@@ -1663,7 +1663,7 @@ static int __pkvm_pin_user_pages(struct kvm *kvm, struct kvm_memory_slot *memslo
 	 */
 	for (p = 0; p < nr_pages; p++) {
 		if (!folio_test_swapbacked(page_folio(pages[p]))) {
-			ret = -EIO;
+			ret = -EREMOTEIO;
 			goto err_unpin_pages;
 		}
 	}
