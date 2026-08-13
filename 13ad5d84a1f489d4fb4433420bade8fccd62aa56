@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6f147d7b_60bd726b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-08-13T09:00:09Z",
+      "side": 1,
+      "message": "Can we hold onto this patch for later? This isn\u0027t a problem to merge as we have plenty of padding into `struct pkvm_module_ops`",
+      "revId": "13ad5d84a1f489d4fb4433420bade8fccd62aa56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "88753bdb_1a8f60d8",
         "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
         "patchSetId": 2
