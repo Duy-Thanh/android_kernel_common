@@ -40,6 +40,30 @@
       ],
       "revId": "0c9662a9a8a0a7f02c6a6190e62840b641c279c8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac20a68d_197133d1",
+        "filename": "mm/page_pinner.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 4245205
+      },
+      "writtenOn": "2026-08-13T03:31:37Z",
+      "side": 1,
+      "message": "there was an effort to add a type wrapper around struct page-\u003eflags. 6.18 is affected.\nhttps://lore.kernel.org/all/20250805172307.1302730-1-willy@infradead.org/T/#u",
+      "parentUuid": "12572368_ff2b4d28",
+      "range": {
+        "startLine": 136,
+        "startChar": 1,
+        "endLine": 136,
+        "endChar": 31
+      },
+      "revId": "0c9662a9a8a0a7f02c6a6190e62840b641c279c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
