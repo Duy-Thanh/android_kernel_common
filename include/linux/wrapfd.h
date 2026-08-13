@@ -12,6 +12,10 @@ union wrapfd_mappable {
 	struct dma_buf *dmabuf;
 };
 
+struct wrapfd_listener_operations {
+	void (*on_content_release)(void *param);
+};
+
 #ifdef CONFIG_ANDROID_WRAPFD
 
 /* Check if the vma is mapping a wrapfd file. */
@@ -31,7 +35,7 @@ bool is_wrapfd_vma(struct vm_area_struct *vma);
  * -ENODEV: device is invalid.
  * -EINVAL: buffer is mapped.
  * -EBUSY: buffer is owned by another device.
- * -ENOENT: wrap is empty (buffer got freed or moved)
+ * -ENOENT: wrap is empty (buffer got freed or moved).
  */
 int wrapfd_get_mappable(struct file *file, struct device *dev,
 			union wrapfd_mappable *mappable);
@@ -55,6 +59,45 @@ int wrapfd_get_mappable(struct file *file, struct device *dev,
 int wrapfd_put_mappable(struct file *file, struct device *dev,
 			union wrapfd_mappable *mappable);
 
+/*
+ * Register a listener for the mappable object currently wrapped by the @file
+ * object. Caller should own the buffer.
+ * The caller can keep the mappable object mapped in its device's address space
+ * but it has to unmap it once on_content_release callback is called.
+ *
+ * file: wrap file associated with the mappable object.
+ * dev: device requesting the operation.
+ * ops: wrapfd listener structure with event handlers.
+ * param: parameter passed to the event handler.
+ * phandle: pointer to variable receiving listener handle. Can't be NULL.
+ *
+ * On success returns 0. On error returns:
+ * -EBADF: file is invalid.
+ * -ENODEV: device is invalid.
+ * -EBUSY: buffer is not owned by the caller.
+ * -ENOENT: wrap is empty (buffer got freed or moved).
+ * -EINVAL: @ops or @phandle parameter is invalid.
+ * -ENOMEM: not enough memory.
+ */
+int wrapfd_add_listener(struct file *file, struct device *dev,
+			const struct wrapfd_listener_operations *ops,
+			void *param, void **phandle);
+
+/*
+ * Unregister previously registered listener. Caller does not have to own the
+ * buffer.
+ * The caller can unregister its listener if it no longer needs to monitor
+ * the content of the wrapfd object.
+ *
+ * file: wrap file associated with the mappable object.
+ * handle: listener handle returned by wrapfd_add_listener().
+ *
+ * On success returns 0. On error returns:
+ * -EBADF: file is invalid.
+ * -EINVAL: handle is invalid or not found.
+ */
+int wrapfd_del_listener(struct file *file, void *handle);
+
 #else /* CONFIG_ANDROID_WRAPFD */
 
 static inline bool is_wrapfd_vma(struct vm_area_struct *vma)
@@ -72,6 +115,18 @@ static inline int wrapfd_put_mappable(struct file *file, struct device *dev,
 				      union wrapfd_mappable *mappable)
 {
 	return -ENOENT;
+}
+
+static inline int wrapfd_add_listener(struct file *file, struct device *dev,
+				      const struct wrapfd_listener_operations *ops,
+				      void *param, void **phandle);
+{
+	return -EINVAL;
+}
+
+static inline int wrapfd_del_listener(struct file *file, void *handle)
+{
+	return -EINVAL;
 }
 
 #endif /* CONFIG_ANDROID_WRAPFD */
