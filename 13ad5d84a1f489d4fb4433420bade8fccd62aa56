@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88753bdb_1a8f60d8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2434,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2026-08-13T06:53:18Z",
+      "side": 1,
+      "message": "When testing 6.12 patches, I ran into issue guest was receiving EFAULT when guest touches the mapped page.\n\n   Step 2: EL2 Hypervisor Page State Check (mem_protect.c)\n\n  The hypercall enters EL2:\n\n    __pkvm_host_donate_guest() (mem_protect.c)\n       │\n       ├──\u003e ___host_check_page_state_range(phys, size, PKVM_PAGE_OWNED, ...)\n       │       └──\u003e Returns -EPERM because page is marked PKVM_MODULE_OWNED_PAGE (4), not PKVM_PAGE_OWNED (0)\n       │\n       └──\u003e [Handles -EPERM]: Calls ___pkvm_module_share_guest()\n               │\n               └──\u003e ___pkvm_check_module_share_guest() (mem_protect.c:2424)\n                       │\n                       ├──\u003e Check 1: ___host_check_page_state_range(phys, size, state, ...)\n                       │       └──\u003e Lines 1120-1122:\n                       │            p \u003d hyp_phys_to_page(addr);\n                       │            if (p-\u003ehost_state !\u003d state)\n                       │                return -EPERM;\n                       │\n                       │            • Actual p-\u003ehost_state in memory \u003d 4 (PKVM_MODULE_OWNED_PAGE)\n                       │            • Old code passed: state \u003d 8 | 4 \u003d 12 (PKVM_NOPAGE | PKVM_MODULE_OWNED_PAGE)\n                       │            • 4 !\u003d 12 EVALUATED TO TRUE -\u003e Returned -EPERM -\u003e Returned -EFAULT (14)!\n                       │\n                       │            [CHANGE 2]: Passing PKVM_MODULE_OWNED_PAGE (4).\n                       │                        4 !\u003d 4 is FALSE -\u003e Check 1 PASSES!\n                       │\n                       ├──\u003e Check 2: __guest_check_page_state_range(..., PKVM_NOPAGE | PKVM_ACCEPT_MODULE_OWNED)\n                       │       └──\u003e Matches annotation from SMC 0x123 -\u003e Check 2 PASSES!\n                       │\n                       └──\u003e Check 3: module_guest_accept_module_owned_share()\n                               └──\u003e Calls example_heap module callback (returns 0) -\u003e Check 3",
+      "fixSuggestions": [
+        {
+          "fixId": "30ebe19b_086edd2a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+              "range": {
+                "startLine": 2435,
+                "startChar": 0,
+                "endLine": 2436,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\t\t   HOST_CHECK_IS_MEMORY | HOST_CHECK_NULL_REFCNT))\n"
+            }
+          ]
+        }
+      ],
+      "revId": "13ad5d84a1f489d4fb4433420bade8fccd62aa56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
