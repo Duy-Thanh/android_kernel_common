@@ -2367,6 +2367,7 @@
   __put_user_1
   __put_user_4
   __put_user_8
+  pv_mmio
   pv_ops
   queue_delayed_work_on
   queue_limits_commit_update_frozen

@@ -289,6 +289,7 @@
   put_device
   __put_task_struct
   put_unused_fd
+  pv_mmio
   pv_ops
   queue_delayed_work_on
   queue_work_on

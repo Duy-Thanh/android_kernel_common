@@ -329028,6 +329028,15 @@ elf_symbol {
   full_name: "put_unused_fd"
 }
 elf_symbol {
+  id: 0x7a0dde60
+  name: "pv_mmio"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x8ee1928d
+  type_id: 0x8e47c273
+  full_name: "pv_mmio"
+}
+elf_symbol {
   id: 0xebbaf5f8
   name: "pv_ops"
   is_defined: true
@@ -343748,6 +343757,7 @@ interface {
   symbol_id: 0x435b99c6
   symbol_id: 0x01768311
   symbol_id: 0xffdd03be
+  symbol_id: 0x7a0dde60
   symbol_id: 0xebbaf5f8
   symbol_id: 0x2721b297
   symbol_id: 0xcb92cfbf
