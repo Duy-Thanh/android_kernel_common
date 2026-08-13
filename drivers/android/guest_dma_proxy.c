@@ -214,6 +214,27 @@ static long guest_dma_proxy_ioctl(struct file *file, unsigned int cmd, unsigned 
 	if (!PAGE_ALIGNED(args.paddr) || !PAGE_ALIGNED(args.size))
 		return -EINVAL;
 
+#define SMC_ACCEPT_SECURE_BUF	0x123
+#ifdef CONFIG_ARM64
+	{
+		struct arm_smccc_1_2_regs smc_args = {
+			.a0 = SMC_ACCEPT_SECURE_BUF,
+			.a1 = args.paddr,
+			.a2 = args.size >> PAGE_SHIFT,
+		};
+		struct arm_smccc_1_2_regs smc_res;
+
+		arm_smccc_1_2_smc(&smc_args, &smc_res);
+		if (smc_res.a0 != 0) {
+			pr_warn("guest_dma_proxy: SMC_ACCEPT_SECURE_BUF for paddr 0x%llx (pages %llu) returned %ld\n",
+				args.paddr, args.size >> PAGE_SHIFT, (long)smc_res.a0);
+		} else {
+			pr_info("guest_dma_proxy: SMC_ACCEPT_SECURE_BUF for paddr 0x%llx (pages %llu) succeeded\n",
+				args.paddr, args.size >> PAGE_SHIFT);
+		}
+	}
+#endif
+
 	/* 1. Security Validation (Disabled) */
 	/*
 	ret = verify_import_token(gdev, args.paddr, args.size, args.token);
