@@ -2146,7 +2146,7 @@ static void handle_host_hcall(struct kvm_cpu_context *host_ctxt)
 	 * returns -EPERM after the first call for a given CPU.
 	 */
 	if (static_branch_unlikely(&kvm_protected_mode_initialized))
-		hcall_min = __KVM_HOST_SMCCC_FUNC___pkvm_prot_finalize;
+		hcall_min = __KVM_HOST_SMCCC_FUNC___pkvm_alloc_module_va;
 
 	id &= ~ARM_SMCCC_CALL_HINTS;
 	id -= KVM_HOST_SMCCC_ID(0);
