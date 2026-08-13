@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc32d466_167e13c1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-08-13T22:25:32Z",
+      "side": 1,
+      "message": "FYI: it seems the offending commit that this patch fixes didn\u0027t exist yet here. This is why this merge conflict....\n\nCherry pick is not clean. Checked against cherry pick source.\nSource commit: [googlesource](https://android.googlesource.com/kernel/common/+/509c2605065004fc4cd86ee50a9350d402785307).\n\nDifference between automated attempted cherry-pick and current commit.\n\n```\ndiff --git a/drivers/hid/hid-core.c b/drivers/hid/hid-core.c\n--- a/drivers/hid/hid-core.c\n+++ b/drivers/hid/hid-core.c\n@@  @@ int hid_report_raw_event(struct hid_device *hid, enum hid_report_type type, u8 *\n \n \tif (csize \u003c rsize) {\n \t\tdbg_hid(\"report %d is too short, (%d \u003c %d)\\n\", report-\u003eid,\n-\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD\n-\t\t\t\tcsize, rsize);\n-||||||| parent of 509c26050 (HID: pass the buffer size to hid_report_raw_event)\n-\t\thid_warn_ratelimited(hid, \"Event data for report %d was too short (%d vs %d)\\n\",\n-\t\t\t\t     report-\u003eid, rsize, csize);\n-\t\tret \u003d -EINVAL;\n-\t\tgoto out;\n-\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n \t\t\tcsize, rsize);\n-\u003e\u003e\u003e\u003e\u003e\u003e\u003e 509c26050 (HID: pass the buffer size to hid_report_raw_event)\n \t\tmemset(cdata + csize, 0, rsize - csize);\n \t}\n \ndiff --git a/drivers/usb/gadget/function/android_f_accessory.c b/drivers/usb/gadget/function/android_f_accessory.c\n--- a/drivers/usb/gadget/function/android_f_accessory.c\n+++ b/drivers/usb/gadget/function/android_f_accessory.c\n@@  @@ static void acc_complete_send_hid_event(struct usb_ep *ep,\n \t\treturn;\n \t}\n \n-\thid_report_raw_event(hid-\u003ehid, HID_INPUT_REPORT, req-\u003ebuf, length, 1);\n+\thid_report_raw_event(hid-\u003ehid, HID_INPUT_REPORT, req-\u003ebuf, length, length, 1);\n }\n \n static int acc_hid_parse(struct hid_device *hid)\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "a688a70354e44f22f91db667ee70f0f2618b2e31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
