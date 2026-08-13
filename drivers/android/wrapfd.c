@@ -20,6 +20,7 @@
 #include <linux/pagemap.h>
 #include <linux/scatterlist.h>
 #include <linux/seq_file.h>
+#include <linux/slab.h>
 #include <linux/spinlock.h>
 #include <linux/uaccess.h>
 #include <linux/uio.h>
@@ -68,6 +69,7 @@ struct wrap_content_operations {
 struct wrap_content {
 	struct wrap_content_operations *ops;
 	bool close_on_exec;
+	struct list_head listeners;
 };
 
 /* dmabuf content */
@@ -791,6 +793,13 @@ struct wrap_ctx {
 	unsigned long map_count;
 	unsigned long use_count;
 	bool unusable;
+	struct mutex listeners_lock;
+};
+
+struct wrapfd_content_listener {
+	const struct wrapfd_listener_operations *ops;
+	void *param;
+	struct list_head list;
 };
 
 static struct wrap_ctx *create_wrap_ctx(void)
@@ -802,6 +811,7 @@ static struct wrap_ctx *create_wrap_ctx(void)
 		return NULL;
 
 	spin_lock_init(&ctx->lock);
+	mutex_init(&ctx->listeners_lock);
 
 	return ctx;
 }
@@ -847,6 +857,22 @@ static inline bool is_owner_dev(struct wrap_ctx *ctx,
 	return ctx->owner.dev == dev;
 }
 
+static void notify_content_release(struct wrap_ctx *ctx,
+				   struct wrap_content *content)
+{
+	struct wrapfd_content_listener *listener;
+	struct wrapfd_content_listener *tmp;
+
+	mutex_lock(&ctx->listeners_lock);
+	list_for_each_entry_safe(listener, tmp, &content->listeners, list) {
+		listener->ops->on_content_release(listener->param);
+		list_del(&listener->list);
+		kfree(listener);
+	}
+	INIT_LIST_HEAD(&content->listeners);
+	mutex_unlock(&ctx->listeners_lock);
+}
+
 static inline int publish_wrap(struct wrap_ctx *ctx,
 			       struct wrap_content *old_content,
 			       struct wrap_content *content)
@@ -869,6 +895,7 @@ static inline int publish_wrap(struct wrap_ctx *ctx,
 	}
 
 	if (old_content == content) {
+		notify_content_release(ctx, old_content);
 		err = old_content->ops->clear(old_content);
 		if (err)
 			goto put_file;
@@ -1158,8 +1185,11 @@ static int wrap_release(struct inode *ignored, struct file *file)
 {
 	struct wrap_ctx *ctx = file->private_data;
 
-	if (ctx->content)
+	if (ctx->content) {
+		notify_content_release(ctx, ctx->content);
 		ctx->content->ops->free(ctx->content);
+	}
+	mutex_destroy(&ctx->listeners_lock);
 	kfree(ctx);
 
 	return 0;
@@ -1430,8 +1460,10 @@ static int wrap_file_empty(struct wrap_ctx *ctx)
 unlock:
 	spin_unlock(&ctx->lock);
 
-	if (!ret)
+	if (!ret) {
+		notify_content_release(ctx, content);
 		content->ops->free(content);
+	}
 
 	return ret;
 }
@@ -1673,6 +1705,99 @@ unlock:
 }
 EXPORT_SYMBOL_GPL(wrapfd_put_mappable);
 
+int wrapfd_add_listener(struct file *file, struct device *dev,
+			const struct wrapfd_listener_operations *ops,
+			void *param, void **handlep)
+{
+	struct wrapfd_content_listener *listener;
+	struct wrap_ctx *ctx;
+	int ret;
+
+	if (WARN_ON(!dev))
+		return -ENODEV;
+
+	if (!file || file->f_op != &wrap_fops)
+		return -EBADF;
+
+	if (!ops || !ops->on_content_release || !handlep)
+		return -EINVAL;
+
+	ctx = file->private_data;
+
+	listener = kmalloc_obj(*listener);
+	if (!listener)
+		return -ENOMEM;
+
+	listener->ops = ops;
+	listener->param = param;
+
+	mutex_lock(&ctx->listeners_lock);
+	spin_lock(&ctx->lock);
+
+	if (!is_owner_dev(ctx, dev)) {
+		ret = -EBUSY;
+		goto unlock;
+	}
+
+	if (!ctx->content) {
+		ret = -ENOENT;
+		goto unlock;
+	}
+
+	*handlep = listener;
+	ret = 0;
+unlock:
+	if (!ret)
+		list_add(&listener->list, &ctx->content->listeners);
+	else
+		kfree(listener);
+	spin_unlock(&ctx->lock);
+	mutex_unlock(&ctx->listeners_lock);
+
+	return ret;
+}
+EXPORT_SYMBOL_GPL(wrapfd_add_listener);
+
+int wrapfd_del_listener(struct file *file, void *handle)
+{
+	struct wrapfd_content_listener *listener;
+	struct wrap_ctx *ctx;
+	int ret = -EINVAL;
+
+	if (!handle)
+		return -EINVAL;
+
+	if (!file || file->f_op != &wrap_fops)
+		return -EBADF;
+
+	ctx = file->private_data;
+
+	mutex_lock(&ctx->listeners_lock);
+	spin_lock(&ctx->lock);
+
+	if (!ctx->content)
+		goto unlock;
+
+	/*
+	 * We could use handle directly as a listener but let's make sure
+	 * it actually points to a valid listener.
+	 */
+	list_for_each_entry(listener, &ctx->content->listeners, list) {
+		if (listener == handle) {
+			list_del(&listener->list);
+			kfree(listener);
+			ret = 0;
+			break;
+		}
+	}
+unlock:
+	spin_unlock(&ctx->lock);
+	mutex_unlock(&ctx->listeners_lock);
+
+	return ret;
+}
+EXPORT_SYMBOL_GPL(wrapfd_del_listener);
+
 static const struct file_operations wrap_fops = {
 	.owner		= THIS_MODULE,
 	.llseek		= wrap_llseek,
@@ -1728,6 +1853,7 @@ static int wrap_file(struct wrap_ctx *ctx,
 		return PTR_ERR(content);
 
 	content->close_on_exec = get_close_on_exec(wrapfd_wrap.fd);
+	INIT_LIST_HEAD(&content->listeners);
 	wrapfd = publish_wrap(ctx, NULL, content);
 	if (wrapfd < 0) {
 		ctx->content = NULL;
