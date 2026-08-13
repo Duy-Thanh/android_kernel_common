@@ -332,7 +332,7 @@ struct pkvm_module_ops {
 	ANDROID_KABI_USE(6, int (*guest_accept_module_prot_page)(u64 ipa, u64 nr_pages));
 	ANDROID_KABI_USE(7, int (*register_guest_accept_module_owned_handler)(int (*cb)(
 					u64 phys, u64 ipa, u64 size,pkvm_handle_t handle)));
-	ANDROID_KABI_RESERVE(8);
+	ANDROID_KABI_USE(8, int (*host_stage2_set_owned)(u64 pfn, u64 nr_pages, bool owned));
 	ANDROID_KABI_RESERVE(9);
 	ANDROID_KABI_RESERVE(10);
 	ANDROID_KABI_RESERVE(11);
