@@ -51,6 +51,24 @@
       ],
       "revId": "13ad5d84a1f489d4fb4433420bade8fccd62aa56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76ed682b_e0a034b6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2434,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-08-13T09:06:17Z",
+      "side": 1,
+      "message": "Arg, this is because it isn\u0027t actually unmapped in a first place. \n\nSo we should both accept (PKVM_NOPAGE | PKVM_MODULE_OWNED_PAGE) and (PKVM_MODULE_OWNED_PAGE)",
+      "parentUuid": "88753bdb_1a8f60d8",
+      "revId": "13ad5d84a1f489d4fb4433420bade8fccd62aa56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
