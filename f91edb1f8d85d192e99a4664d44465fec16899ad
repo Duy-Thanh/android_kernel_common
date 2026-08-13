@@ -22,6 +22,30 @@
       },
       "revId": "f91edb1f8d85d192e99a4664d44465fec16899ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ae9d9d1_dcd601d5",
+        "filename": "drivers/scsi/scsi_logging.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2026-08-13T13:09:31Z",
+      "side": 1,
+      "message": "I reformatted the 6.18 change with `git clang-format HEAD^`. This CL has now also been reformatted with `git clang-format HEAD^` and should now be identical to the 6.18 CL.",
+      "parentUuid": "689a0c60_e90135d7",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 0
+      },
+      "revId": "f91edb1f8d85d192e99a4664d44465fec16899ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
