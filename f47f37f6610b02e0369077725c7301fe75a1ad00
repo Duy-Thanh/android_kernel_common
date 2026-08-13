@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccffb611_1f85263e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1980655
+      },
+      "writtenOn": "2026-08-13T08:33:20Z",
+      "side": 1,
+      "message": "Same presubmit error is tracking in b/545682193 (source file \u0027ResApkBadXml.apk\u0027 does not exist).",
+      "revId": "f47f37f6610b02e0369077725c7301fe75a1ad00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
