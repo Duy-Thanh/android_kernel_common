@@ -70,6 +70,30 @@
       },
       "revId": "c5e956978d518587e9ead71dd4af979ac56da2d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4496719b_fe27936a",
+        "filename": "include/linux/mm_types.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 927,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-08-13T18:30:17Z",
+      "side": 1,
+      "message": "Ok, the only downside is having to submit an \"allowed_break\" update once the replacements come in. However, this LGTM too of course.",
+      "parentUuid": "5382853e_ac33ed43",
+      "range": {
+        "startLine": 924,
+        "startChar": 4,
+        "endLine": 927,
+        "endChar": 5
+      },
+      "revId": "c5e956978d518587e9ead71dd4af979ac56da2d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
