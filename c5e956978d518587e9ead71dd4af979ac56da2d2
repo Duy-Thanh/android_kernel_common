@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b89a004_41a0e37c",
+        "filename": "include/linux/mm_types.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 927,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-08-13T01:07:46Z",
+      "side": 1,
+      "message": "Do you already know the types / names? Do you want to use these instead of the `ANDROID_BACKPORT_RESERVE()`?",
+      "range": {
+        "startLine": 924,
+        "startChar": 4,
+        "endLine": 927,
+        "endChar": 5
+      },
+      "revId": "c5e956978d518587e9ead71dd4af979ac56da2d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
