@@ -34,6 +34,24 @@
       "parentUuid": "7fe3ed6a_899e775d",
       "revId": "31ac90ca1393706b929a2dcc753598d6138db35c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d40e009e_89af3651",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2026-08-13T20:53:31Z",
+      "side": 1,
+      "message": "I have maintained the same change-id from 6.18 which is merged:\n\nhttps://r.android.com/3876665",
+      "parentUuid": "ebd3d4db_146ffefc",
+      "revId": "31ac90ca1393706b929a2dcc753598d6138db35c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
