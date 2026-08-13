@@ -34,6 +34,24 @@
       ],
       "revId": "ac123caf445387caa4c75cc67c0d00321946014d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fabfe494_9d609cac",
+        "filename": "arch/arm64/include/asm/kvm_pkvm_module.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2026-08-13T20:52:41Z",
+      "side": 1,
+      "message": "Ack. I have moved this out and not use the reserve fields.",
+      "parentUuid": "6ca2cd17_daa923a3",
+      "revId": "ac123caf445387caa4c75cc67c0d00321946014d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
