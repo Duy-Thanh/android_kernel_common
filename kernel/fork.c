@@ -3339,3 +3339,12 @@ static int __init init_fork_sysctl(void)
 }
 
 subsys_initcall(init_fork_sysctl);
+
+int object_is_on_stack(const void *obj)
+{
+	void *stack = task_stack_page(current);
+
+	obj = kasan_reset_tag(obj);
+	return (obj >= stack) && (obj < (stack + THREAD_SIZE));
+}
+EXPORT_SYMBOL(object_is_on_stack);
