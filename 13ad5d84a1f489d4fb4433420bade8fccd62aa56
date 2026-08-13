@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b7f9dc6e_eff60a19",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2026-08-13T18:21:05Z",
+      "side": 1,
+      "message": "I see. Since this is a ABI addition by using the reserve fields, this should be ok ?",
+      "parentUuid": "6f147d7b_60bd726b",
+      "revId": "13ad5d84a1f489d4fb4433420bade8fccd62aa56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "88753bdb_1a8f60d8",
         "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
         "patchSetId": 2
