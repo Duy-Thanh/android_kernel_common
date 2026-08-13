@@ -5522,6 +5522,7 @@ static int ufshcd_sdev_init(struct scsi_device *sdev)
 }
 
 /**
+<<<<<<< HEAD   (e5d208fff880b1774013598e50595242fb573ac6 ANDROID: GKI: update symbol list for galaxy)
  * ufshcd_change_queue_depth - change queue depth
  * @sdev: pointer to SCSI device
  * @depth: required depth to set
@@ -5537,6 +5538,25 @@ static int ufshcd_change_queue_depth(struct scsi_device *sdev, int depth)
 
 /**
  * ufshcd_sdev_configure - adjust SCSI device configurations
+||||||| BASE   (b8ce6b6671a801fd5b69e1c55929e511ad0ce4a0 ANDROID: ufs: core: Revert "Temporarily disable write pipeli)
+ * ufshcd_change_queue_depth - change queue depth
+ * @sdev: pointer to SCSI device
+ * @depth: required depth to set
+ *
+ * Change queue depth and make sure the max. limits are not crossed.
+ *
+ * Return: new queue depth.
+ */
+static int ufshcd_change_queue_depth(struct scsi_device *sdev, int depth)
+{
+	return scsi_change_queue_depth(sdev, min(depth, sdev->host->can_queue));
+}
+
+/**
+ * ufshcd_device_configure - adjust SCSI device configurations
+=======
+ * ufshcd_device_configure - adjust SCSI device configurations
+>>>>>>> CHANGE (77724b0ca70ee0e9a88635d47a5f1907c86ccbb9 ANDROID: ufs: core: Disable queue depth tracking support)
  * @sdev: pointer to SCSI device
  * @lim: queue limits
  *
@@ -9434,10 +9454,21 @@ static const struct scsi_host_template ufshcd_driver_template = {
 	.map_queues		= ufshcd_map_queues,
 	.queuecommand		= ufshcd_queuecommand,
 	.mq_poll		= ufshcd_poll,
+<<<<<<< HEAD   (e5d208fff880b1774013598e50595242fb573ac6 ANDROID: GKI: update symbol list for galaxy)
 	.sdev_init		= ufshcd_sdev_init,
 	.sdev_configure		= ufshcd_sdev_configure,
 	.sdev_destroy		= ufshcd_sdev_destroy,
 	.change_queue_depth	= ufshcd_change_queue_depth,
+||||||| BASE   (b8ce6b6671a801fd5b69e1c55929e511ad0ce4a0 ANDROID: ufs: core: Revert "Temporarily disable write pipeli)
+	.slave_alloc		= ufshcd_slave_alloc,
+	.device_configure	= ufshcd_device_configure,
+	.slave_destroy		= ufshcd_slave_destroy,
+	.change_queue_depth	= ufshcd_change_queue_depth,
+=======
+	.slave_alloc		= ufshcd_slave_alloc,
+	.device_configure	= ufshcd_device_configure,
+	.slave_destroy		= ufshcd_slave_destroy,
+>>>>>>> CHANGE (77724b0ca70ee0e9a88635d47a5f1907c86ccbb9 ANDROID: ufs: core: Disable queue depth tracking support)
 	.eh_abort_handler	= ufshcd_abort,
 	.eh_device_reset_handler = ufshcd_eh_device_reset_handler,
 	.eh_host_reset_handler   = ufshcd_eh_host_reset_handler,
@@ -9447,7 +9478,6 @@ static const struct scsi_host_template ufshcd_driver_template = {
 	.max_segment_size	= PRDT_DATA_BYTE_COUNT_MAX,
 	.max_sectors		= SZ_1M / SECTOR_SIZE,
 	.max_host_blocked	= 1,
-	.track_queue_depth	= 1,
 	.skip_settle_delay	= 1,
 	.sdev_groups		= ufshcd_driver_groups,
 };
