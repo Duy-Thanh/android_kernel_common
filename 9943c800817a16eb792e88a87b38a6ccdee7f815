@@ -52,6 +52,24 @@
       "parentUuid": "90f31f73_a2713bc1",
       "revId": "9943c800817a16eb792e88a87b38a6ccdee7f815",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3e31611_f2e5a504",
+        "filename": "arch/x86/kvm/pkvm/cpu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-08-13T20:43:07Z",
+      "side": 1,
+      "message": "Resolving this one as the comment was updated. @vineethrp@google.com - does it LGTY now?",
+      "parentUuid": "496ec525_dfc27d78",
+      "revId": "9943c800817a16eb792e88a87b38a6ccdee7f815",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
