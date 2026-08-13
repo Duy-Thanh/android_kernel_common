@@ -72,6 +72,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7988b407_99cc0cb8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-13T23:49:54Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ae49eed8_2a05ad9c",
+      "revId": "d3eaf6e16b4380fc317e5fd8f1ecf13d301311bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bdb14677_bbdb7318",
@@ -244,6 +262,24 @@
       "side": 1,
       "message": "The implementation of `task_unlock()` is:\n\n```\nstatic inline void task_unlock(struct task_struct *p)\n\t__releases(\u0026p-\u003ealloc_lock)\n{\n\tspin_unlock(\u0026p-\u003ealloc_lock);\n}\n```\n\nThe problem is that `include/linux/sched/task.h` doesn\u0027t have a `task_trylock`, so Mayank had to open-code it. \n\nMaybe Mayank could add a comment next to his `spin_trylock` explaining this?",
       "parentUuid": "2121bc66_575e2622",
+      "revId": "d3eaf6e16b4380fc317e5fd8f1ecf13d301311bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96b7073f_fcd1fba4",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-13T23:49:54Z",
+      "side": 1,
+      "message": "That would help. This also answers my concern earlier that the in_nmi and !in_nmi cases are using different locks so different cpus might not be serialized when accessing t. It is actually the same spinlock, so if the trylock succeeds they are properly serialized.\n\nWould it be better to add a static inline bool task_trylock() instead of the comment?\n\nYour call.",
+      "parentUuid": "b6010fe1_79be6e05",
       "revId": "d3eaf6e16b4380fc317e5fd8f1ecf13d301311bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
