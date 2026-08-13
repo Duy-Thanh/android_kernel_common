@@ -31,8 +31,17 @@
 /* 1 per bounce page (3), and 1 for content read directly into the buffer. */
 #define MAX_NR_KVECS (MAX_NR_BOUNCE_BUFS + 1)
 
-#define MAX_NR_LOAD_REQS 32
-#define MIN_BYTES_PER_REQ SZ_1M
+static int nonzero_uint_param_set(const char *val, const struct kernel_param *kp);
+static const struct kernel_param_ops nonzero_uint_param_ops = {
+	.set = nonzero_uint_param_set,
+	.get = param_get_uint,
+};
+
+static unsigned int max_nr_load_reqs = 32;
+module_param_cb(max_nr_load_reqs, &nonzero_uint_param_ops, &max_nr_load_reqs, 0644);
+
+static unsigned int min_bytes_per_req = SZ_1M;
+module_param_cb(min_bytes_per_req, &nonzero_uint_param_ops, &min_bytes_per_req, 0644);
 
 struct wrap_ctx;
 struct wrap_content;
@@ -105,6 +114,11 @@ struct dmabuf_load_param {
 	struct iosys_map map;
 	struct wrap_io_ctx io_ctx;
 };
+
+static int nonzero_uint_param_set(const char *val, const struct kernel_param *kp)
+{
+	return param_set_uint_minmax(val, kp, 1, UINT_MAX);
+}
 
 static int dmabuf_content_create_wrap(struct wrap_content *content,
 				      struct wrap_ctx *ctx)
@@ -382,8 +396,8 @@ static int wrap_io_read(struct wrap_io_ctx *io_ctx, struct file *file)
 	loff_t cur_file_offs = io_ctx->file_read_offs;
 	long ret = 0;
 
-	nr_reqs = min_t(unsigned int, DIV_ROUND_UP(io_ctx->file_read_len, MIN_BYTES_PER_REQ),
-			MAX_NR_LOAD_REQS);
+	nr_reqs = min_t(unsigned int, DIV_ROUND_UP(io_ctx->file_read_len, min_bytes_per_req),
+			max_nr_load_reqs);
 
 	/*
 	 * Synchronous single-request path for small reads to avoid workqueue scheduling overhead.
