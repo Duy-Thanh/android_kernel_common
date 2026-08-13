@@ -16979,6 +16979,11 @@ pointer_reference {
   pointee_type_id: 0xbb5b98f0
 }
 pointer_reference {
+  id: 0x244925d3
+  kind: POINTER
+  pointee_type_id: 0xbb6471d0
+}
+pointer_reference {
   id: 0x244b9b37
   kind: POINTER
   pointee_type_id: 0xbb6e8a40
@@ -28517,6 +28522,11 @@ pointer_reference {
   id: 0x2fb389b8
   kind: POINTER
   pointee_type_id: 0x948ec07f
+}
+pointer_reference {
+  id: 0x2fb49331
+  kind: POINTER
+  pointee_type_id: 0x9492aa5b
 }
 pointer_reference {
   id: 0x2fb495bb
@@ -50492,6 +50502,10 @@ member {
   type_id: 0x28354e63
 }
 member {
+  id: 0x29edcc1e
+  type_id: 0x2899406a
+}
+member {
   id: 0x2a055993
   type_id: 0x273b165d
 }
@@ -50642,6 +50656,10 @@ member {
 member {
   id: 0x2def4003
   type_id: 0x3893701c
+}
+member {
+  id: 0x2df13677
+  type_id: 0x38eaa9ce
 }
 member {
   id: 0x2e080f29
@@ -50861,6 +50879,11 @@ member {
   id: 0x31296766
   type_id: 0x4b8bfe0c
   offset: 64
+}
+member {
+  id: 0x3138d3a6
+  type_id: 0x4bcd3df2
+  offset: 4288
 }
 member {
   id: 0x31408d0e
@@ -52021,6 +52044,11 @@ member {
   id: 0x3ba19b7e
   type_id: 0x61a83f50
   offset: 768
+}
+member {
+  id: 0x3ba7b45e
+  type_id: 0x61b09364
+  offset: 4224
 }
 member {
   id: 0x3bb33d1d
@@ -59452,16 +59480,15 @@ member {
   offset: 7104
 }
 member {
+  id: 0x821bb455
+  name: "__kabi_reserved6"
+  type_id: 0x92233392
+}
+member {
   id: 0x821bb6a6
   name: "__kabi_reserved6"
   type_id: 0x92233392
   offset: 1408
-}
-member {
-  id: 0x821bb8d6
-  name: "__kabi_reserved6"
-  type_id: 0x92233392
-  offset: 4224
 }
 member {
   id: 0x821bbcbb
@@ -59506,10 +59533,9 @@ member {
   offset: 832
 }
 member {
-  id: 0xc3d41219
+  id: 0xc3d412c7
   name: "__kabi_reserved7"
   type_id: 0x92233392
-  offset: 4288
 }
 member {
   id: 0xc3d41494
@@ -129486,6 +129512,11 @@ member {
   type_id: 0x4585663f
   offset: 2886
   bitsize: 1
+}
+member {
+  id: 0xdd04fdd6
+  name: "guest_accept_module_prot_page"
+  type_id: 0x24401166
 }
 member {
   id: 0x64751b34
@@ -209911,6 +209942,11 @@ member {
   offset: 1600
 }
 member {
+  id: 0x74f65b76
+  name: "register_guest_accept_module_owned_handler"
+  type_id: 0x2fb49331
+}
+member {
   id: 0x7aaa4558
   name: "register_guest_smc_handler"
   type_id: 0x2d6f6f67
@@ -276511,6 +276547,14 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x2899406a
+  kind: STRUCT
+  definition {
+    bytesize: 8
+    member_id: 0xc3d412c7
+  }
+}
+struct_union {
   id: 0x2914b97f
   kind: STRUCT
   definition {
@@ -277421,6 +277465,14 @@ struct_union {
     member_id: 0x8b549786
     member_id: 0x5b2d4e53
     member_id: 0x2ddb9f52
+  }
+}
+struct_union {
+  id: 0x38eaa9ce
+  kind: STRUCT
+  definition {
+    bytesize: 8
+    member_id: 0x821bb455
   }
 }
 struct_union {
@@ -278777,6 +278829,16 @@ struct_union {
     bytesize: 8
     member_id: 0x754dc93d
     member_id: 0x89460966
+  }
+}
+struct_union {
+  id: 0x4bcd3df2
+  kind: UNION
+  definition {
+    bytesize: 8
+    member_id: 0x74f65b76
+    member_id: 0x29edcc1e
+    member_id: 0x36752b74
   }
 }
 struct_union {
@@ -280549,6 +280611,16 @@ struct_union {
     bytesize: 8
     member_id: 0xdd530657
     member_id: 0x188c1100
+  }
+}
+struct_union {
+  id: 0x61b09364
+  kind: UNION
+  definition {
+    bytesize: 8
+    member_id: 0xdd04fdd6
+    member_id: 0x2df13677
+    member_id: 0x36752b74
   }
 }
 struct_union {
@@ -336916,8 +336988,8 @@ struct_union {
     member_id: 0x39de7de3
     member_id: 0x342a4a25
     member_id: 0x3efbeff0
-    member_id: 0x821bb8d6
-    member_id: 0xc3d41219
+    member_id: 0x3ba7b45e
+    member_id: 0x3138d3a6
     member_id: 0x35905373
     member_id: 0x77502c3a
     member_id: 0xe2e3dd75
@@ -416957,6 +417029,11 @@ function {
   parameter_id: 0xd41e888f
 }
 function {
+  id: 0x9492aa5b
+  return_type_id: 0x6720d32f
+  parameter_id: 0x244925d3
+}
+function {
   id: 0x94938ce2
   return_type_id: 0x6720d32f
   parameter_id: 0x223fb206
@@ -440531,6 +440608,14 @@ function {
   parameter_id: 0x92233392
   parameter_id: 0x92233392
   parameter_id: 0x6d7f5ff6
+}
+function {
+  id: 0xbb6471d0
+  return_type_id: 0x6720d32f
+  parameter_id: 0x92233392
+  parameter_id: 0x92233392
+  parameter_id: 0x92233392
+  parameter_id: 0x16864222
 }
 function {
   id: 0xbba46327
