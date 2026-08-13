@@ -288,22 +288,12 @@ static int rb_update_footers(struct hyp_rb_per_cpu *cpu_buffer)
 	return 0;
 }
 
-static int load_page(void *page)
-{
-	return hyp_pin_shared_mem(page, page + PAGE_SIZE);
-}
-
-static void unload_page(void *page)
-{
-	hyp_unpin_shared_mem(page, page + PAGE_SIZE);
-}
-
 static int rb_page_init(struct hyp_buffer_page *bpage, unsigned long hva)
 {
 	void *hyp_va = (void *)kern_hyp_va(hva);
 	int ret;
 
-	ret = load_page(hyp_va);
+	ret = hyp_pin_shared_mem(hyp_va, hyp_va + PAGE_SIZE);
 	if (ret)
 		return ret;
 
@@ -370,7 +360,8 @@ static void rb_cpu_teardown(struct hyp_rb_per_cpu *cpu_buffer)
 		if (!bpage->page)
 			continue;
 
-		unload_page(bpage->page);
+		hyp_unpin_shared_mem((void *)bpage->page,
+				     (void *)bpage->page + PAGE_SIZE);
 	}
 
 	cpu_buffer->bpages = NULL;
@@ -403,7 +394,6 @@ static bool rb_cpu_fits_pack(struct ring_buffer_pack *rb_pack,
 static int rb_cpu_init(struct ring_buffer_pack *rb_pack, struct hyp_buffer_page *start,
 		       struct hyp_rb_per_cpu *cpu_buffer)
 {
-	struct hyp_buffer_page *bpages = start;
 	struct hyp_buffer_page *bpage = start;
 	int i, ret;
 
@@ -412,6 +402,9 @@ static int rb_cpu_init(struct ring_buffer_pack *rb_pack, struct hyp_buffer_page 
 		return -EINVAL;
 
 	memset(cpu_buffer, 0, sizeof(*cpu_buffer));
+
+	cpu_buffer->bpages = start;
+	cpu_buffer->nr_pages = rb_pack->nr_pages + 1;
 
 	/* The reader page is not part of the ring initially */
 	ret = rb_page_init(bpage, rb_pack->reader_page_va);
@@ -423,20 +416,12 @@ static int rb_cpu_init(struct ring_buffer_pack *rb_pack, struct hyp_buffer_page 
 	cpu_buffer->head_page = bpage + 1;
 
 	for (i = 0; i < rb_pack->nr_pages; i++) {
-		bpage = &bpages[i + 1];
-		ret = rb_page_init(bpage, rb_pack->page_va[i]);
+		ret = rb_page_init(++bpage, rb_pack->page_va[i]);
 		if (ret)
-			break;
+			goto err;
 
 		bpage->list.next = &(bpage + 1)->list;
 		bpage->list.prev = &(bpage - 1)->list;
-	}
-
-	if (ret) {
-		while (i--)
-			unload_page(bpages[i].page);
-
-		return ret;
 	}
 
 	/* Close the ring */
@@ -453,10 +438,11 @@ static int rb_cpu_init(struct ring_buffer_pack *rb_pack, struct hyp_buffer_page 
 	atomic_set(&cpu_buffer->overrun, 0);
 	atomic64_set(&cpu_buffer->write_stamp, 0);
 
-	cpu_buffer->bpages = bpages;
-	cpu_buffer->nr_pages = rb_pack->nr_pages + 1;
-
 	return 0;
+err:
+	rb_cpu_teardown(cpu_buffer);
+
+	return ret;
 }
 
 static int rb_setup_bpage_backing(struct hyp_trace_pack *pack)
