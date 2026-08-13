@@ -1571,8 +1571,8 @@ int __pkvm_load_el2_module(struct module *this, unsigned long *token)
 	int ret, i, secs_first;
 	size_t size;
 
-	/* The pKVM hyp only allows loading before it is fully initialized */
-	if (!is_protected_kvm_enabled() || is_pkvm_initialized())
+	/* The pKVM hyp only allows loading if protected mode is enabled */
+	if (!is_protected_kvm_enabled())
 		return -EOPNOTSUPP;
 
 	for (i = 0; i < ARRAY_SIZE(secs_map); i++) {
