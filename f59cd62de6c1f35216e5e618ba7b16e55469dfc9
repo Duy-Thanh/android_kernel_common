@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c387df0_e79e82cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-08-13T01:44:39Z",
+      "side": 1,
+      "message": "This seems to be breaking the build:\n\nhttps://android-build.corp.google.com/quarterdeck/?branch\u003dkernel-pixel-android16-6.12-kminext\u0026target\u003dcaimito_ack\u0026lkgb\u003d16073570\u0026fkbb\u003d16073576",
+      "revId": "f59cd62de6c1f35216e5e618ba7b16e55469dfc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
