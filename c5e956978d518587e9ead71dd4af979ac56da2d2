@@ -46,6 +46,30 @@
       },
       "revId": "c5e956978d518587e9ead71dd4af979ac56da2d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5382853e_ac33ed43",
+        "filename": "include/linux/mm_types.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 927,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-08-13T18:26:20Z",
+      "side": 1,
+      "message": "Will keep are reserve types for now, in the event the planned fields change.",
+      "parentUuid": "763703a9_50d8c189",
+      "range": {
+        "startLine": 924,
+        "startChar": 4,
+        "endLine": 927,
+        "endChar": 5
+      },
+      "revId": "c5e956978d518587e9ead71dd4af979ac56da2d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
