@@ -61,6 +61,7 @@ struct wrap_content_operations {
 struct wrap_content {
 	struct wrap_content_operations *ops;
 	bool close_on_exec;
+	struct list_head listeners;
 };
 
 /* dmabuf content */
@@ -600,6 +601,7 @@ struct wrap_ctx {
 	unsigned long map_count;
 	unsigned long use_count;
 	bool unusable;
+	struct mutex listeners_lock;
 };
 
 static struct wrap_ctx *create_wrap_ctx(void)
@@ -611,6 +613,7 @@ static struct wrap_ctx *create_wrap_ctx(void)
 		return NULL;
 
 	spin_lock_init(&ctx->lock);
+	mutex_init(&ctx->listeners_lock);
 
 	return ctx;
 }
@@ -931,12 +934,37 @@ unlock:
 	return ret;
 }
 
+struct wrapfd_content_listener {
+	const struct wrapfd_listener_operations *ops;
+	void *param;
+	struct list_head list;
+};
+
+static void free_content(struct wrap_ctx *ctx, struct wrap_content *content)
+{
+	struct wrapfd_content_listener *listener;
+	struct wrapfd_content_listener *tmp;
+
+	if (ctx) {
+		mutex_lock(&ctx->listeners_lock);
+		list_for_each_entry_safe(listener, tmp, &content->listeners, list) {
+			listener->ops->on_content_release(listener->param);
+			kfree(listener);
+		}
+		INIT_LIST_HEAD(&content->listeners);
+		mutex_unlock(&ctx->listeners_lock);
+	}
+
+	content->ops->free(content);
+}
+
 static int wrap_release(struct inode *ignored, struct file *file)
 {
 	struct wrap_ctx *ctx = file->private_data;
 
 	if (ctx->content)
-		ctx->content->ops->free(ctx->content);
+		free_content(ctx, ctx->content);
+	mutex_destroy(&ctx->listeners_lock);
 	kfree(ctx);
 
 	return 0;
@@ -1164,7 +1192,7 @@ static int wrap_file_rewrap(struct wrap_ctx *ctx,
 		goto free_new_ctx;
 
 	if (new_content != content)
-		content->ops->free(content);
+		free_content(ctx, content);
 
 	spin_lock(&ctx->lock);
 	unblock_usage(ctx);
@@ -1176,7 +1204,7 @@ free_new_ctx:
 	kfree(new_ctx);
 free_new_content:
 	if (new_content != content)
-		new_content->ops->free(new_content);
+		free_content(NULL, new_content);
 restore_content:
 	/*
 	 * Restore original wrap. We are the owner and the wrap
@@ -1208,7 +1236,7 @@ unlock:
 	spin_unlock(&ctx->lock);
 
 	if (!ret)
-		content->ops->free(content);
+		free_content(ctx, content);
 
 	return ret;
 }
@@ -1450,6 +1478,92 @@ unlock:
 }
 EXPORT_SYMBOL_GPL(wrapfd_put_mappable);
 
+int wrapfd_add_listener(struct file *file, struct device *dev,
+			const struct wrapfd_listener_operations *ops,
+			void *param)
+{
+	struct wrapfd_content_listener *listener;
+	struct wrap_ctx *ctx;
+	int ret;
+
+	if (WARN_ON(!dev))
+		return -ENODEV;
+
+	if (!file || file->f_op != &wrap_fops)
+		return -EBADF;
+
+	ctx = file->private_data;
+
+	listener = kmalloc(sizeof(*listener), GFP_KERNEL);
+	if (!listener)
+		return -ENOMEM;
+
+	spin_lock(&ctx->lock);
+
+	if (!is_owner_dev(ctx, dev)) {
+		ret = -EBUSY;
+		goto unlock;
+	}
+
+	if (!ctx->content) {
+		ret = -ENOENT;
+		goto unlock;
+	}
+
+	listener->ops = ops;
+	listener->param = param;
+
+	/* Device is the owner, content can't change from under us. */
+	ret = 0;
+unlock:
+	spin_unlock(&ctx->lock);
+	if (ret) {
+		kfree(listener);
+		return ret;
+	}
+
+	mutex_lock(&ctx->listeners_lock);
+	list_add(&listener->list, &ctx->content->listeners);
+	mutex_unlock(&ctx->listeners_lock);
+
+	return 0;
+}
+EXPORT_SYMBOL_GPL(wrapfd_add_listener);
+
+int wrapfd_del_listener(struct file *file, void *param)
+{
+	struct wrapfd_content_listener *listener;
+	struct wrap_ctx *ctx;
+	int ret = -EINVAL;
+
+	if (!file || file->f_op != &wrap_fops)
+		return -EBADF;
+
+	ctx = file->private_data;
+
+	mutex_lock(&ctx->listeners_lock);
+	spin_lock(&ctx->lock);
+
+	if (!ctx->content)
+		goto unlock;
+
+	list_for_each_entry(listener, &ctx->content->listeners, list) {
+		if (listener->param == param) {
+			list_del(&listener->list);
+			kfree(listener);
+			ret = 0;
+			break;
+		}
+	}
+
+unlock:
+	spin_unlock(&ctx->lock);
+	mutex_unlock(&ctx->listeners_lock);
+
+	return ret;
+}
+EXPORT_SYMBOL_GPL(wrapfd_del_listener);
+
 static const struct file_operations wrap_fops = {
 	.owner		= THIS_MODULE,
 	.llseek		= wrap_llseek,
@@ -1505,10 +1619,11 @@ static int wrap_file(struct wrap_ctx *ctx,
 		return PTR_ERR(content);
 
 	content->close_on_exec = get_close_on_exec(wrapfd_wrap.fd);
+	INIT_LIST_HEAD(&content->listeners);
 	wrapfd = publish_wrap(ctx, content);
 	if (wrapfd < 0) {
 		ctx->content = NULL;
-		content->ops->free(content);
+		free_content(ctx, content);
 	}
 
 	return wrapfd;
@@ -1576,8 +1691,8 @@ static int __init wrapfd_init(void)
 		return ret;
 	}
 	dma_coerce_mask_and_coherent(wrapfd_misc.this_device,
-				     DMA_BIT_MASK(64));
-	wrapfd_misc.this_device->bus_dma_limit = DMA_BIT_MASK(64);
+				     DMA_BIT_MASK(63));
+	wrapfd_misc.this_device->bus_dma_limit = DMA_BIT_MASK(63);
 
 	return 0;
 }
