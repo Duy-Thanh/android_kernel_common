@@ -33,6 +33,24 @@
       "message": "Please also cherry-pick the fix https://r.android.com/4227738",
       "revId": "dde6a767a0ef114b3d10412df7f36fb9acab5449",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99fa6da7_3b9700fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4327646
+      },
+      "writtenOn": "2026-08-13T06:36:07Z",
+      "side": 1,
+      "message": "Sure, thanks your correction.\nhttps://android-review.googlesource.com/c/kernel/common/+/4229239",
+      "parentUuid": "e3880c7c_7ba6d737",
+      "revId": "dde6a767a0ef114b3d10412df7f36fb9acab5449",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
