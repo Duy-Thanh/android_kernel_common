@@ -5522,20 +5522,6 @@ static int ufshcd_sdev_init(struct scsi_device *sdev)
 }
 
 /**
- * ufshcd_change_queue_depth - change queue depth
- * @sdev: pointer to SCSI device
- * @depth: required depth to set
- *
- * Change queue depth and make sure the max. limits are not crossed.
- *
- * Return: new queue depth.
- */
-static int ufshcd_change_queue_depth(struct scsi_device *sdev, int depth)
-{
-	return scsi_change_queue_depth(sdev, min(depth, sdev->host->can_queue));
-}
-
-/**
  * ufshcd_sdev_configure - adjust SCSI device configurations
  * @sdev: pointer to SCSI device
  * @lim: queue limits
@@ -9437,7 +9423,6 @@ static const struct scsi_host_template ufshcd_driver_template = {
 	.sdev_init		= ufshcd_sdev_init,
 	.sdev_configure		= ufshcd_sdev_configure,
 	.sdev_destroy		= ufshcd_sdev_destroy,
-	.change_queue_depth	= ufshcd_change_queue_depth,
 	.eh_abort_handler	= ufshcd_abort,
 	.eh_device_reset_handler = ufshcd_eh_device_reset_handler,
 	.eh_host_reset_handler   = ufshcd_eh_host_reset_handler,
@@ -9447,7 +9432,6 @@ static const struct scsi_host_template ufshcd_driver_template = {
 	.max_segment_size	= PRDT_DATA_BYTE_COUNT_MAX,
 	.max_sectors		= SZ_1M / SECTOR_SIZE,
 	.max_host_blocked	= 1,
-	.track_queue_depth	= 1,
 	.skip_settle_delay	= 1,
 	.sdev_groups		= ufshcd_driver_groups,
 };
