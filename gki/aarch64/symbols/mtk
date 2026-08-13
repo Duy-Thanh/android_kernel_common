@@ -1471,8 +1471,8 @@
   kernel_cpustat
   kernel_kobj
   kernel_listen
-  __kernel_neon_begin
-  __kernel_neon_end
+  kernel_neon_begin
+  kernel_neon_end
   kernel_param_lock
   kernel_param_unlock
   kernel_power_off
