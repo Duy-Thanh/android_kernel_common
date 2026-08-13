@@ -106,6 +106,24 @@
       "parentUuid": "4727f7f9_cc68cb0b",
       "revId": "9da63071cb9a822a35179d4ed3b8a9715e465265",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7466acc1_a2330070",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-08-13T19:45:25Z",
+      "side": 1,
+      "message": "I think we can resolve this comment and as Chuanxiao suggested it could be improved as separate patch. Please reopen if you think otherwise.",
+      "parentUuid": "ecab12a1_c19105b1",
+      "revId": "9da63071cb9a822a35179d4ed3b8a9715e465265",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
