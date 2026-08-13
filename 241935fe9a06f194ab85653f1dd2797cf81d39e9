@@ -3,6 +3,46 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f342383c_c7a9689f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-08-13T19:47:29Z",
+      "side": 1,
+      "message": "nit: in GKI we typically try to avoid redundant or irrelevant tags to avoid \"noise\".",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 5
+      },
+      "revId": "241935fe9a06f194ab85653f1dd2797cf81d39e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a44ec388_d8b6899e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-08-13T19:47:29Z",
+      "side": 1,
+      "message": "nit: there shouldn\u0027t be empty lines in between tags.",
+      "revId": "241935fe9a06f194ab85653f1dd2797cf81d39e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "f6d758b0_68a82120",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -14,6 +54,23 @@
       "writtenOn": "2026-08-13T10:18:30Z",
       "side": 1,
       "message": "gentle ping for review",
+      "revId": "241935fe9a06f194ab85653f1dd2797cf81d39e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9424ff95_8da38f90",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-08-13T19:47:29Z",
+      "side": 1,
+      "message": "LGTM",
       "revId": "241935fe9a06f194ab85653f1dd2797cf81d39e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
