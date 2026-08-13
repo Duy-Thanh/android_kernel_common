@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ae49eed8_2a05ad9c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1004907
+      },
+      "writtenOn": "2026-08-13T23:19:41Z",
+      "side": 1,
+      "message": "It gets into the reason the original ANDROID CL was created to begin with. See:\n* [ANDROID: mm: export dump_tasks symbol. (2902469)](https://r.android.com/2902469)\n\nThe description says:\n\u003e Export dump_tasks to dump per-task memory status when ramdump.\n\nRamdump is something you\u0027re going to be doing at crash time, and crash detectors often run at NMI level.",
+      "parentUuid": "f4e47e47_0e330772",
+      "revId": "d3eaf6e16b4380fc317e5fd8f1ecf13d301311bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bdb14677_bbdb7318",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -179,6 +197,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4b450e42_28dad260",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1004907
+      },
+      "writtenOn": "2026-08-13T23:19:41Z",
+      "side": 1,
+      "message": "I don\u0027t think so. If I\u0027m reading it right, the whole `dump_tasks()` that we\u0027re calling would be a complete noop if called at NMI time, wouldn\u0027t it? The `dump_tasks()` function walks through all tasks and calls `dump_task()`. If `dump_task()` can\u0027t find a \"MM\" then it just returns without doing anything.\n\nThe idea is that we want to dump the \"MM\" info of all tasks we can. If a specific MM is locked then we can\u0027t safely dump the info, but that doesn\u0027t mean we shouldn\u0027t try to dump the rest.",
+      "parentUuid": "68bda30d_1d09e8fb",
+      "revId": "d3eaf6e16b4380fc317e5fd8f1ecf13d301311bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2121bc66_575e2622",
         "filename": "mm/oom_kill.c",
         "patchSetId": 2
@@ -190,6 +226,24 @@
       "writtenOn": "2026-08-13T23:03:07Z",
       "side": 1,
       "message": "If spin_trylock() succeeds above and t-\u003emm \u003d\u003d NULL, then doesn\u0027t this need to be spin_unlock(\u0026t-\u003ealloc_lock) for the in_nmi case?\n\nIf this is impossible, then I think a comment is needed to explain why.",
+      "revId": "d3eaf6e16b4380fc317e5fd8f1ecf13d301311bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6010fe1_79be6e05",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1004907
+      },
+      "writtenOn": "2026-08-13T23:19:41Z",
+      "side": 1,
+      "message": "The implementation of `task_unlock()` is:\n\n```\nstatic inline void task_unlock(struct task_struct *p)\n\t__releases(\u0026p-\u003ealloc_lock)\n{\n\tspin_unlock(\u0026p-\u003ealloc_lock);\n}\n```\n\nThe problem is that `include/linux/sched/task.h` doesn\u0027t have a `task_trylock`, so Mayank had to open-code it. \n\nMaybe Mayank could add a comment next to his `spin_trylock` explaining this?",
+      "parentUuid": "2121bc66_575e2622",
       "revId": "d3eaf6e16b4380fc317e5fd8f1ecf13d301311bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
