@@ -51,22 +51,20 @@ static struct guest_dma_proxy_device *global_gdev;
  * This function is strictly isolated so that it can be easily updated or
  * replaced with a real pKVM hypercall or virtio control message in the future.
  */
-/*
 static int verify_import_token(struct guest_dma_proxy_device *gdev,
 			       u64 paddr, u64 size, const u8 *token)
 {
 	if (gdev->reserved_size > 0) {
-		if (paddr < gdev->reserved_base ||
-		    (paddr + size) > (gdev->reserved_base + gdev->reserved_size)) {
-			pr_err("guest_dma_proxy: Requested region [%llx-%llx] outside reserved bounds\n",
-				paddr, paddr + size);
+		phys_addr_t res_end = gdev->reserved_base + gdev->reserved_size;
+		if (paddr < gdev->reserved_base || (paddr + size) > res_end) {
+			pr_err("guest_dma_proxy: Requested region [0x%llx-0x%llx] outside reserved DTB bounds [0x%pa-0x%pa]\n",
+				paddr, paddr + size, &gdev->reserved_base, &res_end);
 			return -EPERM;
 		}
 	}
 
-	return 0; 
+	return 0;
 }
-*/
 
 /*
  * =======================================================================
@@ -214,12 +212,10 @@ static long guest_dma_proxy_ioctl(struct file *file, unsigned int cmd, unsigned 
 	if (!PAGE_ALIGNED(args.paddr) || !PAGE_ALIGNED(args.size))
 		return -EINVAL;
 
-	/* 1. Security Validation (Disabled) */
-	/*
+	/* 1. Security Validation */
 	ret = verify_import_token(gdev, args.paddr, args.size, args.token);
 	if (ret)
 		return ret;
-	*/
 
 	/* 2. Allocate tracking structure */
 	gbuf = kzalloc(sizeof(*gbuf), GFP_KERNEL);
@@ -288,7 +284,7 @@ static const struct file_operations guest_dma_proxy_fops = {
 static int __init guest_dma_proxy_init(void)
 {
 	struct guest_dma_proxy_device *gdev;
-	/* struct device_node *np; */
+	struct device_node *np;
 	int ret;
 
 	gdev = kzalloc(sizeof(*gdev), GFP_KERNEL);
@@ -298,33 +294,34 @@ static int __init guest_dma_proxy_init(void)
 	mutex_init(&gdev->lock);
 	xa_init(&gdev->imported_bufs);
 
-	/* Check for reserved memory region in DTB (Commented out - hardcoding base instead) */
-	/*
-	np = of_find_compatible_node(NULL, NULL, "google,guest-dma-proxy");
+	np = of_find_compatible_node(NULL, NULL, "android,guest-dma-proxy");
 	if (np) {
 		struct device_node *rmem_np;
 
 		rmem_np = of_parse_phandle(np, "memory-region", 0);
 		if (rmem_np) {
-			struct reserved_mem *rmem;
+			struct resource r;
 
-			rmem = of_reserved_mem_lookup(rmem_np);
-			if (rmem) {
-				gdev->reserved_base = rmem->base;
-				gdev->reserved_size = rmem->size;
-				pr_info("guest_dma_proxy: Found reserved memory region [%pa-%pa]\n",
-					&rmem->base, &rmem->size);
+			if (of_address_to_resource(rmem_np, 0, &r) == 0) {
+				gdev->reserved_base = r.start;
+				gdev->reserved_size = resource_size(&r);
+				pr_info("guest_dma_proxy: Found DTB reserved memory region [0x%pa - 0x%pa]\n",
+					&gdev->reserved_base,
+					&(phys_addr_t){gdev->reserved_base + gdev->reserved_size});
 			}
+			of_node_put(rmem_np);
 		}
 		of_node_put(np);
 	}
-	*/
 
-	/* Hardcode base physical address based on VM ram end + 128MB gap */
-	gdev->reserved_base = memblock_end_of_DRAM() + 128 * 1024 * 1024;
-	gdev->reserved_size = 1024 * 1024 * 1024; /* 1GB default bounds check limit */
-	pr_info("guest_dma_proxy: Hardcoded reserved memory range at [%pa-%pa]\n",
-		&gdev->reserved_base, &gdev->reserved_size);
+	if (gdev->reserved_size == 0) {
+		/* Fallback for environments without DTB overlay (fixed 8GB window) */
+		gdev->reserved_base = 0x200000000ULL;
+		gdev->reserved_size = 0x200000000ULL;
+		pr_info("guest_dma_proxy: Fallback reserved memory range at [0x%pa - 0x%pa]\n",
+			&gdev->reserved_base,
+			&(phys_addr_t){gdev->reserved_base + gdev->reserved_size});
+	}
 
 	gdev->misc.minor = MISC_DYNAMIC_MINOR;
 	gdev->misc.name = "guest_dma_proxy";
