@@ -231,6 +231,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13142d33_ceb37ce1",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-14T16:38:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b450e42_28dad260",
+      "revId": "d3eaf6e16b4380fc317e5fd8f1ecf13d301311bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2121bc66_575e2622",
@@ -316,6 +334,24 @@
       "side": 1,
       "message": "Looks fine to me, but defer to Todd.",
       "parentUuid": "b60f1dca_fc5c3f04",
+      "revId": "d3eaf6e16b4380fc317e5fd8f1ecf13d301311bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3422823_8ba0e655",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-14T16:38:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1bd02c42_0eb9d54e",
       "revId": "d3eaf6e16b4380fc317e5fd8f1ecf13d301311bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
