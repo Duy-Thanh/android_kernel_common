@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fef1356_b756be50",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-08-14T14:00:41Z",
+      "side": 1,
+      "message": "Your sign-off must come last. Swap these lines.\n\nThe `umendez: ` is then redundant as well.\n\n---\n\nIt is not \"really\" ABI compatibility. The issue is CRC stabilisation and CRCs are only part of the ABI as an extra safety check.\n\nPerhaps: Adjusted for symbol CRC stability.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 41
+      },
+      "revId": "973b0649417095002148ea9818a6de2fa8192557",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d7bdbc5_7318b4e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-08-14T14:00:41Z",
+      "side": 1,
+      "message": "Having said all this... It would be better for the CRC stabilisation to be its own change. So we can roll it back more easily in `-kminext`.",
+      "revId": "973b0649417095002148ea9818a6de2fa8192557",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
