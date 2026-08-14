@@ -138,7 +138,17 @@ struct task_struct *find_lock_task_mm(struct task_struct *p)
 	guard(rcu)();
 
 	for_each_thread(p, t) {
-		task_lock(t);
+		if (in_nmi()) {
+			/*
+			 * task_lock() / task_unlock() wrap t->alloc_lock.
+			 * Open-code task_trylock() using spin_trylock() since
+			 * no helper exists in <linux/sched/task.h>.
+			 */
+			if (!spin_trylock(&t->alloc_lock))
+				continue;
+		} else {
+			task_lock(t);
+		}
 		if (likely(t->mm))
 			return t;
 		task_unlock(t);
@@ -424,9 +434,13 @@ void dump_tasks(struct oom_control *oc)
 	pr_info("Tasks state (memory values in pages):\n");
 	pr_info("[  pid  ]   uid  tgid total_vm      rss rss_anon rss_file rss_shmem pgtables_bytes swapents oom_score_adj name\n");
 
-	if (is_memcg_oom(oc))
+	if (is_memcg_oom(oc)) {
+		if (in_nmi()) {
+			pr_warn("Memory cgroup task dump is not supported in NMI context\n");
+			return;
+		}
 		mem_cgroup_scan_tasks(oc->memcg, dump_task, oc);
-	else {
+	} else {
 		struct task_struct *p;
 		int i = 0;
 
