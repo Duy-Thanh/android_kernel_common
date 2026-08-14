@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03465355_4a3a3ced",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-08-14T13:45:05Z",
+      "side": 1,
+      "message": "@gprocida@google.com could you please take a look at this CL? This commit just adds a new symbol to the x86 ABI rather than modifying or breaking the existing ABI, and therefore does not break the existing KMI interface. Thanks in advance",
+      "revId": "289d358cf9c3eee6887d97def15c8ef89b40fc77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
