@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6d22978_daa3584c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-08-14T16:50:22Z",
+      "side": 1,
+      "message": "Please fix the linter error \n\n```\nCherry pick does not have same author date as original commit.\n\nOriginal author date: Wed May 6 17:57:31 2026 +0800\nCherry pick author date: Fri Jul 3 11:47:41 2026 +0800\n\nPlease cherry-pick using: git cherry-pick -s -x f6b24566035835dc22796f24b1e8738581840b17\n```",
+      "revId": "beaa7b473b373f7caa5921863f104dfd209bb634",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
