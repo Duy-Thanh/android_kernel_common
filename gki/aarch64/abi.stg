@@ -3539,6 +3539,11 @@ pointer_reference {
   pointee_type_id: 0x0d881d5f
 }
 pointer_reference {
+  id: 0x09f6e0b9
+  kind: POINTER
+  pointee_type_id: 0x0d9b6478
+}
+pointer_reference {
   id: 0x09f6e8ac
   kind: POINTER
   pointee_type_id: 0x0d9b442d
@@ -23184,6 +23189,11 @@ pointer_reference {
   pointee_type_id: 0x9ff86624
 }
 pointer_reference {
+  id: 0x2d6f6f67
+  kind: POINTER
+  pointee_type_id: 0x9ffd5b01
+}
+pointer_reference {
   id: 0x2d701b09
   kind: POINTER
   pointee_type_id: 0x9f808aba
@@ -26242,11 +26252,6 @@ pointer_reference {
   id: 0x2ebcf7aa
   kind: POINTER
   pointee_type_id: 0x90b33834
-}
-pointer_reference {
-  id: 0x2ebd0d36
-  kind: POINTER
-  pointee_type_id: 0x90b4d244
 }
 pointer_reference {
   id: 0x2ebd1774
@@ -31777,11 +31782,6 @@ pointer_reference {
   id: 0x34ce1f23
   kind: POINTER
   pointee_type_id: 0xf9789a11
-}
-pointer_reference {
-  id: 0x34d0c5ae
-  kind: POINTER
-  pointee_type_id: 0xf903f024
 }
 pointer_reference {
   id: 0x34d10f7f
@@ -209916,9 +209916,9 @@ member {
   offset: 1600
 }
 member {
-  id: 0x7aa9973a
+  id: 0x7aaa4558
   name: "register_guest_smc_handler"
-  type_id: 0x2ebd0d36
+  type_id: 0x2d6f6f67
   offset: 1408
 }
 member {
@@ -336877,7 +336877,7 @@ struct_union {
     member_id: 0x4e45f47d
     member_id: 0x6417154e
     member_id: 0x43b07f08
-    member_id: 0x7aa9973a
+    member_id: 0x7aaa4558
     member_id: 0xa45f0a58
     member_id: 0x29e427bb
     member_id: 0x32f8a32f
@@ -376578,6 +376578,24 @@ enumeration {
   }
 }
 enumeration {
+  id: 0x8555c1bc
+  name: "pkvm_smc_handler_ret"
+  definition {
+    underlying_type_id: 0x4585663f
+    enumerator {
+      name: "GUEST_SMC_HANDLED"
+    }
+    enumerator {
+      name: "GUEST_SMC_NOT_HANDLED"
+      value: 1
+    }
+    enumerator {
+      name: "GUEST_SMC_NEED_TOPUP"
+      value: 2
+    }
+  }
+}
+enumeration {
   id: 0x7dfcec97
   name: "pm_qos_type"
   definition {
@@ -386544,6 +386562,13 @@ function {
   parameter_id: 0x32a623d7
   parameter_id: 0x054f691a
   parameter_id: 0x32a623d7
+}
+function {
+  id: 0x0d9b6478
+  return_type_id: 0x8555c1bc
+  parameter_id: 0x1f7fd7b9
+  parameter_id: 0x1f7fd7b9
+  parameter_id: 0x16864222
 }
 function {
   id: 0x0d9ea2ee
@@ -410552,11 +410577,6 @@ function {
   parameter_id: 0x32a623d7
   parameter_id: 0x6720d32f
   parameter_id: 0x054f691a
-}
-function {
-  id: 0x90b4d244
-  return_type_id: 0x6720d32f
-  parameter_id: 0x34d0c5ae
 }
 function {
   id: 0x90b57579
@@ -438767,6 +438787,11 @@ function {
   parameter_id: 0x0ca27481
 }
 function {
+  id: 0x9ffd5b01
+  return_type_id: 0x6720d32f
+  parameter_id: 0x09f6e0b9
+}
+function {
   id: 0x9fff161d
   return_type_id: 0x6720d32f
   parameter_id: 0x0a1edf98
@@ -444591,13 +444616,6 @@ function {
   parameter_id: 0x4585663f
 }
 function {
-  id: 0xf903f024
-  return_type_id: 0x6d7f5ff6
-  parameter_id: 0x1f7fd7b9
-  parameter_id: 0x1f7fd7b9
-  parameter_id: 0x16864222
-}
-function {
   id: 0xf904db60
   return_type_id: 0x6d7f5ff6
   parameter_id: 0x1e820193
@@ -448510,7 +448528,7 @@ elf_symbol {
   name: "__pkvm_load_el2_module"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x21291720
+  crc: 0xb2b0c7c8
   type_id: 0x9f5021bd
   full_name: "__pkvm_load_el2_module"
 }
@@ -496557,7 +496575,7 @@ elf_symbol {
   name: "ipi_desc_get"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x1d7abc78
+  crc: 0xeb3b6544
   type_id: 0xac8d9251
   full_name: "ipi_desc_get"
 }
@@ -499717,7 +499735,7 @@ elf_symbol {
   name: "kvm_iommu_register_driver"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xf2c07436
+  crc: 0x31d55806
   type_id: 0x9bab2f7e
   full_name: "kvm_iommu_register_driver"
 }
@@ -511397,7 +511415,7 @@ elf_symbol {
   name: "pkvm_iommu_resume"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe7f6cde2
+  crc: 0x5a3de476
   type_id: 0x9d16dd74
   full_name: "pkvm_iommu_resume"
 }
@@ -511406,7 +511424,7 @@ elf_symbol {
   name: "pkvm_iommu_suspend"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe7f6cde2
+  crc: 0x5a3de476
   type_id: 0x9d16dd74
   full_name: "pkvm_iommu_suspend"
 }
