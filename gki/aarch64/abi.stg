@@ -339891,6 +339891,12 @@ function {
   parameter_id: 0x6d7f5ff6
 }
 function {
+  id: 0x1fc56d5c
+  return_type_id: 0x07f2af49
+  parameter_id: 0x3e10b518
+  parameter_id: 0x3e10b518
+}
+function {
   id: 0x1fc886d7
   return_type_id: 0x48b5725f
   parameter_id: 0x3d435d11
@@ -368582,6 +368588,14 @@ function {
   id: 0x9c8a3bc5
   return_type_id: 0x3e10b518
   parameter_id: 0x3b38b19b
+}
+function {
+  id: 0x9c8a3bf9
+  return_type_id: 0x6720d32f
+  parameter_id: 0x07f2af49
+  parameter_id: 0x3e10b518
+  parameter_id: 0x3e10b518
+  parameter_id: 0x6d7f5ff6
 }
 function {
   id: 0x9c8a5e38
@@ -454416,6 +454430,15 @@ elf_symbol {
   full_name: "touchscreen_report_pos"
 }
 elf_symbol {
+  id: 0xe2481840
+  name: "trace_array_get_by_name"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xf7b914b7
+  type_id: 0x1fc56d5c
+  full_name: "trace_array_get_by_name"
+}
+elf_symbol {
   id: 0x86b2ecdf
   name: "trace_array_put"
   is_defined: true
@@ -454423,6 +454446,15 @@ elf_symbol {
   crc: 0xa2eb319d
   type_id: 0x1164fa41
   full_name: "trace_array_put"
+}
+elf_symbol {
+  id: 0xa274099f
+  name: "trace_array_set_clr_event"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x3b2c61c9
+  type_id: 0x9c8a3bf9
+  full_name: "trace_array_set_clr_event"
 }
 elf_symbol {
   id: 0x00fb9c6d
@@ -472543,7 +472575,9 @@ interface {
   symbol_id: 0xf7dfdad1
   symbol_id: 0x47d78ddb
   symbol_id: 0x961122f4
+  symbol_id: 0xe2481840
   symbol_id: 0x86b2ecdf
+  symbol_id: 0xa274099f
   symbol_id: 0x00fb9c6d
   symbol_id: 0x0e209244
   symbol_id: 0xe8ad61b2
