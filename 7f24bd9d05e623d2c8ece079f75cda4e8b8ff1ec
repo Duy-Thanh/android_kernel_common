@@ -334,6 +334,30 @@
       },
       "revId": "7f24bd9d05e623d2c8ece079f75cda4e8b8ff1ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd9f75ce_55449d32",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-14T15:50:10Z",
+      "side": 1,
+      "message": "\u003e An idea how to fix this correctly (and as a bonus, clean up some other existing mess): [...]\n\nI realized that #2 (fixing the issue originally addressed by this Chuanxiao\u0027s patch) is easy and actually doesn\u0027t depend on #1. So I just did it right in this patch. Please take a look at the latest version of this patch.\n\n#1 (i.e. cleanup of MMIO page state management) is implemented in the rest of the patches in https://android-review.googlesource.com/q/topic:%22pkvm-v6.18-mmio-pgstate-cleanup%22, mainly in the patch aosp/4232681. It turned out to be not so easy, it required quite some other refactoring as well. But I think the result is worth it.\n\nIn a nutshell, it makes MMIO page state management logic quite the same as in pKVM-ARM. In particular, the PKVM_PAGE_OWNED value becomes zero so that pages are automatically host-owned by default (and as a consequence, PKVM_PAGE_NONE becomes non-zero, so PKVM_PAGE_NONE is not stored directly in the page state bits in PTEs anymore, it becomes a meta-state derived from other properties of a PTE as a special case).\n\nWe could do that some other way, keeping PKVM_PAGE_NONE \u003d\u003d 0 and PKVM_PAGE_OWNED !\u003d 0. But that would still require some refactoring in some other places, I think the result would not be simpler, and it would mean _increasing_ divergence from pKVM-ARM even more, instead of reducing it. So I concluded it\u0027s better to stick to the pKVM-ARM\u0027s battle-tested logic instead of reinventing our own, especially since it provides all the same exact functionality that we need anyway (and BTW in the future, for upstream, I think we\u0027ll want to use the same _code_ for that in both pKVM-ARM and pKVM-IA).",
+      "parentUuid": "f9560264_292a6a78",
+      "range": {
+        "startLine": 357,
+        "startChar": 0,
+        "endLine": 363,
+        "endChar": 3
+      },
+      "revId": "7f24bd9d05e623d2c8ece079f75cda4e8b8ff1ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
