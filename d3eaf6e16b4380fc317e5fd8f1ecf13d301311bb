@@ -300,6 +300,24 @@
       "parentUuid": "96b7073f_fcd1fba4",
       "revId": "d3eaf6e16b4380fc317e5fd8f1ecf13d301311bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bd02c42_0eb9d54e",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1004907
+      },
+      "writtenOn": "2026-08-14T14:45:26Z",
+      "side": 1,
+      "message": "Looks fine to me, but defer to Todd.",
+      "parentUuid": "b60f1dca_fc5c3f04",
+      "revId": "d3eaf6e16b4380fc317e5fd8f1ecf13d301311bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
