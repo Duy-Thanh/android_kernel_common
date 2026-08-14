@@ -105,6 +105,30 @@
       },
       "revId": "3a8c50a1f61cb78730581c9621c4ec0a881bd203",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31771ef7_f2d10786",
+        "filename": "drivers/hid/hid-logitech-hidpp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4387,
+      "author": {
+        "id": 3541841
+      },
+      "writtenOn": "2026-08-14T23:07:02Z",
+      "side": 1,
+      "message": "Updated patch that addresses the module parameters concern and also all the feedback from the maintainer. Still waiting on final maintainer feedback.",
+      "parentUuid": "8053a70c_e1868f87",
+      "range": {
+        "startLine": 4387,
+        "startChar": 0,
+        "endLine": 4387,
+        "endChar": 103
+      },
+      "revId": "3a8c50a1f61cb78730581c9621c4ec0a881bd203",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
