@@ -39,6 +39,30 @@
       },
       "revId": "07941626c0da4dd301d0355826d52cb6b6ad2712",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7adcd3ac_37d53ba7",
+        "filename": "drivers/usb/host/xhci-mem.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 3011835
+      },
+      "writtenOn": "2026-08-14T02:16:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe0eb49e_e8688aa3",
+      "range": {
+        "startLine": 396,
+        "startChar": 1,
+        "endLine": 396,
+        "endChar": 33
+      },
+      "revId": "07941626c0da4dd301d0355826d52cb6b6ad2712",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
