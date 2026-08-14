@@ -16,6 +16,23 @@
       "message": "go/f2fs-suspend-deadlock This is one-pager for this issue. Plz, refer to that.",
       "revId": "89653c2929bdabbb25b03f11514e48b1acaf83f7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39ea5767_1d6a4c7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-14T21:55:17Z",
+      "side": 1,
+      "message": "Why not upstream? Is this fixing an android-specific issue? If so, please add a Fixes: tag citing the patch that introduced the issue.",
+      "revId": "89653c2929bdabbb25b03f11514e48b1acaf83f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
