@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fc23201_24e9ecfd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-14T16:32:49Z",
+      "side": 1,
+      "message": "This FROMLIST patch has made no progress upstream for more than a year. It wasn\u0027t rejected, the maintainers just asked questions and there was never any response. Please revive the upstream conversation and get this patch accepted. Alternately, you can re-implement it using vendor hooks.",
+      "revId": "08b0fea3bc815a17b9506a93bfcd244640630fe1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
