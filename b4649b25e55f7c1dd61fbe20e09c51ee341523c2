@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "080021ca_e26cfd2c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-14T00:24:25Z",
+      "side": 1,
+      "message": "This is selecting a bunch of configs that weren\u0027t before...do you have a sense for how much this impacts the kernel\u0027s memory footprint?",
+      "revId": "b4649b25e55f7c1dd61fbe20e09c51ee341523c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
