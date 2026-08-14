@@ -282,6 +282,24 @@
       "parentUuid": "b6010fe1_79be6e05",
       "revId": "d3eaf6e16b4380fc317e5fd8f1ecf13d301311bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b60f1dca_fc5c3f04",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 3218532
+      },
+      "writtenOn": "2026-08-14T01:15:03Z",
+      "side": 1,
+      "message": "I added a comment to keep the diff to a minimum, let me know if `static inline bool task_trylock()` is preferred instead, thanks!",
+      "parentUuid": "96b7073f_fcd1fba4",
+      "revId": "d3eaf6e16b4380fc317e5fd8f1ecf13d301311bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
