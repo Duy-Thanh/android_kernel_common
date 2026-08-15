@@ -365,17 +365,19 @@ static void f2fs_write_end_io(struct bio *bio)
 
 	bio_for_each_folio_all(fi, bio) {
 		struct folio *folio = fi.folio;
-		unsigned int nr_blocks = fi.length >>
-			F2FS_BLKSIZE_BITS(F2FS_F_SB(folio));
+		struct folio *io_folio = NULL;
+		unsigned int nr_blocks;
 		enum count_type type;
 		bool finished = true;
 
 		if (fscrypt_is_bounce_folio(folio)) {
-			struct folio *io_folio = folio;
-
+			io_folio = folio;
 			folio = fscrypt_pagecache_folio(io_folio);
-			fscrypt_free_bounce_page(&io_folio->page);
 		}
+		nr_blocks = fi.length >>
+			F2FS_BLKSIZE_BITS(F2FS_F_SB(folio));
+		if (io_folio)
+			fscrypt_free_bounce_page(&io_folio->page);
 
 #ifdef CONFIG_F2FS_FS_COMPRESSION
 		if (f2fs_is_compressed_page(&folio->page)) {
@@ -3137,20 +3139,25 @@ int f2fs_encrypt_one_page(struct f2fs_io_info *fio)
 	struct inode *inode = fio->page->mapping->host;
 	struct page *mpage, *page;
 	gfp_t gfp_flags = GFP_NOFS;
+	size_t len = PAGE_SIZE;
+	size_t offset = 0;
 
 	if (!f2fs_encrypted_file(inode))
 		return 0;
-	if (f2fs_has_subpage_blocks(fio->sbi))
-		return -EOPNOTSUPP;
 
 	page = fio->compressed_page ? fio->compressed_page : fio->page;
 
 	if (fscrypt_inode_uses_inline_crypto(inode))
 		return 0;
 
+	if (f2fs_has_subpage_blocks(fio->sbi)) {
+		len = F2FS_BLKSIZE(fio->sbi);
+		offset = f2fs_block_offset(fio->sbi, fio->index);
+	}
+
 retry_encrypt:
 	fio->encrypted_page = fscrypt_encrypt_pagecache_blocks(page,
-					PAGE_SIZE, 0, gfp_flags);
+					len, offset, gfp_flags);
 	if (IS_ERR(fio->encrypted_page)) {
 		/* flush pending IOs and wait for a while in the ENOMEM case */
 		if (PTR_ERR(fio->encrypted_page) == -ENOMEM) {
@@ -3166,7 +3173,7 @@ retry_encrypt:
 	if (mpage) {
 		if (PageUptodate(mpage))
 			memcpy(page_address(mpage),
-				page_address(fio->encrypted_page), PAGE_SIZE);
+				page_address(fio->encrypted_page) + offset, len);
 		f2fs_put_page(mpage, 1);
 	}
 	return 0;
@@ -3945,8 +3952,7 @@ static int f2fs_write_cache_subpage_folios(struct address_space *mapping,
 		}
 		if (unlikely(is_sbi_flag_set(sbi, SBI_POR_DOING)))
 			goto redirty_out;
-		if (f2fs_compressed_file(inode) || f2fs_encrypted_file(inode) ||
-		    f2fs_is_atomic_file(inode)) {
+		if (f2fs_compressed_file(inode) || f2fs_is_atomic_file(inode)) {
 			folio_error = -EOPNOTSUPP;
 			goto redirty_out;
 		}
@@ -4505,6 +4511,9 @@ static int f2fs_read_subpage_for_write(struct inode *inode,
 	}
 	err = submit_bio_wait(bio);
 	bio_put(bio);
+	if (!err && fscrypt_inode_uses_fs_layer_crypto(inode))
+		err = fscrypt_decrypt_pagecache_blocks(folio, F2FS_BLKSIZE(sbi),
+						       offset);
 	if (!err)
 		ffs_mark_subrange_uptodate(folio, offset, F2FS_BLKSIZE(sbi));
 out:
@@ -4524,8 +4533,7 @@ static int prepare_subpage_write(struct inode *inode, struct folio *folio,
 	pgoff_t index;
 	int err;
 
-	if (f2fs_compressed_file(inode) || f2fs_encrypted_file(inode) ||
-	    f2fs_is_atomic_file(inode))
+	if (f2fs_compressed_file(inode) || f2fs_is_atomic_file(inode))
 		return -EOPNOTSUPP;
 
 	err = f2fs_prealloc_subpage_write_blocks(inode, pos, end - pos);
