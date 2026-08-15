@@ -1076,8 +1076,8 @@ next_step:
 			continue;
 
 		if (phase == 0) {
-			f2fs_ra_meta_pages(sbi, NAT_BLOCK_OFFSET(nid), 1,
-							META_NAT, true);
+			f2fs_ra_meta_pages(sbi, NAT_BLOCK_OFFSET(sbi, nid), 1,
+					   META_NAT, true);
 			continue;
 		}
 
@@ -1133,7 +1133,8 @@ next_step:
  */
 block_t f2fs_start_bidx_of_node(unsigned int node_ofs, struct inode *inode)
 {
-	unsigned int indirect_blks = 2 * NIDS_PER_BLOCK + 4;
+	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+	unsigned int indirect_blks = 2 * NIDS_PER_BLOCK(sbi) + 4;
 	unsigned int bidx;
 
 	if (node_ofs == 0)
@@ -1142,11 +1143,12 @@ block_t f2fs_start_bidx_of_node(unsigned int node_ofs, struct inode *inode)
 	if (node_ofs <= 2) {
 		bidx = node_ofs - 1;
 	} else if (node_ofs <= indirect_blks) {
-		int dec = (node_ofs - 4) / (NIDS_PER_BLOCK + 1);
+		int dec = (node_ofs - 4) / (NIDS_PER_BLOCK(sbi) + 1);
 
 		bidx = node_ofs - 2 - dec;
 	} else {
-		int dec = (node_ofs - indirect_blks - 3) / (NIDS_PER_BLOCK + 1);
+		int dec = (node_ofs - indirect_blks - 3) /
+				(NIDS_PER_BLOCK(sbi) + 1);
 
 		bidx = node_ofs - 5 - dec;
 	}
@@ -1186,10 +1188,10 @@ static bool is_alive(struct f2fs_sb_info *sbi, struct f2fs_summary *sum,
 
 	if (IS_INODE(node_page)) {
 		base = offset_in_addr(F2FS_INODE(node_page));
-		max_addrs = DEF_ADDRS_PER_INODE;
+		max_addrs = DEF_ADDRS_PER_INODE_SBI(sbi);
 	} else {
 		base = 0;
-		max_addrs = DEF_ADDRS_PER_BLOCK;
+		max_addrs = DEF_ADDRS_PER_BLOCK(sbi);
 	}
 
 	if (base + ofs_in_node >= max_addrs) {
@@ -1309,8 +1311,8 @@ got_it:
 	f2fs_put_page(fio.encrypted_page, 0);
 	f2fs_put_page(page, 1);
 
-	f2fs_update_iostat(sbi, inode, FS_DATA_READ_IO, F2FS_BLKSIZE);
-	f2fs_update_iostat(sbi, NULL, FS_GDATA_READ_IO, F2FS_BLKSIZE);
+	f2fs_update_iostat(sbi, inode, FS_DATA_READ_IO, F2FS_BLKSIZE(sbi));
+	f2fs_update_iostat(sbi, NULL, FS_GDATA_READ_IO, F2FS_BLKSIZE(sbi));
 
 	if (atomic_inode)
 		iput(atomic_inode);
@@ -1430,9 +1432,9 @@ static int move_data_block(struct inode *inode, block_t bidx,
 		}
 
 		f2fs_update_iostat(fio.sbi, inode, FS_DATA_READ_IO,
-							F2FS_BLKSIZE);
+							F2FS_BLKSIZE(fio.sbi));
 		f2fs_update_iostat(fio.sbi, NULL, FS_GDATA_READ_IO,
-							F2FS_BLKSIZE);
+							F2FS_BLKSIZE(fio.sbi));
 
 		lock_page(mpage);
 		if (unlikely(mpage->mapping != META_MAPPING(fio.sbi) ||
@@ -1465,7 +1467,7 @@ static int move_data_block(struct inode *inode, block_t bidx,
 	/* write target block */
 	f2fs_wait_on_page_writeback(fio.encrypted_page, DATA, true, true);
 	memcpy(page_address(fio.encrypted_page),
-				page_address(mpage), PAGE_SIZE);
+				page_address(mpage), F2FS_BLKSIZE(fio.sbi));
 	f2fs_put_page(mpage, 1);
 
 	f2fs_invalidate_internal_cache(fio.sbi, fio.old_blkaddr, 1);
@@ -1481,7 +1483,8 @@ static int move_data_block(struct inode *inode, block_t bidx,
 	fio.new_blkaddr = newaddr;
 	f2fs_submit_page_write(&fio);
 
-	f2fs_update_iostat(fio.sbi, NULL, FS_GC_DATA_IO, F2FS_BLKSIZE);
+	f2fs_update_iostat(fio.sbi, NULL, FS_GC_DATA_IO,
+			   F2FS_BLKSIZE(fio.sbi));
 
 	f2fs_update_data_blkaddr(&dn, newaddr);
 	set_inode_flag(inode, FI_APPEND_WRITE);
@@ -1507,6 +1510,7 @@ out_iput:
 static int move_data_page(struct inode *inode, block_t bidx, int gc_type,
 						unsigned int segno, int off)
 {
+	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
 	struct folio *folio;
 	int err = 0;
 
@@ -1528,17 +1532,24 @@ static int move_data_page(struct inode *inode, block_t bidx, int gc_type,
 			err = -EAGAIN;
 			goto out;
 		}
+		if (f2fs_has_subpage_blocks(sbi))
+			ffs_mark_subrange_dirty(folio,
+						f2fs_lblk_offset_in_folio(sbi, bidx),
+					F2FS_BLKSIZE(sbi));
 		folio_mark_dirty(folio);
 		set_page_private_gcing(&folio->page);
 	} else {
+		unsigned int index = bidx - f2fs_folio_lblk(sbi, folio);
 		struct f2fs_io_info fio = {
-			.sbi = F2FS_I_SB(inode),
+			.sbi = sbi,
 			.ino = inode->i_ino,
 			.type = DATA,
 			.temp = COLD,
 			.op = REQ_OP_WRITE,
 			.op_flags = REQ_SYNC,
 			.old_blkaddr = NULL_ADDR,
+			.index = index,
+			.count = 1,
 			.page = &folio->page,
 			.encrypted_page = NULL,
 			.need_lock = LOCK_REQ,
@@ -1548,6 +1559,58 @@ static int move_data_page(struct inode *inode, block_t bidx, int gc_type,
 
 retry:
 		f2fs_folio_wait_writeback(folio, DATA, true, true);
+		if (f2fs_has_subpage_blocks(sbi)) {
+			struct f2fs_folio_state *ffs;
+			size_t offset = f2fs_block_offset(sbi, index);
+
+			/*
+			 * Relocate only the victim filesystem block.  Preserve any
+			 * unrelated dirty subblocks in the same base folio; normal
+			 * writeback will submit them later.
+			 *
+			 * f2fs_do_write_data_page() starts folio writeback, while the
+			 * BIO completion ends it through write_blocks_pending.  This
+			 * direct GC path submits exactly one filesystem block, so take
+			 * its pending reference before submission.
+			 *
+			 * A clean folio has not necessarily associated its inode with a
+			 * writeback domain yet.  Temporarily dirty and clean the victim
+			 * block before starting writeback, just like the native-page GC
+			 * path below.  Mark the subblock first so ->dirty_folio() does not
+			 * conservatively mark every uptodate subblock dirty.
+			 */
+			f2fs_bug_on(sbi, !folio_has_ffs(folio));
+			ffs = folio->private;
+			f2fs_bug_on(sbi,
+				    atomic_read(&ffs->write_blocks_pending));
+			ffs_mark_subrange_dirty(folio, offset,
+						F2FS_BLKSIZE(sbi));
+			folio_mark_dirty(folio);
+			if (folio_clear_dirty_for_io(folio)) {
+				inode_dec_dirty_pages(inode);
+				f2fs_remove_dirty_inode(inode);
+			}
+			atomic_inc(&ffs->write_blocks_pending);
+			folio_set_f2fs_gcing(folio);
+			err = f2fs_do_write_data_page(&fio);
+			if (!fio.submitted) {
+				if (atomic_dec_and_test(&ffs->write_blocks_pending) &&
+				    folio_test_writeback(folio))
+					folio_end_writeback(folio);
+			}
+			if (err || !fio.submitted)
+				folio_clear_f2fs_gcing(folio);
+			else
+				ffs_clear_subrange_dirty(folio, offset,
+							 F2FS_BLKSIZE(sbi));
+			if (ffs_has_dirty_blocks(folio))
+				folio_mark_dirty(folio);
+			if (err == -ENOMEM) {
+				memalloc_retry_wait(GFP_NOFS);
+				goto retry;
+			}
+			goto out;
+		}
 
 		folio_mark_dirty(folio);
 		if (folio_clear_dirty_for_io(folio)) {
@@ -1618,8 +1681,8 @@ next_step:
 			continue;
 
 		if (phase == 0) {
-			f2fs_ra_meta_pages(sbi, NAT_BLOCK_OFFSET(nid), 1,
-							META_NAT, true);
+			f2fs_ra_meta_pages(sbi, NAT_BLOCK_OFFSET(sbi, nid), 1,
+					   META_NAT, true);
 			continue;
 		}
 
@@ -1874,9 +1937,9 @@ static int do_garbage_collect(struct f2fs_sb_info *sbi,
 		}
 
 		sum = page_address(sum_page);
-		if (type != GET_SUM_TYPE((&sum->footer))) {
+		if (type != GET_SUM_TYPE(sum_footer(sbi, sum))) {
 			f2fs_err(sbi, "Inconsistent segment (%u) type [%d, %d] in SIT and SSA",
-				 segno, type, GET_SUM_TYPE((&sum->footer)));
+				 segno, type, GET_SUM_TYPE(sum_footer(sbi, sum)));
 			f2fs_stop_checkpoint(sbi, false,
 				STOP_CP_REASON_CORRUPTED_SUMMARY);
 			goto skip;
@@ -1890,10 +1953,10 @@ static int do_garbage_collect(struct f2fs_sb_info *sbi,
 		 *                                  - lock_page(sum_page)
 		 */
 		if (type == SUM_TYPE_NODE)
-			submitted += gc_node_segment(sbi, sum->entries, segno,
+			submitted += gc_node_segment(sbi, sum_entries(sum), segno,
 								gc_type, &plug);
 		else
-			submitted += gc_data_segment(sbi, sum->entries, gc_list,
+			submitted += gc_data_segment(sbi, sum_entries(sum), gc_list,
 							segno, gc_type,
 							force_migrate, &plug);
 

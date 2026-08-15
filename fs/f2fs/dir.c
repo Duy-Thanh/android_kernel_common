@@ -16,6 +16,18 @@
 #include "xattr.h"
 #include <trace/events/f2fs.h>
 
+static void f2fs_mark_dentry_folio_dirty(struct inode *dir,
+					 struct folio *folio, pgoff_t index)
+{
+	struct f2fs_sb_info *sbi = F2FS_I_SB(dir);
+
+	if (f2fs_has_subpage_blocks(sbi))
+		ffs_mark_subrange_dirty(folio,
+					f2fs_lblk_offset_in_folio(sbi, index),
+				F2FS_BLKSIZE(sbi));
+	folio_mark_dirty(folio);
+}
+
 static inline bool f2fs_should_fallback_to_linear(struct inode *dir)
 {
 	struct f2fs_sb_info *sbi = F2FS_I_SB(dir);
@@ -37,8 +49,10 @@ extern struct kmem_cache *f2fs_cf_name_slab;
 
 static unsigned long dir_blocks(struct inode *inode)
 {
-	return ((unsigned long long) (i_size_read(inode) + PAGE_SIZE - 1))
-							>> PAGE_SHIFT;
+	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+
+	return F2FS_BYTES_TO_BLK(sbi, i_size_read(inode) +
+					F2FS_BLKSIZE(sbi) - 1);
 }
 
 static unsigned int dir_buckets(unsigned int level, int dir_level)
@@ -189,6 +203,7 @@ static unsigned long dir_block_index(unsigned int level,
 
 static struct f2fs_dir_entry *find_in_block(struct inode *dir,
 				struct page *dentry_page,
+				pgoff_t index,
 				const struct f2fs_filename *fname,
 				int *max_slots,
 				bool use_hash)
@@ -196,7 +211,8 @@ static struct f2fs_dir_entry *find_in_block(struct inode *dir,
 	struct f2fs_dentry_block *dentry_blk;
 	struct f2fs_dentry_ptr d;
 
-	dentry_blk = (struct f2fs_dentry_block *)page_address(dentry_page);
+	dentry_blk = f2fs_folio_lblk_address(F2FS_I_SB(dir),
+					     page_folio(dentry_page), index);
 
 	make_dentry_ptr_block(dir, &d, dentry_blk);
 	return f2fs_find_target_dentry(&d, fname, max_slots, use_hash);
@@ -311,7 +327,8 @@ start_find_bucket:
 			}
 		}
 
-		de = find_in_block(dir, dentry_page, fname, &max_slots, use_hash);
+		de = find_in_block(dir, dentry_page, bidx, fname, &max_slots,
+				   use_hash);
 		if (IS_ERR(de)) {
 			*res_page = ERR_CAST(de);
 			de = NULL;
@@ -450,7 +467,19 @@ void f2fs_set_link(struct inode *dir, struct f2fs_dir_entry *de,
 	f2fs_wait_on_page_writeback(page, type, true, true);
 	de->ino = cpu_to_le32(inode->i_ino);
 	de->file_type = fs_umode_to_ftype(inode->i_mode);
-	set_page_dirty(page);
+	if (type == DATA) {
+		struct f2fs_sb_info *sbi = F2FS_I_SB(dir);
+		struct folio *folio = page_folio(page);
+		size_t offset = round_down((size_t)((void *)de -
+				folio_address(folio)),
+				(size_t)F2FS_BLKSIZE(sbi));
+
+		f2fs_mark_dentry_folio_dirty(dir, folio,
+					     f2fs_folio_lblk(sbi, folio) +
+				(offset >> F2FS_BLKSIZE_BITS(sbi)));
+	} else {
+		set_page_dirty(page);
+	}
 
 	inode_set_mtime_to_ts(dir, inode_set_ctime_current(dir));
 	f2fs_mark_inode_dirty_sync(dir, false);
@@ -520,12 +549,13 @@ static int make_empty_dir(struct inode *inode,
 	if (IS_ERR(dentry_page))
 		return PTR_ERR(dentry_page);
 
-	dentry_blk = page_address(dentry_page);
+	dentry_blk = f2fs_folio_lblk_address(F2FS_I_SB(inode),
+					     page_folio(dentry_page), 0);
 
-	make_dentry_ptr_block(NULL, &d, dentry_blk);
+	make_dentry_ptr_block(inode, &d, dentry_blk);
 	f2fs_do_make_empty_dir(inode, parent, &d);
 
-	set_page_dirty(dentry_page);
+	f2fs_mark_dentry_folio_dirty(inode, page_folio(dentry_page), 0);
 	f2fs_put_page(dentry_page, 1);
 	return 0;
 }
@@ -717,10 +747,11 @@ start:
 		if (IS_ERR(dentry_page))
 			return PTR_ERR(dentry_page);
 
-		dentry_blk = page_address(dentry_page);
-		bit_pos = f2fs_room_for_filename(&dentry_blk->dentry_bitmap,
-						slots, NR_DENTRY_IN_BLOCK);
-		if (bit_pos < NR_DENTRY_IN_BLOCK)
+		dentry_blk = f2fs_folio_lblk_address(F2FS_I_SB(dir),
+						     page_folio(dentry_page), block);
+		make_dentry_ptr_block(dir, &d, dentry_blk);
+		bit_pos = f2fs_room_for_filename(d.bitmap, slots, d.max);
+		if (bit_pos < d.max)
 			goto add_dentry;
 
 		f2fs_put_page(dentry_page, 1);
@@ -741,11 +772,11 @@ add_dentry:
 		}
 	}
 
-	make_dentry_ptr_block(NULL, &d, dentry_blk);
+	make_dentry_ptr_block(dir, &d, dentry_blk);
 	f2fs_update_dentry(ino, mode, &d, &fname->disk_name, fname->hash,
 			   bit_pos);
 
-	set_page_dirty(dentry_page);
+	f2fs_mark_dentry_folio_dirty(dir, page_folio(dentry_page), block);
 
 	if (inode) {
 		f2fs_i_pino_write(inode, dir->i_ino);
@@ -881,7 +912,11 @@ void f2fs_delete_entry(struct f2fs_dir_entry *dentry, struct page *page,
 	struct	f2fs_dentry_block *dentry_blk;
 	unsigned int bit_pos;
 	int slots = GET_DENTRY_SLOTS(le16_to_cpu(dentry->name_len));
-	pgoff_t index = page_folio(page)->index;
+	struct f2fs_dentry_ptr d;
+	struct f2fs_sb_info *sbi = F2FS_I_SB(dir);
+	struct folio *folio = page_folio(page);
+	size_t block_offset;
+	pgoff_t index;
 	int i;
 
 	f2fs_update_time(F2FS_I_SB(dir), REQ_TIME);
@@ -895,27 +930,40 @@ void f2fs_delete_entry(struct f2fs_dir_entry *dentry, struct page *page,
 	lock_page(page);
 	f2fs_wait_on_page_writeback(page, DATA, true, true);
 
-	dentry_blk = page_address(page);
-	bit_pos = dentry - dentry_blk->dentry;
+	block_offset = round_down((size_t)((void *)dentry -
+			folio_address(folio)), (size_t)F2FS_BLKSIZE(sbi));
+	index = f2fs_folio_lblk(sbi, folio) +
+			(block_offset >> F2FS_BLKSIZE_BITS(sbi));
+	dentry_blk = folio_address(folio) + block_offset;
+	make_dentry_ptr_block(dir, &d, dentry_blk);
+	bit_pos = dentry - d.dentry;
 	for (i = 0; i < slots; i++)
-		__clear_bit_le(bit_pos + i, &dentry_blk->dentry_bitmap);
+		__clear_bit_le(bit_pos + i, d.bitmap);
 
 	/* Let's check and deallocate this dentry page */
-	bit_pos = find_next_bit_le(&dentry_blk->dentry_bitmap,
-			NR_DENTRY_IN_BLOCK,
-			0);
-	set_page_dirty(page);
+	bit_pos = find_next_bit_le(d.bitmap, d.max, 0);
+	f2fs_mark_dentry_folio_dirty(dir, folio, index);
 
-	if (bit_pos == NR_DENTRY_IN_BLOCK &&
-		!f2fs_truncate_hole(dir, index, index + 1)) {
-		f2fs_clear_page_cache_dirty_tag(page_folio(page));
-		clear_page_dirty_for_io(page);
-		ClearPageUptodate(page);
-		folio_detach_private(page_folio(page));
+	if (bit_pos == d.max &&
+	    !f2fs_truncate_hole(dir, index, index + 1)) {
+		if (f2fs_has_subpage_blocks(sbi)) {
+			ffs_clear_subrange_dirty(folio, block_offset,
+						 F2FS_BLKSIZE(sbi));
+			ffs_clear_subrange_uptodate(folio, block_offset,
+						    F2FS_BLKSIZE(sbi));
+			if (ffs_has_dirty_blocks(folio))
+				goto keep_dirty;
+		}
+		f2fs_clear_page_cache_dirty_tag(folio);
+		folio_clear_dirty_for_io(folio);
+		folio_clear_uptodate(folio);
+		if (!f2fs_has_subpage_blocks(sbi))
+			folio_detach_private(folio);
 
 		inode_dec_dirty_pages(dir);
 		f2fs_remove_dirty_inode(dir);
 	}
+keep_dirty:
 	f2fs_put_page(page, 1);
 
 	inode_set_mtime_to_ts(dir, inode_set_ctime_current(dir));
@@ -932,6 +980,7 @@ bool f2fs_empty_dir(struct inode *dir)
 	unsigned int bit_pos;
 	struct f2fs_dentry_block *dentry_blk;
 	unsigned long nblock = dir_blocks(dir);
+	struct f2fs_dentry_ptr d;
 
 	if (f2fs_has_inline_dentry(dir))
 		return f2fs_empty_inline_dir(dir);
@@ -949,18 +998,18 @@ bool f2fs_empty_dir(struct inode *dir)
 			}
 		}
 
-		dentry_blk = page_address(dentry_page);
+		dentry_blk = f2fs_folio_lblk_address(F2FS_I_SB(dir),
+						     page_folio(dentry_page), bidx);
+		make_dentry_ptr_block(dir, &d, dentry_blk);
 		if (bidx == 0)
 			bit_pos = 2;
 		else
 			bit_pos = 0;
-		bit_pos = find_next_bit_le(&dentry_blk->dentry_bitmap,
-						NR_DENTRY_IN_BLOCK,
-						bit_pos);
+		bit_pos = find_next_bit_le(d.bitmap, d.max, bit_pos);
 
 		f2fs_put_page(dentry_page, 0);
 
-		if (bit_pos < NR_DENTRY_IN_BLOCK)
+		if (bit_pos < d.max)
 			return false;
 
 		bidx++;
@@ -1060,7 +1109,9 @@ static int f2fs_readdir(struct file *file, struct dir_context *ctx)
 	struct page *dentry_page = NULL;
 	struct file_ra_state *ra = &file->f_ra;
 	loff_t start_pos = ctx->pos;
-	unsigned int n = ((unsigned long)ctx->pos / NR_DENTRY_IN_BLOCK);
+	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+	unsigned int dentry_count = NR_DENTRY_IN_BLOCK(sbi);
+	unsigned int n = (unsigned long)ctx->pos / dentry_count;
 	struct f2fs_dentry_ptr d;
 	struct fscrypt_str fstr = FSTR_INIT(NULL, 0);
 	int err = 0;
@@ -1080,7 +1131,9 @@ static int f2fs_readdir(struct file *file, struct dir_context *ctx)
 		goto out_free;
 	}
 
-	for (; n < npages; ctx->pos = n * NR_DENTRY_IN_BLOCK) {
+	for (; n < npages; ctx->pos = n * dentry_count) {
+		pgoff_t folio_index;
+		pgoff_t nr_folios;
 		pgoff_t next_pgofs;
 
 		/* allow readdir() to be interrupted */
@@ -1091,9 +1144,12 @@ static int f2fs_readdir(struct file *file, struct dir_context *ctx)
 		cond_resched();
 
 		/* readahead for multi pages of dir */
-		if (npages - n > 1 && !ra_has_index(ra, n))
-			page_cache_sync_readahead(inode->i_mapping, ra, file, n,
-				min(npages - n, (pgoff_t)MAX_DIR_RA_PAGES));
+		folio_index = f2fs_lblk_to_folio_index(sbi, n);
+		nr_folios = DIV_ROUND_UP(npages - n, F2FS_BLKS_PER_PAGE(sbi));
+		if (nr_folios > 1 && !ra_has_index(ra, folio_index))
+			page_cache_sync_readahead(inode->i_mapping, ra, file,
+						  folio_index,
+				min(nr_folios, (pgoff_t)MAX_DIR_RA_PAGES));
 
 		dentry_page = f2fs_find_data_page(inode, n, &next_pgofs);
 		if (IS_ERR(dentry_page)) {
@@ -1107,12 +1163,13 @@ static int f2fs_readdir(struct file *file, struct dir_context *ctx)
 			}
 		}
 
-		dentry_blk = page_address(dentry_page);
+		dentry_blk = f2fs_folio_lblk_address(sbi,
+						     page_folio(dentry_page), n);
 
 		make_dentry_ptr_block(inode, &d, dentry_blk);
 
 		err = f2fs_fill_dentries(ctx, &d,
-				n * NR_DENTRY_IN_BLOCK, &fstr);
+				n * dentry_count, &fstr);
 		if (err) {
 			f2fs_put_page(dentry_page, 0);
 			break;
