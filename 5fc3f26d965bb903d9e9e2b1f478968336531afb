@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e0156c0_78b10fd3",
+        "filename": "Documentation/ABI/testing/sysfs-driver-hid-logitech-hidpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-08-15T11:08:27Z",
+      "side": 1,
+      "message": "why not just not have the attribute at all if the device can not support this?  That\u0027s the normal way that sysfs works.",
+      "range": {
+        "startLine": 54,
+        "startChar": 2,
+        "endLine": 55,
+        "endChar": 27
+      },
+      "revId": "5fc3f26d965bb903d9e9e2b1f478968336531afb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
