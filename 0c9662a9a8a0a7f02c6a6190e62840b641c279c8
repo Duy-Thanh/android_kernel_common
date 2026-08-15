@@ -64,6 +64,30 @@
       },
       "revId": "0c9662a9a8a0a7f02c6a6190e62840b641c279c8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1773e622_0c8160aa",
+        "filename": "mm/page_pinner.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 4245205
+      },
+      "writtenOn": "2026-08-15T13:37:46Z",
+      "side": 1,
+      "message": "Marked as resolved if no issues here.",
+      "parentUuid": "ac20a68d_197133d1",
+      "range": {
+        "startLine": 136,
+        "startChar": 1,
+        "endLine": 136,
+        "endChar": 31
+      },
+      "revId": "0c9662a9a8a0a7f02c6a6190e62840b641c279c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
