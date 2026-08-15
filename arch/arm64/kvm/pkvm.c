@@ -756,7 +756,10 @@ void pkvm_host_reclaim_page(struct kvm *host_kvm, phys_addr_t ipa)
 	}
 	write_unlock(&host_kvm->mmu_lock);
 
-	if (WARN_ON(!ppage || order))
+	if (!ppage)
+		return;
+
+	if (WARN_ON(order))
 		return;
 
 	account_locked_vm(mm, 1 << ppage->order, false);
