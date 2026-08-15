@@ -337534,11 +337534,6 @@ function {
   parameter_id: 0x026525e9
 }
 function {
-  id: 0x1d1a000c
-  return_type_id: 0x48b5725f
-  parameter_id: 0x3609467c
-}
-function {
   id: 0x1d1ccc70
   return_type_id: 0x48b5725f
   parameter_id: 0x3fab28c8
@@ -448801,15 +448796,6 @@ elf_symbol {
   full_name: "smpboot_register_percpu_thread"
 }
 elf_symbol {
-  id: 0xbf61e6bf
-  name: "smpboot_unregister_percpu_thread"
-  is_defined: true
-  symbol_type: FUNCTION
-  crc: 0x32bf5923
-  type_id: 0x1d1a000c
-  full_name: "smpboot_unregister_percpu_thread"
-}
-elf_symbol {
   id: 0x675bcd74
   name: "snapshot_get_image_size"
   is_defined: true
@@ -471741,7 +471727,6 @@ interface {
   symbol_id: 0x1f9b728b
   symbol_id: 0x99a17453
   symbol_id: 0xd7393cd7
-  symbol_id: 0xbf61e6bf
   symbol_id: 0x675bcd74
   symbol_id: 0x35280a80
   symbol_id: 0x03fd01bd
