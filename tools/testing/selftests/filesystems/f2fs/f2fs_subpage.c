@@ -19,6 +19,7 @@
 #include <sys/stat.h>
 #include <sys/statfs.h>
 #include <sys/types.h>
+#include <sys/wait.h>
 #include <sys/xattr.h>
 #include <unistd.h>
 
@@ -148,14 +149,40 @@ static void test_buffered_io(const char *dir)
 	if (munmap(map, DATA_LEN))
 		fail("munmap");
 
-	errno = 0;
 	map = mmap(NULL, DATA_LEN, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
-	expect(map == MAP_FAILED && errno == EOPNOTSUPP,
-	       "shared writable mmap was not rejected");
-
-	errno = 0;
-	expect(fallocate(fd, 0, 0, 4096) == -1 && errno == EOPNOTSUPP,
-	       "fallocate was not rejected");
+	if (map == MAP_FAILED)
+		fail("shared writable mmap");
+	((uint8_t *)map)[0] ^= 0x5a;
+	((uint8_t *)map)[4095] ^= 0xa5;
+	((uint8_t *)map)[4096] ^= 0x3c;
+	((uint8_t *)map)[8191] ^= 0xc3;
+	((uint8_t *)map)[8192] ^= 0x69;
+	((uint8_t *)map)[12287] ^= 0x96;
+	((uint8_t *)map)[12288] ^= 0x0f;
+	((uint8_t *)map)[16383] ^= 0xf0;
+	((uint8_t *)map)[16384] ^= 0x55;
+	((uint8_t *)map)[DATA_LEN - 1] ^= 0xaa;
+	expected[0] ^= 0x5a;
+	expected[4095] ^= 0xa5;
+	expected[4096] ^= 0x3c;
+	expected[8191] ^= 0xc3;
+	expected[8192] ^= 0x69;
+	expected[12287] ^= 0x96;
+	expected[12288] ^= 0x0f;
+	expected[16383] ^= 0xf0;
+	expected[16384] ^= 0x55;
+	expected[DATA_LEN - 1] ^= 0xaa;
+	if (msync(map, DATA_LEN, MS_SYNC))
+		fail("msync shared writable mmap");
+	if (munmap(map, DATA_LEN))
+		fail("munmap shared writable mmap");
+	if (fsync(fd))
+		fail("fsync shared writable mmap");
+	if (posix_fadvise(fd, 0, 0, POSIX_FADV_DONTNEED))
+		fail("posix_fadvise shared writable mmap");
+	pread_all(fd, actual, DATA_LEN, 0);
+	expect(!memcmp(actual, expected, DATA_LEN),
+	       "shared writable mmap data mismatch");
 
 	if (fsetxattr(fd, "user.f2fs_subpage", "value", 5, 0))
 		fail("fsetxattr");
@@ -179,6 +206,217 @@ static void test_buffered_io(const char *dir)
 
 	if (close(fd))
 		fail("close buffered file");
+	free(actual);
+	free(expected);
+}
+
+static void test_fallocate(const char *dir)
+{
+	const size_t initial_len = 16 * 4096 + 1;
+	const size_t final_len = initial_len + 2 * 4096;
+	uint8_t *expected = calloc(1, final_len);
+	uint8_t *actual = malloc(final_len);
+	uint8_t *map;
+	char path[PATH_MAX];
+	struct stat st;
+	int fd;
+
+	expect(expected && actual, "allocate fallocate buffers");
+	fill_pattern(expected, initial_len, 31);
+	make_path(path, sizeof(path), dir, "subpage-fallocate.bin");
+	unlink(path);
+	fd = open(path, O_CREAT | O_EXCL | O_RDWR, 0600);
+	if (fd < 0)
+		fail("open fallocate file");
+	pwrite_all(fd, expected, initial_len, 0);
+
+	if (fallocate(fd, FALLOC_FL_KEEP_SIZE, initial_len + 4096, 4096))
+		fail("fallocate keep size");
+	if (fstat(fd, &st))
+		fail("fstat fallocate keep size");
+	expect((size_t)st.st_size == initial_len,
+	       "fallocate keep size changed i_size");
+	if (fallocate(fd, 0, initial_len + 4096, 4096))
+		fail("fallocate extend");
+	if (fstat(fd, &st))
+		fail("fstat fallocate extend");
+	expect((size_t)st.st_size == final_len,
+	       "fallocate did not extend to exact size");
+
+	map = mmap(NULL, final_len, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
+	if (map == MAP_FAILED)
+		fail("mmap fallocate file");
+	if (fallocate(fd, FALLOC_FL_PUNCH_HOLE | FALLOC_FL_KEEP_SIZE,
+		      4095, 2 * 4096 + 3))
+		fail("fallocate punch hole");
+	memset(expected + 4095, 0, 2 * 4096 + 3);
+	map[4096] = 0xb6;
+	expected[4096] = 0xb6;
+	if (fallocate(fd, FALLOC_FL_ZERO_RANGE, 16383, 2 * 4096 + 5))
+		fail("fallocate zero range");
+	memset(expected + 16383, 0, 2 * 4096 + 5);
+	map[16384] = 0xc7;
+	expected[16384] = 0xc7;
+
+	errno = 0;
+	expect(fallocate(fd, FALLOC_FL_COLLAPSE_RANGE, 0, 16384) == -1 &&
+	       errno == EOPNOTSUPP, "collapse range was not rejected");
+	errno = 0;
+	expect(fallocate(fd, FALLOC_FL_INSERT_RANGE, 0, 16384) == -1 &&
+	       errno == EOPNOTSUPP, "insert range was not rejected");
+	if (msync(map, final_len, MS_SYNC))
+		fail("msync fallocate file");
+	if (munmap(map, final_len))
+		fail("munmap fallocate file");
+	if (fsync(fd))
+		fail("fsync fallocate file");
+	if (posix_fadvise(fd, 0, 0, POSIX_FADV_DONTNEED))
+		fail("posix_fadvise fallocate file");
+	pread_all(fd, actual, final_len, 0);
+	expect(!memcmp(actual, expected, final_len),
+	       "fallocate data mismatch");
+
+	if (close(fd))
+		fail("close fallocate file");
+	free(actual);
+	free(expected);
+}
+
+static void test_mmap_sparse_and_truncate(const char *dir)
+{
+	const size_t len = 16 * 4096 + 1;
+	uint8_t *expected = calloc(1, len);
+	uint8_t *actual = malloc(len);
+	uint8_t *map;
+	char path[PATH_MAX];
+	size_t i;
+	int fd;
+
+	expect(expected && actual, "allocate mmap buffers");
+	make_path(path, sizeof(path), dir, "subpage-mmap-sparse.bin");
+	unlink(path);
+	fd = open(path, O_CREAT | O_EXCL | O_RDWR, 0600);
+	if (fd < 0)
+		fail("open sparse mmap file");
+	if (ftruncate(fd, len))
+		fail("size sparse mmap file");
+
+	map = mmap(NULL, len, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
+	if (map == MAP_FAILED)
+		fail("mmap sparse file");
+	for (i = 0; i < len; i += 4096) {
+		map[i] = (uint8_t)(i / 4096 + 1);
+		expected[i] = map[i];
+	}
+	map[len - 1] = 0xe7;
+	expected[len - 1] = 0xe7;
+	if (msync(map, len, MS_SYNC))
+		fail("msync sparse mmap file");
+
+	if (ftruncate(fd, 4097))
+		fail("shrink mapped sparse file");
+	if (ftruncate(fd, len))
+		fail("extend mapped sparse file");
+	memset(expected + 4097, 0, len - 4097);
+	map[4096] = 0x71;
+	map[8192] = 0x82;
+	map[16384] = 0x93;
+	map[len - 1] = 0xa4;
+	expected[4096] = 0x71;
+	expected[8192] = 0x82;
+	expected[16384] = 0x93;
+	expected[len - 1] = 0xa4;
+	if (msync(map, len, MS_SYNC))
+		fail("msync truncated mmap file");
+	if (munmap(map, len))
+		fail("munmap sparse file");
+	if (fsync(fd))
+		fail("fsync sparse mmap file");
+	if (posix_fadvise(fd, 0, 0, POSIX_FADV_DONTNEED))
+		fail("posix_fadvise sparse mmap file");
+	pread_all(fd, actual, len, 0);
+	expect(!memcmp(actual, expected, len),
+	       "sparse mmap or truncate data mismatch");
+
+	if (close(fd))
+		fail("close sparse mmap file");
+	free(actual);
+	free(expected);
+}
+
+static void test_mmap_concurrent_writeback(const char *dir)
+{
+	const size_t len = 256 * 4096;
+	const unsigned int rounds = 1000;
+	uint8_t *expected = calloc(1, len);
+	uint8_t *actual = malloc(len);
+	uint8_t *map;
+	char path[PATH_MAX];
+	unsigned int round;
+	size_t block;
+	int status;
+	pid_t child;
+	int fd;
+
+	expect(expected && actual, "allocate concurrent mmap buffers");
+	make_path(path, sizeof(path), dir, "subpage-mmap-concurrent.bin");
+	unlink(path);
+	fd = open(path, O_CREAT | O_EXCL | O_RDWR, 0600);
+	if (fd < 0)
+		fail("open concurrent mmap file");
+	if (ftruncate(fd, len))
+		fail("size concurrent mmap file");
+	map = mmap(NULL, len, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
+	if (map == MAP_FAILED)
+		fail("mmap concurrent file");
+
+	child = fork();
+	if (child < 0)
+		fail("fork concurrent mmap writer");
+	if (!child) {
+		for (round = 0; round < rounds; round++) {
+			for (block = 0; block < len / 4096; block++)
+				map[block * 4096 + 17] =
+					(uint8_t)(round * 13U + block);
+			if (!(round % 31) && msync(map, len, MS_ASYNC))
+				_exit(EXIT_FAILURE);
+		}
+		if (msync(map, len, MS_SYNC))
+			_exit(EXIT_FAILURE);
+		_exit(EXIT_SUCCESS);
+	}
+
+	for (round = 0; round < rounds; round++) {
+		for (block = 0; block < len / 4096; block++)
+			map[block * 4096 + 31] =
+				(uint8_t)(round * 29U + block);
+		if (!(round % 23) && fdatasync(fd))
+			fail("concurrent mmap fdatasync");
+	}
+	if (waitpid(child, &status, 0) != child)
+		fail("wait concurrent mmap writer");
+	expect(WIFEXITED(status) && WEXITSTATUS(status) == EXIT_SUCCESS,
+	       "concurrent mmap writer failed");
+	for (block = 0; block < len / 4096; block++) {
+		expected[block * 4096 + 17] =
+			(uint8_t)((rounds - 1) * 13U + block);
+		expected[block * 4096 + 31] =
+			(uint8_t)((rounds - 1) * 29U + block);
+	}
+	if (msync(map, len, MS_SYNC))
+		fail("final concurrent mmap msync");
+	if (munmap(map, len))
+		fail("munmap concurrent file");
+	if (fsync(fd))
+		fail("fsync concurrent mmap file");
+	if (posix_fadvise(fd, 0, 0, POSIX_FADV_DONTNEED))
+		fail("posix_fadvise concurrent mmap file");
+	pread_all(fd, actual, len, 0);
+	expect(!memcmp(actual, expected, len),
+	       "concurrent mmap writeback data mismatch");
+
+	if (close(fd))
+		fail("close concurrent mmap file");
 	free(actual);
 	free(expected);
 }
@@ -375,6 +613,9 @@ int main(int argc, char **argv)
 	expect(st.f_bsize == 4096, "filesystem block size is not 4096");
 
 	test_buffered_io(argv[1]);
+	test_fallocate(argv[1]);
+	test_mmap_sparse_and_truncate(argv[1]);
+	test_mmap_concurrent_writeback(argv[1]);
 	test_sync_and_sparse(argv[1]);
 	dirfd = open(argv[1], O_RDONLY | O_DIRECTORY);
 	if (dirfd < 0)
