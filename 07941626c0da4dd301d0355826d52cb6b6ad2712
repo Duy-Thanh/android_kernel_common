@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f626e3e4_128f50e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-08-15T11:11:03Z",
+      "side": 1,
+      "message": "What abi issues?  Why not take the original backported patch?  How would there be a break if the original commit did not have one that this is reverting?",
+      "parentUuid": "6328e2b7_8572a8ad",
+      "revId": "07941626c0da4dd301d0355826d52cb6b6ad2712",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fe0eb49e_e8688aa3",
         "filename": "drivers/usb/host/xhci-mem.c",
         "patchSetId": 3
