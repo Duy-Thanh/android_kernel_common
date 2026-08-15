@@ -962,7 +962,7 @@ int f2fs_recover_orphan_inodes(struct f2fs_sb_info *sbi)
 			set_sbi_flag(sbi, SBI_NEED_FSCK);
 			f2fs_handle_error(sbi, ERROR_INCONSISTENT_ORPHAN);
 			err = -EFSCORRUPTED;
-			f2fs_put_page(page, 1);
+			f2fs_folio_put(folio, true);
 			goto out;
 		}
 
@@ -1015,7 +1015,6 @@ static void write_orphan_inodes(struct f2fs_sb_info *sbi, block_t start_blk)
 						   F2FS_BLKSIZE(sbi));
 			memset(orphan_inos, 0, F2FS_BLKSIZE(sbi));
 		}
-		}
 
 		orphan_inos[nentries++] = cpu_to_le32(orphan->ino);
 
@@ -1045,7 +1044,8 @@ static void write_orphan_inodes(struct f2fs_sb_info *sbi, block_t start_blk)
 	}
 }
 
-static __u32 f2fs_checkpoint_chksum(struct f2fs_checkpoint *ckpt)
+static __u32 f2fs_checkpoint_chksum(struct f2fs_sb_info *sbi,
+				     struct f2fs_checkpoint *ckpt)
 {
 	unsigned int chksum_ofs = le32_to_cpu(ckpt->checksum_offset);
 	__u32 chksum;
@@ -1080,7 +1080,7 @@ static int get_checkpoint_version(struct f2fs_sb_info *sbi, block_t cp_addr,
 		return -EINVAL;
 	}
 
-	crc = f2fs_checkpoint_chksum(*cp_block);
+	crc = f2fs_checkpoint_chksum(sbi, *cp_block);
 	if (crc != cur_cp_crc(*cp_block)) {
 		f2fs_folio_put(*cp_folio, true);
 		f2fs_warn(sbi, "invalid crc value");
@@ -1752,7 +1752,7 @@ static int do_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
 	get_sit_bitmap(sbi, __bitmap_ptr(sbi, SIT_BITMAP));
 	get_nat_bitmap(sbi, __bitmap_ptr(sbi, NAT_BITMAP));
 
-	crc32 = f2fs_checkpoint_chksum(ckpt);
+	crc32 = f2fs_checkpoint_chksum(sbi, ckpt);
 	*((__le32 *)((unsigned char *)ckpt +
 				le32_to_cpu(ckpt->checksum_offset)))
 				= cpu_to_le32(crc32);
