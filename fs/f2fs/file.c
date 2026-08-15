@@ -664,8 +664,8 @@ static int f2fs_file_mmap_prepare(struct vm_area_desc *desc)
 	if (!f2fs_is_compress_backend_ready(inode))
 		return -EOPNOTSUPP;
 	if (f2fs_has_subpage_blocks(F2FS_I_SB(inode)) &&
-	    (vma->vm_flags & VM_SHARED) &&
-	    (vma->vm_flags & VM_MAYWRITE) &&
+	    vma_desc_test(desc, VM_SHARED) &&
+	    vma_desc_test(desc, VM_MAYWRITE) &&
 	    (f2fs_is_pinned_file(inode) || f2fs_is_atomic_file(inode) ||
 	     f2fs_compressed_file(inode)))
 		return -EOPNOTSUPP;
