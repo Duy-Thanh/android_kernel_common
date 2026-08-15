@@ -226,8 +226,9 @@ static int kvm_arm_smmu_domain_finalize(struct kvm_arm_smmu_domain *kvm_smmu_dom
 	struct arm_smmu_device *smmu = master->smmu;
 	struct host_arm_smmu_device *host_smmu = smmu_to_host(smmu);
 	struct io_pgtable_cfg cfg;
+	size_t ias = (smmu->features & ARM_SMMU_FEAT_VAX) ? 52 : 48;
 
-	cfg.ias = smmu->oas;
+	cfg.ias = min_t(unsigned long, ias, VA_BITS);
 	cfg.oas = smmu->oas;
 	cfg.pgsize_bitmap = smmu->pgsize_bitmap;
 
