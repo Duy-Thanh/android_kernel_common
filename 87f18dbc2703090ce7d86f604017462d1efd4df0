@@ -16,6 +16,24 @@
       "message": "These new symbols need to be added to the symbol list",
       "revId": "87f18dbc2703090ce7d86f604017462d1efd4df0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "432aff4b_efd15716",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4245205
+      },
+      "writtenOn": "2026-08-15T09:28:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "513afbab_20ba600e",
+      "revId": "87f18dbc2703090ce7d86f604017462d1efd4df0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
