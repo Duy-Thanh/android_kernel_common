@@ -962,7 +962,7 @@ int f2fs_recover_orphan_inodes(struct f2fs_sb_info *sbi)
 			set_sbi_flag(sbi, SBI_NEED_FSCK);
 			f2fs_handle_error(sbi, ERROR_INCONSISTENT_ORPHAN);
 			err = -EFSCORRUPTED;
-			f2fs_put_page(page, 1);
+			f2fs_folio_put(folio, true);
 			goto out;
 		}
 
