@@ -3670,7 +3670,7 @@ static int __get_segment_type_6(struct f2fs_io_info *fio)
 		if (is_inode_flag_set(inode, FI_ALIGNED_WRITE))
 			return CURSEG_COLD_DATA_PINNED;
 
-		if (page_private_gcing(fio->page)) {
+		if (folio_test_f2fs_gcing(page_folio(fio->page))) {
 			if (fio->sbi->am.atgc_enabled &&
 				(fio->io_type == FS_DATA_IO) &&
 				(fio->sbi->gc_mode != GC_URGENT_HIGH) &&
@@ -3684,7 +3684,9 @@ static int __get_segment_type_6(struct f2fs_io_info *fio)
 			return CURSEG_COLD_DATA;
 
 		type = __get_age_segment_type(inode,
-				page_folio(fio->page)->index);
+					      f2fs_folio_lblk(fio->sbi,
+							page_folio(fio->page)) +
+				fio->index);
 		if (type != NO_CHECK_TYPE)
 			return type;
 
@@ -4018,7 +4020,7 @@ void f2fs_do_write_node_page(unsigned int nid, struct f2fs_io_info *fio)
 	do_write_page(&sum, fio);
 
 	f2fs_update_iostat(fio->sbi, NULL, fio->io_type,
-					F2FS_BLKSIZE(fio->sbi));
+			   F2FS_BLKSIZE(fio->sbi));
 }
 
 void f2fs_outplace_write_data(struct dnode_of_data *dn,
@@ -4034,8 +4036,7 @@ void f2fs_outplace_write_data(struct dnode_of_data *dn,
 	do_write_page(&sum, fio);
 	f2fs_update_data_blkaddr(dn, fio->new_blkaddr);
 
-	f2fs_update_iostat(sbi, dn->inode, fio->io_type,
-					F2FS_BLKSIZE(sbi));
+	f2fs_update_iostat(sbi, dn->inode, fio->io_type, F2FS_BLKSIZE(sbi));
 }
 
 int f2fs_inplace_write_data(struct f2fs_io_info *fio)
@@ -4945,12 +4946,13 @@ static int build_curseg(struct f2fs_sb_info *sbi)
 
 	for (i = 0; i < NO_CHECK_TYPE; i++) {
 		mutex_init(&array[i].curseg_mutex);
-		array[i].sum_blk = f2fs_kzalloc(sbi, PAGE_SIZE, GFP_KERNEL);
+		array[i].sum_blk = f2fs_kzalloc(sbi, sbi->sum_blocksize,
+						GFP_KERNEL);
 		if (!array[i].sum_blk)
 			return -ENOMEM;
 		init_rwsem(&array[i].journal_rwsem);
 		array[i].journal = f2fs_kzalloc(sbi,
-				sizeof(struct f2fs_journal), GFP_KERNEL);
+				sbi->sum_journal_size, GFP_KERNEL);
 		if (!array[i].journal)
 			return -ENOMEM;
 		array[i].seg_type = log_type_to_seg_type(i);
