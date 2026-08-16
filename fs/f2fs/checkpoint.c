@@ -955,6 +955,17 @@ int f2fs_recover_orphan_inodes(struct f2fs_sb_info *sbi)
 		orphan_inos = folio_address(folio);
 		footer = f2fs_orphan_footer(orphan_inos, F2FS_BLKSIZE(sbi));
 		entry_count = le32_to_cpu(footer->entry_count);
+		if (entry_count >
+				f2fs_orphans_per_block(F2FS_BLKSIZE(sbi))) {
+			f2fs_err(sbi, "invalid orphan inode entry count %u",
+				 entry_count);
+			set_sbi_flag(sbi, SBI_NEED_FSCK);
+			f2fs_handle_error(sbi, ERROR_INCONSISTENT_ORPHAN);
+			err = -EFSCORRUPTED;
+			f2fs_put_page(page, 1);
+			goto out;
+		}
+
 		for (j = 0; j < entry_count; j++) {
 			nid_t ino = le32_to_cpu(orphan_inos[j]);
 
