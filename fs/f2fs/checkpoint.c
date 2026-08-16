@@ -706,7 +706,7 @@ static bool f2fs_dirty_meta_folio(struct address_space *mapping,
 		folio_mark_uptodate(folio);
 	if (filemap_dirty_folio(mapping, folio)) {
 		inc_page_count(F2FS_M_SB(mapping), F2FS_DIRTY_META);
-		set_page_private_reference(&folio->page);
+		folio_set_f2fs_reference(folio);
 		return true;
 	}
 	return false;
@@ -976,6 +976,16 @@ int f2fs_recover_orphan_inodes(struct f2fs_sb_info *sbi)
 		orphan_blk = (struct f2fs_orphan_block *)page_address(page);
 		footer = F2FS_ORPHAN_FOOTER(sbi, orphan_blk);
 		entry_count = le32_to_cpu(footer->entry_count);
+		if (entry_count > F2FS_ORPHANS_PER_BLOCK(sbi)) {
+			f2fs_err(sbi, "invalid orphan inode entry count %u",
+				 entry_count);
+			set_sbi_flag(sbi, SBI_NEED_FSCK);
+			f2fs_handle_error(sbi, ERROR_INCONSISTENT_ORPHAN);
+			err = -EFSCORRUPTED;
+			f2fs_put_page(page, 1);
+			goto out;
+		}
+
 		for (j = 0; j < entry_count; j++) {
 			nid_t ino = le32_to_cpu(orphan_blk->ino[j]);
 
@@ -1276,7 +1286,7 @@ void f2fs_update_dirty_folio(struct inode *inode, struct folio *folio)
 	inode_inc_dirty_pages(inode);
 	spin_unlock(&sbi->inode_lock[type]);
 
-	set_page_private_reference(&folio->page);
+	folio_set_f2fs_reference(folio);
 }
 
 void f2fs_remove_dirty_inode(struct inode *inode)
