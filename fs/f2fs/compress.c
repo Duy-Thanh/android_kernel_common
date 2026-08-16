@@ -77,6 +77,8 @@ bool f2fs_is_compressed_page(struct page *page)
 		return false;
 	if (!page_private(page))
 		return false;
+	if (folio_has_ffs(page_folio(page)))
+		return false;
 	if (page_private_nonpointer(page))
 		return false;
 
@@ -546,6 +548,8 @@ bool f2fs_is_compress_backend_ready(struct inode *inode)
 {
 	if (!f2fs_compressed_file(inode))
 		return true;
+	if (f2fs_has_subpage_blocks(F2FS_I_SB(inode)))
+		return false;
 	return f2fs_cops[F2FS_I(inode)->i_compress_algorithm];
 }
 
