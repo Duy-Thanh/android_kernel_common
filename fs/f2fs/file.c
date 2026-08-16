@@ -66,7 +66,8 @@ static vm_fault_t f2fs_filemap_fault(struct vm_fault *vmf)
 	ret = filemap_fault(vmf);
 	if (ret & VM_FAULT_LOCKED)
 		f2fs_update_iostat(F2FS_I_SB(inode), inode,
-					APP_MAPPED_READ_IO, F2FS_BLKSIZE);
+					APP_MAPPED_READ_IO,
+					F2FS_BLKSIZE(F2FS_I_SB(inode)));
 
 	trace_f2fs_filemap_fault(inode, vmf->pgoff, flags, ret);
 
@@ -177,7 +178,7 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
 	}
 	folio_mark_dirty(folio);
 
-	f2fs_update_iostat(sbi, inode, APP_MAPPED_IO, F2FS_BLKSIZE);
+	f2fs_update_iostat(sbi, inode, APP_MAPPED_IO, F2FS_BLKSIZE(sbi));
 	f2fs_update_time(sbi, REQ_TIME);
 
 out_sem:
@@ -457,7 +458,9 @@ static bool __found_offset(struct address_space *mapping,
 static loff_t f2fs_seek_block(struct file *file, loff_t offset, int whence)
 {
 	struct inode *inode = file->f_mapping->host;
-	loff_t maxbytes = F2FS_BLK_TO_BYTES(max_file_blocks(inode));
+	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+	loff_t maxbytes = F2FS_BLK_TO_BYTES(sbi,
+					max_file_blocks(sbi, inode));
 	struct dnode_of_data dn;
 	pgoff_t pgofs, end_offset;
 	loff_t data_ofs = offset;
@@ -481,9 +484,10 @@ static loff_t f2fs_seek_block(struct file *file, loff_t offset, int whence)
 		}
 	}
 
-	pgofs = (pgoff_t)(offset >> PAGE_SHIFT);
+	pgofs = F2FS_BYTES_TO_BLK(sbi, offset);
 
-	for (; data_ofs < isize; data_ofs = (loff_t)pgofs << PAGE_SHIFT) {
+	for (; data_ofs < isize;
+			data_ofs = F2FS_BLK_TO_BYTES(sbi, pgofs)) {
 		set_new_dnode(&dn, inode, NULL, NULL, 0);
 		err = f2fs_get_dnode_of_data(&dn, pgofs, LOOKUP_NODE);
 		if (err && err != -ENOENT) {
@@ -503,7 +507,7 @@ static loff_t f2fs_seek_block(struct file *file, loff_t offset, int whence)
 		/* find data/hole in dnode block */
 		for (; dn.ofs_in_node < end_offset;
 				dn.ofs_in_node++, pgofs++,
-				data_ofs = (loff_t)pgofs << PAGE_SHIFT) {
+				data_ofs = F2FS_BLK_TO_BYTES(sbi, pgofs)) {
 			block_t blkaddr;
 
 			blkaddr = f2fs_data_blkaddr(&dn);
@@ -539,7 +543,8 @@ fail:
 static loff_t f2fs_llseek(struct file *file, loff_t offset, int whence)
 {
 	struct inode *inode = file->f_mapping->host;
-	loff_t maxbytes = F2FS_BLK_TO_BYTES(max_file_blocks(inode));
+	loff_t maxbytes = F2FS_BLK_TO_BYTES(F2FS_I_SB(inode),
+			max_file_blocks(F2FS_I_SB(inode), inode));
 
 	switch (whence) {
 	case SEEK_SET:
@@ -791,9 +796,9 @@ int f2fs_do_truncate_blocks(struct inode *inode, u64 from, bool lock)
 		goto out_err;
 	}
 
-	free_from = (pgoff_t)F2FS_BLK_ALIGN(from);
+	free_from = (pgoff_t)F2FS_BLK_ALIGN(sbi, from);
 
-	if (free_from >= max_file_blocks(inode))
+	if (free_from >= max_file_blocks(sbi, inode))
 		goto free_partial;
 
 	if (lock)
@@ -898,6 +903,7 @@ int f2fs_truncate_blocks(struct inode *inode, u64 from, bool lock)
 
 int f2fs_truncate(struct inode *inode)
 {
+	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
 	int err;
 
 	if (unlikely(f2fs_cp_error(F2FS_I_SB(inode))))
@@ -925,8 +931,8 @@ int f2fs_truncate(struct inode *inode)
 			 * leak in evict() path.
 			 */
 			truncate_inode_pages_range(inode->i_mapping,
-					F2FS_BLK_TO_BYTES(0),
-					F2FS_BLK_END_BYTES(0));
+					F2FS_BLK_TO_BYTES(sbi, 0),
+					F2FS_BLK_END_BYTES(sbi, 0));
 			return err;
 		}
 	}
@@ -1069,6 +1075,7 @@ int f2fs_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
 {
 	struct inode *inode = d_inode(dentry);
 	struct f2fs_inode_info *fi = F2FS_I(inode);
+	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
 	int err;
 
 	if (unlikely(f2fs_cp_error(F2FS_I_SB(inode))))
@@ -1100,7 +1107,7 @@ int f2fs_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
 			return -EOPNOTSUPP;
 		if (is_inode_flag_set(inode, FI_COMPRESS_RELEASED) &&
 			!IS_ALIGNED(attr->ia_size,
-			F2FS_BLK_TO_BYTES(fi->i_cluster_size)))
+			F2FS_BLK_TO_BYTES(sbi, fi->i_cluster_size)))
 			return -EINVAL;
 	}
 
@@ -1584,7 +1591,8 @@ static int f2fs_collapse_range(struct inode *inode, loff_t offset, loff_t len)
 		return -EINVAL;
 
 	/* collapse range should be aligned to block size of f2fs. */
-	if (offset & (F2FS_BLKSIZE - 1) || len & (F2FS_BLKSIZE - 1))
+	if (offset & F2FS_BLKSIZE_MASK(F2FS_I_SB(inode)) ||
+	    len & F2FS_BLKSIZE_MASK(F2FS_I_SB(inode)))
 		return -EINVAL;
 
 	ret = f2fs_convert_inline_inode(inode);
@@ -1794,7 +1802,8 @@ static int f2fs_insert_range(struct inode *inode, loff_t offset, loff_t len)
 		return -EINVAL;
 
 	/* insert range should be aligned to block size of f2fs. */
-	if (offset & (F2FS_BLKSIZE - 1) || len & (F2FS_BLKSIZE - 1))
+	if (offset & F2FS_BLKSIZE_MASK(sbi) ||
+	    len & F2FS_BLKSIZE_MASK(sbi))
 		return -EINVAL;
 
 	ret = f2fs_convert_inline_inode(inode);
@@ -2547,7 +2556,8 @@ static int f2fs_keep_noreuse_range(struct inode *inode,
 				loff_t offset, loff_t len)
 {
 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
-	u64 max_bytes = F2FS_BLK_TO_BYTES(max_file_blocks(inode));
+	u64 max_bytes = F2FS_BLK_TO_BYTES(sbi,
+					max_file_blocks(sbi, inode));
 	u64 start, end;
 	int ret = 0;
 
@@ -3071,11 +3081,12 @@ static int f2fs_ioc_defragment(struct file *filp, unsigned long arg)
 		return -EFAULT;
 
 	/* verify alignment of offset & size */
-	if (range.start & (F2FS_BLKSIZE - 1) || range.len & (F2FS_BLKSIZE - 1))
+	if (range.start & F2FS_BLKSIZE_MASK(sbi) ||
+	    range.len & F2FS_BLKSIZE_MASK(sbi))
 		return -EINVAL;
 
-	if (unlikely((range.start + range.len) >> PAGE_SHIFT >
-					max_file_blocks(inode)))
+	if (unlikely(F2FS_BYTES_TO_BLK(sbi, range.start + range.len) >
+					max_file_blocks(sbi, inode)))
 		return -EINVAL;
 
 	err = mnt_want_write_file(filp);
@@ -3155,7 +3166,7 @@ static int f2fs_move_file_range(struct file *file_in, loff_t pos_in,
 	if (len == 0)
 		olen = len = src->i_size - pos_in;
 	if (pos_in + len == src->i_size)
-		len = ALIGN(src->i_size, F2FS_BLKSIZE) - pos_in;
+		len = ALIGN(src->i_size, F2FS_BLKSIZE(sbi)) - pos_in;
 	if (len == 0) {
 		ret = 0;
 		goto out_unlock;
@@ -3166,9 +3177,9 @@ static int f2fs_move_file_range(struct file *file_in, loff_t pos_in,
 		dst_max_i_size = pos_out + olen;
 
 	/* verify the end result is block aligned */
-	if (!IS_ALIGNED(pos_in, F2FS_BLKSIZE) ||
-			!IS_ALIGNED(pos_in + len, F2FS_BLKSIZE) ||
-			!IS_ALIGNED(pos_out, F2FS_BLKSIZE))
+	if (!IS_ALIGNED(pos_in, F2FS_BLKSIZE(sbi)) ||
+	    !IS_ALIGNED(pos_in + len, F2FS_BLKSIZE(sbi)) ||
+			!IS_ALIGNED(pos_out, F2FS_BLKSIZE(sbi)))
 		goto out_unlock;
 
 	ret = f2fs_convert_inline_inode(src);
@@ -3200,9 +3211,9 @@ static int f2fs_move_file_range(struct file *file_in, loff_t pos_in,
 	}
 
 	f2fs_lock_op(sbi, &lc);
-	ret = __exchange_data_block(src, dst, F2FS_BYTES_TO_BLK(pos_in),
-				F2FS_BYTES_TO_BLK(pos_out),
-				F2FS_BYTES_TO_BLK(len), false);
+	ret = __exchange_data_block(src, dst, F2FS_BYTES_TO_BLK(sbi, pos_in),
+				F2FS_BYTES_TO_BLK(sbi, pos_out),
+				F2FS_BYTES_TO_BLK(sbi, len), false);
 
 	if (!ret) {
 		if (dst_max_i_size)
@@ -3638,7 +3649,7 @@ int f2fs_precache_extents(struct inode *inode)
 	map.m_next_extent = &m_next_extent;
 	map.m_seg_type = NO_CHECK_TYPE;
 	map.m_may_create = false;
-	end = F2FS_BLK_ALIGN(i_size_read(inode));
+	end = F2FS_BLK_ALIGN(F2FS_I_SB(inode), i_size_read(inode));
 
 	while (map.m_lblk < end) {
 		map.m_len = end - map.m_lblk;
@@ -4154,8 +4165,8 @@ unlock_inode:
 static int f2fs_secure_erase(struct block_device *bdev, struct inode *inode,
 		pgoff_t off, block_t block, block_t len, u32 flags)
 {
-	sector_t sector = SECTOR_FROM_BLOCK(block);
-	sector_t nr_sects = SECTOR_FROM_BLOCK(len);
+	sector_t sector = SECTOR_FROM_BLOCK(F2FS_I_SB(inode), block);
+	sector_t nr_sects = SECTOR_FROM_BLOCK(F2FS_I_SB(inode), len);
 	int ret = 0;
 
 	if (flags & F2FS_TRIM_FILE_DISCARD) {
@@ -4230,14 +4241,14 @@ static int f2fs_sec_trim_file(struct file *filp, unsigned long arg)
 		to_end = true;
 	}
 
-	if (!IS_ALIGNED(range.start, F2FS_BLKSIZE) ||
-			(!to_end && !IS_ALIGNED(end_addr, F2FS_BLKSIZE))) {
+	if (!IS_ALIGNED(range.start, F2FS_BLKSIZE(sbi)) ||
+	    (!to_end && !IS_ALIGNED(end_addr, F2FS_BLKSIZE(sbi)))) {
 		ret = -EINVAL;
 		goto err;
 	}
 
-	index = F2FS_BYTES_TO_BLK(range.start);
-	pg_end = DIV_ROUND_UP(end_addr, F2FS_BLKSIZE);
+	index = F2FS_BYTES_TO_BLK(sbi, range.start);
+	pg_end = DIV_ROUND_UP(end_addr, F2FS_BLKSIZE(sbi));
 
 	ret = f2fs_convert_inline_inode(inode);
 	if (ret)
@@ -4980,7 +4991,8 @@ static int f2fs_preallocate_blocks(struct kiocb *iocb, struct iov_iter *iter,
 	 * buffered IO, if DIO meets any holes.
 	 */
 	if (dio && i_size_read(inode) &&
-		(F2FS_BYTES_TO_BLK(pos) < F2FS_BLK_ALIGN(i_size_read(inode))))
+		(F2FS_BYTES_TO_BLK(sbi, pos) <
+		 F2FS_BLK_ALIGN(sbi, i_size_read(inode))))
 		return 0;
 
 	/* No-wait I/O can't allocate blocks. */
@@ -5001,8 +5013,8 @@ static int f2fs_preallocate_blocks(struct kiocb *iocb, struct iov_iter *iter,
 	}
 
 	/* Do not preallocate blocks that will be written partially in 4KB. */
-	map.m_lblk = F2FS_BLK_ALIGN(pos);
-	map.m_len = F2FS_BYTES_TO_BLK(pos + count);
+	map.m_lblk = F2FS_BLK_ALIGN(sbi, pos);
+	map.m_len = F2FS_BYTES_TO_BLK(sbi, pos + count);
 	if (map.m_len > map.m_lblk)
 		map.m_len -= map.m_lblk;
 	else
