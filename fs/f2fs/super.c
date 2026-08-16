@@ -2483,6 +2483,9 @@ static int f2fs_remount(struct super_block *sb, int *flags, char *data)
 	int i, j;
 #endif
 
+	if (f2fs_has_subpage_blocks(sbi) && !(*flags & SB_RDONLY))
+		return -EROFS;
+
 	/*
 	 * Save the old mount options in case we
 	 * need to restore them.
@@ -2839,14 +2842,10 @@ static ssize_t f2fs_quota_read(struct super_block *sb, int type, char *data,
 			       size_t len, loff_t off)
 {
 	struct inode *inode = sb_dqopt(sb)->files[type];
-	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
 	struct address_space *mapping = inode->i_mapping;
-	block_t blkidx = F2FS_BYTES_TO_BLK(sbi, off);
-	int offset = off & (sb->s_blocksize - 1);
 	int tocopy;
 	size_t toread;
 	loff_t i_size = i_size_read(inode);
-	struct page *page;
 
 	if (off > i_size)
 		return 0;
@@ -2855,37 +2854,36 @@ static ssize_t f2fs_quota_read(struct super_block *sb, int type, char *data,
 		len = i_size - off;
 	toread = len;
 	while (toread > 0) {
-		tocopy = min_t(unsigned long, sb->s_blocksize - offset, toread);
+		struct folio *folio;
+		size_t offset;
+
 repeat:
-		page = read_cache_page_gfp(mapping, blkidx, GFP_NOFS);
-		if (IS_ERR(page)) {
-			if (PTR_ERR(page) == -ENOMEM) {
+		folio = mapping_read_folio_gfp(mapping, off >> PAGE_SHIFT,
+					       GFP_NOFS);
+		if (IS_ERR(folio)) {
+			if (PTR_ERR(folio) == -ENOMEM) {
 				memalloc_retry_wait(GFP_NOFS);
 				goto repeat;
 			}
 			set_sbi_flag(F2FS_SB(sb), SBI_QUOTA_NEED_REPAIR);
-			return PTR_ERR(page);
+			return PTR_ERR(folio);
 		}
+		offset = offset_in_folio(folio, off);
+		tocopy = min(folio_size(folio) - offset, toread);
 
-		lock_page(page);
+		folio_lock(folio);
 
-		if (unlikely(page->mapping != mapping)) {
-			f2fs_put_page(page, 1);
+		if (unlikely(folio->mapping != mapping)) {
+			f2fs_folio_put(folio, true);
 			goto repeat;
 		}
-		if (unlikely(!PageUptodate(page))) {
-			f2fs_put_page(page, 1);
-			set_sbi_flag(F2FS_SB(sb), SBI_QUOTA_NEED_REPAIR);
-			return -EIO;
-		}
 
-		memcpy_from_page(data, page, offset, tocopy);
-		f2fs_put_page(page, 1);
+		memcpy_from_folio(data, folio, offset, tocopy);
+		f2fs_folio_put(folio, true);
 
-		offset = 0;
 		toread -= tocopy;
 		data += tocopy;
-		blkidx++;
+		off += tocopy;
 	}
 	return len;
 }
@@ -3724,11 +3722,13 @@ static int sanity_check_raw_super(struct f2fs_sb_info *sbi,
 		}
 	}
 
-	/* Continue to support only block_size equal to PAGE_SIZE. */
-	if (le32_to_cpu(raw_super->log_blocksize) != PAGE_SHIFT) {
-		f2fs_info(sbi, "Invalid log_blocksize (%u), supports only %u",
+	/* Keep one or more filesystem blocks in each base-page folio. */
+	if (le32_to_cpu(raw_super->log_blocksize) <
+			F2FS_MIN_LOG_BLOCKSIZE ||
+			le32_to_cpu(raw_super->log_blocksize) > PAGE_SHIFT) {
+		f2fs_info(sbi, "Invalid log_blocksize (%u), supports %u..%u",
 			  le32_to_cpu(raw_super->log_blocksize),
-			  PAGE_SHIFT);
+			  F2FS_MIN_LOG_BLOCKSIZE, PAGE_SHIFT);
 		return -EFSCORRUPTED;
 	}
 
@@ -4401,6 +4401,8 @@ void f2fs_handle_error(struct f2fs_sb_info *sbi, unsigned char error)
 		return;
 	if (!test_bit(error, (unsigned long *)sbi->errors))
 		return;
+	if (f2fs_has_subpage_blocks(sbi) && f2fs_readonly(sbi->sb))
+		return;
 	schedule_work(&sbi->s_error_work);
 }
 
@@ -4419,7 +4421,8 @@ void f2fs_handle_critical_error(struct f2fs_sb_info *sbi, unsigned char reason)
 
 	set_ckpt_flags(sbi, CP_ERROR_FLAG);
 
-	if (!f2fs_hw_is_readonly(sbi)) {
+	if (!f2fs_hw_is_readonly(sbi) &&
+	    !(f2fs_has_subpage_blocks(sbi) && f2fs_readonly(sb))) {
 		save_stop_reason(sbi, reason);
 
 		/*
@@ -4743,6 +4746,12 @@ try_onemore:
 	sb->s_fs_info = sbi;
 	sbi->raw_super = raw_super;
 	init_sb_info(sbi);
+	if (f2fs_has_subpage_blocks(sbi) &&
+	    (!f2fs_readonly(sb) || recovery)) {
+		f2fs_err(sbi, "subpage block filesystems require a clean read-only mount");
+		err = -EROFS;
+		goto free_sb_buf;
+	}
 
 	INIT_WORK(&sbi->s_error_work, f2fs_record_error_work);
 	memcpy(sbi->errors, raw_super->s_errors, MAX_F2FS_ERRORS);
@@ -4768,6 +4777,13 @@ try_onemore:
 	err = f2fs_default_check(sbi);
 	if (err)
 		goto free_options;
+	if (f2fs_has_subpage_blocks(sbi) &&
+	    (test_opt(sbi, DISABLE_CHECKPOINT) ||
+	     test_opt(sbi, NORECOVERY))) {
+		f2fs_err(sbi, "subpage read-only mounts do not support checkpoint=disable or norecovery");
+		err = -EROFS;
+		goto free_options;
+	}
 
 	sb->s_maxbytes = max_file_blocks(sbi, NULL) <<
 				le32_to_cpu(raw_super->log_blocksize);
@@ -4848,6 +4864,20 @@ try_onemore:
 	err = f2fs_get_valid_checkpoint(sbi);
 	if (err) {
 		f2fs_err(sbi, "Failed to get valid F2FS checkpoint");
+		goto free_meta_inode;
+	}
+
+	if (f2fs_has_subpage_blocks(sbi) &&
+	    (!is_set_ckpt_flags(sbi, CP_UMOUNT_FLAG) ||
+	     is_set_ckpt_flags(sbi, CP_ORPHAN_PRESENT_FLAG) ||
+	     is_set_ckpt_flags(sbi, CP_DISABLED_FLAG) ||
+	     is_set_ckpt_flags(sbi, CP_DISABLED_QUICK_FLAG) ||
+	     is_set_ckpt_flags(sbi, CP_QUOTA_NEED_FSCK_FLAG) ||
+	     is_set_ckpt_flags(sbi, CP_FSCK_FLAG) ||
+	     is_set_ckpt_flags(sbi, CP_ERROR_FLAG) ||
+	     is_set_ckpt_flags(sbi, CP_RESIZEFS_FLAG))) {
+		f2fs_err(sbi, "subpage read-only mount requires a clean checkpoint");
+		err = -EROFS;
 		goto free_meta_inode;
 	}
 
@@ -4980,6 +5010,8 @@ try_onemore:
 		goto free_compress_inode;
 
 	sbi->umount_lock_holder = current;
+	if (f2fs_has_subpage_blocks(sbi))
+		goto reset_checkpoint;
 #ifdef CONFIG_QUOTA
 	/* Enable quota usage during mount */
 	if (f2fs_sb_has_quota_ino(sbi) && !f2fs_readonly(sb)) {
@@ -5075,7 +5107,9 @@ reset_checkpoint:
 	if (err)
 		goto sync_free_meta;
 
-	if (test_opt(sbi, DISABLE_CHECKPOINT))
+	if (f2fs_has_subpage_blocks(sbi))
+		err = 0;
+	else if (test_opt(sbi, DISABLE_CHECKPOINT))
 		err = f2fs_disable_checkpoint(sbi);
 	else if (is_set_ckpt_flags(sbi, CP_DISABLED_FLAG))
 		err = f2fs_enable_checkpoint(sbi);
@@ -5232,8 +5266,9 @@ static void kill_f2fs_super(struct super_block *sb)
 			truncate_inode_pages_final(COMPRESS_MAPPING(sbi));
 #endif
 
-		if (is_sbi_flag_set(sbi, SBI_IS_DIRTY) ||
-				!is_set_ckpt_flags(sbi, CP_UMOUNT_FLAG)) {
+		if (!f2fs_has_subpage_blocks(sbi) &&
+		    (is_sbi_flag_set(sbi, SBI_IS_DIRTY) ||
+		     !is_set_ckpt_flags(sbi, CP_UMOUNT_FLAG))) {
 			struct cp_control cpc = {
 				.reason = CP_UMOUNT,
 			};
