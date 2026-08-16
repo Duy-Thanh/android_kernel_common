@@ -287,7 +287,7 @@ repeat:
 		return ERR_PTR(err);
 	}
 
-	f2fs_update_iostat(sbi, NULL, FS_META_READ_IO, F2FS_BLKSIZE);
+	f2fs_update_iostat(sbi, NULL, FS_META_READ_IO, F2FS_BLKSIZE(sbi));
 
 	folio_lock(folio);
 	if (unlikely(!is_meta_folio(folio))) {
@@ -475,18 +475,18 @@ int f2fs_ra_meta_pages(struct f2fs_sb_info *sbi, block_t start, int nrpages,
 		switch (type) {
 		case META_NAT:
 			if (unlikely(blkno >=
-					NAT_BLOCK_OFFSET(NM_I(sbi)->max_nid)))
+					NAT_BLOCK_OFFSET(sbi, NM_I(sbi)->max_nid)))
 				blkno = 0;
 			/* get nat block addr */
 			fio.new_blkaddr = current_nat_addr(sbi,
-					blkno * NAT_ENTRY_PER_BLOCK);
+					blkno * NAT_ENTRY_PER_BLOCK(sbi));
 			break;
 		case META_SIT:
 			if (unlikely(blkno >= TOTAL_SEGS(sbi)))
 				goto out;
 			/* get sit block addr */
 			fio.new_blkaddr = current_sit_addr(sbi,
-					blkno * SIT_ENTRY_PER_BLOCK);
+					blkno * SIT_ENTRY_PER_BLOCK(sbi));
 			break;
 		case META_SSA:
 		case META_CP:
@@ -512,7 +512,7 @@ int f2fs_ra_meta_pages(struct f2fs_sb_info *sbi, block_t start, int nrpages,
 
 		if (!err)
 			f2fs_update_iostat(sbi, NULL, FS_META_READ_IO,
-							F2FS_BLKSIZE);
+							F2FS_BLKSIZE(sbi));
 	}
 out:
 	blk_finish_plug(&plug);
@@ -953,7 +953,7 @@ int f2fs_recover_orphan_inodes(struct f2fs_sb_info *sbi)
 		}
 
 		orphan_inos = folio_address(folio);
-		footer = f2fs_orphan_footer(orphan_inos, F2FS_BLKSIZE);
+		footer = f2fs_orphan_footer(orphan_inos, F2FS_BLKSIZE(sbi));
 		entry_count = le32_to_cpu(footer->entry_count);
 		for (j = 0; j < entry_count; j++) {
 			nid_t ino = le32_to_cpu(orphan_inos[j]);
@@ -986,7 +986,7 @@ static void write_orphan_inodes(struct f2fs_sb_info *sbi, block_t start_blk)
 	struct ino_entry *orphan = NULL;
 	struct inode_management *im = &sbi->im[ORPHAN_INO];
 
-	orphan_blocks = f2fs_orphan_blocks(F2FS_BLKSIZE, im->ino_num);
+	orphan_blocks = f2fs_orphan_blocks(F2FS_BLKSIZE(sbi), im->ino_num);
 
 	/*
 	 * we don't need to do spin_lock(&im->ino_lock) here, since all the
@@ -1000,14 +1000,15 @@ static void write_orphan_inodes(struct f2fs_sb_info *sbi, block_t start_blk)
 		if (!folio) {
 			folio = f2fs_grab_meta_folio(sbi, start_blk++);
 			orphan_inos = folio_address(folio);
-			footer = f2fs_orphan_footer(orphan_inos, F2FS_BLKSIZE);
-			memset(orphan_inos, 0, F2FS_BLKSIZE);
+			footer = f2fs_orphan_footer(orphan_inos,
+						   F2FS_BLKSIZE(sbi));
+			memset(orphan_inos, 0, F2FS_BLKSIZE(sbi));
 		}
 		}
 
 		orphan_inos[nentries++] = cpu_to_le32(orphan->ino);
 
-		if (nentries == f2fs_orphans_per_block(F2FS_BLKSIZE)) {
+		if (nentries == f2fs_orphans_per_block(F2FS_BLKSIZE(sbi))) {
 			/*
 			 * an orphan block is full,
 			 * then we need to flush current orphan blocks
@@ -1039,10 +1040,10 @@ static __u32 f2fs_checkpoint_chksum(struct f2fs_checkpoint *ckpt)
 	__u32 chksum;
 
 	chksum = f2fs_crc32(ckpt, chksum_ofs);
-	if (chksum_ofs < CP_CHKSUM_OFFSET) {
+	if (chksum_ofs < CP_CHKSUM_OFFSET(sbi)) {
 		chksum_ofs += sizeof(chksum);
 		chksum = f2fs_chksum(chksum, (__u8 *)ckpt + chksum_ofs,
-				     F2FS_BLKSIZE - chksum_ofs);
+						F2FS_BLKSIZE(sbi) - chksum_ofs);
 	}
 	return chksum;
 }
@@ -1062,7 +1063,7 @@ static int get_checkpoint_version(struct f2fs_sb_info *sbi, block_t cp_addr,
 
 	crc_offset = le32_to_cpu((*cp_block)->checksum_offset);
 	if (crc_offset < CP_MIN_CHKSUM_OFFSET ||
-			crc_offset > CP_CHKSUM_OFFSET) {
+			crc_offset > CP_CHKSUM_OFFSET(sbi)) {
 		f2fs_folio_put(*cp_folio, true);
 		f2fs_warn(sbi, "invalid crc_offset: %zu", crc_offset);
 		return -EINVAL;
@@ -1605,7 +1606,7 @@ static void commit_checkpoint(struct f2fs_sb_info *sbi,
 	 */
 	struct folio *folio = f2fs_grab_meta_folio(sbi, blk_addr);
 
-	memcpy(folio_address(folio), src, PAGE_SIZE);
+	memcpy(folio_address(folio), src, F2FS_BLKSIZE(sbi));
 
 	folio_mark_dirty(folio);
 	if (unlikely(!folio_clear_dirty_for_io(folio)))
@@ -1720,7 +1721,7 @@ static int do_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
 		__clear_ckpt_flags(ckpt, CP_COMPACT_SUM_FLAG);
 	spin_unlock_irqrestore(&sbi->cp_lock, flags);
 
-	orphan_blocks = f2fs_orphan_blocks(F2FS_BLKSIZE, orphan_num);
+	orphan_blocks = f2fs_orphan_blocks(F2FS_BLKSIZE(sbi), orphan_num);
 	ckpt->cp_pack_start_sum = cpu_to_le32(1 + cp_payload_blks +
 			orphan_blocks);
 
@@ -1758,14 +1759,15 @@ static int do_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
 		blk = start_blk + BLKS_PER_SEG(sbi) - nm_i->nat_bits_blocks;
 		for (i = 0; i < nm_i->nat_bits_blocks; i++)
 			f2fs_update_meta_page(sbi, nm_i->nat_bits +
-					F2FS_BLK_TO_BYTES(i), blk + i);
+					F2FS_BLK_TO_BYTES(sbi, i), blk + i);
 	}
 
 	/* write out checkpoint buffer at block 0 */
 	f2fs_update_meta_page(sbi, ckpt, start_blk++);
 
 	for (i = 1; i < 1 + cp_payload_blks; i++)
-		f2fs_update_meta_page(sbi, (char *)ckpt + i * F2FS_BLKSIZE,
+		f2fs_update_meta_page(sbi, (char *)ckpt +
+				i * F2FS_BLKSIZE(sbi),
 							start_blk++);
 
 	if (orphan_num) {
@@ -1976,7 +1978,7 @@ void f2fs_init_ino_entry_info(struct f2fs_sb_info *sbi)
 
 	sbi->max_orphans = (BLKS_PER_SEG(sbi) - F2FS_CP_PACKS -
 			NR_CURSEG_PERSIST_TYPE - __cp_payload(sbi)) *
-			f2fs_orphans_per_block(F2FS_BLKSIZE);
+			f2fs_orphans_per_block(F2FS_BLKSIZE(sbi));
 }
 
 int __init f2fs_create_checkpoint_caches(void)
