@@ -1060,8 +1060,9 @@ static int f2fs_readdir(struct file *file, struct dir_context *ctx)
 	void *dentry_blk = NULL;
 	struct file_ra_state *ra = &file->f_ra;
 	loff_t start_pos = ctx->pos;
-	unsigned int entries = f2fs_dentries_per_block(F2FS_BLKSIZE);
-	unsigned int n = (unsigned long)ctx->pos / entries;
+	unsigned int dentry_count =
+		f2fs_dentries_per_block(i_blocksize(inode));
+	unsigned int n = (unsigned long)ctx->pos / dentry_count;
 	struct f2fs_dentry_ptr d;
 	struct fscrypt_str fstr = FSTR_INIT(NULL, 0);
 	int err = 0;
@@ -1081,7 +1082,7 @@ static int f2fs_readdir(struct file *file, struct dir_context *ctx)
 		goto out_free;
 	}
 
-	for (; n < npages; ctx->pos = n * entries) {
+	for (; n < npages; ctx->pos = n * dentry_count) {
 		struct folio *dentry_folio;
 		pgoff_t next_pgofs;
 
@@ -1114,7 +1115,7 @@ static int f2fs_readdir(struct file *file, struct dir_context *ctx)
 		make_dentry_ptr_block(inode, &d, dentry_blk);
 
 		err = f2fs_fill_dentries(ctx, &d,
-				n * entries, &fstr);
+				n * dentry_count, &fstr);
 		f2fs_folio_put(dentry_folio, false);
 		if (err)
 			break;
