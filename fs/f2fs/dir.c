@@ -719,8 +719,8 @@ start:
 
 		dentry_blk = page_address(dentry_page);
 		bit_pos = f2fs_room_for_filename(&dentry_blk->dentry_bitmap,
-						slots, NR_DENTRY_IN_BLOCK);
-		if (bit_pos < NR_DENTRY_IN_BLOCK)
+					slots, NR_DENTRY_IN_BLOCK(F2FS_I_SB(dir)));
+		if (bit_pos < NR_DENTRY_IN_BLOCK(F2FS_I_SB(dir)))
 			goto add_dentry;
 
 		f2fs_put_page(dentry_page, 1);
@@ -902,11 +902,11 @@ void f2fs_delete_entry(struct f2fs_dir_entry *dentry, struct page *page,
 
 	/* Let's check and deallocate this dentry page */
 	bit_pos = find_next_bit_le(&dentry_blk->dentry_bitmap,
-			NR_DENTRY_IN_BLOCK,
+			NR_DENTRY_IN_BLOCK(F2FS_I_SB(dir)),
 			0);
 	set_page_dirty(page);
 
-	if (bit_pos == NR_DENTRY_IN_BLOCK &&
+	if (bit_pos == NR_DENTRY_IN_BLOCK(F2FS_I_SB(dir)) &&
 		!f2fs_truncate_hole(dir, index, index + 1)) {
 		f2fs_clear_page_cache_dirty_tag(page_folio(page));
 		clear_page_dirty_for_io(page);
@@ -955,12 +955,12 @@ bool f2fs_empty_dir(struct inode *dir)
 		else
 			bit_pos = 0;
 		bit_pos = find_next_bit_le(&dentry_blk->dentry_bitmap,
-						NR_DENTRY_IN_BLOCK,
+						NR_DENTRY_IN_BLOCK(F2FS_I_SB(dir)),
 						bit_pos);
 
 		f2fs_put_page(dentry_page, 0);
 
-		if (bit_pos < NR_DENTRY_IN_BLOCK)
+		if (bit_pos < NR_DENTRY_IN_BLOCK(F2FS_I_SB(dir)))
 			return false;
 
 		bidx++;
@@ -1060,7 +1060,8 @@ static int f2fs_readdir(struct file *file, struct dir_context *ctx)
 	struct page *dentry_page = NULL;
 	struct file_ra_state *ra = &file->f_ra;
 	loff_t start_pos = ctx->pos;
-	unsigned int n = ((unsigned long)ctx->pos / NR_DENTRY_IN_BLOCK);
+	unsigned int dentry_count = NR_DENTRY_IN_BLOCK(F2FS_I_SB(inode));
+	unsigned int n = (unsigned long)ctx->pos / dentry_count;
 	struct f2fs_dentry_ptr d;
 	struct fscrypt_str fstr = FSTR_INIT(NULL, 0);
 	int err = 0;
@@ -1080,7 +1081,7 @@ static int f2fs_readdir(struct file *file, struct dir_context *ctx)
 		goto out_free;
 	}
 
-	for (; n < npages; ctx->pos = n * NR_DENTRY_IN_BLOCK) {
+	for (; n < npages; ctx->pos = n * dentry_count) {
 		pgoff_t next_pgofs;
 
 		/* allow readdir() to be interrupted */
@@ -1112,7 +1113,7 @@ static int f2fs_readdir(struct file *file, struct dir_context *ctx)
 		make_dentry_ptr_block(inode, &d, dentry_blk);
 
 		err = f2fs_fill_dentries(ctx, &d,
-				n * NR_DENTRY_IN_BLOCK, &fstr);
+				n * dentry_count, &fstr);
 		if (err) {
 			f2fs_put_page(dentry_page, 0);
 			break;
