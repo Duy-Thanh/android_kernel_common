@@ -22,6 +22,30 @@
       },
       "revId": "5fc3f26d965bb903d9e9e2b1f478968336531afb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02ac638b_ce0fc104",
+        "filename": "Documentation/ABI/testing/sysfs-driver-hid-logitech-hidpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 3541841
+      },
+      "writtenOn": "2026-08-17T23:51:39Z",
+      "side": 1,
+      "message": "The sysfs node is only created if the device supports the multi-platform feature.\n\nThis is for the case where peripheral claims to support the feature but reports that it is not configured for a particular OS (return value: 0xFF which Logitech defines as invalid). It is a bit unclear when the device firmware will return this value since there should be a default.\n\nIn the case where the peripheral reports OxFF/NODATA, a user could still write to the node to set the OS, at which point reading will return a valid value.",
+      "parentUuid": "1e0156c0_78b10fd3",
+      "range": {
+        "startLine": 54,
+        "startChar": 2,
+        "endLine": 55,
+        "endChar": 27
+      },
+      "revId": "5fc3f26d965bb903d9e9e2b1f478968336531afb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
