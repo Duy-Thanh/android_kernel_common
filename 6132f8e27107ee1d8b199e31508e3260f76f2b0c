@@ -16,6 +16,24 @@
       "message": "where is the \"cherry-picked-from\" type line showing the upstream commit id?",
       "revId": "6132f8e27107ee1d8b199e31508e3260f76f2b0c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "319c807f_ddbfaa6f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 3011835
+      },
+      "writtenOn": "2026-08-17T06:51:40Z",
+      "side": 1,
+      "message": "I left it in line 41 and it comes from stable linux-6.12.y.",
+      "parentUuid": "beb2578c_51344ff4",
+      "revId": "6132f8e27107ee1d8b199e31508e3260f76f2b0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
