@@ -2064,6 +2064,7 @@ static int __init ffa_init(void)
 
 	ret = ffa_rxtx_map(virt_to_phys(drv_info->tx_buffer),
 			   virt_to_phys(drv_info->rx_buffer),
+<<<<<<< HEAD   (4615258b1a8f7d29cd6950a9a369c276bf12c247 Merge c892d0d4fe5e ("soc/tegra: cbb: Fix cross-fabric target)
 			   rxtx_bufsz / FFA_PAGE_SIZE);
 	if (ret == -EINVAL && !rxtx_max_bufsz && rxtx_min_bufsz < rxtx_bufsz) {
 		rxtx_bufsz = rxtx_min_bufsz;
@@ -2071,6 +2072,11 @@ static int __init ffa_init(void)
 				   virt_to_phys(drv_info->rx_buffer),
 				   rxtx_bufsz / FFA_PAGE_SIZE);
 	}
+||||||| BASE   (c892d0d4fe5ec05d3fdfb1616c3c0e3c12ef5abc soc/tegra: cbb: Fix cross-fabric target timeout lookup)
+			   rxtx_bufsz / FFA_PAGE_SIZE);
+=======
+			   PAGE_ALIGN(rxtx_bufsz) / FFA_PAGE_SIZE);
+>>>>>>> BRANCH (c7abd0e6c87441e99c759d40eb6fe589634e3041 HID: usbhid: fix deadlock in hid_post_reset())
 	if (ret) {
 		pr_err("failed to register FFA RxTx buffers\n");
 		goto free_pages;
