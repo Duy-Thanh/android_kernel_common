@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f50db872_c4e611a8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-17T16:40:46Z",
+      "side": 1,
+      "message": "\u003e BTW I guess we can also remove that initialization of `data` with those invalid values in this patch?\n\nRemoved initialization of `level` (`phys` and `prot` still need to be initialized).",
+      "parentUuid": "2b096f8b_31974e51",
+      "revId": "ed52ce3b50c049291ce0a29d0b7b6c311755f6b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bdada587_2eb53123",
         "filename": "arch/x86/kvm/pkvm/pgtable.c",
         "patchSetId": 1
@@ -49,6 +67,24 @@
       "writtenOn": "2026-08-17T13:51:51Z",
       "side": 1,
       "message": "nit: Just `BUG_ON(pkvm_pgtable_walk(pgt, vaddr, PAGE_SIZE, \u0026walker) !\u003d PGTABLE_WALK_DONE);` to save `int ret`?",
+      "revId": "ed52ce3b50c049291ce0a29d0b7b6c311755f6b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3f79c2d_0bb4a9ec",
+        "filename": "arch/x86/kvm/pkvm/pgtable.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 860,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-17T16:40:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bdada587_2eb53123",
       "revId": "ed52ce3b50c049291ce0a29d0b7b6c311755f6b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
