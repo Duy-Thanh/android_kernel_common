@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2eca219_c06692c8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2026-08-17T14:00:21Z",
+      "side": 1,
+      "message": "Is it possible that, while the caller of `pkvm_pgtable_lookup()` is playing with the PTE pointer, the corresponding page table page of this PTE pointer may be recycled by another page table API? The page table API usually holds a mmu lock while playing with the PTE pointer. Now returning the PTE pointer to the caller indicates there is no mmu lock protection?",
+      "revId": "2bea620f7493604b0acb28dfdd2e0333fdf6fc34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
