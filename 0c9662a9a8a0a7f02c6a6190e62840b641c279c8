@@ -88,6 +88,30 @@
       },
       "revId": "0c9662a9a8a0a7f02c6a6190e62840b641c279c8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a451869_c24accfa",
+        "filename": "mm/page_pinner.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-08-17T14:24:49Z",
+      "side": 1,
+      "message": "Ok but this should not be part of this patch. `gki_defconfig: Enable PAGE_PINNER` does not imply extra changes. Please place it an a separate patch.",
+      "parentUuid": "1773e622_0c8160aa",
+      "range": {
+        "startLine": 136,
+        "startChar": 1,
+        "endLine": 136,
+        "endChar": 31
+      },
+      "revId": "0c9662a9a8a0a7f02c6a6190e62840b641c279c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
