@@ -16,6 +16,24 @@
       "message": "Is it possible that, while the caller of `pkvm_pgtable_lookup()` is playing with the PTE pointer, the corresponding page table page of this PTE pointer may be recycled by another page table API? The page table API usually holds a mmu lock while playing with the PTE pointer. Now returning the PTE pointer to the caller indicates there is no mmu lock protection?",
       "revId": "2bea620f7493604b0acb28dfdd2e0333fdf6fc34",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a562d25_d27e3a1c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-17T14:27:23Z",
+      "side": 1,
+      "message": "Good question, I haven\u0027t thought about that... But actually the pgtable API itself never takes any lock, i.e. it already assumes it is the caller\u0027s responsibility to hold the needed lock when needed, right?\n\nAlthough actually the only reason I made it return a PTE pointer rather than a PTE _value_ is that our pgtable callbacks pte_present(), pte_annotated() etc take a PTE pointer, not a PTE value (BTW I\u0027m not sure what exactly is the point in that; looks like in practice those callbacks just dereference this pointer anyway?), so it\u0027s just a bit easier to use those callbacks with this returned value if it\u0027s already a pointer.",
+      "parentUuid": "f2eca219_c06692c8",
+      "revId": "2bea620f7493604b0acb28dfdd2e0333fdf6fc34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
