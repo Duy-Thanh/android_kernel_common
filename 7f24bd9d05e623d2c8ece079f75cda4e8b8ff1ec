@@ -382,6 +382,30 @@
       },
       "revId": "7f24bd9d05e623d2c8ece079f75cda4e8b8ff1ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34c1ae9e_79ebd8f2",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-08-17T09:07:40Z",
+      "side": 1,
+      "message": "This is a smart fix. With setting page state for pvmfw page in the PTE during unmap, it guarantees when some memory pages owned by pKVM are sharing the same 2M region with pvmfw, they will not sharing the same 2M leaf pte, so I think this comment can be resolved.",
+      "parentUuid": "b2f41b4e_e80764aa",
+      "range": {
+        "startLine": 357,
+        "startChar": 0,
+        "endLine": 363,
+        "endChar": 3
+      },
+      "revId": "7f24bd9d05e623d2c8ece079f75cda4e8b8ff1ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
