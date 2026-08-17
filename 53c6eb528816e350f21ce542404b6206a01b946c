@@ -16,6 +16,24 @@
       "message": "Since this mapping may legitimately fail with -ENOMEM, we\u0027d better clean up after this failure, i.e. unmap whatever pages we\u0027ve mapped in the hyp MMU and restore the host\u0027s ownership/access to these pages.\n\n...Also while we\u0027re at it, we can improve `pkvm_host_donate_guest()` and `pkvm_host_share_guest()` to check if there are enough pages in the memcache to avoid failing with -ENOMEM in the middle, similarly to the recent improvement in pKVM-ARM: https://lore.kernel.org/all/20260501112149.2824881-6-tabba@google.com/. We might leverage our recently added `need_memcache_topup()` for that.",
       "revId": "53c6eb528816e350f21ce542404b6206a01b946c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "657ad61a_2ad8df96",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1246,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-17T12:58:56Z",
+      "side": 1,
+      "message": "\u003e unmap whatever pages we\u0027ve mapped in the hyp MMU\n\nEhh, that would require implementing TLB flush for the hyp MMU.\n\nWe\u0027d need to implement it anyway if we want to implement mapping only those memory regions that the hypervisor needs to access at the given moment in time, instead of keeping the entire RAM mapped in the hypervisor MMU all the time (b/541580341).\n\nBut now this makes me realize it is not clear how to implement TLB _shootdown_ for the hypervisor MMU. The INIT signal trick that we are using for host and guest EPT wouldn\u0027t just work for the hypervisor MMU. I.e. it seems there is no way to let a remote CPU _immediately_ flush its stage-1 TLB if that CPU is running pKVM hypervisor code in VMX root, not host or guest VM code in VMX non-root.\n\nSo it seems the best we can do is to ensure flushing stage-1 TLB on each remote CPU after next vmexit to pKVM on that CPU, not earlier? I.e. there would be still a window when a hyp_mmu_unmap already returned success while a remote CPU is running pKVM hypervisor code - continuing handling a _previous_ vmexit - with its TLB still not flushed. That might be better than never unmapping at all, but still, feels tricky...\n\n...So for now I\u0027m just gonna add a TODO here.",
+      "parentUuid": "54deeffa_465809af",
+      "revId": "53c6eb528816e350f21ce542404b6206a01b946c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
