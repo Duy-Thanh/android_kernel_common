@@ -51,6 +51,24 @@
       "parentUuid": "39ea5767_1d6a4c7d",
       "revId": "89653c2929bdabbb25b03f11514e48b1acaf83f7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c1aedc8_b9fb2f8d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-17T23:00:20Z",
+      "side": 1,
+      "message": "Please add all of this context into the commit message. Include the link to the upstream maintainer comments and a bug that tracks the long-term solution.",
+      "parentUuid": "8698b5ff_d713f933",
+      "revId": "89653c2929bdabbb25b03f11514e48b1acaf83f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
