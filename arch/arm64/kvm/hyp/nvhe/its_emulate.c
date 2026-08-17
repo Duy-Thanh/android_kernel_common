@@ -1079,6 +1079,9 @@ int pkvm_init_redist_emulation(phys_addr_t redist_base, void *host_priv_states)
 	struct pkvm_moveable_reg *rd_reg, *vlpi_reg = NULL;
 	u64 typer;
 
+	if (!static_branch_unlikely(&kvm_its_hardening))
+		return -EOPNOTSUPP;
+
 	hyp_spin_lock(&redist_lock);
 	/* Find the region with redistributor */
 	rd_reg = get_region(redist_base);
