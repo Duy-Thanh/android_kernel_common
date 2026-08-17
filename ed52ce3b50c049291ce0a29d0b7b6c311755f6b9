@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2b096f8b_31974e51",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-17T14:17:29Z",
+      "side": 1,
+      "message": "If walking failed, the returned values are invalid (e.g. level \u003d pgt-\u003ecap.level, or ptep \u003d NULL in the next patch aosp/4232680), that is not documented in the documentation of `pkvm_pgtable_lookup()`, the caller doesn\u0027t expect that, so the behavior is generally undefined?\n\nBTW I guess we can also remove that initialization of `data` with those invalid values in this patch?",
+      "parentUuid": "466da41e_1a4d9727",
+      "revId": "ed52ce3b50c049291ce0a29d0b7b6c311755f6b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bdada587_2eb53123",
         "filename": "arch/x86/kvm/pkvm/pgtable.c",
         "patchSetId": 1
