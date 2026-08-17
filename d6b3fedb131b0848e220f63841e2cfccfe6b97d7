@@ -16,6 +16,24 @@
       "message": "Note: there are some opportunities here to change how the recipient is woken up in a way that improves the hints we give to the scheduler",
       "revId": "d6b3fedb131b0848e220f63841e2cfccfe6b97d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d00236c_01e04f88",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-08-17T20:40:33Z",
+      "side": 1,
+      "message": "Resolving",
+      "parentUuid": "defda751_d7e0c6ba",
+      "revId": "d6b3fedb131b0848e220f63841e2cfccfe6b97d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
