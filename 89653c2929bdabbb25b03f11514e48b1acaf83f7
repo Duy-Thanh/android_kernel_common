@@ -33,6 +33,24 @@
       "message": "Why not upstream? Is this fixing an android-specific issue? If so, please add a Fixes: tag citing the patch that introduced the issue.",
       "revId": "89653c2929bdabbb25b03f11514e48b1acaf83f7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8698b5ff_d713f933",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1651802
+      },
+      "writtenOn": "2026-08-17T18:05:10Z",
+      "side": 1,
+      "message": "One of the upstream maintainers is requesting a formal fix through the PM/block layer instead of F2FS filesystem layer. We are pursuing that separately as a long-term solution since it could take several months, which does not align with the Android release timeline.\n\nFor the other details, plz, refer to go/f2fs-suspend-deadlock.",
+      "parentUuid": "39ea5767_1d6a4c7d",
+      "revId": "89653c2929bdabbb25b03f11514e48b1acaf83f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
