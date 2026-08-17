@@ -30,6 +30,11 @@ DECLARE_HOOK(android_vh_shmem_mod_shmem,
 DECLARE_HOOK(android_vh_shmem_mod_swapped,
 	TP_PROTO(struct address_space *mapping, long nr_pages),
 	TP_ARGS(mapping, nr_pages));
+DECLARE_RESTRICTED_HOOK(android_rvh_mm_folio_split_bypass,
+			TP_PROTO(struct folio *folio, unsigned int new_order,
+				 struct list_head *list, struct xa_state *xas,
+				 pgoff_t end, int *ret, bool *bypass),
+			TP_ARGS(folio, new_order, list, xas, end, ret, bypass), 1);
 DECLARE_RESTRICTED_HOOK(android_rvh_try_alloc_pages_gfp,
 			TP_PROTO(struct page **page, unsigned int order,
 				gfp_t gfp, enum zone_type highest_zoneidx),
@@ -248,6 +253,9 @@ DECLARE_HOOK(android_vh_should_alloc_pages_retry,
 	int migratetype, struct zone *preferred_zone, struct page **page, bool *should_alloc_retry),
 	TP_ARGS(gfp_mask, order, alloc_flags,
 		migratetype, preferred_zone, page, should_alloc_retry));
+DECLARE_HOOK(android_vh_shrink_try_release_folio,
+	TP_PROTO(struct folio *folio, bool *try_release),
+	TP_ARGS(folio, try_release));
 DECLARE_HOOK(android_vh_unreserve_highatomic_bypass,
 	TP_PROTO(bool force, struct zone *zone, bool *skip_unreserve_highatomic),
 	TP_ARGS(force, zone, skip_unreserve_highatomic));
@@ -713,6 +721,9 @@ DECLARE_HOOK(android_vh_mm_remove_migration_pte_bypass,
 DECLARE_HOOK(android_vh_mm_split_huge_page_bypass,
 	TP_PROTO(struct page *page, struct list_head *list, int *ret, bool *bypass),
 	TP_ARGS(page, list, ret, bypass));
+DECLARE_HOOK(android_vh_mm_truncate_try_split_folio,
+	TP_PROTO(struct folio *folio, bool *ret),
+	TP_ARGS(folio, ret));
 DECLARE_HOOK(android_vh_mm_try_split_folio_bypass,
 	TP_PROTO(struct folio *folio, bool *bypass),
 	TP_ARGS(folio, bypass));
