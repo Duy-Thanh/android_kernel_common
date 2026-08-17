@@ -430,6 +430,30 @@
       },
       "revId": "7f24bd9d05e623d2c8ece079f75cda4e8b8ff1ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a8e26a6_17d0426e",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-17T10:48:10Z",
+      "side": 1,
+      "message": "BTW just a side note: pKVM-ARM takes a different approach: it forces adding pvmfw to the pKVM\u0027s memblock list even if pvmfw is not in the kernel\u0027s memory memblock (aosp/3864884), so that pKVM treats pvmfw as memory and thus doesn\u0027t need to special-case it like we are doing here.\n\nAlthough that is currently buggy (fix aosp/4217426 not merged yet), so maybe we shouldn\u0027t rush to adopt the same approach in pKVM-IA just yet.",
+      "parentUuid": "a16ae5bc_fbeecdca",
+      "range": {
+        "startLine": 357,
+        "startChar": 0,
+        "endLine": 363,
+        "endChar": 3
+      },
+      "revId": "7f24bd9d05e623d2c8ece079f75cda4e8b8ff1ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
