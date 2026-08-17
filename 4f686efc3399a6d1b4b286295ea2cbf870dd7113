@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb18c528_45733a6d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 4270375
+      },
+      "writtenOn": "2026-08-17T08:38:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca313537_0f1497d0",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 35
+      },
+      "revId": "4f686efc3399a6d1b4b286295ea2cbf870dd7113",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9d72b518_b147c0ad",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-08-17T05:01:59Z",
       "side": 1,
       "message": "This CRC violation seems suspicious - is it expected to be here?",
+      "range": {
+        "startLine": 332972,
+        "startChar": 0,
+        "endLine": 332973,
+        "endChar": 21
+      },
+      "revId": "4f686efc3399a6d1b4b286295ea2cbf870dd7113",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db92e879_4a9336a6",
+        "filename": "gki/x86_64/abi.stg",
+        "patchSetId": 2
+      },
+      "lineNbr": 332973,
+      "author": {
+        "id": 4270375
+      },
+      "writtenOn": "2026-08-17T08:38:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d72b518_b147c0ad",
       "range": {
         "startLine": 332972,
         "startChar": 0,
