@@ -16,6 +16,24 @@
       "message": "Where has this change originated from?\n\nOnly Qualcomm should be contributing to their symbol list and I\u0027d like to see the original submission.",
       "revId": "e157f927ae4577fb2231bd7450ee74af51433bc3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cd61a8e_1342b55a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1722387
+      },
+      "writtenOn": "2026-08-17T11:00:47Z",
+      "side": 1,
+      "message": "The original change was made by someone from qcom here: arsp/7057422",
+      "parentUuid": "96be6f36_f3d21ecb",
+      "revId": "e157f927ae4577fb2231bd7450ee74af51433bc3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
