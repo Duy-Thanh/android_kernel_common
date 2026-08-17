@@ -499,8 +499,16 @@ static void mt_get_feature(struct hid_device *hdev, struct hid_report *report)
 			goto free;
 		}
 
+<<<<<<< HEAD   (476e7b24a2766fc0e572ef07016b4da4eb839973 Merge 543555954b1e ("inet: frags: flush pending skbs in fqdi)
 		ret = __hid_report_raw_event(hdev, HID_FEATURE_REPORT, buf,
 					     size, size, 0);
+||||||| BASE   (543555954b1ee8d1903a7020324efb41b0c97428 inet: frags: flush pending skbs in fqdir_pre_exit())
+		ret = hid_report_raw_event(hdev, HID_FEATURE_REPORT, buf,
+					   size, 0);
+=======
+		ret = hid_report_raw_event(hdev, HID_FEATURE_REPORT, buf,
+					   size, size, 0);
+>>>>>>> BRANCH (1953cca3de8453d6e842b7b63c6ef78d19546e26 HID: core: Fix size_t specifier in hid_report_raw_event())
 		if (ret)
 			dev_warn(&hdev->dev, "failed to report feature\n");
 	}

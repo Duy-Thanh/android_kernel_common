@@ -201,7 +201,13 @@ static void gb_hid_init_report(struct gb_hid *ghid, struct hid_report *report)
 	 * we just need to setup the input fields, so using
 	 * __hid_report_raw_event is safe.
 	 */
+<<<<<<< HEAD   (476e7b24a2766fc0e572ef07016b4da4eb839973 Merge 543555954b1e ("inet: frags: flush pending skbs in fqdi)
 	__hid_report_raw_event(ghid->hid, report->type, ghid->inbuf, ghid->bufsize, size, 1);
+||||||| BASE   (543555954b1ee8d1903a7020324efb41b0c97428 inet: frags: flush pending skbs in fqdir_pre_exit())
+	hid_report_raw_event(ghid->hid, report->type, ghid->inbuf, size, 1);
+=======
+	hid_report_raw_event(ghid->hid, report->type, ghid->inbuf, ghid->bufsize, size, 1);
+>>>>>>> BRANCH (1953cca3de8453d6e842b7b63c6ef78d19546e26 HID: core: Fix size_t specifier in hid_report_raw_event())
 }
 
 static void gb_hid_init_reports(struct gb_hid *ghid)

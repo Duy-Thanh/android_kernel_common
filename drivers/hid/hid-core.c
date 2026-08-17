@@ -1998,8 +1998,16 @@ out:
 }
 EXPORT_SYMBOL_GPL(__hid_request);
 
+<<<<<<< HEAD   (476e7b24a2766fc0e572ef07016b4da4eb839973 Merge 543555954b1e ("inet: frags: flush pending skbs in fqdi)
 int __hid_report_raw_event(struct hid_device *hid, enum hid_report_type type, u8 *data,
 			   size_t bufsize, u32 size, int interrupt)
+||||||| BASE   (543555954b1ee8d1903a7020324efb41b0c97428 inet: frags: flush pending skbs in fqdir_pre_exit())
+int hid_report_raw_event(struct hid_device *hid, enum hid_report_type type, u8 *data, u32 size,
+			 int interrupt)
+=======
+int hid_report_raw_event(struct hid_device *hid, enum hid_report_type type, u8 *data,
+			 size_t bufsize, u32 size, int interrupt)
+>>>>>>> BRANCH (1953cca3de8453d6e842b7b63c6ef78d19546e26 HID: core: Fix size_t specifier in hid_report_raw_event())
 {
 	struct hid_report_enum *report_enum = hid->report_enum + type;
 	struct hid_report *report;
@@ -2142,7 +2150,13 @@ static int __hid_input_report(struct hid_device *hid, enum hid_report_type type,
 			goto unlock;
 	}
 
+<<<<<<< HEAD   (476e7b24a2766fc0e572ef07016b4da4eb839973 Merge 543555954b1e ("inet: frags: flush pending skbs in fqdi)
 	ret = __hid_report_raw_event(hid, type, data, bufsize, size, interrupt);
+||||||| BASE   (543555954b1ee8d1903a7020324efb41b0c97428 inet: frags: flush pending skbs in fqdir_pre_exit())
+	ret = hid_report_raw_event(hid, type, data, size, interrupt);
+=======
+	ret = hid_report_raw_event(hid, type, data, bufsize, size, interrupt);
+>>>>>>> BRANCH (1953cca3de8453d6e842b7b63c6ef78d19546e26 HID: core: Fix size_t specifier in hid_report_raw_event())
 
 unlock:
 	if (!lock_already_taken)

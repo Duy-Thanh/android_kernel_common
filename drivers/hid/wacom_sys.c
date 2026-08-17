@@ -74,7 +74,13 @@ static void wacom_wac_queue_flush(struct hid_device *hdev,
 		int err;
 
 		size = kfifo_out(fifo, buf, sizeof(buf));
+<<<<<<< HEAD   (476e7b24a2766fc0e572ef07016b4da4eb839973 Merge 543555954b1e ("inet: frags: flush pending skbs in fqdi)
 		err = __hid_report_raw_event(hdev, HID_INPUT_REPORT, buf, size, size, false);
+||||||| BASE   (543555954b1ee8d1903a7020324efb41b0c97428 inet: frags: flush pending skbs in fqdir_pre_exit())
+		err = hid_report_raw_event(hdev, HID_INPUT_REPORT, buf, size, false);
+=======
+		err = hid_report_raw_event(hdev, HID_INPUT_REPORT, buf, size, size, false);
+>>>>>>> BRANCH (1953cca3de8453d6e842b7b63c6ef78d19546e26 HID: core: Fix size_t specifier in hid_report_raw_event())
 		if (err) {
 			hid_warn(hdev, "%s: unable to flush event due to error %d\n",
 				 __func__, err);
@@ -318,7 +324,13 @@ static void wacom_feature_mapping(struct hid_device *hdev,
 			ret = wacom_get_report(hdev, HID_FEATURE_REPORT,
 					       data, n, WAC_CMD_RETRIES);
 			if (ret == n && features->type == HID_GENERIC) {
+<<<<<<< HEAD   (476e7b24a2766fc0e572ef07016b4da4eb839973 Merge 543555954b1e ("inet: frags: flush pending skbs in fqdi)
 				ret = __hid_report_raw_event(hdev,
+||||||| BASE   (543555954b1ee8d1903a7020324efb41b0c97428 inet: frags: flush pending skbs in fqdir_pre_exit())
+				ret = hid_report_raw_event(hdev,
+=======
+				ret = hid_report_raw_event(hdev,
+>>>>>>> BRANCH (1953cca3de8453d6e842b7b63c6ef78d19546e26 HID: core: Fix size_t specifier in hid_report_raw_event())
 					HID_FEATURE_REPORT, data, n, n, 0);
 			} else if (ret == 2 && features->type != HID_GENERIC) {
 				features->touch_max = data[1];
@@ -380,8 +392,16 @@ static void wacom_feature_mapping(struct hid_device *hdev,
 		ret = wacom_get_report(hdev, HID_FEATURE_REPORT,
 					data, n, WAC_CMD_RETRIES);
 		if (ret == n) {
+<<<<<<< HEAD   (476e7b24a2766fc0e572ef07016b4da4eb839973 Merge 543555954b1e ("inet: frags: flush pending skbs in fqdi)
 			ret = __hid_report_raw_event(hdev, HID_FEATURE_REPORT,
 						     data, n, n, 0);
+||||||| BASE   (543555954b1ee8d1903a7020324efb41b0c97428 inet: frags: flush pending skbs in fqdir_pre_exit())
+			ret = hid_report_raw_event(hdev, HID_FEATURE_REPORT,
+						   data, n, 0);
+=======
+			ret = hid_report_raw_event(hdev, HID_FEATURE_REPORT,
+						   data, n, n, 0);
+>>>>>>> BRANCH (1953cca3de8453d6e842b7b63c6ef78d19546e26 HID: core: Fix size_t specifier in hid_report_raw_event())
 		} else {
 			hid_warn(hdev, "%s: could not retrieve sensor offsets\n",
 				 __func__);
