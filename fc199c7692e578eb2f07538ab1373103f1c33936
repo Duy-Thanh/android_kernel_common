@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8982b236_ab00fd52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-18T21:06:41Z",
+      "side": 1,
+      "message": "This cherry-pick is not clean. Please reclassify as BACKPORT",
+      "revId": "fc199c7692e578eb2f07538ab1373103f1c33936",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
