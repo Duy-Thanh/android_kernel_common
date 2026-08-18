@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1273c246_92226601",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 4578084
+      },
+      "writtenOn": "2026-08-18T15:21:29Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: The second line of the commit message must be blank.\n\nPlease refer to the contri...\n\nThe second line of the commit message must be blank.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 0
+      },
+      "revId": "4bc19308c1fd583d1937e1d39c66abf3868fc270",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "204a0e1d_30eb1fe0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 4578084
+      },
+      "writtenOn": "2026-08-18T15:21:29Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: The second line of the commit message must be blank.\n\nPlease refer to the contri...\n\nThe second line of the commit message must be blank.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 0
+      },
+      "revId": "4bc19308c1fd583d1937e1d39c66abf3868fc270",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
