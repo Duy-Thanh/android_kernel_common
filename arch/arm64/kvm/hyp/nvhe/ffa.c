@@ -513,6 +513,7 @@ static void do_ffa_rxtx_map(struct arm_smccc_1_2_regs *res,
 	int ret = 0;
 	void *rx_virt, *tx_virt;
 	struct kvm_ffa_buffers *ffa_buf;
+	int i = 0;
 
 	if (npages != (KVM_FFA_MBOX_NR_PAGES * PAGE_SIZE) / FFA_PAGE_SIZE) {
 		ret = FFA_RET_INVALID_PARAMETERS;
@@ -539,27 +540,31 @@ static void do_ffa_rxtx_map(struct arm_smccc_1_2_regs *res,
 	if (ret)
 		goto out_unlock;
 
-	ret = __pkvm_host_share_hyp(hyp_phys_to_pfn(tx));
-	if (ret) {
-		ret = FFA_RET_INVALID_PARAMETERS;
-		goto err_unmap;
+	for (i = 0; i < npages; i++) {
+		ret = __pkvm_host_share_hyp(hyp_phys_to_pfn(tx + (i << PAGE_SHIFT)));
+		if (ret) {
+			ret = FFA_RET_INVALID_PARAMETERS;
+			goto err_unmap;
+		}
 	}
 
-	ret = __pkvm_host_share_hyp(hyp_phys_to_pfn(rx));
-	if (ret) {
-		ret = FFA_RET_INVALID_PARAMETERS;
-		goto err_unshare_tx;
+	for (i = 0; i < npages; i++) {
+		ret = __pkvm_host_share_hyp(hyp_phys_to_pfn(rx + (i << PAGE_SHIFT)));
+		if (ret) {
+			ret = FFA_RET_INVALID_PARAMETERS;
+			goto err_unshare;
+		}
 	}
 
 	tx_virt = hyp_phys_to_virt(tx);
-	ret = hyp_pin_shared_mem(tx_virt, tx_virt + 1);
+	ret = hyp_pin_shared_mem(tx_virt, tx_virt + (npages << PAGE_SHIFT));
 	if (ret) {
 		ret = FFA_RET_INVALID_PARAMETERS;
-		goto err_unshare_rx;
+		goto err_unshare;
 	}
 
 	rx_virt = hyp_phys_to_virt(rx);
-	ret = hyp_pin_shared_mem(rx_virt, rx_virt + 1);
+	ret = hyp_pin_shared_mem(rx_virt, rx_virt + (npages << PAGE_SHIFT));
 	if (ret) {
 		ret = FFA_RET_INVALID_PARAMETERS;
 		goto err_unpin_tx;
@@ -575,12 +580,15 @@ out:
 	return;
 
 err_unpin_tx:
-	hyp_unpin_shared_mem(tx_virt, tx_virt + 1);
-err_unshare_rx:
-	__pkvm_host_unshare_hyp(hyp_phys_to_pfn(rx));
-err_unshare_tx:
-	__pkvm_host_unshare_hyp(hyp_phys_to_pfn(tx));
+	hyp_unpin_shared_mem(tx_virt, tx_virt + (npages << PAGE_SHIFT));
+err_unshare:
+	while (i--)
+		WARN_ON(__pkvm_host_unshare_hyp(hyp_phys_to_pfn(rx + (i << PAGE_SHIFT))));
+	i = npages;
 err_unmap:
+	while (i--)
+		WARN_ON(__pkvm_host_unshare_hyp(hyp_phys_to_pfn(tx + (i << PAGE_SHIFT))));
+
 	ffa_unmap_hyp_buffers();
 	goto out_unlock;
 }
@@ -626,11 +634,11 @@ static int do_ffa_rxtx_guest_map(struct kvm_cpu_context *ctxt, struct pkvm_hyp_v
 	if (!PAGE_ALIGNED(tx) || !PAGE_ALIGNED(rx))
 		return -EINVAL;
 
-	ret = __pkvm_guest_share_hyp_page(hyp_vcpu, tx, &tx_va);
+	ret = __pkvm_guest_share_hyp_pages(hyp_vcpu, tx, &tx_va, npages);
 	if (ret)
 		goto out_err;
 
-	ret = __pkvm_guest_share_hyp_page(hyp_vcpu, rx, &rx_va);
+	ret = __pkvm_guest_share_hyp_pages(hyp_vcpu, rx, &rx_va, npages);
 	if (ret)
 		goto out_err_with_tx;
 
@@ -649,7 +657,7 @@ out_unlock:
 	hyp_spin_unlock(&kvm_ffa_hyp_lock);
 	return ret;
 out_err_with_tx:
-	WARN_ON(__pkvm_guest_unshare_hyp_page(pkvm_hyp_vcpu_to_hyp_vm(hyp_vcpu), tx));
+	WARN_ON(__pkvm_guest_unshare_hyp_pages(pkvm_hyp_vcpu_to_hyp_vm(hyp_vcpu), tx, npages));
 out_err:
 	ret = __handle_mem_protect_err(hyp_vcpu, tx, ret);
 	ret = __handle_mem_protect_err(hyp_vcpu, rx, ret);
@@ -664,6 +672,8 @@ static void do_ffa_rxtx_unmap(struct arm_smccc_1_2_regs *res,
 	DECLARE_REG(u32, id, ctxt, 1);
 	int ret = 0;
 	struct kvm_ffa_buffers *ffa_buf;
+	u64 pfn;
+	int i;
 
 	if (hyp_vcpu_to_ffa_handle(hyp_vcpu) != id) {
 		ret = FFA_RET_INVALID_PARAMETERS;
@@ -678,18 +688,23 @@ static void do_ffa_rxtx_unmap(struct arm_smccc_1_2_regs *res,
 	}
 
 	if (!hyp_vcpu) {
-		hyp_unpin_shared_mem(ffa_buf->tx, ffa_buf->tx + 1);
-		WARN_ON(__pkvm_host_unshare_hyp(hyp_virt_to_pfn(ffa_buf->tx)));
-
-		hyp_unpin_shared_mem(ffa_buf->rx, ffa_buf->rx + 1);
-		WARN_ON(__pkvm_host_unshare_hyp(hyp_virt_to_pfn(ffa_buf->rx)));
+		hyp_unpin_shared_mem(ffa_buf->tx, ffa_buf->tx + KVM_FFA_MBOX_NR_PAGES * PAGE_SIZE);
+		for (i = 0; i < KVM_FFA_MBOX_NR_PAGES; i++) {
+			pfn = hyp_virt_to_pfn(ffa_buf->tx + i * PAGE_SIZE);
+			WARN_ON(__pkvm_host_unshare_hyp(pfn));
+		}
+		hyp_unpin_shared_mem(ffa_buf->rx, ffa_buf->rx + KVM_FFA_MBOX_NR_PAGES * PAGE_SIZE);
+		for (i = 0; i < KVM_FFA_MBOX_NR_PAGES; i++) {
+			pfn = hyp_virt_to_pfn(ffa_buf->rx + i * PAGE_SIZE);
+			WARN_ON(__pkvm_host_unshare_hyp(pfn));
+		}
 
 		ffa_unmap_hyp_buffers();
 	} else {
 		struct pkvm_hyp_vm *vm = pkvm_hyp_vcpu_to_hyp_vm(hyp_vcpu);
 
-		WARN_ON(__pkvm_guest_unshare_hyp_page(vm, ffa_buf->tx_ipa));
-		WARN_ON(__pkvm_guest_unshare_hyp_page(vm, ffa_buf->rx_ipa));
+		WARN_ON(__pkvm_guest_unshare_hyp_pages(vm, ffa_buf->tx_ipa, KVM_FFA_MBOX_NR_PAGES));
+		WARN_ON(__pkvm_guest_unshare_hyp_pages(vm, ffa_buf->rx_ipa, KVM_FFA_MBOX_NR_PAGES));
 	}
 
 	ffa_buf->rx = NULL;
@@ -1879,11 +1894,11 @@ int kvm_dying_guest_reclaim_ffa_resources(struct pkvm_hyp_vm *vm)
 	if (list_empty(&ffa_buf->xfer_list)) {
 		/* XXX - needs an explicit rxtx unmap call ? */
 		if (ffa_buf->tx) {
-			WARN_ON(__pkvm_guest_unshare_hyp_page(vm, ffa_buf->tx_ipa));
+			WARN_ON(__pkvm_guest_unshare_hyp_pages(vm, ffa_buf->tx_ipa, KVM_FFA_MBOX_NR_PAGES));
 			ffa_buf->tx = NULL;
 		}
 		if (ffa_buf->rx) {
-			WARN_ON(__pkvm_guest_unshare_hyp_page(vm, ffa_buf->rx_ipa));
+			WARN_ON(__pkvm_guest_unshare_hyp_pages(vm, ffa_buf->rx_ipa, KVM_FFA_MBOX_NR_PAGES));
 			ffa_buf->rx = NULL;
 		}
 		goto unlock;
