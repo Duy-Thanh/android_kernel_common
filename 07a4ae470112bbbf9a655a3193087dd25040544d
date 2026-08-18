@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2da1f4a_008f4753",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-08-18T19:04:07Z",
+      "side": 1,
+      "message": "Temporarily block to avoid ABI update race with aosp/4236526",
+      "revId": "07a4ae470112bbbf9a655a3193087dd25040544d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
