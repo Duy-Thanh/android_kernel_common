@@ -69,6 +69,7 @@
 #include <trace/hooks/topology.h>
 #include <trace/hooks/traps.h>
 #include <trace/hooks/ttm_pool.h>
+#include <trace/hooks/typec.h>
 #include <trace/hooks/ufshcd.h>
 #include <trace/hooks/vmscan.h>
 #include <trace/hooks/wqlockup.h>
@@ -583,6 +584,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tune_mmap_readaround);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tune_scan_control);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tune_scan_type);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tune_swappiness);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_typec_tcpm_log);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_udp6_unicast_rcv_skb);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_udp_enqueue_schedule_skb);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_udp_unicast_rcv_skb);
