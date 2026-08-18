@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11ded866_8c736369",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-08-18T13:58:15Z",
+      "side": 1,
+      "message": "These should be broken up into a smaller set of patches, as there are a lot of new things being added here all at once.\n\nAnd why is new development happening on this very old branch?  No new devices should be shipping for android14, right?",
+      "revId": "7a286cfb15bc41f61cebce474b71a4e3b265f260",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3521c62_49001019",
+        "filename": "arch/arm64/kernel/entry-common.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-08-18T13:58:15Z",
+      "side": 1,
+      "message": "incorrect coding style, checkpatch should have caught this.",
+      "range": {
+        "startLine": 135,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 26
+      },
+      "revId": "7a286cfb15bc41f61cebce474b71a4e3b265f260",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6e72c2a_964c58e6",
+        "filename": "arch/arm64/kernel/entry-common.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-08-18T13:58:15Z",
+      "side": 1,
+      "message": "this is a very hot path, why is a hook needed here?",
+      "range": {
+        "startLine": 139,
+        "startChar": 1,
+        "endLine": 139,
+        "endChar": 38
+      },
+      "revId": "7a286cfb15bc41f61cebce474b71a4e3b265f260",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
