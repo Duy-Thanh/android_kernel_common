@@ -144,6 +144,29 @@
       ],
       "revId": "3b8c326d7c061e43cffe34b7c375b4bd33111249",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cc40ab2_0b9de8a0",
+        "filename": "microdroid/aarch64/symbols/base",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-08-18T16:43:36Z",
+      "side": 1,
+      "message": "What is this (and the other) module?\n\nThe `base` symbol list should be a much shorter list.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 29
+      },
+      "revId": "3b8c326d7c061e43cffe34b7c375b4bd33111249",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
