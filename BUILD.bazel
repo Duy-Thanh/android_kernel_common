@@ -526,7 +526,9 @@ kernel_build(
         "vmlinux.symvers",
     ],
     arch = "arm64",
+    collect_unstripped_modules = True,
     defconfig = "arch/arm64/configs/microdroid_defconfig",
+    kmi_symbol_list = "microdroid/aarch64/symbols/base",
     make_goals = [
         "Image",
         "modules",
@@ -536,6 +538,14 @@ kernel_build(
         "drivers/dma-buf/heaps/system_heap.ko",
         "drivers/iommu/pkvm-pviommu.ko",
     ],
+    trim_nonlisted_kmi = True,
+)
+
+kernel_abi(
+    name = "kernel_aarch64_microdroid_abi",
+    kernel_build = "kernel_aarch64_microdroid",
+    abi_definition_stg = "microdroid/aarch64/abi.stg",
+    define_abi_targets = True,
 )
 
 kernel_modules_install(
