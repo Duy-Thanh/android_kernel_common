@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c2260d8d_a072d0db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4578084
+      },
+      "writtenOn": "2026-08-18T14:54:30Z",
+      "side": 1,
+      "message": "Thanks for the review.\n\nWill split this into three patches:\n1) lazy preemption hooks (pre-6.13)\n2) bounded CFS deferral for framework lock hints\n3) mutex/rwsem wakeup hooks\n\nThis is not for new android14 devices. Existing 6.1 products are\nmigrating from an internal OKI image to GKI, so we need the same\nhooks already merged on 6.6/6.12/6.18. Details are in b/524088305.",
+      "parentUuid": "11ded866_8c736369",
+      "revId": "7a286cfb15bc41f61cebce474b71a4e3b265f260",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e3521c62_49001019",
         "filename": "arch/arm64/kernel/entry-common.c",
         "patchSetId": 1
@@ -43,6 +61,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "79901d5a_a9e550df",
+        "filename": "arch/arm64/kernel/entry-common.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 4578084
+      },
+      "writtenOn": "2026-08-18T14:54:30Z",
+      "side": 1,
+      "message": "Agreed. The variable was declared in the middle of the function.\nWill move it into its own block (or to the top of the block) to\nmatch kernel coding style.",
+      "parentUuid": "e3521c62_49001019",
+      "range": {
+        "startLine": 135,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 26
+      },
+      "revId": "7a286cfb15bc41f61cebce474b71a4e3b265f260",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d6e72c2a_964c58e6",
         "filename": "arch/arm64/kernel/entry-common.c",
         "patchSetId": 1
@@ -54,6 +96,30 @@
       "writtenOn": "2026-08-18T13:58:15Z",
       "side": 1,
       "message": "this is a very hot path, why is a hook needed here?",
+      "range": {
+        "startLine": 139,
+        "startChar": 1,
+        "endLine": 139,
+        "endChar": 38
+      },
+      "revId": "7a286cfb15bc41f61cebce474b71a4e3b265f260",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00fd3324_cef3f504",
+        "filename": "arch/arm64/kernel/entry-common.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 4578084
+      },
+      "writtenOn": "2026-08-18T14:54:30Z",
+      "side": 1,
+      "message": "This matches the pre-6.13 lazy preemption hooks already merged on\n6.6/6.12. Kernel 6.1 has no native lazy preempt, so the deferred\nNEED_RESCHED must be restored when returning to userspace.\nThe hook is a vendor static key. If no vendor module is loaded it\nis a nop (jump label), so default GKI behavior and cost stay\nunchanged. Only our platforms register it.",
+      "parentUuid": "d6e72c2a_964c58e6",
       "range": {
         "startLine": 139,
         "startChar": 1,
