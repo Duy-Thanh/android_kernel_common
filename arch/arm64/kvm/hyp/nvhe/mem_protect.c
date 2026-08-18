@@ -1481,34 +1481,40 @@ unlock:
 	return ret;
 }
 
-int __pkvm_guest_share_hyp_page(struct pkvm_hyp_vcpu *vcpu, u64 ipa, u64 *hyp_va)
+int __pkvm_guest_share_hyp_pages(struct pkvm_hyp_vcpu *vcpu, u64 ipa, u64 *hyp_va, u64 nr_pages)
 {
 	struct pkvm_hyp_vm *vm = pkvm_hyp_vcpu_to_hyp_vm(vcpu);
 	int ret;
 	kvm_pte_t pte;
-	u64 phys;
+	u64 phys, size, available_pages;
 	enum kvm_pgtable_prot prot;
 	void *virt;
-	u64 nr_pages = 1;
+
+	if (check_shl_overflow(nr_pages, PAGE_SHIFT, &size))
+		return -EINVAL;
 
 	hyp_lock_component();
 	guest_lock_component(vm);
 
-	ret = __guest_request_page_transition(ipa, &pte, &nr_pages, vm, PKVM_PAGE_OWNED);
+	ret = __guest_request_page_transition(ipa, &pte, &available_pages, vm, PKVM_PAGE_OWNED);
 	if (ret)
 		goto unlock;
+	else if (available_pages != nr_pages) {
+		ret = -ENOSPC;
+		goto unlock;
+	}
 
 	phys = kvm_pte_to_phys(pte);
 
 	virt = __hyp_va(phys);
 	if (IS_ENABLED(CONFIG_NVHE_EL2_DEBUG)) {
-		ret = __hyp_check_page_state_range((u64)virt, PAGE_SIZE, PKVM_NOPAGE);
+		ret = __hyp_check_page_state_range((u64)virt, size, PKVM_NOPAGE);
 		if (ret)
 			goto unlock;
 	}
 
 	prot = pkvm_mkstate(PAGE_HYP, PKVM_PAGE_SHARED_BORROWED);
-	ret = pkvm_create_mappings_locked(virt, virt + PAGE_SIZE, prot);
+	ret = pkvm_create_mappings_locked(virt, virt + size, prot);
 	if (ret) {
 		/*
 		 * Repaint the return code as we need to distinguish between the
@@ -1529,27 +1535,35 @@ unlock:
 	return ret;
 }
 
-int __pkvm_guest_unshare_hyp_page(struct pkvm_hyp_vm *vm, u64 ipa)
+int __pkvm_guest_unshare_hyp_pages(struct pkvm_hyp_vm *vm, u64 ipa, u64 nr_pages)
 {
+	u64 phys, virt, available_pages, size;
 	int ret;
 	kvm_pte_t pte;
-	u64 phys, virt, nr_pages = 1;
+
+	if (check_shl_overflow(nr_pages, PAGE_SHIFT, &size))
+		return -EINVAL;
 
 	hyp_lock_component();
 	guest_lock_component(vm);
 
-	ret = __guest_request_page_transition(ipa, &pte, &nr_pages, vm, PKVM_PAGE_SHARED_OWNED);
+	ret = __guest_request_page_transition(ipa, &pte, &available_pages, vm,
+					      PKVM_PAGE_SHARED_OWNED);
 	if (ret)
 		goto unlock;
+	else if (available_pages != nr_pages) {
+		ret = -ENOSPC;
+		goto unlock;
+	}
 
 	phys = kvm_pte_to_phys(pte);
 
 	virt = (u64)__hyp_va(phys);
-	ret = __hyp_check_page_state_range(virt, PAGE_SIZE, PKVM_PAGE_SHARED_BORROWED);
+	ret = __hyp_check_page_state_range(virt, size, PKVM_PAGE_SHARED_BORROWED);
 	if (ret)
 		goto unlock;
 
-	WARN_ON(kvm_pgtable_hyp_unmap(&pkvm_pgtable, virt, PAGE_SIZE) != PAGE_SIZE);
+	WARN_ON(kvm_pgtable_hyp_unmap(&pkvm_pgtable, virt, size) != PAGE_SIZE);
 	/*
 	 * NULL memcache: this is the reverse of a prior PAGE_SIZE share, so the
 	 * walker rejected any coarser leaf with -E2BIG. The map below only
@@ -1557,7 +1571,7 @@ int __pkvm_guest_unshare_hyp_page(struct pkvm_hyp_vm *vm, u64 ipa)
 	 * allocates. The teardown path runs without a loaded vCPU, so there is
 	 * no correct memcache to pass.
 	 */
-	ret = kvm_pgtable_stage2_map(&vm->pgt, ipa, PAGE_SIZE, phys,
+	ret = kvm_pgtable_stage2_map(&vm->pgt, ipa, size, phys,
 				     pkvm_mkstate(KVM_PGTABLE_PROT_RWX, PKVM_PAGE_OWNED),
 				     NULL, 0);
 unlock:
