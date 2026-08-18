@@ -1,0 +1,71 @@
+[abi_symbol_list]
+# commonly used symbols
+  kfree
+  __kmalloc_cache_noprof
+  kmalloc_caches
+  module_layout
+  _printk
+  __put_task_struct
+  __stack_chk_fail
+  utf8_data_table
+
+# required by pkvm-pviommu.ko
+  _dev_err
+  device_match_fwnode
+  device_property_read_u32_array
+  dev_iommu_priv_set
+  devm_kmalloc
+  driver_find_device
+  generic_device_group
+  iommu_device_register
+  iommu_device_sysfs_add
+  iommu_device_sysfs_remove
+  iommu_fwspec_add_ids
+  iommu_group_alloc
+  mas_erase
+  mas_find
+  mas_store_gfp
+  mtree_destroy
+  mtree_store_range
+  of_property_read_u32_index
+  pci_bus_type
+  pci_device_group
+  __platform_driver_register
+  platform_driver_unregister
+  put_device
+  _raw_spin_lock
+  _raw_spin_unlock
+  __xa_insert
+  xa_load
+
+# required by system_heap.ko
+  __alloc_pages_noprof
+  arm64_use_ng_mappings
+  dma_buf_export
+  dma_heap_add
+  dma_heap_get_dev
+  dma_heap_get_name
+  dma_map_sgtable
+  dma_set_coherent_mask
+  dma_set_mask
+  __dma_sync_sg_for_cpu
+  __dma_sync_sg_for_device
+  dma_unmap_sg_attrs
+  __free_pages
+  iommu_get_domain_for_dev
+  __list_add_valid_or_report
+  __list_del_entry_valid_or_report
+  memstart_addr
+  __mutex_init
+  mutex_lock
+  mutex_unlock
+  remap_pfn_range
+  sg_alloc_table
+  sg_free_table
+  sg_next
+  __sg_page_iter_next
+  __sg_page_iter_start
+  vfree
+  vmalloc_noprof
+  vmap
+  vunmap
