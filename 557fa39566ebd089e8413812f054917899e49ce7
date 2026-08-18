@@ -16,6 +16,23 @@
       "message": "Per b/537449132, adding dipankarb@ for review/testing",
       "revId": "557fa39566ebd089e8413812f054917899e49ce7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18915a54_bd81ffd8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-08-18T16:51:57Z",
+      "side": 1,
+      "message": "Over to @tkjos@google.com for owners",
+      "revId": "557fa39566ebd089e8413812f054917899e49ce7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
