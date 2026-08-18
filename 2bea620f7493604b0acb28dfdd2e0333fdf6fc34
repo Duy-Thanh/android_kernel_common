@@ -34,6 +34,24 @@
       "parentUuid": "f2eca219_c06692c8",
       "revId": "2bea620f7493604b0acb28dfdd2e0333fdf6fc34",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51809a10_1c9b2123",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2026-08-18T11:12:12Z",
+      "side": 1,
+      "message": "I cannot recall there is a specific reason we have to use pointer in the pgtable callbacks. Maybe can refactor callbacks to accept the raw value rather than pointer, e.g., pte_present/pte_annotated, while keeping the pte_set/pte_get to take pointer, so that no need to return the PTE pointer but a raw pte value, which is more safe?",
+      "parentUuid": "3a562d25_d27e3a1c",
+      "revId": "2bea620f7493604b0acb28dfdd2e0333fdf6fc34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
