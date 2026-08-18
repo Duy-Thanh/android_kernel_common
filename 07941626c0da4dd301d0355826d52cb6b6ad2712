@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a11d5458_8b715868",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-08-18T16:35:48Z",
+      "side": 1,
+      "message": "It was reverted due to kmi issues with xhci_initialize_ring_info() here: https://android-review.git.corp.google.com/c/kernel/common/+/3799130",
+      "parentUuid": "f626e3e4_128f50e6",
+      "revId": "07941626c0da4dd301d0355826d52cb6b6ad2712",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe0eb49e_e8688aa3",
