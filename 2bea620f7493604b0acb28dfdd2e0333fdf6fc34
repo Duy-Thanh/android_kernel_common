@@ -52,6 +52,24 @@
       "parentUuid": "3a562d25_d27e3a1c",
       "revId": "2bea620f7493604b0acb28dfdd2e0333fdf6fc34",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab75047c_5462d3f0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-18T11:31:10Z",
+      "side": 1,
+      "message": "Actually it should be easy to use a raw pte value with the existing callbacks as well: just use a `\u0026pte` (where `pte` is a temporary variable). Maybe I\u0027ll just do that for now.",
+      "parentUuid": "51809a10_1c9b2123",
+      "revId": "2bea620f7493604b0acb28dfdd2e0333fdf6fc34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
