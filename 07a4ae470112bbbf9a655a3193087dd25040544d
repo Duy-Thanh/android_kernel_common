@@ -16,6 +16,24 @@
       "message": "Temporarily block to avoid ABI update race with aosp/4236526",
       "revId": "07a4ae470112bbbf9a655a3193087dd25040544d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a652e27e_77b60751",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-08-18T20:29:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2da1f4a_008f4753",
+      "revId": "07a4ae470112bbbf9a655a3193087dd25040544d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
