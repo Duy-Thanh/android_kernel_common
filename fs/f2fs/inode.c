@@ -525,7 +525,11 @@ struct inode *f2fs_iget(struct super_block *sb, unsigned long ino)
 			ret = -EFSCORRUPTED;
 			trace_f2fs_iget_exit(inode, ret);
 			iput(inode);
+<<<<<<< HEAD   (a825653ab7afc3350ddc9d46b7fd02d0f53a798d Revert "skmsg: convert struct sk_msg_sg::copy to a bitmap")
 			f2fs_handle_error(sbi, ERROR_CORRUPTED_INODE);
+||||||| BASE   (20383429b56974507c465d016e5238b189f7a246 apparmor: mediate the implicit connect of TCP fast open send)
+=======
+>>>>>>> BRANCH (6adfaf07a044ac828ad0e5426a51def9377e3bb6 f2fs: fix to detect corrupted meta ino)
 			return ERR_PTR(ret);
 		}
 
