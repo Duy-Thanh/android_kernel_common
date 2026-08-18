@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "19efffba_f2780430",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4578084
+      },
+      "writtenOn": "2026-08-18T15:26:59Z",
+      "side": 1,
+      "message": "Hi Greg,\nThanks for the review. We hear the request to split this up.\nThese hooks are not three independent features. They are one\nlocking-optimization for heavy load (lazy preemption + bounded\nCFS deferral for framework lock holders + mutex/rwsem wakeup).\nThey are designed and tested together; landing only a subset\nwould leave the solution incomplete.\nThe same set has been shipping on 6.6/6.12 GKI for about six\nmonths, and on our 6.1 OKI builds for about three months, with\nno stability issues. This 6.1 GKI change is a port for existing\ndevices moving from OKI to GKI, not new android14 product\ndevelopment.\nWe are a bit short on bandwidth to maintain three separate\nseries on this old branch, so we would prefer to keep this as\none commit if you can accept that.\nIf you still want it split, we will do so. Please let us know.\nThanks\nWenbo Ren",
+      "parentUuid": "c2260d8d_a072d0db",
+      "revId": "7a286cfb15bc41f61cebce474b71a4e3b265f260",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e3521c62_49001019",
         "filename": "arch/arm64/kernel/entry-common.c",
         "patchSetId": 1
