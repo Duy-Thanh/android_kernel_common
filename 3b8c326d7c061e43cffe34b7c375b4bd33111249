@@ -45,6 +45,105 @@
       },
       "revId": "3b8c326d7c061e43cffe34b7c375b4bd33111249",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f03bb420_5e851b84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-08-18T16:02:38Z",
+      "side": 1,
+      "message": "LGTM for `BUILD.bazel` changes.",
+      "revId": "3b8c326d7c061e43cffe34b7c375b4bd33111249",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "782569bf_dfa6d1c2",
+        "filename": "microdroid/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-08-18T16:02:38Z",
+      "side": 1,
+      "message": "update.",
+      "range": {
+        "startLine": 30,
+        "startChar": 42,
+        "endLine": 30,
+        "endChar": 45
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "114fa2fe_3e6018fa",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "microdroid/README.md",
+              "range": {
+                "startLine": 30,
+                "startChar": 0,
+                "endLine": 31,
+                "endChar": 0
+              },
+              "replacement": "      * e.g. `kmi_symbol_list \u003d \"//common:microdroid/aarch64/symbols/acme\"`\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3b8c326d7c061e43cffe34b7c375b4bd33111249",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69f8b7ae_0ed2bf17",
+        "filename": "microdroid/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-08-18T16:02:38Z",
+      "side": 1,
+      "message": "update `kernel_aarch64_microdroid`.",
+      "range": {
+        "startLine": 34,
+        "startChar": 36,
+        "endLine": 34,
+        "endChar": 61
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "86e03526_90b001a3",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "microdroid/README.md",
+              "range": {
+                "startLine": 34,
+                "startChar": 0,
+                "endLine": 35,
+                "endChar": 0
+              },
+              "replacement": "   * e.g. `tools/bazel run //common:kernel_aarch64_microdroid_abi_update`\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3b8c326d7c061e43cffe34b7c375b4bd33111249",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
