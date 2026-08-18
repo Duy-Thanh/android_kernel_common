@@ -113,6 +113,15 @@ DECLARE_HOOK(android_vh_mem_cgroup_css_offline,
 DECLARE_HOOK(android_vh_mem_cgroup_handle_over_high,
 	TP_PROTO(bool *record_psi),
 	TP_ARGS(record_psi));
+DECLARE_HOOK(android_vh_mem_cgroup_over_high_reclaim,
+	TP_PROTO(struct mem_cgroup *memcg, unsigned int nr_pages,
+		 bool in_retry, unsigned long *nr_reclaimed,
+		 bool *skip_reclaim),
+	TP_ARGS(memcg, nr_pages, in_retry, nr_reclaimed, skip_reclaim));
+DECLARE_HOOK(android_vh_mem_cgroup_over_high_penalty,
+	TP_PROTO(struct mem_cgroup *memcg, unsigned int nr_pages,
+		 unsigned long *penalty_jiffies, bool *force_sleep),
+	TP_ARGS(memcg, nr_pages, penalty_jiffies, force_sleep));
 DECLARE_HOOK(android_vh_slab_alloc_node,
 	TP_PROTO(void *object, unsigned long addr, struct kmem_cache *s),
 	TP_ARGS(object, addr, s));
