@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aed0f312_12cbca2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-08-18T10:24:22Z",
+      "side": 1,
+      "message": "This is a new symbol export. It should be followed by a change in the same series that adds the symbol to a list.",
+      "revId": "d20069e1525472bc5e4a540380b620efcaaeca16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
