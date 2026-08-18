@@ -1103,7 +1103,8 @@ clear_out:
 }
 
 /* caller should call f2fs_lock_op() */
-void f2fs_handle_failed_inode(struct inode *inode, struct f2fs_lock_context *lc)
+void f2fs_handle_failed_inode(struct inode *inode,
+		struct f2fs_lock_context *lc, bool orphan_free)
 {
 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
 	struct node_info ni;
@@ -1124,6 +1125,9 @@ void f2fs_handle_failed_inode(struct inode *inode, struct f2fs_lock_context *lc)
 
 	/* don't make bad inode, since it becomes a regular file. */
 	unlock_new_inode(inode);
+
+	if (!orphan_free)
+		goto out;
 
 	/*
 	 * Note: we should add inode to orphan list before f2fs_unlock_op()
