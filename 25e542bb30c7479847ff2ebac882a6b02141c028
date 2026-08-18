@@ -16,6 +16,24 @@
       "message": "The cherry pick is not clean. Traditionally, that means you should change the tag from UPSTREAM to BACKPORT and include an [explanation] above your S-o-B in the commit message.\n\nHowever, it you could also split the KABI bits into their own ANDROID follow-up change.\n\n---\n\nThis change (whether or not split) should be followed by a symbol addition / ABI update change.",
       "revId": "25e542bb30c7479847ff2ebac882a6b02141c028",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26e17fbd_be05fbf1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-08-18T17:26:57Z",
+      "side": 1,
+      "message": "I\u0027d prefer you\u0027d split out the ABI bits to a separate change so that the UPSTREAM part of the change is applied as is.",
+      "parentUuid": "ef073d9b_1e15d0ae",
+      "revId": "25e542bb30c7479847ff2ebac882a6b02141c028",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
