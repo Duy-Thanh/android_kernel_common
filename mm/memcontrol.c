@@ -2255,6 +2255,14 @@ void __mem_cgroup_handle_over_high(gfp_t gfp_mask)
 	int nr_retries = MAX_RECLAIM_RETRIES;
 	struct mem_cgroup *memcg;
 	bool in_retry = false;
+<<<<<<< HEAD   (67074b3417a54de4fcaa03a95e6c519172cdb88c UPSTREAM: posix-cpu-timers: Prevent UAF caused by non-leader)
+||||||| BASE   (624994dfdb395b0071c731f6940cd7f26df5979c ANDROID: KVM: arm64: Fix flush size in pkvm_device_hyp_assig)
+	bool record_psi = false;
+=======
+	bool record_psi = false;
+	bool skip_reclaim = false;
+	bool force_sleep = false;
+>>>>>>> CHANGE (27995cf89d9b20d418fdfb65e47bb19dc559f8eb ANDROID: mm: Add vendor hooks to modulate memory.high reclai)
 
 	memcg = get_mem_cgroup_from_mm(current->mm);
 	current->memcg_nr_pages_over_high = 0;
@@ -2271,6 +2279,12 @@ retry_reclaim:
 	if (task_is_dying())
 		goto out;
 
+	trace_android_vh_mem_cgroup_over_high_reclaim(
+		memcg, nr_pages, in_retry, &nr_reclaimed, &skip_reclaim);
+
+	if (skip_reclaim)
+		goto do_penalty;
+
 	/*
 	 * The allocating task should reclaim at least the batch size, but for
 	 * subsequent retries we only want to do what's necessary to prevent oom
@@ -2284,6 +2298,7 @@ retry_reclaim:
 				    in_retry ? SWAP_CLUSTER_MAX : nr_pages,
 				    gfp_mask);
 
+do_penalty:
 	/*
 	 * memory.high is breached and reclaim is unable to keep up. Throttle
 	 * allocators proactively to slow down excessive growth.
@@ -2300,6 +2315,12 @@ retry_reclaim:
 	 * extremely slowly.
 	 */
 	penalty_jiffies = min(penalty_jiffies, MEMCG_MAX_HIGH_DELAY_JIFFIES);
+
+	trace_android_vh_mem_cgroup_over_high_penalty(
+		memcg, nr_pages, &penalty_jiffies, &force_sleep);
+
+	if (force_sleep)
+		goto do_sleep;
 
 	/*
 	 * Don't sleep if the amount of jiffies this memcg owes us is so low
@@ -2320,6 +2341,7 @@ retry_reclaim:
 		goto retry_reclaim;
 	}
 
+do_sleep:
 	/*
 	 * Reclaim didn't manage to push usage below the limit, slow
 	 * this allocating task down.

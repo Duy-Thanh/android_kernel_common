@@ -101,6 +101,25 @@ DECLARE_HOOK(android_vh_mem_cgroup_css_online,
 DECLARE_HOOK(android_vh_mem_cgroup_css_offline,
 	TP_PROTO(struct cgroup_subsys_state *css, struct mem_cgroup *memcg),
 	TP_ARGS(css, memcg));
+<<<<<<< HEAD   (67074b3417a54de4fcaa03a95e6c519172cdb88c UPSTREAM: posix-cpu-timers: Prevent UAF caused by non-leader)
+||||||| BASE   (624994dfdb395b0071c731f6940cd7f26df5979c ANDROID: KVM: arm64: Fix flush size in pkvm_device_hyp_assig)
+DECLARE_HOOK(android_vh_mem_cgroup_handle_over_high,
+	TP_PROTO(bool *record_psi),
+	TP_ARGS(record_psi));
+=======
+DECLARE_HOOK(android_vh_mem_cgroup_handle_over_high,
+	TP_PROTO(bool *record_psi),
+	TP_ARGS(record_psi));
+DECLARE_HOOK(android_vh_mem_cgroup_over_high_reclaim,
+	TP_PROTO(struct mem_cgroup *memcg, unsigned int nr_pages,
+		 bool in_retry, unsigned long *nr_reclaimed,
+		 bool *skip_reclaim),
+	TP_ARGS(memcg, nr_pages, in_retry, nr_reclaimed, skip_reclaim));
+DECLARE_HOOK(android_vh_mem_cgroup_over_high_penalty,
+	TP_PROTO(struct mem_cgroup *memcg, unsigned int nr_pages,
+		 unsigned long *penalty_jiffies, bool *force_sleep),
+	TP_ARGS(memcg, nr_pages, penalty_jiffies, force_sleep));
+>>>>>>> CHANGE (27995cf89d9b20d418fdfb65e47bb19dc559f8eb ANDROID: mm: Add vendor hooks to modulate memory.high reclai)
 DECLARE_HOOK(android_vh_slab_alloc_node,
 	TP_PROTO(void *object, unsigned long addr, struct kmem_cache *s),
 	TP_ARGS(object, addr, s));
