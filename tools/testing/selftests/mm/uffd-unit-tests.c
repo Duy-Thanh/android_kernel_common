@@ -1464,7 +1464,8 @@ uffd_test_case_t uffd_tests[] = {
 	{
 		.name = "poison",
 		.uffd_fn = uffd_poison_test,
-		.mem_targets = MEM_ALL,
+		/* POISON is unsupported on private shmem COW mappings */
+		.mem_targets = MEM_ALL & ~MEM_SHMEM_PRIVATE,
 		.uffd_feature_required = UFFD_FEATURE_POISON,
 	},
 };
