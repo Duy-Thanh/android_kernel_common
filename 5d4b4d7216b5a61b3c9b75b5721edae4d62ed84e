@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5025ca1_7911dcdd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-08-18T06:07:13Z",
+      "side": 1,
+      "message": "So why is there an overflow? While this has been a common issue, I believe fixes have landed to avoid most causes of the overflows. Can you clarify how this issue was uncovered?",
+      "revId": "5d4b4d7216b5a61b3c9b75b5721edae4d62ed84e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3575d7fc_38c0be49",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-08-18T06:07:13Z",
+      "side": 1,
+      "message": "So that bug points to the android15-6.6 change: https://r.android.com/3838257 which this seems to be derived from.\n\nIs there a reason you didn\u0027t cherry pick that change, preserving the changeId? and Signed-off-by lines? (while appending your own?)",
+      "revId": "5d4b4d7216b5a61b3c9b75b5721edae4d62ed84e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
