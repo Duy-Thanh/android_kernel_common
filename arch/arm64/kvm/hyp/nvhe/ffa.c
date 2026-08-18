@@ -513,6 +513,7 @@ static void do_ffa_rxtx_map(struct arm_smccc_1_2_regs *res,
 	int ret = 0;
 	void *rx_virt, *tx_virt;
 	struct kvm_ffa_buffers *ffa_buf;
+	int i = 0;
 
 	if (npages != (KVM_FFA_MBOX_NR_PAGES * PAGE_SIZE) / FFA_PAGE_SIZE) {
 		ret = FFA_RET_INVALID_PARAMETERS;
@@ -539,27 +540,31 @@ static void do_ffa_rxtx_map(struct arm_smccc_1_2_regs *res,
 	if (ret)
 		goto out_unlock;
 
-	ret = __pkvm_host_share_hyp(hyp_phys_to_pfn(tx));
-	if (ret) {
-		ret = FFA_RET_INVALID_PARAMETERS;
-		goto err_unmap;
+	for (i = 0; i < npages; i++) {
+		ret = __pkvm_host_share_hyp(hyp_phys_to_pfn(tx + (i << PAGE_SHIFT)));
+		if (ret) {
+			ret = FFA_RET_INVALID_PARAMETERS;
+			goto err_unmap;
+		}
 	}
 
-	ret = __pkvm_host_share_hyp(hyp_phys_to_pfn(rx));
-	if (ret) {
-		ret = FFA_RET_INVALID_PARAMETERS;
-		goto err_unshare_tx;
+	for (i = 0; i < npages; i++) {
+		ret = __pkvm_host_share_hyp(hyp_phys_to_pfn(rx + (i << PAGE_SHIFT)));
+		if (ret) {
+			ret = FFA_RET_INVALID_PARAMETERS;
+			goto err_unshare;
+		}
 	}
 
 	tx_virt = hyp_phys_to_virt(tx);
-	ret = hyp_pin_shared_mem(tx_virt, tx_virt + 1);
+	ret = hyp_pin_shared_mem(tx_virt, tx_virt + (npages << PAGE_SHIFT));
 	if (ret) {
 		ret = FFA_RET_INVALID_PARAMETERS;
-		goto err_unshare_rx;
+		goto err_unshare;
 	}
 
 	rx_virt = hyp_phys_to_virt(rx);
-	ret = hyp_pin_shared_mem(rx_virt, rx_virt + 1);
+	ret = hyp_pin_shared_mem(rx_virt, rx_virt + (npages << PAGE_SHIFT));
 	if (ret) {
 		ret = FFA_RET_INVALID_PARAMETERS;
 		goto err_unpin_tx;
@@ -575,12 +580,15 @@ out:
 	return;
 
 err_unpin_tx:
-	hyp_unpin_shared_mem(tx_virt, tx_virt + 1);
-err_unshare_rx:
-	__pkvm_host_unshare_hyp(hyp_phys_to_pfn(rx));
-err_unshare_tx:
-	__pkvm_host_unshare_hyp(hyp_phys_to_pfn(tx));
+	hyp_unpin_shared_mem(tx_virt, tx_virt + (npages << PAGE_SHIFT));
+err_unshare:
+	while (i--)
+		WARN_ON(__pkvm_host_unshare_hyp(hyp_phys_to_pfn(rx + (i << PAGE_SHIFT))));
+	i = npages;
 err_unmap:
+	while (i--)
+		WARN_ON(__pkvm_host_unshare_hyp(hyp_phys_to_pfn(tx + (i << PAGE_SHIFT))));
+
 	ffa_unmap_hyp_buffers();
 	goto out_unlock;
 }
@@ -664,6 +672,8 @@ static void do_ffa_rxtx_unmap(struct arm_smccc_1_2_regs *res,
 	DECLARE_REG(u32, id, ctxt, 1);
 	int ret = 0;
 	struct kvm_ffa_buffers *ffa_buf;
+	u64 pfn;
+	int i;
 
 	if (hyp_vcpu_to_ffa_handle(hyp_vcpu) != id) {
 		ret = FFA_RET_INVALID_PARAMETERS;
@@ -678,11 +688,16 @@ static void do_ffa_rxtx_unmap(struct arm_smccc_1_2_regs *res,
 	}
 
 	if (!hyp_vcpu) {
-		hyp_unpin_shared_mem(ffa_buf->tx, ffa_buf->tx + 1);
-		WARN_ON(__pkvm_host_unshare_hyp(hyp_virt_to_pfn(ffa_buf->tx)));
-
-		hyp_unpin_shared_mem(ffa_buf->rx, ffa_buf->rx + 1);
-		WARN_ON(__pkvm_host_unshare_hyp(hyp_virt_to_pfn(ffa_buf->rx)));
+		hyp_unpin_shared_mem(ffa_buf->tx, ffa_buf->tx + KVM_FFA_MBOX_NR_PAGES * PAGE_SIZE);
+		for (i = 0; i < KVM_FFA_MBOX_NR_PAGES; i++) {
+			pfn = hyp_virt_to_pfn(ffa_buf->tx + i * PAGE_SIZE);
+			WARN_ON(__pkvm_host_unshare_hyp(pfn));
+		}
+		hyp_unpin_shared_mem(ffa_buf->rx, ffa_buf->rx + KVM_FFA_MBOX_NR_PAGES * PAGE_SIZE);
+		for (i = 0; i < KVM_FFA_MBOX_NR_PAGES; i++) {
+			pfn = hyp_virt_to_pfn(ffa_buf->rx + i * PAGE_SIZE);
+			WARN_ON(__pkvm_host_unshare_hyp(pfn));
+		}
 
 		ffa_unmap_hyp_buffers();
 	} else {
@@ -1342,7 +1357,7 @@ static bool do_ffa_features(struct arm_smccc_1_2_regs *res,
 			    struct kvm_cpu_context *ctxt)
 {
 	DECLARE_REG(u32, id, ctxt, 1);
-	u64 prop = 0;
+	u64 prop = 0, buff_sz;
 	int ret = 0;
 
 	if (!ffa_call_supported(id)) {
@@ -1351,6 +1366,18 @@ static bool do_ffa_features(struct arm_smccc_1_2_regs *res,
 	}
 
 	switch (id) {
+	case FFA_RXTX_MAP:
+	case FFA_FN64_RXTX_MAP:
+		buff_sz = KVM_FFA_MBOX_NR_PAGES * PAGE_SIZE;
+		if (buff_sz == SZ_4K)
+			prop = FFA_FEAT_RXTX_MIN_SZ_4K;
+		else if (buff_sz == SZ_64K)
+			prop = FFA_FEAT_RXTX_MIN_SZ_64K;
+		else if (buff_sz == SZ_16K)
+			prop = FFA_FEAT_RXTX_MIN_SZ_16K;
+		else
+			ret = FFA_RET_NOT_SUPPORTED;
+		goto out_handled;
 	case FFA_MEM_SHARE:
 	case FFA_FN64_MEM_SHARE:
 	case FFA_MEM_LEND:
@@ -1485,7 +1512,7 @@ static int hyp_ffa_post_init(void)
 		return -EINVAL;
 	}
 
-	if (min_rxtx_sz > PAGE_SIZE)
+	if (min_rxtx_sz > PAGE_SIZE * KVM_FFA_SPM_HANDLE_NR_PAGES)
 		return -EOPNOTSUPP;
 
 	return 0;
