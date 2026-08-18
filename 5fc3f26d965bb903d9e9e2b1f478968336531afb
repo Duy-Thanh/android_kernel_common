@@ -46,6 +46,30 @@
       },
       "revId": "5fc3f26d965bb903d9e9e2b1f478968336531afb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "662bb0f1_dd86bafb",
+        "filename": "Documentation/ABI/testing/sysfs-driver-hid-logitech-hidpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-08-18T13:41:14Z",
+      "side": 1,
+      "message": "Ok, that makes more sense, how about changing it to be \"reports no platform is currently configured for this host.\"?",
+      "parentUuid": "02ac638b_ce0fc104",
+      "range": {
+        "startLine": 54,
+        "startChar": 2,
+        "endLine": 55,
+        "endChar": 27
+      },
+      "revId": "5fc3f26d965bb903d9e9e2b1f478968336531afb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
