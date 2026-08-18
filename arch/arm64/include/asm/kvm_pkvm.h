@@ -429,7 +429,7 @@ static inline unsigned long pkvm_selftest_pages(void) { return 32; }
 static inline unsigned long pkvm_selftest_pages(void) { return 0; }
 #endif
 
-#define KVM_FFA_MBOX_NR_PAGES		1
+#define KVM_FFA_MBOX_NR_PAGES		16
 #define KVM_FFA_SPM_HANDLE_NR_PAGES	2
 
 /*
