@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd7b2195_7116e69e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-08-18T13:56:25Z",
+      "side": 1,
+      "message": "that is not correct.",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 65
+      },
+      "revId": "9f61465525520a027d30667e4d6f14cc6cb4fbff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb647d7b_6ae35ea4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-08-18T13:56:25Z",
+      "side": 1,
+      "message": "Full name please.",
+      "range": {
+        "startLine": 42,
+        "startChar": 15,
+        "endLine": 42,
+        "endChar": 20
+      },
+      "revId": "9f61465525520a027d30667e4d6f14cc6cb4fbff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dee28bca_edd39636",
+        "filename": "android/abi_gki_aarch64_oplus",
+        "patchSetId": 1
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-08-18T13:56:25Z",
+      "side": 1,
+      "message": "not in sorted order?",
+      "range": {
+        "startLine": 398,
+        "startChar": 2,
+        "endLine": 398,
+        "endChar": 16
+      },
+      "revId": "9f61465525520a027d30667e4d6f14cc6cb4fbff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
