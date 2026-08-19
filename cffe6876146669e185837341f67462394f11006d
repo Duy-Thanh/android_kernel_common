@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afeb69c0_5ce56a23",
+        "filename": "drivers/devfreq/devfreq.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1048,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-08-19T20:41:32Z",
+      "side": 1,
+      "message": "Additional stray whitespace change not in the patch on the list.",
+      "revId": "cffe6876146669e185837341f67462394f11006d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
