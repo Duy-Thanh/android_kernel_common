@@ -84,8 +84,16 @@ void vivaldi_feature_mapping(struct hid_device *hdev,
 		report_len--;
 	}
 
+<<<<<<< HEAD   (9db55e32e21dae71478481fb33c9533f9234f7d3 Revert "remove pointless includes of <linux/fdtable.h>")
 	ret = __hid_report_raw_event(hdev, HID_FEATURE_REPORT, report_data,
 				     report_len, report_len, 0);
+||||||| BASE   (543555954b1ee8d1903a7020324efb41b0c97428 inet: frags: flush pending skbs in fqdir_pre_exit())
+	ret = hid_report_raw_event(hdev, HID_FEATURE_REPORT, report_data,
+				   report_len, 0);
+=======
+	ret = hid_report_raw_event(hdev, HID_FEATURE_REPORT, report_data,
+				   report_len, report_len, 0);
+>>>>>>> BRANCH (1953cca3de8453d6e842b7b63c6ef78d19546e26 HID: core: Fix size_t specifier in hid_report_raw_event())
 	if (ret) {
 		dev_warn(&hdev->dev, "failed to report feature %d\n",
 			 field->report->id);

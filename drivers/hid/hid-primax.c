@@ -44,7 +44,13 @@ static int px_raw_event(struct hid_device *hid, struct hid_report *report,
 			data[0] |= (1 << (data[idx] - 0xE0));
 			data[idx] = 0;
 		}
+<<<<<<< HEAD   (9db55e32e21dae71478481fb33c9533f9234f7d3 Revert "remove pointless includes of <linux/fdtable.h>")
 		__hid_report_raw_event(hid, HID_INPUT_REPORT, data, size, size, 0);
+||||||| BASE   (543555954b1ee8d1903a7020324efb41b0c97428 inet: frags: flush pending skbs in fqdir_pre_exit())
+		hid_report_raw_event(hid, HID_INPUT_REPORT, data, size, 0);
+=======
+		hid_report_raw_event(hid, HID_INPUT_REPORT, data, size, size, 0);
+>>>>>>> BRANCH (1953cca3de8453d6e842b7b63c6ef78d19546e26 HID: core: Fix size_t specifier in hid_report_raw_event())
 		return 1;
 
 	default:	/* unknown report */
