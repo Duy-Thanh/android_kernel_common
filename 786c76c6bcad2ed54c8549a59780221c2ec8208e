@@ -105,6 +105,24 @@
       "parentUuid": "1cb51e13_5b574e04",
       "revId": "786c76c6bcad2ed54c8549a59780221c2ec8208e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c30a419_fa12db1c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-08-19T20:38:08Z",
+      "side": 1,
+      "message": "Apparently the issue is that `struct super_block` type is exposed to the ABI and one of its members `sb-\u003es_cop` has the `struct fscrypt_operations` type exposed.\n\nIIUC, this change would break users that would set the old `get_devices` right? Is this even a valid usage from a vendor point of view? If not, then it would probably be best to apply the original patch which modifies the signature of the callback here. Instead of taking one of the KABI reserved fields.",
+      "parentUuid": "18571f33_fbcda2be",
+      "revId": "786c76c6bcad2ed54c8549a59780221c2ec8208e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
