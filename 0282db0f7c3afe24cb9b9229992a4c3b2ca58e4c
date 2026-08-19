@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6abeea80_c94d1d99",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-08-19T07:16:27Z",
+      "side": 1,
+      "message": "This isn\u0027t needed anymore. Fuad has a script to track our patches already. There is no need to use it.",
+      "parentUuid": "fdc24c86_1c1c6c4c",
+      "revId": "0282db0f7c3afe24cb9b9229992a4c3b2ca58e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "67a4202f_be583af3",
         "filename": "arch/arm64/include/asm/kvm_pkvm.h",
         "patchSetId": 1
@@ -31,6 +49,30 @@
       "writtenOn": "2026-07-23T08:34:25Z",
       "side": 1,
       "message": "NIT: can we drop the \"__\" to match the other symbol definition format ?",
+      "range": {
+        "startLine": 265,
+        "startChar": 24,
+        "endLine": 265,
+        "endChar": 48
+      },
+      "revId": "0282db0f7c3afe24cb9b9229992a4c3b2ca58e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bac0c41_64680a41",
+        "filename": "arch/arm64/include/asm/kvm_pkvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-08-19T07:16:27Z",
+      "side": 1,
+      "message": "This is because it is \"private\" and must be only accessed with the accessor below \"pkvm_ffa_unmap_on_lend()\".",
+      "parentUuid": "67a4202f_be583af3",
       "range": {
         "startLine": 265,
         "startChar": 24,
