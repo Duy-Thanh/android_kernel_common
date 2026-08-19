@@ -267,6 +267,24 @@
       "parentUuid": "b1ca02ca_7afadcb1",
       "revId": "786c76c6bcad2ed54c8549a59780221c2ec8208e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10a89f95_98f51635",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2026-08-19T22:15:50Z",
+      "side": 1,
+      "message": "It\u0027s not an \"ABI break\".  This should never have been frozen in the first place.\n\nI\u0027ll start an email thread.",
+      "parentUuid": "f7b125b6_1c9ddc23",
+      "revId": "786c76c6bcad2ed54c8549a59780221c2ec8208e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
