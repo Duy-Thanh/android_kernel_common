@@ -16,6 +16,24 @@
       "message": "@tkjos@google.com\n\nI resolved the build failure by adding the missing `#include \u003ctrace/hooks/fs.h\u003e` manually.\n\nOn the development branch, that was added by aosp/4029583 which also added `#undef CREATE_TRACE_POINTS`.\n\nWhich is the right approach?\n\nIt would certainly be simpler to just stack up a cherry-pick of aosp/4029583 before these changes.",
       "revId": "a6a16c2570b259f917ddc3bbfadef7c64ee7e22c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af73bc90_e7da0b4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-19T20:54:32Z",
+      "side": 1,
+      "message": "The #undef CREATE_TRACE_POINTS wasn\u0027t necessary in that case. The hook headers files should not be included with #define CREATE_TRACE_POINTS in any file but vendor_hooks.c, so the #undef is only necessary to undo a previous #define CREATE_TRACE_POINTS. So your approach is fine.",
+      "parentUuid": "84ef70ef_ca5a42ba",
+      "revId": "a6a16c2570b259f917ddc3bbfadef7c64ee7e22c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
