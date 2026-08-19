@@ -159,6 +159,24 @@
       "parentUuid": "f5029a79_c9cba1c4",
       "revId": "786c76c6bcad2ed54c8549a59780221c2ec8208e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d9d12a5_c1104a4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2026-08-19T21:14:21Z",
+      "side": 1,
+      "message": "Doesn\u0027t work because symbol CRCs change:\n\n```\nERROR: ABI DIFFERENCES HAVE BEEN DETECTED!\nERROR: Report summary:\n\nfunction symbol \u0027int __bh_read(struct buffer_head*, blk_opf_t, bool)\u0027 changed\n  CRC changed from 0x64676d2f to 0xb934f752\n\nfunction symbol \u0027struct buffer_head* __bread_gfp(struct block_device*, sector_t, unsigned int, gfp_t)\u0027 changed\n  CRC changed from 0x21ce0724 to 0x57d2ba49\n\nfunction symbol \u0027void __brelse(struct buffer_head*)\u0027 changed\n  CRC changed from 0x46a2ddac to 0x313d99d0\n  ```\n  \nDefining the field in the old way when `defined(__GENKSYMS__)` doesn\u0027t work either.",
+      "parentUuid": "01fb5f26_a34d69c8",
+      "revId": "786c76c6bcad2ed54c8549a59780221c2ec8208e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
