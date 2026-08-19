@@ -40,6 +40,30 @@
       ],
       "revId": "fbb6ba9c5df479f0f7eb11b20099c8d8fe038923",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49f54436_442307f6",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-08-19T04:57:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50f2169d_42b910c6",
+      "range": {
+        "startLine": 114,
+        "startChar": 2,
+        "endLine": 115,
+        "endChar": 12
+      },
+      "revId": "fbb6ba9c5df479f0f7eb11b20099c8d8fe038923",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
