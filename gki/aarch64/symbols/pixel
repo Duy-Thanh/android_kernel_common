@@ -2134,6 +2134,7 @@
   __traceiter_android_rvh_mapping_shrinkable
   __traceiter_android_rvh_meminfo_proc_show
   __traceiter_android_rvh_read_swap_cache_async_timeout
+  __traceiter_android_rvh_set_user_nice_locked
   __traceiter_android_rvh_task_fits_cpu
   __traceiter_android_rvh_ufs_reprogram_all_keys
   __traceiter_android_rvh_update_load_sum
@@ -2196,6 +2197,7 @@
   __tracepoint_android_rvh_mapping_shrinkable
   __tracepoint_android_rvh_meminfo_proc_show
   __tracepoint_android_rvh_read_swap_cache_async_timeout
+  __tracepoint_android_rvh_set_user_nice_locked
   __tracepoint_android_rvh_task_fits_cpu
   __tracepoint_android_rvh_ufs_reprogram_all_keys
   __tracepoint_android_rvh_update_load_sum
