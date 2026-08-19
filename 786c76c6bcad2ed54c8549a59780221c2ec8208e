@@ -195,6 +195,24 @@
       "parentUuid": "7d9d12a5_c1104a4a",
       "revId": "786c76c6bcad2ed54c8549a59780221c2ec8208e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df17f3b4_1305caf4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-08-19T22:03:38Z",
+      "side": 1,
+      "message": "The CRC breaks are fine here. This is the point of the -kminext branches.",
+      "parentUuid": "379a1acd_b6978764",
+      "revId": "786c76c6bcad2ed54c8549a59780221c2ec8208e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
