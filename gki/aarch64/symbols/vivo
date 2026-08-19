@@ -265,6 +265,7 @@
   __traceiter_task_newtask
   __traceiter_android_vh_mutex_init
   __tracepoint_android_rvh_alloc_and_link_pwqs
+  __traceiter_android_rvh_freq_qos_update_request_v2
   __tracepoint_android_rvh_alloc_pages_reclaim_cycle_end
   __tracepoint_android_rvh_alloc_pages_reclaim_start
   __tracepoint_android_rvh_bpf_skb_load_bytes
@@ -439,6 +440,7 @@
   __tracepoint_android_vh_alter_futex_plist_add
   __tracepoint_task_newtask
   __tracepoint_android_vh_mutex_init
+  __tracepoint_android_rvh_freq_qos_update_request_v2
   ucsi_send_command
   unlock_buffer
   __wait_on_buffer
