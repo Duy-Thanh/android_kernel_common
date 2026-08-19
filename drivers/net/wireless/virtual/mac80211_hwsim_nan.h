@@ -11,15 +11,13 @@ struct mac80211_hwsim_nan_data {
 	struct ieee80211_vif *device_vif;
 	u8 bands;
 
-	/* Current channel of the NAN device */
-	struct ieee80211_channel *channel;
-
-	struct hrtimer slot_timer;
+	enum nl80211_band curr_dw_band;
+	struct hrtimer timer;
 	bool notify_dw;
 };
 
 enum hrtimer_restart
-mac80211_hwsim_nan_slot_timer(struct hrtimer *timer);
+mac80211_hwsim_nan_dw_start(struct hrtimer *timer);
 
 int mac80211_hwsim_nan_start(struct ieee80211_hw *hw,
 			     struct ieee80211_vif *vif,
