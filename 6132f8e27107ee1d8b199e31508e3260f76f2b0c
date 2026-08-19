@@ -69,6 +69,24 @@
       "message": "Looks like your backport changed the ownership. Please address this linter error:\n\n```\nKernelCommit\nCherry pick does not have same author as original commit. Original author: \u0027nik... \n🌐 Public\n File a bug\n /COMMIT_MSG\nCherry pick does not have same author as original commit.\n\nOriginal author: \u0027niklas.neronin@linux.intel.com\nCherry pick author: \u0027yenchia.chen@mediatek.com\n\nPlease cherry-pick using: git cherry-pick -s -x cbfd3c7d4ed26786e2e63db0d6cf270bbf7b3dba.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n```",
       "revId": "6132f8e27107ee1d8b199e31508e3260f76f2b0c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4203561b_5aeecbfd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3011835
+      },
+      "writtenOn": "2026-08-19T02:03:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8086b9a_fcd659bf",
+      "revId": "6132f8e27107ee1d8b199e31508e3260f76f2b0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
