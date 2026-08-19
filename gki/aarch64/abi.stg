@@ -363121,6 +363121,14 @@ function {
   parameter_id: 0x11cfee5a
 }
 function {
+  id: 0x9b1215fe
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x29082583
+  parameter_id: 0x6720d32f
+  parameter_id: 0x11cfee5a
+}
+function {
   id: 0x9b1252c1
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -389366,6 +389374,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_freq_qos_update_request"
 }
 elf_symbol {
+  id: 0x26d614c6
+  name: "__traceiter_android_vh_freq_qos_update_request_v2"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x26c0ce67
+  type_id: 0x9b1215fe
+  full_name: "__traceiter_android_vh_freq_qos_update_request_v2"
+}
+elf_symbol {
   id: 0xcec250c2
   name: "__traceiter_android_vh_fsnotify_open"
   is_defined: true
@@ -397068,6 +397085,15 @@ elf_symbol {
   crc: 0x57962c48
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_freq_qos_update_request"
+}
+elf_symbol {
+  id: 0x01dd6178
+  name: "__tracepoint_android_vh_freq_qos_update_request_v2"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x57962c48
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_freq_qos_update_request_v2"
 }
 elf_symbol {
   id: 0x5a709520
@@ -467700,6 +467726,7 @@ interface {
   symbol_id: 0x3272ce60
   symbol_id: 0x4d900d32
   symbol_id: 0xe6eff83f
+  symbol_id: 0x26d614c6
   symbol_id: 0xcec250c2
   symbol_id: 0xe172d11a
   symbol_id: 0x0daa4221
@@ -468556,6 +468583,7 @@ interface {
   symbol_id: 0xace80c56
   symbol_id: 0xa0ce156c
   symbol_id: 0x46787271
+  symbol_id: 0x01dd6178
   symbol_id: 0x5a709520
   symbol_id: 0xbacc3060
   symbol_id: 0x1b0699af
