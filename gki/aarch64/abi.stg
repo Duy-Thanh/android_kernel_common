@@ -367399,6 +367399,16 @@ function {
   parameter_id: 0x4585663f
 }
 function {
+  id: 0x9bca01ab
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x1d5bae2a
+  parameter_id: 0x4585663f
+  parameter_id: 0x6d7f5ff6
+  parameter_id: 0x064d6086
+  parameter_id: 0x11cfee5a
+}
+function {
   id: 0x9bca5e70
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -367472,6 +367482,15 @@ function {
   parameter_id: 0x18bd6530
   parameter_id: 0x18bd6530
   parameter_id: 0x1b7b196f
+}
+function {
+  id: 0x9bcba8c4
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x1d5bae2a
+  parameter_id: 0x4585663f
+  parameter_id: 0x064d6086
+  parameter_id: 0x11cfee5a
 }
 function {
   id: 0x9bcc13c8
@@ -389934,6 +389953,24 @@ elf_symbol {
   full_name: "__traceiter_android_vh_mem_cgroup_id_remove"
 }
 elf_symbol {
+  id: 0xa22430a0
+  name: "__traceiter_android_vh_mem_cgroup_over_high_penalty"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x531116a4
+  type_id: 0x9bcba8c4
+  full_name: "__traceiter_android_vh_mem_cgroup_over_high_penalty"
+}
+elf_symbol {
+  id: 0x24190d62
+  name: "__traceiter_android_vh_mem_cgroup_over_high_reclaim"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x76a837c5
+  type_id: 0x9bca01ab
+  full_name: "__traceiter_android_vh_mem_cgroup_over_high_reclaim"
+}
+elf_symbol {
   id: 0x8c174a7d
   name: "__traceiter_android_vh_meminfo_cache_adjust"
   is_defined: true
@@ -397627,6 +397664,24 @@ elf_symbol {
   crc: 0x57962c48
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_mem_cgroup_id_remove"
+}
+elf_symbol {
+  id: 0x99fb6d22
+  name: "__tracepoint_android_vh_mem_cgroup_over_high_penalty"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x57962c48
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_mem_cgroup_over_high_penalty"
+}
+elf_symbol {
+  id: 0x333d1050
+  name: "__tracepoint_android_vh_mem_cgroup_over_high_reclaim"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x57962c48
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_mem_cgroup_over_high_reclaim"
 }
 elf_symbol {
   id: 0xa2bd1edf
@@ -467738,6 +467793,8 @@ interface {
   symbol_id: 0xb832c560
   symbol_id: 0x96b60e0b
   symbol_id: 0x3431d426
+  symbol_id: 0xa22430a0
+  symbol_id: 0x24190d62
   symbol_id: 0x8c174a7d
   symbol_id: 0xea8ce2b0
   symbol_id: 0x9833ba62
@@ -468593,6 +468650,8 @@ interface {
   symbol_id: 0x37c5c41a
   symbol_id: 0x78341cfd
   symbol_id: 0xac62c748
+  symbol_id: 0x99fb6d22
+  symbol_id: 0x333d1050
   symbol_id: 0xa2bd1edf
   symbol_id: 0xa5b4e5b2
   symbol_id: 0xdc8e9184
