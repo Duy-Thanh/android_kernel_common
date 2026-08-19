@@ -6545,9 +6545,12 @@ static int hwsim_new_radio_nl(struct sk_buff *msg, struct genl_info *info)
 		param.p2p_device = true;
 	}
 
-	if (param.nan_device)
-		param.iftypes |= BIT(NL80211_IFTYPE_NAN) |
-				 BIT(NL80211_IFTYPE_NAN_DATA);
+	/* ensure both flag and iftype support is honored */
+	if (param.nan_device ||
+	    param.iftypes & BIT(NL80211_IFTYPE_NAN)) {
+		param.iftypes |= BIT(NL80211_IFTYPE_NAN);
+		param.nan_device = true;
+	}
 
 	if (info->attrs[HWSIM_ATTR_CIPHER_SUPPORT]) {
 		u32 len = nla_len(info->attrs[HWSIM_ATTR_CIPHER_SUPPORT]);
