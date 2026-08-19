@@ -1647,8 +1647,7 @@ static void mac80211_hwsim_tx_iter(void *_data, u8 *addr,
 	struct tx_iter_data *data = _data;
 	int i;
 
-	if (vif->type == NL80211_IFTYPE_NAN ||
-	    vif->type == NL80211_IFTYPE_NAN_DATA) {
+	if (vif->type == NL80211_IFTYPE_NAN) {
 		data->receive = mac80211_hwsim_nan_receive(data->hw,
 							   data->channel,
 							   data->rx_status);
@@ -1968,19 +1967,13 @@ static void mac80211_hwsim_tx(struct ieee80211_hw *hw,
 		return;
 	}
 
-	if (vif && !data->tmp_chan &&
-	    (vif->type == NL80211_IFTYPE_NAN ||
-	     vif->type == NL80211_IFTYPE_NAN_DATA)) {
-		struct cfg80211_chan_def chandef;
+	if (vif && vif->type == NL80211_IFTYPE_NAN && !data->tmp_chan) {
+		channel = mac80211_hwsim_nan_get_tx_channel(hw);
 
-		mac80211_hwsim_nan_get_tx_chandef(hw, &chandef);
-		if (WARN_ON(!chandef.chan)) {
-			/* No valid channel in current slot, drop frame */
+		if (WARN_ON(!channel)) {
 			ieee80211_free_txskb(hw, skb);
 			return;
 		}
-		channel = chandef.chan;
-		confbw = chandef.width;
 	} else if (!data->use_chanctx) {
 		channel = data->channel;
 		confbw = data->bw;
@@ -2123,8 +2116,7 @@ void ieee80211_hwsim_wake_tx_queue(struct ieee80211_hw *hw,
 	};
 	struct sk_buff *skb;
 
-	if ((txq->vif->type == NL80211_IFTYPE_NAN ||
-	     txq->vif->type == NL80211_IFTYPE_NAN_DATA) &&
+	if (txq->vif->type == NL80211_IFTYPE_NAN &&
 	    !mac80211_hwsim_nan_txq_transmitting(hw, txq))
 		return;
 
