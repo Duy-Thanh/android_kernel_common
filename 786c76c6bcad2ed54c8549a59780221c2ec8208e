@@ -123,6 +123,24 @@
       "parentUuid": "18571f33_fbcda2be",
       "revId": "786c76c6bcad2ed54c8549a59780221c2ec8208e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5029a79_c9cba1c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2026-08-19T20:42:35Z",
+      "side": 1,
+      "message": "We do not support fscrypt-enabled filesystems as vendor modules, or allow vendor modules to override ext4\u0027s or f2fs\u0027s fscrypt functions.  That would make no sense and be completely unsupportable.  The fact that the struct is visible in the headers doesn\u0027t change that.",
+      "parentUuid": "1c30a419_fa12db1c",
+      "revId": "786c76c6bcad2ed54c8549a59780221c2ec8208e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
