@@ -433,6 +433,13 @@ void f2fs_balance_fs(struct f2fs_sb_info *sbi, bool need)
 	 * dir/node pages without enough free segments.
 	 */
 	if (has_not_enough_free_secs(sbi, 0, 0)) {
+		/*
+		 * Submit all cached OPU/IPU DATA bios before triggering
+		 * foreground GC to avoid potential deadlocks.
+		 */
+		f2fs_submit_merged_write(sbi, DATA);
+		f2fs_submit_all_merged_ipu_writes(sbi);
+
 		if (test_opt(sbi, GC_MERGE) && sbi->gc_thread &&
 					sbi->gc_thread->f2fs_gc_task) {
 			DEFINE_WAIT(wait);
@@ -443,6 +450,7 @@ void f2fs_balance_fs(struct f2fs_sb_info *sbi, bool need)
 			io_schedule();
 			finish_wait(&sbi->gc_thread->fggc_wq, &wait);
 		} else {
+<<<<<<< HEAD   (21756fda13d1fac87ba9b734a5e6915b853bb930 Merge f51db99287b5 ("f2fs: fix potential deadlock in f2fs_ba)
 			/*
 			 * Submit all cached OPU/IPU DATA bios before triggering
 			 * foreground GC to avoid potential deadlocks.
@@ -451,6 +459,18 @@ void f2fs_balance_fs(struct f2fs_sb_info *sbi, bool need)
 			f2fs_submit_all_merged_ipu_writes(sbi);
 
 			f2fs_down_write(&sbi->gc_lock);
+||||||| BASE   (f51db99287b5acf81513ece82a0c95eb5db008e3 f2fs: fix potential deadlock in f2fs_balance_fs())
+			/*
+			 * Submit all cached OPU/IPU DATA bios before triggering
+			 * foreground GC to avoid potential deadlocks.
+			 */
+			f2fs_submit_merged_write(sbi, DATA);
+			f2fs_submit_all_merged_ipu_writes(sbi);
+
+			down_write(&sbi->gc_lock);
+=======
+			down_write(&sbi->gc_lock);
+>>>>>>> BRANCH (8071500a8124e5a6d47d901a8d5ffd91743107a1 f2fs: fix potential deadlock in gc_merge path of f2fs_balanc)
 			f2fs_gc(sbi, false, false, false, NULL_SEGNO);
 		}
 	}
