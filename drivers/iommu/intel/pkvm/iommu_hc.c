@@ -32,6 +32,7 @@ int pkvm_iommu_iec_flush(u64 phys, int index, int mask, bool global)
 int pkvm_iommu_clear_ce(struct clear_ce_data *data)
 {
 	struct intel_iommu *iommu = iommu_from_phys(data->phys);
+	u16 bdf = PCI_DEVID(data->bus, data->devfn);
 	struct device_domain_info info = { 0 };
 	struct dmar_domain *domain;
 
@@ -40,6 +41,19 @@ int pkvm_iommu_clear_ce(struct clear_ce_data *data)
 
 	if (data->ats_qdep > PCI_ATS_MAX_QDEP)
 		return -EINVAL;
+
+	if (is_dev_in_satc(bdf)) {
+		/*
+		 * Device is in SATC and optimistically assuming that a well crafted SATC
+		 * would contain only physical functions, its safe to set pfsid = bdf.
+		 * TODO: We should probably be verifying SATC for existence of only
+		 * physical functions during pkvm initialization.
+		 */
+		if (ecap_dit(iommu->ecap))
+			info.pfsid = bdf;
+	} else if (data->ats_supported) {
+		return -EPERM;
+	}
 
 	info.iommu = iommu;
 	info.bus = data->bus;
@@ -96,8 +110,12 @@ static int iommu_set_lm_ce(struct set_lm_ce_data *data)
 	if (data->ats_qdep > PCI_ATS_MAX_QDEP)
 		return -EINVAL;
 
-	if (data->ats_supported && !is_dev_in_satc(bdf))
+	if (is_dev_in_satc(bdf)) {
+		if (ecap_dit(iommu->ecap))
+			info.pfsid = bdf;
+	} else if (data->ats_supported) {
 		return -EPERM;
+	}
 
 	info.bus = data->bus;
 	info.devfn = data->devfn;
@@ -105,7 +123,6 @@ static int iommu_set_lm_ce(struct set_lm_ce_data *data)
 	info.ats_qdep = data->ats_qdep;
 	info.ats_supported = data->ats_supported;
 	info.ats_enabled = info.ats_supported;
-	pkvm_populate_pfsid(&info);
 
 	ret = accept_page_donation(iommu, &data->donation_page_gpa);
 	if (ret)
@@ -178,16 +195,15 @@ static int iommu_set_sm_ce(struct set_sm_ce_data *data)
 
 	info.bus = data->bus;
 	info.devfn = data->devfn;
-	info.iommu = iommu;
 	info.ats_qdep = data->ats_qdep;
 	info.ats_supported = data->ats_supported;
 	info.ats_enabled = info.ats_supported;
-	pkvm_populate_pfsid(&info);
 	info.pasid_supported = data->pasid_supported;
 	info.pasid_enabled = data->pasid_enabled;
 	table.table = pkvm_host_gpa_to_virt(data->pasid_table_gpa);
 	table.max_pasid = data->max_pasid;
 	info.pasid_table = &table;
+	info.iommu = iommu;
 
 	ret = accept_page_donation(iommu, &data->donation_page_gpa);
 	if (ret)
@@ -224,6 +240,7 @@ int pkvm_iommu_set_sm_ce(struct set_sm_ce_data *in, struct set_sm_ce_data *out)
 static int iommu_pasid_setup_fl(struct pasid_setup_fl_data *data)
 {
 	struct intel_iommu *iommu = iommu_from_phys(data->phys);
+	u16 bdf = PCI_DEVID(data->bus, data->devfn);
 	struct device_domain_info info = { 0 };
 	struct pkvm_device dev = { .info = &info };
 	struct dmar_domain *domain;
@@ -238,6 +255,13 @@ static int iommu_pasid_setup_fl(struct pasid_setup_fl_data *data)
 
 	if (data->ats_qdep > PCI_ATS_MAX_QDEP)
 		return -EINVAL;
+
+	if (is_dev_in_satc(bdf)) {
+		if (ecap_dit(iommu->ecap))
+			info.pfsid = bdf;
+	} else if (data->ats_supported) {
+		return -EPERM;
+	}
 
 	if (data->did == FLPT_DEFAULT_DID) {
 		pkvm_err("%s: First-level setup not allowed for default domain\n", __func__);
@@ -310,6 +334,7 @@ int pkvm_iommu_pasid_setup_fl(struct pasid_setup_fl_data *in, struct pasid_setup
 static int iommu_pasid_setup_sl(struct pasid_setup_sl_data *data)
 {
 	struct intel_iommu *iommu = iommu_from_phys(data->phys);
+	u16 bdf = PCI_DEVID(data->bus, data->devfn);
 	struct device_domain_info info = { 0 };
 	struct pkvm_device dev = { .info = &info };
 	struct dmar_domain *domain;
@@ -324,6 +349,13 @@ static int iommu_pasid_setup_sl(struct pasid_setup_sl_data *data)
 
 	if (data->ats_qdep > PCI_ATS_MAX_QDEP)
 		return -EINVAL;
+
+	if (is_dev_in_satc(bdf)) {
+		if (ecap_dit(iommu->ecap))
+			info.pfsid = bdf;
+	} else if (data->ats_supported) {
+		return -EPERM;
+	}
 
 	info.bus = data->bus;
 	info.devfn = data->devfn;
@@ -364,6 +396,7 @@ int pkvm_iommu_pasid_setup_sl(struct pasid_setup_sl_data *in, struct pasid_setup
 int pkvm_iommu_pasid_teardown(struct pasid_teardown_data *data)
 {
 	struct intel_iommu *iommu = iommu_from_phys(data->phys);
+	u16 bdf = PCI_DEVID(data->bus, data->devfn);
 	struct device_domain_info info = { 0 };
 	struct pkvm_device dev = { .info = &info };
 	struct dmar_domain *domain;
@@ -376,6 +409,13 @@ int pkvm_iommu_pasid_teardown(struct pasid_teardown_data *data)
 
 	if (data->ats_qdep > PCI_ATS_MAX_QDEP)
 		return -EINVAL;
+
+	if (is_dev_in_satc(bdf)) {
+		if (ecap_dit(iommu->ecap))
+			info.pfsid = bdf;
+	} else if (data->ats_supported) {
+		return -EPERM;
+	}
 
 	info.bus = data->bus;
 	info.devfn = data->devfn;
