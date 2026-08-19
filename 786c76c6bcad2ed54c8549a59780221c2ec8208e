@@ -213,6 +213,24 @@
       "parentUuid": "379a1acd_b6978764",
       "revId": "786c76c6bcad2ed54c8549a59780221c2ec8208e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff0f37d7_3ccb3316",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2026-08-19T22:06:10Z",
+      "side": 1,
+      "message": "Sure.  So we can take the CRC change on 6.18 and 6.12, since there coincidentally happens to be a thaw going on.  But the fixes are needed on older branches too, so what solution is there?",
+      "parentUuid": "df17f3b4_1305caf4",
+      "revId": "786c76c6bcad2ed54c8549a59780221c2ec8208e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
