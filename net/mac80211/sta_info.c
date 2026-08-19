@@ -783,7 +783,6 @@ struct sta_info *sta_info_alloc_with_link(struct ieee80211_sub_if_data *sdata,
 static int sta_info_insert_check(struct sta_info *sta)
 {
 	struct ieee80211_sub_if_data *sdata = sta->sdata;
-	struct ieee80211_sta *same_addr_sta;
 
 	lockdep_assert_wiphy(sdata->local->hw.wiphy);
 
@@ -799,18 +798,13 @@ static int sta_info_insert_check(struct sta_info *sta)
 		    !is_valid_ether_addr(sta->sta.addr)))
 		return -EINVAL;
 
-	if (!ieee80211_hw_check(&sdata->local->hw, NEEDS_UNIQUE_STA_ADDR))
-		return 0;
-
 	/* The RCU read lock is required by rhashtable due to
 	 * asynchronous resize/rehash.  We also require the mutex
 	 * for correctness.
 	 */
 	rcu_read_lock();
-	same_addr_sta = ieee80211_find_sta_by_ifaddr(&sdata->local->hw,
-						     sta->addr, NULL);
-	/* For NAN, a peer can re-use */
-	if (same_addr_sta && same_addr_sta != rcu_access_pointer(sta->sta.nmi)) {
+	if (ieee80211_hw_check(&sdata->local->hw, NEEDS_UNIQUE_STA_ADDR) &&
+	    ieee80211_find_sta_by_ifaddr(&sdata->local->hw, sta->addr, NULL)) {
 		rcu_read_unlock();
 		return -ENOTUNIQ;
 	}
@@ -1287,17 +1281,6 @@ static int __must_check __sta_info_destroy_part1(struct sta_info *sta)
 	sdata = sta->sdata;
 
 	lockdep_assert_wiphy(local->hw.wiphy);
-
-	if (sdata->vif.type == NL80211_IFTYPE_NAN) {
-		struct sta_info *sta_iter, *tmp;
-
-		/* Remove all NDI stations associated with this NMI STA */
-		list_for_each_entry_safe(sta_iter, tmp, &local->sta_list, list) {
-			if (rcu_access_pointer(sta_iter->sta.nmi) != &sta->sta)
-				continue;
-			sta_info_destroy_addr(sta_iter->sdata, sta_iter->addr);
-		}
-	}
 
 	/*
 	 * Before removing the station from the driver and
