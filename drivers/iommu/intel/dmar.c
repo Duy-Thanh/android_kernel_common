@@ -1644,12 +1644,8 @@ void qi_flush_dev_iotlb(struct intel_iommu *iommu, u16 sid, u16 pfsid,
 	if (!(iommu->gcmd & DMA_GCMD_TE))
 		return;
 #else
-	/*
-	 * Translation is never disabled after enabling during initialization.
-	 * And this is not called before IOMMU is initialized in pKVM.
-	 * If this is called with translation disabled, it means a bug in pKVM!
-	 */
-	BUG_ON(!(iommu->vgsts & DMA_GSTS_TES));
+	if (!(iommu->vgsts & DMA_GSTS_TES))
+		return;
 #endif
 
 	qi_desc_dev_iotlb(sid, pfsid, qdep, addr, mask, &desc);
@@ -1692,12 +1688,8 @@ void qi_flush_dev_iotlb_pasid(struct intel_iommu *iommu, u16 sid, u16 pfsid,
 	if (!(iommu->gcmd & DMA_GCMD_TE))
 		return;
 #else
-	/*
-	 * Translation is never disabled after enabling during initialization.
-	 * And this is not called before IOMMU is initialized in pKVM.
-	 * If this is called with translation disabled, it means a bug in pKVM!
-	 */
-	BUG_ON(!(iommu->vgsts & DMA_GSTS_TES));
+	if (!(iommu->vgsts & DMA_GSTS_TES))
+		return;
 #endif
 
 	qi_desc_dev_iotlb_pasid(sid, pfsid, pasid,
