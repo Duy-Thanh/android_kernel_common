@@ -249,6 +249,24 @@
       "parentUuid": "ff0f37d7_3ccb3316",
       "revId": "786c76c6bcad2ed54c8549a59780221c2ec8208e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7b125b6_1c9ddc23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-08-19T22:14:22Z",
+      "side": 1,
+      "message": "It seems like in older branches you are also backporting another patch: https://android-review.git.corp.google.com/q/I52c0529b7dee751d6325987f142f97c97c0eb743. However, that patch has a different ABI break in `struct fscrypt_master_key` which doesn\u0027t have any reserved fields. 😞",
+      "parentUuid": "b1ca02ca_7afadcb1",
+      "revId": "786c76c6bcad2ed54c8549a59780221c2ec8208e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
