@@ -48,6 +48,10 @@
 #include "hub.h"
 #include "trace.h"
 
+#include <linux/android_kabi.h>
+ANDROID_KABI_DECLONLY(static_call_mod);
+ANDROID_KABI_DECLONLY(trace_eval_map);
+
 const char *usbcore_name = "usbcore";
 
 static bool nousb;	/* Disable USB when built into kernel image */

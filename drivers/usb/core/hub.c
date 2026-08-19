@@ -42,6 +42,10 @@
 #include "otg_productlist.h"
 #include "trace.h"
 
+#include <linux/android_kabi.h>
+ANDROID_KABI_DECLONLY(static_call_mod);
+ANDROID_KABI_DECLONLY(trace_eval_map);
+
 #define USB_VENDOR_GENESYS_LOGIC		0x05e3
 #define USB_VENDOR_SMSC				0x0424
 #define USB_PRODUCT_USB5534B			0x5534
