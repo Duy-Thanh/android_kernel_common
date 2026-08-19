@@ -16,6 +16,24 @@
       "message": "Note for myself: Update kernel-parameters.txt!",
       "revId": "9e28c529e53bd01e5f7f03ec8459f3d6081ef443",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c37c8b70_1ba2d5f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-08-19T07:14:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0edf7abc_ef92cdd7",
+      "revId": "9e28c529e53bd01e5f7f03ec8459f3d6081ef443",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
