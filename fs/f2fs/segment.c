@@ -443,7 +443,20 @@ void f2fs_balance_fs(struct f2fs_sb_info *sbi, bool need)
 			io_schedule();
 			finish_wait(&sbi->gc_thread->fggc_wq, &wait);
 		} else {
+<<<<<<< HEAD   (bbd17eb595bbaab4ffb4e387cb898096e6a06122 Merge a08ee30dcbef ("f2fs: bound i_inline_xattr_size for non)
 			f2fs_down_write(&sbi->gc_lock);
+||||||| BASE   (a08ee30dcbeff6b97df75c38c2589603ddde53a6 f2fs: bound i_inline_xattr_size for non-inline-xattr inodes)
+			down_write(&sbi->gc_lock);
+=======
+			/*
+			 * Submit all cached OPU/IPU DATA bios before triggering
+			 * foreground GC to avoid potential deadlocks.
+			 */
+			f2fs_submit_merged_write(sbi, DATA);
+			f2fs_submit_all_merged_ipu_writes(sbi);
+
+			down_write(&sbi->gc_lock);
+>>>>>>> BRANCH (f51db99287b5acf81513ece82a0c95eb5db008e3 f2fs: fix potential deadlock in f2fs_balance_fs())
 			f2fs_gc(sbi, false, false, false, NULL_SEGNO);
 		}
 	}
