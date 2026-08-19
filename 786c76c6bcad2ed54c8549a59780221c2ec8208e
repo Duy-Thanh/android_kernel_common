@@ -16,6 +16,23 @@
       "message": "if this patch is using ANDROID_KABI_USE() then why do we need this on kminext? It seems perfectly fine to land this on the main branch?",
       "revId": "786c76c6bcad2ed54c8549a59780221c2ec8208e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f12d3237_c09dc2a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-08-19T13:39:47Z",
+      "side": 1,
+      "message": "Also, is any chance the test failure is real?",
+      "revId": "786c76c6bcad2ed54c8549a59780221c2ec8208e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
