@@ -191,10 +191,12 @@ next_interface:
 int ieee80211_chanctx_num_assigned(struct ieee80211_local *local,
 				   struct ieee80211_chanctx *ctx)
 {
-	struct ieee80211_chanctx_user_iter iter;
+	struct ieee80211_link_data *link;
 	int num = 0;
 
-	for_each_chanctx_user_assigned(local, ctx, &iter)
+	lockdep_assert_wiphy(local->hw.wiphy);
+
+	list_for_each_entry(link, &ctx->assigned_links, assigned_chanctx_list)
 		num++;
 
 	return num;
@@ -203,10 +205,12 @@ int ieee80211_chanctx_num_assigned(struct ieee80211_local *local,
 static int ieee80211_chanctx_num_reserved(struct ieee80211_local *local,
 					  struct ieee80211_chanctx *ctx)
 {
-	struct ieee80211_chanctx_user_iter iter;
+	struct ieee80211_link_data *link;
 	int num = 0;
 
-	for_each_chanctx_user_reserved(local, ctx, &iter)
+	lockdep_assert_wiphy(local->hw.wiphy);
+
+	list_for_each_entry(link, &ctx->reserved_links, reserved_chanctx_list)
 		num++;
 
 	return num;
@@ -215,20 +219,8 @@ static int ieee80211_chanctx_num_reserved(struct ieee80211_local *local,
 int ieee80211_chanctx_refcount(struct ieee80211_local *local,
 			       struct ieee80211_chanctx *ctx)
 {
-	struct ieee80211_chanctx_user_iter iter;
-	int num = 0;
-
-	for_each_chanctx_user_all(local, ctx, &iter)
-		num++;
-
-	/*
-	 * This ctx is in the process of getting used,
-	 * take it into consideration
-	 */
-	if (ctx->will_be_used)
-		num++;
-
-	return num;
+	return ieee80211_chanctx_num_assigned(local, ctx) +
+	       ieee80211_chanctx_num_reserved(local, ctx);
 }
 
 static int ieee80211_num_chanctx(struct ieee80211_local *local, int radio_idx)
@@ -815,9 +807,10 @@ static void ieee80211_change_chanctx(struct ieee80211_local *local,
 	_ieee80211_change_chanctx(local, ctx, old_ctx, chanreq, NULL);
 }
 
-/* Note: if successful, the returned chanctx will_be_used flag is set */
+/* Note: if successful, the returned chanctx is reserved for the link */
 static struct ieee80211_chanctx *
 ieee80211_find_chanctx(struct ieee80211_local *local,
+		       struct ieee80211_link_data *link,
 		       const struct ieee80211_chan_req *chanreq,
 		       enum ieee80211_chanctx_mode mode)
 {
@@ -827,6 +820,9 @@ ieee80211_find_chanctx(struct ieee80211_local *local,
 	lockdep_assert_wiphy(local->hw.wiphy);
 
 	if (mode == IEEE80211_CHANCTX_EXCLUSIVE)
+		return NULL;
+
+	if (WARN_ON(link->reserved_chanctx))
 		return NULL;
 
 	list_for_each_entry(ctx, &local->chanctx_list, list) {
@@ -848,12 +844,14 @@ ieee80211_find_chanctx(struct ieee80211_local *local,
 			continue;
 
 		/*
-		 * Mark the chanctx as will be used, as the driver might change
+		 * Reserve the chanctx temporarily, as the driver might change
 		 * active links during callbacks we make into it below and/or
 		 * later during assignment, which could (otherwise) cause the
 		 * context to actually be removed.
 		 */
-		ctx->will_be_used = true;
+		link->reserved_chanctx = ctx;
+		list_add(&link->reserved_chanctx_list,
+			 &ctx->reserved_links);
 
 		ieee80211_change_chanctx(local, ctx, ctx, compat);
 
@@ -2244,8 +2242,8 @@ int _ieee80211_link_use_channel(struct ieee80211_link_data *link,
 	if (!local->in_reconfig)
 		__ieee80211_link_release_channel(link, false);
 
-	ctx = ieee80211_find_chanctx(local, chanreq, mode);
-	/* Note: context will_be_used flag is now set */
+	ctx = ieee80211_find_chanctx(local, link, chanreq, mode);
+	/* Note: context is now reserved */
 	if (ctx)
 		reserved = true;
 	else if (!ieee80211_find_available_radio(local, chanreq,
@@ -2265,8 +2263,10 @@ int _ieee80211_link_use_channel(struct ieee80211_link_data *link,
 	ret = ieee80211_assign_link_chanctx(link, ctx, assign_on_failure);
 
 	if (reserved) {
-		WARN_ON(!ctx->will_be_used);
-		ctx->will_be_used = false;
+		/* remove reservation */
+		WARN_ON(link->reserved_chanctx != ctx);
+		link->reserved_chanctx = NULL;
+		list_del(&link->reserved_chanctx_list);
 	}
 
 	if (ret) {
