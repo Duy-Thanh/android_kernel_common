@@ -33,6 +33,42 @@
       "message": "Also, is any chance the test failure is real?",
       "revId": "786c76c6bcad2ed54c8549a59780221c2ec8208e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc268387_4fce27d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2026-08-19T17:17:07Z",
+      "side": 1,
+      "message": "It\u0027s unlikely to be related.",
+      "parentUuid": "f12d3237_c09dc2a1",
+      "revId": "786c76c6bcad2ed54c8549a59780221c2ec8208e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cb51e13_5b574e04",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2026-08-19T17:17:07Z",
+      "side": 1,
+      "message": "The \"ABI Compliance\" check fails even with that:\n\n```\ntype \u0027struct fscrypt_operations\u0027 changed\n  member \u0027u64 __kabi_reserved1\u0027 was removed\n  member \u0027union { unsigned int(* get_devices_new)(struct super_block*, struct block_device**); struct { u64 __kabi_reserved1; }; union { }; }\u0027 was added\n```\n\nCan we just update the XML file?\n\nI\u0027m still mystified why the fscrypt structs need to be stable at all.  We do *not* support vendor modules using them.  It makes no sense.",
+      "parentUuid": "d4dec0ab_63b9e993",
+      "revId": "786c76c6bcad2ed54c8549a59780221c2ec8208e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
