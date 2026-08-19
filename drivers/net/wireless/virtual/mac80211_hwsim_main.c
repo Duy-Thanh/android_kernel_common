@@ -1159,17 +1159,13 @@ static inline u64 mac80211_hwsim_get_sim_tsf(void)
 ktime_t mac80211_hwsim_tsf_to_boottime(struct mac80211_hwsim_data *data,
 				       u64 tsf)
 {
-	scoped_guard(spinlock_bh, &data->tsf_offset_lock) {
-		return us_to_ktime(tsf - data->tsf_offset);
-	}
+	return us_to_ktime(tsf - data->tsf_offset);
 }
 
 u64 mac80211_hwsim_boottime_to_tsf(struct mac80211_hwsim_data *data,
 				   ktime_t ts)
 {
-	scoped_guard(spinlock_bh, &data->tsf_offset_lock) {
-		return ktime_to_us(ts) + data->tsf_offset;
-	}
+	return ktime_to_us(ts + data->tsf_offset);
 }
 
 u64 mac80211_hwsim_get_tsf(struct ieee80211_hw *hw,
@@ -1178,18 +1174,14 @@ u64 mac80211_hwsim_get_tsf(struct ieee80211_hw *hw,
 	struct mac80211_hwsim_data *data = hw->priv;
 	u64 sim_time = mac80211_hwsim_get_sim_tsf();
 
-	scoped_guard(spinlock_bh, &data->tsf_offset_lock) {
-		return sim_time + data->tsf_offset;
-	}
+	return sim_time + data->tsf_offset;
 }
 
 static __le64 __mac80211_hwsim_get_tsf(struct mac80211_hwsim_data *data)
 {
 	u64 sim_time = mac80211_hwsim_get_sim_tsf();
 
-	scoped_guard(spinlock_bh, &data->tsf_offset_lock) {
-		return cpu_to_le64(sim_time + data->tsf_offset);
-	}
+	return cpu_to_le64(sim_time + data->tsf_offset);
 }
 
 static void mac80211_hwsim_set_tsf(struct ieee80211_hw *hw,
@@ -1204,13 +1196,11 @@ static void mac80211_hwsim_set_tsf(struct ieee80211_hw *hw,
 	if (conf && !conf->enable_beacon)
 		return;
 
-	scoped_guard(spinlock_bh, &data->tsf_offset_lock) {
-		/* adjust after beaconing with new timestamp at old TBTT */
-		if (tsf > now)
-			data->tsf_offset += delta;
-		else
-			data->tsf_offset -= delta;
-	}
+	/* adjust after beaconing with new timestamp at old TBTT */
+	if (tsf > now)
+		data->tsf_offset += delta;
+	else
+		data->tsf_offset -= delta;
 }
 
 static void mac80211_hwsim_monitor_rx(struct ieee80211_hw *hw,
@@ -1490,8 +1480,6 @@ static void mac80211_hwsim_write_tsf(struct mac80211_hwsim_data *data,
 	/* TODO: get MCS */
 	int bitrate = 100;
 
-	spin_lock_bh(&data->tsf_offset_lock);
-
 	txrate = ieee80211_get_tx_rate(data->hw, info);
 	if (txrate)
 		bitrate = txrate->bitrate;
@@ -1517,8 +1505,6 @@ static void mac80211_hwsim_write_tsf(struct mac80211_hwsim_data *data,
 							  10 * 8 * 10 /
 							  bitrate);
 	}
-
-	spin_unlock_bh(&data->tsf_offset_lock);
 }
 
 static void mac80211_hwsim_tx_frame_nl(struct ieee80211_hw *hw,
@@ -5484,8 +5470,6 @@ static int mac80211_hwsim_new_radio(struct genl_info *info,
 
 	hw->wiphy->mbssid_max_interfaces = 8;
 	hw->wiphy->ema_max_profile_periodicity = 3;
-
-	spin_lock_init(&data->tsf_offset_lock);
 
 	data->rx_rssi = DEFAULT_RX_RSSI;
 
