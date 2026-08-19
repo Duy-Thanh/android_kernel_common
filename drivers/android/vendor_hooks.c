@@ -568,3 +568,20 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_start_writeback);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_add_file_rmap);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_remove_file_rmap);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_bypass);
+<<<<<<< HEAD   (3fc92ed75e44bfb2b12bc625fad7a054b939f8a6 UPSTREAM: binder: fix UAF in binder_free_transaction())
+||||||| BASE   (16a61365b3099c7ff5d216401dc6c94cdd8f984a ANDROID: GKI: update symbol list for xiaomi)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_migrate_batch_nr_pages);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_migrate_pages_batch_break);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_migration_entry_wait_enter);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_migration_entry_wait_exit);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_signal_coredump_check);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_migrate_batch_nr_pages);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_migrate_pages_batch_break);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_migration_entry_wait_enter);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_migration_entry_wait_exit);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_signal_coredump_check);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_resched_curr_lazy);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_restore_curr_resched);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_curr_lazy);
+>>>>>>> CHANGE (969cb3de4157901aca91cc12dc3b3d865b7e330c ANDROID: implement lazy preemption via hooks for pre-6.13 ke)
