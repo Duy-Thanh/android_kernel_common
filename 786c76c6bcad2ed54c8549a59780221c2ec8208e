@@ -177,6 +177,24 @@
       "parentUuid": "01fb5f26_a34d69c8",
       "revId": "786c76c6bcad2ed54c8549a59780221c2ec8208e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "379a1acd_b6978764",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2026-08-19T21:45:05Z",
+      "side": 1,
+      "message": "Do we have to keep the same field type and use type casts: https://android-review.git.corp.google.com/c/kernel/common/+/4214726/3?  It seems ridiculous, but it seems to be the only solution that is general enough to work for all three of the fixes that need to be backported.",
+      "parentUuid": "7d9d12a5_c1104a4a",
+      "revId": "786c76c6bcad2ed54c8549a59780221c2ec8208e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
