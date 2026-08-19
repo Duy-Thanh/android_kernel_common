@@ -747,7 +747,7 @@ static struct dma_pte *pfn_to_dma_pte(struct dmar_domain *domain,
 
 	if (!domain_pfn_supported(domain, pfn))
 		/* Address beyond IOMMU's addressing capabilities. */
-		return ERR_PTR(-EINVAL);
+		return NULL;
 
 	parent = domain->pgd;
 
@@ -769,11 +769,11 @@ static struct dma_pte *pfn_to_dma_pte(struct dmar_domain *domain,
 							     SZ_4K);
 
 			if (!tmp_page)
-				return ERR_PTR(-ENOMEM);
+				return NULL;
 #else
 			tmp_page = pop_pkvm_memcache_page(&domain->mc, pkvm_phys_to_virt);
 			if (!tmp_page)
-				return ERR_PTR(-ENOMEM);
+				return NULL;
 			memset(tmp_page, 0, VTD_PAGE_SIZE);
 #endif
 
@@ -798,10 +798,7 @@ static struct dma_pte *pfn_to_dma_pte(struct dmar_domain *domain,
 			}
 			else
 				domain_flush_cache(domain, pte, sizeof(*pte));
-		} else if (WARN_ON_ONCE(dma_pte_superpage(pte))) {
-			return ERR_PTR(-EEXIST);
 		}
-
 		if (level == 1)
 			break;
 
@@ -1886,8 +1883,8 @@ int domain_map(struct dmar_domain *domain, unsigned long iov_pfn,
 
 			pte = pfn_to_dma_pte(domain, iov_pfn, &largepage_lvl,
 					     gfp);
-			if (IS_ERR(pte)) {
-				ret = PTR_ERR(pte);
+			if (!pte) {
+				ret = -ENOMEM;
 				goto out;
 			}
 			first_pte = pte;
@@ -4080,14 +4077,12 @@ static size_t intel_iommu_unmap(struct iommu_domain *domain,
 {
 	struct dmar_domain *dmar_domain = to_dmar_domain(domain);
 	unsigned long start_pfn, last_pfn;
-	struct dma_pte *pte;
 	int level = 0;
 
 	/* Cope with horrid API which requires us to unmap more than the
 	   size argument if it happens to be a large-page mapping. */
-	pte = pfn_to_dma_pte(dmar_domain, iova >> VTD_PAGE_SHIFT, &level,
-			     GFP_ATOMIC);
-	if (IS_ERR(pte))
+	if (unlikely(!pfn_to_dma_pte(dmar_domain, iova >> VTD_PAGE_SHIFT,
+				     &level, GFP_ATOMIC)))
 		return 0;
 
 	if (size < VTD_PAGE_SIZE << level_to_offset_bits(level))
@@ -4158,7 +4153,7 @@ static phys_addr_t intel_iommu_iova_to_phys(struct iommu_domain *domain,
 
 	pte = pfn_to_dma_pte(dmar_domain, iova >> VTD_PAGE_SHIFT, &level,
 			     GFP_ATOMIC);
-	if (!IS_ERR(pte) && dma_pte_present(pte))
+	if (pte && dma_pte_present(pte))
 		phys = dma_pte_addr(pte) +
 			(iova & (BIT_MASK(level_to_offset_bits(level) +
 						VTD_PAGE_SHIFT) - 1));
@@ -4809,7 +4804,7 @@ static int intel_iommu_read_and_clear_dirty(struct iommu_domain *domain,
 		pte = pfn_to_dma_pte(dmar_domain, iova >> VTD_PAGE_SHIFT, &lvl,
 				     GFP_ATOMIC);
 		pgsize = level_size(lvl) << VTD_PAGE_SHIFT;
-		if (IS_ERR(pte) || !dma_pte_present(pte)) {
+		if (!pte || !dma_pte_present(pte)) {
 			iova += pgsize;
 			continue;
 		}
