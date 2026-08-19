@@ -231,6 +231,24 @@
       "parentUuid": "df17f3b4_1305caf4",
       "revId": "786c76c6bcad2ed54c8549a59780221c2ec8208e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1ca02ca_7afadcb1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-08-19T22:10:26Z",
+      "side": 1,
+      "message": "In older branches without a thaw your ANDROID_KABI_USE() workaround would be required.",
+      "parentUuid": "ff0f37d7_3ccb3316",
+      "revId": "786c76c6bcad2ed54c8549a59780221c2ec8208e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
