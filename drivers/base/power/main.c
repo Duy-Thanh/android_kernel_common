@@ -43,9 +43,6 @@
 #include "../base.h"
 #include "power.h"
 
-#undef MODULE_PARAM_PREFIX
-#define MODULE_PARAM_PREFIX "pm."
-
 typedef int (*pm_callback_t)(struct device *);
 
 /*
