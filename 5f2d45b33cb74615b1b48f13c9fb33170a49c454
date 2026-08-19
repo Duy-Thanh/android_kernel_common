@@ -16,6 +16,24 @@
       "message": "Is this still wanted on the kminext branch? I don\u0027t see any activity.",
       "revId": "5f2d45b33cb74615b1b48f13c9fb33170a49c454",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c796898_2e3627b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-08-19T06:38:49Z",
+      "side": 1,
+      "message": "Hi @cmllamas@google.com yes we still want to merge this please.",
+      "parentUuid": "4f34a23d_f5c66cdf",
+      "revId": "5f2d45b33cb74615b1b48f13c9fb33170a49c454",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
