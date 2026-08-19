@@ -141,6 +141,24 @@
       "parentUuid": "1c30a419_fa12db1c",
       "revId": "786c76c6bcad2ed54c8549a59780221c2ec8208e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01fb5f26_a34d69c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-08-19T20:52:17Z",
+      "side": 1,
+      "message": "Cool, then I think we could land the original version of the patch that updates the signature of the `op-\u003eget_devices` callback in place and then amend the STG file. This would reduce the diff with upstream and make maintenance potentially easier. Or we could keep the current change as is. Your choice. Either way it LGTM.",
+      "parentUuid": "f5029a79_c9cba1c4",
+      "revId": "786c76c6bcad2ed54c8549a59780221c2ec8208e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
