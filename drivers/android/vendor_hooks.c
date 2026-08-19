@@ -568,3 +568,26 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_start_writeback);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_add_file_rmap);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_remove_file_rmap);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_bypass);
+<<<<<<< HEAD   (3fc92ed75e44bfb2b12bc625fad7a054b939f8a6 UPSTREAM: binder: fix UAF in binder_free_transaction())
+||||||| BASE   (969cb3de4157901aca91cc12dc3b3d865b7e330c ANDROID: implement lazy preemption via hooks for pre-6.13 ke)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_migrate_batch_nr_pages);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_migrate_pages_batch_break);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_migration_entry_wait_enter);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_migration_entry_wait_exit);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_signal_coredump_check);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_resched_curr_lazy);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_restore_curr_resched);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_curr_lazy);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_migrate_batch_nr_pages);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_migrate_pages_batch_break);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_migration_entry_wait_enter);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_migration_entry_wait_exit);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_signal_coredump_check);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_resched_curr_lazy);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_restore_curr_resched);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_curr_lazy);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lock_delay_schedule);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lock_task_fork);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lock_task_exit);
+>>>>>>> CHANGE (5e1b2b15469fe7d731af17a69aab195b0820412f ANDROID: sched: bounded deferral of CFS preemption for frame)
