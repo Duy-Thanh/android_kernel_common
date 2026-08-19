@@ -69,6 +69,42 @@
       "parentUuid": "d4dec0ab_63b9e993",
       "revId": "786c76c6bcad2ed54c8549a59780221c2ec8208e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "efe0584a_4f6e966f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-08-19T20:24:46Z",
+      "side": 1,
+      "message": "ack",
+      "parentUuid": "cc268387_4fce27d8",
+      "revId": "786c76c6bcad2ed54c8549a59780221c2ec8208e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18571f33_fbcda2be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-08-19T20:24:46Z",
+      "side": 1,
+      "message": "Right, this is an implementation that could land on the main branch. The \"ABI Compliance\" part would need to be added to the allowed_breaks file to clear the change. I suppose we could also just land it here but this is not a KMI breaking patch.\n\n\u003e I\u0027m still mystified why the fscrypt structs need to be stable at all. We do not support vendor modules using them. It makes no sense.\n\nInteresting, I wonder why it was added to the STG monitoring file then. I\u0027ll have a quick look.",
+      "parentUuid": "1cb51e13_5b574e04",
+      "revId": "786c76c6bcad2ed54c8549a59780221c2ec8208e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
