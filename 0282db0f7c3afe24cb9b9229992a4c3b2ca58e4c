@@ -99,6 +99,30 @@
       },
       "revId": "0282db0f7c3afe24cb9b9229992a4c3b2ca58e4c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97b28306_6423db32",
+        "filename": "arch/arm64/include/asm/kvm_pkvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-08-19T08:38:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1bac0c41_64680a41",
+      "range": {
+        "startLine": 265,
+        "startChar": 24,
+        "endLine": 265,
+        "endChar": 48
+      },
+      "revId": "0282db0f7c3afe24cb9b9229992a4c3b2ca58e4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
