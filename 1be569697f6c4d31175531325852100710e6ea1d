@@ -16,6 +16,23 @@
       "message": "@jaegeuk@google.com, please review and give a CR+1",
       "revId": "1be569697f6c4d31175531325852100710e6ea1d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "492103d8_71ccdc91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2026-08-19T01:17:58Z",
+      "side": 1,
+      "message": "+1, as we tested this in Pixel phones, and later, we\u0027ll apply the general solution.",
+      "revId": "1be569697f6c4d31175531325852100710e6ea1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
