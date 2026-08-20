@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fb23709_2b726405",
+        "filename": "kernel/power/swap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-08-20T12:46:43Z",
+      "side": 1,
+      "message": "Are you sure this is correct? You are _always_ setting the reserved[AUTH_SLOT] bits here for _everyone_. Why don\u0027t you pass the pointer to your vendor hook and handle your logic there instead?\n\n```\ntrace_android_vh_store_auth_slot_num(swsusp_header-\u003ereserved)\n```",
+      "range": {
+        "startLine": 337,
+        "startChar": 2,
+        "endLine": 338,
+        "endChar": 65
+      },
+      "revId": "dcccbcfae09fda3b198e6313f097974ad07680b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a590094b_3c3aa1af",
+        "filename": "kernel/power/swap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1614,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-08-20T12:46:43Z",
+      "side": 1,
+      "message": "where are you using this? This looks like it might need to be defined on your end?",
+      "range": {
+        "startLine": 1614,
+        "startChar": 3,
+        "endLine": 1614,
+        "endChar": 24
+      },
+      "revId": "dcccbcfae09fda3b198e6313f097974ad07680b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
