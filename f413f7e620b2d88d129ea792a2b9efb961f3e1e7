@@ -16,6 +16,24 @@
       "message": "do we need to get this in?",
       "revId": "f413f7e620b2d88d129ea792a2b9efb961f3e1e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85bca68f_d337e017",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2026-08-20T16:20:40Z",
+      "side": 1,
+      "message": "No. This is based on:\n\nhttps://r.android.com/c/kernel/common/+/4227879/2/arch/arm64/include/asm/kvm_pkvm_module.h\n\nHowever, pkvm_module_ops has plenty of reserve fields. We will use one of those and land them in 6.12 branch.",
+      "parentUuid": "a4f4035a_6c9c9081",
+      "revId": "f413f7e620b2d88d129ea792a2b9efb961f3e1e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
