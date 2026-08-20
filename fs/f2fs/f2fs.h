@@ -2199,6 +2199,31 @@ static inline struct f2fs_sb_info *F2FS_F_SB(const struct folio *folio)
 	return F2FS_M_SB(folio->mapping);
 }
 
+static inline struct f2fs_sb_info *F2FS_P_SB(struct page *page)
+{
+	return F2FS_F_SB(page_folio(page));
+}
+
+static inline unsigned int f2fs_orphans_per_block(unsigned int blocksize)
+{
+	return (blocksize - sizeof(struct f2fs_orphan_footer)) /
+			sizeof(__le32);
+}
+
+static inline unsigned int
+f2fs_orphan_blocks(unsigned int blocksize, unsigned long orphan_count)
+{
+	return DIV_ROUND_UP(orphan_count, f2fs_orphans_per_block(blocksize));
+}
+
+static inline struct f2fs_orphan_footer *
+f2fs_orphan_footer(void *orphan_block, unsigned int blocksize)
+{
+	return (struct f2fs_orphan_footer *)
+		((char *)orphan_block + blocksize -
+		 sizeof(struct f2fs_orphan_footer));
+}
+
 static inline struct f2fs_super_block *F2FS_RAW_SUPER(struct f2fs_sb_info *sbi)
 {
 	return (struct f2fs_super_block *)(sbi->raw_super);
