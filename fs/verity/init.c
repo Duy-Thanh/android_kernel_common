@@ -9,6 +9,9 @@
 
 #include <linux/ratelimit.h>
 
+ANDROID_KABI_DECLONLY(fsverity_operations);
+ANDROID_KABI_DECLONLY(fsverity_info);
+
 #ifdef CONFIG_SYSCTL
 static struct ctl_table fsverity_sysctl_table[] = {
 #ifdef CONFIG_FS_VERITY_BUILTIN_SIGNATURES

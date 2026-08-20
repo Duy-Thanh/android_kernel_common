@@ -28,6 +28,10 @@
 #include <crypto/skcipher.h>
 #include "fscrypt_private.h"
 
+ANDROID_KABI_DECLONLY(fscrypt_operations);
+ANDROID_KABI_DECLONLY(fscrypt_inode_info);
+ANDROID_KABI_DECLONLY(fscrypt_keyring);
+
 static unsigned int num_prealloc_crypto_pages = 32;
 
 module_param(num_prealloc_crypto_pages, uint, 0444);
