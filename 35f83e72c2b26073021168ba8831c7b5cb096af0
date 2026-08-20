@@ -16,6 +16,23 @@
       "message": "thanks Alan",
       "revId": "35f83e72c2b26073021168ba8831c7b5cb096af0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff351702_8d9c782f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-08-20T16:46:34Z",
+      "side": 1,
+      "message": "Right, presubmit failed but it was a fluke. I would say there is no need to backport this to older branches unless is an actual problem for you. But I won\u0027t oppose either, so feel free to upload it to older branches too after it lands. Thanks.",
+      "revId": "35f83e72c2b26073021168ba8831c7b5cb096af0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
