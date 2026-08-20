@@ -16,6 +16,24 @@
       "message": "This isn\u0027t merged on android17 yet.\n\nIf you have tested the original patch, please +1 it so we can proceed.",
       "revId": "ae90e3e4f12c864dc40f48434d34bff6039f894e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fcfa18d_ed9e54a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2018217
+      },
+      "writtenOn": "2026-08-20T10:24:15Z",
+      "side": 1,
+      "message": "Hi Vincent, this has been merged on Android17 now.\n\nFYI, @msakaray@qualcomm.corp-partner.google.com is working to rebase the whole series.",
+      "parentUuid": "095c69f8_6e35f67c",
+      "revId": "ae90e3e4f12c864dc40f48434d34bff6039f894e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
