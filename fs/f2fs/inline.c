@@ -35,14 +35,13 @@ bool f2fs_may_inline_data(struct inode *inode)
 
 static bool inode_has_blocks(struct inode *inode, struct page *ipage)
 {
-	struct f2fs_inode *ri = F2FS_INODE(ipage);
 	int i;
 
 	if (F2FS_HAS_BLOCKS(inode))
 		return true;
 
 	for (i = 0; i < DEF_NIDS_PER_INODE; i++) {
-		if (ri->i_nid[i])
+		if (F2FS_INODE_NIDS(ipage)[i])
 			return true;
 	}
 	return false;
