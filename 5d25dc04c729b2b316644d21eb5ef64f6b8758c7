@@ -16,6 +16,24 @@
       "message": "This breaks KMI by changing the number of elements in snd_soc_acpi_intel_ptl_sdw_machines.",
       "revId": "5d25dc04c729b2b316644d21eb5ef64f6b8758c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5195fcd_728942ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4240336
+      },
+      "writtenOn": "2026-08-20T16:49:21Z",
+      "side": 1,
+      "message": "Ran and update the abi and symbol in https://android-review.googlesource.com/c/kernel/common/+/4241902/1",
+      "parentUuid": "fab8efd5_559a21dc",
+      "revId": "5d25dc04c729b2b316644d21eb5ef64f6b8758c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
