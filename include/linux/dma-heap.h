@@ -74,6 +74,9 @@ void dma_heap_put(struct dma_heap *heap);
  *
  * NOTE: dma_heaps returned from this function MUST be released
  * using dma_heap_put() when the user is done.
+ *
+ * Return: the dma_heap with the given name, or NULL if no such heap is
+ * registered.
  */
 struct dma_heap *dma_heap_find(const char *name);
 
@@ -85,6 +88,8 @@ struct dma_heap *dma_heap_find(const char *name);
  * @heap_flags:	flags to pass to the dma heap
  *
  * This is for internal dma-buf allocations only.
+ *
+ * Return: a dma_buf on success, or an ERR_PTR() encoded error on failure.
  */
 struct dma_buf *dma_heap_buffer_alloc(struct dma_heap *heap, size_t len,
 				      u32 fd_flags,
@@ -103,6 +108,9 @@ void dma_heap_buffer_free(struct dma_buf *);
  * @len:	size to allocate
  * @fd_flags:	flags to set on returned dma-buf fd
  * @heap_flags:	flags to pass to the dma heap
+ *
+ * Return: a dma-buf file descriptor on success, or a negative errno on
+ * failure.
  */
 int dma_heap_bufferfd_alloc(struct dma_heap *heap, size_t len,
 			    u32 fd_flags,
