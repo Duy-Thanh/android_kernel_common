@@ -34,6 +34,24 @@
       "parentUuid": "73629641_bd8fede1",
       "revId": "78bd88d0e16d39dca2b7a58d6f575d0fb4e997e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "601f8aef_c92d0964",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2026-08-20T03:19:47Z",
+      "side": 1,
+      "message": "The lint checker wants to see \"FROMLIST\" in this case, but since we already took the same commit message on the other cherry-picks, might as well do it here too.",
+      "parentUuid": "e2b77f3f_cf3c2562",
+      "revId": "78bd88d0e16d39dca2b7a58d6f575d0fb4e997e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
