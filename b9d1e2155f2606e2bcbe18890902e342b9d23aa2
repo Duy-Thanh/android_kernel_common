@@ -16,6 +16,23 @@
       "message": "Update the ABI and symbol for",
       "revId": "b9d1e2155f2606e2bcbe18890902e342b9d23aa2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fba9f7f6_667bcd07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-20T16:56:18Z",
+      "side": 1,
+      "message": "Sorry, the KMI is frozen. You can\u0027t just make incompatible KMI changes. If there is a vendor module that references that struct, it will be broken (implied by the fact that the symbol is in the desktop symbol list)",
+      "revId": "b9d1e2155f2606e2bcbe18890902e342b9d23aa2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
