@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "599da42f_0a263e46",
+        "filename": "include/trace/hooks/power.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-20T20:44:54Z",
+      "side": 1,
+      "message": "If it is a restricted hook, it must be named with _rvh_ instead of _vh_",
+      "revId": "4aa0535ace06b2b746e1c147ad614bf4e96a2b54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
