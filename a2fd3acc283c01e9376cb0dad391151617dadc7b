@@ -16,6 +16,24 @@
       "message": "We also need to put a check that if the state is PKVM_PAGE_NONE, then make sure the (annotated) owner is PKVM_ID_HYP. Right now, this isn\u0027t needed, but with device assignment, we don\u0027t want pkvm to share pages belonging to PKVM_ID_GUEST with the host.",
       "revId": "a2fd3acc283c01e9376cb0dad391151617dadc7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abec1c90_c458da03",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1790,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-08-20T01:16:40Z",
+      "side": 1,
+      "message": "sorry, I misunderstood the return of `check_host_mmio_pgstate`. If the state is PKVM_PAGE_NONE, this won\u0027t succeed anyway. please ignore :-)",
+      "parentUuid": "72a01d80_270891c0",
+      "revId": "a2fd3acc283c01e9376cb0dad391151617dadc7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
