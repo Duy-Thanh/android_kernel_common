@@ -22,6 +22,30 @@
       },
       "revId": "de5c18776e62ed73c782bc7609d30d187ddcfab7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef553a9f_04048d71",
+        "filename": "include/trace/hooks/bl_hib.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 3596176
+      },
+      "writtenOn": "2026-08-20T05:49:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c0ce0dc_5e61a36f",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 19
+      },
+      "revId": "de5c18776e62ed73c782bc7609d30d187ddcfab7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
