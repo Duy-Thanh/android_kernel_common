@@ -135,9 +135,8 @@ static bool f2fs_enable_inode_chksum(struct f2fs_sb_info *sbi, struct page *page
 
 static __u32 f2fs_inode_chksum(struct f2fs_sb_info *sbi, struct page *page)
 {
-	struct f2fs_node *node = F2FS_NODE(page);
-	struct f2fs_inode *ri = &node->i;
-	__le32 ino = node->footer.ino;
+	struct f2fs_inode *ri = F2FS_INODE(page);
+	__le32 ino = F2FS_NODE_FOOTER(page)->ino;
 	__le32 gen = ri->i_generation;
 	__u32 chksum, chksum_seed;
 	__u32 dummy_cs = 0;
