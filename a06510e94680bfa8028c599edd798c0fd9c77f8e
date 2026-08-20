@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bbb4e3be_838ba62e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-08-20T08:11:52Z",
+      "side": 1,
+      "message": "This will fail the initialization if the driver doesn\u0027t use the correct number of pages and `KVM_FFA_MBOX_NR_PAGES` is updated to a different value.\n\nTo overcome this, we should return to the driver the number of pages that pKVM uses during the FFA_FEATURES querying for the size of the RXTX buffers.\n\nsomething like this should do the trick:\n```\ndiff --git a/arch/arm64/kvm/hyp/nvhe/ffa.c b/arch/arm64/kvm/hyp/nvhe/ffa.c\nindex 48cf502ce1e7..95156d409f79 100644\n--- a/arch/arm64/kvm/hyp/nvhe/ffa.c\n+++ b/arch/arm64/kvm/hyp/nvhe/ffa.c\n@@ -1355,7 +1355,7 @@ static bool do_ffa_features(struct arm_smccc_1_2_regs *res,\n                            struct kvm_cpu_context *ctxt)\n {\n        DECLARE_REG(u32, id, ctxt, 1);\n-       u64 prop \u003d 0;\n+       u64 prop \u003d 0, buff_sz;\n        int ret \u003d 0;\n \n        if (!ffa_call_supported(id)) {\n@@ -1364,6 +1364,18 @@ static bool do_ffa_features(struct arm_smccc_1_2_regs *res,\n        }\n \n        switch (id) {\n+       case FFA_RXTX_MAP:\n+       case FFA_FN64_RXTX_MAP:\n+               buff_sz \u003d KVM_FFA_MBOX_NR_PAGES * PAGE_SIZE;\n+               if (buff_sz \u003d\u003d SZ_4K)\n+                       prop \u003d FFA_FEAT_RXTX_MIN_SZ_4K;\n+               else if (buff_sz \u003d\u003d SZ_64K)\n+                       prop \u003d FFA_FEAT_RXTX_MIN_SZ_64K;\n+               else if (buff_sz \u003d\u003d SZ_16K)\n+                       prop \u003d FFA_FEAT_RXTX_MIN_SZ_16K;\n+               else\n+                       ret \u003d FFA_RET_NOT_SUPPORTED;\n+               goto out_handled;\n        case FFA_MEM_SHARE:\n        case FFA_FN64_MEM_SHARE:\n        case FFA_MEM_LEND:\n```",
+      "range": {
+        "startLine": 518,
+        "startChar": 0,
+        "endLine": 521,
+        "endChar": 2
+      },
+      "revId": "a06510e94680bfa8028c599edd798c0fd9c77f8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "87504999_c4e507d4",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 1
