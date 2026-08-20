@@ -19,6 +19,9 @@
   fixed_size_llseek
   flush_dcache_page
   free_hpage
+  gcma_alloc_range
+  gcma_free_range
+  gcma_stat_get
   generic_file_read_iter
   generic_mii_ioctl
   generic_perform_write
@@ -56,6 +59,7 @@
   pstore_register
   pstore_unregister
   put_disk
+  register_gcma_area
   runqueues
   scsi_device_quiesce
   scsi_device_resume
