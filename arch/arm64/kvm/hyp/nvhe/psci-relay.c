@@ -401,9 +401,10 @@ static unsigned long psci_1_0_handler(u64 func_id, struct kvm_cpu_context *host_
 		return psci_system_reset2(host_ctxt);
 	case PSCI_1_0_FN_PSCI_FEATURES:
 	case PSCI_1_0_FN_SET_SUSPEND_MODE:
+		return psci_forward(host_ctxt);
 	case PSCI_1_3_FN_SYSTEM_OFF2:
 	case PSCI_1_3_FN64_SYSTEM_OFF2:
-		return psci_forward(host_ctxt);
+		return psci_poison_and_freeze(host_ctxt);
 	case PSCI_1_0_FN64_SYSTEM_SUSPEND:
 		return psci_system_suspend(func_id, host_ctxt);
 	default:
