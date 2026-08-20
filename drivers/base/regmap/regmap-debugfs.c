@@ -289,9 +289,9 @@ static ssize_t regmap_map_read_file(struct file *file, char __user *user_buf,
 	return regmap_read_debugfs(map, 0, map->max_register, user_buf,
 				   count, ppos);
 }
-
-#undef REGMAP_ALLOW_WRITE_DEBUGFS
-#ifdef REGMAP_ALLOW_WRITE_DEBUGFS
+#if 1
+//#undef REGMAP_ALLOW_WRITE_DEBUGFS
+//#ifdef REGMAP_ALLOW_WRITE_DEBUGFS
 /*
  * This can be dangerous especially when we have clients such as
  * PMICs, therefore don't provide any real compile time configuration option
