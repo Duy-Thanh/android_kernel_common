@@ -654,15 +654,27 @@ struct f2fs_dentry_ptr {
 	int nr_bitmap;
 };
 
-static inline void make_dentry_ptr_block(struct inode *inode,
-		struct f2fs_dentry_ptr *d, struct f2fs_dentry_block *t)
+static inline unsigned int f2fs_dentries_per_block(unsigned int blocksize)
 {
+	return (BITS_PER_BYTE * blocksize) /
+		((SIZE_OF_DIR_ENTRY + F2FS_SLOT_LEN) * BITS_PER_BYTE + 1);
+}
+
+static inline void make_dentry_ptr_block(struct inode *inode,
+				struct f2fs_dentry_ptr *d, void *t)
+{
+	unsigned int entries = f2fs_dentries_per_block(F2FS_BLKSIZE);
+	unsigned int bitmap_size = DIV_ROUND_UP(entries, BITS_PER_BYTE);
+	unsigned int reserved_size = F2FS_BLKSIZE - bitmap_size -
+			(SIZE_OF_DIR_ENTRY + F2FS_SLOT_LEN) * entries;
+
 	d->inode = inode;
-	d->max = NR_DENTRY_IN_BLOCK;
-	d->nr_bitmap = SIZE_OF_DENTRY_BITMAP;
-	d->bitmap = t->dentry_bitmap;
-	d->dentry = t->dentry;
-	d->filename = t->filename;
+	d->max = entries;
+	d->nr_bitmap = bitmap_size;
+	d->bitmap = t;
+	d->dentry = t + bitmap_size + reserved_size;
+	d->filename = t + bitmap_size + reserved_size +
+					SIZE_OF_DIR_ENTRY * entries;
 }
 
 static inline void make_dentry_ptr_inline(struct inode *inode,
