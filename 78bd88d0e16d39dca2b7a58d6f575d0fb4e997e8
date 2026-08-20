@@ -16,6 +16,24 @@
       "message": "Please fix this ERROR reported by KernelCommit: \u0027linux-next\u0027 is not an acceptable maintainer tree as commit hashes are not stabl...\n\n\u0027linux-next\u0027 is not an acceptable maintainer tree as commit hashes are not stable there.\nPlease refer to a different maintainer tree or use FROMLIST instead.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
       "revId": "78bd88d0e16d39dca2b7a58d6f575d0fb4e997e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2b77f3f_cf3c2562",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4118894
+      },
+      "writtenOn": "2026-08-20T03:15:22Z",
+      "side": 1,
+      "message": "Thank you for your prompt review. I have checked again and it has not yet entered Linux-stable. I obtained this change from linux-next. If linux-next is unacceptable, how should I modify the commit message? (I have read https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md, but I have no idea how to handle it.)\n\nThis change has been merged into Android 17-6.18, and the same issue was covered by +2. Is it possible to handle this in the same way? Thank you.",
+      "parentUuid": "73629641_bd8fede1",
+      "revId": "78bd88d0e16d39dca2b7a58d6f575d0fb4e997e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
