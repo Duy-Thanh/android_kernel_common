@@ -16,6 +16,24 @@
       "message": "Not related to this change, but should we rename it to `__check_host_state(unsigned long hpa, unsigned long size, u64 prot, void *arg)`? this function doesn\u0027t do anything with gpa?",
       "revId": "a80b276122ed29d14f768ad005299e29540cdd47",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3590b236_0510ad38",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 650,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-20T12:31:24Z",
+      "side": 1,
+      "message": "It doesn\u0027t do anything with gpa but it still has to take gpa as an (unused) argument, to let `for_each_contig_range()` use this function as a callback.\n\nAlso, this logic below:\n\n```\n\tenum pkvm_owner_id owner \u003d (host_state \u003d\u003d PKVM_PAGE_OWNED ||\n\t\t\t\t    host_state \u003d\u003d PKVM_PAGE_SHARED_OWNED) ?\n\t\t\t\t   PKVM_ID_HOST : PKVM_ID_GUEST;\n```\n\nindicates that this function is meant to be used specifically in host\u003c-\u003eguest transitions, not in host\u003c-\u003ehyp transitions, right?",
+      "parentUuid": "f2d80e1f_83a1aab8",
+      "revId": "a80b276122ed29d14f768ad005299e29540cdd47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
