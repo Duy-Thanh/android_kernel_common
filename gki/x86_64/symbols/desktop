@@ -2427,6 +2427,7 @@
   regcache_reg_cached
   regcache_sync
   regcache_sync_region
+  region_intersects
   register_acpi_notifier
   __register_blkdev
   __register_chrdev
