@@ -333,6 +333,14 @@ void psci_mem_protect_dec(u64 n)
 	hyp_spin_unlock(&mem_protect_lock);
 }
 
+static unsigned long psci_poison_and_freeze(struct kvm_cpu_context *host_ctxt)
+{
+	pkvm_poison_pvmfw_pages();
+	/* Avoid racing with a MEM_PROTECT call. */
+	hyp_spin_lock(&mem_protect_lock);
+	return psci_forward(host_ctxt);
+}
+
 static unsigned long psci_0_1_handler(u64 func_id, struct kvm_cpu_context *host_ctxt)
 {
 	if (is_psci_0_1(cpu_off, func_id) || is_psci_0_1(migrate, func_id))
@@ -361,10 +369,7 @@ static unsigned long psci_0_2_handler(u64 func_id, struct kvm_cpu_context *host_
 	 */
 	case PSCI_0_2_FN_SYSTEM_OFF:
 	case PSCI_0_2_FN_SYSTEM_RESET:
-		pkvm_poison_pvmfw_pages();
-		/* Avoid racing with a MEM_PROTECT call. */
-		hyp_spin_lock(&mem_protect_lock);
-		return psci_forward(host_ctxt);
+		return psci_poison_and_freeze(host_ctxt);
 	case PSCI_0_2_FN64_CPU_SUSPEND:
 		return psci_cpu_suspend(func_id, host_ctxt);
 	case PSCI_0_2_FN64_CPU_ON:
