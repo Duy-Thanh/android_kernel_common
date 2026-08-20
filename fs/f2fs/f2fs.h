@@ -2167,6 +2167,11 @@ static inline struct f2fs_checkpoint *F2FS_CKPT(struct f2fs_sb_info *sbi)
 	return (struct f2fs_checkpoint *)(sbi->ckpt);
 }
 
+static inline struct node_footer *F2FS_NODE_FOOTER(const struct page *page)
+{
+	return page_address(page) + F2FS_BLKSIZE - sizeof(struct node_footer);
+}
+
 static inline struct f2fs_node *F2FS_NODE(const struct page *page)
 {
 	return (struct f2fs_node *)page_address(page);
@@ -2175,6 +2180,12 @@ static inline struct f2fs_node *F2FS_NODE(const struct page *page)
 static inline struct f2fs_inode *F2FS_INODE(struct page *page)
 {
 	return &((struct f2fs_node *)page_address(page))->i;
+}
+
+static inline __le32 *F2FS_INODE_NIDS(const struct page *page)
+{
+	return page_address(page) + F2FS_BLKSIZE - sizeof(struct node_footer) -
+		SIZE_OF_I_NID;
 }
 
 static inline struct f2fs_nm_info *NM_I(struct f2fs_sb_info *sbi)
@@ -3104,13 +3115,11 @@ static inline void f2fs_radix_tree_insert(struct radix_tree_root *root,
 		cond_resched();
 }
 
-#define RAW_IS_INODE(p)	((p)->footer.nid == (p)->footer.ino)
-
 static inline bool IS_INODE(struct page *page)
 {
-	struct f2fs_node *p = F2FS_NODE(page);
+	struct node_footer *footer = F2FS_NODE_FOOTER(page);
 
-	return RAW_IS_INODE(p);
+	return footer->nid == footer->ino;
 }
 
 static inline int offset_in_addr(struct f2fs_inode *i)
@@ -3119,9 +3128,11 @@ static inline int offset_in_addr(struct f2fs_inode *i)
 			(le16_to_cpu(i->i_extra_isize) / sizeof(__le32)) : 0;
 }
 
-static inline __le32 *blkaddr_in_node(struct f2fs_node *node)
+static inline __le32 *blkaddr_in_node(struct page *page)
 {
-	return RAW_IS_INODE(node) ? node->i.i_addr : node->dn.addr;
+	struct f2fs_node *node = F2FS_NODE(page);
+
+	return IS_INODE(page) ? node->i.i_addr : node->dn.addr;
 }
 
 static inline int f2fs_has_extra_attr(struct inode *inode);
@@ -3138,8 +3149,7 @@ static inline unsigned int get_dnode_base(struct inode *inode,
 static inline __le32 *get_dnode_addr(struct inode *inode,
 					struct page *node_page)
 {
-	return blkaddr_in_node(F2FS_NODE(node_page)) +
-			get_dnode_base(inode, node_page);
+	return blkaddr_in_node(node_page) + get_dnode_base(inode, node_page);
 }
 
 static inline block_t data_blkaddr(struct inode *inode,
