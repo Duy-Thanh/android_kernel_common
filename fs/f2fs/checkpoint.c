@@ -963,7 +963,9 @@ int f2fs_recover_orphan_inodes(struct f2fs_sb_info *sbi)
 
 	for (i = 0; i < orphan_blocks; i++) {
 		struct page *page;
-		struct f2fs_orphan_block *orphan_blk;
+		__le32 *orphan_inos;
+		struct f2fs_orphan_footer *footer;
+		unsigned int entry_count;
 
 		page = f2fs_get_meta_page(sbi, start_blk + i);
 		if (IS_ERR(page)) {
@@ -971,9 +973,11 @@ int f2fs_recover_orphan_inodes(struct f2fs_sb_info *sbi)
 			goto out;
 		}
 
-		orphan_blk = (struct f2fs_orphan_block *)page_address(page);
-		for (j = 0; j < le32_to_cpu(orphan_blk->entry_count); j++) {
-			nid_t ino = le32_to_cpu(orphan_blk->ino[j]);
+		orphan_inos = page_address(page);
+		footer = f2fs_orphan_footer(orphan_inos, F2FS_BLKSIZE);
+		entry_count = le32_to_cpu(footer->entry_count);
+		for (j = 0; j < entry_count; j++) {
+			nid_t ino = le32_to_cpu(orphan_inos[j]);
 
 			err = recover_orphan_inode(sbi, ino);
 			if (err) {
@@ -994,7 +998,8 @@ out:
 static void write_orphan_inodes(struct f2fs_sb_info *sbi, block_t start_blk)
 {
 	struct list_head *head;
-	struct f2fs_orphan_block *orphan_blk = NULL;
+	__le32 *orphan_inos = NULL;
+	struct f2fs_orphan_footer *footer = NULL;
 	unsigned int nentries = 0;
 	unsigned short index = 1;
 	unsigned short orphan_blocks;
@@ -1002,7 +1007,7 @@ static void write_orphan_inodes(struct f2fs_sb_info *sbi, block_t start_blk)
 	struct ino_entry *orphan = NULL;
 	struct inode_management *im = &sbi->im[ORPHAN_INO];
 
-	orphan_blocks = GET_ORPHAN_BLOCKS(im->ino_num);
+	orphan_blocks = f2fs_orphan_blocks(F2FS_BLKSIZE, im->ino_num);
 
 	/*
 	 * we don't need to do spin_lock(&im->ino_lock) here, since all the
@@ -1015,22 +1020,22 @@ static void write_orphan_inodes(struct f2fs_sb_info *sbi, block_t start_blk)
 	list_for_each_entry(orphan, head, list) {
 		if (!page) {
 			page = f2fs_grab_meta_page(sbi, start_blk++);
-			orphan_blk =
-				(struct f2fs_orphan_block *)page_address(page);
-			memset(orphan_blk, 0, sizeof(*orphan_blk));
+			orphan_inos = page_address(page);
+			footer = f2fs_orphan_footer(orphan_inos, F2FS_BLKSIZE);
+			memset(orphan_inos, 0, F2FS_BLKSIZE);
 		}
 
-		orphan_blk->ino[nentries++] = cpu_to_le32(orphan->ino);
+		orphan_inos[nentries++] = cpu_to_le32(orphan->ino);
 
-		if (nentries == F2FS_ORPHANS_PER_BLOCK) {
+		if (nentries == f2fs_orphans_per_block(F2FS_BLKSIZE)) {
 			/*
-			 * an orphan block is full of 1020 entries,
+			 * an orphan block is full,
 			 * then we need to flush current orphan blocks
 			 * and bring another one in memory
 			 */
-			orphan_blk->blk_addr = cpu_to_le16(index);
-			orphan_blk->blk_count = cpu_to_le16(orphan_blocks);
-			orphan_blk->entry_count = cpu_to_le32(nentries);
+			footer->blk_addr = cpu_to_le16(index);
+			footer->blk_count = cpu_to_le16(orphan_blocks);
+			footer->entry_count = cpu_to_le32(nentries);
 			set_page_dirty(page);
 			f2fs_put_page(page, 1);
 			index++;
@@ -1040,9 +1045,9 @@ static void write_orphan_inodes(struct f2fs_sb_info *sbi, block_t start_blk)
 	}
 
 	if (page) {
-		orphan_blk->blk_addr = cpu_to_le16(index);
-		orphan_blk->blk_count = cpu_to_le16(orphan_blocks);
-		orphan_blk->entry_count = cpu_to_le32(nentries);
+		footer->blk_addr = cpu_to_le16(index);
+		footer->blk_count = cpu_to_le16(orphan_blocks);
+		footer->entry_count = cpu_to_le32(nentries);
 		set_page_dirty(page);
 		f2fs_put_page(page, 1);
 	}
@@ -1712,7 +1717,7 @@ static int do_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
 		__clear_ckpt_flags(ckpt, CP_COMPACT_SUM_FLAG);
 	spin_unlock_irqrestore(&sbi->cp_lock, flags);
 
-	orphan_blocks = GET_ORPHAN_BLOCKS(orphan_num);
+	orphan_blocks = f2fs_orphan_blocks(F2FS_BLKSIZE, orphan_num);
 	ckpt->cp_pack_start_sum = cpu_to_le32(1 + cp_payload_blks +
 			orphan_blocks);
 
@@ -1950,7 +1955,7 @@ void f2fs_init_ino_entry_info(struct f2fs_sb_info *sbi)
 
 	sbi->max_orphans = (BLKS_PER_SEG(sbi) - F2FS_CP_PACKS -
 			NR_CURSEG_PERSIST_TYPE - __cp_payload(sbi)) *
-			F2FS_ORPHANS_PER_BLOCK;
+			f2fs_orphans_per_block(F2FS_BLKSIZE);
 }
 
 int __init f2fs_create_checkpoint_caches(void)
