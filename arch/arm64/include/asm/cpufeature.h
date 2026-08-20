@@ -814,6 +814,15 @@ static inline bool system_supports_mte(void)
 	return alternative_has_cap_unlikely(ARM64_MTE);
 }
 
+/*
+ * Keep system_supports_mte() available for in-kernel MTE users while
+ * suppressing userspace discovery and opt-in.
+ */
+static inline bool system_supports_user_mte(void)
+{
+	return false;
+}
+
 static inline bool system_has_prio_mask_debugging(void)
 {
 	return IS_ENABLED(CONFIG_ARM64_DEBUG_PRIORITY_MASKING) &&

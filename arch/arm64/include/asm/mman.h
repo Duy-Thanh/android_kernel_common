@@ -19,7 +19,7 @@ static inline vm_flags_t arch_calc_vm_prot_bits(unsigned long prot,
 	if (system_supports_bti() && (prot & PROT_BTI))
 		ret |= VM_ARM64_BTI;
 
-	if (system_supports_mte() && (prot & PROT_MTE))
+	if (system_supports_user_mte() && (prot & PROT_MTE))
 		ret |= VM_MTE;
 
 #ifdef CONFIG_ARCH_HAS_PKEYS
@@ -42,7 +42,7 @@ static inline vm_flags_t arch_calc_vm_flag_bits(struct file *file,
 	 * backed by tags-capable memory. The vm_flags may be overridden by a
 	 * filesystem supporting MTE (RAM-based).
 	 */
-	if (system_supports_mte()) {
+	if (system_supports_user_mte()) {
 		if (flags & (MAP_ANONYMOUS | MAP_HUGETLB))
 			return VM_MTE_ALLOWED;
 		if (shmem_file(file) || is_file_hugepages(file))
@@ -61,7 +61,7 @@ static inline bool arch_validate_prot(unsigned long prot,
 	if (system_supports_bti())
 		supported |= PROT_BTI;
 
-	if (system_supports_mte())
+	if (system_supports_user_mte())
 		supported |= PROT_MTE;
 
 	return (prot & ~supported) == 0;
@@ -70,14 +70,15 @@ static inline bool arch_validate_prot(unsigned long prot,
 
 static inline bool arch_validate_flags(vm_flags_t vm_flags)
 {
-	if (system_supports_mte()) {
+	if (system_supports_user_mte()) {
 		/*
 		 * only allow VM_MTE if VM_MTE_ALLOWED has been set
 		 * previously
 		 */
 		if ((vm_flags & VM_MTE) && !(vm_flags & VM_MTE_ALLOWED))
 			return false;
-	}
+	} else if (vm_flags & VM_MTE)
+		return false;
 
 	if (system_supports_gcs() && (vm_flags & VM_SHADOW_STACK)) {
 		/* An executable GCS isn't a good idea. */

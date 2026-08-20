@@ -416,7 +416,7 @@ long get_mte_ctrl(struct task_struct *task)
 	u64 incl = (~mte_ctrl >> MTE_CTRL_GCR_USER_EXCL_SHIFT) &
 		   SYS_GCR_EL1_EXCL_MASK;
 
-	if (!system_supports_mte())
+	if (!system_supports_user_mte())
 		return 0;
 
 	ret = incl << PR_MTE_TAG_SHIFT;
@@ -553,7 +553,7 @@ int mte_ptrace_copy_tags(struct task_struct *child, long request,
 	struct iovec __user *uiov = (void __user *)data;
 	unsigned int gup_flags = FOLL_FORCE;
 
-	if (!system_supports_mte())
+	if (!system_supports_user_mte())
 		return -EIO;
 
 	if (get_user(kiov.iov_base, &uiov->iov_base) ||
@@ -615,7 +615,7 @@ static int register_mte_tcf_preferred_sysctl(void)
 {
 	unsigned int cpu;
 
-	if (!system_supports_mte())
+	if (!system_supports_user_mte())
 		return 0;
 
 	for_each_possible_cpu(cpu) {
