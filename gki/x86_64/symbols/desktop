@@ -1042,8 +1042,10 @@
   drm_probe_ddc
   drm_property_blob_get
   drm_property_blob_put
+  drm_property_create
   drm_property_create_blob
   drm_property_create_enum
+  drm_property_lookup_blob
   drm_property_replace_blob
   drm_puts
   __drm_puts_coredump
