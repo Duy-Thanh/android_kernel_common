@@ -51,6 +51,24 @@
       "message": "So that bug points to the android15-6.6 change: https://r.android.com/3838257 which this seems to be derived from.\n\nIs there a reason you didn\u0027t cherry pick that change, preserving the changeId? and Signed-off-by lines? (while appending your own?)",
       "revId": "5d4b4d7216b5a61b3c9b75b5721edae4d62ed84e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffe689fa_5f84a3db",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 3520250
+      },
+      "writtenOn": "2026-08-20T01:50:07Z",
+      "side": 1,
+      "message": "ok, I have cherry-pick that change to android17-6.18:\nhttps://android-review.googlesource.com/c/kernel/common/+/4241223\n\npls review that commit, thx.",
+      "parentUuid": "3575d7fc_38c0be49",
+      "revId": "5d4b4d7216b5a61b3c9b75b5721edae4d62ed84e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
