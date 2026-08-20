@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4033a09a_6c5088c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-20T16:18:26Z",
+      "side": 1,
+      "message": "This series needs a patch on top to add the new symbols to your symbol list. Why is this feature being added now to the 5.10 kernel which will be EOL next July?",
+      "revId": "9bc536d0522d51015606c951cae3df51c9db47f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
