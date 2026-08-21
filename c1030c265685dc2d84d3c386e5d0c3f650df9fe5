@@ -33,6 +33,24 @@
       "message": "This seems to be adding more tracepoint exports then what the commit message states. And these extra tracepoints seem to be causing build failures for this patch series. Could you please double check these and ensure things build before submitting?",
       "revId": "c1030c265685dc2d84d3c386e5d0c3f650df9fe5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a7f1675_abcbc658",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 782,
+      "author": {
+        "id": 5055945
+      },
+      "writtenOn": "2026-08-21T01:52:10Z",
+      "side": 1,
+      "message": "Sorry, my mistake — the cherry-pick pulled in extra tracepoint exports beyond what the commit message describes. I\u0027ll drop them and double-check the whole series builds.",
+      "parentUuid": "60154d91_31d9d945",
+      "revId": "c1030c265685dc2d84d3c386e5d0c3f650df9fe5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
