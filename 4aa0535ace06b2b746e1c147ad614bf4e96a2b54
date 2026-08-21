@@ -16,6 +16,24 @@
       "message": "If it is a restricted hook, it must be named with _rvh_ instead of _vh_",
       "revId": "4aa0535ace06b2b746e1c147ad614bf4e96a2b54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e314115_b8c5c08e",
+        "filename": "include/trace/hooks/power.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 3589941
+      },
+      "writtenOn": "2026-08-21T10:07:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "599da42f_0a263e46",
+      "revId": "4aa0535ace06b2b746e1c147ad614bf4e96a2b54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
