@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "136c02d2_571da075",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-08-21T21:02:14Z",
+      "side": 1,
+      "message": "Overriding lint as the warning doesn\u0027t look valid.",
+      "revId": "7f78b6ae55b353182c3d590f6ca8ce531256397c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac54b21b_326601a6",
@@ -38,6 +55,30 @@
       "side": 1,
       "message": "The linter mistakes this variable declaration as function declaration. `kvm_nvhe_sym` is conditionally prefixing a symbol name for hypervisor namespace.\n\n```\n#ifndef __KVM_NVHE_HYPERVISOR__\n/*\n * KVM nVHE code has its own symbol namespace prefixed with __kvm_nvhe_,\n * to separate it from the kernel proper.\n */\n#define kvm_nvhe_sym(sym)\t__kvm_nvhe_##sym\n#else\n#define kvm_nvhe_sym(sym)\tsym\n#endif\n```",
       "parentUuid": "ac54b21b_326601a6",
+      "range": {
+        "startLine": 441,
+        "startChar": 0,
+        "endLine": 442,
+        "endChar": 0
+      },
+      "revId": "7f78b6ae55b353182c3d590f6ca8ce531256397c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e952ffb6_09aad628",
+        "filename": "arch/arm64/include/asm/kvm_pkvm.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-08-21T21:02:14Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0409d8a4_e3be22dd",
       "range": {
         "startLine": 441,
         "startChar": 0,
