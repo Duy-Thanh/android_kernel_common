@@ -52,6 +52,24 @@
       "parentUuid": "b5195fcd_728942ac",
       "revId": "5d25dc04c729b2b316644d21eb5ef64f6b8758c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb7b649e_07d76af7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2055842
+      },
+      "writtenOn": "2026-08-21T07:04:39Z",
+      "side": 1,
+      "message": "It\u0027s not about the cutoff - the KMI is frozen forever for 6.18. The only option is KMI that will happen on 1st Nov. Unfortunately the kmi-next branch closed on 15th of August.",
+      "parentUuid": "35b7677d_4586e7e9",
+      "revId": "5d25dc04c729b2b316644d21eb5ef64f6b8758c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
