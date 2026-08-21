@@ -1956,6 +1956,8 @@ slab_flags_t kmem_cache_flags(slab_flags_t flags, const char *name)
 	slab_flags_t block_flags;
 	slab_flags_t slub_debug_local = slub_debug;
 
+	flags |= SLAB_NO_TAGGING;
+
 	if (flags & SLAB_NO_USER_FLAGS)
 		return flags;
 
@@ -2026,7 +2028,7 @@ static inline void remove_full(struct kmem_cache *s, struct kmem_cache_node *n,
 					struct slab *slab) {}
 slab_flags_t kmem_cache_flags(slab_flags_t flags, const char *name)
 {
-	return flags;
+	return flags | SLAB_NO_TAGGING;
 }
 #define slub_debug 0
 

@@ -662,6 +662,8 @@ void __init create_boot_cache(struct kmem_cache *s, const char *name,
 	unsigned int align = ARCH_KMALLOC_MINALIGN;
 	struct kmem_cache_args kmem_args = {};
 
+	flags |= SLAB_NO_TAGGING;
+
 	/*
 	 * kmalloc caches guarantee alignment of at least the largest
 	 * power-of-two divisor of the size. For power-of-two sizes,
