@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b20b57c_c64cd144",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-08-21T18:13:44Z",
+      "side": 1,
+      "message": "This looks to be changes to a driver that isn\u0027t built into the GKI binary (please let me know if this assumption is incorrect), and we do not have a way to test or validate this change. \n\nIs there a reason it is important to include this in the GKI tree instead of allowing folks who use this driver for the vendor drivers to include this change in their vendor driver tree?",
+      "revId": "da184f8f2f6075e4972e94637af890ef6b986610",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
