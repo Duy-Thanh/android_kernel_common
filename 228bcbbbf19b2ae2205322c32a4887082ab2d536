@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1478f57_b4522e24",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 3520250
+      },
+      "writtenOn": "2026-08-21T08:05:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bacef59f_fe7226c1",
+      "revId": "228bcbbbf19b2ae2205322c32a4887082ab2d536",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4ebfcc2b_eb2a2733",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f183e7b1_d6335e8c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 3520250
+      },
+      "writtenOn": "2026-08-21T08:05:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ebfcc2b_eb2a2733",
+      "revId": "228bcbbbf19b2ae2205322c32a4887082ab2d536",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fdf77e13_fa87e34c",
@@ -48,6 +84,24 @@
       "writtenOn": "2026-08-20T06:35:52Z",
       "side": 1,
       "message": "It would be good to open a new bug to provide more detail on why this is necessary on the new kernel version. \n\nI\u0027m somewhat hesitant to take this, as it acts more as a bandaid to cover up the overflow, which should be better understood and avoided in the first place.  We actually pushed back against the patch landing in android16-6.12 for this reason: https://android-review.git.corp.google.com/c/kernel/common/+/3899544/comments/7897e979_cd0ef0ee\n\nSo it would be good to have further descussions in the bug to clarify exactly how to the bug is coming to be (a number of overflow protection fixes have landed in 6.12 and later kernels).",
+      "revId": "228bcbbbf19b2ae2205322c32a4887082ab2d536",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50c55bbb_c794c601",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3520250
+      },
+      "writtenOn": "2026-08-21T08:05:52Z",
+      "side": 1,
+      "message": "ok, I have open a new bug:550166706",
+      "parentUuid": "fdf77e13_fa87e34c",
       "revId": "228bcbbbf19b2ae2205322c32a4887082ab2d536",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
