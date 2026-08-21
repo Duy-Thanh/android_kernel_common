@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "02331232_bb2634d1",
+        "filename": "Documentation/ABI/testing/sysfs-driver-hid-logitech-hidpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 3541841
+      },
+      "writtenOn": "2026-08-21T03:06:05Z",
+      "side": 1,
+      "message": "Fixing this in a follow-up patch.",
+      "parentUuid": "662bb0f1_dd86bafb",
+      "range": {
+        "startLine": 54,
+        "startChar": 2,
+        "endLine": 55,
+        "endChar": 27
+      },
+      "revId": "5fc3f26d965bb903d9e9e2b1f478968336531afb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ad546584_4f140183",
         "filename": "drivers/hid/hid-logitech-hidpp.c",
         "patchSetId": 3
@@ -97,6 +121,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "05e27c47_095e5e19",
+        "filename": "drivers/hid/hid-logitech-hidpp.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 4831,
+      "author": {
+        "id": 3541841
+      },
+      "writtenOn": "2026-08-21T03:06:05Z",
+      "side": 1,
+      "message": "No, this prints the list of platforms supported by the currently selected mode. \n\nLogitech peripherals that support the multi-platform feature contain a list of internal descriptors. Each descriptor includes an `osMask` that specifies which operating systems it supports. In the set function, we iterate over these descriptors and select the descriptor which has the target OS bit is set. \n\nA single descriptor(mode) can be shared across multiple operating systems; for example, a keyboard typically uses the same descriptor for both iOS and macOS. So here, we are printing out the list of operating systems supported by the selected descriptor(mode) irrespective of how the descriptor(mode) was selected.",
+      "parentUuid": "ad546584_4f140183",
+      "range": {
+        "startLine": 4831,
+        "startChar": 0,
+        "endLine": 4831,
+        "endChar": 62
+      },
+      "revId": "5fc3f26d965bb903d9e9e2b1f478968336531afb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "786ddd8b_c4d080b0",
         "filename": "drivers/hid/hid-logitech-hidpp.c",
         "patchSetId": 3
@@ -108,6 +156,30 @@
       "writtenOn": "2026-08-18T13:46:19Z",
       "side": 1,
       "message": "you raced with userspace and lost, please make this part of the default attributes for the device and have a is_visable() callback to enable this or not.",
+      "range": {
+        "startLine": 4924,
+        "startChar": 7,
+        "endLine": 4924,
+        "endChar": 25
+      },
+      "revId": "5fc3f26d965bb903d9e9e2b1f478968336531afb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc8fb21e_b48e4dd3",
+        "filename": "drivers/hid/hid-logitech-hidpp.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 4924,
+      "author": {
+        "id": 3541841
+      },
+      "writtenOn": "2026-08-21T03:06:05Z",
+      "side": 1,
+      "message": "Fixing this in a follow-up patch.",
+      "parentUuid": "786ddd8b_c4d080b0",
       "range": {
         "startLine": 4924,
         "startChar": 7,
