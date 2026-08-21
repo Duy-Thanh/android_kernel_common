@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "76f458d0_70fe718b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-08-21T13:18:11Z",
+      "side": 1,
+      "message": "The call-stack you shared relies on ACPI parsing  (`early_acpi_boot_init()` -\u003e `default_acpi_madt_oem_check()`), which is active in the primary Microdroid kernel (which has `CONFIG_ACPI\u003dy`). However, the secondary crashdump kernel is built with CONFIG_ACPI deliberately disabled. So `early_acpi_boot_init()` and `acpi_boot_init()` are empty stubs and `x2apic_acpi_madt_oem_check` will not be called.\n\nNevertheless, setting `x2apic_phys` would actually work since `x86_64_probe_apic` called during late probe in `time_init` will use it and this happens indeed before the interrupts are enabled.\n\nI will drop this patch and instead prepare one setting x2apic_phys via commandline",
+      "parentUuid": "8ee72bdc_4f423a16",
+      "revId": "e5ed6ab8e9191b78d2c4cafca005e7c12ee244d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7f9e8ab0_33491010",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2026-06-26T14:18:38Z",
       "side": 1,
       "message": "Sounds like this is a generic upstream x86 kernel issue, not pKVM or Android specific? So we should fix it upstream?",
+      "revId": "e5ed6ab8e9191b78d2c4cafca005e7c12ee244d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "463fa151_6ed2c92e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-08-21T13:18:11Z",
+      "side": 1,
+      "message": "It is actually related to kind of exotic pKVM setup. This issue was found because:  `com.android.microdroid.test.MicrodroidHostTests#testTombstonesAreGeneratedUponKernelCrash_protectedVm_true_os_microdroid` is failing. The same test for `protectedVm_false` is passing even without this patch.\n\nIt is because pKVM for pVMs enforces using x2apic mode (aosp/3982019) and explicitly forbids transitioning a pVM out of x2APIC mode: https://android-review.googlesource.com/c/kernel/common/+/3982019/7/arch/x86/kvm/lapic.c. This causes the guest kernel to skip mapping the APIC MMIO fixmap page.\n\nAlso, as you know, even if APIC MMIO will be mapped and not skipped, we could not use MMIO-based APIC as we do not have (and rather do not want to have) instruction decoding support in pKVM. And because the crashdump kernel doesn\u0027t enable CONFIG_ACPI, the default APIC is MMIO based, which can\u0027t work under pKVM.\n\nAnyway, I think that what Chuanxiao suggested (setting x2apic_phys via commandline), is simpler and works as well. So I will probably drop this patch and go with such direction.",
+      "parentUuid": "7f9e8ab0_33491010",
       "revId": "e5ed6ab8e9191b78d2c4cafca005e7c12ee244d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
