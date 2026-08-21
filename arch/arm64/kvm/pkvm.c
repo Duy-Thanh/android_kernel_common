@@ -228,8 +228,6 @@ static int __init early_hyp_lm_size_mb_cfg(char *arg)
 }
 early_param("kvm-arm.hyp_lm_size_mb", early_hyp_lm_size_mb_cfg);
 
-DEFINE_STATIC_KEY_FALSE(kvm_ffa_unmap_on_lend);
-
 void __init kvm_hyp_reserve(void)
 {
 	u64 hyp_mem_pages = 0;
@@ -262,7 +260,7 @@ void __init kvm_hyp_reserve(void)
 	hyp_mem_pages += pkvm_selftest_pages();
 	hyp_mem_pages += hyp_ffa_proxy_pages();
 
-	if (static_branch_unlikely(&kvm_ffa_unmap_on_lend))
+	if (pkvm_ffa_unmap_on_lend())
 		hyp_mem_pages += KVM_FFA_SPM_HANDLE_NR_PAGES;
 
 	hyp_mem_pages++; /* hyp_ppages */
@@ -1918,7 +1916,7 @@ int pkvm_pgtable_stage2_split(struct kvm_pgtable *pgt, u64 addr, u64 size, void 
 
 static int early_ffa_unmap_on_lend_cfg(char *arg)
 {
-	static_branch_enable(&kvm_ffa_unmap_on_lend);
+	kvm_nvhe_sym(__pkvm_ffa_unmap_on_lend) = 1;
 	return 0;
 }
 
