@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7f548f37_1f5c915c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-21T15:29:20Z",
+      "side": 1,
+      "message": "\u003e For APIC MMIO, the kernel uses raw inline assembly\n\nAh, I see. So we\u0027d just need to use the hypercall there as well. (I\u0027m not suggesting to do that, of course.)\n\n\u003e AFAIU before that patch we also used x2APIC mode but it was done differently via host triggering __pkvm__set_virtual_apic_mode, which was then hardened by: aosp/3982020 and aosp/3982019\n\nAh, indeed. I was just recalling I saw Linux pVMs doing a few APIC MMIO accesses during early boot before enabling x2APIC. Probably that was really long ago, even before pvVMCS...\n\n...So just a note: the comments in Chuanxiao\u0027s aosp/3982019 about \"emulating xapic mode will require the host to decode MMIO instruction\" seem a bit misleading: if we really wanted to support xapic, we would just need to let pVMs use the PKVM_GHC_IOREAD/PKVM_GHC_IOWRITE hypercalls for it?",
+      "parentUuid": "66c4e44c_f58e6d94",
+      "revId": "e5ed6ab8e9191b78d2c4cafca005e7c12ee244d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6e3c482f_a320f575",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
