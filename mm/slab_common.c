@@ -903,6 +903,22 @@ static unsigned int __kmalloc_minalign(void)
 	return max(minalign, arch_slab_minalign());
 }
 
+#ifdef CONFIG_KMALLOC_PARTITION_CACHES
+static bool kmalloc_type_no_hw_tags(enum kmalloc_cache_type type)
+{
+#ifdef CONFIG_KMALLOC_PARTITION_TYPED
+	/*
+	 * Token 0 also lands in a no-pointer bucket, but it is used when type
+	 * inference fails. Keep it tagged and only skip HW tags for explicit
+	 * no-pointer tokens.
+	 */
+	return type >= KMALLOC_PARTITION_START + 1 &&
+	       type <= KMALLOC_PARTITION_START + 7;
+#endif
+	return false;
+}
+#endif
+
 static void __init
 new_kmalloc_cache(int idx, enum kmalloc_cache_type type)
 {
@@ -924,8 +940,11 @@ new_kmalloc_cache(int idx, enum kmalloc_cache_type type)
 	}
 
 #ifdef CONFIG_KMALLOC_PARTITION_CACHES
-	if (type >= KMALLOC_PARTITION_START && type <= KMALLOC_PARTITION_END)
+	if (type >= KMALLOC_PARTITION_START && type <= KMALLOC_PARTITION_END) {
 		flags |= SLAB_NO_MERGE;
+		if (kmalloc_type_no_hw_tags(type))
+			flags |= SLAB_NO_TAGGING;
+	}
 #endif
 
 	/*
