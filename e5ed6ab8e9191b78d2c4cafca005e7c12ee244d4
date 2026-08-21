@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "66c4e44c_f58e6d94",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-08-21T14:37:04Z",
+      "side": 1,
+      "message": "\u003e Just to understand, what makes APIC MMIO different from any other MMIO in this regard? \n\nFor APIC MMIO, the kernel uses raw inline assembly e.g.\n```\n  static inline void native_apic_mem_write(u32 reg, u32 v)                                                                                                                                                                                                                                                                     \n  {                                                                                                                                                                                                                                                                                                                            \n          volatile u32 *addr \u003d (volatile u32 *)(APIC_BASE + reg);                                                                                                                                                                                                                                                              \n                                                                                                                                                                                                                                                                                                                               \n          alternative_io(\"movl %0, %1\", \"xchgl %0, %1\", X86_BUG_11AP,                                                                                                                                                                                                                                                          \n                         ASM_OUTPUT(\"\u003dr\" (v), \"\u003dm\" (*addr)),                                                                                                                                                                                                                                                                   \n                         ASM_INPUT(\"0\" (v), \"m\" (*addr)));                                                                                                                                                                                                                                                                     \n  }\n```\n\n\u003e (IIRC, actually APIC MMIO used to work in pVMs. Otherwise Linux pVMs wouldn\u0027t work until we merged aosp/3982019?)\n\nAFAIU before that patch we also used x2APIC mode but it was done differently via host triggering `__pkvm__set_virtual_apic_mode`, which was then hardened by: aosp/3982020 and aosp/3982019",
+      "parentUuid": "0c36b22c_74497ee9",
+      "revId": "e5ed6ab8e9191b78d2c4cafca005e7c12ee244d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6e3c482f_a320f575",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
