@@ -16,6 +16,23 @@
       "message": "Needed to fix build regressions following http://aosp/4200923",
       "revId": "0afcb794b7d0b1e5e016856da02e450f359b4505",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "880d01c3_4ee90acc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2026-08-21T01:57:15Z",
+      "side": 1,
+      "message": "Missing abi.stg additions?",
+      "revId": "0afcb794b7d0b1e5e016856da02e450f359b4505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
