@@ -33,6 +33,24 @@
       "message": "Missing abi.stg additions?",
       "revId": "0afcb794b7d0b1e5e016856da02e450f359b4505",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f111afa0_f0fd7261",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2055842
+      },
+      "writtenOn": "2026-08-21T04:22:31Z",
+      "side": 1,
+      "message": "Yes, thanks for pointing this out. I uploaded new patchset with abi.stg definitions updated.",
+      "parentUuid": "880d01c3_4ee90acc",
+      "revId": "0afcb794b7d0b1e5e016856da02e450f359b4505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
