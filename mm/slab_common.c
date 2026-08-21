@@ -52,7 +52,7 @@ struct kmem_cache *kmem_cache;
 		SLAB_FAILSLAB | SLAB_NO_MERGE)
 
 #define SLAB_MERGE_SAME (SLAB_RECLAIM_ACCOUNT | SLAB_CACHE_DMA | \
-			 SLAB_CACHE_DMA32 | SLAB_ACCOUNT)
+			 SLAB_CACHE_DMA32 | SLAB_ACCOUNT | SLAB_NO_TAGGING)
 
 /*
  * Merge control. If this is set then no merging of slab caches will occur.

@@ -152,10 +152,18 @@ void __kasan_poison_pages(struct page *page, unsigned int order, bool init)
 			     KASAN_PAGE_FREE, init);
 }
 
+static inline bool kasan_cache_no_hw_tags(struct kmem_cache *cache)
+{
+	return kasan_hw_tags_enabled() && (cache->flags & SLAB_NO_TAGGING);
+}
+
 void __kasan_poison_slab(struct slab *slab)
 {
 	struct page *page = slab_page(slab);
 	unsigned long i;
+
+	if (kasan_cache_no_hw_tags(slab->slab_cache))
+		return;
 
 	for (i = 0; i < compound_nr(page); i++)
 		page_kasan_tag_reset(page + i);
@@ -165,11 +173,17 @@ void __kasan_poison_slab(struct slab *slab)
 
 void __kasan_unpoison_new_object(struct kmem_cache *cache, void *object)
 {
+	if (kasan_cache_no_hw_tags(cache))
+		return;
+
 	kasan_unpoison(object, cache->object_size, false);
 }
 
 void __kasan_poison_new_object(struct kmem_cache *cache, void *object)
 {
+	if (kasan_cache_no_hw_tags(cache))
+		return;
+
 	kasan_poison(object, round_up(cache->object_size, KASAN_GRANULE_SIZE),
 			KASAN_SLAB_REDZONE, false);
 }
@@ -211,6 +225,9 @@ void * __must_check __kasan_init_slab_obj(struct kmem_cache *cache,
 	/* Initialize per-object metadata if it is present. */
 	if (kasan_requires_meta())
 		kasan_init_object_meta(cache, object);
+
+	if (kasan_cache_no_hw_tags(cache))
+		return kasan_reset_tag(object);
 
 	/* Tag is ignored in set_tag() without CONFIG_KASAN_SW/HW_TAGS */
 	object = set_tag(object, assign_tag(cache, object, true));
@@ -258,6 +275,9 @@ bool __kasan_slab_pre_free(struct kmem_cache *cache, void *object,
 {
 	if (is_kfence_address(object))
 		return false;
+	if (kasan_cache_no_hw_tags(cache))
+		return false;
+
 	return check_slab_allocation(cache, object, ip);
 }
 
@@ -265,6 +285,9 @@ bool __kasan_slab_free(struct kmem_cache *cache, void *object, bool init,
 		       bool still_accessible, bool no_quarantine)
 {
 	if (is_kfence_address(object))
+		return false;
+
+	if (kasan_cache_no_hw_tags(cache))
 		return false;
 
 	/*
@@ -358,6 +381,9 @@ void * __must_check __kasan_slab_alloc(struct kmem_cache *cache,
 	if (is_kfence_address(object))
 		return (void *)object;
 
+	if (kasan_cache_no_hw_tags(cache))
+		return kasan_reset_tag(object);
+
 	/*
 	 * Generate and assign random tag for tag-based modes.
 	 * Tag is ignored in set_tag() for the generic mode.
@@ -413,6 +439,9 @@ void * __must_check __kasan_kmalloc(struct kmem_cache *cache, const void *object
 
 	if (is_kfence_address(object))
 		return (void *)object;
+
+	if (kasan_cache_no_hw_tags(cache))
+		return kasan_reset_tag(object);
 
 	/* The object has already been unpoisoned by kasan_slab_alloc(). */
 	poison_kmalloc_redzone(cache, object, size, flags);
@@ -472,14 +501,16 @@ void * __must_check __kasan_krealloc(const void *object, size_t size, gfp_t flag
 	if (is_kfence_address(object))
 		return (void *)object;
 
+	slab = virt_to_slab(kasan_reset_tag(object));
+	if (slab && kasan_cache_no_hw_tags(slab->slab_cache))
+		return kasan_reset_tag(object);
+
 	/*
 	 * Unpoison the object's data.
 	 * Part of it might already have been unpoisoned, but it's unknown
 	 * how big that part is.
 	 */
 	kasan_unpoison(object, size, false);
-
-	slab = virt_to_slab(object);
 
 	/* Piggy-back on kmalloc() instrumentation to poison the redzone. */
 	if (unlikely(!slab))
@@ -540,6 +571,9 @@ bool __kasan_mempool_poison_object(void *ptr, unsigned long ip)
 
 	slab = folio_slab(folio);
 
+	if (kasan_cache_no_hw_tags(slab->slab_cache))
+		return true;
+
 	if (check_slab_allocation(slab->slab_cache, ptr, ip))
 		return false;
 
@@ -565,6 +599,9 @@ void __kasan_mempool_unpoison_object(void *ptr, size_t size, unsigned long ip)
 	}
 
 	if (is_kfence_address(ptr))
+		return;
+
+	if (kasan_cache_no_hw_tags(slab->slab_cache))
 		return;
 
 	/* Unpoison the object and save alloc info for non-kmalloc() allocations. */

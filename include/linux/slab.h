@@ -40,6 +40,7 @@ enum _slab_flag_bits {
 #endif
 	_SLAB_NOLEAKTRACE,
 	_SLAB_NO_MERGE,
+	_SLAB_NO_TAGGING,
 #ifdef CONFIG_FAILSLAB
 	_SLAB_FAILSLAB,
 #endif
@@ -185,6 +186,9 @@ enum _slab_flag_bits {
  *   maintainers, and not used together with CONFIG_SLUB_TINY
  */
 #define SLAB_NO_MERGE		__SLAB_FLAG_BIT(_SLAB_NO_MERGE)
+
+/* Do not use hardware tag-based KASAN for this cache. */
+#define SLAB_NO_TAGGING		__SLAB_FLAG_BIT(_SLAB_NO_TAGGING)
 
 /* Fault injection mark */
 #ifdef CONFIG_FAILSLAB

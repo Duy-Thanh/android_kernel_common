@@ -2579,7 +2579,7 @@ bool slab_free_hook(struct kmem_cache *s, void *x, bool init,
 
 		inuse = get_info_end(s);
 		orig_size = get_orig_size(s, x);
-		if (!kasan_has_integrated_init())
+		if (!slab_has_kasan_integrated_init(s))
 			memset(kasan_reset_tag(x), 0, orig_size);
 		rsize = (s->flags & SLAB_RED_ZONE) ? s->red_left_pad : 0;
 		memset((char *)kasan_reset_tag(x) + inuse, 0,
@@ -3313,6 +3313,8 @@ static struct slab *allocate_slab(struct kmem_cache *s, gfp_t flags, int node)
 	flags &= gfp_allowed_mask;
 
 	flags |= s->allocflags;
+	if (s->flags & SLAB_NO_TAGGING)
+		flags |= __GFP_SKIP_KASAN;
 
 	/*
 	 * Let the initial higher-order allocation fail under memory pressure
@@ -5053,7 +5055,7 @@ bool slab_post_alloc_hook(struct kmem_cache *s, struct list_lru *lru,
 	for (i = 0; i < size; i++) {
 		p[i] = kasan_slab_alloc(s, p[i], init_flags, kasan_init);
 		if (p[i] && init && (!kasan_init ||
-				     !kasan_has_integrated_init()))
+				     !slab_has_kasan_integrated_init(s)))
 			memset(p[i], 0, zero_size);
 		if (gfpflags_allow_spinning(flags))
 			kmemleak_alloc_recursive(p[i], s->object_size, 1,
