@@ -16,6 +16,23 @@
       "message": "LGTM, thanks for spinning this!",
       "revId": "bdb0b532a7e4769fd4c7046e0d0e12eacc7f0f9b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab17fc01_0e77480d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2026-08-21T16:04:25Z",
+      "side": 1,
+      "message": "Just need owners review for this pure KMI addition on Android Desktop.",
+      "revId": "bdb0b532a7e4769fd4c7046e0d0e12eacc7f0f9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
