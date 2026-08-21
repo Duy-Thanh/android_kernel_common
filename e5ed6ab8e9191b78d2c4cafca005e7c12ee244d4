@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0c36b22c_74497ee9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-21T13:40:47Z",
+      "side": 1,
+      "message": "\u003e Also, as you know, even if APIC MMIO will be mapped and not skipped, we could not use MMIO-based APIC as we do not have (and rather do not want to have) instruction decoding support in pKVM.\n\nJust to understand, what makes APIC MMIO different from any other MMIO in this regard? IOW, why couldn\u0027t we use hypercalls for it like we do for any other MMIO? (IIRC, actually APIC MMIO used to work in pVMs. Otherwise Linux pVMs wouldn\u0027t work until we merged aosp/3982019?)",
+      "parentUuid": "463fa151_6ed2c92e",
+      "revId": "e5ed6ab8e9191b78d2c4cafca005e7c12ee244d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6e3c482f_a320f575",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
