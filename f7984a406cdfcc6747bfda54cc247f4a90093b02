@@ -16,6 +16,24 @@
       "message": "Doesn\u0027t actually work.  There is no change to the KMI definition.",
       "revId": "f7984a406cdfcc6747bfda54cc247f4a90093b02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6865d488_d091bd6d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-08-21T10:42:53Z",
+      "side": 1,
+      "message": "change should be ignored if those structures change, right gprocida@google.com?",
+      "parentUuid": "92eb35f5_f317faf1",
+      "revId": "f7984a406cdfcc6747bfda54cc247f4a90093b02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
