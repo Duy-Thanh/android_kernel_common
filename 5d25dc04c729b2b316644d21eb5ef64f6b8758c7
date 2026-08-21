@@ -34,6 +34,24 @@
       "parentUuid": "fab8efd5_559a21dc",
       "revId": "5d25dc04c729b2b316644d21eb5ef64f6b8758c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35b7677d_4586e7e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4240336
+      },
+      "writtenOn": "2026-08-21T02:30:53Z",
+      "side": 1,
+      "message": "Does the next check-in cutoff time begin on September 1, 2026? (Reference: https://source.android.com/docs/core/architecture/kernel/gki-releases)",
+      "parentUuid": "b5195fcd_728942ac",
+      "revId": "5d25dc04c729b2b316644d21eb5ef64f6b8758c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
