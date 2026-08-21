@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d891fc48_4c8a9033",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-08-21T14:57:23Z",
+      "side": 1,
+      "message": "This LGTM, however IIRC there is bug with this patch. We should take that too, I\u0027ll go look it up.",
+      "revId": "add30c54d99cee7c68cd5614ea7ed1fea06fc567",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
