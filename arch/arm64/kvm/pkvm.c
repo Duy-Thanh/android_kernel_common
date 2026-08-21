@@ -1913,7 +1913,21 @@ int pkvm_pgtable_stage2_split(struct kvm_pgtable *pgt, u64 addr, u64 size, void 
 
 static int early_ffa_unmap_on_lend_cfg(char *arg)
 {
-	kvm_nvhe_sym(__pkvm_ffa_unmap_on_lend) = 1;
+	bool enable;
+
+	if (!arg)
+		kvm_nvhe_sym(__pkvm_ffa_unmap_on_lend) = PKVM_FFA_UNMAP_ON_LEND_ON;
+	else if (!strcmp(arg, "full"))
+		kvm_nvhe_sym(__pkvm_ffa_unmap_on_lend) = PKVM_FFA_UNMAP_ON_LEND_FULL;
+	else {
+		if (!kstrtobool(arg, &enable)) {
+			kvm_nvhe_sym(__pkvm_ffa_unmap_on_lend) = enable;
+		} else {
+			kvm_err("kvm-arm.ffa-unmap-on-lend: Unknown argument '%s'\n", arg);
+			return -EINVAL;
+		}
+	}
+
 	return 0;
 }
 
