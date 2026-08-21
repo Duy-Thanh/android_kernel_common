@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39882a5e_fac34fed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2026-08-21T16:14:01Z",
+      "side": 1,
+      "message": "`fscrypt: Replace mk_users keyring with simple list` will require an update to `struct fscrypt_master_key` when it is merged via LTS as well.  Might make sense to handle that at the same time, as I did on the other branches.  If not, I suppose Greg will just update the stg and allowed_breaks file again when that is merged.",
+      "revId": "83e77cbc0d990c57fd1c364ad5becf15e25373f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
