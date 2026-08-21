@@ -52,6 +52,24 @@
       "parentUuid": "8fcfa18d_ed9e54a7",
       "revId": "ae90e3e4f12c864dc40f48434d34bff6039f894e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bae44b07_e36911ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-08-21T11:15:19Z",
+      "side": 1,
+      "message": "I cherry-picked the patch from merged to 6.18 version without dependencies and resolved the conflicts. PTAL 😊",
+      "parentUuid": "786616c5_1a5becc0",
+      "revId": "ae90e3e4f12c864dc40f48434d34bff6039f894e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
