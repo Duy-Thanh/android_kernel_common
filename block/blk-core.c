@@ -43,6 +43,8 @@
 
 #define CREATE_TRACE_POINTS
 #include <trace/events/block.h>
+#undef CREATE_TRACE_POINTS
+#include <trace/hooks/blk.h>
 
 #include "blk.h"
 #include "blk-mq-sched.h"
@@ -960,6 +962,7 @@ void submit_bio(struct bio *bio)
 	}
 
 	bio_set_ioprio(bio);
+	trace_android_vh_set_ioprio(bio);
 	submit_bio_noacct(bio);
 }
 EXPORT_SYMBOL(submit_bio);
