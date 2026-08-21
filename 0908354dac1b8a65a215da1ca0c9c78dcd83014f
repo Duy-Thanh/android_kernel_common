@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd705081_8fdd6548",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-08-21T17:25:19Z",
+      "side": 1,
+      "message": "This is needed here because of aosp/3382260 backport.",
+      "revId": "0908354dac1b8a65a215da1ca0c9c78dcd83014f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
