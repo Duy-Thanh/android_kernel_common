@@ -314,8 +314,6 @@ static int __init early_hyp_lm_size_mb_cfg(char *arg)
 }
 early_param("kvm-arm.hyp_lm_size_mb", early_hyp_lm_size_mb_cfg);
 
-DEFINE_STATIC_KEY_FALSE(kvm_ffa_unmap_on_lend);
-
 void __init kvm_hyp_reserve(void)
 {
 	u64 hyp_mem_pages = 0;
@@ -1767,6 +1765,7 @@ int __pkvm_topup_hyp_alloc_mgt_gfp(unsigned long id, unsigned long nr_pages,
 
 	return ret;
 }
+
 EXPORT_SYMBOL(__pkvm_topup_hyp_alloc_mgt_gfp);
 
 static int __pkvm_donate_resource(struct resource *r)
@@ -2051,12 +2050,11 @@ int pkvm_pgtable_stage2_split(struct kvm_pgtable *pgt, u64 addr, u64 size, void 
 
 static int early_ffa_unmap_on_lend_cfg(char *arg)
 {
-	static_branch_enable(&kvm_ffa_unmap_on_lend);
+	kvm_nvhe_sym(__pkvm_ffa_unmap_on_lend) = 1;
 	return 0;
 }
 
 early_param("kvm-arm.ffa-unmap-on-lend", early_ffa_unmap_on_lend_cfg);
-
 static int early_its_hardening_cfg(char *arg)
 {
 	static_branch_enable(&kvm_its_hardening);
