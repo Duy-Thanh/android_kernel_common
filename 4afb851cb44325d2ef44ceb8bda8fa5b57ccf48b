@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07807104_9e4e96c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4257021
+      },
+      "writtenOn": "2026-08-21T15:24:03Z",
+      "side": 1,
+      "message": "Hi John, I found this change are not present in ACK6.18.\nhttps://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/kernel/sched?id\u003d556146ce5e9476db234134c46ddf0e154ca17028\n\nFrom the crash dumps I\u0027ve checked so far, I\u0027ve observed a common pattern: at the time of the crash, there are only two tasks on the cfs_rq. For example, one task has a weight of 90,891,264, while the other has a weight of 1,048,576. The actual crash manifests in different ways across dumps: either cfs_rq-\u003ezero_vruntime overflows (18446681435247085458), or task-\u003ese.vruntime becomes abnormally large (539,949,941,882,274).",
+      "revId": "4afb851cb44325d2ef44ceb8bda8fa5b57ccf48b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
