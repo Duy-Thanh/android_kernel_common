@@ -4479,7 +4479,7 @@ static void write_compacted_summaries(struct f2fs_sb_info *sbi, block_t blkaddr)
 			*summary = sum_entries(seg_i->sum_blk)[j];
 			written_size += SUMMARY_SIZE;
 
-			if (written_size + SUMMARY_SIZE <= PAGE_SIZE -
+			if (written_size + SUMMARY_SIZE <= sbi->sum_blocksize -
 							SUM_FOOTER_SIZE)
 				continue;
 
