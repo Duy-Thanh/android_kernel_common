@@ -620,12 +620,8 @@ static size_t arm_lpae_split_blk_unmap(struct arm_lpae_io_pgtable *data,
 	io_pgtable_tlb_add_page(&data->iop, gather, blk_paddr,
 				ARM_LPAE_BLOCK_SIZE(lvl - 1, data));
 
-	if (unmap_idx_start >= 0) {
-		for (i = 0; i < num_entries; i++)
-			io_pgtable_tlb_add_page(&data->iop, gather, iova + i * size, size);
-
+	if (unmap_idx_start >= 0)
 		return num_entries * size;
-	}
 
 	return __arm_lpae_unmap(data, gather, iova, size, pgcount, lvl, tablep);
 }
