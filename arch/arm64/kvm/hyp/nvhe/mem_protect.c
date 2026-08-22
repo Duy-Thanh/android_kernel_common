@@ -15,6 +15,7 @@
 #include <asm/stage2_pgtable.h>
 
 #include <hyp/fault.h>
+#include <hyp/adjust_pc.h>
 
 #include <nvhe/gfp.h>
 #include <nvhe/iommu.h>
@@ -929,6 +930,45 @@ unlock:
 	return ret;
 }
 
+static bool handle_host_mmio_trap(struct kvm_cpu_context *host_ctxt, u64 esr, u64 addr)
+{
+	u64 offset, reg_value = 0, start, end;
+	u8 reg_size, reg_index;
+	bool write;
+	int i;
+
+	for (i = 0; i < pkvm_moveable_regs_nr; i++) {
+		if (pkvm_moveable_regs[i].type != PKVM_MREG_EMULATE_MMIO ||
+		    !pkvm_moveable_regs[i].cb)
+			continue;
+
+		start = pkvm_moveable_regs[i].start;
+		end = start + pkvm_moveable_regs[i].size;
+		reg_size = BIT((esr & ESR_ELx_SAS) >> ESR_ELx_SAS_SHIFT);
+
+		if (start > addr || addr + reg_size > end)
+			continue;
+
+		reg_index = (esr & ESR_ELx_SRT_MASK) >> ESR_ELx_SRT_SHIFT;
+		write = (esr & ESR_ELx_WNR) == ESR_ELx_WNR;
+		offset = addr - start;
+
+		if (write && reg_index != 31)
+			reg_value = host_ctxt->regs.regs[reg_index];
+
+		pkvm_moveable_regs[i].cb(&pkvm_moveable_regs[i], offset, write,
+					 &reg_value, reg_size);
+
+		if (!write && reg_index != 31)
+			host_ctxt->regs.regs[reg_index] = reg_value;
+
+		kvm_skip_host_instr();
+		return true;
+	}
+
+	return false;
+}
+
 static void (*illegal_abt_notifier)(struct user_pt_regs *regs);
 
 int __pkvm_register_illegal_abt_notifier(void (*cb)(struct user_pt_regs *))
@@ -1010,6 +1050,10 @@ void handle_host_mem_abort(struct kvm_cpu_context *host_ctxt)
 
 	if (is_dabt(esr) && !addr_is_memory(addr) &&
 	    kvm_iommu_host_dabt_handler(host_ctxt, esr, addr))
+		goto return_to_host;
+
+	if (is_dabt(esr) && !addr_is_memory(addr) &&
+	    handle_host_mmio_trap(host_ctxt, esr, addr))
 		goto return_to_host;
 
 	switch (esr & ESR_ELx_FSC_TYPE) {
@@ -1760,16 +1804,29 @@ unlock:
 }
 
 /*
- * Rejects MMIO regions and is unsafe. Use with care!
+ * Rejects MMIO regions and is unsafe (unless "full" mode). Use with care!
  */
 int __pkvm_host_donate_ffa(u64 pfn, u64 nr_pages)
 {
 	u64 size, phys = hyp_pfn_to_phys(pfn), end;
+	enum host_set_page_state_flags flags;
 	int ret;
 
 	if (check_shl_overflow(nr_pages, PAGE_SHIFT, &size) ||
 	    check_add_overflow(phys, size, &end))
 		return -EINVAL;
+
+	switch (__pkvm_ffa_unmap_on_lend) {
+	case PKVM_FFA_UNMAP_ON_LEND_FULL:
+		flags = 0;
+		break;
+	case PKVM_FFA_UNMAP_ON_LEND_ON:
+		/* HOST_SET_NO_COMPLETE to skip pkvm_sme_dvmsync_fw_call() */
+		flags = HOST_SET_NO_IOMMU_UPDATE | HOST_SET_NO_COMPLETE;
+		break;
+	case PKVM_FFA_UNMAP_ON_LEND_OFF:
+		return -EPERM;
+	}
 
 	host_lock_component();
 
@@ -1781,8 +1838,7 @@ int __pkvm_host_donate_ffa(u64 pfn, u64 nr_pages)
 		goto unlock;
 
 	/* HOST_SET_NO_COMPLETE to skip pkvm_sme_dvmsync_fw_call() */
-	WARN_ON(__host_stage2_set_owner_locked(phys, size, PKVM_ID_FFA, 0,
-					       HOST_SET_NO_IOMMU_UPDATE | HOST_SET_NO_COMPLETE));
+	WARN_ON(__host_stage2_set_owner_locked(phys, size, PKVM_ID_FFA, 0, flags));
 
 unlock:
 	host_unlock_component();
@@ -1790,16 +1846,28 @@ unlock:
 }
 
 /*
- * Just like __pkvm_donate_ffa, rejects MMIO regions and does not update the IOMMU.
+ * Just like __pkvm_donate_ffa, rejects MMIO regions.
  */
 int __pkvm_host_reclaim_ffa(u64 pfn, u64 nr_pages)
 {
 	u64 size, phys = hyp_pfn_to_phys(pfn), end;
+	enum host_set_page_state_flags flags;
 	int ret;
 
 	if (check_shl_overflow(nr_pages, PAGE_SHIFT, &size) ||
 	    check_add_overflow(phys, size, &end))
 		return -EINVAL;
+
+	switch (__pkvm_ffa_unmap_on_lend) {
+	case PKVM_FFA_UNMAP_ON_LEND_FULL:
+		flags = 0;
+		break;
+	case PKVM_FFA_UNMAP_ON_LEND_ON:
+		flags = HOST_SET_NO_IOMMU_UPDATE;
+		break;
+	case PKVM_FFA_UNMAP_ON_LEND_OFF:
+		return -EPERM;
+	}
 
 	host_lock_component();
 
@@ -1809,8 +1877,7 @@ int __pkvm_host_reclaim_ffa(u64 pfn, u64 nr_pages)
 	if (ret)
 		goto unlock;
 
-	WARN_ON(__host_stage2_set_owner_locked(phys, size, PKVM_ID_HOST, 0,
-					       HOST_SET_NO_IOMMU_UPDATE));
+	WARN_ON(__host_stage2_set_owner_locked(phys, size, PKVM_ID_HOST, 0, flags));
 
 unlock:
 	host_unlock_component();
