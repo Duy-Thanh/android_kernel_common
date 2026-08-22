@@ -13,6 +13,7 @@
 #include <net/netlink.h>
 #include <net/genetlink.h>
 #include <net/apf.h>
+#include <linux/apf_interpreter.h>
 #include <uapi/linux/nl_apf.h>
 
 /*
@@ -318,6 +319,61 @@ out_put_dev:
 	dev_put(dev);
 	return ret;
 }
+
+/*
+ * This is called by the APF interpreter.
+ * The 'ctx' is the net_device pointer passed from the driver's call to apf_run.
+ */
+uint8_t *apf_allocate_buffer(void *ctx, uint32_t size)
+{
+	/*
+	 * Allocate buffer for APF packet construction.
+	 */
+	return kmalloc(size, GFP_ATOMIC);
+}
+EXPORT_SYMBOL(apf_allocate_buffer);
+
+/*
+ * This is called by the APF interpreter.
+ */
+int apf_transmit_buffer(void *ctx, uint8_t *ptr, uint32_t len, uint8_t dscp)
+{
+	struct net_device *dev = (struct net_device *)ctx;
+	struct sk_buff *skb;
+	struct ethhdr *eth;
+
+	if (len == 0) {
+		kfree(ptr);
+		return 0;
+	}
+
+	/*
+	 * Create an SKB around the buffer. We assume the interpreter has
+	 * constructed a full L2 frame.
+	 */
+	skb = alloc_skb(len, GFP_ATOMIC);
+	if (!skb) {
+		kfree(ptr);
+		return -ENOMEM;
+	}
+
+	memcpy(skb_put(skb, len), ptr, len);
+	kfree(ptr); /* Free the original buffer */
+
+	skb_reset_mac_header(skb);
+	skb->dev = dev;
+
+	eth = (struct ethhdr *)skb->data;
+	skb->protocol = eth->h_proto;
+
+	if (dev_queue_xmit(skb) < 0) {
+		netdev_warn(dev, "%s: failed to transmit skb\n", __func__);
+		return -EIO;
+	}
+
+	return 0;
+}
+EXPORT_SYMBOL(apf_transmit_buffer);
 
 /*
  * Module initialization and exit

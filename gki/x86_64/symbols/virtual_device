@@ -5,6 +5,8 @@
   __alloc_pages_noprof
   __alloc_skb
   alloc_workqueue_noprof
+  apf_run
+  apf_version
   bcmp
   bpf_trace_run1
   bpf_trace_run2
@@ -20,6 +22,7 @@
   cancel_delayed_work
   cancel_delayed_work_sync
   cancel_work_sync
+  capable
   cc_mkdec
   cec_s_phys_addr
   cec_unregister_adapter
