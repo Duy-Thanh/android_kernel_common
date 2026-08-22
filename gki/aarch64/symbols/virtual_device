@@ -11,6 +11,8 @@
   __arch_copy_from_user
   __arch_copy_to_user
   arm64_use_ng_mappings
+  apf_run
+  apf_version
   bcmp
   bpf_trace_run1
   bpf_trace_run2
@@ -25,6 +27,7 @@
   cancel_delayed_work
   cancel_delayed_work_sync
   cancel_work_sync
+  capable
   cec_s_phys_addr
   cec_unregister_adapter
   __check_object_size
