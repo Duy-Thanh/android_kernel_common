@@ -586,7 +586,7 @@ static size_t arm_lpae_split_blk_unmap(struct arm_lpae_io_pgtable *data,
 	size_t tablesz = ARM_LPAE_GRANULE(data);
 	size_t split_sz = ARM_LPAE_BLOCK_SIZE(lvl, data);
 	int ptes_per_table = ARM_LPAE_PTES_PER_TABLE(data);
-	int i, unmap_idx_start = -1, num_entries = 0, max_entries;
+	int num_entries = 0;
 
 	if (WARN_ON(lvl == ARM_LPAE_MAX_LEVELS))
 		return 0;
@@ -595,22 +595,27 @@ static size_t arm_lpae_split_blk_unmap(struct arm_lpae_io_pgtable *data,
 	if (!tablep)
 		return 0; /* Bytes unmapped */
 
-	/* We may be breaking even a smaller block. */
-	if (size == split_sz) {
-		unmap_idx_start = ARM_LPAE_LVL_IDX(iova, lvl, data);
-		max_entries = arm_lpae_max_entries(unmap_idx_start, data);
-		num_entries = min_t(int, pgcount, max_entries);
-	}
-
 	blk_paddr = iopte_to_paddr(blk_pte, data);
 	pte = iopte_prot(blk_pte);
 
-	for (i = 0; i < ptes_per_table; i++, blk_paddr += split_sz) {
-		/* Unmap! */
-		if (i >= unmap_idx_start && i < (unmap_idx_start + num_entries))
-			continue;
+	if (size == split_sz) {
+		int unmap_idx_start = ARM_LPAE_LVL_IDX(iova, lvl, data);
+		int max_entries = arm_lpae_max_entries(unmap_idx_start, data);
+		int suffix_start;
 
-		__arm_lpae_init_pte(data, blk_paddr, pte, lvl, 1, &tablep[i]);
+		num_entries = min_t(int, pgcount, max_entries);
+		suffix_start = unmap_idx_start + num_entries;
+
+		if (unmap_idx_start > 0)
+			__arm_lpae_init_pte(data, blk_paddr, pte, lvl,
+					    unmap_idx_start, tablep);
+
+		if (suffix_start < ptes_per_table)
+			__arm_lpae_init_pte(data, blk_paddr + suffix_start * split_sz,
+					    pte, lvl, ptes_per_table - suffix_start,
+					    &tablep[suffix_start]);
+	} else {
+		__arm_lpae_init_pte(data, blk_paddr, pte, lvl, ptes_per_table, tablep);
 	}
 
 	pte = arm_lpae_install_table(tablep, ptep, blk_pte, data);
@@ -620,7 +625,7 @@ static size_t arm_lpae_split_blk_unmap(struct arm_lpae_io_pgtable *data,
 	io_pgtable_tlb_add_page(&data->iop, gather, blk_paddr,
 				ARM_LPAE_BLOCK_SIZE(lvl - 1, data));
 
-	if (unmap_idx_start >= 0)
+	if (size == split_sz)
 		return num_entries * size;
 
 	return __arm_lpae_unmap(data, gather, iova, size, pgcount, lvl, tablep);
