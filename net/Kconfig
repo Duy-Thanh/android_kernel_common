@@ -544,3 +544,4 @@ config NET_TEST
 	  If unsure, say N.
 
 endif   # if NET
+source "net/apf/Kconfig"
