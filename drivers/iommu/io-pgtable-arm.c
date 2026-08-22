@@ -584,9 +584,11 @@ static size_t arm_lpae_split_blk_unmap(struct arm_lpae_io_pgtable *data,
 	arm_lpae_iopte pte, *tablep;
 	phys_addr_t blk_paddr;
 	size_t tablesz = ARM_LPAE_GRANULE(data);
+	size_t block_sz = ARM_LPAE_BLOCK_SIZE(lvl - 1, data);
 	size_t split_sz = ARM_LPAE_BLOCK_SIZE(lvl, data);
 	int ptes_per_table = ARM_LPAE_PTES_PER_TABLE(data);
 	int num_entries = 0;
+	unsigned long blk_iova = iova & ~(block_sz - 1);
 
 	if (WARN_ON(lvl == ARM_LPAE_MAX_LEVELS))
 		return 0;
@@ -621,9 +623,8 @@ static size_t arm_lpae_split_blk_unmap(struct arm_lpae_io_pgtable *data,
 	pte = arm_lpae_install_table(tablep, ptep, blk_pte, data);
 	/* IDMAP table can't race. */
 	WARN_ON(pte != blk_pte);
-	/* Invalidate old block, blk_paddr == iova as this is idmap. */
-	io_pgtable_tlb_add_page(&data->iop, gather, blk_paddr,
-				ARM_LPAE_BLOCK_SIZE(lvl - 1, data));
+	/* Invalidate old block */
+	io_pgtable_tlb_add_page(&data->iop, gather, blk_iova, block_sz);
 
 	if (size == split_sz)
 		return num_entries * size;
