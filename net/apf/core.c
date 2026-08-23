@@ -13,6 +13,7 @@
 #include <net/netlink.h>
 #include <net/genetlink.h>
 #include <net/apf.h>
+#include <linux/apf_interpreter.h>
 #include <uapi/linux/net_apf.h>
 
 static struct genl_family apf_family;
@@ -453,6 +454,49 @@ static struct genl_family apf_family = {
 	.n_ops = ARRAY_SIZE(apf_ops_list),
 	.module = THIS_MODULE,
 };
+
+// Called by the APF interpreter to allocate buffer for packet construction
+uint8_t *apf_allocate_buffer(void *ctx, uint32_t size)
+{
+	return kmalloc(size, GFP_ATOMIC);
+}
+EXPORT_SYMBOL(apf_allocate_buffer);
+
+// Called by the APF interpreter to transmit a constructed packet
+int apf_transmit_buffer(void *ctx, uint8_t *ptr, uint32_t len, uint8_t dscp)
+{
+	struct net_device *dev = (struct net_device *)ctx;
+	struct sk_buff *skb;
+	struct ethhdr *eth;
+
+	if (len == 0) {
+		kfree(ptr);
+		return 0;
+	}
+
+	skb = alloc_skb(len, GFP_ATOMIC);
+	if (!skb) {
+		kfree(ptr);
+		return -ENOMEM;
+	}
+
+	memcpy(skb_put(skb, len), ptr, len);
+	kfree(ptr);
+
+	skb_reset_mac_header(skb);
+	skb->dev = dev;
+
+	eth = (struct ethhdr *)skb->data;
+	skb->protocol = eth->h_proto;
+
+	if (dev_queue_xmit(skb) < 0) {
+		netdev_warn(dev, "%s: failed to transmit skb\n", __func__);
+		return -EIO;
+	}
+
+	return 0;
+}
+EXPORT_SYMBOL(apf_transmit_buffer);
 
 static int __init apf_init(void)
 {

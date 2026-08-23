@@ -36,6 +36,8 @@
 #include <linux/virtio.h>
 #include <linux/virtio_ids.h>
 #include <linux/virtio_config.h>
+#include <linux/apf_interpreter.h>
+#include <net/apf.h>
 #include "mac80211_hwsim.h"
 #include "mac80211_hwsim_i.h"
 
@@ -226,8 +228,17 @@ struct hwsim_vif_priv {
 	bool assoc;
 	bool bcn_en;
 	u16 aid;
+#if IS_ENABLED(CONFIG_NET_APF)
+	/* protects apf_ram and program state */
+	spinlock_t apf_lock;
+	u8 *apf_ram;
+	u32 apf_ram_len;
+	u32 apf_program_len;
+	ktime_t apf_install_time;
+#endif
 };
 
+#define HWSIM_APF_RAM_SIZE 4096
 #define HWSIM_VIF_MAGIC	0x69537748
 
 static inline void hwsim_check_magic(struct ieee80211_vif *vif)
@@ -2175,6 +2186,18 @@ static int mac80211_hwsim_add_interface(struct ieee80211_hw *hw,
 	vif->hw_queue[IEEE80211_AC_BE] = 2;
 	vif->hw_queue[IEEE80211_AC_BK] = 3;
 
+#if IS_ENABLED(CONFIG_NET_APF)
+	{
+		struct hwsim_vif_priv *vp = (void *)vif->drv_priv;
+
+		spin_lock_init(&vp->apf_lock);
+		vp->apf_ram = kzalloc(HWSIM_APF_RAM_SIZE, GFP_KERNEL);
+		if (!vp->apf_ram)
+			return -ENOMEM;
+		vp->apf_ram_len = HWSIM_APF_RAM_SIZE;
+	}
+#endif
+
 	return 0;
 }
 
@@ -2223,7 +2246,141 @@ static void mac80211_hwsim_remove_interface(
 	hwsim_clear_magic(vif);
 	if (vif->type != NL80211_IFTYPE_MONITOR)
 		mac80211_hwsim_config_mac_nl(hw, vif->addr, false);
+
+#if IS_ENABLED(CONFIG_NET_APF)
+	{
+		struct hwsim_vif_priv *vp = (void *)vif->drv_priv;
+
+		kfree(vp->apf_ram);
+		vp->apf_ram = NULL;
+	}
+#endif
 }
+
+#if IS_ENABLED(CONFIG_NET_APF)
+static int mac80211_hwsim_apf_get_info(struct ieee80211_hw *hw,
+				       struct ieee80211_vif *vif,
+				       struct apf_info *info)
+{
+	info->apf_version = apf_version();
+	info->total_ram = HWSIM_APF_RAM_SIZE;
+	return 0;
+}
+
+static int mac80211_hwsim_apf_get_ram_size(struct ieee80211_hw *hw,
+					   struct ieee80211_vif *vif)
+{
+	struct hwsim_vif_priv *vp = (void *)vif->drv_priv;
+
+	hwsim_check_magic(vif);
+	return vp->apf_ram_len;
+}
+
+static int mac80211_hwsim_apf_write(struct ieee80211_hw *hw,
+				    struct ieee80211_vif *vif,
+				    s32 offset, const u8 *buf, u32 len)
+{
+	struct hwsim_vif_priv *vp = (void *)vif->drv_priv;
+
+	hwsim_check_magic(vif);
+
+	if (offset != APF_PROGRAM_OFFSET)
+		return -EINVAL;
+
+	if (!vp->apf_ram || len > vp->apf_ram_len)
+		return -EINVAL;
+
+	spin_lock_bh(&vp->apf_lock);
+	memcpy(vp->apf_ram, buf, len);
+	if (vp->apf_ram_len > len)
+		memset(vp->apf_ram + len, 0, vp->apf_ram_len - len);
+	vp->apf_program_len = len;
+	vp->apf_install_time = ktime_get();
+	spin_unlock_bh(&vp->apf_lock);
+
+	return 0;
+}
+
+static int mac80211_hwsim_apf_read(struct ieee80211_hw *hw,
+				   struct ieee80211_vif *vif,
+				   u32 offset, u8 *buf, u32 len)
+{
+	struct hwsim_vif_priv *vp = (void *)vif->drv_priv;
+
+	hwsim_check_magic(vif);
+
+	if (offset != 0)
+		return -EINVAL;
+
+	if (!vp->apf_ram || len > vp->apf_ram_len)
+		return -EINVAL;
+
+	spin_lock_bh(&vp->apf_lock);
+	memcpy(buf, vp->apf_ram, len);
+	spin_unlock_bh(&vp->apf_lock);
+
+	return 0;
+}
+
+static int mac80211_hwsim_apf_run_filter(struct ieee80211_hw *hw,
+					 struct ieee80211_vif *vif,
+					 struct sk_buff *skb,
+					 struct net_device *dev)
+{
+	struct hwsim_vif_priv *vp = (void *)vif->drv_priv;
+	s64 install_time_ns;
+	u32 filter_age;
+	u64 age_ns;
+	int ret;
+
+	hwsim_check_magic(vif);
+
+	if (skb_is_nonlinear(skb)) {
+		if (skb_linearize(skb))
+			return 1; /* Pass on error */
+	}
+
+	spin_lock(&vp->apf_lock);
+	if (!vp->apf_ram || vp->apf_program_len == 0) {
+		spin_unlock(&vp->apf_lock);
+		return 1; /* Pass */
+	}
+
+	install_time_ns = ktime_to_ns(vp->apf_install_time);
+	age_ns = ktime_to_ns(ktime_get()) - install_time_ns;
+	/* filter_age is in 1/16384ths of a second */
+	filter_age = (u32)div_u64(age_ns << 5, 1953125);
+
+	ret = apf_run(dev, (u32 *)vp->apf_ram, vp->apf_program_len,
+		      vp->apf_ram_len, skb->data, skb->len, filter_age);
+	spin_unlock(&vp->apf_lock);
+
+	return ret;
+}
+
+static int mac80211_hwsim_apf_fast_path(struct ieee80211_hw *hw,
+					struct ieee80211_vif *vif,
+					const u8 ucast_mac[ETH_ALEN],
+					s16 vlan_tag, __be32 ucast_addr4,
+					bool enable_ipv6_fastpath)
+{
+	hwsim_check_magic(vif);
+	pr_info("mac80211_hwsim: apf_fast_path called: mac=%pM vlan_tag=%d ucast_addr4=%pI4 enable_ipv6_fastpath=%d\n",
+		ucast_mac, vlan_tag, &ucast_addr4, enable_ipv6_fastpath);
+	return 0;
+}
+
+#define HWSIM_APF_OPS \
+	.apf_get_info = mac80211_hwsim_apf_get_info,		\
+	.apf_get_ram_size = mac80211_hwsim_apf_get_ram_size,	\
+	.apf_read = mac80211_hwsim_apf_read,			\
+	.apf_write = mac80211_hwsim_apf_write,			\
+	.apf_run_filter = mac80211_hwsim_apf_run_filter,	\
+	.apf_fast_path = mac80211_hwsim_apf_fast_path,
+
+#else
+#define HWSIM_APF_OPS
+#endif
 
 void mac80211_hwsim_tx_frame(struct ieee80211_hw *hw,
 			     struct sk_buff *skb,
@@ -4116,6 +4273,7 @@ out:
 	.stop_nan = mac80211_hwsim_nan_stop,			\
 	.nan_change_conf = mac80211_hwsim_nan_change_config,	\
 	.nan_peer_sched_changed = mac80211_hwsim_nan_peer_sched_changed, \
+	HWSIM_APF_OPS						\
 	HWSIM_DEBUGFS_OPS
 
 #define HWSIM_NON_MLO_OPS					\
