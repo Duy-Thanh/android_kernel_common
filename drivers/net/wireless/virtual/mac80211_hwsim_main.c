@@ -36,6 +36,10 @@
 #include <linux/virtio.h>
 #include <linux/virtio_ids.h>
 #include <linux/virtio_config.h>
+#include <net/apf.h>
+#if IS_ENABLED(CONFIG_NET_APF)
+#include "apf_interpreter.h"
+#endif
 #include "mac80211_hwsim.h"
 #include "mac80211_hwsim_i.h"
 
@@ -226,8 +230,17 @@ struct hwsim_vif_priv {
 	bool assoc;
 	bool bcn_en;
 	u16 aid;
+#if IS_ENABLED(CONFIG_NET_APF)
+	/* protects apf_ram and program state */
+	spinlock_t apf_lock;
+	u8 *apf_ram;
+	u32 apf_ram_len;
+	u32 apf_program_len;
+	ktime_t apf_install_time;
+#endif
 };
 
+#define HWSIM_APF_RAM_SIZE 4096
 #define HWSIM_VIF_MAGIC	0x69537748
 
 static inline void hwsim_check_magic(struct ieee80211_vif *vif)
@@ -2175,6 +2188,22 @@ static int mac80211_hwsim_add_interface(struct ieee80211_hw *hw,
 	vif->hw_queue[IEEE80211_AC_BE] = 2;
 	vif->hw_queue[IEEE80211_AC_BK] = 3;
 
+#if IS_ENABLED(CONFIG_NET_APF)
+	{
+		struct hwsim_vif_priv *vp = (void *)vif->drv_priv;
+
+		spin_lock_init(&vp->apf_lock);
+		vp->apf_ram = kzalloc(HWSIM_APF_RAM_SIZE, GFP_KERNEL);
+		if (!vp->apf_ram) {
+			if (vif->type != NL80211_IFTYPE_MONITOR)
+				mac80211_hwsim_config_mac_nl(hw, vif->addr, false);
+			hwsim_clear_magic(vif);
+			return -ENOMEM;
+		}
+		vp->apf_ram_len = HWSIM_APF_RAM_SIZE;
+	}
+#endif
+
 	return 0;
 }
 
@@ -2223,7 +2252,233 @@ static void mac80211_hwsim_remove_interface(
 	hwsim_clear_magic(vif);
 	if (vif->type != NL80211_IFTYPE_MONITOR)
 		mac80211_hwsim_config_mac_nl(hw, vif->addr, false);
+
+#if IS_ENABLED(CONFIG_NET_APF)
+	{
+		struct hwsim_vif_priv *vp = (void *)vif->drv_priv;
+		u8 *ram;
+
+		spin_lock_bh(&vp->apf_lock);
+		ram = vp->apf_ram;
+		vp->apf_ram = NULL;
+		vp->apf_program_len = 0;
+		vp->apf_ram_len = 0;
+		spin_unlock_bh(&vp->apf_lock);
+
+		kfree(ram);
+	}
+#endif
 }
+
+#if IS_ENABLED(CONFIG_NET_APF)
+struct hwsim_apf_run_ctx {
+	struct net_device *dev;
+	struct sk_buff_head tx_queue;
+};
+
+/* Called by the APF interpreter to allocate buffer for packet construction */
+uint8_t *apf_allocate_buffer(void *ctx, uint32_t size)
+{
+	return kmalloc(size, GFP_ATOMIC);
+}
+
+/* Called by the APF interpreter to transmit a constructed packet */
+int apf_transmit_buffer(void *ctx, uint8_t *ptr, uint32_t len, uint8_t dscp)
+{
+	struct hwsim_apf_run_ctx *apf_ctx = ctx;
+	struct net_device *dev = apf_ctx->dev;
+	struct sk_buff *skb;
+	struct ethhdr *eth;
+
+	if (len == 0) {
+		kfree(ptr);
+		return 0;
+	}
+
+	if (len < ETH_HLEN) {
+		kfree(ptr);
+		return -EINVAL;
+	}
+
+	skb = alloc_skb(len + LL_RESERVED_SPACE(dev), GFP_ATOMIC);
+	if (!skb) {
+		kfree(ptr);
+		return -ENOMEM;
+	}
+
+	skb_reserve(skb, LL_RESERVED_SPACE(dev));
+	skb_put_data(skb, ptr, len);
+	kfree(ptr);
+
+	skb_reset_mac_header(skb);
+	skb->dev = dev;
+	skb->priority = (dscp >> 5);
+
+	eth = (struct ethhdr *)skb->data;
+	skb->protocol = eth->h_proto;
+
+	skb_queue_tail(&apf_ctx->tx_queue, skb);
+	return 0;
+}
+
+static int mac80211_hwsim_apf_get_info(struct ieee80211_hw *hw,
+				       struct ieee80211_vif *vif,
+				       struct netlink_ext_ack *extack,
+				       struct apf_info *info)
+{
+	memset(info, 0, sizeof(*info));
+	info->apf_version = apf_version();
+	info->total_ram = HWSIM_APF_RAM_SIZE;
+	info->used_ram = HWSIM_APF_RAM_SIZE;
+	return 0;
+}
+
+static int mac80211_hwsim_apf_get_ram_size(struct ieee80211_hw *hw,
+					   struct ieee80211_vif *vif,
+					   struct netlink_ext_ack *extack)
+{
+	struct hwsim_vif_priv *vp = (void *)vif->drv_priv;
+
+	hwsim_check_magic(vif);
+	return vp->apf_ram_len;
+}
+
+static int mac80211_hwsim_apf_write(struct ieee80211_hw *hw,
+				    struct ieee80211_vif *vif,
+				    struct netlink_ext_ack *extack,
+				    s32 offset, const u8 *buf, u32 len)
+{
+	struct hwsim_vif_priv *vp = (void *)vif->drv_priv;
+
+	hwsim_check_magic(vif);
+
+	if (offset != -1) {
+		NL_SET_ERR_MSG_MOD(extack, "Only whole program installation supported");
+		return -EINVAL;
+	}
+
+	if (!vp->apf_ram || len > vp->apf_ram_len) {
+		NL_SET_ERR_MSG_MOD(extack, "APF program exceeds RAM size");
+		return -EINVAL;
+	}
+
+	spin_lock_bh(&vp->apf_lock);
+	memcpy(vp->apf_ram, buf, len);
+	vp->apf_program_len = len;
+	vp->apf_install_time = ktime_get();
+	spin_unlock_bh(&vp->apf_lock);
+
+	return 0;
+}
+
+static int mac80211_hwsim_apf_read(struct ieee80211_hw *hw,
+				   struct ieee80211_vif *vif,
+				   struct netlink_ext_ack *extack,
+				   u32 offset, u8 *buf, u32 len)
+{
+	struct hwsim_vif_priv *vp = (void *)vif->drv_priv;
+
+	hwsim_check_magic(vif);
+
+	if (offset != 0) {
+		NL_SET_ERR_MSG_MOD(extack, "Only offset 0 read supported");
+		return -EINVAL;
+	}
+
+	if (!vp->apf_ram || len > vp->apf_ram_len) {
+		NL_SET_ERR_MSG_MOD(extack, "APF read exceeds RAM size");
+		return -EINVAL;
+	}
+
+	spin_lock_bh(&vp->apf_lock);
+	memcpy(buf, vp->apf_ram, len);
+	spin_unlock_bh(&vp->apf_lock);
+
+	return 0;
+}
+
+static int mac80211_hwsim_apf_run_filter(struct ieee80211_hw *hw,
+					 struct ieee80211_vif *vif,
+					 struct sk_buff *skb,
+					 struct net_device *dev)
+{
+	struct hwsim_vif_priv *vp = (void *)vif->drv_priv;
+	struct hwsim_apf_run_ctx apf_ctx;
+	struct sk_buff *tx_skb;
+	ktime_t now;
+	u32 filter_age = 0;
+	int ret;
+
+	hwsim_check_magic(vif);
+
+	/* Check if APF filter is active before performing linearization */
+	if (!READ_ONCE(vp->apf_ram) || !READ_ONCE(vp->apf_program_len))
+		return 1; /* Pass */
+
+	if (skb_is_nonlinear(skb)) {
+		if (skb_linearize(skb))
+			return 1; /* Pass on error */
+	}
+
+	skb_queue_head_init(&apf_ctx.tx_queue);
+	apf_ctx.dev = dev;
+
+	spin_lock_bh(&vp->apf_lock);
+	if (!vp->apf_ram || vp->apf_program_len == 0) {
+		spin_unlock_bh(&vp->apf_lock);
+		return 1; /* Pass */
+	}
+
+	now = ktime_get();
+	if (ktime_after(now, vp->apf_install_time)) {
+		u64 age_ns = ktime_to_ns(ktime_sub(now, vp->apf_install_time));
+
+		/* filter_age is in 1/16384ths of a second */
+		filter_age = (u32)div_u64(age_ns << 5, 1953125);
+	}
+
+	ret = apf_run(&apf_ctx, (u32 *)vp->apf_ram, vp->apf_program_len,
+		      vp->apf_ram_len, skb->data, skb->len, filter_age);
+	spin_unlock_bh(&vp->apf_lock);
+
+	/* Transmit any packets generated by APF outside apf_lock */
+	while ((tx_skb = skb_dequeue(&apf_ctx.tx_queue))) {
+		int tx_ret = dev_queue_xmit(tx_skb);
+
+		if (tx_ret > 0)
+			tx_ret = net_xmit_errno(tx_ret);
+		if (tx_ret < 0)
+			net_warn_ratelimited("%s: failed to transmit APF reply skb: %d\n",
+					     dev->name, tx_ret);
+	}
+
+	return ret;
+}
+
+static int mac80211_hwsim_apf_fast_path(struct ieee80211_hw *hw,
+					struct ieee80211_vif *vif,
+					struct netlink_ext_ack *extack,
+					const u8 ucast_mac[ETH_ALEN],
+					s16 vlan_tag, __be32 ucast_addr4,
+					bool enable_ipv6_fastpath)
+{
+	hwsim_check_magic(vif);
+	pr_info("mac80211_hwsim: apf_fast_path configured: mac=%pM vlan_tag=%d ucast_addr4=%pI4 enable_ipv6_fastpath=%d\n",
+		ucast_mac, vlan_tag, &ucast_addr4, enable_ipv6_fastpath);
+	return 0;
+}
+
+#define HWSIM_APF_OPS \
+	.apf_get_info = mac80211_hwsim_apf_get_info,		\
+	.apf_get_ram_size = mac80211_hwsim_apf_get_ram_size,	\
+	.apf_read = mac80211_hwsim_apf_read,			\
+	.apf_write = mac80211_hwsim_apf_write,			\
+	.apf_run_filter = mac80211_hwsim_apf_run_filter,	\
+	.apf_fast_path = mac80211_hwsim_apf_fast_path,
+
+#else
+#define HWSIM_APF_OPS
+#endif
 
 void mac80211_hwsim_tx_frame(struct ieee80211_hw *hw,
 			     struct sk_buff *skb,
@@ -4116,6 +4371,7 @@ out:
 	.stop_nan = mac80211_hwsim_nan_stop,			\
 	.nan_change_conf = mac80211_hwsim_nan_change_config,	\
 	.nan_peer_sched_changed = mac80211_hwsim_nan_peer_sched_changed, \
+	HWSIM_APF_OPS						\
 	HWSIM_DEBUGFS_OPS
 
 #define HWSIM_NON_MLO_OPS					\
