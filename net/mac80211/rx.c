@@ -2755,6 +2755,18 @@ ieee80211_deliver_skb(struct ieee80211_rx_data *rx)
 	}
 #endif
 
+#if IS_ENABLED(CONFIG_NET_APF)
+	if (skb && rx->sdata->local->ops->apf_run_filter) {
+		if (!rx->sdata->local->ops->apf_run_filter(&rx->sdata->local->hw,
+							   &rx->sdata->vif,
+							   skb, dev)) {
+			dev_core_stats_rx_dropped_inc(dev);
+			dev_kfree_skb(skb);
+			skb = NULL;
+		}
+	}
+#endif
+
 	if (skb) {
 		skb->protocol = eth_type_trans(skb, dev);
 		ieee80211_deliver_skb_to_local_stack(skb, rx);
