@@ -18,6 +18,7 @@
 #include <linux/kcov.h>
 #include <net/mac80211.h>
 #include <net/ieee80211_radiotap.h>
+#include <net/apf.h>
 #include "ieee80211_i.h"
 #include "sta_info.h"
 #include "debugfs_netdev.h"
@@ -932,6 +933,87 @@ static int ieee80211_netdev_setup_tc(struct net_device *dev,
 	return drv_net_setup_tc(local, sdata, dev, type, type_data);
 }
 
+#if IS_ENABLED(CONFIG_NET_APF)
+static int ieee80211_netdev_apf_get_info(struct net_device *dev,
+					 struct netlink_ext_ack *extack,
+					 struct apf_info *info)
+{
+	struct ieee80211_sub_if_data *sdata = IEEE80211_DEV_TO_SUB_IF(dev);
+	struct ieee80211_local *local = sdata->local;
+
+	if (!local->ops->apf_get_info)
+		return -EOPNOTSUPP;
+
+	return local->ops->apf_get_info(&local->hw, &sdata->vif, extack, info);
+}
+
+static int ieee80211_netdev_apf_get_ram_size(struct net_device *dev,
+					     struct netlink_ext_ack *extack)
+{
+	struct ieee80211_sub_if_data *sdata = IEEE80211_DEV_TO_SUB_IF(dev);
+	struct ieee80211_local *local = sdata->local;
+
+	if (!local->ops->apf_get_ram_size)
+		return -EOPNOTSUPP;
+
+	return local->ops->apf_get_ram_size(&local->hw, &sdata->vif, extack);
+}
+
+static int ieee80211_netdev_apf_read(struct net_device *dev,
+				     struct netlink_ext_ack *extack,
+				     u32 offset, u8 *buf, u32 len)
+{
+	struct ieee80211_sub_if_data *sdata = IEEE80211_DEV_TO_SUB_IF(dev);
+	struct ieee80211_local *local = sdata->local;
+
+	if (!local->ops->apf_read)
+		return -EOPNOTSUPP;
+
+	return local->ops->apf_read(&local->hw, &sdata->vif, extack, offset,
+				    buf, len);
+}
+
+static int ieee80211_netdev_apf_write(struct net_device *dev,
+				      struct netlink_ext_ack *extack,
+				      s32 offset, const u8 *buf, u32 len)
+{
+	struct ieee80211_sub_if_data *sdata = IEEE80211_DEV_TO_SUB_IF(dev);
+	struct ieee80211_local *local = sdata->local;
+
+	if (!local->ops->apf_write)
+		return -EOPNOTSUPP;
+
+	return local->ops->apf_write(&local->hw, &sdata->vif, extack, offset,
+				     buf, len);
+}
+
+static int ieee80211_netdev_apf_fast_path(struct net_device *dev,
+					  struct netlink_ext_ack *extack,
+					  const u8 ucast_mac[ETH_ALEN],
+					  s16 vlan_tag, __be32 ucast_addr4,
+					  bool enable_ipv6_fastpath)
+{
+	struct ieee80211_sub_if_data *sdata = IEEE80211_DEV_TO_SUB_IF(dev);
+	struct ieee80211_local *local = sdata->local;
+
+	if (!local->ops->apf_fast_path)
+		return -EOPNOTSUPP;
+
+	return local->ops->apf_fast_path(&local->hw, &sdata->vif, extack,
+					 ucast_mac, vlan_tag, ucast_addr4,
+					 enable_ipv6_fastpath);
+}
+
+static const struct apf_ops ieee80211_apf_ops = {
+	.version	= 0,
+	.get_info	= ieee80211_netdev_apf_get_info,
+	.get_ram_size	= ieee80211_netdev_apf_get_ram_size,
+	.read		= ieee80211_netdev_apf_read,
+	.write		= ieee80211_netdev_apf_write,
+	.fast_path	= ieee80211_netdev_apf_fast_path,
+};
+#endif
+
 static const struct net_device_ops ieee80211_dataif_ops = {
 	.ndo_open		= ieee80211_open,
 	.ndo_stop		= ieee80211_stop,
@@ -940,6 +1022,9 @@ static const struct net_device_ops ieee80211_dataif_ops = {
 	.ndo_set_rx_mode	= ieee80211_set_multicast_list,
 	.ndo_set_mac_address 	= ieee80211_change_mac,
 	.ndo_setup_tc		= ieee80211_netdev_setup_tc,
+#if IS_ENABLED(CONFIG_NET_APF)
+	.apf_ops		= &ieee80211_apf_ops,
+#endif
 };
 
 static u16 ieee80211_monitor_select_queue(struct net_device *dev,
@@ -1047,6 +1132,9 @@ static const struct net_device_ops ieee80211_dataif_8023_ops = {
 	.ndo_set_mac_address	= ieee80211_change_mac,
 	.ndo_fill_forward_path	= ieee80211_netdev_fill_forward_path,
 	.ndo_setup_tc		= ieee80211_netdev_setup_tc,
+#if IS_ENABLED(CONFIG_NET_APF)
+	.apf_ops		= &ieee80211_apf_ops,
+#endif
 };
 
 static bool ieee80211_iftype_supports_hdr_offload(enum nl80211_iftype iftype)
