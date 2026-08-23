@@ -26,6 +26,86 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "924ce1d8_897a0950",
+        "filename": "include/uapi/linux/nl_apf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-23T03:28:24Z",
+      "side": 1,
+      "message": "I would interleave the comments/docs with the enum names...",
+      "revId": "a2315841e20721a21f0f1c21567cd2b0d4bdad02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c59c692b_2899525b",
+        "filename": "include/uapi/linux/nl_apf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-23T03:28:24Z",
+      "side": 1,
+      "message": "should we clarify what are In vs Out? and/or what commands they apply to??",
+      "revId": "a2315841e20721a21f0f1c21567cd2b0d4bdad02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b966eeb_5d4d007c",
+        "filename": "include/uapi/linux/nl_apf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-23T03:28:24Z",
+      "side": 1,
+      "message": "maybe these two are NL_APF_ATTR_INFO_...",
+      "range": {
+        "startLine": 67,
+        "startChar": 21,
+        "endLine": 69,
+        "endChar": 30
+      },
+      "revId": "a2315841e20721a21f0f1c21567cd2b0d4bdad02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57064a76_7a37a324",
+        "filename": "include/uapi/linux/nl_apf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-23T03:28:24Z",
+      "side": 1,
+      "message": "maybe these should be NL_APF_ATTR_FP_UCAST_MAC ...",
+      "range": {
+        "startLine": 72,
+        "startChar": 1,
+        "endLine": 75,
+        "endChar": 34
+      },
+      "revId": "a2315841e20721a21f0f1c21567cd2b0d4bdad02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c96a4d04_cd6496ce",
         "filename": "net/Kconfig",
         "patchSetId": 2
@@ -128,6 +208,52 @@
         "startChar": 0,
         "endLine": 8,
         "endChar": 3
+      },
+      "revId": "a2315841e20721a21f0f1c21567cd2b0d4bdad02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13bac589_3d16c9c3",
+        "filename": "net/apf/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-23T03:28:24Z",
+      "side": 1,
+      "message": "/* ? or does kernel style allow // below",
+      "range": {
+        "startLine": 1,
+        "startChar": 1,
+        "endLine": 1,
+        "endChar": 2
+      },
+      "revId": "a2315841e20721a21f0f1c21567cd2b0d4bdad02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "470d4c80_7b71f6ba",
+        "filename": "net/apf/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-23T03:28:24Z",
+      "side": 1,
+      "message": "delete",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 0
       },
       "revId": "a2315841e20721a21f0f1c21567cd2b0d4bdad02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
