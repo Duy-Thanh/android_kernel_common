@@ -99,7 +99,7 @@ struct mac80211_hwsim_data {
 	struct ieee80211_channel *channel;
 	enum nl80211_chan_width bw;
 	unsigned int rx_filter;
-	bool started, idle, scanning;
+	bool started, idle, scanning, suspended;
 	struct mutex mutex;
 	enum ps_mode {
 		PS_DISABLED, PS_ENABLED, PS_AUTO_POLL, PS_MANUAL_POLL
