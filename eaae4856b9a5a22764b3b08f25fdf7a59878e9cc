@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "706b2e37_7435771e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1637924
+      },
+      "writtenOn": "2026-08-23T22:22:48Z",
+      "side": 1,
+      "message": "It is highly unlikely that any Tegra soc older than Tegra234 will be certified on a current ACK branch. However, there are open source aosp derivatives such as LineageOS which work to support such hardware. It would simplify things if the built-in hardware support could be cleaned up here for replication into future lts branches.",
+      "revId": "eaae4856b9a5a22764b3b08f25fdf7a59878e9cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
