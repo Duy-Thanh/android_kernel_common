@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95ead37c_e7a6a966",
+        "filename": "include/net/apf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-23T03:22:00Z",
+      "side": 1,
+      "message": "we should make this closer to APFv8 so that we don\u0027t have to add new ones for v8.\n\nfilter -\u003e ram\n\ninclude offset, length for read and write\n\noffset \u003d -1 for program\n\nswitch get_caps to v8 get_info\n\n\nso long as we can say APFv6.1 hw only needs to support the special case of offset\u003d-1 or length \u003d-1 or whatever",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 1
+      },
+      "revId": "a2315841e20721a21f0f1c21567cd2b0d4bdad02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c96a4d04_cd6496ce",
+        "filename": "net/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-23T03:22:00Z",
+      "side": 1,
+      "message": "here?",
+      "revId": "a2315841e20721a21f0f1c21567cd2b0d4bdad02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d9cda21_18764d94",
+        "filename": "net/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-23T03:22:00Z",
+      "side": 1,
+      "message": "1 line up? likely with empty line, or put below dev/net shaper\n\nin which case adjust the Makefile to the same location too",
+      "range": {
+        "startLine": 547,
+        "startChar": 0,
+        "endLine": 547,
+        "endChar": 6
+      },
+      "revId": "a2315841e20721a21f0f1c21567cd2b0d4bdad02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c79b3eb_ebb3f986",
+        "filename": "net/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-23T03:22:00Z",
+      "side": 1,
+      "message": "probably CONFIG_NET_APF, maybe nl_net_apf too? it\u0027s short enough...",
+      "range": {
+        "startLine": 83,
+        "startChar": 6,
+        "endLine": 83,
+        "endChar": 16
+      },
+      "revId": "a2315841e20721a21f0f1c21567cd2b0d4bdad02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d576f00d_9284cd64",
+        "filename": "net/apf/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-23T03:22:00Z",
+      "side": 1,
+      "message": "strip 2024",
+      "range": {
+        "startLine": 3,
+        "startChar": 12,
+        "endLine": 3,
+        "endChar": 16
+      },
+      "revId": "a2315841e20721a21f0f1c21567cd2b0d4bdad02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27cee7a0_c7031482",
+        "filename": "net/apf/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-23T03:22:00Z",
+      "side": 1,
+      "message": "I think apf-y before obj-",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 3
+      },
+      "revId": "a2315841e20721a21f0f1c21567cd2b0d4bdad02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
