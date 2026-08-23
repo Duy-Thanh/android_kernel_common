@@ -4669,6 +4669,8 @@ struct ieee80211_prep_tx_info {
  *      implement this callback need to handle such cases. The type is the full
  *      &enum nl80211_iftype.
  */
+struct apf_info;
+
 struct ieee80211_ops {
 	void (*tx)(struct ieee80211_hw *hw,
 		   struct ieee80211_tx_control *control,
@@ -4715,6 +4717,20 @@ struct ieee80211_ops {
 				    struct ieee80211_vif *vif,
 				    unsigned int filter_flags,
 				    unsigned int changed_flags);
+#if IS_ENABLED(CONFIG_NET_APF)
+	int (*apf_get_info)(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
+			    struct apf_info *info);
+	int (*apf_get_ram_size)(struct ieee80211_hw *hw, struct ieee80211_vif *vif);
+	int (*apf_write)(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
+			 s32 offset, const u8 *buf, u32 len);
+	int (*apf_read)(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
+			u32 offset, u8 *buf, u32 len);
+	int (*apf_run_filter)(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
+			      struct sk_buff *skb, struct net_device *dev);
+	int (*apf_fast_path)(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
+			     const u8 ucast_mac[ETH_ALEN], s16 vlan_tag,
+			     __be32 ucast_addr4, bool enable_ipv6_fastpath);
+#endif
 	int (*set_tim)(struct ieee80211_hw *hw, struct ieee80211_sta *sta,
 		       bool set);
 	int (*set_key)(struct ieee80211_hw *hw, enum set_key_cmd cmd,
