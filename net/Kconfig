@@ -75,6 +75,8 @@ config NET_DEVMEM
 config NET_SHAPER
 	bool
 
+source "net/apf/Kconfig"
+
 config NET_CRC32C
 	bool
 	select CRC32
