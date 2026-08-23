@@ -987,6 +987,7 @@ enum bpf_netdev_command {
 	XDP_SETUP_XSK_POOL,
 };
 
+struct apf_ops;
 struct bpf_prog_offload_ops;
 struct netlink_ext_ack;
 struct xdp_umem;
@@ -1679,6 +1680,14 @@ struct net_device_ops {
 	 * see include/net/net_shapers.h
 	 */
 	const struct net_shaper_ops *net_shaper_ops;
+#endif
+
+#if IS_ENABLED(CONFIG_NET_APF)
+	/**
+	 * @apf_ops: Advanced Packet Filter operations
+	 * see include/net/apf.h
+	 */
+	const struct apf_ops *apf_ops;
 #endif
 
 	ANDROID_KABI_RESERVE(1);
