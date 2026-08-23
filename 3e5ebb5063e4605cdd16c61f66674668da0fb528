@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a3b271b_77ebf1f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1637924
+      },
+      "writtenOn": "2026-08-23T22:25:09Z",
+      "side": 1,
+      "message": "This is required for host1x and tegra-drm to be usable as vendor modules. This change was merged to 6.6, but never replicated to android-mainline.",
+      "revId": "3e5ebb5063e4605cdd16c61f66674668da0fb528",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
