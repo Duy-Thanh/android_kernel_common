@@ -2090,11 +2090,14 @@ int hyp_pin_shared_mem(void *from, void *to)
 
 	for (cur = start; cur < end; cur += PAGE_SIZE) {
 		p = hyp_virt_to_page(cur);
-		hyp_page_ref_inc(p);
-		if (p->refcount == 1)
+		if (p->refcount == 0) {
 			ret = pkvm_create_mappings_locked((void *)cur,
 							  (void *)cur + PAGE_SIZE,
 							  PAGE_HYP);
+			if (ret)
+				break;
+		}
+		hyp_page_ref_inc(p);
 	}
 
 	if (ret) {
