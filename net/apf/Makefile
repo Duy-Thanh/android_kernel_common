@@ -4,5 +4,6 @@
 #
 # Makefile for the Advanced Packet Filter (APF) subsystem
 #
+
 obj-$(CONFIG_NET_APF) += apf.o
-apf-y := core.o
+apf-y := core.o apf_interpreter.o
