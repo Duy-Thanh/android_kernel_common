@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2b6ed0c_fb120cf2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-08-24T09:43:17Z",
+      "side": 1,
+      "message": "Fixed cherry-pick metadata (missing `-x`, sorry).",
+      "revId": "c44dc3f28f30b446bae992cb075221824ec03502",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
