@@ -33,6 +33,24 @@
       "message": "nit: maybe add `Bug: 502087662` for completeness?",
       "revId": "39e827521f91bf7f5377e66e54d5332e8afd46b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "532625a3_70371646",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-08-24T21:49:15Z",
+      "side": 1,
+      "message": "Sure, done",
+      "parentUuid": "b3068b98_b465d1ec",
+      "revId": "39e827521f91bf7f5377e66e54d5332e8afd46b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
