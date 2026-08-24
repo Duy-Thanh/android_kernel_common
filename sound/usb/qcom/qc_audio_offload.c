@@ -1613,6 +1613,11 @@ static void handle_uaudio_stream_req(struct qmi_handle *handle,
 		goto response;
 	}
 
+	if (!req_msg->enable && info_idx < 0) {
+		ret = -EINVAL;
+		goto response;
+	}
+
 	scoped_guard(mutex, &chip->mutex) {
 		if (req_msg->enable) {
 			if (info_idx < 0 || chip->system_suspend || subs->opened) {
