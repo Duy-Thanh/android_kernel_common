@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec3f1ccd_53bb2899",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-08-24T18:16:59Z",
+      "side": 1,
+      "message": "Only curious about these `Test:` tags... I wonder if they were mandated by some other team? IMHO they seem a bit redundant in GKI (e.g. this names a presubmit test). FYI, we don\u0027t force a `Test:` tag here but would be appreciated if they provided relevant context.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 56
+      },
+      "revId": "c5a30ed3c8189e5954730138aa6f328c572fd174",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
