@@ -5835,6 +5835,17 @@ static void put_prev_entity(struct cfs_rq *cfs_rq, struct sched_entity *prev)
 	}
 	SCHED_WARN_ON(cfs_rq->curr != prev);
 	cfs_rq->curr = NULL;
+
+	/*
+	 * For a dequeued entity (prev->on_rq == 0), update_entity_lag()
+	 * wrote se->vlag while se was still cfs_rq->curr, which corrupted
+	 * se->vprot due to the union. Now that cfs_rq->curr is cleared,
+	 * rewrite se->vlag with the correct lag value. The vruntime used
+	 * by entity_lag() was updated by update_curr() at dequeue time and
+	 * has not changed since, so the value is equivalent.
+	 */
+	if (!prev->on_rq)
+		prev->vlag = entity_lag(avg_vruntime(cfs_rq), prev);
 }
 
 static void
