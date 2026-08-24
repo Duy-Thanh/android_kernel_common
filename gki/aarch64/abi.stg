@@ -380621,6 +380621,11 @@ function {
   parameter_id: 0xf435685e
 }
 function {
+  id: 0xf524fcd9
+  return_type_id: 0x6d7f5ff6
+  parameter_id: 0x2e029f76
+}
+function {
   id: 0xf535e5c4
   return_type_id: 0x6d7f5ff6
   parameter_id: 0x2c8e1aaa
@@ -444387,6 +444392,15 @@ elf_symbol {
   full_name: "raw_spin_rq_lock_nested"
 }
 elf_symbol {
+  id: 0xa4c45d3c
+  name: "raw_spin_rq_trylock"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa6dcc7ab
+  type_id: 0xf524fcd9
+  full_name: "raw_spin_rq_trylock"
+}
+elf_symbol {
   id: 0xae54e6d0
   name: "raw_spin_rq_unlock"
   is_defined: true
@@ -473901,6 +473915,7 @@ interface {
   symbol_id: 0x8e8693ec
   symbol_id: 0x938485a1
   symbol_id: 0x486016b6
+  symbol_id: 0xa4c45d3c
   symbol_id: 0xae54e6d0
   symbol_id: 0x3cb678c1
   symbol_id: 0x826d9499
