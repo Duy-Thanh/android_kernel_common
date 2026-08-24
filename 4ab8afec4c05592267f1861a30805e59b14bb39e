@@ -16,6 +16,23 @@
       "message": "Hmm, didn\u0027t we expect to fail the build?",
       "revId": "4ab8afec4c05592267f1861a30805e59b14bb39e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac75f32d_1dd6e9fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-08-24T21:04:12Z",
+      "side": 1,
+      "message": "Thank you for the patch!\nCan you add `Bug:524806744` to the commit message?",
+      "revId": "4ab8afec4c05592267f1861a30805e59b14bb39e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
