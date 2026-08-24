@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "905d9854_7a55edba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-24T20:19:40Z",
+      "side": 1,
+      "message": "why is this needed. What feature does it enable?\n\nYou must create a patch on top of this one to add the new symbols to your symbol list",
+      "revId": "1e3233bfdbd41af51ab6b515249128af9bc20052",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
