@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f618f34d_2201dfaa",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1484,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-08-24T13:25:30Z",
+      "side": 1,
+      "message": "Would be nice to have this in another commit.\n\nAlso __pkvm_guest_share_hyp() just like the other mem transition functions.",
+      "revId": "80cb43d45f3be099c98f9719a28c43bbc0417aa0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55b87a9d_fa2ee671",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1494,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-08-24T13:25:30Z",
+      "side": 1,
+      "message": "I do not think this is necessary. __guest_request_page_transition() is using the page-table anyway to get nr_pages.",
+      "fixSuggestions": [
+        {
+          "fixId": "a361e247_e25e9145",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+              "range": {
+                "startLine": 1493,
+                "startChar": 0,
+                "endLine": 1495,
+                "endChar": 0
+              },
+              "replacement": "\tsize \u003d nr_pages \u003c\u003c PAGE_SHIFT;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "80cb43d45f3be099c98f9719a28c43bbc0417aa0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66fcc18f_b9e66299",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1504,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-08-24T13:25:30Z",
+      "side": 1,
+      "message": "Hum, careful, __guest_requet_page_transition() is capping the number of pages to avoid getting stuck too long in the hypervisor. So it is possible for the guest to call a number a bit too big here but nonetheless valid. It will e.g. stop if the physical addresses are not contiguous.\n\nAnd actually speaking of contiguous physical memory... how is it handled? This memory is faulted into the guest. There is no guarantee it will be contiguous. I am afraid the only way here is the private range... which isn\u0027t the most dynamic resource thing we have :-(",
+      "revId": "80cb43d45f3be099c98f9719a28c43bbc0417aa0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
