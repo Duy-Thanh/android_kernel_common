@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61f04349_a70ea8fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2021533
+      },
+      "writtenOn": "2026-08-24T15:36:34Z",
+      "side": 1,
+      "message": "Given commit [Revert \"timers: Rename del_timer_sync() to timer_delete_sync()\"](3f602a77d6e5b96cc202c4f2c81999e694df208d), instead of directly removing the code, why not consider using `del_timer_sync` instead of `timer_delete_sync`?",
+      "revId": "13b1885358118c163e74721577e7ca0a57e37e0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
