@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdaf8259_87bcc341",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-24T17:05:22Z",
+      "side": 1,
+      "message": "Just a note: IIUC this pkvm_emerg() change doesn\u0027t affect  production builds as it only has effect with CONFIG_PKVM_X86_DEBUG\u003dy (though it\u0027s still good to have for consistency).",
+      "revId": "39e827521f91bf7f5377e66e54d5332e8afd46b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3068b98_b465d1ec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-24T17:05:22Z",
+      "side": 1,
+      "message": "nit: maybe add `Bug: 502087662` for completeness?",
+      "revId": "39e827521f91bf7f5377e66e54d5332e8afd46b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
