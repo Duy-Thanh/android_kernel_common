@@ -139,6 +139,7 @@ void __noreturn panic(const char *fmt, ...)
 {
 	static char panic_msg[1024];
 	va_list args;
+	int len;
 
 	/*
 	 * Ensure only one CPU handles the panic and writes to ramoops.
@@ -167,11 +168,14 @@ void __noreturn panic(const char *fmt, ...)
 	 */
 	pkvm_udelay(10000);
 
+	/* Prepend the standard Linux panic signature on the same line */
+	len = scnprintf(panic_msg, sizeof(panic_msg), "Kernel panic - not syncing: pKVM: ");
+
 	va_start(args, fmt);
-	vscnprintf(panic_msg, sizeof(panic_msg), fmt, args);
+	vscnprintf(panic_msg + len, sizeof(panic_msg) - len, fmt, args);
 	va_end(args);
 
-	pkvm_err("%s", panic_msg);
+	pkvm_emerg("%s", panic_msg);
 
 	pkvm_write_ramoops_console(panic_msg);
 
