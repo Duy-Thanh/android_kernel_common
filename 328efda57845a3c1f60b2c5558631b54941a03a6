@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9eb5591a_124dac06",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-08-24T09:27:50Z",
+      "side": 1,
+      "message": "Can we detect whether fragmentation is supported and only use the larger size when it is not implemented?",
+      "range": {
+        "startLine": 9,
+        "startChar": 39,
+        "endLine": 10,
+        "endChar": 30
+      },
+      "revId": "328efda57845a3c1f60b2c5558631b54941a03a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
