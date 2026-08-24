@@ -1,0 +1,228 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f74f0ca_5dee9140",
+        "filename": "include/net/apf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-24T03:57:15Z",
+      "side": 1,
+      "message": "this include and the RESERVE_KABI below should be in some #ifdef ANDROID guard",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 31
+      },
+      "revId": "f25cc0f00f8a3e376df46e167fc1d4c26a4c3acb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ee156d0_d90d7083",
+        "filename": "include/net/apf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-24T03:57:15Z",
+      "side": 1,
+      "message": "these should be 1 liners",
+      "range": {
+        "startLine": 22,
+        "startChar": 1,
+        "endLine": 22,
+        "endChar": 4
+      },
+      "revId": "f25cc0f00f8a3e376df46e167fc1d4c26a4c3acb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2354da17_7aab55fc",
+        "filename": "include/net/apf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-24T03:57:15Z",
+      "side": 1,
+      "message": "at least some (if not all) of these aren\u0027t optional/placeholder\n\nget_ram_size() and set_id() can be trivially implemented even on APFv6.1",
+      "range": {
+        "startLine": 80,
+        "startChar": 53,
+        "endLine": 80,
+        "endChar": 64
+      },
+      "revId": "f25cc0f00f8a3e376df46e167fc1d4c26a4c3acb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b52303b_73fbba01",
+        "filename": "include/net/apf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-24T03:57:15Z",
+      "side": 1,
+      "message": "should we just add a version field instead? that might be easier than kabi\njust make first field be version (we can even have 0 mean this version so we don\u0027t need to init it)",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 1
+      },
+      "revId": "f25cc0f00f8a3e376df46e167fc1d4c26a4c3acb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d11aff29_5bfaefdd",
+        "filename": "include/uapi/linux/net_apf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-24T03:57:15Z",
+      "side": 1,
+      "message": "I think we do want \u0027net_apf\u0027 name and net_apf.h, but most of the remaining net_apf in here could be just apf, while _ A _ should probably still be _ ATTR _",
+      "range": {
+        "startLine": 18,
+        "startChar": 1,
+        "endLine": 18,
+        "endChar": 7
+      },
+      "revId": "f25cc0f00f8a3e376df46e167fc1d4c26a4c3acb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0e87775_57e03a1d",
+        "filename": "include/uapi/linux/net_apf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-24T03:57:15Z",
+      "side": 1,
+      "message": "should this be 0?  should this match the version of apf_ops??",
+      "range": {
+        "startLine": 19,
+        "startChar": 30,
+        "endLine": 19,
+        "endChar": 31
+      },
+      "revId": "f25cc0f00f8a3e376df46e167fc1d4c26a4c3acb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "480d40b6_264a900f",
+        "filename": "include/uapi/linux/net_apf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-24T03:57:15Z",
+      "side": 1,
+      "message": "as #define or remove the __NET_APF_CMD_MAX definition.",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 42
+      },
+      "revId": "f25cc0f00f8a3e376df46e167fc1d4c26a4c3acb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07fbaf0b_3ec70014",
+        "filename": "include/uapi/linux/net_apf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-24T03:57:15Z",
+      "side": 1,
+      "message": ".",
+      "range": {
+        "startLine": 251,
+        "startChar": 0,
+        "endLine": 251,
+        "endChar": 1
+      },
+      "revId": "f25cc0f00f8a3e376df46e167fc1d4c26a4c3acb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79197797_de227f21",
+        "filename": "net/apf/Kconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-24T03:57:15Z",
+      "side": 1,
+      "message": "is this spurious considering this file is only included if NET",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 15
+      },
+      "revId": "f25cc0f00f8a3e376df46e167fc1d4c26a4c3acb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee02ff42_f5bf10ea",
+        "filename": "net/apf/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-24T03:57:15Z",
+      "side": 1,
+      "message": "is this right?",
+      "revId": "f25cc0f00f8a3e376df46e167fc1d4c26a4c3acb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
