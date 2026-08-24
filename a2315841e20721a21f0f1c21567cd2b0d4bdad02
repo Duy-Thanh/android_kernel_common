@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfe9ee41_624017a6",
+        "filename": "include/net/apf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-24T00:59:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95ead37c_e7a6a966",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 1
+      },
+      "revId": "a2315841e20721a21f0f1c21567cd2b0d4bdad02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "924ce1d8_897a0950",
@@ -37,6 +61,24 @@
       "writtenOn": "2026-08-23T03:28:24Z",
       "side": 1,
       "message": "I would interleave the comments/docs with the enum names...",
+      "revId": "a2315841e20721a21f0f1c21567cd2b0d4bdad02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1735718e_3d389d3a",
+        "filename": "include/uapi/linux/nl_apf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-24T00:59:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "924ce1d8_897a0950",
       "revId": "a2315841e20721a21f0f1c21567cd2b0d4bdad02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -58,6 +100,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "633cb8b6_406e7678",
+        "filename": "include/uapi/linux/nl_apf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-24T00:59:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c59c692b_2899525b",
+      "revId": "a2315841e20721a21f0f1c21567cd2b0d4bdad02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b966eeb_5d4d007c",
@@ -71,6 +131,30 @@
       "writtenOn": "2026-08-23T03:28:24Z",
       "side": 1,
       "message": "maybe these two are NL_APF_ATTR_INFO_...",
+      "range": {
+        "startLine": 67,
+        "startChar": 21,
+        "endLine": 69,
+        "endChar": 30
+      },
+      "revId": "a2315841e20721a21f0f1c21567cd2b0d4bdad02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bc81917_017593cc",
+        "filename": "include/uapi/linux/nl_apf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-24T00:59:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b966eeb_5d4d007c",
       "range": {
         "startLine": 67,
         "startChar": 21,
@@ -104,6 +188,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8aeaebbe_75995f63",
+        "filename": "include/uapi/linux/nl_apf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-24T00:59:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57064a76_7a37a324",
+      "range": {
+        "startLine": 72,
+        "startChar": 1,
+        "endLine": 75,
+        "endChar": 34
+      },
+      "revId": "a2315841e20721a21f0f1c21567cd2b0d4bdad02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c96a4d04_cd6496ce",
@@ -121,6 +229,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc3394bd_3d75a1f8",
+        "filename": "net/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-24T00:59:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c96a4d04_cd6496ce",
+      "revId": "a2315841e20721a21f0f1c21567cd2b0d4bdad02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8d9cda21_18764d94",
@@ -134,6 +260,30 @@
       "writtenOn": "2026-08-23T03:22:00Z",
       "side": 1,
       "message": "1 line up? likely with empty line, or put below dev/net shaper\n\nin which case adjust the Makefile to the same location too",
+      "range": {
+        "startLine": 547,
+        "startChar": 0,
+        "endLine": 547,
+        "endChar": 6
+      },
+      "revId": "a2315841e20721a21f0f1c21567cd2b0d4bdad02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6b698e5_108213e0",
+        "filename": "net/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-24T00:59:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d9cda21_18764d94",
       "range": {
         "startLine": 547,
         "startChar": 0,
@@ -167,6 +317,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "faf808e0_519a9059",
+        "filename": "net/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-24T00:59:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c79b3eb_ebb3f986",
+      "range": {
+        "startLine": 83,
+        "startChar": 6,
+        "endLine": 83,
+        "endChar": 16
+      },
+      "revId": "a2315841e20721a21f0f1c21567cd2b0d4bdad02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d576f00d_9284cd64",
@@ -180,6 +354,30 @@
       "writtenOn": "2026-08-23T03:22:00Z",
       "side": 1,
       "message": "strip 2024",
+      "range": {
+        "startLine": 3,
+        "startChar": 12,
+        "endLine": 3,
+        "endChar": 16
+      },
+      "revId": "a2315841e20721a21f0f1c21567cd2b0d4bdad02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a9c7d16_a4f39e69",
+        "filename": "net/apf/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-24T00:59:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d576f00d_9284cd64",
       "range": {
         "startLine": 3,
         "startChar": 12,
@@ -213,6 +411,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "711ab253_80729081",
+        "filename": "net/apf/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-24T00:59:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27cee7a0_c7031482",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 3
+      },
+      "revId": "a2315841e20721a21f0f1c21567cd2b0d4bdad02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13bac589_3d16c9c3",
@@ -236,6 +458,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "83734622_fbab7e22",
+        "filename": "net/apf/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-24T00:59:13Z",
+      "side": 1,
+      "message": "### 1. Kernel SPDX Comment Style Rules\n\n  scripts/checkpatch.pl strictly enforces different SPDX comment styles depending on file extension:\n\n   File Type                                                                                                        | SPDX Format                                                                                                      | Reason\n  ------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------\n   C Source (.c)                                                                                                    | // SPDX-License-Identifier: GPL-2.0-only                                                                         | Mandated by Linux kernel standard.\n   C Headers (.h)                                                                                                   | /* SPDX-License-Identifier: GPL-2.0-only */                                                                      | Required because headers may be included by older tools/assemblers that fail on //.\n   Kconfig / Makefiles                                                                                              | # SPDX-License-Identifier: GPL-2.0-only                                                                          | Required by script/Makefile syntax.",
+      "parentUuid": "13bac589_3d16c9c3",
+      "range": {
+        "startLine": 1,
+        "startChar": 1,
+        "endLine": 1,
+        "endChar": 2
+      },
+      "revId": "a2315841e20721a21f0f1c21567cd2b0d4bdad02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "470d4c80_7b71f6ba",
@@ -249,6 +495,30 @@
       "writtenOn": "2026-08-23T03:28:24Z",
       "side": 1,
       "message": "delete",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 0
+      },
+      "revId": "a2315841e20721a21f0f1c21567cd2b0d4bdad02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9e56ec9_590789ec",
+        "filename": "net/apf/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-24T00:59:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "470d4c80_7b71f6ba",
       "range": {
         "startLine": 18,
         "startChar": 0,
