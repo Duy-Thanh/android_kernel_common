@@ -139,6 +139,7 @@ void __noreturn panic(const char *fmt, ...)
 {
 	static char panic_msg[1024];
 	va_list args;
+	int len;
 
 	/*
 	 * Ensure only one CPU handles the panic and writes to ramoops.
@@ -168,8 +169,12 @@ void __noreturn panic(const char *fmt, ...)
 	pkvm_udelay(10000);
 
 	va_start(args, fmt);
-	vscnprintf(panic_msg, sizeof(panic_msg), fmt, args);
+	len = vscnprintf(panic_msg, sizeof(panic_msg), fmt, args);
 	va_end(args);
+
+	/* Append the standard Linux panic signature at the end. */
+	scnprintf(panic_msg + len, sizeof(panic_msg) - len,
+		  "Kernel panic - not syncing: HYP panic:\n");
 
 	pkvm_err("%s", panic_msg);
 
