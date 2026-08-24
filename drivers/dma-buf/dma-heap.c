@@ -58,6 +58,7 @@ EXPORT_SYMBOL_GPL(mem_accounting);
 module_param(mem_accounting, bool, 0444);
 MODULE_PARM_DESC(mem_accounting,
 		 "Enable cgroup-based memory accounting for dma-buf heap allocations (default=false).");
+EXPORT_SYMBOL_NS_GPL(mem_accounting, "DMA_BUF_HEAP");
 
 struct dma_heap *dma_heap_find(const char *name)
 {
