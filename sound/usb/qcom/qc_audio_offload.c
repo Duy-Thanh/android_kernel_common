@@ -852,9 +852,13 @@ static int uaudio_sideband_notifier(struct usb_interface *intf,
 		unsigned int *ep = (unsigned int *) evt->evt_data;
 
 		for (if_idx = 0; if_idx < dev->num_intf; if_idx++) {
+			if (!dev->info)
+				break;
 			if (dev->info[if_idx].data_ep_idx == *ep ||
-			    dev->info[if_idx].sync_ep_idx == *ep)
+			    dev->info[if_idx].sync_ep_idx == *ep) {
 				uaudio_send_disconnect_ind(chip);
+				break;
+			}
 		}
 	}
 
