@@ -167,6 +167,30 @@
       },
       "revId": "3b8c326d7c061e43cffe34b7c375b4bd33111249",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b55130c_351e70a1",
+        "filename": "microdroid/aarch64/symbols/base",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2026-08-24T15:18:43Z",
+      "side": 1,
+      "message": "These are optional modules that are built together with the microdroid kernel and can be loaded for the microdroid VMs (e.g. aiseal) that require their functionality.\n\n* pkvm-pviommu is required for device assignment\n* system_heap is required by some of the NPU stacks.\n\nConceptually these are the same as GKI modules, I can change them to be compiled into microdroid kernel it that is easier.",
+      "parentUuid": "4cc40ab2_0b9de8a0",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 29
+      },
+      "revId": "3b8c326d7c061e43cffe34b7c375b4bd33111249",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
