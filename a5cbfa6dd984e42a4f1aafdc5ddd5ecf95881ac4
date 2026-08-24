@@ -49,6 +49,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e7dad423_36073215",
+        "filename": "include/net/apf.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-24T07:16:41Z",
+      "side": 1,
+      "message": "we need to update apf_interpreter.h references to \"netdev_ops-\u003endo_apf_get_info\" etc\nand apf_tool, and the jni network stack code, etc.",
+      "revId": "a5cbfa6dd984e42a4f1aafdc5ddd5ecf95881ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0fcd67d7_2199ea7f",
         "filename": "include/net/apf.h",
         "patchSetId": 6
@@ -60,6 +77,277 @@
       "writtenOn": "2026-08-24T06:45:31Z",
       "side": 1,
       "message": ", currently always 1",
+      "revId": "a5cbfa6dd984e42a4f1aafdc5ddd5ecf95881ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acd52422_ffe7cd05",
+        "filename": "include/net/apf.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-24T07:16:41Z",
+      "side": 1,
+      "message": "actually version 0, so we don\u0027t need to do anything.",
+      "parentUuid": "0fcd67d7_2199ea7f",
+      "revId": "a5cbfa6dd984e42a4f1aafdc5ddd5ecf95881ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86b441e0_d20460fb",
+        "filename": "include/net/apf.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-24T07:16:41Z",
+      "side": 1,
+      "message": "all of these need to pass, struct netlink_ext_ack *extack, so that drivers can\nNL_SET_ERR_MSG(extack, \"Firmware went out for lunch\");\n\nlet\u0027s always make this the 2nd argument\nie. first arg is net_dev, 2nd is extack.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 1
+      },
+      "revId": "a5cbfa6dd984e42a4f1aafdc5ddd5ecf95881ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b2f25fb_e95f19b5",
+        "filename": "include/net/apf.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-24T07:16:41Z",
+      "side": 1,
+      "message": "we need comments throughout about APFv6.1 - here for example, APFv6.1 only needs to support offset \u003d\u003d 0 and len \u003d\u003d ram_size and can EOPNOTSUPP the rest\n\nmaybe should have a comment that\n\n\nint nl_syserr2nlerr(int error)\n{\n\terror \u003d abs(error);\n\n\tswitch (error) {\n\tcase EBADF:\t\treturn NLE_BAD_SOCK;\n\tcase EADDRINUSE:\treturn NLE_EXIST;\n\tcase EEXIST:\t\treturn NLE_EXIST;\n\tcase EADDRNOTAVAIL:\treturn NLE_NOADDR;\n\tcase ESRCH:\t\t/* fall through */\n\tcase ENOENT:\t\treturn NLE_OBJ_NOTFOUND;\n\tcase EINTR:\t\treturn NLE_INTR;\n\tcase EAGAIN:\t\treturn NLE_AGAIN;\n\tcase ENOTSOCK:\t\treturn NLE_BAD_SOCK;\n\tcase ENOPROTOOPT:\treturn NLE_INVAL;\n\tcase EFAULT:\t\treturn NLE_INVAL;\n\tcase EACCES:\t\treturn NLE_NOACCESS;\n\tcase EINVAL:\t\treturn NLE_INVAL;\n\tcase ENOBUFS:\t\treturn NLE_NOMEM;\n\tcase ENOMEM:\t\treturn NLE_NOMEM;\n\tcase EAFNOSUPPORT:\treturn NLE_AF_NOSUPPORT;\n\tcase EPROTONOSUPPORT:\treturn NLE_PROTO_MISMATCH;\n\tcase EOPNOTSUPP:\treturn NLE_OPNOTSUPP;\n\tcase EPERM:\t\treturn NLE_PERM;\n\tcase EBUSY:\t\treturn NLE_BUSY;\n\tcase ERANGE:\t\treturn NLE_RANGE;\n\tcase ENODEV:\t\treturn NLE_NODEV;\n\tcase EHOSTUNREACH:\treturn NLE_HOSTUNREACH;\n\tdefault:\t\treturn NLE_FAILURE;\n\t}\n\nonly supports the above list of Exxx cause everything else becomes NLE_FAILURE.\n\nie. these functions must either succeed or fail with -Exxx where xxx is one of ...",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 1
+      },
+      "revId": "a5cbfa6dd984e42a4f1aafdc5ddd5ecf95881ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94000287_cf18ab83",
+        "filename": "include/net/apf.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-24T07:16:41Z",
+      "side": 1,
+      "message": "APFv6.1 only supports offset \u003d\u003d -1, length \u003d\u003d 0 means disable",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 1
+      },
+      "revId": "a5cbfa6dd984e42a4f1aafdc5ddd5ecf95881ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97228ce9_0d042506",
+        "filename": "include/net/apf.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-24T07:16:41Z",
+      "side": 1,
+      "message": "move to bottom",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 1
+      },
+      "revId": "a5cbfa6dd984e42a4f1aafdc5ddd5ecf95881ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce221998_eaab3d3f",
+        "filename": "include/net/apf.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-24T07:16:41Z",
+      "side": 1,
+      "message": "move this up just below get_info - in general let\u0027s match the order of the next apf_in...h",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 1
+      },
+      "revId": "a5cbfa6dd984e42a4f1aafdc5ddd5ecf95881ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f37361eb_9ce332dc",
+        "filename": "include/uapi/linux/net_apf.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-24T07:16:41Z",
+      "side": 1,
+      "message": "single quote this I think",
+      "range": {
+        "startLine": 5,
+        "startChar": 52,
+        "endLine": 5,
+        "endChar": 59
+      },
+      "revId": "a5cbfa6dd984e42a4f1aafdc5ddd5ecf95881ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16c32ef2_964c279a",
+        "filename": "include/uapi/linux/net_apf.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-24T07:16:41Z",
+      "side": 1,
+      "message": "small e",
+      "range": {
+        "startLine": 8,
+        "startChar": 39,
+        "endLine": 8,
+        "endChar": 47
+      },
+      "revId": "a5cbfa6dd984e42a4f1aafdc5ddd5ecf95881ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6b79528_e921d2e1",
+        "filename": "include/uapi/linux/net_apf.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-24T07:16:41Z",
+      "side": 1,
+      "message": "reorder to match apf_i.h",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 1
+      },
+      "revId": "a5cbfa6dd984e42a4f1aafdc5ddd5ecf95881ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79a4031d_f1e56314",
+        "filename": "net/apf/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-24T07:16:41Z",
+      "side": 1,
+      "message": "either remove of apf/core.c",
+      "range": {
+        "startLine": 3,
+        "startChar": 3,
+        "endLine": 3,
+        "endChar": 12
+      },
+      "revId": "a5cbfa6dd984e42a4f1aafdc5ddd5ecf95881ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5d8537e_3d33dfb9",
+        "filename": "net/apf/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-24T07:16:41Z",
+      "side": 1,
+      "message": "// Output-only attribute. The kernel rejects it if user-space tries to send it.\n    [MY_ATTR_KERNEL_STATS] \u003d { .type \u003d NLA_REJECT },",
+      "range": {
+        "startLine": 424,
+        "startChar": 0,
+        "endLine": 424,
+        "endChar": 1
+      },
+      "revId": "a5cbfa6dd984e42a4f1aafdc5ddd5ecf95881ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2e971b5_e659ab5e",
+        "filename": "net/apf/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-24T07:16:41Z",
+      "side": 1,
+      "message": "reorder",
+      "range": {
+        "startLine": 462,
+        "startChar": 0,
+        "endLine": 462,
+        "endChar": 1
+      },
       "revId": "a5cbfa6dd984e42a4f1aafdc5ddd5ecf95881ac4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
