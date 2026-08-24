@@ -33,6 +33,24 @@
       "message": "Thank you for the patch!\nCan you add `Bug:524806744` to the commit message?",
       "revId": "4ab8afec4c05592267f1861a30805e59b14bb39e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eeda5de8_543144de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2026-08-24T21:08:23Z",
+      "side": 1,
+      "message": "Sure, done.",
+      "parentUuid": "ac75f32d_1dd6e9fe",
+      "revId": "4ab8afec4c05592267f1861a30805e59b14bb39e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
