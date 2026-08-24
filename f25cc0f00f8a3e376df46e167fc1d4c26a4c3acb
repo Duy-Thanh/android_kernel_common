@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23740628_73b05265",
+        "filename": "include/net/apf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-24T06:19:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f74f0ca_5dee9140",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 31
+      },
+      "revId": "f25cc0f00f8a3e376df46e167fc1d4c26a4c3acb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ee156d0_d90d7083",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-08-24T03:57:15Z",
       "side": 1,
       "message": "these should be 1 liners",
+      "range": {
+        "startLine": 22,
+        "startChar": 1,
+        "endLine": 22,
+        "endChar": 4
+      },
+      "revId": "f25cc0f00f8a3e376df46e167fc1d4c26a4c3acb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4f64023_c8c336d9",
+        "filename": "include/net/apf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-24T06:19:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ee156d0_d90d7083",
       "range": {
         "startLine": 22,
         "startChar": 1,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e294f46_364955f6",
+        "filename": "include/net/apf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-24T06:19:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2354da17_7aab55fc",
+      "range": {
+        "startLine": 80,
+        "startChar": 53,
+        "endLine": 80,
+        "endChar": 64
+      },
+      "revId": "f25cc0f00f8a3e376df46e167fc1d4c26a4c3acb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b52303b_73fbba01",
@@ -83,6 +155,30 @@
       "writtenOn": "2026-08-24T03:57:15Z",
       "side": 1,
       "message": "should we just add a version field instead? that might be easier than kabi\njust make first field be version (we can even have 0 mean this version so we don\u0027t need to init it)",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 1
+      },
+      "revId": "f25cc0f00f8a3e376df46e167fc1d4c26a4c3acb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fe03b11_85d3d273",
+        "filename": "include/net/apf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-24T06:19:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b52303b_73fbba01",
       "range": {
         "startLine": 99,
         "startChar": 0,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "833295e5_08210301",
+        "filename": "include/uapi/linux/net_apf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-24T06:19:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d11aff29_5bfaefdd",
+      "range": {
+        "startLine": 18,
+        "startChar": 1,
+        "endLine": 18,
+        "endChar": 7
+      },
+      "revId": "f25cc0f00f8a3e376df46e167fc1d4c26a4c3acb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b0e87775_57e03a1d",
@@ -129,6 +249,30 @@
       "writtenOn": "2026-08-24T03:57:15Z",
       "side": 1,
       "message": "should this be 0?  should this match the version of apf_ops??",
+      "range": {
+        "startLine": 19,
+        "startChar": 30,
+        "endLine": 19,
+        "endChar": 31
+      },
+      "revId": "f25cc0f00f8a3e376df46e167fc1d4c26a4c3acb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b09549e3_7f8d36f3",
+        "filename": "include/uapi/linux/net_apf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-24T06:19:36Z",
+      "side": 1,
+      "message": "All other netlink using version number 1.",
+      "parentUuid": "b0e87775_57e03a1d",
       "range": {
         "startLine": 19,
         "startChar": 30,
@@ -162,6 +306,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "43ae9f92_74da2be7",
+        "filename": "include/uapi/linux/net_apf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-24T06:19:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "480d40b6_264a900f",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 42
+      },
+      "revId": "f25cc0f00f8a3e376df46e167fc1d4c26a4c3acb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "07fbaf0b_3ec70014",
@@ -175,6 +343,30 @@
       "writtenOn": "2026-08-24T03:57:15Z",
       "side": 1,
       "message": ".",
+      "range": {
+        "startLine": 251,
+        "startChar": 0,
+        "endLine": 251,
+        "endChar": 1
+      },
+      "revId": "f25cc0f00f8a3e376df46e167fc1d4c26a4c3acb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fb27d40_c86c9e02",
+        "filename": "include/uapi/linux/net_apf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-24T06:19:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07fbaf0b_3ec70014",
       "range": {
         "startLine": 251,
         "startChar": 0,
@@ -221,6 +413,24 @@
       "writtenOn": "2026-08-24T03:57:15Z",
       "side": 1,
       "message": "is this right?",
+      "revId": "f25cc0f00f8a3e376df46e167fc1d4c26a4c3acb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2ebaced_628486d6",
+        "filename": "net/apf/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-24T06:19:36Z",
+      "side": 1,
+      "message": "It is right. see other reference, to follow the style, move it to the end.\n\n\n```\n  ### Upstream Kernel Examples\n  • net/wireless/Makefile (compiles cfg80211.ko):\n    obj-$(CONFIG_CFG80211) +\u003d cfg80211.o\n    cfg80211-y +\u003d core.o sysfs.o radiotap.o util.o reg.o scan.o nl80211.o ...\n\n  • net/bluetooth/Makefile (compiles bluetooth.ko):\n    obj-$(CONFIG_BT) +\u003d bluetooth.o\n    bluetooth-y :\u003d af_bluetooth.o hci_core.o hci_conn.o hci_event.o mgmt.o ...\n  • net/8021q/Makefile (compiles 8021q.ko):\n    obj-$(CONFIG_VLAN_8021Q) +\u003d 8021q.o\n    8021q-y :\u003d vlan.o vlan_dev.o vlan_netlink.o\n\n  • net/hsr/Makefile (compiles hsr.ko):\n    obj-$(CONFIG_HSR) +\u003d hsr.o\n    hsr-y :\u003d hsr_main.o hsr_framereg.o hsr_device.o hsr_netlink.o ...\n\n```",
+      "parentUuid": "ee02ff42_f5bf10ea",
       "revId": "f25cc0f00f8a3e376df46e167fc1d4c26a4c3acb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
