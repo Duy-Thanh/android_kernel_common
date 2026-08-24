@@ -193,6 +193,11 @@ xhci_sideband_stop_endpoint(struct xhci_sideband *sb,
 	struct xhci_virt_ep *ep;
 	unsigned int ep_index;
 
+	if (!sb || !host_ep)
+		return -EINVAL;
+
+	guard(mutex)(&sb->mutex);
+
 	ep_index = xhci_get_endpoint_index(&host_ep->desc);
 	ep = sb->eps[ep_index];
 
@@ -223,6 +228,11 @@ xhci_sideband_get_endpoint_buffer(struct xhci_sideband *sb,
 	struct xhci_virt_ep *ep;
 	unsigned int ep_index;
 
+	if (!sb || !host_ep)
+		return NULL;
+
+	guard(mutex)(&sb->mutex);
+
 	ep_index = xhci_get_endpoint_index(&host_ep->desc);
 	ep = sb->eps[ep_index];
 
@@ -248,7 +258,12 @@ EXPORT_SYMBOL_GPL(xhci_sideband_get_endpoint_buffer);
 struct sg_table *
 xhci_sideband_get_event_buffer(struct xhci_sideband *sb)
 {
-	if (!sb || !sb->ir)
+	if (!sb)
+		return NULL;
+
+	guard(mutex)(&sb->mutex);
+
+	if (!sb->ir || !sb->ir->event_ring)
 		return NULL;
 
 	return xhci_ring_to_sgtable(sb->ir->event_ring);
