@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a01a5957_48883294",
+        "filename": "arch/x86/kvm/pkvm/memory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-08-24T13:57:40Z",
+      "side": 1,
+      "message": "just a thought: wondering if we could consider NULL as a special case as a documentation for __pa implementation in kernel?:\n```\n  static inline void *kern_pkvm_va(void *va)\n  {\n  \treturn va ? __pkvm_va(__pkvm_pa(va)) : NULL;\n  }\n```\n\nI was reading the __pa implementation and it calls __phys_addr() which BUGS_ON() if va \u003d\u003d NULL when CONFIG_DEBUG_VIRTUAL enabled. But host can genuinely pass va \u003d NULL and we have check in pkvm for NULL like this eg:\n\n```\n        shared_lapic_regs \u003d kern_pkvm_va(READ_ONCE(shared_apic-\u003eregs));\n        if (!shared_lapic_regs) {\n                ret \u003d -EINVAL;\n                goto unshare_apic;\n        }\n```\n\nThis could panic when CONFIG_DEBUG_VIRTUAL enabled.\n\nBut we disable CONFIG_DEBUG_VIRTUAL in undef.h so not an issue at all for us right now.",
+      "fixSuggestions": [
+        {
+          "fixId": "eee0931f_bb7ce781",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/memory.h",
+              "range": {
+                "startLine": 165,
+                "startChar": 0,
+                "endLine": 166,
+                "endChar": 0
+              },
+              "replacement": "\treturn va ? __pkvm_va(__pkvm_pa(va)) : NULL;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "fd944b03fa060150e9209d000ae58ef796e3c0e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
