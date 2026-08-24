@@ -876,6 +876,16 @@ int kvm_arch_vcpu_ioctl_run(struct kvm_vcpu *vcpu)
 			return ret;
 	}
 
+<<<<<<< HEAD   (f01343e230a39702e6bab24215cb24d2e9b385d3 Merge android13-5.10 into android13-5.10-lts)
+||||||| BASE   (2a3da1f4966798b0b48ce302944ad356b2c98b5d Linux 5.10.265)
+	if (run->immediate_exit)
+		return -EINTR;
+
+=======
+	if (!vcpu->wants_to_run)
+		return -EINTR;
+
+>>>>>>> BRANCH (78ed1e47aca1a79488df010fd584502de6aef744 Linux 5.10.266)
 	vcpu_load(vcpu);
 
 	if (run->immediate_exit) {
