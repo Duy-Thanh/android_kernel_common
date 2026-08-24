@@ -1652,9 +1652,12 @@ static void handle_uaudio_stream_req(struct qmi_handle *handle,
 					  req_msg->number_of_ch, req_msg->bit_rate,
 					  datainterval);
 
-		if (!ret)
+		if (!ret) {
 			ret = prepare_qmi_response(subs, req_msg, &resp,
 						   info_idx);
+			if (ret < 0)
+				disable_audio_stream(subs);
+		}
 		if (ret < 0) {
 			guard(mutex)(&chip->mutex);
 			subs->opened = 0;
