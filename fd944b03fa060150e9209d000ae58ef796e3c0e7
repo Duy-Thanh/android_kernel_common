@@ -34,6 +34,24 @@
       ],
       "revId": "fd944b03fa060150e9209d000ae58ef796e3c0e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "385f7538_233ef08d",
+        "filename": "arch/x86/kvm/pkvm/memory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-24T21:55:57Z",
+      "side": 1,
+      "message": "Thinking about this... First, if we do that, we should rather do that for any invalid va below PAGE_OFFSET, not just for NULL? In particular, if the host is able to trick pKVM to access (e.g. write) a VA \u003d\u003d 64K, which is the start of pKVM\u0027s vmemmap, pretty bad things would happen.\n\nNow, thinking about what exactly happens if the host passes such an invalid va, e.g. NULL. __pkvm_pa(va) will return (u64)(-PAGE_OFFSET) which, with 4-level paging, is 0x10000000000000000 - 0xffff888000000000 \u003d 0x778000000000 \u003d 119.5TB which is not gonna be a RAM address with 4-level paging (systems with that much RAM use 5-level paging). So it will not pass is_memory_range() check in pkvm_host_share_hyp/pkvm_host_donate_hyp.\n\nAnd similarly with 5-level paging, __pkvm_pa(va) will be 0x10000000000000000 - 0xff11000000000000 \u003d 0xef000000000000 \u003d 59.75PB which is not gonna be a RAM address on any system.\n\nSo it seems we are safe?",
+      "parentUuid": "a01a5957_48883294",
+      "revId": "fd944b03fa060150e9209d000ae58ef796e3c0e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
