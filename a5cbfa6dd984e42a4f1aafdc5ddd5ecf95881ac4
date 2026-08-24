@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9853dd74_c6e3270d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-24T11:45:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "adc9a364_d35f9379",
+      "range": {
+        "startLine": 9,
+        "startChar": 14,
+        "endLine": 9,
+        "endChar": 21
+      },
+      "revId": "a5cbfa6dd984e42a4f1aafdc5ddd5ecf95881ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5dec0808_66deaf67",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "497fff03_86739b74",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-24T11:45:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5dec0808_66deaf67",
+      "range": {
+        "startLine": 14,
+        "startChar": 51,
+        "endLine": 14,
+        "endChar": 54
+      },
+      "revId": "a5cbfa6dd984e42a4f1aafdc5ddd5ecf95881ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7dad423_36073215",
@@ -60,6 +108,24 @@
       "writtenOn": "2026-08-24T07:16:41Z",
       "side": 1,
       "message": "we need to update apf_interpreter.h references to \"netdev_ops-\u003endo_apf_get_info\" etc\nand apf_tool, and the jni network stack code, etc.",
+      "revId": "a5cbfa6dd984e42a4f1aafdc5ddd5ecf95881ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c23c985c_a9fa9b7b",
+        "filename": "include/net/apf.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-24T11:45:39Z",
+      "side": 1,
+      "message": "Acked, we will need to agree on the netlink API shape first and then update the rest of piece using this.",
+      "parentUuid": "e7dad423_36073215",
       "revId": "a5cbfa6dd984e42a4f1aafdc5ddd5ecf95881ac4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -99,6 +165,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d7639e1_43f6617f",
+        "filename": "include/net/apf.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-24T11:45:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "acd52422_ffe7cd05",
+      "revId": "a5cbfa6dd984e42a4f1aafdc5ddd5ecf95881ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86b441e0_d20460fb",
@@ -112,6 +196,30 @@
       "writtenOn": "2026-08-24T07:16:41Z",
       "side": 1,
       "message": "all of these need to pass, struct netlink_ext_ack *extack, so that drivers can\nNL_SET_ERR_MSG(extack, \"Firmware went out for lunch\");\n\nlet\u0027s always make this the 2nd argument\nie. first arg is net_dev, 2nd is extack.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 1
+      },
+      "revId": "a5cbfa6dd984e42a4f1aafdc5ddd5ecf95881ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acbabe8f_e834c9b2",
+        "filename": "include/net/apf.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-24T11:45:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86b441e0_d20460fb",
       "range": {
         "startLine": 36,
         "startChar": 0,
@@ -145,6 +253,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4c5d200_f0eff788",
+        "filename": "include/net/apf.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-24T11:45:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b2f25fb_e95f19b5",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 1
+      },
+      "revId": "a5cbfa6dd984e42a4f1aafdc5ddd5ecf95881ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "94000287_cf18ab83",
@@ -158,6 +290,30 @@
       "writtenOn": "2026-08-24T07:16:41Z",
       "side": 1,
       "message": "APFv6.1 only supports offset \u003d\u003d -1, length \u003d\u003d 0 means disable",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 1
+      },
+      "revId": "a5cbfa6dd984e42a4f1aafdc5ddd5ecf95881ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d86636c1_9e30c67f",
+        "filename": "include/net/apf.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-24T11:45:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94000287_cf18ab83",
       "range": {
         "startLine": 43,
         "startChar": 0,
@@ -191,6 +347,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fddcc2d7_b2735858",
+        "filename": "include/net/apf.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-24T11:45:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97228ce9_0d042506",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 1
+      },
+      "revId": "a5cbfa6dd984e42a4f1aafdc5ddd5ecf95881ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce221998_eaab3d3f",
@@ -204,6 +384,30 @@
       "writtenOn": "2026-08-24T07:16:41Z",
       "side": 1,
       "message": "move this up just below get_info - in general let\u0027s match the order of the next apf_in...h",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 1
+      },
+      "revId": "a5cbfa6dd984e42a4f1aafdc5ddd5ecf95881ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66d2da53_554dacb8",
+        "filename": "include/net/apf.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-24T11:45:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce221998_eaab3d3f",
       "range": {
         "startLine": 51,
         "startChar": 0,
@@ -237,6 +441,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1b40eeb_1fc1e404",
+        "filename": "include/uapi/linux/net_apf.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-24T11:45:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f37361eb_9ce332dc",
+      "range": {
+        "startLine": 5,
+        "startChar": 52,
+        "endLine": 5,
+        "endChar": 59
+      },
+      "revId": "a5cbfa6dd984e42a4f1aafdc5ddd5ecf95881ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "16c32ef2_964c279a",
@@ -250,6 +478,30 @@
       "writtenOn": "2026-08-24T07:16:41Z",
       "side": 1,
       "message": "small e",
+      "range": {
+        "startLine": 8,
+        "startChar": 39,
+        "endLine": 8,
+        "endChar": 47
+      },
+      "revId": "a5cbfa6dd984e42a4f1aafdc5ddd5ecf95881ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "310e695f_68d7993c",
+        "filename": "include/uapi/linux/net_apf.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-24T11:45:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16c32ef2_964c279a",
       "range": {
         "startLine": 8,
         "startChar": 39,
@@ -283,6 +535,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "646bf0ef_e148f53a",
+        "filename": "include/uapi/linux/net_apf.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-24T11:45:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6b79528_e921d2e1",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 1
+      },
+      "revId": "a5cbfa6dd984e42a4f1aafdc5ddd5ecf95881ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "79a4031d_f1e56314",
@@ -296,6 +572,30 @@
       "writtenOn": "2026-08-24T07:16:41Z",
       "side": 1,
       "message": "either remove of apf/core.c",
+      "range": {
+        "startLine": 3,
+        "startChar": 3,
+        "endLine": 3,
+        "endChar": 12
+      },
+      "revId": "a5cbfa6dd984e42a4f1aafdc5ddd5ecf95881ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "569dced8_e209eb2a",
+        "filename": "net/apf/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-24T11:45:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79a4031d_f1e56314",
       "range": {
         "startLine": 3,
         "startChar": 3,
@@ -329,6 +629,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb97777b_a15c39cd",
+        "filename": "net/apf/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-24T11:45:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5d8537e_3d33dfb9",
+      "range": {
+        "startLine": 424,
+        "startChar": 0,
+        "endLine": 424,
+        "endChar": 1
+      },
+      "revId": "a5cbfa6dd984e42a4f1aafdc5ddd5ecf95881ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f2e971b5_e659ab5e",
@@ -342,6 +666,30 @@
       "writtenOn": "2026-08-24T07:16:41Z",
       "side": 1,
       "message": "reorder",
+      "range": {
+        "startLine": 462,
+        "startChar": 0,
+        "endLine": 462,
+        "endChar": 1
+      },
+      "revId": "a5cbfa6dd984e42a4f1aafdc5ddd5ecf95881ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "121a26de_877449db",
+        "filename": "net/apf/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-24T11:45:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2e971b5_e659ab5e",
       "range": {
         "startLine": 462,
         "startChar": 0,
