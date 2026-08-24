@@ -775,7 +775,14 @@ static void update_entity_lag(struct cfs_rq *cfs_rq, struct sched_entity *se)
 {
 	SCHED_WARN_ON(!se->on_rq);
 
-	se->vlag = entity_lag(avg_vruntime(cfs_rq), se);
+	/*
+	 * When cfs_rq->curr == se, the vlag/vprot union holds vprot
+	 * (see protect_slice()). Writing se->vlag here would corrupt
+	 * se->vprot. The lag will be recomputed at re-enqueue time
+	 * via place_entity(), so skip the write for the current entity.
+	 */
+	if (se != cfs_rq->curr)
+		se->vlag = entity_lag(avg_vruntime(cfs_rq), se);
 }
 
 /*
