@@ -22,6 +22,30 @@
       },
       "revId": "328efda57845a3c1f60b2c5558631b54941a03a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cbb86c3_d4fc2ec3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-08-24T09:36:11Z",
+      "side": 1,
+      "message": "Based on what\u0027s written in the FF-A(DEN0140 1.3.0) gospel it should be possible:\n\n```\n4.1.2.3 Description\nThe ability of an endpoint to use this feature depends on whether its partition manager implements support\nfor receipt and transmission of fragments of the memory transaction descriptor. An endpoint can discover\nthe availability of this support by invoking the FFA_FEATURES interface (see Table 3.1 and the Base FF-A\nSpecification [1]) with the FID of the FFA_MEM_FRAG_TX and FFA_MEM_FRAG_RX ABIs described below.\nAn endpoint must support this feature if its partition manager supports it.\n```",
+      "parentUuid": "9eb5591a_124dac06",
+      "range": {
+        "startLine": 9,
+        "startChar": 39,
+        "endLine": 10,
+        "endChar": 30
+      },
+      "revId": "328efda57845a3c1f60b2c5558631b54941a03a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
