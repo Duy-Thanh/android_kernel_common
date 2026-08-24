@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "025762e9_1d5b95af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-08-24T07:41:20Z",
+      "side": 1,
+      "message": "Please do this as a series, 3 patches, one for the revert, one for the upstream commit, and one that fixes up the abi issues, so we can review this easier to verify that it really is doing what is claimed.\n\nthanks!",
+      "revId": "377489d60a1df8d194ab1b95b3acf8c2964b9e10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
