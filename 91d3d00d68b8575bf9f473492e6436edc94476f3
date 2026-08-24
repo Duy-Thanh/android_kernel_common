@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24b41bb0_ae4a71a0",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-24T22:35:53Z",
+      "side": 1,
+      "message": "Since (compared to patchset 1) the rest of the panic message is at the next line, maybe worth making the text at this line a bit more descriptive, e.g. `pKVM hyp panic:` instead of just `pKVM`?\n\nOr maybe at least add a colon after `pKVM` to make it more clear that the description is at the next line?",
+      "fixSuggestions": [
+        {
+          "fixId": "8f99eeba_fa6d8b7c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/panic.c",
+              "range": {
+                "startLine": 172,
+                "startChar": 0,
+                "endLine": 173,
+                "endChar": 0
+              },
+              "replacement": "\tlen \u003d scnprintf(panic_msg, sizeof(panic_msg), \"Kernel panic - not syncing: pKVM hyp panic:\\n\");\n"
+            }
+          ]
+        }
+      ],
+      "revId": "91d3d00d68b8575bf9f473492e6436edc94476f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
