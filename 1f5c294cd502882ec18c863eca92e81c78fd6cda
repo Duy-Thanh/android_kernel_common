@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed4f9a32_a1188b07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-08-24T19:29:42Z",
+      "side": 1,
+      "message": "This is not a clean cherry-pick of https://android-review.googlesource.com/c/kernel/common/+/4208232. Please either fix that or add an explanation in the changelog why it can\u0027t be cherry-picked cleanly.",
+      "revId": "1f5c294cd502882ec18c863eca92e81c78fd6cda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
