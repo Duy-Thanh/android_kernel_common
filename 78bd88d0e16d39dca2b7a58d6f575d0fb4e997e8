@@ -70,6 +70,23 @@
       "parentUuid": "601f8aef_c92d0964",
       "revId": "78bd88d0e16d39dca2b7a58d6f575d0fb4e997e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef505f50_9e4332e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-08-24T20:16:29Z",
+      "side": 1,
+      "message": "Overriding Kernel commit linter. We allowed other branch to have commit id from linux-next. For future reference: it should have been from maintainer\u0027s tree `https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git`",
+      "revId": "78bd88d0e16d39dca2b7a58d6f575d0fb4e997e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
