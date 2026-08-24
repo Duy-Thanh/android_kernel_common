@@ -1445,7 +1445,7 @@ static int prepare_qmi_response(struct snd_usb_substream *subs,
 	resp->speed_info = get_speed_info(subs->dev->speed);
 	if (resp->speed_info == USB_QMI_DEVICE_SPEED_INVALID_V01) {
 		ret = -ENODEV;
-		goto free_sec_ring;
+		goto unmap_er;
 	}
 
 	resp->speed_info_valid = 1;
@@ -1454,7 +1454,7 @@ static int prepare_qmi_response(struct snd_usb_substream *subs,
 					   &resp->xhci_mem_info.xfer_buff);
 	if (ret < 0) {
 		ret = -ENOMEM;
-		goto free_sec_ring;
+		goto unmap_er;
 	}
 
 	resp->xhci_mem_info_valid = 1;
@@ -1468,7 +1468,7 @@ static int prepare_qmi_response(struct snd_usb_substream *subs,
 						    uadev[card_num].num_intf);
 		if (!uadev[card_num].info) {
 			ret = -ENOMEM;
-			goto unmap_er;
+			goto free_xfer_buf;
 		}
 		uadev[card_num].udev = subs->dev;
 		atomic_set(&uadev[card_num].in_use, 1);
@@ -1512,9 +1512,15 @@ static int prepare_qmi_response(struct snd_usb_substream *subs,
 
 	return 0;
 
+free_xfer_buf:
+	uaudio_iommu_unmap(MEM_XFER_BUF,
+			   IOVA_MASK(resp->xhci_mem_info.xfer_buff.iova),
+			   resp->xhci_mem_info.xfer_buff.size,
+			   resp->xhci_mem_info.xfer_buff.size);
+	usb_free_coherent(subs->dev, resp->xhci_mem_info.xfer_buff.size,
+			  xfer_buf_cpu, resp->xhci_mem_info.xfer_buff.dma);
 unmap_er:
 	uaudio_iommu_unmap(MEM_EVENT_RING, IOVA_BASE, PAGE_SIZE, PAGE_SIZE);
-free_sec_ring:
 	xhci_sideband_remove_interrupter(uadev[card_num].sb);
 	usb_offload_put(subs->dev);
 drop_sync_ep:
