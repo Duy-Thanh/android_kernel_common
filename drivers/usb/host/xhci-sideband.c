@@ -377,7 +377,12 @@ EXPORT_SYMBOL_GPL(xhci_sideband_remove_interrupter);
 int
 xhci_sideband_interrupter_id(struct xhci_sideband *sb)
 {
-	if (!sb || !sb->ir)
+	if (!sb)
+		return -ENODEV;
+
+	guard(mutex)(&sb->mutex);
+
+	if (!sb->ir)
 		return -ENODEV;
 
 	return sb->ir->intr_num;
