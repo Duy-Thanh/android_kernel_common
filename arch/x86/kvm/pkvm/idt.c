@@ -138,14 +138,10 @@ static void default_exception_handler(struct pt_regs *regs,
 	void *adj_rip = (void *)(rip - kaslr_offset_val);
 
 	if (has_error_code)
-		pkvm_panic("\n========================================\n"
-			   "pKVM Exception %d @ip %pS (%px), err code 0x%lx\n"
-			   "========================================\n",
+		pkvm_panic("pKVM Exception %d @ip %pS (%px), err code 0x%lx\n",
 			   vector, adj_rip, (void *)rip, regs->orig_ax);
 	else
-		pkvm_panic("\n========================================\n"
-			   "pKVM Exception %d @ip %pS (%px), no err code\n"
-			   "========================================\n",
+		pkvm_panic("pKVM Exception %d @ip %pS (%px), no err code\n",
 			   vector, adj_rip, (void *)rip);
 }
 

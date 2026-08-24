@@ -63,9 +63,7 @@ void __noreturn pkvm_panic(const char *fmt, ...);
  * the host's metadata.
  */
 #undef BUG
-#define BUG() do { pkvm_panic("\n==================================\n"	\
-			      "pKVM BUG at %s:%u\n"			\
-			      "==================================\n",	\
+#define BUG() do { pkvm_panic("pKVM BUG at %s:%u\n",			\
 			       __FILE__, __LINE__);			\
 			      __builtin_unreachable();			\
 		} while (0)
