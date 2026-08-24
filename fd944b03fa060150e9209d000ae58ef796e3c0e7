@@ -52,6 +52,24 @@
       "parentUuid": "a01a5957_48883294",
       "revId": "fd944b03fa060150e9209d000ae58ef796e3c0e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c274826_826b5843",
+        "filename": "arch/x86/kvm/pkvm/memory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-24T22:18:14Z",
+      "side": 1,
+      "message": "I wouldn\u0027t like to require callers of kern_pkvm_va() to check the return value, as that would make it less aligned with pKVM-ARM\u0027s kern_hyp_va() and the code more complicated. If at all, I think we\u0027d rather validate __pkvm_va(phys) inside pkvm_host_share_hyp/pkvm_host_donate_hyp (since pKVM is not supposed to use a VA returned by kern_pkvm_va() until pkvm_host_share_hyp/pkvm_host_donate_hyp succeeded for it, and pKVM already takes care not to do that).\n\nAnd given the above calculations, it seems even that is not required?",
+      "parentUuid": "385f7538_233ef08d",
+      "revId": "fd944b03fa060150e9209d000ae58ef796e3c0e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
