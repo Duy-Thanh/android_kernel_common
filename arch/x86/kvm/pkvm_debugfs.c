@@ -12,6 +12,12 @@ static int enable_vmexit_trace(void *data, u64 val)
 }
 DEFINE_SIMPLE_ATTRIBUTE(enable_vmexit_trace_fops, NULL, enable_vmexit_trace, "%llu\n");
 
+static int trigger_hyp_panic(void *data, u64 val)
+{
+	return pkvm_hypercall(trigger_hyp_panic, val);
+}
+DEFINE_SIMPLE_ATTRIBUTE(trigger_hyp_panic_fops, NULL, trigger_hyp_panic, "%llu\n");
+
 static const struct vmexit_reason {
 	int reason;
 	char *name;
@@ -278,6 +284,7 @@ struct debugfs_item {
 struct debugfs_item debugfs_files[] = {
 	{ "enable_vmexit_trace", 0222, &enable_vmexit_trace_fops},
 	{ "vmexit_trace", 0444, &vmexit_trace_fops},
+	{ "trigger_hyp_panic", 0222, &trigger_hyp_panic_fops},
 	{ NULL }
 };
 

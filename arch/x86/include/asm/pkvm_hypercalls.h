@@ -24,6 +24,9 @@ PKVM_HC(reprivilege_cpu)
 PKVM_HC(enable_vmexit_trace)
 PKVM_HC(dump_vmexit_trace)
 
+/* pKVM fault injection / debug panic testing */
+PKVM_HC(trigger_hyp_panic)
+
 /* KVM ops */
 PKVM_HC(check_processor_compatibility)
 PKVM_HC(vm_init)
