@@ -1112,7 +1112,7 @@ free_xfer_buf:
  * transfer ring parameters.
  *
  */
-static phys_addr_t
+static int
 uaudio_endpoint_setup(struct snd_usb_substream *subs,
 		      struct snd_usb_endpoint *endpoint, int card_num,
 		      struct mem_info_v01 *mem_info,
