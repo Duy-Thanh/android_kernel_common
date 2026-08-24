@@ -124,6 +124,9 @@ xhci_sideband_add_endpoint(struct xhci_sideband *sb,
 	struct xhci_virt_ep *ep;
 	unsigned int ep_index;
 
+	if (!sb || !host_ep)
+		return -EINVAL;
+
 	guard(mutex)(&sb->mutex);
 
 	if (!sb->vdev)
@@ -171,6 +174,9 @@ xhci_sideband_remove_endpoint(struct xhci_sideband *sb,
 {
 	struct xhci_virt_ep *ep;
 	unsigned int ep_index;
+
+	if (!sb || !host_ep)
+		return -EINVAL;
 
 	guard(mutex)(&sb->mutex);
 
