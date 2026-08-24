@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adc9a364_d35f9379",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-24T06:45:31Z",
+      "side": 1,
+      "message": "maybe quote \u0027net_apf\u0027",
+      "range": {
+        "startLine": 9,
+        "startChar": 14,
+        "endLine": 9,
+        "endChar": 21
+      },
+      "revId": "a5cbfa6dd984e42a4f1aafdc5ddd5ecf95881ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dec0808_66deaf67",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-24T06:45:31Z",
+      "side": 1,
+      "message": "probably remote \u0027the\u0027",
+      "range": {
+        "startLine": 14,
+        "startChar": 51,
+        "endLine": 14,
+        "endChar": 54
+      },
+      "revId": "a5cbfa6dd984e42a4f1aafdc5ddd5ecf95881ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fcd67d7_2199ea7f",
+        "filename": "include/net/apf.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-24T06:45:31Z",
+      "side": 1,
+      "message": ", currently always 1",
+      "revId": "a5cbfa6dd984e42a4f1aafdc5ddd5ecf95881ac4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
