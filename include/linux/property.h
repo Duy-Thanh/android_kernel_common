@@ -119,7 +119,14 @@ struct fwnode_handle *device_get_named_child_node(struct device *dev,
 struct fwnode_handle *fwnode_handle_get(struct fwnode_handle *fwnode);
 void fwnode_handle_put(struct fwnode_handle *fwnode);
 
+<<<<<<< HEAD   (1a15cf200e119c8e22356d7cc22e78b9b1584a43 Merge android12-5.10 into android12-5.10-lts)
 int fwnode_irq_get(struct fwnode_handle *fwnode, unsigned int index);
+||||||| BASE   (2a3da1f4966798b0b48ce302944ad356b2c98b5d Linux 5.10.265)
+int fwnode_irq_get(const struct fwnode_handle *fwnode, unsigned int index);
+=======
+int fwnode_irq_get(const struct fwnode_handle *fwnode, unsigned int index);
+int fwnode_irq_get_byname(const struct fwnode_handle *fwnode, const char *name);
+>>>>>>> BRANCH (78ed1e47aca1a79488df010fd584502de6aef744 Linux 5.10.266)
 
 unsigned int device_get_child_node_count(struct device *dev);
 
