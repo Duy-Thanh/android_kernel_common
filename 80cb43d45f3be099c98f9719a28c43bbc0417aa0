@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "257b22b3_b1916d20",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1484,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-08-25T09:57:33Z",
+      "side": 1,
+      "message": "I agree, let me move it",
+      "parentUuid": "f618f34d_2201dfaa",
+      "revId": "80cb43d45f3be099c98f9719a28c43bbc0417aa0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "55b87a9d_fa2ee671",
         "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
         "patchSetId": 2
@@ -49,6 +67,24 @@
           ]
         }
       ],
+      "revId": "80cb43d45f3be099c98f9719a28c43bbc0417aa0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4befddc_d63ca30a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1494,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-08-25T09:57:33Z",
+      "side": 1,
+      "message": "I would like to keep it to prevent making assumptions about `__guest_request_page_transition`. Apart from that this is outside of the locks which makes sense IMO. Closing this for now",
+      "parentUuid": "55b87a9d_fa2ee671",
       "revId": "80cb43d45f3be099c98f9719a28c43bbc0417aa0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
