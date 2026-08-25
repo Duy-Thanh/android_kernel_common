@@ -968,7 +968,7 @@ static phys_addr_t smmu_iova_to_phys(struct kvm_hyp_iommu_domain *domain,
 	struct io_pgtable *pgtable = smmu_domain->pgtable;
 
 	if (!pgtable)
-		return -EINVAL;
+		return 0;
 
 	hyp_spin_lock(&smmu_domain->pgt_lock);
 	paddr = pgtable->ops.iova_to_phys(&pgtable->ops, iova);
