@@ -16,6 +16,23 @@
       "message": "Thanks so much for preserving all of that functionality while also eliminating the deadlock risks!",
       "revId": "91c93b4f8ec0e59f77caa1e0b614a3a87a3fa846",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bce858d1_c64bbfbf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-25T23:47:52Z",
+      "side": 1,
+      "message": "are you planning to backport this to the 5.10...6.18 kernels?",
+      "revId": "91c93b4f8ec0e59f77caa1e0b614a3a87a3fa846",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
