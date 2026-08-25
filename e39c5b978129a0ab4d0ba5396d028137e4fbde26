@@ -39,6 +39,30 @@
       },
       "revId": "e39c5b978129a0ab4d0ba5396d028137e4fbde26",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09921b82_c89a49e3",
+        "filename": "kernel/cgroup/freezer.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1104430
+      },
+      "writtenOn": "2026-08-25T16:38:20Z",
+      "side": 1,
+      "message": "bionic sets up sigaltstacks in `__init_alternate_signal_stack()` (see https://cs.android.com/android/platform/superproject/+/android-latest-release:bionic/libc/bionic/pthread_create.cpp;l\u003d127;drc\u003dbb9c1216077daaaeac117ef58da19c8e8deb5e39), but those use `mmap()` allocations with an `mprotect(PROT_NONE)` guard at the bottom.\n\nI think in general, all stacks should be having a guard at the bottom. I think the only feature interaction that requires caution would be `MADV_GUARD_INSTALL` guard pages, which don\u0027t create separate VMAs.",
+      "parentUuid": "9476fcb7_88f20838",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 38
+      },
+      "revId": "e39c5b978129a0ab4d0ba5396d028137e4fbde26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
