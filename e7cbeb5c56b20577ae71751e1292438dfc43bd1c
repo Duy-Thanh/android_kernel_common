@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39a5c9aa_c95daeb6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-08-25T20:31:42Z",
+      "side": 1,
+      "message": "Just for clarity: Adding a new vendorhook that takes these arguments and using that (to avoid breaking KABI) isn\u0027t a solution here because it is desired to *remove* the dm_verity(_io) structure from the KMI as it exposes too much to vendor hooks?",
+      "revId": "e7cbeb5c56b20577ae71751e1292438dfc43bd1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3df933eb_a21f6c59",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-08-25T20:31:42Z",
+      "side": 1,
+      "message": "Probably should have a Fixes: tag for the commit that introduced the problematic vendor hooks.",
+      "revId": "e7cbeb5c56b20577ae71751e1292438dfc43bd1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3121af27_8eaff639",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-08-25T20:31:42Z",
+      "side": 1,
+      "message": "Added a few other folks as I want to make sure there is consensus around this KABI break and that there won\u0027t be impact to other partners (which isn\u0027t clear to me).",
+      "revId": "e7cbeb5c56b20577ae71751e1292438dfc43bd1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
