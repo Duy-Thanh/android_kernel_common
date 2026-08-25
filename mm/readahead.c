@@ -164,8 +164,13 @@ static void read_pages(struct readahead_control *rac)
 	const struct address_space_operations *aops = rac->mapping->a_ops;
 	struct folio *folio;
 	struct blk_plug plug;
+	bool bypassed = false;
 
 	if (!readahead_count(rac))
+		return;
+
+	trace_android_vh_readahead_bypass(rac, &bypassed);
+	if (bypassed)
 		return;
 
 	if (unlikely(rac->_workingset))
