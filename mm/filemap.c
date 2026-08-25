@@ -2483,7 +2483,13 @@ static int filemap_read_folio(struct file *file, filler_t filler,
 {
 	bool workingset = folio_test_workingset(folio);
 	unsigned long pflags;
+	bool bypassed = false;
 	int error;
+
+	trace_android_vh_filemap_read_folio_bypass(file, folio->mapping,
+						   folio, &bypassed);
+	if (bypassed)
+		return 0;
 
 	/* Start the actual read. The read will unlock the page. */
 	if (unlikely(workingset))
