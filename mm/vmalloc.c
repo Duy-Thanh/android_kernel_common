@@ -2324,6 +2324,7 @@ static bool __purge_vmap_area_lazy(unsigned long start, unsigned long end,
 	static cpumask_t purge_nodes;
 	unsigned int nr_purge_nodes;
 	struct vmap_node *vn;
+	bool flushed = false;
 	int i;
 
 	lockdep_assert_held(&vmap_purge_lock);
@@ -2357,7 +2358,11 @@ static bool __purge_vmap_area_lazy(unsigned long start, unsigned long end,
 
 	nr_purge_nodes = cpumask_weight(&purge_nodes);
 	if (nr_purge_nodes > 0) {
-		flush_tlb_kernel_range(start, end);
+		/* Without KASAN vmalloc, free paths flush immediately. */
+		if (kasan_vmalloc_enabled()) {
+			flush_tlb_kernel_range(start, end);
+			flushed = true;
+		}
 
 		/* One extra worker is per a lazy_max_pages() full set minus one. */
 		nr_purge_helpers = atomic_long_read(&vmap_lazy_nr) / lazy_max_pages();
@@ -2393,7 +2398,7 @@ static bool __purge_vmap_area_lazy(unsigned long start, unsigned long end,
 	}
 
 	trace_purge_vmap_area_lazy(start, end, nr_purged_areas);
-	return nr_purged_areas > 0;
+	return flushed;
 }
 
 /*
@@ -2459,7 +2464,8 @@ static void free_unmap_vmap_area(struct vmap_area *va)
 {
 	flush_cache_vunmap(va->va_start, va->va_end);
 	vunmap_range_noflush(va->va_start, va->va_end);
-	if (debug_pagealloc_enabled_static())
+	if (!kasan_vmalloc_enabled() ||
+	    debug_pagealloc_enabled_static())
 		flush_tlb_kernel_range(va->va_start, va->va_end);
 
 	free_vmap_area_noflush(va);
@@ -2907,7 +2913,8 @@ static void vb_free(unsigned long addr, unsigned long size)
 
 	vunmap_range_noflush(addr, addr + size);
 
-	if (debug_pagealloc_enabled_static())
+	if (!kasan_vmalloc_enabled() ||
+	    debug_pagealloc_enabled_static())
 		flush_tlb_kernel_range(addr, addr + size);
 
 	spin_lock(&vb->lock);

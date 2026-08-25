@@ -32,8 +32,6 @@ static inline bool kasan_stack_collection_enabled(void)
 
 #include "../slab.h"
 
-DECLARE_STATIC_KEY_TRUE(kasan_flag_vmalloc);
-
 enum kasan_mode {
 	KASAN_MODE_SYNC,
 	KASAN_MODE_ASYNC,
@@ -45,12 +43,6 @@ extern enum kasan_mode kasan_mode __ro_after_init;
 extern unsigned long kasan_page_alloc_sample;
 extern unsigned int kasan_page_alloc_sample_order;
 DECLARE_PER_CPU(long, kasan_page_alloc_skip);
-
-static inline bool kasan_vmalloc_enabled(void)
-{
-	/* Static branch is never enabled with CONFIG_KASAN_VMALLOC disabled. */
-	return static_branch_likely(&kasan_flag_vmalloc);
-}
 
 static inline bool kasan_async_fault_possible(void)
 {
@@ -81,11 +73,6 @@ static inline bool kasan_sample_page_alloc(unsigned int order)
 }
 
 #else /* CONFIG_KASAN_HW_TAGS */
-
-static inline bool kasan_vmalloc_enabled(void)
-{
-	return IS_ENABLED(CONFIG_KASAN_VMALLOC);
-}
 
 static inline bool kasan_async_fault_possible(void)
 {

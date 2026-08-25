@@ -33,6 +33,21 @@ typedef unsigned int __bitwise kasan_vmalloc_flags_t;
 #define KASAN_VMALLOC_PAGE_RANGE 0x1 /* Apply exsiting page range */
 #define KASAN_VMALLOC_TLB_FLUSH  0x2 /* TLB flush */
 
+#ifdef CONFIG_KASAN_HW_TAGS
+DECLARE_STATIC_KEY_TRUE(kasan_flag_vmalloc);
+
+static inline bool kasan_vmalloc_enabled(void)
+{
+	/* Static branch is never enabled with CONFIG_KASAN_VMALLOC disabled. */
+	return static_branch_likely(&kasan_flag_vmalloc);
+}
+#else
+static inline bool kasan_vmalloc_enabled(void)
+{
+	return IS_ENABLED(CONFIG_KASAN_VMALLOC);
+}
+#endif
+
 #if defined(CONFIG_KASAN_GENERIC) || defined(CONFIG_KASAN_SW_TAGS)
 
 #include <linux/pgtable.h>
