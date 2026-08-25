@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b3da061_b100acaf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-08-25T15:48:09Z",
+      "side": 1,
+      "message": "I think this may still not fully work, because if I\u0027m reading the code correctly, it wouldn\u0027t follow the kernel log line formatting (i.e. `\u003clog level\u003e[timestamp] line`. @jasongustaman@google.com Do you know if that could trip the Stability Library parser, or would it just work fine?",
+      "revId": "c85601a60c8d0eda71528921d96c8f3ebb583915",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6695a216_2fe90de7",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-08-25T15:48:09Z",
+      "side": 1,
+      "message": "Could we add a new line at the beginning to make sure this is on its own line? Or is it guaranteed that `fmt` always ends with a new line?",
+      "fixSuggestions": [
+        {
+          "fixId": "c4c86efd_6d3c7960",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/panic.c",
+              "range": {
+                "startLine": 177,
+                "startChar": 0,
+                "endLine": 178,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t \"\\nKernel panic - not syncing: HYP panic\\n\");\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c85601a60c8d0eda71528921d96c8f3ebb583915",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
