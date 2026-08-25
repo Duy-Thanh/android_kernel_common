@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c2fa853_7975b7da",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-08-25T22:08:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2905594b_f9b2662d",
+      "revId": "c85601a60c8d0eda71528921d96c8f3ebb583915",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66c02b00_645a167d",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-08-25T15:49:25Z",
       "side": 1,
       "message": "nit: Could you add a sample console-ramoops contents resulting from this change to the commit message for reference?",
+      "revId": "c85601a60c8d0eda71528921d96c8f3ebb583915",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "009db7b4_6fe09985",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-08-25T22:08:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66c02b00_645a167d",
       "revId": "c85601a60c8d0eda71528921d96c8f3ebb583915",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -101,6 +137,24 @@
           ]
         }
       ],
+      "revId": "c85601a60c8d0eda71528921d96c8f3ebb583915",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bb432b0_c52f5f7c",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-08-25T22:08:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d5fdd11_5e53aeae",
       "revId": "c85601a60c8d0eda71528921d96c8f3ebb583915",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
