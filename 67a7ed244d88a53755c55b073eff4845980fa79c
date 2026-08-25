@@ -91,6 +91,75 @@
       },
       "revId": "67a7ed244d88a53755c55b073eff4845980fa79c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82176c47_81300226",
+        "filename": "net/apf/core.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-25T11:53:05Z",
+      "side": 1,
+      "message": "can this be handled by policy \u0027required\u0027",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 1
+      },
+      "revId": "67a7ed244d88a53755c55b073eff4845980fa79c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79212ba8_9fc4c3e4",
+        "filename": "net/apf/core.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-25T11:53:05Z",
+      "side": 1,
+      "message": "refactor this into a function, it should check both for apf_ops and apf_ops-\u003eget_info and apf_ops-\u003e... for all the functions that are guaranteed to be implemented in apfv6.1\n\nget_info, get_ram_size, read/write\n\nplus a bool argument, which if true also checks\n\nthe remaining apfv8 ones\n\n(or a level, 0\u003dapfv6.1, 1\u003dfastpath, 2\u003dv8)",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 0
+      },
+      "revId": "67a7ed244d88a53755c55b073eff4845980fa79c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18c8c3ce_7894c5a0",
+        "filename": "net/apf/core.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-25T11:53:05Z",
+      "side": 1,
+      "message": "I think you can simply remove the NLA_REJECT lines since this is in-policy\n\nnaively I would expect the default to be reject... for anything not listed.\n\nalso we could have a separate policy per command, or at least for trivial commands that don\u0027t take any inputs besides the ifindex (ie. apf_policy_just_ifindex)",
+      "range": {
+        "startLine": 470,
+        "startChar": 0,
+        "endLine": 470,
+        "endChar": 1
+      },
+      "revId": "67a7ed244d88a53755c55b073eff4845980fa79c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
