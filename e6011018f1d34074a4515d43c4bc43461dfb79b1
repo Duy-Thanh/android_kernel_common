@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18f3b4ff_fff27ba1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 4966542
+      },
+      "writtenOn": "2026-08-25T10:58:09Z",
+      "side": 1,
+      "message": "Updated the commit message to explain why the private dm-verity types need to be removed from the hook ABI and to describe the new explicit parameters and PRE_FEC/FEC_FAILED events.",
+      "parentUuid": "c9093246_06fb2a73",
+      "revId": "e6011018f1d34074a4515d43c4bc43461dfb79b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a8c4922a_70d1956a",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-08-25T09:33:15Z",
       "side": 1,
       "message": "abi breaks require documentation, right?",
+      "revId": "e6011018f1d34074a4515d43c4bc43461dfb79b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cdc50b5_b61150a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4966542
+      },
+      "writtenOn": "2026-08-25T10:58:09Z",
+      "side": 1,
+      "message": "Yes. This is the intentional one-time ABI break described in b/485453627, coordinated with Samsung as the only user of these hooks. I have updated the commit message to document the reason and scope of the ABI change. Please let me know if additional ABI break documentation is required beyond the ABI update in this change.",
+      "parentUuid": "a8c4922a_70d1956a",
       "revId": "e6011018f1d34074a4515d43c4bc43461dfb79b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
