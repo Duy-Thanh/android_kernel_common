@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3ac569ba_9c4be513",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-08-25T21:01:59Z",
+      "side": 1,
+      "message": "\u003e \"ANDROID: topology: Add vendor hook for use_amu_fie\n\u003e Arm64 uses AMU to update arch_freq_scale at tick, but it does not update arch_freq_scale when cpufreq changes. However, it would be inaccurate when cpufreq changes and tick not happends. So we decide not to use AMU and instead update arch_freq_scale when cpufreq changes.\"\n\nYeah, that\u0027s an improvement over the current commit message. Commit messages should focus primarily on the \"why\" the change is needed not the \"what\" the change is making.",
+      "parentUuid": "a900c3de_08432388",
+      "revId": "4f47ec10981f7fe5945b94ceb4532a12c7898be3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d458e78c_c843200d",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 9
