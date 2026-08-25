@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61a13af7_534333c7",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1484,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-08-25T17:31:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "257b22b3_b1916d20",
+      "revId": "80cb43d45f3be099c98f9719a28c43bbc0417aa0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55b87a9d_fa2ee671",
@@ -120,6 +138,24 @@
       "side": 1,
       "message": "From the guest FF-A context the largest size would be 64K so 16 pages but they don\u0027t have to be physically contiguous but guest IPA contiguous. From the context that this function is called it won\u0027t be possible to return a partial number of pages because this is done on the back of other call which doesn\u0027t have such semantics.\n\nI think the safest bet is to fail here.",
       "parentUuid": "66fcc18f_b9e66299",
+      "revId": "80cb43d45f3be099c98f9719a28c43bbc0417aa0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f16bd0de_3d31f64a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1504,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-08-25T17:31:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01c90820_db9d2488",
       "revId": "80cb43d45f3be099c98f9719a28c43bbc0417aa0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
