@@ -70,6 +70,24 @@
       "parentUuid": "14c425bb_d9103df6",
       "revId": "da184f8f2f6075e4972e94637af890ef6b986610",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d57e96f_1891892f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-08-25T20:53:02Z",
+      "side": 1,
+      "message": "Yeah. Generally we don\u0027t have the ability to test or the bandwidth to review all the drivers that could be built out of the kernel source, so we try to limit what we take (outside of LTS merges) to just changes that will be in the official GKI binary and GKI modules. \n\nThe convention is often partners can carry any driver patches in the tree they build the modules from. \n\nOr alternatively, if the changes can land in -stable then eventually it will show up in the GKI source tree, but I recognize this can take awhile.\n\nSo unfortunately, I don\u0027t think we should be taking this change into the GKI tree.",
+      "parentUuid": "9fe3ab62_3eb6ea8d",
+      "revId": "da184f8f2f6075e4972e94637af890ef6b986610",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
