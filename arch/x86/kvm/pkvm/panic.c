@@ -133,11 +133,31 @@ static void __noreturn pkvm_emergency_reset(void)
 		asm volatile("cli; hlt");
 }
 
+extern unsigned int tsc_khz;
+
+static void pkvm_get_timestamp(u64 *sec, u64 *usec)
+{
+	u64 cycles, rem_cycles, khz = tsc_khz;
+
+	if (!khz) {
+		*sec = 0;
+		*usec = 0;
+		return;
+	}
+
+	cycles = rdtsc_ordered();
+	*sec = cycles / (khz * 1000ULL);
+	rem_cycles = cycles % (khz * 1000ULL);
+	*usec = (rem_cycles * 1000ULL) / khz;
+}
+
 atomic_t pkvm_panic_in_progress = ATOMIC_INIT(0);
 
 void __noreturn panic(const char *fmt, ...)
 {
 	static char panic_msg[1024];
+	char pfx[48];
+	u64 sec = 0, usec = 0;
 	va_list args;
 	int len;
 
@@ -168,13 +188,22 @@ void __noreturn panic(const char *fmt, ...)
 	 */
 	pkvm_udelay(10000);
 
+	pkvm_get_timestamp(&sec, &usec);
+	scnprintf(pfx, sizeof(pfx), "<0>[%5lu.%06lu][    C%d] ",
+		  (unsigned long)sec, (unsigned long)usec, raw_smp_processor_id());
+
+	len = scnprintf(panic_msg, sizeof(panic_msg), "%s", pfx);
+
 	va_start(args, fmt);
-	len = vscnprintf(panic_msg, sizeof(panic_msg), fmt, args);
+	len += vscnprintf(panic_msg + len, sizeof(panic_msg) - len, fmt, args);
 	va_end(args);
 
-	/* Append the standard Linux panic signature at the end. */
+	pkvm_get_timestamp(&sec, &usec);
+	scnprintf(pfx, sizeof(pfx), "<0>[%5lu.%06lu][    C%d] ",
+		  (unsigned long)sec, (unsigned long)usec, raw_smp_processor_id());
+
 	scnprintf(panic_msg + len, sizeof(panic_msg) - len,
-		  "Kernel panic - not syncing: HYP panic:\n");
+		  "%sKernel panic - not syncing: HYP panic:\n", pfx);
 
 	pkvm_err("%s", panic_msg);
 
