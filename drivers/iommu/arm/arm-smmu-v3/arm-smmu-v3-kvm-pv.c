@@ -698,6 +698,8 @@ static int kvm_arm_smmu_probe(struct platform_device *pdev)
 	if (ret)
 		return ret;
 
+	mutex_init(&smmu->streams_mutex);
+
 	ret = kvm_arm_smmu_device_reset(host_smmu);
 	if (ret)
 		return ret;
