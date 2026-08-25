@@ -34,6 +34,24 @@
       "parentUuid": "1b20b57c_c64cd144",
       "revId": "da184f8f2f6075e4972e94637af890ef6b986610",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14c425bb_d9103df6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-08-25T05:19:37Z",
+      "side": 1,
+      "message": "@giver@google.com can you provide some context on why you think this should go into the GKI tree? I don\u0027t believe we build this logic as part of the GKI.  We tend to prefer changes (apart from LTS updates) to logic we don\u0027t build be kept in vendor module build tree.",
+      "parentUuid": "e7cea632_49bc40aa",
+      "revId": "da184f8f2f6075e4972e94637af890ef6b986610",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
