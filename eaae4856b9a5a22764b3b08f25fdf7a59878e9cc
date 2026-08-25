@@ -34,6 +34,24 @@
       "parentUuid": "706b2e37_7435771e",
       "revId": "eaae4856b9a5a22764b3b08f25fdf7a59878e9cc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a093891_00647c95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1637924
+      },
+      "writtenOn": "2026-08-25T23:45:31Z",
+      "side": 1,
+      "message": "How would this be any different from say Qualcomm and the db845c target? ARCH_QCOM enables a lot of support by default, including SoCs that are not viable for new certification. With ARCH_TEGRA now similarly enabling all generations by default, this change is primarily trying to undisable stuff that was previously forcibly removed by android specific changes.",
+      "parentUuid": "fb507996_1a6740da",
+      "revId": "eaae4856b9a5a22764b3b08f25fdf7a59878e9cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
