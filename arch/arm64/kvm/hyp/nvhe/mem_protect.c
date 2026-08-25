@@ -6,6 +6,7 @@
 
 #include <linux/kvm_host.h>
 #include <linux/arm-smccc.h>
+#include <linux/bitops.h>
 #include <asm/kvm_emulate.h>
 #include <asm/kvm_hyp.h>
 #include <asm/kvm_hypevents.h>
@@ -1481,47 +1482,128 @@ unlock:
 	return ret;
 }
 
-int __pkvm_guest_share_hyp_page(struct pkvm_hyp_vcpu *vcpu, u64 ipa, u64 *hyp_va)
+#define NUM_GUEST_FFA_VMS		(32)
+#define GUEST_MBOX_SIZE			(KVM_FFA_MBOX_NR_PAGES * PAGE_SIZE)
+#define HYP_PRIV_VA_GUEST_MBOX_SIZE	(NUM_GUEST_FFA_VMS * GUEST_MBOX_SIZE * 2)
+
+static unsigned long recycled_va_range_start;
+static u64 recycled_va_mask;
+
+static void *pkvm_reserve_recycled_va_range(void)
+{
+	unsigned long free_indx;
+	int ret = 0;
+
+	if (!recycled_va_range_start)
+		ret = pkvm_alloc_private_va_range(HYP_PRIV_VA_GUEST_MBOX_SIZE,
+						  &recycled_va_range_start);
+	if (ret || recycled_va_mask == U64_MAX)
+		return NULL;
+
+	free_indx = ffz(recycled_va_mask);
+
+	/* Mark the fix recycled VA space as allocated */
+	recycled_va_mask |= (1 << free_indx);
+
+	return (void *)((free_indx << PAGE_SHIFT) + recycled_va_range_start);
+}
+
+static int pkvm_free_recycled_va_range(void *hva)
+{
+	unsigned long used_offset, used_index;
+
+	if (!recycled_va_range_start)
+		return -EINVAL;
+
+	if (check_sub_overflow((u64)hva, recycled_va_range_start, &used_offset))
+		return -EINVAL;
+
+	if (used_offset >= HYP_PRIV_VA_GUEST_MBOX_SIZE)
+		return -ENOMEM;
+
+	used_index = used_offset >> PAGE_SHIFT;
+	if (!(recycled_va_mask & BIT(used_index)))
+		return -ENOENT;
+
+	recycled_va_mask &= ~BIT(used_index);
+	return 0;
+}
+
+int __pkvm_guest_share_hyp_pages(struct pkvm_hyp_vcpu *vcpu, u64 ipa, u64 *hyp_va, u64 nr_pages)
 {
 	struct pkvm_hyp_vm *vm = pkvm_hyp_vcpu_to_hyp_vm(vcpu);
-	int ret;
-	kvm_pte_t pte;
-	u64 phys;
+	u64 size, available_pages, cur, end_ipa, offset;
 	enum kvm_pgtable_prot prot;
+	kvm_pte_t pte;
+	int ret = 0;
 	void *virt;
-	u64 nr_pages = 1;
+	s8 level;
+
+	if (check_shl_overflow(nr_pages, PAGE_SHIFT, &size) ||
+	    nr_pages != KVM_FFA_MBOX_NR_PAGES)
+		return -EINVAL;
+
+	if (check_add_overflow(ipa, size, &end_ipa))
+		return -EINVAL;
 
 	hyp_lock_component();
 	guest_lock_component(vm);
 
-	ret = __guest_request_page_transition(ipa, &pte, &nr_pages, vm, PKVM_PAGE_OWNED);
-	if (ret)
+	virt = pkvm_reserve_recycled_va_range();
+	if (!virt)
 		goto unlock;
-
-	phys = kvm_pte_to_phys(pte);
-
-	virt = __hyp_va(phys);
-	if (IS_ENABLED(CONFIG_NVHE_EL2_DEBUG)) {
-		ret = __hyp_check_page_state_range((u64)virt, PAGE_SIZE, PKVM_NOPAGE);
-		if (ret)
-			goto unlock;
-	}
 
 	prot = pkvm_mkstate(PAGE_HYP, PKVM_PAGE_SHARED_BORROWED);
-	ret = pkvm_create_mappings_locked(virt, virt + PAGE_SIZE, prot);
-	if (ret) {
-		/*
-		 * Repaint the return code as we need to distinguish between the
-		 * no memory from the guest which is recoverable and no memory
-		 * from the hypervisor.
-		 */
-		if (ret == -ENOMEM)
-			ret = -EBUSY;
-		goto unlock;
+	for (cur = ipa; cur < end_ipa; cur += PAGE_SIZE) {
+		ret = __guest_request_page_transition(cur, &pte, &available_pages, vm,
+						      PKVM_PAGE_OWNED);
+		if (ret)
+			goto err_with_va_range;
+		else if (available_pages != 1) {
+			ret = -ENOSPC;
+			goto err_with_va_range;
+		}
+
+		offset = cur - ipa;
+		if (IS_ENABLED(CONFIG_NVHE_EL2_DEBUG)) {
+			ret = __hyp_check_page_state_range((u64)virt + offset, PAGE_SIZE,
+							   PKVM_NOPAGE);
+			if (ret)
+				goto err_with_va_range;
+		}
+
+		ret = kvm_pgtable_hyp_map(&pkvm_pgtable, (u64)virt + offset, PAGE_SIZE,
+					  kvm_pte_to_phys(pte), prot);
+		if (ret)
+			goto err_with_va_range;
+
+		ret = __guest_initiate_page_transition(cur, pte, 1, vcpu, PKVM_PAGE_SHARED_OWNED);
+		if (ret) {
+			 WARN_ON(kvm_pgtable_hyp_unmap(&pkvm_pgtable, (u64)virt + offset,
+						       PAGE_SIZE) != PAGE_SIZE);
+			 goto err_with_va_range;
+		}
 	}
 
-	WARN_ON(__guest_initiate_page_transition(ipa, pte, nr_pages, vcpu, PKVM_PAGE_SHARED_OWNED));
 	*hyp_va = (u64)virt;
+err_with_va_range:
+	if (!ret)
+		goto unlock;
+
+	/* Revert the state to page owned by the guest and unmapped in hyp */
+	WARN_ON(check_sub_overflow(cur, PAGE_SIZE, &cur));
+	while (cur >= ipa) {
+		WARN_ON(kvm_pgtable_get_leaf(&vm->pgt, cur, &pte, &level));
+		WARN_ON(kvm_pgtable_stage2_map(&vm->pgt, cur, PAGE_SIZE, kvm_pte_to_phys(pte),
+					       pkvm_mkstate(KVM_PGTABLE_PROT_RWX, PKVM_PAGE_OWNED),
+					       NULL, 0));
+		offset = cur - ipa;
+		WARN_ON(kvm_pgtable_hyp_unmap(&pkvm_pgtable, (u64)virt + offset, PAGE_SIZE) !=
+			PAGE_SIZE);
+		cur -= PAGE_SIZE;
+	}
+
+	WARN_ON(pkvm_free_recycled_va_range(virt));
 unlock:
 	guest_unlock_component(vm);
 	hyp_unlock_component();
@@ -1529,37 +1611,78 @@ unlock:
 	return ret;
 }
 
-int __pkvm_guest_unshare_hyp_page(struct pkvm_hyp_vm *vm, u64 ipa)
+int __pkvm_guest_unshare_hyp_pages(struct pkvm_hyp_vm *vm, u64 ipa, u64 nr_pages, u64 hva)
 {
-	int ret;
+	u64 available_pages, size, cur, offset, end_ipa, checked_hva;
+	enum kvm_pgtable_prot prot;
 	kvm_pte_t pte;
-	u64 phys, virt, nr_pages = 1;
+	int ret = 0;
+	s8 level;
 
+	if (check_shl_overflow(nr_pages, PAGE_SHIFT, &size))
+		return -EINVAL;
+
+	if (check_add_overflow(ipa, size, &end_ipa))
+		return -EINVAL;
+
+	prot = pkvm_mkstate(KVM_PGTABLE_PROT_RWX, PKVM_PAGE_OWNED);
 	hyp_lock_component();
 	guest_lock_component(vm);
 
-	ret = __guest_request_page_transition(ipa, &pte, &nr_pages, vm, PKVM_PAGE_SHARED_OWNED);
-	if (ret)
+	for (cur = ipa; cur < end_ipa; cur += PAGE_SIZE) {
+		ret = __guest_request_page_transition(cur, &pte, &available_pages, vm,
+						      PKVM_PAGE_SHARED_OWNED);
+		if (ret)
+			goto err_unshare;
+		else if (available_pages != 1) {
+			ret = -ENOSPC;
+			goto err_unshare;
+		}
+
+		offset = cur - ipa;
+		if (check_add_overflow(hva, offset, &checked_hva)) {
+			ret = -EINVAL;
+			goto err_unshare;
+		}
+
+		ret = __hyp_check_page_state_range(checked_hva, size, PKVM_PAGE_SHARED_BORROWED);
+		if (ret)
+			goto err_unshare;
+
+		WARN_ON(kvm_pgtable_hyp_unmap(&pkvm_pgtable, checked_hva, PAGE_SIZE) != PAGE_SIZE);
+
+		/*
+		 * NULL memcache: this is the reverse of a prior PAGE_SIZE share, so the
+		 * walker rejected any coarser leaf with -E2BIG. The map below only
+		 * flips software state bits via the try_leaf fast path and never
+		 * allocates. The teardown path runs without a loaded vCPU, so there is
+		 * no correct memcache to pass.
+		 */
+		WARN_ON(kvm_pgtable_stage2_map(&vm->pgt, cur, PAGE_SIZE, kvm_pte_to_phys(pte),
+					       prot, NULL, 0));
+	}
+
+err_unshare:
+	if (!ret)
 		goto unlock;
 
-	phys = kvm_pte_to_phys(pte);
+	/* revert the state to shared in the guest and borrowed in the hyp */
+	prot = pkvm_mkstate(KVM_PGTABLE_PROT_RWX, PKVM_PAGE_SHARED_OWNED);
+	WARN_ON(check_sub_overflow(cur, PAGE_SIZE, &cur));
+	while (cur >= ipa) {
+		offset = cur - ipa;
+		WARN_ON(!check_add_overflow(hva, offset, &checked_hva));
 
-	virt = (u64)__hyp_va(phys);
-	ret = __hyp_check_page_state_range(virt, PAGE_SIZE, PKVM_PAGE_SHARED_BORROWED);
-	if (ret)
-		goto unlock;
+		WARN_ON(kvm_pgtable_get_leaf(&vm->pgt, cur, &pte, &level));
+		WARN_ON(kvm_pgtable_hyp_map(&pkvm_pgtable, checked_hva, PAGE_SIZE,
+					    kvm_pte_to_phys(pte),
+					    pkvm_mkstate(PAGE_HYP, PKVM_PAGE_SHARED_BORROWED)));
 
-	WARN_ON(kvm_pgtable_hyp_unmap(&pkvm_pgtable, virt, PAGE_SIZE) != PAGE_SIZE);
-	/*
-	 * NULL memcache: this is the reverse of a prior PAGE_SIZE share, so the
-	 * walker rejected any coarser leaf with -E2BIG. The map below only
-	 * flips software state bits via the try_leaf fast path and never
-	 * allocates. The teardown path runs without a loaded vCPU, so there is
-	 * no correct memcache to pass.
-	 */
-	ret = kvm_pgtable_stage2_map(&vm->pgt, ipa, PAGE_SIZE, phys,
-				     pkvm_mkstate(KVM_PGTABLE_PROT_RWX, PKVM_PAGE_OWNED),
-				     NULL, 0);
+		WARN_ON(kvm_pgtable_stage2_map(&vm->pgt, cur, PAGE_SIZE, kvm_pte_to_phys(pte),
+					       prot, NULL, 0));
+		cur -= PAGE_SIZE;
+	}
+	WARN_ON(pkvm_free_recycled_va_range((void *)hva));
 unlock:
 	guest_unlock_component(vm);
 	hyp_unlock_component();
