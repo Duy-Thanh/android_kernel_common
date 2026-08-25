@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "66c02b00_645a167d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-08-25T15:49:25Z",
+      "side": 1,
+      "message": "nit: Could you add a sample console-ramoops contents resulting from this change to the commit message for reference?",
+      "revId": "c85601a60c8d0eda71528921d96c8f3ebb583915",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "8b3da061_b100acaf",
