@@ -1,6 +1,9 @@
 {
   "imports": [
     {
+      "path": "cts/hostsidetests/scopedstorage"
+    },
+    {
       "path": "cts/tests/tests/drm"
     },
     {
