@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f811bada_88f9985d",
+        "filename": "arch/x86/kvm/pkvm/pgtable.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2026-08-25T07:05:25Z",
+      "side": 1,
+      "message": "nit: since now pte is added, looks like we don\u0027t need prot and phys anymore in this data structure, as prot and phys can be derived from pte if pkvm_pgtable_lookup() has *prot and *phys?",
+      "revId": "e1e8ab62cff8f7515e0cbf3b0254d1f2a07055b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
