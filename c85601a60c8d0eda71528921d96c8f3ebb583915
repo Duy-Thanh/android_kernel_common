@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b60f0b7c_8f11bb4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-08-25T16:04:30Z",
+      "side": 1,
+      "message": "Thanks for adding Jason, yeah just for reference it will look like below with current patchset 4 version if artifinally triggering bug in hyp:\n```\n# dumpsys dropbox --print SYSTEM_LAST_KMSG | tail -20 \n\u003c14\u003e[   49.664469][    T1] init: Service \u0027idmap2d\u0027 (pid 2895) received SIGKILL\n\u003c14\u003e[   52.087419][  T521] servicemanager: Notifying artd they don\u0027t (previously: do) have clients when we now have no record of a client\n\u003c14\u003e[   52.087625][  T521] servicemanager: Caller(pid\u003d1315,uid\u003d1082,sid\u003du:r:artd:s0) Unregistering artd\n\u003c14\u003e[   52.087634][  T521] libbinder.BpBinder: onLastStrongRef automatically unlinking death recipients for binder (0x7dd0abc1e780) with descriptor: \u0027(not cached)\u0027\n\u003c14\u003e[   52.089823][    T1] init: Service \u0027artd\u0027 (pid 1315) exited with status 0 oneshot service took 45.021999 seconds in background\n\u003c14\u003e[   52.089836][    T1] init: Sending SIGKILL to service \u0027artd\u0027 (pid 1315) process group...\n\u003c14\u003e[   52.089963][    T1] libprocessgroup: Removed cgroup /sys/fs/cgroup/system/uid_1082/pid_1315\n\u003c14\u003e[   69.211341][  T521] servicemanager: Caller(pid\u003d610,uid\u003d1017,sid\u003du:r:keystore:s0) Found android.hardware.security.keymint.IRemotelyProvisionedComponent/default in framework VINTF manifest.\n\u003c14\u003e[   69.214024][  T521] servicemanager: Caller(pid\u003d4041,uid\u003d10238,sid\u003du:r:rkpdapp:s0:c238,c256,c512,c768) Found android.hardware.security.keymint.IRemotelyProvisionedComponent/default in framework VINTF manifest.\n\u003c14\u003e[   69.223294][  T521] servicemanager: Caller(pid\u003d610,uid\u003d1017,sid\u003du:r:keystore:s0) Found android.hardware.security.keymint.IRemotelyProvisionedComponent/default in framework VINTF manifest.\n\u003c12\u003e[   72.849016][  T763] healthd: battery l\u003d100 v\u003d8847 t\u003d0.0 h\u003d1 st\u003d5 c\u003d0 fc\u003d8572000 cc\u003d7 chg\u003du\n\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\npKVM Exception 14 @ip 0xffffffff82745654 (0xffffffffb5745654), err code 0x2\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\nKernel panic - not syncing: HYP panic\n\nBoot info:\nLast boot reason: kernel_panic,hyp_panic\n\n# getprop sys.boot.reason\nkernel_panic,hyp_panic\n\n```",
+      "parentUuid": "8b3da061_b100acaf",
+      "revId": "c85601a60c8d0eda71528921d96c8f3ebb583915",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6695a216_2fe90de7",
@@ -66,6 +84,24 @@
           ]
         }
       ],
+      "revId": "c85601a60c8d0eda71528921d96c8f3ebb583915",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae988eae_6d070caa",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-08-25T16:04:30Z",
+      "side": 1,
+      "message": "With current usage we add \\n at the end of both pKVM\u0027s panic() usage (which is in hyp \u0027s`BUG()` and `default_exception_handler` definitions), so it will be correctly formatted and start with new line.",
+      "parentUuid": "6695a216_2fe90de7",
       "revId": "c85601a60c8d0eda71528921d96c8f3ebb583915",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
