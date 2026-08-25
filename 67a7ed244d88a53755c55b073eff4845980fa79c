@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6a28053_e47c135b",
+        "filename": "include/uapi/linux/net_apf.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-25T11:42:22Z",
+      "side": 1,
+      "message": "I think this is not important from netlink side - remove it",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 0
+      },
+      "revId": "67a7ed244d88a53755c55b073eff4845980fa79c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98f3ab61_8d7f92d6",
+        "filename": "include/uapi/linux/net_apf.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-25T11:42:22Z",
+      "side": 1,
+      "message": "Non-negative payload ...",
+      "range": {
+        "startLine": 99,
+        "startChar": 33,
+        "endLine": 99,
+        "endChar": 40
+      },
+      "revId": "67a7ed244d88a53755c55b073eff4845980fa79c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98542b34_193606a7",
+        "filename": "include/uapi/linux/net_apf.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-25T11:42:22Z",
+      "side": 1,
+      "message": "maybe these docs don\u0027t add anything of value?  you can I think find all the same information trivially via search up above???",
+      "range": {
+        "startLine": 132,
+        "startChar": 0,
+        "endLine": 132,
+        "endChar": 1
+      },
+      "revId": "67a7ed244d88a53755c55b073eff4845980fa79c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "787103c4_ff9f01de",
+        "filename": "include/uapi/linux/net_apf.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-25T11:42:22Z",
+      "side": 1,
+      "message": "Non-negative byte offset into APF RAM for read and write, or special value -1 for program installation (via write)",
+      "range": {
+        "startLine": 184,
+        "startChar": 28,
+        "endLine": 185,
+        "endChar": 56
+      },
+      "revId": "67a7ed244d88a53755c55b073eff4845980fa79c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
