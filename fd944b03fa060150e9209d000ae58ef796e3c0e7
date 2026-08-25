@@ -88,6 +88,24 @@
       "parentUuid": "0c274826_826b5843",
       "revId": "fd944b03fa060150e9209d000ae58ef796e3c0e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbdfccf8_b87656b2",
+        "filename": "arch/x86/kvm/pkvm/memory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-25T12:42:11Z",
+      "side": 1,
+      "message": "Ah, I thought you were suggesting to _add_ non-NULL checks for callers of kern_pkvm_va()... Just noticed that in the mentioned `shared_lapic_regs` case we already have a check for that. But in most other cases we don\u0027t.",
+      "parentUuid": "fd154630_ecffbc9b",
+      "revId": "fd944b03fa060150e9209d000ae58ef796e3c0e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
