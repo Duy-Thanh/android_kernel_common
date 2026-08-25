@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a900c3de_08432388",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 3413627
+      },
+      "writtenOn": "2026-08-25T12:09:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4cd9c8a_6625bc45",
+      "revId": "4f47ec10981f7fe5945b94ceb4532a12c7898be3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d458e78c_c843200d",
@@ -191,6 +209,24 @@
       "side": 1,
       "message": "Even if there is topology_clear_scale_freq_source could be used to disable the AMU, there is another patch 39b19974982e03bd7b950f33bc0855385845c9fb, which uses AMU in func arch_cpu_idle_enter. So we need this vendor hook.",
       "parentUuid": "fa4f90f4_692c7a95",
+      "revId": "4f47ec10981f7fe5945b94ceb4532a12c7898be3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92723dde_045f8130",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3413627
+      },
+      "writtenOn": "2026-08-25T12:09:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06ab8cf3_8fede9df",
       "revId": "4f47ec10981f7fe5945b94ceb4532a12c7898be3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
