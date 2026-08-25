@@ -26,6 +26,7 @@ DECLARE_HOOK(android_vh_do_new_mount_fc,
 
 struct blk_mq_hw_ctx;
 struct request_queue;
+struct request;
 
 DECLARE_HOOK(android_vh_blk_mq_delay_run_hw_queue,
 	TP_PROTO(int cpu, struct blk_mq_hw_ctx *hctx, unsigned long delay, bool *skip),
