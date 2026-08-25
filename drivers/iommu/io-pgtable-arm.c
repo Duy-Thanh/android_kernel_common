@@ -569,11 +569,6 @@ static int __arm_lpae_iopte_walk(struct arm_lpae_io_pgtable *data,
 				 arm_lpae_iopte *ptep,
 				 int lvl);
 
-struct put_pages_data {
-	struct arm_lpae_io_pgtable *data;
-	struct iommu_iotlb_gather *gather;
-};
-
 static size_t arm_lpae_split_blk_unmap(struct arm_lpae_io_pgtable *data,
 				       struct iommu_iotlb_gather *gather,
 				       unsigned long iova, size_t size,
