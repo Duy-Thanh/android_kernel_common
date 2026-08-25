@@ -16,6 +16,29 @@
       "message": "All my feedback has been addressed.",
       "revId": "e39c5b978129a0ab4d0ba5396d028137e4fbde26",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9476fcb7_88f20838",
+        "filename": "kernel/cgroup/freezer.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1060234
+      },
+      "writtenOn": "2026-08-25T16:20:10Z",
+      "side": 1,
+      "message": "Does anything on Android use sigaltstack? This could potentially wipe part of the heap if someone uses a malloc\u0027ed address for that.",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 38
+      },
+      "revId": "e39c5b978129a0ab4d0ba5396d028137e4fbde26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
