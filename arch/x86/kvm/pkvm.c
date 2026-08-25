@@ -149,14 +149,14 @@ static int pkvm_vm_ioctl_set_fw_gpa(struct kvm *kvm, u64 gpa)
 	if (!pvmfw_present)
 		return -EINVAL;
 
-	mutex_lock(&pkvm->finalized_lock);
-	if (pkvm->finalized) {
+	mutex_lock(&kvm->lock);
+	if (kvm->created_vcpus) {
 		ret = -EBUSY;
 		goto out;
 	}
 	pkvm->pvmfw_load_addr = gpa;
 out:
-	mutex_unlock(&pkvm->finalized_lock);
+	mutex_unlock(&kvm->lock);
 	return ret;
 }
 

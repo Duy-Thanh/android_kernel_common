@@ -362,76 +362,6 @@ unshare_apic:
 	return ret;
 }
 
-/*
- * TODO: simplify the code by consolidating pkvm_vm_finalize() and
- * postponed_per_vm_setup(). I.e. instead of finalizing the VM before
- * running the first vCPU and using a dedicated hypercall for that,
- * finalize it when creating the first vCPU, same way as the setup in
- * postponed_per_vm_setup(), and then combine postponed_per_vm_setup()
- * into pkvm_vm_finalize().
- */
-static int pkvm_vm_finalize(int vm_handle)
-{
-	struct kvm *kvm, *shared_kvm;
-	struct pkvm_vm *pkvm_vm;
-	struct kvm_vcpu *vcpu;
-	gpa_t pvmfw_load_addr;
-	int ret = 0, i;
-
-	pkvm_vm = pkvm_get_vm(vm_handle);
-	if (!pkvm_vm)
-		return -EINVAL;
-
-	kvm = &pkvm_vm->kvm;
-	shared_kvm = pkvm_vm->shared_kvm;
-
-	if (!pkvm_is_protected_vm(kvm)) {
-		ret = -EINVAL;
-		goto put_pkvm_vm;
-	}
-
-	pkvm_spin_lock(&pkvm_vm->lock);
-
-	if (kvm->arch.pkvm.finalized) {
-		ret = -EBUSY;
-		goto unlock;
-	}
-
-	pvmfw_load_addr = READ_ONCE(shared_kvm->arch.pkvm.pvmfw_load_addr);
-	if (pvmfw_load_addr != INVALID_GPA) {
-		gpa_t pvmfw_end = pvmfw_load_addr + pvmfw_size;
-
-		if (!pvmfw_present || pvmfw_end < pvmfw_load_addr ||
-		    pvmfw_end > pkvm_pgtable_max_size(&pkvm_vm->mmu) ||
-		    pvmfw_end > SZ_4G) {
-			ret = -EINVAL;
-			goto unlock;
-		}
-		kvm->arch.pkvm.pvmfw_load_addr = pvmfw_load_addr;
-	}
-
-	for_each_pkvm_guest_vcpu(i, vcpu, pkvm_vm) {
-		if (vcpu->vcpu_id == kvm->arch.bsp_vcpu_id) {
-			/*
-			 * Make sure pvmfw_load_addr and bsp_vcpu_id are updated before
-			 * updating mp_state, i.e. before allowing the primary vCPU
-			 * to run. Pairs with smp_load_acquire() in pkvm_vcpu_run().
-			 */
-			smp_store_release(&vcpu->arch.mp_state, KVM_MP_STATE_RUNNABLE);
-			break;
-		}
-	}
-
-	/* Pairs with smp_load_acquire() in pkvm_host_donate_guest(). */
-	smp_store_release(&kvm->arch.pkvm.finalized, true);
-	shared_kvm->arch.pkvm.finalized = true;
-unlock:
-	pkvm_spin_unlock(&pkvm_vm->lock);
-put_pkvm_vm:
-	pkvm_put_vm(pkvm_vm);
-	return ret;
-}
-
 static void unsetup_vcpu_lapic(struct kvm_vcpu *vcpu)
 {
 	void *regs = to_pkvm_vcpu(vcpu)->shared_lapic_regs;
@@ -492,15 +422,16 @@ static void pkvm_vcpu_reset(struct kvm_vcpu *vcpu, bool init_event)
 	}
 }
 
-static int postponed_per_vm_setup(struct kvm *kvm)
+static int pkvm_vm_finalize(struct kvm *kvm)
 {
 	struct pkvm_vm *pkvm_vm = to_pkvm(kvm);
 	struct kvm *shared_kvm = pkvm_vm->shared_kvm;
 	enum kvm_irqchip_mode irqchip_mode;
 	u32 max_vcpu_ids, bsp_vcpu_id;
 	u64 apic_bus_cycle_ns;
+	gpa_t pvmfw_load_addr;
 
-	if (pkvm_vm->postponed_setup_done)
+	if (pkvm_vm->finalized)
 		return 0;
 
 	irqchip_mode = READ_ONCE(shared_kvm->arch.irqchip_mode);
@@ -521,20 +452,25 @@ static int postponed_per_vm_setup(struct kvm *kvm)
 	if (!apic_bus_cycle_ns)
 		return -EINVAL;
 
-	/*
-	 * The following setup is per VM, not per vCPU, however it cannot be
-	 * done during VM creation, since these values are set by the host VMM
-	 * via an ioctl after a VM is already created. At the same time, the
-	 * host KVM relies on these values being already set when setting up a
-	 * vCPU, thus implicitly assuming that the VMM should set them before
-	 * creating vCPUs. So it is ok to assume these host's values here are
-	 * up-to-date.
-	 */
+	pvmfw_load_addr = READ_ONCE(shared_kvm->arch.pkvm.pvmfw_load_addr);
+	if (pvmfw_load_addr != INVALID_GPA) {
+		gpa_t pvmfw_end;
+
+		if (!pkvm_is_protected_vm(kvm) || !pvmfw_present)
+			return -EINVAL;
+
+		pvmfw_end = pvmfw_load_addr + pvmfw_size;
+		if (pvmfw_end < pvmfw_load_addr ||
+		    pvmfw_end > pkvm_pgtable_max_size(&pkvm_vm->mmu) ||
+		    pvmfw_end > SZ_4G)
+			return -EINVAL;
+	}
 
 	kvm->arch.irqchip_mode = irqchip_mode;
 	kvm->arch.max_vcpu_ids = max_vcpu_ids;
 	kvm->arch.bsp_vcpu_id = bsp_vcpu_id;
 	kvm->arch.apic_bus_cycle_ns = apic_bus_cycle_ns;
+	kvm->arch.pkvm.pvmfw_load_addr = pvmfw_load_addr;
 
 	if (kvm_caps.has_bus_lock_exit)
 		kvm->arch.bus_lock_detection_enabled =
@@ -548,7 +484,7 @@ static int postponed_per_vm_setup(struct kvm *kvm)
 	if (!pkvm_is_protected_vm(kvm))
 		kvm->arch.disabled_exits = shared_kvm->arch.disabled_exits;
 
-	pkvm_vm->postponed_setup_done = true;
+	pkvm_vm->finalized = true;
 	return 0;
 }
 
@@ -565,7 +501,7 @@ static int __vcpu_create(struct kvm *kvm, struct kvm_vcpu *vcpu, struct fpstate 
 
 	pkvm_spin_lock(&pkvm_vm->lock);
 
-	ret = postponed_per_vm_setup(kvm);
+	ret = pkvm_vm_finalize(kvm);
 	if (ret) {
 		pkvm_spin_unlock(&pkvm_vm->lock);
 		return ret;
@@ -594,8 +530,17 @@ static int __vcpu_create(struct kvm *kvm, struct kvm_vcpu *vcpu, struct fpstate 
 	vcpu->arch.last_vmentry_cpu = -1;
 	vcpu->arch.regs_avail = ~0;
 	vcpu->arch.regs_dirty = ~0;
-	vcpu->arch.mp_state = KVM_MP_STATE_UNINITIALIZED;
 	vcpu->arch.pat = MSR_IA32_CR_PAT_DEFAULT;
+
+	vcpu->arch.mp_state = KVM_MP_STATE_RUNNABLE;
+	if (pkvm_is_protected_vcpu(vcpu) && !kvm_vcpu_is_reset_bsp(vcpu)) {
+		/*
+		 * pVM's secondary vCPUs are not allowed to run
+		 * until the pVM itself allows them to run.
+		 */
+		vcpu->arch.mp_state = KVM_MP_STATE_UNINITIALIZED;
+	}
+
 	if (!pkvm_is_protected_vcpu(vcpu)) {
 		vcpu->arch.mce_banks = kern_pkvm_va(pkvm_vcpu->shared_vcpu->arch.mce_banks);
 		vcpu->arch.mci_ctl2_banks =
@@ -981,19 +926,21 @@ static bool is_guest_vcpu_accessible(struct kvm_vcpu *vcpu, enum pkvm_hc hc)
 		 * booting, the protection for pVM is only enforced by the pKVM
 		 * hypervisor once the vCPU has started running.
 		 *
-		 * If the pVM runs with pvmfw, the pKVM hypervisor itself will
-		 * enforce most of the vcpu's initial state before the first vcpu
-		 * starts running, in pkvm_vcpu_pvmfw_entry_init(). However,
-		 * before that we don't know yet if the pVM will run with pvmfw
-		 * or not, since the host VMM may issue the ioctl enabling pvmfw
-		 * either before or after using any of the above PV interfaces.
-		 *
-		 * For secondary vCPUs, also allow the host to pre-configure the
-		 * initial state of the vcpu, even though the hypervisor itself
-		 * will enforce the initial state before the secondary vcpu starts
-		 * running, in pkvm_vcpu_ap_entry_init(), discarding whatever
-		 * the host has pre-configured. This is just for simplicity, to
-		 * let the host KVM code work as usual.
+		 * TODO: actually, unless the pVM is running without pvmfw, most
+		 * of this pre-configuration by the host is redundant. The pKVM
+		 * hypervisor itself enforces most of the vCPU's initial state
+		 * before the vCPU starts running, in pkvm_vcpu_pvmfw_entry_init()
+		 * for the primary vCPU (if the pVM runs with pvmfw) or in
+		 * pkvm_vcpu_ap_entry_init() for secondary vCPUs, discarding
+		 * whatever the host has pre-configured. So the only case when we
+		 * objectively need to allow the host to use all the above PV
+		 * interfaces is when this is the primary vCPU and the pVM is
+		 * running without pvmfw (for development purposes). However,
+		 * for now we allow them in the other two cases as well, since
+		 * otherwise the VMM (crosvm) would fail trying to set up initial
+		 * values of sregs, msrs, fpu regs etc. Once crosvm is fixed to
+		 * not do that for protected VMs, we can stop allowing these PV
+		 * interfaces in those cases.
 		 */
 		return !kvm_vcpu_has_run(vcpu);
 	default:
@@ -1723,10 +1670,15 @@ static int pkvm_vcpu_run(struct kvm_vcpu *vcpu, bool force_immediate_exit,
 
 	if (pkvm_is_protected_vcpu(vcpu)) {
 		/*
-		 * Pairs with smp_store_release() in pkvm_vm_finalize() and in
-		 * pkvm_start_secondary_vcpu(), to make sure that pvmfw_load_addr,
-		 * bsp_vcpu_id and sipi_vector are read after reading mp_state,
-		 * so they are read with up-to-date values.
+		 * Check if the host is allowed to run this vCPU. It is not allowed
+		 * in the following cases:
+		 * - if this is a secondary vCPU and the pVM itself has not started
+		 *   this vCPU yet
+		 * - if this vCPU encountered a triple fault
+		 *
+		 * Pairs with smp_store_release() in pkvm_start_secondary_vcpu(),
+		 * to make sure that sipi_vector is read after reading mp_state,
+		 * so it is read with up-to-date value.
 		 */
 		if (smp_load_acquire(&vcpu->arch.mp_state) != KVM_MP_STATE_RUNNABLE)
 			return -EPERM;
@@ -2097,9 +2049,6 @@ void pkvm_handle_host_hypercall(struct kvm_vcpu *vcpu)
 		ret = pkvm_vm_init(pkvm_host_gpa_to_phys(pkvm_hc_input1(vcpu)),
 				   pkvm_host_gpa_to_phys(pkvm_hc_input2(vcpu)),
 				   pkvm_host_gpa_to_phys(pkvm_hc_input3(vcpu)));
-		break;
-	case __pkvm__vm_finalize:
-		ret = pkvm_vm_finalize(pkvm_hc_input1(vcpu));
 		break;
 	case __pkvm__vm_destroy:
 		ret = pkvm_vm_destroy(pkvm_hc_input1(vcpu), &out.vm_destroy.memcache);
