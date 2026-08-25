@@ -395,13 +395,26 @@ static int verity_verify_level(struct dm_verity *v, struct dm_verity_io *io,
 			 */
 			r = -EAGAIN;
 			goto release_ret_r;
-		} else if (verity_fec_decode(v, io, DM_VERITY_BLOCK_TYPE_METADATA,
-					     want_digest, hash_block, data) == 0) {
-			trace_android_vh_handle_add_fec_mismatch_blks(hash_block, v->data_dev->name);
-			aux->hash_verified = 1;
 		} else {
-			trace_android_vh_handle_metadata_error(v,
-				hash_block, io, want_digest);
+			trace_android_vh_handle_metadata_error(
+				v->data_dev->name, hash_block,
+				data, 1U << v->hash_dev_block_bits,
+				want_digest, io->tmp_digest, v->digest_size,
+				v->salt, v->salt_size,
+				DMV_ERROR_EVENT_PRE_FEC);
+			if (verity_fec_decode(v, io, DM_VERITY_BLOCK_TYPE_METADATA,
+					      want_digest, hash_block, data) == 0) {
+				trace_android_vh_handle_add_fec_mismatch_blks(
+					hash_block, v->data_dev->name);
+				aux->hash_verified = 1;
+				goto metadata_recovered;
+			}
+			trace_android_vh_handle_metadata_error(
+				v->data_dev->name, hash_block,
+				data, 1U << v->hash_dev_block_bits,
+				want_digest, io->tmp_digest, v->digest_size,
+				v->salt, v->salt_size,
+				DMV_ERROR_EVENT_FEC_FAILED);
 			if (verity_handle_err(v,
 					DM_VERITY_BLOCK_TYPE_METADATA,
 					hash_block)) {
@@ -415,6 +428,8 @@ static int verity_verify_level(struct dm_verity *v, struct dm_verity_io *io,
 				goto release_ret_r;
 			}
 		}
+metadata_recovered:
+		;
 	}
 
 	data += offset;
@@ -528,6 +543,12 @@ static int verity_handle_data_hash_mismatch(struct dm_verity *v,
 			set_bit(blkno, v->validated_blocks);
 		return 0;
 	}
+	trace_android_vh_handle_data_error(
+		v->data_dev->name, blkno,
+		data, 1U << v->data_dev_block_bits,
+		want_digest, block->real_digest, v->digest_size,
+		v->salt, v->salt_size,
+		DMV_ERROR_EVENT_PRE_FEC);
 #if defined(CONFIG_DM_VERITY_FEC)
 	if (verity_fec_decode(v, io, DM_VERITY_BLOCK_TYPE_DATA, want_digest,
 			      blkno, data) == 0) {
@@ -537,7 +558,12 @@ static int verity_handle_data_hash_mismatch(struct dm_verity *v,
 #endif
 	if (bio->bi_status)
 		return -EIO; /* Error correction failed; Just return error */
-	trace_android_vh_handle_data_error(v, blkno, io, data, want_digest);
+	trace_android_vh_handle_data_error(
+		v->data_dev->name, blkno,
+		data, 1U << v->data_dev_block_bits,
+		want_digest, io->tmp_digest, v->digest_size,
+		v->salt, v->salt_size,
+		DMV_ERROR_EVENT_FEC_FAILED);
 	if (verity_handle_err(v, DM_VERITY_BLOCK_TYPE_DATA, blkno)) {
 		io->had_mismatch = true;
 		dm_audit_log_bio(DM_MSG_PREFIX, "verify-data", bio, blkno, 0);
