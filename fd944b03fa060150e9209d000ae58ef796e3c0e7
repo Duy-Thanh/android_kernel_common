@@ -70,6 +70,24 @@
       "parentUuid": "385f7538_233ef08d",
       "revId": "fd944b03fa060150e9209d000ae58ef796e3c0e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd154630_ecffbc9b",
+        "filename": "arch/x86/kvm/pkvm/memory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-08-25T01:59:43Z",
+      "side": 1,
+      "message": "\u003e Now, thinking about what exactly happens if the host passes such an invalid va, e.g. NULL. __pkvm_pa(va) will return (u64)(-PAGE_OFFSET) which, with 4-level paging, is 0x10000000000000000 - 0xffff888000000000 \u003d 0x778000000000 \u003d 119.5TB which is not gonna be a RAM address with 4-level paging (systems with that much RAM use 5-level paging). So it will not pass is_memory_range() check in pkvm_host_share_hyp/pkvm_host_donate_hyp.\n\nyes true, we are safe as we don\u0027t use the va address anywhere directly before vetting it through donation apis and does not pass is_memory_range() in the donation apis\n\nWhat I was referring to was - if CONFIG_DEBUG_VIRTUAL is set, it will panic the system for an input that pkvm validates later - hence that panic could be avoided.  But I realized CONFIG_DEBUG_VIRTUAL is undefined in pkvm and we would not panic anyways - so the changes is okay as it is.\n\nMy earlier suggestion about NULL as a special case was too narrow as you rightly pointed out. If ever there is a need to validate values in kern_pkvm_va(), it should be the whole range below PAGE_OFFSET, but it is not needed. I was thinking about having it as a documentation in the code - in case if we plan to support CONFIG_DEBUG_VIRTUAL in future.\n\n\u003e I wouldn\u0027t like to require callers of kern_pkvm_va() to check the return value, ...\n\nYou mean removing the existing checks for non-NULL in the code? I think its fine to remove it as the logic would bailout anyways in the donation apis.\n\n\u003e And given the above calculations, it seems even that is not required?\n\nYeah, is_memory_range() already takes care of it and explicit check is not needed",
+      "parentUuid": "0c274826_826b5843",
+      "revId": "fd944b03fa060150e9209d000ae58ef796e3c0e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
