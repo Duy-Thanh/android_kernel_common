@@ -52,6 +52,24 @@
       "parentUuid": "fb507996_1a6740da",
       "revId": "eaae4856b9a5a22764b3b08f25fdf7a59878e9cc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72ffa5e9_fc1fbe37",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-25T23:59:30Z",
+      "side": 1,
+      "message": "It differs mainly by the fact that db845 was used internally for our own kernel testing in all ACK kernels from 2018 through 2025 (4.9 through 6.12), but you make a good point, we should be removing support for old devices that will never run on modern GKI kernels. Anyone not using GKI (like LineageOS) is free to enable whatever they want.",
+      "parentUuid": "5a093891_00647c95",
+      "revId": "eaae4856b9a5a22764b3b08f25fdf7a59878e9cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
