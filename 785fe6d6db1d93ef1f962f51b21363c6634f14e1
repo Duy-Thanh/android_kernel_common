@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54f10ec9_f0e2f208",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1802,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-08-25T14:07:34Z",
+      "side": 1,
+      "message": "__host_check_page_state_range already enforce HOST_CHECK_IS_MEMORY.",
+      "revId": "785fe6d6db1d93ef1f962f51b21363c6634f14e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
