@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dca92778_ee9f5a3f",
+        "filename": "gki/aarch64/afdo/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2026-08-25T17:52:47Z",
+      "side": 1,
+      "message": "also update the benchmark numbers?",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 38
+      },
+      "revId": "e1e4356971f7837c64d24b3a63e0fa3a30b8c5ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
