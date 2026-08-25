@@ -66,6 +66,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dd856172_37a09648",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-08-25T14:32:34Z",
+      "side": 1,
+      "message": "nit: Exclude `\"microdroid/**\",` here as well, so changes to files in this folder don\u0027t trigger a full re-build.",
+      "range": {
+        "startLine": 176,
+        "startChar": 12,
+        "endLine": 176,
+        "endChar": 21
+      },
+      "revId": "3b8c326d7c061e43cffe34b7c375b4bd33111249",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "782569bf_dfa6d1c2",
         "filename": "microdroid/README.md",
         "patchSetId": 2
