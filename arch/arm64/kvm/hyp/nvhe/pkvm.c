@@ -449,17 +449,18 @@ static int pkvm_init_features_from_host(struct pkvm_hyp_vm *hyp_vm, const struct
 		memcpy(kvm->arch.id_regs, host_kvm->arch.id_regs, sizeof(kvm->arch.id_regs));
 		memcpy(kvm->arch.fgu, host_kvm->arch.fgu, sizeof(kvm->arch.fgu));
 
-		return 0;
+		goto out;
 	}
 
 	kvm->arch.vcpu_features[0] = pvm_supported_vcpu_features(kvm) &
 				     host_kvm->arch.vcpu_features[0];
 
-	if (kvm_pkvm_ext_allowed(kvm, KVM_CAP_ARM_SVE) && kvm_has_sve(host_kvm))
-		set_bit(KVM_ARCH_FLAG_GUEST_HAS_SVE, &kvm->arch.flags);
-
 	if (kvm_pkvm_ext_allowed(kvm, KVM_CAP_ARM_MTE) && kvm_has_mte(host_kvm))
 		set_bit(KVM_ARCH_FLAG_MTE_ENABLED, &kvm->arch.flags);
+
+out:
+	__assign_bit(KVM_ARCH_FLAG_GUEST_HAS_SVE, &kvm->arch.flags,
+		     kvm_vcpu_has_feature(kvm, KVM_ARM_VCPU_SVE));
 
 	return 0;
 }
