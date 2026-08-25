@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f08f53a_be906d09",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-kvm-pv.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-08-25T18:34:15Z",
+      "side": 1,
+      "message": "Actually, I think the existing code is wrong as that sets an aperture that can be larger than the hypervisors.\nCan you please fix this also while this code is being changed.\n`cfg.ias` should be capped similarly with `VA_BITS`.",
+      "range": {
+        "startLine": 230,
+        "startChar": 1,
+        "endLine": 230,
+        "endChar": 21
+      },
+      "revId": "d6d0ccd3390e9f2d059036c4ed22eba5a99a909a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
