@@ -16,6 +16,24 @@
       "message": "This looks to be changes to a driver that isn\u0027t built into the GKI binary (please let me know if this assumption is incorrect), and we do not have a way to test or validate this change. \n\nIs there a reason it is important to include this in the GKI tree instead of allowing folks who use this driver for the vendor drivers to include this change in their vendor driver tree?",
       "revId": "da184f8f2f6075e4972e94637af890ef6b986610",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7cea632_49bc40aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5091219
+      },
+      "writtenOn": "2026-08-25T02:13:33Z",
+      "side": 1,
+      "message": "Hi John,\nThank you for your review and response.\nThese two changes were originally submitted to ARSP.\nhttps://arsp-review.googlesource.com/c/kernel-desktop/common/+/7539306\nhttps://arsp-review.googlesource.com/c/kernel-desktop/common/+/7539307\n\nThe mt7921 Wi‑Fi module is built within the Aluminum OS Googlebook project. These changes primarily address potential array out‑of‑bounds issues.\nThe Google reviewer for ARSP has requested that we submit these modifications to AOSP first.\n\nThank you.",
+      "parentUuid": "1b20b57c_c64cd144",
+      "revId": "da184f8f2f6075e4972e94637af890ef6b986610",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
