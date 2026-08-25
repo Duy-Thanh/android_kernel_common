@@ -52,6 +52,24 @@
       "parentUuid": "e7cea632_49bc40aa",
       "revId": "da184f8f2f6075e4972e94637af890ef6b986610",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fe3ab62_3eb6ea8d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2014683
+      },
+      "writtenOn": "2026-08-25T09:57:28Z",
+      "side": 1,
+      "message": "The `mt7921` module is currently built as an in-tree module via fragments, which uses the source codes from the GKI staging branch, since `mt7921` is a completely upstream and widely used driver.\nAccording to the commit content, the fixes will likely be ported back to the stable branches including 6.18 in the future, so I thought the changes might be accepted in AOSP rather than needing to change it to a DDK module.\nWe can still make it built from the vendor tree if the changes will be rejected by AOSP.",
+      "parentUuid": "14c425bb_d9103df6",
+      "revId": "da184f8f2f6075e4972e94637af890ef6b986610",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
