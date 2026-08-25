@@ -626,11 +626,11 @@ static int do_ffa_rxtx_guest_map(struct kvm_cpu_context *ctxt, struct pkvm_hyp_v
 	if (!PAGE_ALIGNED(tx) || !PAGE_ALIGNED(rx))
 		return -EINVAL;
 
-	ret = __pkvm_guest_share_hyp_page(hyp_vcpu, tx, &tx_va);
+	ret = __pkvm_guest_share_hyp_pages(hyp_vcpu, tx, &tx_va, npages);
 	if (ret)
 		goto out_err;
 
-	ret = __pkvm_guest_share_hyp_page(hyp_vcpu, rx, &rx_va);
+	ret = __pkvm_guest_share_hyp_pages(hyp_vcpu, rx, &rx_va, npages);
 	if (ret)
 		goto out_err_with_tx;
 
@@ -649,7 +649,7 @@ out_unlock:
 	hyp_spin_unlock(&kvm_ffa_hyp_lock);
 	return ret;
 out_err_with_tx:
-	WARN_ON(__pkvm_guest_unshare_hyp_page(pkvm_hyp_vcpu_to_hyp_vm(hyp_vcpu), tx));
+	WARN_ON(__pkvm_guest_unshare_hyp_pages(pkvm_hyp_vcpu_to_hyp_vm(hyp_vcpu), tx, npages, (u64)tx_va));
 out_err:
 	ret = __handle_mem_protect_err(hyp_vcpu, tx, ret);
 	ret = __handle_mem_protect_err(hyp_vcpu, rx, ret);
@@ -688,8 +688,10 @@ static void do_ffa_rxtx_unmap(struct arm_smccc_1_2_regs *res,
 	} else {
 		struct pkvm_hyp_vm *vm = pkvm_hyp_vcpu_to_hyp_vm(hyp_vcpu);
 
-		WARN_ON(__pkvm_guest_unshare_hyp_page(vm, ffa_buf->tx_ipa));
-		WARN_ON(__pkvm_guest_unshare_hyp_page(vm, ffa_buf->rx_ipa));
+		WARN_ON(__pkvm_guest_unshare_hyp_pages(vm, ffa_buf->tx_ipa,
+						       KVM_FFA_MBOX_NR_PAGES, (u64)ffa_buf->tx));
+		WARN_ON(__pkvm_guest_unshare_hyp_pages(vm, ffa_buf->rx_ipa,
+						       KVM_FFA_MBOX_NR_PAGES, (u64)ffa_buf->rx));
 	}
 
 	ffa_buf->rx = NULL;
@@ -1879,11 +1881,15 @@ int kvm_dying_guest_reclaim_ffa_resources(struct pkvm_hyp_vm *vm)
 	if (list_empty(&ffa_buf->xfer_list)) {
 		/* XXX - needs an explicit rxtx unmap call ? */
 		if (ffa_buf->tx) {
-			WARN_ON(__pkvm_guest_unshare_hyp_page(vm, ffa_buf->tx_ipa));
+			WARN_ON(__pkvm_guest_unshare_hyp_pages(vm, ffa_buf->tx_ipa,
+							       KVM_FFA_MBOX_NR_PAGES,
+							       (u64)ffa_buf->tx));
 			ffa_buf->tx = NULL;
 		}
 		if (ffa_buf->rx) {
-			WARN_ON(__pkvm_guest_unshare_hyp_page(vm, ffa_buf->rx_ipa));
+			WARN_ON(__pkvm_guest_unshare_hyp_pages(vm, ffa_buf->rx_ipa,
+							       KVM_FFA_MBOX_NR_PAGES,
+							       (u64)ffa_buf->rx));
 			ffa_buf->rx = NULL;
 		}
 		goto unlock;
