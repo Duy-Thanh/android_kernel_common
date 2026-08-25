@@ -52,6 +52,24 @@
       "parentUuid": "48107fa7_959fbd34",
       "revId": "dd3698a53b1e972b8c0abd24aa84e4867ba06bb0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e19c2b2_bcf5158a",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-08-25T22:27:34Z",
+      "side": 0,
+      "message": "I tried reverting our patches explicitly instead of doing a merge resolution here, but they were too many and not worth the effort.",
+      "parentUuid": "43c36546_eaf0dd6d",
+      "revId": "dd3698a53b1e972b8c0abd24aa84e4867ba06bb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
