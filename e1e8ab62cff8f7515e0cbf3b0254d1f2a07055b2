@@ -16,6 +16,24 @@
       "message": "nit: since now pte is added, looks like we don\u0027t need prot and phys anymore in this data structure, as prot and phys can be derived from pte if pkvm_pgtable_lookup() has *prot and *phys?",
       "revId": "e1e8ab62cff8f7515e0cbf3b0254d1f2a07055b2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d01ee496_176e1769",
+        "filename": "arch/x86/kvm/pkvm/pgtable.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-25T13:01:36Z",
+      "side": 1,
+      "message": "Actually, looks like we can even simplify the pkvm_pgtable_lookup() API itself: we don\u0027t need to return prot and phys, we can just return pte and level (similarly to ARM\u0027s kvm_pgtable_get_leaf()), and the caller itself can derive prot and phys if needed? There is just one caller anyway (pkvm_handle_host_ept_violation()). WDYT?",
+      "parentUuid": "f811bada_88f9985d",
+      "revId": "e1e8ab62cff8f7515e0cbf3b0254d1f2a07055b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
