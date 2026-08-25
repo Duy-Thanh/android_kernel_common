@@ -16,6 +16,24 @@
       "message": "This seems like maybe you took the wrong side of the MODULE_LICENSE here? Not a huge deal, but just wanted to make sure it was intentional.",
       "revId": "dd3698a53b1e972b8c0abd24aa84e4867ba06bb0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48107fa7_959fbd34",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-08-25T21:58:13Z",
+      "side": 0,
+      "message": "I intentionally took the upstream side. I\u0027m not a license expert but IIUC they are practically the same right? The v2 is just the \"explicit\" version.",
+      "parentUuid": "ede39aa1_e4c87e87",
+      "revId": "dd3698a53b1e972b8c0abd24aa84e4867ba06bb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
