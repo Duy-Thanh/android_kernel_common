@@ -5,8 +5,8 @@ optimize kernel builds, improving performance for specific architectures and ker
 
 ## kernel.afdo
 
-The AutoFDO profile (kernel.afdo) for vmlinux is collected on kernel version 6.12.77 (
-SHA 0819c4ac77680a35f5b8ef1e8619eae421a92800, build server ID ab/15452434) using Pixel 10.
+The AutoFDO profile (kernel.afdo) for vmlinux is collected on kernel version 6.12.90 (
+SHA 7aa7a88586d9f98dc3f97c55ec4e06961e2dabd0, build server ID ab/16095540) using Pixel 10.
 
 ## Performance improvements
 
