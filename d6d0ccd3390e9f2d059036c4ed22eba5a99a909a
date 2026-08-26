@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "90423d4f_18bf475c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-08-26T17:23:06Z",
+      "side": 1,
+      "message": "This is missing the (cherry picked from commit ...) line: https://cs.android.com/android/kernel/superproject/+/common-android17-6.18:common/README.md#requirements-for-backports-from-mainline-linux-upstream-backport",
+      "revId": "d6d0ccd3390e9f2d059036c4ed22eba5a99a909a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6f08f53a_be906d09",
         "filename": "drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-kvm-pv.c",
         "patchSetId": 2
