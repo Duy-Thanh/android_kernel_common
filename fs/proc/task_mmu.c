@@ -14,6 +14,7 @@
 #include <linux/rmap.h>
 #include <linux/swap.h>
 #include <linux/sched/mm.h>
+#include <linux/sched/signal.h>
 #include <linux/swapops.h>
 #include <linux/mmu_notifier.h>
 #include <linux/page_idle.h>
@@ -27,6 +28,26 @@
 #include <asm/tlbflush.h>
 #include "internal.h"
 
+static unsigned long get_mm_counter_sum_local(struct mm_struct *mm, int member)
+{
+	long val = atomic_long_read(&mm->rss_stat.count[member]);
+
+#ifdef SPLIT_RSS_COUNTING
+	struct task_struct *g, *p;
+
+	rcu_read_lock();
+	for_each_process_thread(g, p) {
+		if (p->mm == mm)
+			val += p->rss_stat.count[member];
+	}
+	rcu_read_unlock();
+
+	if (val < 0)
+		val = 0;
+#endif
+	return (unsigned long)val;
+}
+
 #define SEQ_PUT_DEC(str, val) \
 		seq_put_decimal_ull_width(m, str, (val) << (PAGE_SHIFT-10), 8)
 void task_mem(struct seq_file *m, struct mm_struct *mm)
@@ -34,9 +55,9 @@ void task_mem(struct seq_file *m, struct mm_struct *mm)
 	unsigned long text, lib, swap, anon, file, shmem;
 	unsigned long hiwater_vm, total_vm, hiwater_rss, total_rss;
 
-	anon = get_mm_counter(mm, MM_ANONPAGES);
-	file = get_mm_counter(mm, MM_FILEPAGES);
-	shmem = get_mm_counter(mm, MM_SHMEMPAGES);
+	anon = get_mm_counter_sum_local(mm, MM_ANONPAGES);
+	file = get_mm_counter_sum_local(mm, MM_FILEPAGES);
+	shmem = get_mm_counter_sum_local(mm, MM_SHMEMPAGES);
 
 	/*
 	 * Note: to minimize their overhead, mm maintains hiwater_vm and
@@ -57,7 +78,7 @@ void task_mem(struct seq_file *m, struct mm_struct *mm)
 	text = min(text, mm->exec_vm << PAGE_SHIFT);
 	lib = (mm->exec_vm << PAGE_SHIFT) - text;
 
-	swap = get_mm_counter(mm, MM_SWAPENTS);
+	swap = get_mm_counter_sum_local(mm, MM_SWAPENTS);
 	SEQ_PUT_DEC("VmPeak:\t", hiwater_vm);
 	SEQ_PUT_DEC(" kB\nVmSize:\t", total_vm);
 	SEQ_PUT_DEC(" kB\nVmLck:\t", mm->locked_vm);
@@ -91,12 +112,12 @@ unsigned long task_statm(struct mm_struct *mm,
 			 unsigned long *shared, unsigned long *text,
 			 unsigned long *data, unsigned long *resident)
 {
-	*shared = get_mm_counter(mm, MM_FILEPAGES) +
-			get_mm_counter(mm, MM_SHMEMPAGES);
+	*shared = get_mm_counter_sum_local(mm, MM_FILEPAGES) +
+			get_mm_counter_sum_local(mm, MM_SHMEMPAGES);
 	*text = (PAGE_ALIGN(mm->end_code) - (mm->start_code & PAGE_MASK))
 								>> PAGE_SHIFT;
 	*data = mm->data_vm + mm->stack_vm;
-	*resident = *shared + get_mm_counter(mm, MM_ANONPAGES);
+	*resident = *shared + get_mm_counter_sum_local(mm, MM_ANONPAGES);
 	return mm->total_vm;
 }
 
