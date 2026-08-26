@@ -22,6 +22,30 @@
       },
       "revId": "c2e0a810fd5a6437737d4043100913250d1f5d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c14f7739_052a40c7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3583785
+      },
+      "writtenOn": "2026-08-26T01:34:57Z",
+      "side": 1,
+      "message": "Done. Remvoe the FIXUP tag and use the commit message from upstream instead.",
+      "parentUuid": "6f51961b_85cc7856",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "c2e0a810fd5a6437737d4043100913250d1f5d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
