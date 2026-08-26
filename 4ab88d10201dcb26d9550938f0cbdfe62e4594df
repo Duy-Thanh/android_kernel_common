@@ -1,0 +1,79 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b41bcfb7_06248dbf",
+        "filename": "arch/x86/kvm/pkvm/lib/printf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-08-26T10:50:10Z",
+      "side": 1,
+      "message": "Not related to this CL (should be a separate one), but shouldn\u0027t this be 64, to handle lower base, e.g. 2? In the code currently it\u0027s used only for 10 and 16, but this hidden assumption could hit someone in the future and cause ugly bugs.",
+      "revId": "4ab88d10201dcb26d9550938f0cbdfe62e4594df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20f25679_f76530a6",
+        "filename": "arch/x86/kvm/pkvm/lib/printf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-08-26T10:50:10Z",
+      "side": 1,
+      "message": "Shouldn\u0027t the behavior of zero padding be the same as space padding, just different padding character?\n\nAlso the current code for zero padding wouldn\u0027t work for width \u003e 20.",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 2
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3d4fddd7_766e54fc",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/lib/printf.c",
+              "range": {
+                "startLine": 29,
+                "startChar": 0,
+                "endLine": 34,
+                "endChar": 0
+              },
+              "replacement": "\twhile (i \u003c width \u0026\u0026 str \u003c end) {\n\t\t*str++ \u003d zeropad ? \u00270\u0027 : \u0027 \u0027;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4ab88d10201dcb26d9550938f0cbdfe62e4594df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b62fad6c_e93eedbc",
+        "filename": "arch/x86/kvm/pkvm/lib/printf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-08-26T10:50:10Z",
+      "side": 1,
+      "message": "Should this be `width - 2` since we are prepending it with \"0x\"?",
+      "revId": "4ab88d10201dcb26d9550938f0cbdfe62e4594df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
