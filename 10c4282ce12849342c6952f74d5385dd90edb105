@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d493a6ce_e722c72a",
+        "filename": "net/apf/core.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T08:30:31Z",
+      "side": 1,
+      "message": "answer from jetski:\n\n\n  No, only getter/query commands need genlmsg_reply(). Setter/action commands must not call genlmsg_reply().\n\n  Here is how Generic Netlink works:\n\n  ### 1. Getter / Query Commands (GET_INFO, GET_RAM_SIZE, READ)\n\n  • Purpose: Return payload data (attributes like APF_ATTR_INFO_*, APF_ATTR_RAM_SIZE, APF_ATTR_DATA) to userspace.\n  • Mechanism: The handler constructs a response message with apf_genlmsg_new(), populates the attributes with nla_put_*(), and delivers it back to userspace via genlmsg_reply().\n  ──────\n  ### 2. Setter / Action Commands (SET_ID, ENABLE, DISABLE, WRITE, SET_FAST_PATH)\n\n  • Purpose: Perform an operation or update hardware/driver state (no payload attributes returned).\n  • Mechanism: The handler only returns 0 on success or -errno on failure.\n  • Why no genlmsg_reply?:\n      • Netlink clients send mutation requests with the NLM_F_ACK flag in nlmsghdr.nlmsg_flags.\n      • The core Netlink framework in af_netlink.c:2556-2559 automatically replies with a standard netlink_ack() (NLMSG_ERROR packet with error \u003d 0 on success, or error \u003d -errno + extack on failure):\n\tack:\n\t    if (nlh-\u003enlmsg_flags \u0026 NLM_F_ACK || err)\n\t        netlink_ack(skb, nlh, err, \u0026extack);\n\n      • If a setter command were to manually call genlmsg_reply(), userspace would receive two responses (a blank custom message followed by the kernel\u0027s automatic ACK), breaking standard Netlink client libraries (libnl, libmnl).",
+      "parentUuid": "0a78a078_fb930058",
+      "range": {
+        "startLine": 301,
+        "startChar": 0,
+        "endLine": 301,
+        "endChar": 32
+      },
+      "revId": "10c4282ce12849342c6952f74d5385dd90edb105",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6a9356d3_4056ffff",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-08-26T06:59:52Z",
       "side": 1,
       "message": "limit this to 65535 as well just for safety\u0027s sake",
+      "range": {
+        "startLine": 386,
+        "startChar": 48,
+        "endLine": 386,
+        "endChar": 49
+      },
+      "revId": "10c4282ce12849342c6952f74d5385dd90edb105",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6af370e3_b1cd03ce",
+        "filename": "net/apf/core.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T08:30:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a9356d3_4056ffff",
       "range": {
         "startLine": 386,
         "startChar": 48,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a00b25fb_d14919be",
+        "filename": "net/apf/core.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T08:30:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5369873_1db0cbd2",
+      "range": {
+        "startLine": 392,
+        "startChar": 50,
+        "endLine": 392,
+        "endChar": 51
+      },
+      "revId": "10c4282ce12849342c6952f74d5385dd90edb105",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "90062599_928df3ca",
@@ -83,6 +155,30 @@
       "writtenOn": "2026-08-26T06:59:52Z",
       "side": 1,
       "message": "both offsets need a max 65535, but leave them as 32-bit ints so we can increase them later if needed",
+      "range": {
+        "startLine": 390,
+        "startChar": 49,
+        "endLine": 397,
+        "endChar": 49
+      },
+      "revId": "10c4282ce12849342c6952f74d5385dd90edb105",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79eca83f_378f3758",
+        "filename": "net/apf/core.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T08:30:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90062599_928df3ca",
       "range": {
         "startLine": 390,
         "startChar": 49,
