@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ad100d5_39c5e12e",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-26T14:22:16Z",
+      "side": 1,
+      "message": "On ARM it is as follows:\n\n```\n        panic(\"HYP panic:\\nPS:%08llx PC:%016llx ESR:%016llx\\nFAR:%016llx HPFAR:%016llx PAR:%016llx\\nVCPU:%016lx\\n\",\n              spsr, elr_virt, esr, far, hpfar, par, vcpu);\n```\n\ni.e. some (hyp-related) info is printed in the next lines _after_ this `Kernel panic - not syncing: HYP panic:` line.\n\nSo why don\u0027t we print our hyp panic message after this line, not before? Especially if we must have this `:` after `HYP panic`. (It is confusing if we have this colon and nothing in the log after it, right?)",
+      "revId": "c0b56f80ec55ca8fe38bf29e8526121505da24ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
