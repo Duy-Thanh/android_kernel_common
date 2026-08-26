@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a78a078_fb930058",
+        "filename": "net/apf/core.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-26T06:59:52Z",
+      "side": 1,
+      "message": "do you not need genlmsg reply in all of them??",
+      "range": {
+        "startLine": 301,
+        "startChar": 0,
+        "endLine": 301,
+        "endChar": 32
+      },
+      "revId": "10c4282ce12849342c6952f74d5385dd90edb105",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a9356d3_4056ffff",
+        "filename": "net/apf/core.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-26T06:59:52Z",
+      "side": 1,
+      "message": "limit this to 65535 as well just for safety\u0027s sake",
+      "range": {
+        "startLine": 386,
+        "startChar": 48,
+        "endLine": 386,
+        "endChar": 49
+      },
+      "revId": "10c4282ce12849342c6952f74d5385dd90edb105",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5369873_1db0cbd2",
+        "filename": "net/apf/core.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-26T06:59:52Z",
+      "side": 1,
+      "message": "max 65535",
+      "range": {
+        "startLine": 392,
+        "startChar": 50,
+        "endLine": 392,
+        "endChar": 51
+      },
+      "revId": "10c4282ce12849342c6952f74d5385dd90edb105",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90062599_928df3ca",
+        "filename": "net/apf/core.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-26T06:59:52Z",
+      "side": 1,
+      "message": "both offsets need a max 65535, but leave them as 32-bit ints so we can increase them later if needed",
+      "range": {
+        "startLine": 390,
+        "startChar": 49,
+        "endLine": 397,
+        "endChar": 49
+      },
+      "revId": "10c4282ce12849342c6952f74d5385dd90edb105",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
