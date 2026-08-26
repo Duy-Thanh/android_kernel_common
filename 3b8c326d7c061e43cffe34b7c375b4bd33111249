@@ -64,6 +64,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89d83ed8_03aae329",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2026-08-26T12:33:38Z",
+      "side": 1,
+      "message": "We did `stgdiff -s -f short -o diff.txt -F fidelity.txt gki/aarch64/abi.stg microdroid/aarch64/abi.stg` and we have only those additions to ABI surface:\n```\n3 function symbol(s) added\n  \u0027void* mas_erase(struct ma_state*)\u0027\n  \u0027int mas_store_gfp(struct ma_state*, void*, gfp_t)\u0027\n  \u0027int mtree_store_range(struct maple_tree*, unsigned long, unsigned long, void*, gfp_t)\u0027\n  \n2 type(s) changed from ABSENT to FULLY_DEFINED:\n  struct mm_cid\n  struct rseq\n```\n\nThese types and symbols are very unlikely to break, so having microdroid ABI stabilized shouldn\u0027t block regular development and LTS merges.",
+      "revId": "3b8c326d7c061e43cffe34b7c375b4bd33111249",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd856172_37a09648",
