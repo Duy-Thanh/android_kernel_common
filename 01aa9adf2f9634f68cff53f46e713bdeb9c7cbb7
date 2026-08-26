@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2b0ab24_d5fde591",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-26T05:46:31Z",
+      "side": 1,
+      "message": "Is kernel team / GKI team ok with this?\n\nI couldn\u0027t get a single sysctl with a 1 if statement implementation added to kernel to lock down bpf loading because it would be a divergence from upstream...",
+      "revId": "01aa9adf2f9634f68cff53f46e713bdeb9c7cbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
