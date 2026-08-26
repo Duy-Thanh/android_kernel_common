@@ -129,6 +129,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4161afeb_fc4d80f0",
+        "filename": "arch/arm64/configs/microdroid_defconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-08-26T16:14:01Z",
+      "side": 1,
+      "message": "Add `CONFIG_MODULE_SIG\u003dy` below.",
+      "range": {
+        "startLine": 204,
+        "startChar": 0,
+        "endLine": 204,
+        "endChar": 16
+      },
+      "revId": "3b8c326d7c061e43cffe34b7c375b4bd33111249",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "782569bf_dfa6d1c2",
         "filename": "microdroid/README.md",
         "patchSetId": 2
