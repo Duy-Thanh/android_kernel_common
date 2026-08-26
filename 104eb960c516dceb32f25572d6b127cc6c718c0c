@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba8911e1_e942a5e5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 584,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-08-26T14:09:27Z",
+      "side": 1,
+      "message": "The original label name was better - it explained what the clean-up step does.",
+      "revId": "104eb960c516dceb32f25572d6b127cc6c718c0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02a8ea0c_7d6f5569",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-08-26T14:09:27Z",
+      "side": 1,
+      "message": "Note that it would end up calling `__pkvm_host_unshare_hyp()` for a page on which `__pkvm_host_share_hyp()` failed. Is that okay?",
+      "revId": "104eb960c516dceb32f25572d6b127cc6c718c0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "739b560f_8cfc3193",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-08-26T14:09:27Z",
+      "side": 1,
+      "message": "Ditto.",
+      "revId": "104eb960c516dceb32f25572d6b127cc6c718c0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cce0aab_f4020d11",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1379,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-08-26T14:09:27Z",
+      "side": 1,
+      "message": "It would sound like a critical bug if this case is hit. Should there be at least a warning issued?",
+      "revId": "104eb960c516dceb32f25572d6b127cc6c718c0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
