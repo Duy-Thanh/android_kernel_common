@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "671ae999_65c4acf2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-08-26T04:42:49Z",
+      "side": 1,
+      "message": "This should probably be\nFixes: 993e6edaf791 (\"BACKPORT: sched/fair: Fix NO_RUN_TO_PARITY case\")",
+      "revId": "a0954a650379cd91e62f06c9053aca46f54356c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fac30222_ebb6cb2c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-08-26T04:42:49Z",
+      "side": 1,
+      "message": "This uses the same Change-Id (and much of the commit message) as the related android17-6.18 change, but is fairly different. It might be worth adding an annotation here that the android16-6.12 version is quite different from the android17-6.18 version and that this isn\u0027t a straight cherry pick.",
+      "revId": "a0954a650379cd91e62f06c9053aca46f54356c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25c0eff5_da8ee735",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-08-26T04:42:49Z",
+      "side": 1,
+      "message": "Ok, I was a little confused on this initially as the 6.12-LTS doesn\u0027t have vprot but that was backported in android12-6.12 in I82fe0b35391e916bd325b05b1070355a79ee7e2a - commit 993e6edaf791 (\"BACKPORT: sched/fair: Fix NO_RUN_TO_PARITY case\").\n\nI acknowledge the issue here and this looks reasonable to me. Its unfortunate we couldn\u0027t catch this during the KMI thaw earlier this month.",
+      "revId": "a0954a650379cd91e62f06c9053aca46f54356c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
