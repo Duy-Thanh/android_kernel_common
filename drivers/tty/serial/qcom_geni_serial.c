@@ -2039,7 +2039,7 @@ static const struct of_device_id qcom_geni_serial_match_table[] = {
 MODULE_DEVICE_TABLE(of, qcom_geni_serial_match_table);
 
 static struct platform_driver qcom_geni_serial_platform_driver = {
-	.remove_new = qcom_geni_serial_remove,
+	.remove = qcom_geni_serial_remove,
 	.probe = qcom_geni_serial_probe,
 	.shutdown = qcom_geni_serial_sys_shutdown,
 	.driver = {
