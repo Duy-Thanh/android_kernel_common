@@ -106,6 +106,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fce57727_e8e10fc7",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-08-26T16:07:16Z",
+      "side": 1,
+      "message": "You need to set `protected_module_names_list` too.",
+      "range": {
+        "startLine": 541,
+        "startChar": 29,
+        "endLine": 541,
+        "endChar": 30
+      },
+      "revId": "3b8c326d7c061e43cffe34b7c375b4bd33111249",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "782569bf_dfa6d1c2",
         "filename": "microdroid/README.md",
         "patchSetId": 2
