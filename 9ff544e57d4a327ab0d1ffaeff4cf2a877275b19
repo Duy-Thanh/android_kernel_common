@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7eb255fb_cb455674",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-08-26T14:57:27Z",
+      "side": 1,
+      "message": "I suspect that a slightly off timestamp wouldn\u0027t cause any issues - I think we have that sometimes at suspend/resume. Although @jasongustaman@google.com again to confirm if there are any dependencies on timestamp values.",
+      "parentUuid": "5da32680_b12c894b",
+      "revId": "9ff544e57d4a327ab0d1ffaeff4cf2a877275b19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2131df93_6fd4098e",
         "filename": "arch/x86/kvm/pkvm/panic.c",
         "patchSetId": 2
