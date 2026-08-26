@@ -16,6 +16,24 @@
       "message": "There seems to be something broken in this series. I\u0027m seeing the following build failures at this point in the series:\n\n\nINFO: Analyzed target //common:kernel_arm_allmodconfig (71 packages loaded, 114248 targets configured).\n...ment) //common:kernel_arm_allmodconfig failed: (Exit 2): bash failed: error executing KernelBuild command (from target //common:kernel_arm_allmodconfig) /bin/bash -c ... (remaining 1 argument skipped)\n\nUse --sandbox_debug to see verbose messages from the sandbox and retain the sandbox build root for debugging\n...out/bazel/output_user_root/fa9910ec2adab6e32b7b4e0019079cd9/sandbox/linux-sandbox/252/execroot/_main/common/drivers/spi/spi-geni-qcom.c:5:10: fatal error: \u0027trace/events/qcom_geni_spi.h\u0027 file not found\n    5 | #include \u003ctrace/events/qcom_geni_spi.h\u003e\n      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n1 error generated.",
       "revId": "ee8755c10ea9dd3b357e2aa436f24de11261ed0d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "597d88de_2815fa5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4972211
+      },
+      "writtenOn": "2026-08-26T06:07:13Z",
+      "side": 1,
+      "message": "Here is the dependency patch \nhttps://android-review.googlesource.com/c/kernel/common/+/4253999",
+      "parentUuid": "64bb8e21_9d308b7f",
+      "revId": "ee8755c10ea9dd3b357e2aa436f24de11261ed0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
