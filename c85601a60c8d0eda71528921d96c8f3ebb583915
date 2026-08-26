@@ -106,6 +106,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2e8dca8_ceb8f07c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1504563
+      },
+      "writtenOn": "2026-08-26T03:39:44Z",
+      "side": 1,
+      "message": "Yeah, the absence of timestamp would trip the parser: http://google3/wireless/android/telemetry/stability/system_last_kmsg_regexp.cc;l\u003d43;rcl\u003d878846257.\n\nThe current signature also expects a trailing \u0027:\u0027 (but this can be changed).\n\n---\n\nJust to add, assuming it has the \u0027:\u0027 or that the regex is relaxed, the final signature will be: `[hyp_panic] unknown`.",
+      "parentUuid": "b60f0b7c_8f11bb4f",
+      "revId": "c85601a60c8d0eda71528921d96c8f3ebb583915",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d5fdd11_5e53aeae",
