@@ -34,6 +34,24 @@
       "parentUuid": "f811bada_88f9985d",
       "revId": "e1e8ab62cff8f7515e0cbf3b0254d1f2a07055b2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "305459f6_d420430c",
+        "filename": "arch/x86/kvm/pkvm/pgtable.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2026-08-26T07:49:32Z",
+      "side": 1,
+      "message": "Yeah, sounds good to me.",
+      "parentUuid": "d01ee496_176e1769",
+      "revId": "e1e8ab62cff8f7515e0cbf3b0254d1f2a07055b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
