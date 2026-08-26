@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "13371f64_063c88f0",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-26T14:12:43Z",
+      "side": 1,
+      "message": "Don\u0027t we guarantee that tsc_khz is non-zero?",
+      "revId": "9ff544e57d4a327ab0d1ffaeff4cf2a877275b19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5da32680_b12c894b",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-26T14:12:43Z",
+      "side": 1,
+      "message": "Just a question: am I correct that this is the number of cycles since the CPU reset? So this pKVM\u0027s timestamp is slightly out off sync with the host kernel\u0027s timestamp (by the time between reset and kernel start, i.e. a second or more)?",
+      "revId": "9ff544e57d4a327ab0d1ffaeff4cf2a877275b19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2131df93_6fd4098e",
         "filename": "arch/x86/kvm/pkvm/panic.c",
         "patchSetId": 2
