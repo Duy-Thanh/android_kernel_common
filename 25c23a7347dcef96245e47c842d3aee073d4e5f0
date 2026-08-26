@@ -289,6 +289,23 @@
       "message": "AB_OTA_POSTINSTALL_CONFIG +\u003d \\\n  RUN_POSTINSTALL_system\u003dtrue \\\n  POSTINSTALL_PATH_system\u003dusr/bin/postinst \\\n  FILESYSTEM_TYPE_system\u003dext4",
       "revId": "25c23a7347dcef96245e47c842d3aee073d4e5f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e226722d_889c4369",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4705881
+      },
+      "writtenOn": "2026-08-26T22:07:26Z",
+      "side": 1,
+      "message": "git fetch https://android.googlesource.com/kernel/common refs/changes/91/158491/1 \u0026\u0026 git checkout -b change-158491 FETCH_HEAD",
+      "revId": "25c23a7347dcef96245e47c842d3aee073d4e5f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
