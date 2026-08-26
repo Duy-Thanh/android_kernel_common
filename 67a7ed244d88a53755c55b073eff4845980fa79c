@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bf11cbf_a023d0b5",
+        "filename": "include/uapi/linux/net_apf.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T03:32:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6a28053_e47c135b",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 0
+      },
+      "revId": "67a7ed244d88a53755c55b073eff4845980fa79c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "98f3ab61_8d7f92d6",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-08-25T11:42:22Z",
       "side": 1,
       "message": "Non-negative payload ...",
+      "range": {
+        "startLine": 99,
+        "startChar": 33,
+        "endLine": 99,
+        "endChar": 40
+      },
+      "revId": "67a7ed244d88a53755c55b073eff4845980fa79c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3b8c920_c22c1f11",
+        "filename": "include/uapi/linux/net_apf.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T03:32:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98f3ab61_8d7f92d6",
       "range": {
         "startLine": 99,
         "startChar": 33,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33a11aa6_325e5c5d",
+        "filename": "include/uapi/linux/net_apf.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T03:32:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98542b34_193606a7",
+      "range": {
+        "startLine": 132,
+        "startChar": 0,
+        "endLine": 132,
+        "endChar": 1
+      },
+      "revId": "67a7ed244d88a53755c55b073eff4845980fa79c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "787103c4_ff9f01de",
@@ -83,6 +155,30 @@
       "writtenOn": "2026-08-25T11:42:22Z",
       "side": 1,
       "message": "Non-negative byte offset into APF RAM for read and write, or special value -1 for program installation (via write)",
+      "range": {
+        "startLine": 184,
+        "startChar": 28,
+        "endLine": 185,
+        "endChar": 56
+      },
+      "revId": "67a7ed244d88a53755c55b073eff4845980fa79c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcec943f_2694af87",
+        "filename": "include/uapi/linux/net_apf.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T03:32:14Z",
+      "side": 1,
+      "message": "Acked.",
+      "parentUuid": "787103c4_ff9f01de",
       "range": {
         "startLine": 184,
         "startChar": 28,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2bf4424_0d0481c9",
+        "filename": "net/apf/core.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T03:32:14Z",
+      "side": 1,
+      "message": "No, per explanation from jetski:\n\nIn the Linux kernel, struct nla_policy only validates the format and bounds of attributes that are present in the message. There is no concept or flag in nla_policy for mandatory/required attributes.",
+      "parentUuid": "82176c47_81300226",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 1
+      },
+      "revId": "67a7ed244d88a53755c55b073eff4845980fa79c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "79212ba8_9fc4c3e4",
@@ -139,6 +259,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "37dd1111_ca6e7708",
+        "filename": "net/apf/core.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T03:32:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79212ba8_9fc4c3e4",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 0
+      },
+      "revId": "67a7ed244d88a53755c55b073eff4845980fa79c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18c8c3ce_7894c5a0",
@@ -152,6 +296,30 @@
       "writtenOn": "2026-08-25T11:53:05Z",
       "side": 1,
       "message": "I think you can simply remove the NLA_REJECT lines since this is in-policy\n\nnaively I would expect the default to be reject... for anything not listed.\n\nalso we could have a separate policy per command, or at least for trivial commands that don\u0027t take any inputs besides the ifindex (ie. apf_policy_just_ifindex)",
+      "range": {
+        "startLine": 470,
+        "startChar": 0,
+        "endLine": 470,
+        "endChar": 1
+      },
+      "revId": "67a7ed244d88a53755c55b073eff4845980fa79c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7f45436_784740e5",
+        "filename": "net/apf/core.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T03:32:14Z",
+      "side": 1,
+      "message": "split to per module policy. btw The kernel default is ACCEPT (ignore), not reject.",
+      "parentUuid": "18c8c3ce_7894c5a0",
       "range": {
         "startLine": 470,
         "startChar": 0,
