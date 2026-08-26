@@ -33,6 +33,24 @@
       "message": "are you planning to backport this to the 5.10...6.18 kernels?",
       "revId": "91c93b4f8ec0e59f77caa1e0b614a3a87a3fa846",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12f8e692_7b15e805",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1135739
+      },
+      "writtenOn": "2026-08-26T01:58:32Z",
+      "side": 1,
+      "message": "I plan to backport this to 6.12 to address a partner request.\"",
+      "parentUuid": "bce858d1_c64bbfbf",
+      "revId": "91c93b4f8ec0e59f77caa1e0b614a3a87a3fa846",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
