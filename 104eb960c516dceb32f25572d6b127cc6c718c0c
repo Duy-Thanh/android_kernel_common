@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0d87c04_b861f1e3",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 584,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-08-26T14:37:08Z",
+      "side": 1,
+      "message": "I don\u0027t hate the naming on this either, I would prefer to keep it like this.",
+      "parentUuid": "ba8911e1_e942a5e5",
+      "revId": "104eb960c516dceb32f25572d6b127cc6c718c0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "02a8ea0c_7d6f5569",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-08-26T14:09:27Z",
       "side": 1,
       "message": "Note that it would end up calling `__pkvm_host_unshare_hyp()` for a page on which `__pkvm_host_share_hyp()` failed. Is that okay?",
+      "revId": "104eb960c516dceb32f25572d6b127cc6c718c0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2030fe37_f7748ed6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-08-26T14:37:08Z",
+      "side": 1,
+      "message": "yes but I am doing `i--` so `i` it is compared with 0 and it becomes `i - 1` in the loop. Can you please explain how am I calling it on a page that failed the share initially ?",
+      "parentUuid": "02a8ea0c_7d6f5569",
       "revId": "104eb960c516dceb32f25572d6b127cc6c718c0c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -65,6 +101,24 @@
       "writtenOn": "2026-08-26T14:09:27Z",
       "side": 1,
       "message": "It would sound like a critical bug if this case is hit. Should there be at least a warning issued?",
+      "revId": "104eb960c516dceb32f25572d6b127cc6c718c0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e403f926_340be211",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1379,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-08-26T14:37:08Z",
+      "side": 1,
+      "message": "WARN_ON in hypervisor are fatal. This is not a critical case, it just a poor driver behaving bad. Why would you like to bring the machine down in such a case ?",
+      "parentUuid": "2cce0aab_f4020d11",
       "revId": "104eb960c516dceb32f25572d6b127cc6c718c0c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
