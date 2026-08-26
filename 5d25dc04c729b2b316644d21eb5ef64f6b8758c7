@@ -70,6 +70,24 @@
       "parentUuid": "35b7677d_4586e7e9",
       "revId": "5d25dc04c729b2b316644d21eb5ef64f6b8758c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9de53aea_4a6fed58",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-26T00:03:54Z",
+      "side": 1,
+      "message": "6.18 is not frozen forever since it will get another \"KMI thaw\" in June/July 2027. So this could be accepted in that window.",
+      "parentUuid": "cb7b649e_07d76af7",
+      "revId": "5d25dc04c729b2b316644d21eb5ef64f6b8758c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
