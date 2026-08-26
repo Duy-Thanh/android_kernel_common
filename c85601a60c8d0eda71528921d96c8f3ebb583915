@@ -124,6 +124,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "42f760fa_d1401769",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-08-26T08:33:36Z",
+      "side": 1,
+      "message": "\u003e The current signature also expects a trailing \u0027:\u0027 (but this can be changed).\n\nJust to be sure, you mean:\n```\n-                 \"%sKernel panic - not syncing: HYP panic\\n\",\n+                 \"%sKernel panic - not syncing: HYP panic:\\n\",\n```\nI can add it then,\n\n\u003e Just to add, assuming it has the \u0027:\u0027 or that the regex is relaxed, the final signature will be: [hyp_panic] unknown.\n\nBut I assume this is not a problem or you suggesting to append something so it will not be clasified as unknown?\n\nBootstat seems to clasified it correctly as:\n```\n# getprop sys.boot.reason\nkernel_panic,hyp_panic\n```\nwith current patch",
+      "parentUuid": "c2e8dca8_ceb8f07c",
+      "revId": "c85601a60c8d0eda71528921d96c8f3ebb583915",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d5fdd11_5e53aeae",
