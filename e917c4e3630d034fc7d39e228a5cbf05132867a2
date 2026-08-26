@@ -70,6 +70,30 @@
       },
       "revId": "e917c4e3630d034fc7d39e228a5cbf05132867a2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7794281b_84e8978f",
+        "filename": "arch/arm64/kernel/topology.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-26T19:58:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "496131a2_a2b40efe",
+      "range": {
+        "startLine": 228,
+        "startChar": 0,
+        "endLine": 229,
+        "endChar": 0
+      },
+      "revId": "e917c4e3630d034fc7d39e228a5cbf05132867a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
