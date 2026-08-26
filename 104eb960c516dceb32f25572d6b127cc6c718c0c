@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1bb2d1dc_0fa48469",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 584,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-08-26T14:53:06Z",
+      "side": 1,
+      "message": "The upstream coding style mentions this explicitly:\n\nhttps://docs.kernel.org/process/coding-style.html#centralized-exiting-of-functions",
+      "parentUuid": "b0d87c04_b861f1e3",
+      "revId": "104eb960c516dceb32f25572d6b127cc6c718c0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "02a8ea0c_7d6f5569",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 3
@@ -71,6 +89,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "24e692ec_d93e1d7b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-08-26T14:53:06Z",
+      "side": 1,
+      "message": "Yeah, sorry, I don\u0027t know what I meant here.",
+      "parentUuid": "2030fe37_f7748ed6",
+      "revId": "104eb960c516dceb32f25572d6b127cc6c718c0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "739b560f_8cfc3193",
@@ -84,6 +120,24 @@
       "writtenOn": "2026-08-26T14:09:27Z",
       "side": 1,
       "message": "Ditto.",
+      "revId": "104eb960c516dceb32f25572d6b127cc6c718c0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afdd1682_fdb1779e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-08-26T14:53:06Z",
+      "side": 1,
+      "message": "Actually this is even worse than the above, because the name now means neither what failed nor what has to be cleaned up.",
+      "parentUuid": "739b560f_8cfc3193",
       "revId": "104eb960c516dceb32f25572d6b127cc6c718c0c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -119,6 +173,24 @@
       "side": 1,
       "message": "WARN_ON in hypervisor are fatal. This is not a critical case, it just a poor driver behaving bad. Why would you like to bring the machine down in such a case ?",
       "parentUuid": "2cce0aab_f4020d11",
+      "revId": "104eb960c516dceb32f25572d6b127cc6c718c0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a0c5697_f5886169",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1379,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-08-26T14:53:06Z",
+      "side": 1,
+      "message": "How is this driver behavior? We\u0027re checking build-time constants.",
+      "parentUuid": "e403f926_340be211",
       "revId": "104eb960c516dceb32f25572d6b127cc6c718c0c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
