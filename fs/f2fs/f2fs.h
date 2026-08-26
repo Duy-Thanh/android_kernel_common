@@ -224,6 +224,7 @@ struct f2fs_mount_info {
 	block_t unusable_cap;		/* Amount of space allowed to be
 					 * unusable when disabling checkpoint
 					 */
+	unsigned int resizable_tail_secno;	/* number of resizable tail sections */
 
 	/* For compression */
 	unsigned char compress_algorithm;	/* algorithm type */
@@ -1864,7 +1865,14 @@ struct f2fs_sb_info {
 	unsigned int dirty_device;		/* for checkpoint data flush */
 	spinlock_t dev_lock;			/* protect dirty_device */
 	bool aligned_blksize;			/* all devices has the same logical blksize */
+<<<<<<< HEAD   (1621b74e232234d7133190509e61203cd980d598 ANDROID: fuse-bpf: Handle backing getattr errors)
 	unsigned int first_zoned_segno;		/* first segno in sequential zone */
+||||||| BASE   (17176090d7cd105744a132763a325200ccb3840b ANDROID: fuse-bpf: Handle backing getattr errors)
+	unsigned int first_seq_zone_segno;	/* first segno in sequential zone */
+=======
+	unsigned int first_seq_zone_segno;	/* first segno in sequential zone */
+	unsigned int pinned_area_max_secno;	/* upper bound section for pinned files */
+>>>>>>> CHANGE (a9c6dbe5f919d34c91ee92cfe39a2a4a6775b1b9 BACKPORT: f2fs: support resizable tail section and unify pin)
 
 	/* For write statistics */
 	u64 sectors_written_start;
