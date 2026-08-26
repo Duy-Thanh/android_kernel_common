@@ -62,6 +62,557 @@
       },
       "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e06e4d8_efcc2eb6",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-26T04:04:41Z",
+      "side": 1,
+      "message": "this should be in apf_get_mode when it returns INVALID",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 66
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7561407c_6927fd89",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-26T04:04:41Z",
+      "side": 1,
+      "message": "\u003c",
+      "range": {
+        "startLine": 69,
+        "startChar": 11,
+        "endLine": 69,
+        "endChar": 12
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f1b9df8_d89c56de",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-26T04:04:41Z",
+      "side": 1,
+      "message": "\u003c",
+      "range": {
+        "startLine": 76,
+        "startChar": 11,
+        "endLine": 76,
+        "endChar": 36
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3c41b5b_19bfb2c6",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-26T04:04:41Z",
+      "side": 1,
+      "message": "skb",
+      "range": {
+        "startLine": 91,
+        "startChar": 17,
+        "endLine": 91,
+        "endChar": 20
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "446dc554_81ec0eb7",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-26T04:04:41Z",
+      "side": 1,
+      "message": "can fail in two ways, so please NL_SET_ERR_MSG_MOD(info-\u003eextack, \"Failed to",
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4e71c5d_b4853367",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-26T04:04:41Z",
+      "side": 1,
+      "message": "rename to in_skb",
+      "range": {
+        "startLine": 106,
+        "startChar": 40,
+        "endLine": 106,
+        "endChar": 43
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18cc47f9_dfd53633",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-26T04:04:41Z",
+      "side": 1,
+      "message": "skb",
+      "range": {
+        "startLine": 110,
+        "startChar": 17,
+        "endLine": 110,
+        "endChar": 20
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f731036f_9c4ae38b",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-26T04:04:41Z",
+      "side": 1,
+      "message": "?",
+      "range": {
+        "startLine": 122,
+        "startChar": 29,
+        "endLine": 122,
+        "endChar": 30
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e1efa86_d2362742",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-26T04:04:41Z",
+      "side": 1,
+      "message": "?",
+      "range": {
+        "startLine": 198,
+        "startChar": 29,
+        "endLine": 198,
+        "endChar": 30
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b37b8129_6621a4e9",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-26T04:04:41Z",
+      "side": 1,
+      "message": "i think all but req_len \u003d\u003d 0 should have been checked by policy",
+      "range": {
+        "startLine": 234,
+        "startChar": 5,
+        "endLine": 234,
+        "endChar": 83
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26a87a2c_39f7a67e",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-26T04:04:41Z",
+      "side": 1,
+      "message": "I think with policy enforcing \u003e\u003d0 you can make req_offset u32 and rename it to offset",
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b36413f9_11e3d1ca",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-26T04:04:41Z",
+      "side": 1,
+      "message": "ERANGE",
+      "range": {
+        "startLine": 249,
+        "startChar": 10,
+        "endLine": 249,
+        "endChar": 16
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9fc53ba_d09b50c2",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-26T04:04:41Z",
+      "side": 1,
+      "message": "should len -1 require ofs 0",
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61642ec1_8ab53fc7",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-26T04:04:41Z",
+      "side": 1,
+      "message": "i think checked by policy?",
+      "range": {
+        "startLine": 258,
+        "startChar": 0,
+        "endLine": 258,
+        "endChar": 32
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5c0b256_ae554a21",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-26T04:04:41Z",
+      "side": 1,
+      "message": "is the data len attribute spurious? or is this needed to make an odd length write work?",
+      "range": {
+        "startLine": 309,
+        "startChar": 0,
+        "endLine": 309,
+        "endChar": 55
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9688de54_e77fe2bd",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-26T04:04:41Z",
+      "side": 1,
+      "message": "this could be checked via policy",
+      "range": {
+        "startLine": 311,
+        "startChar": 50,
+        "endLine": 311,
+        "endChar": 68
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cf1192b_66b3cd90",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-26T04:04:41Z",
+      "side": 1,
+      "message": "I think this was checked by policy",
+      "range": {
+        "startLine": 311,
+        "startChar": 12,
+        "endLine": 311,
+        "endChar": 13
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24f88777_2feae06a",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-26T04:04:41Z",
+      "side": 1,
+      "message": "we should NLA_REJECT everything else?",
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0064bc97_2292feb5",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-26T04:04:41Z",
+      "side": 1,
+      "message": "min 1",
+      "range": {
+        "startLine": 373,
+        "startChar": 0,
+        "endLine": 373,
+        "endChar": 43
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4e782ca_60e5d08d",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-26T04:04:41Z",
+      "side": 1,
+      "message": "min 0",
+      "range": {
+        "startLine": 378,
+        "startChar": 0,
+        "endLine": 378,
+        "endChar": 41
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21cbe695_180d720a",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-26T04:04:41Z",
+      "side": 1,
+      "message": "min -1",
+      "range": {
+        "startLine": 379,
+        "startChar": 0,
+        "endLine": 379,
+        "endChar": 43
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35f42047_691902dc",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-26T04:04:41Z",
+      "side": 1,
+      "message": "min -1",
+      "range": {
+        "startLine": 384,
+        "startChar": 0,
+        "endLine": 384,
+        "endChar": 41
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "630b10bd_0a98a969",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-26T04:04:41Z",
+      "side": 1,
+      "message": "min 1",
+      "range": {
+        "startLine": 386,
+        "startChar": 0,
+        "endLine": 386,
+        "endChar": 43
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9389a072_b5891254",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-26T04:04:41Z",
+      "side": 1,
+      "message": "can this be min -1 max 4095",
+      "range": {
+        "startLine": 392,
+        "startChar": 0,
+        "endLine": 392,
+        "endChar": 46
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "805a9489_b092c7a7",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-08-26T04:04:41Z",
+      "side": 1,
+      "message": "can this be min/max 0 1\n\n[I don\u0027t care if it is S8 U8 U32 S32]",
+      "range": {
+        "startLine": 394,
+        "startChar": 0,
+        "endLine": 394,
+        "endChar": 48
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
