@@ -2622,13 +2622,14 @@ static int is_next_segment_free(struct f2fs_sb_info *sbi,
  * This function should be returned with success, otherwise BUG
  */
 static int get_new_segment(struct f2fs_sb_info *sbi,
-			unsigned int *newseg, bool new_sec)
+			unsigned int *newseg, bool new_sec, bool pinning)
 {
 	struct free_segmap_info *free_i = FREE_I(sbi);
 	unsigned int segno, secno, zoneno;
 	unsigned int total_zones = MAIN_SECS(sbi) / sbi->secs_per_zone;
 	unsigned int hint = GET_SEC_FROM_SEG(sbi, *newseg);
 	unsigned int old_zoneno = GET_ZONE_FROM_SEG(sbi, *newseg);
+	unsigned int max_secno = MAIN_SECS(sbi);
 	bool init = true;
 	int i;
 	int ret = 0;
@@ -2641,12 +2642,20 @@ static int get_new_segment(struct f2fs_sb_info *sbi,
 		if (segno < GET_SEG_FROM_SEC(sbi, hint + 1))
 			goto got_it;
 	}
+
+	/*
+	 * With resizable_tail_secno, keep pinned allocations out of the
+	 * truncatable tail. Default pinned_area_max_secno == MAIN_SECS,
+	 * so behavior is unchanged when the option is not set.
+	 */
+	if (pinning)
+		max_secno = sbi->pinned_area_max_secno;
+
 find_other_zone:
-	secno = find_next_zero_bit(free_i->free_secmap, MAIN_SECS(sbi), hint);
-	if (secno >= MAIN_SECS(sbi)) {
-		secno = find_first_zero_bit(free_i->free_secmap,
-							MAIN_SECS(sbi));
-		if (secno >= MAIN_SECS(sbi)) {
+	secno = find_next_zero_bit(free_i->free_secmap, max_secno, hint);
+	if (secno >= max_secno) {
+		secno = find_first_zero_bit(free_i->free_secmap, max_secno);
+		if (secno >= max_secno) {
 			ret = -ENOSPC;
 			goto out_unlock;
 		}
@@ -2683,8 +2692,15 @@ out_unlock:
 	spin_unlock(&free_i->segmap_lock);
 
 	if (ret) {
-		f2fs_stop_checkpoint(sbi, false, STOP_CP_REASON_NO_SEGMENT);
-		f2fs_bug_on(sbi, 1);
+		/*
+		 * Pinned area may be full while free space still exists in the
+		 * resizable tail; do not treat that as a fatal no-segment case.
+		 */
+		if (!(pinning && has_unpinned_area(sbi))) {
+			f2fs_stop_checkpoint(sbi, false,
+					STOP_CP_REASON_NO_SEGMENT);
+			f2fs_bug_on(sbi, 1);
+		}
 	}
 	return ret;
 }
@@ -2758,11 +2774,12 @@ static void new_curseg(struct f2fs_sb_info *sbi, int type, bool new_sec)
 {
 	struct curseg_info *curseg = CURSEG_I(sbi, type);
 	unsigned int segno = curseg->segno;
+	bool pinning = (type == CURSEG_COLD_DATA_PINNED);
 
 	if (curseg->inited)
 		write_sum_page(sbi, curseg->sum_blk, GET_SUM_BLOCK(sbi, segno));
 	segno = __get_next_segno(sbi, type);
-	if (get_new_segment(sbi, &segno, new_sec)) {
+	if (get_new_segment(sbi, &segno, new_sec, pinning)) {
 		curseg->segno = NULL_SEGNO;
 		return;
 	}
