@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e271516b_4f2110e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-08-26T20:06:48Z",
+      "side": 1,
+      "message": "This seems to be breaking the pick_eevdf() logic causing it to return NULL.",
+      "revId": "aa608a5906396eea42d0a8d9481c70bde9d27d54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
