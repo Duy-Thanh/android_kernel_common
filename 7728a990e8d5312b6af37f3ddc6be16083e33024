@@ -1,0 +1,226 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "414674c4_8bd3ab9f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-08-26T13:57:04Z",
+      "side": 1,
+      "message": "Drive-by review since I was added to a related bug.",
+      "revId": "7728a990e8d5312b6af37f3ddc6be16083e33024",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bc1a266_448fa00c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-08-26T13:57:04Z",
+      "side": 1,
+      "message": "Not introduced by this CL, but why is it safe to just print a warning and continue going? Same question about the other places where the return value of this function is simply handled by a WARN_ON().",
+      "range": {
+        "startLine": 691,
+        "startChar": 0,
+        "endLine": 694,
+        "endChar": 55
+      },
+      "revId": "7728a990e8d5312b6af37f3ddc6be16083e33024",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e24dd410_a66286a9",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1492,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-08-26T13:57:04Z",
+      "side": 1,
+      "message": "Given this does non-atomic operations on bitmaps, I suppose it needs to run with certain locks acquired. The two functions would benefit from appropriate annotations to make that clear.",
+      "revId": "7728a990e8d5312b6af37f3ddc6be16083e33024",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97b13d04_3fc4349f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1508,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-08-26T13:57:04Z",
+      "side": 1,
+      "message": "How does this relate to the total amount available, allocated at `recycled_va_range_start` (HYP_PRIV_VA_GUEST_MBOX_SIZE)? What\u0027s the reservation size done by this function? Always 1 page? (or KVM_FFA_MBOX_NR_PAGES that happens to be 1 today)\n\nAlso right now it looks like `HYP_PRIV_VA_GUEST_MBOX_SIZE` would indeed be 64 pages, matching the number of bits of the u64 `recycled_va_mask`, but it looks very fragile. If kernel helpers could be used here, would it make sense to make `recycled_va_mask` a bitmap and use the bitmap functions - DECLARE_BITMAP(), find_first_zero_bit(), set_bit(), etc.?",
+      "revId": "7728a990e8d5312b6af37f3ddc6be16083e33024",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56a4b571_37e3fd68",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1582,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-08-26T13:57:04Z",
+      "side": 1,
+      "message": "Is it safe to only warn here? Wouldn\u0027t this mean that something is seriously wrong with the memory management state?",
+      "revId": "7728a990e8d5312b6af37f3ddc6be16083e33024",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfc5e530_3dd14af5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1589,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-08-26T13:57:04Z",
+      "side": 1,
+      "message": "The good practice is to call the error labels based on what the need to do, e.g. `err_unshare`.",
+      "revId": "7728a990e8d5312b6af37f3ddc6be16083e33024",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dce35ba7_b5c0b58f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1594,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-08-26T13:57:04Z",
+      "side": 1,
+      "message": "Is this subtraction really correct? We could end up here already from the first iteration of the mapping loop above. For example, if we jump here with `cur \u003d ipa` and after `__guest_initiate_page_transition()` failing, we would end up with the first page not being unmapped.",
+      "revId": "7728a990e8d5312b6af37f3ddc6be16083e33024",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a87013e0_d5c0765d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1640,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-08-26T13:57:04Z",
+      "side": 1,
+      "message": "Would it make sense to have one loop first call this, so that we can avoid the entire undo loop if this fails? (At least I don\u0027t see this particular call being undone there.)",
+      "range": {
+        "startLine": 1633,
+        "startChar": 0,
+        "endLine": 1640,
+        "endChar": 3
+      },
+      "revId": "7728a990e8d5312b6af37f3ddc6be16083e33024",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cf5bdeb_24d023ae",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1643,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-08-26T13:57:04Z",
+      "side": 1,
+      "message": "I think we could check `(hva + size - 1)` ahead of the loop to remove one more error point from within the loop.",
+      "revId": "7728a990e8d5312b6af37f3ddc6be16083e33024",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0d9cc16_188bfabb",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1648,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-08-26T13:57:04Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be `PAGE_SIZE`? Or better, wouldn\u0027t it be possible to just run this check for the entire memory region ahead of the loop?",
+      "range": {
+        "startLine": 1648,
+        "startChar": 50,
+        "endLine": 1648,
+        "endChar": 54
+      },
+      "revId": "7728a990e8d5312b6af37f3ddc6be16083e33024",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1add29e6_8a69190e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1665,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-08-26T13:57:04Z",
+      "side": 1,
+      "message": "The code below seems to re-share, so should the label be `err_share_again` (or maybe `err_revert_state`)?",
+      "revId": "7728a990e8d5312b6af37f3ddc6be16083e33024",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bd25f66_1ab81cf7",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1669,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-08-26T13:57:04Z",
+      "side": 1,
+      "message": "Wouldn\u0027t the fact that we end up in such a state mean that the hypervisor is in a really bad state and it could be dangerous to just continue running? Maybe a panic() would be safer and also eliminate the complexity of the code below?",
+      "revId": "7728a990e8d5312b6af37f3ddc6be16083e33024",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
