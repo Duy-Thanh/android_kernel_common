@@ -16,6 +16,24 @@
       "message": "The CRC issue is probably caused by this inclusion changing the scope of a data type. The most common case of this is `trace_eval_map`. Try adding this to fix the CRC issue:\n```\n#include \u003clinux/android_kabi.h\u003e\nANDROID_KABI_DECLONLY(trace_eval_map);\n```\n\nIf that doesn\u0027t fix it, then you can follow the instructions at https://source.android.com/docs/core/architecture/kernel/abi-monitor#fixing-crc-mismatch.",
       "revId": "77edb23f9f7794117be02194b5bd4d87171bad22",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6281e5b9_22506bb4",
+        "filename": "fs/direct-io.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 3821538
+      },
+      "writtenOn": "2026-08-26T10:11:20Z",
+      "side": 1,
+      "message": "The above modifications are effective, and I have fixed the CRC issue.",
+      "parentUuid": "de5c1432_a438e743",
+      "revId": "77edb23f9f7794117be02194b5bd4d87171bad22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
