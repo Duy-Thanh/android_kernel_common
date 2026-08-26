@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6587737_2034b7be",
+        "filename": "include/trace/hooks/timer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-08-26T03:53:02Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by GKI Guidelines: Please do not add #include statements to headers under include/trace/hooks/. The...\n\nPlease do not add #include statements to headers under include/trace/hooks/. These should only be getting forward decls and not new includes (to avoid CRC changes due to visibility).\\n\\n Refer to go/ack-contribution-guidelines and go/vendor-hooks for details.",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 24
+      },
+      "revId": "38327b132a7c3543ca619d03e711aa16a6fba477",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
