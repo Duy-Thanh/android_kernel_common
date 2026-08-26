@@ -16,6 +16,24 @@
       "message": "BACKPORT requires an annotation describing the changes made as part of the backport. See https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
       "revId": "c48e7f9a6999a0d30d36fe44b8f25de478be3017",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8c726fe_518ff49d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4229304
+      },
+      "writtenOn": "2026-08-26T10:04:19Z",
+      "side": 1,
+      "message": "understood Todd, added the annotation.",
+      "parentUuid": "bd3370dc_c9006a52",
+      "revId": "c48e7f9a6999a0d30d36fe44b8f25de478be3017",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
