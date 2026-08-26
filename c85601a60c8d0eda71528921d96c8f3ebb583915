@@ -142,6 +142,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b0c3c9d_25817ee4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1504563
+      },
+      "writtenOn": "2026-08-26T08:38:23Z",
+      "side": 1,
+      "message": "\u003e Just to be sure, you mean:\n\u003e -                 \"%sKernel panic - not syncing: HYP panic\\n\",\n\u003e +                 \"%sKernel panic - not syncing: HYP panic:\\n\",\n\nYep, this is accurate. As per the regex in http://google3/wireless/android/telemetry/stability/clusters/kernel_signature_builder.cc;l\u003d149;rcl\u003d897462299.\n\n\u003e But I assume this is not a problem or you suggesting to append something so it will not be clasified as unknown?\n\nAh, that signature part is JFYI, it\u0027s not a problem. Appending something also actually doesn\u0027t change the signature.\n\nThe `unknown` part changes by the stack trace below the panic line.",
+      "parentUuid": "42f760fa_d1401769",
+      "revId": "c85601a60c8d0eda71528921d96c8f3ebb583915",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d5fdd11_5e53aeae",
