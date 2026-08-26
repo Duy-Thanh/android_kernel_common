@@ -46,6 +46,30 @@
       },
       "revId": "e917c4e3630d034fc7d39e228a5cbf05132867a2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "496131a2_a2b40efe",
+        "filename": "arch/arm64/kernel/topology.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 3413627
+      },
+      "writtenOn": "2026-08-26T03:02:54Z",
+      "side": 1,
+      "message": "I will fix it.",
+      "parentUuid": "33bdc5ff_0abf3799",
+      "range": {
+        "startLine": 228,
+        "startChar": 0,
+        "endLine": 229,
+        "endChar": 0
+      },
+      "revId": "e917c4e3630d034fc7d39e228a5cbf05132867a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
