@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d41e9388_34ce7419",
+        "filename": "include/uapi/linux/net_apf.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T06:43:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aecef397_1d63a384",
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d616a400_30bd2950",
@@ -31,6 +49,30 @@
       "writtenOn": "2026-08-26T03:35:46Z",
       "side": 1,
       "message": "remove",
+      "range": {
+        "startLine": 38,
+        "startChar": 37,
+        "endLine": 38,
+        "endChar": 47
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6ed8e85_8fdf1d03",
+        "filename": "include/uapi/linux/net_apf.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T06:43:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d616a400_30bd2950",
       "range": {
         "startLine": 38,
         "startChar": 37,
@@ -64,6 +106,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5821711_9ea42f0a",
+        "filename": "include/uapi/linux/net_apf.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T06:43:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ea77d57_64c4cc75",
+      "range": {
+        "startLine": 95,
+        "startChar": 13,
+        "endLine": 95,
+        "endChar": 36
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e06e4d8_efcc2eb6",
@@ -77,6 +143,30 @@
       "writtenOn": "2026-08-26T04:04:41Z",
       "side": 1,
       "message": "this should be in apf_get_mode when it returns INVALID",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 66
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33fb0c85_b3229883",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T06:43:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e06e4d8_efcc2eb6",
       "range": {
         "startLine": 60,
         "startChar": 0,
@@ -110,6 +200,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d66fbf7_cc8b74dd",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T06:43:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7561407c_6927fd89",
+      "range": {
+        "startLine": 69,
+        "startChar": 11,
+        "endLine": 69,
+        "endChar": 12
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f1b9df8_d89c56de",
@@ -123,6 +237,30 @@
       "writtenOn": "2026-08-26T04:04:41Z",
       "side": 1,
       "message": "\u003c",
+      "range": {
+        "startLine": 76,
+        "startChar": 11,
+        "endLine": 76,
+        "endChar": 36
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa5bf177_ea3d99ab",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T06:43:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f1b9df8_d89c56de",
       "range": {
         "startLine": 76,
         "startChar": 11,
@@ -156,6 +294,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1e4744e_d293cd37",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T06:43:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3c41b5b_19bfb2c6",
+      "range": {
+        "startLine": 91,
+        "startChar": 17,
+        "endLine": 91,
+        "endChar": 20
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "446dc554_81ec0eb7",
@@ -173,6 +335,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cb9b8e2_c2093bcf",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T06:43:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "446dc554_81ec0eb7",
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b4e71c5d_b4853367",
@@ -186,6 +366,30 @@
       "writtenOn": "2026-08-26T04:04:41Z",
       "side": 1,
       "message": "rename to in_skb",
+      "range": {
+        "startLine": 106,
+        "startChar": 40,
+        "endLine": 106,
+        "endChar": 43
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cbd9543_2aca8ff9",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T06:43:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4e71c5d_b4853367",
       "range": {
         "startLine": 106,
         "startChar": 40,
@@ -219,6 +423,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba9c23de_2f5efb39",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T06:43:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18cc47f9_dfd53633",
+      "range": {
+        "startLine": 110,
+        "startChar": 17,
+        "endLine": 110,
+        "endChar": 20
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f731036f_9c4ae38b",
@@ -232,6 +460,30 @@
       "writtenOn": "2026-08-26T04:04:41Z",
       "side": 1,
       "message": "?",
+      "range": {
+        "startLine": 122,
+        "startChar": 29,
+        "endLine": 122,
+        "endChar": 30
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc4a9daf_3c7707bc",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T06:43:27Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f731036f_9c4ae38b",
       "range": {
         "startLine": 122,
         "startChar": 29,
@@ -265,6 +517,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3dfe2446_4c2b670e",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T06:43:27Z",
+      "side": 1,
+      "message": "1. For commands returning small, fixed attributes (GET_INFO with 6 u32s, GET_RAM_SIZE with 1 u32), passing 0 uses the default NLMSG_DEFAULT_SIZE (~4 KB page buffer), which easily holds the response.\n    2. For READ, the returned APF RAM buffer is dynamic and may exceed 4 KB, so nla_total_size(len) is passed to ensure the skb allocation is large enough to prevent -EMSGSIZE on large reads.",
+      "parentUuid": "5e1efa86_d2362742",
+      "range": {
+        "startLine": 198,
+        "startChar": 29,
+        "endLine": 198,
+        "endChar": 30
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b37b8129_6621a4e9",
@@ -278,6 +554,30 @@
       "writtenOn": "2026-08-26T04:04:41Z",
       "side": 1,
       "message": "i think all but req_len \u003d\u003d 0 should have been checked by policy",
+      "range": {
+        "startLine": 234,
+        "startChar": 5,
+        "endLine": 234,
+        "endChar": 83
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a5095e0_28bf521c",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T06:43:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b37b8129_6621a4e9",
       "range": {
         "startLine": 234,
         "startChar": 5,
@@ -305,6 +605,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "963030e8_8a89c873",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T06:43:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26a87a2c_39f7a67e",
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b36413f9_11e3d1ca",
@@ -318,6 +636,30 @@
       "writtenOn": "2026-08-26T04:04:41Z",
       "side": 1,
       "message": "ERANGE",
+      "range": {
+        "startLine": 249,
+        "startChar": 10,
+        "endLine": 249,
+        "endChar": 16
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c88d0443_56352b8c",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T06:43:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b36413f9_11e3d1ca",
       "range": {
         "startLine": 249,
         "startChar": 10,
@@ -345,6 +687,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70240b0f_53b2b93d",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T06:43:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9fc53ba_d09b50c2",
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61642ec1_8ab53fc7",
@@ -368,6 +728,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bc9a750_af2b09d5",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T06:43:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61642ec1_8ab53fc7",
+      "range": {
+        "startLine": 258,
+        "startChar": 0,
+        "endLine": 258,
+        "endChar": 32
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5c0b256_ae554a21",
@@ -381,6 +765,30 @@
       "writtenOn": "2026-08-26T04:04:41Z",
       "side": 1,
       "message": "is the data len attribute spurious? or is this needed to make an odd length write work?",
+      "range": {
+        "startLine": 309,
+        "startChar": 0,
+        "endLine": 309,
+        "endChar": 55
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "728f62af_346c329c",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T06:43:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5c0b256_ae554a21",
       "range": {
         "startLine": 309,
         "startChar": 0,
@@ -437,6 +845,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eebfbaab_bff03150",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T06:43:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9688de54_e77fe2bd",
+      "range": {
+        "startLine": 311,
+        "startChar": 50,
+        "endLine": 311,
+        "endChar": 68
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dac105cc_a4b49097",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T06:43:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5cf1192b_66b3cd90",
+      "range": {
+        "startLine": 311,
+        "startChar": 12,
+        "endLine": 311,
+        "endChar": 13
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24f88777_2feae06a",
@@ -454,6 +910,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d17f5a3_811fb7e0",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T06:43:27Z",
+      "side": 1,
+      "message": "Look deeper, it seems the morden gennetlink have the following logic to reject the non expected attribute\n\n  ### 1. Generic Netlink selects NL_VALIDATE_STRICT by default\n\n  In genetlink.c:931-946:\n\n        enum netlink_validation validate \u003d ops-\u003evalidate \u0026 no_strict_flag ?\n                           NL_VALIDATE_LIBERAL :\n                           NL_VALIDATE_STRICT;\n    ...\n        err \u003d __nlmsg_parse(nlh, hdrlen, attrbuf, ops-\u003emaxattr, ops-\u003epolicy,\n                    validate, extack);\n\n  ### 2. NL_VALIDATE_STRICT defines NL_VALIDATE_UNSPEC\n\n  In netlink.h:529-533:\n\n    #define NL_VALIDATE_STRICT (NL_VALIDATE_TRAILING |\\\n                    NL_VALIDATE_MAXTYPE |\\\n                    NL_VALIDATE_UNSPEC |\\\n                    NL_VALIDATE_STRICT_ATTRS |\\\n                    NL_VALIDATE_NESTED)\n\n  ### 3. Netlink parser validates each attribute against policy\n\n  In nlattr.c:634-640:\n\n            if (policy) {\n                int err \u003d validate_nla(nla, maxtype, policy,\n                               validate, extack, depth);\n\n                if (err \u003c 0)\n                    return err;\n            }\n\n  ### 4. Unspecified attributes (pt-\u003etype \u003d\u003d 0 / NLA_UNSPEC) are rejected\n\n  In nlattr.c:549-554:\n\n        case NLA_UNSPEC:\n            if (validate \u0026 NL_VALIDATE_UNSPEC) {\n                NL_SET_ERR_MSG_ATTR(extack, nla,\n                            \"Unsupported attribute\");\n                return -EINVAL;\n            }\n\n  Any attribute index omitted from a policy table has .type \u003d 0 (NLA_UNSPEC). When NL_VALIDATE_UNSPEC is active (part of NL_VALIDATE_STRICT), the parser aborts immediately with -EINVAL and sets the extack message \"Unsupported attribute\".",
+      "parentUuid": "24f88777_2feae06a",
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0064bc97_2292feb5",
@@ -467,6 +941,30 @@
       "writtenOn": "2026-08-26T04:04:41Z",
       "side": 1,
       "message": "min 1",
+      "range": {
+        "startLine": 373,
+        "startChar": 0,
+        "endLine": 373,
+        "endChar": 43
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2645f99_e5c7becf",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T06:43:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0064bc97_2292feb5",
       "range": {
         "startLine": 373,
         "startChar": 0,
@@ -500,6 +998,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c8f06ee_05cd5447",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T06:43:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4e782ca_60e5d08d",
+      "range": {
+        "startLine": 378,
+        "startChar": 0,
+        "endLine": 378,
+        "endChar": 41
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "21cbe695_180d720a",
@@ -513,6 +1035,30 @@
       "writtenOn": "2026-08-26T04:04:41Z",
       "side": 1,
       "message": "min -1",
+      "range": {
+        "startLine": 379,
+        "startChar": 0,
+        "endLine": 379,
+        "endChar": 43
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2da2e4e_3b1ec3bd",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T06:43:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21cbe695_180d720a",
       "range": {
         "startLine": 379,
         "startChar": 0,
@@ -546,6 +1092,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3790b2e7_ff09fe14",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T06:43:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35f42047_691902dc",
+      "range": {
+        "startLine": 384,
+        "startChar": 0,
+        "endLine": 384,
+        "endChar": 41
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "630b10bd_0a98a969",
@@ -559,6 +1129,30 @@
       "writtenOn": "2026-08-26T04:04:41Z",
       "side": 1,
       "message": "min 1",
+      "range": {
+        "startLine": 386,
+        "startChar": 0,
+        "endLine": 386,
+        "endChar": 43
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "205e51ea_7c34d21c",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T06:43:27Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "630b10bd_0a98a969",
       "range": {
         "startLine": 386,
         "startChar": 0,
@@ -592,6 +1186,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c9cddb5_f531337d",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T06:43:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9389a072_b5891254",
+      "range": {
+        "startLine": 392,
+        "startChar": 0,
+        "endLine": 392,
+        "endChar": 46
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "805a9489_b092c7a7",
@@ -605,6 +1223,30 @@
       "writtenOn": "2026-08-26T04:04:41Z",
       "side": 1,
       "message": "can this be min/max 0 1\n\n[I don\u0027t care if it is S8 U8 U32 S32]",
+      "range": {
+        "startLine": 394,
+        "startChar": 0,
+        "endLine": 394,
+        "endChar": 48
+      },
+      "revId": "b12d7fcbab9f1969510877cc5b6c5cc7838372b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17b7bde4_68b45c19",
+        "filename": "net/apf/core.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-08-26T06:43:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "805a9489_b092c7a7",
       "range": {
         "startLine": 394,
         "startChar": 0,
