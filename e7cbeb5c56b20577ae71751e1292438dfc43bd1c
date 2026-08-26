@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fb35580_f314a476",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2026-08-26T02:26:41Z",
+      "side": 1,
+      "message": "Yes, there are optimizations to these structures that have been unable to be backported due to these vendor hooks.",
+      "parentUuid": "39a5c9aa_c95daeb6",
+      "revId": "e7cbeb5c56b20577ae71751e1292438dfc43bd1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3df933eb_a21f6c59",
@@ -48,6 +66,29 @@
       "writtenOn": "2026-08-25T20:31:42Z",
       "side": 1,
       "message": "Added a few other folks as I want to make sure there is consensus around this KABI break and that there won\u0027t be impact to other partners (which isn\u0027t clear to me).",
+      "revId": "e7cbeb5c56b20577ae71751e1292438dfc43bd1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47289d47_ec9a0840",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2026-08-26T02:26:41Z",
+      "side": 1,
+      "message": "It\u0027s unclear what this parameter is for and what is intended to be passed to it.  You may have intended that it contain the hash of `data` as computed on line 383.  But actually `verity_fec_decode()` may have overwritten it with the unsuccessfully corrected data.\n\nIs this parameter actually necessary?  Since both `salt` and `data` are passed already, the hook implementation could hash them itself if it really needs to.  There are easy-to-use SHA-256 functions in `\u003ccrypto/sha2.h\u003e`.\n\nLikewise for `trace_android_vh_handle_data_error()`.",
+      "range": {
+        "startLine": 415,
+        "startChar": 17,
+        "endLine": 415,
+        "endChar": 31
+      },
       "revId": "e7cbeb5c56b20577ae71751e1292438dfc43bd1c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
