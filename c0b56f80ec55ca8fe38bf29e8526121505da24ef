@@ -34,6 +34,24 @@
       "parentUuid": "0ad100d5_39c5e12e",
       "revId": "c0b56f80ec55ca8fe38bf29e8526121505da24ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "510b61dc_efd7dec9",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-08-27T07:39:13Z",
+      "side": 1,
+      "message": "Ok, so I will go back to the previous version again 😊.\n\nOne note I can\u0027t append it to same line since because bootstat will malformed the boot reason due to bit error correction which it tries to apply. Please see below (the msgs in the console-ramoops is not malformed but bootstat broke it):\n```\nKernel panic - not syncing: pKVM: Exception 14 @ip 0xffffffff82745654 (0xffffffffa2d45654), err code 0x2                                              \n                                                                                                                                                               \n  Boot info:                                                                                                                                                   \n  Last boot reason: kernel_panic,pkvm:_exception_14_@ip_0xffffffff82745654_(0xffffffffa2d45654),_err_oomd_0x2\n```\nSee \"err_oomd\". Gemini explains it this way: \"Because \"cod\" is only 4 bit flips away from \"oom\", bootstat\u0027s fuzzy-corrector sees \"code\" and \"repairs\" it to \"oomd\"! \" + https://cs.android.com/android/platform/superproject/main/+/main:system/core/bootstat/bootstat.cpp\n\nSo I will append it as a new line (similar to what ARM does)",
+      "parentUuid": "0ad100d5_39c5e12e",
+      "revId": "c0b56f80ec55ca8fe38bf29e8526121505da24ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
