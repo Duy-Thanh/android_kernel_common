@@ -16,6 +16,10 @@ static char *number(char *str, char *end, unsigned long long num, int base)
 	char tmp[20];
 	int i = 0;
 
+	/* Currently only base 10 and 16 are supported */
+	if (base != 10 && base != 16)
+		return str;
+
 	if (num == 0) {
 		tmp[i++] = '0';
 	} else {
