@@ -53,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39edcc54_76313860",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 4966542
+      },
+      "writtenOn": "2026-08-27T01:15:12Z",
+      "side": 1,
+      "message": "I added Fixes: ecb87057498e (\"ANDROID: vendor_hooks: Add hooks for dmv\")",
+      "parentUuid": "3df933eb_a21f6c59",
+      "revId": "e7cbeb5c56b20577ae71751e1292438dfc43bd1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3121af27_8eaff639",
@@ -70,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "739eae25_0f2443d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4966542
+      },
+      "writtenOn": "2026-08-27T01:15:12Z",
+      "side": 1,
+      "message": "Thanks. This change is based on b/485453627, where the existing hooks were identified as unintentionally exposing private dm-verity types in the stable ABI. The issue notes that Samsung is the only user of these hooks and that a coordinated one-time ABI break is needed to remove that exposure.\n\nFrom the Samsung side, we are coordinating the corresponding vendor implementation changes. I agree that the impact on any other partners should be confirmed before proceeding with the KABI break.",
+      "parentUuid": "3121af27_8eaff639",
+      "revId": "e7cbeb5c56b20577ae71751e1292438dfc43bd1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "47289d47_ec9a0840",
@@ -83,6 +119,30 @@
       "writtenOn": "2026-08-26T02:26:41Z",
       "side": 1,
       "message": "It\u0027s unclear what this parameter is for and what is intended to be passed to it.  You may have intended that it contain the hash of `data` as computed on line 383.  But actually `verity_fec_decode()` may have overwritten it with the unsuccessfully corrected data.\n\nIs this parameter actually necessary?  Since both `salt` and `data` are passed already, the hook implementation could hash them itself if it really needs to.  There are easy-to-use SHA-256 functions in `\u003ccrypto/sha2.h\u003e`.\n\nLikewise for `trace_android_vh_handle_data_error()`.",
+      "range": {
+        "startLine": 415,
+        "startChar": 17,
+        "endLine": 415,
+        "endChar": 31
+      },
+      "revId": "e7cbeb5c56b20577ae71751e1292438dfc43bd1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1add7c16_9641e23c",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 4966542
+      },
+      "writtenOn": "2026-08-27T01:15:12Z",
+      "side": 1,
+      "message": "The runtime digest is necessary for the Samsung debugging use case because we need to capture the digest actually produced by dm-verity at the time of the failure, rather than only being able to recompute it later from salt and data.\n\nOne of the cases we need to investigate is an AP-side computation malfunction. During failure analysis, we recompute the digest independently from the captured salt and data and compare it with the runtime digest produced by dm-verity. If we recompute the digest in the hook instead, we lose the original runtime result that we are trying to validate.\n\nFor PRE_FEC, io-\u003etmp_digest represents the digest from the initial verification failure and can also be saved as a fallback. After FEC has failed, however, the current io-\u003etmp_digest is diagnostically important because this is the final corruption state. Therefore, for the FEC_FAILED event, the intention is to use the post-FEC io-\u003etmp_digest when it still contains a meaningful digest for the failure being reported, and fall back to the saved PRE_FEC digest if FEC has overwritten it with an unusable value.",
+      "parentUuid": "47289d47_ec9a0840",
       "range": {
         "startLine": 415,
         "startChar": 17,
