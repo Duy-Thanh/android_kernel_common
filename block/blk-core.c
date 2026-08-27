@@ -65,6 +65,13 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(block_rq_issue);
 EXPORT_TRACEPOINT_SYMBOL_GPL(block_rq_merge);
 EXPORT_TRACEPOINT_SYMBOL_GPL(block_rq_requeue);
 EXPORT_TRACEPOINT_SYMBOL_GPL(block_rq_complete);
+<<<<<<< HEAD   (9ac0a529c8731afcd3d688967ec3d1c2378efeb0 BACKPORT: f2fs: Add trace_f2fs_fault_report)
+||||||| BASE   (40b0e40c40bc32d5fb629ee0c734b197204465e0 ANDROID: block: add hooks for vendor IO aggregation control)
+EXPORT_TRACEPOINT_SYMBOL_GPL(block_io_start);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(block_io_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(block_io_done);
+>>>>>>> CHANGE (3f75b068a023d510a41bbb2e192490bc1b21e496 ANDROID: block: add hooks for vendor IO QoS tracking)
 
 static DEFINE_IDA(blk_queue_ida);
 
