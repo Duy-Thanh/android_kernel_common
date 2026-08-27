@@ -108,6 +108,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "da9a467d_839d8197",
+        "filename": "arch/x86/kvm/pkvm/lib/printf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-08-27T09:07:35Z",
+      "side": 1,
+      "message": "You got me 😊\n\nHow about:\n```\n+/*\n+ * Convert number to string.\n+ *\n+ * NOTE: tmp[20] is sized specifically for 64-bit numbers in base 10 (max 20 digits)\n+ * and base 16 (max 16 digits). Other bases are not supported.\n+ */\n static char *number(char *str, char *end, unsigned long long num, int base,\n {\n        static const char digits[16] \u003d \"0123456789abcdef\";\n        char tmp[20];\n        int i \u003d 0;\n \n+       /* Currently only base 10 and 16 are supported */\n+       if (base !\u003d 10 \u0026\u0026 base !\u003d 16)\n+               return str;\n```\n?",
+      "parentUuid": "77d5f890_3ce7e9e2",
+      "revId": "4ab88d10201dcb26d9550938f0cbdfe62e4594df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "20f25679_f76530a6",
