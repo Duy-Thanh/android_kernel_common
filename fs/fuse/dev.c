@@ -329,20 +329,12 @@ EXPORT_SYMBOL_GPL(fuse_req_hash);
 /*
  * A new request is available, wake fiq->waitq
  */
-static void __fuse_dev_wake_and_unlock(struct fuse_iqueue *fiq, bool sync)
+static void fuse_dev_wake_and_unlock(struct fuse_iqueue *fiq)
 __releases(fiq->lock)
 {
-	if (sync)
-		wake_up_sync(&fiq->waitq);
-	else
-		wake_up(&fiq->waitq);
+	wake_up(&fiq->waitq);
 	kill_fasync(&fiq->fasync, SIGIO, POLL_IN);
 	spin_unlock(&fiq->lock);
-}
-
-static void fuse_dev_wake_and_unlock(struct fuse_iqueue *fiq)
-{
-	__fuse_dev_wake_and_unlock(fiq, false);
 }
 
 void fuse_dev_queue_forget(struct fuse_iqueue *fiq,
@@ -403,13 +395,11 @@ EXPORT_SYMBOL_GPL(fuse_request_assign_unique);
 
 static void fuse_dev_queue_req(struct fuse_iqueue *fiq, struct fuse_req *req)
 {
-	bool sync = test_and_clear_bit(FR_SYNC_WAKEUP, &req->flags);
-
 	spin_lock(&fiq->lock);
 	if (fiq->connected) {
 		fuse_request_assign_unique_locked(fiq, req);
 		list_add_tail(&req->list, &fiq->pending);
-		__fuse_dev_wake_and_unlock(fiq, sync);
+		fuse_dev_wake_and_unlock(fiq);
 	} else {
 		spin_unlock(&fiq->lock);
 		req->out.h.error = -ENOTCONN;
@@ -613,11 +603,6 @@ static void __fuse_request_send(struct fuse_req *req)
 	/* acquire extra reference, since request is still needed after
 	   fuse_request_end() */
 	__fuse_get_request(req);
-	/*
-	 * This is a synchronous request: the caller will block waiting for
-	 * the answer. Hint the scheduler via wake_up_sync().
-	 */
-	set_bit(FR_SYNC_WAKEUP, &req->flags);
 	fuse_send_one(fiq, req);
 
 	request_wait_answer(req);
