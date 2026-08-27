@@ -139,6 +139,24 @@
       "parentUuid": "9c29faae_87af2962",
       "revId": "43733ee83a64deb4d190abd1aa9c2f2ed4a43f82",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f852c9c_2bff1d7c",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-27T14:27:27Z",
+      "side": 1,
+      "message": "Looking at how the host kernel prints it:\n\n```\nstatic size_t print_caller(u32 id, char *buf)\n{\n        char caller[12];\n        int vh_ret \u003d 0;\n\n        trace_android_vh_printk_caller(caller, sizeof(caller), id, \u0026vh_ret);\n        if (!vh_ret)\n                snprintf(caller, sizeof(caller), \"%c%u\",\n                         id \u0026 0x80000000 ? \u0027C\u0027 : \u0027T\u0027, id \u0026 ~0x80000000);\n        return sprintf(buf, \"[%6s]\", caller);\n}\n```\n\nWe could similarly use a temp buffer like this?",
+      "parentUuid": "6aa55daf_407dabcc",
+      "revId": "43733ee83a64deb4d190abd1aa9c2f2ed4a43f82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
