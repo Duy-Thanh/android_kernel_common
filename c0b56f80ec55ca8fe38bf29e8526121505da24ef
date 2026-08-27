@@ -70,6 +70,24 @@
       "parentUuid": "510b61dc_efd7dec9",
       "revId": "c0b56f80ec55ca8fe38bf29e8526121505da24ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d98e7016_38200cd3",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-08-27T09:01:52Z",
+      "side": 1,
+      "message": "\u003e Also your example has for some reason Kernel panic - not syncing: pKVM, but it should be Kernel panic - not syncing: HYP Panic:.\n\nYeah, it is my old log from the time I noticed it (not current one) that I dig out from history just to demonstrate it.\n\nAnyway it think it is a bit less confusing if it will not get malformed on boot.reason + ARM also prints it on the new line.",
+      "parentUuid": "b0cff1f9_abdb9e96",
+      "revId": "c0b56f80ec55ca8fe38bf29e8526121505da24ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
