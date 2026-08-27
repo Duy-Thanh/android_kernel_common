@@ -22,6 +22,30 @@
       },
       "revId": "745053c781476d34d74440fe391ca4e31930f54f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1a4a446_2210dcf3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-08-27T14:12:47Z",
+      "side": 1,
+      "message": "see https://git.kernel.org/torvalds/c/e94b9f01543c",
+      "parentUuid": "fe9d1633_f324a381",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "745053c781476d34d74440fe391ca4e31930f54f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
