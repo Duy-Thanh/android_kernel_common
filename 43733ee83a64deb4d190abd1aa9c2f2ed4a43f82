@@ -1,0 +1,108 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4fe9b07_7b77ef83",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-27T13:05:03Z",
+      "side": 1,
+      "message": "Isn\u0027t it already declared in `arch/x86/include/asm/kvm_pkvm.h` which is already included by this file?\n\n```\nextern unsigned int pkvm_sym(tsc_khz);\n```",
+      "fixSuggestions": [
+        {
+          "fixId": "d4886924_bc02fceb",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/panic.c",
+              "range": {
+                "startLine": 136,
+                "startChar": 0,
+                "endLine": 138,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "43733ee83a64deb4d190abd1aa9c2f2ed4a43f82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9643bfe0_49301105",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-27T13:05:03Z",
+      "side": 1,
+      "message": "nit: s/chrombooks/chromebooks/",
+      "fixSuggestions": [
+        {
+          "fixId": "dbb268c8_870432a9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/panic.c",
+              "range": {
+                "startLine": 150,
+                "startChar": 0,
+                "endLine": 151,
+                "endChar": 0
+              },
+              "replacement": " * Note: it is slightly ahead (~1-2s on chromebooks) of the host kernel printk\n"
+            }
+          ]
+        }
+      ],
+      "revId": "43733ee83a64deb4d190abd1aa9c2f2ed4a43f82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da7103fc_3ed822c1",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-27T13:05:03Z",
+      "side": 1,
+      "message": "nit: s/zeros/zeroes/",
+      "revId": "43733ee83a64deb4d190abd1aa9c2f2ed4a43f82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c29faae_87af2962",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-27T13:05:03Z",
+      "side": 1,
+      "message": "The CPU number can be more than one digit?",
+      "revId": "43733ee83a64deb4d190abd1aa9c2f2ed4a43f82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
