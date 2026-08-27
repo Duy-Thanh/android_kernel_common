@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ca1b5b31_021e1513",
+        "filename": "arch/x86/kvm/pkvm/lib/printf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-08-27T01:56:36Z",
+      "side": 1,
+      "message": "I think that\u0027s a fair point too - I\u0027d be happy too with an error when the base is different than 10 or 16.",
+      "parentUuid": "dad46bf8_70bd8890",
+      "revId": "4ab88d10201dcb26d9550938f0cbdfe62e4594df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "20f25679_f76530a6",
         "filename": "arch/x86/kvm/pkvm/lib/printf.c",
         "patchSetId": 1
