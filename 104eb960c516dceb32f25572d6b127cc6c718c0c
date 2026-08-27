@@ -211,6 +211,24 @@
       "parentUuid": "2a0c5697_f5886169",
       "revId": "104eb960c516dceb32f25572d6b127cc6c718c0c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b37bb50_c658084c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1379,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-08-27T08:45:19Z",
+      "side": 1,
+      "message": "That\u0027s not what my comment is about. We hit this else case only if `KVM_FFA_MBOX_NR_PAGES * PAGE_SIZE` is none of the 3 supported sizes - there is nothing coming here from any driver. Both `KVM_FFA_MBOX_NR_PAGES` and `PAGE_SIZE` are constants.\n\nIn fact, maybe BUILD_BUG() is the right thing to put here?",
+      "parentUuid": "5e407ae5_9e36ec97",
+      "revId": "104eb960c516dceb32f25572d6b127cc6c718c0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
