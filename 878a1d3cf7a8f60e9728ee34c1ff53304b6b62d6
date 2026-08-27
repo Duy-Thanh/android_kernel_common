@@ -1,0 +1,59 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54db605f_60653d85",
+        "filename": "drivers/scsi/scsi_lib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2134,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-08-27T05:20:05Z",
+      "side": 1,
+      "message": "This causes redefinition in allmodconfig case as below `#ifdef CONFIG_CDROM_PKTCVD_MODULE` block also does `EXPORT_SYMBOL_GPL(scsi_device_from_queue);` and that causes build error.",
+      "fixSuggestions": [
+        {
+          "fixId": "6155ba13_e287fd6e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/scsi/scsi_lib.c",
+              "range": {
+                "startLine": 2134,
+                "startChar": 0,
+                "endLine": 2135,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/scsi/scsi_lib.c",
+              "range": {
+                "startLine": 2140,
+                "startChar": 0,
+                "endLine": 2141,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/scsi/scsi_lib.c",
+              "range": {
+                "startLine": 2142,
+                "startChar": 0,
+                "endLine": 2143,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "878a1d3cf7a8f60e9728ee34c1ff53304b6b62d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
