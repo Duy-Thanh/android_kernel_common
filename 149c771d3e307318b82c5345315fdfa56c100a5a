@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a653064_1b0deb28",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1282799
+      },
+      "writtenOn": "2026-08-27T02:10:53Z",
+      "side": 1,
+      "message": "Keep the original Change-ID to indicate this is a cherry-pick; a new change has been submitted https://android-review.googlesource.com/c/kernel/common/+/4256802 to replace this one.",
+      "revId": "149c771d3e307318b82c5345315fdfa56c100a5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
