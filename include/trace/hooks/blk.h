@@ -54,6 +54,33 @@ DECLARE_HOOK(android_vh_request_issue_err,
 	TP_PROTO(struct request *rq),
 	TP_ARGS(rq));
 
+<<<<<<< PATCH SET (d08fd44b6a7857abf943842901ad77f12098e8fd ANDROID: block: add hooks for vendor IO QoS tracking)
+DECLARE_RESTRICTED_HOOK(android_rvh_rq_qos_wait,
+	TP_PROTO(void *ignored),
+	TP_ARGS(NULL), 1);
+
+DECLARE_HOOK(android_vh_wbt_wait,
+	TP_PROTO(struct bio *bio, int flags),
+	TP_ARGS(bio, flags));
+
+DECLARE_HOOK(android_vh_wbt_track,
+	TP_PROTO(struct request *rq, struct bio *bio),
+	TP_ARGS(rq, bio));
+
+DECLARE_RESTRICTED_HOOK(android_rvh_blk_execute_rq,
+	TP_PROTO(struct request *rq),
+	TP_ARGS(rq), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_blk_mq_get_tag,
+	TP_PROTO(void *ignored),
+	TP_ARGS(NULL), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_io_schedule_prepare,
+	TP_PROTO(void *ignored),
+	TP_ARGS(NULL), 1);
+||||||| BASE      (9ac0a529c8731afcd3d688967ec3d1c2378efeb0 BACKPORT: f2fs: Add trace_f2fs_fault_report)
+=======
+>>>>>>> BASE      (ab4eec0d552dcbaaf486aa18de7fb840b2c42b45 ANDROID: block: add hooks for vendor IO aggregation control)
 #endif /* _TRACE_HOOK_BLK_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
