@@ -30,6 +30,9 @@
 /* Only access this in an NMI enter/exit */
 DEFINE_PER_CPU(struct nmi_ctx, nmi_contexts);
 
+#ifdef CONFIG_OPLUS_KSTACK_LAZY_MAP
+DEFINE_PER_CPU(unsigned long *, el1_stack_ptr);
+#endif
 DEFINE_PER_CPU(unsigned long *, irq_stack_ptr);
 
 
@@ -58,6 +61,10 @@ static void __init init_irq_stacks(void)
 	unsigned long *p;
 
 	for_each_possible_cpu(cpu) {
+#ifdef CONFIG_OPLUS_KSTACK_LAZY_MAP
+		p = arch_alloc_vmap_stack(EL1_STACK_SIZE, early_cpu_to_node(cpu));
+		per_cpu(el1_stack_ptr, cpu) = p;
+#endif
 		p = arch_alloc_vmap_stack(IRQ_STACK_SIZE, early_cpu_to_node(cpu));
 		per_cpu(irq_stack_ptr, cpu) = p;
 	}

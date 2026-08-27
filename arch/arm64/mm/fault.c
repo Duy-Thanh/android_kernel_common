@@ -21,6 +21,7 @@
 #include <linux/page-flags.h>
 #include <linux/sched/signal.h>
 #include <linux/sched/debug.h>
+#include <linux/sched/task_stack.h>
 #include <linux/highmem.h>
 #include <linux/perf_event.h>
 #include <linux/preempt.h>
@@ -567,6 +568,10 @@ static int __kprobes do_page_fault(unsigned long far, unsigned long esr,
 	 */
 	if (faulthandler_disabled() || !mm)
 		goto no_context;
+#ifdef CONFIG_OPLUS_KSTACK_LAZY_MAP
+	if (!user_mode(regs) && irqs_disabled())
+		goto no_context;
+#endif
 
 	if (user_mode(regs))
 		mm_flags |= FAULT_FLAG_USER;
@@ -738,6 +743,19 @@ static int __kprobes do_translation_fault(unsigned long far,
 	if (is_ttbr0_addr(addr))
 		return do_page_fault(far, esr, regs);
 
+#ifdef CONFIG_OPLUS_KSTACK_LAZY_MAP
+	/*
+	 * arm64 6.6/6.12 has no kern_addr_valid(); current is valid in EL1
+	 * translation-fault context when object_is_on_stack() holds.
+	 */
+	if (!user_mode(regs) && object_is_on_stack((void *)addr)) {
+		pr_debug("kernel fault address 0x%lx esr 0x%lx stack %p\n",
+				addr, esr, current->stack);
+		if (!oplus_ks_lazy_fault_map(current, addr)) {
+			return 0;
+		}
+	}
+#endif
 	do_bad_area(far, esr, regs);
 	return 0;
 }

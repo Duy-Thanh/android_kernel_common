@@ -1311,6 +1311,18 @@ config RANDOMIZE_KSTACK_OFFSET_DEFAULT
 	  "randomize_kstack_offset=on/off", and this config chooses the default
 	  boot state.
 
+config OPLUS_KSTACK_LAZY_MAP
+	bool "OPLUS: lazy-map kernel stack pages"
+	depends on VMAP_STACK && THREAD_INFO_IN_TASK
+	select OPLUS_VMALLOC_PARTIAL_MAP
+	default y
+	help
+	  OPLUS: map only part of each kernel stack at creation, grow on fault.
+
+config OPLUS_VMALLOC_PARTIAL_MAP
+	def_bool y
+	bool "OPLUS: partial page fill for vmalloc areas"
+
 config ARCH_OPTIONAL_KERNEL_RWX
 	def_bool n
 

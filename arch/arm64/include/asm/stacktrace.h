@@ -22,6 +22,10 @@ extern void dump_backtrace(struct pt_regs *regs, struct task_struct *tsk,
 
 DECLARE_PER_CPU(unsigned long *, irq_stack_ptr);
 
+#ifdef CONFIG_OPLUS_KSTACK_LAZY_MAP
+DECLARE_PER_CPU(unsigned long *, el1_stack_ptr);
+#endif
+
 static inline struct stack_info stackinfo_get_irq(void)
 {
 	unsigned long low = (unsigned long)raw_cpu_read(irq_stack_ptr);

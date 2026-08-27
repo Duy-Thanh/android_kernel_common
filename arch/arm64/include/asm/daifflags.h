@@ -120,6 +120,13 @@ static inline void local_daif_restore(unsigned long flags)
 		trace_hardirqs_off();
 }
 
+#ifdef CONFIG_OPLUS_KSTACK_LAZY_MAP
+static inline bool oplus_ks_lazy_in_boot_pages(struct pt_regs *regs)
+{
+	return ((regs->sp - sizeof(struct pt_regs)) & (1 << THREAD_SHIFT)) == 0;
+}
+#endif
+
 /*
  * Called by synchronous exception handlers to restore the DAIF bits that were
  * modified by taking an exception.
@@ -128,8 +135,18 @@ static inline void local_daif_inherit(struct pt_regs *regs)
 {
 	unsigned long flags = regs->pstate & DAIF_MASK;
 
+#ifdef CONFIG_OPLUS_KSTACK_LAZY_MAP
+	if (!oplus_ks_lazy_in_boot_pages(regs)) {
+		/* disable I F if sp not in initial stack pages */
+		flags |= (PSR_I_BIT | PSR_F_BIT);
+	} else {
+		if (interrupts_enabled(regs))
+			trace_hardirqs_on();
+	}
+#else
 	if (interrupts_enabled(regs))
 		trace_hardirqs_on();
+#endif
 
 	if (system_uses_irq_prio_masking())
 		gic_write_pmr(regs->pmr_save);

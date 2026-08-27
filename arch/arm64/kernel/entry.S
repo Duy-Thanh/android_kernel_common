@@ -68,6 +68,49 @@
 	b	el\el\ht\()_\regsize\()_\label
 
 0:
+#ifdef CONFIG_OPLUS_KSTACK_LAZY_MAP
+	.if \el != 0
+#if (THREAD_SHIFT - 1 >= PAGE_SHIFT)
+	tbz	x0, #(THREAD_SHIFT - 1), 2f		/* page b10x needs more checks */
+#endif
+1:
+	/* Stash the original SP (minus PT_REGS_SIZE). */
+	msr	tpidrro_el0, x0  /* see el1_stack_entry */
+
+	/* Recover the original x0 in sp */
+	sub	sp, sp, x0	// sp'' = sp' - x0' = (sp + x0) - sp = x0
+
+	get_current_task	x0
+
+	/* Save in task->thread.el1_temporary */
+#if THREAD_EL1_TEMPORARY < (1U << 12)
+	add	x0, x0, #(THREAD_EL1_TEMPORARY)
+#else
+	add	x0, x0, #(THREAD_EL1_TEMPORARY >> 12), lsl #12
+	add	x0, x0, #(THREAD_EL1_TEMPORARY & ((1U << 12) - 1))
+#endif
+	stp	x1, x2, [x0]
+
+	/* Switch to the el1 stack */
+	ldr_this_cpu x1, el1_stack_ptr, x2
+	mov	x2, x0
+	mov	x0, sp /* Recover the original x0 */
+	add	sp, x1, #EL1_STACK_SIZE
+
+	ldp	x1, x2, [x2] /* Recover x1, x2 */
+	sub	sp, sp, #PT_REGS_SIZE
+	b	el1_stack_\ht\()_\label
+2:
+	/* page b100 must be bad */
+#if (THREAD_SHIFT - 2 >= PAGE_SHIFT)
+	tbnz	x0, #(THREAD_SHIFT - 2), 1b
+#if (THREAD_SHIFT - 3 >= PAGE_SHIFT)
+	tbnz	x0, #(THREAD_SHIFT - 3), 1b
+#endif
+#endif
+	b	el1_stack_bad
+	.else
+#endif
 	/*
 	 * Either we've just detected an overflow, or we've taken an exception
 	 * while on the overflow stack. Either way, we won't return to
@@ -96,6 +139,9 @@
 	/* We were already on the overflow stack. Restore sp/x0 and carry on. */
 	sub	sp, sp, x0
 	mrs	x0, tpidrro_el0
+#ifdef CONFIG_OPLUS_KSTACK_LAZY_MAP
+	.endif
+#endif
 #endif
 	b	el\el\ht\()_\regsize\()_\label
 .org .Lventry_start\@ + 128	// Did we overflow the ventry slot?
@@ -195,7 +241,7 @@ alternative_cb_end
 #endif
 	.endm
 
-	.macro	kernel_entry, el, regsize = 64
+	.macro	kernel_entry, el, regsize = 64, el1_stk = 0
 	.if	\el == 0
 	alternative_insn nop, SET_PSTATE_DIT(1), ARM64_HAS_DIT
 	.endif
@@ -276,7 +322,16 @@ alternative_else_nop_endif
 
 	scs_load_current
 	.else
+#ifdef CONFIG_OPLUS_KSTACK_LAZY_MAP
+	.if \el1_stk == 0
+#endif
 	add	x21, sp, #PT_REGS_SIZE
+#ifdef CONFIG_OPLUS_KSTACK_LAZY_MAP
+	.else
+	mrs	x21, tpidrro_el0
+	add	x21, x21, #PT_REGS_SIZE
+	.endif
+#endif
 	get_current_task tsk
 	.endif /* \el == 0 */
 	mrs	x22, elr_el1
@@ -332,7 +387,7 @@ alternative_else_nop_endif
 	*/
 	.endm
 
-	.macro	kernel_exit, el
+	.macro	kernel_exit, el, el1_stk = 0
 	.if	\el != 0
 	disable_daif
 	.endif
@@ -452,8 +507,20 @@ alternative_if ARM64_WORKAROUND_SPECULATIVE_UNPRIV_LOAD
 alternative_else_nop_endif
 	eret
 	.else
+#ifdef CONFIG_OPLUS_KSTACK_LAZY_MAP
+	.if	\el1_stk == 0
+#endif
 	ldr	lr, [sp, #S_LR]
 	add	sp, sp, #PT_REGS_SIZE		// restore sp
+#ifdef CONFIG_OPLUS_KSTACK_LAZY_MAP
+	.else
+	/* Using x0 and x1 to switch SP */
+	mov	x1, sp
+	ldp	lr, x0, [sp, #S_LR]		// original SP in x0
+	mov	sp, x0
+	ldp	x0, x1, [x1, #16 * 0]
+	.endif
+#endif
 
 	/* Ensure any device/NC reads complete */
 	alternative_insn nop, "dmb sy", ARM64_WORKAROUND_1508412
@@ -618,6 +685,78 @@ SYM_CODE_START_LOCAL(ret_to_user)
 #endif
 	kernel_exit 0
 SYM_CODE_END(ret_to_user)
+
+#ifdef CONFIG_OPLUS_KSTACK_LAZY_MAP
+	.macro el1_stack_entry
+	/* original SP (minus PT_REGS_SIZE) */
+	mrs	x1, tpidrro_el0
+
+	/* Recover tpidrro_el0 from task->thread.tp_value */
+	ldr	x0, [tsk, #TSK_TI_FLAGS]
+	tbnz	x0, TIF_32BIT, 1f
+	mov	x0, xzr
+	b	2f
+1:
+	ldr	x0, [tsk, #THREAD_TP_VALUE]
+2:
+	msr	tpidrro_el0, x0
+
+	/* original SP (minus PT_REGS_SIZE) in task->stack */
+	ldr	x0, [tsk, TSK_STACK]
+	sub	x2, x1, x0
+	and	x2, x2, #~(THREAD_SIZE - 1)
+	cbz	x2, 3f
+
+	/* bad_stack */
+	mov	x0, sp
+	bl	handle_bad_stack
+	ASM_BUG()
+3:
+	.endm
+
+	.macro el1_stack_entry_handler ht:req, label:req
+SYM_CODE_START_LOCAL(el1_stack_\ht\()_\label)
+	kernel_entry 1, 64, 1
+	el1_stack_entry
+	mov	x0, sp
+	bl	el1\ht\()_64_\label\()_handler
+	kernel_exit 1, 1
+SYM_CODE_END(el1_stack_\ht\()_\label)
+	.endm
+
+	el1_stack_entry_handler	t, sync
+	el1_stack_entry_handler	t, irq
+	el1_stack_entry_handler	t, fiq
+	el1_stack_entry_handler	t, error
+
+	el1_stack_entry_handler	h, sync
+	el1_stack_entry_handler	h, irq
+	el1_stack_entry_handler	h, fiq
+	el1_stack_entry_handler	h, error
+
+el1_stack_bad:
+	/* Stash the original SP (minus PT_REGS_SIZE). */
+	msr	tpidrro_el0, x0
+
+	/* Recover the original x0 value and stash it in tpidr_el0 */
+	sub	x0, sp, x0
+	msr	tpidr_el0, x0
+
+	/* Switch to the overflow stack */
+	adr_this_cpu sp, overflow_stack + OVERFLOW_STACK_SIZE, x0
+
+	/* Restore the original x0 value */
+	mrs	x0, tpidr_el0
+
+	/* Store the original GPRs to the new stack */
+	sub	sp, sp, #PT_REGS_SIZE
+	kernel_entry 1, 64, 1
+
+	/* bad_stack */
+	mov	x0, sp
+	bl	handle_bad_stack
+	ASM_BUG()
+#endif
 
 	.popsection				// .entry.text
 

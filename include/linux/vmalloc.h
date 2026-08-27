@@ -163,6 +163,30 @@ extern void *vmalloc_array(size_t n, size_t size) __alloc_size(1, 2);
 extern void *__vcalloc(size_t n, size_t size, gfp_t flags) __alloc_size(1, 2);
 extern void *vcalloc(size_t n, size_t size) __alloc_size(1, 2);
 
+#ifdef CONFIG_OPLUS_VMALLOC_PARTIAL_MAP
+extern void *__vmalloc_init_range(unsigned long size, unsigned long align,
+			unsigned int vm_begin_page, unsigned int vm_nr_pages,
+			unsigned int init_page_begin, unsigned int init_page_end,
+			unsigned long start, unsigned long end, gfp_t gfp_mask,
+			pgprot_t prot, unsigned long vm_flags, int node,
+			const void *caller);
+static inline void oplus_vm_area_clear_pages(const struct vm_struct *area)
+{
+	unsigned long i;
+
+	for (i = 0; i < area->nr_pages; ++i) {
+		if (area->pages[i] != NULL)
+			memset(area->addr + (i * PAGE_SIZE), 0, PAGE_SIZE);
+	}
+}
+
+extern unsigned int oplus_vm_area_mapped_cnt(const struct vm_struct *area);
+extern void vfree_vm_area(struct vm_struct *area);
+extern void vfree_vm_area_atomic(struct vm_struct *area);
+int vmalloc_map_page_atomic(struct vm_struct *area,
+			unsigned int index, struct page *page);
+#endif
+
 extern void vfree(const void *addr);
 extern void vfree_atomic(const void *addr);
 

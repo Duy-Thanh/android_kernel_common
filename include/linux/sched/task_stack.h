@@ -82,8 +82,23 @@ static inline void put_task_stack(struct task_struct *tsk) {}
 
 void exit_task_stack_account(struct task_struct *tsk);
 
+#ifndef CONFIG_OPLUS_KSTACK_LAZY_MAP
 #define task_stack_end_corrupted(task) \
 		(*(end_of_stack(task)) != STACK_END_MAGIC)
+#else
+#define task_stack_end_corrupted(task) false
+
+extern unsigned int oplus_ks_lazy_boot_nr;
+
+extern void oplus_ks_lazy_pool_tick(int cpu);
+extern unsigned long oplus_ks_lazy_unused(struct task_struct *p);
+extern void oplus_ks_lazy_sync_from_mm_config(bool enable,
+					      unsigned int boot_nr);
+int proc_oplus_ks_lazy_pages_handler(struct ctl_table *table, int write,
+			void *buffer, size_t *length, loff_t *ppos);
+extern int oplus_ks_lazy_fault_map(struct task_struct *tsk,
+			unsigned long addr);
+#endif
 
 static inline int object_is_on_stack(const void *obj)
 {
@@ -99,6 +114,11 @@ extern void thread_stack_cache_init(void);
 static inline unsigned long stack_not_used(struct task_struct *p)
 {
 	unsigned long *n = end_of_stack(p);
+
+#ifdef CONFIG_OPLUS_KSTACK_LAZY_MAP
+	if (p->stack_vm_area)
+		return oplus_ks_lazy_unused(p);
+#endif
 
 	do { 	/* Skip over canary */
 # ifdef CONFIG_STACK_GROWSUP
