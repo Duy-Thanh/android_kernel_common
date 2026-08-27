@@ -16,6 +16,24 @@
       "message": "How",
       "revId": "a57dedde94dff4d3e3b612a521e62492e1bebc2d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51a5b611_315665b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5035698
+      },
+      "writtenOn": "2026-08-27T08:32:54Z",
+      "side": 1,
+      "message": "Hi Evie — in case \"How\" is asking how the kernel-doc was lost:\n\nUpstream commit d5e79eeba308 (\"dma-buf: heaps: Deduplicate docs and adopt common format\") added the colons kernel-doc needs on @heap_devt, @list and @heap_cdev. That hunk never reached android-mainline: merge da0c10aefaf6 resolved this block by taking the new @priv: line from mainline while keeping the android side\u0027s colonless @heap_devt / @list / @heap_cdev, next to the ANDROID-only @heap_dev.\n\nThe original change (4200863) restores the upstream wording, gives @heap_dev the same treatment, and documents @refcount, which was added later with the heap device lifetime handling and never described. scripts/kernel-doc -none drivers/dma-buf/dma-heap.c reports five warnings before it and none after. No functional change, and drm-misc-next is clean here so there is nothing to send upstream.\n\nHappy to clarify if you meant something else.",
+      "parentUuid": "8a79a310_eeb55794",
+      "revId": "a57dedde94dff4d3e3b612a521e62492e1bebc2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
