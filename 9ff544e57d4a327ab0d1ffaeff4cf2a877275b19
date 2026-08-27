@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "78a917d4_e4ef0246",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-08-27T08:01:03Z",
+      "side": 1,
+      "message": "Ahh indded, we do and check it in vmx_pkvm_init. Will remove it.",
+      "parentUuid": "13371f64_063c88f0",
+      "revId": "9ff544e57d4a327ab0d1ffaeff4cf2a877275b19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5da32680_b12c894b",
         "filename": "arch/x86/kvm/pkvm/panic.c",
         "patchSetId": 2
@@ -73,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c6d9597e_267e07dc",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-08-27T08:01:03Z",
+      "side": 1,
+      "message": "Yeah I think you are right the pKVM timestump will be a second or so shifted (as they are shifted 1s after host kernel timestamp they should not confuse stability libraries even if they use timestamp).\n\nI did some test with debug prints (just before triggering hypercall) and indeed it seems shifted 1s e.g.:\n```\n\u003c6\u003e[   44.033778][ T7358] pkvm-host: Triggering hypervisor panic for test (val\u003d1)\n\u003c0\u003e[   45.565474][    C4] Kernel panic - not syncing: HYP panic:\n```\n\nBut as Jason confirmed it should be ok. I will just document it with such comment:\n\n```\n+/*\n+ * Approximate uptime timestamp derived directly from hardware TSC cycles.\n+ * Note: it is slightly ahead (~1-2s) of the host kernel printk timestamp, which\n+ * zeros at kernel entry, but preserves proper chronological ordering for crash\n+ * log analysis.\n+ */\n```",
+      "parentUuid": "7eb255fb_cb455674",
+      "revId": "9ff544e57d4a327ab0d1ffaeff4cf2a877275b19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2131df93_6fd4098e",
         "filename": "arch/x86/kvm/pkvm/panic.c",
         "patchSetId": 2
@@ -96,6 +132,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "50462f9c_c963843f",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-08-27T08:01:03Z",
+      "side": 1,
+      "message": "Agree",
+      "parentUuid": "2131df93_6fd4098e",
+      "range": {
+        "startLine": 193,
+        "startChar": 4,
+        "endLine": 193,
+        "endChar": 43
+      },
+      "revId": "9ff544e57d4a327ab0d1ffaeff4cf2a877275b19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3e713bff_1431e42f",
         "filename": "arch/x86/kvm/pkvm/panic.c",
         "patchSetId": 2
@@ -107,6 +167,30 @@
       "writtenOn": "2026-08-26T11:03:57Z",
       "side": 1,
       "message": "Why couldn\u0027t we just print directly to panic_msg?\n\nThat said, I feel like this deserves a helper function, something like `pkvm_kernel_scnprint(buf, size, message)` that obtains the timestamps and appends one properly formatted line to the buffer.",
+      "range": {
+        "startLine": 192,
+        "startChar": 0,
+        "endLine": 195,
+        "endChar": 58
+      },
+      "revId": "9ff544e57d4a327ab0d1ffaeff4cf2a877275b19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "302bf2e5_30a34ce6",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-08-27T08:01:03Z",
+      "side": 1,
+      "message": "Agree, I will add a helper function.",
+      "parentUuid": "3e713bff_1431e42f",
       "range": {
         "startLine": 192,
         "startChar": 0,
