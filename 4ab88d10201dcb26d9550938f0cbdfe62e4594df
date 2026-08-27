@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5b24f4c8_ea3ad30e",
+        "filename": "arch/x86/kvm/pkvm/lib/printf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-08-27T07:33:44Z",
+      "side": 1,
+      "message": "This printf.c was introduced as part of fatal error logging support and is minimal implementation to not increase TCB. It deliberately does not support binary (%b) or octal (%o) formatting. Therefore we are safe with this implementation.\n\nAlso since this print library is used in pKVM only for fatal-error handling I prefer to not add error for unsupported format here.",
+      "parentUuid": "b41bcfb7_06248dbf",
+      "revId": "4ab88d10201dcb26d9550938f0cbdfe62e4594df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "20f25679_f76530a6",
         "filename": "arch/x86/kvm/pkvm/lib/printf.c",
         "patchSetId": 1
