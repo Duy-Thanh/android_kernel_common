@@ -70,6 +70,30 @@
       },
       "revId": "745053c781476d34d74440fe391ca4e31930f54f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9753f8e2_61f1d44d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-08-27T15:05:03Z",
+      "side": 1,
+      "message": "Thanks, it\u0027s a bummer that infra doesn\u0027t over the PV+2 retroactivly.",
+      "parentUuid": "e8eb1ee5_5e3f0dbe",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "745053c781476d34d74440fe391ca4e31930f54f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
