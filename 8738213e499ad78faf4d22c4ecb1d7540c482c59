@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f59259fe_dc3e3e52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-27T16:08:59Z",
+      "side": 1,
+      "message": "Abandon this version and instead cherry-pick aosp/3438287 so the Change-Id matches",
+      "revId": "8738213e499ad78faf4d22c4ecb1d7540c482c59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
