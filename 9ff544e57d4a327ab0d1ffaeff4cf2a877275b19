@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "12e24c06_d1a09462",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-08-27T10:15:01Z",
+      "side": 1,
+      "message": "Removed (squashed with aosp/4247523)",
+      "parentUuid": "78a917d4_e4ef0246",
+      "revId": "9ff544e57d4a327ab0d1ffaeff4cf2a877275b19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5da32680_b12c894b",
@@ -125,6 +143,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "960441e8_842df621",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-08-27T10:15:01Z",
+      "side": 1,
+      "message": "Done (squashed with aosp/4247523)",
+      "parentUuid": "e870651b_21217fa1",
+      "revId": "9ff544e57d4a327ab0d1ffaeff4cf2a877275b19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2131df93_6fd4098e",
@@ -172,6 +208,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b29fa02c_6d3d0e46",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-08-27T10:15:01Z",
+      "side": 1,
+      "message": "Done (squashed with aosp/4247523)",
+      "parentUuid": "50462f9c_c963843f",
+      "range": {
+        "startLine": 193,
+        "startChar": 4,
+        "endLine": 193,
+        "endChar": 43
+      },
+      "revId": "9ff544e57d4a327ab0d1ffaeff4cf2a877275b19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e713bff_1431e42f",
@@ -209,6 +269,30 @@
       "side": 1,
       "message": "Agree, I will add a helper function.",
       "parentUuid": "3e713bff_1431e42f",
+      "range": {
+        "startLine": 192,
+        "startChar": 0,
+        "endLine": 195,
+        "endChar": 58
+      },
+      "revId": "9ff544e57d4a327ab0d1ffaeff4cf2a877275b19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3e416ae_b72fdb5d",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-08-27T10:15:01Z",
+      "side": 1,
+      "message": "Done (squashed with aosp/4247523)",
+      "parentUuid": "302bf2e5_30a34ce6",
       "range": {
         "startLine": 192,
         "startChar": 0,
