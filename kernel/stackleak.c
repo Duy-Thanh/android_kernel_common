@@ -84,6 +84,7 @@ static __always_inline void __stackleak_poison(unsigned long erase_low,
 
 static __always_inline void __stackleak_erase(bool on_task_stack)
 {
+#ifndef CONFIG_OPLUS_KSTACK_LAZY_MAP
 	const unsigned long task_stack_low = stackleak_task_low_bound(current);
 	const unsigned long task_stack_high = stackleak_task_high_bound(current);
 	unsigned long erase_low, erase_high;
@@ -117,6 +118,7 @@ static __always_inline void __stackleak_erase(bool on_task_stack)
 
 	/* Reset the 'lowest_stack' value for the next syscall */
 	current->lowest_stack = task_stack_high;
+#endif /* CONFIG_OPLUS_KSTACK_LAZY_MAP */
 }
 
 /*

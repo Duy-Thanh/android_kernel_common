@@ -109,6 +109,10 @@
 #include <asm/cacheflush.h>
 #include <asm/tlbflush.h>
 
+#ifdef CONFIG_OPLUS_KSTACK_LAZY_MAP
+#include <linux/debugfs.h>
+#endif
+
 #include <trace/events/sched.h>
 
 #define CREATE_TRACE_POINTS
@@ -205,10 +209,12 @@ static inline void free_task_struct(struct task_struct *tsk)
 #define NR_CACHED_STACKS 2
 static DEFINE_PER_CPU(struct vm_struct *, cached_stacks[NR_CACHED_STACKS]);
 
+#ifndef CONFIG_OPLUS_KSTACK_LAZY_MAP
 struct vm_stack {
 	struct rcu_head rcu;
 	struct vm_struct *stack_vm_area;
 };
+#endif
 
 static bool try_release_thread_stack_to_cache(struct vm_struct *vm)
 {
@@ -222,6 +228,7 @@ static bool try_release_thread_stack_to_cache(struct vm_struct *vm)
 	return false;
 }
 
+#ifndef CONFIG_OPLUS_KSTACK_LAZY_MAP
 static void thread_stack_free_rcu(struct rcu_head *rh)
 {
 	struct vm_stack *vm_stack = container_of(rh, struct vm_stack, rcu);
@@ -239,6 +246,7 @@ static void thread_stack_delayed_free(struct task_struct *tsk)
 	vm_stack->stack_vm_area = tsk->stack_vm_area;
 	call_rcu(&vm_stack->rcu, thread_stack_free_rcu);
 }
+#endif /* !CONFIG_OPLUS_KSTACK_LAZY_MAP */
 
 static int free_vm_stack_cache(unsigned int cpu)
 {
@@ -251,12 +259,540 @@ static int free_vm_stack_cache(unsigned int cpu)
 		if (!vm_stack)
 			continue;
 
+#ifdef CONFIG_OPLUS_KSTACK_LAZY_MAP
+		vfree_vm_area(vm_stack);
+#else
 		vfree(vm_stack->addr);
+#endif
 		cached_vm_stacks[i] = NULL;
 	}
 
 	return 0;
 }
+
+#ifdef CONFIG_OPLUS_KSTACK_LAZY_MAP
+#define OPLUS_KS_POOL_OK	0x0
+#define OPLUS_KS_POOL_NEED	0x1
+#define OPLUS_KS_POOL_BUSY	0x2
+
+struct oplus_ks_lazy_pool {
+	int nr_available;
+	unsigned int fill_state;
+	struct page *cached;
+};
+
+#define OPLUS_KS_POOL_CAP (THREAD_SIZE / PAGE_SIZE * 64)
+#define OPLUS_KS_POOL_LOW_WATER (OPLUS_KS_POOL_CAP / 2)
+#define OPLUS_KS_POOL_FILL_BATCH 8
+
+DEFINE_PER_CPU(struct oplus_ks_lazy_pool, oplus_ks_lazy_pools);
+unsigned int oplus_ks_lazy_boot_nr = THREAD_SIZE / PAGE_SIZE;
+
+/* Return unused bytes from the start of one mapped stack page. */
+static unsigned long oplus_ks_lazy_scan_page(unsigned long *data)
+{
+	unsigned int k;
+
+	for (k = 0; k < PAGE_SIZE / sizeof(*data); k++) {
+		if (data[k] != 0)
+			return k * sizeof(*data);
+	}
+	return PAGE_SIZE;
+}
+
+unsigned long oplus_ks_lazy_unused(struct task_struct *tsk)
+{
+	struct vm_struct *vm = task_stack_vm_area(tsk);
+	unsigned long not_used = 0;
+	unsigned int i;
+
+	for (i = 0; i < THREAD_SIZE / PAGE_SIZE; i++) {
+		unsigned long page_unused;
+
+		if (vm->pages[i] == NULL) {
+			not_used += PAGE_SIZE;
+			continue;
+		}
+
+		page_unused = oplus_ks_lazy_scan_page(
+			(unsigned long *)(tsk->stack + not_used));
+		not_used += page_unused;
+		if (page_unused != PAGE_SIZE)
+			return not_used;
+	}
+	return not_used;
+}
+
+/* 6.6/6.12 struct page has no page->next; chain via page->private. */
+static inline struct page *oplus_ks_page_next(struct page *page)
+{
+	return (struct page *)page_private(page);
+}
+
+static inline void oplus_ks_page_set_next(struct page *page, struct page *next)
+{
+	set_page_private(page, (unsigned long)next);
+}
+
+static struct page *oplus_ks_lazy_pool_take(struct oplus_ks_lazy_pool *pool)
+{
+	struct page *page = NULL;
+
+	if (pool->nr_available > 0 && pool->cached != NULL) {
+		page = pool->cached;
+		pool->cached = oplus_ks_page_next(page);
+		oplus_ks_page_set_next(page, NULL);
+		--pool->nr_available;
+		if (pool->nr_available < OPLUS_KS_POOL_LOW_WATER)
+			pool->fill_state |= OPLUS_KS_POOL_NEED;
+	}
+	return page;
+}
+static void oplus_ks_lazy_pool_put(struct oplus_ks_lazy_pool *pool,
+			struct page *page)
+{
+	if (!page)
+		return;
+	oplus_ks_page_set_next(page, pool->cached);
+	pool->cached = page;
+	++pool->nr_available;
+}
+
+int oplus_ks_lazy_pool_fill(struct oplus_ks_lazy_pool *pool)
+{
+	struct page *head = NULL;
+	struct page *excess = NULL;
+	int nr_pages;
+	int add;
+	int room;
+	unsigned long flags;
+
+	/*
+	 * Allocate with IRQs enabled (bounded batch). Account + list splice
+	 * under one irq-off section so nested oplus_ks_lazy_pool_take()
+	 * cannot push nr_available past CAP or see a torn update.
+	 * Digibaby: keep __GFP_ZERO so mapped stack pages are zeroed.
+	 */
+	for (nr_pages = 0; nr_pages < OPLUS_KS_POOL_FILL_BATCH; nr_pages++) {
+		struct page *page = alloc_page(GFP_ATOMIC | __GFP_ZERO);
+		if (page == NULL) {
+			printk_deferred("oplus_ks_lazy_pool_fill: nomem after %d pages\n",
+					nr_pages);
+			break;
+		}
+
+		oplus_ks_page_set_next(page, head);
+		head = page;
+	}
+
+	local_irq_save(flags);
+	room = OPLUS_KS_POOL_CAP - pool->nr_available;
+	if (room < 0)
+		room = 0;
+	add = nr_pages;
+	if (add > room)
+		add = room;
+	while (nr_pages > add && head) {
+		struct page *page = head;
+
+		head = oplus_ks_page_next(page);
+		oplus_ks_page_set_next(page, excess);
+		excess = page;
+		nr_pages--;
+	}
+	if (head) {
+		if (!pool->cached) {
+			pool->cached = head;
+		} else {
+			struct page *tail = pool->cached;
+
+			while (oplus_ks_page_next(tail))
+				tail = oplus_ks_page_next(tail);
+			oplus_ks_page_set_next(tail, head);
+		}
+		pool->nr_available += add;
+	}
+	local_irq_restore(flags);
+
+	while (excess) {
+		struct page *page = excess;
+
+		excess = oplus_ks_page_next(page);
+		oplus_ks_page_set_next(page, NULL);
+		__free_page(page);
+	}
+
+	printk_deferred("oplus_ks_lazy_pool_fill avail=%d newly=%d\n",
+			pool->nr_available, add);
+	return add == 0 ? -ENOMEM : 0;
+}
+
+
+void oplus_ks_lazy_pool_tick(int cpu_input)
+{
+	struct oplus_ks_lazy_pool *pool;
+	int cpu_self;
+	unsigned long flags;
+
+	preempt_disable();
+	cpu_self = smp_processor_id();
+	if (cpu_input != cpu_self)
+		printk_deferred("vmap_stack cpu input %d self %d\n",
+				cpu_input, cpu_self);
+	pool = per_cpu_ptr(&oplus_ks_lazy_pools, cpu_self);
+
+	local_irq_save(flags);
+	if (!(pool->fill_state & OPLUS_KS_POOL_NEED)) {
+		local_irq_restore(flags);
+		preempt_enable();
+		return;
+	}
+	pool->fill_state |= OPLUS_KS_POOL_BUSY;
+	local_irq_restore(flags);
+
+	oplus_ks_lazy_pool_fill(pool);
+
+	local_irq_save(flags);
+	if (pool->nr_available >= OPLUS_KS_POOL_LOW_WATER)
+		pool->fill_state = OPLUS_KS_POOL_OK;
+	else
+		pool->fill_state = OPLUS_KS_POOL_NEED;
+	local_irq_restore(flags);
+	preempt_enable();
+}
+
+
+/*
+ * Config split for GKI friendliness:
+ * - fork.c: default full map; cmdline(RUS) gate only (no DT/OF parse).
+ * - mm_osvelte: read DTBO boot-nr and call oplus_ks_lazy_sync_from_mm_config().
+ * Priority: cmdline disable > mm_config boot-nr > compile default.
+ * Bit COMFD1_KSTACK_LAZY must match mm_osvelte/mm-config.h (bit 8).
+ */
+#define OPLUS_COMFD1_KSTACK_LAZY		8
+#define OPLUS_KS_LAZY_CMDLINE_KEY	"oplus_bsp_mm_osvelte.feature_disable1="
+
+static unsigned long oplus_ks_lazy_cmdline_fd1;
+static bool oplus_ks_lazy_pool_armed;
+static bool oplus_ks_lazy_cmdline_parsed;
+
+static void oplus_ks_lazy_arm_pool(void)
+{
+	unsigned int cpu;
+
+	if (oplus_ks_lazy_boot_nr >= THREAD_SIZE / PAGE_SIZE)
+		return;
+	if (kasan_enabled())
+		return;
+	if (oplus_ks_lazy_pool_armed)
+		return;
+
+	for_each_possible_cpu(cpu) {
+		struct oplus_ks_lazy_pool *pool;
+
+		pool = per_cpu_ptr(&oplus_ks_lazy_pools, cpu);
+		pool->fill_state = OPLUS_KS_POOL_NEED;
+	}
+	oplus_ks_lazy_pool_armed = true;
+	pr_info("oplus_ks_lazy: pool armed boot_nr=%u\n",
+		oplus_ks_lazy_boot_nr);
+}
+
+static void oplus_ks_lazy_parse_cmdline(void)
+{
+	char *s, *end;
+	unsigned long val;
+
+	if (oplus_ks_lazy_cmdline_parsed)
+		return;
+	oplus_ks_lazy_cmdline_parsed = true;
+
+	s = strstr(saved_command_line, OPLUS_KS_LAZY_CMDLINE_KEY);
+	if (!s) {
+		pr_info("oplus_ks_lazy: cmdline key absent, allow mm_config\n");
+		return;
+	}
+	s += strlen(OPLUS_KS_LAZY_CMDLINE_KEY);
+	val = simple_strtoul(s, &end, 16);
+	if (end != s)
+		oplus_ks_lazy_cmdline_fd1 = val;
+	pr_info("oplus_ks_lazy: cmdline fd1=0x%lx (bit%u disable=%d)\n",
+		oplus_ks_lazy_cmdline_fd1, OPLUS_COMFD1_KSTACK_LAZY,
+		!!(oplus_ks_lazy_cmdline_fd1 &
+		   (1UL << OPLUS_COMFD1_KSTACK_LAZY)));
+}
+
+static int __init oplus_ks_lazy_cmdline_init(void)
+{
+	unsigned int full = THREAD_SIZE / PAGE_SIZE;
+
+	oplus_ks_lazy_parse_cmdline();
+	if (oplus_ks_lazy_cmdline_fd1 &
+	    (1UL << OPLUS_COMFD1_KSTACK_LAZY)) {
+		oplus_ks_lazy_boot_nr = full;
+		pr_info("oplus_ks_lazy: disabled by cmdline, boot_nr=%u\n",
+			oplus_ks_lazy_boot_nr);
+	} else {
+		pr_info("oplus_ks_lazy: cmdline allow enable, default boot_nr=%u (await mm_config)\n",
+			oplus_ks_lazy_boot_nr);
+	}
+
+	return 0;
+}
+core_initcall(oplus_ks_lazy_cmdline_init);
+
+static int oplus_ks_lazy_pool_setup(void)
+{
+	pr_info("oplus_ks_lazy: pool_setup boot_nr=%u kasan=%d armed=%d\n",
+		oplus_ks_lazy_boot_nr, kasan_enabled(),
+		oplus_ks_lazy_pool_armed);
+
+	if (oplus_ks_lazy_boot_nr == THREAD_SIZE / PAGE_SIZE) {
+		pr_info("oplus_ks_lazy: pool_setup skip (full map / not configured yet)\n");
+		return 0;
+	}
+	if (kasan_enabled()) {
+		oplus_ks_lazy_boot_nr = THREAD_SIZE / PAGE_SIZE;
+		pr_info("oplus_ks_lazy: pool_setup force full map (kasan)\n");
+		return 0;
+	}
+
+	oplus_ks_lazy_arm_pool();
+	return 0;
+}
+late_initcall(oplus_ks_lazy_pool_setup);
+
+/**
+ * oplus_ks_lazy_sync_from_mm_config - apply boot-nr from mm_osvelte
+ * @enable: whether mm_config enables the feature
+ * @boot_nr: initial mapped pages (1..THREAD_SIZE/PAGE_SIZE)
+ *
+ * Called after mm_config parses DTBO. Cmdline RUS disable and KASAN win.
+ */
+void oplus_ks_lazy_sync_from_mm_config(bool enable, unsigned int boot_nr)
+{
+	unsigned int before = oplus_ks_lazy_boot_nr;
+	unsigned int full = THREAD_SIZE / PAGE_SIZE;
+	unsigned int want;
+
+	oplus_ks_lazy_parse_cmdline();
+
+	pr_info("oplus_ks_lazy: mm_sync enter cur=%u enable=%d req=%u kasan=%d fd1=0x%lx\n",
+		before, enable, boot_nr, kasan_enabled(),
+		oplus_ks_lazy_cmdline_fd1);
+
+	if (oplus_ks_lazy_cmdline_fd1 &
+	    (1UL << OPLUS_COMFD1_KSTACK_LAZY)) {
+		oplus_ks_lazy_boot_nr = full;
+		pr_info("oplus_ks_lazy: mm_sync blocked by cmdline, boot_nr=%u\n",
+			oplus_ks_lazy_boot_nr);
+		return;
+	}
+	if (kasan_enabled()) {
+		oplus_ks_lazy_boot_nr = full;
+		pr_info("oplus_ks_lazy: mm_sync blocked by kasan, boot_nr=%u\n",
+			oplus_ks_lazy_boot_nr);
+		return;
+	}
+
+	if (!enable) {
+		want = full;
+	} else if (boot_nr >= 1 && boot_nr <= full) {
+		want = boot_nr;
+	} else {
+		want = 1;
+		pr_info("oplus_ks_lazy: mm_sync invalid boot_nr=%u -> 1\n",
+			boot_nr);
+	}
+
+	oplus_ks_lazy_boot_nr = want;
+	if (want < full)
+		oplus_ks_lazy_arm_pool();
+
+	pr_info("oplus_ks_lazy: mm_sync done before=%u after=%u\n",
+		before, oplus_ks_lazy_boot_nr);
+}
+
+#ifdef CONFIG_SYSCTL
+int proc_oplus_ks_lazy_pages_handler(struct ctl_table *table, int write,
+			void *buffer, size_t *length, loff_t *ppos)
+{
+	int ret;
+
+	if (kasan_enabled())
+		return -EPERM;
+	ret = proc_douintvec_minmax(table, write, buffer, length, ppos);
+	if (ret == 0 && write) {
+		oplus_ks_lazy_pool_setup();
+	}
+
+	return ret;
+}
+#endif /* CONFIG_SYSCTL */
+
+#ifdef CONFIG_DEBUG_FS
+static int oplus_ks_lazy_test_fn(long *arg, long depth)
+{
+	long stk_data[sizeof(long)];
+	int pid_nr = task_pid_nr(current);
+	long timeout = (depth * pid_nr) % HZ + 1;
+
+	memcpy(stk_data, arg, sizeof(stk_data));
+
+	pr_warn("vmap_stack_test %u begin depth %ld data %px",
+			pid_nr, depth, stk_data);
+	schedule_timeout(timeout);
+	if (depth > 0) {
+		oplus_ks_lazy_test_fn(stk_data, depth - 1);
+	}
+	schedule_timeout(timeout);
+	pr_warn("vmap_stack_test %u end depth %ld data %px",
+			pid_nr, depth, stk_data);
+	return depth;
+}
+
+static int oplus_ks_lazy_test_th(void *arg)
+{
+	long depth = (long)arg;
+	long stk_data[sizeof(long)] = { 0 };
+
+	oplus_ks_lazy_test_fn(stk_data, depth);
+	return 0;
+}
+
+static ssize_t oplus_ks_lazy_test_write(struct file *file,
+			const char __user *buf, size_t len, loff_t *ppos)
+{
+	long nr_threads = 1;
+	long depth = 1;
+	long i;
+	struct task_struct *p;
+	char kbuf[64];
+	size_t size;
+
+	size = min(sizeof(kbuf) - 1, len);
+	if (copy_from_user(kbuf, buf, size))
+		return -EFAULT;
+	kbuf[size] = '\0';
+
+	if (sscanf(kbuf, "threads:%lu depth:%lu", &nr_threads, &depth) != 2)
+		return -EINVAL;
+
+	if (nr_threads < 1)
+		nr_threads = 1;
+	else if (nr_threads > 32)
+		nr_threads = 32;
+	if (depth < 0)
+		depth = 0;
+	else if (depth > 32)
+		depth = 32;
+
+	for (i = 0; i < nr_threads; i++) {
+		p = kthread_create(oplus_ks_lazy_test_th, (void *)depth,
+				"vstk_tst_%ld", i);
+		if (IS_ERR(p)) {
+			pr_warn("vmap_stack_test create thread %ld failed", i);
+			break;
+		}
+		wake_up_process(p);
+	}
+	return len;
+}
+
+struct file_operations oplus_ks_lazy_test_fops = {
+	.write = oplus_ks_lazy_test_write,
+};
+
+static int __init oplus_ks_lazy_debugfs_init(void)
+{
+	struct dentry *vmap_stack_dir;
+
+	vmap_stack_dir = debugfs_create_dir("vmap_stack", NULL);
+	if (!vmap_stack_dir) {
+		pr_err("failed to create vmap stack\n");
+		return -ENOMEM;
+	}
+	debugfs_create_file("test_stack_on_demand", 0200,
+			vmap_stack_dir, NULL, &oplus_ks_lazy_test_fops);
+	return 0;
+}
+subsys_initcall(oplus_ks_lazy_debugfs_init);
+#endif
+
+int oplus_ks_lazy_fault_map(struct task_struct *tsk,
+			unsigned long addr)
+{
+	struct page *page;
+	struct vm_struct *vm = task_stack_vm_area(tsk);
+	int index;
+	int ret;
+
+	if (vm == NULL)
+		return -EINVAL;
+
+	/* Spin operation cannot be used in el1 exception context. */
+	index = (addr - (unsigned long)tsk->stack) >> PAGE_SHIFT;
+	pr_debug("oplus_ks_lazy_fault_map page[%d]@0x%lx for 0x%lx\n",
+			index, (unsigned long)tsk->stack, addr);
+	if (index >= vm->nr_pages)
+		return -EINVAL;
+
+	page = oplus_ks_lazy_pool_take(this_cpu_ptr(&oplus_ks_lazy_pools));
+	if (page == NULL) {
+		pr_debug("oplus_ks_lazy_fault_map page[%d] for 0x%lx nomem\n",
+			 index, addr);
+		return -ENOMEM;
+	}
+	ret = vmalloc_map_page_atomic(vm, index, page);
+	if (ret < 0) {
+		pr_debug("oplus_ks_lazy_fault_map page[%d] for 0x%lx ret %d\n",
+			 index, addr, ret);
+		oplus_ks_lazy_pool_put(this_cpu_ptr(&oplus_ks_lazy_pools), page);
+		return ret;
+	}
+
+	/*
+	 * Boot-mapped stack pages are charged in memcg_charge_kernel_stack().
+	 * Fault-mapped pages must charge here so free_thread_stack() uncharge
+	 * stays paired. GFP_ATOMIC: ignore charge failure (uncharge is a no-op).
+	 */
+	if (memcg_kmem_charge_page(page, GFP_ATOMIC, 0))
+		pr_debug("oplus_ks_lazy_fault_map page[%d] memcg charge failed\n",
+			 index);
+
+	mod_lruvec_page_state(page, NR_KERNEL_STACK_KB, PAGE_SIZE / 1024);
+	return 0;
+}
+
+static void *oplus_ks_lazy_alloc(int node, const void *caller)
+{
+	unsigned long size = THREAD_SIZE;
+	unsigned long align = THREAD_ALIGN;
+	unsigned int vm_begin_page = 0;
+	unsigned int vm_nr_pages = THREAD_SIZE / PAGE_SIZE;
+	unsigned int init_page_begin = 0;
+	unsigned int init_page_end = THREAD_SIZE / PAGE_SIZE;
+	unsigned int init_begin = init_page_end - oplus_ks_lazy_boot_nr;
+
+	preempt_disable(); /* for this_cpu_ptr */
+	if (0 < init_begin && init_begin < init_page_end &&
+		this_cpu_ptr(&oplus_ks_lazy_pools)->nr_available >= init_begin) {
+		vm_begin_page = THREAD_ALIGN / PAGE_SIZE - init_begin;
+		size = THREAD_SIZE + vm_begin_page * PAGE_SIZE;
+		init_page_begin = init_begin;
+		align = THREAD_ALIGN * 2;
+	}
+	preempt_enable();
+
+	return __vmalloc_init_range(size, align,
+				vm_begin_page, vm_nr_pages,
+				init_page_begin, init_page_end,
+				VMALLOC_START, VMALLOC_END,
+				THREADINFO_GFP & ~__GFP_ACCOUNT,
+				PAGE_KERNEL,
+				0, node, caller);
+}
+#endif /* CONFIG_OPLUS_KSTACK_LAZY_MAP */
 
 static int memcg_charge_kernel_stack(struct vm_struct *vm)
 {
@@ -267,6 +803,10 @@ static int memcg_charge_kernel_stack(struct vm_struct *vm)
 	BUG_ON(vm->nr_pages != THREAD_SIZE / PAGE_SIZE);
 
 	for (i = 0; i < THREAD_SIZE / PAGE_SIZE; i++) {
+#ifdef CONFIG_OPLUS_KSTACK_LAZY_MAP
+		if (vm->pages[i] == NULL)
+			continue;
+#endif
 		ret = memcg_kmem_charge_page(vm->pages[i], GFP_KERNEL, 0);
 		if (ret)
 			goto err;
@@ -274,8 +814,14 @@ static int memcg_charge_kernel_stack(struct vm_struct *vm)
 	}
 	return 0;
 err:
-	for (i = 0; i < nr_charged; i++)
+	for (i = 0; i < THREAD_SIZE / PAGE_SIZE && nr_charged; i++) {
+#ifdef CONFIG_OPLUS_KSTACK_LAZY_MAP
+		if (!vm->pages[i])
+			continue;
+#endif
 		memcg_kmem_uncharge_page(vm->pages[i], 0);
+		nr_charged--;
+	}
 	return ret;
 }
 
@@ -299,10 +845,18 @@ static int alloc_thread_stack_node(struct task_struct *tsk, int node)
 		stack = kasan_reset_tag(s->addr);
 
 		/* Clear stale pointers from reused stack. */
+#ifdef CONFIG_OPLUS_KSTACK_LAZY_MAP
+		oplus_vm_area_clear_pages(s);
+#else
 		memset(stack, 0, THREAD_SIZE);
+#endif
 
 		if (memcg_charge_kernel_stack(s)) {
+#ifdef CONFIG_OPLUS_KSTACK_LAZY_MAP
+			vfree_vm_area(s);
+#else
 			vfree(s->addr);
+#endif
 			return -ENOMEM;
 		}
 
@@ -316,17 +870,25 @@ static int alloc_thread_stack_node(struct task_struct *tsk, int node)
 	 * so memcg accounting is performed manually on assigning/releasing
 	 * stacks to tasks. Drop __GFP_ACCOUNT.
 	 */
+#ifdef CONFIG_OPLUS_KSTACK_LAZY_MAP
+	stack = oplus_ks_lazy_alloc(node, __builtin_return_address(0));
+#else
 	stack = __vmalloc_node_range(THREAD_SIZE, THREAD_ALIGN,
 				     VMALLOC_START, VMALLOC_END,
 				     THREADINFO_GFP & ~__GFP_ACCOUNT,
 				     PAGE_KERNEL,
 				     0, node, __builtin_return_address(0));
+#endif
 	if (!stack)
 		return -ENOMEM;
 
 	vm = find_vm_area(stack);
 	if (memcg_charge_kernel_stack(vm)) {
+#ifdef CONFIG_OPLUS_KSTACK_LAZY_MAP
+		vfree_vm_area(vm);
+#else
 		vfree(stack);
+#endif
 		return -ENOMEM;
 	}
 	/*
@@ -342,8 +904,20 @@ static int alloc_thread_stack_node(struct task_struct *tsk, int node)
 
 static void free_thread_stack(struct task_struct *tsk)
 {
+#ifdef CONFIG_OPLUS_KSTACK_LAZY_MAP
+	struct vm_struct *vm = tsk->stack_vm_area;
+
+	/*
+	 * Bottom of stack may be unmapped, so do not embed an RCU head
+	 * there. Free via a mapped address, and only cache shallow stacks.
+	 */
+	if (oplus_vm_area_mapped_cnt(vm) > oplus_ks_lazy_boot_nr ||
+	    !try_release_thread_stack_to_cache(vm))
+		vfree_vm_area_atomic(vm);
+#else
 	if (!try_release_thread_stack_to_cache(tsk->stack_vm_area))
 		thread_stack_delayed_free(tsk);
+#endif
 
 	tsk->stack = NULL;
 	tsk->stack_vm_area = NULL;
@@ -565,9 +1139,18 @@ static void account_kernel_stack(struct task_struct *tsk, int account)
 		struct vm_struct *vm = task_stack_vm_area(tsk);
 		int i;
 
+#ifdef CONFIG_OPLUS_KSTACK_LAZY_MAP
+		for (i = 0; i < THREAD_SIZE / PAGE_SIZE; i++) {
+			if (vm->pages[i] == NULL)
+				continue;
+			mod_lruvec_page_state(vm->pages[i], NR_KERNEL_STACK_KB,
+						account * PAGE_SIZE / 1024);
+		}
+#else
 		for (i = 0; i < THREAD_SIZE / PAGE_SIZE; i++)
 			mod_lruvec_page_state(vm->pages[i], NR_KERNEL_STACK_KB,
 					      account * (PAGE_SIZE / 1024));
+#endif
 	} else {
 		void *stack = task_stack_page(tsk);
 
@@ -586,8 +1169,13 @@ void exit_task_stack_account(struct task_struct *tsk)
 		int i;
 
 		vm = task_stack_vm_area(tsk);
-		for (i = 0; i < THREAD_SIZE / PAGE_SIZE; i++)
+		for (i = 0; i < THREAD_SIZE / PAGE_SIZE; i++) {
+#ifdef CONFIG_OPLUS_KSTACK_LAZY_MAP
+			if (vm->pages[i] == NULL)
+				continue;
+#endif
 			memcg_kmem_uncharge_page(vm->pages[i], 0);
+		}
 	}
 }
 
@@ -1129,10 +1717,12 @@ int __weak arch_dup_task_struct(struct task_struct *dst,
 
 void set_task_stack_end_magic(struct task_struct *tsk)
 {
+#ifndef CONFIG_OPLUS_KSTACK_LAZY_MAP
 	unsigned long *stackend;
 
 	stackend = end_of_stack(tsk);
 	*stackend = STACK_END_MAGIC;	/* for overflow detection */
+#endif
 }
 
 static struct task_struct *dup_task_struct(struct task_struct *orig, int node)

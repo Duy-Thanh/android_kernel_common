@@ -36,6 +36,7 @@
 #include <linux/sched/nohz.h>
 #include <linux/sched/rseq_api.h>
 #include <linux/sched/rt.h>
+#include <linux/sched/task_stack.h>
 
 #include <linux/blkdev.h>
 #include <linux/context_tracking.h>
@@ -6756,6 +6757,9 @@ static void __sched notrace __schedule(unsigned int sched_mode)
 	prev = rq->curr;
 
 	schedule_debug(prev, !!sched_mode);
+#ifdef CONFIG_OPLUS_KSTACK_LAZY_MAP
+	oplus_ks_lazy_pool_tick(cpu);
+#endif
 
 	trace_android_vh_lock_delay_schedule(prev, sched_mode, &skip_schedule);
 

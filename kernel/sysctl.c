@@ -60,6 +60,7 @@
 #include <linux/capability.h>
 #include <linux/binfmts.h>
 #include <linux/sched/sysctl.h>
+#include <linux/sched/task_stack.h>
 #include <linux/mount.h>
 #include <linux/userfaultfd_k.h>
 #include <linux/pid.h>
@@ -96,6 +97,9 @@ EXPORT_SYMBOL_GPL(sysctl_long_vals);
 static const int six_hundred_forty_kb = 640 * 1024;
 #endif
 
+#ifdef CONFIG_OPLUS_KSTACK_LAZY_MAP
+static const unsigned int max_oplus_ks_lazy_pages = THREAD_SIZE / PAGE_SIZE;
+#endif
 
 static const int ngroups_max = NGROUPS_MAX;
 static const int cap_last_cap = CAP_LAST_CAP;
@@ -2227,6 +2231,17 @@ static struct ctl_table vm_table[] = {
 		.mode		= 0644,
 		.proc_handler	= proc_doulongvec_minmax,
 	},
+#ifdef CONFIG_OPLUS_KSTACK_LAZY_MAP
+	{
+		.procname	= "oplus_ks_lazy_pages",
+		.data		= &oplus_ks_lazy_boot_nr,
+		.maxlen		= sizeof(oplus_ks_lazy_boot_nr),
+		.mode		= 0600,
+		.proc_handler	= proc_oplus_ks_lazy_pages_handler,
+		.extra1		= SYSCTL_ONE,
+		.extra2		= (void *)&max_oplus_ks_lazy_pages,
+	},
+#endif
 #ifdef CONFIG_HAVE_ARCH_MMAP_RND_BITS
 	{
 		.procname	= "mmap_rnd_bits",

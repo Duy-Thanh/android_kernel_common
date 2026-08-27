@@ -563,6 +563,9 @@ struct task_struct *__switch_to(struct task_struct *prev,
 
 	trace_android_vh_is_fpsimd_save(prev, next);
 
+#ifdef CONFIG_OPLUS_KSTACK_LAZY_MAP
+	BUG_ON(!object_is_on_stack((void *)&last));
+#endif
 	/* the actual thread switch */
 	last = cpu_switch_to(prev, next);
 

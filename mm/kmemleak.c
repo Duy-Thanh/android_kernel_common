@@ -66,6 +66,7 @@
 #include <linux/sched/signal.h>
 #include <linux/sched/task.h>
 #include <linux/sched/task_stack.h>
+#include <linux/vmalloc.h>
 #include <linux/jiffies.h>
 #include <linux/delay.h>
 #include <linux/export.h>
@@ -1516,6 +1517,28 @@ unlock_put:
 	put_object(object);
 }
 
+#ifdef CONFIG_OPLUS_KSTACK_LAZY_MAP
+static void scan_task_stack(struct task_struct *tsk,
+			    struct kmemleak_object *scanned)
+{
+	struct vm_struct *vm = task_stack_vm_area(tsk);
+	void *addr = tsk->stack;
+	int i;
+
+	if (!vm) {
+		scan_block(addr, addr + THREAD_SIZE, scanned);
+		return;
+	}
+
+	for (i = 0; i < vm->nr_pages; i++) {
+		if (!vm->pages[i])
+			continue;
+		addr = tsk->stack + PAGE_SIZE * i;
+		scan_block(addr, addr + PAGE_SIZE, scanned);
+	}
+}
+#endif
+
 /*
  * Scan data sections and all the referenced memory blocks allocated via the
  * kernel's standard allocators. This function must be called with the
@@ -1614,7 +1637,11 @@ static void kmemleak_scan(void)
 		for_each_process_thread(g, p) {
 			void *stack = try_get_task_stack(p);
 			if (stack) {
+#ifdef CONFIG_OPLUS_KSTACK_LAZY_MAP
+				scan_task_stack(p, NULL);
+#else
 				scan_block(stack, stack + THREAD_SIZE, NULL);
+#endif
 				put_task_stack(p);
 			}
 		}

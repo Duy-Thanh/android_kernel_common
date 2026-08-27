@@ -47,6 +47,10 @@ int main(void)
 #endif
   BLANK();
   DEFINE(THREAD_CPU_CONTEXT,	offsetof(struct task_struct, thread.cpu_context));
+#ifdef CONFIG_OPLUS_KSTACK_LAZY_MAP
+  DEFINE(THREAD_EL1_TEMPORARY,	offsetof(struct task_struct, thread.cpu_context));
+  DEFINE(THREAD_TP_VALUE,	offsetof(struct task_struct, thread.uw.tp_value));
+#endif
   DEFINE(THREAD_SCTLR_USER,	offsetof(struct task_struct, thread.sctlr_user));
 #ifdef CONFIG_ARM64_PTR_AUTH
   DEFINE(THREAD_KEYS_USER,	offsetof(struct task_struct, thread.keys_user));

@@ -531,7 +531,10 @@ static __always_inline void __el1_irq(struct pt_regs *regs,
 	do_interrupt_handler(regs, handler);
 	irq_exit_rcu();
 
-	arm64_preempt_schedule_irq();
+#ifdef CONFIG_OPLUS_KSTACK_LAZY_MAP
+	if (oplus_ks_lazy_in_boot_pages(regs))
+#endif
+		arm64_preempt_schedule_irq();
 
 	exit_to_kernel_mode(regs);
 }

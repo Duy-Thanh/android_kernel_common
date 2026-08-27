@@ -2754,9 +2754,14 @@ static inline void set_area_direct_map(const struct vm_struct *area,
 	int i;
 
 	/* HUGE_VMALLOC passes small pages to set_direct_map */
-	for (i = 0; i < area->nr_pages; i++)
+	for (i = 0; i < area->nr_pages; i++) {
+#ifdef CONFIG_OPLUS_VMALLOC_PARTIAL_MAP
+		if (!area->pages[i])
+			continue;
+#endif
 		if (page_address(area->pages[i]))
 			set_direct_map(area->pages[i]);
+	}
 }
 
 /*
@@ -2774,7 +2779,15 @@ static void vm_reset_perms(struct vm_struct *area)
 	 * the vm_unmap_aliases() flush includes the direct map.
 	 */
 	for (i = 0; i < area->nr_pages; i += 1U << page_order) {
+#ifdef CONFIG_OPLUS_VMALLOC_PARTIAL_MAP
+		unsigned long addr;
+
+		if (!area->pages[i])
+			continue;
+		addr = (unsigned long)page_address(area->pages[i]);
+#else
 		unsigned long addr = (unsigned long)page_address(area->pages[i]);
+#endif
 
 		if (addr) {
 			unsigned long page_size;
@@ -2850,6 +2863,9 @@ void vfree(const void *addr)
 {
 	struct vm_struct *vm;
 	int i;
+#ifdef CONFIG_OPLUS_VMALLOC_PARTIAL_MAP
+	int nr_allocated = 0;
+#endif
 
 	if (unlikely(in_interrupt())) {
 		vfree_atomic(addr);
@@ -2875,6 +2891,11 @@ void vfree(const void *addr)
 	for (i = 0; i < vm->nr_pages; i++) {
 		struct page *page = vm->pages[i];
 
+#ifdef CONFIG_OPLUS_VMALLOC_PARTIAL_MAP
+		if (!page)
+			continue;
+		nr_allocated++;
+#endif
 		BUG_ON(!page);
 		if (!(vm->flags & VM_MAP_PUT_PAGES))
 			mod_memcg_page_state(page, MEMCG_VMALLOC, -1);
@@ -2886,11 +2907,119 @@ void vfree(const void *addr)
 		cond_resched();
 	}
 	if (!(vm->flags & VM_MAP_PUT_PAGES))
+#ifdef CONFIG_OPLUS_VMALLOC_PARTIAL_MAP
+		atomic_long_sub(nr_allocated, &nr_vmalloc_pages);
+#else
 		atomic_long_sub(vm->nr_pages, &nr_vmalloc_pages);
+#endif
 	kvfree(vm->pages);
 	kfree(vm);
 }
 EXPORT_SYMBOL(vfree);
+
+#ifdef CONFIG_OPLUS_VMALLOC_PARTIAL_MAP
+unsigned int oplus_vm_area_mapped_cnt(const struct vm_struct *area)
+{
+	int nr_allocated = 0;
+	int i;
+
+	for (i = 0; i < area->nr_pages; i++) {
+		if (area->pages[i] != NULL)
+			nr_allocated++;
+	}
+
+	return nr_allocated;
+}
+
+static void *__vm_area_get_valid_addr(struct vm_struct *area)
+{
+	void *addr = NULL;
+	int i;
+
+	BUG_ON(area == NULL);
+	for (i = 0; i < area->nr_pages; i++) {
+		struct page *page = area->pages[i];
+		if (page != NULL) {
+			addr = area->addr + (i * PAGE_SIZE);
+			break;
+		}
+	}
+	BUG_ON(i >= area->nr_pages);
+
+	return addr;
+}
+
+void vfree_vm_area(struct vm_struct *area)
+{
+	vfree(__vm_area_get_valid_addr(area));
+}
+
+void vfree_vm_area_atomic(struct vm_struct *area)
+{
+	vfree_atomic(__vm_area_get_valid_addr(area));
+}
+
+static int map_kernel_page_atomic(unsigned long addr,
+			pgprot_t prot, struct page *page)
+{
+	pgd_t *pgd;
+	p4d_t *p4d;
+	pud_t *pud;
+	pmd_t *pmd;
+	pte_t *pte;
+
+	pgd = pgd_offset_k(addr);
+	if (pgd == NULL || pgd_none(*pgd))
+		return -EFAULT;
+
+	p4d = p4d_offset(pgd, addr);
+	if (p4d == NULL || p4d_none(*p4d))
+		return -EFAULT;
+
+	pud = pud_offset(p4d, addr);
+	if (pud == NULL || pud_none(*pud))
+		return -EFAULT;
+
+	pmd = pmd_offset(pud, addr);
+	if (pmd == NULL || pmd_none(*pmd))
+		return -EFAULT;
+
+	pte = pte_offset_kernel(pmd, addr);
+	set_pte_at(&init_mm, addr, pte, mk_pte(page, prot));
+	flush_tlb_kernel_range(addr, addr + PAGE_SIZE);
+	return 0;
+}
+
+int vmalloc_map_page_atomic(struct vm_struct *area,
+			unsigned int index, struct page *page)
+{
+	unsigned long base = (unsigned long)area->addr;
+	unsigned long page_addr;
+	int ret;
+
+	pr_devel("vmalloc_map_page_atomic page[%d]@0x%lx\n",
+			 index, base);
+	if (index >= area->nr_pages) {
+		return -EINVAL;
+	}
+
+	if (area->pages[index] != NULL) {
+		return -EEXIST;
+	}
+
+	page_addr = base + (index << PAGE_SHIFT);
+	/* Claim slot before PTE install so unmap paths never skip a mapped page. */
+	area->pages[index] = page;
+	ret = map_kernel_page_atomic(page_addr, PAGE_KERNEL, page);
+	if (ret < 0) {
+		area->pages[index] = NULL;
+		return ret;
+	}
+	flush_cache_vmap(page_addr, page_addr + PAGE_SIZE);
+	atomic_long_inc(&nr_vmalloc_pages);
+	return 0;
+}
+#endif
 
 /**
  * vunmap - release virtual mapping obtained by vmap()
@@ -3134,9 +3263,16 @@ vm_area_alloc_pages(gfp_t gfp, int nid,
 	return nr_allocated;
 }
 
+#ifdef CONFIG_OPLUS_VMALLOC_PARTIAL_MAP
+static void *__vmalloc_area_init_range(struct vm_struct *area,
+				unsigned int init_page_begin, unsigned int init_page_end,
+				gfp_t gfp_mask, pgprot_t prot, unsigned int page_shift,
+				int node)
+#else
 static void *__vmalloc_area_node(struct vm_struct *area, gfp_t gfp_mask,
 				 pgprot_t prot, unsigned int page_shift,
 				 int node)
+#endif
 {
 	const gfp_t nested_gfp = (gfp_mask & GFP_RECLAIM_MASK) | __GFP_ZERO;
 	bool nofail = gfp_mask & __GFP_NOFAIL;
@@ -3172,6 +3308,7 @@ static void *__vmalloc_area_node(struct vm_struct *area, gfp_t gfp_mask,
 	set_vm_area_page_order(area, page_shift - PAGE_SHIFT);
 	page_order = vm_area_page_order(area);
 
+#ifndef CONFIG_OPLUS_VMALLOC_PARTIAL_MAP
 	area->nr_pages = vm_area_alloc_pages(gfp_mask | __GFP_NOWARN,
 		node, page_order, nr_small_pages, area->pages);
 
@@ -3232,6 +3369,63 @@ static void *__vmalloc_area_node(struct vm_struct *area, gfp_t gfp_mask,
 			area->nr_pages * PAGE_SIZE);
 		goto fail;
 	}
+#else
+	area->nr_pages = nr_small_pages;
+	nr_small_pages = init_page_end - init_page_begin;
+	nr_small_pages = vm_area_alloc_pages(gfp_mask | __GFP_NOWARN,
+		node, page_order, nr_small_pages, &area->pages[init_page_begin]);
+
+	atomic_long_add(nr_small_pages, &nr_vmalloc_pages);
+	if (gfp_mask & __GFP_ACCOUNT) {
+		int i;
+
+		for (i = 0; i < area->nr_pages; i++) {
+			if (!area->pages[i])
+				continue;
+			mod_memcg_page_state(area->pages[i], MEMCG_VMALLOC, 1);
+		}
+	}
+
+	/*
+	 * If not enough pages were obtained to accomplish an
+	 * allocation request, free them via vfree() if any.
+	 */
+	if (init_page_end - init_page_begin != nr_small_pages) {
+		warn_alloc(gfp_mask, NULL,
+			"vmalloc error: size %lu, page order %u, failed to allocate pages",
+			area->nr_pages * PAGE_SIZE, page_order);
+		goto fail;
+	}
+
+	/*
+	 * Page table allocations ignore external gfp mask, enforce it
+	 * by the scope API.
+	 */
+	if ((gfp_mask & (__GFP_FS | __GFP_IO)) == __GFP_IO)
+		flags = memalloc_nofs_save();
+	else if ((gfp_mask & (__GFP_FS | __GFP_IO)) == 0)
+		flags = memalloc_noio_save();
+
+	do {
+		ret = vmap_pages_range(addr + init_page_begin * PAGE_SIZE,
+			addr + init_page_end * PAGE_SIZE,
+			prot, &area->pages[init_page_begin], page_shift);
+		if (nofail && (ret < 0))
+			schedule_timeout_uninterruptible(1);
+	} while (nofail && (ret < 0));
+
+	if ((gfp_mask & (__GFP_FS | __GFP_IO)) == __GFP_IO)
+		memalloc_nofs_restore(flags);
+	else if ((gfp_mask & (__GFP_FS | __GFP_IO)) == 0)
+		memalloc_noio_restore(flags);
+
+	if (ret < 0) {
+		warn_alloc(gfp_mask, NULL,
+			"vmalloc error: size %lu, failed to map pages",
+			area->nr_pages * PAGE_SIZE);
+		goto fail;
+	}
+#endif
 
 	return area->addr;
 
@@ -3272,6 +3466,22 @@ void *__vmalloc_node_range(unsigned long size, unsigned long align,
 			unsigned long start, unsigned long end, gfp_t gfp_mask,
 			pgprot_t prot, unsigned long vm_flags, int node,
 			const void *caller)
+#ifdef CONFIG_OPLUS_VMALLOC_PARTIAL_MAP
+{
+	unsigned long vm_nr_pages = PAGE_ALIGN(size) >> PAGE_SHIFT;
+
+	return __vmalloc_init_range(size, align, 0, vm_nr_pages,
+				0, vm_nr_pages,
+				start, end, gfp_mask, prot, vm_flags, node, caller);
+}
+
+void *__vmalloc_init_range(unsigned long size, unsigned long align,
+			unsigned int vm_begin_page, unsigned int vm_nr_pages,
+			unsigned int init_page_begin, unsigned int init_page_end,
+			unsigned long start, unsigned long end, gfp_t gfp_mask,
+			pgprot_t prot, unsigned long vm_flags, int node,
+			const void *caller)
+#endif
 {
 	struct vm_struct *area;
 	void *ret;
@@ -3311,6 +3521,37 @@ void *__vmalloc_node_range(unsigned long size, unsigned long align,
 		align = max(real_align, 1UL << shift);
 		size = ALIGN(real_size, 1UL << shift);
 	}
+
+#ifdef CONFIG_OPLUS_VMALLOC_PARTIAL_MAP
+	size = PAGE_ALIGN(size);
+	/*
+	 * kvmalloc() may set VM_ALLOW_HUGE_VMAP and round @size up to a
+	 * PMD multiple. Full-map callers pass vm_nr_pages from
+	 * PAGE_ALIGN(real_size); expand counts to the huge-aligned span so
+	 * we do not reject valid kvmalloc/vmalloc. True partial/lazy maps
+	 * still cannot use huge mappings.
+	 */
+	if (shift > PAGE_SHIFT &&
+	    vm_begin_page == 0 && init_page_begin == 0 &&
+	    init_page_end == vm_nr_pages &&
+	    vm_nr_pages == (PAGE_ALIGN(real_size) >> PAGE_SHIFT) &&
+	    vm_nr_pages < size / PAGE_SIZE) {
+		vm_nr_pages = size / PAGE_SIZE;
+		init_page_end = vm_nr_pages;
+	}
+	if (vm_begin_page + vm_nr_pages > size / PAGE_SIZE ||
+		vm_nr_pages == 0 ||
+		(shift > PAGE_SHIFT && (vm_begin_page > 0 ||
+						init_page_begin > 0 ||
+						vm_nr_pages != size / PAGE_SIZE ||
+						vm_nr_pages != init_page_end)) ||
+		init_page_end > vm_nr_pages ||
+		init_page_begin >= init_page_end) {
+		warn_alloc(gfp_mask, NULL,
+			"vmalloc error: size %lu, invalid args", real_size);
+		return NULL;
+	}
+#endif
 
 again:
 	area = __get_vm_area_node(real_size, align, shift, VM_ALLOC |
@@ -3353,7 +3594,14 @@ again:
 	}
 
 	/* Allocate physical pages and map them into vmalloc space. */
+#ifdef CONFIG_OPLUS_VMALLOC_PARTIAL_MAP
+	area->addr += vm_begin_page * PAGE_SIZE;
+	area->size = vm_nr_pages * PAGE_SIZE + (area->size - size);
+	ret = __vmalloc_area_init_range(area, init_page_begin, init_page_end,
+					gfp_mask, prot, shift, node);
+#else
 	ret = __vmalloc_area_node(area, gfp_mask, prot, shift, node);
+#endif
 	if (!ret)
 		goto fail;
 
@@ -4384,8 +4632,13 @@ static void show_numa_info(struct seq_file *m, struct vm_struct *v)
 
 		memset(counters, 0, nr_node_ids * sizeof(unsigned int));
 
-		for (nr = 0; nr < v->nr_pages; nr += step)
+		for (nr = 0; nr < v->nr_pages; nr += step) {
+#ifdef CONFIG_OPLUS_VMALLOC_PARTIAL_MAP
+			if (!v->pages[nr])
+				continue;
+#endif
 			counters[page_to_nid(v->pages[nr])] += step;
+		}
 		for_each_node_state(nr, N_HIGH_MEMORY)
 			if (counters[nr])
 				seq_printf(m, " N%u=%u", nr, counters[nr]);
@@ -4430,7 +4683,12 @@ static int s_show(struct seq_file *m, void *p)
 		seq_printf(m, " %pS", v->caller);
 
 	if (v->nr_pages)
+#ifdef CONFIG_OPLUS_VMALLOC_PARTIAL_MAP
+		seq_printf(m, " pages=%d",
+			   oplus_vm_area_mapped_cnt(v));
+#else
 		seq_printf(m, " pages=%d", v->nr_pages);
+#endif
 
 	if (v->phys_addr)
 		seq_printf(m, " phys=%pa", &v->phys_addr);
