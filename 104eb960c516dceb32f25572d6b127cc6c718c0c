@@ -193,6 +193,24 @@
       "parentUuid": "e403f926_340be211",
       "revId": "104eb960c516dceb32f25572d6b127cc6c718c0c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e407ae5_9e36ec97",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1379,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-08-27T04:23:28Z",
+      "side": 1,
+      "message": "The choice of the return values is following a spec (FF-A) which acts like a contract between different components that are talking FF-A in the system.\n\nThere is not only \"one\" driver and the tendency is for different vendors to use different drivers. (eg. Pixel uses trusty*.ko ). Upstream LK is providing the arm-ffa driver, feel free to check it for reference.",
+      "parentUuid": "2a0c5697_f5886169",
+      "revId": "104eb960c516dceb32f25572d6b127cc6c718c0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
