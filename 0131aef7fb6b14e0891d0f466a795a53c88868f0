@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd6e9393_83f97584",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3303003
+      },
+      "writtenOn": "2026-08-27T21:27:58Z",
+      "side": 1,
+      "message": "Hello, this patch is under review for the USB development tree. Given it resolves an issue we\u0027ve seen cause kernel crashes, I\u0027d like to land quickly as FROMLIST. Please take a look.",
+      "revId": "0131aef7fb6b14e0891d0f466a795a53c88868f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
