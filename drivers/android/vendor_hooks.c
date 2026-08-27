@@ -767,3 +767,16 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_blk_reset);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_attach_sd);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sdhci_get_cd);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_gpio_cd_irqt);
+<<<<<<< HEAD   (9ac0a529c8731afcd3d688967ec3d1c2378efeb0 BACKPORT: f2fs: Add trace_f2fs_fault_report)
+||||||| BASE   (a3d06921ce7506e56eb9b3444a70dbbe9c69cac4 ANDROID: fuse-bpf: fix verifier bypass in fuse_prog_is_valid)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_netlink_alloc_skb);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_skb_free_head);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_unlock_mmap_bypass);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_netlink_alloc_skb);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_skb_free_head);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_unlock_mmap_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_submit_bio_post);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_submit_bio_pre);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_request_issue_err);
+>>>>>>> CHANGE (40b0e40c40bc32d5fb629ee0c734b197204465e0 ANDROID: block: add hooks for vendor IO aggregation control)
