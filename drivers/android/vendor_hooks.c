@@ -767,3 +767,6 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_blk_reset);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_attach_sd);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sdhci_get_cd);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_gpio_cd_irqt);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_submit_bio_post);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_submit_bio_pre);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_request_issue_err);
