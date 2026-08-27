@@ -599,6 +599,7 @@ static inline void __get_secs_required(struct f2fs_sb_info *sbi,
 					get_pages(sbi, F2FS_DIRTY_DENTS) +
 					get_pages(sbi, F2FS_DIRTY_IMETA);
 	unsigned int total_dent_blocks = get_pages(sbi, F2FS_DIRTY_DENTS);
+<<<<<<< HEAD   (2216917721e656fd8ffbc156cbbf7c58ba5b057e Merge fcc051d377a9 ("f2fs: validate compress cache inode onl)
 	unsigned int total_data_blocks = 0;
 	unsigned int node_secs = total_node_blocks / CAP_BLKS_PER_SEC(sbi);
 	unsigned int dent_secs = total_dent_blocks / CAP_BLKS_PER_SEC(sbi);
@@ -630,6 +631,19 @@ static inline bool has_not_enough_free_secs(struct f2fs_sb_info *sbi,
 {
 	unsigned int free_secs, lower_secs, upper_secs;
 	bool curseg_space;
+||||||| BASE   (fcc051d377a9701a452e7663a1a8223c26225df9 f2fs: validate compress cache inode only when enabled)
+	unsigned int node_secs = total_node_blocks / BLKS_PER_SEC(sbi);
+	unsigned int dent_secs = total_dent_blocks / BLKS_PER_SEC(sbi);
+	unsigned int node_blocks = total_node_blocks % BLKS_PER_SEC(sbi);
+	unsigned int dent_blocks = total_dent_blocks % BLKS_PER_SEC(sbi);
+	unsigned int free, need_lower, need_upper;
+=======
+	unsigned int node_secs = total_node_blocks / CAP_BLKS_PER_SEC(sbi);
+	unsigned int dent_secs = total_dent_blocks / CAP_BLKS_PER_SEC(sbi);
+	unsigned int node_blocks = total_node_blocks % CAP_BLKS_PER_SEC(sbi);
+	unsigned int dent_blocks = total_dent_blocks % CAP_BLKS_PER_SEC(sbi);
+	unsigned int free, need_lower, need_upper;
+>>>>>>> BRANCH (efd9ff7d54368f4863beb14d01a611965af8309d f2fs: adjust zone capacity when considering valid block coun)
 
 	if (unlikely(is_sbi_flag_set(sbi, SBI_POR_DOING)))
 		return false;
