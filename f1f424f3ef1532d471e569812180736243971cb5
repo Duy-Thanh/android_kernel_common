@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dc05a0b_be56de9c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-08-27T21:09:17Z",
+      "side": 1,
+      "message": "When cherry-picking you should preserve the Change-Id so we can identify related changes on different branches.",
+      "revId": "f1f424f3ef1532d471e569812180736243971cb5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
