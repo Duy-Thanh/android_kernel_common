@@ -54,6 +54,24 @@
       ],
       "revId": "878a1d3cf7a8f60e9728ee34c1ff53304b6b62d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb587314_a6f8792b",
+        "filename": "drivers/scsi/scsi_lib.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2134,
+      "author": {
+        "id": 1282799
+      },
+      "writtenOn": "2026-08-27T07:13:39Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "54db605f_60653d85",
+      "revId": "878a1d3cf7a8f60e9728ee34c1ff53304b6b62d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
