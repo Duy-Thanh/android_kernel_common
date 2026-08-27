@@ -126,6 +126,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1242c7ef_b3c63ccc",
+        "filename": "arch/x86/kvm/pkvm/lib/printf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-08-27T09:15:20Z",
+      "side": 1,
+      "message": "That\u0027s going to the extreme now :D. Either the comment or the error check alone is good enough. Just anything that makes the assumption documented.\n\nI proposed the check in the code, because it\u0027s just 2 lines, adds safety in case someone  doesn\u0027t read the implementation and expresses the entire information within itself (no need for an extra comment). And in fact, since this is a static function, it will get optimized out.\n\nUp to you, though, I\u0027m okay with any of the mentioned options.",
+      "parentUuid": "da9a467d_839d8197",
+      "revId": "4ab88d10201dcb26d9550938f0cbdfe62e4594df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "20f25679_f76530a6",
