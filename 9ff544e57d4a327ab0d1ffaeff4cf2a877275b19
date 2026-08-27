@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e5a6e506_4a1e3f64",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1504563
+      },
+      "writtenOn": "2026-08-27T01:28:06Z",
+      "side": 1,
+      "message": "For the stability library, we are not using the timestamp value in any way right now (other than to confirm that it is a kernel log), so it should be okay.",
+      "parentUuid": "7eb255fb_cb455674",
+      "revId": "9ff544e57d4a327ab0d1ffaeff4cf2a877275b19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2131df93_6fd4098e",
         "filename": "arch/x86/kvm/pkvm/panic.c",
         "patchSetId": 2
