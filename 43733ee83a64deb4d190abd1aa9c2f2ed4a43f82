@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e6a0794b_3e595d69",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-08-27T14:21:33Z",
+      "side": 1,
+      "message": "To be 100% precise `Chromebooks` (starting with a capital letter) :)",
+      "parentUuid": "9643bfe0_49301105",
+      "revId": "43733ee83a64deb4d190abd1aa9c2f2ed4a43f82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "da7103fc_3ed822c1",
         "filename": "arch/x86/kvm/pkvm/panic.c",
         "patchSetId": 7
@@ -101,6 +119,24 @@
       "writtenOn": "2026-08-27T13:05:03Z",
       "side": 1,
       "message": "The CPU number can be more than one digit?",
+      "revId": "43733ee83a64deb4d190abd1aa9c2f2ed4a43f82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6aa55daf_407dabcc",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-08-27T14:21:33Z",
+      "side": 1,
+      "message": "Yeah, we have to adjust the number of padding spaces and the %\u003cwidth\u003ed wouldn\u0027t help unfortunately. :(\n\nThat said, I believe from the crash processing pipeline the CPU ID wouldn\u0027t matter, so maybe we could just always print C0 for simplicity? (Although I guess the CPU ID could potentially be useful for investigating the crash.)",
+      "parentUuid": "9c29faae_87af2962",
       "revId": "43733ee83a64deb4d190abd1aa9c2f2ed4a43f82",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
