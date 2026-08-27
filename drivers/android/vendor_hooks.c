@@ -805,3 +805,6 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_gpio_cd_irqt);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_netlink_alloc_skb);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_skb_free_head);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_unlock_mmap_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_submit_bio_post);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_submit_bio_pre);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_request_issue_err);
