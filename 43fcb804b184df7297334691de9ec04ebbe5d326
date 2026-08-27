@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1adb6230_514d473c",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-27T22:15:39Z",
+      "side": 1,
+      "message": "Just a note: looks like 8192 is the max possible number of CPUs on x86, so I guess this is safe.",
+      "revId": "43fcb804b184df7297334691de9ec04ebbe5d326",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
