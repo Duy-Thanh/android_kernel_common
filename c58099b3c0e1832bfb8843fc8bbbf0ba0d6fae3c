@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3189e8ba_b52b7059",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-08-27T08:24:03Z",
+      "side": 1,
+      "message": "As the page-size can be modified we should have a `nr_handles\u003d` instead.\n\nAlso, it only depends on \"unmap_on_lend\" so let\u0027s make it an option of the existing cmdline `kvm-arm.unmap_on_lend`:\n\nHere\u0027s an example\n\n`kvm-arm.unmap_on_lend\u003dfull,nr_handles\u003d4096`",
+      "revId": "c58099b3c0e1832bfb8843fc8bbbf0ba0d6fae3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
