@@ -16,6 +16,24 @@
       "message": "This `base` check is an independent change, it can be done in a separate small patch (which could then be reviewed separately, and doesn\u0027t need to be cherry-picked to the release branch)?",
       "revId": "512f1faf490666fc2b55a0ae387d3f5bbf8b83c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22b2b241_3c4c68ca",
+        "filename": "arch/x86/kvm/pkvm/lib/printf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-08-27T20:09:28Z",
+      "side": 1,
+      "message": "Ok, I\u0027ve push it as aosp/4256644 and going to merge independently later on after we merge this series.",
+      "parentUuid": "42639b02_eef7cc2e",
+      "revId": "512f1faf490666fc2b55a0ae387d3f5bbf8b83c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
