@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e870651b_21217fa1",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-27T08:29:25Z",
+      "side": 1,
+      "message": "\u003e I think we have that sometimes at suspend/resume.\n\n[completely unimportant note] I suppose not on Intel. All modern Intel CPUs have a \"nonstop TSC\" that ticks in suspend.\n\n\u003e ```\n\u003e + * Note: it is slightly ahead (~1-2s)\n\u003e ```\n\nnit: 1-2s is Chromebook/Googlebook specific, most other platforms have slower bootloaders. :)",
+      "parentUuid": "c6d9597e_267e07dc",
+      "revId": "9ff544e57d4a327ab0d1ffaeff4cf2a877275b19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2131df93_6fd4098e",
         "filename": "arch/x86/kvm/pkvm/panic.c",
         "patchSetId": 2
