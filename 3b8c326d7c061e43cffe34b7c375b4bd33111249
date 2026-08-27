@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "43199fa1_9d4da777",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2026-08-27T15:08:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4f94d26_b8550593",
+      "range": {
+        "startLine": 9,
+        "startChar": 44,
+        "endLine": 9,
+        "endChar": 48
+      },
+      "revId": "3b8c326d7c061e43cffe34b7c375b4bd33111249",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "172a8c09_2943829c",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-08-18T15:30:30Z",
       "side": 1,
       "message": "its",
+      "range": {
+        "startLine": 14,
+        "startChar": 39,
+        "endLine": 14,
+        "endChar": 43
+      },
+      "revId": "3b8c326d7c061e43cffe34b7c375b4bd33111249",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce06e973_bb1050c6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2026-08-27T15:08:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "172a8c09_2943829c",
       "range": {
         "startLine": 14,
         "startChar": 39,
@@ -104,6 +152,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "309db903_ef768a25",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2026-08-27T15:08:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd856172_37a09648",
+      "range": {
+        "startLine": 176,
+        "startChar": 12,
+        "endLine": 176,
+        "endChar": 21
+      },
+      "revId": "3b8c326d7c061e43cffe34b7c375b4bd33111249",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fce57727_e8e10fc7",
@@ -127,6 +199,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36082ece_5c65d6ef",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2026-08-27T15:08:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fce57727_e8e10fc7",
+      "range": {
+        "startLine": 541,
+        "startChar": 29,
+        "endLine": 541,
+        "endChar": 30
+      },
+      "revId": "3b8c326d7c061e43cffe34b7c375b4bd33111249",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4161afeb_fc4d80f0",
@@ -140,6 +236,30 @@
       "writtenOn": "2026-08-26T16:14:01Z",
       "side": 1,
       "message": "Add `CONFIG_MODULE_SIG\u003dy` below.",
+      "range": {
+        "startLine": 204,
+        "startChar": 0,
+        "endLine": 204,
+        "endChar": 16
+      },
+      "revId": "3b8c326d7c061e43cffe34b7c375b4bd33111249",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4eb65c8b_4f8e59a9",
+        "filename": "arch/arm64/configs/microdroid_defconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2026-08-27T15:08:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4161afeb_fc4d80f0",
       "range": {
         "startLine": 204,
         "startChar": 0,
@@ -191,6 +311,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e64ba28_0bf16c8e",
+        "filename": "microdroid/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2026-08-27T15:08:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "782569bf_dfa6d1c2",
+      "range": {
+        "startLine": 30,
+        "startChar": 42,
+        "endLine": 30,
+        "endChar": 45
+      },
+      "revId": "3b8c326d7c061e43cffe34b7c375b4bd33111249",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "69f8b7ae_0ed2bf17",
@@ -232,6 +376,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8feccdac_cec4f114",
+        "filename": "microdroid/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2026-08-27T15:08:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69f8b7ae_0ed2bf17",
+      "range": {
+        "startLine": 34,
+        "startChar": 36,
+        "endLine": 34,
+        "endChar": 61
+      },
+      "revId": "3b8c326d7c061e43cffe34b7c375b4bd33111249",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4cc40ab2_0b9de8a0",
@@ -269,6 +437,30 @@
       "side": 1,
       "message": "These are optional modules that are built together with the microdroid kernel and can be loaded for the microdroid VMs (e.g. aiseal) that require their functionality.\n\n* pkvm-pviommu is required for device assignment\n* system_heap is required by some of the NPU stacks.\n\nConceptually these are the same as GKI modules, I can change them to be compiled into microdroid kernel it that is easier.",
       "parentUuid": "4cc40ab2_0b9de8a0",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 29
+      },
+      "revId": "3b8c326d7c061e43cffe34b7c375b4bd33111249",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c259e414_f8a4d01d",
+        "filename": "microdroid/aarch64/symbols/base",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2026-08-27T15:08:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b55130c_351e70a1",
       "range": {
         "startLine": 12,
         "startChar": 0,
