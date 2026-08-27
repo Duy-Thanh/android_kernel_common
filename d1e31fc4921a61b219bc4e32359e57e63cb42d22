@@ -16,6 +16,24 @@
       "message": "Please keep the change-id of the original change, and use actual cherry-pick to pick up change on this branch",
       "revId": "d1e31fc4921a61b219bc4e32359e57e63cb42d22",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "639c8a7c_ab8d0c5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1282799
+      },
+      "writtenOn": "2026-08-27T02:09:28Z",
+      "side": 1,
+      "message": "Hi, Sandeep\nAccording to your comment, a new change has been submitted to replace this one to keep the original Change-ID\nhttps://android-review.googlesource.com/c/kernel/common/+/4255343\nKindly please help review it.",
+      "parentUuid": "ce05e825_97012a89",
+      "revId": "d1e31fc4921a61b219bc4e32359e57e63cb42d22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
