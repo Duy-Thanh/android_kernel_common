@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ea31130_99e80e60",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-08-27T20:12:47Z",
+      "side": 1,
+      "message": "Yeah, you are rigth, removed.",
+      "parentUuid": "f4fe9b07_7b77ef83",
+      "revId": "43733ee83a64deb4d190abd1aa9c2f2ed4a43f82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9643bfe0_49301105",
@@ -89,6 +107,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e41eab06_51a3426b",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-08-27T20:12:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6a0794b_3e595d69",
+      "revId": "43733ee83a64deb4d190abd1aa9c2f2ed4a43f82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da7103fc_3ed822c1",
@@ -102,6 +138,24 @@
       "writtenOn": "2026-08-27T13:05:03Z",
       "side": 1,
       "message": "nit: s/zeros/zeroes/",
+      "revId": "43733ee83a64deb4d190abd1aa9c2f2ed4a43f82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75dda031_5ad25044",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-08-27T20:12:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da7103fc_3ed822c1",
       "revId": "43733ee83a64deb4d190abd1aa9c2f2ed4a43f82",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -155,6 +209,24 @@
       "side": 1,
       "message": "Looking at how the host kernel prints it:\n\n```\nstatic size_t print_caller(u32 id, char *buf)\n{\n        char caller[12];\n        int vh_ret \u003d 0;\n\n        trace_android_vh_printk_caller(caller, sizeof(caller), id, \u0026vh_ret);\n        if (!vh_ret)\n                snprintf(caller, sizeof(caller), \"%c%u\",\n                         id \u0026 0x80000000 ? \u0027C\u0027 : \u0027T\u0027, id \u0026 ~0x80000000);\n        return sprintf(buf, \"[%6s]\", caller);\n}\n```\n\nWe could similarly use a temp buffer like this?",
       "parentUuid": "6aa55daf_407dabcc",
+      "revId": "43733ee83a64deb4d190abd1aa9c2f2ed4a43f82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e535f246_05844727",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-08-27T20:12:47Z",
+      "side": 1,
+      "message": "Thanks for suggestions - done. I\u0027ve slightly had to update the previous commit but now it works.",
+      "parentUuid": "9f852c9c_2bff1d7c",
       "revId": "43733ee83a64deb4d190abd1aa9c2f2ed4a43f82",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
