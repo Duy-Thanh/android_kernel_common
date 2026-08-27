@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42639b02_eef7cc2e",
+        "filename": "arch/x86/kvm/pkvm/lib/printf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-27T13:11:48Z",
+      "side": 1,
+      "message": "This `base` check is an independent change, it can be done in a separate small patch (which could then be reviewed separately, and doesn\u0027t need to be cherry-picked to the release branch)?",
+      "revId": "512f1faf490666fc2b55a0ae387d3f5bbf8b83c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
