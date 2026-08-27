@@ -16,6 +16,23 @@
       "message": "When cherry-picking you should preserve the Change-Id so we can identify related changes on different branches.",
       "revId": "f1f424f3ef1532d471e569812180736243971cb5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fedf2bc3_4b4b3331",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-08-27T23:43:33Z",
+      "side": 1,
+      "message": "I want to still hold off on taking this, as while it avoids a crash, it is a workaround and hides erroneous calculations. These calculation errors will persist and can cause scheduling anomalies that will be very difficult to diagnose or debug. I\u0027d much prefer the focus stay on fixing the calculation errors so they do not occur.",
+      "revId": "f1f424f3ef1532d471e569812180736243971cb5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
