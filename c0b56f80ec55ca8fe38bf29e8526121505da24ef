@@ -52,6 +52,24 @@
       "parentUuid": "0ad100d5_39c5e12e",
       "revId": "c0b56f80ec55ca8fe38bf29e8526121505da24ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0cff1f9_abdb9e96",
+        "filename": "arch/x86/kvm/pkvm/panic.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-08-27T08:57:27Z",
+      "side": 1,
+      "message": "It doesn\u0027t really matter in the end. We would still have the original log line, but up to you.\n\nAlso your example has for some reason `Kernel panic - not syncing: pKVM`, but it should be `Kernel panic - not syncing: HYP Panic:`.",
+      "parentUuid": "510b61dc_efd7dec9",
+      "revId": "c0b56f80ec55ca8fe38bf29e8526121505da24ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
