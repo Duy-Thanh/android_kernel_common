@@ -6844,6 +6844,11 @@ pointer_reference {
   pointee_type_id: 0x13544dcf
 }
 pointer_reference {
+  id: 0x0e463afc
+  kind: POINTER
+  pointee_type_id: 0x13580d6c
+}
+pointer_reference {
   id: 0x0e46caf3
   kind: POINTER
   pointee_type_id: 0x135bcd51
@@ -13272,6 +13277,11 @@ pointer_reference {
   id: 0x2060db23
   kind: POINTER
   pointee_type_id: 0xabc38a13
+}
+pointer_reference {
+  id: 0x2066c566
+  kind: POINTER
+  pointee_type_id: 0xabdbf304
 }
 pointer_reference {
   id: 0x206bf782
@@ -26789,6 +26799,11 @@ pointer_reference {
   pointee_type_id: 0xed8451a2
 }
 pointer_reference {
+  id: 0x31f1630d
+  kind: POINTER
+  pointee_type_id: 0xed856aa8
+}
+pointer_reference {
   id: 0x31f49752
   kind: POINTER
   pointee_type_id: 0xed92bbd4
@@ -33909,6 +33924,11 @@ pointer_reference {
   pointee_type_id: 0xd633a805
 }
 pointer_reference {
+  id: 0x3f1da9b9
+  kind: POINTER
+  pointee_type_id: 0xd636407a
+}
+pointer_reference {
   id: 0x3f21336c
   kind: POINTER
   pointee_type_id: 0xd6c42b2c
@@ -38689,6 +38709,11 @@ qualified {
   qualified_type_id: 0x2889169c
 }
 qualified {
+  id: 0xd636407a
+  qualifier: CONST
+  qualified_type_id: 0x289eb761
+}
+qualified {
   id: 0xd646f122
   qualifier: CONST
   qualified_type_id: 0x295c7202
@@ -40257,6 +40282,11 @@ qualified {
   id: 0xed640f62
   qualifier: CONST
   qualified_type_id: 0xc5d78b03
+}
+qualified {
+  id: 0xed856aa8
+  qualifier: CONST
+  qualified_type_id: 0xc6521c28
 }
 qualified {
   id: 0xed94bd83
@@ -320111,6 +320141,48 @@ enumeration {
   }
 }
 enumeration {
+  id: 0x251fec82
+  name: "pcie_link_width"
+  definition {
+    underlying_type_id: 0x4585663f
+    enumerator {
+      name: "PCIE_LNK_WIDTH_RESRV"
+    }
+    enumerator {
+      name: "PCIE_LNK_X1"
+      value: 1
+    }
+    enumerator {
+      name: "PCIE_LNK_X2"
+      value: 2
+    }
+    enumerator {
+      name: "PCIE_LNK_X4"
+      value: 4
+    }
+    enumerator {
+      name: "PCIE_LNK_X8"
+      value: 8
+    }
+    enumerator {
+      name: "PCIE_LNK_X12"
+      value: 12
+    }
+    enumerator {
+      name: "PCIE_LNK_X16"
+      value: 16
+    }
+    enumerator {
+      name: "PCIE_LNK_X32"
+      value: 32
+    }
+    enumerator {
+      name: "PCIE_LNK_WIDTH_UNKNOWN"
+      value: 255
+    }
+  }
+}
+enumeration {
   id: 0xdb6b364c
   name: "perf_event_state"
   definition {
@@ -341350,6 +341422,12 @@ function {
   parameter_id: 0x23f09c34
 }
 function {
+  id: 0x289916da
+  return_type_id: 0x042af17e
+  parameter_id: 0x21003da7
+  parameter_id: 0x2668e644
+}
+function {
   id: 0x289e456d
   return_type_id: 0x18456730
   parameter_id: 0x0355dc72
@@ -341703,6 +341781,11 @@ function {
   id: 0x2eb1a24e
   return_type_id: 0x145f7b00
   parameter_id: 0x3ddc5dec
+}
+function {
+  id: 0x2ec04b91
+  return_type_id: 0xa12a969e
+  parameter_id: 0x11e6864c
 }
 function {
   id: 0x2ed65af4
@@ -343039,6 +343122,11 @@ function {
   parameter_id: 0x92233392
 }
 function {
+  id: 0x40ff39b0
+  return_type_id: 0x1ce51dde
+  parameter_id: 0x14e7280b
+}
+function {
   id: 0x4116d326
   return_type_id: 0x0cc78943
   parameter_id: 0x0258f96e
@@ -343431,6 +343519,11 @@ function {
   id: 0x486110f4
   return_type_id: 0x10b38ed2
   parameter_id: 0x4585663f
+}
+function {
+  id: 0x48800604
+  return_type_id: 0x251fec82
+  parameter_id: 0x11e6864c
 }
 function {
   id: 0x48834be4
@@ -344664,6 +344757,12 @@ function {
   parameter_id: 0x39d1288c
 }
 function {
+  id: 0x58f6a03b
+  return_type_id: 0x2560a232
+  parameter_id: 0x1a8fcc43
+  parameter_id: 0x4585663f
+}
+function {
   id: 0x58f99147
   return_type_id: 0x0102f0d8
   parameter_id: 0x071f0de3
@@ -345658,6 +345757,11 @@ function {
   id: 0x6356f86d
   return_type_id: 0x2cae7fa9
   parameter_id: 0x0258f96e
+}
+function {
+  id: 0x636e6c75
+  return_type_id: 0x38b136d3
+  parameter_id: 0x2309ad3e
 }
 function {
   id: 0x638a35ee
@@ -349368,6 +349472,13 @@ function {
   parameter_id: 0x38d23361
 }
 function {
+  id: 0x90e11933
+  return_type_id: 0x6720d32f
+  parameter_id: 0x347303b4
+  parameter_id: 0x1fff8df6
+  parameter_id: 0x0b131b04
+}
+function {
   id: 0x90e2d95d
   return_type_id: 0x6720d32f
   parameter_id: 0x310ec01d
@@ -352698,6 +352809,15 @@ function {
   parameter_id: 0x3c14a620
 }
 function {
+  id: 0x92869f54
+  return_type_id: 0x6720d32f
+  parameter_id: 0x3f37d9d5
+  parameter_id: 0x36ffb4de
+  parameter_id: 0x4585663f
+  parameter_id: 0x4585663f
+  parameter_id: 0x0e463afc
+}
+function {
   id: 0x9286b490
   return_type_id: 0x6720d32f
   parameter_id: 0x3c21809c
@@ -354231,6 +354351,13 @@ function {
   parameter_id: 0x3863a91c
 }
 function {
+  id: 0x93987cec
+  return_type_id: 0x6720d32f
+  parameter_id: 0x3e10b518
+  parameter_id: 0x6720d32f
+  parameter_id: 0x00c72527
+}
+function {
   id: 0x9398dfdf
   return_type_id: 0x6720d32f
   parameter_id: 0x3860f3c0
@@ -355087,6 +355214,14 @@ function {
   parameter_id: 0x6720d32f
   parameter_id: 0x6720d32f
   parameter_id: 0xc9082b19
+}
+function {
+  id: 0x944db684
+  return_type_id: 0x6720d32f
+  parameter_id: 0x2309ad3e
+  parameter_id: 0x4585663f
+  parameter_id: 0x6720d32f
+  parameter_id: 0x38d23361
 }
 function {
   id: 0x944e647e
@@ -356162,6 +356297,13 @@ function {
   return_type_id: 0x6720d32f
   parameter_id: 0x23f09c34
   parameter_id: 0x3e10b518
+}
+function {
+  id: 0x9585421a
+  return_type_id: 0x6720d32f
+  parameter_id: 0x23f09c34
+  parameter_id: 0x3f44b979
+  parameter_id: 0x1253769c
 }
 function {
   id: 0x95854407
@@ -368916,6 +369058,14 @@ function {
   parameter_id: 0x6d7f5ff6
 }
 function {
+  id: 0x9c2a5d1e
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0483e6f8
+  parameter_id: 0x2066c566
+  parameter_id: 0x2fc964c0
+  parameter_id: 0x0bb0c019
+}
+function {
   id: 0x9c2b054b
   return_type_id: 0x6720d32f
   parameter_id: 0x054f691a
@@ -378974,6 +379124,11 @@ function {
   parameter_id: 0x0490bb4a
 }
 function {
+  id: 0xe1f0750f
+  return_type_id: 0x3ea31487
+  parameter_id: 0x3909df7b
+}
+function {
   id: 0xe1f0bd48
   return_type_id: 0x32bee099
   parameter_id: 0x1b36c7a2
@@ -379766,6 +379921,12 @@ function {
   parameter_id: 0x31829648
 }
 function {
+  id: 0xf19f47cc
+  return_type_id: 0x6d7f5ff6
+  parameter_id: 0x3f1da9b9
+  parameter_id: 0x3f1da9b9
+}
+function {
   id: 0xf1a27a59
   return_type_id: 0x6d7f5ff6
   parameter_id: 0x3e6396e0
@@ -380044,6 +380205,11 @@ function {
   return_type_id: 0x6d7f5ff6
   parameter_id: 0x322c8c4b
   parameter_id: 0x3e10b518
+}
+function {
+  id: 0xf2d803c7
+  return_type_id: 0x6d7f5ff6
+  parameter_id: 0x31f1630d
 }
 function {
   id: 0xf2dafae3
@@ -380823,6 +380989,11 @@ function {
   return_type_id: 0x6d7f5ff6
   parameter_id: 0x1a61f607
   parameter_id: 0x39a83127
+}
+function {
+  id: 0xf8ddc018
+  return_type_id: 0x6d7f5ff6
+  parameter_id: 0x19e66c71
 }
 function {
   id: 0xf8fa1a38
@@ -384852,6 +385023,15 @@ elf_symbol {
   crc: 0x25d983bf
   type_id: 0x8cdd9b00
   full_name: "__regmap_init_mmio_clk"
+}
+elf_symbol {
+  id: 0xfc3f92c1
+  name: "__regmap_init_spmi_ext"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x060a5d4d
+  type_id: 0x8b7d8884
+  full_name: "__regmap_init_spmi_ext"
 }
 elf_symbol {
   id: 0xe3a7489a
@@ -402842,6 +403022,15 @@ elf_symbol {
   full_name: "balance_push_callback"
 }
 elf_symbol {
+  id: 0x651f6a71
+  name: "base64_decode"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe3c0b5b1
+  type_id: 0x93987cec
+  full_name: "base64_decode"
+}
+elf_symbol {
   id: 0x3c7e214c
   name: "baswap"
   is_defined: true
@@ -406242,6 +406431,15 @@ elf_symbol {
   full_name: "clocks_calc_mult_shift"
 }
 elf_symbol {
+  id: 0x4f612feb
+  name: "clocksource_unregister"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xace91698
+  type_id: 0x98984954
+  full_name: "clocksource_unregister"
+}
+elf_symbol {
   id: 0xef28f52a
   name: "clone_private_mount"
   is_defined: true
@@ -406646,6 +406844,15 @@ elf_symbol {
   crc: 0x16792efe
   type_id: 0x958527d1
   full_name: "console_printk"
+}
+elf_symbol {
+  id: 0x81aa2ce7
+  name: "console_resume"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x697718f3
+  type_id: 0x10cf8a7c
+  full_name: "console_resume"
 }
 elf_symbol {
   id: 0x406ac226
@@ -408796,6 +409003,15 @@ elf_symbol {
   full_name: "debugfs_attr_write"
 }
 elf_symbol {
+  id: 0x6dc2bff8
+  name: "debugfs_attr_write_signed"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x334d4145
+  type_id: 0x120e3950
+  full_name: "debugfs_attr_write_signed"
+}
+elf_symbol {
   id: 0xaff52b5c
   name: "debugfs_change_name"
   is_defined: true
@@ -409848,6 +410064,15 @@ elf_symbol {
   crc: 0x92674e79
   type_id: 0x9d3fe9f7
   full_name: "dev_pm_opp_init_cpufreq_table"
+}
+elf_symbol {
+  id: 0x1e1a06d6
+  name: "dev_pm_opp_is_turbo"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x583e9cba
+  type_id: 0xf8ddc018
+  full_name: "dev_pm_opp_is_turbo"
 }
 elf_symbol {
   id: 0xde18ea43
@@ -411461,6 +411686,15 @@ elf_symbol {
   full_name: "devm_extcon_dev_allocate"
 }
 elf_symbol {
+  id: 0x425f4d8f
+  name: "devm_extcon_dev_free"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x4d4cd828
+  type_id: 0x104e479f
+  full_name: "devm_extcon_dev_free"
+}
+elf_symbol {
   id: 0xbcab4e4a
   name: "devm_extcon_dev_register"
   is_defined: true
@@ -412189,6 +412423,15 @@ elf_symbol {
   crc: 0x9bcf79c8
   type_id: 0x584c42dc
   full_name: "devm_platform_get_and_ioremap_resource"
+}
+elf_symbol {
+  id: 0xd6a1eff6
+  name: "devm_platform_get_irqs_affinity"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x10c3e7da
+  type_id: 0x92869f54
+  full_name: "devm_platform_get_irqs_affinity"
 }
 elf_symbol {
   id: 0x901f9d38
@@ -414660,6 +414903,15 @@ elf_symbol {
   full_name: "drm_atomic_commit"
 }
 elf_symbol {
+  id: 0x25c01835
+  name: "drm_atomic_get_bridge_state"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa785e786
+  type_id: 0x289916da
+  full_name: "drm_atomic_get_bridge_state"
+}
+elf_symbol {
   id: 0xc98da8e7
   name: "drm_atomic_get_connector_state"
   is_defined: true
@@ -414757,6 +415009,15 @@ elf_symbol {
   crc: 0x938b7056
   type_id: 0x8715e05e
   full_name: "drm_atomic_get_private_obj_state"
+}
+elf_symbol {
+  id: 0xeb615d72
+  name: "drm_atomic_helper_async_check"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x641ee7c1
+  type_id: 0x93c5cc72
+  full_name: "drm_atomic_helper_async_check"
 }
 elf_symbol {
   id: 0x85741d8b
@@ -415180,6 +415441,15 @@ elf_symbol {
   crc: 0xcb0c4334
   type_id: 0x94751139
   full_name: "drm_atomic_helper_swap_state"
+}
+elf_symbol {
+  id: 0x09621b81
+  name: "drm_atomic_helper_unprepare_planes"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xefdf2ce9
+  type_id: 0x1edd7ece
+  full_name: "drm_atomic_helper_unprepare_planes"
 }
 elf_symbol {
   id: 0xace15cad
@@ -416161,6 +416431,15 @@ elf_symbol {
   crc: 0xcf53f513
   type_id: 0x1e597e38
   full_name: "drm_dev_get"
+}
+elf_symbol {
+  id: 0x48f7af32
+  name: "drm_dev_has_vblank"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x3615e963
+  type_id: 0xf2d803c7
+  full_name: "drm_dev_has_vblank"
 }
 elf_symbol {
   id: 0x5654b5d3
@@ -422307,6 +422586,15 @@ elf_symbol {
   full_name: "genlmsg_put"
 }
 elf_symbol {
+  id: 0x71bc0736
+  name: "genpd_dev_pm_attach_by_id"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x33267d0e
+  type_id: 0xacaf1bfd
+  full_name: "genpd_dev_pm_attach_by_id"
+}
+elf_symbol {
   id: 0xa0c0d25f
   name: "genphy_c37_config_aneg"
   is_defined: true
@@ -423336,6 +423624,15 @@ elf_symbol {
   full_name: "gpio_device_get_chip"
 }
 elf_symbol {
+  id: 0x6747ccfe
+  name: "gpio_device_get_desc"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x69d29df1
+  type_id: 0x58f6a03b
+  full_name: "gpio_device_get_desc"
+}
+elf_symbol {
   id: 0x3aa96cc3
   name: "gpio_device_to_device"
   is_defined: true
@@ -423514,6 +423811,15 @@ elf_symbol {
   crc: 0x9223d124
   type_id: 0x9b54e21c
   full_name: "gpiochip_populate_parent_fwspec_fourcell"
+}
+elf_symbol {
+  id: 0xf6adf25c
+  name: "gpiochip_query_valid_mask"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x5c45328e
+  type_id: 0xe1f0750f
+  full_name: "gpiochip_query_valid_mask"
 }
 elf_symbol {
   id: 0x7dd9e61e
@@ -430950,6 +431256,24 @@ elf_symbol {
   full_name: "kvfree_sensitive"
 }
 elf_symbol {
+  id: 0x117b2ce4
+  name: "kvm_disable_trbe"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd272d446
+  type_id: 0x10985193
+  full_name: "kvm_disable_trbe"
+}
+elf_symbol {
+  id: 0xe613c6e5
+  name: "kvm_enable_trbe"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd272d446
+  type_id: 0x10985193
+  full_name: "kvm_enable_trbe"
+}
+elf_symbol {
   id: 0xca6c2d8c
   name: "kvm_iommu_alloc_domain"
   is_defined: true
@@ -432296,6 +432620,15 @@ elf_symbol {
   full_name: "mbox_send_message"
 }
 elf_symbol {
+  id: 0x05646d55
+  name: "mctrl_gpio_disable_ms_no_sync"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x64e21c8e
+  type_id: 0x12587114
+  full_name: "mctrl_gpio_disable_ms_no_sync"
+}
+elf_symbol {
   id: 0x94feced5
   name: "mctrl_gpio_disable_ms_sync"
   is_defined: true
@@ -432321,6 +432654,15 @@ elf_symbol {
   crc: 0x03e36209
   type_id: 0xcc749bfc
   full_name: "mctrl_gpio_get"
+}
+elf_symbol {
+  id: 0xe22ebd96
+  name: "mctrl_gpio_get_outputs"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x03e36209
+  type_id: 0xcc749bfc
+  full_name: "mctrl_gpio_get_outputs"
 }
 elf_symbol {
   id: 0x225925a6
@@ -436700,6 +437042,15 @@ elf_symbol {
   full_name: "of_device_is_available"
 }
 elf_symbol {
+  id: 0x4f555551
+  name: "of_device_is_big_endian"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x973bf180
+  type_id: 0xf22f7816
+  full_name: "of_device_is_big_endian"
+}
+elf_symbol {
   id: 0x490e6dfe
   name: "of_device_is_compatible"
   is_defined: true
@@ -436761,6 +437112,15 @@ elf_symbol {
   crc: 0x4e359525
   type_id: 0xf3b89be9
   full_name: "of_dma_is_coherent"
+}
+elf_symbol {
+  id: 0x946cd8ba
+  name: "of_dma_router_register"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xfbc9714f
+  type_id: 0x90e11933
+  full_name: "of_dma_router_register"
 }
 elf_symbol {
   id: 0x85218a7f
@@ -438559,6 +438919,15 @@ elf_symbol {
   full_name: "pci_bus_claim_resources"
 }
 elf_symbol {
+  id: 0xbec826c0
+  name: "pci_bus_read_config_dword"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x9b9f8e9a
+  type_id: 0x944db684
+  full_name: "pci_bus_read_config_dword"
+}
+elf_symbol {
   id: 0x22e85b74
   name: "pci_bus_size_bridges"
   is_defined: true
@@ -438766,6 +439135,15 @@ elf_symbol {
   full_name: "pci_enable_device_mem"
 }
 elf_symbol {
+  id: 0xf522f449
+  name: "pci_enable_link_state"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x817bb202
+  type_id: 0x9865c1f0
+  full_name: "pci_enable_link_state"
+}
+elf_symbol {
   id: 0xf6382d08
   name: "pci_enable_msi"
   is_defined: true
@@ -438881,6 +439259,15 @@ elf_symbol {
   crc: 0x394d42f2
   type_id: 0x04ce0b6f
   full_name: "pci_find_ext_capability"
+}
+elf_symbol {
+  id: 0x780d1110
+  name: "pci_find_host_bridge"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xbca90ef7
+  type_id: 0x636e6c75
+  full_name: "pci_find_host_bridge"
 }
 elf_symbol {
   id: 0xbbb674cc
@@ -439565,6 +439952,24 @@ elf_symbol {
   crc: 0x31120ae5
   type_id: 0x99f942bc
   full_name: "pcie_get_mps"
+}
+elf_symbol {
+  id: 0x8897c24a
+  name: "pcie_get_speed_cap"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x926fb7c1
+  type_id: 0x2ec04b91
+  full_name: "pcie_get_speed_cap"
+}
+elf_symbol {
+  id: 0xb69b7010
+  name: "pcie_get_width_cap"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x40855901
+  type_id: 0x48800604
+  full_name: "pcie_get_width_cap"
 }
 elf_symbol {
   id: 0xc0468e7f
@@ -453515,6 +453920,24 @@ elf_symbol {
   full_name: "spmi_controller_remove"
 }
 elf_symbol {
+  id: 0xe77ae602
+  name: "spmi_device_add"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x38d31274
+  type_id: 0x9ab9a458
+  full_name: "spmi_device_add"
+}
+elf_symbol {
+  id: 0xda6e9ac9
+  name: "spmi_device_alloc"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x6fa6612d
+  type_id: 0x40ff39b0
+  full_name: "spmi_device_alloc"
+}
+elf_symbol {
   id: 0x37c222d5
   name: "spmi_ext_register_read"
   is_defined: true
@@ -454481,6 +454904,15 @@ elf_symbol {
   crc: 0xeb748ba0
   type_id: 0x958c8293
   full_name: "sysfs_add_link_to_group"
+}
+elf_symbol {
+  id: 0x94c17aed
+  name: "sysfs_chmod_file"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x14326dbe
+  type_id: 0x9585421a
+  full_name: "sysfs_chmod_file"
 }
 elf_symbol {
   id: 0x90640a71
@@ -457761,6 +458193,24 @@ elf_symbol {
   full_name: "uart_insert_char"
 }
 elf_symbol {
+  id: 0x3714b6e5
+  name: "uart_match_port"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x55b7a2d2
+  type_id: 0xf19f47cc
+  full_name: "uart_match_port"
+}
+elf_symbol {
+  id: 0x637e9bac
+  name: "uart_parse_earlycon"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x0c82ca07
+  type_id: 0x9c2a5d1e
+  full_name: "uart_parse_earlycon"
+}
+elf_symbol {
   id: 0xffeb078f
   name: "uart_parse_options"
   is_defined: true
@@ -458110,6 +458560,15 @@ elf_symbol {
   crc: 0x9fff567a
   type_id: 0x9c35aa01
   full_name: "ufshcd_change_power_mode"
+}
+elf_symbol {
+  id: 0x831615c5
+  name: "ufshcd_clkgate_delay_set"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x1ca79bb7
+  type_id: 0x10c3ba5a
+  full_name: "ufshcd_clkgate_delay_set"
 }
 elf_symbol {
   id: 0xa45d6674
@@ -459526,6 +459985,15 @@ elf_symbol {
   crc: 0xc4dafb03
   type_id: 0xa2868e3b
   full_name: "usb_ep_autoconfig"
+}
+elf_symbol {
+  id: 0x9d8d4423
+  name: "usb_ep_autoconfig_ss"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x9b85d71d
+  type_id: 0xa28a8fc1
+  full_name: "usb_ep_autoconfig_ss"
 }
 elf_symbol {
   id: 0x50104747
@@ -466524,6 +466992,7 @@ interface {
   symbol_id: 0x3f068dc8
   symbol_id: 0x727b6def
   symbol_id: 0x2a48bf7d
+  symbol_id: 0xfc3f92c1
   symbol_id: 0xe3a7489a
   symbol_id: 0xf7c2da07
   symbol_id: 0x1141e9bb
@@ -468523,6 +468992,7 @@ interface {
   symbol_id: 0x8814eddf
   symbol_id: 0x4e505a21
   symbol_id: 0xa3814535
+  symbol_id: 0x651f6a71
   symbol_id: 0x3c7e214c
   symbol_id: 0x3a41b660
   symbol_id: 0x21702781
@@ -468901,6 +469371,7 @@ interface {
   symbol_id: 0x430bfeda
   symbol_id: 0xf06c3226
   symbol_id: 0x0522e13b
+  symbol_id: 0x4f612feb
   symbol_id: 0xef28f52a
   symbol_id: 0xb14ae124
   symbol_id: 0x4cf39275
@@ -468946,6 +469417,7 @@ interface {
   symbol_id: 0x4c537c27
   symbol_id: 0x3d10b5b8
   symbol_id: 0x10e14b48
+  symbol_id: 0x81aa2ce7
   symbol_id: 0x406ac226
   symbol_id: 0x5948b88e
   symbol_id: 0x85d79e5f
@@ -469184,6 +469656,7 @@ interface {
   symbol_id: 0xe2150034
   symbol_id: 0xb0ae7663
   symbol_id: 0xf97f370a
+  symbol_id: 0x6dc2bff8
   symbol_id: 0xaff52b5c
   symbol_id: 0xc3377ccb
   symbol_id: 0x0ba701fe
@@ -469301,6 +469774,7 @@ interface {
   symbol_id: 0x0d97ed87
   symbol_id: 0x0aa80467
   symbol_id: 0x92dcd9e0
+  symbol_id: 0x1e1a06d6
   symbol_id: 0xde18ea43
   symbol_id: 0xd14b81b5
   symbol_id: 0x2d6a4342
@@ -469480,6 +469954,7 @@ interface {
   symbol_id: 0x4a6566b1
   symbol_id: 0x0e6117e6
   symbol_id: 0x4b1cb09a
+  symbol_id: 0x425f4d8f
   symbol_id: 0xbcab4e4a
   symbol_id: 0xa77979a2
   symbol_id: 0x56724950
@@ -469561,6 +470036,7 @@ interface {
   symbol_id: 0xb6582726
   symbol_id: 0x0bc8f86d
   symbol_id: 0x5463e7ba
+  symbol_id: 0xd6a1eff6
   symbol_id: 0x901f9d38
   symbol_id: 0x655f3c71
   symbol_id: 0xee877b72
@@ -469832,6 +470308,7 @@ interface {
   symbol_id: 0xff22568f
   symbol_id: 0xe21486eb
   symbol_id: 0x4fa53f59
+  symbol_id: 0x25c01835
   symbol_id: 0xc98da8e7
   symbol_id: 0xd5466b6c
   symbol_id: 0x1d9e3d52
@@ -469843,6 +470320,7 @@ interface {
   symbol_id: 0xd9c6b1b6
   symbol_id: 0x0a479d68
   symbol_id: 0xcb9062ec
+  symbol_id: 0xeb615d72
   symbol_id: 0x85741d8b
   symbol_id: 0x13b62ed6
   symbol_id: 0xa9a0aa89
@@ -469890,6 +470368,7 @@ interface {
   symbol_id: 0x5f99d405
   symbol_id: 0x308067a6
   symbol_id: 0xe375001c
+  symbol_id: 0x09621b81
   symbol_id: 0xace15cad
   symbol_id: 0x38dc8db4
   symbol_id: 0xf8c5a501
@@ -469999,6 +470478,7 @@ interface {
   symbol_id: 0x9543b6f4
   symbol_id: 0xe8ffa2f1
   symbol_id: 0x57980a14
+  symbol_id: 0x48f7af32
   symbol_id: 0x5654b5d3
   symbol_id: 0x0cb650e6
   symbol_id: 0xaf3c279d
@@ -470680,6 +471160,7 @@ interface {
   symbol_id: 0xc09fd862
   symbol_id: 0x3598fbb3
   symbol_id: 0x343a2d56
+  symbol_id: 0x71bc0736
   symbol_id: 0xa0c0d25f
   symbol_id: 0xb87c5ff6
   symbol_id: 0xd1e108fe
@@ -470794,6 +471275,7 @@ interface {
   symbol_id: 0x2b91f916
   symbol_id: 0xcf06489d
   symbol_id: 0xa2362332
+  symbol_id: 0x6747ccfe
   symbol_id: 0x3aa96cc3
   symbol_id: 0x2defacf0
   symbol_id: 0xbde724d2
@@ -470814,6 +471296,7 @@ interface {
   symbol_id: 0x65492c23
   symbol_id: 0xa106a350
   symbol_id: 0x59b3b64e
+  symbol_id: 0xf6adf25c
   symbol_id: 0x7dd9e61e
   symbol_id: 0x77a0ab63
   symbol_id: 0x4825b485
@@ -471638,6 +472121,8 @@ interface {
   symbol_id: 0x15a3f41a
   symbol_id: 0x6e8c6baf
   symbol_id: 0xa91d5234
+  symbol_id: 0x117b2ce4
+  symbol_id: 0xe613c6e5
   symbol_id: 0xca6c2d8c
   symbol_id: 0xdfad7ed3
   symbol_id: 0xa278ae56
@@ -471787,9 +472272,11 @@ interface {
   symbol_id: 0xa93d3855
   symbol_id: 0x88716266
   symbol_id: 0x28a1af7f
+  symbol_id: 0x05646d55
   symbol_id: 0x94feced5
   symbol_id: 0xfff946e6
   symbol_id: 0x6b021d79
+  symbol_id: 0xe22ebd96
   symbol_id: 0x225925a6
   symbol_id: 0x791e75a2
   symbol_id: 0x58a39a91
@@ -472276,6 +472763,7 @@ interface {
   symbol_id: 0x88e4c008
   symbol_id: 0x99c34b67
   symbol_id: 0x5bbd22c3
+  symbol_id: 0x4f555551
   symbol_id: 0x490e6dfe
   symbol_id: 0xa4bda7eb
   symbol_id: 0x34456de2
@@ -472283,6 +472771,7 @@ interface {
   symbol_id: 0xb784add6
   symbol_id: 0x46255d0e
   symbol_id: 0xcd27d22d
+  symbol_id: 0x946cd8ba
   symbol_id: 0x85218a7f
   symbol_id: 0x9368cefd
   symbol_id: 0xd37bdc53
@@ -472482,6 +472971,7 @@ interface {
   symbol_id: 0x082c11eb
   symbol_id: 0x375c1ee2
   symbol_id: 0x2ad69fc2
+  symbol_id: 0xbec826c0
   symbol_id: 0x22e85b74
   symbol_id: 0x1540c319
   symbol_id: 0x06548b7e
@@ -472505,6 +472995,7 @@ interface {
   symbol_id: 0x35a3d772
   symbol_id: 0x86bcc4a0
   symbol_id: 0xf1728c3f
+  symbol_id: 0xf522f449
   symbol_id: 0xf6382d08
   symbol_id: 0x433f7035
   symbol_id: 0xca5fcd83
@@ -472518,6 +473009,7 @@ interface {
   symbol_id: 0x3852868c
   symbol_id: 0x27f20808
   symbol_id: 0x63876663
+  symbol_id: 0x780d1110
   symbol_id: 0xbbb674cc
   symbol_id: 0x969e210d
   symbol_id: 0xbbf8a63b
@@ -472594,6 +473086,8 @@ interface {
   symbol_id: 0x1070f731
   symbol_id: 0x9c45e831
   symbol_id: 0xb7c9d0b8
+  symbol_id: 0x8897c24a
+  symbol_id: 0xb69b7010
   symbol_id: 0xc0468e7f
   symbol_id: 0x6a5075fe
   symbol_id: 0xffa3ecd1
@@ -474143,6 +474637,8 @@ interface {
   symbol_id: 0xc1ff3a0f
   symbol_id: 0xb9875bdb
   symbol_id: 0x494d6bbb
+  symbol_id: 0xe77ae602
+  symbol_id: 0xda6e9ac9
   symbol_id: 0x37c222d5
   symbol_id: 0x75b6f1be
   symbol_id: 0x54aaff66
@@ -474251,6 +474747,7 @@ interface {
   symbol_id: 0x18d0dd21
   symbol_id: 0x92705587
   symbol_id: 0xdbe66171
+  symbol_id: 0x94c17aed
   symbol_id: 0x90640a71
   symbol_id: 0x5b711bcd
   symbol_id: 0xc84792a8
@@ -474615,6 +475112,8 @@ interface {
   symbol_id: 0x42e824ab
   symbol_id: 0x6a1d1a11
   symbol_id: 0xd3ec6f8d
+  symbol_id: 0x3714b6e5
+  symbol_id: 0x637e9bac
   symbol_id: 0xffeb078f
   symbol_id: 0xb56e6dcc
   symbol_id: 0x321abf21
@@ -474654,6 +475153,7 @@ interface {
   symbol_id: 0x5ba31e17
   symbol_id: 0x3b41d1e4
   symbol_id: 0xb91d5141
+  symbol_id: 0x831615c5
   symbol_id: 0xa45d6674
   symbol_id: 0x536defb8
   symbol_id: 0x8987b1eb
@@ -474811,6 +475311,7 @@ interface {
   symbol_id: 0xc4c75d65
   symbol_id: 0x3fdad193
   symbol_id: 0x00e285ec
+  symbol_id: 0x9d8d4423
   symbol_id: 0x50104747
   symbol_id: 0xe17a0800
   symbol_id: 0x1a573f6f
