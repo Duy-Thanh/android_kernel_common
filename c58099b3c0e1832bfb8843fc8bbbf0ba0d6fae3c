@@ -34,6 +34,24 @@
       "parentUuid": "3189e8ba_b52b7059",
       "revId": "c58099b3c0e1832bfb8843fc8bbbf0ba0d6fae3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7261967e_a6661328",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 4605888
+      },
+      "writtenOn": "2026-08-28T04:57:35Z",
+      "side": 1,
+      "message": "Added both suggestions given above to latest patch. Please review.",
+      "parentUuid": "05632123_cb35649c",
+      "revId": "c58099b3c0e1832bfb8843fc8bbbf0ba0d6fae3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
