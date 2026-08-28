@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9d577014_a29c6aa5",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-08-28T20:51:47Z",
+      "side": 1,
+      "message": "Not a hard rule of course, but the functions in the file are defined after all the struct and global declarations, so I thought to retain that pattern.\n\nI moved this block down though just to avoid having to use a forward declaration. What do you think?",
+      "parentUuid": "e6f9141e_a00738c4",
+      "range": {
+        "startLine": 34,
+        "startChar": 11,
+        "endLine": 34,
+        "endChar": 34
+      },
+      "revId": "7c39cbd2e221f5e3d53035adb329ade7b46d53a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8f55ed4d_29796f00",
         "filename": "drivers/android/wrapfd.c",
         "patchSetId": 7
@@ -148,6 +172,30 @@
           ]
         }
       ],
+      "revId": "7c39cbd2e221f5e3d53035adb329ade7b46d53a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56684ec8_8ad64752",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-08-28T20:51:47Z",
+      "side": 1,
+      "message": "Done. I ended up moving some of the values that are constant for an IO request out of the struct and calculate them as necessary, since they\u0027re not expensive to re-calculate.",
+      "parentUuid": "8f55ed4d_29796f00",
+      "range": {
+        "startLine": 89,
+        "startChar": 8,
+        "endLine": 89,
+        "endChar": 17
+      },
       "revId": "7c39cbd2e221f5e3d53035adb329ade7b46d53a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
