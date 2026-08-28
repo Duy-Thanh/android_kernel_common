@@ -350111,6 +350111,14 @@ function {
   parameter_id: 0xc9082b19
 }
 function {
+  id: 0x9114142e
+  return_type_id: 0x6720d32f
+  parameter_id: 0x3267a784
+  parameter_id: 0x0258f96e
+  parameter_id: 0x18bd6530
+  parameter_id: 0x949717cb
+}
+function {
   id: 0x91146625
   return_type_id: 0x6720d32f
   parameter_id: 0x32a623d7
@@ -415441,6 +415449,15 @@ elf_symbol {
   full_name: "driver_find_device"
 }
 elf_symbol {
+  id: 0x9b35e60f
+  name: "driver_for_each_device"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x489a5277
+  type_id: 0x9114142e
+  full_name: "driver_for_each_device"
+}
+elf_symbol {
   id: 0x1f0cd029
   name: "driver_register"
   is_defined: true
@@ -421730,6 +421747,15 @@ elf_symbol {
   crc: 0xec667310
   type_id: 0x1958e6c4
   full_name: "folio_wait_bit"
+}
+elf_symbol {
+  id: 0x51f2e056
+  name: "folio_wait_writeback"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xc30648fe
+  type_id: 0x18c46588
+  full_name: "folio_wait_writeback"
 }
 elf_symbol {
   id: 0xf20cee49
@@ -471118,6 +471144,7 @@ interface {
   symbol_id: 0xbde576b8
   symbol_id: 0xf2cf40cf
   symbol_id: 0xa6a7d8d9
+  symbol_id: 0x9b35e60f
   symbol_id: 0x1f0cd029
   symbol_id: 0xd90c83a1
   symbol_id: 0x5234324e
@@ -471816,6 +471843,7 @@ interface {
   symbol_id: 0xc05a6c7d
   symbol_id: 0x8ac19c42
   symbol_id: 0x3dca9a13
+  symbol_id: 0x51f2e056
   symbol_id: 0xf20cee49
   symbol_id: 0x11f54a64
   symbol_id: 0x28aa9430

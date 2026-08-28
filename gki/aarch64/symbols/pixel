@@ -325,6 +325,7 @@
   device_link_add
   device_link_del
   device_match_fwnode
+  device_match_of_node
   device_property_match_string
   device_property_present
   device_property_read_bool
@@ -560,6 +561,8 @@
   down_write
   dput
   drain_workqueue
+  driver_find_device
+  driver_for_each_device
   driver_register
   driver_unregister
   drm_add_modes_noedid
@@ -856,6 +859,7 @@
   __folio_lock
   __folio_put
   folio_unlock
+  folio_wait_writeback
   for_each_thermal_trip
   __fortify_panic
   fput
@@ -1272,6 +1276,8 @@
   kvm_iommu_share_hyp_sg
   kvm_iommu_unmap_pages
   kvm_iommu_unshare_hyp_sg
+  __kvm_nvhe_kvm_patch_physvirt_offset
+  __kvm_nvhe_kvm_update_va_mask
   kvm_tracing_set_el1_configuration
   led_classdev_register_ext
   led_classdev_unregister
@@ -2186,9 +2192,12 @@
   trace_handle_return
   __traceiter_android_rvh_gup_longterm_locked
   __traceiter_android_rvh_hw_protection_shutdown
+  __traceiter_android_rvh_madvise_pageout_begin
+  __traceiter_android_rvh_madvise_pageout_end
   __traceiter_android_rvh_mapping_shrinkable
   __traceiter_android_rvh_meminfo_proc_show
   __traceiter_android_rvh_read_swap_cache_async_timeout
+  __traceiter_android_rvh_reclaim_folio_list
   __traceiter_android_rvh_set_user_nice_locked
   __traceiter_android_rvh_swap_read_folio_bdev_sync
   __traceiter_android_rvh_task_fits_cpu
@@ -2254,9 +2263,12 @@
   trace_output_call
   __tracepoint_android_rvh_gup_longterm_locked
   __tracepoint_android_rvh_hw_protection_shutdown
+  __tracepoint_android_rvh_madvise_pageout_begin
+  __tracepoint_android_rvh_madvise_pageout_end
   __tracepoint_android_rvh_mapping_shrinkable
   __tracepoint_android_rvh_meminfo_proc_show
   __tracepoint_android_rvh_read_swap_cache_async_timeout
+  __tracepoint_android_rvh_reclaim_folio_list
   __tracepoint_android_rvh_set_user_nice_locked
   __tracepoint_android_rvh_swap_read_folio_bdev_sync
   __tracepoint_android_rvh_task_fits_cpu
@@ -2522,6 +2534,7 @@
   vmf_insert_pfn_prot
   vm_node_stat
   vm_unmapped_area
+  vm_zone_stat
   vprintk
   vprintk_emit
   vring_del_virtqueue
