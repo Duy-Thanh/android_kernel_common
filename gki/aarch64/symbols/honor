@@ -185,6 +185,10 @@
   __tracepoint_block_rq_merge
   __traceiter_block_rq_requeue
   __tracepoint_block_rq_requeue
+  __traceiter_android_vh_mem_cgroup_over_high_reclaim
+  __tracepoint_android_vh_mem_cgroup_over_high_reclaim
+  __traceiter_android_vh_mem_cgroup_over_high_penalty
+  __tracepoint_android_vh_mem_cgroup_over_high_penalty
   mempool_exit
   dm_register_target
   dm_unregister_target
