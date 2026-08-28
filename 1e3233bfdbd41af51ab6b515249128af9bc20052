@@ -16,6 +16,24 @@
       "message": "why is this needed. What feature does it enable?\n\nYou must create a patch on top of this one to add the new symbols to your symbol list",
       "revId": "1e3233bfdbd41af51ab6b515249128af9bc20052",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d32b4c45_3dc6244c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3486811
+      },
+      "writtenOn": "2026-08-28T08:22:47Z",
+      "side": 1,
+      "message": "This is needed for Honor\u0027s customized asynchronous Binder priority policy.\n\nWhen an asynchronous Binder transaction completes, we need to invoke trace_android_vh_binder_restore_priority() to restore the thread\u0027s original priority. This prevents a priority override from leaking into subsequent work.\n\nRegarding the symbol list, trace_android_vh_binder_restore_priority is already an existing symbol and is already included in the current symbol list. Therefore, this patch does not introduce any new symbols that need to be added.",
+      "parentUuid": "905d9854_7a55edba",
+      "revId": "1e3233bfdbd41af51ab6b515249128af9bc20052",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
