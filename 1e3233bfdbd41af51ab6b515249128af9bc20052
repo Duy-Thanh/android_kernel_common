@@ -34,6 +34,24 @@
       "parentUuid": "905d9854_7a55edba",
       "revId": "1e3233bfdbd41af51ab6b515249128af9bc20052",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b09da432_e81bedc1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-08-28T16:36:18Z",
+      "side": 1,
+      "message": "Are you saying that the \"priority override\" is not being properly restored by the binder driver? If so, please submit an actual fix instead of a vendor hook. If not, then please clarify what this feature is doing and why the priority needs to be changed by the hook. Put this in the commit message.",
+      "parentUuid": "d32b4c45_3dc6244c",
+      "revId": "1e3233bfdbd41af51ab6b515249128af9bc20052",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
