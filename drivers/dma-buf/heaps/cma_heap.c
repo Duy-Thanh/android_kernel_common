@@ -422,6 +422,11 @@ static int __init add_cma_heaps(void)
 }
 module_init(add_cma_heaps);
 MODULE_DESCRIPTION("DMA-BUF CMA Heap");
+<<<<<<< HEAD   (62472d9b40cf9ab09e948d85ae63e14979b462c8 UPSTREAM: dma-fence: Fix potential tracepoint null pointer d)
 MODULE_LICENSE("GPL v2");
+||||||| BASE   (9c87e61e3c5797277407ba5eae4eac8a52be3fa3 Merge tag 'bpf-next-7.2' of git://git.kernel.org/pub/scm/lin)
+=======
+MODULE_LICENSE("GPL");
+>>>>>>> BRANCH (4b99990cdf9560e8a071640baf19f312e6ae02f4 Merge tag 'drm-next-2026-06-17' of https://gitlab.freedeskto)
 MODULE_IMPORT_NS("DMA_BUF");
 MODULE_IMPORT_NS("DMA_BUF_HEAP");
