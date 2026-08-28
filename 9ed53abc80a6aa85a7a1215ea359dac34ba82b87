@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ef0fded_80502a4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-08-28T13:41:43Z",
+      "side": 1,
+      "message": "This patch must go after the next patch aosp/4232686, not before (since before aosp/4232686, `pkvm_handle_host_ept_violation()` still takes `host_mmu_lock` on its own). Let me fix this.",
+      "revId": "9ed53abc80a6aa85a7a1215ea359dac34ba82b87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
