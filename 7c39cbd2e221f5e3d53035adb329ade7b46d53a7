@@ -16,6 +16,140 @@
       "message": "I\u0027ll resolve this after @surenb@google.com take\u0027s a look at the patch",
       "revId": "7c39cbd2e221f5e3d53035adb329ade7b46d53a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6f9141e_a00738c4",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-08-28T04:33:32Z",
+      "side": 1,
+      "message": "Why not define the function here and avoid forward declaration?",
+      "range": {
+        "startLine": 34,
+        "startChar": 11,
+        "endLine": 34,
+        "endChar": 34
+      },
+      "revId": "7c39cbd2e221f5e3d53035adb329ade7b46d53a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f55ed4d_29796f00",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-08-28T04:33:32Z",
+      "side": 1,
+      "message": "Many fields containing \"file_offs\" and \"len\". It\u0027s a bit confusing. Maybe define a\n\n```\nstruct file_region {\n\tloff_t offs;\n\tsize_t len;\n};\n```\nand use it here to structure the fields a bit better. Might be a bit more readable.",
+      "range": {
+        "startLine": 89,
+        "startChar": 8,
+        "endLine": 89,
+        "endChar": 17
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "816499a8_0ee96eac",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 89,
+                "startChar": 0,
+                "endLine": 92,
+                "endChar": 0
+              },
+              "replacement": "\tloff_t req_file_offs;\n\tloff_t req_buf_offs;\n\tsize_t req_len;\n"
+            },
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 396,
+                "startChar": 0,
+                "endLine": 398,
+                "endChar": 0
+              },
+              "replacement": "\tio_ctx-\u003ereq_file_offs \u003d file_offs;\n\tio_ctx-\u003ereq_buf_offs \u003d buf_offs;\n"
+            },
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 400,
+                "startChar": 0,
+                "endLine": 401,
+                "endChar": 0
+              },
+              "replacement": "\tio_ctx-\u003ereq_len \u003d len;\n"
+            },
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 459,
+                "startChar": 0,
+                "endLine": 460,
+                "endChar": 0
+              },
+              "replacement": "\treturn io_ctx-\u003ebytes_read \u003c offset_in_page(io_ctx-\u003ereq_file_offs) + io_ctx-\u003ereq_len ? -EINVAL : 0;\n"
+            },
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 469,
+                "startChar": 0,
+                "endLine": 470,
+                "endChar": 0
+              },
+              "replacement": "\tif (io_ctx-\u003ebytes_read \u003c (offset_in_page(io_ctx-\u003ereq_file_offs) + io_ctx-\u003ereq_len))\n"
+            },
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 472,
+                "startChar": 0,
+                "endLine": 474,
+                "endChar": 0
+              },
+              "replacement": "\ttot_len \u003d io_ctx-\u003ereq_len;\n\tdst \u003d io_ctx-\u003edst_buf + io_ctx-\u003ereq_buf_offs;\n"
+            },
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 476,
+                "startChar": 0,
+                "endLine": 477,
+                "endChar": 0
+              },
+              "replacement": "\t\tsrc \u003d io_ctx-\u003ebounce_bufs[cur_bounce_page] + offset_in_page(io_ctx-\u003ereq_file_offs);\n"
+            },
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 478,
+                "startChar": 0,
+                "endLine": 479,
+                "endChar": 0
+              },
+              "replacement": "\t\tlen \u003d min(tot_len, PAGE_SIZE - offset_in_page(io_ctx-\u003ereq_file_offs));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7c39cbd2e221f5e3d53035adb329ade7b46d53a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
