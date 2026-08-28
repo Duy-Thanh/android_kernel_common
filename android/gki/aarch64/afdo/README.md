@@ -18,7 +18,7 @@ benchmark noise.
 
 | Benchmark            | Improvement |
 | -------------------- | ----------- |
-| Boot time            | 8.0%        |
+| Boot time            | 2.58%       |
 | Cold App launch time | 2.2%        |
 | Binder-rpc           | 12.9%       |
 | Binder-addints       | 27.3%       |
