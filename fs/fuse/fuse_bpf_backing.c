@@ -5,6 +5,7 @@
 */
 
 #include "fuse_i.h"
+#include <linux/backing-file.h>
 #include <linux/fdtable.h>
 #include <linux/filelock.h>
 #include <linux/filter.h>
@@ -130,9 +131,10 @@ int fuse_open_backing(struct fuse_bpf_args *fa,
 	if (retval)
 		return retval;
 
-	backing_file = dentry_open(&fd->backing_path,
-				   foi->flags,
-				   current_cred());
+	backing_file = backing_file_open(&file->f_path,
+					 foi->flags,
+					 &fd->backing_path,
+					 current_cred());
 
 	if (IS_ERR(backing_file)) {
 		fuse_file_free(ff);
@@ -209,8 +211,9 @@ static int fuse_open_file_backing(struct inode *inode, struct file *file)
 		return -ENOMEM;
 	file->private_data = fuse_file;
 
-	backing_file = dentry_open(&fuse_dentry->backing_path, file->f_flags,
-				   current_cred());
+	backing_file = backing_file_open(&file->f_path, file->f_flags,
+					 &fuse_dentry->backing_path,
+					 current_cred());
 	if (IS_ERR(backing_file)) {
 		fuse_file_free(fuse_file);
 		file->private_data = NULL;
