@@ -58,6 +58,9 @@ bool smmu_cmdq_has_space(struct arm_smmu_queue *cmdq, u32 n)
 {
 	struct arm_smmu_ll_queue *llq = &cmdq->llq;
 
+	if (queue_has_space(llq, n))
+		return true;
+
 	WRITE_ONCE(llq->cons, readl_relaxed(cmdq->cons_reg));
 	return queue_has_space(llq, n);
 }
