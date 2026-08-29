@@ -32,6 +32,9 @@ static inline bool smmu_cmdq_full(struct arm_smmu_queue *cmdq)
 {
 	struct arm_smmu_ll_queue *llq = &cmdq->llq;
 
+	if (!queue_full(llq))
+		return false;
+
 	WRITE_ONCE(llq->cons, readl_relaxed(cmdq->cons_reg));
 	return queue_full(llq);
 }
@@ -39,6 +42,9 @@ static inline bool smmu_cmdq_full(struct arm_smmu_queue *cmdq)
 static inline bool smmu_cmdq_empty(struct arm_smmu_queue *cmdq)
 {
 	struct arm_smmu_ll_queue *llq = &cmdq->llq;
+
+	if (queue_empty(llq))
+		return true;
 
 	WRITE_ONCE(llq->cons, readl_relaxed(cmdq->cons_reg));
 	return queue_empty(llq);
