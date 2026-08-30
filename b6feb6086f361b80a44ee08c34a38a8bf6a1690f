@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a55986b6_26026b6f",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-08-30T17:30:18Z",
+      "side": 1,
+      "message": "So, file_seg.len encodes io_ctx-\u003elen and io_ctx-\u003efile_read_len is calculated later?",
+      "range": {
+        "startLine": 258,
+        "startChar": 24,
+        "endLine": 258,
+        "endChar": 27
+      },
+      "revId": "b6feb6086f361b80a44ee08c34a38a8bf6a1690f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
