@@ -113,6 +113,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49d742fe_da2d2d91",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1493,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-08-31T20:33:59Z",
+      "side": 1,
+      "message": "Ack.",
+      "parentUuid": "3834303c_76055993",
+      "range": {
+        "startLine": 1493,
+        "startChar": 2,
+        "endLine": 1493,
+        "endChar": 16
+      },
+      "revId": "f4889840fb9175df41b2de6d9ac20502f6912c34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d2445e0d_1860866d",
@@ -244,6 +268,30 @@
       "side": 1,
       "message": "That would be a bad user design because `wrapfd_add_listener()` is supposed to be called only when the driver owns the buffer and if there is a race with `wrapfd_put_mappable()` then you can\u0027t guarantee that the driver owns it (if `wrapfd_put_mappable()` wins the race).\n\nI don\u0027t think we can lock `listeners_lock` before `is_owner_dev()` because that would introduce dependency between `ctx-\u003elock` and `listeners_lock` which can lead to a deadlock. I\u0027ll think more about ways we can handle this in a better way but I think this race should be prevented from the user side (making sure `wrapfd_add_listener()` is not racing with `wrapfd_put_mappable()`).",
       "parentUuid": "199310d9_2121256a",
+      "range": {
+        "startLine": 1525,
+        "startChar": 0,
+        "endLine": 1528,
+        "endChar": 0
+      },
+      "revId": "f4889840fb9175df41b2de6d9ac20502f6912c34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9115629f_a007eebc",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1528,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-08-31T20:33:59Z",
+      "side": 1,
+      "message": "Which scenario would result in a deadlock between `ctx-\u003elock` and `listeners_lock`?",
+      "parentUuid": "e234d039_a8c7100a",
       "range": {
         "startLine": 1525,
         "startChar": 0,
