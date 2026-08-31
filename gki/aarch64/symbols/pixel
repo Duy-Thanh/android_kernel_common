@@ -215,6 +215,30 @@
   __copy_overflow
   copy_page
   _copy_to_iter
+  coresight_alloc_device_name
+  coresight_barrier_pkt
+  coresight_claim_device
+  coresight_claim_device_unlocked
+  coresight_clear_self_claim_tag
+  coresight_disable_sysfs
+  coresight_disclaim_device
+  coresight_disclaim_device_unlocked
+  coresight_enable_sysfs
+  coresight_find_input_type
+  coresight_find_output_type
+  coresight_get_enable_clocks
+  coresight_get_platform_data
+  coresight_get_static_trace_id
+  coresight_init_driver
+  coresight_register
+  coresight_remove_driver
+  coresight_simple_show32
+  coresight_simple_show_pair
+  coresight_timeout
+  coresight_trace_id_get_static_system_id
+  coresight_trace_id_get_system_id
+  coresight_trace_id_put_system_id
+  coresight_unregister
   cpu_all_bits
   cpu_bit_bitmap
   cpufreq_cpu_get
