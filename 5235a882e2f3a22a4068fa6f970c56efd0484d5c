@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e219d88f_a88a46fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-08-31T16:06:35Z",
+      "side": 1,
+      "message": "Can we move this e.g. `# CONFIG_COMPAT  is not set` or whatever is needed into build/kernel/kleaf/impl/defconfig/arm64_16k_defconfig fragment? It would be great to avoid this tech-debt in android-mainline if possible.",
+      "revId": "5235a882e2f3a22a4068fa6f970c56efd0484d5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
