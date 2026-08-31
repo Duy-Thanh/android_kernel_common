@@ -22,6 +22,30 @@
       },
       "revId": "b6feb6086f361b80a44ee08c34a38a8bf6a1690f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ea2d526_0a68dd4f",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-08-31T16:59:17Z",
+      "side": 1,
+      "message": "Yeah, whenver `io_ctx-\u003efile_read_len` is needed, we I use `dio_aligned_len()`. Since it\u0027s easy to compute and understand, I thought having a separate variable for it wasn\u0027t necessary; we just have to be careful of when we want len vs dio_aligned_len(), but that was true with `len` vs `file_read_len` anyway. What do you think?",
+      "parentUuid": "a55986b6_26026b6f",
+      "range": {
+        "startLine": 258,
+        "startChar": 24,
+        "endLine": 258,
+        "endChar": 27
+      },
+      "revId": "b6feb6086f361b80a44ee08c34a38a8bf6a1690f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
