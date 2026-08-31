@@ -695,8 +695,10 @@ static void dmabuf_content_free(struct wrap_content *content)
 
 	dmabuf_content = container_of(content, struct wrap_content_dmabuf,
 				      content);
-	if (dmabuf_content->dmabuf)
+	if (dmabuf_content->dmabuf) {
 		dma_buf_put(dmabuf_content->dmabuf);
+		BUG_ON(clear_dmabuf_content(dmabuf_content->dmabuf));
+	}
 	kfree(dmabuf_content);
 }
 
