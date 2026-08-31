@@ -1,0 +1,137 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23593683_9633fcca",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 951,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-08-31T18:53:50Z",
+      "side": 1,
+      "message": "Might be a good idea to either ensure that `on_content_release()` is defined before invoking it, or check in `add_listener()` and fail to add it if it\u0027s not defined. I think the latter makes the most sense given the support we have right now.",
+      "range": {
+        "startLine": 951,
+        "startChar": 3,
+        "endLine": 951,
+        "endChar": 54
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "7ead2c26_a4d4f59d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\tif (!ops || !ops-\u003eon_content_release)\n\t\treturn -EINVAL;\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f4889840fb9175df41b2de6d9ac20502f6912c34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab11ef6a_fc2bbf31",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1493,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-08-31T18:53:50Z",
+      "side": 1,
+      "message": "nit and in `wrapfd_del_listener()` too: this is bad file number, which sounds like fds, but we\u0027re using a proper file handle here, so I think `-EINVAL` might actually be more appropriate here?",
+      "range": {
+        "startLine": 1493,
+        "startChar": 2,
+        "endLine": 1493,
+        "endChar": 16
+      },
+      "revId": "f4889840fb9175df41b2de6d9ac20502f6912c34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2445e0d_1860866d",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1497,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-08-31T18:53:50Z",
+      "side": 1,
+      "message": "nit: this can be `kmalloc_obj(*listener);`",
+      "range": {
+        "startLine": 1497,
+        "startChar": 12,
+        "endLine": 1497,
+        "endChar": 51
+      },
+      "revId": "f4889840fb9175df41b2de6d9ac20502f6912c34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a060d98_4575498d",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1514,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-08-31T18:53:50Z",
+      "side": 1,
+      "message": "nit: this doesn\u0027t have to happen under locks; you can initialize the structure after you allocate it.",
+      "range": {
+        "startLine": 1512,
+        "startChar": 0,
+        "endLine": 1514,
+        "endChar": 25
+      },
+      "revId": "f4889840fb9175df41b2de6d9ac20502f6912c34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "199310d9_2121256a",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1528,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-08-31T18:53:50Z",
+      "side": 1,
+      "message": "I think you need to lock this mutex befor the `is_owner_dev()` check. If not, I think the possible scenario could lead to a race condition (using UAF as an example):\n\nAfter dropping the spin lock, a separate thread from the driver uses the same `dev` pointer that owns the buffer, and invokes `wrapfd_put_mappable()`, which opens the door for another thread to close() the wrapfd and release it freeing the associated data structures. Then, when we come back to this thread, we\u0027ll use memory that\u0027s been freed.",
+      "range": {
+        "startLine": 1525,
+        "startChar": 0,
+        "endLine": 1528,
+        "endChar": 0
+      },
+      "revId": "f4889840fb9175df41b2de6d9ac20502f6912c34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
