@@ -16,6 +16,24 @@
       "message": "Can we move this e.g. `# CONFIG_COMPAT  is not set` or whatever is needed into build/kernel/kleaf/impl/defconfig/arm64_16k_defconfig fragment? It would be great to avoid this tech-debt in android-mainline if possible.",
       "revId": "5235a882e2f3a22a4068fa6f970c56efd0484d5c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f59a4e07_4d84e0a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-08-31T22:02:04Z",
+      "side": 1,
+      "message": "I think that seems reasonable. I tested it out on my local environment, and saw that if we add `# CONFIG_COMPAT is not set` to the respective 16k/64k defconfig fragments in kleaf, the kernel is built without compat support, which is what this patch achieves, so I think it should be safe to do that.",
+      "parentUuid": "e219d88f_a88a46fb",
+      "revId": "5235a882e2f3a22a4068fa6f970c56efd0484d5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
