@@ -44,6 +44,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cc0725e9_1945159c",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 951,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-08-31T19:19:04Z",
+      "side": 1,
+      "message": "Ack. We should check when listener is added.",
+      "parentUuid": "23593683_9633fcca",
+      "range": {
+        "startLine": 951,
+        "startChar": 3,
+        "endLine": 951,
+        "endChar": 54
+      },
+      "revId": "f4889840fb9175df41b2de6d9ac20502f6912c34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ab11ef6a_fc2bbf31",
         "filename": "drivers/android/wrapfd.c",
         "patchSetId": 1
@@ -55,6 +79,30 @@
       "writtenOn": "2026-08-31T18:53:50Z",
       "side": 1,
       "message": "nit and in `wrapfd_del_listener()` too: this is bad file number, which sounds like fds, but we\u0027re using a proper file handle here, so I think `-EINVAL` might actually be more appropriate here?",
+      "range": {
+        "startLine": 1493,
+        "startChar": 2,
+        "endLine": 1493,
+        "endChar": 16
+      },
+      "revId": "f4889840fb9175df41b2de6d9ac20502f6912c34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3834303c_76055993",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1493,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-08-31T19:19:04Z",
+      "side": 1,
+      "message": "We use the same error code for wrapfd_{get|put}_mappable(), so this is consistent. We basically say that the FD provided is not a valid wrapfd.",
+      "parentUuid": "ab11ef6a_fc2bbf31",
       "range": {
         "startLine": 1493,
         "startChar": 2,
@@ -90,6 +138,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f234847c_84beb781",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1497,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-08-31T19:19:04Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d2445e0d_1860866d",
+      "range": {
+        "startLine": 1497,
+        "startChar": 12,
+        "endLine": 1497,
+        "endChar": 51
+      },
+      "revId": "f4889840fb9175df41b2de6d9ac20502f6912c34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8a060d98_4575498d",
         "filename": "drivers/android/wrapfd.c",
         "patchSetId": 1
@@ -113,6 +185,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b6851c51_4f8741bb",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1514,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-08-31T19:19:04Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8a060d98_4575498d",
+      "range": {
+        "startLine": 1512,
+        "startChar": 0,
+        "endLine": 1514,
+        "endChar": 25
+      },
+      "revId": "f4889840fb9175df41b2de6d9ac20502f6912c34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "199310d9_2121256a",
         "filename": "drivers/android/wrapfd.c",
         "patchSetId": 1
@@ -124,6 +220,30 @@
       "writtenOn": "2026-08-31T18:53:50Z",
       "side": 1,
       "message": "I think you need to lock this mutex befor the `is_owner_dev()` check. If not, I think the possible scenario could lead to a race condition (using UAF as an example):\n\nAfter dropping the spin lock, a separate thread from the driver uses the same `dev` pointer that owns the buffer, and invokes `wrapfd_put_mappable()`, which opens the door for another thread to close() the wrapfd and release it freeing the associated data structures. Then, when we come back to this thread, we\u0027ll use memory that\u0027s been freed.",
+      "range": {
+        "startLine": 1525,
+        "startChar": 0,
+        "endLine": 1528,
+        "endChar": 0
+      },
+      "revId": "f4889840fb9175df41b2de6d9ac20502f6912c34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e234d039_a8c7100a",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1528,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-08-31T19:19:04Z",
+      "side": 1,
+      "message": "That would be a bad user design because `wrapfd_add_listener()` is supposed to be called only when the driver owns the buffer and if there is a race with `wrapfd_put_mappable()` then you can\u0027t guarantee that the driver owns it (if `wrapfd_put_mappable()` wins the race).\n\nI don\u0027t think we can lock `listeners_lock` before `is_owner_dev()` because that would introduce dependency between `ctx-\u003elock` and `listeners_lock` which can lead to a deadlock. I\u0027ll think more about ways we can handle this in a better way but I think this race should be prevented from the user side (making sure `wrapfd_add_listener()` is not racing with `wrapfd_put_mappable()`).",
+      "parentUuid": "199310d9_2121256a",
       "range": {
         "startLine": 1525,
         "startChar": 0,
