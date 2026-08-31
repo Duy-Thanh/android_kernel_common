@@ -27899,6 +27899,11 @@ pointer_reference {
   pointee_type_id: 0xe5ac437d
 }
 pointer_reference {
+  id: 0x340055b2
+  kind: POINTER
+  pointee_type_id: 0xfa41b054
+}
+pointer_reference {
   id: 0x34016e82
   kind: POINTER
   pointee_type_id: 0xfa455c97
@@ -30422,6 +30427,11 @@ pointer_reference {
   id: 0x380a78f0
   kind: POINTER
   pointee_type_id: 0xca69055f
+}
+pointer_reference {
+  id: 0x380af085
+  kind: POINTER
+  pointee_type_id: 0xca6b248b
 }
 pointer_reference {
   id: 0x380c33d1
@@ -41184,6 +41194,11 @@ qualified {
   qualified_type_id: 0x98e32fbd
 }
 qualified {
+  id: 0xfa41b054
+  qualifier: CONST
+  qualified_type_id: 0x994177db
+}
+qualified {
   id: 0xfa455c97
   qualifier: CONST
   qualified_type_id: 0x9952c4d4
@@ -48005,6 +48020,29 @@ member {
   name: "FramesWithExcessiveDeferral"
   type_id: 0x92233392
   offset: 1024
+}
+member {
+  id: 0x9583c91c
+  name: "HB0"
+  type_id: 0x295c7202
+}
+member {
+  id: 0xd444664c
+  name: "HB1"
+  type_id: 0x295c7202
+  offset: 8
+}
+member {
+  id: 0x1603fa52
+  name: "HB2"
+  type_id: 0x295c7202
+  offset: 16
+}
+member {
+  id: 0x56c4b67f
+  name: "HB3"
+  type_id: 0x295c7202
+  offset: 24
 }
 member {
   id: 0x6c3e5929
@@ -82241,6 +82279,12 @@ member {
   name: "daylight"
   type_id: 0x295c7202
   offset: 112
+}
+member {
+  id: 0xd75b166e
+  name: "db"
+  type_id: 0x5e9b9471
+  offset: 32
 }
 member {
   id: 0xf540eeb1
@@ -195438,6 +195482,11 @@ member {
   offset: 10304
 }
 member {
+  id: 0x0fed75b2
+  name: "sdp_header"
+  type_id: 0x90206a5a
+}
+member {
   id: 0x682990f8
   name: "sdp_max"
   type_id: 0x4585663f
@@ -256234,6 +256283,28 @@ struct_union {
   id: 0x39ab1cec
   kind: STRUCT
   name: "dmem_cgroup_region"
+}
+struct_union {
+  id: 0xca6b248b
+  kind: STRUCT
+  name: "dp_sdp"
+  definition {
+    bytesize: 36
+    member_id: 0x0fed75b2
+    member_id: 0xd75b166e
+  }
+}
+struct_union {
+  id: 0x90206a5a
+  kind: STRUCT
+  name: "dp_sdp_header"
+  definition {
+    bytesize: 4
+    member_id: 0x9583c91c
+    member_id: 0xd444664c
+    member_id: 0x1603fa52
+    member_id: 0x56c4b67f
+  }
 }
 struct_union {
   id: 0x33fed362
@@ -337617,6 +337688,13 @@ function {
   parameter_id: 0x35d17e4b
 }
 function {
+  id: 0x191b8833
+  return_type_id: 0xd5cc9c9a
+  parameter_id: 0x340055b2
+  parameter_id: 0x380af085
+  parameter_id: 0x295c7202
+}
+function {
   id: 0x191d871c
   return_type_id: 0x48b5725f
   parameter_id: 0x24954792
@@ -377601,6 +377679,13 @@ function {
   parameter_id: 0x6720d32f
 }
 function {
+  id: 0x9f8801da
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0bfc9031
+  parameter_id: 0x3e10b518
+  parameter_id: 0x3e10b518
+}
+function {
   id: 0x9f89d33b
   return_type_id: 0x6720d32f
   parameter_id: 0x0e56cd62
@@ -380934,6 +381019,12 @@ function {
   parameter_id: 0x3f37d9d5
   parameter_id: 0x4585663f
   parameter_id: 0x3e10b518
+}
+function {
+  id: 0xcf3975d4
+  return_type_id: 0x3b4ce03a
+  parameter_id: 0x3f37d9d5
+  parameter_id: 0x4585663f
 }
 function {
   id: 0xcf4a3461
@@ -427442,6 +427533,15 @@ elf_symbol {
   full_name: "hdmi_audio_infoframe_pack"
 }
 elf_symbol {
+  id: 0x6392ceb7
+  name: "hdmi_audio_infoframe_pack_for_dp"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xaad06b29
+  type_id: 0x191b8833
+  full_name: "hdmi_audio_infoframe_pack_for_dp"
+}
+elf_symbol {
   id: 0x0e1d2fa4
   name: "hdmi_avi_infoframe_check"
   is_defined: true
@@ -443109,6 +443209,15 @@ elf_symbol {
   full_name: "phy_connect_direct"
 }
 elf_symbol {
+  id: 0x2bf61c61
+  name: "phy_create_lookup"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x62965ebc
+  type_id: 0x9f8801da
+  full_name: "phy_create_lookup"
+}
+elf_symbol {
   id: 0x5ebc16d0
   name: "phy_disconnect"
   is_defined: true
@@ -444826,6 +444935,15 @@ elf_symbol {
   crc: 0x44c2aa6c
   type_id: 0x935b00c2
   full_name: "platform_get_irq_optional"
+}
+elf_symbol {
+  id: 0x3b8354ef
+  name: "platform_get_mem_or_io"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x3a4c8c94
+  type_id: 0xcf3975d4
+  full_name: "platform_get_mem_or_io"
 }
 elf_symbol {
   id: 0xb7a7a808
@@ -474299,6 +474417,7 @@ interface {
   symbol_id: 0x3163ad8e
   symbol_id: 0x78d85567
   symbol_id: 0xcd9a2048
+  symbol_id: 0x6392ceb7
   symbol_id: 0x0e1d2fa4
   symbol_id: 0x306e3b3d
   symbol_id: 0x684435da
@@ -476036,6 +476155,7 @@ interface {
   symbol_id: 0xc278f4fa
   symbol_id: 0x9c15bd7a
   symbol_id: 0x866cf90c
+  symbol_id: 0x2bf61c61
   symbol_id: 0x5ebc16d0
   symbol_id: 0xb39736f6
   symbol_id: 0x9d35d830
@@ -476227,6 +476347,7 @@ interface {
   symbol_id: 0xaa322a74
   symbol_id: 0x0d9f5d07
   symbol_id: 0x864eb34f
+  symbol_id: 0x3b8354ef
   symbol_id: 0xb7a7a808
   symbol_id: 0x160949a1
   symbol_id: 0xf5e8f5ed
