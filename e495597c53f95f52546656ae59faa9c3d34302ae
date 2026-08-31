@@ -16,6 +16,23 @@
       "message": "Hi, can you also approve this change as 4217208 approved ?",
       "revId": "e495597c53f95f52546656ae59faa9c3d34302ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "675c923a_dc2d1b91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869026
+      },
+      "writtenOn": "2026-08-31T06:57:12Z",
+      "side": 1,
+      "message": "restore, as we could not enable the module just in internal code",
+      "revId": "e495597c53f95f52546656ae59faa9c3d34302ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
