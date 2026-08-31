@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94ce14fa_d962c010",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869026
+      },
+      "writtenOn": "2026-08-31T06:57:08Z",
+      "side": 1,
+      "message": "restore, as we could not enable the module just in internal code",
+      "revId": "72a5612cf0dbf50fc865296d781672f7786bc1e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
