@@ -300,6 +300,30 @@
       },
       "revId": "f4889840fb9175df41b2de6d9ac20502f6912c34",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b24f0c8_e57f3065",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1528,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-08-31T20:40:53Z",
+      "side": 1,
+      "message": "`wrapfd_del_listener()` takes `ctx-\u003elock` and then `listeners_lock`. If I restructure this function to do the same then we will avoid a possible deadlock. I\u0027ll try that and post an update if everything pans out as I expect it to.",
+      "parentUuid": "9115629f_a007eebc",
+      "range": {
+        "startLine": 1525,
+        "startChar": 0,
+        "endLine": 1528,
+        "endChar": 0
+      },
+      "revId": "f4889840fb9175df41b2de6d9ac20502f6912c34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
