@@ -403,13 +403,13 @@
         "allowOverrideInChildProjects": false
       },
       "applicabilityExpressionResult": {
-        "value": {"expression":{"expressionString":"has:unresolved"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["has:unresolved"],"atomExplanations":{"value":{"has:unresolved":""}}}
+        "value": {"expression":{"expressionString":"has:unresolved"},"status":"PASS","errorMessage":{"value":null},"passingAtoms":["has:unresolved"],"failingAtoms":[],"atomExplanations":{"value":{"has:unresolved":""}}}
       },
       "submittabilityExpressionResult": {
-        "value": {"expression":{"expressionString":"-has:unresolved"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[],"atomExplanations":{"value":null}}
+        "value": {"expression":{"expressionString":"-has:unresolved"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":["has:unresolved"],"failingAtoms":[],"atomExplanations":{"value":{"has:unresolved":""}}}
       },
       "overrideExpressionResult": {
-        "value": {"expression":{"expressionString":"message:\"^.*Unresolved-Comment-Reason:.*\""},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[],"atomExplanations":{"value":null}}
+        "value": {"expression":{"expressionString":"message:\"^.*Unresolved-Comment-Reason:.*\""},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["message:\"^.*Unresolved-Comment-Reason:.*\""],"atomExplanations":{"value":{"message:\"^.*Unresolved-Comment-Reason:.*\"":""}}}
       },
       "patchSetCommitId": "f1f424f3ef1532d471e569812180736243971cb5",
       "legacy": {
