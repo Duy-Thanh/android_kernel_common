@@ -1,0 +1,109 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a29a5350_684763ab",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-08-31T21:20:26Z",
+      "side": 1,
+      "message": "I don\u0027t think you need this. Similar to my comments in aosp/3949142, I think `begin_cpu_access()` with `DMA_BIDIRECTIONAL` should be enough and then `end_cpu_access()`.",
+      "range": {
+        "startLine": 468,
+        "startChar": 0,
+        "endLine": 477,
+        "endChar": 0
+      },
+      "revId": "9ba2696b41d563a90e2ecf402cf582e85ed187d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df7880c9_a58da7c9",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1563,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-08-31T21:20:26Z",
+      "side": 1,
+      "message": "Might want to write a TODO or a note to investigate if we need to do this when we free the buffer back to the kernel.",
+      "range": {
+        "startLine": 1563,
+        "startChar": 2,
+        "endLine": 1563,
+        "endChar": 72
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6b08b28d_300491dd",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\t\t/* TODO: Investigate if we need to do this. */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9ba2696b41d563a90e2ecf402cf582e85ed187d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91ed75a1_7f12dd7a",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1581,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-08-31T21:20:26Z",
+      "side": 1,
+      "message": "This goes away if you get rid of the map attachment portions above.",
+      "range": {
+        "startLine": 1578,
+        "startChar": 0,
+        "endLine": 1581,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "089c3b05_97d32490",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 1578,
+                "startChar": 0,
+                "endLine": 1582,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "9ba2696b41d563a90e2ecf402cf582e85ed187d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

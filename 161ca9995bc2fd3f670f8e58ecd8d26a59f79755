@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "996012a8_917cce3f",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1580,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-08-31T21:20:26Z",
+      "side": 1,
+      "message": "I don\u0027t think this is needed given the explanation above.",
+      "range": {
+        "startLine": 1578,
+        "startChar": 0,
+        "endLine": 1580,
+        "endChar": 59
+      },
+      "revId": "161ca9995bc2fd3f670f8e58ecd8d26a59f79755",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
