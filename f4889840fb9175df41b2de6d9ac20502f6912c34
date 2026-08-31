@@ -324,6 +324,30 @@
       },
       "revId": "f4889840fb9175df41b2de6d9ac20502f6912c34",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6be78114_44461594",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1528,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-08-31T21:23:36Z",
+      "side": 1,
+      "message": "But `wrapfd_del_listener()` cannot take `listeners_lock` after `ctx-\u003elock` because after `ctx-\u003elock` is taken, the thread is in atomic context; you\u0027d need to take the locks in the other order each time, and if you do that every time you need to take both locks, then I do not think you\u0027ll have a deadlock?",
+      "parentUuid": "3b24f0c8_e57f3065",
+      "range": {
+        "startLine": 1525,
+        "startChar": 0,
+        "endLine": 1528,
+        "endChar": 0
+      },
+      "revId": "f4889840fb9175df41b2de6d9ac20502f6912c34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
