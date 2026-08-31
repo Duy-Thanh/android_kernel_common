@@ -51,6 +51,24 @@
       "parentUuid": "5a7bd004_72a7e44a",
       "revId": "0131aef7fb6b14e0891d0f466a795a53c88868f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "374633e9_8bb0ed53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-08-31T09:16:33Z",
+      "side": 1,
+      "message": "Give me a few hours and then it can be `FROMGIT` with the proper git id.",
+      "parentUuid": "b797c5ff_01523cae",
+      "revId": "0131aef7fb6b14e0891d0f466a795a53c88868f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
