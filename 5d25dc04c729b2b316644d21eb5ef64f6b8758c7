@@ -88,6 +88,24 @@
       "parentUuid": "cb7b649e_07d76af7",
       "revId": "5d25dc04c729b2b316644d21eb5ef64f6b8758c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3484cd80_f9daaf73",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1543611
+      },
+      "writtenOn": "2026-08-31T03:39:34Z",
+      "side": 1,
+      "message": "Hi Todd and Hubert, Would it be acceptable to rework this CL to avoid breaking the KMI by replacing the 3 dropped elements with 3 empty {} padding elements at the end of the snd_soc_acpi_intel_ptl_sdw_machines array? Since snd_soc_acpi_find_machine() terminates when it hits the first empty element, appending extra {}s wouldn\u0027t change the runtime behavior. However, it would preserve the array size at 17 elements, keeping the STG ABI structure and CRC intact.If this workaround is acceptable, we can land this now without needing to wait for the next KMI thaw window (and we can drop the ABI update CL as it won\u0027t be necessary). \n\nLet me know what you think! Thanks!",
+      "parentUuid": "9de53aea_4a6fed58",
+      "revId": "5d25dc04c729b2b316644d21eb5ef64f6b8758c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
