@@ -215,6 +215,49 @@
   __copy_overflow
   copy_page
   _copy_to_iter
+  coresight_add_in_conn
+  coresight_add_out_conn
+  coresight_add_sysfs_link
+  coresight_alloc_device_name
+  coresight_barrier_pkt
+  coresight_claim_device
+  coresight_claim_device_unlocked
+  coresight_clear_self_claim_tag
+  coresight_clear_self_claim_tag_unlocked
+  coresight_disable_sysfs
+  coresight_disclaim_device
+  coresight_disclaim_device_unlocked
+  coresight_enable_sysfs
+  coresight_find_csdev_by_fwnode
+  coresight_find_input_type
+  coresight_find_output_type
+  coresight_get_cpu
+  coresight_get_enable_clocks
+  coresight_get_percpu_sink
+  coresight_get_platform_data
+  coresight_get_static_trace_id
+  coresight_init_driver
+  coresight_register
+  coresight_remove_cti_ops
+  coresight_remove_driver
+  coresight_remove_sysfs_link
+  coresight_set_cti_ops
+  coresight_set_percpu_sink
+  coresight_simple_show32
+  coresight_simple_show_pair
+  coresight_timeout
+  coresight_trace_id_get_cpu_id
+  coresight_trace_id_get_cpu_id_map
+  coresight_trace_id_get_static_system_id
+  coresight_trace_id_get_system_id
+  coresight_trace_id_perf_start
+  coresight_trace_id_perf_stop
+  coresight_trace_id_put_cpu_id
+  coresight_trace_id_put_cpu_id_map
+  coresight_trace_id_put_system_id
+  coresight_trace_id_read_cpu_id
+  coresight_trace_id_read_cpu_id_map
+  coresight_unregister
   cpu_all_bits
   cpu_bit_bitmap
   cpufreq_cpu_get
