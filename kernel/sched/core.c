@@ -732,6 +732,7 @@ bool raw_spin_rq_trylock(struct rq *rq)
 		raw_spin_unlock(lock);
 	}
 }
+EXPORT_SYMBOL_GPL(raw_spin_rq_trylock);
 
 void raw_spin_rq_unlock(struct rq *rq)
 {
