@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bf36e42_ffd6c0f1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2026-09-01T03:17:31Z",
+      "side": 1,
+      "message": "Thanks, you\u0027re right on both counts. The earlier message was inaccurate.\n\nI confirmed against the source that blk_mq_insert_request() has no\nWARN_ON_ONCE(rq-\u003etag !\u003d BLK_MQ_NO_TAG) in this tree, and that the real\nstall is the loss of the hctx-\u003edispatch + SCHED_RESTART restart\nhandshake, not any tag-invariant violation. I\u0027ve reworded the commit\nmessage accordingly: the requeued work must land on hctx-\u003edispatch so\nthat the smp_mb() after the requeue (paired with the one in\n__blk_mq_sched_restart()) orders the addition against the SCHED_RESTART\ncheck; routing it through blk_mq_insert_request() (sw queue / elevator)\nbypasses that, so the queue is never rerun and the requests are never\nre-dispatched -\u003e stall.\n\nBRs,zhipeng",
+      "parentUuid": "b04f9982_f7c812e4",
+      "range": {
+        "startLine": 17,
+        "startChar": 8,
+        "endLine": 17,
+        "endChar": 46
+      },
+      "revId": "c0956dcd5bb39c600729420eab379160a32d7b50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "572235c2_16f81786",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-08-31T13:45:59Z",
       "side": 1,
       "message": "This implementation reverses the request order. Additionally, repeatedly locking and unlocking hctx-\u003elock is inefficient. Please consider the following implementation:\n```\nstatic void blk_mq_reinsert_list(struct blk_mq_hw_ctx *hctx,\n\t\t\t\t struct list_head *list)\n{\n\tstruct request *rq, *next;\n\tLIST_HEAD(ordered_list);\n\n\tif (!blk_mq_preserve_order_for_list(hctx-\u003equeue, list)) {\n\t\tspin_lock(\u0026hctx-\u003elock);\n\t\tlist_splice_tail_init(list, \u0026hctx-\u003edispatch);\n\t\tspin_unlock(\u0026hctx-\u003elock);\n\t\treturn;\n\t}\n\n\tlist_for_each_entry_safe(rq, next, list, queuelist) {\n\t\tif (blk_mq_preserve_order(rq))\n\t\t\tlist_move_tail(\u0026rq-\u003equeuelist, \u0026ordered_list);\n\t}\n\n\tif (!list_empty(list)) {\n\t\tspin_lock(\u0026hctx-\u003elock);\n\t\tlist_splice_tail_init(list, \u0026hctx-\u003edispatch);\n\t\tspin_unlock(\u0026hctx-\u003elock);\n\t}\n\n\twhile (!list_empty(\u0026ordered_list)) {\n\t\trq \u003d list_last_entry(\u0026ordered_list, struct request, queuelist);\n\t\tlist_del_init(\u0026rq-\u003equeuelist);\n\t\tblk_mq_insert_request(rq, BLK_MQ_INSERT_ORDERED);\n\t}\n}\n```",
+      "range": {
+        "startLine": 2141,
+        "startChar": 0,
+        "endLine": 2157,
+        "endChar": 1
+      },
+      "revId": "c0956dcd5bb39c600729420eab379160a32d7b50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2811ef9_78482a58",
+        "filename": "block/blk-mq.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2157,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2026-09-01T03:17:31Z",
+      "side": 1,
+      "message": "Good catch on both — the per-request hctx-\u003elock churn and the order\nreversal. I\u0027ve adopted your implementation: a single\nlist_splice_tail_init() onto hctx-\u003edispatch for the common non-zoned\npath (which is exactly the original, efficient behaviour), and the\norder-preserving BLK_MQ_INSERT_ORDERED handling applied only to the\nzoned requests peeled off into a separate list. Lock is taken once and\nrequest order is preserved.\n\n\nBRs,\nZhipeng",
+      "parentUuid": "572235c2_16f81786",
       "range": {
         "startLine": 2141,
         "startChar": 0,
