@@ -22,6 +22,30 @@
       },
       "revId": "32a6ee78910bd5f077850f4ae10985956332447c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63c379e2_8717879e",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-01T14:13:17Z",
+      "side": 0,
+      "message": "Sorry, that was oversight on my part; fixed!",
+      "parentUuid": "58e466ac_132d0ff1",
+      "range": {
+        "startLine": 543,
+        "startChar": 1,
+        "endLine": 543,
+        "endChar": 21
+      },
+      "revId": "32a6ee78910bd5f077850f4ae10985956332447c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
