@@ -1831,6 +1831,134 @@ static unsigned int __bpf_prog_ret0_warn(const void *ctx,
 	WARN_ON_ONCE(1);
 	return 0;
 }
+<<<<<<< HEAD   (4866d936fe7c83c33f0c2924a23d610a9f1961f2 Merge e8121a58241f ("selftests/bpf: Fix bpf_iter/task_vma te)
+||||||| BASE   (e8121a58241f010e2d8e96a78d5d1f3c61b44c91 selftests/bpf: Fix bpf_iter/task_vma test)
+#endif
+
+static bool __bpf_prog_map_compatible(struct bpf_map *map,
+				      const struct bpf_prog *fp)
+{
+	enum bpf_prog_type prog_type = fp->aux->dst_prog ? fp->aux->dst_prog->type : fp->type;
+	struct bpf_prog_aux *aux = fp->aux;
+	enum bpf_cgroup_storage_type i;
+	bool ret = false;
+	u64 cookie;
+
+	if (fp->kprobe_override)
+		return ret;
+
+	spin_lock(&map->owner_lock);
+	/* There's no owner yet where we could check for compatibility. */
+	if (!map->owner) {
+		map->owner = bpf_map_owner_alloc(map);
+		if (!map->owner)
+			goto err;
+		map->owner->type  = prog_type;
+		map->owner->jited = fp->jited;
+		/* Note: xdp_has_frags doesn't exist in aux yet in our branch */
+		/* map->owner->xdp_has_frags = aux->xdp_has_frags; */
+		map->owner->attach_func_proto = aux->attach_func_proto;
+		for_each_cgroup_storage_type(i) {
+			map->owner->storage_cookie[i] =
+				aux->cgroup_storage[i] ?
+				aux->cgroup_storage[i]->cookie : 0;
+		}
+		ret = true;
+	} else {
+		ret = map->owner->type  == prog_type &&
+		      map->owner->jited == fp->jited;
+		/* Note: xdp_has_frags check would go here when available */
+		/* && map->owner->xdp_has_frags == aux->xdp_has_frags; */
+		for_each_cgroup_storage_type(i) {
+			if (!ret)
+				break;
+			cookie = aux->cgroup_storage[i] ?
+				 aux->cgroup_storage[i]->cookie : 0;
+			ret = map->owner->storage_cookie[i] == cookie ||
+			      !cookie;
+		}
+		if (ret &&
+		    map->owner->attach_func_proto != aux->attach_func_proto) {
+			switch (prog_type) {
+			case BPF_PROG_TYPE_TRACING:
+			case BPF_PROG_TYPE_LSM:
+			case BPF_PROG_TYPE_EXT:
+			case BPF_PROG_TYPE_STRUCT_OPS:
+				ret = false;
+				break;
+			default:
+				break;
+			}
+		}
+	}
+err:
+	spin_unlock(&map->owner_lock);
+	return ret;
+}
+=======
+#endif
+
+static bool __bpf_prog_map_compatible(struct bpf_map *map,
+				      const struct bpf_prog *fp)
+{
+	enum bpf_prog_type prog_type = fp->aux->dst_prog ? fp->aux->dst_prog->type : fp->type;
+	struct bpf_prog_aux *aux = fp->aux;
+	enum bpf_cgroup_storage_type i;
+	bool ret = false;
+	u64 cookie;
+
+	if (fp->kprobe_override)
+		return ret;
+
+	spin_lock(&map->owner_lock);
+	/* There's no owner yet where we could check for compatibility. */
+	if (!map->owner) {
+		map->owner = bpf_map_owner_alloc(map);
+		if (!map->owner)
+			goto err;
+		map->owner->type  = prog_type;
+		map->owner->jited = fp->jited;
+		/* Note: xdp_has_frags doesn't exist in aux yet in our branch */
+		/* map->owner->xdp_has_frags = aux->xdp_has_frags; */
+		map->owner->attach_func_proto = aux->attach_func_proto;
+		for_each_cgroup_storage_type(i) {
+			map->owner->storage_cookie[i] =
+				aux->cgroup_storage[i] ?
+				aux->cgroup_storage[i]->cookie : 0;
+		}
+		ret = true;
+	} else {
+		ret = map->owner->type  == prog_type &&
+		      map->owner->jited == fp->jited;
+		/* Note: xdp_has_frags check would go here when available */
+		/* && map->owner->xdp_has_frags == aux->xdp_has_frags; */
+		for_each_cgroup_storage_type(i) {
+			if (!ret)
+				break;
+			cookie = aux->cgroup_storage[i] ?
+				 aux->cgroup_storage[i]->cookie : 0;
+			ret = map->owner->storage_cookie[i] == cookie ||
+			      (!cookie && !aux->tail_call_reachable);
+		}
+		if (ret &&
+		    map->owner->attach_func_proto != aux->attach_func_proto) {
+			switch (prog_type) {
+			case BPF_PROG_TYPE_TRACING:
+			case BPF_PROG_TYPE_LSM:
+			case BPF_PROG_TYPE_EXT:
+			case BPF_PROG_TYPE_STRUCT_OPS:
+				ret = false;
+				break;
+			default:
+				break;
+			}
+		}
+	}
+err:
+	spin_unlock(&map->owner_lock);
+	return ret;
+}
+>>>>>>> BRANCH (277b699584ec322173e2ea14edf00be62cf376c1 net: mana: guard TX wq object destroy with INVALID_MANA_HAND)
 
 bool bpf_prog_array_compatible(struct bpf_array *array,
 			       const struct bpf_prog *fp)
