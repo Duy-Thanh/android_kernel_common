@@ -310161,6 +310161,15 @@ elf_symbol {
   full_name: "bt_warn"
 }
 elf_symbol {
+  id: 0xcf431833
+  name: "bt_warn_ratelimited"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xdfbdca25
+  type_id: 0x1d88d4f1
+  full_name: "bt_warn_ratelimited"
+}
+elf_symbol {
   id: 0xfc8c52c1
   name: "btbcm_set_bdaddr"
   is_defined: true
@@ -341765,6 +341774,7 @@ interface {
   symbol_id: 0x6ebfe2e8
   symbol_id: 0x676ffcb7
   symbol_id: 0xd84e3ad6
+  symbol_id: 0xcf431833
   symbol_id: 0xfc8c52c1
   symbol_id: 0xb47c5ffe
   symbol_id: 0xdded4dcd
