@@ -33,6 +33,24 @@
       "message": "Please `git cherry-pick -x`. You can also add the missing penultimate line to the commit message by hand.",
       "revId": "51136764f540b83c16a5b8abf25b2bb0269dfd53",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e0792fc_39140945",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-09-01T10:52:42Z",
+      "side": 1,
+      "message": "`(cherry picked from commit 3ab5872299d5e82b56421f050aee906aa69bce34)`",
+      "parentUuid": "afdf4ec7_abf678cb",
+      "revId": "51136764f540b83c16a5b8abf25b2bb0269dfd53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
