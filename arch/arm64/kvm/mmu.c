@@ -1271,9 +1271,26 @@ static int user_mem_abort(struct kvm_vcpu *vcpu, phys_addr_t fault_ipa,
 	}
 
 	/*
+<<<<<<< HEAD   (4f08b4b867e1d10b96fd18e2640ef0fd5e934cbf Revert "net/sched: reject overly deep qdisc hierarchies")
 	 * Let's check if we will get back a huge page backed by hugetlbfs, or
 	 * get block mapping for device MMIO region.
 	 */
+||||||| BASE   (87d569cb35a541b31a184faf982540694d4c9a89 s390/vfio_ccw: Cancel existing workqueues)
+=======
+	 * Permission faults just need to update the existing leaf entry,
+	 * and so normally don't require allocations from the memcache. The
+	 * only exception to this is when dirty logging is enabled at runtime
+	 * and a write fault needs to collapse a block entry into a table.
+	 */
+	if (fault_status != FSC_PERM || (logging_active && write_fault)) {
+		ret = kvm_mmu_topup_memory_cache(memcache,
+						 kvm_mmu_cache_min_pages(kvm));
+		if (ret)
+			return ret;
+	}
+
+	/* Let's check if we will get back a huge page backed by hugetlbfs */
+>>>>>>> BRANCH (099306c9d2308e91ad6930b1c6a5a66fa6b62374 KVM: arm64: Retry fault if vma_lookup() results become inval)
 	mmap_read_lock(current->mm);
 	vma = find_vma_intersection(current->mm, hva, hva + 1);
 	if (unlikely(!vma)) {
@@ -1324,22 +1341,17 @@ static int user_mem_abort(struct kvm_vcpu *vcpu, phys_addr_t fault_ipa,
 		fault_ipa &= ~(vma_pagesize - 1);
 
 	gfn = fault_ipa >> PAGE_SHIFT;
-	mmap_read_unlock(current->mm);
 
 	/*
-	 * Permission faults just need to update the existing leaf entry,
-	 * and so normally don't require allocations from the memcache. The
-	 * only exception to this is when dirty logging is enabled at runtime
-	 * and a write fault needs to collapse a block entry into a table.
+	 * Read mmu_notifier_seq so that KVM can detect if the results of
+	 * find_vma_intersection() or gfn_to_pfn_prot() become stale prior to
+	 * acquiring kvm->mmu_lock.
+	 *
+	 * Rely on mmap_read_unlock() for an implicit smp_rmb(), which pairs
+	 * with the smp_wmb() in kvm_mmu_notifier_invalidate_range_end().
 	 */
-	if (fault_status != FSC_PERM || (logging_active && write_fault)) {
-		ret = kvm_mmu_topup_memory_cache(memcache,
-						 kvm_mmu_cache_min_pages(kvm));
-		if (ret)
-			return ret;
-	}
-
 	mmu_seq = vcpu->kvm->mmu_notifier_seq;
+<<<<<<< HEAD   (4f08b4b867e1d10b96fd18e2640ef0fd5e934cbf Revert "net/sched: reject overly deep qdisc hierarchies")
 	/*
 	 * Ensure the read of mmu_notifier_seq happens before we call
 	 * gfn_to_pfn_prot (which calls get_user_pages), so that we don't risk
@@ -1354,6 +1366,20 @@ static int user_mem_abort(struct kvm_vcpu *vcpu, phys_addr_t fault_ipa,
 	 * slot because it's always fixed even @gfn is adjusted for huge pages.
 	 */
 	smp_rmb();
+||||||| BASE   (87d569cb35a541b31a184faf982540694d4c9a89 s390/vfio_ccw: Cancel existing workqueues)
+	/*
+	 * Ensure the read of mmu_notifier_seq happens before we call
+	 * gfn_to_pfn_prot (which calls get_user_pages), so that we don't risk
+	 * the page we just got a reference to gets unmapped before we have a
+	 * chance to grab the mmu_lock, which ensure that if the page gets
+	 * unmapped afterwards, the call to kvm_unmap_hva will take it away
+	 * from us again properly. This smp_rmb() interacts with the smp_wmb()
+	 * in kvm_mmu_notifier_invalidate_<page|range_end>.
+	 */
+	smp_rmb();
+=======
+	mmap_read_unlock(current->mm);
+>>>>>>> BRANCH (099306c9d2308e91ad6930b1c6a5a66fa6b62374 KVM: arm64: Retry fault if vma_lookup() results become inval)
 
 	pfn = __gfn_to_pfn_memslot(memslot, gfn, false, NULL,
 				   write_fault, &writable);
