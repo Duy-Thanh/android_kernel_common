@@ -367,8 +367,9 @@ static int suspend_prepare(suspend_state_t state)
 		return -EPERM;
 
 	pm_prepare_console();
-
+	trace_suspend_resume(TPS("suspend_prepare"), 0, true);
 	error = pm_notifier_call_chain_robust(PM_SUSPEND_PREPARE, PM_POST_SUSPEND);
+	trace_suspend_resume(TPS("suspend_prepare"), error, false);
 	if (error)
 		goto Restore;
 
@@ -381,7 +382,9 @@ static int suspend_prepare(suspend_state_t state)
 	log_suspend_abort_reason("One or more tasks refusing to freeze");
 	suspend_stats.failed_freeze++;
 	dpm_save_failed_step(SUSPEND_FREEZE);
+	trace_suspend_resume(TPS("post_suspend"), 0, true);
 	pm_notifier_call_chain(PM_POST_SUSPEND);
+	trace_suspend_resume(TPS("post_suspend"), 0, false);
  Restore:
 	pm_restore_console();
 	return error;
@@ -565,7 +568,9 @@ int suspend_devices_and_enter(suspend_state_t state)
 static void suspend_finish(void)
 {
 	suspend_thaw_processes();
+	trace_suspend_resume(TPS("post_suspend"), 0, true);
 	pm_notifier_call_chain(PM_POST_SUSPEND);
+	trace_suspend_resume(TPS("post_suspend"), 0, false);
 	pm_restore_console();
 }
 
