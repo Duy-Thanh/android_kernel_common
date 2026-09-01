@@ -52,6 +52,24 @@
       "parentUuid": "d32b4c45_3dc6244c",
       "revId": "1e3233bfdbd41af51ab6b515249128af9bc20052",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8634a00_d458a749",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3486811
+      },
+      "writtenOn": "2026-09-01T02:08:14Z",
+      "side": 1,
+      "message": "This is not a fix for an incorrectly restored Binder priority override.\nThe Binder driver\u0027s existing priority restoration behavior is unchanged.\n\nThe new hook provides an extension point for a vendor-managed,\nper-thread priority policy. Before a Binder worker waits for new\nprocess work, the vendor policy may need to reconcile any temporary\npriority state associated with previously processed work.\n\nThis hook is placed immediately before binder_restore_priority() so\nthat the vendor-managed state is handled at the same worker-state\ntransition, while the Binder driver continues to restore its own\npriority state as before.\n\nA dedicated hook is used instead of changing the semantics of an\nexisting hook, since existing hooks may already be used by other\nvendors for different purposes. The commit message has been updated\nto clarify this rationale.",
+      "parentUuid": "b09da432_e81bedc1",
+      "revId": "1e3233bfdbd41af51ab6b515249128af9bc20052",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
