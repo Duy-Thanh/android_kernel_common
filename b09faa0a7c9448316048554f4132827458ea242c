@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04d55c82_6ee0d2ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2055842
+      },
+      "writtenOn": "2026-09-01T13:02:04Z",
+      "side": 1,
+      "message": "You also need to update the abi.stg definitions as currently this change is incomplete.",
+      "revId": "b09faa0a7c9448316048554f4132827458ea242c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
