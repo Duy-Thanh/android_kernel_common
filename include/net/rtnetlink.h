@@ -10,7 +10,16 @@ typedef int (*rtnl_doit_func)(struct sk_buff *, struct nlmsghdr *,
 typedef int (*rtnl_dumpit_func)(struct sk_buff *, struct netlink_callback *);
 
 enum rtnl_link_flags {
+<<<<<<< HEAD   (0fc136683e6c078fdc3479c3913c00cfb331bcd1 Merge 39f2d4b7c731 ("rtnetlink: change nlk->cb_mutex role") )
 	RTNL_FLAG_DOIT_UNLOCKED = 1,
+||||||| BASE   (39f2d4b7c731e42cb242570b9da51f26043546aa rtnetlink: change nlk->cb_mutex role)
+	RTNL_FLAG_DOIT_UNLOCKED		= BIT(0),
+	RTNL_FLAG_BULK_DEL_SUPPORTED	= BIT(1),
+=======
+	RTNL_FLAG_DOIT_UNLOCKED		= BIT(0),
+	RTNL_FLAG_BULK_DEL_SUPPORTED	= BIT(1),
+	RTNL_FLAG_DUMP_UNLOCKED		= BIT(2),
+>>>>>>> BRANCH (89f9c5fee3c64c5cabc34e65599308fd3c879cf9 ipv6: fib6: fix NULL deref in fib6_walk_continue() on multi-)
 };
 
 enum rtnl_kinds {
