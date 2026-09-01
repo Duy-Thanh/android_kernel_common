@@ -15,9 +15,21 @@ use kernel::{
     types::ARef,
 };
 
+struct Listener {
+    ops: *const bindings::wrapfd_listener_operations,
+    param: *mut ffi::c_void,
+}
+
+// SAFETY: `Listener` can be safely sent across threads.
+unsafe impl Send for Listener {}
+
+// SAFETY: `Listener` can be shared across threads.
+unsafe impl Sync for Listener {}
+
 pub(crate) struct DmaBufContent {
     pub(crate) dmabuf: ARef<DmaBuf>,
     writable: bool,
+    listeners: KVec<Listener>,
 }
 
 impl DmaBufContent {
@@ -51,7 +63,13 @@ impl DmaBufContent {
             return Err(EACCES);
         }
 
-        Ok(Self { dmabuf, writable })
+        let listeners = KVec::new();
+
+        Ok(Self {
+            dmabuf,
+            writable,
+            listeners,
+        })
     }
 
     pub(crate) fn create_wrap(
@@ -225,5 +243,51 @@ impl DmaBufContent {
         })?;
 
         Ok(0)
+    }
+
+    pub(crate) fn add_listener(
+        &mut self,
+        ops: *const bindings::wrapfd_listener_operations,
+        param: *mut ffi::c_void,
+    ) -> Result<()> {
+        self.listeners.push(Listener { ops, param }, GFP_KERNEL)?;
+        Ok(())
+    }
+
+    pub(crate) fn remove_listeners(&mut self, param: *mut ffi::c_void) {
+        // We're removing all listener entries that match `param`. We're iterating
+        // the vector in reverse so that removal of entries does not invalidate the loop index.
+        for i in (0..self.listeners.len()).rev() {
+            let listener = &self.listeners[i];
+
+            if listener.param != param {
+                continue;
+            }
+
+            _ = self.listeners.remove(i);
+        }
+    }
+
+    fn notify_listeners(&mut self) {
+        let mut listeners = KVec::new();
+        core::mem::swap(&mut self.listeners, &mut listeners);
+
+        for Listener { ops, param } in listeners {
+            // SAFETY: We've previously verified that `ops` is a non-null pointer, the contract for
+            // `wrapfd_add_listener` requires `ops` to point to a valid `struct
+            // wrapfd_listener_operation` and remain valid for as long as the listener is
+            // registered.
+            let Some(on_content_release) = (unsafe { (*ops).on_content_release }) else {
+                continue;
+            };
+            // SAFETY: Safe by contract.
+            unsafe { on_content_release(param) };
+        }
+    }
+}
+
+impl Drop for DmaBufContent {
+    fn drop(&mut self) {
+        self.notify_listeners();
     }
 }
