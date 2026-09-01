@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11b3d8fd_b0616cf6",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5848,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-09-01T05:14:48Z",
+      "side": 1,
+      "message": "While the AI review was a bit misguided, it does raise one reasonable concern here:\n\n\u003e 1. **This patch breaks `vlag` calculation:**\n\u003e In `dequeue_entity()`, `update_entity_lag()` calculates the correct lag because `cfs_rq-\u003ecurr \u003d\u003d se`, so `avg_vruntime()` dynamically includes the task\u0027s weight and vruntime in the average. \n\u003e However, this patch recalculates `vlag` here **after** `cfs_rq-\u003ecurr` is set to `NULL` (line 5837). Because `cfs_rq-\u003ecurr` is `NULL`, `avg_vruntime(cfs_rq)` computes the average vruntime of the runqueue *excluding* the task being dequeued! This violates EEVDF math and overwrites the correct `vlag` computed in `dequeue_entity()` with a mathematically incorrect one.\n\nI need to look at this more closely to validate that this concern is real, and see if an alternative solution can be found.",
+      "range": {
+        "startLine": 5848,
+        "startChar": 0,
+        "endLine": 5848,
+        "endChar": 0
+      },
+      "revId": "80145fbeec1e6ba349601d841052967447f9c1f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
