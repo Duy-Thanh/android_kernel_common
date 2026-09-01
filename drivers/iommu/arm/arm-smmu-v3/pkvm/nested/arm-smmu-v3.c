@@ -170,7 +170,7 @@ static int smmu_tlb_inv_range_smmu(struct hyp_arm_smmu_v3_device *smmu,
 			       idmap_pgtable->cfg.pgsize_bitmap,
 			       smmu->features & ARM_SMMU_FEAT_RANGE_INV,
 			       smmu, __smmu_add_cmd, NULL);
-	return smmu_sync_cmd(smmu);
+	return 0;
 }
 
 static void smmu_tlb_inv_range(unsigned long iova, size_t size, size_t granule,
@@ -203,7 +203,7 @@ static void smmu_tlb_inv_range(unsigned long iova, size_t size, size_t granule,
 		 */
 		if (nested_smmu->active) {
 			WARN_ON(smmu_tlb_inv_range_smmu(&nested_smmu->common, &cmd, iova, size, granule));
-			WARN_ON(smmu_send_cmd(&nested_smmu->common, &cmd_s1));
+			WARN_ON(smmu_add_cmd(&nested_smmu->common, &cmd_s1));
 		}
 		kvm_smmu_hw_unlock(nested_smmu);
 	}
@@ -1200,8 +1200,23 @@ int smmu_init_hyp_module(const struct pkvm_module_ops *ops)
 #endif
 
 /* Shared with the kernel driver in EL1 */
+static void smmu_host_stage2_idmap_complete(bool map)
+{
+	struct hyp_arm_smmu_v3_nested_device *smmu;
+	if (map)
+		return;
+
+	for_each_smmu(smmu) {
+		kvm_smmu_hw_lock(smmu);
+		if (smmu->active)
+			WARN_ON(smmu_sync_cmd(&smmu->common));
+		kvm_smmu_hw_unlock(smmu);
+	}
+}
+
 struct kvm_iommu_ops smmu_ops = {
 	.init				= smmu_init,
 	.host_stage2_idmap		= smmu_host_stage2_idmap,
+	.host_stage2_idmap_complete	= smmu_host_stage2_idmap_complete,
 	.dabt_handler			= smmu_dabt_handler,
 };
