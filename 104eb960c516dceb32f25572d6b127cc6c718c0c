@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "60b22612_bd684d79",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 584,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-09-01T10:26:10Z",
+      "side": 1,
+      "message": "Rolling back the shared pages from the RX buffers is exactly what this cleanup path does. Thanks for pointing out the coding style link, perhaps you can suggest an alternate name for it ?",
+      "parentUuid": "1bb2d1dc_0fa48469",
+      "revId": "104eb960c516dceb32f25572d6b127cc6c718c0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "02a8ea0c_7d6f5569",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 3
@@ -138,6 +156,24 @@
       "side": 1,
       "message": "Actually this is even worse than the above, because the name now means neither what failed nor what has to be cleaned up.",
       "parentUuid": "739b560f_8cfc3193",
+      "revId": "104eb960c516dceb32f25572d6b127cc6c718c0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec3b94e3_1f4df966",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-09-01T10:26:10Z",
+      "side": 1,
+      "message": "It is un-mapping the hypervisor buffers and rolling back any potential shared pages from the tx mailbox so I don\u0027t see any issues here. Perhaps you could suggest an alternate naming if you are so much against it ?",
+      "parentUuid": "afdd1682_fdb1779e",
       "revId": "104eb960c516dceb32f25572d6b127cc6c718c0c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -227,6 +263,24 @@
       "side": 1,
       "message": "That\u0027s not what my comment is about. We hit this else case only if `KVM_FFA_MBOX_NR_PAGES * PAGE_SIZE` is none of the 3 supported sizes - there is nothing coming here from any driver. Both `KVM_FFA_MBOX_NR_PAGES` and `PAGE_SIZE` are constants.\n\nIn fact, maybe BUILD_BUG() is the right thing to put here?",
       "parentUuid": "5e407ae5_9e36ec97",
+      "revId": "104eb960c516dceb32f25572d6b127cc6c718c0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d18c9363_acfd9a75",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1379,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2026-09-01T10:26:10Z",
+      "side": 1,
+      "message": "Oh, I see what you mean. I don\u0027t want to make it a static assertion because I would like to change the size of the buffer to be kept in a variable and to allow it to be configurable from the kernel cmdline in aosp/4238523(currently this is set in stone to a larger value). It will then be mapped to an enum which accepts only 3 supported sizes. If a wrong value of the enum is selected it will warn on from the kernel.",
+      "parentUuid": "6b37bb50_c658084c",
       "revId": "104eb960c516dceb32f25572d6b127cc6c718c0c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
