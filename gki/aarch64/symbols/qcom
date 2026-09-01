@@ -1868,10 +1868,12 @@
   memory_read_from_buffer
   memparse
   mempool_alloc_noprof
+  mempool_alloc_pages
   mempool_alloc_slab
   mempool_create_node_noprof
   mempool_destroy
   mempool_free
+  mempool_free_pages
   mempool_free_slab
   mempool_kfree
   mempool_kmalloc
