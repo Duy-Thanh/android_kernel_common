@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58e466ac_132d0ff1",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-09-01T05:37:37Z",
+      "side": 0,
+      "message": "Why is this removed?",
+      "range": {
+        "startLine": 543,
+        "startChar": 1,
+        "endLine": 543,
+        "endChar": 21
+      },
+      "revId": "32a6ee78910bd5f077850f4ae10985956332447c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
