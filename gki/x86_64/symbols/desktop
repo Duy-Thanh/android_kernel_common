@@ -209,6 +209,7 @@
   bt_info
   bt_to_errno
   bt_warn
+  bt_warn_ratelimited
   buffer_migrate_folio
   BUG_func
   build_skb
