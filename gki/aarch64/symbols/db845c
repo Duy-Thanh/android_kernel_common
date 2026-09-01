@@ -138,6 +138,7 @@
   devm_clk_get
   devm_clk_get_enabled
   devm_clk_get_optional
+  devm_clk_hw_get_clk
   devm_clk_hw_register
   devm_drm_bridge_add
   devm_drm_of_get_bridge
@@ -192,7 +193,6 @@
   devm_snd_soc_register_card
   devm_snd_soc_register_component
   __devm_spi_alloc_controller
-  devm_spi_register_controller
   devm_thermal_of_zone_register
   devm_watchdog_register_device
   _dev_notice
@@ -579,7 +579,6 @@
   pci_alloc_irq_vectors
   pci_assign_resource
   pci_bus_type
-  pci_dev_put
   pci_disable_device
   pcie_capability_clear_and_set_word_locked
   pcie_capability_read_word
@@ -595,7 +594,6 @@
   pci_request_region
   pci_set_master
   pci_unregister_driver
-  pci_write_config_dword
   pci_write_config_word
   perf_trace_buf_alloc
   perf_trace_run_bpf_submit
@@ -821,6 +819,8 @@
   spi_controller_resume
   spi_controller_suspend
   spi_finalize_current_transfer
+  spi_register_controller
+  spi_unregister_controller
   sprintf
   sscanf
   __stack_chk_fail
@@ -884,8 +884,6 @@
   unregister_reboot_notifier
   unregister_rpmsg_driver
   usb_disabled
-  usb_hcd_pci_pm_ops
-  usb_hcd_pci_shutdown
   __usecs_to_jiffies
   usleep_range_state
   utf8_data_table
@@ -941,10 +939,12 @@
   __wake_up
   __warn_printk
   watchdog_init_timeout
+  watchdog_notify_pretimeout
   ww_mutex_lock
   ww_mutex_lock_interruptible
   ww_mutex_unlock
   __xa_alloc
+  xa_destroy
   xa_erase
   xa_find
   xa_find_after
@@ -988,6 +988,7 @@
 # required by ath10k_pci.ko
   pci_disable_msi
   pci_enable_msi
+  pci_write_config_dword
 
 # required by ath10k_snoc.ko
   dev_set_threaded
@@ -1088,7 +1089,6 @@
   clk_hw_round_rate
   __clk_is_enabled
   __clk_mux_determine_rate_closest
-  devm_clk_hw_get_clk
   divider_ro_round_rate_parent
   pm_genpd_remove_subdomain
 
@@ -1218,7 +1218,6 @@
   kmem_cache_destroy
   kmem_cache_free
   rb_next
-  xa_destroy
 
 # required by i2c-designware-core.ko
   device_set_node
@@ -1739,10 +1738,13 @@
   usb_root_hub_lost_power
 
 # required by ohci-pci.ko
+  pci_dev_put
   pci_get_slot
   pci_match_id
+  usb_hcd_pci_pm_ops
   usb_hcd_pci_probe
   usb_hcd_pci_remove
+  usb_hcd_pci_shutdown
 
 # required by ohci-platform.ko
   devm_reset_control_array_get
@@ -2092,8 +2094,6 @@
 # required by smem.ko
   devm_hwspin_lock_request_specific
   hwspin_lock_bust
-  hwspin_lock_free
-  hwspin_lock_request_specific
   __hwspin_lock_timeout
   __hwspin_unlock
   of_hwspin_lock_get_id
@@ -2116,7 +2116,6 @@
   snd_pcm_hw_constraint_eld
 
 # required by snd-soc-lpass-va-macro.ko
-  clk_hw_get_clk
   dapm_regulator_event
   regcache_sync_region
 
@@ -2180,6 +2179,7 @@
   of_property_read_variable_u16_array
 
 # required by spi-geni-qcom.ko
+  devm_spi_register_controller
   geni_se_clk_freq_match
   geni_se_rx_init_dma
   geni_se_tx_init_dma
@@ -2196,8 +2196,6 @@
   dmam_pool_create
   icc_disable
   icc_enable
-  spi_register_controller
-  spi_unregister_controller
 
 # required by spi-qup.ko
   cache_line_size
@@ -2307,10 +2305,3 @@
 # required by wcd934x.ko
   mfd_add_devices
   mfd_remove_devices
-
-# required by xhci-pci-renesas.ko
-  pci_dev_get
-  pci_read_config_byte
-  pci_write_config_byte
-  xhci_pci_common_probe
-  xhci_pci_remove

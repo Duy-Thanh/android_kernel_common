@@ -540326,6 +540326,15 @@ elf_symbol {
   full_name: "watchdog_init_timeout"
 }
 elf_symbol {
+  id: 0xca4c96b9
+  name: "watchdog_notify_pretimeout"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x062a3172
+  type_id: 0x142187db
+  full_name: "watchdog_notify_pretimeout"
+}
+elf_symbol {
   id: 0x610289ba
   name: "watchdog_register_device"
   is_defined: true
@@ -552162,6 +552171,7 @@ interface {
   symbol_id: 0xaf968ded
   symbol_id: 0x5942369c
   symbol_id: 0xb3aa5e28
+  symbol_id: 0xca4c96b9
   symbol_id: 0x610289ba
   symbol_id: 0x39d70409
   symbol_id: 0xae30b13d
