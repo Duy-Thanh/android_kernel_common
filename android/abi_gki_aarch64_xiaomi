@@ -740,11 +740,10 @@ __tracepoint_android_vh_migration_entry_wait_exit
 __tracepoint_android_vh_migrate_pages_batch_break
 __tracepoint_android_vh_migrate_batch_nr_pages
 
-
 # required by micar power
 emergency_sync
 pm_system_cancel_wakeup
-
+clear_wakeup_reasons
 
 #required by wakeup tracer
 __traceiter_alarmtimer_start
@@ -755,3 +754,4 @@ __traceiter_alarmtimer_fired
 __tracepoint_alarmtimer_fired
 udp4_lib_lookup
 udp6_lib_lookup
+clear_wakeup_reasons
