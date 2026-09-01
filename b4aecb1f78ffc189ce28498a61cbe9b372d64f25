@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f157a3d_a9ad1055",
+        "filename": "arch/arm64/include/asm/kvm_pkvm.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-09-01T08:26:43Z",
+      "side": 1,
+      "message": "Keeping this kvm_ffa_spm_nr_pages is probably easier. It is 1 by default and modified by early_ffa_unmap_on_lend_cfg if necessary.\n\nThen this file and nvhe/ffa.c can keep using a \"nr_pages\" value.",
+      "revId": "b4aecb1f78ffc189ce28498a61cbe9b372d64f25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
