@@ -124,6 +124,24 @@
       "parentUuid": "3484cd80_f9daaf73",
       "revId": "5d25dc04c729b2b316644d21eb5ef64f6b8758c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ac69d8a_ceb63ee7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-09-01T02:47:04Z",
+      "side": 1,
+      "message": "Yes, as long as the dummy entries don\u0027t cause issues (eg, a string could cause problems if drivers assume they can traverse the table printing element names).\n\nDon\u0027t put that into this patch, instead add a new patch that is just for fixing the KMI break by adding dummy entries.",
+      "parentUuid": "3db2212f_8e631092",
+      "revId": "5d25dc04c729b2b316644d21eb5ef64f6b8758c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
