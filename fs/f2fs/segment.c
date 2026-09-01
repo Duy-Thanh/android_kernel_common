@@ -430,9 +430,29 @@ void f2fs_balance_fs(struct f2fs_sb_info *sbi, bool need)
 	 * We should do GC or end up with checkpoint, if there are so many dirty
 	 * dir/node pages without enough free segments.
 	 */
+<<<<<<< HEAD   (a5be26a4bd49eee99b978ae2affcdc06d89b1d20 Merge f51db99287b5 ("f2fs: fix potential deadlock in f2fs_ba)
 	if (has_enough_free_secs(sbi, 0, 0))
 		return;
+||||||| BASE   (f51db99287b5acf81513ece82a0c95eb5db008e3 f2fs: fix potential deadlock in f2fs_balance_fs())
+	if (has_not_enough_free_secs(sbi, 0, 0)) {
+		if (test_opt(sbi, GC_MERGE) && sbi->gc_thread &&
+					sbi->gc_thread->f2fs_gc_task) {
+			DEFINE_WAIT(wait);
+=======
+	if (has_not_enough_free_secs(sbi, 0, 0)) {
+		/*
+		 * Submit all cached OPU/IPU DATA bios before triggering
+		 * foreground GC to avoid potential deadlocks.
+		 */
+		f2fs_submit_merged_write(sbi, DATA);
+		f2fs_submit_all_merged_ipu_writes(sbi);
 
+		if (test_opt(sbi, GC_MERGE) && sbi->gc_thread &&
+					sbi->gc_thread->f2fs_gc_task) {
+			DEFINE_WAIT(wait);
+>>>>>>> BRANCH (8071500a8124e5a6d47d901a8d5ffd91743107a1 f2fs: fix potential deadlock in gc_merge path of f2fs_balanc)
+
+<<<<<<< HEAD   (a5be26a4bd49eee99b978ae2affcdc06d89b1d20 Merge f51db99287b5 ("f2fs: fix potential deadlock in f2fs_ba)
 	if (test_opt(sbi, GC_MERGE) && sbi->gc_thread &&
 				sbi->gc_thread->f2fs_gc_task) {
 		DEFINE_WAIT(wait);
@@ -452,6 +472,34 @@ void f2fs_balance_fs(struct f2fs_sb_info *sbi, bool need)
 			.nr_free_secs = 1 };
 		f2fs_down_write(&sbi->gc_lock);
 		f2fs_gc(sbi, &gc_control);
+||||||| BASE   (f51db99287b5acf81513ece82a0c95eb5db008e3 f2fs: fix potential deadlock in f2fs_balance_fs())
+			prepare_to_wait(&sbi->gc_thread->fggc_wq, &wait,
+						TASK_UNINTERRUPTIBLE);
+			wake_up(&sbi->gc_thread->gc_wait_queue_head);
+			io_schedule();
+			finish_wait(&sbi->gc_thread->fggc_wq, &wait);
+		} else {
+			/*
+			 * Submit all cached OPU/IPU DATA bios before triggering
+			 * foreground GC to avoid potential deadlocks.
+			 */
+			f2fs_submit_merged_write(sbi, DATA);
+			f2fs_submit_all_merged_ipu_writes(sbi);
+
+			down_write(&sbi->gc_lock);
+			f2fs_gc(sbi, false, false, false, NULL_SEGNO);
+		}
+=======
+			prepare_to_wait(&sbi->gc_thread->fggc_wq, &wait,
+						TASK_UNINTERRUPTIBLE);
+			wake_up(&sbi->gc_thread->gc_wait_queue_head);
+			io_schedule();
+			finish_wait(&sbi->gc_thread->fggc_wq, &wait);
+		} else {
+			down_write(&sbi->gc_lock);
+			f2fs_gc(sbi, false, false, false, NULL_SEGNO);
+		}
+>>>>>>> BRANCH (8071500a8124e5a6d47d901a8d5ffd91743107a1 f2fs: fix potential deadlock in gc_merge path of f2fs_balanc)
 	}
 }
 
