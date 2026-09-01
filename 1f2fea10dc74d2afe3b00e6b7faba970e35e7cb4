@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8efbfc24_670fa485",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-01T20:09:38Z",
+      "side": 1,
+      "message": "Needs `ANDROID:` tag",
+      "revId": "1f2fea10dc74d2afe3b00e6b7faba970e35e7cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e5790f2_ffe9dd5d",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-01T20:09:38Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCheckPatch: ERROR:OPEN_BRACE: open brace \u0027{\u0027 following function definitions go on the next l...\n\nERROR:OPEN_BRACE: open brace \u0027{\u0027 following function definitions go on the next line",
+      "range": {
+        "startLine": 412,
+        "startChar": 0,
+        "endLine": 413,
+        "endChar": 0
+      },
+      "revId": "1f2fea10dc74d2afe3b00e6b7faba970e35e7cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98b6618b_4359740a",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-01T20:09:38Z",
+      "side": 1,
+      "message": "I think we would also have to update the tests to reinitialize the wrapfd with the expected contents, as this is an update to the semantics of rewrap: https://cs.android.com/android/kernel/superproject/+/common-android16-6.12:common/tools/testing/selftests/drivers/wrapfd/wrapfd.c;l\u003d759-791",
+      "range": {
+        "startLine": 448,
+        "startChar": 0,
+        "endLine": 451,
+        "endChar": 22
+      },
+      "revId": "1f2fea10dc74d2afe3b00e6b7faba970e35e7cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
