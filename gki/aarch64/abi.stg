@@ -382067,6 +382067,15 @@ elf_symbol {
   full_name: "___ratelimit"
 }
 elf_symbol {
+  id: 0x836df78f
+  name: "__alloc_frozen_pages_noprof"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xb3a29158
+  type_id: 0x80fe241d
+  full_name: "__alloc_frozen_pages_noprof"
+}
+elf_symbol {
   id: 0x4e2b41c6
   name: "__alloc_pages_noprof"
   is_defined: true
@@ -467265,6 +467274,7 @@ interface {
   symbol_id: 0x1fc79573
   symbol_id: 0x41de13f7
   symbol_id: 0xe284f532
+  symbol_id: 0x836df78f
   symbol_id: 0x4e2b41c6
   symbol_id: 0x9be8e89f
   symbol_id: 0x0f53d9b1
