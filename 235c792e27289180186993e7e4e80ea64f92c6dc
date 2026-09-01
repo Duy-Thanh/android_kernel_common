@@ -1,0 +1,132 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c564c503_21dfb6aa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-01T19:58:56Z",
+      "side": 1,
+      "message": "Need to add `ANDROID:` tag",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 51
+      },
+      "revId": "235c792e27289180186993e7e4e80ea64f92c6dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e327003e_38cc68b5",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1526,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-01T19:58:56Z",
+      "side": 1,
+      "message": "Having `param` as a key imposes a restriction that two listeners cannot share the same `param.` I\u0027m not sure if there would ever be such a scenario, but should we instead return an opaque pointer to the listener structure we allocated in `wrapfd_add_listener()` and just take that in `wrapfd_del_listener()`?\n\nThat also has the advantage of saving us an O(n) search through the listeners list.",
+      "range": {
+        "startLine": 1526,
+        "startChar": 0,
+        "endLine": 1526,
+        "endChar": 33
+      },
+      "revId": "235c792e27289180186993e7e4e80ea64f92c6dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ebc7335_8ba4dc75",
+        "filename": "include/linux/wrapfd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-01T19:58:56Z",
+      "side": 1,
+      "message": "s/onve/once",
+      "range": {
+        "startLine": 66,
+        "startChar": 26,
+        "endLine": 66,
+        "endChar": 30
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "7d53df8a_a81bdd34",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/wrapfd.h",
+              "range": {
+                "startLine": 66,
+                "startChar": 0,
+                "endLine": 67,
+                "endChar": 0
+              },
+              "replacement": " * but it has to unmap it once on_content_release callback is called.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "235c792e27289180186993e7e4e80ea64f92c6dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "551d090d_3049e679",
+        "filename": "include/linux/wrapfd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-01T19:58:56Z",
+      "side": 1,
+      "message": "s/lintener/listener",
+      "range": {
+        "startLine": 70,
+        "startChar": 15,
+        "endLine": 70,
+        "endChar": 23
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6aeb70b1_6e7ee4b2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/wrapfd.h",
+              "range": {
+                "startLine": 70,
+                "startChar": 0,
+                "endLine": 71,
+                "endChar": 0
+              },
+              "replacement": " * ops: wrapfd listener structure with event handlers.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "235c792e27289180186993e7e4e80ea64f92c6dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
