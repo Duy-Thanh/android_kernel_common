@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a7b7fc10_116e5d98",
+        "filename": "arch/x86/configs/gki_defconfig",
+        "patchSetId": 9
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2026-09-01T22:34:40Z",
+      "side": 1,
+      "message": "We can have it either way. Built in is fine if everyone agrees.",
+      "parentUuid": "59ca9e23_f0fe3e37",
+      "range": {
+        "startLine": 588,
+        "startChar": 29,
+        "endLine": 588,
+        "endChar": 30
+      },
+      "revId": "01aa9adf2f9634f68cff53f46e713bdeb9c7cbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cffa02f8_43dc2cd2",
         "filename": "drivers/android/bpf/bpf_fd_loader.c",
         "patchSetId": 9
@@ -54,6 +78,30 @@
       "writtenOn": "2026-09-01T04:23:49Z",
       "side": 1,
       "message": "All android specific UAPI should be prefixed with ANDROID_",
+      "range": {
+        "startLine": 25,
+        "startChar": 7,
+        "endLine": 25,
+        "endChar": 25
+      },
+      "revId": "01aa9adf2f9634f68cff53f46e713bdeb9c7cbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea383701_44002e2d",
+        "filename": "drivers/android/bpf/bpf_fd_loader.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2026-09-01T22:34:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cffa02f8_43dc2cd2",
       "range": {
         "startLine": 25,
         "startChar": 7,
@@ -77,6 +125,30 @@
       "writtenOn": "2026-09-01T04:23:49Z",
       "side": 1,
       "message": "Doesn\u0027t this need to be in a UAPI Header?",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 56
+      },
+      "revId": "01aa9adf2f9634f68cff53f46e713bdeb9c7cbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87aa77ca_46c97ecc",
+        "filename": "drivers/android/bpf/bpf_fd_loader.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2026-09-01T22:34:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b98815f_74eaca63",
       "range": {
         "startLine": 25,
         "startChar": 0,
@@ -138,6 +210,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "80a392cf_532e5418",
+        "filename": "drivers/android/bpf/bpf_fd_loader.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2026-09-01T22:34:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26d91dc4_fbc804f5",
+      "range": {
+        "startLine": 40,
+        "startChar": 34,
+        "endLine": 40,
+        "endChar": 46
+      },
+      "revId": "01aa9adf2f9634f68cff53f46e713bdeb9c7cbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "beacc1db_7f2c1c76",
@@ -151,6 +247,30 @@
       "writtenOn": "2026-09-01T04:23:49Z",
       "side": 1,
       "message": "size_t *",
+      "range": {
+        "startLine": 214,
+        "startChar": 46,
+        "endLine": 214,
+        "endChar": 50
+      },
+      "revId": "01aa9adf2f9634f68cff53f46e713bdeb9c7cbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ce35c1c_96dc0913",
+        "filename": "drivers/android/bpf/bpf_fd_loader.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2026-09-01T22:34:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "beacc1db_7f2c1c76",
       "range": {
         "startLine": 214,
         "startChar": 46,
@@ -208,6 +328,30 @@
           ]
         }
       ],
+      "revId": "01aa9adf2f9634f68cff53f46e713bdeb9c7cbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e09ae93e_e8cdd215",
+        "filename": "drivers/android/bpf/bpf_fd_loader.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2026-09-01T22:34:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de82b6bb_7c59e46d",
+      "range": {
+        "startLine": 218,
+        "startChar": 6,
+        "endLine": 218,
+        "endChar": 9
+      },
       "revId": "01aa9adf2f9634f68cff53f46e713bdeb9c7cbb7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -316,6 +460,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7934056_dcc2ba4e",
+        "filename": "drivers/android/bpf/bpf_fd_loader.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2026-09-01T22:34:40Z",
+      "side": 1,
+      "message": "Added validation immediately after obtaining the instructions section.",
+      "parentUuid": "6b9f1747_6020727b",
+      "range": {
+        "startLine": 311,
+        "startChar": 17,
+        "endLine": 311,
+        "endChar": 53
+      },
+      "revId": "01aa9adf2f9634f68cff53f46e713bdeb9c7cbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "43093239_3f511530",
@@ -385,6 +553,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a54bfb28_ddb3352f",
+        "filename": "drivers/android/bpf/bpf_fd_loader.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2026-09-01T22:34:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1478b362_04ef3f96",
+      "range": {
+        "startLine": 381,
+        "startChar": 2,
+        "endLine": 381,
+        "endChar": 12
+      },
+      "revId": "01aa9adf2f9634f68cff53f46e713bdeb9c7cbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b452afef_2031b082",
@@ -398,6 +590,30 @@
       "writtenOn": "2026-09-01T04:23:49Z",
       "side": 1,
       "message": "Scary.",
+      "range": {
+        "startLine": 416,
+        "startChar": 10,
+        "endLine": 416,
+        "endChar": 14
+      },
+      "revId": "01aa9adf2f9634f68cff53f46e713bdeb9c7cbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfdbb915_88aaf8f2",
+        "filename": "drivers/android/bpf/bpf_fd_loader.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2026-09-01T22:34:40Z",
+      "side": 1,
+      "message": "Restricting access to root. Let me know if you think it should be something else.",
+      "parentUuid": "b452afef_2031b082",
       "range": {
         "startLine": 416,
         "startChar": 10,
