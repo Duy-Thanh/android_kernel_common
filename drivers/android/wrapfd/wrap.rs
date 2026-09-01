@@ -947,3 +947,74 @@ unsafe extern "C" fn wrapfd_put_mappable(
         Err(err) => err.to_errno(),
     }
 }
+
+#[export]
+/// # Safety
+///
+/// - `file` must be a valid, non-null pointer to a live C `struct file` created by this driver.
+/// - `dev` must be a valid pointer to a live C `struct device` or null (handled gracefully).
+/// - `ops` must be a valid pointer to a live C `struct wrapfd_listener_operations`.
+/// - The caller must ensure `file` and `dev` remain allocated for the duration of this call.
+/// - `ops` must remain allocated and `param` valid until a matching call to `wrapfd_del_listener`.
+unsafe extern "C" fn wrapfd_add_listener(
+    file: *mut bindings::file,
+    dev: *mut bindings::device,
+    ops: *const bindings::wrapfd_listener_operations,
+    param: *mut ffi::c_void,
+) -> ffi::c_int {
+    let result = with_wrap_helper(file, "wrapfd_add_listener", |wrap| {
+        if dev.is_null() {
+            pr_warn!("wrapfd_add_listener: dev is NULL!\n");
+            return Err(ENODEV);
+        }
+
+        let mut guard = wrap.inner.lock();
+
+        let WrapOwner::Device(ref owning_dev) = guard.owner else {
+            return Err(EBUSY);
+        };
+
+        // SAFETY: `dev` has been verified to be a non-null pointer and points to a live C `struct
+        // device` per function contract.
+        if owning_dev != &unsafe { kernel::device::Device::get_device(dev) } {
+            return Err(EBUSY);
+        }
+
+        let Some(ref mut content) = guard.content else {
+            return Err(ENOENT);
+        };
+
+        content.add_listener(ops, param)
+    });
+
+    match result {
+        Ok(()) => 0,
+        Err(err) => err.to_errno(),
+    }
+}
+
+#[export]
+/// # Safety
+///
+/// - `file` must be a valid, non-null pointer to a live C `struct file` created by this driver.
+unsafe extern "C" fn wrapfd_del_listener(
+    file: *mut bindings::file,
+    param: *mut ffi::c_void,
+) -> ffi::c_int {
+    let result = with_wrap_helper(file, "wrapfd_add_listener", |wrap| {
+        let mut guard = wrap.inner.lock();
+
+        let Some(ref mut content) = guard.content else {
+            return Err(EINVAL);
+        };
+
+        content.remove_listeners(param);
+
+        Ok(())
+    });
+
+    match result {
+        Ok(()) => 0,
+        Err(err) => err.to_errno(),
+    }
+}
