@@ -215,11 +215,30 @@ static void smmu_tlb_flush_walk(unsigned long iova, size_t size,
 	smmu_tlb_inv_range(iova, size, granule, false);
 }
 
+static void smmu_iotlb_sync(struct iommu_iotlb_gather *gather)
+{
+	if (gather->start < gather->end)
+		smmu_tlb_inv_range(gather->start, gather->end - gather->start + 1,
+				   gather->pgsize, true);
+	iommu_iotlb_gather_init(gather);
+}
+
 static void smmu_tlb_add_page(struct iommu_iotlb_gather *gather,
 			      unsigned long iova, size_t granule,
 			      void *cookie)
 {
-	smmu_tlb_inv_range(iova, granule, granule, true);
+	if (!gather) {
+		smmu_tlb_inv_range(iova, granule, granule, true);
+		return;
+	}
+
+	if ((gather->pgsize && gather->pgsize != granule) ||
+	    iommu_iotlb_gather_is_disjoint(gather, iova, granule)) {
+		smmu_iotlb_sync(gather);
+	}
+
+	gather->pgsize = granule;
+	iommu_iotlb_gather_add_range(gather, iova, granule);
 }
 
 static const struct iommu_flush_ops smmu_tlb_ops = {
@@ -1148,8 +1167,8 @@ static int smmu_host_stage2_idmap(phys_addr_t start, phys_addr_t end, int prot)
 			start += mapped;
 		}
 	} else {
+		iommu_iotlb_gather_init(&gather);
 		while (size) {
-			iommu_iotlb_gather_init(&gather);
 			pgsize = smmu_pgsize_idmap(size, start, pgtable->cfg.pgsize_bitmap);
 			pgcount = size / pgsize;
 			unmapped = pgtable->ops.unmap_pages(&pgtable->ops, start,
@@ -1160,6 +1179,7 @@ static int smmu_host_stage2_idmap(phys_addr_t start, phys_addr_t end, int prot)
 			size -= unmapped;
 			start += unmapped;
 		}
+		smmu_iotlb_sync(&gather);
 		/* Some memory were not unmapped. */
 		if (WARN_ON(size))
 			return -EINVAL;
