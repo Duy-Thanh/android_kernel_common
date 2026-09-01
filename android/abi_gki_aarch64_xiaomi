@@ -744,6 +744,10 @@ __tracepoint_android_vh_migrate_batch_nr_pages
 # required by micar power
 emergency_sync
 pm_system_cancel_wakeup
+<<<<<<< PATCH SET (a9c4ce34f145aae3f0162d38d28d36f8ecdfcf6e ANDROID: GKI: update symbol list file for xiaomi)
+clear_wakeup_reasons
+||||||| BASE      (028afce791ff6b00197fbc057a51eedaeabd0d6b ANDROID: GKI: export clear_wakeup_reasons symbol)
+=======
 
 
 #required by wakeup tracer
@@ -755,3 +759,4 @@ __traceiter_alarmtimer_fired
 __tracepoint_alarmtimer_fired
 udp4_lib_lookup
 udp6_lib_lookup
+>>>>>>> BASE      (9935822dd1fc678e3732842744c0f96e779429f2 ANDROID: GKI: export clear_wakeup_reasons symbol)
