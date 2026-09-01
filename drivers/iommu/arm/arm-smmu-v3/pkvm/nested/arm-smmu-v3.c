@@ -164,17 +164,20 @@ static void __smmu_add_cmd(void *__opaque, struct arm_smmu_cmdq_batch *unused,
 
 static int smmu_tlb_inv_range_smmu(struct hyp_arm_smmu_v3_device *smmu,
 				   struct arm_smmu_cmdq_ent *cmd,
-				   unsigned long iova, size_t size, size_t granule)
+				   unsigned long iova, size_t size, size_t granule,
+				   bool sync)
 {
 	arm_smmu_tlb_inv_build(cmd, iova, size, granule,
 			       idmap_pgtable->cfg.pgsize_bitmap,
 			       smmu->features & ARM_SMMU_FEAT_RANGE_INV,
 			       smmu, __smmu_add_cmd, NULL);
-	return smmu_sync_cmd(smmu);
+	if (sync)
+		return smmu_sync_cmd(smmu);
+	return 0;
 }
 
 static void smmu_tlb_inv_range(unsigned long iova, size_t size, size_t granule,
-			       bool leaf)
+			       bool leaf, bool sync)
 {
 	struct arm_smmu_cmdq_ent cmd_s1 = {
 		.opcode = CMDQ_OP_TLBI_NH_ALL,
@@ -202,8 +205,11 @@ static void smmu_tlb_inv_range(unsigned long iova, size_t size, size_t granule,
 		 * TLB invalidations.
 		 */
 		if (nested_smmu->active) {
-			WARN_ON(smmu_tlb_inv_range_smmu(&nested_smmu->common, &cmd, iova, size, granule));
-			WARN_ON(smmu_send_cmd(&nested_smmu->common, &cmd_s1));
+			WARN_ON(smmu_tlb_inv_range_smmu(&nested_smmu->common, &cmd,
+							iova, size, granule, sync));
+			WARN_ON(smmu_add_cmd(&nested_smmu->common, &cmd_s1));
+			if (sync)
+				WARN_ON(smmu_sync_cmd(&nested_smmu->common));
 		}
 		kvm_smmu_hw_unlock(nested_smmu);
 	}
@@ -212,14 +218,14 @@ static void smmu_tlb_inv_range(unsigned long iova, size_t size, size_t granule,
 static void smmu_tlb_flush_walk(unsigned long iova, size_t size,
 				size_t granule, void *cookie)
 {
-	smmu_tlb_inv_range(iova, size, granule, false);
+	smmu_tlb_inv_range(iova, size, granule, false, true);
 }
 
 static void smmu_iotlb_sync(struct iommu_iotlb_gather *gather)
 {
 	if (gather->start < gather->end)
 		smmu_tlb_inv_range(gather->start, gather->end - gather->start + 1,
-				   gather->pgsize, true);
+				   gather->pgsize, true, false);
 	iommu_iotlb_gather_init(gather);
 }
 
@@ -228,7 +234,7 @@ static void smmu_tlb_add_page(struct iommu_iotlb_gather *gather,
 			      void *cookie)
 {
 	if (!gather) {
-		smmu_tlb_inv_range(iova, granule, granule, true);
+		smmu_tlb_inv_range(iova, granule, granule, true, false);
 		return;
 	}
 
@@ -1199,9 +1205,24 @@ int smmu_init_hyp_module(const struct pkvm_module_ops *ops)
 }
 #endif
 
+static void smmu_host_stage2_idmap_complete(bool map)
+{
+	struct hyp_arm_smmu_v3_nested_device *smmu;
+	if (map)
+		return;
+
+	for_each_smmu(smmu) {
+		kvm_smmu_hw_lock(smmu);
+		if (smmu->active)
+			WARN_ON(smmu_sync_cmd(&smmu->common));
+		kvm_smmu_hw_unlock(smmu);
+	}
+}
+
 /* Shared with the kernel driver in EL1 */
 struct kvm_iommu_ops smmu_ops = {
 	.init				= smmu_init,
 	.host_stage2_idmap		= smmu_host_stage2_idmap,
+	.host_stage2_idmap_complete	= smmu_host_stage2_idmap_complete,
 	.dabt_handler			= smmu_dabt_handler,
 };
