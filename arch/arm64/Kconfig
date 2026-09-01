@@ -1754,7 +1754,7 @@ config ARM64_TAGGED_ADDR_ABI
 
 menuconfig COMPAT
 	bool "Kernel support for 32-bit EL0"
-	depends on ARM64_4K_PAGES
+	depends on ARM64_4K_PAGES || EXPERT
 	select HAVE_UID16
 	select OLD_SIGSUSPEND3
 	select COMPAT_OLD_SIGACTION
@@ -1763,6 +1763,10 @@ menuconfig COMPAT
 	  kernel at EL1. AArch32-specific components such as system calls,
 	  the user helper functions, VFP support and the ptrace interface are
 	  handled appropriately by the kernel.
+
+	  If you use a page size other than 4KB (i.e, 16KB or 64KB), please be aware
+	  that you will only be able to execute AArch32 binaries that were compiled
+	  with page size aligned segments.
 
 	  If you want to execute 32-bit userspace applications, say Y.
 
