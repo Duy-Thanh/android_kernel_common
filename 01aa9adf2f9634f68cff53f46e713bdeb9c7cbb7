@@ -16,6 +16,396 @@
       "message": "Is kernel team / GKI team ok with this?\n\nI couldn\u0027t get a single sysctl with a 1 if statement implementation added to kernel to lock down bpf loading because it would be a divergence from upstream...",
       "revId": "01aa9adf2f9634f68cff53f46e713bdeb9c7cbb7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59ca9e23_f0fe3e37",
+        "filename": "arch/x86/configs/gki_defconfig",
+        "patchSetId": 9
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-09-01T04:23:49Z",
+      "side": 1,
+      "message": "Seems like this should be built in?",
+      "range": {
+        "startLine": 588,
+        "startChar": 29,
+        "endLine": 588,
+        "endChar": 30
+      },
+      "revId": "01aa9adf2f9634f68cff53f46e713bdeb9c7cbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cffa02f8_43dc2cd2",
+        "filename": "drivers/android/bpf/bpf_fd_loader.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-09-01T04:23:49Z",
+      "side": 1,
+      "message": "All android specific UAPI should be prefixed with ANDROID_",
+      "range": {
+        "startLine": 25,
+        "startChar": 7,
+        "endLine": 25,
+        "endChar": 25
+      },
+      "revId": "01aa9adf2f9634f68cff53f46e713bdeb9c7cbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b98815f_74eaca63",
+        "filename": "drivers/android/bpf/bpf_fd_loader.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-09-01T04:23:49Z",
+      "side": 1,
+      "message": "Doesn\u0027t this need to be in a UAPI Header?",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 56
+      },
+      "revId": "01aa9adf2f9634f68cff53f46e713bdeb9c7cbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26d91dc4_fbc804f5",
+        "filename": "drivers/android/bpf/bpf_fd_loader.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-09-01T04:23:49Z",
+      "side": 1,
+      "message": "Why not SZ_8M from sizes.h",
+      "range": {
+        "startLine": 40,
+        "startChar": 34,
+        "endLine": 40,
+        "endChar": 46
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4f61725a_52395c04",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/bpf/bpf_fd_loader.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "#include \u003clinux/sizes.h\u003e\n"
+            },
+            {
+              "path": "drivers/android/bpf/bpf_fd_loader.c",
+              "range": {
+                "startLine": 40,
+                "startChar": 0,
+                "endLine": 41,
+                "endChar": 0
+              },
+              "replacement": "#define BPF_LOADER_MAX_SIZE SZ_8M\n"
+            }
+          ]
+        }
+      ],
+      "revId": "01aa9adf2f9634f68cff53f46e713bdeb9c7cbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "beacc1db_7f2c1c76",
+        "filename": "drivers/android/bpf/bpf_fd_loader.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-09-01T04:23:49Z",
+      "side": 1,
+      "message": "size_t *",
+      "range": {
+        "startLine": 214,
+        "startChar": 46,
+        "endLine": 214,
+        "endChar": 50
+      },
+      "revId": "01aa9adf2f9634f68cff53f46e713bdeb9c7cbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de82b6bb_7c59e46d",
+        "filename": "drivers/android/bpf/bpf_fd_loader.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-09-01T04:23:49Z",
+      "side": 1,
+      "message": "Have you run `checkpatch.pl --strict` on this?",
+      "range": {
+        "startLine": 218,
+        "startChar": 6,
+        "endLine": 218,
+        "endChar": 9
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "49422c7c_b2fe4df0",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/bpf/bpf_fd_loader.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\tint i;\n"
+            },
+            {
+              "path": "drivers/android/bpf/bpf_fd_loader.c",
+              "range": {
+                "startLine": 218,
+                "startChar": 0,
+                "endLine": 219,
+                "endChar": 0
+              },
+              "replacement": "\tfor (i \u003d 1; i \u003c info-\u003ehdr-\u003ee_shnum; i++) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "01aa9adf2f9634f68cff53f46e713bdeb9c7cbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32aee898_e359c9c3",
+        "filename": "drivers/android/bpf/bpf_fd_loader.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-09-01T04:23:49Z",
+      "side": 1,
+      "message": "Are we SURE we want to do this? This is essentially bypassing CAP_SYS_ADMIN and CAP_BPF.",
+      "range": {
+        "startLine": 232,
+        "startChar": 11,
+        "endLine": 232,
+        "endChar": 25
+      },
+      "revId": "01aa9adf2f9634f68cff53f46e713bdeb9c7cbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de929f48_02b9b6e8",
+        "filename": "drivers/android/bpf/bpf_fd_loader.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-09-01T04:23:49Z",
+      "side": 1,
+      "message": "One of the premises is that the bpf programs must be loaded from a dm_verity partition. Why not enforce this check here?",
+      "revId": "01aa9adf2f9634f68cff53f46e713bdeb9c7cbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe6c0b2e_2522e660",
+        "filename": "drivers/android/bpf/bpf_fd_loader.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-09-01T04:23:49Z",
+      "side": 1,
+      "message": "Don\u0027t we want a different `kernel_read_file_id`? Seems like overloading the `module` id could be limiting.",
+      "range": {
+        "startLine": 251,
+        "startChar": 10,
+        "endLine": 251,
+        "endChar": 24
+      },
+      "revId": "01aa9adf2f9634f68cff53f46e713bdeb9c7cbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b9f1747_6020727b",
+        "filename": "drivers/android/bpf/bpf_fd_loader.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-09-01T04:23:49Z",
+      "side": 1,
+      "message": "Need to check for malicious elf file.\n\n`if (insns_sz \u003d\u003d 0 || (insns_sz % sizeof(struct bpf_insn)) !\u003d 0) {\n    err \u003d -ENOEXEC;`",
+      "range": {
+        "startLine": 311,
+        "startChar": 17,
+        "endLine": 311,
+        "endChar": 53
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "312dc499_80f2b0aa",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/bpf/bpf_fd_loader.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\tif (insns_sz \u003d\u003d 0 || (insns_sz % sizeof(struct bpf_insn)) !\u003d 0) {\n\t\terr \u003d -ENOEXEC;\n\t\tgoto out_free_buf;\n\t}\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "01aa9adf2f9634f68cff53f46e713bdeb9c7cbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43093239_3f511530",
+        "filename": "drivers/android/bpf/bpf_fd_loader.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-09-01T04:23:49Z",
+      "side": 1,
+      "message": "Don\u0027t you need to copy context from user? Also, Does TV still support 32 bit compat mode? if so, this will cause issues.",
+      "range": {
+        "startLine": 329,
+        "startChar": 1,
+        "endLine": 329,
+        "endChar": 41
+      },
+      "revId": "01aa9adf2f9634f68cff53f46e713bdeb9c7cbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d04859b9_30e584bc",
+        "filename": "drivers/android/bpf/bpf_fd_loader.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-09-01T04:23:49Z",
+      "side": 1,
+      "message": "If this fails half way through, do we leak the FDs that may have been created?",
+      "range": {
+        "startLine": 331,
+        "startChar": 1,
+        "endLine": 331,
+        "endChar": 62
+      },
+      "revId": "01aa9adf2f9634f68cff53f46e713bdeb9c7cbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1478b362_04ef3f96",
+        "filename": "drivers/android/bpf/bpf_fd_loader.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-09-01T04:23:49Z",
+      "side": 1,
+      "message": "declaration in switch block.",
+      "range": {
+        "startLine": 381,
+        "startChar": 2,
+        "endLine": 381,
+        "endChar": 12
+      },
+      "revId": "01aa9adf2f9634f68cff53f46e713bdeb9c7cbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b452afef_2031b082",
+        "filename": "drivers/android/bpf/bpf_fd_loader.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-09-01T04:23:49Z",
+      "side": 1,
+      "message": "Scary.",
+      "range": {
+        "startLine": 416,
+        "startChar": 10,
+        "endLine": 416,
+        "endChar": 14
+      },
+      "revId": "01aa9adf2f9634f68cff53f46e713bdeb9c7cbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
