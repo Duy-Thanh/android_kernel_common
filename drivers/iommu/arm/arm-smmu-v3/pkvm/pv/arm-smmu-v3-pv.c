@@ -120,8 +120,8 @@ static int smmu_send_cmd(struct hyp_arm_smmu_v3_device_pv *smmu,
 	return smmu_sync_cmd(&smmu->common);
 }
 
-static int smmu_submit_batch_sync(struct hyp_arm_smmu_v3_device *smmu,
-				  struct arm_smmu_cmdq_batch *cmds)
+static int smmu_submit_batch(struct hyp_arm_smmu_v3_device *smmu,
+			     struct arm_smmu_cmdq_batch *cmds, bool sync)
 {
 	int i;
 	int ret;
@@ -134,7 +134,11 @@ static int smmu_submit_batch_sync(struct hyp_arm_smmu_v3_device *smmu,
 	for (i = 0; i < cmds->num; i++)
 		smmu_add_cmd_raw(smmu, &cmds->cmds[i * CMDQ_ENT_DWORDS]);
 
-	return smmu_sync_cmd(smmu);
+	if (sync)
+		return smmu_sync_cmd(smmu);
+
+	writel(smmu->cmdq.llq.prod, smmu->cmdq.prod_reg);
+	return 0;
 }
 
 static void __smmu_add_cmd(void *__opaque, struct arm_smmu_cmdq_batch *cmds,
@@ -144,7 +148,7 @@ static void __smmu_add_cmd(void *__opaque, struct arm_smmu_cmdq_batch *cmds,
 	int index;
 
 	if (cmds->num == CMDQ_BATCH_ENTRIES) {
-		smmu_submit_batch_sync(smmu, cmds);
+		smmu_submit_batch(smmu, cmds, false);
 		cmds->num = 0;
 	}
 
@@ -186,7 +190,8 @@ static void smmu_tlb_flush_all(void *cookie)
 static int smmu_tlb_inv_range_smmu(struct hyp_arm_smmu_v3_device_pv *smmu,
 				   struct io_pgtable *pgtable,
 				   struct arm_smmu_cmdq_ent *cmd,
-				   unsigned long iova, size_t size, size_t granule)
+				   unsigned long iova, size_t size, size_t granule,
+				   bool sync)
 {
 
 	struct arm_smmu_cmdq_batch cmds;
@@ -196,7 +201,7 @@ static int smmu_tlb_inv_range_smmu(struct hyp_arm_smmu_v3_device_pv *smmu,
 			       pgtable->cfg.pgsize_bitmap,
 			       smmu->common.features & ARM_SMMU_FEAT_RANGE_INV,
 			       smmu, __smmu_add_cmd, &cmds);
-	return smmu_submit_batch_sync(&smmu->common, &cmds);
+	return smmu_submit_batch(&smmu->common, &cmds, sync);
 }
 
 static void smmu_tlb_inv_range(struct kvm_hyp_iommu_domain *domain,
@@ -228,7 +233,7 @@ static void smmu_tlb_inv_range(struct kvm_hyp_iommu_domain *domain,
 		return;
 	}
 	WARN_ON(smmu_tlb_inv_range_smmu(smmu, smmu_domain->pgtable,
-					&cmd, iova, size, granule));
+					&cmd, iova, size, granule, true));
 	kvm_smmu_unlock(&smmu->common);
 }
 
@@ -1399,7 +1404,7 @@ static int smmu_host_stage2_idmap(phys_addr_t start, phys_addr_t end, int prot)
 }
 
 static void smmu_tlb_inv_range_idmap(unsigned long iova, size_t size, size_t granule,
-				     bool leaf)
+				     bool leaf, bool sync)
 {
 	struct hyp_arm_smmu_v3_device_pv *smmu;
 
@@ -1418,7 +1423,7 @@ static void smmu_tlb_inv_range_idmap(unsigned long iova, size_t size, size_t gra
 			continue;
 		}
 		WARN_ON(smmu_tlb_inv_range_smmu(smmu, idmap_pgtable,
-					&cmd, iova, size, granule));
+					&cmd, iova, size, granule, sync));
 		kvm_smmu_unlock(&smmu->common);
 	}
 }
@@ -1426,14 +1431,14 @@ static void smmu_tlb_inv_range_idmap(unsigned long iova, size_t size, size_t gra
 static void smmu_idmap_tlb_flush_walk(unsigned long iova, size_t size,
 				      size_t granule, void *cookie)
 {
-	smmu_tlb_inv_range_idmap(iova, size, granule, false);
+	smmu_tlb_inv_range_idmap(iova, size, granule, false, true);
 }
 
 static void smmu_idmap_iotlb_sync(struct iommu_iotlb_gather *gather)
 {
 	if (gather->start < gather->end)
 		smmu_tlb_inv_range_idmap(gather->start, gather->end - gather->start + 1,
-					 gather->pgsize, true);
+					 gather->pgsize, true, false);
 	iommu_iotlb_gather_init(gather);
 }
 
@@ -1442,7 +1447,7 @@ static void smmu_idmap_tlb_add_page(struct iommu_iotlb_gather *gather,
 				    void *cookie)
 {
 	if (!gather) {
-		smmu_tlb_inv_range_idmap(iova, granule, granule, true);
+		smmu_tlb_inv_range_idmap(iova, granule, granule, true, false);
 		return;
 	}
 
@@ -1540,6 +1545,23 @@ int smmu_init_hyp_module(const struct pkvm_module_ops *ops)
 }
 #endif
 
+static void smmu_host_stage2_idmap_complete(bool map)
+{
+	struct hyp_arm_smmu_v3_device_pv *smmu;
+	if (map)
+		return;
+
+	for_each_smmu(smmu) {
+		kvm_smmu_lock(&smmu->common);
+		if (!smmu->idmap_ref || smmu->power_is_off) {
+			kvm_smmu_unlock(&smmu->common);
+			continue;
+		}
+		WARN_ON(smmu_sync_cmd(&smmu->common));
+		kvm_smmu_unlock(&smmu->common);
+	}
+}
+
 /* Shared with the kernel driver in EL1 */
 struct kvm_iommu_ops smmu_pv_ops = {
 	.init                           = smmu_init,
@@ -1553,6 +1575,7 @@ struct kvm_iommu_ops smmu_pv_ops = {
 	.iova_to_phys			= smmu_iova_to_phys,
 	.dabt_handler			= smmu_dabt_handler,
 	.host_stage2_idmap		= smmu_host_stage2_idmap,
+	.host_stage2_idmap_complete	= smmu_host_stage2_idmap_complete,
 	.set_identity			= smmu_set_identity,
 	.dev_block_dma			= smmu_dev_block_dma,
 	.get_iommu_token_by_id	= smmu_id_to_token,
