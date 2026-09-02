@@ -52,6 +52,24 @@
       "parentUuid": "b70c67be_82d31b41",
       "revId": "1d0ff4452ac33e938c2d9e96901794889a4f1324",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b6b5a48_9e19e5fb",
+        "filename": "fs/fuse/file.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3547,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2026-09-02T23:43:56Z",
+      "side": 1,
+      "message": "Right. This has the same issue as http://b/461519132#comment30\n\nfuse passthrough is primarily for read/write I/O. The rest of the metadata I/O gets routed to userspace and handled by MediaProvider daemon (fuse daemon). When posix_fadvise is invoked, it would end up evicting both data and metadata pages. This may be racy for metadata I/Os which are being handled by the daemon.",
+      "parentUuid": "439e3a99_31b53ab0",
+      "revId": "1d0ff4452ac33e938c2d9e96901794889a4f1324",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
