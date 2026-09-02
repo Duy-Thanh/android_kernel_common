@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ffd147c1_222f6b04",
+        "filename": "arch/x86/configs/gki_defconfig",
+        "patchSetId": 9
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2026-09-02T01:00:51Z",
+      "side": 1,
+      "message": "No preference. Either way works for me.",
+      "parentUuid": "a7b7fc10_116e5d98",
+      "range": {
+        "startLine": 588,
+        "startChar": 29,
+        "endLine": 588,
+        "endChar": 30
+      },
+      "revId": "01aa9adf2f9634f68cff53f46e713bdeb9c7cbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cffa02f8_43dc2cd2",
         "filename": "drivers/android/bpf/bpf_fd_loader.c",
         "patchSetId": 9
@@ -381,6 +405,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0228ff33_3397f5af",
+        "filename": "drivers/android/bpf/bpf_fd_loader.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2026-09-02T01:00:51Z",
+      "side": 1,
+      "message": "I think there has been an issue with copying the code over. The upstream PoC did have a check for CAP_BPF: https://lore.kernel.org/all/20260813002618.3755631-3-tweek@google.com/",
+      "parentUuid": "32aee898_e359c9c3",
+      "range": {
+        "startLine": 232,
+        "startChar": 11,
+        "endLine": 232,
+        "endChar": 25
+      },
+      "revId": "01aa9adf2f9634f68cff53f46e713bdeb9c7cbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "de929f48_02b9b6e8",
         "filename": "drivers/android/bpf/bpf_fd_loader.c",
         "patchSetId": 9
@@ -398,6 +446,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "00a19c1b_73074f50",
+        "filename": "drivers/android/bpf/bpf_fd_loader.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2026-09-02T01:00:51Z",
+      "side": 1,
+      "message": "It is already here! This is happening via the LSM hook for `security_kernel_read_file` called within `kernel_read_file`. SELinux will kick in and make sure that the right permission has been granted to \"load this file as a kernel module\". \n\nEnforcing on the policy side give us more flexibility.",
+      "parentUuid": "de929f48_02b9b6e8",
+      "revId": "01aa9adf2f9634f68cff53f46e713bdeb9c7cbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fe6c0b2e_2522e660",
         "filename": "drivers/android/bpf/bpf_fd_loader.c",
         "patchSetId": 9
@@ -409,6 +475,30 @@
       "writtenOn": "2026-09-01T04:23:49Z",
       "side": 1,
       "message": "Don\u0027t we want a different `kernel_read_file_id`? Seems like overloading the `module` id could be limiting.",
+      "range": {
+        "startLine": 251,
+        "startChar": 10,
+        "endLine": 251,
+        "endChar": 24
+      },
+      "revId": "01aa9adf2f9634f68cff53f46e713bdeb9c7cbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1cba3f6_8ecd2860",
+        "filename": "drivers/android/bpf/bpf_fd_loader.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2026-09-02T01:00:51Z",
+      "side": 1,
+      "message": "It\u0027s a trade-off. The initial PoC had a different id. Jeff suggested reusing `module` as we are treating both equally.\n\nCons of introducing a new id:\n- This is part of the kernel API, we would need to pick something that won\u0027t conflict with any upstream addition (https://source.corp.google.com/h/android/kernel/common/+/android-mainline:include/linux/kernel_read_file.h;l\u003d18;drc\u003d4c269eab9889712dd561ecf3f0302c183d73e473). Is there any elegant way to add an enum without making future merge painful?\n- The SELinux policy for kernel modules has been shipped with the platform for a while. If we decide to do any kind of backporting, reusing the existing policy allows us to piggy back on it.\n\nI can\u0027t think of any sufficient reason why we would want a different id, but if you have a preference here, I\u0027m ok to go down that path.",
+      "parentUuid": "fe6c0b2e_2522e660",
       "range": {
         "startLine": 251,
         "startChar": 10,
@@ -509,6 +599,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2b104641_570d35ce",
+        "filename": "drivers/android/bpf/bpf_fd_loader.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2026-09-02T01:00:51Z",
+      "side": 1,
+      "message": "I think this is an output-only parameter, but let me check that one.",
+      "parentUuid": "43093239_3f511530",
+      "range": {
+        "startLine": 329,
+        "startChar": 1,
+        "endLine": 329,
+        "endChar": 41
+      },
+      "revId": "01aa9adf2f9634f68cff53f46e713bdeb9c7cbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d04859b9_30e584bc",
         "filename": "drivers/android/bpf/bpf_fd_loader.c",
         "patchSetId": 9
@@ -520,6 +634,30 @@
       "writtenOn": "2026-09-01T04:23:49Z",
       "side": 1,
       "message": "If this fails half way through, do we leak the FDs that may have been created?",
+      "range": {
+        "startLine": 331,
+        "startChar": 1,
+        "endLine": 331,
+        "endChar": 62
+      },
+      "revId": "01aa9adf2f9634f68cff53f46e713bdeb9c7cbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8f9ada4_da3efc76",
+        "filename": "drivers/android/bpf/bpf_fd_loader.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2026-09-02T01:00:51Z",
+      "side": 1,
+      "message": "It shouldn\u0027t: https://source.corp.google.com/h/android/kernel/common/+/android-mainline:tools/lib/bpf/gen_loader.c;l\u003d146;drc\u003d7fef1796ec4d8c4cce70c374efafdbbc8d6d6cbc",
+      "parentUuid": "d04859b9_30e584bc",
       "range": {
         "startLine": 331,
         "startChar": 1,
