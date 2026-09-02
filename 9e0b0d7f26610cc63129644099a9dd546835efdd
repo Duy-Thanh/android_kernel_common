@@ -16,6 +16,23 @@
       "message": "No objection on this from me, but it looks like something that will be needed upstream as well? Or is there some reason the upstream rust binder doesn\u0027t need this symbol?",
       "revId": "9e0b0d7f26610cc63129644099a9dd546835efdd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8af0b42_b9fc79f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-09-02T18:48:32Z",
+      "side": 1,
+      "message": "This also needs a symbol update follow on patch.",
+      "revId": "9e0b0d7f26610cc63129644099a9dd546835efdd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
