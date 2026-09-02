@@ -23,7 +23,12 @@
 #include <linux/slab.h>
 #include <linux/percpu-refcount.h>
 #include <linux/bpfptr.h>
+<<<<<<< HEAD   (de9e5285a2366f988d6b9794bfdf2693356a1977 Merge 2a2e5f7393b2 ("xfrm: use compat translator only for u6)
 #include <linux/android_kabi.h>
+||||||| BASE   (2a2e5f7393b260944b18c019a9715da749114038 xfrm: use compat translator only for u64 alignment mismatch)
+=======
+#include <linux/rcupdate_trace.h>
+>>>>>>> BRANCH (674f684f7c61c3db475450e8c2b0c5701f9e4ae7 Linux 5.15.212)
 
 struct bpf_verifier_env;
 struct bpf_verifier_log;
@@ -1381,6 +1386,9 @@ out:
 			_ret = (_cn ? NET_XMIT_DROP : -EPERM);		\
 		_ret;					\
 	})
+
+#define bpf_rcu_lock_held() \
+	(rcu_read_lock_held() || rcu_read_lock_trace_held() || rcu_read_lock_bh_held())
 
 #ifdef CONFIG_BPF_SYSCALL
 DECLARE_PER_CPU(int, bpf_prog_active);
