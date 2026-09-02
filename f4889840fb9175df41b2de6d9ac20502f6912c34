@@ -348,6 +348,29 @@
       },
       "revId": "f4889840fb9175df41b2de6d9ac20502f6912c34",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fc4027a_39eea538",
+        "filename": "include/linux/wrapfd.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-09-02T10:22:59Z",
+      "side": 1,
+      "message": "Why are we inventing our own listener abstraction? Could this just be a generic `wait_queue_head_t` that drivers can register themselves with? Or do we expect this vtable to get more operations in the future?",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 2
+      },
+      "revId": "f4889840fb9175df41b2de6d9ac20502f6912c34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
