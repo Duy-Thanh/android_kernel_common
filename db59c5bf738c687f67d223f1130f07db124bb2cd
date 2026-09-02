@@ -16,6 +16,24 @@
       "message": "@keirf@google.com could you please take a look and advise if we should add anyone else for the review/cc here? AFAIU the `crashdump_defconfig` is only used by the AVF and shouldn\u0027t influence anyone else beside us and it fixes b/527430550.",
       "revId": "db59c5bf738c687f67d223f1130f07db124bb2cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c120c53_132c79ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2026-09-02T11:16:34Z",
+      "side": 1,
+      "message": "It\u0027s fine. Only used for AVF crashkernel.",
+      "parentUuid": "daaa4982_896cfe41",
+      "revId": "db59c5bf738c687f67d223f1130f07db124bb2cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
