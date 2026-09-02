@@ -43,6 +43,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "98fe72d2_94acd280",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-02T18:37:34Z",
+      "side": 1,
+      "message": "Please use `dma_buf_[vmap|vunmap]_unlocked()`. See aosp/4269603.",
+      "range": {
+        "startLine": 420,
+        "startChar": 7,
+        "endLine": 420,
+        "endChar": 19
+      },
+      "revId": "1f2fea10dc74d2afe3b00e6b7faba970e35e7cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "98b6618b_4359740a",
         "filename": "drivers/android/wrapfd.c",
         "patchSetId": 2
