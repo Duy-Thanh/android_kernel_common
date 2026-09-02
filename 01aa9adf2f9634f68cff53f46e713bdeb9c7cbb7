@@ -427,6 +427,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e2f0d70_eb3084e9",
+        "filename": "drivers/android/bpf/bpf_fd_loader.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2026-09-02T13:29:53Z",
+      "side": 1,
+      "message": "Ah, that\u0027s my bad. I have included a `bpf_capable()` check which covers both CAP_SYS_ADMIN and CAP_BPF. Let me know if we want to restrict to CAP_BPF only.",
+      "parentUuid": "0228ff33_3397f5af",
+      "range": {
+        "startLine": 232,
+        "startChar": 11,
+        "endLine": 232,
+        "endChar": 25
+      },
+      "revId": "01aa9adf2f9634f68cff53f46e713bdeb9c7cbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de929f48_02b9b6e8",
