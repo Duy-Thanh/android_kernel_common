@@ -573,15 +573,10 @@ void clockevents_handle_noop(struct clock_event_device *dev)
  * Called from various tick functions with clockevents_lock held and
  * interrupts disabled.
  */
-void clockevents_exchange_device(struct clock_event_device *old,
-				 struct clock_event_device *new)
+void __clockevents_exchange_device(struct clock_event_device *old,
+				   struct clock_event_device *new)
 {
-	/*
-	 * Caller releases a clock event device. We queue it into the
-	 * released list and do a notify add later.
-	 */
 	if (old) {
-		module_put(old->owner);
 		clockevents_switch_state(old, CLOCK_EVT_STATE_DETACHED);
 		list_move(&old->list, &clockevents_released);
 	}
@@ -590,6 +585,23 @@ void clockevents_exchange_device(struct clock_event_device *old,
 		BUG_ON(!clockevent_state_detached(new));
 		clockevents_shutdown(new);
 	}
+}
+
+/**
+ * clockevents_exchange_device - release and request clock devices
+ * @old:	device to release (can be NULL)
+ * @new:	device to request (can be NULL)
+ *
+ * Called from various tick functions with clockevents_lock held and
+ * interrupts disabled.
+ */
+void clockevents_exchange_device(struct clock_event_device *old,
+				 struct clock_event_device *new)
+{
+	if (old)
+		module_put(old->owner);
+
+	__clockevents_exchange_device(old, new);
 }
 
 /**
