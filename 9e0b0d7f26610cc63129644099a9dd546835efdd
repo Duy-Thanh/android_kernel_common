@@ -33,6 +33,42 @@
       "message": "This also needs a symbol update follow on patch.",
       "revId": "9e0b0d7f26610cc63129644099a9dd546835efdd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7efb267d_a8497947",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-09-02T19:13:46Z",
+      "side": 1,
+      "message": "Rust Binder is not buildable as a module upstream. I tried fixing that some time ago but did not succeed at the time.\n\nhttps://lore.kernel.org/all/20260205-binder-tristate-v1-0-dfc947c35d35@google.com/",
+      "parentUuid": "36c69d1f_c1c2ae8b",
+      "revId": "9e0b0d7f26610cc63129644099a9dd546835efdd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7a552c1_0a47c1d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-09-02T19:13:46Z",
+      "side": 1,
+      "message": "Rust Binder is GKI module, so no symbol list changes are needed.",
+      "parentUuid": "e8af0b42_b9fc79f2",
+      "revId": "9e0b0d7f26610cc63129644099a9dd546835efdd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
