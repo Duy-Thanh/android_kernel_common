@@ -70,6 +70,24 @@
       "parentUuid": "b09da432_e81bedc1",
       "revId": "1e3233bfdbd41af51ab6b515249128af9bc20052",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dad7cb8d_5ef96d4b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-09-02T19:51:14Z",
+      "side": 1,
+      "message": "I don\u0027t understand what you mean by \"changing the semantics of an existing hook\". You can use a hook for whatever you want, what semantics are you concerned about? I think you are saying that an existing hook would serve your purposes - it would be preferred for you to use the existing hook unless there is a really good reason why not.",
+      "parentUuid": "d8634a00_d458a749",
+      "revId": "1e3233bfdbd41af51ab6b515249128af9bc20052",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
