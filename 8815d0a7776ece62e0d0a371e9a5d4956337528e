@@ -88,6 +88,23 @@
       "parentUuid": "77df46d6_f2fc1636",
       "revId": "8815d0a7776ece62e0d0a371e9a5d4956337528e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f5d834c_297cdd10",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-09-02T21:54:26Z",
+      "side": 1,
+      "message": "Overriding lint as I don\u0027t see why the binding header here would be usefully split.",
+      "revId": "8815d0a7776ece62e0d0a371e9a5d4956337528e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
