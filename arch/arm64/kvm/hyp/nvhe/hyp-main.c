@@ -830,6 +830,12 @@ static bool is_vcpu_runnable(struct pkvm_hyp_vcpu *hyp_vcpu)
 		hyp_vcpu->power_state == PSCI_0_2_AFFINITY_LEVEL_ON);
 }
 
+/*
+ * CI pipeline check (tabba/ci-check-good): this comment is the only
+ * change on this branch. It provides a known-good build that must pass a
+ * protected-VM run, paired with tabba/ci-check-bad which injects a deliberate
+ * failure on this same vCPU-run path.
+ */
 static void handle___kvm_vcpu_run(struct kvm_cpu_context *host_ctxt)
 {
 	struct pkvm_hyp_vcpu *hyp_vcpu;
