@@ -1236,6 +1236,7 @@ static int ra_data_block(struct inode *inode, pgoff_t index)
 		.in_list = 0,
 	};
 	int err = 0;
+<<<<<<< HEAD   (854dbba814c710d5fb575e51e6bb463e605bfdcc Merge android17-6.18 into android17-6.18-lts)
 	bool bypass = false;
 
 	trace_android_rvh_f2fs_ra_data_block_bypass(inode, index, &err, &bypass);
@@ -1252,6 +1253,9 @@ static int ra_data_block(struct inode *inode, pgoff_t index)
 		mapping = atomic_inode->i_mapping;
 	}
 	f2fs_up_read(&F2FS_I(inode)->i_sem);
+||||||| BASE   (da99d0302d3ccccfb13c69e663bf8eae698b9562 clk: spacemit: ccu_mix: fix inverted condition in ccu_mix_tr)
+=======
+>>>>>>> BRANCH (4623c251496b99c530ce225c05334f4eac8b933a f2fs: avoid reading already updated pages during GC)
 
 	folio = f2fs_grab_cache_folio(mapping, index, true);
 	if (IS_ERR(folio)) {
