@@ -32,8 +32,10 @@ static inline void pkvm_spin_lock(pkvm_spinlock_t *lock)
 		      "   cmpl %%eax,%[tail]\n"
 		      "   jnz 2b\n"
 		      "1:\n"
-		      : [head] "+m"(lock->head)
-		      : [tail] "m"(lock->tail)
+		      :
+		      :
+		      [head] "m"(lock->head),
+		      [tail] "m"(lock->tail)
 		      : "cc", "memory", "eax");
 }
 
@@ -41,8 +43,8 @@ static inline void pkvm_spin_unlock(pkvm_spinlock_t *lock)
 {
 	/* Increment tail of queue */
 	asm volatile ("   lock incl %[tail]\n"
-		      : [tail] "+m" (lock->tail)
 		      :
+		      : [tail] "m" (lock->tail)
 		      : "cc", "memory");
 }
 
