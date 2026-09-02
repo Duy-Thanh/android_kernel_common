@@ -2445,10 +2445,18 @@ int xfrm_user_policy(struct sock *sk, int optname, sockptr_t optval, int optlen)
 	if (IS_ERR(data))
 		return PTR_ERR(data);
 
+<<<<<<< HEAD   (489b1b2a8b70082748d15159feb3edcaeca3a34b Revert "bridge: stp: Fix a potential use-after-free when del)
 	/* Use the 64-bit / untranslated format on Android, even for compat */
 	if (!IS_ENABLED(CONFIG_ANDROID) || IS_ENABLED(CONFIG_XFRM_USER_COMPAT)) {
 		if (in_compat_syscall()) {
 			struct xfrm_translator *xtr = xfrm_get_translator();
+||||||| BASE   (1dd9cb98fe228e017fff9efb33862ff38c741b65 xen/gntdev: fix error handling in ioctl)
+	if (in_compat_syscall()) {
+		struct xfrm_translator *xtr = xfrm_get_translator();
+=======
+	if (IS_ENABLED(CONFIG_COMPAT_FOR_U64_ALIGNMENT) && in_compat_syscall()) {
+		struct xfrm_translator *xtr = xfrm_get_translator();
+>>>>>>> BRANCH (2a2e5f7393b260944b18c019a9715da749114038 xfrm: use compat translator only for u64 alignment mismatch)
 
 			if (!xtr) {
 				kfree(data);
