@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0595055_e7ae151c",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/nested/arm-smmu-v3.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-09-02T08:59:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0a87365_e261af0a",
+      "range": {
+        "startLine": 165,
+        "startChar": 7,
+        "endLine": 165,
+        "endChar": 10
+      },
+      "revId": "662f5005266fc41c747eadc05fa0fbc00e58f9ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db71dc15_ea534840",
@@ -61,6 +85,30 @@
           ]
         }
       ],
+      "revId": "662f5005266fc41c747eadc05fa0fbc00e58f9ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bba02c84_d248ead5",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/pv/arm-smmu-v3-pv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1422,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-09-02T08:59:45Z",
+      "side": 1,
+      "message": "Thanks for spotting that, I fixed it.",
+      "parentUuid": "db71dc15_ea534840",
+      "range": {
+        "startLine": 1422,
+        "startChar": 32,
+        "endLine": 1422,
+        "endChar": 37
+      },
       "revId": "662f5005266fc41c747eadc05fa0fbc00e58f9ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
