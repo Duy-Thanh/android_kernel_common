@@ -34,6 +34,24 @@
       "parentUuid": "db7e4046_b7633bd9",
       "revId": "8815d0a7776ece62e0d0a371e9a5d4956337528e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65bab0cd_2764e51f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-09-02T20:29:01Z",
+      "side": 1,
+      "message": "So, if the right long term solution is device-tree approach, one concern here might be are there any other tegra238 devices using the GKI where these hard-coded settings might conflict?",
+      "parentUuid": "d49482b3_1ab10ca8",
+      "revId": "8815d0a7776ece62e0d0a371e9a5d4956337528e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
