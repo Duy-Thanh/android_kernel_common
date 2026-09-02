@@ -435,6 +435,47 @@ int hyp_create_idmap(u32 hyp_va_bits)
 	return __pkvm_create_mappings(start, end - start, start, PAGE_HYP_EXEC);
 }
 
+static int check_host_ownership_walker(u64 addr, u64 end, u32 level,
+				       kvm_pte_t *ptep,
+				       enum kvm_pgtable_walk_flags flag,
+				       void * const arg)
+{
+	kvm_pte_t pte = *ptep, host_pte;
+	phys_addr_t phys, phys_end;
+	int ret;
+
+	if (!kvm_pte_valid(pte))
+		return 0;
+
+	if (pkvm_getstate(kvm_pgtable_hyp_pte_prot(pte)) != PKVM_PAGE_OWNED)
+		return -EPERM;
+
+	phys = kvm_pte_to_phys(pte);
+	phys_end = phys + kvm_granule_size(level);
+	for (; phys < phys_end; phys += PAGE_SIZE) {
+		ret = kvm_pgtable_get_leaf(&host_mmu.pgt, phys, &host_pte, NULL);
+		if (ret)
+			return ret;
+
+		if (!host_stage2_pte_is_hyp_owned(host_pte))
+			return -EPERM;
+	}
+
+	return 0;
+}
+
+int pkvm_check_host_ownership(void)
+{
+	struct kvm_pgtable_walker walker = {
+		.cb	= check_host_ownership_walker,
+		.flags	= KVM_PGTABLE_WALK_LEAF,
+	};
+
+	/* The private range and the vmemmap share one quarter of the VA space. */
+	return kvm_pgtable_walk(&pkvm_pgtable, __private_range_base,
+				BIT(pkvm_pgtable.ia_bits - 2), &walker);
+}
+
 static void *admit_host_page(void *arg)
 {
 	struct kvm_hyp_memcache *host_mc = arg;
