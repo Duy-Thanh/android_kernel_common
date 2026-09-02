@@ -19,7 +19,6 @@
 #define _LINUX_WAKEUP_REASON_H
 
 #define MAX_SUSPEND_ABORT_LEN 256
-#define MAX_WAKEUP_REASON_IRQ_NAME_LEN 64
 
 #ifdef CONFIG_SUSPEND
 void log_irq_wakeup_reason(int irq);

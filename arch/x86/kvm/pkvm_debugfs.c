@@ -208,9 +208,6 @@ static int vmexit_trace_show(struct seq_file *m, void *unused)
 		vm_handle = PKVM_HOST_VM_HANDLE;
 	}
 
-	if (!size)
-		return 0;
-
 	perf = alloc_pages_exact(size, GFP_KERNEL_ACCOUNT);
 	if (!perf) {
 		pr_err("failed to allocate perf buffer\n");
@@ -231,42 +228,7 @@ out:
 
 	return ret;
 }
-
-static int vmexit_trace_open(struct inode *inode, struct file *file)
-{
-	struct kvm *kvm = inode->i_private;
-	int r;
-
-	if (kvm && !kvm_get_kvm_safe(kvm))
-		return -ENOENT;
-
-	r = single_open(file, vmexit_trace_show, kvm);
-	if (r < 0 && kvm)
-		kvm_put_kvm(kvm);
-
-	return r;
-}
-
-static int vmexit_trace_release(struct inode *inode, struct file *file)
-{
-	struct kvm *kvm = inode->i_private;
-	int ret;
-
-	ret = single_release(inode, file);
-
-	if (kvm)
-		kvm_put_kvm(kvm);
-
-	return ret;
-}
-
-static const struct file_operations vmexit_trace_fops = {
-	.owner		= THIS_MODULE,
-	.open		= vmexit_trace_open,
-	.read		= seq_read,
-	.llseek		= seq_lseek,
-	.release	= vmexit_trace_release,
-};
+DEFINE_SHOW_ATTRIBUTE(vmexit_trace);
 
 struct debugfs_item {
 	const char *name;
