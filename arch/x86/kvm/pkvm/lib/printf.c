@@ -10,8 +10,7 @@
 #include <linux/sprintf.h>
 #include <asm/string.h>
 
-static char *number(char *str, char *end, unsigned long long num, int base,
-		    int width, bool zeropad)
+static char *number(char *str, char *end, unsigned long long num, int base)
 {
 	static const char digits[16] = "0123456789abcdef";
 	char tmp[20];
@@ -24,11 +23,6 @@ static char *number(char *str, char *end, unsigned long long num, int base,
 			tmp[i++] = digits[num % base];
 			num /= base;
 		}
-	}
-
-	while (i < width && str < end) {
-		*str++ = zeropad ? '0' : ' ';
-		width--;
 	}
 
 	while (i-- > 0 && str < end)
@@ -49,40 +43,18 @@ int vscnprintf(char *buf, size_t size, const char *fmt, va_list args)
 	end--;
 
 	for (; *fmt && str < end; ++fmt) {
-		int width = 0;
-		bool zeropad = false;
-
 		if (*fmt != '%') {
 			*str++ = *fmt;
 			continue;
 		}
 
 		fmt++;
-
-		/* Flags */
-		if (*fmt == '0') {
-			zeropad = true;
-			fmt++;
-		}
-
-		/* Field width */
-		while (*fmt >= '0' && *fmt <= '9') {
-			width = width * 10 + (*fmt - '0');
-			fmt++;
-		}
-
 		switch (*fmt) {
 		case 's': {
 			const char *s = va_arg(args, char *);
-			size_t len;
 
 			if (!s)
 				s = "(null)";
-			len = strlen(s);
-			while (len < width && str < end) {
-				*str++ = ' ';
-				width--;
-			}
 			while (*s && str < end)
 				*str++ = *s++;
 			break;
@@ -95,28 +67,24 @@ int vscnprintf(char *buf, size_t size, const char *fmt, va_list args)
 				if (str < end)
 					*str++ = '-';
 				num = -num;
-				if (width > 0)
-					width--;
 			}
-			str = number(str, end, (unsigned long long)num, 10, width, zeropad);
+			str = number(str, end, (unsigned long long)num, 10);
 			break;
 		}
 		case 'u': {
-			str = number(str, end, va_arg(args, unsigned int), 10, width, zeropad);
+			str = number(str, end, va_arg(args, unsigned int), 10);
 			break;
 		}
 		case 'x': {
-			str = number(str, end, va_arg(args, unsigned int), 16, width, zeropad);
+			str = number(str, end, va_arg(args, unsigned int), 16);
 			break;
 		}
 		case 'l': {
 			fmt++;
 			if (*fmt == 'x')
-				str = number(str, end, va_arg(args, unsigned long), 16,
-					     width, zeropad);
+				str = number(str, end, va_arg(args, unsigned long), 16);
 			else if (*fmt == 'u')
-				str = number(str, end, va_arg(args, unsigned long), 10,
-					     width, zeropad);
+				str = number(str, end, va_arg(args, unsigned long), 10);
 			else if (*fmt == 'd') {
 				/* Use long long to safely handle negation of INT_MIN */
 				long long num = va_arg(args, long);
@@ -125,10 +93,8 @@ int vscnprintf(char *buf, size_t size, const char *fmt, va_list args)
 					if (str < end)
 						*str++ = '-';
 					num = -num;
-					if (width > 0)
-						width--;
 				}
-				str = number(str, end, (unsigned long long)num, 10, width, zeropad);
+				str = number(str, end, (unsigned long long)num, 10);
 			}
 			break;
 		}
@@ -138,13 +104,8 @@ int vscnprintf(char *buf, size_t size, const char *fmt, va_list args)
 			if (str < end - 1) {
 				*str++ = '0';
 				*str++ = 'x';
-				if (width > 1)
-					width -= 2;
-				else
-					width = 0;
 			}
-			str = number(str, end, (unsigned long)va_arg(args, void *), 16,
-				     width, zeropad);
+			str = number(str, end, (unsigned long)va_arg(args, void *), 16);
 			break;
 		}
 		case '%': {

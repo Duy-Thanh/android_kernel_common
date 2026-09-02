@@ -236,36 +236,34 @@ static inline void pci_mmcfg_writel(unsigned int val, volatile void __iomem *pos
 }
 
 #ifdef CONFIG_PARAVIRT
-#include <asm/io.h>
-
 static inline unsigned char mmio_config_readb(void __iomem *pos)
 {
-	return __pv_mmio_read(pci_mmcfg_readb, pv_pci_mmcfg_readb, pos);
+	return pv_pci_mmcfg_readb(pos);
 }
 
 static inline unsigned short mmio_config_readw(void __iomem *pos)
 {
-	return __pv_mmio_read(pci_mmcfg_readw, pv_pci_mmcfg_readw, pos);
+	return pv_pci_mmcfg_readw(pos);
 }
 
 static inline unsigned int mmio_config_readl(void __iomem *pos)
 {
-	return __pv_mmio_read(pci_mmcfg_readl, pv_pci_mmcfg_readl, pos);
+	return pv_pci_mmcfg_readl(pos);
 }
 
 static inline void mmio_config_writeb(void __iomem *pos, u8 val)
 {
-	__pv_mmio_write(pci_mmcfg_writeb, pv_pci_mmcfg_writeb, val, pos);
+	pv_pci_mmcfg_writeb(val, pos);
 }
 
 static inline void mmio_config_writew(void __iomem *pos, u16 val)
 {
-	__pv_mmio_write(pci_mmcfg_writew, pv_pci_mmcfg_writew, val, pos);
+	pv_pci_mmcfg_writew(val, pos);
 }
 
 static inline void mmio_config_writel(void __iomem *pos, u32 val)
 {
-	__pv_mmio_write(pci_mmcfg_writel, pv_pci_mmcfg_writel, val, pos);
+	pv_pci_mmcfg_writel(val, pos);
 }
 #else
 static inline unsigned char mmio_config_readb(void __iomem *pos)

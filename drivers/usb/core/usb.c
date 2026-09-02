@@ -46,11 +46,6 @@
 #include <linux/dma-mapping.h>
 
 #include "hub.h"
-#include "trace.h"
-
-#include <linux/android_kabi.h>
-ANDROID_KABI_DECLONLY(static_call_mod);
-ANDROID_KABI_DECLONLY(trace_eval_map);
 
 const char *usbcore_name = "usbcore";
 
@@ -752,7 +747,6 @@ struct usb_device *usb_alloc_dev(struct usb_device *parent,
 #endif
 
 	dev->authorized = usb_dev_authorized(dev, usb_hcd);
-	trace_usb_alloc_dev(dev);
 	return dev;
 }
 EXPORT_SYMBOL_GPL(usb_alloc_dev);

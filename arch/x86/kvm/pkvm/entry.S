@@ -45,12 +45,7 @@
 
 .macro exception_entry name vector has_error_code
 SYM_CODE_START(handle_exception_\name)
-	.if \vector == X86_TRAP_BP
-		/* #BP advances %rip to the next instruction */
-		UNWIND_HINT_IRET_REGS offset=\has_error_code*8 signal=0
-	.else
-		UNWIND_HINT_IRET_REGS offset=\has_error_code*8
-	.endif
+	UNWIND_HINT_UNDEFINED
 	ENDBR
 
 	.if \has_error_code == 0
