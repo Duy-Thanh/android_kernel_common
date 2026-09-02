@@ -34,6 +34,24 @@
       "parentUuid": "eaec7528_5d94049c",
       "revId": "1d0ff4452ac33e938c2d9e96901794889a4f1324",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "439e3a99_31b53ab0",
+        "filename": "fs/fuse/file.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3547,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-09-02T23:15:04Z",
+      "side": 1,
+      "message": "Hi Shai,\nWhile reviewing change with jetski\u0027s assist and other cases to consider I think we need to handle few things\n\n#### 1. Double-caching and unnecessary FUSE daemon IPC on `POSIX_FADV_WILLNEED`\nWhile the current implementation successfully solves the `POSIX_FADV_DONTNEED` case by dropping the lower backing pagecache, we need to adapt the flow so `POSIX_FADV_WILLNEED` is handled cleanly.\n\nCurrently, `generic_fadvise(file, ...)` runs unconditionally on the FUSE file before delegating to `backing_file`:\n- For `POSIX_FADV_DONTNEED`, invalidating both mappings works as intended to drop the physical pages.\n- However, if an application or library invokes `posix_fadvise(..., POSIX_FADV_WILLNEED)` (or `readahead(2)` / `madvise(..., MADV_WILLNEED)`), `generic_fadvise()` triggers `force_page_cache_\nreadahead()` against the upper FUSE inode mapping (`file-\u003ef_mapping`).\n- This executes `fuse_readahead()`, which serializes and dispatches `FUSE_READ` IPC requests over `/dev/fuse` to the userspace FUSE daemon (MediaProvider) and allocates folios in `file-\u003ef_ma\npping`.\n- Next, `vfs_fadvise(backing_file, ...)` runs and issues readahead directly on the physical block filesystem, populating `backing_file-\u003ef_mapping`.\n- In passthrough mode, subsequent reads (`fuse_passthrough_read_iter`) read strictly from `backing_file-\u003ef_mapping`. The folios loaded into `file-\u003ef_mapping` are never read or consumed, resu\nlting in double memory consumption and unnecessary userspace IPC.\n\nIn OverlayFS ([`ovl_fadvise` in `fs/overlayfs/file.c`](https://elixir.bootlin.com/linux/v6.12/source/fs/overlayfs/file.c#L463)), this is handled by delegating exclusively to `vfs_fadvise(real)` without calling `generic_fadvise(file)` on the wrapper layer. We can follow that exact pattern: if passthrough is active on the file, delegate exclusively to `backing_file`; otherwise, f\nall back to `generic_fadvise(file)`.\n\n#### 2. Consistency with existing FUSE passthrough wrappers \u0026 encapsulation\nIn `fs/fuse/file.c`, file operations never access `ff-\u003ecred` or backing credentials directly. Instead, `file.c` checks `if (fuse_file_passthrough(ff))` and delegates to a dedicated helper wr\napper in `fs/fuse/passthrough.c`:\n- Similar to how `fuse_file_read_iter()` delegates to `fuse_passthrough_read_iter()`\n- Similar to how `fuse_file_write_iter()` delegates to `fuse_passthrough_write_iter()`\n- Similar to how `fuse_file_mmap()` delegates to `fuse_passthrough_mmap()`\n\no be consistent with this design, maintain proper encapsulation, and avoid directly exposing `ff-\u003ecred` inside `file.c`, we can follow this exact convention and delegate to a `fuse_passthro\nugh_fadvise()` helper in `fs/fuse/passthrough.c`:\n\n**In `fs/fuse/file.c`:**\n```c\nstatic int fuse_file_fadvise(struct file *file, loff_t offset, loff_t len, int advice)\n{\n    struct fuse_file *ff \u003d file-\u003eprivate_data;\n\n    if (fuse_file_passthrough(ff))\n        return fuse_passthrough_fadvise(ff, offset, len, advice);\n\n    return generic_fadvise(file, offset, len, advice);\n}\n```\n\n**In `fs/fuse/passthrough.c`:**\n```c\nint fuse_passthrough_fadvise(struct fuse_file *ff, loff_t offset, loff_t len, int advice)\n{\n    struct file *backing_file \u003d fuse_file_passthrough(ff);\n    const struct cred *old_cred;\n    int ret;\n\n    if (!backing_file)\n        return -EINVAL;\n\n    old_cred \u003d override_creds(ff-\u003ecred);\n    ret \u003d vfs_fadvise(backing_file, offset, len, advice);\n    revert_creds(old_cred);\n\n    return ret;\n}\n```\n\n**In `fs/fuse/fuse_i.h`:**\n```c\n#ifdef CONFIG_FUSE_PASSTHROUGH\nint fuse_passthrough_fadvise(struct fuse_file *ff, loff_t offset, loff_t len, int advice);\n#else\nstatic inline int fuse_passthrough_fadvise(struct fuse_file *ff, loff_t offset,\n                       loff_t len, int advice)\n{\n    return -EOPNOTSUPP;\n}\n#endif\n```\n\nWhat do you think?",
+      "parentUuid": "b70c67be_82d31b41",
+      "revId": "1d0ff4452ac33e938c2d9e96901794889a4f1324",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
