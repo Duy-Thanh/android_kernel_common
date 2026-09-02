@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11b2166d_dd72f193",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/pv/arm-smmu-v3-pv.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 783,
+      "author": {
+        "id": 1150933
+      },
+      "writtenOn": "2026-09-02T22:05:39Z",
+      "side": 1,
+      "message": "Consider explicitly assigning `.vmid` to align with line 1403.",
+      "fixSuggestions": [
+        {
+          "fixId": "054a1c0f_d50ccd18",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/arm/arm-smmu-v3/pkvm/pv/arm-smmu-v3-pv.c",
+              "range": {
+                "startLine": 783,
+                "startChar": 0,
+                "endLine": 784,
+                "endChar": 0
+              },
+              "replacement": "\tstruct arm_smmu_cmdq_ent cmd \u003d {\n\t\t.opcode \u003d CMDQ_OP_TLBI_S12_VMALL,\n\t\t.tlbi \u003d {\n\t\t\t.vmid \u003d 0,\n\t\t},\n\t};\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6f7564af442e2d91271d3026e7fbdc67c3e43b5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
