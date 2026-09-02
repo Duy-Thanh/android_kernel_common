@@ -1,0 +1,68 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0a87365_e261af0a",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/nested/arm-smmu-v3.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1150933
+      },
+      "writtenOn": "2026-09-02T03:48:41Z",
+      "side": 1,
+      "message": "Consider changing this to `void`.",
+      "range": {
+        "startLine": 165,
+        "startChar": 7,
+        "endLine": 165,
+        "endChar": 10
+      },
+      "revId": "662f5005266fc41c747eadc05fa0fbc00e58f9ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db71dc15_ea534840",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/pv/arm-smmu-v3-pv.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1422,
+      "author": {
+        "id": 1150933
+      },
+      "writtenOn": "2026-09-02T03:48:41Z",
+      "side": 1,
+      "message": "I don\u0027t think it\u0027s safe to skip the sync if this function is called from `smmu_idmap_tlb_flush_walk`. The io-pgtable code relies on the fact that TLB invalidates are complete by the time this function returns. If this can\u0027t be guaranteed, we might observe use-after-free situations where the table walker walks into freed memory.",
+      "range": {
+        "startLine": 1422,
+        "startChar": 32,
+        "endLine": 1422,
+        "endChar": 37
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ea5e5b68_0cb46b07",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/arm/arm-smmu-v3/pkvm/pv/arm-smmu-v3-pv.c",
+              "range": {
+                "startLine": 1422,
+                "startChar": 0,
+                "endLine": 1423,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\t\t\u0026cmd, iova, size, granule, true));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "662f5005266fc41c747eadc05fa0fbc00e58f9ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
