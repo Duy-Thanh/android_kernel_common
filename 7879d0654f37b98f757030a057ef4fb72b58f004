@@ -16,6 +16,24 @@
       "message": "please add more description. What feature does this enable?",
       "revId": "7879d0654f37b98f757030a057ef4fb72b58f004",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "092f6675_bbc4df50",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5078526
+      },
+      "writtenOn": "2026-09-02T01:46:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c399144b_f438b141",
+      "revId": "7879d0654f37b98f757030a057ef4fb72b58f004",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
