@@ -1,0 +1,121 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fa35d6e_49524841",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-09-02T09:49:49Z",
+      "side": 1,
+      "message": "minor:\n\u003e There is no need to allow the VMM to set the pvmfw_load_addr value for a\npVM at any time before its first vCPU is run first time.\n\nThis seems a bit confusing and hard to understand. Shall we simplify it to something like:\n```\nThere is no need to allow the VMM to delay the setting of pvmfw_load_addr for a pVM until the first vCPU runs.\n```",
+      "revId": "a875c2229201c574ec9bde066049b9b19da48076",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f669d1dc_d1ea6693",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-09-02T09:49:49Z",
+      "side": 1,
+      "message": "super minor: validation and setting ofpvmfw load address seems a bit unrelated to rest of the arch.* fields we set here(compared to arch.pkvm.pvmfw_load_addr). Would it make sense to move it to a separate helper function - something like pkvm_validate_pvmfw_load_addr() which validates and sets kvm-\u003earch.pkvm.pvmfw_load_addr?",
+      "fixSuggestions": [
+        {
+          "fixId": "42099389_c3d7d43e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "static int pkvm_validate_pvmfw_load_addr(struct kvm *kvm)\n{\n\tstruct pkvm_vm *pkvm_vm \u003d to_pkvm(kvm);\n\tstruct kvm *shared_kvm \u003d pkvm_vm-\u003eshared_kvm;\n\tgpa_t pvmfw_load_addr;\n\n\tpvmfw_load_addr \u003d READ_ONCE(shared_kvm-\u003earch.pkvm.pvmfw_load_addr);\n\tif (pvmfw_load_addr !\u003d INVALID_GPA) {\n\t\tgpa_t pvmfw_end;\n\n\t\tif (!pkvm_is_protected_vm(kvm) || !pvmfw_present)\n\t\t\treturn -EINVAL;\n\n\t\tpvmfw_end \u003d pvmfw_load_addr + pvmfw_size;\n\t\tif (pvmfw_end \u003c pvmfw_load_addr ||\n\t\t    pvmfw_end \u003e pkvm_pgtable_max_size(\u0026pkvm_vm-\u003emmu) ||\n\t\t    pvmfw_end \u003e SZ_4G)\n\t\t\treturn -EINVAL;\n\t}\n\n\tkvm-\u003earch.pkvm.pvmfw_load_addr \u003d pvmfw_load_addr;\n\treturn 0;\n}\n\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 432,
+                "startChar": 0,
+                "endLine": 433,
+                "endChar": 0
+              },
+              "replacement": "\tint ret;\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 455,
+                "startChar": 0,
+                "endLine": 468,
+                "endChar": 0
+              },
+              "replacement": "\tret \u003d pkvm_validate_pvmfw_load_addr(kvm);\n\tif (ret)\n\t\treturn ret;\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 473,
+                "startChar": 0,
+                "endLine": 474,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "a875c2229201c574ec9bde066049b9b19da48076",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "411ef793_ef619d75",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-09-02T09:49:49Z",
+      "side": 1,
+      "message": "Should we check if `pvmfw_load_addr` is page aligned as well?",
+      "fixSuggestions": [
+        {
+          "fixId": "020f3419_71050749",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 463,
+                "startChar": 0,
+                "endLine": 464,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (!PAGE_ALIGNED(pvmfw_load_addr) ||\n\t\t    pvmfw_end \u003c pvmfw_load_addr ||\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a875c2229201c574ec9bde066049b9b19da48076",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
