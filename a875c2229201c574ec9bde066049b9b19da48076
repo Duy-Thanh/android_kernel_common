@@ -85,6 +85,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2510dcac_90ab9e26",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-09-02T10:55:20Z",
+      "side": 1,
+      "message": "\u003e validation and setting ofpvmfw load address seems a bit unrelated to rest of the arch.* fields we set here(compared to arch.pkvm.pvmfw_load_addr)\n\nWhy? The very idea is that pvmfw_load_addr is just like any other VM params that are initialized post VM init, pre vCPUs creation.\n\n\u003e something like pkvm_validate_pvmfw_load_addr() which validates and sets kvm-\u003earch.pkvm.pvmfw_load_addr?\n\nFor other params, we first validate them all, then (once we know they all are valid) set them all, in a unified fashion. Why do it differently for pvmfw_load_addr?\n\nIf we validate and set pvmfw_load_addr _after_ validating and setting other params, it means that if pvmfw_load_addr validation fails, even though vCPU creation fails, we leave a side effect on the VM state. Similarly if we validate and set pvmfw_load_addr  _before_ validating and setting other params. Even if this side effect is not harmful, it\u0027s still cleaner to avoid it?",
+      "parentUuid": "f669d1dc_d1ea6693",
+      "revId": "a875c2229201c574ec9bde066049b9b19da48076",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "411ef793_ef619d75",
         "filename": "arch/x86/kvm/pkvm/pkvm.c",
         "patchSetId": 1
@@ -114,6 +132,24 @@
           ]
         }
       ],
+      "revId": "a875c2229201c574ec9bde066049b9b19da48076",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77877a96_9ecb7e37",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-09-02T10:55:20Z",
+      "side": 1,
+      "message": "We discussed this with @jaszczyk@google.com recently in some other review. To our best knowledge, there is no particular reason to not allow an unaligned pvmfw address in the _guest_ memory. `gpa_range_overlaps_pvmfw()` doesn\u0027t rely on it being page-aligned.",
+      "parentUuid": "411ef793_ef619d75",
       "revId": "a875c2229201c574ec9bde066049b9b19da48076",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
