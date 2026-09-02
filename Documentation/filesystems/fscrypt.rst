@@ -1063,6 +1063,24 @@ astute users may notice some differences in behavior:
 
 - DAX (Direct Access) is not supported on encrypted files.
 
+<<<<<<< HEAD   (d1d91e95d6f19cbd15ae7a0c8171e5cdeaa1b0ad Merge android13-5.10 into android13-5.10-lts)
+||||||| BASE   (38a5e4f139eb1933f8837e7e2a841810d90cd44c Linux 5.10.268)
+- The st_size of an encrypted symlink will not necessarily give the
+  length of the symlink target as required by POSIX.  It will actually
+  give the length of the ciphertext, which will be slightly longer
+  than the plaintext due to NUL-padding and an extra 2-byte overhead.
+
+=======
+- The st_size of an encrypted symlink will not necessarily give the
+  length of the symlink target as required by POSIX.  It will actually
+  give the length of the ciphertext, which will be slightly longer
+  than the plaintext due to NUL-padding and an extra 2-byte overhead.
+
+- Encrypted files cannot be used directly as swap files.  To swap to
+  an encrypted file, set up a loopback device on top of it.
+  Alternatively, encrypted swap can use a dm-crypt device.
+
+>>>>>>> BRANCH (be0af8204173441616d0775a54a95ca612a84ba8 Linux 5.10.269)
 - The maximum length of an encrypted symlink is 2 bytes shorter than
   the maximum length of an unencrypted symlink.  For example, on an
   EXT4 filesystem with a 4K block size, unencrypted symlinks can be up
