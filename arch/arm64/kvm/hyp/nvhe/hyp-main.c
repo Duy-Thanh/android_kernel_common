@@ -30,6 +30,9 @@
 
 #include "../../sys_regs.h"
 
+/* CI pipeline check: this branch has no header declaration for hyp_panic(). */
+asmlinkage void __noreturn hyp_panic(void);
+
 DEFINE_PER_CPU(struct kvm_nvhe_init_params, kvm_init_params);
 
 void __kvm_hyp_host_forward_smc(struct kvm_cpu_context *host_ctxt);
@@ -846,6 +849,15 @@ static void handle___kvm_vcpu_run(struct kvm_cpu_context *host_ctxt)
 
 		if (unlikely(!is_vcpu_runnable(hyp_vcpu)))
 			goto out;
+
+		/*
+		 * CI pipeline check (tabba/ci-check-bad): deliberately
+		 * crash the hypervisor when running a protected vCPU, so a
+		 * working CI MUST fail the protected-VM run. Non-protected
+		 * guests and the host's own vCPUs are untouched.
+		 */
+		if (pkvm_hyp_vcpu_is_protected(hyp_vcpu))
+			hyp_panic();
 
 		flush_hyp_vcpu(hyp_vcpu);
 
