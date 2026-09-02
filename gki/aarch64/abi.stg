@@ -454311,6 +454311,15 @@ elf_symbol {
   full_name: "snd_ctl_notify_one"
 }
 elf_symbol {
+  id: 0x20fc506b
+  name: "snd_ctl_remove"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x6b9ba283
+  type_id: 0x91d0f233
+  full_name: "snd_ctl_remove"
+}
+elf_symbol {
   id: 0xe3942db0
   name: "snd_device_free"
   is_defined: true
@@ -477729,6 +477738,7 @@ interface {
   symbol_id: 0x6aca9744
   symbol_id: 0x6b08a95c
   symbol_id: 0x238c5442
+  symbol_id: 0x20fc506b
   symbol_id: 0xe3942db0
   symbol_id: 0xcb68aa10
   symbol_id: 0x74d92df1

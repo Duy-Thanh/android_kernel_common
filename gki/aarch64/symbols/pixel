@@ -2294,8 +2294,10 @@
   snd_ctl_add
   snd_ctl_boolean_mono_info
   snd_ctl_enum_info
+  snd_ctl_find_id
   snd_ctl_new1
   snd_ctl_notify
+  snd_ctl_remove
   snd_info_create_card_entry
   snd_jack_set_key
   snd_pcm_format_physical_width
