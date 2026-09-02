@@ -52,6 +52,24 @@
       "parentUuid": "d49482b3_1ab10ca8",
       "revId": "8815d0a7776ece62e0d0a371e9a5d4956337528e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77df46d6_f2fc1636",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3386406
+      },
+      "writtenOn": "2026-09-02T21:16:30Z",
+      "side": 1,
+      "message": "That\u0027s a valid concern. This will be the only tegra238 device using the GKI, so there won\u0027t be any case where the hard-coded settings conflict between platforms.",
+      "parentUuid": "65bab0cd_2764e51f",
+      "revId": "8815d0a7776ece62e0d0a371e9a5d4956337528e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
