@@ -451,6 +451,10 @@ void __noreturn __pkvm_init_finalise(void)
 	if (ret)
 		goto out;
 
+	ret = pkvm_check_host_ownership();
+	if (ret)
+		goto out;
+
 	make_host_stage2_reclaimable();
 
 	ret = unmap_protected_regions();
