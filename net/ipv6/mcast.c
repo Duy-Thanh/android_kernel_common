@@ -1333,10 +1333,22 @@ static int mld_process_v2(struct inet6_dev *idev, struct mld2_query *mld,
 int igmp6_event_query(struct sk_buff *skb)
 {
 	struct mld2_query *mlh2 = NULL;
+<<<<<<< HEAD   (bc8bdbc7f27361c81afc80417c9ad44805426cc7 Merge android12-5.10 into android12-5.10-lts)
 	struct ifmcaddr6 *ma;
 	const struct in6_addr *group;
+||||||| BASE   (38a5e4f139eb1933f8837e7e2a841810d90cd44c Linux 5.10.268)
+	const struct in6_addr *group;
+=======
+>>>>>>> BRANCH (be0af8204173441616d0775a54a95ca612a84ba8 Linux 5.10.269)
 	unsigned long max_delay;
 	struct inet6_dev *idev;
+<<<<<<< HEAD   (bc8bdbc7f27361c81afc80417c9ad44805426cc7 Merge android12-5.10 into android12-5.10-lts)
+||||||| BASE   (38a5e4f139eb1933f8837e7e2a841810d90cd44c Linux 5.10.268)
+	struct ifmcaddr6 *ma;
+=======
+	struct in6_addr group;
+	struct ifmcaddr6 *ma;
+>>>>>>> BRANCH (be0af8204173441616d0775a54a95ca612a84ba8 Linux 5.10.269)
 	struct mld_msg *mld;
 	int group_type;
 	int mark = 0;
@@ -1367,8 +1379,8 @@ int igmp6_event_query(struct sk_buff *skb)
 		return 0;
 
 	mld = (struct mld_msg *)icmp6_hdr(skb);
-	group = &mld->mld_mca;
-	group_type = ipv6_addr_type(group);
+	group = mld->mld_mca;
+	group_type = ipv6_addr_type(&group);
 
 	if (group_type != IPV6_ADDR_ANY &&
 	    !(group_type&IPV6_ADDR_MULTICAST))
@@ -1422,8 +1434,16 @@ int igmp6_event_query(struct sk_buff *skb)
 			spin_unlock_bh(&ma->mca_lock);
 		}
 	} else {
+<<<<<<< HEAD   (bc8bdbc7f27361c81afc80417c9ad44805426cc7 Merge android12-5.10 into android12-5.10-lts)
 		for (ma = idev->mc_list; ma; ma = ma->next) {
 			if (!ipv6_addr_equal(group, &ma->mca_addr))
+||||||| BASE   (38a5e4f139eb1933f8837e7e2a841810d90cd44c Linux 5.10.268)
+		for_each_mc_mclock(idev, ma) {
+			if (!ipv6_addr_equal(group, &ma->mca_addr))
+=======
+		for_each_mc_mclock(idev, ma) {
+			if (!ipv6_addr_equal(&group, &ma->mca_addr))
+>>>>>>> BRANCH (be0af8204173441616d0775a54a95ca612a84ba8 Linux 5.10.269)
 				continue;
 			spin_lock_bh(&ma->mca_lock);
 			if (ma->mca_flags & MAF_TIMER_RUNNING) {
