@@ -16,6 +16,24 @@
       "message": "Oops, looks like upstream should revert this based on the reviews, right?",
       "revId": "198c28efd1d6b8f831fb1fcf0f052e14f79a8d0d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b324c48_368d21be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3303003
+      },
+      "writtenOn": "2026-09-02T00:51:04Z",
+      "side": 1,
+      "message": "Agreed, I\u0027ll abandon this change and we can finish review upstream before landing",
+      "parentUuid": "1eeda6ef_dbf5ccf0",
+      "revId": "198c28efd1d6b8f831fb1fcf0f052e14f79a8d0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
