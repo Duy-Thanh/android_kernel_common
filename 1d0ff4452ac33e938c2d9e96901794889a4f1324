@@ -16,6 +16,24 @@
       "message": "return code ?\n\nThis sounds similar to overlayfs supporting fadvise: https://lore.kernel.org/all/1535374564-8257-7-git-send-email-amir73il@gmail.com/\n\nhttps://elixir.bootlin.com/linux/v6.12.107/source/fs/overlayfs/file.c#L462\n\nThis should perhaps also check override creds something like this:\n\n        ret \u003d generic_fadvise(file, offset, len, advice);\n        if (ret)\n            return ret;\n\n        if (backing_file) {\n            old_cred \u003d override_creds(ff-\u003ecred);\n            ret \u003d vfs_fadvise(backing_file, offset, len, advice);\n            revert_creds(old_cred);\n        }",
       "revId": "1d0ff4452ac33e938c2d9e96901794889a4f1324",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b70c67be_82d31b41",
+        "filename": "fs/fuse/file.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3547,
+      "author": {
+        "id": 1059977
+      },
+      "writtenOn": "2026-09-02T22:12:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eaec7528_5d94049c",
+      "revId": "1d0ff4452ac33e938c2d9e96901794889a4f1324",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
