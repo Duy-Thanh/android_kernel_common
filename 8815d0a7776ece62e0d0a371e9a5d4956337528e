@@ -16,6 +16,24 @@
       "message": "Please explain why this isn\u0027t being sent upstream first",
       "revId": "8815d0a7776ece62e0d0a371e9a5d4956337528e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d49482b3_1ab10ca8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3386406
+      },
+      "writtenOn": "2026-09-02T19:41:01Z",
+      "side": 1,
+      "message": "Hi Todd. Since the wake-up sources being added in this patch are platform specific, we cannot hardcode them in the upstream linux PMC driver source.\nThe more correct solution that we\u0027re pursuing is to introduce a device-tree based wake source registration in our pmc driver, to allow us to register pmc wake sources from the DT rather than having to hardcode them in the source table.\n\nIn the meantime while we pursue that implementation in upstream, we still require these wake-sources present in ACK for this specific platform and are looking to make the mid Sept cut-off for the GKI Sept release. Hence we\u0027re requesting their inclusion for now as an Android specific patch. \n\nOnce device-tree based wake source registration is implemented and pushed to upstream, we can backport that to ACK and move to using that method instead of hardcoding these wake sources.",
+      "parentUuid": "db7e4046_b7633bd9",
+      "revId": "8815d0a7776ece62e0d0a371e9a5d4956337528e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
