@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "162d5fc0_84d1ef55",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 584,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-09-02T06:43:21Z",
+      "side": 1,
+      "message": "As I mentioned at the very beginning - this unshares the rx memory and thus the original label `err_unshare_rx` was correct.",
+      "parentUuid": "60b22612_bd684d79",
+      "revId": "104eb960c516dceb32f25572d6b127cc6c718c0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "02a8ea0c_7d6f5569",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 3
@@ -174,6 +192,24 @@
       "side": 1,
       "message": "It is un-mapping the hypervisor buffers and rolling back any potential shared pages from the tx mailbox so I don\u0027t see any issues here. Perhaps you could suggest an alternate naming if you are so much against it ?",
       "parentUuid": "afdd1682_fdb1779e",
+      "revId": "104eb960c516dceb32f25572d6b127cc6c718c0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c4a22fb_c2103b1a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1074825
+      },
+      "writtenOn": "2026-09-02T06:43:21Z",
+      "side": 1,
+      "message": "What the code does after the jump first is `unshare_tx` as the original label was.",
+      "parentUuid": "ec3b94e3_1f4df966",
       "revId": "104eb960c516dceb32f25572d6b127cc6c718c0c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
