@@ -142,6 +142,24 @@
       "parentUuid": "3db2212f_8e631092",
       "revId": "5d25dc04c729b2b316644d21eb5ef64f6b8758c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cced5fff_c0e1a844",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4240336
+      },
+      "writtenOn": "2026-09-03T08:33:38Z",
+      "side": 1,
+      "message": "@tkjos@google.com @judyhsiao@google.com, following your advices, I reworked the changes and added three entries to the snd_soc_acpi_intel_ptl_sdw_machines array to avoid ABI updates.",
+      "parentUuid": "1ac69d8a_ceb63ee7",
+      "revId": "5d25dc04c729b2b316644d21eb5ef64f6b8758c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
