@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddf2b2bf_4054f264",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-09-03T10:36:01Z",
+      "side": 1,
+      "message": "Why is this exported to modules?",
+      "range": {
+        "startLine": 324,
+        "startChar": 0,
+        "endLine": 324,
+        "endChar": 57
+      },
+      "revId": "07ded410055a125a2572ed3498b5d518cf275a83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
