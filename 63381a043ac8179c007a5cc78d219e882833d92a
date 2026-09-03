@@ -1,0 +1,68 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a978d82c_abf90401",
+        "filename": "arch/x86/kvm/mmu/mmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1641,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-09-03T12:16:12Z",
+      "side": 1,
+      "message": "minor nit: Better to move these inside the while block?",
+      "range": {
+        "startLine": 1640,
+        "startChar": 0,
+        "endLine": 1641,
+        "endChar": 9
+      },
+      "revId": "63381a043ac8179c007a5cc78d219e882833d92a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5685a1bc_ec9718ba",
+        "filename": "arch/x86/kvm/mmu/mmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1651,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-09-03T12:16:12Z",
+      "side": 1,
+      "message": "minor nit: I feel this comment is tied to the context of this change and might not be relevant to one who just reads the code later. We could probably remove this comment or put it slightly differently to say why we are using `pkvm_mapping_iter_first` in a loop. Something like:\n\n```\n\t/*\n\t * Retrieve the first mapping in the range on every iteration because\n\t * mmu_lock may be dropped when yielding, which invalidates tree iterators.\n\t */\n```",
+      "range": {
+        "startLine": 1648,
+        "startChar": 0,
+        "endLine": 1651,
+        "endChar": 4
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "76347581_f99a5fac",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/mmu/mmu.c",
+              "range": {
+                "startLine": 1649,
+                "startChar": 0,
+                "endLine": 1651,
+                "endChar": 0
+              },
+              "replacement": "\t * Retrieve the first mapping in the range on every iteration because\n\t * mmu_lock may be dropped when yielding, which invalidates tree iterators.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "63381a043ac8179c007a5cc78d219e882833d92a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
