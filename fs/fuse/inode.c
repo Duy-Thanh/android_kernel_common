@@ -510,6 +510,9 @@ struct inode *fuse_iget_backing(struct super_block *sb, u64 nodeid,
 	struct fuse_attr attr;
 	unsigned long hash = (unsigned long) backing_inode;
 
+	if (!backing_inode)
+		return NULL;
+
 	if (nodeid)
 		hash = nodeid;
 

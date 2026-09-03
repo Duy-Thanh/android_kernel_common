@@ -1518,17 +1518,24 @@ int fuse_mkdir_backing(
 					backing_path.dentry->d_parent,
 					entry->d_name.len);
 
-		if (IS_ERR(d)) {
+		if (!IS_ERR(d) && d_really_is_positive(d)) {
+			dput(backing_path.dentry);
+			backing_path.dentry = d;
+		} else if (!IS_ERR(d)) {
+			dput(d);
+		} else if (d_really_is_negative(backing_path.dentry)) {
 			err = PTR_ERR(d);
 			goto out;
 		}
-		dput(backing_path.dentry);
-		backing_path.dentry = d;
+	}
+	if (d_really_is_negative(backing_path.dentry)) {
+		err = -EIO;
+		goto out;
 	}
 	inode = fuse_iget_backing(dir_inode->i_sb, 0,
 				  backing_path.dentry->d_inode);
-	if (IS_ERR(inode)) {
-		err = PTR_ERR(inode);
+	if (IS_ERR_OR_NULL(inode)) {
+		err = inode ? PTR_ERR(inode) : -EIO;
 		goto out;
 	}
 	d_instantiate(entry, inode);
