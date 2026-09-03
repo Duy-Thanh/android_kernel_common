@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c403317a_b175068c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2026-09-03T20:34:42Z",
+      "side": 1,
+      "message": "Thanks Carlos, are you planning to update the ABI symbols after this patch is submitted? Otherwise the build will be broken.",
+      "revId": "9ae5ef004825548305e3ba4d169c6d36f1d44b36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
