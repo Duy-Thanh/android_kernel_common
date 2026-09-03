@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e921a9b_bd7f7133",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-03T15:21:12Z",
+      "side": 1,
+      "message": "s/the/the host?",
+      "range": {
+        "startLine": 9,
+        "startChar": 63,
+        "endLine": 9,
+        "endChar": 66
+      },
+      "revId": "14f789a87400a56fc096cf0edb9fdc5f926e24a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ee0eae1_1c38b54f",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/nested/arm-smmu-v3.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-03T15:21:12Z",
+      "side": 1,
+      "message": "nit: shouldn\u0027t all of this be `cpu_to_le64()`? That\u0027s independent of this patch, and I can make a follow up patch to fix that if you\u0027d like?",
+      "range": {
+        "startLine": 344,
+        "startChar": 0,
+        "endLine": 359,
+        "endChar": 60
+      },
+      "revId": "14f789a87400a56fc096cf0edb9fdc5f926e24a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
