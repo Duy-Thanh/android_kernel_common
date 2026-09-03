@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "092cec94_f051545d",
+        "filename": "rust/kernel/anon_inodes.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-03T19:31:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6dfea023_dc1e599d",
+      "range": {
+        "startLine": 22,
+        "startChar": 19,
+        "endLine": 22,
+        "endChar": 25
+      },
+      "revId": "dd82e8a6de5bc2eefd3fc6c50034fb9f2716395b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "94e42806_deff7483",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-09-03T00:31:51Z",
       "side": 1,
       "message": "Alice had mentioned this earlier, but there\u0027s a type alias for this upstream, which I\u0027ve backported to 6.18: aosp/4269683. You can rebase your series on top of that patch and make use of it.",
+      "range": {
+        "startLine": 35,
+        "startChar": 15,
+        "endLine": 35,
+        "endChar": 31
+      },
+      "revId": "dd82e8a6de5bc2eefd3fc6c50034fb9f2716395b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8028b1b_c857ac16",
+        "filename": "rust/kernel/anon_inodes.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-03T19:31:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94e42806_deff7483",
       "range": {
         "startLine": 35,
         "startChar": 15,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "251e8398_4393bdd0",
+        "filename": "rust/kernel/anon_inodes.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-03T19:31:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5236a5c_681e46cb",
+      "range": {
+        "startLine": 122,
+        "startChar": 1,
+        "endLine": 124,
+        "endChar": 100
+      },
+      "revId": "dd82e8a6de5bc2eefd3fc6c50034fb9f2716395b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f4c97ad_29824eca",
@@ -83,6 +155,30 @@
       "writtenOn": "2026-09-03T01:19:13Z",
       "side": 1,
       "message": "I know we\u0027re implementing this for the wrapfd driver, which passes some context. However, there isn\u0027t a hard requirement in `anon_inode_create_getfile` that says that `ptr` must be valid. In fact, there are kernel drivers that call `anon_inode_getfile()`, which could be implemented on top of this too, with a `NULL` ctx pointer. I think it made more sense to assume that `private_data` was not NULL in the miscdevice case, because `misc_open()` is always invoked, and that points the `file-\u003eprivate_data` to the `miscdevice` structure. However, we don\u0027t have something like that here.\n\nMaybe we should make this an `Option` parameter and not bail out in `release()` if it\u0027s NULL?",
+      "range": {
+        "startLine": 275,
+        "startChar": 0,
+        "endLine": 275,
+        "endChar": 16
+      },
+      "revId": "dd82e8a6de5bc2eefd3fc6c50034fb9f2716395b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a3f3c6d_99ee5f8e",
+        "filename": "rust/kernel/anon_inodes.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-03T19:31:35Z",
+      "side": 1,
+      "message": "ptr is not just a generic void* but in the rust case an object implementing the trait AnonInodeFileInterface that in turn implements the various callbacks. So it\u0027s not really optional in this case.",
+      "parentUuid": "5f4c97ad_29824eca",
       "range": {
         "startLine": 275,
         "startChar": 0,
