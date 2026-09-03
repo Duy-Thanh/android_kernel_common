@@ -164,8 +164,6 @@ static int coreboot_table_populate(struct device *dev, void *ptr)
 			put_device(&device->dev);
 			return ret;
 		}
-
-		ptr_entry += entry->size;
 	}
 
 	return 0;

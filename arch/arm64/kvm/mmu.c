@@ -1734,7 +1734,7 @@ static int __pkvm_pin_user_pages(struct kvm *kvm, struct kvm_memory_slot *memslo
 	long ret;
 	int p;
 
-	pages = kmalloc_array(nr_pages, sizeof(*pages), GFP_KERNEL);
+	pages = kvmalloc_array(nr_pages, sizeof(*pages), GFP_KERNEL);
 	if (!pages)
 		return -ENOMEM;
 
@@ -1785,7 +1785,7 @@ static int __pkvm_pin_user_pages(struct kvm *kvm, struct kvm_memory_slot *memslo
 err_unpin_pages:
 	unpin_user_pages(pages, nr_pages);
 err_free_pages:
-	kfree(pages);
+	kvfree(pages);
 	return ret;
 }
 
@@ -2208,7 +2208,7 @@ free_ppages:
 		kfree(ppage);
 	}
 free_pages:
-	kfree(pages);
+	kvfree(pages);
 	return ret;
 }
 
@@ -2332,7 +2332,7 @@ end:
 
 	if (ret)
 		unpin_user_pages(pages, nr_pages);
-	kfree(pages);
+	kvfree(pages);
 
 	/* Servicing a hyp request allocates, so it must run outside the mmu_lock. */
 	if (ret && res.a1)

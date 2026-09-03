@@ -1,4 +1,5 @@
 [abi_symbol_list]
+  __alloc_frozen_pages_noprof
   bdev_file_open_by_dev
   bdev_file_open_by_path
   bdev_fput
