@@ -842,7 +842,7 @@ out_unlock:
 static int smmu_dev_block_dma(pkvm_handle_t iommu, u32 sid, bool is_host2guest)
 {
 	struct hyp_arm_smmu_v3_device_pv *smmu = smmu_id_to_ptr(iommu);
-	static struct arm_smmu_ste *dst;
+	struct arm_smmu_ste *dst;
 	int ret = 0;
 
 
