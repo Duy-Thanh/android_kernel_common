@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b44b1e7_ced031d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2026-09-03T06:32:36Z",
+      "side": 1,
+      "message": "hello all,\n\nThe GKI Respin request page currently does not allow selecting android17-6.18-2026-09, so I manually cherry-picked it onto android17-6.18-2026-09. I hope this bug fix patch can be included in android17-6.18-2026-09_r1.\n\nBRs,\nZhipeng",
+      "revId": "021a05049c3049e33d6057c909d3182ab4b89481",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
