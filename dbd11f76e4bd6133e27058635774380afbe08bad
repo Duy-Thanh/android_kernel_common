@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bb98a42_24185f5d",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/pv/arm-smmu-v3-pv.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-03T15:30:20Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we store the error codes for each of these functions so we can propagate them back?",
+      "range": {
+        "startLine": 840,
+        "startChar": 1,
+        "endLine": 844,
+        "endChar": 0
+      },
+      "revId": "dbd11f76e4bd6133e27058635774380afbe08bad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
