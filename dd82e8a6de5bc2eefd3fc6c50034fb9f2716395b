@@ -187,6 +187,30 @@
       },
       "revId": "dd82e8a6de5bc2eefd3fc6c50034fb9f2716395b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ef03246_c80aae33",
+        "filename": "rust/kernel/anon_inodes.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-03T21:23:10Z",
+      "side": 1,
+      "message": "Okay, perhaps we should ensure it\u0027s not NULL here rather than later then?",
+      "parentUuid": "3a3f3c6d_99ee5f8e",
+      "range": {
+        "startLine": 275,
+        "startChar": 0,
+        "endLine": 275,
+        "endChar": 16
+      },
+      "revId": "dd82e8a6de5bc2eefd3fc6c50034fb9f2716395b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
