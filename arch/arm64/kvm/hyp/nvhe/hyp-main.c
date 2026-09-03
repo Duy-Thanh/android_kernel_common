@@ -971,6 +971,15 @@ static void handle___kvm_vcpu_run(struct kvm_cpu_context *host_ctxt)
 			goto out;
 		}
 
+		/*
+		 * CI pipeline check (tabba/ci-check-bad): deliberately
+		 * crash the hypervisor when running a protected vCPU, so a
+		 * working CI MUST fail the protected-VM run. Non-protected
+		 * guests and the host's own vCPUs are untouched.
+		 */
+		if (pkvm_hyp_vcpu_is_protected(hyp_vcpu))
+			hyp_panic();
+
 		flush_hyp_vcpu(hyp_vcpu);
 		ret = __kvm_vcpu_run(&hyp_vcpu->vcpu);
 		sync_hyp_vcpu(hyp_vcpu, ret);
