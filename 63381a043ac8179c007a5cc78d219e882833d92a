@@ -63,6 +63,30 @@
       ],
       "revId": "63381a043ac8179c007a5cc78d219e882833d92a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "066e76f1_e3fb7618",
+        "filename": "arch/x86/kvm/mmu/mmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1651,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-09-03T13:35:05Z",
+      "side": 1,
+      "message": "My motivation for this comment was: we do implement `for_each_pkvm_mapping()`, and in particular we do use it in a similar case in `pkvm_age_gfn_range()` below, so I just wanted to clarify why we can\u0027t use it here.\n\n\u003e Retrieve the first mapping in the range on every iteration\n\nThat is clear from the code?\n\n\u003e which invalidates tree iterators.\n\n\"invalidates\" sounds a bit unclear to me in this context. Dropping mmu_lock just makes those iterators unsafe?\n\nHow about e.g.: \"We cannot safely use for_each_pkvm_mapping() for walking the range here, since mmu_lock may be dropped between iterations when yielding.\" ?",
+      "parentUuid": "5685a1bc_ec9718ba",
+      "range": {
+        "startLine": 1648,
+        "startChar": 0,
+        "endLine": 1651,
+        "endChar": 4
+      },
+      "revId": "63381a043ac8179c007a5cc78d219e882833d92a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
