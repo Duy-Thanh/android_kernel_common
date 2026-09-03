@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4adcbefb_cc5f9c23",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-03T19:39:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "227e00fc_6f261ef9",
+      "revId": "2ac9f1fd57cfcb01e919c7f6b9be76bd59f49a93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "48f06854_5d77331e",
@@ -31,6 +49,30 @@
       "writtenOn": "2026-09-03T01:28:05Z",
       "side": 1,
       "message": "Please explain why",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 67
+      },
+      "revId": "2ac9f1fd57cfcb01e919c7f6b9be76bd59f49a93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4ca3419_99e12bc5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-03T19:39:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48f06854_5d77331e",
       "range": {
         "startLine": 8,
         "startChar": 0,
