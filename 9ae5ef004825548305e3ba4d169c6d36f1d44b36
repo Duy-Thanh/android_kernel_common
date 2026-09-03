@@ -16,6 +16,24 @@
       "message": "Thanks Carlos, are you planning to update the ABI symbols after this patch is submitted? Otherwise the build will be broken.",
       "revId": "9ae5ef004825548305e3ba4d169c6d36f1d44b36",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23e3ab9f_cff79ee6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-09-03T22:46:32Z",
+      "side": 1,
+      "message": "The symbol updates were submitted independently to both branches `android17-6.18` and `android17-6.18-kminext` and unfortunately, the commits were different and the merge above required a bit too much of a manual resolution. The idea is to revert this `-kminext` specific patch and let the symbol updates land via merge instead. This should be the preferred workflow (or clean cherry-picks). Anyway, the build works for the Pixels I have.",
+      "parentUuid": "c403317a_b175068c",
+      "revId": "9ae5ef004825548305e3ba4d169c6d36f1d44b36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
