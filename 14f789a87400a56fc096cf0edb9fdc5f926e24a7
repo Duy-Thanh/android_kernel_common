@@ -93,6 +93,30 @@
       },
       "revId": "14f789a87400a56fc096cf0edb9fdc5f926e24a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c75f668_8657464d",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/nested/arm-smmu-v3.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-03T15:34:19Z",
+      "side": 1,
+      "message": "Do you mean in the hyp driver? Because the upstream version of the driver does use le64 conversions, so shouldn\u0027t we do that?",
+      "parentUuid": "09934410_da6b3075",
+      "range": {
+        "startLine": 344,
+        "startChar": 0,
+        "endLine": 359,
+        "endChar": 60
+      },
+      "revId": "14f789a87400a56fc096cf0edb9fdc5f926e24a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
