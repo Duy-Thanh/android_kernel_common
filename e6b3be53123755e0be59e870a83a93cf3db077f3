@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bc5ddc5_47ad922a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-03T18:44:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60b5d3ff_d908799a",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 9
+      },
+      "revId": "e6b3be53123755e0be59e870a83a93cf3db077f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "77f70a99_14601b01",
@@ -37,6 +61,24 @@
       "writtenOn": "2026-09-03T00:40:45Z",
       "side": 1,
       "message": "Can you please add some context as to why this is needed?",
+      "revId": "e6b3be53123755e0be59e870a83a93cf3db077f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "225a14dc_5403359e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-03T18:44:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77f70a99_14601b01",
       "revId": "e6b3be53123755e0be59e870a83a93cf3db077f3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
