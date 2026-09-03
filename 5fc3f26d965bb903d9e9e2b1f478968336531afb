@@ -96,6 +96,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f9d33e7_bf8b9674",
+        "filename": "Documentation/ABI/testing/sysfs-driver-hid-logitech-hidpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 3541841
+      },
+      "writtenOn": "2026-09-03T01:28:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02331232_bb2634d1",
+      "range": {
+        "startLine": 54,
+        "startChar": 2,
+        "endLine": 55,
+        "endChar": 27
+      },
+      "revId": "5fc3f26d965bb903d9e9e2b1f478968336531afb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ad546584_4f140183",
@@ -180,6 +204,30 @@
       "side": 1,
       "message": "Fixing this in a follow-up patch.",
       "parentUuid": "786ddd8b_c4d080b0",
+      "range": {
+        "startLine": 4924,
+        "startChar": 7,
+        "endLine": 4924,
+        "endChar": 25
+      },
+      "revId": "5fc3f26d965bb903d9e9e2b1f478968336531afb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f52b5a71_9c056f9b",
+        "filename": "drivers/hid/hid-logitech-hidpp.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 4924,
+      "author": {
+        "id": 3541841
+      },
+      "writtenOn": "2026-09-03T01:28:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc8fb21e_b48e4dd3",
       "range": {
         "startLine": 4924,
         "startChar": 7,
