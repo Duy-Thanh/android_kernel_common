@@ -941,6 +941,13 @@ static struct kvm_vcpu *__get_host_hyp_vcpus(struct kvm_vcpu *arg,
 		__get_host_hyp_vcpus(__vcpu, hyp_vcpup);			\
 	})
 
+/*
+ * CI pipeline check (tabba/ci-check-good): this comment is the only
+ * change on this branch. It provides a known-good build that must pass a
+ * protected-VM run, paired with tabba/ci-check-bad which injects a deliberate
+ * failure on this same vCPU-run path.
+ * Round 3.
+ */
 static void handle___kvm_vcpu_run(struct kvm_cpu_context *host_ctxt)
 {
 	struct pkvm_hyp_vcpu *hyp_vcpu;
