@@ -22,6 +22,30 @@
       },
       "revId": "dbd11f76e4bd6133e27058635774380afbe08bad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8f79ceb_2bf1de7f",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/pv/arm-smmu-v3-pv.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-09-03T15:32:49Z",
+      "side": 1,
+      "message": "`WARN_ON()` is fatal, I guess in case of failure, we can re-increment the refcount and leak the  device and then return the  error.\nBut the possible errors from that path are -ETIMEDOUT which means the HW is not responding that is already quite bad.",
+      "parentUuid": "0bb98a42_24185f5d",
+      "range": {
+        "startLine": 840,
+        "startChar": 1,
+        "endLine": 844,
+        "endChar": 0
+      },
+      "revId": "dbd11f76e4bd6133e27058635774380afbe08bad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
