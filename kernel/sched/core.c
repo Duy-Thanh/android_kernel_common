@@ -101,6 +101,7 @@
 #include <trace/hooks/sched.h>
 #include <trace/hooks/cgroup.h>
 #include <trace/hooks/dtask.h>
+#include <trace/hooks/blk.h>
 
 EXPORT_TRACEPOINT_SYMBOL_GPL(ipi_send_cpu);
 EXPORT_TRACEPOINT_SYMBOL_GPL(ipi_send_cpumask);
@@ -753,6 +754,7 @@ bool raw_spin_rq_trylock(struct rq *rq)
 		raw_spin_unlock(lock);
 	}
 }
+EXPORT_SYMBOL_GPL(raw_spin_rq_trylock);
 
 void raw_spin_rq_unlock(struct rq *rq)
 {
@@ -5134,6 +5136,7 @@ static void __sched_fork(unsigned long clone_flags, struct task_struct *p)
 	p->se.nr_migrations		= 0;
 	p->se.vruntime			= 0;
 	p->se.vlag			= 0;
+	p->se.rel_deadline		= 0;
 	INIT_LIST_HEAD(&p->se.group_node);
 
 	/* A delayed task cannot be in clone(). */
@@ -8800,6 +8803,7 @@ int io_schedule_prepare(void)
 	int old_iowait = current->in_iowait;
 
 	current->in_iowait = 1;
+	trace_android_rvh_io_schedule_prepare(NULL);
 	blk_flush_plug(current->plug, true);
 	return old_iowait;
 }

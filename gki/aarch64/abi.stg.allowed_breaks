@@ -280,3 +280,10 @@ type 'struct fscrypt_master_key' changed
   3 members ('siphash_key_t mk_ino_hash_key' .. 'bool mk_present') changed
     offset changed by -4096
 
+type 'struct fscrypt_master_key' changed
+  byte size changed from 360 to 368
+  member changed from 'struct key* mk_users' to 'struct list_head mk_users'
+    type changed from 'struct key*' to 'struct list_head'
+  6 members ('struct list_head mk_decrypted_inodes' .. 'bool mk_present') changed
+    offset changed by 64
+

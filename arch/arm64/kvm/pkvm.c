@@ -2048,19 +2048,36 @@ int pkvm_pgtable_stage2_split(struct kvm_pgtable *pgt, u64 addr, u64 size, void 
 	return -EINVAL;
 }
 
-static int early_ffa_unmap_on_lend_cfg(char *arg)
+static int __init early_ffa_unmap_on_lend_cfg(char *arg)
 {
+	char *token;
 	bool enable;
 
-	if (!arg)
+	if (!arg) {
 		kvm_nvhe_sym(__pkvm_ffa_unmap_on_lend) = PKVM_FFA_UNMAP_ON_LEND_ON;
-	else if (!strcmp(arg, "full"))
-		kvm_nvhe_sym(__pkvm_ffa_unmap_on_lend) = PKVM_FFA_UNMAP_ON_LEND_FULL;
-	else {
-		if (!kstrtobool(arg, &enable)) {
+		return 0;
+	}
+
+	while ((token = strsep(&arg, ","))) {
+		u64 val;
+
+		if (!*token)
+			continue;
+
+		if (!strcmp(token, "full")) {
+			kvm_nvhe_sym(__pkvm_ffa_unmap_on_lend) = PKVM_FFA_UNMAP_ON_LEND_FULL;
+		} else if (!strncmp(token, "nr_handles=", 11)) {
+			if (kstrtoull(token + 11, 10, &val) || !val) {
+				kvm_err("kvm-arm.ffa-unmap-on-lend: Invalid nr_handles '%s'\n",
+					token + 11);
+				return -EINVAL;
+			}
+			kvm_nvhe_sym(kvm_ffa_spm_nr_pages) =
+				DIV_ROUND_UP(val * KVM_FFA_SPM_HANDLE_SIZE, PAGE_SIZE);
+		} else if (!kstrtobool(token, &enable)) {
 			kvm_nvhe_sym(__pkvm_ffa_unmap_on_lend) = enable;
 		} else {
-			kvm_err("kvm-arm.ffa-unmap-on-lend: Unknown argument '%s'\n", arg);
+			kvm_err("kvm-arm.ffa-unmap-on-lend: Unknown argument '%s'\n", token);
 			return -EINVAL;
 		}
 	}

@@ -474,6 +474,10 @@ DECLARE_HOOK(android_vh_wp_page_reuse,
 DECLARE_HOOK(android_vh_filemap_read,
 	TP_PROTO(struct file *file, loff_t pos, size_t size),
 	TP_ARGS(file, pos, size));
+DECLARE_HOOK(android_vh_filemap_read_folio_bypass,
+	     TP_PROTO(struct file *file, struct address_space *mapping,
+		      struct folio *folio, bool *bypassed),
+	     TP_ARGS(file, mapping, folio, bypassed));
 DECLARE_HOOK(android_vh_filemap_map_pages,
 	TP_PROTO(struct file *file, pgoff_t orig_start_pgoff, pgoff_t first_pgoff,
 		pgoff_t last_pgoff, vm_fault_t ret),
@@ -827,6 +831,9 @@ DECLARE_HOOK(android_vh_folio_add_file_rmap,
 DECLARE_HOOK(android_vh_readahead_add_folio,
 	TP_PROTO(struct folio *folio, struct address_space *mapping),
 	TP_ARGS(folio, mapping));
+DECLARE_HOOK(android_vh_readahead_bypass,
+	     TP_PROTO(struct readahead_control *ractl, bool *bypassed),
+	     TP_ARGS(ractl, bypassed));
 DECLARE_HOOK(android_vh_folio_remove_rmap,
 	TP_PROTO(struct folio *folio, struct page *page, int nr_pages,
 		 int level),
