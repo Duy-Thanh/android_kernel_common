@@ -34,6 +34,24 @@
       ],
       "revId": "6f7564af442e2d91271d3026e7fbdc67c3e43b5b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "adf75fb3_13191db8",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/pv/arm-smmu-v3-pv.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 783,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-09-03T08:33:05Z",
+      "side": 1,
+      "message": "Sure, we rely on the struct being empty for other fields though.",
+      "parentUuid": "11b2166d_dd72f193",
+      "revId": "6f7564af442e2d91271d3026e7fbdc67c3e43b5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
