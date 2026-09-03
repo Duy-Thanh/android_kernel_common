@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6dfea023_dc1e599d",
+        "filename": "rust/kernel/anon_inodes.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-03T01:19:13Z",
+      "side": 1,
+      "message": "I\u0027m not sure that device is the right thing to call it; anon inodes are associated with files, not just devices that are presented as files. Also, the anon inode here refers to the wrap file, not the wrapfd device file, so perhaps we should call this `AnonInodeFileInterface`?\n\nDitto throughout the rest of the file.",
+      "range": {
+        "startLine": 22,
+        "startChar": 19,
+        "endLine": 22,
+        "endChar": 25
+      },
+      "revId": "dd82e8a6de5bc2eefd3fc6c50034fb9f2716395b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "94e42806_deff7483",
         "filename": "rust/kernel/anon_inodes.rs",
         "patchSetId": 1
@@ -19,6 +42,52 @@
         "startChar": 15,
         "endLine": 35,
         "endChar": 31
+      },
+      "revId": "dd82e8a6de5bc2eefd3fc6c50034fb9f2716395b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5236a5c_681e46cb",
+        "filename": "rust/kernel/anon_inodes.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-03T01:19:13Z",
+      "side": 1,
+      "message": "I don\u0027t think the logic in `rust/kernel/miscdevice.rs` takes an additional reference on the file object. `File::from_raw_file()` just creates a Rust reference to the file structure by casting the pointer--not incrementing the reference count--which is the same thing as what you have on L129.\n\nGiven that, I think it makes sense to just do the same thing that the miscdevice implementation does.",
+      "range": {
+        "startLine": 122,
+        "startChar": 1,
+        "endLine": 124,
+        "endChar": 100
+      },
+      "revId": "dd82e8a6de5bc2eefd3fc6c50034fb9f2716395b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f4c97ad_29824eca",
+        "filename": "rust/kernel/anon_inodes.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-03T01:19:13Z",
+      "side": 1,
+      "message": "I know we\u0027re implementing this for the wrapfd driver, which passes some context. However, there isn\u0027t a hard requirement in `anon_inode_create_getfile` that says that `ptr` must be valid. In fact, there are kernel drivers that call `anon_inode_getfile()`, which could be implemented on top of this too, with a `NULL` ctx pointer. I think it made more sense to assume that `private_data` was not NULL in the miscdevice case, because `misc_open()` is always invoked, and that points the `file-\u003eprivate_data` to the `miscdevice` structure. However, we don\u0027t have something like that here.\n\nMaybe we should make this an `Option` parameter and not bail out in `release()` if it\u0027s NULL?",
+      "range": {
+        "startLine": 275,
+        "startChar": 0,
+        "endLine": 275,
+        "endChar": 16
       },
       "revId": "dd82e8a6de5bc2eefd3fc6c50034fb9f2716395b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
