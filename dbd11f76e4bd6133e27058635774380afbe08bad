@@ -94,6 +94,30 @@
       },
       "revId": "dbd11f76e4bd6133e27058635774380afbe08bad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c9a6c9a_1b265a66",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/pv/arm-smmu-v3-pv.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-03T16:07:55Z",
+      "side": 1,
+      "message": "if `WARN_ON()` is unconditionally fatal, and this pattern is used throughout other parts of the hypervisor, then it\u0027s fine. No point in adding deadcode anyway, so this is ok.",
+      "parentUuid": "990367b9_c7bb118e",
+      "range": {
+        "startLine": 840,
+        "startChar": 1,
+        "endLine": 844,
+        "endChar": 0
+      },
+      "revId": "dbd11f76e4bd6133e27058635774380afbe08bad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
