@@ -117,6 +117,30 @@
       },
       "revId": "14f789a87400a56fc096cf0edb9fdc5f926e24a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f0e2ab9_f72cedb9",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/nested/arm-smmu-v3.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-09-03T15:38:40Z",
+      "side": 1,
+      "message": "Yes, I mean in this driver. Interestingly the pv driver (arm-smmu-v3-pv.c) gets this right. I guess that\u0027s because this is based on an older version of the upstream posting. The last version also gets it right: https://lore.kernel.org/all/20260501111928.259252-25-smostafa@google.com/\n\n\nBut anyway, big endian is not common at all and it is getting removed from the kernel:\nhttps://lore.kernel.org/all/20260811140132.22778-1-will@kernel.org/",
+      "parentUuid": "8c75f668_8657464d",
+      "range": {
+        "startLine": 344,
+        "startChar": 0,
+        "endLine": 359,
+        "endChar": 60
+      },
+      "revId": "14f789a87400a56fc096cf0edb9fdc5f926e24a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
