@@ -87,6 +87,30 @@
       },
       "revId": "63381a043ac8179c007a5cc78d219e882833d92a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55a1d862_03526d89",
+        "filename": "arch/x86/kvm/mmu/mmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1651,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-09-03T13:41:49Z",
+      "side": 1,
+      "message": "\u003e How about e.g.: \"We cannot safely use for_each_pkvm_mapping() for walking the range here, since mmu_lock may be dropped between iterations when yielding.\" ?\n\nSounds good.\n\nI haven\u0027t usually seen comments stating why we didn\u0027t chose an alternate implementation, but in this case it makes sense as you pointed out about the use of `for_each_pkvm_mapping` in `pkvm_age_gfn_range`. We could add this as well in the comment if you feel its okay - like:\n\n\"Unlike in pkvm_age_gfn_range, we cannot safely use for_each_pkvm_mapping() for walking the range here, since mmu_lock may be dropped between iterations when yielding.\"\n\nBut no strict preference and your suggestion sounds good to me.",
+      "parentUuid": "066e76f1_e3fb7618",
+      "range": {
+        "startLine": 1648,
+        "startChar": 0,
+        "endLine": 1651,
+        "endChar": 4
+      },
+      "revId": "63381a043ac8179c007a5cc78d219e882833d92a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
