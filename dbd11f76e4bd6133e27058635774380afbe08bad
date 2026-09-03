@@ -70,6 +70,30 @@
       },
       "revId": "dbd11f76e4bd6133e27058635774380afbe08bad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "990367b9_c7bb118e",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/pv/arm-smmu-v3-pv.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-09-03T15:42:32Z",
+      "side": 1,
+      "message": "It\u0027s always fatal in EL2, as the hypervisor doesn\u0027t handle BRK, it will panic. This kind of error handling is commonly used (as in mem_protect.c) to avoid complex error handling in situations that shouldn\u0027t happen.\n\nIn this specific situation, I think it\u0027s safe to `return ret` and leak the reference. But if the HW is timing out, the system probably won\u0027t survive for longer.\nI can to update the code to be tolerant.",
+      "parentUuid": "faa622f8_dbbab9df",
+      "range": {
+        "startLine": 840,
+        "startChar": 1,
+        "endLine": 844,
+        "endChar": 0
+      },
+      "revId": "dbd11f76e4bd6133e27058635774380afbe08bad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
