@@ -16,6 +16,41 @@
       "message": "This driver is a QCOM vendor module and is not built into GKI. Why is this change needed?",
       "revId": "a857b20b6df0303ccadd1818e9f140ee88d9b4a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45bfef0b_e2006073",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5067318
+      },
+      "writtenOn": "2026-09-03T10:20:28Z",
+      "side": 1,
+      "message": "The change is adding for interconnect support",
+      "parentUuid": "7067bdc4_30cec1ef",
+      "revId": "a857b20b6df0303ccadd1818e9f140ee88d9b4a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d3b0cdb_9f3bbde7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5067318
+      },
+      "writtenOn": "2026-09-03T10:20:28Z",
+      "side": 1,
+      "message": "This change is required because the QSPI controller is connected to a SPI-NOR storage device. The recovery image contains binaries for both SPI-NOR and NVMe storage devices. During the recovery process, the QSPI controller reads the SPI-NOR binaries from the recovery image and writes them to the SPI-NOR storage device. Therefore, this Qualcomm vendor-specific driver change is required to support SPI-NOR access during recovery operations",
+      "revId": "a857b20b6df0303ccadd1818e9f140ee88d9b4a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
