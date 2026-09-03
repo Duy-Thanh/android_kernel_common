@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "59110d7b_21969661",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-09-03T06:00:10Z",
+      "side": 1,
+      "message": "Ok, I\u0027ve corrected the change Id and resubmitted it here: https://r.android.com/3899544\n\nI will move forward with that change and mark this version as abandoned.",
+      "parentUuid": "2dc05a0b_be56de9c",
+      "revId": "f1f424f3ef1532d471e569812180736243971cb5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fedf2bc3_4b4b3331",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "If there is no other option that avoids this in a timely fashion, I\u0027ll consider merging this on a temporary basis.",
       "parentUuid": "fedf2bc3_4b4b3331",
+      "revId": "f1f424f3ef1532d471e569812180736243971cb5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "195b20a0_8fde68d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-09-03T06:00:10Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5784e260_e04f2a75",
       "revId": "f1f424f3ef1532d471e569812180736243971cb5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
