@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60b5d3ff_d908799a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-03T00:40:45Z",
+      "side": 1,
+      "message": "Using `BACKPORT` alone makes it seem like this is upstream, and you had to resolve some conflicts to get it working. However, this patch is not upstream; it\u0027s specific to Android, so you should tag it as:\n\n`BACKPORT: ANDROID: ...`",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 9
+      },
+      "revId": "e6b3be53123755e0be59e870a83a93cf3db077f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77f70a99_14601b01",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-03T00:40:45Z",
+      "side": 1,
+      "message": "Can you please add some context as to why this is needed?",
+      "revId": "e6b3be53123755e0be59e870a83a93cf3db077f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
