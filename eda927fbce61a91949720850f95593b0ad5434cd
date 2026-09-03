@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "132abf47_185cf014",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-09-03T06:11:13Z",
+      "side": 1,
+      "message": "Re-submitted as https://r.android.com/3899544, but in presubmit there found this patch didn\u0027t even build.  Please be sure to test your patches before submitting them!",
+      "revId": "eda927fbce61a91949720850f95593b0ad5434cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
