@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "6316b246_a2eee9b6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-09-03T15:30:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e921a9b_bd7f7133",
+      "range": {
+        "startLine": 9,
+        "startChar": 63,
+        "endLine": 9,
+        "endChar": 66
+      },
+      "revId": "14f789a87400a56fc096cf0edb9fdc5f926e24a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "1ee0eae1_1c38b54f",
         "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/nested/arm-smmu-v3.c",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2026-09-03T15:21:12Z",
       "side": 1,
       "message": "nit: shouldn\u0027t all of this be `cpu_to_le64()`? That\u0027s independent of this patch, and I can make a follow up patch to fix that if you\u0027d like?",
+      "range": {
+        "startLine": 344,
+        "startChar": 0,
+        "endLine": 359,
+        "endChar": 60
+      },
+      "revId": "14f789a87400a56fc096cf0edb9fdc5f926e24a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09934410_da6b3075",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/nested/arm-smmu-v3.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-09-03T15:30:14Z",
+      "side": 1,
+      "message": "Actually, there is no other place in the driver where le64 conversion is done, I dropped for consistency.",
+      "parentUuid": "1ee0eae1_1c38b54f",
       "range": {
         "startLine": 344,
         "startChar": 0,
