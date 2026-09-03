@@ -22,6 +22,30 @@
       },
       "revId": "07ded410055a125a2572ed3498b5d518cf275a83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95a2befb_dee80474",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 4605888
+      },
+      "writtenOn": "2026-09-03T17:44:24Z",
+      "side": 1,
+      "message": "Hi Will,\nDPD proxy driver (HLOS) was checking against KVM_FFA_MAX_NR_CONSTITUENTS macro. Since we are replacing macro with configurable variable, HLOS also needs to access the same. So, had to export this. Here\u0027s the ARSP gerrit for DPD proxy driver change.\nhttps://arsp-review.googlesource.com/c/kernel-desktop/private/google-modules/soc/qcom/msm/+/9125748/1/drivers/iommu/qcom_dpd_proxy.c",
+      "parentUuid": "ddf2b2bf_4054f264",
+      "range": {
+        "startLine": 324,
+        "startChar": 0,
+        "endLine": 324,
+        "endChar": 57
+      },
+      "revId": "07ded410055a125a2572ed3498b5d518cf275a83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
