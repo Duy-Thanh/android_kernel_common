@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94e42806_deff7483",
+        "filename": "rust/kernel/anon_inodes.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-03T00:31:51Z",
+      "side": 1,
+      "message": "Alice had mentioned this earlier, but there\u0027s a type alias for this upstream, which I\u0027ve backported to 6.18: aosp/4269683. You can rebase your series on top of that patch and make use of it.",
+      "range": {
+        "startLine": 35,
+        "startChar": 15,
+        "endLine": 35,
+        "endChar": 31
+      },
+      "revId": "dd82e8a6de5bc2eefd3fc6c50034fb9f2716395b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
