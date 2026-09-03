@@ -16,6 +16,24 @@
       "message": "This needs to have the same change-Id as the patch that you cherrypicked it from: https://android-review.googlesource.com/c/kernel/common/+/4171432\n\nYou also need to explain why it must be tagged as a `BACKPORT` patch as documented here: https://cs.android.com/android/kernel/superproject/+/common-android17-6.18:common/README.md#requirements-for-backports-from-mainline-linux-upstream-backport\n\nAlso, please use `git cherry-pick -x` as documented here: https://source.android.com/docs/core/architecture/kernel/gki-respin#source-of-truth",
       "revId": "a97d4b7c010c34f9c17f9be353c9199a08977c31",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6746c387_92ef1fa0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961260
+      },
+      "writtenOn": "2026-09-03T14:06:16Z",
+      "side": 1,
+      "message": "I cherry-picked https://android-review.googlesource.com/c/kernel/common/+/4171432 into https://android-review.googlesource.com/c/kernel/common/+/4274041. Thanks.",
+      "parentUuid": "7450639c_4c6c6f7c",
+      "revId": "a97d4b7c010c34f9c17f9be353c9199a08977c31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
