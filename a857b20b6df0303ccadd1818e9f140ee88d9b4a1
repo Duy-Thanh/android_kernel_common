@@ -68,6 +68,24 @@
       "message": "Thanks",
       "revId": "a857b20b6df0303ccadd1818e9f140ee88d9b4a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ce55313_9971875d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-09-03T16:23:53Z",
+      "side": 1,
+      "message": "But it is not needed in the ACK kernel tree since it is not part of any GKI build. This should be in your downstream tree for vendor modules.",
+      "parentUuid": "2d3b0cdb_9f3bbde7",
+      "revId": "a857b20b6df0303ccadd1818e9f140ee88d9b4a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
