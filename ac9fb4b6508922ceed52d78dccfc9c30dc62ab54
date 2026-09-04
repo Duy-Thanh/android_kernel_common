@@ -34,6 +34,23 @@
       "parentUuid": "b4650dcd_514eac53",
       "revId": "ac9fb4b6508922ceed52d78dccfc9c30dc62ab54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dd9b23d_389e72fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3486811
+      },
+      "writtenOn": "2026-09-04T02:09:41Z",
+      "side": 1,
+      "message": "The new hook is introduced to restore HONOR’s proprietary asynchronous Binder priority propagation capability.\nSince trace_android_vh_binder_restore_priority is already invoked at two other locations, it may have been registered by other vendors. Reusing this hook here could introduce unintended behavior or side effects in their existing implementations. Therefore, we introduced the trace_android_vh_binder_before_restore_priority hook.",
+      "revId": "ac9fb4b6508922ceed52d78dccfc9c30dc62ab54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
