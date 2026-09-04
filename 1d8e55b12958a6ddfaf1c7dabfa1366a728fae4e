@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a7656f3_e754929e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2026-09-04T08:37:11Z",
+      "side": 1,
+      "message": "Thanks for the review. I can now see the reason for the Presubmit-Verified failure — it was due to the missing respin request bug reference.\n\nI\u0027ve added the bug reference IssueTracker: https://issuetracker.google.com/issues/556290471 to the commit message (keeping the existing bug references intact) and updated the patch accordingly.\n\nHowever, I\u0027m not entirely sure whether using this regular bug is acceptable here. The reason I used a regular bug is that the GKI Respin request page currently does not allow selecting android17-6.18-2026-09. Could you please re-review?\n                                                                                                                                                                                 \nThanks!",
+      "revId": "1d8e55b12958a6ddfaf1c7dabfa1366a728fae4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
