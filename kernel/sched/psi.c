@@ -555,11 +555,8 @@ static u64 update_triggers(struct psi_group *group, u64 now)
 
 		/* Generate an event */
 		if (cmpxchg(&t->event, 0, 1) == 0) {
-			struct psi_trigger_ext *t_ext;
-
-			t_ext = container_of(t, struct psi_trigger_ext, trigger);
-			if (t_ext->of)
-				kernfs_notify(t_ext->of->kn);
+			if (t->of)
+				kernfs_notify(t->of->kn);
 			else
 				wake_up_interruptible(&t->event_wait);
 		}
@@ -1255,7 +1252,6 @@ struct psi_trigger *psi_trigger_create(struct psi_group *group, char *buf,
 				       enum psi_res res, struct file *file,
 				       struct kernfs_open_file *of)
 {
-	struct psi_trigger_ext *t_ext;
 	struct psi_trigger *t;
 	enum psi_states state;
 	u32 threshold_us;
@@ -1286,10 +1282,9 @@ struct psi_trigger *psi_trigger_create(struct psi_group *group, char *buf,
 	if (threshold_us == 0 || threshold_us > window_us)
 		return ERR_PTR(-EINVAL);
 
-	t_ext = kmalloc(sizeof(*t_ext), GFP_KERNEL);
-	if (!t_ext)
+	t = kmalloc(sizeof(*t), GFP_KERNEL);
+	if (!t)
 		return ERR_PTR(-ENOMEM);
-	t = &t_ext->trigger;
 
 	t->group = group;
 	t->state = state;
@@ -1300,7 +1295,7 @@ struct psi_trigger *psi_trigger_create(struct psi_group *group, char *buf,
 
 	t->event = 0;
 	t->last_event_time = 0;
-	t_ext->of = of;
+	t->of = of;
 	if (!of)
 		init_waitqueue_head(&t->event_wait);
 	t->pending_event = false;
@@ -1312,7 +1307,7 @@ struct psi_trigger *psi_trigger_create(struct psi_group *group, char *buf,
 
 		task = kthread_create(psi_poll_worker, group, "psimon");
 		if (IS_ERR(task)) {
-			kfree(t_ext);
+			kfree(t);
 			mutex_unlock(&group->trigger_lock);
 			return ERR_CAST(task);
 		}
@@ -1334,7 +1329,6 @@ struct psi_trigger *psi_trigger_create(struct psi_group *group, char *buf,
 
 void psi_trigger_destroy(struct psi_trigger *t)
 {
-	struct psi_trigger_ext *t_ext;
 	struct psi_group *group;
 	struct task_struct *task_to_destroy = NULL;
 
@@ -1351,9 +1345,8 @@ void psi_trigger_destroy(struct psi_trigger *t)
 	 * being accessed later. Can happen if cgroup is deleted from under a
 	 * polling process.
 	 */
-	t_ext = container_of(t, struct psi_trigger_ext, trigger);
-	if (t_ext->of)
-		kernfs_notify(t_ext->of->kn);
+	if (t->of)
+		kernfs_notify(t->of->kn);
 	else
 		wake_up_interruptible(&t->event_wait);
 
@@ -1403,14 +1396,13 @@ void psi_trigger_destroy(struct psi_trigger *t)
 		kthread_stop(task_to_destroy);
 		atomic_set(&group->poll_scheduled, 0);
 	}
-	kfree(t_ext);
+	kfree(t);
 }
 
 __poll_t psi_trigger_poll(void **trigger_ptr,
 				struct file *file, poll_table *wait)
 {
 	__poll_t ret = DEFAULT_POLLMASK;
-	struct psi_trigger_ext *t_ext;
 	struct psi_trigger *t;
 
 	if (static_branch_likely(&psi_disabled))
@@ -1420,9 +1412,8 @@ __poll_t psi_trigger_poll(void **trigger_ptr,
 	if (!t)
 		return DEFAULT_POLLMASK | EPOLLERR | EPOLLPRI;
 
-	t_ext = container_of(t, struct psi_trigger_ext, trigger);
-	if (t_ext->of)
-		kernfs_generic_poll(t_ext->of, wait);
+	if (t->of)
+		kernfs_generic_poll(t->of, wait);
 	else
 		poll_wait(file, &t->event_wait, wait);
 
