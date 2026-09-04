@@ -99,6 +99,7 @@ _ARM_GKI_MODULES_LIST = [
 _ARM64_GKI_MODULES_LIST = [
     # keep sorted
     "arch/arm64/geniezone/gzvm.ko",
+    "drivers/android/wrapfd/rust_wrapfd.ko",
     "drivers/char/hw_random/cctrng.ko",
     "drivers/perf/dwc_pcie_pmu.ko",
 ]
@@ -109,6 +110,7 @@ _X86_GKI_MODULES_LIST = [
 
 _X86_64_GKI_MODULES_LIST = [
     # keep sorted
+    "drivers/android/wrapfd/rust_wrapfd.ko",
 ]
 
 def _apply(map_each, lst):

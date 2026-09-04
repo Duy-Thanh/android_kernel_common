@@ -1293,6 +1293,7 @@ bool get_close_on_exec(unsigned int fd)
 	rcu_read_unlock();
 	return res;
 }
+EXPORT_SYMBOL(get_close_on_exec);
 
 static int do_dup2(struct files_struct *files,
 	struct file *file, unsigned fd, unsigned flags)
