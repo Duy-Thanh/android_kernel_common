@@ -50,6 +50,24 @@
       "message": "Could you please help check why Presubmit-Verified is -1? I don\u0027t have permission to view it. Thank you.",
       "revId": "021a05049c3049e33d6057c909d3182ab4b89481",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d738552_b227112d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-09-04T02:06:17Z",
+      "side": 1,
+      "message": "looks to be a lab issue, rerunning",
+      "parentUuid": "db596814_5073cd13",
+      "revId": "021a05049c3049e33d6057c909d3182ab4b89481",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
