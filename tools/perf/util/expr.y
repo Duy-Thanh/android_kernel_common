@@ -7,8 +7,6 @@
 #include "util/debug.h"
 #define IN_EXPR_Y 1
 #include "expr.h"
-#include "expr-bison.h"
-int expr_lex(YYSTYPE * yylval_param , void *yyscanner);
 %}
 
 %define api.pure full
@@ -58,7 +56,7 @@ int expr_lex(YYSTYPE * yylval_param , void *yyscanner);
 static void expr_error(double *final_val __maybe_unused,
 		       struct expr_parse_ctx *ctx __maybe_unused,
 		       bool compute_ids __maybe_unused,
-		       void *scanner __maybe_unused,
+		       void *scanner,
 		       const char *s)
 {
 	pr_debug("%s\n", s);

@@ -10,8 +10,7 @@
 #include <net/ip_vs.h>
 
 static int
-sctp_csum_check(int af, struct sk_buff *skb, struct ip_vs_protocol *pp,
-		unsigned int sctphoff);
+sctp_csum_check(int af, struct sk_buff *skb, struct ip_vs_protocol *pp);
 
 static int
 sctp_conn_schedule(struct netns_ipvs *ipvs, int af, struct sk_buff *skb,
@@ -109,7 +108,7 @@ sctp_snat_handler(struct sk_buff *skb, struct ip_vs_protocol *pp,
 		int ret;
 
 		/* Some checks before mangling */
-		if (!sctp_csum_check(cp->af, skb, pp, sctphoff))
+		if (!sctp_csum_check(cp->af, skb, pp))
 			return 0;
 
 		/* Call application helper if needed */
@@ -157,7 +156,7 @@ sctp_dnat_handler(struct sk_buff *skb, struct ip_vs_protocol *pp,
 		int ret;
 
 		/* Some checks before mangling */
-		if (!sctp_csum_check(cp->af, skb, pp, sctphoff))
+		if (!sctp_csum_check(cp->af, skb, pp))
 			return 0;
 
 		/* Call application helper if needed */
@@ -186,11 +185,18 @@ sctp_dnat_handler(struct sk_buff *skb, struct ip_vs_protocol *pp,
 }
 
 static int
-sctp_csum_check(int af, struct sk_buff *skb, struct ip_vs_protocol *pp,
-		unsigned int sctphoff)
+sctp_csum_check(int af, struct sk_buff *skb, struct ip_vs_protocol *pp)
 {
+	unsigned int sctphoff;
 	struct sctphdr *sh;
 	__le32 cmp, val;
+
+#ifdef CONFIG_IP_VS_IPV6
+	if (af == AF_INET6)
+		sctphoff = sizeof(struct ipv6hdr);
+	else
+#endif
+		sctphoff = ip_hdrlen(skb);
 
 	sh = (struct sctphdr *)(skb->data + sctphoff);
 	cmp = sh->checksum;

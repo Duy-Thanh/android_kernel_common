@@ -137,7 +137,7 @@ static void putback_movable_page(struct page *page)
  *
  * This function shall be used whenever the isolated pageset has been
  * built from lru, balloon, hugetlbfs page. See isolate_migratepages_range()
- * and folio_isolate_hugetlb().
+ * and isolate_hugetlb().
  */
 void putback_movable_pages(struct list_head *l)
 {
@@ -146,7 +146,7 @@ void putback_movable_pages(struct list_head *l)
 
 	list_for_each_entry_safe(page, page2, l, lru) {
 		if (unlikely(PageHuge(page))) {
-			folio_putback_hugetlb(page);
+			putback_active_hugepage(page);
 			continue;
 		}
 		list_del(&page->lru);
@@ -1382,7 +1382,7 @@ static int unmap_and_move_huge_page(new_page_t get_new_page,
 
 	if (folio_ref_count(src) == 1) {
 		/* page was freed from under us. So we are done. */
-		folio_putback_hugetlb(hpage);
+		putback_active_hugepage(hpage);
 		return MIGRATEPAGE_SUCCESS;
 	}
 
@@ -1466,19 +1466,19 @@ out_unlock:
 	folio_unlock(src);
 out:
 	if (rc == MIGRATEPAGE_SUCCESS)
-		folio_putback_hugetlb(hpage);
+		putback_active_hugepage(hpage);
 	else if (rc != -EAGAIN)
 		list_move_tail(&src->lru, ret);
 
 	/*
-	 * If migration was not successful and there's a freeing callback,
-	 * return the folio to that special allocator. Otherwise, simply drop
-	 * our additional reference.
+	 * If migration was not successful and there's a freeing callback, use
+	 * it.  Otherwise, put_page() will drop the reference grabbed during
+	 * isolation.
 	 */
 	if (put_new_page)
 		put_new_page(new_hpage, private);
 	else
-		folio_put(dst);
+		putback_active_hugepage(new_hpage);
 
 	return rc;
 }
@@ -2019,7 +2019,7 @@ static int add_page_for_migration(struct mm_struct *mm, unsigned long addr,
 
 	if (PageHuge(page)) {
 		if (PageHead(page)) {
-			err = folio_isolate_hugetlb(page, pagelist);
+			err = isolate_hugetlb(page, pagelist);
 			if (!err)
 				err = 1;
 		}

@@ -793,7 +793,7 @@ ENTRY(__switch_to)
 	@ are using KASAN
 	mov_l	r2, KASAN_SHADOW_OFFSET
 	add	r2, r2, ip, lsr #KASAN_SHADOW_SCALE_SHIFT
-	ldrb	r2, [r2]
+	ldr	r2, [r2]
 #endif
 #endif
 

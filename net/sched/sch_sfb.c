@@ -439,7 +439,7 @@ static struct sk_buff *sfb_dequeue(struct Qdisc *sch)
 	struct Qdisc *child = q->qdisc;
 	struct sk_buff *skb;
 
-	skb = qdisc_dequeue_peeked(child);
+	skb = child->dequeue(q->qdisc);
 
 	if (skb) {
 		qdisc_bstats_update(sch, skb);

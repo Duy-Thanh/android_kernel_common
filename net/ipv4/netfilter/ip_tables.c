@@ -834,12 +834,14 @@ copy_entries_to_user(unsigned int total_size,
 		const struct xt_entry_target *t;
 
 		e = loc_cpu_entry + off;
-		if (copy_to_user(userptr + off, e,
-				 offsetof(struct ipt_entry, counters)) ||
-		    copy_to_user(userptr + off
+		if (copy_to_user(userptr + off, e, sizeof(*e))) {
+			ret = -EFAULT;
+			goto free_counters;
+		}
+		if (copy_to_user(userptr + off
 				 + offsetof(struct ipt_entry, counters),
 				 &counters[num],
-				 sizeof(counters[num]))) {
+				 sizeof(counters[num])) != 0) {
 			ret = -EFAULT;
 			goto free_counters;
 		}
@@ -1228,8 +1230,9 @@ compat_copy_entry_to_user(struct ipt_entry *e, void __user **dstptr,
 
 	origsize = *size;
 	ce = *dstptr;
-	if (copy_to_user(ce, e, offsetof(struct compat_ipt_entry, counters)) ||
-	    copy_to_user(&ce->counters, &counters[i], sizeof(counters[i])))
+	if (copy_to_user(ce, e, sizeof(struct ipt_entry)) != 0 ||
+	    copy_to_user(&ce->counters, &counters[i],
+	    sizeof(counters[i])) != 0)
 		return -EFAULT;
 
 	*dstptr += sizeof(struct compat_ipt_entry);
