@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7d084e4_f05ae70f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-04T18:22:17Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Commit needs to contain a properly formatted Bug: or Fixes: line.\n\nPlease refer ...\n\nCommit needs to contain a properly formatted Bug: or Fixes: line.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "c8f5414a7ce25b82478ba59a23c4f7bdccbd2f67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f09e4e09_4acc6229",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-04T18:22:17Z",
+      "side": 1,
+      "message": "You also need to update the STG ABI file as part of this commit.",
+      "revId": "c8f5414a7ce25b82478ba59a23c4f7bdccbd2f67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
