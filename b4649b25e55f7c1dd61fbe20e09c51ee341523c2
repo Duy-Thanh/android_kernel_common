@@ -16,6 +16,24 @@
       "message": "This is selecting a bunch of configs that weren\u0027t before...do you have a sense for how much this impacts the kernel\u0027s memory footprint?",
       "revId": "b4649b25e55f7c1dd61fbe20e09c51ee341523c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36112e1a_d6a1dddc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1898165
+      },
+      "writtenOn": "2026-09-04T10:37:42Z",
+      "side": 1,
+      "message": "I treid to compare vmlinux with and without the patch and I got almost no change\n```\n./common/scripts/bloat-o-meter dist-old/vmlinux dist-new/vmlinux\nadd/remove: 0/0 grow/shrink: 2/0 up/down: 48/0 (48)\nFunction                                     old     new   delta\nkernel_config_data                         50501   50547     +46\nkernel_config_data_end                        11      13      +2\nTotal: Before\u003d147573952589734006663, After\u003d147573952589734006711, chg +0.00%\n```",
+      "parentUuid": "080021ca_e26cfd2c",
+      "revId": "b4649b25e55f7c1dd61fbe20e09c51ee341523c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
