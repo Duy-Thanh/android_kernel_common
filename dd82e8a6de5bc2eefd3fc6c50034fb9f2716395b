@@ -211,6 +211,30 @@
       },
       "revId": "dd82e8a6de5bc2eefd3fc6c50034fb9f2716395b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6749456_b5090e79",
+        "filename": "rust/kernel/anon_inodes.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-04T11:15:59Z",
+      "side": 1,
+      "message": "Sorry, I should\u0027ve been clearer, yes, this type is called a \"Ptr\" but it\u0027s declared as\n\ntype Ptr: ForeignOwnable + Send + Sync;\n\nSo it starts out its live as some kind of Pin\u003c\u0026Foo\u003e or Pin\u003cBox\u003cFoo\u003e\u003e or something like that, in other words, a rust object, not a \"pointer\" pointer. It\u0027s then converted to a ffi::c_void, i.e. a void* by converting it using into_foreign(), it\u0027s not technically guaranteed to be non-null, but it\u0027s guaranteed that calling ForeignOwnable::borrow or ForeignOwnable::from_foreign will retrieve the original \"Ptr\" object again.\nI don\u0027t believe there\u0027s any NULL checking to do here.\n\nIf anything I should probably get rid of the NULL check I added in `release`...",
+      "parentUuid": "2ef03246_c80aae33",
+      "range": {
+        "startLine": 275,
+        "startChar": 0,
+        "endLine": 275,
+        "endChar": 16
+      },
+      "revId": "dd82e8a6de5bc2eefd3fc6c50034fb9f2716395b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
