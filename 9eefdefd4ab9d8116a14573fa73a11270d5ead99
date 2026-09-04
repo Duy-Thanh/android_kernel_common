@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f743a044_4c4c4318",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-04T18:14:50Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Commit needs to contain a properly formatted Bug: or Fixes: line.\n\nPlease refer ...\n\nCommit needs to contain a properly formatted Bug: or Fixes: line.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "9eefdefd4ab9d8116a14573fa73a11270d5ead99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95a8de5d_658a2057",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1122,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-04T18:14:50Z",
+      "side": 1,
+      "message": "I think we should do `list_del()` after this and before `kfree()`, since that poisons the next and prev pointers. Otherwise, if this gets freed, and reallocated, and used without initialization, it could point to valid memory.",
+      "revId": "9eefdefd4ab9d8116a14573fa73a11270d5ead99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10a61db8_e5ddc335",
+        "filename": "include/linux/wrapfd.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-04T18:14:50Z",
+      "side": 1,
+      "message": "Now that we\u0027re passing back the `listener` handle, should we include a note that after the `on_content_release()` callback is invoked, the handle is invalid (since we free it), so perhaps as part of `on_content_release()`, they should clear their references to the handle, since it\u0027ll be a dangling pointer?",
+      "range": {
+        "startLine": 66,
+        "startChar": 31,
+        "endLine": 66,
+        "endChar": 69
+      },
+      "revId": "9eefdefd4ab9d8116a14573fa73a11270d5ead99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53585b79_ecba4f8b",
+        "filename": "include/linux/wrapfd.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-04T18:14:50Z",
+      "side": 1,
+      "message": "nit: `phandle` is also used in the kernel to refer to device nodes in a devicetree. Maybe we can call this `ret_handle` or something to that effect?",
+      "range": {
+        "startLine": 72,
+        "startChar": 3,
+        "endLine": 72,
+        "endChar": 73
+      },
+      "revId": "9eefdefd4ab9d8116a14573fa73a11270d5ead99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "938ce5ec_99517614",
+        "filename": "include/linux/wrapfd.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-04T18:14:50Z",
+      "side": 1,
+      "message": "The semi-colon at the end shouldn\u0027t be there.",
+      "revId": "9eefdefd4ab9d8116a14573fa73a11270d5ead99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
