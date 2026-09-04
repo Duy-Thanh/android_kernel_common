@@ -33,6 +33,23 @@
       "message": "IssueTracker: https://issuetracker.google.com/issues/556290471",
       "revId": "021a05049c3049e33d6057c909d3182ab4b89481",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db596814_5073cd13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2026-09-04T01:49:28Z",
+      "side": 1,
+      "message": "Could you please help check why Presubmit-Verified is -1? I don\u0027t have permission to view it. Thank you.",
+      "revId": "021a05049c3049e33d6057c909d3182ab4b89481",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
