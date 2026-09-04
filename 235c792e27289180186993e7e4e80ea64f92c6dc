@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27acd325_3ced2f08",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-09-04T16:52:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c564c503_21dfb6aa",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 51
+      },
+      "revId": "235c792e27289180186993e7e4e80ea64f92c6dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e327003e_38cc68b5",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-09-01T19:58:56Z",
       "side": 1,
       "message": "Having `param` as a key imposes a restriction that two listeners cannot share the same `param.` I\u0027m not sure if there would ever be such a scenario, but should we instead return an opaque pointer to the listener structure we allocated in `wrapfd_add_listener()` and just take that in `wrapfd_del_listener()`?\n\nThat also has the advantage of saving us an O(n) search through the listeners list.",
+      "range": {
+        "startLine": 1526,
+        "startChar": 0,
+        "endLine": 1526,
+        "endChar": 33
+      },
+      "revId": "235c792e27289180186993e7e4e80ea64f92c6dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9407bb2_1d38b3bf",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1526,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-09-04T16:52:54Z",
+      "side": 1,
+      "message": "Ack on the first point but using the opaque pointer as a listener without actually verifying its validity sounds risky to me. I prefer to conduct this O(n) search to confirm it\u0027s a valid listener and only then remove it.",
+      "parentUuid": "e327003e_38cc68b5",
       "range": {
         "startLine": 1526,
         "startChar": 0,
@@ -88,6 +136,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0372cd9f_fdd6fa88",
+        "filename": "include/linux/wrapfd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-09-04T16:52:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ebc7335_8ba4dc75",
+      "range": {
+        "startLine": 66,
+        "startChar": 26,
+        "endLine": 66,
+        "endChar": 30
+      },
+      "revId": "235c792e27289180186993e7e4e80ea64f92c6dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "551d090d_3049e679",
@@ -125,6 +197,30 @@
           ]
         }
       ],
+      "revId": "235c792e27289180186993e7e4e80ea64f92c6dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8aa5e1d_0fa4c1e4",
+        "filename": "include/linux/wrapfd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-09-04T16:52:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "551d090d_3049e679",
+      "range": {
+        "startLine": 70,
+        "startChar": 15,
+        "endLine": 70,
+        "endChar": 23
+      },
       "revId": "235c792e27289180186993e7e4e80ea64f92c6dc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
