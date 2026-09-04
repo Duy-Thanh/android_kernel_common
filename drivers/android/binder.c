@@ -1839,7 +1839,30 @@ static void binder_txn_latency_free(struct binder_transaction *t)
 
 static void binder_free_transaction(struct binder_transaction *t)
 {
+<<<<<<< PATCH SET (51728c91a2a42204e20433c7f53d2ba016c6f07d Revert "UPSTREAM: binder: fix UAF in binder_free_transaction)
+	struct binder_proc *target_proc;
+
+	spin_lock(&t->lock);
+	target_proc = t->to_proc;
+	spin_unlock(&t->lock);
+||||||| BASE      (fb04ae8c677c68133ee5458e0fae5aabfa17e99a Revert "FROMLIST: firmware: arm_ffa: Fix out-of-bound writes)
+	struct binder_thread *target_thread;
+	struct binder_proc *target_proc;
+
+	spin_lock(&t->lock);
+	target_proc = t->to_proc;
+	target_thread = t->to_thread;
+	/*
+	 * Pin target_thread to keep target_proc alive. Undelivered
+	 * transactions with !target_thread are safe, as target_proc
+	 * can only be the current context there.
+	 */
+	if (target_thread)
+		atomic_inc(&target_thread->tmp_ref);
+	spin_unlock(&t->lock);
+=======
 	struct binder_proc *target_proc = t->to_proc;
+>>>>>>> BASE      (ec8e3e2c714552fb6a0da8f727f743151c00efe7 Revert "ANDROID: dm-bow: Fix Use-After-free in dm_bow_dtr()")
 
 	trace_android_vh_free_oem_binder_struct(t);
 	if (target_proc) {
