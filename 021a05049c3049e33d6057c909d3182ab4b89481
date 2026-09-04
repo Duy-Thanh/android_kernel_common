@@ -68,6 +68,24 @@
       "parentUuid": "db596814_5073cd13",
       "revId": "021a05049c3049e33d6057c909d3182ab4b89481",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4b14818_ee68cc8f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2026-09-04T02:55:57Z",
+      "side": 1,
+      "message": "hello John,\n\nThere\u0027s still 1 failure. Is it because the commit message doesn\u0027t comply with the cherry-pick specification? Since I\u0027ve only submitted respins before, I\u0027m not familiar with the specific rules. Could you please help me check? Thank you.\n\nBRs,\nZhipeng",
+      "parentUuid": "1d738552_b227112d",
+      "revId": "021a05049c3049e33d6057c909d3182ab4b89481",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
