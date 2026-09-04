@@ -46,6 +46,30 @@
       },
       "revId": "07ded410055a125a2572ed3498b5d518cf275a83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ec58c68_73fd2dc0",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1898956
+      },
+      "writtenOn": "2026-09-04T06:52:31Z",
+      "side": 1,
+      "message": "Maheshwar, this was not a part of the original change in 6.18. Such modification should be done in a separate changes as follow-up if actually needed. Also accessing this symbol from modules other then early pKVM vendor modules should cause trap and panic...",
+      "parentUuid": "95a2befb_dee80474",
+      "range": {
+        "startLine": 324,
+        "startChar": 0,
+        "endLine": 324,
+        "endChar": 57
+      },
+      "revId": "07ded410055a125a2572ed3498b5d518cf275a83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
