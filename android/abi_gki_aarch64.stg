@@ -267839,6 +267839,12 @@ function {
   parameter_id: 0x4585663f
 }
 function {
+  id: 0x11deb671
+  return_type_id: 0x48b5725f
+  parameter_id: 0x054f691a
+  parameter_id: 0x054f691a
+}
+function {
   id: 0x11e015cb
   return_type_id: 0x48b5725f
   parameter_id: 0x0665e6b6
@@ -355641,6 +355647,15 @@ elf_symbol {
   full_name: "rtnl_is_locked"
 }
 elf_symbol {
+  id: 0x730105d4
+  name: "rtnl_kfree_skbs"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x41ca1269
+  type_id: 0x11deb671
+  full_name: "rtnl_kfree_skbs"
+}
+elf_symbol {
   id: 0x8c0dd14a
   name: "rtnl_link_register"
   is_defined: true
@@ -376377,6 +376392,7 @@ interface {
   symbol_id: 0x5c1197ba
   symbol_id: 0x22e1072c
   symbol_id: 0x50b92bc4
+  symbol_id: 0x730105d4
   symbol_id: 0x8c0dd14a
   symbol_id: 0x3480e8df
   symbol_id: 0x0bf91812

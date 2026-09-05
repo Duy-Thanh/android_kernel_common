@@ -62,6 +62,7 @@
   remove_proc_subtree
   rtc_read_alarm
   rtc_set_alarm
+  rtnl_kfree_skbs
   sdio_memcpy_fromio
   sdio_memcpy_toio
   sdio_set_block_size
