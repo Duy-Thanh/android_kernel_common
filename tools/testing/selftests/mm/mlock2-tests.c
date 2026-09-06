@@ -11,6 +11,11 @@
 #include "kselftest.h"
 #include "mlock2.h"
 
+/* TODO(b/557760113): remove when bionic header is updated */
+#if defined(__ANDROID__) && !defined(MAP_DROPPABLE)
+#define MAP_DROPPABLE 0x08
+#endif
+
 struct vm_boundaries {
 	unsigned long start;
 	unsigned long end;
