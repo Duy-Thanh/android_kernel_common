@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "817a34d5_9f3eefd4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-09-06T01:39:12Z",
+      "side": 1,
+      "message": "I just stumbled into this commit by chance while rebasing a merge....\n\nI don\u0027t understand what the intention is as DRM_DISPLAY_HELPER is a pretty hard dependency for these configs... \n```\n    drm_display_helper-$(CONFIG_DRM_BRIDGE_CONNECTOR) +\u003d drm_bridge_connector.o\n    drm_display_helper-$(CONFIG_DRM_DISPLAY_DP_HELPER) +\u003d drm_dp_helper.o\n    ...\n    obj-$(CONFIG_DRM_DISPLAY_HELPER) +\u003d drm_display_helper.o\n```\n\nI don\u0027t see any odd `#ifdef` built-in code that would be missing otherwise with this patch either so I\u0027m a bit confused. Could you explain what the goal of this change is?\n\nSee, I\u0027ve always been concerned about the usage of this file. I think it is pretty hacky to skip all the dependencies that are set by upstream and just forcefully enable these nested configs.",
+      "revId": "2837d873ec71152d7599676357d34f94764f061b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
