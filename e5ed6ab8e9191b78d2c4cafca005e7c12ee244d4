@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "448bbe67_ae4a5d05",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-09-07T11:29:48Z",
+      "side": 1,
+      "message": "My bad: aosp/4248642 doesn\u0027t really fix the issue (I thought it did because a few test iterations passed (I was \"lucky\" that during those tests timer irq didn\u0027t hit in vulnerable window between irq enabled and switch to x2apic phys) but when repeated many times I hit the issue again).\n\nSo this patch is still needed.\n\nAbove I wrote:\n\n\u003e Nevertheless, setting x2apic_phys would actually work since x86_64_probe_apic called during late probe in time_init will use it and this happens indeed before the interrupts are enabled.\n\nand this was my mistake: `time_init`, only assigns `x86_late_time_init` (which finally calls `x86_64_probe_apic`) as   `late_time_init`. But `late_time_init` is actually called after `local_irq_enable` (see: `start_kernel`).\n\nI\u0027ve updated the commit log a bit and rebased. I think we indeed should try to upstream it (after removing ANDROID specific commit log details).",
+      "parentUuid": "76f458d0_70fe718b",
+      "revId": "e5ed6ab8e9191b78d2c4cafca005e7c12ee244d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7f9e8ab0_33491010",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -121,6 +139,24 @@
       "side": 1,
       "message": "\u003e For APIC MMIO, the kernel uses raw inline assembly\n\nAh, I see. So we\u0027d just need to use the hypercall there as well. (I\u0027m not suggesting to do that, of course.)\n\n\u003e AFAIU before that patch we also used x2APIC mode but it was done differently via host triggering __pkvm__set_virtual_apic_mode, which was then hardened by: aosp/3982020 and aosp/3982019\n\nAh, indeed. I was just recalling I saw Linux pVMs doing a few APIC MMIO accesses during early boot before enabling x2APIC. Probably that was really long ago, even before pvVMCS...\n\n...So just a note: the comments in Chuanxiao\u0027s aosp/3982019 about \"emulating xapic mode will require the host to decode MMIO instruction\" seem a bit misleading: if we really wanted to support xapic, we would just need to let pVMs use the PKVM_GHC_IOREAD/PKVM_GHC_IOWRITE hypercalls for it?",
       "parentUuid": "66c4e44c_f58e6d94",
+      "revId": "e5ed6ab8e9191b78d2c4cafca005e7c12ee244d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1a7c848_1b22b8a5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-09-07T11:29:48Z",
+      "side": 1,
+      "message": "\u003e ...So just a note: the comments in Chuanxiao\u0027s aosp/3982019 about \"emulating xapic mode will require the host to decode MMIO instruction\" seem a bit misleading: if we really wanted to support xapic, we would just need to let pVMs use the PKVM_GHC_IOREAD/PKVM_GHC_IOWRITE hypercalls for it?\n\nYeah, seems so. Just to be clear: you only pointing to the comment being a bit misleading nothing else, right?",
+      "parentUuid": "7f548f37_1f5c915c",
       "revId": "e5ed6ab8e9191b78d2c4cafca005e7c12ee244d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
