@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3933f6cc_310aeb2d",
+        "filename": "arch/x86/kvm/pkvm/gsmi.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-09-07T20:36:32Z",
+      "side": 1,
+      "message": "Is this a TOCTOU here? There would be a small window where host would be able to change `sel-\u003edata_ptr` after `pkvm_host_share_hyp` succeeds but before we assign to `type1`? We should probably memcpy sel and type1 before validating them I guess.\n\nBTW, just a thought. Would it be better to have an api `pkvm_copy_{to,from}_host` that does the same checks in `pkvm_host_share_hyp` and does the copy with host mmu lock held so that we could use it here and avoid unshare at the end? I wanted to implement that for hypercall parameters to overcome the limitation of 10 params for hypercalls(and the complexity in supporting upto 10 parameters)",
+      "fixSuggestions": [
+        {
+          "fixId": "5cb21787_353d0953",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/gsmi.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\t\tu64 data_ptr;\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/gsmi.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\t\tbounce_sel \u003d \u0026this_cpu_read(bounce_ptr)-\u003eset_eventlog;\n\t\tmemcpy(bounce_sel, sel, sizeof(*sel));\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/gsmi.c",
+              "range": {
+                "startLine": 73,
+                "startChar": 0,
+                "endLine": 74,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (bounce_sel-\u003etype !\u003d 1) {\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/gsmi.c",
+              "range": {
+                "startLine": 78,
+                "startChar": 0,
+                "endLine": 79,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (!bounce_sel-\u003edata_ptr || bounce_sel-\u003edata_len !\u003d sizeof(*type1))\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/gsmi.c",
+              "range": {
+                "startLine": 81,
+                "startChar": 0,
+                "endLine": 82,
+                "endChar": 0
+              },
+              "replacement": "\t\tdata_ptr \u003d bounce_sel-\u003edata_ptr;\n\n\t\tif (pkvm_host_share_hyp(data_ptr, sizeof(*type1)))\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/gsmi.c",
+              "range": {
+                "startLine": 84,
+                "startChar": 0,
+                "endLine": 85,
+                "endChar": 0
+              },
+              "replacement": "\t\ttype1 \u003d __pkvm_va(data_ptr);\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/gsmi.c",
+              "range": {
+                "startLine": 86,
+                "startChar": 0,
+                "endLine": 87,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/gsmi.c",
+              "range": {
+                "startLine": 89,
+                "startChar": 0,
+                "endLine": 90,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/gsmi.c",
+              "range": {
+                "startLine": 95,
+                "startChar": 0,
+                "endLine": 96,
+                "endChar": 0
+              },
+              "replacement": "\t\tpkvm_host_unshare_hyp(data_ptr, sizeof(*type1));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4930933f964dfd7608a24a6b483fe396c2619203",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
