@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4313e531_03faa6b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1865564
+      },
+      "writtenOn": "2026-09-07T07:42:57Z",
+      "side": 1,
+      "message": "For boards without supporting pretimeout, it will be a NOP.",
+      "revId": "36d5890ab5474ba2205f70a7a7732b6539f09b91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
