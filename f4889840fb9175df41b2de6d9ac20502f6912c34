@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33a4ad46_d533fcea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-09-07T16:04:52Z",
+      "side": 1,
+      "message": "Please note that I moved the development of these patches to aosp/4265682. These patches are still here because we use them to build an image for our NPU Manager demo. When reviewing, please look into the new patchset.",
+      "revId": "f4889840fb9175df41b2de6d9ac20502f6912c34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23593683_9633fcca",
@@ -363,6 +380,30 @@
       "writtenOn": "2026-09-02T10:22:59Z",
       "side": 1,
       "message": "Why are we inventing our own listener abstraction? Could this just be a generic `wait_queue_head_t` that drivers can register themselves with? Or do we expect this vtable to get more operations in the future?",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 2
+      },
+      "revId": "f4889840fb9175df41b2de6d9ac20502f6912c34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5667100a_f51e5991",
+        "filename": "include/linux/wrapfd.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-09-07T16:04:52Z",
+      "side": 1,
+      "message": "This callback has to be synchronous (wrapfd calls it, waits until the TPU driver unmaps the buffer and then frees it), so I don\u0027t think waitqueue works well for this case as it would require some kind of a handshake. A callback like it\u0027s implemented now is straight forward and simple, so I think it makes sense in this context.",
+      "parentUuid": "3fc4027a_39eea538",
       "range": {
         "startLine": 15,
         "startChar": 0,
