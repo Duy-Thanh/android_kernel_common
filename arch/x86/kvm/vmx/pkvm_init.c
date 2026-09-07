@@ -1306,6 +1306,13 @@ static void do_pkvm_hyp_init(void *data)
 			.prot	= pgprot_val(PAGE_KERNEL),
 		},
 		{
+			.type	= PKVM_RESERVED_USED_MEMORY,
+			.va	= (unsigned long)__va(pkvm_mem32_base),
+			.pa	= pkvm_mem32_base,
+			.size	= pkvm_mem32_size,
+			.prot	= pgprot_val(PAGE_KERNEL),
+		},
+		{
 			.type	= PKVM_TEXT_DATA,
 			.va	= (unsigned long)pkvm_sym(text_start),
 			.pa	= __pa_symbol(pkvm_sym(text_start)),
