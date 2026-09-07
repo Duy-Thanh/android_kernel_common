@@ -174,6 +174,21 @@ static int kvm_iommu_snapshot_host_stage2(struct kvm_iommu_ops *ops)
 	return ret;
 }
 
+int kvm_iommu_init_atomic_pool(struct kvm_hyp_memcache *atomic_mc)
+{
+	int ret;
+
+	/* Can not use this HVC with kvm-arm.hyp_iommu_pages != 0*/
+	if (iommu_pages_pool_atomic.max_order)
+		return -EINVAL;
+
+	ret = hyp_pool_init_empty(&iommu_pages_pool_atomic, 1024 /* order = 10*/);
+	if (ret)
+		return ret;
+
+	return refill_hyp_pool(&iommu_pages_pool_atomic, atomic_mc);
+}
+
 int kvm_iommu_init(void *pool_base, size_t nr_pages)
 {
 	int ret;
