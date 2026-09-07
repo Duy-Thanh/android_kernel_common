@@ -16,6 +16,24 @@
       "message": "Putting this on hold until the submitter responds to the queries in the bug.\n\nFWIW, I had the same queries.",
       "revId": "1dc1d20016777e4ee56f2b817d306c0232868f66",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fea385e_603c9cb5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4972211
+      },
+      "writtenOn": "2026-09-07T09:40:56Z",
+      "side": 1,
+      "message": "Porting what are all missing changes from Linux-next ACK 6.12 and 6.18 branches.\nFor I2C, SPI and UART along with dependencies.",
+      "parentUuid": "2cc62d7b_ba5a656b",
+      "revId": "1dc1d20016777e4ee56f2b817d306c0232868f66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
