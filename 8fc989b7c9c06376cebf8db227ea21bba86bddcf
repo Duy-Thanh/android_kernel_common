@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "859504f5_074249cb",
+        "filename": "arch/x86/kvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-09-07T22:23:01Z",
+      "side": 1,
+      "message": "If so, shouldn\u0027t we also `memblock_phys_free()` to not leak memory from the previous memblock_phys_alloc()?",
+      "range": {
+        "startLine": 101,
+        "startChar": 2,
+        "endLine": 101,
+        "endChar": 64
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "7991fced_cf63d525",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\t\tmemblock_phys_free(pkvm_mem_base, pkvm_mem_size);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8fc989b7c9c06376cebf8db227ea21bba86bddcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
