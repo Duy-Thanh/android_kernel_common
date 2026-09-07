@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca8447dd_fc8b77b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-09-07T07:58:04Z",
+      "side": 1,
+      "message": "android14-6.1 has no AVF presubmit, so I kicked an ABTD run of the AVF test group on a physical Pixel 8 against this change: 216 tests reached a verdict, 0 failures. 112 of them are protected-VM cases, so the pvmfw path is exercised on hardware, which our QEMU rig can\u0027t do on this branch.\n\nThe run\u0027s top-line status says failed, and that part isn\u0027t pKVM. It\u0027s a single module error from a keymint VTS binary, VtsHalRemotelyProvisionedComponentTargetTest, which fails to link on the device.\n\nI ran the same target on the branch\u0027s latest green build with no change applied. It gives the identical 216 tests, 0 failures and the same module error, so this is a comparison rather than a bare green run.\n\nThis change: go/forrest-run/L73500030181192746\nBaseline: go/forrest-run/L71000030180205531",
+      "revId": "cae699c47bff5632a199a5768f8a43075502b368",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
