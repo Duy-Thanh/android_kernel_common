@@ -22,6 +22,30 @@
       },
       "revId": "7c318632fe945a1d34cb3e785ddb3733b1a3307d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "644c4ce6_575d37ea",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-09-07T06:56:07Z",
+      "side": 1,
+      "message": "I can use scoped_cond_guard() but it will need to wrap all the block, and I saw some similar usages (ACQUIRE() + ACQUIRE_ERR()) in other kernel sources, so I changed to ACQUIRE() pattern.\nDo you have suggested patterns?",
+      "parentUuid": "44488a5c_d8886fd4",
+      "range": {
+        "startLine": 190,
+        "startChar": 0,
+        "endLine": 191,
+        "endChar": 41
+      },
+      "revId": "7c318632fe945a1d34cb3e785ddb3733b1a3307d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
