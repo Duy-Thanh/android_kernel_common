@@ -40,6 +40,30 @@
       ],
       "revId": "8fc989b7c9c06376cebf8db227ea21bba86bddcf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "617232bb_bfb9a2c5",
+        "filename": "arch/x86/kvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-09-07T22:33:16Z",
+      "side": 1,
+      "message": "Indeed. Somehow that didn\u0027t occur to me...",
+      "parentUuid": "859504f5_074249cb",
+      "range": {
+        "startLine": 101,
+        "startChar": 2,
+        "endLine": 101,
+        "endChar": 64
+      },
+      "revId": "8fc989b7c9c06376cebf8db227ea21bba86bddcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
