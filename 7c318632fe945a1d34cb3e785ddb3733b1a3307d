@@ -46,6 +46,30 @@
       },
       "revId": "7c318632fe945a1d34cb3e785ddb3733b1a3307d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f62601d1_96936f20",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 3489357
+      },
+      "writtenOn": "2026-09-07T06:59:42Z",
+      "side": 1,
+      "message": "Oh, no need to change anything. My comment was merely about kernel API. That ACQUIRE() + ACQUIRE_ERR() is how upstream does it, it just looks a bit weird. Why couldn\u0027t they just have ACQUIRE_TRY(lock), for instance, and check the underlying try_lock status. Just a side note.",
+      "parentUuid": "644c4ce6_575d37ea",
+      "range": {
+        "startLine": 190,
+        "startChar": 0,
+        "endLine": 191,
+        "endChar": 41
+      },
+      "revId": "7c318632fe945a1d34cb3e785ddb3733b1a3307d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
