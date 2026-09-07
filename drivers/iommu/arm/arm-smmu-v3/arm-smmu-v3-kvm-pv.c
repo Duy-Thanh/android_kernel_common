@@ -40,24 +40,6 @@ int kvm_nvhe_sym(smmu_init_hyp_module)(const struct pkvm_module_ops *ops);
 	((typeof(kvm_nvhe_sym(x)) *)(kern_hyp_va(lm_alias(&kvm_nvhe_sym(x)))))
 #endif
 
-static size_t smmu_hyp_pgt_pages(void)
-{
-	/*
-	 * SMMUv3 uses the same format as stage-2 and hence have the same memory
-	 * requirements, we add extra 500 pages for L2 ste.
-	 * For modules, we can't use host_s2_pgtable_pages(), so we return 1 page,
-	 * and rely on the vendor passing the right commandline arg.
-	 */
-	if (of_find_compatible_node(NULL, NULL, "arm,smmu-v3")) {
-#ifdef MODULE
-		return 1;
-#else
-		return host_s2_pgtable_pages() + 500;
-#endif
-	}
-	return 0;
-}
-
 struct host_arm_smmu_device {
 	struct arm_smmu_device		smmu;
 	pkvm_handle_t			id;
@@ -571,6 +553,25 @@ static irqreturn_t kvm_arm_smmu_pri_handler(int irq, void *dev)
 	return IRQ_HANDLED;
 }
 
+static int smmu_alloc_atomic_mc(void)
+{
+	int ret;
+	int atomic_pages = 10000;
+	struct kvm_hyp_memcache atomic_mc;
+
+	init_hyp_memcache(&atomic_mc);
+	/* For PGD*/
+	ret = topup_hyp_memcache(&atomic_mc, 1, 3);
+	if (ret)
+		return ret;
+	ret = topup_hyp_memcache(&atomic_mc, atomic_pages, 0);
+	if (ret)
+		return ret;
+	pr_info("smmuv3: Allocated %d MiB for atomic usage\n",
+		(atomic_pages << PAGE_SHIFT) / SZ_1M);
+	return kvm_iommu_init_atomic_pool(&atomic_mc);
+}
+
 static int kvm_arm_smmu_device_reset(struct host_arm_smmu_device *host_smmu)
 {
 	int ret;
@@ -860,6 +861,11 @@ static int kvm_arm_smmu_v3_init_drv(void)
 		goto err_free;
 	}
 #endif
+
+	ret = smmu_alloc_atomic_mc();
+	if (ret)
+		goto err_free;
+
 	/*
 	 * These variables are stored in the nVHE image, and won't be accessible
 	 * after KVM initialization. Ownership of kvm_arm_smmu_array will be
@@ -943,9 +949,10 @@ static int kvm_arm_smmu_v3_register(void)
 	if (ret || !kvm_arm_smmu_count)
 		return ret;
 
-	ret = kvm_iommu_register_driver(&kvm_smmu_v3_ops, smmu_hyp_pgt_pages());
+	ret = kvm_iommu_register_driver(&kvm_smmu_v3_ops, 0);
 	if (ret)
 		kvm_arm_smmu_array_free();
+
 	return ret;
 };
 
