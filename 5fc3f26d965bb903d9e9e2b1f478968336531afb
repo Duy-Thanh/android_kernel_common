@@ -193,6 +193,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c7c3e637_db29d75b",
+        "filename": "drivers/hid/hid-logitech-hidpp.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 4831,
+      "author": {
+        "id": 3541841
+      },
+      "writtenOn": "2026-09-07T17:54:53Z",
+      "side": 1,
+      "message": "Apologies for the confusion caused by using the term \"mode\". The peripheral firmware does not define named \"modes\" or individual per-OS states. \n\nUnder the HID++ 2.0 Multi-Platform specification (feature 0x4531), the peripheral exposes a table of \"platform descriptors\". Each row consists solely of an index and a 16-bit bitmask (`osMask`) indicating which operating systems that descriptor is designed for. \n\nWhen userspace writes an OS name to `/sys/bus/hid/drivers/logitech-hidpp-device/\u003cdev\u003e/platform`, the driver finds the descriptor that has that OS bit set in its `osMask` and instructs the device to switch to that descriptor index:\n- If the requested OS is not supported by any descriptor on the peripheral, `write()` fails with `-EOPNOTSUPP`.\n- If the write succeeds, the peripheral activates that descriptor.\n\nThe peripheral does not record which specific OS name was requested; it only stores the active descriptor index. Because a single descriptor often covers multiple operating systems with identical key behaviors (for instance, Apple layouts share the same descriptor for both iOS and macOS), the peripheral is functionally configured for all of those operating systems simultaneously.\n\n### How Userspace Knows\nUserspace verifies the configuration by checking if its target platform is present in the output of `.../platform`:\n\n1. Default read on connect/boot:\n```\n   $ cat /sys/bus/hid/drivers/logitech-hidpp-device/\u003cdev\u003e/platform\n   windows\n```\n2. Userspace configures iOS:\n```\n   $ echo \"ios\" \u003e /sys/bus/hid/drivers/logitech-hidpp-device/\u003cdev\u003e/platform\n```\n3. Userspace verifies the setting:\n```\n   $ cat /sys/bus/hid/drivers/logitech-hidpp-device/\u003cdev\u003e/platform\n   ios macos\n```\n\nBecause the descriptor\u0027s `osMask` covers both iOS and macOS, userspace sees that `ios` is active.\n\n### Why We Cannot Report a Single OS Name or Index\n- **Stateless hardware query**: On connect, device probe, or when switching OSes via Easy-Switch buttons/keys on the peripheral, the driver queries the device (`GET_CURRENT_PLATFORM`), which only returns the active descriptor index. If that descriptor covers `BIT(IOS) | BIT(MACOS)`, the driver cannot know whether the user originally targeted iOS or macOS. Arbitrarily returning just one would be simple but can falsely indicate that the other OS is not supported.\n- **Indices are arbitrary**: The descriptor indices (e.g. index 0, 1, 2) are device- and firmware-dependent and can change between firmware updates, so exposing the raw index would not provide a stable or meaningful ABI to userspace.\n\nPrinting all platform names covered by the active descriptor\u0027s `osMask` provides userspace with an exact, truthful reflection of the hardware\u0027s supported configuration.",
+      "parentUuid": "1208010a_8d38ff0a",
+      "range": {
+        "startLine": 4831,
+        "startChar": 0,
+        "endLine": 4831,
+        "endChar": 62
+      },
+      "revId": "5fc3f26d965bb903d9e9e2b1f478968336531afb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "786ddd8b_c4d080b0",
         "filename": "drivers/hid/hid-logitech-hidpp.c",
         "patchSetId": 3
