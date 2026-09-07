@@ -33,6 +33,24 @@
       "message": "hello all,\n\nCould you please help look into the reason for the Presubmit-Verified -1? We hope these patches can be merged into android17-6.18-2026-09. This is very important to us. Thank you very much.\n\n\nBRs,\nZhipeng",
       "revId": "1d8e55b12958a6ddfaf1c7dabfa1366a728fae4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1d5d785_e021fa38",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-09-07T12:55:23Z",
+      "side": 1,
+      "message": "The respin bug is missing from the commit message",
+      "parentUuid": "bf51bde1_4570f8a7",
+      "revId": "1d8e55b12958a6ddfaf1c7dabfa1366a728fae4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
