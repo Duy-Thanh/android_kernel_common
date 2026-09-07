@@ -163,6 +163,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c5adc05d_63b0772b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-09-07T17:55:39Z",
+      "side": 1,
+      "message": "If I recall correctly, right, nothing else. :)",
+      "parentUuid": "d1a7c848_1b22b8a5",
+      "revId": "e5ed6ab8e9191b78d2c4cafca005e7c12ee244d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6e3c482f_a320f575",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
