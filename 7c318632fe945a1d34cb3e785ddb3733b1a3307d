@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44488a5c_d8886fd4",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 3489357
+      },
+      "writtenOn": "2026-09-07T05:02:58Z",
+      "side": 1,
+      "message": "Not something that your patch adds, just a side note: that ACQUIRE() followed by ACQUIRE_ERR() is a strange semantics.",
+      "range": {
+        "startLine": 190,
+        "startChar": 0,
+        "endLine": 191,
+        "endChar": 41
+      },
+      "revId": "7c318632fe945a1d34cb3e785ddb3733b1a3307d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
