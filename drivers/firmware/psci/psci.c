@@ -512,6 +512,14 @@ static int psci_system_suspend(unsigned long unused)
 	int err;
 	phys_addr_t pa_cpu_resume = __pa_symbol(cpu_resume);
 
+	/* Marker: S3 Entry Start */
+	trace_printk("PSCI: S3 entry start, invoking TF-A SYSTEM_SUSPEND\n");
+	/*
+	 * [S3 Entry Start Marker]
+	 * Placeholder for GPIO trigger register write:
+	 * writel(GPIO_TRIGGER_VAL, GPIO_REG);
+	 */
+
 	err = invoke_psci_fn(PSCI_FN_NATIVE(1_0, SYSTEM_SUSPEND),
 			      pa_cpu_resume, 0, 0);
 	return psci_to_linux_errno(err);
@@ -519,7 +527,20 @@ static int psci_system_suspend(unsigned long unused)
 
 static int psci_system_suspend_enter(suspend_state_t state)
 {
-	return cpu_suspend(0, psci_system_suspend);
+	int ret;
+
+	trace_printk("PSCI: S3 entering psci_system_suspend_enter\n");
+	ret = cpu_suspend(0, psci_system_suspend);
+
+	/* Marker: S3 Exit End (resumed from TF-A via cpu_resume) */
+	trace_printk("PSCI: S3 exit end, returned from cpu_suspend, ret=%d\n", ret);
+	/*
+	 * [S3 Exit End Marker]
+	 * Placeholder for GPIO release register write:
+	 * writel(GPIO_RELEASE_VAL, GPIO_REG);
+	 */
+
+	return ret;
 }
 
 static const struct platform_suspend_ops psci_suspend_ops = {
