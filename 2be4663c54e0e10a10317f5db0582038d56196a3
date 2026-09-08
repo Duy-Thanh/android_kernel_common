@@ -112,6 +112,30 @@
       },
       "revId": "2be4663c54e0e10a10317f5db0582038d56196a3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b553339_12452754",
+        "filename": "arch/x86/kvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-09-08T13:18:45Z",
+      "side": 1,
+      "message": "Indeed, so probably not need to bother about it. Marking as resolved.",
+      "parentUuid": "9fcece94_3486cbef",
+      "range": {
+        "startLine": 369,
+        "startChar": 5,
+        "endLine": 369,
+        "endChar": 13
+      },
+      "revId": "2be4663c54e0e10a10317f5db0582038d56196a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
