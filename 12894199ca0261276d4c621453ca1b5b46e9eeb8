@@ -153,6 +153,29 @@
       "parentUuid": "15aceca6_28d7e61a",
       "revId": "12894199ca0261276d4c621453ca1b5b46e9eeb8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbfd0953_f36cf40c",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-09-08T20:15:42Z",
+      "side": 1,
+      "message": "Just wonder: Would it be safer to either drop non-GSMI writes or inject #GP instead of forwarding a raw outb() from hypervisor context? Similar as you did for size different than 1:\n```\n\t/*\n\t * For simplicity, only allow single-byte non-string accesses\n\t * to the SMI command port. This covers Linux kernel\u0027s needs.\n\t */\n\tif (size !\u003d 1 || string) {\n\t\tkvm_inject_gp(vcpu, 0);\n\t\treturn X86EMUL_UNHANDLEABLE;\n\t}\n```\n\nI am not sure if this is problematic but AFAIU (with AI help): whenever CPU enters SMM, the HW saves the registers (RSP,RBX,RCX etc) into the SMRAM save state area and in this case those would be hyp registers rather than the host vCPU registers and upon RSM, any return values or flags modified by the SMM handler are restored directly into the hyp\u0027s context rather than host vCPU one.\n\nif so, forwarding raw outb here may potentially harmful as malicious host could probably trigger outb with val !\u003d GSMI_CALLBACK to trigger SMM with hypervisor CPU state and overwrite it during RSM? WDYT?",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 19
+      },
+      "revId": "12894199ca0261276d4c621453ca1b5b46e9eeb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
