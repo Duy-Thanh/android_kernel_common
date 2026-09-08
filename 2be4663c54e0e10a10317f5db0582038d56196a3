@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2294761e_74532e46",
+        "filename": "arch/x86/kvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-09-08T11:52:15Z",
+      "side": 1,
+      "message": "Thinking loudly: in `drivers/firmware/google/gsmi.c` every inline asm with `outb` (except bogus command) uses \"b\" (ebx). Shouldn\u0027t we also set it to 0 here? (I mean see `gsmi_exec` for every `gsmi_dev.handshake_type`)",
+      "range": {
+        "startLine": 369,
+        "startChar": 5,
+        "endLine": 369,
+        "endChar": 13
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a0df4b78_ab8f57c2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\t\t  \"b\" (0),\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2be4663c54e0e10a10317f5db0582038d56196a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
