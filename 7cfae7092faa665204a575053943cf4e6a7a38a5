@@ -22,6 +22,30 @@
       },
       "revId": "7cfae7092faa665204a575053943cf4e6a7a38a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26450357_a66c03af",
+        "filename": "arch/x86/kvm/pkvm/gsmi.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-09-08T12:00:45Z",
+      "side": 1,
+      "message": "\u003e It should be okay to unshare the page soon after we copy it locally and it can avoid the goto.\n\nYep, but I think that wouldn\u0027t make any difference. The host\u0027s driver is not supposed to do anything else with this memory (donate it to a pVM or whatever) while making GSMI requests anyway.\n\n\u003e We could also maybe directly copy to the percpu variable instead of local variables to reduce the number of lines of code.\n\nI did that initially, but then realized that we would need a temporary variable for `sel-\u003edata_ptr` anyway, since we need to share and unshare memory at this host\u0027s data_ptr address, not at pKVM\u0027s `bounce_sel-\u003edata_ptr` address pointing to pKVM\u0027s memory.\n\nWell, we could get away without a temporary variable if we first assign `sel-\u003edata_ptr` to `bounce_sel-\u003edata_ptr`, then share, copy and unshare, and only after that change `bounce_sel-\u003edata_ptr` to pKVM\u0027s address. But IMHO my current version is still more readable than that.",
+      "parentUuid": "5a38515c_a9e68aa4",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 2
+      },
+      "revId": "7cfae7092faa665204a575053943cf4e6a7a38a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
