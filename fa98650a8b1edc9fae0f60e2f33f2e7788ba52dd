@@ -1,0 +1,68 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed852f22_19217092",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-09-08T10:24:59Z",
+      "side": 1,
+      "message": "nit: handshake",
+      "range": {
+        "startLine": 17,
+        "startChar": 12,
+        "endLine": 17,
+        "endChar": 20
+      },
+      "revId": "fa98650a8b1edc9fae0f60e2f33f2e7788ba52dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cf6dcad_6f1d6586",
+        "filename": "arch/x86/kvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-09-08T10:24:59Z",
+      "side": 1,
+      "message": "Just to understand: I see that drivers/firmware/google/gsmi.c uses GSMI_HANDSHAKE_SPIN during probe to overcome some issues when SMI are not kind of synchronous and added a spin loop. Do I correctly understand this commit log part \"So probe GSMI support during pKVM initialization, similarly to how the\nGSMI kernel driver in drivers/firmware/google/gsmi.c does that (though\na bit differently, as we require the GSMI_HANDSHAKE_NONE protocol, since\nthat is the hanshake protocol that is implemented by modern versions of\ncoreboot and thus relevant on modern Chromebook platforms).\" as: on our modern chips we do not have to use GSMI_HANDSHAKE_SPIN as GSMI_HANDSHAKE_NONE is guaranteed? If so perhaps adding comment here like:\n```\n\t/*\n\t * Modern versions of coreboot implement GSMI_HANDSHAKE_NONE,\n\t * as SMI execution is synchronous on modern Chromebook platforms,\n\t * meaning we do not have to use GSMI_HANDSHAKE_SPIN to poll for\n\t * completion.\n\t */\n```\nwould be helpful?",
+      "range": {
+        "startLine": 364,
+        "startChar": 0,
+        "endLine": 371,
+        "endChar": 4
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "eb2cb2e2_1d430c6b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * Modern versions of coreboot implement GSMI_HANDSHAKE_NONE,\n\t * as SMI execution is synchronous on modern Chromebook platforms,\n\t * meaning we do not have to use GSMI_HANDSHAKE_SPIN to poll for\n\t * completion.\n\t */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "fa98650a8b1edc9fae0f60e2f33f2e7788ba52dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
