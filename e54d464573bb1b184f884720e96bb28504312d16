@@ -34,6 +34,24 @@
       "parentUuid": "b880236a_8363aafa",
       "revId": "e54d464573bb1b184f884720e96bb28504312d16",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "289b4b29_77b85ff3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-09-08T18:57:21Z",
+      "side": 1,
+      "message": "This question should have been asked for aosp/4229258 then. This is fixing an upstream issue `e1696c8bd0056 (\"wifi: cfg80211: stop NAN and P2P in cfg80211_leave\")`. Why is the fix not being sent upstream? Can we get it upstream before it is needed for the android18-7.x branch?",
+      "parentUuid": "c6a0d4f6_d5a54113",
+      "revId": "e54d464573bb1b184f884720e96bb28504312d16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
