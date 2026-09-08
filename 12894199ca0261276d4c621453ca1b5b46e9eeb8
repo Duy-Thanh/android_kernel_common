@@ -200,6 +200,30 @@
       },
       "revId": "12894199ca0261276d4c621453ca1b5b46e9eeb8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fc35722_ecd96673",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-09-08T21:14:03Z",
+      "side": 1,
+      "message": "\u003e Would it be safer to either drop non-GSMI writes or inject #GP instead of forwarding a raw outb() from hypervisor context?\n\nI\u0027m not entirely sure that the host never ever needs to write other commands like APM_CNT_ACPI_DISABLE or APM_CNT_ACPI_ENABLE on our platforms. I didn\u0027t check that.\n\nAnd I think the GSMI case is not really special here: it is still the hypervisor that executes the `outb` instruction and enters SMM. I don\u0027t think the CPU _hardware_\u0027s behavior when entering SMM is any different with %al \u003d\u003d GSMI_CALLBACK than with any other %al value.\n\nAs I understand, it is up to the SMM _firmware_ (i.e. coreboot) what exactly to do with those register values saved in SMRAM. And BTW, AFAICS the GSMI case is actually the only case when coreboot does anything at all with those registers. See the usage of `save_state_ops` in `smihandler_southbridge_apmc()` in coreboot. (Another case there is SMMSTORE, but it is disabled in coreboot on our platforms.)\n\nSo, AFAICS the only case when any hypervisor\u0027s registers will be modified on RSM is the case when the GSMI handler writes the GSMI command result to the hypervisor\u0027s RAX register.\n\nSo I\u0027m not sure what\u0027s the issue here. The SMM firmware is trusted by pKVM.\n\nBTW I\u0027ve also just looked through all other SMI handlers in the `southbridge_smi[]` array in `src/soc/intel/common/feature/smihandler/smihandler.c` besides this `smihandler_southbridge_apmc()` (i.e., as I understand, handlers of all other known possible causes of entering SMM besides writing to the 0xB2 port) - none of them use the `save_state_ops` passed to them, so I guess the hypervisor\u0027s registers will not be modified by SMM in any of those other cases either.",
+      "parentUuid": "fbfd0953_f36cf40c",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 19
+      },
+      "revId": "12894199ca0261276d4c621453ca1b5b46e9eeb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
