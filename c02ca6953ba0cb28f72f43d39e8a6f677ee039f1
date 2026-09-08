@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04ecd01d_8308a089",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-09-08T16:42:53Z",
+      "side": 1,
+      "message": "We nned to change the semantics of wrapfd_get_mappable() which will affect this CL too, so blocking for now.",
+      "revId": "c02ca6953ba0cb28f72f43d39e8a6f677ee039f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
