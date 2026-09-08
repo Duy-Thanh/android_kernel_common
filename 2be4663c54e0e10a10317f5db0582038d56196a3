@@ -64,6 +64,30 @@
       },
       "revId": "2be4663c54e0e10a10317f5db0582038d56196a3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77210afd_b62ae0f3",
+        "filename": "arch/x86/kvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-09-08T12:46:10Z",
+      "side": 1,
+      "message": "OTOH, well, it might make sense to pass 0 anyway, in case this ABI will be extended in the future so that the EBX value will mean something for GSMI_CMD_HANDSHAKE_TYPE as well (which is quite unlikely, but hey).",
+      "parentUuid": "b82b8c23_6ada4f93",
+      "range": {
+        "startLine": 369,
+        "startChar": 5,
+        "endLine": 369,
+        "endChar": 13
+      },
+      "revId": "2be4663c54e0e10a10317f5db0582038d56196a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
