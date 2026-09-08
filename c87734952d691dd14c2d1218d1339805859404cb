@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d55033f8_3a60eda3",
+        "filename": "drivers/android/guest_dma_proxy.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1827146
+      },
+      "writtenOn": "2026-09-08T21:42:54Z",
+      "side": 1,
+      "message": "verify_import_token does not perform multibuffer overlap validation - but API does not prevent user from importing multiple overlapping buffers right now.\n\n- how about to at least add protection to allow only single buffer import (some atomic counter/flag)?\n- or at least add explicit comment/TODO about current limitation\n\nThank you",
+      "range": {
+        "startLine": 224,
+        "startChar": 1,
+        "endLine": 224,
+        "endChar": 68
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3f8c7407_a825ea92",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/guest_dma_proxy.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\t *\n\t * TODO(b/515757062): Verify that the requested region does not overlap\n\t * with any currently active imported buffers, or restrict the driver\n\t * to a single active buffer if overlapping imports must be prevented.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c87734952d691dd14c2d1218d1339805859404cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
