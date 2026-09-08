@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a38515c_a9e68aa4",
+        "filename": "arch/x86/kvm/pkvm/gsmi.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-09-08T10:58:03Z",
+      "side": 1,
+      "message": "It should be okay to unshare the page soon after we copy it locally and it can avoid the goto. Something like:\n\n```\n\tcase GSMI_CMD_SET_EVENT_LOG: {\n\t\tstruct gsmi_set_eventlog_param *sel, *bounce_sel;\n\t\tstruct gsmi_log_entry_type_1 *type1, *bounce_type1;\n\t\tu32 data_ptr, data_len, type;\n\n\t\tif (pkvm_host_share_hyp(param, sizeof(*sel)))\n\t\t\tbreak;\n\n\t\tsel \u003d __pkvm_va(param);\n\t\tdata_ptr \u003d READ_ONCE(sel-\u003edata_ptr);\n\t\tdata_len \u003d READ_ONCE(sel-\u003edata_len);\n\t\ttype \u003d READ_ONCE(sel-\u003etype);\n\t\tpkvm_host_unshare_hyp(param, sizeof(*sel));\n\n\t\tif (type !\u003d 1) {\n\t\t\tret \u003d GSMI_UNSUPPORTED;\n\t\t\tbreak;\n\t\t}\n\n\t\tif (!data_ptr || data_len !\u003d sizeof(*type1))\n\t\t\tbreak;\n\n\t\tif (pkvm_host_share_hyp(data_ptr, sizeof(*type1)))\n\t\t\tbreak;\n\n\t\tbounce_sel \u003d \u0026this_cpu_read(bounce_ptr)-\u003eset_eventlog;\n\t\tbounce_type1 \u003d \u0026this_cpu_read(bounce_ptr)-\u003elog_entry;\n\n\t\tbounce_sel-\u003edata_ptr \u003d __pkvm_pa(bounce_type1);\n\t\tbounce_sel-\u003edata_len \u003d data_len;\n\t\tbounce_sel-\u003etype \u003d type;\n\n\t\ttype1 \u003d __pkvm_va(data_ptr);\n\t\tmemcpy(bounce_type1, type1, sizeof(*type1));\n\t\tpkvm_host_unshare_hyp(data_ptr, sizeof(*type1));\n\n\t\tret \u003d gsmi_write(subcmd, __pkvm_pa(bounce_sel));\n\t\tbreak;\n\t}\n```\n\nWe could also maybe directly copy to the percpu variable instead of local variables to reduce the number of lines of code. I understand the reasoning behind using local variables is to update the percpu only after successfully validating inputs. Since we always overwrite all the fields before invoking gsmi_write, it should be safe I guess.",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 2
+      },
+      "revId": "7cfae7092faa665204a575053943cf4e6a7a38a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

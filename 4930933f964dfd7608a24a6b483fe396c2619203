@@ -186,6 +186,24 @@
       "parentUuid": "b7d73341_6ad37627",
       "revId": "4930933f964dfd7608a24a6b483fe396c2619203",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e89261d_53f3d5e0",
+        "filename": "arch/x86/kvm/pkvm/gsmi.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-09-08T10:58:03Z",
+      "side": 1,
+      "message": "\u003e So for this patch I\u0027ve just used READ_ONCE for each individual field instead.\n\nI was thinking if memcpy would be sufficient here. Hypercall boundary will act as a barrier and there would not be any optimization based re-orderings on this cpu. A well-behaved host will not be touching this from another cpu. A buggy/malicious host modifying the contents of sel from another cpu cannot pose a security threat in this case I guess - worst case is a bad data_ptr, data_len and/or type and they all are checked and validated before we proceed.\n\nBut I agree READ_ONCE is a formal hygiene in the generic sense and doesn\u0027t cost anything extra.",
+      "parentUuid": "13fa862f_24e534bf",
+      "revId": "4930933f964dfd7608a24a6b483fe396c2619203",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
