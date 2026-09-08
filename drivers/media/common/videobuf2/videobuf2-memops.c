@@ -38,18 +38,20 @@ struct frame_vector *vb2_create_framevec(unsigned long start,
 					 unsigned long length,
 					 bool write)
 {
+	struct mm_struct *mm = current->mm;
 	int ret;
-	unsigned long first, last;
 	unsigned long nr;
 	struct frame_vector *vec;
 
-	first = start >> PAGE_SHIFT;
-	last = (start + length - 1) >> PAGE_SHIFT;
-	nr = last - first + 1;
+	if (!length)
+		return ERR_PTR(-EINVAL);
+	nr = mm_user_range_pages(mm, start, length);
+	if (nr > UINT_MAX)
+		return ERR_PTR(-EOVERFLOW);
 	vec = frame_vector_create(nr);
 	if (!vec)
 		return ERR_PTR(-ENOMEM);
-	ret = get_vaddr_frames(start & PAGE_MASK, nr, write, vec);
+	ret = get_vaddr_frames_range(start, length, write, vec);
 	if (ret < 0)
 		goto out_destroy;
 	/* We accept only complete set of PFNs */
@@ -65,6 +67,19 @@ out_destroy:
 	return ERR_PTR(ret);
 }
 EXPORT_SYMBOL(vb2_create_framevec);
+
+int vb2_framevec_to_sgtable(struct frame_vector *vec, unsigned long size,
+			    struct sg_table *sgt, gfp_t gfp)
+{
+	struct page **pages = frame_vector_pages(vec);
+
+	if (IS_ERR(pages))
+		return PTR_ERR(pages);
+	return sg_alloc_table_from_pages(sgt, pages, frame_vector_count(vec),
+					 frame_vector_frame_offset(vec, 0), size,
+					 gfp);
+}
+EXPORT_SYMBOL_GPL(vb2_framevec_to_sgtable);
 
 /**
  * vb2_destroy_framevec() - release vector of mapped pfns
