@@ -54,6 +54,88 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1fedd6b3_d975fc8a",
+        "filename": "drivers/android/guest_dma_proxy.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1827146
+      },
+      "writtenOn": "2026-09-08T22:53:18Z",
+      "side": 1,
+      "message": "nit: is this expected to be a call to `pkvm_page_relinquish` or hyperviser agnostic call with ARM pKVM specific implementation in other component (where corresponding check such as `kvm_arm_hyp_service_available(ARM_SMCCC_KVM_FUNC_MEM_RELINQUISH)` will take a place?)",
+      "range": {
+        "startLine": 163,
+        "startChar": 3,
+        "endLine": 164,
+        "endChar": 61
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "1ebec35e_a7e0fe0b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/guest_dma_proxy.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t/*\n\t\t\t * TODO(b/515757062): Investigate abstracting this via standard\n\t\t\t * pkvm_page_relinquish or guarding by kvm_arm_hyp_service_available\n\t\t\t * if available in guest context.\n\t\t\t */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c87734952d691dd14c2d1218d1339805859404cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28dc22f1_9e0a0458",
+        "filename": "drivers/android/guest_dma_proxy.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1827146
+      },
+      "writtenOn": "2026-09-08T22:53:18Z",
+      "side": 1,
+      "message": "nit: consider explicitly reject any flags other than 0 or O_RDONLY, since that is what used later for exp_info.flags",
+      "range": {
+        "startLine": 217,
+        "startChar": 0,
+        "endLine": 218,
+        "endChar": 17
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "1ca11ecc_6baafc4f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/guest_dma_proxy.c",
+              "range": {
+                "startLine": 217,
+                "startChar": 0,
+                "endLine": 218,
+                "endChar": 0
+              },
+              "replacement": "\tif (args.flags !\u003d 0 \u0026\u0026 args.flags !\u003d O_RDONLY)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c87734952d691dd14c2d1218d1339805859404cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d55033f8_3a60eda3",
         "filename": "drivers/android/guest_dma_proxy.c",
         "patchSetId": 4
