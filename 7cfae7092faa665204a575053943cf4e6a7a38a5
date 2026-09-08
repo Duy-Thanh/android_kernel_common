@@ -46,6 +46,30 @@
       },
       "revId": "7cfae7092faa665204a575053943cf4e6a7a38a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e908b03_609123c7",
+        "filename": "arch/x86/kvm/pkvm/gsmi.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-09-08T12:26:14Z",
+      "side": 1,
+      "message": "\u003e Yep, but I think that wouldn\u0027t make any difference. The host\u0027s driver is not supposed to do anything else with this memory (donate it to a pVM or whatever) while making GSMI requests anyway.\n\nYeah true, but my intention was to make the code a bit more concise and readable. \n\n\u003e Well, we could get away without a temporary variable if we first assign sel-\u003edata_ptr to bounce_sel-\u003edata_ptr, then share, copy and unshare, and only after that change bounce_sel-\u003edata_ptr to pKVM\u0027s address. But IMHO my current version is still more readable than that.\n\nyeah this is what I tried locally and made the code more compact. But I am fine either way",
+      "parentUuid": "26450357_a66c03af",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 2
+      },
+      "revId": "7cfae7092faa665204a575053943cf4e6a7a38a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
