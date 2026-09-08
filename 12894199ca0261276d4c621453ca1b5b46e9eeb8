@@ -176,6 +176,30 @@
       },
       "revId": "12894199ca0261276d4c621453ca1b5b46e9eeb8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6214306a_b294ce0c",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-09-08T21:10:47Z",
+      "side": 1,
+      "message": "From reading the code and researching with AI, we should be safe. There are two non-GSMI commands supported: `APM_CNT_ACPI_ENABLE` and `APM_CNT_ACPI_DISABLE`. Since we trust SMM handler and they don\u0027t support any other commands, it should be safe to do outb. For `APM_CNT_ACPI_DISABLE` and `APM_CNT_ACPI_ENABLE` the handler doesn\u0027t update any registers that needs to be relayed back to host and linux doesn\u0027t expect a return value. So calling outb with hypervisor context should be safe.",
+      "parentUuid": "fbfd0953_f36cf40c",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 19
+      },
+      "revId": "12894199ca0261276d4c621453ca1b5b46e9eeb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
