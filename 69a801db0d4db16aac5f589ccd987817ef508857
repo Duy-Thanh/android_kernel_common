@@ -16,6 +16,23 @@
       "message": "\u003c?xmlversion\u003d\"1.0\"?\u003e\n\u003cFunnyTemplate\u003e\n\u003cProperty\u003e\n\u003cName\u003e瓶子\u003c/Name\u003e\n\u003cWidth\u003e800\u003c/Width\u003e\n\u003cHeight\u003e600\u003c/Height\u003e\n\u003cClientVersion\u003e7.0.3\u003c/ClientVersion\u003e\n\u003cMaximumInput\u003e1\u003c/MaximumInput\u003e\n\u003cDirection\u003e90\u003c/Direction\u003e\n\u003cNeedFaceInfo\u003efalse\u003c/NeedFaceInfo\u003e\n\u003cSupportRealtimePreview\u003etrue\u003c/SupportRealtimePreview\u003e\n\u003c/Property\u003e\n\u003c!--纹理资源存放位置 --\u003e\n\u003cTextureResource\u003e\n\u003cAlphaTexture\u003eFUNNY_TEXTURE_INDEX_3\u003c/AlphaTexture\u003e\n\u003cTemplateTexture\u003eFUNNY_TEXTURE_INDEX_4\u003c/TemplateTexture\u003e\n\u003c/TextureResource\u003e\n\u003cLayers\u003e\n\u003c!--底图--\u003e\n\u003cLayername\u003d\"background\"\u003e\n\u003cRequired\u003eFUNNY_REQUIRE_PREVIEW_MAKE\u003c/Required\u003e\n\u003cImageSourceColorSource\u003d\"FUNNY_TEXTURE_INDEX_1\"FaceCoordinate\u003d\"\"/\u003e\n\u003cStep\u003e\n\u003cOperateselected\u003d\"0\"type\u003d\"FUNNY_OPERATION_TYPE_EFFECT\"\u003e\n\u003cOperatingParam\u003e\n\u003c![CDATA[Effect\u003dDynamicGaussBlur;guassFrame\u003d\u003cStandLength\u003e500\u003c/StandLength\u003e\u003cBlurRadius\n\u003e10\u003c/BlurRadius\u003e\u003cSigma\u003e5.0\u003c/Sigma\u003e]]\u003e\u003c/OperatingParam\u003e\n\u003cOperatingParam\u003e\n\u003c![CDATA[Effect\u003dDynamicGaussBlur;guassFrame\u003d\u003cStandLength\u003e500\u003c/StandLength\u003e\u003cBlurRadius\n\u003e10\u003c/BlurRadius\u003e\u003cSigma\u003e5.0\u003c/Sigma\u003e]]\u003e\u003c/OperatingParam\u003e\n\u003cOperatingParam\u003e\n\u003c![CDATA[Effect\u003dDynamicGaussBlur;guassFrame\u003d\u003cStandLength\u003e500\u003c/StandLength\u003e\u003cBlurRadius\n\u003e10\u003c/BlurRadius\u003e\u003cSigma\u003e5.0\u003c/Sigma\u003e]]\u003e\u003c/OperatingParam\u003e\n\u003cOperatingParam\u003e\n\u003c![CDATA[Effect\u003dDynamicGaussBlur;guassFrame\u003d\u003cStandLength\u003e500\u003c/StandLength\u003e\u003cBlurRadius\n\u003e10\u003c/BlurRadius\u003e\u003cSigma\u003e5.0\u003c/Sigma\u003e]]\u003e\u003c/OperatingParam\u003e\n\u003c/Operate\u003e\n\u003c/Step\u003e\n\u003c/Layer\u003e\n\u003c!--前景--\u003e\n\u003cLayername\u003d\"foreground\"\u003e\n\u003cRequired\u003eFUNNY_REQUIRE_PREVIEW_MAKE\u003c/Required\u003e\n\u003cImageSource ColorSource\u003d\"FUNNY_TEXTURE_INDEX_1\"\nAlphaSource\u003d\"FUNNY_TEXTURE_INDEX_3\"\nAlphaChannel\u003d\"FUNNY_CHANNEL_R\"FaceCoordinate\u003d\"\"/\u003e\n\u003cStep\u003e\n\u003cOperateselected\u003d\"0\"type\u003d\"FUNNY_OPERATION_TYPE_TRANSFORM\"\u003e\n\u003cOperatingParam\u003ecutdirect\u003d5;pos\u003d303,300,738,300,738,556,303,556;",
       "revId": "69a801db0d4db16aac5f589ccd987817ef508857",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca915035_e3682265",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1967875
+      },
+      "writtenOn": "2026-09-08T00:52:09Z",
+      "side": 1,
+      "message": "Respin Bug: b/558314932",
+      "revId": "69a801db0d4db16aac5f589ccd987817ef508857",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
