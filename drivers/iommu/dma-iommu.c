@@ -1713,9 +1713,7 @@ int iommu_dma_mmap(struct device *dev, struct vm_area_struct *vma,
 		pfn = page_to_pfn(virt_to_page(cpu_addr));
 	}
 
-	return remap_pfn_range(vma, vma->vm_start, pfn + off,
-			       vma->vm_end - vma->vm_start,
-			       vma->vm_page_prot);
+	return dma_mmap_pfn(vma, pfn, size);
 }
 
 int iommu_dma_get_sgtable(struct device *dev, struct sg_table *sgt,

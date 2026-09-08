@@ -765,16 +765,28 @@ void dma_free_pages(struct device *dev, size_t size, struct page *page,
 }
 EXPORT_SYMBOL_GPL(dma_free_pages);
 
-int dma_mmap_pages(struct device *dev, struct vm_area_struct *vma,
-		size_t size, struct page *page)
+/**
+ * dma_mmap_pfn - map a bounded physically contiguous DMA allocation
+ * @vma: user mapping with its page offset and protection already selected
+ * @size: allocation size in bytes, rounded up for the bounds check
+ * @pfn: first native PFN of the allocation, before the VMA offset
+ *
+ * Return: zero on success or the bounds/remap error.
+ */
+int dma_mmap_pfn(struct vm_area_struct *vma, unsigned long pfn, size_t size)
 {
 	unsigned long count = PAGE_ALIGN(size) >> PAGE_SHIFT;
 
 	if (vma->vm_pgoff >= count || vma_pages(vma) > count - vma->vm_pgoff)
 		return -ENXIO;
 	return remap_pfn_range(vma, vma->vm_start,
-			       page_to_pfn(page) + vma->vm_pgoff,
+			       pfn + vma->vm_pgoff,
 			       vma_pages(vma) << PAGE_SHIFT, vma->vm_page_prot);
+}
+int dma_mmap_pages(struct device *dev, struct vm_area_struct *vma,
+		   size_t size, struct page *page)
+{
+	return dma_mmap_pfn(vma, page_to_pfn(page), size);
 }
 EXPORT_SYMBOL_GPL(dma_mmap_pages);
 
