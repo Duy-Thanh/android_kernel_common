@@ -99,6 +99,24 @@
       ],
       "revId": "12894199ca0261276d4c621453ca1b5b46e9eeb8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15aceca6_28d7e61a",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-09-08T16:27:38Z",
+      "side": 1,
+      "message": "May be a good idea, but maybe let\u0027s merge this as is first, to fix the actual security issue first? (SMMSTORE and OPAL are disabled in the coreboot config on chromebooks, so I think we are safe in that regard.)",
+      "parentUuid": "83aad78f_8dc80297",
+      "revId": "12894199ca0261276d4c621453ca1b5b46e9eeb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
