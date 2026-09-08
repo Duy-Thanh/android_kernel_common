@@ -70,6 +70,30 @@
       },
       "revId": "7cfae7092faa665204a575053943cf4e6a7a38a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ab682d3_7e711df6",
+        "filename": "arch/x86/kvm/pkvm/gsmi.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-09-08T12:40:30Z",
+      "side": 1,
+      "message": "I think I\u0027m gonna move pkvm_host_unshare_hyp to get rid of goto as you are suggesting.",
+      "parentUuid": "5e908b03_609123c7",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 2
+      },
+      "revId": "7cfae7092faa665204a575053943cf4e6a7a38a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

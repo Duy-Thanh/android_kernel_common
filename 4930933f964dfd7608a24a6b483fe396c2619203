@@ -204,6 +204,24 @@
       "parentUuid": "13fa862f_24e534bf",
       "revId": "4930933f964dfd7608a24a6b483fe396c2619203",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26064403_9329c537",
+        "filename": "arch/x86/kvm/pkvm/gsmi.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-09-08T12:40:30Z",
+      "side": 1,
+      "message": "I\u0027m not talking about ordering, I\u0027m talking about the \"once\" part of the semantics. I think memcpy() generally doesn\u0027t guarantee that it won\u0027t load data from the same memory location more than once. Although in our pKVM-IA case, it probably currently de facto guarantees that, as we are using the assembly implementation of memcpy() from `arch/x86/lib/memcpy.S`. But it seems better to not rely on such implementation assumptions.",
+      "parentUuid": "9e89261d_53f3d5e0",
+      "revId": "4930933f964dfd7608a24a6b483fe396c2619203",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
