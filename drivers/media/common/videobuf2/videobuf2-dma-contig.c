@@ -631,8 +631,7 @@ static void *vb2_dc_get_userptr(struct vb2_buffer *vb, struct device *dev,
 		goto fail_pfnvec;
 	}
 
-	ret = sg_alloc_table_from_pages(sgt, frame_vector_pages(vec), n_pages,
-		offset, size, GFP_KERNEL);
+	ret = vb2_framevec_to_sgtable(vec, size, sgt, GFP_KERNEL);
 	if (ret) {
 		pr_err("failed to initialize sg table\n");
 		goto fail_sgt;

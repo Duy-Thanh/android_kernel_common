@@ -36,6 +36,10 @@ extern const struct vm_operations_struct vb2_common_vm_ops;
 struct frame_vector *vb2_create_framevec(unsigned long start,
 					 unsigned long length,
 					 bool write);
+struct sg_table;
+int vb2_framevec_to_sgtable(struct frame_vector *vec, unsigned long size,
+			    struct sg_table *sgt, gfp_t gfp);
+
 void vb2_destroy_framevec(struct frame_vector *vec);
 
 #endif
