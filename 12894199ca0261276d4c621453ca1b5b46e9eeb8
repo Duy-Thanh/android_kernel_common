@@ -1,0 +1,104 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd1201a7_b9316178",
+        "filename": "arch/x86/kvm/pkvm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-09-08T15:29:17Z",
+      "side": 1,
+      "message": "Wondering if this initialization logic can move to aosp/4280531 and the hypervisor side of initialization into a separate commit (or aosp/4280531 itself) so that this CL focusses only on the mediation logic (and setting smi_command_port in iobitmap)",
+      "fixSuggestions": [
+        {
+          "fixId": "7c0b56ff_c86c3acf",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm.c",
+              "range": {
+                "startLine": 398,
+                "startChar": 0,
+                "endLine": 399,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "arch/x86/kvm/pkvm.c",
+              "range": {
+                "startLine": 400,
+                "startChar": 0,
+                "endLine": 402,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "12894199ca0261276d4c621453ca1b5b46e9eeb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83aad78f_8dc80297",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-09-08T15:29:17Z",
+      "side": 1,
+      "message": "I was thinking if we should have an allowlist for this(like what we did for iommu registers). Reading the generic coreboot code, SMMSTORE and OPAL also passes an address in RBX, but chromebooks do not support those. From what I understand, we need to support only `APM_CNT_ACPI_ENABLE` and `APM_CNT_ACPI_DISABLE`. So probably something like:\n\n```\nswitch (val) {\n  case GSMI_CALLBACK:\n  \tpkvm_handle_gsmi(vcpu);\n  \tbreak;\n  case APM_CNT_ACPI_ENABLE:\n  case APM_CNT_ACPI_DISABLE:\n  \toutb(val, port);\n  \tbreak;\n  default:\n  \tkvm_inject_gp(vcpu, 0);\n  \treturn X86EMUL_UNHANDLEABLE;\n  }\n```\n\nWDYT?",
+      "fixSuggestions": [
+        {
+          "fixId": "aaf15982_c5172bc2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+              "range": {
+                "startLine": 147,
+                "startChar": 0,
+                "endLine": 148,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (val \u003d\u003d GSMI_CALLBACK) {\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+              "range": {
+                "startLine": 149,
+                "startChar": 0,
+                "endLine": 150,
+                "endChar": 0
+              },
+              "replacement": "\t\t} else if (val \u003d\u003d APM_CNT_ACPI_ENABLE ||\n\t\t\t   val \u003d\u003d APM_CNT_ACPI_DISABLE) {\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\t\t} else {\n\t\t\tpkvm_warn(\"Unsupported SMI command 0x%x\\n\", val);\n\t\t\tkvm_inject_gp(vcpu, 0);\n\t\t\treturn X86EMUL_UNHANDLEABLE;\n\t\t}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "12894199ca0261276d4c621453ca1b5b46e9eeb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
