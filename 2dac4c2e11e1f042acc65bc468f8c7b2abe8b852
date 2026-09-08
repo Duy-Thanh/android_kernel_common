@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b045f29_c3daa24e",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/pv/arm-smmu-v3-pv.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1560,
+      "author": {
+        "id": 1150933
+      },
+      "writtenOn": "2026-09-08T16:55:43Z",
+      "side": 1,
+      "message": "Consider splitting this into two separate loops: one to submit the SYNC command to each SMMU, and a second to wait for it to be consumed. That way, multiple SMMUs can process their commands in parallel rather than serializing the wait across SMMUs.",
+      "revId": "2dac4c2e11e1f042acc65bc468f8c7b2abe8b852",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
