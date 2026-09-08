@@ -303,7 +303,7 @@ static int tcp_write_timeout(struct sock *sk)
 	trace_android_vh_tcp_state_change(sk, TCP_STATE_CHANGE_REASON_RETRANSMIT, 0);
 
 	if (sk_rethink_txhash(sk)) {
-		tp->timeout_rehash++;
+		WRITE_ONCE(tp->timeout_rehash, tp->timeout_rehash + 1);
 		__NET_INC_STATS(sock_net(sk), LINUX_MIB_TCPTIMEOUTREHASH);
 	}
 
