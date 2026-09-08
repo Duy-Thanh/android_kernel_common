@@ -9149,6 +9149,11 @@ pointer_reference {
   pointee_type_id: 0x16bbfd4f
 }
 pointer_reference {
+  id: 0x0f3fa369
+  kind: POINTER
+  pointee_type_id: 0x16be6b3a
+}
+pointer_reference {
   id: 0x0f40e795
   kind: POINTER
   pointee_type_id: 0x174378c9
@@ -20727,6 +20732,11 @@ pointer_reference {
   id: 0x2c794b1f
   kind: POINTER
   pointee_type_id: 0x9ba5cae2
+}
+pointer_reference {
+  id: 0x2c798fc6
+  kind: POINTER
+  pointee_type_id: 0x9ba6d986
 }
 pointer_reference {
   id: 0x2c799285
@@ -36799,6 +36809,11 @@ pointer_reference {
   pointee_type_id: 0xdc0b0182
 }
 pointer_reference {
+  id: 0x3d931cf5
+  kind: POINTER
+  pointee_type_id: 0xdc0c9549
+}
+pointer_reference {
   id: 0x3d98309d
   kind: POINTER
   pointee_type_id: 0xdc2024eb
@@ -43007,6 +43022,11 @@ qualified {
   id: 0xdc06b593
   qualifier: CONST
   qualified_type_id: 0x005d60c6
+}
+qualified {
+  id: 0xdc0c9549
+  qualifier: CONST
+  qualified_type_id: 0x0075e3ad
 }
 qualified {
   id: 0xdc2024eb
@@ -101032,6 +101052,11 @@ member {
   offset: 72
 }
 member {
+  id: 0x4f29540a
+  name: "device_init"
+  type_id: 0x2c798fc6
+}
+member {
   id: 0x4f2a634f
   name: "device_init"
   type_id: 0x2f4eca66
@@ -101237,6 +101262,12 @@ member {
   id: 0x58ac7a9e
   name: "device_release"
   type_id: 0x0c08e6c9
+  offset: 64
+}
+member {
+  id: 0x58af4ddb
+  name: "device_release"
+  type_id: 0x0f3fa369
   offset: 64
 }
 member {
@@ -352050,6 +352081,16 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x0075e3ad
+  kind: STRUCT
+  name: "tegra_vpr_ops"
+  definition {
+    bytesize: 16
+    member_id: 0x4f29540a
+    member_id: 0x58af4ddb
+  }
+}
+struct_union {
   id: 0x6a268aa0
   kind: STRUCT
   name: "thermal_attr"
@@ -397231,6 +397272,12 @@ function {
   parameter_id: 0x2a738191
 }
 function {
+  id: 0x1a08ebca
+  return_type_id: 0x48b5725f
+  parameter_id: 0x2bc93f35
+  parameter_id: 0x18bd6530
+}
+function {
   id: 0x1a0ce609
   return_type_id: 0x48b5725f
   parameter_id: 0x2a52de6b
@@ -404691,6 +404738,11 @@ function {
   return_type_id: 0x33756485
   parameter_id: 0x39182992
   parameter_id: 0x2c456d6d
+}
+function {
+  id: 0x3f78d109
+  return_type_id: 0x1023f4f6
+  parameter_id: 0x2bc93f35
 }
 function {
   id: 0x3f83d490
@@ -421405,6 +421457,13 @@ function {
   return_type_id: 0x6720d32f
   parameter_id: 0x249959de
   parameter_id: 0xc93e017b
+}
+function {
+  id: 0x9782cfc8
+  return_type_id: 0x6720d32f
+  parameter_id: 0x2bc93f35
+  parameter_id: 0x3d931cf5
+  parameter_id: 0x18bd6530
 }
 function {
   id: 0x9783f629
@@ -442450,6 +442509,14 @@ function {
   parameter_id: 0x33756485
   parameter_id: 0x4585663f
   parameter_id: 0xf1a6dfed
+}
+function {
+  id: 0xb950b08b
+  return_type_id: 0x06835e9c
+  parameter_id: 0x1023f4f6
+  parameter_id: 0x33756485
+  parameter_id: 0x33756485
+  parameter_id: 0x6d7f5ff6
 }
 function {
   id: 0xb961dff5
@@ -475342,6 +475409,15 @@ elf_symbol {
   crc: 0xf97f7575
   type_id: 0xb94d0c8b
   full_name: "cma_alloc"
+}
+elf_symbol {
+  id: 0x9f2d7f78
+  name: "cma_alloc_at"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xfea0d19b
+  type_id: 0xb950b08b
+  full_name: "cma_alloc_at"
 }
 elf_symbol {
   id: 0x5f9864aa
@@ -529744,6 +529820,42 @@ elf_symbol {
   full_name: "tegra_sku_info"
 }
 elf_symbol {
+  id: 0x9a0c394d
+  name: "tegra_vpr_enable"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x41f6ae62
+  type_id: 0x1a08ebca
+  full_name: "tegra_vpr_enable"
+}
+elf_symbol {
+  id: 0x00878356
+  name: "tegra_vpr_get_cma"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x31341728
+  type_id: 0x3f78d109
+  full_name: "tegra_vpr_get_cma"
+}
+elf_symbol {
+  id: 0x868939a9
+  name: "tegra_vpr_register"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xcaee4734
+  type_id: 0x9782cfc8
+  full_name: "tegra_vpr_register"
+}
+elf_symbol {
+  id: 0xa336f3bf
+  name: "tegra_vpr_unregister"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x41f6ae62
+  type_id: 0x1a08ebca
+  full_name: "tegra_vpr_unregister"
+}
+elf_symbol {
   id: 0xfc1cafae
   name: "tegra_xusb_padctl_legacy_probe"
   is_defined: true
@@ -544950,6 +545062,7 @@ interface {
   symbol_id: 0xb14ae124
   symbol_id: 0x4cf39275
   symbol_id: 0x83dc639c
+  symbol_id: 0x9f2d7f78
   symbol_id: 0x5f9864aa
   symbol_id: 0x966a7c42
   symbol_id: 0x8e3563cc
@@ -550989,6 +551102,10 @@ interface {
   symbol_id: 0x1d3215de
   symbol_id: 0xcfccceca
   symbol_id: 0xcb1a674c
+  symbol_id: 0x9a0c394d
+  symbol_id: 0x00878356
+  symbol_id: 0x868939a9
+  symbol_id: 0xa336f3bf
   symbol_id: 0xfc1cafae
   symbol_id: 0x5bbd3545
   symbol_id: 0xf4017fdd

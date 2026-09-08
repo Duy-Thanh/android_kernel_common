@@ -253,6 +253,8 @@
   clk_set_rate
   clk_unprepare
   clocks_calc_mult_shift
+  cma_alloc_at
+  cma_release
   close_fd
   compat_ptr_ioctl
   complete
@@ -774,9 +776,12 @@
   dma_free_pages
   dma_get_any_slave_channel
   dma_get_sgtable_attrs
+  dma_heap_add
   dma_heap_buffer_alloc
   dma_heap_buffer_free
   dma_heap_find
+  dma_heap_get_drvdata
+  dma_heap_get_name
   dma_heap_put
   d_make_root
   dmam_alloc_attrs
@@ -3041,6 +3046,8 @@
   set_capacity
   set_capacity_and_notify
   set_cpus_allowed_ptr
+  set_direct_map_default_noflush
+  set_direct_map_invalid_noflush
   set_disk_ro
   set_freezable
   set_nlink
@@ -3557,6 +3564,10 @@
   tegra_powergate_power_off
   tegra_powergate_sequence_power_up
   tegra_sku_info
+  tegra_vpr_enable
+  tegra_vpr_get_cma
+  tegra_vpr_register
+  tegra_vpr_unregister
   tegra_xusb_padctl_legacy_probe
   thermal_zone_device_enable
   thermal_zone_device_priv
