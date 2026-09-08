@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b69ed64_adc7aa25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-09-08T11:33:32Z",
+      "side": 1,
+      "message": "Do not submit. This is only for testing. Only `KVM: arm64: Transfer the hyp stack pages out of the host stage-2` is to be submitted.",
+      "revId": "98fe7a7faeb42f598c89168931ddc172d0bc8374",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
