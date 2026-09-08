@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33170cc9_aa8cff53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-09-08T13:33:29Z",
+      "side": 1,
+      "message": "minor nit: \n\u003e so the entire extra reserved region is merely one 4K page, i.e.\nthe memory cost is negligible.\n\nThis is not entirely accurate as it depends on num_possible_cpus(). Probably reword it a bit?",
+      "revId": "f1ed5882e210d891f87cb93ad954fb6439d8f3c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
