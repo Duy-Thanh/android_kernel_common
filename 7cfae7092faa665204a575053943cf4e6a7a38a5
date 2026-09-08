@@ -94,6 +94,30 @@
       },
       "revId": "7cfae7092faa665204a575053943cf4e6a7a38a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6327187e_810dbc36",
+        "filename": "arch/x86/kvm/pkvm/gsmi.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-09-08T14:28:13Z",
+      "side": 1,
+      "message": "Done - moved pkvm_host_unshare_hyp and reshuffled the code a bit to make it look nicer.",
+      "parentUuid": "5ab682d3_7e711df6",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 2
+      },
+      "revId": "7cfae7092faa665204a575053943cf4e6a7a38a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
