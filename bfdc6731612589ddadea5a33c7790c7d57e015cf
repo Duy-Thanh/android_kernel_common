@@ -1,0 +1,74 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0d2039a_27223e46",
+        "filename": "arch/x86/kvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-09-08T15:20:09Z",
+      "side": 1,
+      "message": "minor nit: s/pkvm_gsmi_init/pkvm_gsmi_probe/ ?",
+      "fixSuggestions": [
+        {
+          "fixId": "3099eefb_16b1a5aa",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm.c",
+              "range": {
+                "startLine": 351,
+                "startChar": 0,
+                "endLine": 352,
+                "endChar": 0
+              },
+              "replacement": "int __init pkvm_gsmi_probe(void)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "bfdc6731612589ddadea5a33c7790c7d57e015cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbf9d61c_8726f0bc",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1455,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-09-08T15:20:09Z",
+      "side": 1,
+      "message": "Wondering if it would be better to probe in pkvm_reserve() before reserving the pages for gsmi?",
+      "fixSuggestions": [
+        {
+          "fixId": "fdeee44f_a8115ce8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm_init.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\ttotal +\u003d pkvm_gsmi_pages();\n"
+            }
+          ]
+        }
+      ],
+      "revId": "bfdc6731612589ddadea5a33c7790c7d57e015cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
