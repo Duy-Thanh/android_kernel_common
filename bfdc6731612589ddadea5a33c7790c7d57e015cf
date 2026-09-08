@@ -177,6 +177,24 @@
       "parentUuid": "c5c9e756_c96b35fa",
       "revId": "bfdc6731612589ddadea5a33c7790c7d57e015cf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0db2bf48_a52f6a7d",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1455,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-09-08T16:38:30Z",
+      "side": 1,
+      "message": "\u003e I was more worried about the 0 sized section passed to do_pkvm_hyp_init() if we don\u0027t allocate memory.\n\nYeah, and BTW that is precisely why I reset `pkvm_mem_base` to 0 as well if `pkvm_mem32_base` allocation failed (so that `vmx_pkvm_init()` bails out almost at the very beginning in this case).\n\n\u003e I thought it would be a good idea for generic pkvm code(non-chromebook) to not rely on successful allocation when its not needed.\n\nThat is a non-issue for all intents and purposes (who cares about those few KB)? (Also I doubt we will ever be upstreaming these GSMI patches. :))",
+      "parentUuid": "feaf12d4_51625e95",
+      "revId": "bfdc6731612589ddadea5a33c7790c7d57e015cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
