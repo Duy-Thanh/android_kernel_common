@@ -63,6 +63,30 @@
       ],
       "revId": "fa98650a8b1edc9fae0f60e2f33f2e7788ba52dd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "405b393d_a916c43b",
+        "filename": "arch/x86/kvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-09-08T11:45:51Z",
+      "side": 1,
+      "message": "\u003e I see that drivers/firmware/google/gsmi.c uses GSMI_HANDSHAKE_SPIN during probe [...]\n\nIt uses it for probing the handshake via the GSMI_CMD_HANDSHAKE_TYPE command. But even before that, in `gsmi_system_valid()`, it probes GSMI support via a custom assembly _without_ using SPIN. That custom probing is what my code here mimics (although it also combines it with probing the handshake type via the same initial `outb`, because why not).\n\nI see the GSMI kernel driver has been using this SPIN for GSMI_CMD_HANDSHAKE_TYPE since the very beginning, since 2011 when this driver was first implemented. But coreboot has _always_  been advertising GSMI_HANDSHAKE_NONE support, since 2012 when GSMI support was first implemented in coreboot.\n\nSo I conclude that this SPIN quirk was only required on some ancient pre-coreboot platforms we don\u0027t need to care about.\n\nAlso, the mentioned custom probing in `gsmi_system_valid()` was added to the kernel driver in 2020, so I guess by that time those ancient platforms requiring SPIN have already long been irrelevant.\n\n\u003e If so perhaps adding comment here like: [...]\n\nI already added a similar comment in another part of code in https://android-review.googlesource.com/c/kernel/common/+/4280533/3/arch/x86/kvm/pkvm/gsmi.c#19",
+      "parentUuid": "7cf6dcad_6f1d6586",
+      "range": {
+        "startLine": 364,
+        "startChar": 0,
+        "endLine": 371,
+        "endChar": 4
+      },
+      "revId": "fa98650a8b1edc9fae0f60e2f33f2e7788ba52dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
