@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2caa7264_fdb0ac69",
+        "filename": "arch/x86/kvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-09-08T15:43:04Z",
+      "side": 1,
+      "message": "This is super minor and hence resolving it in favor of merging fast due to the time crunch",
+      "parentUuid": "b0d2039a_27223e46",
+      "revId": "bfdc6731612589ddadea5a33c7790c7d57e015cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cbf9d61c_8726f0bc",
@@ -67,6 +85,24 @@
           ]
         }
       ],
+      "revId": "bfdc6731612589ddadea5a33c7790c7d57e015cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad8d25a0_0c9aaffe",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1455,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-09-08T15:43:04Z",
+      "side": 1,
+      "message": "resolving it in favor of merging fast due to the time crunch. This suggestion might need some non-trivial refactor",
+      "parentUuid": "cbf9d61c_8726f0bc",
       "revId": "bfdc6731612589ddadea5a33c7790c7d57e015cf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
