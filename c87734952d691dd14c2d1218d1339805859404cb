@@ -3,6 +3,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ba5a877c_a89db09d",
+        "filename": "drivers/android/guest_dma_proxy.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1827146
+      },
+      "writtenOn": "2026-09-08T22:21:40Z",
+      "side": 1,
+      "message": "nit: remove this line to enforce bounds validation unconditionally\n\nIf reserved_size is 0 the bounds checking is skipped and any arbitrary physical address could be imported.",
+      "range": {
+        "startLine": 62,
+        "startChar": 1,
+        "endLine": 62,
+        "endChar": 31
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4acb35ec_83f41271",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/guest_dma_proxy.c",
+              "range": {
+                "startLine": 62,
+                "startChar": 0,
+                "endLine": 64,
+                "endChar": 0
+              },
+              "replacement": "\tphys_addr_t res_end \u003d gdev-\u003ereserved_base + gdev-\u003ereserved_size;\n"
+            },
+            {
+              "path": "drivers/android/guest_dma_proxy.c",
+              "range": {
+                "startLine": 65,
+                "startChar": 0,
+                "endLine": 70,
+                "endChar": 0
+              },
+              "replacement": "\tif (paddr \u003c gdev-\u003ereserved_base || end \u003e res_end) {\n\t\tpr_err(\"guest_dma_proxy: Requested region [0x%llx-0x%llx] outside reserved DTB bounds [0x%pa-0x%pa]\\n\",\n\t\t\tpaddr, end, \u0026gdev-\u003ereserved_base, \u0026res_end);\n\t\treturn -EPERM;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c87734952d691dd14c2d1218d1339805859404cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d55033f8_3a60eda3",
         "filename": "drivers/android/guest_dma_proxy.c",
         "patchSetId": 4
