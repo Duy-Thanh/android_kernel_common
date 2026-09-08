@@ -88,6 +88,30 @@
       },
       "revId": "2be4663c54e0e10a10317f5db0582038d56196a3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fcece94_3486cbef",
+        "filename": "arch/x86/kvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-09-08T12:53:21Z",
+      "side": 1,
+      "message": "Although, actually the kernel driver doesn\u0027t pass 0 either, it passes the address of the (unused) memory buffer `gsmi_dev.param_buf-\u003eaddress` (and BTW this buffer is not even zeroed before `gsmi_exec(GSMI_CALLBACK, GSMI_CMD_HANDSHAKE_TYPE)` is called).",
+      "parentUuid": "77210afd_b62ae0f3",
+      "range": {
+        "startLine": 369,
+        "startChar": 5,
+        "endLine": 369,
+        "endChar": 13
+      },
+      "revId": "2be4663c54e0e10a10317f5db0582038d56196a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
