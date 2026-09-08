@@ -16,6 +16,23 @@
       "message": "the temperature is too high, force stop app and use it later!",
       "revId": "25472ba58717d64da9fee87f6381209dda9c6741",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c86c5765_285917f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-09-08T11:34:32Z",
+      "side": 1,
+      "message": "Do not submit. This is only for testing. Only `KVM: arm64: Transfer the hyp stack pages out of the host stage-2` is to be submitted.",
+      "revId": "25472ba58717d64da9fee87f6381209dda9c6741",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
