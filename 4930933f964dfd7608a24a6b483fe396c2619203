@@ -168,6 +168,24 @@
       "parentUuid": "f6f4ee1a_13853bc4",
       "revId": "4930933f964dfd7608a24a6b483fe396c2619203",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13fa862f_24e534bf",
+        "filename": "arch/x86/kvm/pkvm/gsmi.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-09-08T09:31:10Z",
+      "side": 1,
+      "message": "Fixed the TOCTOU, using READ_ONCE.\n\nBTW regarding this:\n\n\u003e To be 100% safe in this regard, we should probably copy it via *bounce_sel \u003d *(volatile struct gsmi_set_eventlog_param *)sel instead, like we are doing e.g. in pkvm_refill_memcache().\n\nI\u0027ve done a bit of research on this with gemini\u0027s help, and it looks like generally we\u0027d better not do that (i.e. not rely on volatile semantics for structs or other non-scalar types), at least because that seems to be poorly supported by compilers, e.g.: https://gcc.gnu.org/bugzilla/show_bug.cgi?id\u003d111849\n\nSo for this patch I\u0027ve just used READ_ONCE for each individual field instead. For the few existing cases like pkvm_refill_memcache(), we can fix them later.",
+      "parentUuid": "b7d73341_6ad37627",
+      "revId": "4930933f964dfd7608a24a6b483fe396c2619203",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
