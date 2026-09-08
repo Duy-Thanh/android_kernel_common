@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5227c196_319092b2",
+        "filename": "arch/x86/kvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-09-08T16:15:38Z",
+      "side": 1,
+      "message": "\u003e minor nit: s/pkvm_gsmi_init/pkvm_gsmi_probe/ ?\n\nI kind of \"followed\" the \"style\" of the above `pkvm_ramoops_init()`...\n\nIn https://android-review.googlesource.com/c/kernel/common/+/4280533/5/arch/x86/kvm/pkvm.c#398 I\u0027m adding a bit more setup to this function, which is not just about probing.",
+      "parentUuid": "2caa7264_fdb0ac69",
+      "revId": "bfdc6731612589ddadea5a33c7790c7d57e015cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cbf9d61c_8726f0bc",
@@ -103,6 +121,24 @@
       "side": 1,
       "message": "resolving it in favor of merging fast due to the time crunch. This suggestion might need some non-trivial refactor",
       "parentUuid": "cbf9d61c_8726f0bc",
+      "revId": "bfdc6731612589ddadea5a33c7790c7d57e015cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5c9e756_c96b35fa",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1455,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-09-08T16:15:38Z",
+      "side": 1,
+      "message": "\u003e Wondering if it would be better to probe in pkvm_reserve() before reserving the pages for gsmi?\n\nI don\u0027t think that would be a good idea. `pkvm_reserve()` is called in early kernel setup code. I\u0027m not sure `dmi_check_system()` is already workable at that point, and so on.",
+      "parentUuid": "ad8d25a0_0c9aaffe",
       "revId": "bfdc6731612589ddadea5a33c7790c7d57e015cf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
