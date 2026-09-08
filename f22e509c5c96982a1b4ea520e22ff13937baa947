@@ -16,6 +16,24 @@
       "message": "I think there\u0027s a bigger problem here in that we\u0027re not saving/restoring the stack pointers correctly either. I\u0027ll upload a patch shortly...",
       "revId": "f22e509c5c96982a1b4ea520e22ff13937baa947",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "962cf78d_9f18d102",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-09-08T15:16:51Z",
+      "side": 1,
+      "message": "Ah, sorry, I\u0027m wrong here. The stack pointers are ok in Android, as we didn\u0027t backport all of the changes being reviewed upstream.\n\nHowever, I still think there\u0027s a better way to manage the pauth keys. I\u0027ll upload a new version for you to have a look at.",
+      "parentUuid": "bf506b0d_ae893197",
+      "revId": "f22e509c5c96982a1b4ea520e22ff13937baa947",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
