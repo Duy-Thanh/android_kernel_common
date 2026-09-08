@@ -217,3 +217,5 @@ type 'struct fscrypt_master_key' changed
   2 members ('siphash_key_t mk_ino_hash_key' .. 'bool mk_ino_hash_key_initialized') changed
     offset changed by -4032
 
+type 'struct usb_udc' changed
+  member 'bool teardown' was added
