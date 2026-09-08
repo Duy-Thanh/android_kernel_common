@@ -40,6 +40,30 @@
       ],
       "revId": "2be4663c54e0e10a10317f5db0582038d56196a3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b82b8c23_6ada4f93",
+        "filename": "arch/x86/kvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-09-08T12:04:41Z",
+      "side": 1,
+      "message": "Coreboot only uses this value in EBX for GSMI_CMD_SET_EVENT_LOG and GSMI_CMD_CLEAR_EVENT_LOG commands, not for GSMI_CMD_HANDSHAKE_TYPE. So it should be ok not to set it for GSMI_CMD_HANDSHAKE_TYPE.",
+      "parentUuid": "2294761e_74532e46",
+      "range": {
+        "startLine": 369,
+        "startChar": 5,
+        "endLine": 369,
+        "endChar": 13
+      },
+      "revId": "2be4663c54e0e10a10317f5db0582038d56196a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
