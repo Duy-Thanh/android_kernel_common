@@ -72,6 +72,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "11042ab4_8d125785",
+        "filename": "arch/x86/kvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-09-08T16:31:09Z",
+      "side": 1,
+      "message": "\u003e I kind of \"followed\" the \"style\" of the above pkvm_ramoops_init()...\n\nAhh ok.\n\n\u003e In https://android-review.googlesource.com/c/kernel/common/+/4280533/5/arch/x86/kvm/pkvm.c#398 I\u0027m adding a bit more setup to this function, which is not just about probing.\n\nYeah saw that. we have two functions - one in hypervisor and one in host with similar names(pkvm_gsmi_init vs pkvm_init_gsmi) and thought of differentiating that. But we follow the same pattern in other places as you pointed out (and in iommu code as well). So I am fine with existing names",
+      "parentUuid": "5227c196_319092b2",
+      "revId": "bfdc6731612589ddadea5a33c7790c7d57e015cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cbf9d61c_8726f0bc",
@@ -139,6 +157,24 @@
       "side": 1,
       "message": "\u003e Wondering if it would be better to probe in pkvm_reserve() before reserving the pages for gsmi?\n\nI don\u0027t think that would be a good idea. `pkvm_reserve()` is called in early kernel setup code. I\u0027m not sure `dmi_check_system()` is already workable at that point, and so on.",
       "parentUuid": "ad8d25a0_0c9aaffe",
+      "revId": "bfdc6731612589ddadea5a33c7790c7d57e015cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "feaf12d4_51625e95",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1455,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-09-08T16:31:09Z",
+      "side": 1,
+      "message": "From what I understand, dmi_check_system() if functional by the time pkvm_reserve() is called. I was more worried about the 0 sized section passed to `do_pkvm_hyp_init()` if we don\u0027t allocate memory. I thought it would be a good idea for generic pkvm code(non-chromebook) to not rely on successful allocation when its not needed. But it can wait",
+      "parentUuid": "c5c9e756_c96b35fa",
       "revId": "bfdc6731612589ddadea5a33c7790c7d57e015cf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
