@@ -173,6 +173,41 @@
       ],
       "revId": "c87734952d691dd14c2d1218d1339805859404cb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12b208ff_3b790d71",
+        "filename": "drivers/android/guest_dma_proxy.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1827146
+      },
+      "writtenOn": "2026-09-08T23:14:52Z",
+      "side": 1,
+      "message": "Verify that `no-map` is present on the reserved memory node, to avoid mismatched memory attributes (pgprot_noncached)",
+      "fixSuggestions": [
+        {
+          "fixId": "cc6a70de_c5433ffd",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/guest_dma_proxy.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\tif (!of_property_read_bool(rmem_np, \"no-map\")) {\n\t\tpr_err(\"guest_dma_proxy: Reserved memory region must be \u0027no-map\u0027\\n\");\n\t\tof_node_put(rmem_np);\n\t\tof_node_put(np);\n\t\treturn -EINVAL;\n\t}\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c87734952d691dd14c2d1218d1339805859404cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
