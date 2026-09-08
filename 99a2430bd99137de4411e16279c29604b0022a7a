@@ -16,6 +16,24 @@
       "message": "Do not submit. This is only for testing. Only `KVM: arm64: Transfer the hyp stack pages out of the host stage-2` is to be submitted.",
       "revId": "99a2430bd99137de4411e16279c29604b0022a7a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9ddaf68_945961b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-09-08T11:34:46Z",
+      "side": 1,
+      "message": "Actually, we do want it in A17.",
+      "parentUuid": "13b30287_58a4f7e7",
+      "revId": "99a2430bd99137de4411e16279c29604b0022a7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
