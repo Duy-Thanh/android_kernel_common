@@ -248,6 +248,30 @@
       },
       "revId": "12894199ca0261276d4c621453ca1b5b46e9eeb8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13a1d70a_241348ea",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-09-08T22:24:15Z",
+      "side": 1,
+      "message": "To be precise, just noticed that one more case is TCG_OPAL_S3_UNLOCK (`opal_s3_smi_apmc()`) - also disabled on chromebooks.",
+      "parentUuid": "63c4c0cb_fe30583e",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 19
+      },
+      "revId": "12894199ca0261276d4c621453ca1b5b46e9eeb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
