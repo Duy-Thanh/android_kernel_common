@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27770403_660a5d35",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-09-08T18:36:14Z",
+      "side": 1,
+      "message": "Can you replace this with the same patch with a Change-Id that matches the android-mainline version?",
+      "revId": "53e8ba8cab3b673995bd936b28ffe6ee683ff2c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
