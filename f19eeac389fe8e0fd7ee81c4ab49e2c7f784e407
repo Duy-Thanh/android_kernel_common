@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5400121a_4d42fd28",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1827146
+      },
+      "writtenOn": "2026-09-08T20:40:45Z",
+      "side": 1,
+      "message": "maybe you also want to add relevant test here\n```\nTest: atest MicrodroidTests#testSharedMemory\n```",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 3
+      },
+      "revId": "f19eeac389fe8e0fd7ee81c4ab49e2c7f784e407",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
