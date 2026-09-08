@@ -51,6 +51,24 @@
       "parentUuid": "bf51bde1_4570f8a7",
       "revId": "1d8e55b12958a6ddfaf1c7dabfa1366a728fae4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2d3aae8_a5992e93",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2026-09-08T01:32:55Z",
+      "side": 1,
+      "message": "hello Will,\n\nThe GKI Respin request page currently does not allow selecting android17-6.18-2026-09, so I manually cherry-picked it onto android17-6.18-2026-09. \n\nHow can I get a respin bug? Could you please help me with this issue? Thank you very much.",
+      "parentUuid": "f1d5d785_e021fa38",
+      "revId": "1d8e55b12958a6ddfaf1c7dabfa1366a728fae4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
