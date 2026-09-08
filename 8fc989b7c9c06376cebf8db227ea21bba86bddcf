@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6819153d_faebaf43",
+        "filename": "arch/x86/kvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-09-08T09:32:24Z",
+      "side": 1,
+      "message": "Anyway, done.",
+      "parentUuid": "b1e8f3f2_3c2834c9",
+      "range": {
+        "startLine": 97,
+        "startChar": 1,
+        "endLine": 97,
+        "endChar": 16
+      },
+      "revId": "8fc989b7c9c06376cebf8db227ea21bba86bddcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "859504f5_074249cb",
@@ -103,6 +127,30 @@
       "side": 1,
       "message": "Indeed. Somehow that didn\u0027t occur to me...",
       "parentUuid": "859504f5_074249cb",
+      "range": {
+        "startLine": 101,
+        "startChar": 2,
+        "endLine": 101,
+        "endChar": 64
+      },
+      "revId": "8fc989b7c9c06376cebf8db227ea21bba86bddcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b7eb4ce_fc799346",
+        "filename": "arch/x86/kvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-09-08T09:32:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "617232bb_bfb9a2c5",
       "range": {
         "startLine": 101,
         "startChar": 2,
