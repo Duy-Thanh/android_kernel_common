@@ -10,11 +10,20 @@ ifndef CONFIG_DEBUG_INFO
   RUSTFLAGS_AUTOFDO_CLANG += -Cdebuginfo=line-tables-only
 endif
 
+# Clang 22.0.2 (r596125) MachineFunctionSplitter emits indirect branches across
+# sections without BTI landing pads (bti j), causing BTI traps on arm64.
+ifneq ($(CONFIG_ARM64_BTI_KERNEL)_$(CONFIG_CLANG_VERSION),y_220002)
+  AUTOFDO_MFS_CLANG := y
+endif
+
 ifdef CLANG_AUTOFDO_PROFILE
   CFLAGS_AUTOFDO_CLANG += -fprofile-sample-use=$(CLANG_AUTOFDO_PROFILE) -ffunction-sections
-  CFLAGS_AUTOFDO_CLANG += -fsplit-machine-functions
   RUSTFLAGS_AUTOFDO_CLANG += -Zprofile-sample-use=$(CLANG_AUTOFDO_PROFILE) -Zfunction-sections=y
-  RUSTFLAGS_AUTOFDO_CLANG += -Cllvm-args=-split-machine-functions
+
+  ifeq ($(AUTOFDO_MFS_CLANG),y)
+    CFLAGS_AUTOFDO_CLANG += -fsplit-machine-functions
+    RUSTFLAGS_AUTOFDO_CLANG += -Cllvm-args=-split-machine-functions
+  endif
 endif
 
 ifdef CONFIG_LTO_CLANG_THIN
@@ -22,7 +31,9 @@ ifdef CONFIG_LTO_CLANG_THIN
     KBUILD_LDFLAGS += --lto-sample-profile=$(CLANG_AUTOFDO_PROFILE)
   endif
   KBUILD_LDFLAGS += --mllvm=-enable-fs-discriminator=true --mllvm=-improved-fs-discriminator=true -plugin-opt=thinlto
-  KBUILD_LDFLAGS += -plugin-opt=-split-machine-functions
+  ifeq ($(AUTOFDO_MFS_CLANG),y)
+    KBUILD_LDFLAGS += -plugin-opt=-split-machine-functions
+  endif
 endif
 
 export CFLAGS_AUTOFDO_CLANG RUSTFLAGS_AUTOFDO_CLANG
