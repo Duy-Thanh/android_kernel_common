@@ -799,6 +799,16 @@ struct vm_area_desc {
 	void *private_data;
 };
 
+/**
+ * struct page_span - exact byte interval backed by one pinned/referenced page
+ * @offset: first byte within the native page
+ * @length: number of valid bytes in this entry
+ */
+struct page_span {
+	unsigned int offset;
+	unsigned int length;
+};
+
 /*
  * This struct describes a virtual memory area. There is one of these
  * per VM-area/task. A VM area is any part of the process virtual memory

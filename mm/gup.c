@@ -814,7 +814,8 @@ static inline bool can_follow_write_pte(pte_t pte, struct page *page,
 }
 
 static struct page *follow_page_pte(struct vm_area_struct *vma,
-		unsigned long address, pmd_t *pmd, unsigned int flags)
+		unsigned long address, pmd_t *pmd, unsigned int flags,
+		unsigned int *phys_offset)
 {
 	struct mm_struct *mm = vma->vm_mm;
 	struct folio *folio;
@@ -874,6 +875,12 @@ static struct page *follow_page_pte(struct vm_area_struct *vma,
 		page = ERR_PTR(ret);
 		goto out;
 	}
+	/* Capture the PTE slice while its page reference and PTL are held. */
+#ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
+	if (phys_offset)
+		*phys_offset = (__pte_to_phys(pte) & (PAGE_SIZE_KERNEL - 1)) +
+			       (address & (mm_pte_size(mm) - 1));
+#endif
 
 	/*
 	 * We need to make the page accessible if and only if we are going
@@ -912,7 +919,8 @@ no_page:
 static struct page *follow_pmd_mask(struct vm_area_struct *vma,
 				    unsigned long address, pud_t *pudp,
 				    unsigned int flags,
-				    unsigned long *page_mask)
+				    unsigned long *page_mask,
+				    unsigned int *phys_offset)
 {
 	pmd_t *pmd, pmdval;
 	spinlock_t *ptl;
@@ -926,7 +934,7 @@ static struct page *follow_pmd_mask(struct vm_area_struct *vma,
 	if (!pmd_present(pmdval))
 		return no_page_table(vma, flags, address);
 	if (likely(!pmd_leaf(pmdval)))
-		return follow_page_pte(vma, address, pmd, flags);
+		return follow_page_pte(vma, address, pmd, flags, phys_offset);
 
 	if (pmd_protnone(pmdval) && !gup_can_follow_protnone(vma, flags))
 		return no_page_table(vma, flags, address);
@@ -939,14 +947,14 @@ static struct page *follow_pmd_mask(struct vm_area_struct *vma,
 	}
 	if (unlikely(!pmd_leaf(pmdval))) {
 		spin_unlock(ptl);
-		return follow_page_pte(vma, address, pmd, flags);
+		return follow_page_pte(vma, address, pmd, flags, phys_offset);
 	}
 	if (pmd_trans_huge(pmdval) && (flags & FOLL_SPLIT_PMD)) {
 		spin_unlock(ptl);
 		split_huge_pmd(vma, pmd, address);
 		/* If pmd was left empty, stuff a page table in there quickly */
 		return pte_alloc(mm, pmd) ? ERR_PTR(-ENOMEM) :
-			follow_page_pte(vma, address, pmd, flags);
+			follow_page_pte(vma, address, pmd, flags, phys_offset);
 	}
 	page = follow_huge_pmd(vma, address, pmd, flags, page_mask);
 	spin_unlock(ptl);
@@ -956,7 +964,8 @@ static struct page *follow_pmd_mask(struct vm_area_struct *vma,
 static struct page *follow_pud_mask(struct vm_area_struct *vma,
 				    unsigned long address, p4d_t *p4dp,
 				    unsigned int flags,
-				    unsigned long *page_mask)
+				    unsigned long *page_mask,
+				    unsigned int *phys_offset)
 {
 	pud_t *pudp, pud;
 	spinlock_t *ptl;
@@ -978,13 +987,15 @@ static struct page *follow_pud_mask(struct vm_area_struct *vma,
 	if (unlikely(pud_bad(pud)))
 		return no_page_table(vma, flags, address);
 
-	return follow_pmd_mask(vma, address, pudp, flags, page_mask);
+	return follow_pmd_mask(vma, address, pudp, flags, page_mask,
+			       phys_offset);
 }
 
 static struct page *follow_p4d_mask(struct vm_area_struct *vma,
 				    unsigned long address, pgd_t *pgdp,
 				    unsigned int flags,
-				    unsigned long *page_mask)
+				    unsigned long *page_mask,
+				    unsigned int *phys_offset)
 {
 	p4d_t *p4dp, p4d;
 
@@ -995,7 +1006,8 @@ static struct page *follow_p4d_mask(struct vm_area_struct *vma,
 	if (!p4d_present(p4d) || p4d_bad(p4d))
 		return no_page_table(vma, flags, address);
 
-	return follow_pud_mask(vma, address, p4dp, flags, page_mask);
+	return follow_pud_mask(vma, address, p4dp, flags, page_mask,
+			       phys_offset);
 }
 
 /**
@@ -1020,7 +1032,8 @@ static struct page *follow_p4d_mask(struct vm_area_struct *vma,
  */
 static struct page *follow_page_mask(struct vm_area_struct *vma,
 			      unsigned long address, unsigned int flags,
-			      unsigned long *page_mask)
+			      unsigned long *page_mask,
+			      unsigned int *phys_offset)
 {
 	pgd_t *pgd;
 	struct mm_struct *mm = vma->vm_mm;
@@ -1034,7 +1047,8 @@ static struct page *follow_page_mask(struct vm_area_struct *vma,
 	if (pgd_none(*pgd) || unlikely(pgd_bad(*pgd)))
 		page = no_page_table(vma, flags, address);
 	else
-		page = follow_p4d_mask(vma, address, pgd, flags, page_mask);
+		page = follow_p4d_mask(vma, address, pgd, flags, page_mask,
+				phys_offset);
 
 	vma_pgtable_walk_end(vma);
 
@@ -1368,7 +1382,7 @@ static struct vm_area_struct *gup_vma_lookup(struct mm_struct *mm,
 static long __get_user_pages(struct mm_struct *mm,
 		unsigned long start, unsigned long nr_pages,
 		unsigned int gup_flags, struct page **pages,
-		int *locked)
+		int *locked, struct page_span *spans)
 {
 	P3S_CONTEXT_REMOTE_MM(mm);
 	long ret = 0, i = 0;
@@ -1389,6 +1403,7 @@ static long __get_user_pages(struct mm_struct *mm,
 	do {
 		struct page *page;
 		unsigned int page_increm;
+		unsigned int phys_offset = start & (PAGE_SIZE_KERNEL - 1);
 
 		/* first iteration or cross vma bound */
 		if (!vma || start >= vma->vm_end) {
@@ -1438,7 +1453,8 @@ retry:
 		}
 		cond_resched();
 
-		page = follow_page_mask(vma, start, gup_flags, &page_mask);
+		page = follow_page_mask(vma, start, gup_flags, &page_mask,
+					spans ? &phys_offset : NULL);
 		if (!page || PTR_ERR(page) == -EMLINK) {
 			ret = faultin_page(vma, start, gup_flags,
 					   PTR_ERR(page) == -EMLINK, locked);
@@ -1511,6 +1527,10 @@ next_page:
 			for (j = 0; j < page_increm; j++) {
 				subpage = page + j;
 				pages[i + j] = subpage;
+				if (spans)
+					spans[i + j].offset =
+						(phys_offset + j * PAGE_SIZE) &
+						(PAGE_SIZE_KERNEL - 1);
 				flush_anon_page(vma, subpage, start + j * PAGE_SIZE);
 				flush_dcache_page(subpage);
 			}
@@ -1706,7 +1726,7 @@ static __always_inline long __get_user_pages_locked(struct mm_struct *mm,
 	pages_done = 0;
 	for (;;) {
 		ret = __get_user_pages(mm, start, nr_pages, flags, pages,
-				       locked);
+				       locked, NULL);
 		if (!(flags & FOLL_UNLOCKABLE)) {
 			/* VM_FAULT_RETRY couldn't trigger, bypass */
 			pages_done = ret;
@@ -1766,7 +1786,7 @@ retry:
 
 		*locked = 1;
 		ret = __get_user_pages(mm, start, 1, flags | FOLL_TRIED,
-				       pages, locked);
+				       pages, locked, NULL);
 		if (!*locked) {
 			/* Continue to retry until we succeeded */
 			VM_WARN_ON_ONCE(ret != 0);
@@ -1874,7 +1894,7 @@ long populate_vma_page_range(struct vm_area_struct *vma,
 	 * not result in a stack expansion that recurses back here.
 	 */
 	ret = __get_user_pages(mm, start, nr_pages, gup_flags,
-			       NULL, locked ? locked : &local_locked);
+			       NULL, locked ? locked : &local_locked, NULL);
 	lru_add_drain();
 	return ret;
 }
@@ -3596,3 +3616,5 @@ int folio_add_pins(struct folio *folio, unsigned int pins)
 	return try_grab_folio(folio, pins, FOLL_PIN);
 }
 EXPORT_SYMBOL_GPL(folio_add_pins);
+
+#include "gup_p3s.c"
