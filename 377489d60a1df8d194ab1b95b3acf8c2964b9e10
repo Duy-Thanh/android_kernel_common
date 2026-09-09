@@ -16,6 +16,24 @@
       "message": "Please do this as a series, 3 patches, one for the revert, one for the upstream commit, and one that fixes up the abi issues, so we can review this easier to verify that it really is doing what is claimed.\n\nthanks!",
       "revId": "377489d60a1df8d194ab1b95b3acf8c2964b9e10",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9d4e06a_4dd1c66c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4531441
+      },
+      "writtenOn": "2026-09-09T04:40:44Z",
+      "side": 1,
+      "message": "Done. Created the patches here https://android-review.git.corp.google.com/q/topic:%22udc-teardown-kabi-fix%22",
+      "parentUuid": "025762e9_1d5b95af",
+      "revId": "377489d60a1df8d194ab1b95b3acf8c2964b9e10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
