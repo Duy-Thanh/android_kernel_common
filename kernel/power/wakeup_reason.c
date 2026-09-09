@@ -377,6 +377,10 @@ static ssize_t last_suspend_time_show(struct kobject *kobj,
 	/* sleep_time = total_time - suspend_resume_time */
 	sleep_time = timespec64_sub(total_time, suspend_resume_time);
 
+	/* Prevent negative durations caused by mismatched clock interval races. */
+	if (sleep_time.tv_sec < 0)
+		sleep_time = (struct timespec64){0, 0};
+
 	/* Export suspend_resume_time and sleep_time in pair here. */
 	return sprintf(buf, "%llu.%09lu %llu.%09lu\n",
 		       (unsigned long long)suspend_resume_time.tv_sec,
