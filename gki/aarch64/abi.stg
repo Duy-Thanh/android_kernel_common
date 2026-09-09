@@ -470102,6 +470102,15 @@ elf_symbol {
   full_name: "wake_up_process"
 }
 elf_symbol {
+  id: 0xecc7b6fc
+  name: "wake_up_var"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xef83eb2a
+  type_id: 0x16b708df
+  full_name: "wake_up_var"
+}
+elf_symbol {
   id: 0x9329b8c6
   name: "wakeup_preempt"
   is_defined: true
@@ -480995,6 +481004,7 @@ interface {
   symbol_id: 0x7540b5a8
   symbol_id: 0xb1036d49
   symbol_id: 0x9a87f32b
+  symbol_id: 0xecc7b6fc
   symbol_id: 0x9329b8c6
   symbol_id: 0x1e98f8ba
   symbol_id: 0xfff68651
