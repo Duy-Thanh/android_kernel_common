@@ -69,32 +69,6 @@ struct wrap_content_dmabuf {
 	bool writable;
 };
 
-struct data_segment {
-	loff_t offs;
-	size_t len;
-};
-
-struct wrap_io_ctx {
-	u8 *bounce_bufs[MAX_NR_BOUNCE_BUFS];
-	u8 *dst_buf;
-	size_t start_bounce_len;
-	size_t end_bounce_len;
-	loff_t buf_offs;
-	struct data_segment file_seg;
-	/* The portion of the buffer that we read the file contents into without bouncing. */
-	struct data_segment dio_buf_seg;
-	size_t bytes_read;
-	struct kiocb kiocb;
-	struct iov_iter iter;
-	struct kvec iov[MAX_NR_KVECS];
-};
-
-struct dmabuf_load_param {
-	struct dma_buf *dmabuf;
-	struct iosys_map map;
-	struct wrap_io_ctx io_ctx;
-};
-
 static int dmabuf_content_create_wrap(struct wrap_content *content,
 				      struct wrap_ctx *ctx)
 {
@@ -127,15 +101,28 @@ static int dmabuf_content_create_wrap(struct wrap_content *content,
 	return fd;
 }
 
-static size_t dio_aligned_len(loff_t file_offs, size_t len)
-{
-	/*
-	 * File offset and read length must be page aligned for direct I/O requests, so page align
-	 * the start and end of the read to figure out how much we'll actually be reading from the
-	 * file.
-	 */
-	return PAGE_ALIGN(file_offs + len) - PAGE_ALIGN_DOWN(file_offs);
-}
+struct wrap_io_ctx {
+	u8 *bounce_bufs[MAX_NR_BOUNCE_BUFS];
+	u8 *dst_buf;
+	size_t start_bounce_len;
+	size_t end_bounce_len;
+	loff_t file_offs;
+	loff_t buf_offs;
+	size_t len;
+	loff_t direct_read_buf_offs;
+	size_t direct_read_len;
+	size_t bytes_read;
+	size_t file_read_len;
+	struct kiocb kiocb;
+	struct iov_iter iter;
+	struct kvec iov[MAX_NR_KVECS];
+};
+
+struct dmabuf_load_param {
+	struct dma_buf *dmabuf;
+	struct iosys_map map;
+	struct wrap_io_ctx io_ctx;
+};
 
 static void prepare_iocb_request(struct wrap_io_ctx *io_ctx, struct file *file)
 {
@@ -151,9 +138,9 @@ static void prepare_iocb_request(struct wrap_io_ctx *io_ctx, struct file *file)
 		cur_bounce_page++;
 	}
 
-	if (io_ctx->dio_buf_seg.len) {
-		io_ctx->iov[nr_segs].iov_base = io_ctx->dst_buf + io_ctx->dio_buf_seg.offs;
-		io_ctx->iov[nr_segs].iov_len = io_ctx->dio_buf_seg.len;
+	if (io_ctx->direct_read_len) {
+		io_ctx->iov[nr_segs].iov_base = io_ctx->dst_buf + io_ctx->direct_read_buf_offs;
+		io_ctx->iov[nr_segs].iov_len = io_ctx->direct_read_len;
 		nr_segs++;
 	}
 
@@ -165,11 +152,10 @@ static void prepare_iocb_request(struct wrap_io_ctx *io_ctx, struct file *file)
 	}
 
 	init_sync_kiocb(kiocb, file);
-	/* File offset and size must be page aligned for direct I/O requests. */
-	kiocb->ki_pos = PAGE_ALIGN_DOWN(io_ctx->file_seg.offs);
+	/* File offset must be page aligned for direct I/O requests. */
+	kiocb->ki_pos = PAGE_ALIGN_DOWN(io_ctx->file_offs);
 	kiocb->ki_flags |= IOCB_DIRECT;
-	iov_iter_kvec(&io_ctx->iter, ITER_DEST, io_ctx->iov, nr_segs,
-		      dio_aligned_len(io_ctx->file_seg.offs, io_ctx->file_seg.len));
+	iov_iter_kvec(&io_ctx->iter, ITER_DEST, io_ctx->iov, nr_segs, io_ctx->file_read_len);
 }
 
 /*
@@ -192,13 +178,20 @@ static int wrap_io_prepare(struct file *file, loff_t file_offs, u8 *dst_buf, lof
 {
 	u8 *bounce_bufs[MAX_NR_BOUNCE_BUFS] = {};
 	size_t start_bounce_len = 0;
-	loff_t dio_buf_offs = buf_offs;
-	size_t dio_buf_len = 0;
+	loff_t direct_read_buf_offs = buf_offs;
+	size_t direct_read_len = 0;
 	size_t end_bounce_len;
 	size_t nr_bounce_pages;
-	size_t file_read_len = dio_aligned_len(file_offs, len);
+	size_t file_read_len;
 	loff_t buf_end = buf_offs + len;
 	int i, ret = 0;
+
+	/*
+	 * File offset and read length must be page aligned for direct I/O requests, so page align
+	 * the start and end of the read to figure out how much we'll actually be reading from the
+	 * file.
+	 */
+	file_read_len = PAGE_ALIGN(file_offs + len) - PAGE_ALIGN_DOWN(file_offs);
 
 	/*
 	 * If either the file or buffer offset are unaligned, then using direct I/O into the first
@@ -219,7 +212,8 @@ static int wrap_io_prepare(struct file *file, loff_t file_offs, u8 *dst_buf, lof
 		 * This means that the data will need to be shifted backwards if it is read into
 		 * the buffer directly.
 		 */
-		dio_buf_offs = PAGE_ALIGN(buf_offs + PAGE_SIZE - offset_in_page(file_offs));
+		direct_read_buf_offs = PAGE_ALIGN(buf_offs + PAGE_SIZE -
+						    offset_in_page(file_offs));
 		start_bounce_len = PAGE_SIZE;
 	}
 
@@ -228,15 +222,15 @@ static int wrap_io_prepare(struct file *file, loff_t file_offs, u8 *dst_buf, lof
 	 * the range we're reading into, and since direct I/O is done in units of pages,
 	 * ensure that there is at least a page to read.
 	 */
-	if (dio_buf_offs <= (buf_end - PAGE_SIZE))
-		dio_buf_len = PAGE_ALIGN_DOWN(buf_end) - dio_buf_offs;
+	if (direct_read_buf_offs <= (buf_end - PAGE_SIZE))
+		direct_read_len = PAGE_ALIGN_DOWN(buf_end) - direct_read_buf_offs;
 
 	/*
 	 * Bounce the remainder, which is capped at 2 pages, since we may have shifted the data
 	 * earlier, because of the buffer offset by at most one page, and then any other data
 	 * at the tail which may cross into another page.
 	 */
-	end_bounce_len = file_read_len - start_bounce_len - dio_buf_len;
+	end_bounce_len = file_read_len - start_bounce_len - direct_read_len;
 	WARN_ON(end_bounce_len > PAGE_SIZE * 2);
 
 	nr_bounce_pages = (start_bounce_len + end_bounce_len) / PAGE_SIZE;
@@ -253,11 +247,12 @@ static int wrap_io_prepare(struct file *file, loff_t file_offs, u8 *dst_buf, lof
 	io_ctx->dst_buf = dst_buf;
 	io_ctx->start_bounce_len = start_bounce_len;
 	io_ctx->end_bounce_len = end_bounce_len;
+	io_ctx->file_offs = file_offs;
 	io_ctx->buf_offs = buf_offs;
-	io_ctx->file_seg.offs = file_offs;
-	io_ctx->file_seg.len = len;
-	io_ctx->dio_buf_seg.offs = dio_buf_offs;
-	io_ctx->dio_buf_seg.len = dio_buf_len;
+	io_ctx->direct_read_buf_offs = direct_read_buf_offs;
+	io_ctx->direct_read_len = direct_read_len;
+	io_ctx->len = len;
+	io_ctx->file_read_len = file_read_len;
 	prepare_iocb_request(io_ctx, file);
 	return 0;
 
@@ -272,12 +267,10 @@ err_free_bounce_pages:
 static ssize_t wrap_io_read(struct wrap_io_ctx *io_ctx, struct file *file)
 {
 	ssize_t bytes_read;
-	loff_t file_offs = io_ctx->file_seg.offs;
-	size_t dio_read_len = dio_aligned_len(file_offs, io_ctx->file_seg.len);
 
-	while (io_ctx->bytes_read < dio_read_len) {
+	while (io_ctx->bytes_read < io_ctx->file_read_len) {
 		io_ctx->iter.count = min_t(size_t, MAX_RW_COUNT,
-					   PAGE_ALIGN(dio_read_len - io_ctx->bytes_read));
+					   PAGE_ALIGN(io_ctx->file_read_len - io_ctx->bytes_read));
 
 		bytes_read = vfs_iocb_iter_read(file, &io_ctx->kiocb, &io_ctx->iter);
 		if (bytes_read <= 0)
@@ -287,43 +280,42 @@ static ssize_t wrap_io_read(struct wrap_io_ctx *io_ctx, struct file *file)
 	}
 
 	/* File was too short / early EOF. */
-	return io_ctx->bytes_read < offset_in_page(file_offs) + io_ctx->file_seg.len ? -EINVAL : 0;
+	return io_ctx->bytes_read < offset_in_page(io_ctx->file_offs) + io_ctx->len ? -EINVAL : 0;
 }
 
 static void wrap_io_complete(struct wrap_io_ctx *io_ctx)
 {
-	u8 *dst, *src, *dio_start;
+	u8 *dst, *src, *direct_read_start;
 	size_t tot_len, len;
 	unsigned int cur_bounce_page = 0;
-	loff_t file_offs = io_ctx->file_seg.offs;
 	int i;
 
-	if (io_ctx->bytes_read < (offset_in_page(file_offs) + io_ctx->file_seg.len))
+	if (io_ctx->bytes_read < (offset_in_page(io_ctx->file_offs) + io_ctx->len))
 		goto out;
 
-	tot_len = io_ctx->file_seg.len;
+	tot_len = io_ctx->len;
 	dst = io_ctx->dst_buf + io_ctx->buf_offs;
 
 	if (io_ctx->start_bounce_len) {
-		src = io_ctx->bounce_bufs[cur_bounce_page] + offset_in_page(file_offs);
+		src = io_ctx->bounce_bufs[cur_bounce_page] + offset_in_page(io_ctx->file_offs);
 		/* Handle the case where all of the requested data is in the first bounce page. */
-		len = min(tot_len, PAGE_SIZE - offset_in_page(file_offs));
+		len = min(tot_len, PAGE_SIZE - offset_in_page(io_ctx->file_offs));
 		memcpy(dst, src, len);
 		dst += len;
 		tot_len -= len;
 		cur_bounce_page++;
 	}
 
-	if (io_ctx->dio_buf_seg.len) {
-		dio_start = io_ctx->dst_buf + io_ctx->dio_buf_seg.offs;
-		len = min(tot_len, io_ctx->dio_buf_seg.len);
+	if (io_ctx->direct_read_len) {
+		direct_read_start = io_ctx->dst_buf + io_ctx->direct_read_buf_offs;
+		len = min(tot_len, io_ctx->direct_read_len);
 
 		/*
 		 * If there's anything that was copied directly into the dmabuf, check to make sure
 		 * it's in the right place. Shift it back if it's not.
 		 */
-		if (dio_start != dst)
-			memmove(dst, dio_start, len);
+		if (direct_read_start != dst)
+			memmove(dst, direct_read_start, len);
 
 		dst += len;
 		tot_len -= len;
@@ -547,7 +539,7 @@ static struct wrap_content *alloc_dmabuf_content(struct dma_buf *dmabuf,
 {
 	struct wrap_content_dmabuf *dmabuf_content;
 
-	dmabuf_content = kmalloc_obj(*dmabuf_content);
+	dmabuf_content = kmalloc(sizeof(*dmabuf_content), GFP_KERNEL);
 	if (!dmabuf_content)
 		return ERR_PTR(-ENOMEM);
 
@@ -587,7 +579,7 @@ static struct wrap_ctx *create_wrap_ctx(void)
 {
 	struct wrap_ctx *ctx;
 
-	ctx = kzalloc_obj(*ctx);
+	ctx = kzalloc(sizeof(*ctx), GFP_KERNEL);
 	if (!ctx)
 		return NULL;
 
@@ -817,7 +809,7 @@ unlock:
 		goto err;
 
 	/* If we reached here then ctx->map_count has been incremented */
-	mapping = kzalloc_obj(*mapping);
+	mapping = kzalloc(sizeof(*mapping), GFP_KERNEL);
 	if (!mapping) {
 		ret = -ENOMEM;
 		goto err_dec;
