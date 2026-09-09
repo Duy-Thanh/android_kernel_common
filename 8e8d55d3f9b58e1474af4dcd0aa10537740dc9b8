@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a30eb5e1_b2c248dd",
+        "filename": "drivers/dma-buf/heaps/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-09-09T02:07:41Z",
+      "side": 1,
+      "message": "My one concern about this is, this isn\u0027t a dmabuf heaps driver, more of a platform specific reserved memory driver, so it probably shouldn\u0027t be in the drivers/dma-buf/headps dir. Maybe somewhere in drivers/soc/tegra instead?\n\nI\u0027m surprised though, is module init really too late for this sort of reservation?",
+      "revId": "8e8d55d3f9b58e1474af4dcd0aa10537740dc9b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
