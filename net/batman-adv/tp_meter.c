@@ -1139,7 +1139,7 @@ static void batadv_tp_receiver_shutdown(struct timer_list *t)
 	bat_priv = tp_vars->bat_priv;
 
 	/* if there is recent activity rearm the timer */
-	if (!batadv_has_timed_out(tp_vars->last_recv_time,
+	if (!batadv_has_timed_out(READ_ONCE(tp_vars->last_recv_time),
 				  BATADV_TP_RECV_TIMEOUT)) {
 		/* reset the receiver shutdown timer */
 		batadv_tp_reset_receiver_timer(tp_vars);
@@ -1382,8 +1382,18 @@ batadv_tp_init_recv(struct batadv_priv *bat_priv,
 		goto out_unlock;
 
 	tp_vars = batadv_tp_list_find_session(bat_priv, icmp->orig,
+<<<<<<< HEAD   (1476e727b59a0214540b283e99c65f516118215a Merge 1c616b0be4bd ("batman-adv: tp_meter: restrict number o)
 					      icmp->session);
 	if (tp_vars)
+||||||| BASE   (1c616b0be4bd8399d485e25e91859373b95d6013 batman-adv: tp_meter: restrict number of unacked list entrie)
+					      icmp->session, BATADV_TP_RECEIVER);
+	if (tp_vars) {
+		tp_vars->last_recv_time = jiffies;
+=======
+					      icmp->session, BATADV_TP_RECEIVER);
+	if (tp_vars) {
+		WRITE_ONCE(tp_vars->last_recv_time, jiffies);
+>>>>>>> BRANCH (c33ea8e9ac35c65abb0fece4b4e5573613f449c1 batman-adv: tp_meter: annotate last_recv_time access with RE)
 		goto out_unlock;
 
 	if (!atomic_add_unless(&bat_priv->tp_num, 1, BATADV_TP_MAX_NUM)) {
@@ -1412,6 +1422,14 @@ batadv_tp_init_recv(struct batadv_priv *bat_priv,
 	kref_get(&tp_vars->refcount);
 	timer_setup(&tp_vars->timer, batadv_tp_receiver_shutdown, 0);
 
+<<<<<<< HEAD   (1476e727b59a0214540b283e99c65f516118215a Merge 1c616b0be4bd ("batman-adv: tp_meter: restrict number o)
+||||||| BASE   (1c616b0be4bd8399d485e25e91859373b95d6013 batman-adv: tp_meter: restrict number of unacked list entrie)
+	tp_vars->last_recv_time = jiffies;
+
+=======
+	WRITE_ONCE(tp_vars->last_recv_time, jiffies);
+
+>>>>>>> BRANCH (c33ea8e9ac35c65abb0fece4b4e5573613f449c1 batman-adv: tp_meter: annotate last_recv_time access with RE)
 	kref_get(&tp_vars->refcount);
 	hlist_add_head_rcu(&tp_vars->list, &bat_priv->tp_list);
 
@@ -1460,6 +1478,14 @@ static void batadv_tp_recv_msg(struct batadv_priv *bat_priv,
 				   icmp->orig);
 			goto out;
 		}
+<<<<<<< HEAD   (1476e727b59a0214540b283e99c65f516118215a Merge 1c616b0be4bd ("batman-adv: tp_meter: restrict number o)
+||||||| BASE   (1c616b0be4bd8399d485e25e91859373b95d6013 batman-adv: tp_meter: restrict number of unacked list entrie)
+
+		tp_vars->last_recv_time = jiffies;
+=======
+
+		WRITE_ONCE(tp_vars->last_recv_time, jiffies);
+>>>>>>> BRANCH (c33ea8e9ac35c65abb0fece4b4e5573613f449c1 batman-adv: tp_meter: annotate last_recv_time access with RE)
 	}
 
 	if (unlikely(tp_vars->role != BATADV_TP_RECEIVER)) {
