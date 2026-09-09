@@ -52,6 +52,24 @@
       "parentUuid": "c6a0d4f6_d5a54113",
       "revId": "e54d464573bb1b184f884720e96bb28504312d16",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46b7907e_e9c5e514",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3963932
+      },
+      "writtenOn": "2026-09-09T15:36:46Z",
+      "side": 1,
+      "message": "Hi Todd,\n\nhttps://partnerissuetracker.corp.google.com/u/0/issues/505636388\n\ncould you please check this buganizer.\nThis is not upstreamed in wireless next in the mainline kernel. \n \nThis is a workaround for Google Android only, because our driver is not aligned with updated kernel expectation.",
+      "parentUuid": "289b4b29_77b85ff3",
+      "revId": "e54d464573bb1b184f884720e96bb28504312d16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
