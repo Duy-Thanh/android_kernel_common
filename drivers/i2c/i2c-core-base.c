@@ -1470,16 +1470,31 @@ static int i2c_register_adapter(struct i2c_adapter *adap)
 		goto out_list;
 	}
 
-	dev_set_name(&adap->dev, "i2c-%d", adap->nr);
+	res = dev_set_name(&adap->dev, "i2c-%d", adap->nr);
+	if (res)
+		goto err_remove_irq_domain;
+
 	adap->dev.bus = &i2c_bus_type;
 	adap->dev.type = &i2c_adapter_type;
-	res = device_register(&adap->dev);
+	device_initialize(&adap->dev);
+
+<<<<<<< HEAD   (7c8a4712246dced33ecd7ef9b2cc3d8380afe8f7 Merge 9b49b2c4e39c ("i2c: core: fix NULL-deref on adapter re)
+	res = of_i2c_setup_smbus_alert(adap);
+||||||| BASE   (9b49b2c4e39cef71819548fea841d3fe0fc0e170 i2c: core: fix NULL-deref on adapter registration failure)
+	adap->debugfs = debugfs_create_dir(dev_name(&adap->dev), i2c_debugfs_root);
+
+	res = i2c_setup_smbus_alert(adap);
+=======
+	adap->debugfs = debugfs_create_dir(dev_name(&adap->dev), i2c_debugfs_root);
+
+	res = device_add(&adap->dev);
 	if (res) {
 		pr_err("adapter '%s': can't register device (%d)\n", adap->name, res);
-		goto err_put_adap;
+		goto err_remove_debugfs;
 	}
 
-	res = of_i2c_setup_smbus_alert(adap);
+	res = i2c_setup_smbus_alert(adap);
+>>>>>>> BRANCH (8448877bf27486786468f9697cd588ecfd80b72e i2c: core: fix adapter debugfs creation)
 	if (res)
 		goto out_reg;
 
@@ -1519,10 +1534,17 @@ static int i2c_register_adapter(struct i2c_adapter *adap)
 out_reg:
 	i2c_deregister_clients(adap);
 	device_del(&adap->dev);
-err_put_adap:
+err_remove_debugfs:
+	debugfs_remove_recursive(adap->debugfs);
 	init_completion(&adap->dev_released);
 	put_device(&adap->dev);
 	wait_for_completion(&adap->dev_released);
+<<<<<<< HEAD   (7c8a4712246dced33ecd7ef9b2cc3d8380afe8f7 Merge 9b49b2c4e39c ("i2c: core: fix NULL-deref on adapter re)
+||||||| BASE   (9b49b2c4e39cef71819548fea841d3fe0fc0e170 i2c: core: fix NULL-deref on adapter registration failure)
+
+=======
+err_remove_irq_domain:
+>>>>>>> BRANCH (8448877bf27486786468f9697cd588ecfd80b72e i2c: core: fix adapter debugfs creation)
 	i2c_host_notify_irq_teardown(adap);
 
 out_list:
