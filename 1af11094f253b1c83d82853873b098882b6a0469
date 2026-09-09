@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "13a4fe97_835643e8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-09-09T17:19:43Z",
+      "side": 1,
+      "message": "@gregkh@google.com, since you requested this kmi-safe fix to be applied as a separate change, how best should we handle the commit message? Should this be updated to just describe the changes to the original kabi-breaking commit?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 0
+      },
+      "revId": "1af11094f253b1c83d82853873b098882b6a0469",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d295bdcc_89d6718d",
         "filename": "drivers/usb/gadget/udc/core.c",
         "patchSetId": 7
