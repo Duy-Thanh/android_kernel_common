@@ -23,7 +23,12 @@
 #include <linux/slab.h>
 #include <linux/percpu-refcount.h>
 #include <linux/bpfptr.h>
+<<<<<<< HEAD   (fc5c960d99916726bfbd43592e27c62f014691a1 Merge a4365bc41baa ("i2c: core: fix adapter registration rac)
 #include <linux/android_kabi.h>
+||||||| BASE   (a4365bc41baaf67f3a5aa8556d23544e6ec7480a i2c: core: fix adapter registration race)
+=======
+#include <linux/rcupdate_trace.h>
+>>>>>>> BRANCH (674f684f7c61c3db475450e8c2b0c5701f9e4ae7 Linux 5.15.212)
 
 struct bpf_verifier_env;
 struct bpf_verifier_log;
@@ -1381,6 +1386,9 @@ out:
 			_ret = (_cn ? NET_XMIT_DROP : -EPERM);		\
 		_ret;					\
 	})
+
+#define bpf_rcu_lock_held() \
+	(rcu_read_lock_held() || rcu_read_lock_trace_held() || rcu_read_lock_bh_held())
 
 #ifdef CONFIG_BPF_SYSCALL
 DECLARE_PER_CPU(int, bpf_prog_active);

@@ -2931,10 +2931,18 @@ static int xfrm_user_rcv_msg(struct sk_buff *skb, struct nlmsghdr *nlh,
 	if (!netlink_net_capable(skb, CAP_NET_ADMIN))
 		return -EPERM;
 
+<<<<<<< HEAD   (fc5c960d99916726bfbd43592e27c62f014691a1 Merge a4365bc41baa ("i2c: core: fix adapter registration rac)
 	/* Use the 64-bit / untranslated format on Android, even for compat */
 	if (!IS_ENABLED(CONFIG_ANDROID) || IS_ENABLED(CONFIG_XFRM_USER_COMPAT)) {
 		if (in_compat_syscall()) {
 			struct xfrm_translator *xtr = xfrm_get_translator();
+||||||| BASE   (a4365bc41baaf67f3a5aa8556d23544e6ec7480a i2c: core: fix adapter registration race)
+	if (in_compat_syscall()) {
+		struct xfrm_translator *xtr = xfrm_get_translator();
+=======
+	if (IS_ENABLED(CONFIG_COMPAT_FOR_U64_ALIGNMENT) && in_compat_syscall()) {
+		struct xfrm_translator *xtr = xfrm_get_translator();
+>>>>>>> BRANCH (674f684f7c61c3db475450e8c2b0c5701f9e4ae7 Linux 5.15.212)
 
 			if (!xtr)
 				return -EOPNOTSUPP;

@@ -1476,7 +1476,13 @@ static int i2c_register_adapter(struct i2c_adapter *adap)
 	res = device_register(&adap->dev);
 	if (res) {
 		pr_err("adapter '%s': can't register device (%d)\n", adap->name, res);
+<<<<<<< HEAD   (fc5c960d99916726bfbd43592e27c62f014691a1 Merge a4365bc41baa ("i2c: core: fix adapter registration rac)
 		goto err_put_adap;
+||||||| BASE   (a4365bc41baaf67f3a5aa8556d23544e6ec7480a i2c: core: fix adapter registration race)
+		goto err_remove_debugfs;
+=======
+		goto err_replace_id;
+>>>>>>> BRANCH (674f684f7c61c3db475450e8c2b0c5701f9e4ae7 Linux 5.15.212)
 	}
 
 	res = of_i2c_setup_smbus_alert(adap);
@@ -1519,7 +1525,18 @@ static int i2c_register_adapter(struct i2c_adapter *adap)
 out_reg:
 	i2c_deregister_clients(adap);
 	device_del(&adap->dev);
+<<<<<<< HEAD   (fc5c960d99916726bfbd43592e27c62f014691a1 Merge a4365bc41baa ("i2c: core: fix adapter registration rac)
 err_put_adap:
+||||||| BASE   (a4365bc41baaf67f3a5aa8556d23544e6ec7480a i2c: core: fix adapter registration race)
+err_remove_debugfs:
+	debugfs_remove_recursive(adap->debugfs);
+=======
+err_replace_id:
+	mutex_lock(&core_lock);
+	idr_replace(&i2c_adapter_idr, NULL, adap->nr);
+	mutex_unlock(&core_lock);
+	debugfs_remove_recursive(adap->debugfs);
+>>>>>>> BRANCH (674f684f7c61c3db475450e8c2b0c5701f9e4ae7 Linux 5.15.212)
 	init_completion(&adap->dev_released);
 	put_device(&adap->dev);
 	wait_for_completion(&adap->dev_released);
@@ -1708,6 +1725,8 @@ void i2c_del_adapter(struct i2c_adapter *adap)
 	/* First make sure that this adapter was ever added */
 	mutex_lock(&core_lock);
 	found = idr_find(&i2c_adapter_idr, adap->nr);
+	if (found == adap)
+		idr_replace(&i2c_adapter_idr, NULL, adap->nr);
 	mutex_unlock(&core_lock);
 	if (found != adap) {
 		pr_debug("attempting to delete unregistered adapter [%s]\n", adap->name);

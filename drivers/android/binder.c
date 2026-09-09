@@ -1790,6 +1790,22 @@ static void binder_free_transaction(struct binder_transaction *t)
 {
 	struct binder_thread *target_thread;
 	struct binder_proc *target_proc;
+<<<<<<< HEAD   (fc5c960d99916726bfbd43592e27c62f014691a1 Merge a4365bc41baa ("i2c: core: fix adapter registration rac)
+||||||| BASE   (a4365bc41baaf67f3a5aa8556d23544e6ec7480a i2c: core: fix adapter registration race)
+=======
+
+	spin_lock(&t->lock);
+	target_proc = t->to_proc;
+	target_thread = t->to_thread;
+	/*
+	 * Pin target_thread to keep target_proc alive. Undelivered
+	 * transactions with !target_thread are safe, as target_proc
+	 * can only be the current context there.
+	 */
+	if (target_thread)
+		atomic_inc(&target_thread->tmp_ref);
+	spin_unlock(&t->lock);
+>>>>>>> BRANCH (674f684f7c61c3db475450e8c2b0c5701f9e4ae7 Linux 5.15.212)
 
 	spin_lock(&t->lock);
 	target_proc = t->to_proc;
