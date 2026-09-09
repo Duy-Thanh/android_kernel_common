@@ -23,7 +23,6 @@ allOf:
 properties:
   compatible:
     enum:
-      - ti,am62l-rti-wdt
       - ti,j7-rti-wdt
 
   reg:

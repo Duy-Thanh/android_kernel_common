@@ -21,36 +21,25 @@
 #include "vs_primary_plane_regs.h"
 
 static int vs_primary_plane_atomic_check(struct drm_plane *plane,
-					 struct drm_atomic_commit *state)
+					 struct drm_atomic_state *state)
 {
 	struct drm_plane_state *new_plane_state = drm_atomic_get_new_plane_state(state,
 										 plane);
-	struct vs_plane_state *new_vs_plane_state = to_vs_plane_state(new_plane_state);
-	struct drm_framebuffer *fb = new_plane_state->fb;
 	struct drm_crtc *crtc = new_plane_state->crtc;
-	struct drm_crtc_state *crtc_state = NULL;
-	int ret;
+	struct drm_crtc_state *crtc_state;
 
-	if (crtc)
-		crtc_state = drm_atomic_get_new_crtc_state(state, crtc);
-
-	ret = drm_atomic_helper_check_plane_state(new_plane_state,
-						  crtc_state,
-						  DRM_PLANE_NO_SCALING,
-						  DRM_PLANE_NO_SCALING,
-						  false, true);
-	if (ret)
-		return ret;
-
-	if (!new_plane_state->visible)
+	if (!crtc)
 		return 0;
 
-	ret = drm_format_to_vs_format(fb->format->format,
-				      &new_vs_plane_state->format);
-	if (drm_WARN_ON_ONCE(plane->dev, ret))
-		return ret;
+	crtc_state = drm_atomic_get_new_crtc_state(state, crtc);
+	if (WARN_ON(!crtc_state))
+		return -EINVAL;
 
-	return 0;
+	return drm_atomic_helper_check_plane_state(new_plane_state,
+						   crtc_state,
+						   DRM_PLANE_NO_SCALING,
+						   DRM_PLANE_NO_SCALING,
+						   false, true);
 }
 
 static void vs_primary_plane_commit(struct vs_dc *dc, unsigned int output)
@@ -60,7 +49,7 @@ static void vs_primary_plane_commit(struct vs_dc *dc, unsigned int output)
 }
 
 static void vs_primary_plane_atomic_enable(struct drm_plane *plane,
-					   struct drm_atomic_commit *atomic_state)
+					   struct drm_atomic_state *atomic_state)
 {
 	struct drm_plane_state *state = drm_atomic_get_new_plane_state(atomic_state,
 								       plane);
@@ -79,7 +68,7 @@ static void vs_primary_plane_atomic_enable(struct drm_plane *plane,
 }
 
 static void vs_primary_plane_atomic_disable(struct drm_plane *plane,
-					    struct drm_atomic_commit *atomic_state)
+					    struct drm_atomic_state *atomic_state)
 {
 	struct drm_plane_state *state = drm_atomic_get_old_plane_state(atomic_state,
 								       plane);
@@ -95,15 +84,15 @@ static void vs_primary_plane_atomic_disable(struct drm_plane *plane,
 }
 
 static void vs_primary_plane_atomic_update(struct drm_plane *plane,
-					   struct drm_atomic_commit *atomic_state)
+					   struct drm_atomic_state *atomic_state)
 {
 	struct drm_plane_state *state = drm_atomic_get_new_plane_state(atomic_state,
 								       plane);
-	struct vs_plane_state *vs_state = to_vs_plane_state(state);
 	struct drm_framebuffer *fb = state->fb;
 	struct drm_crtc *crtc = state->crtc;
 	struct vs_dc *dc;
 	struct vs_crtc *vcrtc;
+	struct vs_format fmt;
 	unsigned int output;
 	dma_addr_t dma_addr;
 
@@ -116,15 +105,16 @@ static void vs_primary_plane_atomic_update(struct drm_plane *plane,
 	output = vcrtc->id;
 	dc = vcrtc->dc;
 
+	drm_format_to_vs_format(state->fb->format->format, &fmt);
+
 	regmap_update_bits(dc->regs, VSDC_FB_CONFIG(output),
 			   VSDC_FB_CONFIG_FMT_MASK,
-			   VSDC_FB_CONFIG_FMT(vs_state->format.color));
+			   VSDC_FB_CONFIG_FMT(fmt.color));
 	regmap_update_bits(dc->regs, VSDC_FB_CONFIG(output),
 			   VSDC_FB_CONFIG_SWIZZLE_MASK,
-			   VSDC_FB_CONFIG_SWIZZLE(vs_state->format.swizzle));
+			   VSDC_FB_CONFIG_SWIZZLE(fmt.swizzle));
 	regmap_assign_bits(dc->regs, VSDC_FB_CONFIG(output),
-			   VSDC_FB_CONFIG_UV_SWIZZLE_EN,
-			   vs_state->format.uv_swizzle);
+			   VSDC_FB_CONFIG_UV_SWIZZLE_EN, fmt.uv_swizzle);
 
 	dma_addr = vs_fb_get_dma_addr(fb, &state->src);
 
@@ -155,10 +145,10 @@ static const struct drm_plane_helper_funcs vs_primary_plane_helper_funcs = {
 };
 
 static const struct drm_plane_funcs vs_primary_plane_funcs = {
-	.atomic_destroy_state	= vs_plane_destroy_state,
-	.atomic_duplicate_state	= vs_plane_duplicate_state,
+	.atomic_destroy_state	= drm_atomic_helper_plane_destroy_state,
+	.atomic_duplicate_state	= drm_atomic_helper_plane_duplicate_state,
 	.disable_plane		= drm_atomic_helper_disable_plane,
-	.reset			= vs_plane_reset,
+	.reset			= drm_atomic_helper_plane_reset,
 	.update_plane		= drm_atomic_helper_update_plane,
 };
 

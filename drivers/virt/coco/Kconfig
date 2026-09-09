@@ -17,7 +17,5 @@ source "drivers/virt/coco/arm-cca-guest/Kconfig"
 source "drivers/virt/coco/guest/Kconfig"
 endif
 
-source "drivers/virt/coco/tdx-host/Kconfig"
-
 config TSM
 	bool

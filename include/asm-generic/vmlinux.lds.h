@@ -1018,12 +1018,6 @@
 #define PERCPU_DECRYPTED_SECTION
 #endif
 
-#ifdef CONFIG_PROPELLER_CLANG
-#define PROPELLER_DATA                                                     \
-	.llvm_bb_addr_map : { *(.llvm_bb_addr_map) }
-#else
-#define PROPELLER_DATA
-#endif
 
 /*
  * Default discarded sections.

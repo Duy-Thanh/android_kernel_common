@@ -472,15 +472,13 @@ static int mpc52xx_spi_probe(struct platform_device *op)
 	if (ms->irq0 && ms->irq1) {
 		rc = request_irq(ms->irq0, mpc52xx_spi_irq, 0,
 				  "mpc5200-spi-modf", ms);
-		if (rc == 0) {
-			rc = request_irq(ms->irq1, mpc52xx_spi_irq, 0,
-					 "mpc5200-spi-spif", ms);
-			if (rc)
-				free_irq(ms->irq0, ms);
-		}
-
-		if (rc)
+		rc |= request_irq(ms->irq1, mpc52xx_spi_irq, 0,
+				  "mpc5200-spi-spif", ms);
+		if (rc) {
+			free_irq(ms->irq0, ms);
+			free_irq(ms->irq1, ms);
 			ms->irq0 = ms->irq1 = 0;
+		}
 	} else {
 		/* operate in polled mode */
 		ms->irq0 = ms->irq1 = 0;
@@ -500,10 +498,8 @@ static int mpc52xx_spi_probe(struct platform_device *op)
 
  err_register:
 	dev_err(&ms->host->dev, "initialization failed\n");
-	if (ms->irq0) {
-		free_irq(ms->irq0, ms);
-		free_irq(ms->irq1, ms);
-	}
+	free_irq(ms->irq0, ms);
+	free_irq(ms->irq1, ms);
 	cancel_work_sync(&ms->work);
  err_gpio:
 	while (i-- > 0)
@@ -520,16 +516,14 @@ static int mpc52xx_spi_probe(struct platform_device *op)
 
 static void mpc52xx_spi_remove(struct platform_device *op)
 {
-	struct spi_controller *host = platform_get_drvdata(op);
+	struct spi_controller *host = spi_controller_get(platform_get_drvdata(op));
 	struct mpc52xx_spi *ms = spi_controller_get_devdata(host);
 	int i;
 
 	spi_unregister_controller(host);
 
-	if (ms->irq0) {
-		free_irq(ms->irq0, ms);
-		free_irq(ms->irq1, ms);
-	}
+	free_irq(ms->irq0, ms);
+	free_irq(ms->irq1, ms);
 
 	cancel_work_sync(&ms->work);
 

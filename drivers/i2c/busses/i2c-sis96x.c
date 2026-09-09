@@ -245,19 +245,23 @@ static int sis96x_probe(struct pci_dev *dev,
 	u16 ww = 0;
 	int retval;
 
-	if (sis96x_smbus_base)
-		return dev_err_probe(&dev->dev, -EBUSY, "Only one device supported.\n");
+	if (sis96x_smbus_base) {
+		dev_err(&dev->dev, "Only one device supported.\n");
+		return -EBUSY;
+	}
 
 	pci_read_config_word(dev, PCI_CLASS_DEVICE, &ww);
-	if (ww != PCI_CLASS_SERIAL_SMBUS)
-		return dev_err_probe(&dev->dev, -ENODEV,
-				     "Unsupported device class 0x%04x!\n", ww);
+	if (PCI_CLASS_SERIAL_SMBUS != ww) {
+		dev_err(&dev->dev, "Unsupported device class 0x%04x!\n", ww);
+		return -ENODEV;
+	}
 
 	sis96x_smbus_base = pci_resource_start(dev, SIS96x_BAR);
-	if (!sis96x_smbus_base)
-		return dev_err_probe(&dev->dev, -EINVAL,
-				     "SiS96x SMBus base address not initialized!\n");
-
+	if (!sis96x_smbus_base) {
+		dev_err(&dev->dev, "SiS96x SMBus base address "
+			"not initialized!\n");
+		return -EINVAL;
+	}
 	dev_info(&dev->dev, "SiS96x SMBus base address: 0x%04x\n",
 			sis96x_smbus_base);
 
@@ -268,9 +272,9 @@ static int sis96x_probe(struct pci_dev *dev,
 	/* Everything is happy, let's grab the memory and set things up. */
 	if (!request_region(sis96x_smbus_base, SMB_IOSIZE,
 			    sis96x_driver.name)) {
-		dev_err_probe(&dev->dev, -EINVAL,
-			      "SMBus registers 0x%04x-0x%04x already in use!\n",
-			      sis96x_smbus_base, sis96x_smbus_base + SMB_IOSIZE - 1);
+		dev_err(&dev->dev, "SMBus registers 0x%04x-0x%04x "
+			"already in use!\n", sis96x_smbus_base,
+			sis96x_smbus_base + SMB_IOSIZE - 1);
 
 		sis96x_smbus_base = 0;
 		return -EINVAL;
@@ -283,7 +287,7 @@ static int sis96x_probe(struct pci_dev *dev,
 		"SiS96x SMBus adapter at 0x%04x", sis96x_smbus_base);
 
 	if ((retval = i2c_add_adapter(&sis96x_adapter))) {
-		dev_err_probe(&dev->dev, retval, "Couldn't register adapter!\n");
+		dev_err(&dev->dev, "Couldn't register adapter!\n");
 		release_region(sis96x_smbus_base, SMB_IOSIZE);
 		sis96x_smbus_base = 0;
 	}

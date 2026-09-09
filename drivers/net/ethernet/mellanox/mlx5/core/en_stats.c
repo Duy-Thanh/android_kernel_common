@@ -496,7 +496,8 @@ static void mlx5e_stats_update_stats_rq_page_pool(struct mlx5e_channel *c)
 	struct page_pool *pool = c->rq.page_pool;
 	struct page_pool_stats stats = { 0 };
 
-	page_pool_get_stats(pool, &stats);
+	if (!page_pool_get_stats(pool, &stats))
+		return;
 
 	rq_stats->pp_alloc_fast = stats.alloc_stats.fast;
 	rq_stats->pp_alloc_slow = stats.alloc_stats.slow;

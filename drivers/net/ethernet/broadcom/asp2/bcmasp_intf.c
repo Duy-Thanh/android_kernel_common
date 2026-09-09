@@ -344,35 +344,40 @@ static netdev_tx_t bcmasp_xmit(struct sk_buff *skb, struct net_device *dev)
 	return NETDEV_TX_OK;
 }
 
-static void umac_reset_and_init(struct bcmasp_intf *intf,
-				const unsigned char *addr)
+static void bcmasp_netif_start(struct net_device *dev)
 {
-	struct phy_device *phydev = intf->ndev->phydev;
-	u32 mac0, mac1;
+	struct bcmasp_intf *intf = netdev_priv(dev);
 
+	bcmasp_set_rx_mode(dev);
+	napi_enable(&intf->tx_napi);
+	napi_enable(&intf->rx_napi);
+
+	bcmasp_enable_rx_irq(intf, 1);
+	bcmasp_enable_tx_irq(intf, 1);
+	bcmasp_enable_phy_irq(intf, 1);
+
+	phy_start(dev->phydev);
+}
+
+static void umac_reset(struct bcmasp_intf *intf)
+{
 	umac_wl(intf, 0x0, UMC_CMD);
 	umac_wl(intf, UMC_CMD_SW_RESET, UMC_CMD);
 	usleep_range(10, 100);
 	/* We hold the umac in reset and bring it out of
 	 * reset when phy link is up.
 	 */
+}
 
-	umac_wl(intf, 0x800, UMC_FRM_LEN);
-	umac_wl(intf, 0xffff, UMC_PAUSE_CNTRL);
-	umac_wl(intf, 0x800, UMC_RX_MAX_PKT_SZ);
-
-	mac0 = (addr[0] << 24) | (addr[1] << 16) | (addr[2] << 8) |
-		addr[3];
-	mac1 = (addr[4] << 8) | addr[5];
+static void umac_set_hw_addr(struct bcmasp_intf *intf,
+			     const unsigned char *addr)
+{
+	u32 mac0 = (addr[0] << 24) | (addr[1] << 16) | (addr[2] << 8) |
+		    addr[3];
+	u32 mac1 = (addr[4] << 8) | addr[5];
 
 	umac_wl(intf, mac0, UMC_MAC0);
 	umac_wl(intf, mac1, UMC_MAC1);
-
-	/* Reset shadow values since we reset the umac */
-	intf->old_duplex = -1;
-	intf->old_link = -1;
-	intf->old_pause = -1;
-	phydev->eee_cfg.tx_lpi_timer = umac_rl(intf, UMC_EEE_LPI_TIMER);
 }
 
 static void umac_enable_set(struct bcmasp_intf *intf, u32 mask,
@@ -394,6 +399,13 @@ static void umac_enable_set(struct bcmasp_intf *intf, u32 mask,
 	 */
 	if (enable == 0)
 		usleep_range(1000, 2000);
+}
+
+static void umac_init(struct bcmasp_intf *intf)
+{
+	umac_wl(intf, 0x800, UMC_FRM_LEN);
+	umac_wl(intf, 0xffff, UMC_PAUSE_CNTRL);
+	umac_wl(intf, 0x800, UMC_RX_MAX_PKT_SZ);
 }
 
 static int bcmasp_tx_reclaim(struct bcmasp_intf *intf)
@@ -915,15 +927,7 @@ static void bcmasp_rgmii_mode_en_set(struct bcmasp_intf *intf, bool enable)
 	rgmii_wl(intf, reg, RGMII_OOB_CNTRL);
 }
 
-static void bcmasp_phy_hw_unprepare(struct bcmasp_intf *intf)
-{
-	if (intf->internal_phy)
-		bcmasp_ephy_enable_set(intf, false);
-	else
-		bcmasp_rgmii_mode_en_set(intf, false);
-}
-
-static void bcmasp_netif_deinit(struct net_device *dev, bool stop_phy)
+static void bcmasp_netif_deinit(struct net_device *dev)
 {
 	struct bcmasp_intf *intf = netdev_priv(dev);
 	u32 reg, timeout = 1000;
@@ -946,8 +950,7 @@ static void bcmasp_netif_deinit(struct net_device *dev, bool stop_phy)
 
 	umac_enable_set(intf, UMC_CMD_TX_EN, 0);
 
-	if (stop_phy)
-		phy_stop(dev->phydev);
+	phy_stop(dev->phydev);
 
 	umac_enable_set(intf, UMC_CMD_RX_EN, 0);
 
@@ -975,13 +978,17 @@ static int bcmasp_stop(struct net_device *dev)
 	/* Stop tx from updating HW */
 	netif_tx_disable(dev);
 
-	bcmasp_netif_deinit(dev, true);
+	bcmasp_netif_deinit(dev);
 
 	bcmasp_reclaim_free_buffers(intf);
 
 	phy_disconnect(dev->phydev);
 
-	bcmasp_phy_hw_unprepare(intf);
+	/* Disable internal EPHY or external PHY */
+	if (intf->internal_phy)
+		bcmasp_ephy_enable_set(intf, false);
+	else
+		bcmasp_rgmii_mode_en_set(intf, false);
 
 	/* Disable the interface clocks */
 	bcmasp_core_clock_set_intf(intf, false);
@@ -991,14 +998,9 @@ static int bcmasp_stop(struct net_device *dev)
 	return 0;
 }
 
-static void bcmasp_phy_hw_prepare(struct bcmasp_intf *intf)
+static void bcmasp_configure_port(struct bcmasp_intf *intf)
 {
 	u32 reg, id_mode_dis = 0;
-
-	if (intf->internal_phy)
-		bcmasp_ephy_enable_set(intf, true);
-	else
-		bcmasp_rgmii_mode_en_set(intf, true);
 
 	reg = rgmii_rl(intf, RGMII_PORT_CNTRL);
 	reg &= ~RGMII_PORT_MODE_MASK;
@@ -1034,8 +1036,26 @@ static void bcmasp_phy_hw_prepare(struct bcmasp_intf *intf)
 	rgmii_wl(intf, reg, RGMII_OOB_CNTRL);
 }
 
-static phy_interface_t bcmasp_phy_iface_for_connect(phy_interface_t mode)
+static int bcmasp_netif_init(struct net_device *dev, bool phy_connect)
 {
+	struct bcmasp_intf *intf = netdev_priv(dev);
+	phy_interface_t phy_iface = intf->phy_interface;
+	u32 phy_flags = PHY_BRCM_AUTO_PWRDWN_ENABLE |
+			PHY_BRCM_DIS_TXCRXC_NOENRGY |
+			PHY_BRCM_IDDQ_SUSPEND;
+	struct phy_device *phydev = NULL;
+	int ret;
+
+	/* Always enable interface clocks */
+	bcmasp_core_clock_set_intf(intf, true);
+
+	/* Enable internal PHY or external PHY before any MAC activity */
+	if (intf->internal_phy)
+		bcmasp_ephy_enable_set(intf, true);
+	else
+		bcmasp_rgmii_mode_en_set(intf, true);
+	bcmasp_configure_port(intf);
+
 	/* This is an ugly quirk but we have not been correctly
 	 * interpreting the phy_interface values and we have done that
 	 * across different drivers, so at least we are consistent in
@@ -1061,43 +1081,46 @@ static phy_interface_t bcmasp_phy_iface_for_connect(phy_interface_t mode)
 	 * affected because they use different phy_interface_t values
 	 * or the Generic PHY driver.
 	 */
-	switch (mode) {
+	switch (phy_iface) {
 	case PHY_INTERFACE_MODE_RGMII:
-		return PHY_INTERFACE_MODE_RGMII_ID;
+		phy_iface = PHY_INTERFACE_MODE_RGMII_ID;
+		break;
 	case PHY_INTERFACE_MODE_RGMII_TXID:
-		return PHY_INTERFACE_MODE_RGMII_RXID;
+		phy_iface = PHY_INTERFACE_MODE_RGMII_RXID;
+		break;
 	default:
-		return mode;
+		break;
 	}
-}
 
-static int bcmasp_phy_attach(struct bcmasp_intf *intf)
-{
-	u32 phy_flags = PHY_BRCM_AUTO_PWRDWN_ENABLE |
-			PHY_BRCM_DIS_TXCRXC_NOENRGY |
-			PHY_BRCM_IDDQ_SUSPEND;
-	struct phy_device *phydev;
-	phy_interface_t phy_iface;
+	if (phy_connect) {
+		phydev = of_phy_connect(dev, intf->phy_dn,
+					bcmasp_adj_link, phy_flags,
+					phy_iface);
+		if (!phydev) {
+			ret = -ENODEV;
+			netdev_err(dev, "could not attach to PHY\n");
+			goto err_phy_disable;
+		}
 
-	phy_iface = bcmasp_phy_iface_for_connect(intf->phy_interface);
-	phydev = of_phy_connect(intf->ndev, intf->phy_dn,
-				bcmasp_adj_link, phy_flags,
-				phy_iface);
-	if (!phydev) {
-		netdev_err(intf->ndev, "could not attach to PHY\n");
-		return -ENODEV;
+		if (intf->internal_phy)
+			dev->phydev->irq = PHY_MAC_INTERRUPT;
+
+		/* Indicate that the MAC is responsible for PHY PM */
+		phydev->mac_managed_pm = true;
+
+		/* Set phylib's copy of the LPI timer */
+		phydev->eee_cfg.tx_lpi_timer = umac_rl(intf, UMC_EEE_LPI_TIMER);
 	}
-	if (intf->internal_phy)
-		intf->ndev->phydev->irq = PHY_MAC_INTERRUPT;
 
-	phydev->mac_managed_pm = true;
+	umac_reset(intf);
 
-	return 0;
-}
+	umac_init(intf);
 
-static void bcmasp_netif_init(struct net_device *dev)
-{
-	struct bcmasp_intf *intf = netdev_priv(dev);
+	umac_set_hw_addr(intf, dev->dev_addr);
+
+	intf->old_duplex = -1;
+	intf->old_link = -1;
+	intf->old_pause = -1;
 
 	bcmasp_init_tx(intf);
 	netif_napi_add_tx(intf->ndev, &intf->tx_napi, bcmasp_tx_poll);
@@ -1109,13 +1132,18 @@ static void bcmasp_netif_init(struct net_device *dev)
 
 	intf->crc_fwd = !!(umac_rl(intf, UMC_CMD) & UMC_CMD_CRC_FWD);
 
-	bcmasp_set_rx_mode(dev);
-	napi_enable(&intf->tx_napi);
-	napi_enable(&intf->rx_napi);
+	bcmasp_netif_start(dev);
 
-	bcmasp_enable_rx_irq(intf, 1);
-	bcmasp_enable_tx_irq(intf, 1);
-	bcmasp_enable_phy_irq(intf, 1);
+	netif_start_queue(dev);
+
+	return 0;
+
+err_phy_disable:
+	if (intf->internal_phy)
+		bcmasp_ephy_enable_set(intf, false);
+	else
+		bcmasp_rgmii_mode_en_set(intf, false);
+	return ret;
 }
 
 static int bcmasp_open(struct net_device *dev)
@@ -1133,30 +1161,14 @@ static int bcmasp_open(struct net_device *dev)
 	if (ret)
 		goto err_free_mem;
 
-	bcmasp_core_clock_set_intf(intf, true);
-
-	bcmasp_phy_hw_prepare(intf);
-
-	ret = bcmasp_phy_attach(intf);
-	if (ret)
-		goto err_phy_attach;
-
-	umac_reset_and_init(intf, dev->dev_addr);
-
-	dev->phydev->eee_cfg.tx_lpi_timer = umac_rl(intf, UMC_EEE_LPI_TIMER);
-
-	bcmasp_netif_init(dev);
-
-	phy_start(dev->phydev);
-
-	netif_start_queue(dev);
+	ret = bcmasp_netif_init(dev, true);
+	if (ret) {
+		clk_disable_unprepare(intf->parent->clk);
+		goto err_free_mem;
+	}
 
 	return ret;
 
-err_phy_attach:
-	bcmasp_phy_hw_unprepare(intf);
-	bcmasp_core_clock_set_intf(intf, false);
-	clk_disable_unprepare(intf->parent->clk);
 err_free_mem:
 	bcmasp_reclaim_free_buffers(intf);
 
@@ -1386,33 +1398,28 @@ int bcmasp_interface_suspend(struct bcmasp_intf *intf)
 {
 	struct device *kdev = &intf->parent->pdev->dev;
 	struct net_device *dev = intf->ndev;
-	bool wake;
 
 	if (!netif_running(dev))
 		return 0;
 
 	netif_device_detach(dev);
 
-	wake = device_may_wakeup(kdev) && intf->wolopts;
+	bcmasp_netif_deinit(dev);
 
-	bcmasp_netif_deinit(dev, !wake);
-
-	if (wake) {
-		/* Disable phy status updates while suspending */
-		mutex_lock(&dev->phydev->lock);
-		dev->phydev->state = PHY_READY;
-		mutex_unlock(&dev->phydev->lock);
-		cancel_delayed_work_sync(&dev->phydev->state_queue);
-
-		bcmasp_suspend_to_wol(intf);
-	} else {
-		bcmasp_phy_hw_unprepare(intf);
+	if (!intf->wolopts) {
+		if (intf->internal_phy)
+			bcmasp_ephy_enable_set(intf, false);
+		else
+			bcmasp_rgmii_mode_en_set(intf, false);
 
 		/* If Wake-on-LAN is disabled, we can safely
 		 * disable the network interface clocks.
 		 */
 		bcmasp_core_clock_set_intf(intf, false);
 	}
+
+	if (device_may_wakeup(kdev) && intf->wolopts)
+		bcmasp_suspend_to_wol(intf);
 
 	clk_disable_unprepare(intf->parent->clk);
 
@@ -1437,11 +1444,8 @@ static void bcmasp_resume_from_wol(struct bcmasp_intf *intf)
 
 int bcmasp_interface_resume(struct bcmasp_intf *intf)
 {
-	struct device *kdev = &intf->parent->pdev->dev;
 	struct net_device *dev = intf->ndev;
-	bool wake;
 	int ret;
-	u32 reg;
 
 	if (!netif_running(dev))
 		return 0;
@@ -1450,41 +1454,17 @@ int bcmasp_interface_resume(struct bcmasp_intf *intf)
 	if (ret)
 		return ret;
 
-	wake = device_may_wakeup(kdev) && intf->wolopts;
+	ret = bcmasp_netif_init(dev, false);
+	if (ret)
+		goto out;
 
-	bcmasp_core_clock_set_intf(intf, true);
-
-	/* The interface might be HW reset in some suspend modes, so we may
-	 * need to restore the UNIMAC/PHY if that is the case.
-	 */
-	reg = umac_rl(intf, UMC_CMD);
-	if (wake && (reg & UMC_CMD_RX_EN)) {
-		umac_enable_set(intf, UMC_CMD_TX_EN, 1);
-		bcmasp_resume_from_wol(intf);
-	} else {
-		bcmasp_phy_hw_prepare(intf);
-		umac_reset_and_init(intf, dev->dev_addr);
-	}
-
-	bcmasp_netif_init(dev);
-
-	if (wake) {
-		/* If HW was reset, reprogram the unimac/PHY before resuming
-		 * link status tracking to avoid racing the state machine.
-		 */
-		if (!(reg & UMC_CMD_RX_EN))
-			bcmasp_adj_link(dev);
-
-		/* Resume link status tracking */
-		mutex_lock(&dev->phydev->lock);
-		dev->phydev->state = dev->phydev->link ? PHY_RUNNING : PHY_NOLINK;
-		mutex_unlock(&dev->phydev->lock);
-		phy_trigger_machine(dev->phydev);
-	} else {
-		phy_start(dev->phydev);
-	}
+	bcmasp_resume_from_wol(intf);
 
 	netif_device_attach(dev);
 
 	return 0;
+
+out:
+	clk_disable_unprepare(intf->parent->clk);
+	return ret;
 }

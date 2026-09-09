@@ -32,7 +32,7 @@
 int mls_compute_context_len(struct policydb *p, struct context *context)
 {
 	int i, l, len, head, prev;
-	const char *nm;
+	char *nm;
 	struct ebitmap *e;
 	struct ebitmap_node *node;
 
@@ -86,8 +86,7 @@ int mls_compute_context_len(struct policydb *p, struct context *context)
 void mls_sid_to_context(struct policydb *p, struct context *context,
 			char **scontext)
 {
-	const char *nm;
-	char *scontextp;
+	char *scontextp, *nm;
 	int i, l, head, prev;
 	struct ebitmap *e;
 	struct ebitmap_node *node;
@@ -156,44 +155,27 @@ void mls_sid_to_context(struct policydb *p, struct context *context,
 	*scontext = scontextp;
 }
 
-bool mls_level_isvalid(const struct policydb *p, const struct mls_level *l)
+int mls_level_isvalid(struct policydb *p, struct mls_level *l)
 {
-	const char *name;
-	const struct level_datum *levdatum;
-	struct ebitmap_node *node;
-	u32 bit;
-	int rc;
+	struct level_datum *levdatum;
 
 	if (!l->sens || l->sens > p->p_levels.nprim)
-		return false;
-
-	name = sym_name(p, SYM_LEVELS, l->sens - 1);
-	if (!name)
-		return false;
-
-	levdatum = symtab_search(&p->p_levels, name);
+		return 0;
+	levdatum = symtab_search(&p->p_levels,
+				 sym_name(p, SYM_LEVELS, l->sens - 1));
 	if (!levdatum)
-		return false;
+		return 0;
 
 	/*
-	 * Validate that all bits set in l->cat are also be set in
+	 * Return 1 iff all the bits set in l->cat are also be set in
 	 * levdatum->level->cat and no bit in l->cat is larger than
 	 * p->p_cats.nprim.
 	 */
-	rc = ebitmap_contains(&levdatum->level.cat, &l->cat,
-			      p->p_cats.nprim);
-	if (!rc)
-		return false;
-
-	ebitmap_for_each_positive_bit(&levdatum->level.cat, node, bit) {
-		if (!sym_name(p, SYM_CATS, bit))
-			return false;
-	}
-
-	return true;
+	return ebitmap_contains(&levdatum->level.cat, &l->cat,
+				p->p_cats.nprim);
 }
 
-bool mls_range_isvalid(const struct policydb *p, const struct mls_range *r)
+int mls_range_isvalid(struct policydb *p, struct mls_range *r)
 {
 	return (mls_level_isvalid(p, &r->level[0]) &&
 		mls_level_isvalid(p, &r->level[1]) &&
@@ -201,32 +183,32 @@ bool mls_range_isvalid(const struct policydb *p, const struct mls_range *r)
 }
 
 /*
- * Return true if the MLS fields in the security context
+ * Return 1 if the MLS fields in the security context
  * structure `c' are valid.  Return 0 otherwise.
  */
-bool mls_context_isvalid(const struct policydb *p, const struct context *c)
+int mls_context_isvalid(struct policydb *p, struct context *c)
 {
-	const struct user_datum *usrdatum;
+	struct user_datum *usrdatum;
 
 	if (!p->mls_enabled)
-		return true;
+		return 1;
 
 	if (!mls_range_isvalid(p, &c->range))
-		return false;
+		return 0;
 
 	if (c->role == OBJECT_R_VAL)
-		return true;
+		return 1;
 
 	/*
 	 * User must be authorized for the MLS range.
 	 */
 	if (!c->user || c->user > p->p_users.nprim)
-		return false;
+		return 0;
 	usrdatum = p->user_val_to_struct[c->user - 1];
-	if (!usrdatum || !mls_range_contains(usrdatum->range, c->range))
-		return false; /* user may not be associated with range */
+	if (!mls_range_contains(usrdatum->range, c->range))
+		return 0; /* user may not be associated with range */
 
-	return true;
+	return 1;
 }
 
 /*
@@ -467,8 +449,8 @@ int mls_convert_context(struct policydb *oldp, struct policydb *newp,
 		return 0;
 
 	for (l = 0; l < 2; l++) {
-		const char *name = sym_name(oldp, SYM_LEVELS,
-					    oldc->range.level[l].sens - 1);
+		char *name = sym_name(oldp, SYM_LEVELS,
+				      oldc->range.level[l].sens - 1);
 
 		levdatum = symtab_search(&newp->p_levels, name);
 

@@ -225,7 +225,7 @@ xfs_filestream_lookup_association(
 	atomic_inc(&pag_group(pag)->xg_active_ref);
 	xfs_mru_cache_done(mp->m_filestream);
 
-	trace_xfs_filestream_lookup(pag, I_INO(ap->ip));
+	trace_xfs_filestream_lookup(pag, ap->ip->i_ino);
 
 	ap->blkno = xfs_agbno_to_fsb(pag, 0);
 	xfs_bmap_adjacent(ap);
@@ -345,7 +345,7 @@ xfs_filestream_select_ag(
 	args->total = ap->total;
 	pip = xfs_filestream_get_parent(ap->ip);
 	if (pip) {
-		ino = I_INO(pip);
+		ino = pip->i_ino;
 		error = xfs_filestream_lookup_association(ap, args, ino,
 				longest);
 		xfs_irele(pip);
@@ -370,7 +370,7 @@ void
 xfs_filestream_deassociate(
 	struct xfs_inode	*ip)
 {
-	xfs_mru_cache_delete(ip->i_mount->m_filestream, I_INO(ip));
+	xfs_mru_cache_delete(ip->i_mount->m_filestream, ip->i_ino);
 }
 
 int

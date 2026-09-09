@@ -2,7 +2,6 @@
 #include <linux/cpu.h>
 
 #include <asm/apic.h>
-#include <asm/cpuid/api.h>
 #include <asm/memtype.h>
 #include <asm/msr.h>
 #include <asm/processor.h>
@@ -80,7 +79,7 @@ static bool parse_8000_001e(struct topo_scan *tscan)
 	if (!boot_cpu_has(X86_FEATURE_TOPOEXT))
 		return false;
 
-	cpuid_read(0x8000001e, &leaf);
+	cpuid_leaf(0x8000001e, &leaf);
 
 	/*
 	 * If leaf 0xb/0x26 is available, then the APIC ID and the domain

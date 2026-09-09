@@ -5012,8 +5012,8 @@ MODULE_LICENSE("GPL");
 
 /* This doesn't actually get used other than for module information */
 static const struct pnp_device_id floppy_pnpids[] = {
-	{ .id = "PNP0700" },
-	{ }
+	{"PNP0700", 0},
+	{}
 };
 
 MODULE_DEVICE_TABLE(pnp, floppy_pnpids);

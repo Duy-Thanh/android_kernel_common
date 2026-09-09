@@ -2,8 +2,6 @@
 #ifndef __ASM_VDSO_PROCESSOR_H
 #define __ASM_VDSO_PROCESSOR_H
 
-#include <asm/barrier.h>
-
-#define cpu_relax()	bcr_serialize()
+#define cpu_relax() barrier()
 
 #endif /* __ASM_VDSO_PROCESSOR_H */

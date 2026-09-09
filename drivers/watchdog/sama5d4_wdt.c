@@ -30,7 +30,6 @@ struct sama5d4_wdt {
 	void __iomem		*reg_base;
 	u32			mr;
 	u32			ir;
-	u32			wddis_mask;
 	unsigned long		last_ping;
 	bool			need_irq;
 	bool			sam9x60_support;
@@ -49,10 +48,7 @@ MODULE_PARM_DESC(nowayout,
 	"Watchdog cannot be stopped once started (default="
 	__MODULE_STRING(WATCHDOG_NOWAYOUT) ")");
 
-static inline bool wdt_enabled(struct sama5d4_wdt *wdt)
-{
-	return !(wdt->mr & wdt->wddis_mask);
-}
+#define wdt_enabled (!(wdt->mr & AT91_WDT_WDDIS))
 
 #define wdt_read(wdt, field) \
 	readl_relaxed((wdt)->reg_base + (field))
@@ -85,9 +81,12 @@ static int sama5d4_wdt_start(struct watchdog_device *wdd)
 {
 	struct sama5d4_wdt *wdt = watchdog_get_drvdata(wdd);
 
-	if (wdt->sam9x60_support)
+	if (wdt->sam9x60_support) {
 		writel_relaxed(wdt->ir, wdt->reg_base + AT91_SAM9X60_IER);
-	wdt->mr &= ~wdt->wddis_mask;
+		wdt->mr &= ~AT91_SAM9X60_WDDIS;
+	} else {
+		wdt->mr &= ~AT91_WDT_WDDIS;
+	}
 	wdt_write(wdt, AT91_WDT_MR, wdt->mr);
 
 	return 0;
@@ -97,9 +96,12 @@ static int sama5d4_wdt_stop(struct watchdog_device *wdd)
 {
 	struct sama5d4_wdt *wdt = watchdog_get_drvdata(wdd);
 
-	if (wdt->sam9x60_support)
+	if (wdt->sam9x60_support) {
 		writel_relaxed(wdt->ir, wdt->reg_base + AT91_SAM9X60_IDR);
-	wdt->mr |= wdt->wddis_mask;
+		wdt->mr |= AT91_SAM9X60_WDDIS;
+	} else {
+		wdt->mr |= AT91_WDT_WDDIS;
+	}
 	wdt_write(wdt, AT91_WDT_MR, wdt->mr);
 
 	return 0;
@@ -115,7 +117,7 @@ static int sama5d4_wdt_ping(struct watchdog_device *wdd)
 }
 
 static int sama5d4_wdt_set_timeout(struct watchdog_device *wdd,
-				    unsigned int timeout)
+				 unsigned int timeout)
 {
 	struct sama5d4_wdt *wdt = watchdog_get_drvdata(wdd);
 	u32 value = WDT_SEC2TICKS(timeout);
@@ -138,8 +140,8 @@ static int sama5d4_wdt_set_timeout(struct watchdog_device *wdd,
 	 * If the watchdog is enabled, then the timeout can be updated. Else,
 	 * wait that the user enables it.
 	 */
-	if (wdt_enabled(wdt))
-		wdt_write(wdt, AT91_WDT_MR, wdt->mr & ~wdt->wddis_mask);
+	if (wdt_enabled)
+		wdt_write(wdt, AT91_WDT_MR, wdt->mr & ~AT91_WDT_WDDIS);
 
 	wdd->timeout = timeout;
 
@@ -182,7 +184,10 @@ static int of_sama5d4_wdt_init(struct device_node *np, struct sama5d4_wdt *wdt)
 {
 	const char *tmp;
 
-	wdt->mr = wdt->wddis_mask;
+	if (wdt->sam9x60_support)
+		wdt->mr = AT91_SAM9X60_WDDIS;
+	else
+		wdt->mr = AT91_WDT_WDDIS;
 
 	if (!of_property_read_string(np, "atmel,watchdog-type", &tmp) &&
 	    !strcmp(tmp, "software"))
@@ -208,11 +213,15 @@ static int sama5d4_wdt_init(struct sama5d4_wdt *wdt)
 	 * If the watchdog is already running, we can safely update it.
 	 * Else, we have to disable it properly.
 	 */
-	if (!wdt_enabled(wdt)) {
+	if (!wdt_enabled) {
 		reg = wdt_read(wdt, AT91_WDT_MR);
-		if (!(reg & wdt->wddis_mask))
+		if (wdt->sam9x60_support && (!(reg & AT91_SAM9X60_WDDIS)))
 			wdt_write_nosleep(wdt, AT91_WDT_MR,
-					  reg | wdt->wddis_mask);
+					  reg | AT91_SAM9X60_WDDIS);
+		else if (!wdt->sam9x60_support &&
+			 (!(reg & AT91_WDT_WDDIS)))
+			wdt_write_nosleep(wdt, AT91_WDT_MR,
+					  reg | AT91_WDT_WDDIS);
 	}
 
 	if (wdt->sam9x60_support) {
@@ -264,9 +273,6 @@ static int sama5d4_wdt_probe(struct platform_device *pdev)
 	    of_device_is_compatible(dev->of_node, "microchip,sama7g5-wdt"))
 		wdt->sam9x60_support = true;
 
-	wdt->wddis_mask = wdt->sam9x60_support ? AT91_SAM9X60_WDDIS
-						: AT91_WDT_WDDIS;
-
 	watchdog_set_drvdata(wdd, wdt);
 
 	regs = devm_platform_ioremap_resource(pdev, 0);
@@ -300,8 +306,8 @@ static int sama5d4_wdt_probe(struct platform_device *pdev)
 	watchdog_init_timeout(wdd, wdt_timeout, dev);
 
 	reg = wdt_read(wdt, AT91_WDT_MR);
-	if (!(reg & wdt->wddis_mask)) {
-		wdt->mr &= ~wdt->wddis_mask;
+	if (!(reg & AT91_WDT_WDDIS)) {
+		wdt->mr &= ~AT91_WDT_WDDIS;
 		set_bit(WDOG_HW_RUNNING, &wdd->status);
 	}
 

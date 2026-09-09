@@ -11,7 +11,6 @@
 #include <linux/module.h>
 #include <linux/platform_device.h>
 #include <linux/regmap.h>
-#include <linux/bitfield.h>
 #include <linux/string_choices.h>
 #include <sound/core.h>
 #include <sound/dmaengine_pcm.h>
@@ -237,34 +236,34 @@ static int atmel_classd_component_probe(struct snd_soc_component *component)
 	u32 mask, val;
 
 	mask = CLASSD_MR_PWMTYP_MASK;
-	val = FIELD_PREP(CLASSD_MR_PWMTYP_MASK, pdata->pwm_type);
+	val = pdata->pwm_type << CLASSD_MR_PWMTYP_SHIFT;
 
 	mask |= CLASSD_MR_NON_OVERLAP_MASK;
 	if (pdata->non_overlap_enable) {
-		val |= FIELD_PREP(CLASSD_MR_NON_OVERLAP_MASK,
-				CLASSD_MR_NON_OVERLAP_EN);
+		val |= (CLASSD_MR_NON_OVERLAP_EN
+			<< CLASSD_MR_NON_OVERLAP_SHIFT);
 
 		mask |= CLASSD_MR_NOVR_VAL_MASK;
 		switch (pdata->non_overlap_time) {
 		case 5:
-			val |= FIELD_PREP(CLASSD_MR_NOVR_VAL_MASK,
-					CLASSD_MR_NOVR_VAL_5NS);
+			val |= (CLASSD_MR_NOVR_VAL_5NS
+				<< CLASSD_MR_NOVR_VAL_SHIFT);
 			break;
 		case 10:
-			val |= FIELD_PREP(CLASSD_MR_NOVR_VAL_MASK,
-					CLASSD_MR_NOVR_VAL_10NS);
+			val |= (CLASSD_MR_NOVR_VAL_10NS
+				<< CLASSD_MR_NOVR_VAL_SHIFT);
 			break;
 		case 15:
-			val |= FIELD_PREP(CLASSD_MR_NOVR_VAL_MASK,
-					CLASSD_MR_NOVR_VAL_15NS);
+			val |= (CLASSD_MR_NOVR_VAL_15NS
+				<< CLASSD_MR_NOVR_VAL_SHIFT);
 			break;
 		case 20:
-			val |= FIELD_PREP(CLASSD_MR_NOVR_VAL_MASK,
-					CLASSD_MR_NOVR_VAL_20NS);
+			val |= (CLASSD_MR_NOVR_VAL_20NS
+				<< CLASSD_MR_NOVR_VAL_SHIFT);
 			break;
 		default:
-			val |= FIELD_PREP(CLASSD_MR_NOVR_VAL_MASK,
-					CLASSD_MR_NOVR_VAL_10NS);
+			val |= (CLASSD_MR_NOVR_VAL_10NS
+				<< CLASSD_MR_NOVR_VAL_SHIFT);
 			dev_warn(component->dev,
 				"non-overlapping value %d is invalid, the default value 10 is specified\n",
 				pdata->non_overlap_time);
@@ -371,10 +370,8 @@ atmel_classd_cpu_dai_hw_params(struct snd_pcm_substream *substream,
 		return ret;
 
 	mask = CLASSD_INTPMR_DSP_CLK_FREQ_MASK | CLASSD_INTPMR_FRAME_MASK;
-	val = FIELD_PREP(CLASSD_INTPMR_DSP_CLK_FREQ_MASK,
-			sample_rates[best].dsp_clk) |
-		FIELD_PREP(CLASSD_INTPMR_FRAME_MASK,
-			sample_rates[best].sample_rate);
+	val = (sample_rates[best].dsp_clk << CLASSD_INTPMR_DSP_CLK_FREQ_SHIFT)
+	| (sample_rates[best].sample_rate << CLASSD_INTPMR_FRAME_SHIFT);
 
 	snd_soc_component_update_bits(component, CLASSD_INTPMR, mask, val);
 
@@ -398,8 +395,8 @@ static int atmel_classd_cpu_dai_prepare(struct snd_pcm_substream *substream,
 
 	snd_soc_component_update_bits(component, CLASSD_MR,
 				CLASSD_MR_LEN_MASK | CLASSD_MR_REN_MASK,
-				FIELD_PREP(CLASSD_MR_LEN_MASK, CLASSD_MR_LEN_DIS) |
-				FIELD_PREP(CLASSD_MR_REN_MASK, CLASSD_MR_REN_DIS));
+				(CLASSD_MR_LEN_DIS << CLASSD_MR_LEN_SHIFT)
+				|(CLASSD_MR_REN_DIS << CLASSD_MR_REN_SHIFT));
 
 	return 0;
 }
@@ -421,8 +418,8 @@ static int atmel_classd_cpu_dai_trigger(struct snd_pcm_substream *substream,
 	case SNDRV_PCM_TRIGGER_STOP:
 	case SNDRV_PCM_TRIGGER_SUSPEND:
 	case SNDRV_PCM_TRIGGER_PAUSE_PUSH:
-		val = FIELD_PREP(CLASSD_MR_LEN_MASK, CLASSD_MR_LEN_DIS) |
-			FIELD_PREP(CLASSD_MR_REN_MASK, CLASSD_MR_REN_DIS);
+		val = (CLASSD_MR_LEN_DIS << CLASSD_MR_LEN_SHIFT)
+			| (CLASSD_MR_REN_DIS << CLASSD_MR_REN_SHIFT);
 		break;
 	default:
 		return -EINVAL;

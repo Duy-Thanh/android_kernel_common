@@ -1966,7 +1966,8 @@ static inline int clone_security(struct xfrm_state *x, struct xfrm_sec_ctx *secu
 }
 
 static struct xfrm_state *xfrm_state_clone_and_setup(struct xfrm_state *orig,
-					   const struct xfrm_migrate *m)
+					   struct xfrm_encap_tmpl *encap,
+					   struct xfrm_migrate *m)
 {
 	struct net *net = xs_net(orig);
 	struct xfrm_state *x = xfrm_state_alloc(net);
@@ -1974,25 +1975,13 @@ static struct xfrm_state *xfrm_state_clone_and_setup(struct xfrm_state *orig,
 		goto out;
 
 	memcpy(&x->id, &orig->id, sizeof(x->id));
-	if (m->msg_type == XFRM_MSG_MIGRATE_STATE) {
-		if (m->flags & XFRM_MIGRATE_STATE_UPDATE_H2H_SEL) {
-			u8 prefixlen = (m->new_family == AF_INET6) ? 128 : 32;
-
-			x->sel             = orig->sel;
-			x->sel.family      = m->new_family;
-			x->sel.prefixlen_d = prefixlen;
-			x->sel.prefixlen_s = prefixlen;
-			x->sel.daddr       = m->new_daddr;
-			x->sel.saddr       = m->new_saddr;
-		} else {
-			x->sel = *m->new_sel;
-		}
-	} else {
-		x->sel = orig->sel;
-	}
+	memcpy(&x->sel, &orig->sel, sizeof(x->sel));
 	memcpy(&x->lft, &orig->lft, sizeof(x->lft));
 	x->props.mode = orig->props.mode;
 	x->props.replay_window = orig->props.replay_window;
+	x->props.reqid = orig->props.reqid;
+	x->props.family = orig->props.family;
+	x->props.saddr = orig->props.saddr;
 
 	if (orig->aalg) {
 		x->aalg = xfrm_algo_auth_clone(orig->aalg);
@@ -2021,12 +2010,16 @@ static struct xfrm_state *xfrm_state_clone_and_setup(struct xfrm_state *orig,
 	}
 	x->props.calgo = orig->props.calgo;
 
-	if (m->encap) {
-		x->encap = kmemdup(m->encap, sizeof(*x->encap), GFP_KERNEL);
+	if (encap || orig->encap) {
+		if (encap)
+			x->encap = kmemdup(encap, sizeof(*x->encap),
+					GFP_KERNEL);
+		else
+			x->encap = kmemdup(orig->encap, sizeof(*x->encap),
+					GFP_KERNEL);
+
 		if (!x->encap)
 			goto error;
-		x->mapping_maxage = m->mapping_maxage;
-		x->nat_keepalive_interval = m->nat_keepalive_interval;
 	}
 
 	if (orig->security)
@@ -2040,12 +2033,13 @@ static struct xfrm_state *xfrm_state_clone_and_setup(struct xfrm_state *orig,
 			goto error;
 	}
 
-	if (xfrm_replay_clone(x, orig))
-		goto error;
+	if (orig->replay_esn) {
+		if (xfrm_replay_clone(x, orig))
+			goto error;
+	}
 
-	x->mark = m->new_mark ? *m->new_mark : m->old_mark;
-
-	x->props.smark = m->smark;
+	memcpy(&x->mark, &orig->mark, sizeof(x->mark));
+	memcpy(&x->props.smark, &orig->props.smark, sizeof(x->props.smark));
 
 	x->props.flags = orig->props.flags;
 	x->props.extra_flags = orig->props.extra_flags;
@@ -2055,8 +2049,12 @@ static struct xfrm_state *xfrm_state_clone_and_setup(struct xfrm_state *orig,
 	x->tfcpad = orig->tfcpad;
 	x->replay_maxdiff = orig->replay_maxdiff;
 	x->replay_maxage = orig->replay_maxage;
+	memcpy(&x->curlft, &orig->curlft, sizeof(x->curlft));
 	x->km.state = orig->km.state;
 	x->km.seq = orig->km.seq;
+	x->replay = orig->replay;
+	x->preplay = orig->preplay;
+	x->mapping_maxage = orig->mapping_maxage;
 	x->lastused = orig->lastused;
 	x->new_mapping = 0;
 	x->new_mapping_sport = 0;
@@ -2068,7 +2066,7 @@ static struct xfrm_state *xfrm_state_clone_and_setup(struct xfrm_state *orig,
 			goto error;
 	}
 
-	x->props.reqid = m->new_reqid;
+
 	x->props.family = m->new_family;
 	memcpy(&x->id.daddr, &m->new_daddr, sizeof(x->id.daddr));
 	memcpy(&x->props.saddr, &m->new_saddr, sizeof(x->props.saddr));
@@ -2090,14 +2088,14 @@ struct xfrm_state *xfrm_migrate_state_find(struct xfrm_migrate *m, struct net *n
 
 	spin_lock_bh(&net->xfrm.xfrm_state_lock);
 
-	if (m->old_reqid) {
+	if (m->reqid) {
 		h = xfrm_dst_hash(net, &m->old_daddr, &m->old_saddr,
-				  m->old_reqid, m->old_family);
+				  m->reqid, m->old_family);
 		hlist_for_each_entry(x, xfrm_state_deref_prot(net->xfrm.state_bydst, net) + h, bydst) {
 			if (x->props.mode != m->mode ||
 			    x->id.proto != m->proto)
 				continue;
-			if (m->old_reqid && x->props.reqid != m->old_reqid)
+			if (m->reqid && x->props.reqid != m->reqid)
 				continue;
 			if (if_id != 0 && x->if_id != if_id)
 				continue;
@@ -2134,80 +2132,44 @@ struct xfrm_state *xfrm_migrate_state_find(struct xfrm_migrate *m, struct net *n
 }
 EXPORT_SYMBOL(xfrm_migrate_state_find);
 
-struct xfrm_state *xfrm_state_migrate_create(struct xfrm_state *x,
-					     const struct xfrm_migrate *m,
-					     struct net *net,
-					     struct netlink_ext_ack *extack)
-{
-	struct xfrm_state *xc;
-
-	xc = xfrm_state_clone_and_setup(x, m);
-	if (!xc) {
-		NL_SET_ERR_MSG(extack, "Failed to clone and setup state");
-		return NULL;
-	}
-
-	if (xfrm_init_state(xc, extack) < 0) {
-		NL_SET_ERR_MSG_WEAK(extack, "Failed to initialize migrated state");
-		goto error;
-	}
-
-	/* configure the hardware if offload is requested */
-	if (m->xuo && xfrm_dev_state_add(net, xc, m->xuo, extack))
-		goto error;
-
-	return xc;
-error:
-	xc->km.state = XFRM_STATE_DEAD;
-	xfrm_state_put(xc);
-	return NULL;
-}
-EXPORT_SYMBOL(xfrm_state_migrate_create);
-
-int xfrm_state_migrate_install(const struct xfrm_state *x,
-			       struct xfrm_state *xc,
-			       const struct xfrm_migrate *m,
-			       struct netlink_ext_ack *extack)
-{
-	if (m->new_family == m->old_family &&
-	    xfrm_addr_equal(&x->id.daddr, &m->new_daddr, m->new_family)) {
-		/*
-		 * Care is needed when the destination address of the state is
-		 * to be updated as it is a part of triplet.
-		 */
-		xfrm_state_insert(xc);
-	} else {
-		if (xfrm_state_add(xc) < 0) {
-			NL_SET_ERR_MSG(extack, "Failed to add migrated state");
-			if (m->xuo)
-				xfrm_dev_state_delete(xc);
-			xc->km.state = XFRM_STATE_DEAD;
-			xfrm_state_put(xc);
-			return -EEXIST;
-		}
-	}
-
-	return 0;
-}
-EXPORT_SYMBOL(xfrm_state_migrate_install);
-
 struct xfrm_state *xfrm_state_migrate(struct xfrm_state *x,
 				      struct xfrm_migrate *m,
+				      struct xfrm_encap_tmpl *encap,
 				      struct net *net,
+				      struct xfrm_user_offload *xuo,
 				      struct netlink_ext_ack *extack)
 {
 	struct xfrm_state *xc;
 
-	xc = xfrm_state_migrate_create(x, m, net, extack);
+	xc = xfrm_state_clone_and_setup(x, encap, m);
 	if (!xc)
 		return NULL;
 
-	xfrm_migrate_sync(xc, x);
+	if (xfrm_init_state(xc) < 0)
+		goto error;
 
-	if (xfrm_state_migrate_install(x, xc, m, extack) < 0)
-		return NULL;
+	/* configure the hardware if offload is requested */
+	if (xuo && xfrm_dev_state_add(net, xc, xuo, extack))
+		goto error;
+
+	/* add state */
+	if (xfrm_addr_equal(&x->id.daddr, &m->new_daddr, m->new_family)) {
+		/* a care is needed when the destination address of the
+		   state is to be updated as it is a part of triplet */
+		xfrm_state_insert(xc);
+	} else {
+		if (xfrm_state_add(xc) < 0)
+			goto error_add;
+	}
 
 	return xc;
+error_add:
+	if (xuo)
+		xfrm_dev_state_delete(xc);
+error:
+	xc->km.state = XFRM_STATE_DEAD;
+	xfrm_state_put(xc);
+	return NULL;
 }
 EXPORT_SYMBOL(xfrm_state_migrate);
 #endif
@@ -3291,11 +3253,11 @@ error:
 
 EXPORT_SYMBOL(__xfrm_init_state);
 
-int xfrm_init_state(struct xfrm_state *x, struct netlink_ext_ack *extack)
+int xfrm_init_state(struct xfrm_state *x)
 {
 	int err;
 
-	err = __xfrm_init_state(x, extack);
+	err = __xfrm_init_state(x, NULL);
 	if (err)
 		return err;
 

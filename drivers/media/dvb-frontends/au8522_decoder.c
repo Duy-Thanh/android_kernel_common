@@ -768,8 +768,8 @@ static void au8522_remove(struct i2c_client *client)
 }
 
 static const struct i2c_device_id au8522_id[] = {
-	{ .name = "au8522" },
-	{ }
+	{ "au8522" },
+	{}
 };
 
 MODULE_DEVICE_TABLE(i2c, au8522_id);

@@ -427,7 +427,7 @@ static int bcm_kona_i2c_write_fifo_single(struct bcm_kona_i2c_dev *dev,
 		return -EREMOTEIO;
 	}
 
-	/* Check if a timeout occurred */
+	/* Check if a timeout occured */
 	if (!time_left) {
 		dev_err(dev->device, "completion timed out\n");
 		return -EREMOTEIO;

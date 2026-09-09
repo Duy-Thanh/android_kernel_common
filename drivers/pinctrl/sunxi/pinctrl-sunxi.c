@@ -925,7 +925,7 @@ static int sunxi_pmx_request(struct pinctrl_dev *pctldev, unsigned offset)
 	return 0;
 
 out:
-	regulator_put(reg);
+	regulator_put(s_reg->regulator);
 
 	return ret;
 }

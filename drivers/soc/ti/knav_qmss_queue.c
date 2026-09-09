@@ -25,8 +25,11 @@
 
 #include "knav_qmss.h"
 
-static struct knav_device *knav_qdev;
+static struct knav_device *kdev;
 static DEFINE_MUTEX(knav_dev_lock);
+#define knav_dev_lock_held() \
+	lockdep_is_held(&knav_dev_lock)
+
 /* Queue manager register indices in DTS */
 #define KNAV_QUEUE_PEEK_REG_INDEX	0
 #define KNAV_QUEUE_STATUS_REG_INDEX	1
@@ -55,7 +58,7 @@ static DEFINE_MUTEX(knav_dev_lock);
 
 #define for_each_handle_rcu(qh, inst)				\
 	list_for_each_entry_rcu(qh, &inst->handles, list,	\
-				lockdep_is_held(&knav_dev_lock))
+				knav_dev_lock_held())
 
 #define for_each_instance(idx, inst, kdev)		\
 	for (idx = 0, inst = kdev->instances;		\
@@ -202,10 +205,10 @@ knav_queue_match_id_to_inst(struct knav_device *kdev, unsigned id)
 
 static inline struct knav_queue_inst *knav_queue_find_by_id(int id)
 {
-	if (knav_qdev->base_id <= id &&
-	    knav_qdev->base_id + knav_qdev->num_queues > id) {
-		id -= knav_qdev->base_id;
-		return knav_queue_match_id_to_inst(knav_qdev, id);
+	if (kdev->base_id <= id &&
+	    kdev->base_id + kdev->num_queues > id) {
+		id -= kdev->base_id;
+		return knav_queue_match_id_to_inst(kdev, id);
 	}
 	return NULL;
 }
@@ -293,7 +296,7 @@ static struct knav_queue *knav_queue_open_by_type(const char *name,
 
 	mutex_lock(&knav_dev_lock);
 
-	for_each_instance(idx, inst, knav_qdev) {
+	for_each_instance(idx, inst, kdev) {
 		if (knav_queue_is_reserved(inst))
 			continue;
 		if (!knav_queue_match_type(inst, type))
@@ -466,9 +469,9 @@ static int knav_queue_debug_show(struct seq_file *s, void *v)
 
 	mutex_lock(&knav_dev_lock);
 	seq_printf(s, "%s: %u-%u\n",
-		   dev_name(knav_qdev->dev), knav_qdev->base_id,
-		   knav_qdev->base_id + knav_qdev->num_queues - 1);
-	for_each_instance(idx, inst, knav_qdev)
+		   dev_name(kdev->dev), kdev->base_id,
+		   kdev->base_id + kdev->num_queues - 1);
+	for_each_instance(idx, inst, kdev)
 		knav_queue_debug_show_instance(s, inst);
 	mutex_unlock(&knav_dev_lock);
 
@@ -477,8 +480,8 @@ static int knav_queue_debug_show(struct seq_file *s, void *v)
 
 DEFINE_SHOW_ATTRIBUTE(knav_queue_debug);
 
-static inline int knav_queue_pdsp_wait(u32 __iomem *addr, unsigned int timeout,
-				       u32 flags)
+static inline int knav_queue_pdsp_wait(u32 * __iomem addr, unsigned timeout,
+					u32 flags)
 {
 	unsigned long end;
 	u32 val = 0;
@@ -517,7 +520,7 @@ static int knav_queue_flush(struct knav_queue *qh)
  *			     Subsequent attempts to open a shared queue should
  *			     also have this flag.
  *
- * Return: handle to the open hardware queue on success. Use IS_ERR()
+ * Returns a handle to the open hardware queue if successful. Use IS_ERR()
  * to check the returned value for error codes.
  */
 void *knav_queue_open(const char *name, unsigned id,
@@ -573,7 +576,7 @@ EXPORT_SYMBOL_GPL(knav_queue_close);
  * @cmd:			- control commands
  * @arg:			- command argument
  *
- * Return: 0 on success, errno otherwise.
+ * Returns 0 on success, errno otherwise.
  */
 int knav_queue_device_control(void *qhandle, enum knav_queue_ctrl_cmd cmd,
 				unsigned long arg)
@@ -625,7 +628,7 @@ EXPORT_SYMBOL_GPL(knav_queue_device_control);
  * @size:		- size of data to push
  * @flags:		- can be used to pass additional information
  *
- * Return: 0 on success, errno otherwise.
+ * Returns 0 on success, errno otherwise.
  */
 int knav_queue_push(void *qhandle, dma_addr_t dma,
 					unsigned size, unsigned flags)
@@ -646,7 +649,7 @@ EXPORT_SYMBOL_GPL(knav_queue_push);
  * @qhandle:		- hardware queue handle
  * @size:		- (optional) size of the data pop'ed.
  *
- * Return: DMA address on success, 0 on failure.
+ * Returns a DMA address on success, 0 on failure.
  */
 dma_addr_t knav_queue_pop(void *qhandle, unsigned *size)
 {
@@ -747,8 +750,8 @@ EXPORT_SYMBOL_GPL(knav_pool_desc_dma_to_virt);
  * @region_id:		- QMSS region id from which the descriptors are to be
  *			  allocated.
  *
- * Return: pool handle on success. Use IS_ERR_OR_NULL() to identify
- * error values on return.
+ * Returns a pool handle on success.
+ * Use IS_ERR_OR_NULL() to identify error values on return.
  */
 void *knav_pool_create(const char *name,
 					int num_desc, int region_id)
@@ -759,17 +762,19 @@ void *knav_pool_create(const char *name,
 	unsigned last_offset;
 	int ret;
 
-	if (!knav_qdev)
+	if (!kdev)
 		return ERR_PTR(-EPROBE_DEFER);
 
-	if (!knav_qdev->dev)
+	if (!kdev->dev)
 		return ERR_PTR(-ENODEV);
 
-	pool = devm_kzalloc(knav_qdev->dev, sizeof(*pool), GFP_KERNEL);
-	if (!pool)
+	pool = devm_kzalloc(kdev->dev, sizeof(*pool), GFP_KERNEL);
+	if (!pool) {
+		dev_err(kdev->dev, "out of memory allocating pool\n");
 		return ERR_PTR(-ENOMEM);
+	}
 
-	for_each_region(knav_qdev, reg_itr) {
+	for_each_region(kdev, reg_itr) {
 		if (reg_itr->id != region_id)
 			continue;
 		region = reg_itr;
@@ -777,28 +782,28 @@ void *knav_pool_create(const char *name,
 	}
 
 	if (!region) {
-		dev_err(knav_qdev->dev, "region-id(%d) not found\n", region_id);
+		dev_err(kdev->dev, "region-id(%d) not found\n", region_id);
 		ret = -EINVAL;
 		goto err;
 	}
 
 	pool->queue = knav_queue_open(name, KNAV_QUEUE_GP, 0);
 	if (IS_ERR(pool->queue)) {
-		dev_err(knav_qdev->dev,
-			"failed to open queue for pool(%s), error %pe\n",
-			name, pool->queue);
+		dev_err(kdev->dev,
+			"failed to open queue for pool(%s), error %ld\n",
+			name, PTR_ERR(pool->queue));
 		ret = PTR_ERR(pool->queue);
 		goto err;
 	}
 
 	pool->name = kstrndup(name, KNAV_NAME_SIZE - 1, GFP_KERNEL);
-	pool->kdev = knav_qdev;
-	pool->dev = knav_qdev->dev;
+	pool->kdev = kdev;
+	pool->dev = kdev->dev;
 
 	mutex_lock(&knav_dev_lock);
 
 	if (num_desc > (region->num_desc - region->used_desc)) {
-		dev_err(knav_qdev->dev, "out of descs in region(%d) for pool(%s)\n",
+		dev_err(kdev->dev, "out of descs in region(%d) for pool(%s)\n",
 			region_id, name);
 		ret = -ENOMEM;
 		goto err_unlock;
@@ -824,10 +829,10 @@ void *knav_pool_create(const char *name,
 		pool->num_desc = num_desc;
 		pool->region_offset = last_offset;
 		region->used_desc += num_desc;
-		list_add_tail(&pool->list, &knav_qdev->pools);
+		list_add_tail(&pool->list, &kdev->pools);
 		list_add_tail(&pool->region_inst, node);
 	} else {
-		dev_err(knav_qdev->dev, "pool(%s) create failed: fragmented desc pool in region(%d)\n",
+		dev_err(kdev->dev, "pool(%s) create failed: fragmented desc pool in region(%d)\n",
 			name, region_id);
 		ret = -ENOMEM;
 		goto err_unlock;
@@ -841,7 +846,7 @@ err_unlock:
 	mutex_unlock(&knav_dev_lock);
 err:
 	kfree(pool->name);
-	devm_kfree(knav_qdev->dev, pool);
+	devm_kfree(kdev->dev, pool);
 	return ERR_PTR(ret);
 }
 EXPORT_SYMBOL_GPL(knav_pool_create);
@@ -869,7 +874,7 @@ void knav_pool_destroy(void *ph)
 
 	mutex_unlock(&knav_dev_lock);
 	kfree(pool->name);
-	devm_kfree(knav_qdev->dev, pool);
+	devm_kfree(kdev->dev, pool);
 }
 EXPORT_SYMBOL_GPL(knav_pool_destroy);
 
@@ -878,7 +883,7 @@ EXPORT_SYMBOL_GPL(knav_pool_destroy);
  * knav_pool_desc_get()	- Get a descriptor from the pool
  * @ph:		- pool handle
  *
- * Return: descriptor from the pool on success, error pointer otherwise.
+ * Returns descriptor from the pool.
  */
 void *knav_pool_desc_get(void *ph)
 {
@@ -917,7 +922,7 @@ EXPORT_SYMBOL_GPL(knav_pool_desc_put);
  * @dma:			- DMA address return pointer
  * @dma_sz:			- adjusted return pointer
  *
- * Return: 0 on success, errno otherwise.
+ * Returns 0 on success, errno otherwise.
  */
 int knav_pool_desc_map(void *ph, void *desc, unsigned size,
 					dma_addr_t *dma, unsigned *dma_sz)
@@ -942,7 +947,7 @@ EXPORT_SYMBOL_GPL(knav_pool_desc_map);
  * @dma:			- DMA address of descriptor to unmap
  * @dma_sz:			- size of descriptor to unmap
  *
- * Return: descriptor address on success. Use IS_ERR_OR_NULL() to identify
+ * Returns descriptor address on success, Use IS_ERR_OR_NULL() to identify
  * error values on return.
  */
 void *knav_pool_desc_unmap(void *ph, dma_addr_t dma, unsigned dma_sz)
@@ -962,8 +967,7 @@ EXPORT_SYMBOL_GPL(knav_pool_desc_unmap);
 /**
  * knav_pool_count()	- Get the number of descriptors in pool.
  * @ph:			- pool handle
- *
- * Return: number of elements in the pool.
+ * Returns number of elements in the pool.
  */
 int knav_pool_count(void *ph)
 {
@@ -1021,8 +1025,10 @@ static void knav_queue_setup_region(struct knav_device *kdev,
 	region->dma_end = region->dma_start + size;
 
 	pool = devm_kzalloc(kdev->dev, sizeof(*pool), GFP_KERNEL);
-	if (!pool)
+	if (!pool) {
+		dev_err(kdev->dev, "out of memory allocating dummy pool\n");
 		goto fail;
+	}
 	pool->num_desc = 0;
 	pool->region_offset = region->num_desc;
 	list_add(&pool->region_inst, &region->pools);
@@ -1205,8 +1211,10 @@ static int knav_setup_queue_range(struct knav_device *kdev,
 	int ret, i;
 
 	range = devm_kzalloc(dev, sizeof(*range), GFP_KERNEL);
-	if (!range)
+	if (!range) {
+		dev_err(dev, "out of memory allocating range\n");
 		return -ENOMEM;
+	}
 
 	range->kdev = kdev;
 	range->name = knav_queue_find_name(node);
@@ -1368,7 +1376,7 @@ static void __iomem *knav_queue_map_reg(struct knav_device *kdev,
 	if (ret) {
 		dev_err(kdev->dev, "Can't translate of node(%pOFn) address for index(%d)\n",
 			node, index);
-		return IOMEM_ERR_PTR(ret);
+		return ERR_PTR(ret);
 	}
 
 	regs = devm_ioremap_resource(kdev->dev, &res);
@@ -1556,7 +1564,7 @@ static int knav_queue_load_pdsp(struct knav_device *kdev,
 	int i, ret, fwlen;
 	const struct firmware *fw;
 	bool found = false;
-	const __be32 *fwdata;
+	u32 *fwdata;
 
 	for (i = 0; i < ARRAY_SIZE(knav_acc_firmwares); i++) {
 		if (knav_acc_firmwares[i]) {
@@ -1578,9 +1586,9 @@ static int knav_queue_load_pdsp(struct knav_device *kdev,
 	dev_info(kdev->dev, "firmware file %s downloaded for PDSP\n",
 		 knav_acc_firmwares[i]);
 
-	writel_relaxed(pdsp->id + 1, pdsp->command + 0x6);
+	writel_relaxed(pdsp->id + 1, pdsp->command + 0x18);
 	/* download the firmware */
-	fwdata = (const __be32 *)fw->data;
+	fwdata = (u32 *)fw->data;
 	fwlen = (fw->size + sizeof(u32) - 1) / sizeof(u32);
 	for (i = 0; i < fwlen; i++)
 		writel_relaxed(be32_to_cpu(fwdata[i]), pdsp->iram + i);
@@ -1681,7 +1689,7 @@ static inline struct knav_qmgr_info *knav_find_qmgr(unsigned id)
 {
 	struct knav_qmgr_info *qmgr;
 
-	for_each_qmgr(knav_qdev, qmgr) {
+	for_each_qmgr(kdev, qmgr) {
 		if ((id >= qmgr->start_queue) &&
 		    (id < qmgr->start_queue + qmgr->num_queues))
 			return qmgr;
@@ -1773,22 +1781,22 @@ static int knav_queue_probe(struct platform_device *pdev)
 		return -ENODEV;
 	}
 
-	knav_qdev = devm_kzalloc(dev, sizeof(struct knav_device), GFP_KERNEL);
-	if (!knav_qdev) {
+	kdev = devm_kzalloc(dev, sizeof(struct knav_device), GFP_KERNEL);
+	if (!kdev) {
 		dev_err(dev, "memory allocation failed\n");
 		return -ENOMEM;
 	}
 
 	if (device_get_match_data(dev))
-		knav_qdev->version = QMSS_66AK2G;
+		kdev->version = QMSS_66AK2G;
 
-	platform_set_drvdata(pdev, knav_qdev);
-	knav_qdev->dev = dev;
-	INIT_LIST_HEAD(&knav_qdev->queue_ranges);
-	INIT_LIST_HEAD(&knav_qdev->qmgrs);
-	INIT_LIST_HEAD(&knav_qdev->pools);
-	INIT_LIST_HEAD(&knav_qdev->regions);
-	INIT_LIST_HEAD(&knav_qdev->pdsps);
+	platform_set_drvdata(pdev, kdev);
+	kdev->dev = dev;
+	INIT_LIST_HEAD(&kdev->queue_ranges);
+	INIT_LIST_HEAD(&kdev->qmgrs);
+	INIT_LIST_HEAD(&kdev->pools);
+	INIT_LIST_HEAD(&kdev->regions);
+	INIT_LIST_HEAD(&kdev->pdsps);
 
 	pm_runtime_enable(&pdev->dev);
 	ret = pm_runtime_resume_and_get(&pdev->dev);
@@ -1803,31 +1811,31 @@ static int knav_queue_probe(struct platform_device *pdev)
 		ret = -ENODEV;
 		goto err;
 	}
-	knav_qdev->base_id    = temp[0];
-	knav_qdev->num_queues = temp[1];
+	kdev->base_id    = temp[0];
+	kdev->num_queues = temp[1];
 
 	/* Initialize queue managers using device tree configuration */
-	ret = knav_queue_init_qmgrs(knav_qdev, node);
+	ret = knav_queue_init_qmgrs(kdev, node);
 	if (ret)
 		goto err;
 
 	/* get pdsp configuration values from device tree */
-	ret = knav_queue_setup_pdsps(knav_qdev, node);
+	ret = knav_queue_setup_pdsps(kdev, node);
 	if (ret)
 		goto err;
 
 	/* get usable queue range values from device tree */
-	ret = knav_setup_queue_pools(knav_qdev, node);
+	ret = knav_setup_queue_pools(kdev, node);
 	if (ret)
 		goto err;
 
-	ret = knav_get_link_ram(knav_qdev, "linkram0", &knav_qdev->link_rams[0]);
+	ret = knav_get_link_ram(kdev, "linkram0", &kdev->link_rams[0]);
 	if (ret) {
-		dev_err(knav_qdev->dev, "could not setup linking ram\n");
+		dev_err(kdev->dev, "could not setup linking ram\n");
 		goto err;
 	}
 
-	ret = knav_get_link_ram(knav_qdev, "linkram1", &knav_qdev->link_rams[1]);
+	ret = knav_get_link_ram(kdev, "linkram1", &kdev->link_rams[1]);
 	if (ret) {
 		/*
 		 * nothing really, we have one linking ram already, so we just
@@ -1835,15 +1843,15 @@ static int knav_queue_probe(struct platform_device *pdev)
 		 */
 	}
 
-	ret = knav_queue_setup_link_ram(knav_qdev);
+	ret = knav_queue_setup_link_ram(kdev);
 	if (ret)
 		goto err;
 
-	ret = knav_queue_setup_regions(knav_qdev, node);
+	ret = knav_queue_setup_regions(kdev, node);
 	if (ret)
 		goto err;
 
-	ret = knav_queue_init_queues(knav_qdev);
+	ret = knav_queue_init_queues(kdev);
 	if (ret < 0) {
 		dev_err(dev, "hwqueue initialization failed\n");
 		goto err;
@@ -1855,9 +1863,9 @@ static int knav_queue_probe(struct platform_device *pdev)
 	return 0;
 
 err:
-	knav_queue_stop_pdsps(knav_qdev);
-	knav_queue_free_regions(knav_qdev);
-	knav_free_queue_ranges(knav_qdev);
+	knav_queue_stop_pdsps(kdev);
+	knav_queue_free_regions(kdev);
+	knav_free_queue_ranges(kdev);
 	pm_runtime_put_sync(&pdev->dev);
 	pm_runtime_disable(&pdev->dev);
 	return ret;
@@ -1865,12 +1873,7 @@ err:
 
 static void knav_queue_remove(struct platform_device *pdev)
 {
-	struct knav_device *kdev = platform_get_drvdata(pdev);
-
-	device_ready = false;
-	knav_queue_stop_pdsps(kdev);
-	knav_queue_free_regions(kdev);
-	knav_free_queue_ranges(kdev);
+	/* TODO: Free resources */
 	pm_runtime_put_sync(&pdev->dev);
 	pm_runtime_disable(&pdev->dev);
 }

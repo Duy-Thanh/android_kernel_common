@@ -311,8 +311,8 @@ static void lm3509_remove(struct i2c_client *client)
 }
 
 static const struct i2c_device_id lm3509_id[] = {
-	{ .name = LM3509_NAME },
-	{ }
+	{ LM3509_NAME },
+	{}
 };
 
 MODULE_DEVICE_TABLE(i2c, lm3509_id);

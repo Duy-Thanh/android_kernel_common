@@ -38,7 +38,6 @@
 #define __rust_helper __always_inline
 #endif
 
-#include "acpi.c"
 #include "atomic.c"
 #include "atomic_ext.c"
 #include "auxiliary.c"
@@ -61,7 +60,6 @@
 #include "dma.c"
 #include "dma-resv.c"
 #include "drm.c"
-#include "drm_gpuvm.c"
 #include "err.c"
 #include "irq.c"
 #include "fs.c"
@@ -92,7 +90,6 @@
 #include "signal.c"
 #include "slab.c"
 #include "spinlock.c"
-#include "string.c"
 #include "sync.c"
 #include "task.c"
 #include "time.c"

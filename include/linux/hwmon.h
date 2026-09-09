@@ -13,7 +13,6 @@
 #define _HWMON_H_
 
 #include <linux/bitops.h>
-#include <linux/cleanup.h>
 
 struct device;
 struct attribute_group;
@@ -40,7 +39,6 @@ enum hwmon_chip_attributes {
 	hwmon_chip_power_reset_history,
 	hwmon_chip_register_tz,
 	hwmon_chip_update_interval,
-	hwmon_chip_update_interval_us,
 	hwmon_chip_alarms,
 	hwmon_chip_samples,
 	hwmon_chip_curr_samples,
@@ -57,7 +55,6 @@ enum hwmon_chip_attributes {
 #define HWMON_C_POWER_RESET_HISTORY	BIT(hwmon_chip_power_reset_history)
 #define HWMON_C_REGISTER_TZ		BIT(hwmon_chip_register_tz)
 #define HWMON_C_UPDATE_INTERVAL		BIT(hwmon_chip_update_interval)
-#define HWMON_C_UPDATE_INTERVAL_US	BIT(hwmon_chip_update_interval_us)
 #define HWMON_C_ALARMS			BIT(hwmon_chip_alarms)
 #define HWMON_C_SAMPLES			BIT(hwmon_chip_samples)
 #define HWMON_C_CURR_SAMPLES		BIT(hwmon_chip_curr_samples)
@@ -480,8 +477,7 @@ hwmon_device_register_with_info(struct device *dev,
 				const struct attribute_group **extra_groups);
 struct device *
 hwmon_device_register_for_thermal(struct device *dev, const char *name,
-				  void *drvdata,
-				  const struct attribute_group **extra_groups);
+				  void *drvdata);
 struct device *
 devm_hwmon_device_register_with_info(struct device *dev,
 				const char *name, void *drvdata,
@@ -498,8 +494,6 @@ char *devm_hwmon_sanitize_name(struct device *dev, const char *name);
 
 void hwmon_lock(struct device *dev);
 void hwmon_unlock(struct device *dev);
-
-DEFINE_GUARD(hwmon_lock, struct device *, hwmon_lock(_T), hwmon_unlock(_T))
 
 /**
  * hwmon_is_bad_char - Is the char invalid in a hwmon name

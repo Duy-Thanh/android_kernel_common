@@ -226,9 +226,7 @@ static void module_flash_fw_work(struct work_struct *work)
 	module_fw = container_of(work, struct ethtool_module_fw_flash, work);
 	dev = module_fw->fw_update.dev;
 
-	netdev_lock_ops(dev);
 	ethtool_cmis_fw_update(&module_fw->fw_update);
-	netdev_unlock_ops(dev);
 
 	module_flash_fw_work_list_del(&module_fw->list);
 
@@ -429,7 +427,8 @@ int ethnl_act_module_fw_flash(struct sk_buff *skb, struct genl_info *info)
 		return ret;
 	dev = req_info.dev;
 
-	netdev_lock_ops_compat(dev);
+	rtnl_lock();
+	netdev_lock_ops(dev);
 	ret = ethnl_ops_begin(dev);
 	if (ret < 0)
 		goto out_unlock;
@@ -444,7 +443,8 @@ out_complete:
 	ethnl_ops_complete(dev);
 
 out_unlock:
-	netdev_unlock_ops_compat(dev);
+	netdev_unlock_ops(dev);
+	rtnl_unlock();
 	ethnl_parse_header_dev_put(&req_info);
 	return ret;
 }

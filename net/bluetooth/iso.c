@@ -10,7 +10,6 @@
 #include <linux/debugfs.h>
 #include <linux/seq_file.h>
 #include <linux/sched/signal.h>
-#include <linux/uio.h>
 
 #include <net/bluetooth/bluetooth.h>
 #include <net/bluetooth/hci_core.h>
@@ -1883,17 +1882,18 @@ static int iso_sock_setsockopt(struct socket *sock, int level, int optname,
 }
 
 static int iso_sock_getsockopt(struct socket *sock, int level, int optname,
-			       sockopt_t *opt)
+			       char __user *optval, int __user *optlen)
 {
 	struct sock *sk = sock->sk;
+	int len, err = 0;
 	struct bt_iso_qos *qos;
-	int len, val, err = 0;
 	u8 base_len;
 	u8 *base;
 
 	BT_DBG("sk %p", sk);
 
-	len = opt->optlen;
+	if (get_user(len, optlen))
+		return -EFAULT;
 
 	lock_sock(sk);
 
@@ -1904,17 +1904,15 @@ static int iso_sock_getsockopt(struct socket *sock, int level, int optname,
 			break;
 		}
 
-		val = test_bit(BT_SK_DEFER_SETUP, &bt_sk(sk)->flags);
-		if (copy_to_iter(&val, sizeof(val), &opt->iter_out) !=
-		    sizeof(val))
+		if (put_user(test_bit(BT_SK_DEFER_SETUP, &bt_sk(sk)->flags),
+			     (u32 __user *)optval))
 			err = -EFAULT;
 
 		break;
 
 	case BT_PKT_STATUS:
-		val = test_bit(BT_SK_PKT_STATUS, &bt_sk(sk)->flags);
-		if (copy_to_iter(&val, sizeof(val), &opt->iter_out) !=
-		    sizeof(val))
+		if (put_user(test_bit(BT_SK_PKT_STATUS, &bt_sk(sk)->flags),
+			     (int __user *)optval))
 			err = -EFAULT;
 		break;
 
@@ -1922,7 +1920,7 @@ static int iso_sock_getsockopt(struct socket *sock, int level, int optname,
 		qos = iso_sock_get_qos(sk);
 
 		len = min_t(unsigned int, len, sizeof(*qos));
-		if (copy_to_iter(qos, len, &opt->iter_out) != len)
+		if (copy_to_user(optval, qos, len))
 			err = -EFAULT;
 
 		break;
@@ -1938,8 +1936,9 @@ static int iso_sock_getsockopt(struct socket *sock, int level, int optname,
 		}
 
 		len = min_t(unsigned int, len, base_len);
-		opt->optlen = len;
-		if (copy_to_iter(base, len, &opt->iter_out) != len)
+		if (copy_to_user(optval, base, len))
+			err = -EFAULT;
+		if (put_user(len, optlen))
 			err = -EFAULT;
 
 		break;
@@ -2706,7 +2705,7 @@ static const struct proto_ops iso_sock_ops = {
 	.socketpair	= sock_no_socketpair,
 	.shutdown	= iso_sock_shutdown,
 	.setsockopt	= iso_sock_setsockopt,
-	.getsockopt_iter = iso_sock_getsockopt
+	.getsockopt	= iso_sock_getsockopt
 };
 
 static const struct net_proto_family iso_sock_family_ops = {

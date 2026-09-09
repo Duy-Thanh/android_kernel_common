@@ -648,7 +648,8 @@ int dma_resv_get_singleton(struct dma_resv *obj, enum dma_resv_usage usage,
 	}
 
 	array = dma_fence_array_create(count, fences,
-				       dma_fence_context_alloc(1), 1);
+				       dma_fence_context_alloc(1),
+				       1, false);
 	if (!array) {
 		while (count--)
 			dma_fence_put(fences[count]);

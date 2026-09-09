@@ -31,7 +31,6 @@ struct hibmc_vdac {
 	struct drm_connector connector;
 	struct i2c_adapter adapter;
 	struct i2c_algo_bit_data bit_data;
-	int phys_status;
 };
 
 struct hibmc_drm_private {

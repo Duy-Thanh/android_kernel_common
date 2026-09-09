@@ -6,9 +6,7 @@
 
 /dts-v1/;
 
-#include <dt-bindings/leds/common.h>
-
-#include "fsl-lx2160a-rev2.dtsi"
+#include "fsl-lx2160a.dtsi"
 #include "fsl-lx2162a-sr-som.dtsi"
 
 / {
@@ -16,6 +14,7 @@
 	compatible = "solidrun,lx2162a-clearfog", "solidrun,lx2162a-som", "fsl,lx2160a";
 
 	aliases {
+		crypto = &crypto;
 		i2c0 = &i2c0;
 		i2c1 = &i2c2;
 		i2c2 = &i2c4;
@@ -40,9 +39,6 @@
 		compatible = "gpio-leds";
 
 		led_sfp_at: led-sfp-at {
-			color = <LED_COLOR_ID_GREEN>;
-			function = LED_FUNCTION_LAN;
-			function-enumerator = <1>;
 			gpios = <&gpio2 5 GPIO_ACTIVE_HIGH>; /* PROC_IRQ5 */
 			default-state = "off";
 			linux,default-trigger = "netdev";
@@ -50,9 +46,6 @@
 		};
 
 		led_sfp_ab: led-sfp-ab {
-			color = <LED_COLOR_ID_GREEN>;
-			function = LED_FUNCTION_LAN;
-			function-enumerator = <2>;
 			gpios = <&gpio2 11 GPIO_ACTIVE_HIGH>; /* PROC_IRQ11 */
 			default-state = "off";
 			linux,default-trigger = "netdev";
@@ -60,9 +53,6 @@
 		};
 
 		led_sfp_bt: led-sfp-bt {
-			color = <LED_COLOR_ID_GREEN>;
-			function = LED_FUNCTION_LAN;
-			function-enumerator = <3>;
 			gpios = <&gpio2 13 GPIO_ACTIVE_HIGH>; /* EVT1_B */
 			default-state = "off";
 			linux,default-trigger = "netdev";
@@ -70,9 +60,6 @@
 		};
 
 		led_sfp_bb: led-sfp-bb {
-			color = <LED_COLOR_ID_GREEN>;
-			function = LED_FUNCTION_LAN;
-			function-enumerator = <4>;
 			gpios = <&gpio2 14 GPIO_ACTIVE_HIGH>; /* EVT2_B */
 			default-state = "off";
 			linux,default-trigger = "netdev";
@@ -137,36 +124,42 @@
 	phys = <&serdes_2 0>;
 	phy-handle = <&ethernet_phy3>;
 	phy-connection-type = "sgmii";
+	status = "okay";
 };
 
 &dpmac12 {
 	phys = <&serdes_2 1>;
 	phy-handle = <&ethernet_phy1>;
 	phy-connection-type = "sgmii";
+	status = "okay";
 };
 
 &dpmac13 {
 	phys = <&serdes_2 6>;
 	phy-handle = <&ethernet_phy6>;
 	phy-connection-type = "sgmii";
+	status = "okay";
 };
 
 &dpmac14 {
 	phys = <&serdes_2 7>;
 	phy-handle = <&ethernet_phy8>;
 	phy-connection-type = "sgmii";
+	status = "okay";
 };
 
 &dpmac15 {
 	phys = <&serdes_2 4>;
 	phy-handle = <&ethernet_phy4>;
 	phy-connection-type = "sgmii";
+	status = "okay";
 };
 
 &dpmac16 {
 	phys = <&serdes_2 5>;
 	phy-handle = <&ethernet_phy2>;
 	phy-connection-type = "sgmii";
+	status = "okay";
 };
 
 &dpmac17 {
@@ -177,12 +170,14 @@
 	phys = <&serdes_2 2>;
 	phy-handle = <&ethernet_phy5>;
 	phy-connection-type = "sgmii";
+	status = "okay";
 };
 
 &dpmac18 {
 	phys = <&serdes_2 3>;
 	phy-handle = <&ethernet_phy7>;
 	phy-connection-type = "sgmii";
+	status = "okay";
 };
 
 &emdio1 {
@@ -319,6 +314,14 @@
 	};
 };
 
+&pcie3 {
+	status = "disabled";
+};
+
+&pcie4 {
+	status = "disabled";
+};
+
 &pcs_mdio3 {
 	status = "okay";
 };
@@ -364,6 +367,10 @@
 };
 
 &pcs_mdio18 {
+	status = "okay";
+};
+
+&serdes_1 {
 	status = "okay";
 };
 

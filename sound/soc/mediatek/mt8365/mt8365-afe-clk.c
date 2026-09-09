@@ -194,12 +194,15 @@ int mt8365_afe_enable_top_cg(struct mtk_base_afe *afe, unsigned int cg_type)
 	unsigned int reg = get_top_cg_reg(cg_type);
 	unsigned int mask = get_top_cg_mask(cg_type);
 	unsigned int val = get_top_cg_on_val(cg_type);
+	unsigned long flags;
 
-	guard(spinlock_irqsave)(&afe_priv->afe_ctrl_lock);
+	spin_lock_irqsave(&afe_priv->afe_ctrl_lock, flags);
 
 	afe_priv->top_cg_ref_cnt[cg_type]++;
 	if (afe_priv->top_cg_ref_cnt[cg_type] == 1)
 		regmap_update_bits(afe->regmap, reg, mask, val);
+
+	spin_unlock_irqrestore(&afe_priv->afe_ctrl_lock, flags);
 
 	return 0;
 }
@@ -210,14 +213,17 @@ int mt8365_afe_disable_top_cg(struct mtk_base_afe *afe, unsigned int cg_type)
 	unsigned int reg = get_top_cg_reg(cg_type);
 	unsigned int mask = get_top_cg_mask(cg_type);
 	unsigned int val = get_top_cg_off_val(cg_type);
+	unsigned long flags;
 
-	guard(spinlock_irqsave)(&afe_priv->afe_ctrl_lock);
+	spin_lock_irqsave(&afe_priv->afe_ctrl_lock, flags);
 
 	afe_priv->top_cg_ref_cnt[cg_type]--;
 	if (afe_priv->top_cg_ref_cnt[cg_type] == 0)
 		regmap_update_bits(afe->regmap, reg, mask, val);
 	else if (afe_priv->top_cg_ref_cnt[cg_type] < 0)
 		afe_priv->top_cg_ref_cnt[cg_type] = 0;
+
+	spin_unlock_irqrestore(&afe_priv->afe_ctrl_lock, flags);
 
 	return 0;
 }
@@ -257,12 +263,15 @@ int mt8365_afe_emi_clk_off(struct mtk_base_afe *afe)
 int mt8365_afe_enable_afe_on(struct mtk_base_afe *afe)
 {
 	struct mt8365_afe_private *afe_priv = afe->platform_priv;
+	unsigned long flags;
 
-	guard(spinlock_irqsave)(&afe_priv->afe_ctrl_lock);
+	spin_lock_irqsave(&afe_priv->afe_ctrl_lock, flags);
 
 	afe_priv->afe_on_ref_cnt++;
 	if (afe_priv->afe_on_ref_cnt == 1)
 		regmap_update_bits(afe->regmap, AFE_DAC_CON0, 0x1, 0x1);
+
+	spin_unlock_irqrestore(&afe_priv->afe_ctrl_lock, flags);
 
 	return 0;
 }
@@ -270,14 +279,17 @@ int mt8365_afe_enable_afe_on(struct mtk_base_afe *afe)
 int mt8365_afe_disable_afe_on(struct mtk_base_afe *afe)
 {
 	struct mt8365_afe_private *afe_priv = afe->platform_priv;
+	unsigned long flags;
 
-	guard(spinlock_irqsave)(&afe_priv->afe_ctrl_lock);
+	spin_lock_irqsave(&afe_priv->afe_ctrl_lock, flags);
 
 	afe_priv->afe_on_ref_cnt--;
 	if (afe_priv->afe_on_ref_cnt == 0)
 		regmap_update_bits(afe->regmap, AFE_DAC_CON0, 0x1, 0x0);
 	else if (afe_priv->afe_on_ref_cnt < 0)
 		afe_priv->afe_on_ref_cnt = 0;
+
+	spin_unlock_irqrestore(&afe_priv->afe_ctrl_lock, flags);
 
 	return 0;
 }
@@ -310,11 +322,13 @@ int mt8365_afe_enable_apll_tuner_cfg(struct mtk_base_afe *afe, unsigned int apll
 {
 	struct mt8365_afe_private *afe_priv = afe->platform_priv;
 
-	guard(mutex)(&afe_priv->afe_clk_mutex);
+	mutex_lock(&afe_priv->afe_clk_mutex);
 
 	afe_priv->apll_tuner_ref_cnt[apll]++;
-	if (afe_priv->apll_tuner_ref_cnt[apll] != 1)
+	if (afe_priv->apll_tuner_ref_cnt[apll] != 1) {
+		mutex_unlock(&afe_priv->afe_clk_mutex);
 		return 0;
+	}
 
 	if (apll == MT8365_AFE_APLL1) {
 		regmap_update_bits(afe->regmap, AFE_APLL_TUNER_CFG,
@@ -328,6 +342,7 @@ int mt8365_afe_enable_apll_tuner_cfg(struct mtk_base_afe *afe, unsigned int apll
 				   AFE_APLL_TUNER_CFG1_EN_MASK, 0x1);
 	}
 
+	mutex_unlock(&afe_priv->afe_clk_mutex);
 	return 0;
 }
 
@@ -335,7 +350,7 @@ int mt8365_afe_disable_apll_tuner_cfg(struct mtk_base_afe *afe, unsigned int apl
 {
 	struct mt8365_afe_private *afe_priv = afe->platform_priv;
 
-	guard(mutex)(&afe_priv->afe_clk_mutex);
+	mutex_lock(&afe_priv->afe_clk_mutex);
 
 	afe_priv->apll_tuner_ref_cnt[apll]--;
 	if (afe_priv->apll_tuner_ref_cnt[apll] == 0) {
@@ -350,6 +365,7 @@ int mt8365_afe_disable_apll_tuner_cfg(struct mtk_base_afe *afe, unsigned int apl
 		afe_priv->apll_tuner_ref_cnt[apll] = 0;
 	}
 
+	mutex_unlock(&afe_priv->afe_clk_mutex);
 	return 0;
 }
 

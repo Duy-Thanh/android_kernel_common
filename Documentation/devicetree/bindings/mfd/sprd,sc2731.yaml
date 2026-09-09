@@ -54,9 +54,7 @@ properties:
 
   regulators:
     type: object
-    oneOf:
-      - $ref: /schemas/regulator/sprd,sc2730-regulator.yaml#
-      - $ref: /schemas/regulator/sprd,sc2731-regulator.yaml#
+    $ref: /schemas/regulator/sprd,sc2731-regulator.yaml#
 
 patternProperties:
   "^adc@[0-9a-f]+$":

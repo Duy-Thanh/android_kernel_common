@@ -377,10 +377,8 @@ static void task_fpsimd_load(void)
 			if (!thread_sm_enabled(&current->thread))
 				WARN_ON_ONCE(!test_and_set_thread_flag(TIF_SVE));
 
-			if (test_thread_flag(TIF_SVE)) {
-				unsigned long vq = sve_vq_from_vl(task_get_sve_vl(current));
-				sysreg_clear_set_s(SYS_ZCR_EL1, ZCR_ELx_LEN, vq - 1);
-			}
+			if (test_thread_flag(TIF_SVE))
+				sve_set_vq(sve_vq_from_vl(task_get_sve_vl(current)) - 1);
 
 			restore_sve_regs = true;
 			restore_ffr = true;
@@ -405,10 +403,8 @@ static void task_fpsimd_load(void)
 		unsigned long sme_vl = task_get_sme_vl(current);
 
 		/* Ensure VL is set up for restoring data */
-		if (test_thread_flag(TIF_SME)) {
-			unsigned long vq = sve_vq_from_vl(sme_vl);
-			sysreg_clear_set_s(SYS_SMCR_EL1, SMCR_ELx_LEN, vq - 1);
-		}
+		if (test_thread_flag(TIF_SME))
+			sme_set_vq(sve_vq_from_vl(sme_vl) - 1);
 
 		write_sysreg_s(current->thread.svcr, SYS_SVCR);
 
@@ -425,8 +421,9 @@ static void task_fpsimd_load(void)
 
 	if (restore_sve_regs) {
 		WARN_ON_ONCE(current->thread.fp_type != FP_STATE_SVE);
-		sve_load_state(current->thread.sve_state, restore_ffr);
-		fpsimd_load_common(&current->thread.uw.fpsimd_state);
+		sve_load_state(sve_pffr(&current->thread),
+			       &current->thread.uw.fpsimd_state.fpsr,
+			       restore_ffr);
 	} else {
 		WARN_ON_ONCE(current->thread.fp_type != FP_STATE_FPSIMD);
 		fpsimd_load_state(&current->thread.uw.fpsimd_state);
@@ -506,8 +503,9 @@ static void fpsimd_save_user_state(void)
 			return;
 		}
 
-		sve_save_state(last->sve_state, save_ffr);
-		fpsimd_save_common(last->st);
+		sve_save_state((char *)last->sve_state +
+					sve_ffr_offset(vl),
+			       &last->st->fpsr, save_ffr);
 		*last->fp_type = FP_STATE_SVE;
 	} else {
 		fpsimd_save_state(last->st);
@@ -638,8 +636,7 @@ static __uint128_t arm64_cpu_to_le128(__uint128_t x)
 
 #define arm64_le128_to_cpu(x) arm64_cpu_to_le128(x)
 
-static void __fpsimd_to_sve(struct arm64_sve_state *sst,
-			    struct user_fpsimd_state const *fst,
+static void __fpsimd_to_sve(void *sst, struct user_fpsimd_state const *fst,
 			    unsigned int vq)
 {
 	unsigned int i;
@@ -666,7 +663,7 @@ static void __fpsimd_to_sve(struct arm64_sve_state *sst,
 static inline void fpsimd_to_sve(struct task_struct *task)
 {
 	unsigned int vq;
-	struct arm64_sve_state *sst = task->thread.sve_state;
+	void *sst = task->thread.sve_state;
 	struct user_fpsimd_state const *fst = &task->thread.uw.fpsimd_state;
 
 	if (!system_supports_sve() && !system_supports_sme())
@@ -690,7 +687,7 @@ static inline void fpsimd_to_sve(struct task_struct *task)
 static inline void sve_to_fpsimd(struct task_struct *task)
 {
 	unsigned int vq, vl;
-	const struct arm64_sve_state *sst = task->thread.sve_state;
+	void const *sst = task->thread.sve_state;
 	struct user_fpsimd_state *fst = &task->thread.uw.fpsimd_state;
 	unsigned int i;
 	__uint128_t const *p;
@@ -789,7 +786,7 @@ void fpsimd_sync_from_effective_state(struct task_struct *task)
 void fpsimd_sync_to_effective_state_zeropad(struct task_struct *task)
 {
 	unsigned int vq;
-	struct arm64_sve_state *sst = task->thread.sve_state;
+	void *sst = task->thread.sve_state;
 	struct user_fpsimd_state const *fst = &task->thread.uw.fpsimd_state;
 
 	if (task->thread.fp_type != FP_STATE_SVE)
@@ -807,8 +804,7 @@ static int change_live_vector_length(struct task_struct *task,
 {
 	unsigned int sve_vl = task_get_sve_vl(task);
 	unsigned int sme_vl = task_get_sme_vl(task);
-	struct arm64_sve_state *sve_state = NULL;
-	struct arm64_sme_state *sme_state = NULL;
+	void *sve_state = NULL, *sme_state = NULL;
 
 	if (type == ARM64_VEC_SME)
 		sme_vl = vl;
@@ -1297,6 +1293,31 @@ void sme_suspend_exit(void)
 
 #endif /* CONFIG_ARM64_SME */
 
+static void sve_init_regs(void)
+{
+	/*
+	 * Convert the FPSIMD state to SVE, zeroing all the state that
+	 * is not shared with FPSIMD. If (as is likely) the current
+	 * state is live in the registers then do this there and
+	 * update our metadata for the current task including
+	 * disabling the trap, otherwise update our in-memory copy.
+	 * We are guaranteed to not be in streaming mode, we can only
+	 * take a SVE trap when not in streaming mode and we can't be
+	 * in streaming mode when taking a SME trap.
+	 */
+	if (!test_thread_flag(TIF_FOREIGN_FPSTATE)) {
+		unsigned long vq_minus_one =
+			sve_vq_from_vl(task_get_sve_vl(current)) - 1;
+		sve_set_vq(vq_minus_one);
+		sve_flush_live(true, vq_minus_one);
+		fpsimd_bind_task_to_cpu();
+	} else {
+		fpsimd_to_sve(current);
+		current->thread.fp_type = FP_STATE_SVE;
+		fpsimd_flush_task_state(current);
+	}
+}
+
 /*
  * Trapped SVE access
  *
@@ -1328,23 +1349,13 @@ void do_sve_acc(unsigned long esr, struct pt_regs *regs)
 		WARN_ON(1); /* SVE access shouldn't have trapped */
 
 	/*
-	 * Convert the FPSIMD state to SVE. Stale SVE state can be present in
-	 * registers or memory, so we must zero all state that is not shared
-	 * with FPSIMD.
-	 *
-	 * SVE traps cannot be taken from streaming mode, so there cannot be
-	 * any effective streaming mode SVE state.
+	 * Even if the task can have used streaming mode we can only
+	 * generate SVE access traps in normal SVE mode and
+	 * transitioning out of streaming mode may discard any
+	 * streaming mode state.  Always clear the high bits to avoid
+	 * any potential errors tracking what is properly initialised.
 	 */
-	if (!test_thread_flag(TIF_FOREIGN_FPSTATE)) {
-		unsigned long vq = sve_vq_from_vl(task_get_sve_vl(current));
-		sysreg_clear_set_s(SYS_ZCR_EL1, ZCR_ELx_LEN, vq - 1);
-		sve_flush_live();
-		fpsimd_bind_task_to_cpu();
-	} else {
-		fpsimd_to_sve(current);
-		current->thread.fp_type = FP_STATE_SVE;
-		fpsimd_flush_task_state(current);
-	}
+	sve_init_regs();
 
 	put_cpu_fpsimd_context();
 }
@@ -1468,8 +1479,9 @@ void do_sme_acc(unsigned long esr, struct pt_regs *regs)
 		WARN_ON(1);
 
 	if (!test_thread_flag(TIF_FOREIGN_FPSTATE)) {
-		unsigned long vq = sve_vq_from_vl(task_get_sme_vl(current));
-		sysreg_clear_set_s(SYS_SMCR_EL1, SMCR_ELx_LEN, vq - 1);
+		unsigned long vq_minus_one =
+			sve_vq_from_vl(task_get_sme_vl(current)) - 1;
+		sme_set_vq(vq_minus_one);
 
 		fpsimd_bind_task_to_cpu();
 	} else {
@@ -1644,8 +1656,8 @@ static void fpsimd_flush_thread_vl(enum vec_type type)
 
 void fpsimd_flush_thread(void)
 {
-	struct arm64_sve_state *sve_state = NULL;
-	struct arm64_sme_state *sme_state = NULL;
+	void *sve_state = NULL;
+	void *sme_state = NULL;
 
 	if (!system_supports_fpsimd())
 		return;

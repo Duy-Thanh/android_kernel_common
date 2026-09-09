@@ -535,7 +535,6 @@ static void check_audio_bandwidth(
 {
 	switch (signal) {
 	case SIGNAL_TYPE_HDMI_TYPE_A:
-	case SIGNAL_TYPE_HDMI_FRL:
 		check_audio_bandwidth_hdmi(
 			crtc_info, channel_count, sample_rates);
 		break;
@@ -739,7 +738,6 @@ void dce_aud_az_configure(
 	/* set audio for output signal */
 	switch (signal) {
 	case SIGNAL_TYPE_HDMI_TYPE_A:
-	case SIGNAL_TYPE_HDMI_FRL:
 		set_reg_field_value(value,
 			1,
 			AZALIA_F0_CODEC_PIN_CONTROL_CHANNEL_SPEAKER,
@@ -800,12 +798,6 @@ void dce_aud_az_configure(
 			/* adjust specific properties */
 			switch (audio_format_code) {
 			case AUDIO_FORMAT_CODE_LINEARPCM: {
-				if (signal == SIGNAL_TYPE_HDMI_FRL
-						&& channel_count > 2
-						&& crtc_info != NULL
-						&& crtc_info->v_active <= 576) {
-					channel_count = 2;
-				}
 
 				check_audio_bandwidth(
 					crtc_info,

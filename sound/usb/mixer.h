@@ -94,7 +94,6 @@ struct usb_mixer_elem_info {
 	int cache_val[MAX_CHANNELS];
 	u8 initialized;
 	u8 min_mute;
-	u8 get_cur_broken;
 	void *private_data;
 };
 

@@ -22,4 +22,3 @@ Block
    switching-sched
    writeback_cache_control
    ublk
-   error-injection

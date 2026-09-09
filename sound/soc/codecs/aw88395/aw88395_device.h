@@ -152,7 +152,7 @@ struct aw_cali_desc {
 
 struct aw_container {
 	int len;
-	u8 data[] __counted_by(len);
+	u8 data[];
 };
 
 struct aw_device {

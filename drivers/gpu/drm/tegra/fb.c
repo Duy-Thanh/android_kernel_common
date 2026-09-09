@@ -102,7 +102,6 @@ static const struct drm_framebuffer_funcs tegra_fb_funcs = {
 	.create_handle = drm_gem_fb_create_handle,
 };
 
-static
 struct drm_framebuffer *tegra_fb_alloc(struct drm_device *drm,
 				       const struct drm_format_info *info,
 				       const struct drm_mode_fb_cmd2 *mode_cmd,

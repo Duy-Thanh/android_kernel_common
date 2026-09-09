@@ -7,8 +7,6 @@
 #include <linux/highmem.h>
 #include <linux/vmalloc.h>
 
-#include <asm/cpuid/api.h>
-
 #include "mmu.h"
 #include "psb_drv.h"
 #include "psb_reg.h"

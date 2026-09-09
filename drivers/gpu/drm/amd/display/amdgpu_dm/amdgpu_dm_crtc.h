@@ -27,10 +27,11 @@
 #ifndef __AMDGPU_DM_CRTC_H__
 #define __AMDGPU_DM_CRTC_H__
 
-void amdgpu_dm_crtc_set_static_screen_optimze(
+void amdgpu_dm_crtc_set_panel_sr_feature(
 	struct amdgpu_display_manager *dm,
+	struct amdgpu_crtc *acrtc,
 	struct dc_stream_state *stream,
-	bool sso_enable, bool allow_sr_entry);
+	bool vblank_enabled, bool allow_sr_entry);
 
 void amdgpu_dm_crtc_handle_vblank(struct amdgpu_crtc *acrtc);
 

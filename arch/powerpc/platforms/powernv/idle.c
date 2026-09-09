@@ -8,7 +8,6 @@
 #include <linux/types.h>
 #include <linux/mm.h>
 #include <linux/slab.h>
-#include <linux/sysfs.h>
 #include <linux/of.h>
 #include <linux/device.h>
 #include <linux/cpu.h>
@@ -172,7 +171,7 @@ static u8 fastsleep_workaround_applyonce;
 static ssize_t show_fastsleep_workaround_applyonce(struct device *dev,
 		struct device_attribute *attr, char *buf)
 {
-	return sysfs_emit(buf, "%u\n", fastsleep_workaround_applyonce);
+	return sprintf(buf, "%u\n", fastsleep_workaround_applyonce);
 }
 
 static ssize_t store_fastsleep_workaround_applyonce(struct device *dev,

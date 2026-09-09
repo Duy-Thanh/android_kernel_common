@@ -22,7 +22,6 @@
 #include "crypto_ctx.h"
 #include "auth.h"
 #include "stats.h"
-#include "compress.h"
 
 int ksmbd_debug_types;
 
@@ -245,15 +244,6 @@ send:
 	if (work->tcon)
 		ksmbd_tree_connect_put(work->tcon);
 	smb3_preauth_hash_rsp(work);
-	/*
-	 * Preauthentication hashes cover the original SMB2 response. Apply the
-	 * transport compression wrapper only after updating the hash.
-	 */
-	if (work->compress_response) {
-		rc = ksmbd_compress_response(work);
-		if (rc < 0)
-			ksmbd_debug(CONN, "Failed to compress response: %d\n", rc);
-	}
 	if (work->sess && work->sess->enc && work->encrypted &&
 	    conn->ops->encrypt_resp) {
 		rc = conn->ops->encrypt_resp(work);

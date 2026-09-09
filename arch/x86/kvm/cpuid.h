@@ -7,8 +7,6 @@
 #include <asm/processor.h>
 #include <uapi/asm/kvm_para.h>
 
-#include "smm.h"
-
 extern u32 kvm_cpu_caps[NR_KVM_CPU_CAPS] __read_mostly;
 extern bool kvm_is_configuring_cpu_caps __read_mostly;
 
@@ -126,7 +124,7 @@ static __always_inline bool guest_cpuid_has(struct kvm_vcpu *vcpu,
 
 	entry = kvm_find_cpuid_entry_index(vcpu, cpuid.function, cpuid.index);
 	if (!entry)
-		return false;
+		return NULL;
 
 	reg = __cpuid_entry_get_reg(entry, cpuid.reg);
 	if (!reg)
@@ -183,17 +181,15 @@ static inline int guest_cpuid_stepping(struct kvm_vcpu *vcpu)
 	return x86_stepping(best->eax);
 }
 
-static inline bool cpuid_fault_enabled(struct kvm_vcpu *vcpu)
+static inline bool supports_cpuid_fault(struct kvm_vcpu *vcpu)
 {
-	return (vcpu->arch.msr_misc_features_enables &
-		MSR_MISC_FEATURES_ENABLES_CPUID_FAULT) ||
-		(vcpu->arch.msr_hwcr & MSR_K7_HWCR_CPUID_USER_DIS);
+	return vcpu->arch.msr_platform_info & MSR_PLATFORM_INFO_CPUID_FAULT;
 }
 
-static inline bool kvm_is_cpuid_allowed(struct kvm_vcpu *vcpu)
+static inline bool cpuid_fault_enabled(struct kvm_vcpu *vcpu)
 {
-	return !cpuid_fault_enabled(vcpu) || is_smm(vcpu) ||
-	       !kvm_x86_call(get_cpl)(vcpu);
+	return vcpu->arch.msr_misc_features_enables &
+		  MSR_MISC_FEATURES_ENABLES_CPUID_FAULT;
 }
 
 static __always_inline void kvm_cpu_cap_clear(unsigned int x86_feature)

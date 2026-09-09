@@ -74,10 +74,8 @@ int of_partition(struct parsed_partitions *state)
 	struct device_node *partitions_np = of_node_get(ddev->of_node);
 
 	if (!partitions_np ||
-	    !of_device_is_compatible(partitions_np, "fixed-partitions")) {
-		of_node_put(partitions_np);
+	    !of_device_is_compatible(partitions_np, "fixed-partitions"))
 		return 0;
-	}
 
 	slot = 1;
 	/* Validate parition offset and size */
@@ -106,6 +104,5 @@ int of_partition(struct parsed_partitions *state)
 
 	seq_buf_puts(&state->pp_buf, "\n");
 
-	of_node_put(partitions_np);
 	return 1;
 }

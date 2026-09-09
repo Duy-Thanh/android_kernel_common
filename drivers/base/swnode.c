@@ -374,28 +374,20 @@ EXPORT_SYMBOL_GPL(property_entries_free);
 /* -------------------------------------------------------------------------- */
 /* fwnode operations */
 
-static struct swnode *swnode_get(struct swnode *swnode)
-{
-	kobject_get(&swnode->kobj);
-
-	return swnode;
-}
-
-static void swnode_put(struct swnode *swnode)
-{
-	kobject_put(&swnode->kobj);
-}
-
 static struct fwnode_handle *software_node_get(struct fwnode_handle *fwnode)
 {
-	struct swnode *swnode = swnode_get(to_swnode(fwnode));
+	struct swnode *swnode = to_swnode(fwnode);
+
+	kobject_get(&swnode->kobj);
 
 	return &swnode->fwnode;
 }
 
 static void software_node_put(struct fwnode_handle *fwnode)
 {
-	swnode_put(to_swnode(fwnode));
+	struct swnode *swnode = to_swnode(fwnode);
+
+	kobject_put(&swnode->kobj);
 }
 
 static bool software_node_property_present(const struct fwnode_handle *fwnode,
@@ -501,7 +493,7 @@ software_node_get_named_child_node(const struct fwnode_handle *fwnode,
 
 	list_for_each_entry(child, &swnode->children, entry) {
 		if (!strcmp(childname, kobject_name(&child->kobj))) {
-			swnode_get(child);
+			kobject_get(&child->kobj);
 			return &child->fwnode;
 		}
 	}
@@ -745,7 +737,7 @@ software_node_find_by_name(const struct software_node *parent, const char *name)
 		swnode = kobj_to_swnode(k);
 		if (parent == swnode->node->parent && swnode->node->name &&
 		    !strcmp(name, swnode->node->name)) {
-			swnode_get(swnode);
+			kobject_get(&swnode->kobj);
 			break;
 		}
 		swnode = NULL;
@@ -843,13 +835,13 @@ swnode_register(const struct software_node *node, struct swnode *parent,
 					   parent ? &parent->kobj : NULL,
 					   "node%d", swnode->id);
 	if (ret) {
-		swnode_put(swnode);
+		kobject_put(&swnode->kobj);
 		return ERR_PTR(ret);
 	}
 
 	/*
 	 * Assign the flag only in the successful case, so
-	 * the above swnode_put() won't mess up with properties.
+	 * the above kobject_put() won't mess up with properties.
 	 */
 	swnode->allocated = allocated;
 
@@ -986,7 +978,7 @@ void fwnode_remove_software_node(struct fwnode_handle *fwnode)
 	if (!swnode)
 		return;
 
-	swnode_put(swnode);
+	kobject_put(&swnode->kobj);
 }
 EXPORT_SYMBOL_GPL(fwnode_remove_software_node);
 
@@ -1010,7 +1002,7 @@ int device_add_software_node(struct device *dev, const struct software_node *nod
 
 	swnode = software_node_to_swnode(node);
 	if (swnode) {
-		swnode_get(swnode);
+		kobject_get(&swnode->kobj);
 	} else {
 		ret = software_node_register(node);
 		if (ret)
@@ -1052,7 +1044,7 @@ void device_remove_software_node(struct device *dev)
 		software_node_notify_remove(dev);
 
 	set_secondary_fwnode(dev, NULL);
-	swnode_put(swnode);
+	kobject_put(&swnode->kobj);
 }
 EXPORT_SYMBOL_GPL(device_remove_software_node);
 
@@ -1105,7 +1097,7 @@ void software_node_notify(struct device *dev)
 	if (!swnode)
 		return;
 
-	swnode_get(swnode);
+	kobject_get(&swnode->kobj);
 	ret = sysfs_create_link(&dev->kobj, &swnode->kobj, "software_node");
 	if (ret)
 		return;
@@ -1127,11 +1119,11 @@ void software_node_notify_remove(struct device *dev)
 
 	sysfs_remove_link(&swnode->kobj, dev_name(dev));
 	sysfs_remove_link(&dev->kobj, "software_node");
-	swnode_put(swnode);
+	kobject_put(&swnode->kobj);
 
 	if (swnode->managed) {
 		set_secondary_fwnode(dev, NULL);
-		swnode_put(swnode);
+		kobject_put(&swnode->kobj);
 	}
 }
 

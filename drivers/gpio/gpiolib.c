@@ -55,7 +55,7 @@
 
 /* Device and char device-related information */
 static DEFINE_IDA(gpio_ida);
-static dev_t gpio_devt __ro_after_init;
+static dev_t gpio_devt;
 #define GPIO_DEV_MAX 256 /* 256 GPIO chip devices supported */
 
 static int gpio_bus_match(struct device *dev, const struct device_driver *drv)
@@ -114,7 +114,7 @@ static int gpiochip_irqchip_init_hw(struct gpio_chip *gc);
 static int gpiochip_irqchip_init_valid_mask(struct gpio_chip *gc);
 static void gpiochip_irqchip_free_valid_mask(struct gpio_chip *gc);
 
-static bool gpiolib_initialized __ro_after_init;
+static bool gpiolib_initialized;
 
 const char *gpiod_get_label(struct gpio_desc *desc)
 {
@@ -143,15 +143,13 @@ static void desc_free_label(struct rcu_head *rh)
 static int desc_set_label(struct gpio_desc *desc, const char *label)
 {
 	struct gpio_desc_label *new = NULL, *old;
-	size_t len;
 
 	if (label) {
-		len = strlen(label);
-		new = kzalloc_flex(*new, str, len + 1);
+		new = kzalloc_flex(*new, str, strlen(label) + 1);
 		if (!new)
 			return -ENOMEM;
 
-		memcpy(new->str, label, len);
+		strcpy(new->str, label);
 	}
 
 	old = rcu_replace_pointer(desc->label, new, 1);
@@ -492,28 +490,6 @@ int gpiod_get_direction(struct gpio_desc *desc)
 	return ret;
 }
 EXPORT_SYMBOL_GPL(gpiod_get_direction);
-
-/**
- * gpiod_is_single_ended - check if the GPIO is configured as single-ended
- * @desc: the GPIO descriptor to check
- *
- * Returns true if the GPIO is configured as either Open Drain or Open Source.
- * In these modes, the direction of the line cannot always be reliably
- * determined by reading hardware registers, as the "off" state (High-Z)
- * is physically indistinguishable from an input state.
- */
-bool gpiod_is_single_ended(struct gpio_desc *desc)
-{
-	if (!desc)
-		return false;
-
-	if (test_bit(GPIOD_FLAG_OPEN_DRAIN, &desc->flags) ||
-		test_bit(GPIOD_FLAG_OPEN_SOURCE, &desc->flags))
-		return true;
-
-	return false;
-}
-EXPORT_SYMBOL_GPL(gpiod_is_single_ended);
 
 /*
  * Add a new chip to the global chips list, keeping the list of chips sorted
@@ -3438,13 +3414,20 @@ static int gpio_chip_get_value(struct gpio_chip *gc, const struct gpio_desc *des
 
 static int gpiod_get_raw_value_commit(const struct gpio_desc *desc)
 {
+	struct gpio_device *gdev;
+	struct gpio_chip *gc;
 	int value;
 
-	CLASS(gpio_chip_guard, guard)(desc);
-	if (!guard.gc)
+	/* FIXME Unable to use gpio_chip_guard due to const desc. */
+	gdev = desc->gdev;
+
+	guard(srcu)(&gdev->srcu);
+
+	gc = srcu_dereference(gdev->chip, &gdev->srcu);
+	if (!gc)
 		return -ENODEV;
 
-	value = gpio_chip_get_value(guard.gc, desc);
+	value = gpio_chip_get_value(gc, desc);
 	value = value < 0 ? value : !!value;
 	trace_gpio_value(desc_to_gpio(desc), 1, value);
 	return value;
@@ -4151,6 +4134,8 @@ EXPORT_SYMBOL_GPL(gpiod_is_shared);
  */
 int gpiod_to_irq(const struct gpio_desc *desc)
 {
+	struct gpio_device *gdev;
+	struct gpio_chip *gc;
 	int offset;
 	int ret;
 
@@ -4158,13 +4143,16 @@ int gpiod_to_irq(const struct gpio_desc *desc)
 	if (ret <= 0)
 		return -EINVAL;
 
-	CLASS(gpio_chip_guard, guard)(desc);
-	if (!guard.gc)
+	gdev = desc->gdev;
+	/* FIXME Cannot use gpio_chip_guard due to const desc. */
+	guard(srcu)(&gdev->srcu);
+	gc = srcu_dereference(gdev->chip, &gdev->srcu);
+	if (!gc)
 		return -ENODEV;
 
 	offset = gpiod_hwgpio(desc);
-	if (guard.gc->to_irq) {
-		ret = guard.gc->to_irq(guard.gc, offset);
+	if (gc->to_irq) {
+		ret = gc->to_irq(gc, offset);
 		if (ret)
 			return ret;
 
@@ -4172,7 +4160,7 @@ int gpiod_to_irq(const struct gpio_desc *desc)
 		return -ENXIO;
 	}
 #ifdef CONFIG_GPIOLIB_IRQCHIP
-	if (guard.gc->irq.chip) {
+	if (gc->irq.chip) {
 		/*
 		 * Avoid race condition with other code, which tries to lookup
 		 * an IRQ before the irqchip has been properly registered,
@@ -5360,7 +5348,7 @@ EXPORT_SYMBOL_GPL(gpiod_put_array);
  * gpio_device of the GPIO chip with the firmware node and then simply
  * bind it to this stub driver.
  */
-static struct device_driver gpio_stub_drv __ro_after_init = {
+static struct device_driver gpio_stub_drv = {
 	.name = "gpio_stub_drv",
 	.bus = &gpio_bus_type,
 };
@@ -5518,8 +5506,8 @@ static int gpiolib_seq_show(struct seq_file *s, void *v)
 	if (gc->label)
 		seq_printf(s, ", %s", gc->label);
 	if (gc->can_sleep)
-		seq_puts(s, ", can sleep");
-	seq_puts(s, ":\n");
+		seq_printf(s, ", can sleep");
+	seq_printf(s, ":\n");
 
 	if (gc->dbg_show)
 		gc->dbg_show(s, gc);

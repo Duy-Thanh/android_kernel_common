@@ -90,7 +90,6 @@ struct mod_vrr_params_flip_interval {
 struct mod_vrr_params {
 	bool supported;
 	bool send_info_frame;
-	bool m_const_engaged; // this is used when m_const is set up in OPTC so no overriding happens from FreeSync Module
 	enum mod_vrr_state state;
 
 	uint32_t min_refresh_in_uhz;
@@ -98,8 +97,6 @@ struct mod_vrr_params {
 	uint32_t max_refresh_in_uhz;
 	uint32_t min_duration_in_us;
 	uint32_t fixed_refresh_in_uhz;
-
-	uint32_t m_const;
 
 	struct dc_crtc_timing_adjust adjust;
 

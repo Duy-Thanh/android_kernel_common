@@ -16,9 +16,7 @@ proc-y	+= cmdline.o
 proc-y	+= consoles.o
 proc-y	+= cpuinfo.o
 proc-y	+= devices.o
-ifneq ($(CONFIG_GENERIC_IRQ_SHOW),y)
-proc-y += interrupts.o
-endif
+proc-y	+= interrupts.o
 proc-y	+= loadavg.o
 proc-y	+= meminfo.o
 proc-y	+= stat.o

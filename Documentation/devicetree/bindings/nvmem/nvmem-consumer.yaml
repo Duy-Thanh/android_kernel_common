@@ -16,8 +16,6 @@ properties:
     $ref: /schemas/types.yaml#/definitions/phandle-array
     description:
       List of phandle to the nvmem providers.
-    items:
-      maxItems: 1
 
   nvmem-cells:
     $ref: /schemas/types.yaml#/definitions/phandle-array

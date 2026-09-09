@@ -193,7 +193,6 @@ static const struct dmi_system_id ac_dmi_table[]  __initconst = {
 static int acpi_ac_probe(struct platform_device *pdev)
 {
 	struct power_supply_config psy_cfg = {};
-	struct device *dev = &pdev->dev;
 	struct acpi_device *adev;
 	struct acpi_ac *ac;
 	int result;
@@ -202,7 +201,7 @@ static int acpi_ac_probe(struct platform_device *pdev)
 	if (!adev)
 		return -ENODEV;
 
-	ac = devm_kzalloc(dev, sizeof(*ac), GFP_KERNEL);
+	ac = kzalloc_obj(struct acpi_ac);
 	if (!ac)
 		return -ENOMEM;
 
@@ -212,7 +211,7 @@ static int acpi_ac_probe(struct platform_device *pdev)
 
 	result = acpi_ac_get_state(ac);
 	if (result)
-		return result;
+		goto err_release_ac;
 
 	psy_cfg.drv_data = ac;
 
@@ -221,22 +220,33 @@ static int acpi_ac_probe(struct platform_device *pdev)
 	ac->charger_desc.properties = ac_props;
 	ac->charger_desc.num_properties = ARRAY_SIZE(ac_props);
 	ac->charger_desc.get_property = get_ac_property;
-	ac->charger = devm_power_supply_register(dev, &ac->charger_desc, &psy_cfg);
-	if (IS_ERR(ac->charger))
-		return PTR_ERR(ac->charger);
+	ac->charger = power_supply_register(&pdev->dev,
+					    &ac->charger_desc, &psy_cfg);
+	if (IS_ERR(ac->charger)) {
+		result = PTR_ERR(ac->charger);
+		goto err_release_ac;
+	}
 
 	pr_info("AC Adapter [%s] (%s-line)\n", acpi_device_bid(adev),
 		str_on_off(ac->state));
 
-	result = devm_acpi_install_notify_handler(dev, ACPI_ALL_NOTIFY,
-						  acpi_ac_notify, ac);
-	if (result)
-		return result;
-
 	ac->battery_nb.notifier_call = acpi_ac_battery_notify;
 	register_acpi_notifier(&ac->battery_nb);
 
+	result = acpi_dev_install_notify_handler(adev, ACPI_ALL_NOTIFY,
+						 acpi_ac_notify, ac);
+	if (result)
+		goto err_unregister;
+
 	return 0;
+
+err_unregister:
+	power_supply_unregister(ac->charger);
+	unregister_acpi_notifier(&ac->battery_nb);
+err_release_ac:
+	kfree(ac);
+
+	return result;
 }
 
 #ifdef CONFIG_PM_SLEEP
@@ -261,7 +271,12 @@ static void acpi_ac_remove(struct platform_device *pdev)
 {
 	struct acpi_ac *ac = platform_get_drvdata(pdev);
 
+	acpi_dev_remove_notify_handler(ac->device, ACPI_ALL_NOTIFY,
+				       acpi_ac_notify);
+	power_supply_unregister(ac->charger);
 	unregister_acpi_notifier(&ac->battery_nb);
+
+	kfree(ac);
 }
 
 static struct platform_driver acpi_ac_driver = {

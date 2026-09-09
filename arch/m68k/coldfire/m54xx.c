@@ -51,12 +51,12 @@ static struct clk_lookup m54xx_clk_lookup[] = {
 static void __init m54xx_uarts_init(void)
 {
 	/* enable io pins */
-	mcf_write8(MCF_PAR_PSC_TXD | MCF_PAR_PSC_RXD, MCFGPIO_PAR_PSC0);
-	mcf_write8(MCF_PAR_PSC_TXD | MCF_PAR_PSC_RXD | MCF_PAR_PSC_RTS_RTS,
+	__raw_writeb(MCF_PAR_PSC_TXD | MCF_PAR_PSC_RXD, MCFGPIO_PAR_PSC0);
+	__raw_writeb(MCF_PAR_PSC_TXD | MCF_PAR_PSC_RXD | MCF_PAR_PSC_RTS_RTS,
 		MCFGPIO_PAR_PSC1);
-	mcf_write8(MCF_PAR_PSC_TXD | MCF_PAR_PSC_RXD | MCF_PAR_PSC_RTS_RTS |
+	__raw_writeb(MCF_PAR_PSC_TXD | MCF_PAR_PSC_RXD | MCF_PAR_PSC_RTS_RTS |
 		MCF_PAR_PSC_CTS_CTS, MCFGPIO_PAR_PSC2);
-	mcf_write8(MCF_PAR_PSC_TXD | MCF_PAR_PSC_RXD, MCFGPIO_PAR_PSC3);
+	__raw_writeb(MCF_PAR_PSC_TXD | MCF_PAR_PSC_RXD, MCFGPIO_PAR_PSC3);
 }
 
 /***************************************************************************/
@@ -67,9 +67,9 @@ static void __init m54xx_i2c_init(void)
 	u32 r;
 
 	/* set the fec/i2c/irq pin assignment register for i2c */
-	r = mcf_read32(MCF_PAR_FECI2CIRQ);
+	r = readl(MCF_PAR_FECI2CIRQ);
 	r |= MCF_PAR_FECI2CIRQ_SDA | MCF_PAR_FECI2CIRQ_SCL;
-	mcf_write32(r, MCF_PAR_FECI2CIRQ);
+	writel(r, MCF_PAR_FECI2CIRQ);
 #endif /* IS_ENABLED(CONFIG_I2C_IMX) */
 }
 
@@ -79,9 +79,9 @@ static void mcf54xx_reset(void)
 {
 	/* disable interrupts and enable the watchdog */
 	asm("movew #0x2700, %sr\n");
-	mcf_write32(0, MCF_GPT_GMS0);
-	mcf_write32(MCF_GPT_GCIR_CNT(1), MCF_GPT_GCIR0);
-	mcf_write32(MCF_GPT_GMS_WDEN | MCF_GPT_GMS_CE | MCF_GPT_GMS_TMS(4),
+	__raw_writel(0, MCF_GPT_GMS0);
+	__raw_writel(MCF_GPT_GCIR_CNT(1), MCF_GPT_GCIR0);
+	__raw_writel(MCF_GPT_GMS_WDEN | MCF_GPT_GMS_CE | MCF_GPT_GMS_TMS(4),
 		MCF_GPT_GMS0);
 }
 

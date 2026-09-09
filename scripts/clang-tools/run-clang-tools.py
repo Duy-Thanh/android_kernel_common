@@ -79,15 +79,14 @@ def run_analysis(entry):
 
 
 def main():
-    args = parse_arguments()
-
-    # Read JSON data into the datastore variable
-    with open(args.path) as f:
-        datastore = json.load(f)
-
-    lock = multiprocessing.Lock()
     try:
-        with multiprocessing.Pool(initializer=init, initargs=(lock, args)) as pool:
+        args = parse_arguments()
+
+        lock = multiprocessing.Lock()
+        pool = multiprocessing.Pool(initializer=init, initargs=(lock, args))
+        # Read JSON data into the datastore variable
+        with open(args.path, "r") as f:
+            datastore = json.load(f)
             pool.map(run_analysis, datastore)
     except BrokenPipeError:
         # Python flushes standard streams on exit; redirect remaining output

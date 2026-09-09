@@ -717,17 +717,13 @@ int amdgpu_bo_create(struct amdgpu_device *adev,
 	    bo->tbo.resource->mem_type == TTM_PL_VRAM) {
 		struct dma_fence *fence;
 
-		r = amdgpu_ttm_clear_buffer(amdgpu_ttm_next_clear_entity(adev),
-					    bo, bo->tbo.base.resv, &fence,
-					    true, AMDGPU_KERNEL_JOB_ID_TTM_CLEAR_BUFFER);
+		r = amdgpu_ttm_clear_buffer(bo, bo->tbo.base.resv, &fence);
 		if (unlikely(r))
 			goto fail_unreserve;
 
-		if (fence) {
-			dma_resv_add_fence(bo->tbo.base.resv, fence,
-					   DMA_RESV_USAGE_KERNEL);
-			dma_fence_put(fence);
-		}
+		dma_resv_add_fence(bo->tbo.base.resv, fence,
+				   DMA_RESV_USAGE_KERNEL);
+		dma_fence_put(fence);
 	}
 	if (!bp->resv)
 		amdgpu_bo_unreserve(bo);
@@ -1329,9 +1325,9 @@ void amdgpu_bo_release_notify(struct ttm_buffer_object *bo)
 	if (r)
 		goto out;
 
-	r = amdgpu_ttm_clear_buffer(amdgpu_ttm_next_clear_entity(adev),
-				    abo, &bo->base._resv, &fence,
-				    false, AMDGPU_KERNEL_JOB_ID_CLEAR_ON_RELEASE);
+	r = amdgpu_fill_buffer(amdgpu_ttm_next_clear_entity(adev),
+			       abo, 0, &bo->base._resv,
+			       &fence, AMDGPU_KERNEL_JOB_ID_CLEAR_ON_RELEASE);
 	if (WARN_ON(r))
 		goto out;
 

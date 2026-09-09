@@ -298,7 +298,7 @@ static void nft_exthdr_tcp_set_eval(const struct nft_expr *expr,
 						 old.v32, new.v32, false);
 			break;
 		default:
-			DEBUG_NET_WARN_ON_ONCE(1);
+			WARN_ON_ONCE(1);
 			break;
 		}
 

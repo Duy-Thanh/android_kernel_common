@@ -453,14 +453,10 @@ static int scmi_powercap_cap_set(const struct scmi_protocol_handle *ph,
 		return -EINVAL;
 
 	/* Just log the last set request if acting on a disabled domain */
-	if (PROTOCOL_REV_MAJOR(ph->version) >= 0x2) {
-		if (!scmi_powercap_dom_info_get(ph, domain_id))
-			return -EINVAL;
-
-		if (!pi->states[domain_id].enabled) {
-			pi->states[domain_id].last_pcap = power_cap;
-			return 0;
-		}
+	if (PROTOCOL_REV_MAJOR(ph->version) >= 0x2 &&
+	    !pi->states[domain_id].enabled) {
+		pi->states[domain_id].last_pcap = power_cap;
+		return 0;
 	}
 
 	return __scmi_powercap_cap_set(ph, pi, domain_id,
@@ -641,9 +637,6 @@ static int scmi_powercap_cap_enable_set(const struct scmi_protocol_handle *ph,
 	if (PROTOCOL_REV_MAJOR(ph->version) < 0x2)
 		return -EINVAL;
 
-	if (!scmi_powercap_dom_info_get(ph, domain_id))
-		return -EINVAL;
-
 	if (enable == pi->states[domain_id].enabled)
 		return 0;
 
@@ -684,9 +677,6 @@ static int scmi_powercap_cap_enable_get(const struct scmi_protocol_handle *ph,
 	*enable = true;
 	if (PROTOCOL_REV_MAJOR(ph->version) < 0x2)
 		return 0;
-
-	if (!scmi_powercap_dom_info_get(ph, domain_id))
-		return -EINVAL;
 
 	/*
 	 * Report always real platform state; platform could have ignored

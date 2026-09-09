@@ -7,13 +7,14 @@ The purpose of this document is to provide subsystem specific information
 which is supplementary to the general development process handbook
 :ref:`Documentation/process <development_process_main>`.
 
-For developers, see below for all the known subsystem specific guides.
-If the subsystem you are contributing to does not have a guide listed
-here, it is fair to seek clarification of questions raised in
-Documentation/maintainer/maintainer-entry-profile.rst.
+Contents:
 
-For maintainers, consider documenting additional requirements and
-expectations if submissions routinely overlook specific submission
-criteria. See Documentation/maintainer/maintainer-entry-profile.rst.
+.. toctree::
+   :numbered:
+   :maxdepth: 2
 
-.. maintainers-profile-toc::
+   maintainer-netdev
+   maintainer-soc
+   maintainer-soc-clean-dts
+   maintainer-tip
+   maintainer-kvm-x86

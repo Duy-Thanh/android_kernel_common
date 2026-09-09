@@ -17,17 +17,12 @@ int nf_ct_seqadj_init(struct nf_conn *ct, enum ip_conntrack_info ctinfo,
 	if (off == 0)
 		return 0;
 
-	spin_lock_bh(&ct->lock);
-	seqadj = nfct_seqadj(ct);
-	if (!seqadj) {
-		spin_unlock_bh(&ct->lock);
-		return 0;
-	}
 	set_bit(IPS_SEQ_ADJUST_BIT, &ct->status);
+
+	seqadj = nfct_seqadj(ct);
 	this_way = &seqadj->seq[dir];
 	this_way->offset_before	 = off;
 	this_way->offset_after	 = off;
-	spin_unlock_bh(&ct->lock);
 	return 0;
 }
 EXPORT_SYMBOL_GPL(nf_ct_seqadj_init);
@@ -42,8 +37,10 @@ int nf_ct_seqadj_set(struct nf_conn *ct, enum ip_conntrack_info ctinfo,
 	if (off == 0)
 		return 0;
 
-	if (unlikely(!seqadj))
+	if (unlikely(!seqadj)) {
+		WARN_ONCE(1, "Missing nfct_seqadj_ext_add() setup call\n");
 		return 0;
+	}
 
 	set_bit(IPS_SEQ_ADJUST_BIT, &ct->status);
 
@@ -126,9 +123,6 @@ static unsigned int nf_ct_sack_adjust(struct sk_buff *skb,
 	struct nf_conn_seqadj *seqadj = nfct_seqadj(ct);
 	unsigned int dir, optoff, optend;
 
-	if (!seqadj)
-		return 0;
-
 	optoff = protoff + sizeof(struct tcphdr);
 	optend = protoff + tcph->doff * 4;
 
@@ -178,9 +172,6 @@ int nf_ct_seq_adjust(struct sk_buff *skb,
 	struct nf_conn_seqadj *seqadj = nfct_seqadj(ct);
 	struct nf_ct_seqadj *this_way, *other_way;
 	int res = 1;
-
-	if (!seqadj)
-		return 0;
 
 	this_way  = &seqadj->seq[dir];
 	other_way = &seqadj->seq[!dir];

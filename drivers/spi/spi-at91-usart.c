@@ -16,6 +16,7 @@
 #include <linux/gpio/consumer.h>
 #include <linux/pinctrl/consumer.h>
 #include <linux/platform_device.h>
+#include <linux/pm_runtime.h>
 
 #include <linux/spi/spi.h>
 
@@ -495,13 +496,14 @@ static int at91_usart_spi_probe(struct platform_device *pdev)
 	if (IS_ERR(clk))
 		return PTR_ERR(clk);
 
-	controller = devm_spi_alloc_host(&pdev->dev, sizeof(*aus));
+	ret = -ENOMEM;
+	controller = spi_alloc_host(&pdev->dev, sizeof(*aus));
 	if (!controller)
-		return -ENOMEM;
+		goto at91_usart_spi_probe_fail;
 
 	ret = at91_usart_gpio_setup(pdev);
 	if (ret)
-		return ret;
+		goto at91_usart_spi_probe_fail;
 
 	controller->mode_bits = SPI_CPOL | SPI_CPHA | SPI_LOOP | SPI_CS_HIGH;
 	controller->dev.of_node = pdev->dev.parent->of_node;
@@ -523,8 +525,10 @@ static int at91_usart_spi_probe(struct platform_device *pdev)
 
 	aus->dev = &pdev->dev;
 	aus->regs = devm_ioremap_resource(&pdev->dev, regs);
-	if (IS_ERR(aus->regs))
-		return PTR_ERR(aus->regs);
+	if (IS_ERR(aus->regs)) {
+		ret = PTR_ERR(aus->regs);
+		goto at91_usart_spi_probe_fail;
+	}
 
 	aus->irq = irq;
 	aus->clk = clk;
@@ -532,11 +536,11 @@ static int at91_usart_spi_probe(struct platform_device *pdev)
 	ret = devm_request_irq(&pdev->dev, irq, at91_usart_spi_interrupt, 0,
 			       dev_name(&pdev->dev), controller);
 	if (ret)
-		return ret;
+		goto at91_usart_spi_probe_fail;
 
 	ret = clk_prepare_enable(clk);
 	if (ret)
-		return ret;
+		goto at91_usart_spi_probe_fail;
 
 	aus->spi_clk = clk_get_rate(clk);
 	at91_usart_spi_init(aus);
@@ -567,22 +571,43 @@ at91_usart_fail_register_controller:
 	at91_usart_spi_release_dma(controller);
 at91_usart_fail_dma:
 	clk_disable_unprepare(clk);
-
+at91_usart_spi_probe_fail:
+	spi_controller_put(controller);
 	return ret;
+}
+
+__maybe_unused static int at91_usart_spi_runtime_suspend(struct device *dev)
+{
+	struct spi_controller *ctlr = dev_get_drvdata(dev);
+	struct at91_usart_spi *aus = spi_controller_get_devdata(ctlr);
+
+	clk_disable_unprepare(aus->clk);
+	pinctrl_pm_select_sleep_state(dev);
+
+	return 0;
+}
+
+__maybe_unused static int at91_usart_spi_runtime_resume(struct device *dev)
+{
+	struct spi_controller *ctrl = dev_get_drvdata(dev);
+	struct at91_usart_spi *aus = spi_controller_get_devdata(ctrl);
+
+	pinctrl_pm_select_default_state(dev);
+
+	return clk_prepare_enable(aus->clk);
 }
 
 __maybe_unused static int at91_usart_spi_suspend(struct device *dev)
 {
 	struct spi_controller *ctrl = dev_get_drvdata(dev);
-	struct at91_usart_spi *aus = spi_controller_get_devdata(ctrl);
 	int ret;
 
 	ret = spi_controller_suspend(ctrl);
 	if (ret)
 		return ret;
 
-	clk_disable_unprepare(aus->clk);
-	pinctrl_pm_select_sleep_state(dev);
+	if (!pm_runtime_suspended(dev))
+		at91_usart_spi_runtime_suspend(dev);
 
 	return 0;
 }
@@ -593,11 +618,11 @@ __maybe_unused static int at91_usart_spi_resume(struct device *dev)
 	struct at91_usart_spi *aus = spi_controller_get_devdata(ctrl);
 	int ret;
 
-	pinctrl_pm_select_default_state(dev);
-
-	ret = clk_prepare_enable(aus->clk);
-	if (ret)
-		return ret;
+	if (!pm_runtime_suspended(dev)) {
+		ret = at91_usart_spi_runtime_resume(dev);
+		if (ret)
+			return ret;
+	}
 
 	at91_usart_spi_init(aus);
 
@@ -609,14 +634,20 @@ static void at91_usart_spi_remove(struct platform_device *pdev)
 	struct spi_controller *ctlr = platform_get_drvdata(pdev);
 	struct at91_usart_spi *aus = spi_controller_get_devdata(ctlr);
 
+	spi_controller_get(ctlr);
+
 	spi_unregister_controller(ctlr);
 
 	at91_usart_spi_release_dma(ctlr);
 	clk_disable_unprepare(aus->clk);
+
+	spi_controller_put(ctlr);
 }
 
 static const struct dev_pm_ops at91_usart_spi_pm_ops = {
 	SET_SYSTEM_SLEEP_PM_OPS(at91_usart_spi_suspend, at91_usart_spi_resume)
+	SET_RUNTIME_PM_OPS(at91_usart_spi_runtime_suspend,
+			   at91_usart_spi_runtime_resume, NULL)
 };
 
 static struct platform_driver at91_usart_spi_driver = {

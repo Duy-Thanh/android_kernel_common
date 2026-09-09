@@ -96,7 +96,6 @@ static int tftp_help(struct sk_buff *skb,
 }
 
 static struct nf_conntrack_helper tftp[MAX_PORTS * 2] __read_mostly;
-static struct nf_conntrack_helper *tftp_ptr[MAX_PORTS * 2] __read_mostly;
 
 static const struct nf_conntrack_expect_policy tftp_exp_policy = {
 	.max_expected	= 1,
@@ -105,7 +104,7 @@ static const struct nf_conntrack_expect_policy tftp_exp_policy = {
 
 static void __exit nf_conntrack_tftp_fini(void)
 {
-	nf_conntrack_helpers_unregister(tftp_ptr, ports_c * 2);
+	nf_conntrack_helpers_unregister(tftp, ports_c * 2);
 }
 
 static int __init nf_conntrack_tftp_init(void)
@@ -128,7 +127,7 @@ static int __init nf_conntrack_tftp_init(void)
 				  THIS_MODULE);
 	}
 
-	ret = nf_conntrack_helpers_register(tftp, ports_c * 2, tftp_ptr);
+	ret = nf_conntrack_helpers_register(tftp, ports_c * 2);
 	if (ret < 0) {
 		pr_err("failed to register helpers\n");
 		return ret;

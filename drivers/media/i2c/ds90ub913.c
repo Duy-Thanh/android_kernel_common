@@ -872,8 +872,8 @@ static void ub913_remove(struct i2c_client *client)
 }
 
 static const struct i2c_device_id ub913_id[] = {
-	{ .name = "ds90ub913a-q1" },
-	{ }
+	{ "ds90ub913a-q1" },
+	{}
 };
 MODULE_DEVICE_TABLE(i2c, ub913_id);
 

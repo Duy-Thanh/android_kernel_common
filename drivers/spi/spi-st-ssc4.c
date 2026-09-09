@@ -279,7 +279,7 @@ static int spi_st_probe(struct platform_device *pdev)
 	int irq, ret = 0;
 	u32 var;
 
-	host = devm_spi_alloc_host(&pdev->dev, sizeof(*spi_st));
+	host = spi_alloc_host(&pdev->dev, sizeof(*spi_st));
 	if (!host)
 		return -ENOMEM;
 
@@ -296,12 +296,13 @@ static int spi_st_probe(struct platform_device *pdev)
 	spi_st->clk = devm_clk_get(&pdev->dev, "ssc");
 	if (IS_ERR(spi_st->clk)) {
 		dev_err(&pdev->dev, "Unable to request clock\n");
-		return PTR_ERR(spi_st->clk);
+		ret = PTR_ERR(spi_st->clk);
+		goto put_host;
 	}
 
 	ret = clk_prepare_enable(spi_st->clk);
 	if (ret)
-		return ret;
+		goto put_host;
 
 	init_completion(&spi_st->done);
 
@@ -360,7 +361,8 @@ rpm_disable:
 	pm_runtime_disable(&pdev->dev);
 clk_disable:
 	clk_disable_unprepare(spi_st->clk);
-
+put_host:
+	spi_controller_put(host);
 	return ret;
 }
 
@@ -369,11 +371,15 @@ static void spi_st_remove(struct platform_device *pdev)
 	struct spi_controller *host = platform_get_drvdata(pdev);
 	struct spi_st *spi_st = spi_controller_get_devdata(host);
 
+	spi_controller_get(host);
+
 	spi_unregister_controller(host);
 
 	pm_runtime_disable(&pdev->dev);
 
 	clk_disable_unprepare(spi_st->clk);
+
+	spi_controller_put(host);
 
 	pinctrl_pm_select_sleep_state(&pdev->dev);
 }

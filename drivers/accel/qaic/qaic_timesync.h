@@ -1,6 +1,7 @@
-/* SPDX-License-Identifier: GPL-2.0-only */
-
-/* Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries. */
+/* SPDX-License-Identifier: GPL-2.0-only
+ *
+ * Copyright (c) 2023 Qualcomm Innovation Center, Inc. All rights reserved.
+ */
 
 #ifndef __QAIC_TIMESYNC_H__
 #define __QAIC_TIMESYNC_H__

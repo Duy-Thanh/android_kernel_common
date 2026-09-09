@@ -29,6 +29,7 @@
 
 #include "rsnd.h"
 
+#define RSND_DVC_NAME_SIZE	16
 
 #define DVC_NAME "dvc"
 
@@ -326,6 +327,7 @@ int rsnd_dvc_probe(struct rsnd_priv *priv)
 	struct device *dev = rsnd_priv_to_dev(priv);
 	struct rsnd_dvc *dvc;
 	struct clk *clk;
+	char name[RSND_DVC_NAME_SIZE];
 	int i, nr, ret;
 
 	node = rsnd_dvc_of_node(priv);
@@ -352,14 +354,17 @@ int rsnd_dvc_probe(struct rsnd_priv *priv)
 	for_each_child_of_node_scoped(node, np) {
 		dvc = rsnd_dvc_get(priv, i);
 
-		clk = rsnd_devm_clk_get_indexed(dev, DVC_NAME, i);
+		snprintf(name, RSND_DVC_NAME_SIZE, "%s.%d",
+			 DVC_NAME, i);
+
+		clk = devm_clk_get(dev, name);
 		if (IS_ERR(clk)) {
 			ret = PTR_ERR(clk);
 			goto rsnd_dvc_probe_done;
 		}
 
 		ret = rsnd_mod_init(priv, rsnd_mod_get(dvc), &rsnd_dvc_ops,
-				    clk, NULL, RSND_MOD_DVC, i);
+				    clk, RSND_MOD_DVC, i);
 		if (ret)
 			goto rsnd_dvc_probe_done;
 
@@ -380,24 +385,4 @@ void rsnd_dvc_remove(struct rsnd_priv *priv)
 	for_each_rsnd_dvc(dvc, priv, i) {
 		rsnd_mod_quit(rsnd_mod_get(dvc));
 	}
-}
-
-void rsnd_dvc_suspend(struct rsnd_priv *priv)
-{
-	struct rsnd_dvc *dvc;
-	int i;
-
-	for_each_rsnd_dvc(dvc, priv, i)
-		rsnd_suspend_clk_reset(rsnd_mod_get(dvc)->clk,
-				       rsnd_mod_get(dvc)->rstc);
-}
-
-void rsnd_dvc_resume(struct rsnd_priv *priv)
-{
-	struct rsnd_dvc *dvc;
-	int i;
-
-	for_each_rsnd_dvc(dvc, priv, i)
-		rsnd_resume_clk_reset(rsnd_mod_get(dvc)->clk,
-				      rsnd_mod_get(dvc)->rstc);
 }

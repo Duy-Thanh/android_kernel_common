@@ -227,10 +227,8 @@ static const struct nft_chain *nft_trace_get_chain(const struct nft_rule_dp *rul
 
 	last = (const struct nft_rule_dp_last *)rule;
 
-	if (unlikely(!last->chain)) {
-		DEBUG_NET_WARN_ON_ONCE(1);
+	if (WARN_ON_ONCE(!last->chain))
 		return &info->basechain->chain;
-	}
 
 	return last->chain;
 }
@@ -356,7 +354,7 @@ void nft_trace_notify(const struct nft_pktinfo *pkt,
 	return;
 
  nla_put_failure:
-	DEBUG_NET_WARN_ON_ONCE(1);
+	WARN_ON_ONCE(1);
 	kfree_skb(skb);
 }
 

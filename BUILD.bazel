@@ -413,7 +413,6 @@ kernel_build(
         "Image",
     ],
     makefile = ":Makefile",
-    pahole = ":pahole",
 )
 
 pkg_files(
@@ -449,7 +448,6 @@ kernel_build(
     ],
     makefile = ":Makefile",
     page_size = "16k",
-    pahole = ":pahole",
 )
 
 pkg_files(
@@ -479,7 +477,6 @@ kernel_build(
         "bzImage",
     ],
     makefile = ":Makefile",
-    pahole = ":pahole",
 )
 
 pkg_files(
@@ -509,7 +506,6 @@ kernel_build(
         "Image",
     ],
     makefile = ":Makefile",
-    pahole = ":pahole",
 )
 
 pkg_files(
@@ -537,7 +533,6 @@ kernel_build(
         "bzImage",
     ],
     makefile = ":Makefile",
-    pahole = ":pahole",
 )
 
 pkg_files(
@@ -594,6 +589,8 @@ _DB845C_MODULE_OUTS = [
     "drivers/dma/qcom/bam_dma.ko",
     "drivers/dma/qcom/gpi.ko",
     "drivers/extcon/extcon-usb-gpio.ko",
+    "drivers/firmware/qcom/qcom-scm.ko",
+    "drivers/firmware/qcom/qcom_tzmem.ko",
     "drivers/gpio/gpio-wcd934x.ko",
     "drivers/gpu/drm/bridge/aux-bridge.ko",
     "drivers/gpu/drm/bridge/aux-hpd-bridge.ko",
@@ -665,6 +662,7 @@ _DB845C_MODULE_OUTS = [
     "drivers/phy/qualcomm/phy-qcom-snps-femto-v2.ko",
     "drivers/phy/qualcomm/phy-qcom-usb-hs.ko",
     "drivers/pinctrl/qcom/pinctrl-lpass-lpi.ko",
+    "drivers/pinctrl/qcom/pinctrl-msm.ko",
     "drivers/pinctrl/qcom/pinctrl-sc7280.ko",
     "drivers/pinctrl/qcom/pinctrl-sc7280-lpass-lpi.ko",
     "drivers/pinctrl/qcom/pinctrl-sdm845.ko",
@@ -846,7 +844,6 @@ kernel_build(
         "//build/kernel/kleaf:kgdb_is_true": [],
         "//conditions:default": _DB845C_WATCHDOG_MODULE_OUTS,
     }),
-    pahole = ":pahole",
     pre_defconfig_fragments = ["arch/arm64/configs/db845c_gki.fragment"],
     strip_modules = select({
         "//build/kernel/kleaf:debug_is_true": False,
@@ -975,7 +972,6 @@ kernel_build(
         "//build/kernel/kleaf:kgdb_is_true": [],
         "//conditions:default": _ROCKPI4_WATCHDOG_MODULE_OUTS,
     }),
-    pahole = ":pahole",
     pre_defconfig_fragments = ["arch/arm64/configs/rockpi4_gki.fragment"],
     trim_nonlisted_kmi = False,
     visibility = ["//visibility:private"],
@@ -1164,7 +1160,6 @@ kernel_build(
         "//build/kernel/kleaf:kgdb_is_true": [],
         "//conditions:default": _AMLOGIC_WATCHDOG_MODULE_OUTS,
     }),
-    pahole = ":pahole",
     pre_defconfig_fragments = ["arch/arm64/configs/amlogic_gki.fragment"],
     visibility = ["//visibility:private"],
 )
@@ -1219,7 +1214,6 @@ kernel_build(
         "modules",
     ],
     makefile = ":Makefile",
-    pahole = ":pahole",
     post_defconfig_fragments = ["arch/arm64/configs/allmodconfig.fragment"],
     visibility = ["//visibility:private"],
 )
@@ -1238,7 +1232,6 @@ kernel_build(
         "modules",
     ],
     makefile = ":Makefile",
-    pahole = ":pahole",
     post_defconfig_fragments = ["arch/x86/configs/allmodconfig.fragment"],
     visibility = ["//visibility:private"],
 )
@@ -1267,7 +1260,6 @@ kernel_build(
         "modules",
     ],
     makefile = ":Makefile",
-    pahole = ":pahole",
     post_defconfig_fragments = ["arch/arm/configs/allmodconfig.fragment"],
     visibility = ["//visibility:private"],
 )
@@ -1301,7 +1293,7 @@ cc_library(
 
 pahole(
     name = "pahole",
-    visibility = ["//visibility:public"],
+    visibility = ["//visibility:private"],
     deps = [":bpf_x86"],
 )
 

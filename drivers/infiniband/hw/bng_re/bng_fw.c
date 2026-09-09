@@ -123,6 +123,7 @@ static int bng_re_process_qp_event(struct bng_re_rcfw *rcfw,
 	bool is_waiter_alive;
 	struct pci_dev *pdev;
 	u32 wait_cmds = 0;
+	int rc = 0;
 
 	pdev = rcfw->pdev;
 	switch (qp_event->event) {
@@ -151,7 +152,7 @@ static int bng_re_process_qp_event(struct bng_re_rcfw *rcfw,
 				 "rcfw timedout: cookie = %#x, free_slots = %d",
 				 cookie, crsqe->free_slots);
 			spin_unlock(&hwq->lock);
-			return 0;
+			return rc;
 		}
 
 		if (crsqe->is_waiter_alive) {
@@ -181,7 +182,7 @@ static int bng_re_process_qp_event(struct bng_re_rcfw *rcfw,
 		spin_unlock(&hwq->lock);
 	}
 	*num_wait += wait_cmds;
-	return 0;
+	return rc;
 }
 
 /* function events */

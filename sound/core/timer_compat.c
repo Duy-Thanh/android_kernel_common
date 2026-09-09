@@ -49,13 +49,12 @@ static int snd_timer_user_info_compat(struct file *file,
 {
 	struct snd_timer_user *tu;
 	struct snd_timer_info32 info;
+	struct snd_timer *t;
 
 	tu = file->private_data;
 	if (!tu->timeri)
 		return -EBADFD;
-
-	struct snd_timer *t __free(snd_timeri_timer) =
-		snd_timeri_timer_get(tu->timeri);
+	t = tu->timeri->timer;
 	if (!t)
 		return -EBADFD;
 	memset(&info, 0, sizeof(info));

@@ -61,16 +61,15 @@
 //! undefined symbols and linker errors, it is not developer friendly to debug, so it is recommended
 //! to avoid it and prefer other two assertions where possible.
 
-#[doc(inline)]
 pub use crate::{
-    build_assert_macro as build_assert,
+    build_assert,
     build_error,
     const_assert,
     static_assert, //
 };
 
 #[doc(hidden)]
-pub use build_error::build_error as build_error_fn;
+pub use build_error::build_error;
 
 /// Static assert (i.e. compile-time assert).
 ///
@@ -106,7 +105,6 @@ pub use build_error::build_error as build_error_fn;
 /// static_assert!(f(40) == 42, "f(x) must add 2 to the given input.");
 /// ```
 #[macro_export]
-#[doc(hidden)]
 macro_rules! static_assert {
     ($condition:expr $(,$arg:literal)?) => {
         const _: () = ::core::assert!($condition $(,$arg)?);
@@ -135,7 +133,6 @@ macro_rules! static_assert {
 /// }
 /// ```
 #[macro_export]
-#[doc(hidden)]
 macro_rules! const_assert {
     ($condition:expr $(,$arg:literal)?) => {
         const { ::core::assert!($condition $(,$arg)?) };
@@ -160,13 +157,12 @@ macro_rules! const_assert {
 /// // foo(usize::MAX); // Fails to compile.
 /// ```
 #[macro_export]
-#[doc(hidden)]
 macro_rules! build_error {
     () => {{
-        $crate::build_assert::build_error_fn("")
+        $crate::build_assert::build_error("")
     }};
     ($msg:expr) => {{
-        $crate::build_assert::build_error_fn($msg)
+        $crate::build_assert::build_error($msg)
     }};
 }
 
@@ -204,16 +200,15 @@ macro_rules! build_error {
 /// const _: () = const_bar(2);
 /// ```
 #[macro_export]
-#[doc(hidden)]
-macro_rules! build_assert_macro {
+macro_rules! build_assert {
     ($cond:expr $(,)?) => {{
         if !$cond {
-            $crate::build_assert::build_error_fn(concat!("assertion failed: ", stringify!($cond)));
+            $crate::build_assert::build_error(concat!("assertion failed: ", stringify!($cond)));
         }
     }};
     ($cond:expr, $msg:expr) => {{
         if !$cond {
-            $crate::build_assert::build_error_fn($msg);
+            $crate::build_assert::build_error($msg);
         }
     }};
 }

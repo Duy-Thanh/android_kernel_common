@@ -333,7 +333,7 @@ static int lp8860_probe(struct i2c_client *client)
 }
 
 static const struct i2c_device_id lp8860_id[] = {
-	{ .name = "lp8860" },
+	{ "lp8860" },
 	{ }
 };
 MODULE_DEVICE_TABLE(i2c, lp8860_id);

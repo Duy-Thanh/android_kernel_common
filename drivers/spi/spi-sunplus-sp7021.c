@@ -290,7 +290,8 @@ static void sp7021_spi_setup_clk(struct spi_controller *ctlr, struct spi_transfe
 	div = max(2U, clk_rate / xfer->speed_hz);
 
 	clk_sel = (div / 2) - 1;
-	FIELD_MODIFY(SP7021_CLK_MASK, &pspim->xfer_conf, clk_sel);
+	pspim->xfer_conf &= ~SP7021_CLK_MASK;
+	pspim->xfer_conf |= FIELD_PREP(SP7021_CLK_MASK, clk_sel);
 	writel(pspim->xfer_conf, pspim->m_base + SP7021_SPI_CONFIG_REG);
 }
 

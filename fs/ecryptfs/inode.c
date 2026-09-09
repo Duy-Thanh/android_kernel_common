@@ -350,9 +350,11 @@ static struct dentry *ecryptfs_lookup_interpose(struct dentry *dentry,
 	 */
 	lower_inode = READ_ONCE(lower_dentry->d_inode);
 
-	if (!lower_inode) /* We want to add because we couldn't find in lower */
-		return d_splice_alias(NULL, dentry);
-
+	if (!lower_inode) {
+		/* We want to add because we couldn't find in lower */
+		d_add(dentry, NULL);
+		return NULL;
+	}
 	inode = __ecryptfs_get_inode(lower_inode, dentry->d_sb);
 	if (IS_ERR(inode)) {
 		printk(KERN_ERR "%s: Error interposing; rc = [%ld]\n",

@@ -1373,6 +1373,7 @@ static int sdma_v5_0_early_init(struct amdgpu_ip_block *ip_block)
 		return r;
 
 	sdma_v5_0_set_ring_funcs(adev);
+	sdma_v5_0_set_buffer_funcs(adev);
 	amdgpu_sdma_set_vm_pte_scheds(adev, &sdma_v5_0_vm_pte_funcs);
 	sdma_v5_0_set_irq_funcs(adev);
 	sdma_v5_0_set_mqd_funcs(adev);
@@ -1471,11 +1472,8 @@ static int sdma_v5_0_hw_init(struct amdgpu_ip_block *ip_block)
 	sdma_v5_0_init_golden_registers(adev);
 
 	r = sdma_v5_0_start(adev);
-	if (r)
-		return r;
-	sdma_v5_0_set_buffer_funcs(adev);
 
-	return 0;
+	return r;
 }
 
 static int sdma_v5_0_hw_fini(struct amdgpu_ip_block *ip_block)
@@ -2054,7 +2052,10 @@ static const struct amdgpu_buffer_funcs sdma_v5_0_buffer_funcs = {
 
 static void sdma_v5_0_set_buffer_funcs(struct amdgpu_device *adev)
 {
-	amdgpu_sdma_set_buffer_funcs_scheds(adev, &sdma_v5_0_buffer_funcs);
+	if (adev->mman.buffer_funcs == NULL) {
+		adev->mman.buffer_funcs = &sdma_v5_0_buffer_funcs;
+		adev->mman.buffer_funcs_ring = &adev->sdma.instance[0].ring;
+	}
 }
 
 const struct amdgpu_ip_block_version sdma_v5_0_ip_block = {

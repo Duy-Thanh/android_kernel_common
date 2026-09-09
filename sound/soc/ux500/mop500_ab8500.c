@@ -234,18 +234,19 @@ static int mop500_ab8500_hw_params(struct snd_pcm_substream *substream,
 		substream->number);
 
 	/* Ensure configuration consistency between DAIs */
-	scoped_guard(mutex, &mop500_ab8500_params_lock) {
-		if (mop500_ab8500_usage) {
-			if (mop500_ab8500_rate != params_rate(params) ||
-			    mop500_ab8500_channels != params_channels(params)) {
-				return -EBUSY;
-			}
-		} else {
-			mop500_ab8500_rate = params_rate(params);
-			mop500_ab8500_channels = params_channels(params);
+	mutex_lock(&mop500_ab8500_params_lock);
+	if (mop500_ab8500_usage) {
+		if (mop500_ab8500_rate != params_rate(params) ||
+		    mop500_ab8500_channels != params_channels(params)) {
+			mutex_unlock(&mop500_ab8500_params_lock);
+			return -EBUSY;
 		}
-		__set_bit(cpu_dai->id, &mop500_ab8500_usage);
+	} else {
+		mop500_ab8500_rate = params_rate(params);
+		mop500_ab8500_channels = params_channels(params);
 	}
+	__set_bit(cpu_dai->id, &mop500_ab8500_usage);
+	mutex_unlock(&mop500_ab8500_params_lock);
 
 	channels = params_channels(params);
 
@@ -338,8 +339,9 @@ static int mop500_ab8500_hw_free(struct snd_pcm_substream *substream)
 	struct snd_soc_pcm_runtime *rtd = snd_soc_substream_to_rtd(substream);
 	struct snd_soc_dai *cpu_dai = snd_soc_rtd_to_cpu(rtd, 0);
 
-	guard(mutex)(&mop500_ab8500_params_lock);
+	mutex_lock(&mop500_ab8500_params_lock);
 	__clear_bit(cpu_dai->id, &mop500_ab8500_usage);
+	mutex_unlock(&mop500_ab8500_params_lock);
 
 	return 0;
 }

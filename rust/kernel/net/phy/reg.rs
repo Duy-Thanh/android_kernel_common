@@ -9,11 +9,9 @@
 //! defined in IEEE 802.3.
 
 use super::Device;
-use crate::{
-    build_assert::build_assert,
-    error::*,
-    uapi, //
-};
+use crate::build_assert;
+use crate::error::*;
+use crate::uapi;
 
 mod private {
     /// Marker that a trait cannot be implemented outside of this crate

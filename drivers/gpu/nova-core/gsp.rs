@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0
 
 mod boot;
-mod hal;
 
 use kernel::{
     debugfs,
@@ -25,7 +24,6 @@ mod fw;
 mod sequencer;
 
 pub(crate) use fw::{
-    GspFmcBootParams,
     GspFwWprMeta,
     LibosParams, //
 };
@@ -186,6 +184,3 @@ impl Gsp {
         })
     }
 }
-
-/// Opaque bundle required to unload the GSP. Created by [`Gsp::boot`], consumed by [`Gsp::unload`].
-pub(crate) struct UnloadBundle(KBox<dyn hal::UnloadBundle>);

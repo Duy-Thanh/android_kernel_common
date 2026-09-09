@@ -360,7 +360,6 @@ static void rtw89_regd_setup_unii4(struct rtw89_dev *rtwdev,
 				   struct wiphy *wiphy)
 {
 	struct rtw89_regulatory_info *regulatory = &rtwdev->regulatory;
-	bool skip_acpi_dsm = rtwdev->hci.type == RTW89_HCI_TYPE_USB;
 	const struct rtw89_chip_info *chip = rtwdev->chip;
 	struct ieee80211_supported_band *sband;
 	struct rtw89_acpi_dsm_result res = {};
@@ -377,9 +376,6 @@ static void rtw89_regd_setup_unii4(struct rtw89_dev *rtwdev,
 		sband->n_channels -= RTW89_5GHZ_UNII4_CHANNEL_NUM;
 		return;
 	}
-
-	if (skip_acpi_dsm)
-		return;
 
 	bitmap_fill(regulatory->block_unii4, RTW89_REGD_MAX_COUNTRY_NUM);
 
@@ -430,16 +426,12 @@ static void __rtw89_regd_setup_policy_6ghz(struct rtw89_dev *rtwdev, bool block,
 static void rtw89_regd_setup_policy_6ghz(struct rtw89_dev *rtwdev)
 {
 	struct rtw89_regulatory_info *regulatory = &rtwdev->regulatory;
-	bool skip_acpi_dsm = rtwdev->hci.type == RTW89_HCI_TYPE_USB;
 	const struct rtw89_acpi_country_code *country;
 	const struct rtw89_acpi_policy_6ghz *ptr;
 	struct rtw89_acpi_dsm_result res = {};
 	bool to_block;
 	int i, j;
 	int ret;
-
-	if (skip_acpi_dsm)
-		return;
 
 	ret = rtw89_acpi_evaluate_dsm(rtwdev, RTW89_ACPI_DSM_FUNC_6G_BP, &res);
 	if (ret) {
@@ -486,15 +478,11 @@ out:
 static void rtw89_regd_setup_policy_6ghz_sp(struct rtw89_dev *rtwdev)
 {
 	struct rtw89_regulatory_info *regulatory = &rtwdev->regulatory;
-	bool skip_acpi_dsm = rtwdev->hci.type == RTW89_HCI_TYPE_USB;
 	const struct rtw89_acpi_policy_6ghz_sp *ptr;
 	struct rtw89_acpi_dsm_result res = {};
 	bool enable;
 	u8 index;
 	int ret;
-
-	if (skip_acpi_dsm)
-		return;
 
 	ret = rtw89_acpi_evaluate_dsm(rtwdev, RTW89_ACPI_DSM_FUNC_6GHZ_SP_SUP, &res);
 	if (ret) {
@@ -536,16 +524,12 @@ out:
 static void rtw89_regd_setup_policy_6ghz_vlp(struct rtw89_dev *rtwdev)
 {
 	struct rtw89_regulatory_info *regulatory = &rtwdev->regulatory;
-	bool skip_acpi_dsm = rtwdev->hci.type == RTW89_HCI_TYPE_USB;
 	const struct rtw89_acpi_policy_6ghz_vlp *ptr = NULL;
 	struct rtw89_acpi_dsm_result res = {};
 	bool enable;
 	u8 index;
 	int ret;
 	u8 val;
-
-	if (skip_acpi_dsm)
-		return;
 
 	/* By default, allow 6 GHz VLP on all countries except US and CA. */
 	val = ~(RTW89_ACPI_CONF_6GHZ_VLP_US | RTW89_ACPI_CONF_6GHZ_VLP_CA);
@@ -590,7 +574,6 @@ static void rtw89_regd_setup_6ghz(struct rtw89_dev *rtwdev, struct wiphy *wiphy)
 {
 	const struct rtw89_chip_info *chip = rtwdev->chip;
 	bool chip_support_6ghz = chip->support_bands & BIT(NL80211_BAND_6GHZ);
-	bool skip_acpi_dsm = rtwdev->hci.type == RTW89_HCI_TYPE_USB;
 	bool regd_allow_6ghz = chip_support_6ghz;
 	struct ieee80211_supported_band *sband;
 	struct rtw89_acpi_dsm_result res = {};
@@ -598,9 +581,6 @@ static void rtw89_regd_setup_6ghz(struct rtw89_dev *rtwdev, struct wiphy *wiphy)
 	u8 val;
 
 	if (!chip_support_6ghz)
-		goto bottom;
-
-	if (skip_acpi_dsm)
 		goto bottom;
 
 	ret = rtw89_acpi_evaluate_dsm(rtwdev, RTW89_ACPI_DSM_FUNC_6G_DIS, &res);
@@ -681,13 +661,9 @@ const char *rtw89_regd_get_string(enum rtw89_regulation_type regd)
 static void rtw89_regd_setup_reg_rules(struct rtw89_dev *rtwdev)
 {
 	struct rtw89_regulatory_info *regulatory = &rtwdev->regulatory;
-	bool skip_acpi_dsm = rtwdev->hci.type == RTW89_HCI_TYPE_USB;
 	const struct rtw89_acpi_policy_reg_rules *ptr;
 	struct rtw89_acpi_dsm_result res = {};
 	int ret;
-
-	if (skip_acpi_dsm)
-		return;
 
 	regulatory->txpwr_uk_follow_etsi = true;
 

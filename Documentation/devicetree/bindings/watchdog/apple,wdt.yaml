@@ -16,9 +16,7 @@ properties:
   compatible:
     oneOf:
       - items:
-          - enum:
-              - apple,t6020-wdt
-              - apple,t8122-wdt
+          - const: apple,t6020-wdt
           - const: apple,t8103-wdt
       - items:
           - enum:

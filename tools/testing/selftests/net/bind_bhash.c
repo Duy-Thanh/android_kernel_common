@@ -52,19 +52,18 @@ static int bind_socket(int opt, const char *addr)
 		err = setsockopt(sock_fd, SOL_SOCKET, opt, &reuse, sizeof(reuse));
 		if (err) {
 			perror("setsockopt failed");
-			goto err_free_info;
+			goto cleanup;
 		}
 	}
 
 	err = bind(sock_fd, res->ai_addr, res->ai_addrlen);
 	if (err) {
 		perror("failed to bind to port");
-		goto err_free_info;
+		goto cleanup;
 	}
-	freeaddrinfo(res);
+
 	return sock_fd;
-err_free_info:
-	freeaddrinfo(res);
+
 cleanup:
 	close(sock_fd);
 	return err;

@@ -870,7 +870,7 @@ struct platform_device *platform_device_register_full(const struct platform_devi
 	pdev->dev.parent = pdevinfo->parent;
 	pdev->dev.fwnode = pdevinfo->fwnode;
 	pdev->dev.of_node = of_node_get(to_of_node(pdev->dev.fwnode));
-	dev_assign_of_node_reused(&pdev->dev, pdevinfo->of_node_reused);
+	pdev->dev.of_node_reused = pdevinfo->of_node_reused;
 
 	if (pdevinfo->dma_mask) {
 		pdev->platform_dma_mask = pdevinfo->dma_mask;
@@ -915,14 +915,11 @@ EXPORT_SYMBOL_GPL(platform_device_register_full);
  * __platform_driver_register - register a driver for platform-level devices
  * @drv: platform driver structure
  * @owner: owning module/driver
- * @mod_name: module name string
  */
-int __platform_driver_register(struct platform_driver *drv, struct module *owner,
-			       const char *mod_name)
+int __platform_driver_register(struct platform_driver *drv, struct module *owner)
 {
 	drv->driver.owner = owner;
 	drv->driver.bus = &platform_bus_type;
-	drv->driver.mod_name = mod_name;
 
 	return driver_register(&drv->driver);
 }
@@ -955,7 +952,6 @@ static int is_bound_to_driver(struct device *dev, void *driver)
  * @drv: platform driver structure
  * @probe: the driver probe routine, probably from an __init section
  * @module: module which will be the owner of the driver
- * @mod_name: module name string
  *
  * Use this instead of platform_driver_register() when you know the device
  * is not hotpluggable and has already been registered, and you want to
@@ -973,8 +969,7 @@ static int is_bound_to_driver(struct device *dev, void *driver)
  */
 int __init_or_module __platform_driver_probe(struct platform_driver *drv,
 					     int (*probe)(struct platform_device *),
-					     struct module *module,
-					     const char *mod_name)
+					     struct module *module)
 {
 	int retval;
 
@@ -1002,7 +997,7 @@ int __init_or_module __platform_driver_probe(struct platform_driver *drv,
 
 	/* temporary section violation during probe() */
 	drv->probe = probe;
-	retval = __platform_driver_register(drv, module, mod_name);
+	retval = __platform_driver_register(drv, module);
 	if (retval)
 		return retval;
 
@@ -1030,7 +1025,6 @@ EXPORT_SYMBOL_GPL(__platform_driver_probe);
  * @data: platform specific data for this platform device
  * @size: size of platform specific data
  * @module: module which will be the owner of the driver
- * @mod_name: module name string
  *
  * Use this in legacy-style modules that probe hardware directly and
  * register a single platform device and corresponding platform driver.
@@ -1041,7 +1035,7 @@ struct platform_device * __init_or_module
 __platform_create_bundle(struct platform_driver *driver,
 			 int (*probe)(struct platform_device *),
 			 struct resource *res, unsigned int n_res,
-			 const void *data, size_t size, struct module *module, const char *mod_name)
+			 const void *data, size_t size, struct module *module)
 {
 	struct platform_device *pdev;
 	int error;
@@ -1064,7 +1058,7 @@ __platform_create_bundle(struct platform_driver *driver,
 	if (error)
 		goto err_pdev_put;
 
-	error = __platform_driver_probe(driver, probe, module, mod_name);
+	error = __platform_driver_probe(driver, probe, module);
 	if (error)
 		goto err_pdev_del;
 
@@ -1084,7 +1078,6 @@ EXPORT_SYMBOL_GPL(__platform_create_bundle);
  * @drivers: an array of drivers to register
  * @count: the number of drivers to register
  * @owner: module owning the drivers
- * @mod_name: module name string
  *
  * Registers platform drivers specified by an array. On failure to register a
  * driver, all previously registered drivers will be unregistered. Callers of
@@ -1094,7 +1087,7 @@ EXPORT_SYMBOL_GPL(__platform_create_bundle);
  * Returns: 0 on success or a negative error code on failure.
  */
 int __platform_register_drivers(struct platform_driver * const *drivers,
-				unsigned int count, struct module *owner, const char *mod_name)
+				unsigned int count, struct module *owner)
 {
 	unsigned int i;
 	int err;
@@ -1102,7 +1095,7 @@ int __platform_register_drivers(struct platform_driver * const *drivers,
 	for (i = 0; i < count; i++) {
 		pr_debug("registering platform driver %ps\n", drivers[i]);
 
-		err = __platform_driver_register(drivers[i], owner, mod_name);
+		err = __platform_driver_register(drivers[i], owner);
 		if (err < 0) {
 			pr_err("failed to register platform driver %ps: %d\n",
 			       drivers[i], err);

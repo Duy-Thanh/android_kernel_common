@@ -110,6 +110,10 @@ static inline void lock_vector_lock(void) {}
 static inline void unlock_vector_lock(void) {}
 #endif
 
+/* Statistics */
+extern atomic_t irq_err_count;
+extern atomic_t irq_mis_count;
+
 extern void elcr_set_level_irq(unsigned int irq);
 
 extern char irq_entries_start[];

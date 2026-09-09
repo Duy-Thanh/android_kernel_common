@@ -11,19 +11,14 @@ maintainers:
 
 description: |
   The CS2000-CP is an extremely versatile system clocking device that
-  utilizes a programmable phase lock loop. CS2500 is a compatible
-  drop-in replacement for CS2000-CP.
+  utilizes a programmable phase lock loop.
 
   Link: https://www.cirrus.com/products/cs2000/
-  Link: https://www.cirrus.com/products/cs2500/
 
 properties:
   compatible:
-    oneOf:
-      - items:
-          - const: cirrus,cs2500
-          - const: cirrus,cs2000-cp
-      - const: cirrus,cs2000-cp
+    enum:
+      - cirrus,cs2000-cp
 
   clocks:
     description:

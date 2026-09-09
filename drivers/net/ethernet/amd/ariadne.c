@@ -693,8 +693,8 @@ static void ariadne_remove_one(struct zorro_dev *z)
 }
 
 static const struct zorro_device_id ariadne_zorro_tbl[] = {
-	{ .id = ZORRO_PROD_VILLAGE_TRONIC_ARIADNE },
-	{ }
+	{ ZORRO_PROD_VILLAGE_TRONIC_ARIADNE },
+	{ 0 }
 };
 MODULE_DEVICE_TABLE(zorro, ariadne_zorro_tbl);
 

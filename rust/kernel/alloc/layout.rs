@@ -4,10 +4,7 @@
 //!
 //! Custom layout types extending or improving [`Layout`].
 
-use core::{
-    alloc::Layout,
-    marker::PhantomData, //
-};
+use core::{alloc::Layout, marker::PhantomData};
 
 /// Error when constructing an [`ArrayLayout`].
 pub struct LayoutError;
@@ -50,10 +47,7 @@ impl<T> ArrayLayout<T> {
     /// # Examples
     ///
     /// ```
-    /// # use kernel::alloc::layout::{
-    /// #     ArrayLayout,
-    /// #     LayoutError, //
-    /// # };
+    /// # use kernel::alloc::layout::{ArrayLayout, LayoutError};
     /// let layout = ArrayLayout::<i32>::new(15)?;
     /// assert_eq!(layout.len(), 15);
     ///

@@ -42,7 +42,7 @@ Example:
 
 		...
 
-		my_fh = kzalloc_obj(*my_fh);
+		my_fh = kzalloc(sizeof(*my_fh), GFP_KERNEL);
 
 		...
 

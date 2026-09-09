@@ -285,7 +285,7 @@ int ath_descdma_setup(struct ath_softc *sc, struct ath_descdma *dd,
 {
 	struct ath_common *common = ath9k_hw_common(sc->sc_ah);
 	u8 *ds;
-	int i, desc_len;
+	int i, bsize, desc_len;
 
 	ath_dbg(common, CONFIG, "%s DMA: %u buffers %u desc/buf\n",
 		name, nbuf, ndesc);
@@ -339,7 +339,8 @@ int ath_descdma_setup(struct ath_softc *sc, struct ath_descdma *dd,
 	if (is_tx) {
 		struct ath_buf *bf;
 
-		bf = devm_kcalloc(sc->dev, sizeof(*bf), nbuf, GFP_KERNEL);
+		bsize = sizeof(struct ath_buf) * nbuf;
+		bf = devm_kzalloc(sc->dev, bsize, GFP_KERNEL);
 		if (!bf)
 			return -ENOMEM;
 
@@ -369,7 +370,8 @@ int ath_descdma_setup(struct ath_softc *sc, struct ath_descdma *dd,
 	} else {
 		struct ath_rxbuf *bf;
 
-		bf = devm_kcalloc(sc->dev, sizeof(struct ath_rxbuf), nbuf, GFP_KERNEL);
+		bsize = sizeof(struct ath_rxbuf) * nbuf;
+		bf = devm_kzalloc(sc->dev, bsize, GFP_KERNEL);
 		if (!bf)
 			return -ENOMEM;
 
@@ -574,7 +576,7 @@ static int ath9k_nvmem_request_eeprom(struct ath_softc *sc)
 	size_t len;
 	int err;
 
-	cell = nvmem_cell_get(sc->dev, "calibration");
+	cell = devm_nvmem_cell_get(sc->dev, "calibration");
 	if (IS_ERR(cell)) {
 		err = PTR_ERR(cell);
 
@@ -591,7 +593,6 @@ static int ath9k_nvmem_request_eeprom(struct ath_softc *sc)
 	}
 
 	buf = nvmem_cell_read(cell, &len);
-	nvmem_cell_put(cell);
 	if (IS_ERR(buf))
 		return PTR_ERR(buf);
 
@@ -957,6 +958,7 @@ static void ath9k_set_hw_capab(struct ath_softc *sc, struct ieee80211_hw *hw)
 	hw->wiphy->flags |= WIPHY_FLAG_IBSS_RSN;
 	hw->wiphy->flags |= WIPHY_FLAG_SUPPORTS_TDLS;
 	hw->wiphy->flags |= WIPHY_FLAG_HAS_REMAIN_ON_CHANNEL;
+	hw->wiphy->flags |= WIPHY_FLAG_SUPPORTS_5_10_MHZ;
 	hw->wiphy->flags |= WIPHY_FLAG_HAS_CHANNEL_SWITCH;
 	hw->wiphy->flags |= WIPHY_FLAG_AP_UAPSD;
 

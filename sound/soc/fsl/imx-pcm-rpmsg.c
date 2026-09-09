@@ -632,7 +632,6 @@ static const struct snd_soc_component_driver imx_rpmsg_soc_component = {
 	.pointer	= imx_rpmsg_pcm_pointer,
 	.ack		= imx_rpmsg_pcm_ack,
 	.prepare	= imx_rpmsg_pcm_prepare,
-	.debugfs_prefix	= "rpmsg",
 };
 
 static void imx_rpmsg_pcm_work(struct work_struct *work)
@@ -690,6 +689,7 @@ static void imx_rpmsg_pcm_work(struct work_struct *work)
 
 static int imx_rpmsg_pcm_probe(struct platform_device *pdev)
 {
+	struct snd_soc_component *component;
 	struct rpmsg_info *info;
 	int ret, i;
 
@@ -740,6 +740,16 @@ static int imx_rpmsg_pcm_probe(struct platform_device *pdev)
 					      NULL, 0);
 	if (ret)
 		goto fail;
+
+	component = snd_soc_lookup_component(&pdev->dev, NULL);
+	if (!component) {
+		ret = -EINVAL;
+		goto fail;
+	}
+
+#ifdef CONFIG_DEBUG_FS
+	component->debugfs_prefix = "rpmsg";
+#endif
 
 	return 0;
 

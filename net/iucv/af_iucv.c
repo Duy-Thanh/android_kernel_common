@@ -26,7 +26,6 @@
 #include <linux/init.h>
 #include <linux/poll.h>
 #include <linux/security.h>
-#include <linux/uio.h>
 #include <net/sock.h>
 #include <asm/machine.h>
 #include <asm/ebcdic.h>
@@ -1536,7 +1535,7 @@ static int iucv_sock_setsockopt(struct socket *sock, int level, int optname,
 }
 
 static int iucv_sock_getsockopt(struct socket *sock, int level, int optname,
-				sockopt_t *opt)
+				char __user *optval, int __user *optlen)
 {
 	struct sock *sk = sock->sk;
 	struct iucv_sock *iucv = iucv_sk(sk);
@@ -1546,7 +1545,9 @@ static int iucv_sock_getsockopt(struct socket *sock, int level, int optname,
 	if (level != SOL_IUCV)
 		return -ENOPROTOOPT;
 
-	len = opt->optlen;
+	if (get_user(len, optlen))
+		return -EFAULT;
+
 	if (len < 0)
 		return -EINVAL;
 
@@ -1581,8 +1582,9 @@ static int iucv_sock_getsockopt(struct socket *sock, int level, int optname,
 	if (rc)
 		return rc;
 
-	opt->optlen = len;
-	if (copy_to_iter(&val, len, &opt->iter_out) != len)
+	if (put_user(len, optlen))
+		return -EFAULT;
+	if (copy_to_user(optval, &val, len))
 		return -EFAULT;
 
 	return 0;
@@ -2234,7 +2236,7 @@ static const struct proto_ops iucv_sock_ops = {
 	.socketpair	= sock_no_socketpair,
 	.shutdown	= iucv_sock_shutdown,
 	.setsockopt	= iucv_sock_setsockopt,
-	.getsockopt_iter = iucv_sock_getsockopt,
+	.getsockopt	= iucv_sock_getsockopt,
 };
 
 static int iucv_sock_create(struct net *net, struct socket *sock, int protocol,

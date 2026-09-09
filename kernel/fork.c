@@ -211,7 +211,7 @@ static DEFINE_PER_CPU(struct vm_struct *, cached_stacks[NR_CACHED_STACKS]);
  * accounting is performed by the code assigning/releasing stacks to tasks.
  * We need a zeroed memory without __GFP_ACCOUNT.
  */
-#define GFP_VMAP_STACK (GFP_KERNEL | __GFP_ZERO | __GFP_SKIP_KASAN)
+#define GFP_VMAP_STACK (GFP_KERNEL | __GFP_ZERO)
 
 struct vm_stack {
 	struct rcu_head rcu;
@@ -349,8 +349,7 @@ static int alloc_thread_stack_node(struct task_struct *tsk, int node)
 		}
 
 		/* Reset stack metadata. */
-		if (!kasan_hw_tags_enabled())
-			kasan_unpoison_range(vm_area->addr, THREAD_SIZE);
+		kasan_unpoison_range(vm_area->addr, THREAD_SIZE);
 
 		stack = kasan_reset_tag(vm_area->addr);
 
@@ -737,7 +736,6 @@ void __mmdrop(struct mm_struct *mm)
 	cleanup_lazy_tlbs(mm);
 
 	WARN_ON_ONCE(mm == current->active_mm);
-	mm_destroy_sched(mm);
 	mm_free_pgd(mm);
 	mm_free_id(mm);
 	destroy_context(mm);
@@ -1117,7 +1115,6 @@ static struct mm_struct *mm_init(struct mm_struct *mm, struct task_struct *p)
 #endif
 	mm_init_uprobes_state(mm);
 	hugetlb_count_init(mm);
-	futex_mm_init(mm);
 
 	mm_flags_clear_all(mm);
 	if (current->mm) {
@@ -1130,8 +1127,11 @@ static struct mm_struct *mm_init(struct mm_struct *mm, struct task_struct *p)
 		mm->def_flags = 0;
 	}
 
-	if (mm_alloc_pgd(mm))
+	if (futex_mm_init(mm))
 		goto fail_mm_init;
+
+	if (mm_alloc_pgd(mm))
+		goto fail_nopgd;
 
 	if (mm_alloc_id(mm))
 		goto fail_noid;
@@ -1142,9 +1142,6 @@ static struct mm_struct *mm_init(struct mm_struct *mm, struct task_struct *p)
 	if (mm_alloc_cid(mm, p))
 		goto fail_cid;
 
-	if (mm_alloc_sched(mm))
-		goto fail_sched;
-
 	if (percpu_counter_init_many(mm->rss_stat, 0, GFP_KERNEL_ACCOUNT,
 				     NR_MM_COUNTERS))
 		goto fail_pcpu;
@@ -1153,8 +1150,6 @@ static struct mm_struct *mm_init(struct mm_struct *mm, struct task_struct *p)
 	return mm;
 
 fail_pcpu:
-	mm_destroy_sched(mm);
-fail_sched:
 	mm_destroy_cid(mm);
 fail_cid:
 	destroy_context(mm);
@@ -1162,6 +1157,8 @@ fail_nocontext:
 	mm_free_id(mm);
 fail_noid:
 	mm_free_pgd(mm);
+fail_nopgd:
+	futex_hash_free(mm);
 fail_mm_init:
 	free_mm(mm);
 	return NULL;
@@ -2255,7 +2252,6 @@ __latent_entropy struct task_struct *copy_process(
 	lockdep_init_task(p);
 
 	p->blocked_on = NULL; /* not blocked yet */
-	p->blocked_donor = NULL; /* nobody is boosting p yet */
 
 #ifdef CONFIG_BCACHE
 	p->sequential_io	= 0;

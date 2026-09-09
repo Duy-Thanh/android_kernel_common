@@ -162,7 +162,7 @@ static void *global_p = NULL;
 
 static int sealing_thread_fn(void *arg)
 {
-	int r;
+	int sig, r;
 
 	/*
 	 * This thread first waits 200ms so any pending operation in the parent

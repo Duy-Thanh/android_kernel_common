@@ -3,8 +3,8 @@
  * Copyright © 2022 Intel Corporation
  */
 
-#ifndef _XE_GUC_FWIF_H_
-#define _XE_GUC_FWIF_H_
+#ifndef _XE_GUC_FWIF_H
+#define _XE_GUC_FWIF_H
 
 #include <linux/bits.h>
 

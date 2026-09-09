@@ -31,7 +31,6 @@ struct gpio_regmap {
 	unsigned int reg_clr_base;
 	unsigned int reg_dir_in_base;
 	unsigned int reg_dir_out_base;
-	unsigned long *fixed_direction_mask;
 	unsigned long *fixed_direction_output;
 
 #ifdef CONFIG_REGMAP_IRQ
@@ -139,20 +138,6 @@ static int gpio_regmap_set_with_clear(struct gpio_chip *chip,
 	return regmap_write(gpio->regmap, reg, mask);
 }
 
-static bool gpio_regmap_fixed_direction(struct gpio_regmap *gpio,
-					unsigned int offset)
-{
-	if (!gpio->fixed_direction_output)
-		return false;
-
-	/* In this case only some GPIOs are fixed as input/output */
-	if (gpio->fixed_direction_mask &&
-	    !test_bit(offset, gpio->fixed_direction_mask))
-		return false;
-
-	return true;
-}
-
 static int gpio_regmap_get_direction(struct gpio_chip *chip,
 				     unsigned int offset)
 {
@@ -160,7 +145,7 @@ static int gpio_regmap_get_direction(struct gpio_chip *chip,
 	unsigned int base, val, reg, mask;
 	int invert, ret;
 
-	if (gpio_regmap_fixed_direction(gpio, offset)) {
+	if (gpio->fixed_direction_output) {
 		if (test_bit(offset, gpio->fixed_direction_output))
 			return GPIO_LINE_DIRECTION_OUT;
 		else
@@ -196,35 +181,12 @@ static int gpio_regmap_get_direction(struct gpio_chip *chip,
 		return GPIO_LINE_DIRECTION_IN;
 }
 
-static int gpio_regmap_try_direction_fixed(struct gpio_regmap *gpio,
-					   unsigned int offset, bool output)
-{
-	if (test_bit(offset, gpio->fixed_direction_output)) {
-		if (output)
-			return 0;
-		else
-			return -EINVAL;
-	} else {
-		if (output)
-			return -EINVAL;
-		else
-			return 0;
-	}
-}
-
 static int gpio_regmap_set_direction(struct gpio_chip *chip,
 				     unsigned int offset, bool output)
 {
 	struct gpio_regmap *gpio = gpiochip_get_data(chip);
 	unsigned int base, val, reg, mask;
 	int invert, ret;
-
-	/*
-	 * If the direction is fixed, only accept the fixed
-	 * direction in this call.
-	 */
-	if (gpio_regmap_fixed_direction(gpio, offset))
-		return gpio_regmap_try_direction_fixed(gpio, offset, output);
 
 	if (gpio->reg_dir_out_base) {
 		base = gpio_regmap_addr(gpio->reg_dir_out_base);
@@ -257,20 +219,6 @@ static int gpio_regmap_direction_input(struct gpio_chip *chip,
 static int gpio_regmap_direction_output(struct gpio_chip *chip,
 					unsigned int offset, int value)
 {
-	struct gpio_regmap *gpio = gpiochip_get_data(chip);
-	int ret;
-
-	/*
-	 * First check if this is gonna work on a fixed direction line,
-	 * if it doesn't (i.e. this is a fixed input line), then do not
-	 * attempt to set the output value either and just bail out.
-	 */
-	if (gpio_regmap_fixed_direction(gpio, offset)) {
-		ret = gpio_regmap_try_direction_fixed(gpio, offset, true);
-		if (ret)
-			return ret;
-	}
-
 	gpio_regmap_set(chip, offset, value);
 
 	return gpio_regmap_set_direction(chip, offset, true);
@@ -354,23 +302,12 @@ struct gpio_regmap *gpio_regmap_register(const struct gpio_regmap_config *config
 			goto err_free_gpio;
 	}
 
-	if (config->fixed_direction_mask) {
-		gpio->fixed_direction_mask = bitmap_alloc(chip->ngpio,
-							    GFP_KERNEL);
-		if (!gpio->fixed_direction_mask) {
-			ret = -ENOMEM;
-			goto err_free_gpio;
-		}
-		bitmap_copy(gpio->fixed_direction_mask,
-			    config->fixed_direction_mask, chip->ngpio);
-	}
-
 	if (config->fixed_direction_output) {
 		gpio->fixed_direction_output = bitmap_alloc(chip->ngpio,
 							    GFP_KERNEL);
 		if (!gpio->fixed_direction_output) {
 			ret = -ENOMEM;
-			goto err_free_bitmap_dirmask;
+			goto err_free_gpio;
 		}
 		bitmap_copy(gpio->fixed_direction_output,
 			    config->fixed_direction_output, chip->ngpio);
@@ -392,7 +329,7 @@ struct gpio_regmap *gpio_regmap_register(const struct gpio_regmap_config *config
 
 	ret = gpiochip_add_data(chip, gpio);
 	if (ret < 0)
-		goto err_free_bitmap_output;
+		goto err_free_bitmap;
 
 #ifdef CONFIG_REGMAP_IRQ
 	if (config->regmap_irq_chip) {
@@ -418,10 +355,8 @@ struct gpio_regmap *gpio_regmap_register(const struct gpio_regmap_config *config
 
 err_remove_gpiochip:
 	gpiochip_remove(chip);
-err_free_bitmap_output:
+err_free_bitmap:
 	bitmap_free(gpio->fixed_direction_output);
-err_free_bitmap_dirmask:
-	bitmap_free(gpio->fixed_direction_mask);
 err_free_gpio:
 	kfree(gpio);
 	return ERR_PTR(ret);
@@ -441,7 +376,6 @@ void gpio_regmap_unregister(struct gpio_regmap *gpio)
 
 	gpiochip_remove(&gpio->gpio_chip);
 	bitmap_free(gpio->fixed_direction_output);
-	bitmap_free(gpio->fixed_direction_mask);
 	kfree(gpio);
 }
 EXPORT_SYMBOL_GPL(gpio_regmap_unregister);

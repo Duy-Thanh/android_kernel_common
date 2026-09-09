@@ -11,6 +11,7 @@ use kernel::{
         Io, //
     },
     prelude::*,
+    sync::aref::ARef,
     time::{
         delay::fsleep,
         Delta, //
@@ -131,7 +132,7 @@ pub(crate) struct GspSequencer<'a> {
     /// Sequencer information with command data.
     seq_info: GspSequence,
     /// `Bar0` for register access.
-    bar: Bar0<'a>,
+    bar: &'a Bar0,
     /// SEC2 falcon for core operations.
     sec2_falcon: &'a Falcon<Sec2>,
     /// GSP falcon for core operations.
@@ -141,7 +142,7 @@ pub(crate) struct GspSequencer<'a> {
     /// Bootloader application version.
     bootloader_app_version: u32,
     /// Device for logging.
-    dev: &'a device::Device,
+    dev: ARef<device::Device>,
 }
 
 impl fw::RegWritePayload {
@@ -280,7 +281,7 @@ pub(crate) struct GspSeqIter<'a> {
     /// Number of commands processed so far.
     cmds_processed: u32,
     /// Device for logging.
-    dev: &'a device::Device,
+    dev: ARef<device::Device>,
 }
 
 impl<'a> Iterator for GspSeqIter<'a> {
@@ -308,7 +309,7 @@ impl<'a> Iterator for GspSeqIter<'a> {
             self.cmd_data.len() - offset
         };
         buffer[..copy_len].copy_from_slice(&self.cmd_data[offset..offset + copy_len]);
-        let cmd_result = GspSeqCmd::new(&buffer, self.dev);
+        let cmd_result = GspSeqCmd::new(&buffer, &self.dev);
 
         cmd_result.map_or_else(
             |_err| {
@@ -333,7 +334,7 @@ impl<'a> GspSequencer<'a> {
             current_offset: 0,
             total_cmds: self.seq_info.cmd_index,
             cmds_processed: 0,
-            dev: self.dev,
+            dev: self.dev.clone(),
         }
     }
 }
@@ -349,9 +350,9 @@ pub(crate) struct GspSequencerParams<'a> {
     /// SEC2 falcon for core operations.
     pub(crate) sec2_falcon: &'a Falcon<Sec2>,
     /// Device for logging.
-    pub(crate) dev: &'a device::Device,
+    pub(crate) dev: ARef<device::Device>,
     /// BAR0 for register access.
-    pub(crate) bar: Bar0<'a>,
+    pub(crate) bar: &'a Bar0,
 }
 
 impl<'a> GspSequencer<'a> {

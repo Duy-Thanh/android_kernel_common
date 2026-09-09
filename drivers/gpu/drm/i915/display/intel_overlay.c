@@ -481,9 +481,13 @@ static int intel_overlay_do_put_image(struct intel_overlay *overlay,
 	if (ret != 0)
 		return ret;
 
+	atomic_inc(&display->restore.pending_fb_pin);
+
 	vma = intel_parent_overlay_pin_fb(display, obj, &offset);
-	if (IS_ERR(vma))
-		return PTR_ERR(vma);
+	if (IS_ERR(vma)) {
+		ret = PTR_ERR(vma);
+		goto out_pin_section;
+	}
 
 	if (!intel_parent_overlay_is_active(display)) {
 		const struct intel_crtc_state *crtc_state =
@@ -567,6 +571,8 @@ static int intel_overlay_do_put_image(struct intel_overlay *overlay,
 
 out_unpin:
 	intel_parent_overlay_unpin_fb(display, vma);
+out_pin_section:
+	atomic_dec(&display->restore.pending_fb_pin);
 
 	return ret;
 }

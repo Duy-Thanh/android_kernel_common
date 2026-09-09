@@ -50,9 +50,7 @@ static int udp_msg_wait_data(struct sock *sk, struct sk_psock *psock,
 	sk_set_bit(SOCKWQ_ASYNC_WAITDATA, sk);
 	ret = udp_msg_has_data(sk, psock);
 	if (!ret) {
-		release_sock(sk);
 		wait_woken(&wait, TASK_INTERRUPTIBLE, timeo);
-		lock_sock(sk);
 		ret = udp_msg_has_data(sk, psock);
 	}
 	sk_clear_bit(SOCKWQ_ASYNC_WAITDATA, sk);
@@ -81,7 +79,6 @@ static int udp_bpf_recvmsg(struct sock *sk, struct msghdr *msg, size_t len,
 		goto out;
 	}
 
-	lock_sock(sk);
 msg_bytes_ready:
 	copied = sk_msg_recvmsg(sk, psock, msg, len, flags);
 	if (!copied) {
@@ -93,17 +90,11 @@ msg_bytes_ready:
 		if (data) {
 			if (psock_has_data(psock))
 				goto msg_bytes_ready;
-
-			release_sock(sk);
-
 			ret = sk_udp_recvmsg(sk, msg, len, flags);
 			goto out;
 		}
 		copied = -EAGAIN;
 	}
-
-	release_sock(sk);
-
 	ret = copied;
 out:
 	sk_psock_put(sk, psock);

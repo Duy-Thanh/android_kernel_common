@@ -54,9 +54,11 @@ menf21bmc_probe(struct i2c_client *client)
 	int rev_major, rev_minor, rev_main;
 	int ret;
 
-	if (!i2c_check_functionality(client->adapter, I2C_FUNC_SMBUS_BYTE_DATA |
-						      I2C_FUNC_SMBUS_WORD_DATA |
-						      I2C_FUNC_SMBUS_BYTE))
+	ret = i2c_check_functionality(client->adapter,
+				      I2C_FUNC_SMBUS_BYTE_DATA |
+				      I2C_FUNC_SMBUS_WORD_DATA |
+				      I2C_FUNC_SMBUS_BYTE);
+	if (!ret)
 		return -ENODEV;
 
 	rev_major = i2c_smbus_read_word_data(client, BMC_CMD_REV_MAJOR);

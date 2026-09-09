@@ -386,10 +386,6 @@ linkcheck-docs:
    rules:
     - when: never
 
-mr-label-maker-test:
-   rules:
-    - when: never
-
 test-docs:
    rules:
     - when: never

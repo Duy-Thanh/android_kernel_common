@@ -31,7 +31,6 @@ static const struct acpi_device_id usbio_gpio_acpi_hids[] = {
 	{ "INTC10B5" }, /* LNL */
 	{ "INTC10D1" }, /* MTL-CVF */
 	{ "INTC10E2" }, /* PTL */
-	{ "INTC1116" }, /* NVL */
 	{ }
 };
 

@@ -67,7 +67,7 @@ struct xe_oa_format {
 	u32 counter_select;
 	/** @size: record size as written by HW (multiple of 64 byte cachelines) */
 	int size;
-	/** @type: of enum drm_xe_oa_format_type */
+	/** @type: of enum @drm_xe_oa_format_type */
 	int type;
 	/** @header: 32 or 64 bit report headers */
 	enum xe_oa_report_header header;
@@ -154,18 +154,16 @@ struct xe_oa {
 	u16 oa_unit_ids;
 };
 
-/**
- * struct xe_oa_buffer - State of the stream OA buffer
- */
+/** @xe_oa_buffer: State of the stream OA buffer */
 struct xe_oa_buffer {
 	/** @format: data format */
 	const struct xe_oa_format *format;
 
-	/** @bo: xe_bo backing the OA buffer */
+	/** @format: xe_bo backing the OA buffer */
 	struct xe_bo *bo;
 
-	/** @bounce: bounce buffer used with xe_map layer */
-	void *bounce;
+	/** @vaddr: mapped vaddr of the OA buffer */
+	u8 *vaddr;
 
 	/** @ptr_lock: Lock protecting reads/writes to head/tail pointers */
 	spinlock_t ptr_lock;

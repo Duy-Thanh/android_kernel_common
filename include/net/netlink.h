@@ -2260,10 +2260,7 @@ static inline struct nlattr *nla_nest_start(struct sk_buff *skb, int attrtype)
  */
 static inline int nla_nest_end(struct sk_buff *skb, struct nlattr *start)
 {
-	unsigned long diff = skb_tail_pointer(skb) - (unsigned char *)start;
-
-	DEBUG_NET_WARN_ON_ONCE(diff > U16_MAX);
-	start->nla_len = diff;
+	start->nla_len = skb_tail_pointer(skb) - (unsigned char *)start;
 	return skb->len;
 }
 

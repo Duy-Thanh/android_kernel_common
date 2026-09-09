@@ -709,7 +709,7 @@ static void max9860_remove(struct i2c_client *i2c)
 }
 
 static const struct i2c_device_id max9860_i2c_id[] = {
-	{ .name = "max9860" },
+	{ "max9860", },
 	{ }
 };
 MODULE_DEVICE_TABLE(i2c, max9860_i2c_id);

@@ -256,22 +256,19 @@ static int starfive_trng_read(struct hwrng *rng, void *buf, size_t max, bool wai
 
 	if (wait) {
 		ret = starfive_trng_wait_idle(trng);
-		if (ret) {
-			ret = -ETIMEDOUT;
-			goto out_put;
-		}
+		if (ret)
+			return -ETIMEDOUT;
 	}
 
 	ret = starfive_trng_cmd(trng, STARFIVE_CTRL_GENE_RANDNUM, wait);
 	if (ret)
-		goto out_put;
+		return ret;
 
 	memcpy_fromio(buf, trng->base + STARFIVE_RAND0, max);
-	ret = max;
 
-out_put:
 	pm_runtime_put_sync_autosuspend(trng->dev);
-	return ret;
+
+	return max;
 }
 
 static int starfive_trng_probe(struct platform_device *pdev)

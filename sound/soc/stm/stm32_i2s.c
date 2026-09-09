@@ -615,10 +615,10 @@ static irqreturn_t stm32_i2s_isr(int irq, void *devid)
 	if (flags & I2S_SR_TIFRE)
 		dev_dbg(&pdev->dev, "Frame error\n");
 
-	scoped_guard(spinlock, &i2s->irq_lock) {
-		if (err && i2s->substream)
-			snd_pcm_stop_xrun(i2s->substream);
-	}
+	spin_lock(&i2s->irq_lock);
+	if (err && i2s->substream)
+		snd_pcm_stop_xrun(i2s->substream);
+	spin_unlock(&i2s->irq_lock);
 
 	return IRQ_HANDLED;
 }
@@ -905,10 +905,12 @@ static int stm32_i2s_startup(struct snd_pcm_substream *substream,
 			     struct snd_soc_dai *cpu_dai)
 {
 	struct stm32_i2s_data *i2s = snd_soc_dai_get_drvdata(cpu_dai);
+	unsigned long flags;
 	int ret;
 
-	scoped_guard(spinlock_irqsave, &i2s->irq_lock)
-		i2s->substream = substream;
+	spin_lock_irqsave(&i2s->irq_lock, flags);
+	i2s->substream = substream;
+	spin_unlock_irqrestore(&i2s->irq_lock, flags);
 
 	if ((i2s->fmt & SND_SOC_DAIFMT_FORMAT_MASK) != SND_SOC_DAIFMT_DSP_A)
 		snd_pcm_hw_constraint_single(substream->runtime,
@@ -980,19 +982,19 @@ static int stm32_i2s_trigger(struct snd_pcm_substream *substream, int cmd,
 		regmap_write_bits(i2s->regmap, STM32_I2S_IFCR_REG,
 				  I2S_IFCR_MASK, I2S_IFCR_MASK);
 
-		scoped_guard(spinlock, &i2s->lock_fd) {
-			i2s->refcount++;
-			if (playback_flg) {
-				ier = I2S_IER_UDRIE;
-			} else {
-				ier = I2S_IER_OVRIE;
+		spin_lock(&i2s->lock_fd);
+		i2s->refcount++;
+		if (playback_flg) {
+			ier = I2S_IER_UDRIE;
+		} else {
+			ier = I2S_IER_OVRIE;
 
-				if (STM32_I2S_IS_MASTER(i2s) && i2s->refcount == 1)
-					/* dummy write to gate bus clocks */
-					regmap_write(i2s->regmap,
-						     STM32_I2S_TXDR_REG, 0);
-			}
+			if (STM32_I2S_IS_MASTER(i2s) && i2s->refcount == 1)
+				/* dummy write to gate bus clocks */
+				regmap_write(i2s->regmap,
+					     STM32_I2S_TXDR_REG, 0);
 		}
+		spin_unlock(&i2s->lock_fd);
 
 		if (STM32_I2S_IS_SLAVE(i2s))
 			ier |= I2S_IER_TIFREIE;
@@ -1014,18 +1016,21 @@ static int stm32_i2s_trigger(struct snd_pcm_substream *substream, int cmd,
 					   I2S_IER_OVRIE,
 					   (unsigned int)~I2S_IER_OVRIE);
 
-		scoped_guard(spinlock, &i2s->lock_fd) {
-			i2s->refcount--;
-			if (i2s->refcount)
-				return 0;
-
-			ret = regmap_update_bits(i2s->regmap, STM32_I2S_CR1_REG,
-						 I2S_CR1_SPE, 0);
-			if (ret < 0) {
-				dev_err(cpu_dai->dev, "Error %d disabling I2S\n", ret);
-				return ret;
-			}
+		spin_lock(&i2s->lock_fd);
+		i2s->refcount--;
+		if (i2s->refcount) {
+			spin_unlock(&i2s->lock_fd);
+			break;
 		}
+
+		ret = regmap_update_bits(i2s->regmap, STM32_I2S_CR1_REG,
+					 I2S_CR1_SPE, 0);
+		if (ret < 0) {
+			dev_err(cpu_dai->dev, "Error %d disabling I2S\n", ret);
+			spin_unlock(&i2s->lock_fd);
+			return ret;
+		}
+		spin_unlock(&i2s->lock_fd);
 
 		cfg1_mask = I2S_CFG1_RXDMAEN | I2S_CFG1_TXDMAEN;
 		regmap_update_bits(i2s->regmap, STM32_I2S_CFG1_REG,
@@ -1042,6 +1047,7 @@ static void stm32_i2s_shutdown(struct snd_pcm_substream *substream,
 			       struct snd_soc_dai *cpu_dai)
 {
 	struct stm32_i2s_data *i2s = snd_soc_dai_get_drvdata(cpu_dai);
+	unsigned long flags;
 
 	clk_disable_unprepare(i2s->i2sclk);
 
@@ -1053,8 +1059,9 @@ static void stm32_i2s_shutdown(struct snd_pcm_substream *substream,
 	if (!i2s->i2smclk && i2s->put_i2s_clk_rate)
 		i2s->put_i2s_clk_rate(i2s);
 
-	scoped_guard(spinlock_irqsave, &i2s->irq_lock)
-		i2s->substream = NULL;
+	spin_lock_irqsave(&i2s->irq_lock, flags);
+	i2s->substream = NULL;
+	spin_unlock_irqrestore(&i2s->irq_lock, flags);
 }
 
 static int stm32_i2s_dai_probe(struct snd_soc_dai *cpu_dai)

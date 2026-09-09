@@ -83,14 +83,6 @@
 	status = "okay";
 };
 
-&ufs_0 {
-	status = "okay";
-};
-
-&ufs_0_phy {
-	status = "okay";
-};
-
 &xtcxo {
 	clock-frequency = <38400000>;
 };

@@ -100,8 +100,8 @@ static struct pmbus_driver_info aps_379_info = {
 };
 
 static const struct i2c_device_id aps_379_id[] = {
-	{ .name = "aps-379" },
-	{ }
+	{ "aps-379", 0 },
+	{},
 };
 MODULE_DEVICE_TABLE(i2c, aps_379_id);
 

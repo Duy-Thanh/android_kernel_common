@@ -75,13 +75,13 @@ static int pvc_setsockopt(struct socket *sock, int level, int optname,
 }
 
 static int pvc_getsockopt(struct socket *sock, int level, int optname,
-			  sockopt_t *opt)
+			  char __user *optval, int __user *optlen)
 {
 	struct sock *sk = sock->sk;
 	int error;
 
 	lock_sock(sk);
-	error = vcc_getsockopt(sock, level, optname, opt);
+	error = vcc_getsockopt(sock, level, optname, optval, optlen);
 	release_sock(sk);
 	return error;
 }
@@ -122,7 +122,7 @@ static const struct proto_ops pvc_proto_ops = {
 	.listen =	sock_no_listen,
 	.shutdown =	pvc_shutdown,
 	.setsockopt =	pvc_setsockopt,
-	.getsockopt_iter = pvc_getsockopt,
+	.getsockopt =	pvc_getsockopt,
 	.sendmsg =	vcc_sendmsg,
 	.recvmsg =	vcc_recvmsg,
 	.mmap =		sock_no_mmap,

@@ -291,8 +291,6 @@ static int amdgpu_ras_mgr_sw_init(struct amdgpu_ip_block *ip_block)
 	con->uniras_enabled = false;
 
 	if (amdgpu_ip_version(adev, MP0_HWIP, 0) == IP_VERSION(13, 0, 14) ||
-	    amdgpu_ip_version(adev, MP0_HWIP, 0) == IP_VERSION(13, 0, 12) ||
-	    amdgpu_ip_version(adev, MP0_HWIP, 0) == IP_VERSION(13, 0, 6) ||
 	    adev->debug_enable_ras_aca)
 		con->uniras_enabled = true;
 	else
@@ -309,17 +307,13 @@ static int amdgpu_ras_mgr_sw_init(struct amdgpu_ip_block *ip_block)
 	if (!ras_mgr->ras_core) {
 		RAS_DEV_ERR(adev, "Failed to create ras core!\n");
 		ret = -EINVAL;
-		goto err1;
+		goto err;
 	}
 
 	ras_mgr->ras_core->dev = adev;
 
 	amdgpu_ras_process_init(adev);
-	ret = ras_core_sw_init(ras_mgr->ras_core);
-	if (ret) {
-		RAS_DEV_ERR(adev, "ras_core_sw_init failed! ret:%d\n", ret);
-		goto err2;
-	}
+	ras_core_sw_init(ras_mgr->ras_core);
 	amdgpu_ras_mgr_init_event_mgr(ras_mgr->ras_core);
 
 	if (amdgpu_sriov_vf(adev)) {
@@ -327,22 +321,14 @@ static int amdgpu_ras_mgr_sw_init(struct amdgpu_ip_block *ip_block)
 		if (ret) {
 			RAS_DEV_ERR(adev,
 				"Virt ras sw_init failed! ret:%d\n", ret);
-			goto err3;
+			goto err;
 		}
 	}
 
 	return 0;
 
-err3:
-	if (ras_mgr->ras_core)
-		ras_core_sw_fini(ras_mgr->ras_core);
-err2:
-	amdgpu_ras_process_fini(adev);
-	if (ras_mgr->ras_core)
-		ras_core_destroy(ras_mgr->ras_core);
-err1:
+err:
 	kfree(ras_mgr);
-	con->ras_mgr = NULL;
 	return ret;
 }
 
@@ -510,10 +496,8 @@ uint64_t amdgpu_ras_mgr_gen_ras_event_seqno(struct amdgpu_device *adev,
 	if ((seqno_type == RAS_SEQNO_TYPE_DE) ||
 	    (seqno_type == RAS_SEQNO_TYPE_POISON_CONSUMPTION)) {
 		ret = ras_core_put_seqno(ras_mgr->ras_core, seqno_type, seq_no);
-		if (ret) {
+		if (ret)
 			RAS_DEV_WARN(adev, "There are too many ras interrupts!");
-			return 0;
-		}
 	}
 
 	return seq_no;

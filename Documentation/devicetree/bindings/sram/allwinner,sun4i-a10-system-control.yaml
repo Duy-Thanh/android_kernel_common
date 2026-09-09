@@ -80,7 +80,6 @@ patternProperties:
               - const: allwinner,sun4i-a10-sram-c1
               - const: allwinner,sun4i-a10-sram-d
               - const: allwinner,sun50i-a64-sram-c
-              - const: allwinner,sun50i-h616-ve-sram
               - items:
                   - enum:
                       - allwinner,sun5i-a13-sram-a3-a4
@@ -104,9 +103,7 @@ patternProperties:
                       - allwinner,sun7i-a20-sram-d
                   - const: allwinner,sun4i-a10-sram-d
               - items:
-                  - enum:
-                      - allwinner,sun50i-h6-sram-c
-                      - allwinner,sun50i-h616-sram-c
+                  - const: allwinner,sun50i-h6-sram-c
                   - const: allwinner,sun50i-a64-sram-c
 
 required:

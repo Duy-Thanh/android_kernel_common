@@ -1811,10 +1811,10 @@ static void ar9003_hw_tx99_stop(struct ath_hw *ah)
 
 static void ar9003_hw_tx99_set_txpower(struct ath_hw *ah, u8 txpower)
 {
-	u8 p_pwr_array[ar9300RateSize];
+	static u8 p_pwr_array[ar9300RateSize] = { 0 };
 	unsigned int i;
 
-	txpower = min(txpower, MAX_RATE_POWER);
+	txpower = txpower <= MAX_RATE_POWER ? txpower : MAX_RATE_POWER;
 	for (i = 0; i < ar9300RateSize; i++)
 		p_pwr_array[i] = txpower;
 

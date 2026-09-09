@@ -53,20 +53,6 @@ static const struct nla_policy psp_get_stats_nl_policy[PSP_A_STATS_DEV_ID + 1] =
 	[PSP_A_STATS_DEV_ID] = NLA_POLICY_MIN(NLA_U32, 1),
 };
 
-/* PSP_CMD_DEV_ASSOC - do */
-static const struct nla_policy psp_dev_assoc_nl_policy[PSP_A_DEV_NSID + 1] = {
-	[PSP_A_DEV_ID] = NLA_POLICY_MIN(NLA_U32, 1),
-	[PSP_A_DEV_IFINDEX] = { .type = NLA_U32, },
-	[PSP_A_DEV_NSID] = { .type = NLA_S32, },
-};
-
-/* PSP_CMD_DEV_DISASSOC - do */
-static const struct nla_policy psp_dev_disassoc_nl_policy[PSP_A_DEV_NSID + 1] = {
-	[PSP_A_DEV_ID] = NLA_POLICY_MIN(NLA_U32, 1),
-	[PSP_A_DEV_IFINDEX] = { .type = NLA_U32, },
-	[PSP_A_DEV_NSID] = { .type = NLA_S32, },
-};
-
 /* Ops table for psp */
 static const struct genl_split_ops psp_nl_ops[] = {
 	{
@@ -85,7 +71,7 @@ static const struct genl_split_ops psp_nl_ops[] = {
 	},
 	{
 		.cmd		= PSP_CMD_DEV_SET,
-		.pre_doit	= psp_device_get_locked_admin,
+		.pre_doit	= psp_device_get_locked,
 		.doit		= psp_nl_dev_set_doit,
 		.post_doit	= psp_device_unlock,
 		.policy		= psp_dev_set_nl_policy,
@@ -94,7 +80,7 @@ static const struct genl_split_ops psp_nl_ops[] = {
 	},
 	{
 		.cmd		= PSP_CMD_KEY_ROTATE,
-		.pre_doit	= psp_device_get_locked_admin,
+		.pre_doit	= psp_device_get_locked,
 		.doit		= psp_nl_key_rotate_doit,
 		.post_doit	= psp_device_unlock,
 		.policy		= psp_key_rotate_nl_policy,
@@ -132,24 +118,6 @@ static const struct genl_split_ops psp_nl_ops[] = {
 		.cmd	= PSP_CMD_GET_STATS,
 		.dumpit	= psp_nl_get_stats_dumpit,
 		.flags	= GENL_CMD_CAP_DUMP,
-	},
-	{
-		.cmd		= PSP_CMD_DEV_ASSOC,
-		.pre_doit	= psp_device_get_locked_dev_assoc,
-		.doit		= psp_nl_dev_assoc_doit,
-		.post_doit	= psp_device_unlock,
-		.policy		= psp_dev_assoc_nl_policy,
-		.maxattr	= PSP_A_DEV_NSID,
-		.flags		= GENL_ADMIN_PERM | GENL_CMD_CAP_DO,
-	},
-	{
-		.cmd		= PSP_CMD_DEV_DISASSOC,
-		.pre_doit	= psp_device_get_locked,
-		.doit		= psp_nl_dev_disassoc_doit,
-		.post_doit	= psp_device_unlock,
-		.policy		= psp_dev_disassoc_nl_policy,
-		.maxattr	= PSP_A_DEV_NSID,
-		.flags		= GENL_ADMIN_PERM | GENL_CMD_CAP_DO,
 	},
 };
 

@@ -38,6 +38,8 @@
 #define DDC_CI_ADDR		0x37
 #define DDC_SEGMENT_ADDR	0x30
 
+#define HDMI14_MAX_TMDSCLK	340000000
+
 #define SCRAMB_POLL_DELAY_MS	3000
 
 /*
@@ -748,7 +750,7 @@ static struct i2c_adapter *dw_hdmi_qp_i2c_adapter(struct dw_hdmi_qp *hdmi)
 }
 
 static void dw_hdmi_qp_bridge_atomic_enable(struct drm_bridge *bridge,
-					    struct drm_atomic_commit *state)
+					    struct drm_atomic_state *state)
 {
 	struct dw_hdmi_qp *hdmi = bridge->driver_private;
 	struct drm_connector_state *conn_state;
@@ -783,7 +785,7 @@ static void dw_hdmi_qp_bridge_atomic_enable(struct drm_bridge *bridge,
 }
 
 static void dw_hdmi_qp_bridge_atomic_disable(struct drm_bridge *bridge,
-					     struct drm_atomic_commit *state)
+					     struct drm_atomic_state *state)
 {
 	struct dw_hdmi_qp *hdmi = bridge->driver_private;
 
@@ -833,9 +835,9 @@ dw_hdmi_qp_bridge_tmds_char_rate_valid(const struct drm_bridge *bridge,
 	/*
 	 * TODO: when hdmi->no_hpd is 1 we must not support modes that
 	 * require scrambling, including every mode with a clock above
-	 * HDMI_1_3_TMDS_CHAR_RATE_MAX_HZ.
+	 * HDMI14_MAX_TMDSCLK.
 	 */
-	if (rate > HDMI_1_3_TMDS_CHAR_RATE_MAX_HZ) {
+	if (rate > HDMI14_MAX_TMDSCLK) {
 		dev_dbg(hdmi->dev, "Unsupported TMDS char rate: %lld\n", rate);
 		return MODE_CLOCK_HIGH;
 	}

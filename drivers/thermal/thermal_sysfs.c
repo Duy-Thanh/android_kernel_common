@@ -82,7 +82,7 @@ mode_store(struct device *dev, struct device_attribute *attr,
 }
 
 #define thermal_trip_of_attr(_ptr_, _attr_)				\
-	({								\
+	({ 								\
 		struct thermal_trip_desc *td;				\
 									\
 		td = container_of(_ptr_, struct thermal_trip_desc,	\
@@ -536,9 +536,11 @@ cur_state_store(struct device *dev, struct device_attribute *attr,
 	unsigned long state;
 	int result;
 
-	result = kstrtoul(buf, 10, &state);
-	if (result < 0)
-		return result;
+	if (sscanf(buf, "%ld\n", &state) != 1)
+		return -EINVAL;
+
+	if ((long)state < 0)
+		return -EINVAL;
 
 	/* Requested state should be less than max_state + 1 */
 	if (state > cdev->max_state)

@@ -26,8 +26,6 @@ struct sdca_dev;
  * @name: Human-readable string.
  * @type: Function topology type.
  * @adr: ACPI address (used for SDCA register access).
- * @duplicate: Internal flag to indicate if other functions of the same type
- * exist.
  */
 struct sdca_function_desc {
 	struct fwnode_handle *node;
@@ -35,8 +33,6 @@ struct sdca_function_desc {
 	const char *name;
 	u32 type;
 	u8 adr;
-
-	bool duplicate;
 };
 
 /**

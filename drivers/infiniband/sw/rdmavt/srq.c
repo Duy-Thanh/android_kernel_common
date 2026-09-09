@@ -128,7 +128,6 @@ int rvt_modify_srq(struct ib_srq *ibsrq, struct ib_srq_attr *attr,
 	struct rvt_srq *srq = ibsrq_to_rvtsrq(ibsrq);
 	struct rvt_dev_info *dev = ib_to_rvt(ibsrq->device);
 	struct rvt_rq tmp_rq = {};
-	__u64 offset_addr;
 	int ret = 0;
 
 	if (attr_mask & IB_SRQ_MAX_WR) {
@@ -150,17 +149,19 @@ int rvt_modify_srq(struct ib_srq *ibsrq, struct ib_srq_attr *attr,
 			return -ENOMEM;
 		/* Check that we can write the offset to mmap. */
 		if (udata && udata->inlen >= sizeof(__u64)) {
+			__u64 offset_addr;
 			__u64 offset = 0;
 
 			ret = ib_copy_from_udata(&offset_addr, udata,
 						 sizeof(offset_addr));
 			if (ret)
 				goto bail_free;
-			if (copy_to_user(u64_to_user_ptr(offset_addr), &offset,
-					 sizeof(offset))) {
-				ret = -EFAULT;
+			udata->outbuf = (void __user *)
+					(unsigned long)offset_addr;
+			ret = ib_copy_to_udata(udata, &offset,
+					       sizeof(offset));
+			if (ret)
 				goto bail_free;
-			}
 		}
 
 		spin_lock_irq(&srq->rq.kwq->c_lock);
@@ -235,10 +236,10 @@ int rvt_modify_srq(struct ib_srq *ibsrq, struct ib_srq_attr *attr,
 			 * See rvt_mmap() for details.
 			 */
 			if (udata && udata->inlen >= sizeof(__u64)) {
-				if (copy_to_user(u64_to_user_ptr(offset_addr),
-						 &ip->offset,
-						 sizeof(ip->offset)))
-					return -EFAULT;
+				ret = ib_copy_to_udata(udata, &ip->offset,
+						       sizeof(ip->offset));
+				if (ret)
+					return ret;
 			}
 
 			/*

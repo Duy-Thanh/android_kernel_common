@@ -35,7 +35,7 @@ static int dac124s085_set_brightness(struct led_classdev *ldev,
 {
 	struct dac124s085_led *led = container_of(ldev, struct dac124s085_led,
 						  ldev);
-	__le16 word;
+	u16 word;
 	int ret;
 
 	mutex_lock(&led->mutex);

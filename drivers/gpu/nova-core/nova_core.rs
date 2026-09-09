@@ -17,10 +17,9 @@ mod driver;
 mod falcon;
 mod fb;
 mod firmware;
-mod fsp;
+mod gfw;
 mod gpu;
 mod gsp;
-mod mctp;
 #[macro_use]
 mod num;
 mod regs;
@@ -48,13 +47,13 @@ struct NovaCoreModule {
     // Fields are dropped in declaration order, so `_driver` is dropped first,
     // then `_debugfs_guard` clears `DEBUGFS_ROOT`.
     #[pin]
-    _driver: Registration<pci::Adapter<driver::NovaCoreDriver>>,
+    _driver: Registration<pci::Adapter<driver::NovaCore>>,
     _debugfs_guard: DebugfsRootGuard,
 }
 
 impl InPlaceModule for NovaCoreModule {
     fn init(module: &'static kernel::ThisModule) -> impl PinInit<Self, Error> {
-        let dir = debugfs::Dir::new(kernel::c_str!("nova-core"));
+        let dir = debugfs::Dir::new(kernel::c_str!("nova_core"));
 
         // SAFETY: We are the only driver code running during init, so there
         // cannot be any concurrent access to `DEBUGFS_ROOT`.
@@ -69,7 +68,7 @@ impl InPlaceModule for NovaCoreModule {
 
 module! {
     type: NovaCoreModule,
-    name: "nova-core",
+    name: "NovaCore",
     authors: ["Danilo Krummrich"],
     description: "Nova Core GPU driver",
     license: "GPL v2",

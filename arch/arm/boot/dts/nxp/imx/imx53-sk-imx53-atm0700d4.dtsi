@@ -10,7 +10,6 @@
 / {
 	panel: panel-rgb {
 		compatible = "powertip,ph800480t013-idf02";
-		power-supply = <&reg_5v>;
 
 		port {
 			panel_rgb_in: endpoint {

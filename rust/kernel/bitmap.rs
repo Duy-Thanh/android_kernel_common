@@ -499,8 +499,9 @@ impl Bitmap {
     }
 }
 
-#[cfg(CONFIG_RUST_BITMAP_KUNIT_TEST)]
-#[macros::kunit_tests(rust_kernel_bitmap)]
+use macros::kunit_tests;
+
+#[kunit_tests(rust_kernel_bitmap)]
 mod tests {
     use super::*;
     use kernel::alloc::flags::GFP_KERNEL;

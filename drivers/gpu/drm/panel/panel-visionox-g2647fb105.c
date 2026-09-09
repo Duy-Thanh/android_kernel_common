@@ -207,12 +207,9 @@ static int visionox_g2647fb105_probe(struct mipi_dsi_device *dsi)
 	struct visionox_g2647fb105 *ctx;
 	int ret;
 
-	ctx = devm_drm_panel_alloc(dev, __typeof(*ctx), panel,
-				  &visionox_g2647fb105_panel_funcs,
-				  DRM_MODE_CONNECTOR_DSI);
-
-	if (IS_ERR(ctx))
-		return PTR_ERR(ctx);
+	ctx = devm_kzalloc(dev, sizeof(*ctx), GFP_KERNEL);
+	if (!ctx)
+		return -ENOMEM;
 
 	ret = devm_regulator_bulk_get_const(dev,
 					    ARRAY_SIZE(visionox_g2647fb105_supplies),
@@ -234,6 +231,10 @@ static int visionox_g2647fb105_probe(struct mipi_dsi_device *dsi)
 	dsi->mode_flags = MIPI_DSI_MODE_VIDEO_BURST |
 			  MIPI_DSI_CLOCK_NON_CONTINUOUS | MIPI_DSI_MODE_LPM;
 
+	ctx->panel.prepare_prev_first = true;
+
+	drm_panel_init(&ctx->panel, dev, &visionox_g2647fb105_panel_funcs,
+		       DRM_MODE_CONNECTOR_DSI);
 	ctx->panel.prepare_prev_first = true;
 
 	ctx->panel.backlight = visionox_g2647fb105_create_backlight(dsi);

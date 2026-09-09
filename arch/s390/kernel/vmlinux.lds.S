@@ -159,13 +159,6 @@ SECTIONS
 	}
 #endif
 
-	. = ALIGN(8);
-	.s390dbf_info : {
-		__s390dbf_info = .;
-		*(.s390dbf_info)
-		__s390dbf_info_end = .;
-	}
-
 	/*
 	 * Table with the patch locations to undo expolines
 	*/

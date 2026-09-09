@@ -184,23 +184,23 @@ synproxy_check_timestamp_cookie(struct synproxy_options *opts)
 	opts->options |= opts->tsecr & (1 << 5) ? NF_SYNPROXY_OPT_ECN : 0;
 }
 
-static bool
+static unsigned int
 synproxy_tstamp_adjust(struct sk_buff *skb, unsigned int protoff,
 		       struct tcphdr *th, struct nf_conn *ct,
 		       enum ip_conntrack_info ctinfo,
 		       const struct nf_conn_synproxy *synproxy)
 {
 	unsigned int optoff, optend;
-	u32 new, old;
+	__be32 *ptr, old;
 
 	if (synproxy->tsoff == 0)
-		return true;
+		return 1;
 
 	optoff = protoff + sizeof(struct tcphdr);
 	optend = protoff + th->doff * 4;
 
 	if (skb_ensure_writable(skb, optend))
-		return false;
+		return 0;
 
 	th = (struct tcphdr *)(skb->data + protoff);
 
@@ -209,7 +209,7 @@ synproxy_tstamp_adjust(struct sk_buff *skb, unsigned int protoff,
 
 		switch (op[0]) {
 		case TCPOPT_EOL:
-			return true;
+			return 1;
 		case TCPOPT_NOP:
 			optoff++;
 			continue;
@@ -217,26 +217,28 @@ synproxy_tstamp_adjust(struct sk_buff *skb, unsigned int protoff,
 			if (optoff + 1 == optend ||
 			    optoff + op[1] > optend ||
 			    op[1] < 2)
-				return true;
+				return 0;
 			if (op[0] == TCPOPT_TIMESTAMP &&
 			    op[1] == TCPOLEN_TIMESTAMP) {
 				if (CTINFO2DIR(ctinfo) == IP_CT_DIR_REPLY) {
-					old = get_unaligned_be32(&op[2]);
-					new = old - synproxy->tsoff;
-					put_unaligned_be32(new, &op[2]);
+					ptr = (__be32 *)&op[2];
+					old = *ptr;
+					*ptr = htonl(ntohl(*ptr) -
+						     synproxy->tsoff);
 				} else {
-					old = get_unaligned_be32(&op[6]);
-					new = old + synproxy->tsoff;
-					put_unaligned_be32(new, &op[6]);
+					ptr = (__be32 *)&op[6];
+					old = *ptr;
+					*ptr = htonl(ntohl(*ptr) +
+						     synproxy->tsoff);
 				}
 				inet_proto_csum_replace4(&th->check, skb,
-							 cpu_to_be32(old),
-							 cpu_to_be32(new), false);
+							 old, *ptr, false);
+				return 1;
 			}
 			optoff += op[1];
 		}
 	}
-	return true;
+	return 1;
 }
 
 #ifdef CONFIG_PROC_FS
@@ -747,9 +749,7 @@ ipv4_synproxy_hook(void *priv, struct sk_buff *skb,
 		break;
 	}
 
-	if (!synproxy_tstamp_adjust(skb, thoff, th, ct, ctinfo, synproxy))
-		return NF_DROP_REASON(skb, SKB_DROP_REASON_NETFILTER_DROP, ENOMEM);
-
+	synproxy_tstamp_adjust(skb, thoff, th, ct, ctinfo, synproxy);
 	return NF_ACCEPT;
 }
 EXPORT_SYMBOL_GPL(ipv4_synproxy_hook);
@@ -1177,9 +1177,7 @@ ipv6_synproxy_hook(void *priv, struct sk_buff *skb,
 		break;
 	}
 
-	if (!synproxy_tstamp_adjust(skb, thoff, th, ct, ctinfo, synproxy))
-		return NF_DROP_REASON(skb, SKB_DROP_REASON_NETFILTER_DROP, ENOMEM);
-
+	synproxy_tstamp_adjust(skb, thoff, th, ct, ctinfo, synproxy);
 	return NF_ACCEPT;
 }
 EXPORT_SYMBOL_GPL(ipv6_synproxy_hook);

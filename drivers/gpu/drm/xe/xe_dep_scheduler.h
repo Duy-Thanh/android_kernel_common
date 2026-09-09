@@ -3,9 +3,6 @@
  * Copyright © 2025 Intel Corporation
  */
 
-#ifndef _XE_DEP_SCHEDULER_H_
-#define _XE_DEP_SCHEDULER_H_
-
 #include <linux/types.h>
 
 struct drm_sched_entity;
@@ -22,5 +19,3 @@ void xe_dep_scheduler_fini(struct xe_dep_scheduler *dep_scheduler);
 
 struct drm_sched_entity *
 xe_dep_scheduler_entity(struct xe_dep_scheduler *dep_scheduler);
-
-#endif

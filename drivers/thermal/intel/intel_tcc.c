@@ -181,17 +181,17 @@ static u32 get_temp_mask(bool pkg)
  */
 int intel_tcc_get_tjmax(int cpu)
 {
-	struct msr msrval;
+	u32 low, high;
 	int val, err;
 
 	if (cpu < 0)
-		err = rdmsr_safe(MSR_IA32_TEMPERATURE_TARGET, &msrval.l, &msrval.h);
+		err = rdmsr_safe(MSR_IA32_TEMPERATURE_TARGET, &low, &high);
 	else
-		err = rdmsrq_safe_on_cpu(cpu, MSR_IA32_TEMPERATURE_TARGET, &msrval.q);
+		err = rdmsr_safe_on_cpu(cpu, MSR_IA32_TEMPERATURE_TARGET, &low, &high);
 	if (err)
 		return err;
 
-	val = (msrval.l >> 16) & 0xff;
+	val = (low >> 16) & 0xff;
 
 	return val ? val : -ENODATA;
 }
@@ -208,17 +208,17 @@ EXPORT_SYMBOL_NS_GPL(intel_tcc_get_tjmax, "INTEL_TCC");
  */
 int intel_tcc_get_offset(int cpu)
 {
-	struct msr val;
+	u32 low, high;
 	int err;
 
 	if (cpu < 0)
-		err = rdmsr_safe(MSR_IA32_TEMPERATURE_TARGET, &val.l, &val.h);
+		err = rdmsr_safe(MSR_IA32_TEMPERATURE_TARGET, &low, &high);
 	else
-		err = rdmsrq_safe_on_cpu(cpu, MSR_IA32_TEMPERATURE_TARGET, &val.q);
+		err = rdmsr_safe_on_cpu(cpu, MSR_IA32_TEMPERATURE_TARGET, &low, &high);
 	if (err)
 		return err;
 
-	return (val.l >> 24) & intel_tcc_temp_masks.tcc_offset;
+	return (low >> 24) & intel_tcc_temp_masks.tcc_offset;
 }
 EXPORT_SYMBOL_NS_GPL(intel_tcc_get_offset, "INTEL_TCC");
 
@@ -235,7 +235,7 @@ EXPORT_SYMBOL_NS_GPL(intel_tcc_get_offset, "INTEL_TCC");
 
 int intel_tcc_set_offset(int cpu, int offset)
 {
-	struct msr val;
+	u32 low, high;
 	int err;
 
 	if (!intel_tcc_temp_masks.tcc_offset)
@@ -245,23 +245,23 @@ int intel_tcc_set_offset(int cpu, int offset)
 		return -EINVAL;
 
 	if (cpu < 0)
-		err = rdmsr_safe(MSR_IA32_TEMPERATURE_TARGET, &val.l, &val.h);
+		err = rdmsr_safe(MSR_IA32_TEMPERATURE_TARGET, &low, &high);
 	else
-		err = rdmsrq_safe_on_cpu(cpu, MSR_IA32_TEMPERATURE_TARGET, &val.q);
+		err = rdmsr_safe_on_cpu(cpu, MSR_IA32_TEMPERATURE_TARGET, &low, &high);
 	if (err)
 		return err;
 
 	/* MSR Locked */
-	if (val.l & BIT(31))
+	if (low & BIT(31))
 		return -EPERM;
 
-	val.l &= ~(intel_tcc_temp_masks.tcc_offset << 24);
-	val.l |= offset << 24;
+	low &= ~(intel_tcc_temp_masks.tcc_offset << 24);
+	low |= offset << 24;
 
 	if (cpu < 0)
-		return wrmsr_safe(MSR_IA32_TEMPERATURE_TARGET, val.l, val.h);
+		return wrmsr_safe(MSR_IA32_TEMPERATURE_TARGET, low, high);
 	else
-		return wrmsrq_safe_on_cpu(cpu, MSR_IA32_TEMPERATURE_TARGET, val.q);
+		return wrmsr_safe_on_cpu(cpu, MSR_IA32_TEMPERATURE_TARGET, low, high);
 }
 EXPORT_SYMBOL_NS_GPL(intel_tcc_set_offset, "INTEL_TCC");
 
@@ -279,8 +279,7 @@ EXPORT_SYMBOL_NS_GPL(intel_tcc_set_offset, "INTEL_TCC");
 int intel_tcc_get_temp(int cpu, int *temp, bool pkg)
 {
 	u32 msr = pkg ? MSR_IA32_PACKAGE_THERM_STATUS : MSR_IA32_THERM_STATUS;
-	u32 mask;
-	struct msr val;
+	u32 low, high, mask;
 	int tjmax, err;
 
 	tjmax = intel_tcc_get_tjmax(cpu);
@@ -288,19 +287,19 @@ int intel_tcc_get_temp(int cpu, int *temp, bool pkg)
 		return tjmax;
 
 	if (cpu < 0)
-		err = rdmsr_safe(msr, &val.l, &val.h);
+		err = rdmsr_safe(msr, &low, &high);
 	else
-		err = rdmsrq_safe_on_cpu(cpu, msr, &val.q);
+		err = rdmsr_safe_on_cpu(cpu, msr, &low, &high);
 	if (err)
 		return err;
 
 	/* Temperature is beyond the valid thermal sensor range */
-	if (!(val.l & BIT(31)))
+	if (!(low & BIT(31)))
 		return -ENODATA;
 
 	mask = get_temp_mask(pkg);
 
-	*temp = tjmax - ((val.l >> 16) & mask);
+	*temp = tjmax - ((low >> 16) & mask);
 
 	return 0;
 }

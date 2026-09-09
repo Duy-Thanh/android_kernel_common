@@ -10,7 +10,6 @@
 
 #include <asm/apic.h>
 #include <asm/cpu.h>
-#include <asm/cpuid/api.h>
 #include <asm/smp.h>
 #include <asm/numa.h>
 #include <asm/cacheinfo.h>

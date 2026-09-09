@@ -179,7 +179,7 @@ static int img_spdif_in_do_clkgen_single(struct img_spdif_in *spdif,
 		unsigned int rate)
 {
 	unsigned int nom, hld;
-	unsigned long clk_rate;
+	unsigned long flags, clk_rate;
 	int ret = 0;
 	u32 reg;
 
@@ -196,14 +196,18 @@ static int img_spdif_in_do_clkgen_single(struct img_spdif_in *spdif,
 	reg |= (hld << IMG_SPDIF_IN_CLKGEN_HLD_SHIFT) &
 		IMG_SPDIF_IN_CLKGEN_HLD_MASK;
 
-	guard(spinlock_irqsave)(&spdif->lock);
+	spin_lock_irqsave(&spdif->lock, flags);
 
-	if (spdif->active)
+	if (spdif->active) {
+		spin_unlock_irqrestore(&spdif->lock, flags);
 		return -EBUSY;
+	}
 
 	img_spdif_in_writel(spdif, reg, IMG_SPDIF_IN_CLKGEN);
 
 	spdif->single_freq = rate;
+
+	spin_unlock_irqrestore(&spdif->lock, flags);
 
 	return 0;
 }
@@ -212,7 +216,7 @@ static int img_spdif_in_do_clkgen_multi(struct img_spdif_in *spdif,
 		unsigned int multi_freqs[])
 {
 	unsigned int nom, hld, rate, max_rate = 0;
-	unsigned long clk_rate;
+	unsigned long flags, clk_rate;
 	int i, ret = 0;
 	u32 reg, trk_reg, temp_regs[IMG_SPDIF_IN_NUM_ACLKGEN];
 
@@ -238,10 +242,12 @@ static int img_spdif_in_do_clkgen_multi(struct img_spdif_in *spdif,
 		temp_regs[i] = reg;
 	}
 
-	guard(spinlock_irqsave)(&spdif->lock);
+	spin_lock_irqsave(&spdif->lock, flags);
 
-	if (spdif->active)
+	if (spdif->active) {
+		spin_unlock_irqrestore(&spdif->lock, flags);
 		return -EBUSY;
+	}
 
 	trk_reg = spdif->trk << IMG_SPDIF_IN_ACLKGEN_TRK_SHIFT;
 
@@ -255,6 +261,8 @@ static int img_spdif_in_do_clkgen_multi(struct img_spdif_in *spdif,
 	spdif->multi_freqs[1] = multi_freqs[1];
 	spdif->multi_freqs[2] = multi_freqs[2];
 	spdif->multi_freqs[3] = multi_freqs[3];
+
+	spin_unlock_irqrestore(&spdif->lock, flags);
 
 	return 0;
 }
@@ -315,8 +323,9 @@ static int img_spdif_in_get_multi_freq(struct snd_kcontrol *kcontrol,
 {
 	struct snd_soc_dai *cpu_dai = snd_kcontrol_chip(kcontrol);
 	struct img_spdif_in *spdif = snd_soc_dai_get_drvdata(cpu_dai);
+	unsigned long flags;
 
-	guard(spinlock_irqsave)(&spdif->lock);
+	spin_lock_irqsave(&spdif->lock, flags);
 	if (spdif->multi_freq) {
 		ucontrol->value.integer.value[0] = spdif->multi_freqs[0];
 		ucontrol->value.integer.value[1] = spdif->multi_freqs[1];
@@ -328,6 +337,7 @@ static int img_spdif_in_get_multi_freq(struct snd_kcontrol *kcontrol,
 		ucontrol->value.integer.value[2] = 0;
 		ucontrol->value.integer.value[3] = 0;
 	}
+	spin_unlock_irqrestore(&spdif->lock, flags);
 
 	return 0;
 }
@@ -339,6 +349,7 @@ static int img_spdif_in_set_multi_freq(struct snd_kcontrol *kcontrol,
 	struct img_spdif_in *spdif = snd_soc_dai_get_drvdata(cpu_dai);
 	unsigned int multi_freqs[IMG_SPDIF_IN_NUM_ACLKGEN];
 	bool multi_freq;
+	unsigned long flags;
 
 	if ((ucontrol->value.integer.value[0] == 0) &&
 			(ucontrol->value.integer.value[1] == 0) &&
@@ -356,12 +367,16 @@ static int img_spdif_in_set_multi_freq(struct snd_kcontrol *kcontrol,
 	if (multi_freq)
 		return img_spdif_in_do_clkgen_multi(spdif, multi_freqs);
 
-	guard(spinlock_irqsave)(&spdif->lock);
+	spin_lock_irqsave(&spdif->lock, flags);
 
-	if (spdif->active)
+	if (spdif->active) {
+		spin_unlock_irqrestore(&spdif->lock, flags);
 		return -EBUSY;
+	}
 
 	spdif->multi_freq = false;
+
+	spin_unlock_irqrestore(&spdif->lock, flags);
 
 	return 0;
 }
@@ -384,8 +399,9 @@ static int img_spdif_in_get_lock_freq(struct snd_kcontrol *kcontrol,
 	struct img_spdif_in *spdif = snd_soc_dai_get_drvdata(cpu_dai);
 	u32 reg;
 	int i;
+	unsigned long flags;
 
-	guard(spinlock_irqsave)(&spdif->lock);
+	spin_lock_irqsave(&spdif->lock, flags);
 
 	reg = img_spdif_in_readl(spdif, IMG_SPDIF_IN_STATUS);
 	if (reg & IMG_SPDIF_IN_STATUS_LOCK_MASK) {
@@ -399,6 +415,8 @@ static int img_spdif_in_get_lock_freq(struct snd_kcontrol *kcontrol,
 	} else {
 		uc->value.integer.value[0] = 0;
 	}
+
+	spin_unlock_irqrestore(&spdif->lock, flags);
 
 	return 0;
 }
@@ -430,13 +448,16 @@ static int img_spdif_in_set_trk(struct snd_kcontrol *kcontrol,
 {
 	struct snd_soc_dai *cpu_dai = snd_kcontrol_chip(kcontrol);
 	struct img_spdif_in *spdif = snd_soc_dai_get_drvdata(cpu_dai);
+	unsigned long flags;
 	int i;
 	u32 reg;
 
-	guard(spinlock_irqsave)(&spdif->lock);
+	spin_lock_irqsave(&spdif->lock, flags);
 
-	if (spdif->active)
+	if (spdif->active) {
+		spin_unlock_irqrestore(&spdif->lock, flags);
 		return -EBUSY;
+	}
 
 	spdif->trk = ucontrol->value.integer.value[0];
 
@@ -452,6 +473,8 @@ static int img_spdif_in_set_trk(struct snd_kcontrol *kcontrol,
 
 		img_spdif_in_aclkgen_writel(spdif, i);
 	}
+
+	spin_unlock_irqrestore(&spdif->lock, flags);
 
 	return 0;
 }
@@ -483,12 +506,15 @@ static int img_spdif_in_set_lock_acquire(struct snd_kcontrol *kcontrol,
 {
 	struct snd_soc_dai *cpu_dai = snd_kcontrol_chip(kcontrol);
 	struct img_spdif_in *spdif = snd_soc_dai_get_drvdata(cpu_dai);
+	unsigned long flags;
 	u32 reg;
 
-	guard(spinlock_irqsave)(&spdif->lock);
+	spin_lock_irqsave(&spdif->lock, flags);
 
-	if (spdif->active)
+	if (spdif->active) {
+		spin_unlock_irqrestore(&spdif->lock, flags);
 		return -EBUSY;
+	}
 
 	spdif->lock_acquire = ucontrol->value.integer.value[0];
 
@@ -497,6 +523,8 @@ static int img_spdif_in_set_lock_acquire(struct snd_kcontrol *kcontrol,
 	reg |= (spdif->lock_acquire << IMG_SPDIF_IN_CTL_LOCKHI_SHIFT) &
 		IMG_SPDIF_IN_CTL_LOCKHI_MASK;
 	img_spdif_in_writel(spdif, reg, IMG_SPDIF_IN_CTL);
+
+	spin_unlock_irqrestore(&spdif->lock, flags);
 
 	return 0;
 }
@@ -517,12 +545,15 @@ static int img_spdif_in_set_lock_release(struct snd_kcontrol *kcontrol,
 {
 	struct snd_soc_dai *cpu_dai = snd_kcontrol_chip(kcontrol);
 	struct img_spdif_in *spdif = snd_soc_dai_get_drvdata(cpu_dai);
+	unsigned long flags;
 	u32 reg;
 
-	guard(spinlock_irqsave)(&spdif->lock);
+	spin_lock_irqsave(&spdif->lock, flags);
 
-	if (spdif->active)
+	if (spdif->active) {
+		spin_unlock_irqrestore(&spdif->lock, flags);
 		return -EBUSY;
+	}
 
 	spdif->lock_release = ucontrol->value.integer.value[0];
 
@@ -531,6 +562,8 @@ static int img_spdif_in_set_lock_release(struct snd_kcontrol *kcontrol,
 	reg |= (spdif->lock_release << IMG_SPDIF_IN_CTL_LOCKLO_SHIFT) &
 		IMG_SPDIF_IN_CTL_LOCKLO_MASK;
 	img_spdif_in_writel(spdif, reg, IMG_SPDIF_IN_CTL);
+
+	spin_unlock_irqrestore(&spdif->lock, flags);
 
 	return 0;
 }
@@ -592,11 +625,12 @@ static struct snd_kcontrol_new img_spdif_in_controls[] = {
 static int img_spdif_in_trigger(struct snd_pcm_substream *substream, int cmd,
 	struct snd_soc_dai *dai)
 {
+	unsigned long flags;
 	struct img_spdif_in *spdif = snd_soc_dai_get_drvdata(dai);
 	int ret = 0;
 	u32 reg;
 
-	guard(spinlock_irqsave)(&spdif->lock);
+	spin_lock_irqsave(&spdif->lock, flags);
 
 	switch (cmd) {
 	case SNDRV_PCM_TRIGGER_START:
@@ -622,6 +656,8 @@ static int img_spdif_in_trigger(struct snd_pcm_substream *substream, int cmd,
 	default:
 		ret = -EINVAL;
 	}
+
+	spin_unlock_irqrestore(&spdif->lock, flags);
 
 	return ret;
 }

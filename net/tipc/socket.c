@@ -37,7 +37,6 @@
 
 #include <linux/rhashtable.h>
 #include <linux/sched/signal.h>
-#include <linux/uio.h>
 #include <trace/events/sock.h>
 
 #include "core.h"
@@ -1363,9 +1362,6 @@ static void tipc_sk_conn_proto_rcv(struct tipc_sock *tsk, struct sk_buff *skb,
 			__skb_queue_tail(xmitq, skb);
 		return;
 	} else if (mtyp == CONN_ACK) {
-		if (tsk->snt_unacked < msg_conn_ack(hdr))
-			goto exit;
-
 		was_cong = tsk_conn_cong(tsk);
 		tipc_sk_push_backlog(tsk, msg_nagle_ack(hdr));
 		tsk->snt_unacked -= msg_conn_ack(hdr);
@@ -2456,17 +2452,17 @@ static void tipc_sk_enqueue(struct sk_buff_head *inputq, struct sock *sk,
 			atomic_set(dcnt, 0);
 		lim = rcvbuf_limit(sk, skb) + atomic_read(dcnt);
 		if (likely(!sk_add_backlog(sk, skb, lim))) {
-			trace_tipc_sk_overlimit1(sk, skb, TIPC_DUMP_SK_BKLGQ,
+			trace_tipc_sk_overlimit1(sk, skb, TIPC_DUMP_ALL,
 						 "bklg & rcvq >90% allocated!");
 			continue;
 		}
 
-		trace_tipc_sk_dump(sk, skb, TIPC_DUMP_SK_BKLGQ, "err_overload!");
+		trace_tipc_sk_dump(sk, skb, TIPC_DUMP_ALL, "err_overload!");
 		/* Overload => reject message back to sender */
 		onode = tipc_own_addr(sock_net(sk));
 		sk_drops_inc(sk);
 		if (tipc_msg_reverse(onode, &skb, TIPC_ERR_OVERLOAD)) {
-			trace_tipc_sk_rej_msg(sk, skb, TIPC_DUMP_SK_BKLGQ,
+			trace_tipc_sk_rej_msg(sk, skb, TIPC_DUMP_ALL,
 					      "@sk_enqueue!");
 			__skb_queue_tail(xmitq, skb);
 		}
@@ -3224,7 +3220,8 @@ static int tipc_setsockopt(struct socket *sock, int lvl, int opt,
  * @sock: socket structure
  * @lvl: option level
  * @opt: option identifier
- * @sopt: socket option container (input buffer length, output value/length)
+ * @ov: receptacle for option value
+ * @ol: receptacle for length of option value
  *
  * For stream sockets only, returns 0 length result for all IPPROTO_TCP options
  * (to ease compatibility).
@@ -3232,22 +3229,22 @@ static int tipc_setsockopt(struct socket *sock, int lvl, int opt,
  * Return: 0 on success, errno otherwise
  */
 static int tipc_getsockopt(struct socket *sock, int lvl, int opt,
-			   sockopt_t *sopt)
+			   char __user *ov, int __user *ol)
 {
 	struct sock *sk = sock->sk;
 	struct tipc_sock *tsk = tipc_sk(sk);
 	struct tipc_service_range seq;
 	int len, scope;
-	int res = 0;
 	u32 value;
+	int res;
 
-	if (lvl == IPPROTO_TCP && sock->type == SOCK_STREAM) {
-		sopt->optlen = 0;
-		return 0;
-	}
+	if ((lvl == IPPROTO_TCP) && (sock->type == SOCK_STREAM))
+		return put_user(0, ol);
 	if (lvl != SOL_TIPC)
 		return -ENOPROTOOPT;
-	len = sopt->optlen;
+	res = get_user(len, ol);
+	if (res)
+		return res;
 
 	lock_sock(sk);
 
@@ -3263,6 +3260,7 @@ static int tipc_getsockopt(struct socket *sock, int lvl, int opt,
 		break;
 	case TIPC_CONN_TIMEOUT:
 		value = tsk->conn_timeout;
+		/* no need to set "res", since already 0 at this point */
 		break;
 	case TIPC_NODE_RECVQ_DEPTH:
 		value = 0; /* was tipc_queue_size, now obsolete */
@@ -3286,17 +3284,15 @@ static int tipc_getsockopt(struct socket *sock, int lvl, int opt,
 	release_sock(sk);
 
 	if (res)
-		return res;
+		return res;	/* "get" failed */
 
 	if (len < sizeof(value))
 		return -EINVAL;
 
-	if (copy_to_iter(&value, sizeof(value), &sopt->iter_out) !=
-	    sizeof(value))
+	if (copy_to_user(ov, &value, sizeof(value)))
 		return -EFAULT;
-	sopt->optlen = sizeof(value);
 
-	return 0;
+	return put_user(sizeof(value), ol);
 }
 
 static int tipc_ioctl(struct socket *sock, unsigned int cmd, unsigned long arg)
@@ -3369,7 +3365,7 @@ static const struct proto_ops msg_ops = {
 	.listen		= sock_no_listen,
 	.shutdown	= tipc_shutdown,
 	.setsockopt	= tipc_setsockopt,
-	.getsockopt_iter = tipc_getsockopt,
+	.getsockopt	= tipc_getsockopt,
 	.sendmsg	= tipc_sendmsg,
 	.recvmsg	= tipc_recvmsg,
 	.mmap		= sock_no_mmap,
@@ -3389,7 +3385,7 @@ static const struct proto_ops packet_ops = {
 	.listen		= tipc_listen,
 	.shutdown	= tipc_shutdown,
 	.setsockopt	= tipc_setsockopt,
-	.getsockopt_iter = tipc_getsockopt,
+	.getsockopt	= tipc_getsockopt,
 	.sendmsg	= tipc_send_packet,
 	.recvmsg	= tipc_recvmsg,
 	.mmap		= sock_no_mmap,
@@ -3409,7 +3405,7 @@ static const struct proto_ops stream_ops = {
 	.listen		= tipc_listen,
 	.shutdown	= tipc_shutdown,
 	.setsockopt	= tipc_setsockopt,
-	.getsockopt_iter = tipc_getsockopt,
+	.getsockopt	= tipc_getsockopt,
 	.sendmsg	= tipc_sendstream,
 	.recvmsg	= tipc_recvstream,
 	.mmap		= sock_no_mmap,

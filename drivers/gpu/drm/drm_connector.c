@@ -2867,18 +2867,23 @@ int drm_connector_attach_max_bpc_property(struct drm_connector *connector,
 EXPORT_SYMBOL(drm_connector_attach_max_bpc_property);
 
 /**
- * drm_connector_attach_hdr_output_metadata_property - attach "HDR_OUTPUT_METADATA" property
+ * drm_connector_attach_hdr_output_metadata_property - attach "HDR_OUTPUT_METADA" property
  * @connector: connector to attach the property on.
  *
  * This is used to allow the userspace to send HDR Metadata to the
  * driver.
+ *
+ * Returns:
+ * Zero on success, negative errno on failure.
  */
-void drm_connector_attach_hdr_output_metadata_property(struct drm_connector *connector)
+int drm_connector_attach_hdr_output_metadata_property(struct drm_connector *connector)
 {
 	struct drm_device *dev = connector->dev;
 	struct drm_property *prop = dev->mode_config.hdr_output_metadata_property;
 
 	drm_object_attach_property(&connector->base, prop, 0);
+
+	return 0;
 }
 EXPORT_SYMBOL(drm_connector_attach_hdr_output_metadata_property);
 

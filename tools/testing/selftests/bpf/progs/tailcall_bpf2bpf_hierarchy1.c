@@ -16,25 +16,20 @@ int count = 0;
 static __noinline
 int subprog_tail(struct __sk_buff *skb)
 {
-	int ret = 0;
-
 	bpf_tail_call_static(skb, &jmp_table, 0);
-	barrier_var(ret);
-	return ret;
+	return 0;
 }
 
 SEC("tc")
 int entry(struct __sk_buff *skb)
 {
-	int ret = 1, ret1, ret2;
+	int ret = 1;
 
 	clobber_regs_stack();
 
 	count++;
-	ret1 = subprog_tail(skb);
-	ret2 = subprog_tail(skb);
-	__sink(ret1);
-	__sink(ret2);
+	subprog_tail(skb);
+	subprog_tail(skb);
 
 	return ret;
 }

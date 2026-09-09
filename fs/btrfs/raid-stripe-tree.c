@@ -272,9 +272,7 @@ int btrfs_delete_raid_extent(struct btrfs_trans_handle *trans, u64 start, u64 le
 								 &key,
 								 key.offset - length,
 								 length);
-			ASSERT(key.offset - diff_end == length,
-			       "key.offset=%llu diff_end=%llu length=%llu",
-			       key.offset, diff_end, length);
+			ASSERT(key.offset - diff_end == length);
 			break;
 		}
 

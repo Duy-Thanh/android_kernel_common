@@ -1075,7 +1075,6 @@ out_del_balloon_wq:
 out_del_vqs:
 	vdev->config->del_vqs(vdev);
 out_free_vb:
-	mutex_destroy(&vb->balloon_lock);
 	kfree(vb);
 out:
 	return err;
@@ -1120,7 +1119,6 @@ static void virtballoon_remove(struct virtio_device *vdev)
 	}
 
 	remove_common(vb);
-	mutex_destroy(&vb->balloon_lock);
 	kfree(vb);
 }
 

@@ -34,14 +34,7 @@ enum cpu_usage_stat {
 };
 
 struct kernel_cpustat {
-#ifdef CONFIG_NO_HZ_COMMON
-	bool		idle_dyntick;
-	bool		idle_elapse;
-	seqcount_t	idle_sleeptime_seq;
-	u64		idle_entrytime;
-	u64		idle_stealtime[2];
-#endif
-	u64		cpustat[NR_STATS];
+	u64 cpustat[NR_STATS];
 };
 
 struct kernel_stat {
@@ -106,68 +99,23 @@ static inline unsigned long kstat_cpu_irqs_sum(unsigned int cpu)
 	return kstat_cpu(cpu).irqs_sum;
 }
 
-#ifdef CONFIG_NO_HZ_COMMON
-extern void kcpustat_dyntick_start(u64 now);
-extern void kcpustat_dyntick_stop(u64 now);
-extern void kcpustat_irq_enter(u64 now);
-extern void kcpustat_irq_exit(u64 now);
-extern u64 kcpustat_field_idle(int cpu);
-extern u64 kcpustat_field_iowait(int cpu);
-
-static inline bool kcpustat_idle_dyntick(void)
-{
-	return __this_cpu_read(kernel_cpustat.idle_dyntick);
-}
-#else
-static inline u64 kcpustat_field_idle(int cpu)
-{
-	return kcpustat_cpu(cpu).cpustat[CPUTIME_IDLE];
-}
-static inline u64 kcpustat_field_iowait(int cpu)
-{
-	return kcpustat_cpu(cpu).cpustat[CPUTIME_IOWAIT];
-}
-
-static inline bool kcpustat_idle_dyntick(void)
-{
-	return false;
-}
-#endif /* CONFIG_NO_HZ_COMMON */
-
-extern u64 get_cpu_idle_time_us(int cpu, u64 *last_update_time);
-extern u64 get_cpu_iowait_time_us(int cpu, u64 *last_update_time);
-
-/* Fetch cputime values when vtime is disabled on a CPU */
-static inline u64 kcpustat_field_default(enum cpu_usage_stat usage, int cpu)
-{
-	if (usage == CPUTIME_IDLE)
-		return kcpustat_field_idle(cpu);
-	if (usage == CPUTIME_IOWAIT)
-		return kcpustat_field_iowait(cpu);
-	return kcpustat_cpu(cpu).cpustat[usage];
-}
-
-static inline void kcpustat_cpu_fetch_default(struct kernel_cpustat *dst, int cpu)
-{
-	*dst = kcpustat_cpu(cpu);
-	dst->cpustat[CPUTIME_IDLE] = kcpustat_field_idle(cpu);
-	dst->cpustat[CPUTIME_IOWAIT] = kcpustat_field_iowait(cpu);
-}
-
 #ifdef CONFIG_VIRT_CPU_ACCOUNTING_GEN
-extern u64 kcpustat_field(enum cpu_usage_stat usage, int cpu);
+extern u64 kcpustat_field(struct kernel_cpustat *kcpustat,
+			  enum cpu_usage_stat usage, int cpu);
 extern void kcpustat_cpu_fetch(struct kernel_cpustat *dst, int cpu);
 #else
-static inline u64 kcpustat_field(enum cpu_usage_stat usage, int cpu)
+static inline u64 kcpustat_field(struct kernel_cpustat *kcpustat,
+				 enum cpu_usage_stat usage, int cpu)
 {
-	return kcpustat_field_default(usage, cpu);
+	return kcpustat->cpustat[usage];
 }
 
 static inline void kcpustat_cpu_fetch(struct kernel_cpustat *dst, int cpu)
 {
-	kcpustat_cpu_fetch_default(dst, cpu);
+	*dst = kcpustat_cpu(cpu);
 }
-#endif /* !CONFIG_VIRT_CPU_ACCOUNTING_GEN */
+
+#endif
 
 extern void account_user_time(struct task_struct *, u64);
 extern void account_guest_time(struct task_struct *, u64);
@@ -176,16 +124,18 @@ extern void account_system_index_time(struct task_struct *, u64,
 				      enum cpu_usage_stat);
 extern void account_steal_time(u64);
 extern void account_idle_time(u64);
+extern u64 get_idle_time(struct kernel_cpustat *kcs, int cpu);
 
 #ifdef CONFIG_VIRT_CPU_ACCOUNTING_NATIVE
 static inline void account_process_tick(struct task_struct *tsk, int user)
 {
-	if (!kcpustat_idle_dyntick())
-		vtime_flush(tsk);
+	vtime_flush(tsk);
 }
 #else
 extern void account_process_tick(struct task_struct *, int user);
 #endif
+
+extern void account_idle_ticks(unsigned long ticks);
 
 #ifdef CONFIG_SCHED_CORE
 extern void __account_forceidle_time(struct task_struct *tsk, u64 delta);

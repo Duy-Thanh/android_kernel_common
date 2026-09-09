@@ -37,13 +37,13 @@
 #include <linux/in.h>
 #include <linux/ipv6.h>
 #include <linux/poll.h>
-#include <linux/uio.h>
 #include <net/sock.h>
 
 #include "rds.h"
 
 /* this is just used for stats gathering :/ */
 static DEFINE_SPINLOCK(rds_sock_lock);
+static unsigned long rds_sock_count;
 static LIST_HEAD(rds_sock_list);
 DECLARE_WAIT_QUEUE_HEAD(rds_poll_waitq);
 
@@ -82,6 +82,7 @@ static int rds_release(struct socket *sock)
 
 	spin_lock_bh(&rds_sock_lock);
 	list_del_init(&rs->rs_item);
+	rds_sock_count--;
 	spin_unlock_bh(&rds_sock_lock);
 
 	rds_trans_put(rs->rs_transport);
@@ -218,7 +219,7 @@ static __poll_t rds_poll(struct file *file, struct socket *sock,
 
 	poll_wait(file, sk_sleep(sk), wait);
 
-	if (READ_ONCE(rs->rs_seen_congestion))
+	if (rs->rs_seen_congestion)
 		poll_wait(file, &rds_poll_waitq, wait);
 
 	read_lock_irqsave(&rs->rs_recv_lock, flags);
@@ -246,7 +247,7 @@ static __poll_t rds_poll(struct file *file, struct socket *sock,
 
 	/* clear state any time we wake a seen-congested socket */
 	if (mask)
-		WRITE_ONCE(rs->rs_seen_congestion, 0);
+		rs->rs_seen_congestion = 0;
 
 	return mask;
 }
@@ -486,36 +487,35 @@ out:
 }
 
 static int rds_getsockopt(struct socket *sock, int level, int optname,
-			  sockopt_t *opt)
+			  char __user *optval, int __user *optlen)
 {
 	struct rds_sock *rs = rds_sk_to_rs(sock->sk);
 	int ret = -ENOPROTOOPT, len;
 	int trans;
-	int val;
 
 	if (level != SOL_RDS)
 		goto out;
 
-	len = opt->optlen;
+	if (get_user(len, optlen)) {
+		ret = -EFAULT;
+		goto out;
+	}
 
 	switch (optname) {
 	case RDS_INFO_FIRST ... RDS_INFO_LAST:
-		ret = rds_info_getsockopt(sock, optname, opt);
+		ret = rds_info_getsockopt(sock, optname, optval,
+					  optlen);
 		break;
 
 	case RDS_RECVERR:
-		if (len < sizeof(int)) {
+		if (len < sizeof(int))
 			ret = -EINVAL;
-			break;
-		}
-		val = rs->rs_recverr;
-		if (copy_to_iter(&val, sizeof(int), &opt->iter_out) !=
-		    sizeof(int)) {
+		else
+		if (put_user(rs->rs_recverr, (int __user *) optval) ||
+		    put_user(sizeof(int), optlen))
 			ret = -EFAULT;
-		} else {
-			opt->optlen = sizeof(int);
+		else
 			ret = 0;
-		}
 		break;
 	case SO_RDS_TRANSPORT:
 		if (len < sizeof(int)) {
@@ -524,13 +524,11 @@ static int rds_getsockopt(struct socket *sock, int level, int optname,
 		}
 		trans = (rs->rs_transport ? rs->rs_transport->t_type :
 			 RDS_TRANS_NONE); /* unbound */
-		if (copy_to_iter(&trans, sizeof(int), &opt->iter_out) !=
-		    sizeof(int)) {
+		if (put_user(trans, (int __user *)optval) ||
+		    put_user(sizeof(int), optlen))
 			ret = -EFAULT;
-		} else {
-			opt->optlen = sizeof(int);
+		else
 			ret = 0;
-		}
 		break;
 	default:
 		break;
@@ -657,7 +655,7 @@ static const struct proto_ops rds_proto_ops = {
 	.listen =	sock_no_listen,
 	.shutdown =	sock_no_shutdown,
 	.setsockopt =	rds_setsockopt,
-	.getsockopt_iter =	rds_getsockopt,
+	.getsockopt =	rds_getsockopt,
 	.sendmsg =	rds_sendmsg,
 	.recvmsg =	rds_recvmsg,
 	.mmap =		sock_no_mmap,
@@ -696,6 +694,7 @@ static int __rds_create(struct socket *sock, struct sock *sk, int protocol)
 
 	spin_lock_bh(&rds_sock_lock);
 	list_add_tail(&rs->rs_item, &rds_sock_list);
+	rds_sock_count++;
 	spin_unlock_bh(&rds_sock_lock);
 
 	return 0;
@@ -736,7 +735,6 @@ static void rds_sock_inc_info(struct socket *sock, unsigned int len,
 			      struct rds_info_iterator *iter,
 			      struct rds_info_lengths *lens)
 {
-	struct net *net = sock_net(sock->sk);
 	struct rds_sock *rs;
 	struct rds_incoming *inc;
 	unsigned int total = 0;
@@ -746,9 +744,6 @@ static void rds_sock_inc_info(struct socket *sock, unsigned int len,
 	spin_lock_bh(&rds_sock_lock);
 
 	list_for_each_entry(rs, &rds_sock_list, rs_item) {
-		/* Only show sockets in the caller's netns. */
-		if (!net_eq(sock_net(rds_rs_to_sk(rs)), net))
-			continue;
 		/* This option only supports IPv4 sockets. */
 		if (!ipv6_addr_v4mapped(&rs->rs_bound_addr))
 			continue;
@@ -779,7 +774,6 @@ static void rds6_sock_inc_info(struct socket *sock, unsigned int len,
 			       struct rds_info_iterator *iter,
 			       struct rds_info_lengths *lens)
 {
-	struct net *net = sock_net(sock->sk);
 	struct rds_incoming *inc;
 	unsigned int total = 0;
 	struct rds_sock *rs;
@@ -789,9 +783,6 @@ static void rds6_sock_inc_info(struct socket *sock, unsigned int len,
 	spin_lock_bh(&rds_sock_lock);
 
 	list_for_each_entry(rs, &rds_sock_list, rs_item) {
-		/* Only show sockets in the caller's netns. */
-		if (!net_eq(sock_net(rds_rs_to_sk(rs)), net))
-			continue;
 		read_lock(&rs->rs_recv_lock);
 
 		list_for_each_entry(inc, &rs->rs_recv_queue, i_item) {
@@ -815,9 +806,7 @@ static void rds_sock_info(struct socket *sock, unsigned int len,
 			  struct rds_info_iterator *iter,
 			  struct rds_info_lengths *lens)
 {
-	struct net *net = sock_net(sock->sk);
 	struct rds_info_socket sinfo;
-	unsigned int copied = 0;
 	unsigned int cnt = 0;
 	struct rds_sock *rs;
 
@@ -825,24 +814,12 @@ static void rds_sock_info(struct socket *sock, unsigned int len,
 
 	spin_lock_bh(&rds_sock_lock);
 
-	/* First pass: count entries visible in the caller's netns. */
-	list_for_each_entry(rs, &rds_sock_list, rs_item) {
-		if (!net_eq(sock_net(rds_rs_to_sk(rs)), net))
-			continue;
-		if (!ipv6_addr_v4mapped(&rs->rs_bound_addr))
-			continue;
-		cnt++;
+	if (len < rds_sock_count) {
+		cnt = rds_sock_count;
+		goto out;
 	}
 
-	if (len < cnt)
-		goto out;
-
 	list_for_each_entry(rs, &rds_sock_list, rs_item) {
-		if (copied >= cnt)
-			break;
-		/* Only show sockets in the caller's netns. */
-		if (!net_eq(sock_net(rds_rs_to_sk(rs)), net))
-			continue;
 		/* This option only supports IPv4 sockets. */
 		if (!ipv6_addr_v4mapped(&rs->rs_bound_addr))
 			continue;
@@ -855,13 +832,8 @@ static void rds_sock_info(struct socket *sock, unsigned int len,
 		sinfo.inum = sock_i_ino(rds_rs_to_sk(rs));
 
 		rds_info_copy(iter, &sinfo, sizeof(sinfo));
-		copied++;
+		cnt++;
 	}
-	/* A concurrent rds_bind() can change rs_bound_addr between the
-	 * two passes without holding rds_sock_lock, so copied may be
-	 * less than cnt. Report what was actually copied.
-	 */
-	cnt = copied;
 
 out:
 	lens->nr = cnt;
@@ -875,32 +847,17 @@ static void rds6_sock_info(struct socket *sock, unsigned int len,
 			   struct rds_info_iterator *iter,
 			   struct rds_info_lengths *lens)
 {
-	struct net *net = sock_net(sock->sk);
 	struct rds6_info_socket sinfo6;
-	unsigned int copied = 0;
-	unsigned int cnt = 0;
 	struct rds_sock *rs;
 
 	len /= sizeof(struct rds6_info_socket);
 
 	spin_lock_bh(&rds_sock_lock);
 
-	/* First pass: count entries visible in the caller's netns. */
-	list_for_each_entry(rs, &rds_sock_list, rs_item) {
-		if (!net_eq(sock_net(rds_rs_to_sk(rs)), net))
-			continue;
-		cnt++;
-	}
-
-	if (len < cnt)
+	if (len < rds_sock_count)
 		goto out;
 
 	list_for_each_entry(rs, &rds_sock_list, rs_item) {
-		if (copied >= cnt)
-			break;
-		/* Only show sockets in the caller's netns. */
-		if (!net_eq(sock_net(rds_rs_to_sk(rs)), net))
-			continue;
 		sinfo6.sndbuf = rds_sk_sndbuf(rs);
 		sinfo6.rcvbuf = rds_sk_rcvbuf(rs);
 		sinfo6.bound_addr = rs->rs_bound_addr;
@@ -910,12 +867,10 @@ static void rds6_sock_info(struct socket *sock, unsigned int len,
 		sinfo6.inum = sock_i_ino(rds_rs_to_sk(rs));
 
 		rds_info_copy(iter, &sinfo6, sizeof(sinfo6));
-		copied++;
 	}
-	cnt = copied;
 
  out:
-	lens->nr = cnt;
+	lens->nr = rds_sock_count;
 	lens->each = sizeof(struct rds6_info_socket);
 
 	spin_unlock_bh(&rds_sock_lock);

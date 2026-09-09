@@ -1774,7 +1774,7 @@ static int __init tegra234_cbb_init(void)
 {
 	return platform_driver_register(&tegra234_cbb_driver);
 }
-core_initcall(tegra234_cbb_init);
+pure_initcall(tegra234_cbb_init);
 
 static void __exit tegra234_cbb_exit(void)
 {

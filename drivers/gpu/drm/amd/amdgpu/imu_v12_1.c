@@ -140,17 +140,27 @@ static int imu_v12_1_switch_compute_partition(struct amdgpu_device *adev,
 	int ret;
 
 	if (adev->psp.funcs) {
-		ret = psp_spatial_partition(&adev->psp, compute_partition_mode);
+		/*TODO: revisit asp interface once it's avaialble */
+		ret = psp_spatial_partition(&adev->psp,
+					    NUM_XCC(adev->gfx.xcc_mask) /
+						    num_xccs_per_xcp);
 		if (ret)
 			return ret;
 	}
 
 	adev->gfx.num_xcc_per_xcp = num_xccs_per_xcp;
+
 	return 0;
+}
+
+static void imu_v12_1_init_mcm_addr_lut(struct amdgpu_device *adev)
+{
+	/* todo: fill in when interface is ready */
 }
 
 const struct amdgpu_imu_funcs gfx_v12_1_imu_funcs = {
 	.init_microcode = imu_v12_1_init_microcode,
 	.load_microcode = imu_v12_1_load_microcode,
 	.switch_compute_partition = imu_v12_1_switch_compute_partition,
+	.init_mcm_addr_lut = imu_v12_1_init_mcm_addr_lut,
 };

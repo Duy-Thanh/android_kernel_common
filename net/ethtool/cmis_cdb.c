@@ -2,7 +2,6 @@
 
 #include <linux/ethtool.h>
 #include <linux/jiffies.h>
-#include <net/netdev_lock.h>
 
 #include "common.h"
 #include "module_fw.h"
@@ -180,7 +179,6 @@ cmis_cdb_validate_password(struct ethtool_cmis_cdb *cdb,
 
 	pe_pl = *((struct cmis_password_entry_pl *)page_data.data);
 	pe_pl.password = params->password;
-	netdev_assert_locked_ops(dev);
 	err = ops->set_module_eeprom_by_page(dev, &page_data, &extack);
 	if (err < 0) {
 		if (extack._msg)
@@ -548,7 +546,6 @@ __ethtool_cmis_cdb_execute_cmd(struct net_device *dev,
 	if (!page_data->data)
 		return -ENOMEM;
 
-	netdev_assert_locked_ops(dev);
 	err = ops->set_module_eeprom_by_page(dev, page_data, &extack);
 	if (err < 0) {
 		if (extack._msg)

@@ -59,9 +59,6 @@
 
 #define ATOM_CMD_TIMEOUT_SEC	20
 
-/* Limit ATOM command table recursion (calltable) to avoid kernel stack overflow. */
-#define ATOM_EXECUTE_MAX_DEPTH	32
-
 typedef struct {
 	struct atom_context *ctx;
 	uint32_t *ps, *ws;
@@ -1232,13 +1229,6 @@ static int amdgpu_atom_execute_table_locked(struct atom_context *ctx, int index,
 	if (!base)
 		return -EINVAL;
 
-	if (ctx->execute_depth >= ATOM_EXECUTE_MAX_DEPTH) {
-		DRM_ERROR("atombios command table nesting exceeded limit (%u)\n",
-			  ATOM_EXECUTE_MAX_DEPTH);
-		return -ELOOP;
-	}
-	ctx->execute_depth++;
-
 	len = CU16(base + ATOM_CT_SIZE_PTR);
 	ws = CU8(base + ATOM_CT_WS_PTR);
 	ps = CU8(base + ATOM_CT_PS_PTR) & ATOM_CT_PS_MASK;
@@ -1295,7 +1285,6 @@ static int amdgpu_atom_execute_table_locked(struct atom_context *ctx, int index,
 free:
 	if (ws)
 		kfree(ectx.ws);
-	ctx->execute_depth--;
 	return ret;
 }
 

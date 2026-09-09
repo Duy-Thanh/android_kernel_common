@@ -4,7 +4,6 @@
 
 #include <asm/cpu.h>
 #include <asm/cpufeature.h>
-#include <asm/cpuid/api.h>
 #include <asm/msr.h>
 
 #include "cpu.h"

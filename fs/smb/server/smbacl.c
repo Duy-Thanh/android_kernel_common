@@ -1477,9 +1477,7 @@ int smb_check_perm_dacl(struct ksmbd_conn *conn, const struct path *path,
 			break;
 		aces_size -= ace_size;
 
-		if (ace->sid.num_subauth > SID_MAX_SUB_AUTHORITIES ||
-		    ace_size < offsetof(struct smb_ace, sid) + CIFS_SID_BASE_SIZE +
-			      sizeof(__le32) * ace->sid.num_subauth)
+		if (ace->sid.num_subauth > SID_MAX_SUB_AUTHORITIES)
 			break;
 
 		if (!compare_sids(&sid, &ace->sid) ||

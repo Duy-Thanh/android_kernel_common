@@ -105,7 +105,6 @@ static int emac_xsk_xmit_zc(struct prueth_emac *emac,
 	struct xdp_desc xdp_desc;
 	int num_tx = 0, pkt_len;
 	int descs_avail, ret;
-	u32 dst_tag_id;
 	u32 *epib;
 	int i;
 
@@ -138,17 +137,9 @@ static int emac_xsk_xmit_zc(struct prueth_emac *emac,
 		epib[0] = 0;
 		epib[1] = 0;
 		cppi5_hdesc_set_pktlen(host_desc, pkt_len);
-		dst_tag_id = emac->port_id | (q_idx << 8);
+		cppi5_desc_set_tags_ids(&host_desc->hdr, 0,
+					(emac->port_id | (q_idx << 8)));
 
-		if (emac->prueth->is_hsr_offload_mode &&
-		    (ndev->features & NETIF_F_HW_HSR_DUP))
-			dst_tag_id = PRUETH_UNDIRECTED_PKT_DST_TAG;
-
-		if (emac->prueth->is_hsr_offload_mode &&
-		    (ndev->features & NETIF_F_HW_HSR_TAG_INS))
-			epib[1] |= PRUETH_UNDIRECTED_PKT_TAG_INS;
-
-		cppi5_desc_set_tags_ids(&host_desc->hdr, 0, dst_tag_id);
 		k3_udma_glue_tx_dma_to_cppi5_addr(tx_chn->tx_chn, &dma_buf);
 		cppi5_hdesc_attach_buf(host_desc, dma_buf, pkt_len, dma_buf,
 				       pkt_len);
@@ -705,7 +696,6 @@ u32 emac_xmit_xdp_frame(struct prueth_emac *emac,
 	dma_addr_t desc_dma, buf_dma;
 	struct prueth_swdata *swdata;
 	struct page *page;
-	u32 dst_tag_id;
 	u32 *epib;
 	int ret;
 
@@ -747,25 +737,9 @@ u32 emac_xmit_xdp_frame(struct prueth_emac *emac,
 
 	/* set dst tag to indicate internal qid at the firmware which is at
 	 * bit8..bit15. bit0..bit7 indicates port num for directed
-	 * packets in case of switch mode operation and port num 0
-	 * for undirected packets in case of HSR offload mode.
-	 *
-	 * XDP_TX frames arrive on a slave port with the HSR tag already
-	 * stripped by the PRU firmware.  Like skb TX via hsr0, they must
-	 * be sent as undirected so the PRU duplicates them to both ports
-	 * and re-inserts the HSR sequence tag.
+	 * packets in case of switch mode operation
 	 */
-	dst_tag_id = emac->port_id | (q_idx << 8);
-
-	if (emac->prueth->is_hsr_offload_mode &&
-	    (ndev->features & NETIF_F_HW_HSR_DUP))
-		dst_tag_id = PRUETH_UNDIRECTED_PKT_DST_TAG;
-
-	if (emac->prueth->is_hsr_offload_mode &&
-	    (ndev->features & NETIF_F_HW_HSR_TAG_INS))
-		epib[1] |= PRUETH_UNDIRECTED_PKT_TAG_INS;
-
-	cppi5_desc_set_tags_ids(&first_desc->hdr, 0, dst_tag_id);
+	cppi5_desc_set_tags_ids(&first_desc->hdr, 0, (emac->port_id | (q_idx << 8)));
 	k3_udma_glue_tx_dma_to_cppi5_addr(tx_chn->tx_chn, &buf_dma);
 	cppi5_hdesc_attach_buf(first_desc, buf_dma, xdpf->len, buf_dma, xdpf->len);
 	swdata = cppi5_hdesc_get_swdata(first_desc);
@@ -953,7 +927,6 @@ static int emac_rx_packet_zc(struct prueth_emac *emac, u32 flow_id,
 	struct cppi5_host_desc_t *desc_rx;
 	struct prueth_swdata *swdata;
 	dma_addr_t desc_dma, buf_dma;
-	int avail_desc, alloc_budget;
 	struct xdp_buff *xdp;
 	int xdp_status = 0;
 	int count = 0;
@@ -1020,13 +993,16 @@ static int emac_rx_packet_zc(struct prueth_emac *emac, u32 flow_id,
 	if (xdp_status & ICSSG_XDP_REDIR)
 		xdp_do_flush();
 
-	avail_desc = k3_cppi_desc_pool_avail(rx_chn->desc_pool);
-	alloc_budget = min_t(int, budget, avail_desc);
-
-	ret = prueth_rx_alloc_zc(emac, alloc_budget);
+	/* Allocate xsk buffers from the pool for the "count" number of
+	 * packets processed in order to be able to receive more packets.
+	 */
+	ret = prueth_rx_alloc_zc(emac, count);
 
 	if (xsk_uses_need_wakeup(rx_chn->xsk_pool)) {
-		if (ret < alloc_budget)
+		/* If the user space doesn't provide enough buffers then it must
+		 * explicitly wake up the kernel when new buffers are available
+		 */
+		if (ret < count)
 			xsk_set_rx_need_wakeup(rx_chn->xsk_pool);
 		else
 			xsk_clear_rx_need_wakeup(rx_chn->xsk_pool);

@@ -6,5 +6,36 @@
  * Copyright 2021 Ideas on Board Oy
  */
 
-#define RENESAS_LVDS_OUTPUT	lvds0
+/dts-v1/;
+/plugin/;
+
+&{/} {
 #include "panel-aa104xd12.dtsi"
+};
+
+&{/panel} {
+	backlight = <&backlight>;
+
+	port {
+		panel_in: endpoint {
+			remote-endpoint = <&lvds0_out>;
+		};
+	};
+};
+
+&lvds0 {
+	status = "okay";
+
+	ports {
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		port@1 {
+			reg = <1>;
+
+			lvds0_out: endpoint {
+				remote-endpoint = <&panel_in>;
+			};
+		};
+	};
+};

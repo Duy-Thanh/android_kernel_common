@@ -27,10 +27,6 @@ properties:
     items:
       - const: mclk
 
-  port:
-    $ref: audio-graph-port.yaml#
-    unevaluatedProperties: false
-
   "#sound-dai-cells":
     const: 0
 

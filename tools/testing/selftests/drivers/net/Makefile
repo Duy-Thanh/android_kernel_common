@@ -7,7 +7,6 @@ TEST_INCLUDES := $(wildcard lib/py/*.py) \
 
 TEST_GEN_FILES := \
 	napi_id_helper \
-	so_txtime \
 # end of TEST_GEN_FILES
 
 TEST_PROGS := \
@@ -22,7 +21,6 @@ TEST_PROGS := \
 	queues.py \
 	ring_reconfig.py \
 	shaper.py \
-	so_txtime.py \
 	stats.py \
 	xdp.py \
 # end of TEST_PROGS

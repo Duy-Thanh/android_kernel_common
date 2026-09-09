@@ -25,32 +25,17 @@
 const struct nf_ct_timeout_hooks __rcu *nf_ct_timeout_hook __read_mostly;
 EXPORT_SYMBOL_GPL(nf_ct_timeout_hook);
 
-/* nf_ct_iterate_cleanup() holds the conntrack lock. */
 static int untimeout(struct nf_conn *ct, void *timeout)
 {
 	struct nf_conn_timeout *timeout_ext = nf_ct_timeout_find(ct);
 
 	if (timeout_ext) {
-		struct nf_ct_timeout *t;
+		const struct nf_ct_timeout *t;
 
-		rcu_read_lock();
-		t = rcu_dereference(timeout_ext->timeout);
-		if (!t) {
-			rcu_read_unlock();
-			return 0;
-		}
+		t = rcu_access_pointer(timeout_ext->timeout);
 
-		if (!timeout || t == timeout) {
+		if (!timeout || t == timeout)
 			RCU_INIT_POINTER(timeout_ext->timeout, NULL);
-
-			/* No race with nf_conntrack_free() which is called
-			 * only after the conntrack has been removed from
-			 * the hashes.
-			 */
-			if (refcount_dec_and_test(&t->refcnt))
-				kfree_rcu(t, rcu);
-		}
-		rcu_read_unlock();
 	}
 
 	/* We are not intended to delete this conntrack. */
@@ -84,8 +69,6 @@ int nf_ct_set_timeout(struct net *net, struct nf_conn *ct,
 	struct nf_conn_timeout *timeout_ext;
 	const char *errmsg = NULL;
 	int ret = 0;
-
-	WARN_ON_ONCE(!nf_ct_is_template(ct));
 
 	rcu_read_lock();
 	h = rcu_dereference(nf_ct_timeout_hook);
@@ -144,8 +127,6 @@ void nf_ct_destroy_timeout(struct nf_conn *ct)
 	struct nf_conn_timeout *timeout_ext;
 	const struct nf_ct_timeout_hooks *h;
 
-	WARN_ON_ONCE(!nf_ct_is_template(ct));
-
 	rcu_read_lock();
 	h = rcu_dereference(nf_ct_timeout_hook);
 
@@ -158,8 +139,6 @@ void nf_ct_destroy_timeout(struct nf_conn *ct)
 			if (t)
 				h->timeout_put(t);
 			RCU_INIT_POINTER(timeout_ext->timeout, NULL);
-			if (t && refcount_dec_and_test(&t->refcnt))
-				kfree_rcu(t, rcu);
 		}
 	}
 	rcu_read_unlock();

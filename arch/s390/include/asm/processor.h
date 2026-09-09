@@ -33,7 +33,6 @@
 #include <linux/irqflags.h>
 #include <linux/instruction_pointer.h>
 #include <linux/bitops.h>
-#include <asm/vdso/processor.h>
 #include <asm/fpu-types.h>
 #include <asm/cpu.h>
 #include <asm/page.h>
@@ -282,6 +281,8 @@ static __always_inline unsigned short stap(void)
 	asm volatile("stap %0" : "=Q" (cpu_address));
 	return cpu_address;
 }
+
+#define cpu_relax() barrier()
 
 #define ECAG_CACHE_ATTRIBUTE	0
 #define ECAG_CPU_ATTRIBUTE	1

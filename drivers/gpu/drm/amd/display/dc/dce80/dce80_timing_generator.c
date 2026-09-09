@@ -98,7 +98,7 @@ static void program_pix_dur(struct timing_generator *tg, uint32_t pix_clk_100hz)
 
 	set_reg_field_value(
 		value,
-		(uint32_t)pix_dur,
+		pix_dur,
 		DPG_PIPE_ARBITRATION_CONTROL1,
 		PIXEL_DURATION);
 

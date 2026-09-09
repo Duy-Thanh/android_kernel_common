@@ -221,11 +221,6 @@ static int hns_roce_query_device(struct ib_device *ib_dev,
 				 struct ib_udata *uhw)
 {
 	struct hns_roce_dev *hr_dev = to_hr_dev(ib_dev);
-	int ret;
-
-	ret = ib_is_udata_in_empty(uhw);
-	if (ret)
-		return ret;
 
 	memset(props, 0, sizeof(*props));
 
@@ -279,7 +274,7 @@ static int hns_roce_query_device(struct ib_device *ib_dev,
 	if (hr_dev->caps.flags & HNS_ROCE_CAP_FLAG_XRC)
 		props->device_cap_flags |= IB_DEVICE_XRC;
 
-	return ib_respond_empty_udata(uhw);
+	return 0;
 }
 
 static int hns_roce_query_port(struct ib_device *ib_dev, u32 port_num,
@@ -482,7 +477,8 @@ static int hns_roce_alloc_ucontext(struct ib_ucontext *uctx,
 
 	resp.cqe_size = hr_dev->caps.cqe_sz;
 
-	ret = ib_respond_udata(udata, resp);
+	ret = ib_copy_to_udata(udata, &resp,
+			       min(udata->outlen, sizeof(resp)));
 	if (ret)
 		goto error_fail_copy_to_udata;
 
@@ -1117,7 +1113,7 @@ static void check_and_get_armed_cq(struct list_head *cq_list, struct ib_cq *cq)
 	unsigned long flags;
 
 	spin_lock_irqsave(&hr_cq->lock, flags);
-	if (cq->comp_handler && hr_cq->ib_cq.poll_ctx != IB_POLL_DIRECT) {
+	if (cq->comp_handler) {
 		if (!hr_cq->is_armed) {
 			hr_cq->is_armed = 1;
 			list_add_tail(&hr_cq->node, cq_list);

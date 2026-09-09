@@ -170,10 +170,10 @@ struct clock_source_funcs {
 			struct clock_source *,
 			struct pixel_clk_params *,
 			struct pll_settings *);
-	bool (*get_dp_dto_frequency_100hz)(
+	bool (*get_pixel_clk_frequency_100hz)(
 			const struct clock_source *clock_source,
 			unsigned int inst,
-			unsigned int *pixel_clk_100hz);
+			unsigned int *pixel_clk_khz);
 	bool (*override_dp_pix_clk)(
 			struct clock_source *clock_source,
 			unsigned int inst,

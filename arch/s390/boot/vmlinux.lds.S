@@ -31,7 +31,6 @@ SECTIONS
 		_text = .;	/* Text */
 		*(.text)
 		*(.text.*)
-		*(.noinstr.text)
 		INIT_TEXT
 		_etext = . ;
 	}

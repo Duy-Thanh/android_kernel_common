@@ -25,8 +25,6 @@ share it. GEM has simpler initialization and execution requirements than
 TTM, but has no video RAM management capabilities and is thus limited to
 UMA devices.
 
-.. contents::
-
 The Translation Table Manager (TTM)
 ===================================
 

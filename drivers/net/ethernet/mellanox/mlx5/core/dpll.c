@@ -300,8 +300,7 @@ static int mlx5_dpll_state_on_dpll_set(const struct dpll_pin *pin,
 
 static int mlx5_dpll_ffo_get(const struct dpll_pin *pin, void *pin_priv,
 			     const struct dpll_device *dpll, void *dpll_priv,
-			     struct dpll_ffo_param *ffo,
-			     struct netlink_ext_ack *extack)
+			     s64 *ffo, struct netlink_ext_ack *extack)
 {
 	struct mlx5_dpll_synce_status synce_status;
 	struct mlx5_dpll *mdpll = pin_priv;
@@ -310,11 +309,10 @@ static int mlx5_dpll_ffo_get(const struct dpll_pin *pin, void *pin_priv,
 	err = mlx5_dpll_synce_status_get(mdpll->mdev, &synce_status);
 	if (err)
 		return err;
-	return mlx5_dpll_pin_ffo_get(&synce_status, &ffo->ffo);
+	return mlx5_dpll_pin_ffo_get(&synce_status, ffo);
 }
 
 static const struct dpll_pin_ops mlx5_dpll_pins_ops = {
-	.supported_ffo = BIT(DPLL_FFO_PORT_RXTX_RATE),
 	.direction_get = mlx5_dpll_pin_direction_get,
 	.state_on_dpll_get = mlx5_dpll_state_on_dpll_get,
 	.state_on_dpll_set = mlx5_dpll_state_on_dpll_set,

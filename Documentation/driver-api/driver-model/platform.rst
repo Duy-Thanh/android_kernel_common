@@ -70,8 +70,7 @@ Kernel modules can be composed of several platform drivers. The platform core
 provides helpers to register and unregister an array of drivers::
 
 	int __platform_register_drivers(struct platform_driver * const *drivers,
-				      unsigned int count, struct module *owner,
-				      const char *mod_name);
+				      unsigned int count, struct module *owner);
 	void platform_unregister_drivers(struct platform_driver * const *drivers,
 					 unsigned int count);
 

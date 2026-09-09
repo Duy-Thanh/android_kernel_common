@@ -250,15 +250,18 @@ static const char * const jack_events_name[] = {
 /* the recommended buffer size is 256 */
 static int parse_mask_bits(unsigned int mask_bits, char *buf, size_t buf_size)
 {
-	int len = scnprintf(buf, buf_size, "0x%04x", mask_bits);
 	int i;
 
-	for (i = 0; i < ARRAY_SIZE(jack_events_name); i++)
-		if (mask_bits & (1 << i))
-			len += scnprintf(buf + len, buf_size - len, " %s", jack_events_name[i]);
-	len += scnprintf(buf + len, buf_size - len, "\n");
+	scnprintf(buf, buf_size, "0x%04x", mask_bits);
 
-	return len;
+	for (i = 0; i < ARRAY_SIZE(jack_events_name); i++)
+		if (mask_bits & (1 << i)) {
+			strlcat(buf, " ", buf_size);
+			strlcat(buf, jack_events_name[i], buf_size);
+		}
+	strlcat(buf, "\n", buf_size);
+
+	return strlen(buf);
 }
 
 static ssize_t jack_kctl_mask_bits_read(struct file *file,

@@ -546,10 +546,9 @@ static const char * const trace_blacklist[] = {
 	"__rcu_read_lock",
 	"__rcu_read_unlock",
 	"bpf_get_numa_node_id",
-	"___migrate_enable",
 };
 
-bool is_unsafe_function(const char *name)
+static bool skip_entry(char *name)
 {
 	int i;
 
@@ -652,7 +651,7 @@ int bpf_get_ksyms(struct ksyms **ksymsp, bool kernel)
 		free(name);
 		if (sscanf(buf, "%ms$*[^\n]\n", &name) != 1)
 			continue;
-		if (is_unsafe_function(name))
+		if (skip_entry(name))
 			continue;
 
 		ks = search_kallsyms_custom_local(ksyms, name, search_kallsyms_compare);
@@ -729,7 +728,7 @@ int bpf_get_addrs(unsigned long **addrsp, size_t *cntp, bool kernel)
 		free(name);
 		if (sscanf(buf, "%p %ms$*[^\n]\n", &addr, &name) != 2)
 			continue;
-		if (is_unsafe_function(name))
+		if (skip_entry(name))
 			continue;
 
 		if (cnt == max_cnt) {

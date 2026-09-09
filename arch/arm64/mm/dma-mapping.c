@@ -49,7 +49,7 @@ void arch_setup_dma_ops(struct device *dev, bool coherent)
 		   dev_driver_string(dev), dev_name(dev),
 		   ARCH_DMA_MINALIGN, cls);
 
-	dev_assign_dma_coherent(dev, coherent);
+	dev->dma_coherent = coherent;
 
 	xen_setup_dma_ops(dev);
 }

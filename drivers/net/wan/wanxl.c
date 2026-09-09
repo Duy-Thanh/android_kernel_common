@@ -806,10 +806,13 @@ static int wanxl_pci_init_one(struct pci_dev *pdev,
 }
 
 static const struct pci_device_id wanxl_pci_tbl[] = {
-	{ PCI_VDEVICE(SBE, PCI_DEVICE_ID_SBE_WANXL100) },
-	{ PCI_VDEVICE(SBE, PCI_DEVICE_ID_SBE_WANXL200) },
-	{ PCI_VDEVICE(SBE, PCI_DEVICE_ID_SBE_WANXL400) },
-	{ }
+	{ PCI_VENDOR_ID_SBE, PCI_DEVICE_ID_SBE_WANXL100, PCI_ANY_ID,
+	  PCI_ANY_ID, 0, 0, 0 },
+	{ PCI_VENDOR_ID_SBE, PCI_DEVICE_ID_SBE_WANXL200, PCI_ANY_ID,
+	  PCI_ANY_ID, 0, 0, 0 },
+	{ PCI_VENDOR_ID_SBE, PCI_DEVICE_ID_SBE_WANXL400, PCI_ANY_ID,
+	  PCI_ANY_ID, 0, 0, 0 },
+	{ 0, }
 };
 
 static struct pci_driver wanxl_pci_driver = {

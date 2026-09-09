@@ -39,7 +39,6 @@
 #include <linux/fs.h>
 #include <linux/slab.h>
 #include <linux/uaccess.h>
-#include <linux/uio.h>
 #include <linux/skbuff.h>
 #include <linux/netdevice.h>
 #include <linux/rtnetlink.h>
@@ -1722,18 +1721,18 @@ static int netlink_setsockopt(struct socket *sock, int level, int optname,
 }
 
 static int netlink_getsockopt(struct socket *sock, int level, int optname,
-			      sockopt_t *opt)
+			      char __user *optval, int __user *optlen)
 {
 	struct sock *sk = sock->sk;
 	struct netlink_sock *nlk = nlk_sk(sk);
 	unsigned int flag;
 	int len, val;
-	u32 group;
 
 	if (level != SOL_NETLINK)
 		return -ENOPROTOOPT;
 
-	len = opt->optlen;
+	if (get_user(len, optlen))
+		return -EFAULT;
 	if (len < 0)
 		return -EINVAL;
 
@@ -1757,14 +1756,14 @@ static int netlink_getsockopt(struct socket *sock, int level, int optname,
 
 			idx = pos / sizeof(unsigned long);
 			shift = (pos % sizeof(unsigned long)) * 8;
-			group = (u32)(nlk->groups[idx] >> shift);
-			if (copy_to_iter(&group, sizeof(u32),
-					 &opt->iter_out) != sizeof(u32)) {
+			if (put_user((u32)(nlk->groups[idx] >> shift),
+				     (u32 __user *)(optval + pos))) {
 				err = -EFAULT;
 				break;
 			}
 		}
-		opt->optlen = ALIGN(BITS_TO_BYTES(nlk->ngroups), sizeof(u32));
+		if (put_user(ALIGN(BITS_TO_BYTES(nlk->ngroups), sizeof(u32)), optlen))
+			err = -EFAULT;
 		netlink_unlock_table();
 		return err;
 	}
@@ -1790,8 +1789,8 @@ static int netlink_getsockopt(struct socket *sock, int level, int optname,
 	len = sizeof(int);
 	val = test_bit(flag, &nlk->flags);
 
-	opt->optlen = len;
-	if (copy_to_iter(&val, len, &opt->iter_out) != len)
+	if (put_user(len, optlen) ||
+	    copy_to_user(optval, &val, len))
 		return -EFAULT;
 
 	return 0;
@@ -2819,7 +2818,7 @@ static const struct proto_ops netlink_ops = {
 	.listen =	sock_no_listen,
 	.shutdown =	sock_no_shutdown,
 	.setsockopt =	netlink_setsockopt,
-	.getsockopt_iter = netlink_getsockopt,
+	.getsockopt =	netlink_getsockopt,
 	.sendmsg =	netlink_sendmsg,
 	.recvmsg =	netlink_recvmsg,
 	.mmap =		sock_no_mmap,

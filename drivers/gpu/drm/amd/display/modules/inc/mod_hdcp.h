@@ -114,7 +114,6 @@ struct mod_hdcp_displayport {
 };
 
 struct mod_hdcp_hdmi {
-	uint8_t frl_enabled;
 	uint8_t reserved;
 };
 enum mod_hdcp_operation_mode {

@@ -227,8 +227,8 @@ struct sonicvibes {
 };
 
 static const struct pci_device_id snd_sonic_ids[] = {
-	{ PCI_VDEVICE(S3, 0xca00) },
-	{ }
+	{ PCI_VDEVICE(S3, 0xca00), 0, },
+        { 0, }
 };
 
 MODULE_DEVICE_TABLE(pci, snd_sonic_ids);

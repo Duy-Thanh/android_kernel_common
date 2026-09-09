@@ -356,10 +356,8 @@ int radeon_ring_restore(struct radeon_device *rdev, struct radeon_ring *ring,
 
 	/* restore the saved ring content */
 	r = radeon_ring_lock(rdev, ring, size);
-	if (r) {
-		kvfree(data);
+	if (r)
 		return r;
-	}
 
 	for (i = 0; i < size; ++i) {
 		radeon_ring_write(ring, data[i]);

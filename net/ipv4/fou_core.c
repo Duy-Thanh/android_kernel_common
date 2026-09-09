@@ -22,7 +22,7 @@
 #include "fou_nl.h"
 
 struct fou {
-	struct sock *sk;
+	struct socket *sock;
 	u8 protocol;
 	u8 flags;
 	__be16 port;
@@ -508,8 +508,8 @@ out:
 
 static bool fou_cfg_cmp(struct fou *fou, struct fou_cfg *cfg)
 {
+	struct sock *sk = fou->sock->sk;
 	struct udp_port_cfg *udp_cfg = &cfg->udp_config;
-	struct sock *sk = fou->sk;
 
 	if (fou->family != udp_cfg->family ||
 	    fou->port != udp_cfg->local_udp_port ||
@@ -558,8 +558,11 @@ static int fou_add_to_port_list(struct net *net, struct fou *fou,
 
 static void fou_release(struct fou *fou)
 {
+	struct socket *sock = fou->sock;
+
 	list_del(&fou->list);
-	udp_tunnel_sock_release(fou->sk);
+	udp_tunnel_sock_release(sock);
+
 	kfree_rcu(fou, rcu);
 }
 
@@ -590,7 +593,7 @@ static int fou_create(struct net *net, struct fou_cfg *cfg,
 	fou->family = cfg->udp_config.family;
 	fou->flags = cfg->flags;
 	fou->type = cfg->type;
-	fou->sk = sk;
+	fou->sock = sock;
 
 	memset(&tunnel_cfg, 0, sizeof(tunnel_cfg));
 	tunnel_cfg.encap_type = 1;
@@ -615,7 +618,7 @@ static int fou_create(struct net *net, struct fou_cfg *cfg,
 		goto error;
 	}
 
-	setup_udp_tunnel_sock(net, sk, &tunnel_cfg);
+	setup_udp_tunnel_sock(net, sock, &tunnel_cfg);
 
 	sk->sk_allocation = GFP_ATOMIC;
 
@@ -631,7 +634,7 @@ static int fou_create(struct net *net, struct fou_cfg *cfg,
 error:
 	kfree(fou);
 	if (sock)
-		udp_tunnel_sock_release(sock->sk);
+		udp_tunnel_sock_release(sock);
 
 	return err;
 }
@@ -776,9 +779,9 @@ int fou_nl_del_doit(struct sk_buff *skb, struct genl_info *info)
 
 static int fou_fill_info(struct fou *fou, struct sk_buff *msg)
 {
-	struct sock *sk = fou->sk;
+	struct sock *sk = fou->sock->sk;
 
-	if (nla_put_u8(msg, FOU_ATTR_AF, sk->sk_family) ||
+	if (nla_put_u8(msg, FOU_ATTR_AF, fou->sock->sk->sk_family) ||
 	    nla_put_be16(msg, FOU_ATTR_PORT, fou->port) ||
 	    nla_put_be16(msg, FOU_ATTR_PEER_PORT, sk->sk_dport) ||
 	    nla_put_u8(msg, FOU_ATTR_IPPROTO, fou->protocol) ||
@@ -790,7 +793,7 @@ static int fou_fill_info(struct fou *fou, struct sk_buff *msg)
 		if (nla_put_flag(msg, FOU_ATTR_REMCSUM_NOPARTIAL))
 			return -1;
 
-	if (sk->sk_family == AF_INET) {
+	if (fou->sock->sk->sk_family == AF_INET) {
 		if (nla_put_in_addr(msg, FOU_ATTR_LOCAL_V4, sk->sk_rcv_saddr))
 			return -1;
 

@@ -863,30 +863,32 @@ resv_err:
 	return err2;
 }
 
-/*
- * Return the agcount for the new file system size passed in *nb and adjust *nb
- * when it has to be reduced because of maximum AG count or because it would
- * create a below minimum size AG.
- */
-xfs_agnumber_t
-xfs_growfs_compute_agcount(
+void
+xfs_growfs_compute_deltas(
 	struct xfs_mount	*mp,
-	xfs_rfsblock_t		*nb)
+	xfs_rfsblock_t		nb,
+	int64_t			*deltap,
+	xfs_agnumber_t		*nagcountp)
 {
-	uint64_t		agcount; /* 64-bits wide to catch overflows */
-	xfs_extlen_t		remainder;
+	xfs_rfsblock_t	nb_div, nb_mod;
+	int64_t		delta;
+	xfs_agnumber_t	nagcount;
 
-	agcount = div_u64_rem(*nb, mp->m_sb.sb_agblocks, &remainder);
-	if (agcount >= XFS_MAX_AGNUMBER + 1) {
-		agcount = XFS_MAX_AGNUMBER + 1;
-		remainder = 0;
+	nb_div = nb;
+	nb_mod = do_div(nb_div, mp->m_sb.sb_agblocks);
+	if (nb_mod && nb_mod >= XFS_MIN_AG_BLOCKS)
+		nb_div++;
+	else if (nb_mod)
+		nb = nb_div * mp->m_sb.sb_agblocks;
+
+	if (nb_div > XFS_MAX_AGNUMBER + 1) {
+		nb_div = XFS_MAX_AGNUMBER + 1;
+		nb = nb_div * mp->m_sb.sb_agblocks;
 	}
-	*nb = (xfs_rfsblock_t)agcount * mp->m_sb.sb_agblocks;
-	if (remainder >= XFS_MIN_AG_BLOCKS) {
-		*nb += remainder;
-		agcount++;
-	}
-	return agcount;
+	nagcount = nb_div;
+	delta = nb - mp->m_sb.sb_dblocks;
+	*deltap = delta;
+	*nagcountp = nagcount;
 }
 
 /*

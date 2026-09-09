@@ -195,8 +195,8 @@ static int tda38640_probe(struct i2c_client *client)
 }
 
 static const struct i2c_device_id tda38640_id[] = {
-	{ .name = "tda38640" },
-	{ }
+	{"tda38640"},
+	{}
 };
 MODULE_DEVICE_TABLE(i2c, tda38640_id);
 

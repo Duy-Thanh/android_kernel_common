@@ -98,18 +98,15 @@ static ssize_t amdgpu_securedisplay_debugfs_write(struct file *f, const char __u
 	uint32_t phy_id;
 	uint32_t op;
 	char str[64];
-	long len;
-	ssize_t write_ret = size;
-	int ret, nargs;
+	int ret;
 
-	if (*pos)
+	if (*pos || size > sizeof(str) - 1)
 		return -EINVAL;
 
-	len = strncpy_from_user(str, buf, sizeof(str));
-	if (len < 0)
+	memset(str,  0, sizeof(str));
+	ret = copy_from_user(str, buf, size);
+	if (ret)
 		return -EFAULT;
-	if (len == 0 || len >= sizeof(str))
-		return -EINVAL;
 
 	ret = pm_runtime_get_sync(dev->dev);
 	if (ret < 0) {
@@ -117,14 +114,10 @@ static ssize_t amdgpu_securedisplay_debugfs_write(struct file *f, const char __u
 		return ret;
 	}
 
-	if (len < 3)
-		nargs = sscanf(str, "%u", &op);
+	if (size < 3)
+		sscanf(str, "%u ", &op);
 	else
-		nargs = sscanf(str, "%u %u", &op, &phy_id);
-	if (nargs < 1) {
-		write_ret = -EINVAL;
-		goto out;
-	}
+		sscanf(str, "%u %u", &op, &phy_id);
 
 	switch (op) {
 	case 1:
@@ -142,10 +135,9 @@ static ssize_t amdgpu_securedisplay_debugfs_write(struct file *f, const char __u
 		mutex_unlock(&psp->securedisplay_context.mutex);
 		break;
 	case 2:
-		if (nargs < 2 || phy_id >= TA_SECUREDISPLAY_MAX_PHY) {
+		if (size < 3 || phy_id >= TA_SECUREDISPLAY_MAX_PHY) {
 			dev_err(adev->dev, "Invalid input: %s\n", str);
-			write_ret = -EINVAL;
-			break;
+			return -EINVAL;
 		}
 		mutex_lock(&psp->securedisplay_context.mutex);
 		psp_prep_securedisplay_cmd_buf(psp, &securedisplay_cmd,
@@ -165,14 +157,11 @@ static ssize_t amdgpu_securedisplay_debugfs_write(struct file *f, const char __u
 		break;
 	default:
 		dev_err(adev->dev, "Invalid input: %s\n", str);
-		write_ret = -EINVAL;
-		break;
 	}
 
-out:
 	pm_runtime_put_autosuspend(dev->dev);
 
-	return write_ret;
+	return size;
 }
 
 static const struct file_operations amdgpu_securedisplay_debugfs_ops = {

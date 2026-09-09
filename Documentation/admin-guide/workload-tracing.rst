@@ -202,15 +202,6 @@ database. To get out of this mode press ctrl+d. -p option is used to
 specify the number of file path components to display. -p10 is optimal
 for browsing kernel sources.
 
-Alternatively, the kernel build system can generate the cscope database::
-
-  make cscope
-
-To exclude directories from the generated database, pass IGNORE_DIRS to
-the cscope target. For example, to exclude Documentation/, run::
-
-  make IGNORE_DIRS="Documentation" cscope
-
 What is perf and how do we use it?
 ==================================
 
@@ -252,21 +243,13 @@ which can help mitigate performance regressions. It also acts as a common
 benchmarking framework, enabling developers to easily create test cases,
 integrate transparently, and use performance-rich tooling.
 
-"perf bench all" runs all available benchmarks in the perf bench
-framework. The exact set of benchmarks depends on the perf version and on
-the features enabled when perf was built.
+"perf bench all" command runs the following benchmarks:
 
-To list the benchmark collections available on the current system, run::
-
-  perf bench
-
-To list benchmarks in a collection, run::
-
-  perf bench <collection>
-
-For example, to list the benchmarks in the mem collection, run::
-
-  perf bench mem
+ * sched/messaging
+ * sched/pipe
+ * syscall/basic
+ * mem/memcpy
+ * mem/memset
 
 What is stress-ng and how do we use it?
 =======================================
@@ -288,17 +271,17 @@ exercised:
 
 The following command runs the stressor::
 
-  stress-ng --netdev 1 -t 60 --metrics
+  stress-ng --netdev 1 -t 60 --metrics command.
 
 We can use the perf record command to record the events and information
 associated with a process. This command records the profiling data in the
 perf.data file in the same directory.
 
 Using the following commands you can record the events associated with the
-netdev stressor, view the generated report perf.data and annotate the output
-to view the statistics of each instruction of the program::
+netdev stressor, view the generated report perf.data and annotate the to
+view the statistics of each instruction of the program::
 
-  perf record -- stress-ng --netdev 1 -t 60 --metrics
+  perf record stress-ng --netdev 1 -t 60 --metrics command.
   perf report
   perf annotate
 
@@ -366,13 +349,13 @@ times each system call is invoked, and the corresponding Linux subsystem.
 +-------------------+-----------+-----------------+-------------------------+
 | geteuid           | 1         | Process Mgmt.   | sys_geteuid()           |
 +-------------------+-----------+-----------------+-------------------------+
-| getegid           | 1         | Process Mgmt.   | sys_getegid()           |
+| getegid           | 1         | Process Mgmt.   | sys_getegid             |
 +-------------------+-----------+-----------------+-------------------------+
 | close             | 49951     | Filesystem      | sys_close()             |
 +-------------------+-----------+-----------------+-------------------------+
 | pipe              | 604       | Filesystem      | sys_pipe()              |
 +-------------------+-----------+-----------------+-------------------------+
-| openat            | 48560     | Filesystem      | sys_openat()            |
+| openat            | 48560     | Filesystem      | sys_opennat()           |
 +-------------------+-----------+-----------------+-------------------------+
 | fstat             | 8338      | Filesystem      | sys_fstat()             |
 +-------------------+-----------+-----------------+-------------------------+

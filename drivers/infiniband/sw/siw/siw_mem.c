@@ -41,14 +41,16 @@ struct siw_mem *siw_mem_id2obj(struct siw_device *sdev, int stag_index)
 
 void siw_umem_release(struct siw_umem *umem)
 {
-	unsigned int i, num_chunks = umem->num_chunks;
+	int i, num_pages = umem->num_pages;
 
 	if (umem->base_mem)
 		ib_umem_release(umem->base_mem);
 
-	for (i = 0; i < num_chunks; i++)
+	for (i = 0; num_pages > 0; i++) {
 		kfree(umem->page_chunk[i].plist);
-
+		num_pages -= PAGES_PER_CHUNK;
+	}
+	kfree(umem->page_chunk);
 	kfree(umem);
 }
 
@@ -186,7 +188,7 @@ int siw_check_mem(struct ib_pd *pd, struct siw_mem *mem, u64 addr,
  * lookup is being done and mem is not released it check fails.
  */
 int siw_check_sge(struct ib_pd *pd, struct siw_sge *sge, struct siw_mem *mem[],
-		  enum ib_access_flags perms, u32 off, u32 len)
+		  enum ib_access_flags perms, u32 off, int len)
 {
 	struct siw_device *sdev = to_siw_dev(pd->device);
 	struct siw_mem *new = NULL;
@@ -336,21 +338,26 @@ struct siw_umem *siw_umem_get(struct ib_device *base_dev, u64 start,
 	struct sg_page_iter sg_iter;
 	struct sg_table *sgt;
 	u64 first_page_va;
-	unsigned int num_pages, num_chunks, i;
-	int rv = 0;
+	int num_pages, num_chunks, i, rv = 0;
 
 	if (!len)
 		return ERR_PTR(-EINVAL);
 
 	first_page_va = start & PAGE_MASK;
 	num_pages = PAGE_ALIGN(start + len - first_page_va) >> PAGE_SHIFT;
-	num_chunks = ((num_pages - 1) >> CHUNK_SHIFT) + 1;
+	num_chunks = (num_pages >> CHUNK_SHIFT) + 1;
 
-	umem = kzalloc_flex(*umem, page_chunk, num_chunks);
+	umem = kzalloc_obj(*umem);
 	if (!umem)
 		return ERR_PTR(-ENOMEM);
 
-	base_mem = ib_umem_get_va(base_dev, start, len, rights);
+	umem->page_chunk =
+		kzalloc_objs(struct siw_page_chunk, num_chunks);
+	if (!umem->page_chunk) {
+		rv = -ENOMEM;
+		goto err_out;
+	}
+	base_mem = ib_umem_get(base_dev, start, len, rights);
 	if (IS_ERR(base_mem)) {
 		rv = PTR_ERR(base_mem);
 		siw_dbg(base_dev, "Cannot pin user memory: %d\n", rv);
@@ -358,39 +365,32 @@ struct siw_umem *siw_umem_get(struct ib_device *base_dev, u64 start,
 	}
 	umem->fp_addr = first_page_va;
 	umem->base_mem = base_mem;
-	umem->num_pages = num_pages;
-	umem->num_chunks = num_chunks;
 
 	sgt = &base_mem->sgt_append.sgt;
 	__sg_page_iter_start(&sg_iter, sgt->sgl, sgt->orig_nents, 0);
 
-	for (i = 0; i < num_chunks; i++) {
-		struct page **plist;
-		unsigned int pix, nents = min(num_pages, PAGES_PER_CHUNK);
+	if (!__sg_page_iter_next(&sg_iter)) {
+		rv = -EINVAL;
+		goto err_out;
+	}
+	for (i = 0; num_pages > 0; i++) {
+		int nents = min_t(int, num_pages, PAGES_PER_CHUNK);
+		struct page **plist =
+			kzalloc_objs(struct page *, nents);
 
-		plist = kzalloc_objs(struct page *, nents);
 		if (!plist) {
 			rv = -ENOMEM;
 			goto err_out;
 		}
 		umem->page_chunk[i].plist = plist;
-
-		for (pix = 0; pix < nents; pix++) {
+		while (nents--) {
+			*plist = sg_page_iter_page(&sg_iter);
+			umem->num_pages++;
+			num_pages--;
+			plist++;
 			if (!__sg_page_iter_next(&sg_iter))
 				break;
-			plist[pix] = sg_page_iter_page(&sg_iter);
-			num_pages--;
 		}
-	}
-
-	if (num_pages) {
-		/*
-		 * Unexpected size of sg list provided by ib_umem_get_va()
-		 */
-		siw_dbg(base_dev, "Short SG list, missing %u pages\n",
-			num_pages);
-		rv = -EINVAL;
-		goto err_out;
 	}
 	return umem;
 err_out:

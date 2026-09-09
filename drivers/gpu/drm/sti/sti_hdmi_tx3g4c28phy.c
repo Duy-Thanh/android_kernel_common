@@ -4,8 +4,6 @@
  * Author: Vincent Abriou <vincent.abriou@st.com> for STMicroelectronics.
  */
 
-#include <linux/hdmi.h>
-
 #include <drm/drm_print.h>
 
 #include "sti_hdmi_tx3g4c28phy.h"
@@ -104,7 +102,7 @@ static bool sti_hdmi_tx3g4c28phy_start(struct sti_hdmi *hdmi)
 	tmdsck = ckpxpll;
 	pllctrl |= 40 << PLL_CFG_NDIV_SHIFT;
 
-	if (tmdsck > HDMI_1_3_TMDS_CHAR_RATE_MAX_HZ) {
+	if (tmdsck > 340000000) {
 		DRM_ERROR("output TMDS clock (%d) out of range\n", tmdsck);
 		goto err;
 	}
@@ -137,7 +135,7 @@ static bool sti_hdmi_tx3g4c28phy_start(struct sti_hdmi *hdmi)
 	       HDMI_SRZ_CFG_EN_BIASRES_DETECTION |
 	       HDMI_SRZ_CFG_EN_SINK_TERM_DETECTION);
 
-	if (tmdsck > HDMI_1_0_TMDS_CHAR_RATE_MAX_HZ)
+	if (tmdsck > 165000000)
 		val |= HDMI_SRZ_CFG_EN_SRC_TERMINATION;
 
 	/*

@@ -24,7 +24,7 @@ struct cpu_operations {
 				     struct task_struct *tidle);
 #ifdef CONFIG_HOTPLUG_CPU
 	void		(*cpu_stop)(void);
-	bool		(*cpu_is_stopped)(unsigned int cpu);
+	int		(*cpu_is_stopped)(unsigned int cpu);
 #endif
 };
 

@@ -18,7 +18,7 @@
 struct pfcp_dev {
 	struct list_head	list;
 
-	struct sock		*sk;
+	struct socket		*sock;
 	struct net_device	*dev;
 	struct net		*net;
 
@@ -104,8 +104,8 @@ drop:
 
 static void pfcp_del_sock(struct pfcp_dev *pfcp)
 {
-	udp_tunnel_sock_release(pfcp->sk);
-	pfcp->sk = NULL;
+	udp_tunnel_sock_release(pfcp->sock);
+	pfcp->sock = NULL;
 }
 
 static void pfcp_dev_uninit(struct net_device *dev)
@@ -148,11 +148,10 @@ static void pfcp_link_setup(struct net_device *dev)
 	dev->flags = IFF_POINTOPOINT | IFF_NOARP | IFF_MULTICAST;
 	dev->priv_flags |= IFF_NO_QUEUE;
 
-	dev->pcpu_stat_type = NETDEV_PCPU_STAT_TSTATS;
 	netif_keep_dst(dev);
 }
 
-static struct sock *pfcp_create_sock(struct pfcp_dev *pfcp)
+static struct socket *pfcp_create_sock(struct pfcp_dev *pfcp)
 {
 	struct udp_tunnel_sock_cfg tuncfg = {};
 	struct udp_port_cfg udp_conf = {
@@ -173,16 +172,16 @@ static struct sock *pfcp_create_sock(struct pfcp_dev *pfcp)
 	tuncfg.encap_rcv = pfcp_encap_recv;
 	tuncfg.encap_type = 1;
 
-	setup_udp_tunnel_sock(net, sock->sk, &tuncfg);
+	setup_udp_tunnel_sock(net, sock, &tuncfg);
 
-	return sock->sk;
+	return sock;
 }
 
 static int pfcp_add_sock(struct pfcp_dev *pfcp)
 {
-	pfcp->sk = pfcp_create_sock(pfcp);
+	pfcp->sock = pfcp_create_sock(pfcp);
 
-	return PTR_ERR_OR_ZERO(pfcp->sk);
+	return PTR_ERR_OR_ZERO(pfcp->sock);
 }
 
 static int pfcp_newlink(struct net_device *dev,
@@ -217,7 +216,6 @@ static int pfcp_newlink(struct net_device *dev,
 
 exit_del_pfcp_sock:
 	pfcp_del_sock(pfcp);
-	synchronize_rcu();
 exit_err:
 	pfcp->net = NULL;
 	return err;

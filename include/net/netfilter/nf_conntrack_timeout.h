@@ -12,7 +12,6 @@
 #define CTNL_TIMEOUT_NAME_MAX	32
 
 struct nf_ct_timeout {
-	refcount_t		refcnt;
 	__u16			l3num;
 	const struct nf_conntrack_l4proto *l4proto;
 	struct rcu_head		rcu;
@@ -22,22 +21,6 @@ struct nf_ct_timeout {
 struct nf_conn_timeout {
 	struct nf_ct_timeout __rcu *timeout;
 };
-
-static inline void nf_ct_timeout_put(const struct nf_conn *ct)
-{
-#ifdef CONFIG_NF_CONNTRACK_TIMEOUT
-	struct nf_conn_timeout *timeout_ext;
-	struct nf_ct_timeout *timeout;
-
-	timeout_ext = nf_ct_ext_find(ct, NF_CT_EXT_TIMEOUT);
-	if (!timeout_ext)
-		return;
-
-	timeout = rcu_dereference(timeout_ext->timeout);
-	if (timeout && refcount_dec_and_test(&timeout->refcnt))
-		kfree_rcu(timeout, rcu);
-#endif
-}
 
 static inline unsigned int *
 nf_ct_timeout_data(const struct nf_conn_timeout *t)
@@ -73,14 +56,8 @@ struct nf_conn_timeout *nf_ct_timeout_ext_add(struct nf_conn *ct,
 #ifdef CONFIG_NF_CONNTRACK_TIMEOUT
 	struct nf_conn_timeout *timeout_ext;
 
-	if (!timeout)
-		return NULL;
-
 	timeout_ext = nf_ct_ext_add(ct, NF_CT_EXT_TIMEOUT, gfp);
-	if (!timeout_ext || timeout_ext->timeout)
-		return NULL;
-
-	if (!refcount_inc_not_zero(&timeout->refcnt))
+	if (timeout_ext == NULL)
 		return NULL;
 
 	rcu_assign_pointer(timeout_ext->timeout, timeout);
@@ -98,7 +75,7 @@ static inline unsigned int *nf_ct_timeout_lookup(const struct nf_conn *ct)
 	struct nf_conn_timeout *timeout_ext;
 
 	timeout_ext = nf_ct_timeout_find(ct);
-	if (timeout_ext && rcu_access_pointer(timeout_ext->timeout))
+	if (timeout_ext)
 		timeouts = nf_ct_timeout_data(timeout_ext);
 #endif
 	return timeouts;

@@ -444,9 +444,8 @@ static int mlx4_ib_query_device(struct ib_device *ibdev,
 	struct mlx4_uverbs_ex_query_device cmd;
 	struct mlx4_uverbs_ex_query_device_resp resp = {};
 	struct mlx4_clock_params clock_params;
-	size_t uhw_outlen = uhw ? uhw->outlen : 0;
 
-	if (uhw && uhw->inlen) {
+	if (uhw->inlen) {
 		err = ib_copy_validate_udata_in_cm(uhw, cmd, reserved, 0);
 		if (err)
 			return err;
@@ -573,7 +572,7 @@ static int mlx4_ib_query_device(struct ib_device *ibdev,
 	props->cq_caps.max_cq_moderation_count = MLX4_MAX_CQ_COUNT;
 	props->cq_caps.max_cq_moderation_period = MLX4_MAX_CQ_PERIOD;
 
-	if (uhw_outlen >= resp.response_length + sizeof(resp.hca_core_clock_offset)) {
+	if (uhw->outlen >= resp.response_length + sizeof(resp.hca_core_clock_offset)) {
 		resp.response_length += sizeof(resp.hca_core_clock_offset);
 		if (!mlx4_get_internal_clock_params(dev->dev, &clock_params)) {
 			resp.comp_mask |= MLX4_IB_QUERY_DEV_RESP_MASK_CORE_CLOCK_OFFSET;
@@ -581,14 +580,14 @@ static int mlx4_ib_query_device(struct ib_device *ibdev,
 		}
 	}
 
-	if (uhw_outlen >= resp.response_length +
+	if (uhw->outlen >= resp.response_length +
 	    sizeof(resp.max_inl_recv_sz)) {
 		resp.response_length += sizeof(resp.max_inl_recv_sz);
 		resp.max_inl_recv_sz  = dev->dev->caps.max_rq_sg *
 			sizeof(struct mlx4_wqe_data_seg);
 	}
 
-	if (offsetofend(typeof(resp), rss_caps) <= uhw_outlen) {
+	if (offsetofend(typeof(resp), rss_caps) <= uhw->outlen) {
 		if (props->rss_caps.supported_qpts) {
 			resp.rss_caps.rx_hash_function =
 				MLX4_IB_RX_HASH_FUNC_TOEPLITZ;
@@ -612,7 +611,7 @@ static int mlx4_ib_query_device(struct ib_device *ibdev,
 				       sizeof(resp.rss_caps);
 	}
 
-	if (offsetofend(typeof(resp), tso_caps) <= uhw_outlen) {
+	if (offsetofend(typeof(resp), tso_caps) <= uhw->outlen) {
 		if (dev->dev->caps.max_gso_sz &&
 		    ((mlx4_ib_port_link_layer(ibdev, 1) ==
 		    IB_LINK_LAYER_ETHERNET) ||
@@ -626,8 +625,8 @@ static int mlx4_ib_query_device(struct ib_device *ibdev,
 				       sizeof(resp.tso_caps);
 	}
 
-	if (uhw_outlen) {
-		err = ib_respond_udata(uhw, resp);
+	if (uhw->outlen) {
+		err = ib_copy_to_udata(uhw, &resp, resp.response_length);
 		if (err)
 			goto out;
 	}
@@ -1091,8 +1090,8 @@ static int mlx4_ib_alloc_ucontext(struct ib_ucontext *uctx,
 	struct ib_device *ibdev = uctx->device;
 	struct mlx4_ib_dev *dev = to_mdev(ibdev);
 	struct mlx4_ib_ucontext *context = to_mucontext(uctx);
-	struct mlx4_ib_alloc_ucontext_resp_v3 resp_v3 = {};
-	struct mlx4_ib_alloc_ucontext_resp resp = {};
+	struct mlx4_ib_alloc_ucontext_resp_v3 resp_v3;
+	struct mlx4_ib_alloc_ucontext_resp resp;
 	int err;
 
 	if (!dev->ib_active)
@@ -1122,16 +1121,16 @@ static int mlx4_ib_alloc_ucontext(struct ib_ucontext *uctx,
 	mutex_init(&context->wqn_ranges_mutex);
 
 	if (ibdev->ops.uverbs_abi_ver == MLX4_IB_UVERBS_NO_DEV_CAPS_ABI_VERSION)
-		err = ib_respond_udata(udata, resp_v3);
+		err = ib_copy_to_udata(udata, &resp_v3, sizeof(resp_v3));
 	else
-		err = ib_respond_udata(udata, resp);
+		err = ib_copy_to_udata(udata, &resp, sizeof(resp));
 
 	if (err) {
 		mlx4_uar_free(to_mdev(ibdev)->dev, &context->uar);
-		return err;
+		return -EFAULT;
 	}
 
-	return 0;
+	return err;
 }
 
 static void mlx4_ib_dealloc_ucontext(struct ib_ucontext *ibcontext)
@@ -1200,14 +1199,9 @@ static int mlx4_ib_alloc_pd(struct ib_pd *ibpd, struct ib_udata *udata)
 	if (err)
 		return err;
 
-	if (udata) {
-		struct mlx4_ib_alloc_pd_resp uresp = { .pdn = pd->pdn };
-
-		err = ib_respond_udata(udata, uresp);
-		if (err) {
-			mlx4_pd_free(to_mdev(ibdev)->dev, pd->pdn);
-			return err;
-		}
+	if (udata && ib_copy_to_udata(udata, &pd->pdn, sizeof(__u32))) {
+		mlx4_pd_free(to_mdev(ibdev)->dev, pd->pdn);
+		return -EFAULT;
 	}
 	return 0;
 }
@@ -1702,9 +1696,9 @@ static struct ib_flow *mlx4_ib_create_flow(struct ib_qp *qp,
 	    (flow_attr->type != IB_FLOW_ATTR_NORMAL))
 		return ERR_PTR(-EOPNOTSUPP);
 
-	err = ib_is_udata_in_empty(udata);
-	if (err)
-		return ERR_PTR(err);
+	if (udata &&
+	    udata->inlen && !ib_is_udata_cleared(udata, 0, udata->inlen))
+		return ERR_PTR(-EOPNOTSUPP);
 
 	memset(type, 0, sizeof(type));
 

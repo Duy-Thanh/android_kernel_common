@@ -418,12 +418,21 @@ static int brcms_chspec_bw(u16 chanspec)
 	return BRCMS_10_MHZ;
 }
 
+static void brcms_c_bsscfg_mfree(struct brcms_bss_cfg *cfg)
+{
+	if (cfg == NULL)
+		return;
+
+	kfree(cfg->current_bss);
+	kfree(cfg);
+}
+
 static void brcms_c_detach_mfree(struct brcms_c_info *wlc)
 {
 	if (wlc == NULL)
 		return;
 
-	kfree(wlc->bsscfg);
+	brcms_c_bsscfg_mfree(wlc->bsscfg);
 	kfree(wlc->pub);
 	kfree(wlc->modulecb);
 	kfree(wlc->default_bss);
@@ -442,6 +451,25 @@ static void brcms_c_detach_mfree(struct brcms_c_info *wlc)
 		dev_kfree_skb_any(wlc->probe_resp);
 
 	kfree(wlc);
+}
+
+static struct brcms_bss_cfg *brcms_c_bsscfg_malloc(uint unit)
+{
+	struct brcms_bss_cfg *cfg;
+
+	cfg = kzalloc_obj(*cfg, GFP_ATOMIC);
+	if (cfg == NULL)
+		goto fail;
+
+	cfg->current_bss = kzalloc_obj(*cfg->current_bss, GFP_ATOMIC);
+	if (cfg->current_bss == NULL)
+		goto fail;
+
+	return cfg;
+
+ fail:
+	brcms_c_bsscfg_mfree(cfg);
+	return NULL;
 }
 
 static struct brcms_c_info *
@@ -499,7 +527,7 @@ brcms_c_attach_malloc(uint unit, uint *err, uint devid)
 		goto fail;
 	}
 
-	wlc->bsscfg = kzalloc_obj(*wlc->bsscfg, GFP_ATOMIC);
+	wlc->bsscfg = brcms_c_bsscfg_malloc(unit);
 	if (wlc->bsscfg == NULL) {
 		*err = 1011;
 		goto fail;
@@ -3785,7 +3813,7 @@ static void brcms_c_set_home_chanspec(struct brcms_c_info *wlc, u16 chanspec)
 		wlc->home_chanspec = chanspec;
 
 		if (wlc->pub->associated)
-			wlc->bsscfg->current_bss.chanspec = chanspec;
+			wlc->bsscfg->current_bss->chanspec = chanspec;
 	}
 }
 
@@ -5395,7 +5423,7 @@ void brcms_c_get_current_rateset(struct brcms_c_info *wlc,
 	struct brcms_c_rateset *rs;
 
 	if (wlc->pub->associated)
-		rs = &wlc->bsscfg->current_bss.rateset;
+		rs = &wlc->bsscfg->current_bss->rateset;
 	else
 		rs = &wlc->default_bss->rateset;
 
@@ -5422,7 +5450,7 @@ int brcms_c_set_rateset(struct brcms_c_info *wlc, struct brcm_rateset *rs)
 	if (wlc->pub->_n_enab & SUPPORT_11N) {
 		struct brcms_bss_info *mcsset_bss;
 		if (wlc->pub->associated)
-			mcsset_bss = &wlc->bsscfg->current_bss;
+			mcsset_bss = wlc->bsscfg->current_bss;
 		else
 			mcsset_bss = wlc->default_bss;
 		memcpy(internal_rs.mcs, &mcsset_bss->rateset.mcs[0],
@@ -7781,7 +7809,7 @@ void brcms_c_init(struct brcms_c_info *wlc, bool mute_tx)
 		u32 bi;
 
 		/* get beacon period and convert to uS */
-		bi = wlc->bsscfg->current_bss.beacon_period << 10;
+		bi = wlc->bsscfg->current_bss->beacon_period << 10;
 		/*
 		 * update since init path would reset
 		 * to default value

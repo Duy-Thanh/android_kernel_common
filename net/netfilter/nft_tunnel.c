@@ -60,7 +60,7 @@ static void nft_tunnel_get_eval(const struct nft_expr *expr,
 			regs->verdict.code = NFT_BREAK;
 		break;
 	default:
-		DEBUG_NET_WARN_ON_ONCE(1);
+		WARN_ON(1);
 		regs->verdict.code = NFT_BREAK;
 	}
 }

@@ -464,9 +464,10 @@ xfs_iunlink_insert_inode(
 	struct xfs_buf		*agibp,
 	struct xfs_inode	*ip)
 {
+	struct xfs_mount	*mp = tp->t_mountp;
 	struct xfs_agi		*agi = agibp->b_addr;
 	xfs_agino_t		next_agino;
-	xfs_agino_t		agino = XFS_INODE_TO_AGINO(ip);
+	xfs_agino_t		agino = XFS_INO_TO_AGINO(mp, ip->i_ino);
 	short			bucket_index = agino % XFS_AGI_UNLINKED_BUCKETS;
 	int			error;
 
@@ -530,7 +531,7 @@ xfs_iunlink(
 	ASSERT(VFS_I(ip)->i_mode != 0);
 	trace_xfs_iunlink(ip);
 
-	pag = xfs_perag_get(mp, XFS_INODE_TO_AGNO(ip));
+	pag = xfs_perag_get(mp, XFS_INO_TO_AGNO(mp, ip->i_ino));
 
 	/* Get the agi buffer first.  It ensures lock ordering on the list. */
 	error = xfs_read_agi(pag, tp, 0, &agibp);
@@ -552,7 +553,7 @@ xfs_iunlink_remove_inode(
 {
 	struct xfs_mount	*mp = tp->t_mountp;
 	struct xfs_agi		*agi = agibp->b_addr;
-	xfs_agino_t		agino = XFS_INODE_TO_AGINO(ip);
+	xfs_agino_t		agino = XFS_INO_TO_AGINO(mp, ip->i_ino);
 	xfs_agino_t		head_agino;
 	short			bucket_index = agino % XFS_AGI_UNLINKED_BUCKETS;
 	int			error;
@@ -654,7 +655,7 @@ xfs_droplink(
 	if (inode->i_nlink == 0) {
 		xfs_info_ratelimited(tp->t_mountp,
  "Inode 0x%llx link count dropped below zero.  Pinning link count.",
-				I_INO(ip));
+				ip->i_ino);
 		set_nlink(inode, XFS_NLINK_PINNED);
 	}
 	if (inode->i_nlink != XFS_NLINK_PINNED)
@@ -683,7 +684,7 @@ xfs_bumplink(
 	if (inode->i_nlink == XFS_NLINK_PINNED - 1)
 		xfs_info_ratelimited(tp->t_mountp,
  "Inode 0x%llx link count exceeded maximum.  Pinning link count.",
-				I_INO(ip));
+				ip->i_ino);
 	if (inode->i_nlink != XFS_NLINK_PINNED)
 		inc_nlink(inode);
 
@@ -707,7 +708,7 @@ xfs_inode_uninit(
 	 * makes the AGI lock -> unlinked list modification order the same as
 	 * used in O_TMPFILE creation.
 	 */
-	error = xfs_difree(tp, pag, I_INO(ip), xic);
+	error = xfs_difree(tp, pag, ip->i_ino, xic);
 	if (error)
 		return error;
 

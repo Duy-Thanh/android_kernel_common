@@ -95,7 +95,6 @@ static struct vs_chip_identity vs_chip_identities[] = {
 		.customer_id = ~0U,
 
 		.display_count = 2,
-		.max_cursor_size = 64,
 		.formats = &vs_formats_no_yuv444,
 	},
 	{
@@ -104,7 +103,6 @@ static struct vs_chip_identity vs_chip_identities[] = {
 		.customer_id = 0x30B,
 
 		.display_count = 2,
-		.max_cursor_size = 64,
 		.formats = &vs_formats_no_yuv444,
 	},
 	{
@@ -113,7 +111,6 @@ static struct vs_chip_identity vs_chip_identities[] = {
 		.customer_id = 0x310,
 
 		.display_count = 2,
-		.max_cursor_size = 64,
 		.formats = &vs_formats_with_yuv444,
 	},
 	{
@@ -122,7 +119,6 @@ static struct vs_chip_identity vs_chip_identities[] = {
 		.customer_id = 0x311,
 
 		.display_count = 2,
-		.max_cursor_size = 64,
 		.formats = &vs_formats_no_yuv444,
 	},
 };

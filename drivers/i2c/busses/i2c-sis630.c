@@ -431,23 +431,24 @@ static int sis630_setup(struct pci_dev *sis630_dev)
 	   in acpi io space and read acpi base addr
 	*/
 	if (pci_read_config_byte(sis630_dev, SIS630_BIOS_CTL_REG, &b)) {
-		retval = dev_err_probe(&sis630_dev->dev, -ENODEV,
-				       "Error: Can't read bios ctl reg\n");
+		dev_err(&sis630_dev->dev, "Error: Can't read bios ctl reg\n");
+		retval = -ENODEV;
 		goto exit;
 	}
 	/* if ACPI already enabled , do nothing */
 	if (!(b & 0x80) &&
 	    pci_write_config_byte(sis630_dev, SIS630_BIOS_CTL_REG, b | 0x80)) {
-		retval = dev_err_probe(&sis630_dev->dev, -ENODEV,
-				       "Error: Can't enable ACPI\n");
+		dev_err(&sis630_dev->dev, "Error: Can't enable ACPI\n");
+		retval = -ENODEV;
 		goto exit;
 	}
 
 	/* Determine the ACPI base address */
 	if (pci_read_config_word(sis630_dev,
 				 SIS630_ACPI_BASE_REG, &acpi_base)) {
-		retval = dev_err_probe(&sis630_dev->dev, -ENODEV,
-				       "Error: Can't determine ACPI base address\n");
+		dev_err(&sis630_dev->dev,
+			"Error: Can't determine ACPI base address\n");
+		retval = -ENODEV;
 		goto exit;
 	}
 
@@ -468,10 +469,11 @@ static int sis630_setup(struct pci_dev *sis630_dev)
 	/* Everything is happy, let's grab the memory and set things up. */
 	if (!request_region(smbus_base + SMB_STS, SIS630_SMB_IOREGION,
 			    sis630_driver.name)) {
-		retval = dev_err_probe(&sis630_dev->dev, -EBUSY,
-				       "I/O Region 0x%04x-0x%04x for SMBus already in use.\n",
-				       smbus_base + SMB_STS,
-				       smbus_base + SMB_STS + SIS630_SMB_IOREGION - 1);
+		dev_err(&sis630_dev->dev,
+			"I/O Region 0x%04x-0x%04x for SMBus already in use.\n",
+			smbus_base + SMB_STS,
+			smbus_base + SMB_STS + SIS630_SMB_IOREGION - 1);
+		retval = -EBUSY;
 		goto exit;
 	}
 
@@ -509,9 +511,12 @@ static int sis630_probe(struct pci_dev *dev, const struct pci_device_id *id)
 {
 	int ret;
 
-	if (sis630_setup(dev))
-		return dev_err_probe(&dev->dev, -ENODEV,
-				     "Compatible bus not detected, module not inserted.\n");
+	if (sis630_setup(dev)) {
+		dev_err(&dev->dev,
+			"SIS630 compatible bus not detected, "
+			"module not inserted.\n");
+		return -ENODEV;
+	}
 
 	/* set up the sysfs linkage to our parent device */
 	sis630_adapter.dev.parent = &dev->dev;

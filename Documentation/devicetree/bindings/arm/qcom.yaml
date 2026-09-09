@@ -79,7 +79,6 @@ properties:
       - items:
           - enum:
               - fairphone,fp6
-              - nothing,asteroids
           - const: qcom,milos
 
       - items:
@@ -365,11 +364,6 @@ properties:
               - qcom,ipq9574-ap-al02-c8
               - qcom,ipq9574-ap-al02-c9
           - const: qcom,ipq9574
-
-      - items:
-          - enum:
-              - qcom,ipq9650-rdp488
-          - const: qcom,ipq9650
 
       - items:
           - enum:
@@ -828,14 +822,6 @@ properties:
           - const: google,zombie-sku514
           - const: qcom,sc7280
 
-      - description: Xiaomi Poco F1
-        items:
-          - enum:
-              - xiaomi,beryllium-ebbg
-              - xiaomi,beryllium-tianma
-          - const: xiaomi,beryllium
-          - const: qcom,sdm845
-
       - items:
           - enum:
               - lenovo,flex-5g
@@ -986,6 +972,8 @@ properties:
               - sony,akatsuki-row
               - sony,apollo-row
               - thundercomm,db845c
+              - xiaomi,beryllium
+              - xiaomi,beryllium-ebbg
               - xiaomi,polaris
           - const: qcom,sdm845
 
@@ -1052,7 +1040,6 @@ properties:
 
       - items:
           - enum:
-              - motorola,dubai
               - nothing,spacewar
           - const: qcom,sm7325
 
@@ -1180,10 +1167,6 @@ properties:
           - const: microsoft,denali-oled
           - const: microsoft,denali
           - const: qcom,x1e80100
-
-      - items:
-          - const: microsoft,surface-pro-12in
-          - const: qcom,x1p42100
 
       - items:
           - enum:

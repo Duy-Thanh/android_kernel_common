@@ -14,7 +14,8 @@
 /*======== Data structures kept in memory ========*/
 
 struct hfs_readdir_data {
-	loff_t pos;
+	struct list_head list;
+	struct file *file;
 	struct hfs_cat_key key;
 };
 

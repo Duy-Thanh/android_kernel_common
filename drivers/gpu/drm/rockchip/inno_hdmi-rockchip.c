@@ -14,7 +14,6 @@
 
 #include <drm/bridge/inno_hdmi.h>
 #include <drm/drm_bridge_connector.h>
-#include <drm/drm_managed.h>
 #include <drm/drm_of.h>
 
 #include "rockchip_drm_drv.h"
@@ -91,7 +90,7 @@ static int inno_hdmi_rockchip_bind(struct device *dev, struct device *master, vo
 	const struct inno_hdmi_plat_data *plat_data;
 	int ret;
 
-	hdmi = drmm_kzalloc(drm, sizeof(*hdmi), GFP_KERNEL);
+	hdmi = devm_kzalloc(dev, sizeof(*hdmi), GFP_KERNEL);
 	if (!hdmi)
 		return -ENOMEM;
 
@@ -137,7 +136,7 @@ static int inno_hdmi_rockchip_bind(struct device *dev, struct device *master, vo
 		return ret;
 	}
 
-	return 0;
+	return drm_connector_attach_encoder(connector, encoder);
 }
 
 static const struct component_ops inno_hdmi_rockchip_ops = {

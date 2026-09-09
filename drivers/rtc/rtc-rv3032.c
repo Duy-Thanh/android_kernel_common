@@ -376,7 +376,7 @@ static int rv3032_read_offset(struct device *dev, long *offset)
 	if (ret < 0)
 		return ret;
 
-	steps = FIELD_GET_SIGNED(RV3032_OFFSET_MSK, value);
+	steps = sign_extend32(FIELD_GET(RV3032_OFFSET_MSK, value), 5);
 
 	*offset = DIV_ROUND_CLOSEST(steps * OFFSET_STEP_PPT, 1000);
 

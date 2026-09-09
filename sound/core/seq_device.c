@@ -234,10 +234,7 @@ int snd_seq_device_new(struct snd_card *card, int device, const char *id,
 	if (snd_BUG_ON(!id))
 		return -EINVAL;
 
-	if (argsize < 0)
-		return -EINVAL;
-
-	dev = kzalloc_flex(*dev, args, argsize);
+	dev = kzalloc(sizeof(*dev) + argsize, GFP_KERNEL);
 	if (!dev)
 		return -ENOMEM;
 

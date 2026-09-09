@@ -25,7 +25,6 @@ properties:
     enum:
       - fsl,qoriq-tmu
       - fsl,imx8mq-tmu
-      - fsl,imx93-tmu
 
   reg:
     maxItems: 1

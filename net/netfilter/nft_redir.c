@@ -126,7 +126,7 @@ static void nft_redir_eval(const struct nft_expr *expr,
 		break;
 #endif
 	default:
-		DEBUG_NET_WARN_ON_ONCE(1);
+		WARN_ON_ONCE(1);
 		break;
 	}
 }

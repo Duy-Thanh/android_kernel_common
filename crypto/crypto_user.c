@@ -70,9 +70,11 @@ static struct crypto_alg *crypto_alg_match(struct crypto_user_alg *p, int exact)
 
 static int crypto_report_cipher(struct sk_buff *skb, struct crypto_alg *alg)
 {
-	struct crypto_report_cipher rcipher = {
-		.type = "cipher",
-	};
+	struct crypto_report_cipher rcipher;
+
+	memset(&rcipher, 0, sizeof(rcipher));
+
+	strscpy(rcipher.type, "cipher", sizeof(rcipher.type));
 
 	rcipher.blocksize = alg->cra_blocksize;
 	rcipher.min_keysize = alg->cra_cipher.cia_min_keysize;
@@ -101,10 +103,10 @@ static int crypto_report_one(struct crypto_alg *alg,
 	if (nla_put_u32(skb, CRYPTOCFGA_PRIORITY_VAL, alg->cra_priority))
 		goto nla_put_failure;
 	if (alg->cra_flags & CRYPTO_ALG_LARVAL) {
-		struct crypto_report_larval rl = {
-			.type = "larval",
-		};
+		struct crypto_report_larval rl;
 
+		memset(&rl, 0, sizeof(rl));
+		strscpy(rl.type, "larval", sizeof(rl.type));
 		if (nla_put(skb, CRYPTOCFGA_REPORT_LARVAL, sizeof(rl), &rl))
 			goto nla_put_failure;
 		goto out;

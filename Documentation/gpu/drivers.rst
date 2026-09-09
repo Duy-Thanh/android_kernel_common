@@ -8,7 +8,6 @@ GPU Driver Documentation
    amdgpu/index
    i915
    imagination/index
-   intel-display/index
    mcde
    meson
    nouveau

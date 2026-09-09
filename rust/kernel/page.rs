@@ -3,25 +3,17 @@
 //! Kernel page allocation and management.
 
 use crate::{
-    alloc::{
-        AllocError,
-        Flags, //
-    },
+    alloc::{AllocError, Flags},
     bindings,
-    error::{
-        code::*,
-        Result, //
-    },
-    uaccess::UserSliceReader, //
+    error::code::*,
+    error::Result,
+    uaccess::UserSliceReader,
 };
 use core::{
     marker::PhantomData,
     mem::ManuallyDrop,
     ops::Deref,
-    ptr::{
-        self,
-        NonNull, //
-    }, //
+    ptr::{self, NonNull},
 };
 
 /// A bitwise shift for the page size.
@@ -201,7 +193,6 @@ impl Page {
     }
 
     /// Get the node id containing this page.
-    #[inline]
     pub fn nid(&self) -> i32 {
         // SAFETY: Always safe to call with a valid page.
         unsafe { bindings::page_to_nid(self.as_ptr()) }

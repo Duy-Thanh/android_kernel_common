@@ -4,11 +4,8 @@
 //!
 //! Provides 1:1 mapping to the C atomic operations.
 
-use crate::{
-    bindings,
-    build_assert::static_assert,
-    macros::paste, //
-};
+use crate::bindings;
+use crate::macros::paste;
 use core::cell::UnsafeCell;
 use ffi::c_void;
 
@@ -49,7 +46,7 @@ pub trait AtomicImpl: Sized + Copy + private::Sealed {
 // In the future when a CONFIG_ARCH_SUPPORTS_ATOMIC_RMW=n architecture plans to support Rust, the
 // load/store helpers that guarantee atomicity against RmW operations (usually via a lock) need to
 // be added.
-static_assert!(
+crate::static_assert!(
     cfg!(CONFIG_ARCH_SUPPORTS_ATOMIC_RMW),
     "The current implementation of atomic i8/i16/ptr relies on the architecure being \
     ARCH_SUPPORTS_ATOMIC_RMW"

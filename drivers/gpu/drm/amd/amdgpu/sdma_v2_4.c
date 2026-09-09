@@ -828,6 +828,7 @@ static int sdma_v2_4_early_init(struct amdgpu_ip_block *ip_block)
 		return r;
 
 	sdma_v2_4_set_ring_funcs(adev);
+	sdma_v2_4_set_buffer_funcs(adev);
 	amdgpu_sdma_set_vm_pte_scheds(adev, &sdma_v2_4_vm_pte_funcs);
 	sdma_v2_4_set_irq_funcs(adev);
 
@@ -897,9 +898,7 @@ static int sdma_v2_4_hw_init(struct amdgpu_ip_block *ip_block)
 	if (r)
 		return r;
 
-	sdma_v2_4_set_buffer_funcs(adev);
-
-	return 0;
+	return r;
 }
 
 static int sdma_v2_4_hw_fini(struct amdgpu_ip_block *ip_block)
@@ -1236,7 +1235,8 @@ static const struct amdgpu_buffer_funcs sdma_v2_4_buffer_funcs = {
 
 static void sdma_v2_4_set_buffer_funcs(struct amdgpu_device *adev)
 {
-	amdgpu_sdma_set_buffer_funcs_scheds(adev, &sdma_v2_4_buffer_funcs);
+	adev->mman.buffer_funcs = &sdma_v2_4_buffer_funcs;
+	adev->mman.buffer_funcs_ring = &adev->sdma.instance[0].ring;
 }
 
 const struct amdgpu_ip_block_version sdma_v2_4_ip_block = {

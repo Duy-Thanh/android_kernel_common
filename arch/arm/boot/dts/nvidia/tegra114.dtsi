@@ -8,8 +8,6 @@
 #include <dt-bindings/soc/tegra-pmc.h>
 #include <dt-bindings/thermal/tegra114-soctherm.h>
 
-#include "tegra114-peripherals-opp.dtsi"
-
 / {
 	compatible = "nvidia,tegra114";
 	interrupt-parent = <&lic>;
@@ -58,8 +56,6 @@
 			clocks = <&tegra_car TEGRA114_CLK_VI>;
 			resets = <&tegra_car 20>;
 			reset-names = "vi";
-			power-domains = <&pd_venc>;
-			operating-points-v2 = <&vi_dvfs_opp_table>;
 
 			iommus = <&mc TEGRA_SWGROUP_VI>;
 
@@ -73,8 +69,6 @@
 			clocks = <&tegra_car TEGRA114_CLK_EPP>;
 			resets = <&tegra_car TEGRA114_CLK_EPP>;
 			reset-names = "epp";
-			power-domains = <&pd_heg>;
-			operating-points-v2 = <&epp_dvfs_opp_table>;
 
 			iommus = <&mc TEGRA_SWGROUP_EPP>;
 
@@ -88,7 +82,6 @@
 			clocks = <&tegra_car TEGRA114_CLK_ISP>;
 			resets = <&tegra_car TEGRA114_CLK_ISP>;
 			reset-names = "isp";
-			power-domains = <&pd_venc>;
 
 			iommus = <&mc TEGRA_SWGROUP_ISP>;
 
@@ -102,8 +95,6 @@
 			clocks = <&tegra_car TEGRA114_CLK_GR2D>;
 			resets = <&tegra_car 21>, <&mc TEGRA114_MC_RESET_2D>;
 			reset-names = "2d", "mc";
-			power-domains = <&pd_heg>;
-			operating-points-v2 = <&gr2d_dvfs_opp_table>;
 
 			iommus = <&mc TEGRA_SWGROUP_G2>;
 		};
@@ -114,8 +105,6 @@
 			clocks = <&tegra_car TEGRA114_CLK_GR3D>;
 			resets = <&tegra_car 24>, <&mc TEGRA114_MC_RESET_3D>;
 			reset-names = "3d", "mc";
-			power-domains = <&pd_3d>;
-			operating-points-v2 = <&gr3d_dvfs_opp_table>;
 
 			iommus = <&mc TEGRA_SWGROUP_NV>;
 		};
@@ -129,23 +118,10 @@
 			clock-names = "dc", "parent";
 			resets = <&tegra_car 27>;
 			reset-names = "dc";
-			power-domains = <&pd_core>;
-			operating-points-v2 = <&disp1_dvfs_opp_table>;
 
 			iommus = <&mc TEGRA_SWGROUP_DC>;
 
 			nvidia,head = <0>;
-
-			interconnects = <&mc TEGRA114_MC_DISPLAY0A &emc>,
-					<&mc TEGRA114_MC_DISPLAY0B &emc>,
-					<&mc TEGRA114_MC_DISPLAY1B &emc>,
-					<&mc TEGRA114_MC_DISPLAY0C &emc>,
-					<&mc TEGRA114_MC_DISPLAYHC &emc>;
-			interconnect-names = "wina",
-					     "winb",
-					     "winb-vfilter",
-					     "winc",
-					     "cursor";
 
 			rgb {
 				status = "disabled";
@@ -161,23 +137,10 @@
 			clock-names = "dc", "parent";
 			resets = <&tegra_car 26>;
 			reset-names = "dc";
-			power-domains = <&pd_core>;
-			operating-points-v2 = <&disp2_dvfs_opp_table>;
 
 			iommus = <&mc TEGRA_SWGROUP_DCB>;
 
 			nvidia,head = <1>;
-
-			interconnects = <&mc TEGRA114_MC_DISPLAY0AB &emc>,
-					<&mc TEGRA114_MC_DISPLAY0BB &emc>,
-					<&mc TEGRA114_MC_DISPLAY1BB &emc>,
-					<&mc TEGRA114_MC_DISPLAY0CB &emc>,
-					<&mc TEGRA114_MC_DISPLAYHCB &emc>;
-			interconnect-names = "wina",
-					     "winb",
-					     "winb-vfilter",
-					     "winc",
-					     "cursor";
 
 			rgb {
 				status = "disabled";
@@ -193,8 +156,6 @@
 			clock-names = "hdmi", "parent";
 			resets = <&tegra_car 51>;
 			reset-names = "hdmi";
-			power-domains = <&pd_core>;
-			operating-points-v2 = <&hdmi_dvfs_opp_table>;
 			status = "disabled";
 		};
 
@@ -208,7 +169,6 @@
 			resets = <&tegra_car 48>;
 			reset-names = "dsi";
 			nvidia,mipi-calibrate = <&mipi 0x060>; /* DSIA & DSIB pads */
-			power-domains = <&pd_core>;
 			status = "disabled";
 
 			#address-cells = <1>;
@@ -225,7 +185,6 @@
 			resets = <&tegra_car 82>;
 			reset-names = "dsi";
 			nvidia,mipi-calibrate = <&mipi 0x180>; /* DSIC & DSID pads */
-			power-domains = <&pd_core>;
 			status = "disabled";
 
 			#address-cells = <1>;
@@ -239,8 +198,6 @@
 			clocks = <&tegra_car TEGRA114_CLK_MSENC>;
 			resets = <&tegra_car TEGRA114_CLK_MSENC>;
 			reset-names = "mpe";
-			power-domains = <&pd_mpe>;
-			operating-points-v2 = <&msenc_dvfs_opp_table>;
 
 			iommus = <&mc TEGRA_SWGROUP_MSENC>;
 
@@ -253,8 +210,6 @@
 			interrupts = <GIC_SPI 50 IRQ_TYPE_LEVEL_HIGH>;
 			clocks = <&tegra_car TEGRA114_CLK_TSEC>;
 			resets = <&tegra_car TEGRA114_CLK_TSEC>;
-			power-domains = <&pd_core>;
-			operating-points-v2 = <&tsec_dvfs_opp_table>;
 
 			iommus = <&mc TEGRA_SWGROUP_TSEC>;
 
@@ -368,9 +323,6 @@
 		clock-names = "actmon", "emc";
 		resets = <&tegra_car TEGRA114_CLK_ACTMON>;
 		reset-names = "actmon";
-		operating-points-v2 = <&emc_bw_dfs_opp_table>;
-		interconnects = <&mc TEGRA114_MC_MPCORER &emc>;
-		interconnect-names = "cpu-read";
 		#cooling-cells = <2>;
 	};
 
@@ -414,8 +366,6 @@
 		reset-names = "vde", "mc";
 		resets = <&tegra_car 61>, <&mc TEGRA114_MC_RESET_VDE>;
 		iommus = <&mc TEGRA_SWGROUP_VDE>;
-		power-domains = <&pd_vde>;
-		operating-points-v2 = <&vde_dvfs_opp_table>;
 	};
 
 	apbmisc@70000800 {
@@ -493,7 +443,6 @@
 		clocks = <&tegra_car TEGRA114_CLK_PWM>;
 		resets = <&tegra_car 17>;
 		reset-names = "pwm";
-		power-domains = <&pd_core>;
 		status = "disabled";
 	};
 
@@ -584,8 +533,6 @@
 		reset-names = "spi";
 		dmas = <&apbdma 15>, <&apbdma 15>;
 		dma-names = "rx", "tx";
-		power-domains = <&pd_core>;
-		operating-points-v2 = <&sbc1_dvfs_opp_table>;
 		status = "disabled";
 	};
 
@@ -601,8 +548,6 @@
 		reset-names = "spi";
 		dmas = <&apbdma 16>, <&apbdma 16>;
 		dma-names = "rx", "tx";
-		power-domains = <&pd_core>;
-		operating-points-v2 = <&sbc2_dvfs_opp_table>;
 		status = "disabled";
 	};
 
@@ -618,8 +563,6 @@
 		reset-names = "spi";
 		dmas = <&apbdma 17>, <&apbdma 17>;
 		dma-names = "rx", "tx";
-		power-domains = <&pd_core>;
-		operating-points-v2 = <&sbc3_dvfs_opp_table>;
 		status = "disabled";
 	};
 
@@ -635,8 +578,6 @@
 		reset-names = "spi";
 		dmas = <&apbdma 18>, <&apbdma 18>;
 		dma-names = "rx", "tx";
-		power-domains = <&pd_core>;
-		operating-points-v2 = <&sbc4_dvfs_opp_table>;
 		status = "disabled";
 	};
 
@@ -652,8 +593,6 @@
 		reset-names = "spi";
 		dmas = <&apbdma 27>, <&apbdma 27>;
 		dma-names = "rx", "tx";
-		power-domains = <&pd_core>;
-		operating-points-v2 = <&sbc5_dvfs_opp_table>;
 		status = "disabled";
 	};
 
@@ -669,8 +608,6 @@
 		reset-names = "spi";
 		dmas = <&apbdma 28>, <&apbdma 28>;
 		dma-names = "rx", "tx";
-		power-domains = <&pd_core>;
-		operating-points-v2 = <&sbc6_dvfs_opp_table>;
 		status = "disabled";
 	};
 
@@ -697,86 +634,6 @@
 		clocks = <&tegra_car TEGRA114_CLK_PCLK>, <&clk32k_in>;
 		clock-names = "pclk", "clk32k_in";
 		#clock-cells = <1>;
-
-		pd_core: core-domain {
-			#power-domain-cells = <0>;
-			operating-points-v2 = <&core_opp_table>;
-		};
-
-		powergates {
-			/*
-			 * TODO: Add DIS and DISB domains once DC is able
-			 * to handle them properly. VENC and DISB should
-			 * set DIS as their source power domain due to
-			 * internal dependency.
-			 */
-
-			pd_heg: heg {
-				clocks = <&tegra_car TEGRA114_CLK_GR2D>,
-					 <&tegra_car TEGRA114_CLK_EPP>;
-				resets = <&mc TEGRA114_MC_RESET_2D>,
-					 <&mc TEGRA114_MC_RESET_EPP>,
-					 <&tegra_car TEGRA114_CLK_GR2D>,
-					 <&tegra_car TEGRA114_CLK_EPP>;
-				power-domains = <&pd_core>;
-				#power-domain-cells = <0>;
-			};
-
-			pd_mpe: mpe {
-				clocks = <&tegra_car TEGRA114_CLK_MSENC>;
-				resets = <&mc TEGRA114_MC_RESET_MPE>,
-					 <&tegra_car TEGRA114_CLK_MSENC>;
-				power-domains = <&pd_core>;
-				#power-domain-cells = <0>;
-			};
-
-			pd_3d: td {
-				clocks = <&tegra_car TEGRA114_CLK_GR3D>;
-				resets = <&mc TEGRA114_MC_RESET_3D>,
-					 <&tegra_car TEGRA114_CLK_GR3D>;
-				power-domains = <&pd_core>;
-				#power-domain-cells = <0>;
-			};
-
-			pd_vde: vdec {
-				clocks = <&tegra_car TEGRA114_CLK_VDE>;
-				resets = <&mc TEGRA114_MC_RESET_VDE>,
-					 <&tegra_car TEGRA114_CLK_VDE>;
-				power-domains = <&pd_core>;
-				#power-domain-cells = <0>;
-			};
-
-			pd_venc: venc {
-				clocks = <&tegra_car TEGRA114_CLK_ISP>,
-					 <&tegra_car TEGRA114_CLK_VI>,
-					 <&tegra_car TEGRA114_CLK_CSI>;
-				resets = <&mc TEGRA114_MC_RESET_ISP>,
-					 <&mc TEGRA114_MC_RESET_VI>,
-					 <&tegra_car TEGRA114_CLK_ISP>,
-					 <&tegra_car 20 /* VI */>,
-					 <&tegra_car TEGRA114_CLK_CSI>;
-				power-domains = <&pd_core>;
-				#power-domain-cells = <0>;
-			};
-
-			pd_xusbss: xusba {
-				clocks = <&tegra_car TEGRA114_CLK_XUSB_SS>;
-				resets = <&tegra_car TEGRA114_CLK_XUSB_SS>;
-				#power-domain-cells = <0>;
-			};
-
-			pd_xusbdev: xusbb {
-				clocks = <&tegra_car TEGRA114_CLK_XUSB_DEV>;
-				resets = <&tegra_car 95>;
-				#power-domain-cells = <0>;
-			};
-
-			pd_xusbhost: xusbc {
-				clocks = <&tegra_car TEGRA114_CLK_XUSB_HOST>;
-				resets = <&tegra_car TEGRA114_CLK_XUSB_HOST>;
-				#power-domain-cells = <0>;
-			};
-		};
 	};
 
 	fuse@7000f800 {
@@ -786,7 +643,6 @@
 		clock-names = "fuse";
 		resets = <&tegra_car 39>;
 		reset-names = "fuse";
-		power-domains = <&pd_core>;
 	};
 
 	mc: memory-controller@70019000 {
@@ -799,7 +655,6 @@
 
 		#reset-cells = <1>;
 		#iommu-cells = <1>;
-		#interconnect-cells = <1>;
 	};
 
 	emc: external-memory-controller@7001b000 {
@@ -808,12 +663,8 @@
 		interrupts = <GIC_SPI 78 IRQ_TYPE_LEVEL_HIGH>;
 		clocks = <&tegra_car TEGRA114_CLK_EMC>;
 		clock-names = "emc";
-		power-domains = <&pd_core>;
 
 		nvidia,memory-controller = <&mc>;
-		operating-points-v2 = <&emc_icc_dvfs_opp_table>;
-
-		#interconnect-cells = <0>;
 	};
 
 	hda@70030000 {
@@ -1003,8 +854,6 @@
 		clock-names = "sdhci";
 		resets = <&tegra_car 14>;
 		reset-names = "sdhci";
-		power-domains = <&pd_core>;
-		operating-points-v2 = <&sdmmc1_dvfs_opp_table>;
 		status = "disabled";
 	};
 
@@ -1027,8 +876,6 @@
 		clock-names = "sdhci";
 		resets = <&tegra_car 69>;
 		reset-names = "sdhci";
-		power-domains = <&pd_core>;
-		operating-points-v2 = <&sdmmc3_dvfs_opp_table>;
 		status = "disabled";
 	};
 
@@ -1040,8 +887,6 @@
 		clock-names = "sdhci";
 		resets = <&tegra_car 15>;
 		reset-names = "sdhci";
-		power-domains = <&pd_core>;
-		operating-points-v2 = <&sdmmc4_dvfs_opp_table>;
 		status = "disabled";
 	};
 
@@ -1054,7 +899,6 @@
 		resets = <&tegra_car 22>;
 		reset-names = "usb";
 		nvidia,phy = <&phy1>;
-		power-domains = <&pd_core>;
 		status = "disabled";
 	};
 
@@ -1095,7 +939,6 @@
 		resets = <&tegra_car 59>;
 		reset-names = "usb";
 		nvidia,phy = <&phy3>;
-		power-domains = <&pd_core>;
 		status = "disabled";
 	};
 

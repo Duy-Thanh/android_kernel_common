@@ -1,7 +1,8 @@
-/* SPDX-License-Identifier: GPL-2.0-only */
-
-/* Copyright (c) 2019-2021, The Linux Foundation. All rights reserved. */
-/* Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries. */
+/* SPDX-License-Identifier: GPL-2.0-only
+ *
+ * Copyright (c) 2019-2021, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2021-2023 Qualcomm Innovation Center, Inc. All rights reserved.
+ */
 
 #ifndef _QAIC_H_
 #define _QAIC_H_
@@ -151,6 +152,8 @@ struct qaic_device {
 	struct list_head	cntl_xfer_list;
 	/* Synchronizes MHI control device transactions and its xfer list */
 	struct mutex		cntl_mutex;
+	/* Array of DBC struct of this device */
+	struct dma_bridge_chan	*dbc;
 	/* Work queue for tasks related to MHI control device */
 	struct workqueue_struct	*cntl_wq;
 	/* Synchronizes all the users of device during cleanup */
@@ -203,8 +206,6 @@ struct qaic_device {
 	void			*ssr_mhi_buf;
 	/* DBC which is under SSR. Sentinel U32_MAX would mean that no SSR in progress */
 	u32			ssr_dbc;
-	/* Array of DBC struct of this device */
-	struct dma_bridge_chan	dbc[] __counted_by(num_dbc);
 };
 
 struct qaic_drm_device {

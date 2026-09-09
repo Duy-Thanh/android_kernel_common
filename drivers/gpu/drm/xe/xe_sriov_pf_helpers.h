@@ -7,7 +7,6 @@
 #define _XE_SRIOV_PF_HELPERS_H_
 
 #include "xe_assert.h"
-#include "xe_device.h"
 #include "xe_device_types.h"
 #include "xe_sriov.h"
 #include "xe_sriov_types.h"
@@ -58,7 +57,7 @@ static inline unsigned int xe_sriov_pf_num_vfs(const struct xe_device *xe)
 static inline bool xe_sriov_pf_admin_only(const struct xe_device *xe)
 {
 	xe_assert(xe, IS_SRIOV_PF(xe));
-	return xe_device_is_admin_only(xe);
+	return xe->sriov.pf.admin_only;
 }
 
 static inline struct mutex *xe_sriov_pf_master_mutex(struct xe_device *xe)

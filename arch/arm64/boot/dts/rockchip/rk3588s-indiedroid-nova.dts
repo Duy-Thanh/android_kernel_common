@@ -277,10 +277,8 @@
 };
 
 &hdmi0 {
-	frl-enable-gpios = <&gpio4 RK_PB6 GPIO_ACTIVE_LOW>;
 	pinctrl-0 = <&hdmim0_tx0_scl>, <&hdmim0_tx0_sda>,
-		    <&hdmim0_tx0_hpd>, <&hdmim0_tx0_cec>,
-		    <&hdmi0_tx_on_h>;
+		    <&hdmim0_tx0_hpd>, <&hdmim0_tx0_cec>;
 	pinctrl-names = "default";
 	status = "okay";
 };
@@ -368,7 +366,6 @@
 
 &i2c6 {
 	pinctrl-0 = <&i2c6m3_xfer>;
-	pinctrl-names = "default";
 	status = "okay";
 
 	fusb302: typec-portc@22 {
@@ -441,7 +438,6 @@
 
 &i2c7 {
 	pinctrl-0 = <&i2c7m0_xfer>;
-	pinctrl-names = "default";
 	status = "okay";
 
 	es8388: audio-codec@11 {
@@ -518,12 +514,6 @@
 		bt_wake_host: bt-wake-host {
 			rockchip,pins =
 				<0 RK_PC5 RK_FUNC_GPIO &pcfg_pull_down>;
-		};
-	};
-
-	hdmi {
-		hdmi0_tx_on_h: hdmi0-tx-on-h {
-			rockchip,pins = <4 RK_PB6 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
 	};
 
@@ -975,7 +965,6 @@
 
 &uart2 {
 	pinctrl-0 = <&uart2m0_xfer>;
-	pinctrl-names = "default";
 	status = "okay";
 };
 

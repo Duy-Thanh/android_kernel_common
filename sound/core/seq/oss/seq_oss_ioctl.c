@@ -51,11 +51,9 @@ static int snd_seq_oss_oob_user(struct seq_oss_devinfo *dp, void __user *arg)
 	memset(&tmpev, 0, sizeof(tmpev));
 	snd_seq_oss_fill_addr(dp, &tmpev, dp->addr.client, dp->addr.port);
 	tmpev.time.tick = 0;
-
-	snd_use_lock_t *lock __free(seq_oss_use_lock) = NULL;
-
-	if (!snd_seq_oss_process_event(dp, (union evrec *)ev, &tmpev, &lock))
+	if (! snd_seq_oss_process_event(dp, (union evrec *)ev, &tmpev)) {
 		snd_seq_oss_dispatch(dp, &tmpev, 0, 0);
+	}
 	return 0;
 }
 
@@ -177,3 +175,4 @@ snd_seq_oss_ioctl(struct seq_oss_devinfo *dp, unsigned int cmd, unsigned long ca
 	}
 	return 0;
 }
+

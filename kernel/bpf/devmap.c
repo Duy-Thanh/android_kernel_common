@@ -581,10 +581,6 @@ static int dev_map_enqueue_clone(struct bpf_dtab_netdev *obj,
 {
 	struct xdp_frame *nxdpf;
 
-	/* Frags live outside the linear frame and cannot be cloned safely. */
-	if (unlikely(xdp_frame_has_frags(xdpf)))
-		return -EOPNOTSUPP;
-
 	nxdpf = xdpf_clone(xdpf);
 	if (!nxdpf)
 		return -ENOMEM;
@@ -710,18 +706,6 @@ int dev_map_generic_redirect(struct bpf_dtab_netdev *dst, struct sk_buff *skb,
 	if (unlikely(err))
 		return err;
 
-	if (dst->xdp_prog && skb_cloned(skb)) {
-		struct sk_buff *nskb;
-
-		nskb = skb_copy(skb, GFP_ATOMIC);
-		if (!nskb)
-			return -ENOMEM;
-
-		nskb->mac_len = skb->mac_len;
-		consume_skb(skb);
-		skb = nskb;
-	}
-
 	/* Redirect has already succeeded semantically at this point, so we just
 	 * return 0 even if packet is dropped. Helper below takes care of
 	 * freeing skb.
@@ -741,9 +725,6 @@ static int dev_map_redirect_clone(struct bpf_dtab_netdev *dst,
 {
 	struct sk_buff *nskb;
 	int err;
-
-	if (unlikely(skb_is_nonlinear(skb)))
-		return -EOPNOTSUPP;
 
 	nskb = skb_clone(skb, GFP_ATOMIC);
 	if (!nskb)

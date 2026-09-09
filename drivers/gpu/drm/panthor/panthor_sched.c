@@ -3,7 +3,7 @@
 
 #include <drm/drm_drv.h>
 #include <drm/drm_exec.h>
-#include <drm/drm_file.h>
+#include <drm/drm_gem_shmem_helper.h>
 #include <drm/drm_managed.h>
 #include <drm/drm_print.h>
 #include <drm/gpu_scheduler.h>
@@ -28,12 +28,11 @@
 #include "panthor_devfreq.h"
 #include "panthor_device.h"
 #include "panthor_fw.h"
-#include "panthor_fw_regs.h"
 #include "panthor_gem.h"
 #include "panthor_gpu.h"
-#include "panthor_gpu_regs.h"
 #include "panthor_heap.h"
 #include "panthor_mmu.h"
+#include "panthor_regs.h"
 #include "panthor_sched.h"
 
 /**
@@ -222,7 +221,7 @@ struct panthor_scheduler {
 	/** @groups: Various lists used to classify groups. */
 	struct {
 		/**
-		 * @groups.runnable: Runnable group lists.
+		 * @runnable: Runnable group lists.
 		 *
 		 * When a group has queues that want to execute something,
 		 * its panthor_group::run_node should be inserted here.
@@ -232,7 +231,7 @@ struct panthor_scheduler {
 		struct list_head runnable[PANTHOR_CSG_PRIORITY_COUNT];
 
 		/**
-		 * @groups.idle: Idle group lists.
+		 * @idle: Idle group lists.
 		 *
 		 * When all queues of a group are idle (either because they
 		 * have nothing to execute, or because they are blocked), the
@@ -243,7 +242,7 @@ struct panthor_scheduler {
 		struct list_head idle[PANTHOR_CSG_PRIORITY_COUNT];
 
 		/**
-		 * @groups.waiting: List of groups whose queues are blocked on a
+		 * @waiting: List of groups whose queues are blocked on a
 		 * synchronization object.
 		 *
 		 * Insert panthor_group::wait_node here when a group is waiting
@@ -284,17 +283,17 @@ struct panthor_scheduler {
 
 	/** @pm: Power management related fields. */
 	struct {
-		/** @pm.has_ref: True if the scheduler owns a runtime PM reference. */
+		/** @has_ref: True if the scheduler owns a runtime PM reference. */
 		bool has_ref;
 	} pm;
 
 	/** @reset: Reset related fields. */
 	struct {
-		/** @reset.lock: Lock protecting the other reset fields. */
+		/** @lock: Lock protecting the other reset fields. */
 		struct mutex lock;
 
 		/**
-		 * @reset.in_progress: True if a reset is in progress.
+		 * @in_progress: True if a reset is in progress.
 		 *
 		 * Set to true in panthor_sched_pre_reset() and back to false in
 		 * panthor_sched_post_reset().
@@ -302,7 +301,7 @@ struct panthor_scheduler {
 		atomic_t in_progress;
 
 		/**
-		 * @reset.stopped_groups: List containing all groups that were stopped
+		 * @stopped_groups: List containing all groups that were stopped
 		 * before a reset.
 		 *
 		 * Insert panthor_group::run_node in the pre_reset path.
@@ -396,19 +395,19 @@ struct panthor_queue {
 
 	/** @iface: Firmware interface. */
 	struct {
-		/** @iface.mem: FW memory allocated for this interface. */
+		/** @mem: FW memory allocated for this interface. */
 		struct panthor_kernel_bo *mem;
 
-		/** @iface.input: Input interface. */
+		/** @input: Input interface. */
 		struct panthor_fw_ringbuf_input_iface *input;
 
-		/** @iface.output: Output interface. */
+		/** @output: Output interface. */
 		const struct panthor_fw_ringbuf_output_iface *output;
 
-		/** @iface.input_fw_va: FW virtual address of the input interface buffer. */
+		/** @input_fw_va: FW virtual address of the input interface buffer. */
 		u32 input_fw_va;
 
-		/** @iface.output_fw_va: FW virtual address of the output interface buffer. */
+		/** @output_fw_va: FW virtual address of the output interface buffer. */
 		u32 output_fw_va;
 	} iface;
 
@@ -417,26 +416,26 @@ struct panthor_queue {
 	 * queue is waiting on.
 	 */
 	struct {
-		/** @syncwait.gpu_va: GPU address of the synchronization object. */
+		/** @gpu_va: GPU address of the synchronization object. */
 		u64 gpu_va;
 
-		/** @syncwait.ref: Reference value to compare against. */
+		/** @ref: Reference value to compare against. */
 		u64 ref;
 
-		/** @syncwait.gt: True if this is a greater-than test. */
+		/** @gt: True if this is a greater-than test. */
 		bool gt;
 
-		/** @syncwait.sync64: True if this is a 64-bit sync object. */
+		/** @sync64: True if this is a 64-bit sync object. */
 		bool sync64;
 
-		/** @syncwait.obj: Buffer object holding the synchronization object. */
+		/** @bo: Buffer object holding the synchronization object. */
 		struct drm_gem_object *obj;
 
-		/** @syncwait.offset: Offset of the synchronization object inside @bo. */
+		/** @offset: Offset of the synchronization object inside @bo. */
 		u64 offset;
 
 		/**
-		 * @syncwait.kmap: Kernel mapping of the buffer object holding the
+		 * @kmap: Kernel mapping of the buffer object holding the
 		 * synchronization object.
 		 */
 		void *kmap;
@@ -444,21 +443,21 @@ struct panthor_queue {
 
 	/** @fence_ctx: Fence context fields. */
 	struct {
-		/** @fence_ctx.lock: Used to protect access to all fences allocated by this context. */
+		/** @lock: Used to protect access to all fences allocated by this context. */
 		spinlock_t lock;
 
 		/**
-		 * @fence_ctx.id: Fence context ID.
+		 * @id: Fence context ID.
 		 *
 		 * Allocated with dma_fence_context_alloc().
 		 */
 		u64 id;
 
-		/** @fence_ctx.seqno: Sequence number of the last initialized fence. */
+		/** @seqno: Sequence number of the last initialized fence. */
 		atomic64_t seqno;
 
 		/**
-		 * @fence_ctx.last_fence: Fence of the last submitted job.
+		 * @last_fence: Fence of the last submitted job.
 		 *
 		 * We return this fence when we get an empty command stream.
 		 * This way, we are guaranteed that all earlier jobs have completed
@@ -468,7 +467,7 @@ struct panthor_queue {
 		struct dma_fence *last_fence;
 
 		/**
-		 * @fence_ctx.in_flight_jobs: List containing all in-flight jobs.
+		 * @in_flight_jobs: List containing all in-flight jobs.
 		 *
 		 * Used to keep track and signal panthor_job::done_fence when the
 		 * synchronization object attached to the queue is signaled.
@@ -478,13 +477,13 @@ struct panthor_queue {
 
 	/** @profiling: Job profiling data slots and access information. */
 	struct {
-		/** @profiling.slots: Kernel BO holding the slots. */
+		/** @slots: Kernel BO holding the slots. */
 		struct panthor_kernel_bo *slots;
 
-		/** @profiling.slot_count: Number of jobs ringbuffer can hold at once. */
+		/** @slot_count: Number of jobs ringbuffer can hold at once. */
 		u32 slot_count;
 
-		/** @profiling.seqno: Index of the next available profiling information slot. */
+		/** @seqno: Index of the next available profiling information slot. */
 		u32 seqno;
 	} profiling;
 };
@@ -628,7 +627,7 @@ struct panthor_group {
 
 	/** @fdinfo: Per-file info exposed through /proc/<process>/fdinfo */
 	struct {
-		/** @fdinfo.data: Total sampled values for jobs in queues from this group. */
+		/** @data: Total sampled values for jobs in queues from this group. */
 		struct panthor_gpu_usage data;
 
 		/**
@@ -806,15 +805,15 @@ struct panthor_job {
 
 	/** @call_info: Information about the userspace command stream call. */
 	struct {
-		/** @call_info.start: GPU address of the userspace command stream. */
+		/** @start: GPU address of the userspace command stream. */
 		u64 start;
 
-		/** @call_info.size: Size of the userspace command stream. */
+		/** @size: Size of the userspace command stream. */
 		u32 size;
 
 		/**
-		 * @call_info.latest_flush: Flush ID at the time the userspace
-		 * command stream was built.
+		 * @latest_flush: Flush ID at the time the userspace command
+		 * stream was built.
 		 *
 		 * Needed for the flush reduction mechanism.
 		 */
@@ -823,10 +822,10 @@ struct panthor_job {
 
 	/** @ringbuf: Position of this job is in the ring buffer. */
 	struct {
-		/** @ringbuf.start: Start offset. */
+		/** @start: Start offset. */
 		u64 start;
 
-		/** @ringbuf.end: End offset. */
+		/** @end: End offset. */
 		u64 end;
 	} ringbuf;
 
@@ -841,10 +840,10 @@ struct panthor_job {
 
 	/** @profiling: Job profiling information. */
 	struct {
-		/** @profiling.mask: Current device job profiling enablement bitmask. */
+		/** @mask: Current device job profiling enablement bitmask. */
 		u32 mask;
 
-		/** @profiling.slot: Job index in the profiling slots BO. */
+		/** @slot: Job index in the profiling slots BO. */
 		u32 slot;
 	} profiling;
 };
@@ -872,7 +871,8 @@ panthor_queue_get_syncwait_obj(struct panthor_group *group, struct panthor_queue
 	int ret;
 
 	if (queue->syncwait.kmap) {
-		bo = to_panthor_bo(queue->syncwait.obj);
+		bo = container_of(queue->syncwait.obj,
+				  struct panthor_gem_object, base.base);
 		goto out_sync;
 	}
 
@@ -882,7 +882,7 @@ panthor_queue_get_syncwait_obj(struct panthor_group *group, struct panthor_queue
 	if (drm_WARN_ON(&ptdev->base, IS_ERR_OR_NULL(bo)))
 		goto err_put_syncwait_obj;
 
-	queue->syncwait.obj = &bo->base;
+	queue->syncwait.obj = &bo->base.base;
 	ret = drm_gem_vmap(queue->syncwait.obj, &map);
 	if (drm_WARN_ON(&ptdev->base, ret))
 		goto err_put_syncwait_obj;
@@ -896,7 +896,7 @@ out_sync:
 	 * panthor_gem_sync() is a NOP if map_wc=true, so no need to check
 	 * it here.
 	 */
-	panthor_gem_sync(&bo->base,
+	panthor_gem_sync(&bo->base.base,
 			 DRM_PANTHOR_BO_SYNC_CPU_CACHE_FLUSH_AND_INVALIDATE,
 			 queue->syncwait.offset,
 			 queue->syncwait.sync64 ?
@@ -1894,8 +1894,6 @@ static void process_fw_events_work(struct work_struct *work)
 
 /**
  * panthor_sched_report_fw_events() - Report FW events to the scheduler.
- * @ptdev: Device.
- * @events: Bitmask of pending FW events to report.
  */
 void panthor_sched_report_fw_events(struct panthor_device *ptdev, u32 events)
 {
@@ -2781,7 +2779,6 @@ static void panthor_group_start(struct panthor_group *group)
 
 /**
  * panthor_sched_report_mmu_fault() - Report MMU faults to the scheduler.
- * @ptdev: Device.
  */
 void panthor_sched_report_mmu_fault(struct panthor_device *ptdev)
 {
@@ -3373,7 +3370,7 @@ queue_run_job(struct drm_sched_job *sched_job)
 		if (resume_tick)
 			sched_resume_tick(ptdev);
 
-		panthor_fw_ring_doorbell(ptdev, queue->doorbell_id);
+		gpu_write(ptdev, CSF_DOORBELL(queue->doorbell_id), 1);
 		if (!sched->pm.has_ref &&
 		    !(group->blocked_queues & BIT(job->queue_idx))) {
 			pm_runtime_get(ptdev->base.dev);
@@ -3490,6 +3487,7 @@ group_create_queue(struct panthor_group *group,
 	struct drm_sched_init_args sched_args = {
 		.ops = &panthor_queue_sched_ops,
 		.submit_wq = group->ptdev->scheduler->wq,
+		.num_rqs = 1,
 		/*
 		 * The credit limit argument tells us the total number of
 		 * instructions across all CS slots in the ringbuffer, with

@@ -371,7 +371,7 @@ xfs_btree_check_ptr(
 		case XFS_BTREE_TYPE_INODE:
 			xfs_err(cur->bc_mp,
 "Inode %llu fork %d: Corrupt %sbt pointer at level %d index %d.",
-				I_INO(cur->bc_ino.ip),
+				cur->bc_ino.ip->i_ino,
 				cur->bc_ino.whichfork, cur->bc_ops->name,
 				level, index);
 			break;
@@ -1305,7 +1305,7 @@ xfs_btree_owner(
 	case XFS_BTREE_TYPE_MEM:
 		return cur->bc_mem.xfbtree->owner;
 	case XFS_BTREE_TYPE_INODE:
-		return I_INO(cur->bc_ino.ip);
+		return cur->bc_ino.ip->i_ino;
 	case XFS_BTREE_TYPE_AG:
 		return cur->bc_group->xg_gno;
 	default:
@@ -3129,7 +3129,7 @@ xfs_btree_promote_leaf_iroot(
 	 */
 	broot = cur->bc_ops->broot_realloc(cur, 1);
 	xfs_btree_init_block(cur->bc_mp, broot, cur->bc_ops,
-			cur->bc_nlevels - 1, 1, I_INO(cur->bc_ino.ip));
+			cur->bc_nlevels - 1, 1, cur->bc_ino.ip->i_ino);
 
 	pp = xfs_btree_ptr_addr(cur, 1, broot);
 	kp = xfs_btree_key_addr(cur, 1, broot);
@@ -3243,7 +3243,8 @@ xfs_btree_new_iroot(
 	if (level > 0)
 		aptr = *xfs_btree_ptr_addr(cur, 1, block);
 	else
-		aptr.l = cpu_to_be64(XFS_INODE_TO_FSB(cur->bc_ino.ip));
+		aptr.l = cpu_to_be64(XFS_INO_TO_FSB(cur->bc_mp,
+				cur->bc_ino.ip->i_ino));
 
 	/* Allocate the new block. If we can't do it, we're toast. Give up. */
 	error = xfs_btree_alloc_block(cur, &aptr, &nptr, stat);
@@ -3826,7 +3827,7 @@ xfs_btree_demote_leaf_child(
 	 */
 	broot = cur->bc_ops->broot_realloc(cur, numrecs);
 	xfs_btree_init_block(cur->bc_mp, broot, cur->bc_ops, 0, numrecs,
-			I_INO(cur->bc_ino.ip));
+			cur->bc_ino.ip->i_ino);
 
 	rp = xfs_btree_rec_addr(cur, 1, broot);
 	crp = xfs_btree_rec_addr(cur, 1, cblock);
@@ -5607,8 +5608,9 @@ xfs_btree_alloc_metafile_block(
 
 	ASSERT(xfs_is_metadir_inode(ip));
 
-	xfs_rmap_inode_bmbt_owner(&args.oinfo, ip, cur->bc_ino.whichfork);
-	error = xfs_alloc_vextent_start_ag(&args, XFS_INODE_TO_FSB(ip));
+	xfs_rmap_ino_bmbt_owner(&args.oinfo, ip->i_ino, cur->bc_ino.whichfork);
+	error = xfs_alloc_vextent_start_ag(&args,
+			XFS_INO_TO_FSB(cur->bc_mp, ip->i_ino));
 	if (error)
 		return error;
 	if (args.fsbno == NULLFSBLOCK) {
@@ -5639,7 +5641,7 @@ xfs_btree_free_metafile_block(
 
 	ASSERT(xfs_is_metadir_inode(ip));
 
-	xfs_rmap_inode_bmbt_owner(&oinfo, ip, cur->bc_ino.whichfork);
+	xfs_rmap_ino_bmbt_owner(&oinfo, ip->i_ino, cur->bc_ino.whichfork);
 	error = xfs_free_extent_later(tp, fsbno, 1, &oinfo, XFS_AG_RESV_METAFILE,
 			0);
 	if (error)

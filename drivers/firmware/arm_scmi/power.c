@@ -204,12 +204,8 @@ scmi_power_name_get(const struct scmi_protocol_handle *ph,
 		    u32 domain)
 {
 	struct scmi_power_info *pi = ph->get_priv(ph);
-	struct power_dom_info *dom;
+	struct power_dom_info *dom = pi->dom_info + domain;
 
-	if (domain >= pi->num_domains)
-		return "unknown";
-
-	dom = pi->dom_info + domain;
 	return dom->name;
 }
 

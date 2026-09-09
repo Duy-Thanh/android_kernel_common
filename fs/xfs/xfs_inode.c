@@ -495,9 +495,9 @@ xfs_lock_two_inodes(
 	ASSERT(!(ip1_mode & (XFS_IOLOCK_SHARED|XFS_IOLOCK_EXCL)));
 	ASSERT(!(ip0_mode & (XFS_MMAPLOCK_SHARED|XFS_MMAPLOCK_EXCL)));
 	ASSERT(!(ip1_mode & (XFS_MMAPLOCK_SHARED|XFS_MMAPLOCK_EXCL)));
-	ASSERT(I_INO(ip0) != I_INO(ip1));
+	ASSERT(ip0->i_ino != ip1->i_ino);
 
-	if (I_INO(ip0) > I_INO(ip1)) {
+	if (ip0->i_ino > ip1->i_ino) {
 		swap(ip0, ip1);
 		swap(ip0_mode, ip1_mode);
 	}
@@ -1357,7 +1357,7 @@ xfs_inactive_health(
 	if (sick & XFS_SICK_INO_FORGET)
 		return;
 
-	pag = xfs_perag_get(mp, XFS_INODE_TO_AGNO(ip));
+	pag = xfs_perag_get(mp, XFS_INO_TO_AGNO(mp, ip->i_ino));
 	if (!pag) {
 		/* There had better still be a perag structure! */
 		ASSERT(0);
@@ -1380,7 +1380,7 @@ int
 xfs_inactive(
 	xfs_inode_t	*ip)
 {
-	struct xfs_mount	*mp = ip->i_mount;
+	struct xfs_mount	*mp;
 	int			error = 0;
 	int			truncate = 0;
 
@@ -1393,20 +1393,7 @@ xfs_inactive(
 		goto out;
 	}
 
-	/*
-	 * If the filesystem has been shut down - for example a mount that
-	 * failed after background inactivation was enabled - do not
-	 * inactivate the inode.  Inactivation modifies persistent metadata,
-	 * its transactions cannot complete on a shut down mount, and the
-	 * subsystems it relies on (e.g. quota, mp->m_quotainfo) may not be
-	 * set up.  The attached dquots are dropped at the out: label and the
-	 * inode then goes straight to reclaim, the same way
-	 * xfs_inode_needs_inactive() already declines to inactivate on a shut
-	 * down mount at queue time.
-	 */
-	if (xfs_is_shutdown(mp))
-		goto out;
-
+	mp = ip->i_mount;
 	ASSERT(!xfs_iflags_test(ip, XFS_IRECOVERY));
 
 	xfs_inactive_health(ip);
@@ -1526,7 +1513,7 @@ xfs_iunlink_lookup(
 	 * Inode in RCU freeing limbo should not happen.  Warn about this and
 	 * let the caller handle the failure.
 	 */
-	if (WARN_ON_ONCE(!I_INO(ip))) {
+	if (WARN_ON_ONCE(!ip->i_ino)) {
 		rcu_read_unlock();
 		return NULL;
 	}
@@ -1627,7 +1614,7 @@ retry:
 	 * valid, the wrong inode or stale.
 	 */
 	spin_lock(&ip->i_flags_lock);
-	if (I_INO(ip) != inum || __xfs_iflags_test(ip, XFS_ISTALE))
+	if (ip->i_ino != inum || __xfs_iflags_test(ip, XFS_ISTALE))
 		goto out_iflags_unlock;
 
 	/*
@@ -1809,7 +1796,7 @@ xfs_ifree(
 	ASSERT(ip->i_disk_size == 0 || !S_ISREG(VFS_I(ip)->i_mode));
 	ASSERT(ip->i_nblocks == 0);
 
-	pag = xfs_perag_get(mp, XFS_INODE_TO_AGNO(ip));
+	pag = xfs_perag_get(mp, XFS_INO_TO_AGNO(mp, ip->i_ino));
 
 	error = xfs_inode_uninit(tp, pag, ip, &xic);
 	if (error)
@@ -2068,7 +2055,7 @@ xfs_sort_inodes(
 	 */
 	for (i = 0; i < num_inodes; i++) {
 		for (j = 1; j < num_inodes; j++) {
-			if (I_INO(i_tab[j]) < I_INO(i_tab[j-1]))
+			if (i_tab[j]->i_ino < i_tab[j-1]->i_ino)
 				swap(i_tab[j], i_tab[j - 1]);
 		}
 	}
@@ -2318,7 +2305,8 @@ retry:
 			struct xfs_perag	*pag;
 			struct xfs_buf		*bp;
 
-			pag = xfs_perag_get(mp, XFS_INODE_TO_AGNO(inodes[i]));
+			pag = xfs_perag_get(mp,
+					XFS_INO_TO_AGNO(mp, inodes[i]->i_ino));
 			error = xfs_read_agi(pag, tp, 0, &bp);
 			xfs_perag_put(pag);
 			if (error)
@@ -2399,7 +2387,7 @@ xfs_iflush(
 	    XFS_TEST_ERROR(mp, XFS_ERRTAG_IFLUSH_1)) {
 		xfs_alert_tag(mp, XFS_PTAG_IFLUSH,
 			"%s: Bad inode %llu magic number 0x%x, ptr "PTR_FMT,
-			__func__, I_INO(ip), be16_to_cpu(dip->di_magic), dip);
+			__func__, ip->i_ino, be16_to_cpu(dip->di_magic), dip);
 		goto flush_out;
 	}
 	if (ip->i_df.if_format == XFS_DINODE_FMT_META_BTREE) {
@@ -2408,7 +2396,7 @@ xfs_iflush(
 			xfs_alert_tag(mp, XFS_PTAG_IFLUSH,
 				"%s: Bad %s meta btree inode %Lu, ptr "PTR_FMT,
 				__func__, xfs_metafile_type_str(ip->i_metatype),
-				I_INO(ip), ip);
+				ip->i_ino, ip);
 			goto flush_out;
 		}
 	} else if (S_ISREG(VFS_I(ip)->i_mode)) {
@@ -2417,7 +2405,7 @@ xfs_iflush(
 		    XFS_TEST_ERROR(mp, XFS_ERRTAG_IFLUSH_3)) {
 			xfs_alert_tag(mp, XFS_PTAG_IFLUSH,
 				"%s: Bad regular inode %llu, ptr "PTR_FMT,
-				__func__, I_INO(ip), ip);
+				__func__, ip->i_ino, ip);
 			goto flush_out;
 		}
 	} else if (S_ISDIR(VFS_I(ip)->i_mode)) {
@@ -2427,7 +2415,7 @@ xfs_iflush(
 		    XFS_TEST_ERROR(mp, XFS_ERRTAG_IFLUSH_4)) {
 			xfs_alert_tag(mp, XFS_PTAG_IFLUSH,
 				"%s: Bad directory inode %llu, ptr "PTR_FMT,
-				__func__, I_INO(ip), ip);
+				__func__, ip->i_ino, ip);
 			goto flush_out;
 		}
 	}
@@ -2436,7 +2424,7 @@ xfs_iflush(
 		xfs_alert_tag(mp, XFS_PTAG_IFLUSH,
 			"%s: detected corrupt incore inode %llu, "
 			"total extents = %llu nblocks = %lld, ptr "PTR_FMT,
-			__func__, I_INO(ip),
+			__func__, ip->i_ino,
 			ip->i_df.if_nextents + xfs_ifork_nextents(&ip->i_af),
 			ip->i_nblocks, ip);
 		goto flush_out;
@@ -2445,7 +2433,7 @@ xfs_iflush(
 	    XFS_TEST_ERROR(mp, XFS_ERRTAG_IFLUSH_6)) {
 		xfs_alert_tag(mp, XFS_PTAG_IFLUSH,
 			"%s: bad inode %llu, forkoff 0x%x, ptr "PTR_FMT,
-			__func__, I_INO(ip), ip->i_forkoff, ip);
+			__func__, ip->i_ino, ip->i_forkoff, ip);
 		goto flush_out;
 	}
 
@@ -2453,7 +2441,7 @@ xfs_iflush(
 	    ip->i_af.if_format == XFS_DINODE_FMT_META_BTREE) {
 		xfs_alert_tag(mp, XFS_PTAG_IFLUSH,
 			"%s: meta btree in inode %Lu attr fork, ptr "PTR_FMT,
-			__func__, I_INO(ip), ip);
+			__func__, ip->i_ino, ip);
 		goto flush_out;
 	}
 
@@ -2753,7 +2741,7 @@ xfs_mmaplock_two_inodes_and_break_dax_layout(
 {
 	int			error;
 
-	if (I_INO(ip1) > I_INO(ip2))
+	if (ip1->i_ino > ip2->i_ino)
 		swap(ip1, ip2);
 
 again:
@@ -2865,8 +2853,8 @@ xfs_inode_reload_unlinked_bucket(
 	struct xfs_buf		*agibp;
 	struct xfs_agi		*agi;
 	struct xfs_perag	*pag;
-	xfs_agnumber_t		agno = XFS_INODE_TO_AGNO(ip);
-	xfs_agino_t		agino = XFS_INODE_TO_AGINO(ip);
+	xfs_agnumber_t		agno = XFS_INO_TO_AGNO(mp, ip->i_ino);
+	xfs_agino_t		agino = XFS_INO_TO_AGINO(mp, ip->i_ino);
 	xfs_agino_t		prev_agino, next_agino;
 	unsigned int		bucket;
 	bool			foundit = false;

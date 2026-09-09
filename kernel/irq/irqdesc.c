@@ -137,18 +137,17 @@ static void desc_set_defaults(unsigned int irq, struct irq_desc *desc, int node,
 	desc->tot_count = 0;
 	desc->name = NULL;
 	desc->owner = owner;
-	rcuref_init(&desc->refcnt, 1);
 	desc_smp_init(desc, node, affinity);
 }
 
-unsigned int total_nr_irqs __read_mostly = NR_IRQS;
+static unsigned int nr_irqs = NR_IRQS;
 
 /**
  * irq_get_nr_irqs() - Number of interrupts supported by the system.
  */
 unsigned int irq_get_nr_irqs(void)
 {
-	return total_nr_irqs;
+	return nr_irqs;
 }
 EXPORT_SYMBOL_GPL(irq_get_nr_irqs);
 
@@ -158,12 +157,13 @@ EXPORT_SYMBOL_GPL(irq_get_nr_irqs);
  *
  * Return: @nr.
  */
-unsigned int __init irq_set_nr_irqs(unsigned int nr)
+unsigned int irq_set_nr_irqs(unsigned int nr)
 {
-	total_nr_irqs = nr;
-	irq_proc_calc_prec();
+	nr_irqs = nr;
+
 	return nr;
 }
+EXPORT_SYMBOL_GPL(irq_set_nr_irqs);
 
 static DEFINE_MUTEX(sparse_irq_lock);
 static struct maple_tree sparse_irqs = MTREE_INIT_EXT(sparse_irqs,
@@ -181,12 +181,15 @@ static int irq_find_free_area(unsigned int from, unsigned int cnt)
 	return mas.index;
 }
 
-struct irq_desc *irq_find_desc_at_or_after(unsigned int offset)
+static unsigned int irq_find_at_or_after(unsigned int offset)
 {
 	unsigned long index = offset;
+	struct irq_desc *desc;
 
-	lockdep_assert_in_rcu_read_lock();
-	return mt_find(&sparse_irqs, &index, total_nr_irqs);
+	guard(rcu)();
+	desc = mt_find(&sparse_irqs, &index, nr_irqs);
+
+	return desc ? irq_desc_get_irq(desc) : nr_irqs;
 }
 
 static void irq_insert_desc(unsigned int irq, struct irq_desc *desc)
@@ -461,17 +464,6 @@ static void delayed_free_desc(struct rcu_head *rhp)
 	kobject_put(&desc->kobj);
 }
 
-void irq_desc_free_rcu(struct irq_desc *desc)
-{
-	/*
-	 * We free the descriptor, masks and stat fields via RCU. That
-	 * allows demultiplex interrupts to do rcu based management of
-	 * the child interrupts.
-	 * This also allows us to use rcu in kstat_irqs_usr().
-	 */
-	call_rcu(&desc->rcu, delayed_free_desc);
-}
-
 static void free_desc(unsigned int irq)
 {
 	struct irq_desc *desc = irq_to_desc(irq);
@@ -490,7 +482,14 @@ static void free_desc(unsigned int irq)
 	 */
 	irq_sysfs_del(desc);
 	delete_irq_desc(irq);
-	irq_desc_put_ref(desc);
+
+	/*
+	 * We free the descriptor, masks and stat fields via RCU. That
+	 * allows demultiplex interrupts to do rcu based management of
+	 * the child interrupts.
+	 * This also allows us to use rcu in kstat_irqs_usr().
+	 */
+	call_rcu(&desc->rcu, delayed_free_desc);
 }
 
 static int alloc_descs(unsigned int start, unsigned int cnt, int node,
@@ -542,8 +541,7 @@ static bool irq_expand_nr_irqs(unsigned int nr)
 {
 	if (nr > MAX_SPARSE_IRQS)
 		return false;
-	total_nr_irqs = nr;
-	irq_proc_calc_prec();
+	nr_irqs = nr;
 	return true;
 }
 
@@ -557,22 +555,21 @@ int __init early_irq_init(void)
 	/* Let arch update nr_irqs and return the nr of preallocated irqs */
 	initcnt = arch_probe_nr_irqs();
 	printk(KERN_INFO "NR_IRQS: %d, nr_irqs: %d, preallocated irqs: %d\n",
-	       NR_IRQS, total_nr_irqs, initcnt);
+	       NR_IRQS, nr_irqs, initcnt);
 
-	if (WARN_ON(total_nr_irqs > MAX_SPARSE_IRQS))
-		total_nr_irqs = MAX_SPARSE_IRQS;
+	if (WARN_ON(nr_irqs > MAX_SPARSE_IRQS))
+		nr_irqs = MAX_SPARSE_IRQS;
 
 	if (WARN_ON(initcnt > MAX_SPARSE_IRQS))
 		initcnt = MAX_SPARSE_IRQS;
 
-	if (initcnt > total_nr_irqs)
-		total_nr_irqs = initcnt;
+	if (initcnt > nr_irqs)
+		nr_irqs = initcnt;
 
 	for (i = 0; i < initcnt; i++) {
 		desc = alloc_desc(i, node, 0, NULL, NULL);
 		irq_insert_desc(i, desc);
 	}
-	irq_proc_calc_prec();
 	return arch_early_irq_init();
 }
 
@@ -593,7 +590,7 @@ int __init early_irq_init(void)
 
 	init_irq_default_affinity();
 
-	pr_info("NR_IRQS: %d\n", NR_IRQS);
+	printk(KERN_INFO "NR_IRQS: %d\n", NR_IRQS);
 
 	count = ARRAY_SIZE(irq_desc);
 
@@ -603,7 +600,6 @@ int __init early_irq_init(void)
 			goto __free_desc_res;
 	}
 
-	irq_proc_calc_prec();
 	return arch_early_irq_init();
 
 __free_desc_res:
@@ -864,7 +860,7 @@ void irq_free_descs(unsigned int from, unsigned int cnt)
 {
 	int i;
 
-	if (from >= total_nr_irqs || (from + cnt) > total_nr_irqs)
+	if (from >= nr_irqs || (from + cnt) > nr_irqs)
 		return;
 
 	guard(mutex)(&sparse_irq_lock);
@@ -913,7 +909,7 @@ int __ref __irq_alloc_descs(int irq, unsigned int from, unsigned int cnt, int no
 	if (irq >=0 && start != irq)
 		return -EEXIST;
 
-	if (start + cnt > total_nr_irqs) {
+	if (start + cnt > nr_irqs) {
 		if (!irq_expand_nr_irqs(start + cnt))
 			return -ENOMEM;
 	}
@@ -925,15 +921,11 @@ EXPORT_SYMBOL_GPL(__irq_alloc_descs);
  * irq_get_next_irq - get next allocated irq number
  * @offset:	where to start the search
  *
- * Returns next irq number after offset or total_nr_irqs if none is found.
+ * Returns next irq number after offset or nr_irqs if none is found.
  */
 unsigned int irq_get_next_irq(unsigned int offset)
 {
-	struct irq_desc *desc;
-
-	guard(rcu)();
-	desc = irq_find_desc_at_or_after(offset);
-	return desc ? irq_desc_get_irq(desc) : total_nr_irqs;
+	return irq_find_at_or_after(offset);
 }
 
 struct irq_desc *__irq_get_desc_lock(unsigned int irq, unsigned long *flags, bool bus,

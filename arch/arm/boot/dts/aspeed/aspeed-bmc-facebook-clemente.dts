@@ -443,6 +443,11 @@
 			#address-cells = <1>;
 			#size-cells = <0>;
 			reg = <0>;
+			// IOB0 NIC0 TEMP
+			temperature-sensor@1f {
+				compatible = "ti,tmp421";
+				reg = <0x1f>;
+			};
 		};
 
 		i2c0mux2ch1: i2c@1 {
@@ -461,6 +466,11 @@
 			#address-cells = <1>;
 			#size-cells = <0>;
 			reg = <3>;
+			// IOB0 NIC1 TEMP
+			temperature-sensor@1f {
+				compatible = "ti,tmp421";
+				reg = <0x1f>;
+			};
 		};
 	};
 
@@ -627,6 +637,11 @@
 			#address-cells = <1>;
 			#size-cells = <0>;
 			reg = <0>;
+			// IOB1 NIC0 TEMP
+			temperature-sensor@1f {
+				compatible = "ti,tmp421";
+				reg = <0x1f>;
+			};
 		};
 
 		i2c0mux5ch1: i2c@1 {
@@ -651,6 +666,11 @@
 			#address-cells = <1>;
 			#size-cells = <0>;
 			reg = <3>;
+			// IOB1 NIC1 TEMP
+			temperature-sensor@1f {
+				compatible = "ti,tmp421";
+				reg = <0x1f>;
+			};
 		};
 	};
 };

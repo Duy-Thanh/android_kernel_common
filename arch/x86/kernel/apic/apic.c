@@ -64,7 +64,6 @@
 #include <asm/tsc.h>
 #include <asm/hypervisor.h>
 #include <asm/cpu_device_id.h>
-#include <asm/cpuid/api.h>
 #include <asm/intel-family.h>
 #include <asm/irq_regs.h>
 #include <asm/cpu.h>
@@ -1046,7 +1045,7 @@ static void local_apic_timer_interrupt(void)
 	/*
 	 * the NMI deadlock-detector uses this.
 	 */
-	inc_irq_stat(APIC_TIMER);
+	inc_irq_stat(apic_timer_irqs);
 
 	evt->event_handler(evt);
 }
@@ -2115,7 +2114,7 @@ static noinline void handle_spurious_interrupt(u8 vector)
 
 	trace_spurious_apic_entry(vector);
 
-	irq_stat_inc_and_enable(IRQ_COUNT_SPURIOUS);
+	inc_irq_stat(irq_spurious_count);
 
 	/*
 	 * If this is a spurious interrupt then do not acknowledge
@@ -2187,7 +2186,7 @@ DEFINE_IDTENTRY_SYSVEC(sysvec_error_interrupt)
 		apic_write(APIC_ESR, 0);
 	v = apic_read(APIC_ESR);
 	apic_eoi();
-	irq_stat_inc_and_enable(IRQ_COUNT_PIC_APIC_ERROR);
+	atomic_inc(&irq_err_count);
 
 	apic_pr_debug("APIC error on CPU%d: %02x", smp_processor_id(), v);
 

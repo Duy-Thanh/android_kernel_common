@@ -38,7 +38,8 @@ static int s3d_get_props(struct s3d_info *sp)
 	sp->depth = of_getintprop_default(sp->of_node, "depth", 8);
 
 	if (!sp->width || !sp->height) {
-		pci_err(sp->pdev, "Critical properties missing\n");
+		printk(KERN_ERR "s3d: Critical properties missing for %s\n",
+		       pci_name(sp->pdev));
 		return -EINVAL;
 	}
 
@@ -106,7 +107,7 @@ static int s3d_set_fbinfo(struct s3d_info *sp)
 	var->transp.length = 0;
 
 	if (fb_alloc_cmap(&info->cmap, 256, 0)) {
-		pci_err(sp->pdev, "Cannot allocate color map\n");
+		printk(KERN_ERR "s3d: Cannot allocate color map.\n");
 		return -ENOMEM;
 	}
 
@@ -126,7 +127,8 @@ static int s3d_pci_register(struct pci_dev *pdev,
 
 	err = pci_enable_device(pdev);
 	if (err < 0) {
-		pci_err(pdev, "Cannot enable PCI device\n");
+		printk(KERN_ERR "s3d: Cannot enable PCI device %s\n",
+		       pci_name(pdev));
 		goto err_out;
 	}
 
@@ -141,7 +143,8 @@ static int s3d_pci_register(struct pci_dev *pdev,
 	sp->pdev = pdev;
 	sp->of_node = pci_device_to_OF_node(pdev);
 	if (!sp->of_node) {
-		pci_err(pdev, "Cannot find OF node\n");
+		printk(KERN_ERR "s3d: Cannot find OF node of %s\n",
+		       pci_name(pdev));
 		err = -ENODEV;
 		goto err_release_fb;
 	}
@@ -150,7 +153,8 @@ static int s3d_pci_register(struct pci_dev *pdev,
 
 	err = pci_request_region(pdev, 1, "s3d framebuffer");
 	if (err < 0) {
-		pci_err(pdev, "Cannot request region 1\n");
+		printk("s3d: Cannot request region 1 for %s\n",
+		       pci_name(pdev));
 		goto err_release_fb;
 	}
 
@@ -190,11 +194,12 @@ static int s3d_pci_register(struct pci_dev *pdev,
 
 	pci_set_drvdata(pdev, info);
 
-	pci_info(pdev, "Found device\n");
+	printk("s3d: Found device at %s\n", pci_name(pdev));
 
 	err = register_framebuffer(info);
 	if (err < 0) {
-		pci_err(pdev, "Could not register framebuffer\n");
+		printk(KERN_ERR "s3d: Could not register framebuffer %s\n",
+		       pci_name(pdev));
 		goto err_unmap_fb;
 	}
 

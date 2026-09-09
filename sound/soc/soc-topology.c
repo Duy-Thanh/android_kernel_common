@@ -1326,24 +1326,9 @@ static int soc_tplg_dapm_complete(struct soc_tplg *tplg)
 	return ret;
 }
 
-static int soc_tplg_check_name(const char *name)
-{
-	if (strnlen(name, SNDRV_CTL_ELEM_ID_NAME_MAXLEN) ==
-	    SNDRV_CTL_ELEM_ID_NAME_MAXLEN)
-		return -EINVAL;
-
-	return 0;
-}
-
 static int set_stream_info(struct soc_tplg *tplg, struct snd_soc_pcm_stream *stream,
 			   struct snd_soc_tplg_stream_caps *caps)
 {
-	int ret;
-
-	ret = soc_tplg_check_name(caps->name);
-	if (ret)
-		return ret;
-
 	stream->stream_name = devm_kstrdup(tplg->dev, caps->name, GFP_KERNEL);
 	if (!stream->stream_name)
 		return -ENOMEM;
@@ -1395,11 +1380,7 @@ static int soc_tplg_dai_create(struct soc_tplg *tplg,
 	if (dai_drv == NULL)
 		return -ENOMEM;
 
-	ret = soc_tplg_check_name(pcm->dai_name);
-	if (ret)
-		goto err;
-
-	if (pcm->dai_name[0]) {
+	if (strlen(pcm->dai_name)) {
 		dai_drv->name = devm_kstrdup(tplg->dev, pcm->dai_name, GFP_KERNEL);
 		if (!dai_drv->name) {
 			ret = -ENOMEM;
@@ -1505,11 +1486,7 @@ static int soc_tplg_fe_link_create(struct soc_tplg *tplg,
 	if (tplg->ops)
 		link->dobj.unload = tplg->ops->link_unload;
 
-	ret = soc_tplg_check_name(pcm->pcm_name);
-	if (ret)
-		goto err;
-
-	if (pcm->pcm_name[0]) {
+	if (strlen(pcm->pcm_name)) {
 		link->name = devm_kstrdup(tplg->dev, pcm->pcm_name, GFP_KERNEL);
 		link->stream_name = devm_kstrdup(tplg->dev, pcm->pcm_name, GFP_KERNEL);
 		if (!link->name || !link->stream_name) {
@@ -1519,11 +1496,7 @@ static int soc_tplg_fe_link_create(struct soc_tplg *tplg,
 	}
 	link->id = le32_to_cpu(pcm->pcm_id);
 
-	ret = soc_tplg_check_name(pcm->dai_name);
-	if (ret)
-		goto err;
-
-	if (pcm->dai_name[0]) {
+	if (strlen(pcm->dai_name)) {
 		link->cpus->dai_name = devm_kstrdup(tplg->dev, pcm->dai_name, GFP_KERNEL);
 		if (!link->cpus->dai_name) {
 			ret = -ENOMEM;
@@ -1874,10 +1847,6 @@ static int soc_tplg_dai_config(struct soc_tplg *tplg,
 	int ret;
 
 	memset(&dai_component, 0, sizeof(dai_component));
-
-	ret = soc_tplg_check_name(d->dai_name);
-	if (ret)
-		return ret;
 
 	dai_component.dai_name = d->dai_name;
 	dai = snd_soc_find_dai(&dai_component);

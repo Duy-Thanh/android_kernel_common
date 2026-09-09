@@ -26,22 +26,21 @@ kernel::usb_device_table!(
 
 impl usb::Driver for SampleDriver {
     type IdInfo = ();
-    type Data<'bound> = Self;
     const ID_TABLE: usb::IdTable<Self::IdInfo> = &USB_TABLE;
 
-    fn probe<'bound>(
-        intf: &'bound usb::Interface<Core<'_>>,
+    fn probe(
+        intf: &usb::Interface<Core>,
         _id: &usb::DeviceId,
-        _info: &'bound Self::IdInfo,
-    ) -> impl PinInit<Self, Error> + 'bound {
-        let dev: &device::Device<Core<'_>> = intf.as_ref();
+        _info: &Self::IdInfo,
+    ) -> impl PinInit<Self, Error> {
+        let dev: &device::Device<Core> = intf.as_ref();
         dev_info!(dev, "Rust USB driver sample probed\n");
 
         Ok(Self { _intf: intf.into() })
     }
 
-    fn disconnect<'bound>(intf: &'bound usb::Interface<Core<'_>>, _data: Pin<&Self>) {
-        let dev: &device::Device<Core<'_>> = intf.as_ref();
+    fn disconnect(intf: &usb::Interface<Core>, _data: Pin<&Self>) {
+        let dev: &device::Device<Core> = intf.as_ref();
         dev_info!(dev, "Rust USB driver sample disconnected\n");
     }
 }

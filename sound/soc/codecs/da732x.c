@@ -1547,7 +1547,7 @@ err:
 }
 
 static const struct i2c_device_id da732x_i2c_id[] = {
-	{ .name = "da7320" },
+	{ "da7320"},
 	{ }
 };
 MODULE_DEVICE_TABLE(i2c, da732x_i2c_id);

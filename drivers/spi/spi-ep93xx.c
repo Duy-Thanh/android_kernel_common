@@ -600,7 +600,6 @@ fail_release_rx:
 	espi->dma_rx = NULL;
 fail_free_page:
 	free_page((unsigned long)espi->zeropage);
-	espi->zeropage = NULL;
 
 	return ret;
 }
@@ -632,7 +631,7 @@ static int ep93xx_spi_probe(struct platform_device *pdev)
 	if (irq < 0)
 		return irq;
 
-	host = devm_spi_alloc_host(&pdev->dev, sizeof(*espi));
+	host = spi_alloc_host(&pdev->dev, sizeof(*espi));
 	if (!host)
 		return -ENOMEM;
 
@@ -657,7 +656,8 @@ static int ep93xx_spi_probe(struct platform_device *pdev)
 	espi->clk = devm_clk_get(&pdev->dev, NULL);
 	if (IS_ERR(espi->clk)) {
 		dev_err(&pdev->dev, "unable to get spi clock\n");
-		return PTR_ERR(espi->clk);
+		error = PTR_ERR(espi->clk);
+		goto fail_release_host;
 	}
 
 	/*
@@ -668,21 +668,22 @@ static int ep93xx_spi_probe(struct platform_device *pdev)
 	host->min_speed_hz = clk_get_rate(espi->clk) / (254 * 256);
 
 	espi->mmio = devm_platform_get_and_ioremap_resource(pdev, 0, &res);
-	if (IS_ERR(espi->mmio))
-		return PTR_ERR(espi->mmio);
-
+	if (IS_ERR(espi->mmio)) {
+		error = PTR_ERR(espi->mmio);
+		goto fail_release_host;
+	}
 	espi->sspdr_phys = res->start + SSPDR;
 
 	error = devm_request_irq(&pdev->dev, irq, ep93xx_spi_interrupt,
 				0, "ep93xx-spi", host);
 	if (error) {
 		dev_err(&pdev->dev, "failed to request irq\n");
-		return error;
+		goto fail_release_host;
 	}
 
 	error = ep93xx_spi_setup_dma(&pdev->dev, espi);
 	if (error == -EPROBE_DEFER)
-		return error;
+		goto fail_release_host;
 
 	if (error)
 		dev_warn(&pdev->dev, "DMA setup failed. Falling back to PIO\n");
@@ -703,6 +704,8 @@ static int ep93xx_spi_probe(struct platform_device *pdev)
 
 fail_free_dma:
 	ep93xx_spi_release_dma(espi);
+fail_release_host:
+	spi_controller_put(host);
 
 	return error;
 }
@@ -712,9 +715,13 @@ static void ep93xx_spi_remove(struct platform_device *pdev)
 	struct spi_controller *host = platform_get_drvdata(pdev);
 	struct ep93xx_spi *espi = spi_controller_get_devdata(host);
 
+	spi_controller_get(host);
+
 	spi_unregister_controller(host);
 
 	ep93xx_spi_release_dma(espi);
+
+	spi_controller_put(host);
 }
 
 static const struct of_device_id ep93xx_spi_of_ids[] = {

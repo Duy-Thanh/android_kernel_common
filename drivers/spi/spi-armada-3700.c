@@ -818,13 +818,17 @@ static int a3700_spi_probe(struct platform_device *pdev)
 	u32 num_cs = 0;
 	int irq, ret = 0;
 
-	host = devm_spi_alloc_host(dev, sizeof(*spi));
-	if (!host)
-		return -ENOMEM;
+	host = spi_alloc_host(dev, sizeof(*spi));
+	if (!host) {
+		dev_err(dev, "host allocation failed\n");
+		ret = -ENOMEM;
+		goto out;
+	}
 
 	if (of_property_read_u32(dev->of_node, "num-cs", &num_cs)) {
 		dev_err(dev, "could not find num-cs\n");
-		return -ENXIO;
+		ret = -ENXIO;
+		goto error;
 	}
 
 	host->bus_num = pdev->id;
@@ -845,20 +849,25 @@ static int a3700_spi_probe(struct platform_device *pdev)
 	spi->host = host;
 
 	spi->base = devm_platform_ioremap_resource(pdev, 0);
-	if (IS_ERR(spi->base))
-		return PTR_ERR(spi->base);
+	if (IS_ERR(spi->base)) {
+		ret = PTR_ERR(spi->base);
+		goto error;
+	}
 
 	irq = platform_get_irq(pdev, 0);
-	if (irq < 0)
-		return -ENXIO;
-
+	if (irq < 0) {
+		ret = -ENXIO;
+		goto error;
+	}
 	spi->irq = irq;
 
 	init_completion(&spi->done);
 
 	spi->clk = devm_clk_get_prepared(dev, NULL);
-	if (IS_ERR(spi->clk))
-		return dev_err_probe(dev, PTR_ERR(spi->clk), "could not find clk\n");
+	if (IS_ERR(spi->clk)) {
+		dev_err(dev, "could not find clk: %ld\n", PTR_ERR(spi->clk));
+		goto error;
+	}
 
 	host->max_speed_hz = min_t(unsigned long, A3700_SPI_MAX_SPEED_HZ,
 					clk_get_rate(spi->clk));
@@ -869,16 +878,23 @@ static int a3700_spi_probe(struct platform_device *pdev)
 
 	ret = devm_request_irq(dev, spi->irq, a3700_spi_interrupt, 0,
 			       dev_name(dev), host);
-	if (ret)
-		return dev_err_probe(dev, ret, "could not request IRQ\n");
+	if (ret) {
+		dev_err(dev, "could not request IRQ: %d\n", ret);
+		goto error;
+	}
 
 	ret = devm_spi_register_controller(dev, host);
 	if (ret) {
 		dev_err(dev, "Failed to register host\n");
-		return ret;
+		goto error;
 	}
 
 	return 0;
+
+error:
+	spi_controller_put(host);
+out:
+	return ret;
 }
 
 static struct platform_driver a3700_spi_driver = {

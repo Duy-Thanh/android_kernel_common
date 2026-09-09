@@ -22,11 +22,11 @@ int vlv_clock_get_hpll_vco(struct drm_device *drm)
 	int hpll_freq, vco_freq[] = { 800, 1600, 2000, 2400 };
 
 	if (!display->vlv_clock.hpll_freq) {
-		vlv_cck_get(display);
+		vlv_cck_get(drm);
 		/* Obtain SKU information */
-		hpll_freq = vlv_cck_read(display, CCK_FUSE_REG) &
+		hpll_freq = vlv_cck_read(drm, CCK_FUSE_REG) &
 			CCK_FUSE_HPLL_FREQ_MASK;
-		vlv_cck_put(display);
+		vlv_cck_put(drm);
 
 		display->vlv_clock.hpll_freq = vco_freq[hpll_freq] * 1000;
 
@@ -39,13 +39,12 @@ int vlv_clock_get_hpll_vco(struct drm_device *drm)
 static int vlv_clock_get_cck(struct drm_device *drm,
 			     const char *name, u32 reg, int ref_freq)
 {
-	struct intel_display *display = to_intel_display(drm);
 	u32 val;
 	int divider;
 
-	vlv_cck_get(display);
-	val = vlv_cck_read(display, reg);
-	vlv_cck_put(display);
+	vlv_cck_get(drm);
+	val = vlv_cck_read(drm, reg);
+	vlv_cck_put(drm);
 
 	divider = val & CCK_FREQUENCY_VALUES;
 

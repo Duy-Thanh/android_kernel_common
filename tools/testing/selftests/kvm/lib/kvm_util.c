@@ -77,8 +77,7 @@ static ssize_t get_module_param(const char *module_name, const char *param,
 	int fd, r;
 
 	/* Verify KVM is loaded, to provide a more helpful SKIP message. */
-	fd = open_kvm_dev_path_or_exit();
-	kvm_free_fd(fd);
+	close(open_kvm_dev_path_or_exit());
 
 	r = snprintf(path, path_size, "/sys/module/%s/parameters/%s",
 		     module_name, param);
@@ -91,7 +90,8 @@ static ssize_t get_module_param(const char *module_name, const char *param,
 	TEST_ASSERT(bytes_read > 0, "read(%s) returned %ld, wanted %ld bytes",
 		    path, bytes_read, buffer_size);
 
-	kvm_free_fd(fd);
+	r = close(fd);
+	TEST_ASSERT(!r, "close(%s) failed", path);
 	return bytes_read;
 }
 
@@ -160,7 +160,7 @@ unsigned int kvm_check_cap(long cap)
 	ret = __kvm_ioctl(kvm_fd, KVM_CHECK_EXTENSION, (void *)cap);
 	TEST_ASSERT(ret >= 0, KVM_IOCTL_ERROR(KVM_CHECK_EXTENSION, ret));
 
-	kvm_free_fd(kvm_fd);
+	close(kvm_fd);
 
 	return (unsigned int)ret;
 }
@@ -747,7 +747,8 @@ static void kvm_stats_release(struct kvm_binary_stats *stats)
 		stats->desc = NULL;
 	}
 
-	kvm_free_fd(stats->fd);
+	kvm_close(stats->fd);
+	stats->fd = -1;
 }
 
 __weak void vcpu_arch_free(struct kvm_vcpu *vcpu)
@@ -776,7 +777,7 @@ static void vm_vcpu_rm(struct kvm_vm *vm, struct kvm_vcpu *vcpu)
 
 	kvm_munmap(vcpu->run, vcpu_mmap_sz());
 
-	kvm_free_fd(vcpu->fd);
+	kvm_close(vcpu->fd);
 	kvm_stats_release(&vcpu->stats);
 
 	list_del(&vcpu->list);
@@ -792,8 +793,8 @@ void kvm_vm_release(struct kvm_vm *vmp)
 	list_for_each_entry_safe(vcpu, tmp, &vmp->vcpus, list)
 		vm_vcpu_rm(vmp, vcpu);
 
-	kvm_free_fd(vmp->fd);
-	kvm_free_fd(vmp->kvm_fd);
+	kvm_close(vmp->fd);
+	kvm_close(vmp->kvm_fd);
 
 	/* Free cached stats metadata and close FD */
 	kvm_stats_release(&vmp->stats);
@@ -814,10 +815,10 @@ static void __vm_mem_region_delete(struct kvm_vm *vm,
 	if (region->fd >= 0) {
 		/* There's an extra map when using shared memory. */
 		kvm_munmap(region->mmap_alias, region->mmap_size);
-		kvm_free_fd(region->fd);
+		close(region->fd);
 	}
-	if ((int)region->region.guest_memfd >= 0)
-		kvm_free_fd(region->region.guest_memfd);
+	if (region->region.guest_memfd >= 0)
+		close(region->region.guest_memfd);
 
 	free(region);
 }
@@ -1310,7 +1311,7 @@ static size_t vcpu_mmap_sz(void)
 	TEST_ASSERT(ret >= 0 && ret >= sizeof(struct kvm_run),
 		    KVM_IOCTL_ERROR(KVM_GET_VCPU_MMAP_SIZE, ret));
 
-	kvm_free_fd(dev_fd);
+	close(dev_fd);
 
 	return ret;
 }

@@ -15,8 +15,7 @@
 #include <linux/jiffies.h>
 #include <linux/regmap.h>
 #include <linux/regulator/consumer.h>
-#include <linux/mod_devicetable.h>
-#include <linux/property.h>
+#include <linux/of.h>
 
 #define	DRIVER_NAME "tmp102"
 
@@ -314,7 +313,7 @@ static int tmp102_probe(struct i2c_client *client)
 	if (!tmp102)
 		return -ENOMEM;
 
-	device_property_read_string(dev, "label", &tmp102->label);
+	of_property_read_string(dev->of_node, "label", &tmp102->label);
 
 	i2c_set_clientdata(client, tmp102);
 
@@ -396,12 +395,12 @@ static int tmp102_resume(struct device *dev)
 static DEFINE_SIMPLE_DEV_PM_OPS(tmp102_dev_pm_ops, tmp102_suspend, tmp102_resume);
 
 static const struct i2c_device_id tmp102_id[] = {
-	{ .name = "tmp102" },
+	{ "tmp102" },
 	{ }
 };
 MODULE_DEVICE_TABLE(i2c, tmp102_id);
 
-static const struct of_device_id tmp102_of_match[] = {
+static const struct of_device_id __maybe_unused tmp102_of_match[] = {
 	{ .compatible = "ti,tmp102" },
 	{ },
 };
@@ -409,7 +408,7 @@ MODULE_DEVICE_TABLE(of, tmp102_of_match);
 
 static struct i2c_driver tmp102_driver = {
 	.driver.name	= DRIVER_NAME,
-	.driver.of_match_table = tmp102_of_match,
+	.driver.of_match_table = of_match_ptr(tmp102_of_match),
 	.driver.pm	= pm_sleep_ptr(&tmp102_dev_pm_ops),
 	.probe		= tmp102_probe,
 	.id_table	= tmp102_id,

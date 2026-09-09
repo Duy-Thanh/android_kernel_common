@@ -55,19 +55,16 @@ static int mthca_query_device(struct ib_device *ibdev, struct ib_device_attr *pr
 {
 	struct ib_smp *in_mad;
 	struct ib_smp *out_mad;
-	int err;
+	int err = -ENOMEM;
 	struct mthca_dev *mdev = to_mdev(ibdev);
 
-	err = ib_is_udata_in_empty(uhw);
-	if (err)
-		return err;
+	if (uhw->inlen || uhw->outlen)
+		return -EINVAL;
 
 	in_mad = kzalloc_obj(*in_mad);
 	out_mad = kmalloc_obj(*out_mad);
-	if (!in_mad || !out_mad) {
-		err = -ENOMEM;
+	if (!in_mad || !out_mad)
 		goto out;
-	}
 
 	memset(props, 0, sizeof *props);
 
@@ -114,7 +111,7 @@ static int mthca_query_device(struct ib_device *ibdev, struct ib_device_attr *pr
 	props->max_total_mcast_qp_attach = props->max_mcast_qp_attach *
 					   props->max_mcast_grp;
 
-	err = ib_respond_empty_udata(uhw);
+	err = 0;
  out:
 	kfree(in_mad);
 	kfree(out_mad);
@@ -314,11 +311,10 @@ static int mthca_alloc_ucontext(struct ib_ucontext *uctx,
 		return err;
 	}
 
-	err = ib_respond_udata(udata, uresp);
-	if (err) {
+	if (ib_copy_to_udata(udata, &uresp, sizeof(uresp))) {
 		mthca_cleanup_user_db_tab(to_mdev(ibdev), &context->uar, context->db_tab);
 		mthca_uar_free(to_mdev(ibdev), &context->uar);
-		return err;
+		return -EFAULT;
 	}
 
 	context->reg_mr_warned = 0;
@@ -360,12 +356,9 @@ static int mthca_alloc_pd(struct ib_pd *ibpd, struct ib_udata *udata)
 		return err;
 
 	if (udata) {
-		struct mthca_alloc_pd_resp uresp = { .pdn = pd->pd_num };
-
-		err = ib_respond_udata(udata, uresp);
-		if (err) {
+		if (ib_copy_to_udata(udata, &pd->pd_num, sizeof (__u32))) {
 			mthca_pd_free(to_mdev(ibdev), pd);
-			return err;
+			return -EFAULT;
 		}
 	}
 
@@ -434,17 +427,11 @@ static int mthca_create_srq(struct ib_srq *ibsrq,
 	if (err)
 		return err;
 
-	if (context) {
-		struct mthca_create_srq_resp uresp = { .srqn = srq->srqn };
-
-		err = ib_respond_udata(udata, uresp);
-		if (err) {
-			mthca_free_srq(to_mdev(ibsrq->device), srq);
-			mthca_unmap_user_db(to_mdev(ibsrq->device),
-					    &context->uar, context->db_tab,
-					    ucmd.db_index);
-			return err;
-		}
+	if (context && ib_copy_to_udata(udata, &srq->srqn, sizeof(__u32))) {
+		mthca_free_srq(to_mdev(ibsrq->device), srq);
+		mthca_unmap_user_db(to_mdev(ibsrq->device), &context->uar,
+				    context->db_tab, ucmd.db_index);
+		return -EFAULT;
 	}
 
 	return 0;
@@ -643,14 +630,10 @@ static int mthca_create_cq(struct ib_cq *ibcq,
 	if (err)
 		goto err_unmap_arm;
 
-	if (udata) {
-		struct mthca_create_cq_resp uresp = { .cqn = cq->cqn };
-
-		err = ib_respond_udata(udata, uresp);
-		if (err) {
-			mthca_free_cq(to_mdev(ibdev), cq);
-			goto err_unmap_arm;
-		}
+	if (udata && ib_copy_to_udata(udata, &cq->cqn, sizeof(__u32))) {
+		mthca_free_cq(to_mdev(ibdev), cq);
+		err = -EFAULT;
+		goto err_unmap_arm;
 	}
 
 	cq->resize_buf = NULL;
@@ -881,7 +864,7 @@ static struct ib_mr *mthca_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
 	if (!mr)
 		return ERR_PTR(-ENOMEM);
 
-	mr->umem = ib_umem_get_va(pd->device, start, length, acc);
+	mr->umem = ib_umem_get(pd->device, start, length, acc);
 	if (IS_ERR(mr->umem)) {
 		err = PTR_ERR(mr->umem);
 		goto err;

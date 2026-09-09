@@ -417,8 +417,8 @@ static void lp3944_remove(struct i2c_client *client)
 
 /* lp3944 i2c driver struct */
 static const struct i2c_device_id lp3944_id[] = {
-	{ .name = "lp3944" },
-	{ }
+	{ "lp3944" },
+	{}
 };
 
 MODULE_DEVICE_TABLE(i2c, lp3944_id);

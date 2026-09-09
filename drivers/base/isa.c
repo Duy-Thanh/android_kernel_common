@@ -11,7 +11,9 @@
 #include <linux/dma-mapping.h>
 #include <linux/isa.h>
 
-static struct device *isa_bus;
+static struct device isa_bus = {
+	.init_name	= "isa"
+};
 
 struct isa_dev {
 	struct device dev;
@@ -129,7 +131,7 @@ int isa_register_driver(struct isa_driver *isa_driver, unsigned int ndev)
 			break;
 		}
 
-		isa_dev->dev.parent	= isa_bus;
+		isa_dev->dev.parent	= &isa_bus;
 		isa_dev->dev.bus	= &isa_bus_type;
 
 		dev_set_name(&isa_dev->dev, "%s.%u",
@@ -167,11 +169,9 @@ static int __init isa_bus_init(void)
 
 	error = bus_register(&isa_bus_type);
 	if (!error) {
-		isa_bus = root_device_register("isa");
-		if (IS_ERR(isa_bus)) {
-			error = PTR_ERR(isa_bus);
+		error = device_register(&isa_bus);
+		if (error)
 			bus_unregister(&isa_bus_type);
-		}
 	}
 	return error;
 }

@@ -1399,7 +1399,7 @@ static int do_skeleton(int argc, char **argv)
 				continue;
 
 			if (use_loader)
-				printf("\t\tint %s_fd;\n", ident);
+				printf("t\tint %s_fd;\n", ident);
 			else
 				printf("\t\tstruct bpf_link *%s;\n", ident);
 		}
@@ -2094,8 +2094,7 @@ btfgen_mark_type(struct btfgen_info *info, unsigned int type_id, bool follow_poi
 	struct btf_type *cloned_type;
 	struct btf_param *param;
 	struct btf_array *array;
-	__u32 i;
-	int err;
+	int err, i;
 
 	if (type_id == 0)
 		return 0;
@@ -2230,8 +2229,7 @@ static int btfgen_mark_type_match(struct btfgen_info *info, __u32 type_id, bool 
 	const struct btf_type *btf_type;
 	struct btf *btf = info->src_btf;
 	struct btf_type *cloned_type;
-	int err;
-	__u32 i;
+	int i, err;
 
 	if (type_id == 0)
 		return 0;
@@ -2251,7 +2249,7 @@ static int btfgen_mark_type_match(struct btfgen_info *info, __u32 type_id, bool 
 	case BTF_KIND_STRUCT:
 	case BTF_KIND_UNION: {
 		struct btf_member *m = btf_members(btf_type);
-		__u32 vlen = btf_vlen(btf_type);
+		__u16 vlen = btf_vlen(btf_type);
 
 		if (behind_ptr)
 			break;
@@ -2288,7 +2286,7 @@ static int btfgen_mark_type_match(struct btfgen_info *info, __u32 type_id, bool 
 		break;
 	}
 	case BTF_KIND_FUNC_PROTO: {
-		__u32 vlen = btf_vlen(btf_type);
+		__u16 vlen = btf_vlen(btf_type);
 		struct btf_param *param;
 
 		/* mark ret type */
@@ -2494,9 +2492,8 @@ static struct btf *btfgen_get_btf(struct btfgen_info *info)
 {
 	struct btf *btf_new = NULL;
 	unsigned int *ids = NULL;
-	unsigned int n = btf__type_cnt(info->marked_btf);
+	unsigned int i, n = btf__type_cnt(info->marked_btf);
 	int err = 0;
-	__u32 i;
 
 	btf_new = btf__new_empty();
 	if (!btf_new) {
@@ -2526,7 +2523,8 @@ static struct btf *btfgen_get_btf(struct btfgen_info *info)
 		/* add members for struct and union */
 		if (btf_is_composite(type)) {
 			struct btf_member *cloned_m, *m;
-			__u32 vlen, idx_src;
+			unsigned short vlen;
+			int idx_src;
 
 			name = btf__str_by_offset(info->src_btf, type->name_off);
 

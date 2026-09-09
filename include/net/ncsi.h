@@ -60,7 +60,7 @@ static inline int ncsi_start_dev(struct ncsi_dev *nd)
 	return -ENOTTY;
 }
 
-static inline void ncsi_stop_dev(struct ncsi_dev *nd)
+static void ncsi_stop_dev(struct ncsi_dev *nd)
 {
 }
 

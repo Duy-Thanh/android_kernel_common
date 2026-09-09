@@ -52,9 +52,15 @@
 
 #include <trace/events/tcp.h>
 
-void noinline tcp_mstamp_refresh(struct tcp_sock *tp)
+/* Refresh clocks of a TCP socket,
+ * ensuring monotically increasing values.
+ */
+void tcp_mstamp_refresh(struct tcp_sock *tp)
 {
-	tcp_mstamp_refresh_inline(tp);
+	u64 val = tcp_clock_ns();
+
+	tp->tcp_clock_cache = val;
+	tp->tcp_mstamp = div_u64(val, NSEC_PER_USEC);
 }
 
 static bool tcp_write_xmit(struct sock *sk, unsigned int mss_now, int nonagle,
@@ -466,22 +472,22 @@ static int bpf_skops_write_hdr_opt_arg0(struct sk_buff *skb,
 }
 
 /* req, syn_skb and synack_type are used when writing synack */
-static u32 bpf_skops_hdr_opt_len(struct sock *sk, struct sk_buff *skb,
-				 struct request_sock *req,
-				 struct sk_buff *syn_skb,
-				 enum tcp_synack_type synack_type,
-				 struct tcp_out_options *opts,
-				 u32 remaining)
+static void bpf_skops_hdr_opt_len(struct sock *sk, struct sk_buff *skb,
+				  struct request_sock *req,
+				  struct sk_buff *syn_skb,
+				  enum tcp_synack_type synack_type,
+				  struct tcp_out_options *opts,
+				  unsigned int *remaining)
 {
 	struct bpf_sock_ops_kern sock_ops;
 	int err;
 
 	if (likely(!BPF_SOCK_OPS_TEST_FLAG(tcp_sk(sk),
 					   BPF_SOCK_OPS_WRITE_HDR_OPT_CB_FLAG)) ||
-	    !remaining)
-		return remaining;
+	    !*remaining)
+		return;
 
-	/* remaining has already been aligned to 4 bytes, so remaining >= 4 */
+	/* *remaining has already been aligned to 4 bytes, so *remaining >= 4 */
 
 	/* init sock_ops */
 	memset(&sock_ops, 0, offsetof(struct bpf_sock_ops_kern, temp));
@@ -513,21 +519,21 @@ static u32 bpf_skops_hdr_opt_len(struct sock *sk, struct sk_buff *skb,
 	}
 
 	sock_ops.args[0] = bpf_skops_write_hdr_opt_arg0(skb, synack_type);
-	sock_ops.remaining_opt_len = remaining;
+	sock_ops.remaining_opt_len = *remaining;
 	/* tcp_current_mss() does not pass a skb */
 	if (skb)
 		bpf_skops_init_skb(&sock_ops, skb, 0);
 
 	err = BPF_CGROUP_RUN_PROG_SOCK_OPS_SK(&sock_ops, sk);
 
-	if (err || sock_ops.remaining_opt_len == remaining)
-		return remaining;
+	if (err || sock_ops.remaining_opt_len == *remaining)
+		return;
 
-	opts->bpf_opt_len = remaining - sock_ops.remaining_opt_len;
+	opts->bpf_opt_len = *remaining - sock_ops.remaining_opt_len;
 	/* round up to 4 bytes */
 	opts->bpf_opt_len = (opts->bpf_opt_len + 3) & ~3;
 
-	return remaining - opts->bpf_opt_len;
+	*remaining -= opts->bpf_opt_len;
 }
 
 static void bpf_skops_write_hdr_opt(struct sock *sk, struct sk_buff *skb,
@@ -575,14 +581,13 @@ static void bpf_skops_write_hdr_opt(struct sock *sk, struct sk_buff *skb,
 		       max_opt_len - nr_written);
 }
 #else
-static u32 bpf_skops_hdr_opt_len(struct sock *sk, struct sk_buff *skb,
-				 struct request_sock *req,
-				 struct sk_buff *syn_skb,
-				 enum tcp_synack_type synack_type,
-				 struct tcp_out_options *opts,
-				 u32 remaining)
+static void bpf_skops_hdr_opt_len(struct sock *sk, struct sk_buff *skb,
+				  struct request_sock *req,
+				  struct sk_buff *syn_skb,
+				  enum tcp_synack_type synack_type,
+				  struct tcp_out_options *opts,
+				  unsigned int *remaining)
 {
-	return remaining;
 }
 
 static void bpf_skops_write_hdr_opt(struct sock *sk, struct sk_buff *skb,
@@ -1051,8 +1056,7 @@ static unsigned int tcp_syn_options(struct sock *sk, struct sk_buff *skb,
 		remaining -= tcp_options_fit_accecn(opts, 0, remaining);
 	}
 
-	remaining = bpf_skops_hdr_opt_len(sk, skb, NULL, NULL, 0, opts,
-					  remaining);
+	bpf_skops_hdr_opt_len(sk, skb, NULL, NULL, 0, opts, &remaining);
 
 	return MAX_TCP_OPTION_SPACE - remaining;
 }
@@ -1139,8 +1143,8 @@ static unsigned int tcp_synack_options(const struct sock *sk,
 		remaining -= tcp_options_fit_accecn(opts, 0, remaining);
 	}
 
-	remaining = bpf_skops_hdr_opt_len((struct sock *)sk, skb, req, syn_skb,
-					  synack_type, opts, remaining);
+	bpf_skops_hdr_opt_len((struct sock *)sk, skb, req, syn_skb,
+			      synack_type, opts, &remaining);
 
 	return MAX_TCP_OPTION_SPACE - remaining;
 }
@@ -1175,7 +1179,6 @@ static unsigned int tcp_established_options(struct sock *sk, struct sk_buff *skb
 		size += TCPOLEN_TSTAMP_ALIGNED;
 	}
 
-#if IS_ENABLED(CONFIG_MPTCP)
 	/* MPTCP options have precedence over SACK for the limited TCP
 	 * option space because a MPTCP connection would be forced to
 	 * fall back to regular TCP if a required multipath option is
@@ -1184,22 +1187,14 @@ static unsigned int tcp_established_options(struct sock *sk, struct sk_buff *skb
 	 */
 	if (sk_is_mptcp(sk)) {
 		unsigned int remaining = MAX_TCP_OPTION_SPACE - size;
-		bool has_ts = opts->options & OPTION_TS;
-		int opt_size;
+		unsigned int opt_size = 0;
 
-		opts->mptcp.drop_ts = 0;
-
-		opt_size = mptcp_established_options(sk, skb, remaining, has_ts,
-						     &opts->mptcp);
-		if (opt_size >= 0) {
+		if (mptcp_established_options(sk, skb, &opt_size, remaining,
+					      &opts->mptcp)) {
 			opts->options |= OPTION_MPTCP;
 			size += opt_size;
-
-			if (opts->mptcp.drop_ts)
-				opts->options &= ~OPTION_TS;
 		}
 	}
-#endif
 
 	eff_sacks = tp->rx_opt.num_sacks + tp->rx_opt.dsack;
 	if (unlikely(eff_sacks)) {
@@ -1238,8 +1233,7 @@ static unsigned int tcp_established_options(struct sock *sk, struct sk_buff *skb
 					    BPF_SOCK_OPS_WRITE_HDR_OPT_CB_FLAG))) {
 		unsigned int remaining = MAX_TCP_OPTION_SPACE - size;
 
-		remaining = bpf_skops_hdr_opt_len(sk, skb, NULL, NULL, 0, opts,
-						  remaining);
+		bpf_skops_hdr_opt_len(sk, skb, NULL, NULL, 0, opts, &remaining);
 
 		size = MAX_TCP_OPTION_SPACE - remaining;
 	}
@@ -1427,7 +1421,6 @@ void tcp_wfree(struct sk_buff *skb)
 out:
 	sk_free(sk);
 }
-EXPORT_SYMBOL_GPL(tcp_wfree);
 
 /* Note: Called under soft irq.
  * We can call TCP stack right away, unless socket is owned by user.
@@ -1670,8 +1663,14 @@ static int __tcp_transmit_skb(struct sock *sk, struct sk_buff *skb,
 					       key.md5_key, sk, skb);
 #endif
 	} else if (tcp_key_is_ao(&key)) {
-		tcp_ao_transmit_skb(sk, skb, key.ao_key, th,
-				    opts.hash_location);
+		int err;
+
+		err = tcp_ao_transmit_skb(sk, skb, key.ao_key, th,
+					  opts.hash_location);
+		if (err) {
+			sk_skb_reason_drop(sk, skb, SKB_DROP_REASON_NOT_SPECIFIED);
+			return -ENOMEM;
+		}
 	}
 
 	/* BPF prog is the last one writing header option */
@@ -2973,7 +2972,7 @@ static bool tcp_write_xmit(struct sock *sk, unsigned int mss_now, int nonagle,
 
 	sent_pkts = 0;
 
-	tcp_mstamp_refresh_inline(tp);
+	tcp_mstamp_refresh(tp);
 
 	/* AccECN option beacon depends on mstamp, it may change mss */
 	if (tcp_ecn_mode_accecn(tp) && tcp_accecn_option_beacon_check(sk))

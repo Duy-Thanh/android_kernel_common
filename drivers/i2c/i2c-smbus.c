@@ -220,7 +220,7 @@ static void smbalert_remove(struct i2c_client *ara)
 }
 
 static const struct i2c_device_id smbalert_ids[] = {
-	{ .name = "smbus_alert" },
+	{ "smbus_alert" },
 	{ /* LIST END */ }
 };
 MODULE_DEVICE_TABLE(i2c, smbalert_ids);

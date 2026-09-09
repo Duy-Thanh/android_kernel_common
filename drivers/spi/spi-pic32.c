@@ -752,7 +752,7 @@ static int pic32_spi_probe(struct platform_device *pdev)
 	struct pic32_spi *pic32s;
 	int ret;
 
-	host = devm_spi_alloc_host(&pdev->dev, sizeof(*pic32s));
+	host = spi_alloc_host(&pdev->dev, sizeof(*pic32s));
 	if (!host)
 		return -ENOMEM;
 
@@ -761,7 +761,7 @@ static int pic32_spi_probe(struct platform_device *pdev)
 
 	ret = pic32_spi_hw_probe(pdev, pic32s);
 	if (ret)
-		return ret;
+		goto err_host;
 
 	host->dev.of_node	= pdev->dev.of_node;
 	host->mode_bits	= SPI_MODE_3 | SPI_MODE_0 | SPI_CS_HIGH;
@@ -833,7 +833,8 @@ static int pic32_spi_probe(struct platform_device *pdev)
 
 err_bailout:
 	pic32_spi_dma_unprep(pic32s);
-
+err_host:
+	spi_controller_put(host);
 	return ret;
 }
 
@@ -841,10 +842,14 @@ static void pic32_spi_remove(struct platform_device *pdev)
 {
 	struct pic32_spi *pic32s = platform_get_drvdata(pdev);
 
+	spi_controller_get(pic32s->host);
+
 	spi_unregister_controller(pic32s->host);
 
 	pic32_spi_disable(pic32s);
 	pic32_spi_dma_unprep(pic32s);
+
+	spi_controller_put(pic32s->host);
 }
 
 static const struct of_device_id pic32_spi_of_match[] = {

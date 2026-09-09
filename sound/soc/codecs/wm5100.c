@@ -2669,7 +2669,7 @@ static const struct dev_pm_ops wm5100_pm = {
 };
 
 static const struct i2c_device_id wm5100_i2c_id[] = {
-	{ .name = "wm5100" },
+	{ "wm5100" },
 	{ }
 };
 MODULE_DEVICE_TABLE(i2c, wm5100_i2c_id);

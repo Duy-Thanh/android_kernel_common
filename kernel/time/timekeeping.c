@@ -67,7 +67,6 @@ static inline bool tk_is_aux(const struct timekeeper *tk)
 {
 	return tk->id >= TIMEKEEPER_AUX_FIRST && tk->id <= TIMEKEEPER_AUX_LAST;
 }
-static inline struct tk_data *aux_get_tk_data(clockid_t id);
 #else
 static inline bool tk_get_aux_ts64(unsigned int tkid, struct timespec64 *ts)
 {
@@ -77,10 +76,6 @@ static inline bool tk_get_aux_ts64(unsigned int tkid, struct timespec64 *ts)
 static inline bool tk_is_aux(const struct timekeeper *tk)
 {
 	return false;
-}
-static inline struct tk_data *aux_get_tk_data(clockid_t id)
-{
-	return NULL;
 }
 #endif
 
@@ -320,7 +315,6 @@ static __always_inline u64 tk_clock_read(const struct tk_read_base *tkr)
 
 	return clock->read(clock);
 }
-
 static inline void clocksource_disable_inline_read(void) { }
 static inline void clocksource_enable_inline_read(void) { }
 #endif
@@ -1188,107 +1182,44 @@ noinstr time64_t __ktime_get_real_seconds(void)
 	return tk->xtime_sec;
 }
 
-static inline u64 tk_clock_read_snapshot(const struct tk_read_base *tkr,
-					 struct clocksource_hw_snapshot *chs)
-{
-	struct clocksource *clock = READ_ONCE(tkr->clock);
-
-	if (unlikely(clock->read_snapshot))
-		return clock->read_snapshot(clock, chs);
-
-	return clock->read(clock);
-}
-
-
 /**
- * ktime_get_snapshot_id -  Simultaneously snapshot a given clock ID with
- *			    CLOCK_MONOTONIC_RAW and the underlying
- *			    clocksource counter value.
- * @clock_id:		The clock ID to snapshot
- * @systime_snapshot:	Pointer to struct receiving the system time snapshot
+ * ktime_get_snapshot - snapshots the realtime/monotonic raw clocks with counter
+ * @systime_snapshot:	pointer to struct receiving the system time snapshot
  */
-void ktime_get_snapshot_id(clockid_t clock_id, struct system_time_snapshot *systime_snapshot)
+void ktime_get_snapshot(struct system_time_snapshot *systime_snapshot)
 {
-	ktime_t base_raw, base_sys, offs_sys, *offs, offs_zero = 0;
-	u64 nsec_raw, nsec_sys, now;
-	struct timekeeper *tk;
-	struct tk_data *tkd;
+	struct timekeeper *tk = &tk_core.timekeeper;
 	unsigned int seq;
+	ktime_t base_raw;
+	ktime_t base_real;
+	ktime_t base_boot;
+	u64 nsec_raw;
+	u64 nsec_real;
+	u64 now;
 
-	/* Invalidate the snapshot for all failure cases */
-	systime_snapshot->valid = false;
-
-	if (WARN_ON_ONCE(timekeeping_suspended))
-		return;
-
-	switch (clock_id) {
-	case CLOCK_REALTIME:
-		tkd = &tk_core;
-		offs = &tk_core.timekeeper.offs_real;
-		break;
-	/* Map RAW to MONOTONIC so the loop below is trivial */
-	case CLOCK_MONOTONIC_RAW:
-	case CLOCK_MONOTONIC:
-		tkd = &tk_core;
-		offs = &offs_zero;
-		break;
-	case CLOCK_BOOTTIME:
-		tkd = &tk_core;
-		offs = &tk_core.timekeeper.offs_boot;
-		break;
-	case CLOCK_AUX ... CLOCK_AUX_LAST:
-		tkd = aux_get_tk_data(clock_id);
-		if (!tkd)
-			return;
-		offs = &tkd->timekeeper.offs_aux;
-		break;
-	default:
-		WARN_ON_ONCE(1);
-		return;
-	}
-
-	tk = &tkd->timekeeper;
+	WARN_ON_ONCE(timekeeping_suspended);
 
 	do {
-		struct clocksource_hw_snapshot chs = { };
-
-		seq = read_seqcount_begin(&tkd->seq);
-
-		/* Aux clocks can be invalid */
-		if (!tk->clock_valid)
-			return;
-
-		now = tk_clock_read_snapshot(&tk->tkr_mono, &chs);
+		seq = read_seqcount_begin(&tk_core.seq);
+		now = tk_clock_read(&tk->tkr_mono);
 		systime_snapshot->cs_id = tk->tkr_mono.clock->id;
-
-		systime_snapshot->hw_cycles = chs.hw_cycles;
-		systime_snapshot->hw_csid = chs.hw_csid;
-
 		systime_snapshot->cs_was_changed_seq = tk->cs_was_changed_seq;
 		systime_snapshot->clock_was_set_seq = tk->clock_was_set_seq;
-
-		base_sys = tk->tkr_mono.base;
-		offs_sys = *offs;
+		base_real = ktime_add(tk->tkr_mono.base,
+				      tk_core.timekeeper.offs_real);
+		base_boot = ktime_add(tk->tkr_mono.base,
+				      tk_core.timekeeper.offs_boot);
 		base_raw = tk->tkr_raw.base;
-
-		nsec_sys = timekeeping_cycles_to_ns(&tk->tkr_mono, now);
-		nsec_raw = timekeeping_cycles_to_ns(&tk->tkr_raw, now);
-	} while (read_seqcount_retry(&tkd->seq, seq));
+		nsec_real = timekeeping_cycles_to_ns(&tk->tkr_mono, now);
+		nsec_raw  = timekeeping_cycles_to_ns(&tk->tkr_raw, now);
+	} while (read_seqcount_retry(&tk_core.seq, seq));
 
 	systime_snapshot->cycles = now;
-	systime_snapshot->systime = ktime_add_ns(base_sys, offs_sys + nsec_sys);
-	systime_snapshot->monoraw = ktime_add_ns(base_raw, nsec_raw);
-
-	/*
-	 * Special case for PTP. Just transfer the raw time into sys,
-	 * so the call sites can consistently use snap::systime.
-	 */
-	if (clock_id == CLOCK_MONOTONIC_RAW)
-		systime_snapshot->systime = systime_snapshot->monoraw;
-	/* Tell the consumer that this snapshot is valid */
-	systime_snapshot->valid = true;
+	systime_snapshot->real = ktime_add_ns(base_real, nsec_real);
+	systime_snapshot->boot = ktime_add_ns(base_boot, nsec_real);
+	systime_snapshot->raw = ktime_add_ns(base_raw, nsec_raw);
 }
-EXPORT_SYMBOL_GPL(ktime_get_snapshot_id);
+EXPORT_SYMBOL_GPL(ktime_get_snapshot);
 
 /* Scale base by mult/div checking for overflow */
 static int scale64_check_overflow(u64 mult, u64 div, u64 *base)
@@ -1331,7 +1262,7 @@ static int adjust_historical_crosststamp(struct system_time_snapshot *history,
 					 struct system_device_crosststamp *ts)
 {
 	struct timekeeper *tk = &tk_core.timekeeper;
-	u64 corr_raw, corr_sys;
+	u64 corr_raw, corr_real;
 	bool interp_forward;
 	int ret;
 
@@ -1348,7 +1279,8 @@ static int adjust_historical_crosststamp(struct system_time_snapshot *history,
 	 * Scale the monotonic raw time delta by:
 	 *	partial_history_cycles / total_history_cycles
 	 */
-	corr_raw = (u64)ktime_to_ns(ktime_sub(ts->sys_monoraw, history->monoraw));
+	corr_raw = (u64)ktime_to_ns(
+		ktime_sub(ts->sys_monoraw, history->raw));
 	ret = scale64_check_overflow(partial_history_cycles,
 				     total_history_cycles, &corr_raw);
 	if (ret)
@@ -1356,29 +1288,30 @@ static int adjust_historical_crosststamp(struct system_time_snapshot *history,
 
 	/*
 	 * If there is a discontinuity in the history, scale monotonic raw
-	 * correction by:
-	 *	mult(sys)/mult(raw) yielding the system time correction
-	 *
-	 * Otherwise, calculate the system time correction similar to monotonic
-	 * raw calculation
+	 *	correction by:
+	 *	mult(real)/mult(raw) yielding the realtime correction
+	 * Otherwise, calculate the realtime correction similar to monotonic
+	 *	raw calculation
 	 */
 	if (discontinuity) {
-		corr_sys = mul_u64_u32_div(corr_raw, tk->tkr_mono.mult, tk->tkr_raw.mult);
+		corr_real = mul_u64_u32_div
+			(corr_raw, tk->tkr_mono.mult, tk->tkr_raw.mult);
 	} else {
-		corr_sys = (u64)ktime_to_ns(ktime_sub(ts->sys_systime, history->systime));
-		ret = scale64_check_overflow(partial_history_cycles, total_history_cycles,
-					     &corr_sys);
+		corr_real = (u64)ktime_to_ns(
+			ktime_sub(ts->sys_realtime, history->real));
+		ret = scale64_check_overflow(partial_history_cycles,
+					     total_history_cycles, &corr_real);
 		if (ret)
 			return ret;
 	}
 
-	/* Fixup monotonic raw and system time time values */
+	/* Fixup monotonic raw and real time time values */
 	if (interp_forward) {
-		ts->sys_monoraw = ktime_add_ns(history->monoraw, corr_raw);
-		ts->sys_systime = ktime_add_ns(history->systime, corr_sys);
+		ts->sys_monoraw = ktime_add_ns(history->raw, corr_raw);
+		ts->sys_realtime = ktime_add_ns(history->real, corr_real);
 	} else {
 		ts->sys_monoraw = ktime_sub_ns(ts->sys_monoraw, corr_raw);
-		ts->sys_systime = ktime_sub_ns(ts->sys_systime, corr_sys);
+		ts->sys_realtime = ktime_sub_ns(ts->sys_realtime, corr_real);
 	}
 
 	return 0;
@@ -1435,8 +1368,6 @@ static bool convert_base_to_cs(struct system_counterval_t *scv)
 		return false;
 
 	scv->cycles += base->offset;
-	/* Set the clocksource ID as scv::cycles is now clocksource based */
-	scv->cs_id = cs->id;
 	return true;
 }
 
@@ -1504,11 +1435,11 @@ EXPORT_SYMBOL_GPL(ktime_real_to_base_clock);
 
 /**
  * get_device_system_crosststamp - Synchronously capture system/device timestamp
- * @get_time_fn:	Callback to get simultaneous device time and system counter
- *			from the device driver
+ * @get_time_fn:	Callback to get simultaneous device time and
+ *	system counter from the device driver
  * @ctx:		Context passed to get_time_fn()
- * @history_begin:	Historical reference point used to interpolate system time when
- *			the counter value provided by the driver is before the current interval
+ * @history_begin:	Historical reference point used to interpolate system
+ *	time when counter provided by the driver is before the current interval
  * @xtstamp:		Receives simultaneously captured system and device time
  *
  * Reads a timestamp from a device and correlates it to system time
@@ -1521,54 +1452,36 @@ int get_device_system_crosststamp(int (*get_time_fn)
 				  struct system_time_snapshot *history_begin,
 				  struct system_device_crosststamp *xtstamp)
 {
-	u64 syscnt_cycles, cycles, now, interval_start;
-	unsigned int seq, clock_was_set_seq = 0;
-	ktime_t base_sys, base_raw, *offs;
-	u64 nsec_sys, nsec_raw;
+	struct system_counterval_t system_counterval = {};
+	struct timekeeper *tk = &tk_core.timekeeper;
+	u64 cycles, now, interval_start;
+	unsigned int clock_was_set_seq = 0;
+	ktime_t base_real, base_raw;
+	u64 nsec_real, nsec_raw;
 	u8 cs_was_changed_seq;
+	unsigned int seq;
 	bool do_interp;
-	struct timekeeper *tk;
-	struct tk_data *tkd;
 	int ret;
 
-	switch (xtstamp->clock_id) {
-	case CLOCK_REALTIME:
-		tkd = &tk_core;
-		offs = &tk_core.timekeeper.offs_real;
-		break;
-	case CLOCK_AUX ... CLOCK_AUX_LAST:
-		tkd = aux_get_tk_data(xtstamp->clock_id);
-		if (!tkd)
-			return -ENODEV;
-		offs = &tkd->timekeeper.offs_aux;
-		break;
-	default:
-		WARN_ON_ONCE(1);
-		return -ENODEV;
-	}
-
-	tk = &tkd->timekeeper;
-
 	do {
-		seq = read_seqcount_begin(&tkd->seq);
+		seq = read_seqcount_begin(&tk_core.seq);
 		/*
 		 * Try to synchronously capture device time and a system
 		 * counter value calling back into the device driver
 		 */
-		ret = get_time_fn(&xtstamp->device, &xtstamp->sys_counter, ctx);
+		ret = get_time_fn(&xtstamp->device, &system_counterval, ctx);
 		if (ret)
 			return ret;
 
 		/*
 		 * Verify that the clocksource ID associated with the captured
 		 * system counter value is the same as for the currently
-		 * installed timekeeper clocksource and convert to it.
+		 * installed timekeeper clocksource
 		 */
-		if (xtstamp->sys_counter.cs_id == CSID_GENERIC ||
-		    !convert_base_to_cs(&xtstamp->sys_counter))
+		if (system_counterval.cs_id == CSID_GENERIC ||
+		    !convert_base_to_cs(&system_counterval))
 			return -ENODEV;
-
-		cycles = syscnt_cycles = xtstamp->sys_counter.cycles;
+		cycles = system_counterval.cycles;
 
 		/*
 		 * Check whether the system counter value provided by the
@@ -1585,14 +1498,15 @@ int get_device_system_crosststamp(int (*get_time_fn)
 			do_interp = false;
 		}
 
-		base_sys = ktime_add(tk->tkr_mono.base, *offs);
+		base_real = ktime_add(tk->tkr_mono.base,
+				      tk_core.timekeeper.offs_real);
 		base_raw = tk->tkr_raw.base;
 
-		nsec_sys = timekeeping_cycles_to_ns(&tk->tkr_mono, cycles);
+		nsec_real = timekeeping_cycles_to_ns(&tk->tkr_mono, cycles);
 		nsec_raw = timekeeping_cycles_to_ns(&tk->tkr_raw, cycles);
-	} while (read_seqcount_retry(&tkd->seq, seq));
+	} while (read_seqcount_retry(&tk_core.seq, seq));
 
-	xtstamp->sys_systime = ktime_add_ns(base_sys, nsec_sys);
+	xtstamp->sys_realtime = ktime_add_ns(base_real, nsec_real);
 	xtstamp->sys_monoraw = ktime_add_ns(base_raw, nsec_raw);
 
 	/*
@@ -1609,19 +1523,24 @@ int get_device_system_crosststamp(int (*get_time_fn)
 		 * clocksource change
 		 */
 		if (!history_begin ||
-		    !timestamp_in_interval(history_begin->cycles, cycles, syscnt_cycles) ||
+		    !timestamp_in_interval(history_begin->cycles,
+					   cycles, system_counterval.cycles) ||
 		    history_begin->cs_was_changed_seq != cs_was_changed_seq)
 			return -EINVAL;
-
-		partial_history_cycles = cycles - syscnt_cycles;
+		partial_history_cycles = cycles - system_counterval.cycles;
 		total_history_cycles = cycles - history_begin->cycles;
-		discontinuity = history_begin->clock_was_set_seq != clock_was_set_seq;
+		discontinuity =
+			history_begin->clock_was_set_seq != clock_was_set_seq;
 
-		ret = adjust_historical_crosststamp(history_begin, partial_history_cycles,
-						    total_history_cycles, discontinuity, xtstamp);
+		ret = adjust_historical_crosststamp(history_begin,
+						    partial_history_cycles,
+						    total_history_cycles,
+						    discontinuity, xtstamp);
+		if (ret)
+			return ret;
 	}
 
-	return ret;
+	return 0;
 }
 EXPORT_SYMBOL_GPL(get_device_system_crosststamp);
 

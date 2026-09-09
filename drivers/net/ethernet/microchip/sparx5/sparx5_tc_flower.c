@@ -807,7 +807,7 @@ static int sparx5_tc_flower_psfp_setup(struct sparx5 *sparx5,
 		/* Add new flow-meter */
 		ret = sparx5_psfp_fm_add(sparx5, pol_idx, fm, &psfp_fmid);
 		if (ret < 0)
-			goto err_sg_del;
+			return ret;
 	}
 
 	/* Map stream filter to stream gate */
@@ -816,7 +816,7 @@ static int sparx5_tc_flower_psfp_setup(struct sparx5 *sparx5,
 	/* Add new stream-filter and map it to a steam gate */
 	ret = sparx5_psfp_sf_add(sparx5, sf, &psfp_sfid);
 	if (ret < 0)
-		goto err_fm_del;
+		return ret;
 
 	/* Streams are classified by ISDX - map ISDX 1:1 to sfid for now. */
 	sparx5_isdx_conf_set(sparx5, psfp_sfid, psfp_sfid, psfp_fmid);
@@ -824,23 +824,13 @@ static int sparx5_tc_flower_psfp_setup(struct sparx5 *sparx5,
 	ret = vcap_rule_add_action_bit(vrule, VCAP_AF_ISDX_ADD_REPLACE_SEL,
 				       VCAP_BIT_1);
 	if (ret)
-		goto err_sf_del;
+		return ret;
 
 	ret = vcap_rule_add_action_u32(vrule, VCAP_AF_ISDX_VAL, psfp_sfid);
 	if (ret)
-		goto err_sf_del;
+		return ret;
 
 	return 0;
-
-err_sf_del:
-	sparx5_isdx_conf_set(sparx5, psfp_sfid, 0, 0);
-	sparx5_psfp_sf_del(sparx5, psfp_sfid);
-err_fm_del:
-	if (pol_idx >= 0)
-		sparx5_psfp_fm_del(sparx5, psfp_fmid);
-err_sg_del:
-	sparx5_psfp_sg_del(sparx5, psfp_sgid);
-	return ret;
 }
 
 /* Handle the action trap for a VCAP rule */

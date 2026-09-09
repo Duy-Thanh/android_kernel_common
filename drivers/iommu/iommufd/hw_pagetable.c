@@ -489,9 +489,6 @@ int iommufd_hwpt_get_dirty_bitmap(struct iommufd_ucmd *ucmd)
 	return rc;
 }
 
-/* An arbitrary entry_num cap, far above any realistic invalidation batch */
-#define IOMMU_HWPT_INVALIDATE_ENTRY_NUM_MAX (1U << 19)
-
 int iommufd_hwpt_invalidate(struct iommufd_ucmd *ucmd)
 {
 	struct iommu_hwpt_invalidate *cmd = ucmd->cmd;
@@ -510,13 +507,7 @@ int iommufd_hwpt_invalidate(struct iommufd_ucmd *ucmd)
 		goto out;
 	}
 
-	/*
-	 * Bound entry_num and entry_len so a single call cannot pin the CPU;
-	 * entry_len also caps the copy_struct_from_user() trailing-zero scan.
-	 */
-	if (cmd->entry_num &&
-	    (!cmd->data_uptr || !cmd->entry_len || cmd->entry_len > PAGE_SIZE ||
-	     cmd->entry_num > IOMMU_HWPT_INVALIDATE_ENTRY_NUM_MAX)) {
+	if (cmd->entry_num && (!cmd->data_uptr || !cmd->entry_len)) {
 		rc = -EINVAL;
 		goto out;
 	}

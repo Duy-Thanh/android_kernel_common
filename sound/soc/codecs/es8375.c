@@ -752,7 +752,7 @@ static void es8375_i2c_shutdown(struct i2c_client *i2c)
 }
 
 static const struct i2c_device_id es8375_id[] = {
-	{ .name = "es8375" },
+	{"es8375"},
 	{ }
 };
 MODULE_DEVICE_TABLE(i2c, es8375_id);

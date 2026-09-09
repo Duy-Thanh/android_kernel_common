@@ -27,15 +27,11 @@ llvm)
 	if [ "$SRCARCH" = loongarch ]; then
 		echo 18.0.0
 	else
-		echo 17.0.1
+		echo 15.0.0
 	fi
 	;;
 rustc)
-	if [ "$SRCARCH" = "s390" ]; then
-		echo 1.96.0
-	else
-		echo 1.85.0
-	fi
+	echo 1.85.0
 	;;
 bindgen)
 	echo 0.71.1

@@ -86,7 +86,8 @@ do {									\
 
 #define trace_printk(fmt, ...)				\
 do {							\
-	if (sizeof __stringify((__VA_ARGS__)) > 3)		\
+	char _______STR[] = __stringify((__VA_ARGS__));	\
+	if (sizeof(_______STR) > 3)			\
 		do_trace_printk(fmt, ##__VA_ARGS__);	\
 	else						\
 		trace_puts(fmt);			\

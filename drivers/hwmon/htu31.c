@@ -322,7 +322,7 @@ static int htu31_probe(struct i2c_client *client)
 }
 
 static const struct i2c_device_id htu31_id[] = {
-	{ .name = "htu31" },
+	{ "htu31" },
 	{ }
 };
 MODULE_DEVICE_TABLE(i2c, htu31_id);

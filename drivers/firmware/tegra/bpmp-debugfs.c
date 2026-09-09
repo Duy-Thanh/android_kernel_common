@@ -2,8 +2,6 @@
 /*
  * Copyright (c) 2017, NVIDIA CORPORATION.  All rights reserved.
  */
-
-#include <linux/cleanup.h>
 #include <linux/debugfs.h>
 #include <linux/dma-mapping.h>
 #include <linux/slab.h>
@@ -470,7 +468,7 @@ static int bpmp_populate_debugfs_inband(struct tegra_bpmp *bpmp,
 			dentry = debugfs_create_file(name, mode, parent, bpmp,
 						     &bpmp_debug_fops);
 			if (IS_ERR(dentry)) {
-				err = PTR_ERR(dentry);
+				err = -ENOMEM;
 				goto out;
 			}
 		}
@@ -721,7 +719,7 @@ static int bpmp_populate_dir(struct tegra_bpmp *bpmp, struct seqbuf *seqbuf,
 		if (t & DEBUGFS_S_ISDIR) {
 			dentry = debugfs_create_dir(name, parent);
 			if (IS_ERR(dentry))
-				return PTR_ERR(dentry);
+				return -ENOMEM;
 			err = bpmp_populate_dir(bpmp, seqbuf, dentry, depth+1);
 			if (err < 0)
 				return err;
@@ -734,7 +732,7 @@ static int bpmp_populate_dir(struct tegra_bpmp *bpmp, struct seqbuf *seqbuf,
 						     parent, bpmp,
 						     &debugfs_fops);
 			if (IS_ERR(dentry))
-				return PTR_ERR(dentry);
+				return -ENOMEM;
 		}
 	}
 
@@ -771,21 +769,9 @@ free:
 	return err;
 }
 
-static DEFINE_MUTEX(bpmp_debugfs_root_lock);
-static struct dentry *bpmp_debugfs_root;
-
-static struct dentry *bpmp_debugfs_get_root(void)
-{
-	guard(mutex)(&bpmp_debugfs_root_lock);
-	if (!bpmp_debugfs_root)
-		bpmp_debugfs_root = debugfs_create_dir("bpmp", NULL);
-	return bpmp_debugfs_root;
-}
-
 int tegra_bpmp_init_debugfs(struct tegra_bpmp *bpmp)
 {
-	struct dentry *root, *d;
-	char name[32];
+	struct dentry *root;
 	bool inband;
 	int err;
 
@@ -794,24 +780,13 @@ int tegra_bpmp_init_debugfs(struct tegra_bpmp *bpmp)
 	if (!inband && !tegra_bpmp_mrq_is_supported(bpmp, MRQ_DEBUGFS))
 		return 0;
 
-	root = bpmp_debugfs_get_root();
+	root = debugfs_create_dir("bpmp", NULL);
 	if (IS_ERR(root))
-		return PTR_ERR(root);
+		return -ENOMEM;
 
-	if (dev_to_node(bpmp->dev) == NUMA_NO_NODE) {
-		d = root;
-	} else {
-		snprintf(name, sizeof(name), "%d-bpmp", dev_to_node(bpmp->dev));
-		d = debugfs_create_dir(name, root);
-		if (IS_ERR(d)) {
-			err = PTR_ERR(d);
-			goto out;
-		}
-	}
-
-	bpmp->debugfs_mirror = debugfs_create_dir("debug", d);
+	bpmp->debugfs_mirror = debugfs_create_dir("debug", root);
 	if (IS_ERR(bpmp->debugfs_mirror)) {
-		err = PTR_ERR(bpmp->debugfs_mirror);
+		err = -ENOMEM;
 		goto out;
 	}
 
@@ -822,18 +797,8 @@ int tegra_bpmp_init_debugfs(struct tegra_bpmp *bpmp)
 		err = bpmp_populate_debugfs_shmem(bpmp);
 
 out:
-	if (err < 0) {
-		if (!IS_ERR(d))
-			debugfs_remove_recursive(d);
-
-		guard(mutex)(&bpmp_debugfs_root_lock);
-		if (root == d) {
-			bpmp_debugfs_root = NULL;
-		} else if (simple_empty(root)) {
-			debugfs_remove(root);
-			bpmp_debugfs_root = NULL;
-		}
-	}
+	if (err < 0)
+		debugfs_remove_recursive(root);
 
 	return err;
 }

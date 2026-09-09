@@ -13,7 +13,6 @@
 #include <linux/nmi.h>
 
 #include <asm/cpufeature.h>
-#include <asm/cpuid/api.h>
 #include <asm/hardirq.h>
 #include <asm/apic.h>
 #include <asm/msr.h>
@@ -374,7 +373,7 @@ again:
 	else
 		zhaoxin_pmu_ack_status(status);
 
-	inc_perf_irq_stat();
+	inc_irq_stat(apic_perf_irqs);
 
 	/*
 	 * CondChgd bit 63 doesn't mean any overflow status. Ignore

@@ -1363,10 +1363,7 @@ union replay_enable_and_configuration {
 		unsigned char FREESYNC_PANEL_REPLAY_MODE              :1;
 		unsigned char TIMING_DESYNC_ERROR_VERIFICATION        :1;
 		unsigned char STATE_TRANSITION_ERROR_DETECTION        :1;
-		unsigned char FSFT_ENABLED                            :1;
-		unsigned char FRAME_SKIPPING_ERROR_DETECTION          :1;
-		unsigned char FRAME_SKIPPING_ENABLE                   :1;
-		unsigned char RESERVED                                :2;
+		unsigned char RESERVED                                :5;
 	} bits;
 	unsigned char raw;
 };

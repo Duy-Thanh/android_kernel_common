@@ -51,8 +51,10 @@ static unsigned int amd_powersave_bias_target(struct cpufreq_policy *policy,
 	if (!policy->freq_table)
 		return freq_next;
 
-	rdmsrq_on_cpu(policy->cpu, MSR_AMD64_FREQ_SENSITIVITY_ACTUAL, &actual.q);
-	rdmsrq_on_cpu(policy->cpu, MSR_AMD64_FREQ_SENSITIVITY_REFERENCE, &reference.q);
+	rdmsr_on_cpu(policy->cpu, MSR_AMD64_FREQ_SENSITIVITY_ACTUAL,
+		&actual.l, &actual.h);
+	rdmsr_on_cpu(policy->cpu, MSR_AMD64_FREQ_SENSITIVITY_REFERENCE,
+		&reference.l, &reference.h);
 	actual.h &= 0x00ffffff;
 	reference.h &= 0x00ffffff;
 

@@ -263,7 +263,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x0>;
+			reg = <0>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -291,7 +291,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x1>;
+			reg = <1>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -319,7 +319,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x2>;
+			reg = <2>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -347,7 +347,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x3>;
+			reg = <3>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -375,7 +375,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x4>;
+			reg = <4>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -403,7 +403,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x5>;
+			reg = <5>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -431,7 +431,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x6>;
+			reg = <6>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -459,7 +459,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x7>;
+			reg = <7>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -487,7 +487,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x8>;
+			reg = <8>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -515,7 +515,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x9>;
+			reg = <9>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -533,7 +533,7 @@
 			};
 		};
 
-		cpu10: cpu@a {
+		cpu10: cpu@10 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -543,7 +543,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0xa>;
+			reg = <10>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -561,7 +561,7 @@
 			};
 		};
 
-		cpu11: cpu@b {
+		cpu11: cpu@11 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -571,7 +571,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0xb>;
+			reg = <11>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -589,7 +589,7 @@
 			};
 		};
 
-		cpu12: cpu@c {
+		cpu12: cpu@12 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -599,7 +599,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0xc>;
+			reg = <12>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -617,7 +617,7 @@
 			};
 		};
 
-		cpu13: cpu@d {
+		cpu13: cpu@13 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -627,7 +627,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0xd>;
+			reg = <13>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -645,7 +645,7 @@
 			};
 		};
 
-		cpu14: cpu@e {
+		cpu14: cpu@14 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -655,7 +655,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0xe>;
+			reg = <14>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -673,7 +673,7 @@
 			};
 		};
 
-		cpu15: cpu@f {
+		cpu15: cpu@15 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -683,7 +683,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0xf>;
+			reg = <15>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -701,7 +701,7 @@
 			};
 		};
 
-		cpu16: cpu@10 {
+		cpu16: cpu@16 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -711,7 +711,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x10>;
+			reg = <16>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -729,7 +729,7 @@
 			};
 		};
 
-		cpu17: cpu@11 {
+		cpu17: cpu@17 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -739,7 +739,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x11>;
+			reg = <17>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -757,7 +757,7 @@
 			};
 		};
 
-		cpu18: cpu@12 {
+		cpu18: cpu@18 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -767,7 +767,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x12>;
+			reg = <18>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -785,7 +785,7 @@
 			};
 		};
 
-		cpu19: cpu@13 {
+		cpu19: cpu@19 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -795,7 +795,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x13>;
+			reg = <19>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -813,7 +813,7 @@
 			};
 		};
 
-		cpu20: cpu@14 {
+		cpu20: cpu@20 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -823,7 +823,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x14>;
+			reg = <20>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -841,7 +841,7 @@
 			};
 		};
 
-		cpu21: cpu@15 {
+		cpu21: cpu@21 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -851,7 +851,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x15>;
+			reg = <21>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -869,7 +869,7 @@
 			};
 		};
 
-		cpu22: cpu@16 {
+		cpu22: cpu@22 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -879,7 +879,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x16>;
+			reg = <22>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -897,7 +897,7 @@
 			};
 		};
 
-		cpu23: cpu@17 {
+		cpu23: cpu@23 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -907,7 +907,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x17>;
+			reg = <23>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -925,7 +925,7 @@
 			};
 		};
 
-		cpu24: cpu@18 {
+		cpu24: cpu@24 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -935,7 +935,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x18>;
+			reg = <24>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -953,7 +953,7 @@
 			};
 		};
 
-		cpu25: cpu@19 {
+		cpu25: cpu@25 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -963,7 +963,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x19>;
+			reg = <25>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -981,7 +981,7 @@
 			};
 		};
 
-		cpu26: cpu@1a {
+		cpu26: cpu@26 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -991,7 +991,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x1a>;
+			reg = <26>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -1009,7 +1009,7 @@
 			};
 		};
 
-		cpu27: cpu@1b {
+		cpu27: cpu@27 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -1019,7 +1019,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x1b>;
+			reg = <27>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -1037,7 +1037,7 @@
 			};
 		};
 
-		cpu28: cpu@1c {
+		cpu28: cpu@28 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -1047,7 +1047,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x1c>;
+			reg = <28>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -1065,7 +1065,7 @@
 			};
 		};
 
-		cpu29: cpu@1d {
+		cpu29: cpu@29 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -1075,7 +1075,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x1d>;
+			reg = <29>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -1093,7 +1093,7 @@
 			};
 		};
 
-		cpu30: cpu@1e {
+		cpu30: cpu@30 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -1103,7 +1103,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x1e>;
+			reg = <30>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -1121,7 +1121,7 @@
 			};
 		};
 
-		cpu31: cpu@1f {
+		cpu31: cpu@31 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -1131,7 +1131,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x1f>;
+			reg = <31>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -1149,7 +1149,7 @@
 			};
 		};
 
-		cpu32: cpu@20 {
+		cpu32: cpu@32 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -1159,7 +1159,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x20>;
+			reg = <32>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -1177,7 +1177,7 @@
 			};
 		};
 
-		cpu33: cpu@21 {
+		cpu33: cpu@33 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -1187,7 +1187,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x21>;
+			reg = <33>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -1205,7 +1205,7 @@
 			};
 		};
 
-		cpu34: cpu@22 {
+		cpu34: cpu@34 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -1215,7 +1215,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x22>;
+			reg = <34>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -1233,7 +1233,7 @@
 			};
 		};
 
-		cpu35: cpu@23 {
+		cpu35: cpu@35 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -1243,7 +1243,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x23>;
+			reg = <35>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -1261,7 +1261,7 @@
 			};
 		};
 
-		cpu36: cpu@24 {
+		cpu36: cpu@36 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -1271,7 +1271,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x24>;
+			reg = <36>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -1289,7 +1289,7 @@
 			};
 		};
 
-		cpu37: cpu@25 {
+		cpu37: cpu@37 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -1299,7 +1299,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x25>;
+			reg = <37>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -1317,7 +1317,7 @@
 			};
 		};
 
-		cpu38: cpu@26 {
+		cpu38: cpu@38 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -1327,7 +1327,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x26>;
+			reg = <38>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -1345,7 +1345,7 @@
 			};
 		};
 
-		cpu39: cpu@27 {
+		cpu39: cpu@39 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -1355,7 +1355,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x27>;
+			reg = <39>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -1373,7 +1373,7 @@
 			};
 		};
 
-		cpu40: cpu@28 {
+		cpu40: cpu@40 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -1383,7 +1383,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x28>;
+			reg = <40>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -1401,7 +1401,7 @@
 			};
 		};
 
-		cpu41: cpu@29 {
+		cpu41: cpu@41 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -1411,7 +1411,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x29>;
+			reg = <41>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -1429,7 +1429,7 @@
 			};
 		};
 
-		cpu42: cpu@2a {
+		cpu42: cpu@42 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -1439,7 +1439,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x2a>;
+			reg = <42>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -1457,7 +1457,7 @@
 			};
 		};
 
-		cpu43: cpu@2b {
+		cpu43: cpu@43 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -1467,7 +1467,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x2b>;
+			reg = <43>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -1485,7 +1485,7 @@
 			};
 		};
 
-		cpu44: cpu@2c {
+		cpu44: cpu@44 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -1495,7 +1495,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x2c>;
+			reg = <44>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -1513,7 +1513,7 @@
 			};
 		};
 
-		cpu45: cpu@2d {
+		cpu45: cpu@45 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -1523,7 +1523,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x2d>;
+			reg = <45>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -1541,7 +1541,7 @@
 			};
 		};
 
-		cpu46: cpu@2e {
+		cpu46: cpu@46 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -1551,7 +1551,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x2e>;
+			reg = <46>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -1569,7 +1569,7 @@
 			};
 		};
 
-		cpu47: cpu@2f {
+		cpu47: cpu@47 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -1579,7 +1579,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x2f>;
+			reg = <47>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -1597,7 +1597,7 @@
 			};
 		};
 
-		cpu48: cpu@30 {
+		cpu48: cpu@48 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -1607,7 +1607,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x30>;
+			reg = <48>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -1625,7 +1625,7 @@
 			};
 		};
 
-		cpu49: cpu@31 {
+		cpu49: cpu@49 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -1635,7 +1635,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x31>;
+			reg = <49>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -1653,7 +1653,7 @@
 			};
 		};
 
-		cpu50: cpu@32 {
+		cpu50: cpu@50 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -1663,7 +1663,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x32>;
+			reg = <50>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -1681,7 +1681,7 @@
 			};
 		};
 
-		cpu51: cpu@33 {
+		cpu51: cpu@51 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -1691,7 +1691,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x33>;
+			reg = <51>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -1709,7 +1709,7 @@
 			};
 		};
 
-		cpu52: cpu@34 {
+		cpu52: cpu@52 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -1719,7 +1719,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x34>;
+			reg = <52>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -1737,7 +1737,7 @@
 			};
 		};
 
-		cpu53: cpu@35 {
+		cpu53: cpu@53 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -1747,7 +1747,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x35>;
+			reg = <53>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -1765,7 +1765,7 @@
 			};
 		};
 
-		cpu54: cpu@36 {
+		cpu54: cpu@54 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -1775,7 +1775,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x36>;
+			reg = <54>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -1793,7 +1793,7 @@
 			};
 		};
 
-		cpu55: cpu@37 {
+		cpu55: cpu@55 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -1803,7 +1803,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x37>;
+			reg = <55>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -1821,7 +1821,7 @@
 			};
 		};
 
-		cpu56: cpu@38 {
+		cpu56: cpu@56 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -1831,7 +1831,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x38>;
+			reg = <56>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -1849,7 +1849,7 @@
 			};
 		};
 
-		cpu57: cpu@39 {
+		cpu57: cpu@57 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -1859,7 +1859,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x39>;
+			reg = <57>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -1877,7 +1877,7 @@
 			};
 		};
 
-		cpu58: cpu@3a {
+		cpu58: cpu@58 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -1887,7 +1887,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x3a>;
+			reg = <58>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -1905,7 +1905,7 @@
 			};
 		};
 
-		cpu59: cpu@3b {
+		cpu59: cpu@59 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -1915,7 +1915,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x3b>;
+			reg = <59>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -1933,7 +1933,7 @@
 			};
 		};
 
-		cpu60: cpu@3c {
+		cpu60: cpu@60 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -1943,7 +1943,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x3c>;
+			reg = <60>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -1961,7 +1961,7 @@
 			};
 		};
 
-		cpu61: cpu@3d {
+		cpu61: cpu@61 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -1971,7 +1971,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x3d>;
+			reg = <61>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -1989,7 +1989,7 @@
 			};
 		};
 
-		cpu62: cpu@3e {
+		cpu62: cpu@62 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -1999,7 +1999,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x3e>;
+			reg = <62>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;
@@ -2017,7 +2017,7 @@
 			};
 		};
 
-		cpu63: cpu@3f {
+		cpu63: cpu@63 {
 			compatible = "thead,c920", "riscv";
 			device_type = "cpu";
 			riscv,isa = "rv64imafdc";
@@ -2027,7 +2027,7 @@
 					       "zifencei", "zihpm", "zfh",
 					       "xtheadvector";
 			thead,vlenb = <16>;
-			reg = <0x3f>;
+			reg = <63>;
 			i-cache-block-size = <64>;
 			i-cache-size = <65536>;
 			i-cache-sets = <512>;

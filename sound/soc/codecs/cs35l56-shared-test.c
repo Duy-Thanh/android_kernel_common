@@ -29,7 +29,6 @@ struct cs35l56_shared_test_priv {
 	struct faux_device *gpio_dev;
 	struct cs35l56_shared_test_mock_gpio *gpio_priv;
 	struct regmap *registers;
-	unsigned int reg_offset;
 	struct cs35l56_base *cs35l56_base;
 	u8 applied_pad_pull_state[CS35L56_MAX_GPIO];
 };
@@ -195,8 +194,6 @@ static int cs35l56_shared_test_reg_read(void *context, unsigned int reg, unsigne
 {
 	struct cs35l56_shared_test_priv *priv = context;
 
-	reg -= priv->reg_offset;
-
 	switch (reg) {
 	case CS35L56_SYNC_GPIO1_CFG ... CS35L56_ASP2_DIO_GPIO13_CFG:
 	case CS35L56_GPIO1_CTRL1 ... CS35L56_GPIO13_CTRL1:
@@ -216,8 +213,6 @@ static int cs35l56_shared_test_reg_read(void *context, unsigned int reg, unsigne
 static int cs35l56_shared_test_reg_write(void *context, unsigned int reg, unsigned int val)
 {
 	struct cs35l56_shared_test_priv *priv = context;
-
-	reg -= priv->reg_offset;
 
 	switch (reg) {
 	case CS35L56_UPDATE_REGS:
@@ -678,7 +673,6 @@ static int cs35l56_shared_test_case_base_init(struct kunit *test, u8 type, u8 re
 	priv->cs35l56_base->rev = rev;
 
 	if (regmap_config) {
-		priv->reg_offset = regmap_config->reg_base;
 		ret = cs35l56_shared_test_case_regmap_init(test, regmap_config);
 		if (ret)
 			return ret;

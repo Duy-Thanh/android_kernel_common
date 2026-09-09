@@ -248,11 +248,13 @@ int afs_silly_iput(struct dentry *dentry, struct inode *inode)
 	struct dentry *alias;
 	int ret;
 
+	DECLARE_WAIT_QUEUE_HEAD_ONSTACK(wq);
+
 	_enter("%p{%pd},%llx", dentry, dentry, vnode->fid.vnode);
 
 	down_read(&dvnode->rmdir_lock);
 
-	alias = d_alloc_parallel(dentry->d_parent, &dentry->d_name);
+	alias = d_alloc_parallel(dentry->d_parent, &dentry->d_name, &wq);
 	if (IS_ERR(alias)) {
 		up_read(&dvnode->rmdir_lock);
 		return 0;

@@ -17,14 +17,14 @@ union dcn401_clk_mgr_block_sequence_params {
 		uint32_t ppclk;
 		uint16_t freq_mhz;
 		/* outputs */
-		int *response;
+		uint32_t *response;
 	} update_hardmin_params;
 	struct {
 		/* inputs */
 		uint32_t ppclk;
 		int freq_khz;
 		/* outputs */
-		int *response;
+		uint32_t *response;
 	} update_hardmin_optimized_params;
 	struct {
 		/* inputs */

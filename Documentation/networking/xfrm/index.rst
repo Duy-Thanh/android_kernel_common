@@ -9,6 +9,5 @@ XFRM Framework
 
    xfrm_device
    xfrm_proc
-   xfrm_migrate_state
    xfrm_sync
    xfrm_sysctl

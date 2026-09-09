@@ -39,12 +39,12 @@ static int altera_spi_probe(struct platform_device *pdev)
 	enum altera_spi_type type = ALTERA_SPI_TYPE_UNKNOWN;
 	struct altera_spi *hw;
 	struct spi_controller *host;
-	int err;
+	int err = -ENODEV;
 	u16 i;
 
-	host = devm_spi_alloc_host(&pdev->dev, sizeof(struct altera_spi));
+	host = spi_alloc_host(&pdev->dev, sizeof(struct altera_spi));
 	if (!host)
-		return -ENOMEM;
+		return err;
 
 	/* setup the host state. */
 	host->bus_num = -1;
@@ -54,7 +54,8 @@ static int altera_spi_probe(struct platform_device *pdev)
 			dev_err(&pdev->dev,
 				"Invalid number of chipselect: %u\n",
 				pdata->num_chipselect);
-			return -EINVAL;
+			err = -EINVAL;
+			goto exit;
 		}
 
 		host->num_chipselect = pdata->num_chipselect;
@@ -79,7 +80,7 @@ static int altera_spi_probe(struct platform_device *pdev)
 		hw->regmap = dev_get_regmap(pdev->dev.parent, NULL);
 		if (!hw->regmap) {
 			dev_err(&pdev->dev, "get regmap failed\n");
-			return -ENODEV;
+			goto exit;
 		}
 
 		regoff = platform_get_resource(pdev, IORESOURCE_REG, 0);
@@ -89,14 +90,17 @@ static int altera_spi_probe(struct platform_device *pdev)
 		void __iomem *res;
 
 		res = devm_platform_ioremap_resource(pdev, 0);
-		if (IS_ERR(res))
-			return PTR_ERR(res);
+		if (IS_ERR(res)) {
+			err = PTR_ERR(res);
+			goto exit;
+		}
 
 		hw->regmap = devm_regmap_init_mmio(&pdev->dev, res,
 						   &spi_altera_config);
 		if (IS_ERR(hw->regmap)) {
 			dev_err(&pdev->dev, "regmap mmio init failed\n");
-			return PTR_ERR(hw->regmap);
+			err = PTR_ERR(hw->regmap);
+			goto exit;
 		}
 	}
 
@@ -108,12 +112,12 @@ static int altera_spi_probe(struct platform_device *pdev)
 		err = devm_request_irq(&pdev->dev, hw->irq, altera_spi_irq, 0,
 				       pdev->name, host);
 		if (err)
-			return err;
+			goto exit;
 	}
 
 	err = devm_spi_register_controller(&pdev->dev, host);
 	if (err)
-		return err;
+		goto exit;
 
 	if (pdata) {
 		for (i = 0; i < pdata->num_devices; i++) {
@@ -127,6 +131,9 @@ static int altera_spi_probe(struct platform_device *pdev)
 	dev_info(&pdev->dev, "regoff %u, irq %d\n", hw->regoff, hw->irq);
 
 	return 0;
+exit:
+	spi_controller_put(host);
+	return err;
 }
 
 #ifdef CONFIG_OF
@@ -139,8 +146,8 @@ MODULE_DEVICE_TABLE(of, altera_spi_match);
 #endif /* CONFIG_OF */
 
 static const struct platform_device_id altera_spi_ids[] = {
-	{ .name = DRV_NAME,		.driver_data = ALTERA_SPI_TYPE_UNKNOWN },
-	{ .name = "subdev_spi_altera",	.driver_data = ALTERA_SPI_TYPE_SUBDEV },
+	{ DRV_NAME,		ALTERA_SPI_TYPE_UNKNOWN },
+	{ "subdev_spi_altera",	ALTERA_SPI_TYPE_SUBDEV },
 	{ }
 };
 MODULE_DEVICE_TABLE(platform, altera_spi_ids);

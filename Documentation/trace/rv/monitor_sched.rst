@@ -36,7 +36,7 @@ Specifications
 --------------
 
 The specifications included in sched are currently a work in progress, adapting the ones
-defined by Daniel Bristot in [1]_.
+defined in by Daniel Bristot in [1].
 
 Currently we included the following:
 
@@ -365,7 +365,4 @@ constraints when processing the events::
 References
 ----------
 
-.. [1] Daniel Bristot de Oliveira et al.:
-       `A thread synchronization model for the PREEMPT_RT Linux kernel
-       <https://www.iris.sssup.it/bitstream/11382/533630/1/Elsevier-JSA-2020.pdf>`_,
-       J. Syst. Archit., 2020.
+[1] - https://bristot.me/linux-task-model
