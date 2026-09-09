@@ -16,6 +16,24 @@
       "message": "My one concern about this is, this isn\u0027t a dmabuf heaps driver, more of a platform specific reserved memory driver, so it probably shouldn\u0027t be in the drivers/dma-buf/headps dir. Maybe somewhere in drivers/soc/tegra instead?\n\nI\u0027m surprised though, is module init really too late for this sort of reservation?",
       "revId": "8e8d55d3f9b58e1474af4dcd0aa10537740dc9b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f0e68c4_05eaaedf",
+        "filename": "drivers/dma-buf/heaps/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 4048864
+      },
+      "writtenOn": "2026-09-09T04:34:21Z",
+      "side": 1,
+      "message": "Good point and I agree.\n\nThe current location is intentional so that this BACKPORT: FROMLIST: change stays aligned with the upstream Linux v6 series. That series already splits the driver into a built-in tegra-vpr-init.c and a modular tegra-vpr.c, while retaining both files under drivers/dma-buf/heaps/.\nSince the series is still under upstream review, I would prefer not to introduce an ACK-specific file relocation before the upstream maintainers decide on the final organization. If the upstream series moves the initializer to drivers/soc/tegra/, I will update the ACK backport to follow that final upstream layout, or carry the upstream relocation into the corresponding future ACK version. Does this sound reasonable?\n\nRegarding initialization timing, the DT core reserves the physical range during early boot, independently of the VPR initializer. RESERVEDMEM_OF_DECLARE() registers tegra_vpr_rmem_init() as the handler for the VPR reserved-memory node. During the early reserved-memory scan, tegra_vpr_rmem_init() calls cma_init_reserved_mem() to add the VPR range to the CMA area list. Later, cma_init_reserved_areas() processes that list, initializes each area’s allocation bitmap, and makes the area available for CMA allocations. \nA module_init() callback runs after this CMA setup has completed, when it is too late to add another area to that initialization pass. Also cma_init_reserved_mem() is marked __init and is not exported to modules, so the VPR CMA setup cannot be deferred until module load time.",
+      "parentUuid": "a30eb5e1_b2c248dd",
+      "revId": "8e8d55d3f9b58e1474af4dcd0aa10537740dc9b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
