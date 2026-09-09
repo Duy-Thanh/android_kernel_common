@@ -329,7 +329,6 @@ pub fn in_kunit_test() -> bool {
     !unsafe { bindings::kunit_get_current_test() }.is_null()
 }
 
-#[cfg(CONFIG_RUST_KUNIT_SELFTEST)]
 #[kunit_tests(rust_kernel_kunit)]
 mod tests {
     use super::*;

@@ -97,9 +97,7 @@ properties:
     minItems: 1
     items:
       - description: vbus extcon
-        maxItems: 1
       - description: id extcon
-        maxItems: 1
 
   phy-clkgate-delay-us:
     description:

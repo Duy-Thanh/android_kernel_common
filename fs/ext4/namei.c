@@ -145,9 +145,9 @@ static struct buffer_head *__ext4_read_dirblock(struct inode *inode,
 	if (IS_ERR(bh)) {
 		__ext4_warning(inode->i_sb, func, line,
 			       "inode #%llu: lblock %lu: comm %s: "
-			       "error %pe reading directory block",
+			       "error %ld reading directory block",
 			       inode->i_ino, (unsigned long)block,
-			       current->comm, bh);
+			       current->comm, PTR_ERR(bh));
 
 		return bh;
 	}
@@ -3054,7 +3054,7 @@ out_stop:
 out_retry:
 	if (err == -ENOSPC && ext4_should_retry_alloc(dir->i_sb, &retries))
 		goto retry;
-	return err ? ERR_PTR(err) : NULL;
+	return ERR_PTR(err);
 }
 
 /*

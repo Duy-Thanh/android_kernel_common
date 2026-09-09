@@ -221,10 +221,11 @@ static int create_direct_keys(struct mlx5_vdpa_dev *mvdev, struct mlx5_vdpa_mr *
 
 	list_for_each_entry(dmr, &mr->head, list) {
 		struct mlx5_create_mkey_mem *cmd_mem;
-		int mttcount;
+		int mttlen, mttcount;
 
-		mttcount = ALIGN(dmr->nsg, MLX5_VDPA_MTT_ALIGN / sizeof(cmd_mem->mtt[0]));
-		cmd_mem = kvzalloc_flex(*cmd_mem, mtt, mttcount);
+		mttlen = roundup(MLX5_ST_SZ_BYTES(mtt) * dmr->nsg, MLX5_VDPA_MTT_ALIGN);
+		mttcount = mttlen / sizeof(cmd_mem->mtt[0]);
+		cmd_mem = kvcalloc(1, struct_size(cmd_mem, mtt, mttcount), GFP_KERNEL);
 		if (!cmd_mem) {
 			err = -ENOMEM;
 			goto done;

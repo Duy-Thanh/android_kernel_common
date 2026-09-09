@@ -1014,7 +1014,7 @@ static void __meminit free_pagetable(struct page *page, int order)
 #ifdef CONFIG_HAVE_BOOTMEM_INFO_NODE
 		enum bootmem_type type = bootmem_type(page);
 
-		if (type == MIX_SECTION_INFO) {
+		if (type == SECTION_INFO || type == MIX_SECTION_INFO) {
 			while (nr_pages--)
 				put_page_bootmem(page++);
 		} else {
@@ -1028,24 +1028,13 @@ static void __meminit free_pagetable(struct page *page, int order)
 	}
 }
 
-static void __meminit free_vmemmap_pages(struct page *page, unsigned int order,
+static void __meminit free_hugepage_table(struct page *page,
 		struct vmem_altmap *altmap)
 {
-	unsigned long nr_pages = 1u << order;
-
-	if (altmap) {
-		vmem_altmap_free(altmap, nr_pages);
-	} else if (PageReserved(page)) {
-		if (IS_ENABLED(CONFIG_HAVE_BOOTMEM_INFO_NODE) &&
-		    bootmem_type(page) == SECTION_INFO) {
-			while (nr_pages--)
-				put_page_bootmem(page++);
-		} else {
-			free_reserved_pages(page, nr_pages);
-		}
-	} else {
-		__free_pages(page, order);
-	}
+	if (altmap)
+		vmem_altmap_free(altmap, PMD_SIZE / PAGE_SIZE);
+	else
+		free_pagetable(page, get_order(PMD_SIZE));
 }
 
 static void __meminit free_pte_table(pte_t *pte_start, pmd_t *pmd)
@@ -1129,8 +1118,7 @@ remove_pte_table(pte_t *pte_start, unsigned long addr, unsigned long end,
 			return;
 
 		if (!direct)
-			/* We never populate base pages from the altmap. */
-			free_vmemmap_pages(pte_page(*pte), 0, NULL);
+			free_pagetable(pte_page(*pte), 0);
 
 		spin_lock(&init_mm.page_table_lock);
 		pte_clear(&init_mm, addr, pte);
@@ -1165,19 +1153,19 @@ remove_pmd_table(pmd_t *pmd_start, unsigned long addr, unsigned long end,
 			if (IS_ALIGNED(addr, PMD_SIZE) &&
 			    IS_ALIGNED(next, PMD_SIZE)) {
 				if (!direct)
-					free_vmemmap_pages(pmd_page(*pmd),
-							   PMD_ORDER, altmap);
+					free_hugepage_table(pmd_page(*pmd),
+							    altmap);
 
 				spin_lock(&init_mm.page_table_lock);
 				pmd_clear(pmd);
 				spin_unlock(&init_mm.page_table_lock);
 				pages++;
 			} else if (vmemmap_pmd_is_unused(addr, next)) {
-				free_vmemmap_pages(pmd_page(*pmd), PMD_ORDER,
-						   altmap);
-				spin_lock(&init_mm.page_table_lock);
-				pmd_clear(pmd);
-				spin_unlock(&init_mm.page_table_lock);
+					free_hugepage_table(pmd_page(*pmd),
+							    altmap);
+					spin_lock(&init_mm.page_table_lock);
+					pmd_clear(pmd);
+					spin_unlock(&init_mm.page_table_lock);
 			}
 			continue;
 		}
@@ -1300,13 +1288,12 @@ kernel_physical_mapping_remove(unsigned long start, unsigned long end)
 	remove_pagetable(start, end, true, NULL);
 }
 
-void __ref arch_remove_memory(u64 start, u64 size, struct vmem_altmap *altmap,
-			      struct dev_pagemap *pgmap)
+void __ref arch_remove_memory(u64 start, u64 size, struct vmem_altmap *altmap)
 {
 	unsigned long start_pfn = start >> PAGE_SHIFT;
 	unsigned long nr_pages = size >> PAGE_SHIFT;
 
-	__remove_pages(start_pfn, nr_pages, altmap, pgmap);
+	__remove_pages(start_pfn, nr_pages, altmap);
 	kernel_physical_mapping_remove(start, start + size);
 }
 #endif /* CONFIG_MEMORY_HOTPLUG */

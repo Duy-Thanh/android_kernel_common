@@ -651,7 +651,6 @@ static const struct pci_device_id cpt_id_table[] = {
 	{ PCI_DEVICE(PCI_VENDOR_ID_CAVIUM, CPT_81XX_PCI_PF_DEVICE_ID) },
 	{ 0, }  /* end of table */
 };
-MODULE_DEVICE_TABLE(pci, cpt_id_table);
 
 static struct pci_driver cpt_pci_driver = {
 	.name = DRV_NAME,
@@ -667,3 +666,4 @@ MODULE_AUTHOR("George Cherian <george.cherian@cavium.com>");
 MODULE_DESCRIPTION("Cavium Thunder CPT Physical Function Driver");
 MODULE_LICENSE("GPL v2");
 MODULE_VERSION(DRV_VERSION);
+MODULE_DEVICE_TABLE(pci, cpt_id_table);

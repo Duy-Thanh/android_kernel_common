@@ -63,8 +63,7 @@ properties:
     description: The PWM that is used to control the fan.
     maxItems: 1
 
-  "#cooling-cells":
-    const: 2
+  "#cooling-cells": true
 
 required:
   - compatible

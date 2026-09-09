@@ -994,8 +994,12 @@ static struct dentry *__gfs2_lookup(struct inode *dir, struct dentry *dentry,
 	int error;
 
 	inode = gfs2_lookupi(dir, &dentry->d_name, 0);
-	if (inode == NULL || IS_ERR(inode))
-		return d_splice_alias(inode, dentry);
+	if (inode == NULL) {
+		d_add(dentry, NULL);
+		return NULL;
+	}
+	if (IS_ERR(inode))
+		return ERR_CAST(inode);
 
 	gl = GFS2_I(inode)->i_gl;
 	error = gfs2_glock_nq_init(gl, LM_ST_SHARED, LM_FLAG_ANY, &gh);

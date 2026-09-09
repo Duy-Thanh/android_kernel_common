@@ -8,28 +8,13 @@ static bool verify_num_vhca_ids(struct mlx5_core_dev *mdev, u32 *vhca_ids,
 				unsigned int size)
 {
 	unsigned int max_num_vhca_id = MLX5_CAP_GEN_2(mdev, max_rqt_vhca_id);
-	unsigned int unique_count = 0;
-	int i, j;
+	int i;
 
-	/* Count unique vhca_ids */
-	for (i = 0; i < size; i++) {
-		bool is_unique = true;
-
-		/* Check if vhca_ids[i] was already seen */
-		for (j = 0; j < i; j++) {
-			if (vhca_ids[j] == vhca_ids[i]) {
-				is_unique = false;
-				break;
-			}
-		}
-		if (is_unique)
-			unique_count++;
-	}
-
-	/* Verify that number of unique vhca_ids doesn't exceed
-	 * max_num_vhca_id
-	 */
-	return unique_count <= max_num_vhca_id;
+	/* Verify that all vhca_ids are in range [0, max_num_vhca_ids - 1] */
+	for (i = 0; i < size; i++)
+		if (vhca_ids[i] >= max_num_vhca_id)
+			return false;
+	return true;
 }
 
 static bool rqt_verify_vhca_ids(struct mlx5_core_dev *mdev, u32 *vhca_ids,
@@ -183,6 +168,8 @@ out:
 	return err;
 }
 
+#define MLX5E_UNIFORM_SPREAD_RQT_FACTOR 2
+
 u32 mlx5e_rqt_size(struct mlx5_core_dev *mdev, unsigned int num_channels)
 {
 	u32 rqt_size = max_t(u32, MLX5E_INDIR_MIN_RQT_SIZE,
@@ -190,6 +177,13 @@ u32 mlx5e_rqt_size(struct mlx5_core_dev *mdev, unsigned int num_channels)
 	u32 max_cap_rqt_size = 1 << MLX5_CAP_GEN(mdev, log_max_rqt_size);
 
 	return min_t(u32, rqt_size, max_cap_rqt_size);
+}
+
+#define MLX5E_MAX_RQT_SIZE_ALLOWED_WITH_XOR8_HASH 256
+
+unsigned int mlx5e_rqt_max_num_channels_allowed_for_xor8(void)
+{
+	return MLX5E_MAX_RQT_SIZE_ALLOWED_WITH_XOR8_HASH / MLX5E_UNIFORM_SPREAD_RQT_FACTOR;
 }
 
 void mlx5e_rqt_destroy(struct mlx5e_rqt *rqt)

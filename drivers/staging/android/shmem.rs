@@ -7,8 +7,9 @@
 use kernel::{
     bindings,
     error::{from_err_ptr, to_result, Result},
-    fs::file::{File, LocalFile, Offset},
+    fs::file::{File, LocalFile},
     iov::IovIterDest,
+    miscdevice::loff_t,
     mm::virt::{vm_flags_t, VmaNew},
     prelude::*,
     str::CStr,
@@ -24,7 +25,7 @@ use core::{
 /// # Safety
 ///
 /// Caller must ensure that access to the file position is properly synchronized.
-pub(crate) unsafe fn file_get_fpos(file: &LocalFile) -> Offset {
+pub(crate) unsafe fn file_get_fpos(file: &LocalFile) -> loff_t {
     // SAFETY: Caller ensures that this is okay.
     unsafe { (*file.as_ptr()).f_pos }
 }
@@ -32,7 +33,7 @@ pub(crate) unsafe fn file_get_fpos(file: &LocalFile) -> Offset {
 /// # Safety
 ///
 /// Caller must ensure that access to the file position is properly synchronized.
-pub(crate) unsafe fn file_set_fpos(file: &LocalFile, pos: Offset) {
+pub(crate) unsafe fn file_set_fpos(file: &LocalFile, pos: loff_t) {
     // SAFETY: Caller ensures that this is okay.
     unsafe { (*file.as_ptr()).f_pos = pos };
 }
@@ -91,7 +92,7 @@ impl ShmemFile {
         &self.inner
     }
 
-    pub(crate) fn vfs_llseek(&self, offset: Offset, whence: c_int) -> Result<Offset> {
+    pub(crate) fn vfs_llseek(&self, offset: loff_t, whence: c_int) -> Result<loff_t> {
         // SAFETY: Just an FFI call. The file is valid.
         let ret = unsafe { bindings::vfs_llseek(self.inner.as_ptr(), offset, whence) };
 
@@ -105,15 +106,15 @@ impl ShmemFile {
     pub(crate) fn vfs_iter_read(
         &self,
         iov: &mut IovIterDest<'_>,
-        pos: &mut Offset,
-    ) -> Result<Offset> {
+        pos: &mut loff_t,
+    ) -> Result<loff_t> {
         // SAFETY: Just an FFI call. The file and iov is valid.
         let ret = unsafe { bindings::vfs_iter_read(self.inner.as_ptr(), iov.as_raw(), pos, 0) };
 
         if ret < 0 {
             Err(Error::from_errno(ret as i32))
         } else {
-            Ok(ret as Offset)
+            Ok(ret as loff_t)
         }
     }
 

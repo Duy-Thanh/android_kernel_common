@@ -202,6 +202,8 @@ cleanup:
 	iters_task__destroy(skel);
 }
 
+extern int stack_mprotect(void);
+
 static void subtest_css_task_iters(void)
 {
 	struct iters_css_task *skel = NULL;

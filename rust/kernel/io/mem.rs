@@ -62,31 +62,33 @@ impl<'a> IoRequest<'a> {
     ///
     /// impl platform::Driver for SampleDriver {
     ///    # type IdInfo = ();
-    ///    # type Data<'bound> = Self;
     ///
-    ///    fn probe<'bound>(
-    ///       pdev: &'bound platform::Device<Core<'_>>,
-    ///       info: Option<&'bound Self::IdInfo>,
-    ///    ) -> impl PinInit<Self, Error> + 'bound {
+    ///    fn probe(
+    ///       pdev: &platform::Device<Core>,
+    ///       info: Option<&Self::IdInfo>,
+    ///    ) -> impl PinInit<Self, Error> {
     ///       let offset = 0; // Some offset.
     ///
     ///       // If the size is known at compile time, use [`Self::iomap_sized`].
     ///       //
     ///       // No runtime checks will apply when reading and writing.
     ///       let request = pdev.io_request_by_index(0).ok_or(ENODEV)?;
-    ///       let iomem = request.iomap_sized::<42>()?;
+    ///       let iomem = request.iomap_sized::<42>();
+    ///       let iomem = KBox::pin_init(iomem, GFP_KERNEL)?;
+    ///
+    ///       let io = iomem.access(pdev.as_ref())?;
     ///
     ///       // Read and write a 32-bit value at `offset`.
-    ///       let data = iomem.read32(offset);
+    ///       let data = io.read32(offset);
     ///
-    ///       iomem.write32(data, offset);
+    ///       io.write32(data, offset);
     ///
     ///       # Ok(SampleDriver)
     ///     }
     /// }
     /// ```
-    pub fn iomap_sized<const SIZE: usize>(self) -> Result<IoMem<'a, SIZE>> {
-        IoMem::ioremap(self.device, self.resource)
+    pub fn iomap_sized<const SIZE: usize>(self) -> impl PinInit<Devres<IoMem<SIZE>>, Error> + 'a {
+        IoMem::new(self)
     }
 
     /// Same as [`Self::iomap_sized`] but with exclusive access to the
@@ -95,8 +97,10 @@ impl<'a> IoRequest<'a> {
     /// This uses the [`ioremap()`] C API.
     ///
     /// [`ioremap()`]: https://docs.kernel.org/driver-api/device-io.html#getting-access-to-the-device
-    pub fn iomap_exclusive_sized<const SIZE: usize>(self) -> Result<ExclusiveIoMem<'a, SIZE>> {
-        ExclusiveIoMem::ioremap(self.device, self.resource)
+    pub fn iomap_exclusive_sized<const SIZE: usize>(
+        self,
+    ) -> impl PinInit<Devres<ExclusiveIoMem<SIZE>>, Error> + 'a {
+        ExclusiveIoMem::new(self)
     }
 
     /// Maps an [`IoRequest`] where the size is not known at compile time,
@@ -122,12 +126,11 @@ impl<'a> IoRequest<'a> {
     ///
     /// impl platform::Driver for SampleDriver {
     ///    # type IdInfo = ();
-    ///    # type Data<'bound> = Self;
     ///
-    ///    fn probe<'bound>(
-    ///       pdev: &'bound platform::Device<Core<'_>>,
-    ///       info: Option<&'bound Self::IdInfo>,
-    ///    ) -> impl PinInit<Self, Error> + 'bound {
+    ///    fn probe(
+    ///       pdev: &platform::Device<Core>,
+    ///       info: Option<&Self::IdInfo>,
+    ///    ) -> impl PinInit<Self, Error> {
     ///       let offset = 0; // Some offset.
     ///
     ///       // Unlike [`Self::iomap_sized`], here the size of the memory region
@@ -135,24 +138,27 @@ impl<'a> IoRequest<'a> {
     ///       // family of functions should be used, leading to runtime checks on every
     ///       // access.
     ///       let request = pdev.io_request_by_index(0).ok_or(ENODEV)?;
-    ///       let iomem = request.iomap()?;
+    ///       let iomem = request.iomap();
+    ///       let iomem = KBox::pin_init(iomem, GFP_KERNEL)?;
     ///
-    ///       let data = iomem.try_read32(offset)?;
+    ///       let io = iomem.access(pdev.as_ref())?;
     ///
-    ///       iomem.try_write32(data, offset)?;
+    ///       let data = io.try_read32(offset)?;
+    ///
+    ///       io.try_write32(data, offset)?;
     ///
     ///       # Ok(SampleDriver)
     ///     }
     /// }
     /// ```
-    pub fn iomap(self) -> Result<IoMem<'a>> {
-        self.iomap_sized::<0>()
+    pub fn iomap(self) -> impl PinInit<Devres<IoMem<0>>, Error> + 'a {
+        Self::iomap_sized::<0>(self)
     }
 
     /// Same as [`Self::iomap`] but with exclusive access to the underlying
     /// region.
-    pub fn iomap_exclusive(self) -> Result<ExclusiveIoMem<'a, 0>> {
-        self.iomap_exclusive_sized::<0>()
+    pub fn iomap_exclusive(self) -> impl PinInit<Devres<ExclusiveIoMem<0>>, Error> + 'a {
+        Self::iomap_exclusive_sized::<0>(self)
     }
 }
 
@@ -161,9 +167,9 @@ impl<'a> IoRequest<'a> {
 /// # Invariants
 ///
 /// - [`ExclusiveIoMem`] has exclusive access to the underlying [`IoMem`].
-pub struct ExclusiveIoMem<'a, const SIZE: usize> {
+pub struct ExclusiveIoMem<const SIZE: usize> {
     /// The underlying `IoMem` instance.
-    iomem: IoMem<'a, SIZE>,
+    iomem: IoMem<SIZE>,
 
     /// The region abstraction. This represents exclusive access to the
     /// range represented by the underlying `iomem`.
@@ -172,9 +178,9 @@ pub struct ExclusiveIoMem<'a, const SIZE: usize> {
     _region: Region,
 }
 
-impl<'a, const SIZE: usize> ExclusiveIoMem<'a, SIZE> {
+impl<const SIZE: usize> ExclusiveIoMem<SIZE> {
     /// Creates a new `ExclusiveIoMem` instance.
-    fn ioremap(dev: &'a Device<Bound>, resource: &Resource) -> Result<Self> {
+    fn ioremap(resource: &Resource) -> Result<Self> {
         let start = resource.start();
         let size = resource.size();
         let name = resource.name().unwrap_or_default();
@@ -188,29 +194,26 @@ impl<'a, const SIZE: usize> ExclusiveIoMem<'a, SIZE> {
             )
             .ok_or(EBUSY)?;
 
-        let iomem = IoMem::ioremap(dev, resource)?;
+        let iomem = IoMem::ioremap(resource)?;
 
-        Ok(ExclusiveIoMem {
+        let iomem = ExclusiveIoMem {
             iomem,
             _region: region,
-        })
+        };
+
+        Ok(iomem)
     }
 
-    /// Consume the `ExclusiveIoMem` and register it as a device-managed resource.
-    ///
-    /// The returned `Devres<ExclusiveIoMem<'static, SIZE>>` can outlive the original lifetime
-    /// `'a`. Access to the I/O memory is revoked when the device is unbound.
-    pub fn into_devres(self) -> Result<Devres<ExclusiveIoMem<'static, SIZE>>> {
-        // SAFETY: Casting to `'static` is sound because `Devres` guarantees the
-        // `ExclusiveIoMem` does not actually outlive the device -- access is revoked and the
-        // resource is released when the device is unbound.
-        let iomem: ExclusiveIoMem<'static, SIZE> = unsafe { core::mem::transmute(self) };
-        let dev = iomem.iomem.dev;
-        Devres::new(dev, iomem)
+    /// Creates a new `ExclusiveIoMem` instance from a previously acquired [`IoRequest`].
+    pub fn new<'a>(io_request: IoRequest<'a>) -> impl PinInit<Devres<Self>, Error> + 'a {
+        let dev = io_request.device;
+        let res = io_request.resource;
+
+        Devres::new(dev, Self::ioremap(res))
     }
 }
 
-impl<const SIZE: usize> Deref for ExclusiveIoMem<'_, SIZE> {
+impl<const SIZE: usize> Deref for ExclusiveIoMem<SIZE> {
     type Target = Mmio<SIZE>;
 
     fn deref(&self) -> &Self::Target {
@@ -227,13 +230,12 @@ impl<const SIZE: usize> Deref for ExclusiveIoMem<'_, SIZE> {
 ///
 /// [`IoMem`] always holds an [`MmioRaw`] instance that holds a valid pointer to the
 /// start of the I/O memory mapped region.
-pub struct IoMem<'a, const SIZE: usize = 0> {
-    dev: &'a Device<Bound>,
+pub struct IoMem<const SIZE: usize = 0> {
     io: MmioRaw<SIZE>,
 }
 
-impl<'a, const SIZE: usize> IoMem<'a, SIZE> {
-    fn ioremap(dev: &'a Device<Bound>, resource: &Resource) -> Result<Self> {
+impl<const SIZE: usize> IoMem<SIZE> {
+    fn ioremap(resource: &Resource) -> Result<Self> {
         // Note: Some ioremap() implementations use types that depend on the CPU
         // word width rather than the bus address width.
         //
@@ -265,33 +267,28 @@ impl<'a, const SIZE: usize> IoMem<'a, SIZE> {
         }
 
         let io = MmioRaw::new(addr as usize, size)?;
+        let io = IoMem { io };
 
-        Ok(IoMem { dev, io })
+        Ok(io)
     }
 
-    /// Consume the `IoMem` and register it as a device-managed resource.
-    ///
-    /// The returned `Devres<IoMem<'static, SIZE>>` can outlive the original
-    /// lifetime `'a`. Access to the I/O memory is revoked when the device
-    /// is unbound.
-    pub fn into_devres(self) -> Result<Devres<IoMem<'static, SIZE>>> {
-        // SAFETY: Casting to `'static` is sound because `Devres` guarantees the `IoMem` does not
-        // actually outlive the device -- access is revoked and the resource is released when the
-        // device is unbound.
-        let iomem: IoMem<'static, SIZE> = unsafe { core::mem::transmute(self) };
-        let dev = iomem.dev;
-        Devres::new(dev, iomem)
+    /// Creates a new `IoMem` instance from a previously acquired [`IoRequest`].
+    pub fn new<'a>(io_request: IoRequest<'a>) -> impl PinInit<Devres<Self>, Error> + 'a {
+        let dev = io_request.device;
+        let res = io_request.resource;
+
+        Devres::new(dev, Self::ioremap(res))
     }
 }
 
-impl<const SIZE: usize> Drop for IoMem<'_, SIZE> {
+impl<const SIZE: usize> Drop for IoMem<SIZE> {
     fn drop(&mut self) {
         // SAFETY: Safe as by the invariant of `Io`.
         unsafe { bindings::iounmap(self.io.addr() as *mut c_void) }
     }
 }
 
-impl<const SIZE: usize> Deref for IoMem<'_, SIZE> {
+impl<const SIZE: usize> Deref for IoMem<SIZE> {
     type Target = Mmio<SIZE>;
 
     fn deref(&self) -> &Self::Target {

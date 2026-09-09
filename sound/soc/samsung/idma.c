@@ -67,8 +67,9 @@ static int idma_enqueue(struct snd_pcm_substream *substream)
 	struct idma_ctrl *prtd = substream->runtime->private_data;
 	u32 val;
 
-	scoped_guard(spinlock, &prtd->lock)
-		prtd->token = (void *) substream;
+	spin_lock(&prtd->lock);
+	prtd->token = (void *) substream;
+	spin_unlock(&prtd->lock);
 
 	/* Internal DMA Level0 Interrupt Address */
 	val = idma.lp_tx_addr + prtd->periodsz;
@@ -100,15 +101,16 @@ static void idma_setcallbk(struct snd_pcm_substream *substream,
 {
 	struct idma_ctrl *prtd = substream->runtime->private_data;
 
-	guard(spinlock)(&prtd->lock);
+	spin_lock(&prtd->lock);
 	prtd->cb = cb;
+	spin_unlock(&prtd->lock);
 }
 
 static void idma_control(int op)
 {
 	u32 val = readl(idma.regs + I2SAHB);
 
-	guard(spinlock)(&idma.lock);
+	spin_lock(&idma.lock);
 
 	switch (op) {
 	case LPAM_DMA_START:
@@ -118,10 +120,12 @@ static void idma_control(int op)
 		val &= ~(AHB_INTENLVL0 | AHB_DMAEN);
 		break;
 	default:
+		spin_unlock(&idma.lock);
 		return;
 	}
 
 	writel(val, idma.regs + I2SAHB);
+	spin_unlock(&idma.lock);
 }
 
 static void idma_done(void *id, int bytes_xfer)
@@ -188,7 +192,7 @@ static int idma_trigger(struct snd_soc_component *component,
 	struct idma_ctrl *prtd = substream->runtime->private_data;
 	int ret = 0;
 
-	guard(spinlock)(&prtd->lock);
+	spin_lock(&prtd->lock);
 
 	switch (cmd) {
 	case SNDRV_PCM_TRIGGER_RESUME:
@@ -210,6 +214,8 @@ static int idma_trigger(struct snd_soc_component *component,
 		break;
 	}
 
+	spin_unlock(&prtd->lock);
+
 	return ret;
 }
 
@@ -222,10 +228,12 @@ idma_pointer(struct snd_soc_component *component,
 	dma_addr_t src;
 	unsigned long res;
 
-	scoped_guard(spinlock, &prtd->lock) {
-		idma_getpos(&src);
-		res = src - prtd->start;
-	}
+	spin_lock(&prtd->lock);
+
+	idma_getpos(&src);
+	res = src - prtd->start;
+
+	spin_unlock(&prtd->lock);
 
 	return bytes_to_frames(substream->runtime, res);
 }

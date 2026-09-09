@@ -5,10 +5,9 @@
 
 #include <linux/string_helpers.h>
 
-#include <drm/intel/display_parent_interface.h>
 #include <drm/intel/i915_drm.h>
+#include <drm/intel/display_parent_interface.h>
 #include <drm/intel/intel_pcode_regs.h>
-#include <drm/intel/mchbar_regs.h>
 
 #include "display/intel_display_rps.h"
 #include "display/vlv_clock.h"
@@ -26,6 +25,7 @@
 #include "intel_gt_pm_irq.h"
 #include "intel_gt_print.h"
 #include "intel_gt_regs.h"
+#include "intel_mchbar_regs.h"
 #include "intel_pcode.h"
 #include "intel_rps.h"
 #include "vlv_iosf_sb.h"

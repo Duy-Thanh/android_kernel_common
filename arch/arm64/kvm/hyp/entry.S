@@ -8,6 +8,7 @@
 
 #include <asm/alternative.h>
 #include <asm/assembler.h>
+#include <asm/fpsimdmacros.h>
 #include <asm/kvm.h>
 #include <asm/kvm_arm.h>
 #include <asm/kvm_asm.h>

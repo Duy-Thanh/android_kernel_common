@@ -748,7 +748,10 @@ static const char *cs_amp_devm_get_dell_ssidex(struct device *dev,
 	char *ssidex_buf __free(kfree) = cs_amp_alloc_get_efi_variable(DELL_SSIDEXV2_EFI_NAME,
 								       &DELL_SSIDEXV2_EFI_GUID,
 								       NULL);
-	if (IS_ERR(ssidex_buf))
+	ret = PTR_ERR_OR_ZERO(ssidex_buf);
+	if (ret == -ENOENT)
+		return ERR_PTR(-ENOENT);
+	else if (ret < 0)
 		return ssidex_buf;
 
 	/*

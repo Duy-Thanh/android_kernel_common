@@ -33,7 +33,6 @@
 #include <linux/sprintf.h>
 #include <linux/stddef.h>
 #include <linux/string.h>
-#include <linux/utsname.h>
 #include <linux/workqueue.h>
 #include <net/dsfield.h>
 #include <net/genetlink.h>
@@ -105,33 +104,22 @@ static int __init batadv_init(void)
 	batadv_tp_meter_init();
 
 	batadv_event_workqueue = create_singlethread_workqueue("bat_events");
-	if (!batadv_event_workqueue) {
-		ret = -ENOMEM;
+	if (!batadv_event_workqueue)
 		goto err_create_wq;
-	}
-
-	ret = batadv_wifi_net_devices_init();
-	if (ret < 0)
-		goto err_init_wifi;
 
 	register_netdevice_notifier(&batadv_hard_if_notifier);
 	rtnl_link_register(&batadv_link_ops);
 	batadv_netlink_register();
 
 	pr_info("B.A.T.M.A.N. advanced %s (compatibility version %i) loaded\n",
-		init_utsname()->release, BATADV_COMPAT_VERSION);
+		BATADV_SOURCE_VERSION, BATADV_COMPAT_VERSION);
 
 	return 0;
-
-err_init_wifi:
-	destroy_workqueue(batadv_event_workqueue);
-	batadv_event_workqueue = NULL;
-	rcu_barrier();
 
 err_create_wq:
 	batadv_tt_cache_destroy();
 
-	return ret;
+	return -ENOMEM;
 }
 
 static void __exit batadv_exit(void)
@@ -145,7 +133,6 @@ static void __exit batadv_exit(void)
 
 	rcu_barrier();
 
-	batadv_wifi_net_devices_deinit();
 	batadv_tt_cache_destroy();
 }
 
@@ -194,38 +181,37 @@ int batadv_mesh_init(struct net_device *mesh_iface)
 	INIT_HLIST_HEAD(&bat_priv->tvlv.container_list);
 	INIT_HLIST_HEAD(&bat_priv->tvlv.handler_list);
 	INIT_HLIST_HEAD(&bat_priv->meshif_vlan_list);
-	INIT_HLIST_HEAD(&bat_priv->tp_sender_list);
-	INIT_HLIST_HEAD(&bat_priv->tp_receiver_list);
+	INIT_HLIST_HEAD(&bat_priv->tp_list);
 
 	bat_priv->gw.generation = 0;
 
 	ret = batadv_originator_init(bat_priv);
 	if (ret < 0) {
-		WRITE_ONCE(bat_priv->mesh_state, BATADV_MESH_DEACTIVATING);
+		atomic_set(&bat_priv->mesh_state, BATADV_MESH_DEACTIVATING);
 		goto err_orig;
 	}
 
 	ret = batadv_tt_init(bat_priv);
 	if (ret < 0) {
-		WRITE_ONCE(bat_priv->mesh_state, BATADV_MESH_DEACTIVATING);
+		atomic_set(&bat_priv->mesh_state, BATADV_MESH_DEACTIVATING);
 		goto err_tt;
 	}
 
 	ret = batadv_v_mesh_init(bat_priv);
 	if (ret < 0) {
-		WRITE_ONCE(bat_priv->mesh_state, BATADV_MESH_DEACTIVATING);
+		atomic_set(&bat_priv->mesh_state, BATADV_MESH_DEACTIVATING);
 		goto err_v;
 	}
 
 	ret = batadv_bla_init(bat_priv);
 	if (ret < 0) {
-		WRITE_ONCE(bat_priv->mesh_state, BATADV_MESH_DEACTIVATING);
+		atomic_set(&bat_priv->mesh_state, BATADV_MESH_DEACTIVATING);
 		goto err_bla;
 	}
 
 	ret = batadv_dat_init(bat_priv);
 	if (ret < 0) {
-		WRITE_ONCE(bat_priv->mesh_state, BATADV_MESH_DEACTIVATING);
+		atomic_set(&bat_priv->mesh_state, BATADV_MESH_DEACTIVATING);
 		goto err_dat;
 	}
 
@@ -233,7 +219,7 @@ int batadv_mesh_init(struct net_device *mesh_iface)
 	batadv_mcast_init(bat_priv);
 
 	atomic_set(&bat_priv->gw.reselect, 0);
-	WRITE_ONCE(bat_priv->mesh_state, BATADV_MESH_ACTIVE);
+	atomic_set(&bat_priv->mesh_state, BATADV_MESH_ACTIVE);
 
 	return 0;
 
@@ -247,7 +233,7 @@ err_tt:
 	batadv_originator_free(bat_priv);
 err_orig:
 	batadv_purge_outstanding_packets(bat_priv, NULL);
-	WRITE_ONCE(bat_priv->mesh_state, BATADV_MESH_INACTIVE);
+	atomic_set(&bat_priv->mesh_state, BATADV_MESH_INACTIVE);
 
 	return ret;
 }
@@ -260,7 +246,7 @@ void batadv_mesh_free(struct net_device *mesh_iface)
 {
 	struct batadv_priv *bat_priv = netdev_priv(mesh_iface);
 
-	WRITE_ONCE(bat_priv->mesh_state, BATADV_MESH_DEACTIVATING);
+	atomic_set(&bat_priv->mesh_state, BATADV_MESH_DEACTIVATING);
 
 	batadv_purge_outstanding_packets(bat_priv, NULL);
 	batadv_tp_stop_all(bat_priv);
@@ -291,7 +277,7 @@ void batadv_mesh_free(struct net_device *mesh_iface)
 	free_percpu(bat_priv->bat_counters);
 	bat_priv->bat_counters = NULL;
 
-	WRITE_ONCE(bat_priv->mesh_state, BATADV_MESH_INACTIVE);
+	atomic_set(&bat_priv->mesh_state, BATADV_MESH_INACTIVE);
 }
 
 /**
@@ -455,7 +441,7 @@ int batadv_batman_skb_recv(struct sk_buff *skb, struct net_device *dev,
 
 	bat_priv = netdev_priv(hard_iface->mesh_iface);
 
-	if (READ_ONCE(bat_priv->mesh_state) != BATADV_MESH_ACTIVE)
+	if (atomic_read(&bat_priv->mesh_state) != BATADV_MESH_ACTIVE)
 		goto err_free;
 
 	/* discard frames on not active interfaces */
@@ -628,7 +614,7 @@ bool batadv_vlan_ap_isola_get(struct batadv_priv *bat_priv, unsigned short vid)
 	 */
 	vlan = batadv_meshif_vlan_get(bat_priv, vid);
 	if (vlan) {
-		ap_isolation_enabled = READ_ONCE(vlan->ap_isolation);
+		ap_isolation_enabled = atomic_read(&vlan->ap_isolation);
 		batadv_meshif_vlan_put(vlan);
 	}
 
@@ -698,5 +684,6 @@ MODULE_LICENSE("GPL");
 
 MODULE_AUTHOR(BATADV_DRIVER_AUTHOR);
 MODULE_DESCRIPTION(BATADV_DRIVER_DESC);
+MODULE_VERSION(BATADV_SOURCE_VERSION);
 MODULE_ALIAS_RTNL_LINK("batadv");
 MODULE_ALIAS_GENL_FAMILY(BATADV_NL_NAME);

@@ -11,8 +11,6 @@
 	aliases {
 		serial0 = &uart0;
 		ethernet0 = &gmac0;
-		i3c0 = &i3c0;
-		i3c1 = &i3c1;
 	};
 
 	chosen {
@@ -41,7 +39,7 @@
 
 &gmac0 {
 	status = "okay";
-	phy-mode = "rgmii"; /* TX/RX clock delays provided by Agilex5 I/O hardware */
+	phy-mode = "rgmii-id";
 	phy-handle = <&emac0_phy0>;
 	max-frame-size = <9000>;
 

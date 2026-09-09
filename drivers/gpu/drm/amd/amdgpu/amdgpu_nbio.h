@@ -121,6 +121,4 @@ u64 amdgpu_nbio_get_pcie_replay_count(struct amdgpu_device *adev);
 
 bool amdgpu_nbio_is_replay_cnt_supported(struct amdgpu_device *adev);
 
-void amdgpu_nbio_program_aspm(struct amdgpu_device *adev);
-
 #endif

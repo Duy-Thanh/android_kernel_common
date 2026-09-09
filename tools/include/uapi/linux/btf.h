@@ -33,22 +33,20 @@ struct btf_header {
 	__u32	layout_len;	/* length of layout section	*/
 };
 
-enum btf_max {
-	/* Max possible kind */
-	BTF_MAX_KIND =		0x0000007f,
-	/* Max # of type identifier */
-	BTF_MAX_TYPE =		0x000fffff,
-	/* Max offset into the string section */
-	BTF_MAX_NAME_OFFSET =	0x00ffffff,
-	/* Max # of struct/union/enum members or func args */
-	BTF_MAX_VLEN =		0x00ffffff,
-};
+/* Max # of type identifier */
+#define BTF_MAX_TYPE	0x000fffff
+/* Max offset into the string section */
+#define BTF_MAX_NAME_OFFSET	0x00ffffff
+/* Max # of struct/union/enum members or func args */
+#define BTF_MAX_VLEN	0xffff
 
 struct btf_type {
 	__u32 name_off;
 	/* "info" bits arrangement
-	 * bits  0-23: vlen (e.g. # of struct's members)
-	 * bits 24-30: kind (e.g. int, ptr, array...etc)
+	 * bits  0-15: vlen (e.g. # of struct's members)
+	 * bits 16-23: unused
+	 * bits 24-28: kind (e.g. int, ptr, array...etc)
+	 * bits 29-30: unused
 	 * bit     31: kind_flag, currently used by
 	 *             struct, union, enum, fwd, enum64,
 	 *             decl_tag and type_tag
@@ -67,8 +65,8 @@ struct btf_type {
 	};
 };
 
-#define BTF_INFO_KIND(info)	(((info) >> 24) & 0x7f)
-#define BTF_INFO_VLEN(info)	((info) & 0xffffff)
+#define BTF_INFO_KIND(info)	(((info) >> 24) & 0x1f)
+#define BTF_INFO_VLEN(info)	((info) & 0xffff)
 #define BTF_INFO_KFLAG(info)	((info) >> 31)
 
 enum {

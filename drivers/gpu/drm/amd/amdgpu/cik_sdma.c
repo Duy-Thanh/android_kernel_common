@@ -939,6 +939,7 @@ static int cik_sdma_early_init(struct amdgpu_ip_block *ip_block)
 
 	cik_sdma_set_ring_funcs(adev);
 	cik_sdma_set_irq_funcs(adev);
+	cik_sdma_set_buffer_funcs(adev);
 	amdgpu_sdma_set_vm_pte_scheds(adev, &cik_sdma_vm_pte_funcs);
 
 	return 0;
@@ -999,15 +1000,8 @@ static int cik_sdma_sw_fini(struct amdgpu_ip_block *ip_block)
 static int cik_sdma_hw_init(struct amdgpu_ip_block *ip_block)
 {
 	struct amdgpu_device *adev = ip_block->adev;
-	int r;
 
-	r = cik_sdma_start(adev);
-	if (r)
-		return r;
-
-	cik_sdma_set_buffer_funcs(adev);
-
-	return 0;
+	return cik_sdma_start(adev);
 }
 
 static int cik_sdma_hw_fini(struct amdgpu_ip_block *ip_block)
@@ -1346,7 +1340,8 @@ static const struct amdgpu_buffer_funcs cik_sdma_buffer_funcs = {
 
 static void cik_sdma_set_buffer_funcs(struct amdgpu_device *adev)
 {
-	amdgpu_sdma_set_buffer_funcs_scheds(adev, &cik_sdma_buffer_funcs);
+	adev->mman.buffer_funcs = &cik_sdma_buffer_funcs;
+	adev->mman.buffer_funcs_ring = &adev->sdma.instance[0].ring;
 }
 
 const struct amdgpu_ip_block_version cik_sdma_ip_block =

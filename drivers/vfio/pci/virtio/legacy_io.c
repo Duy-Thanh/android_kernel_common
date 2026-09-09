@@ -298,18 +298,19 @@ int virtiovf_pci_ioctl_get_region_info(struct vfio_device *core_vdev,
 static int virtiovf_set_notify_addr(struct virtiovf_pci_core_device *virtvdev)
 {
 	struct vfio_pci_core_device *core_device = &virtvdev->core_device;
-	void __iomem *io;
+	int ret;
 
 	/*
 	 * Setup the BAR where the 'notify' exists to be used by vfio as well
 	 * This will let us mmap it only once and use it when needed.
 	 */
-	io = vfio_pci_core_get_iomap(core_device,
-				     virtvdev->notify_bar);
-	if (IS_ERR(io))
-		return PTR_ERR(io);
+	ret = vfio_pci_core_setup_barmap(core_device,
+					 virtvdev->notify_bar);
+	if (ret)
+		return ret;
 
-	virtvdev->notify_addr = io + virtvdev->notify_offset;
+	virtvdev->notify_addr = core_device->barmap[virtvdev->notify_bar] +
+			virtvdev->notify_offset;
 	return 0;
 }
 

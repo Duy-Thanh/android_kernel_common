@@ -76,20 +76,7 @@
 	.runs = -1,
 },
 {
-	"sleepable raw tracepoint accept",
-	.insns = {
-	BPF_MOV64_IMM(BPF_REG_0, 0),
-	BPF_EXIT_INSN(),
-	},
-	.prog_type = BPF_PROG_TYPE_TRACING,
-	.expected_attach_type = BPF_TRACE_RAW_TP,
-	.kfunc = "sys_enter",
-	.result = ACCEPT,
-	.flags = BPF_F_SLEEPABLE,
-	.runs = -1,
-},
-{
-	"sleepable raw tracepoint reject non-faultable",
+	"sleepable raw tracepoint reject",
 	.insns = {
 	BPF_MOV64_IMM(BPF_REG_0, 0),
 	BPF_EXIT_INSN(),
@@ -98,7 +85,7 @@
 	.expected_attach_type = BPF_TRACE_RAW_TP,
 	.kfunc = "sched_switch",
 	.result = REJECT,
-	.errstr = "Sleepable program cannot attach to non-faultable tracepoint",
+	.errstr = "Only fentry/fexit/fsession/fmod_ret, lsm, iter, uprobe, and struct_ops programs can be sleepable",
 	.flags = BPF_F_SLEEPABLE,
 	.runs = -1,
 },

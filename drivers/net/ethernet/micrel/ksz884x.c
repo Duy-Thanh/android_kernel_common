@@ -6839,9 +6839,11 @@ static int __maybe_unused pcidev_suspend(struct device *dev_d)
 static char pcidev_name[] = "ksz884xp";
 
 static const struct pci_device_id pcidev_table[] = {
-	{ PCI_VDEVICE(MICREL_KS, 0x8841) },
-	{ PCI_VDEVICE(MICREL_KS, 0x8842) },
-	{ }
+	{ PCI_VENDOR_ID_MICREL_KS, 0x8841,
+		PCI_ANY_ID, PCI_ANY_ID, 0, 0, 0 },
+	{ PCI_VENDOR_ID_MICREL_KS, 0x8842,
+		PCI_ANY_ID, PCI_ANY_ID, 0, 0, 0 },
+	{ 0 }
 };
 
 MODULE_DEVICE_TABLE(pci, pcidev_table);

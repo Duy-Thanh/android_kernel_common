@@ -3,47 +3,24 @@
 //! Implementation of [`Box`].
 
 #[allow(unused_imports)] // Used in doc comments.
-use super::allocator::{
-    KVmalloc,
-    Kmalloc,
-    Vmalloc,
-    VmallocPageIter, //
-};
+use super::allocator::{KVmalloc, Kmalloc, Vmalloc, VmallocPageIter};
+use super::{AllocError, Allocator, Flags, NumaNode};
+use core::alloc::Layout;
+use core::borrow::{Borrow, BorrowMut};
+use core::marker::PhantomData;
+use core::mem::ManuallyDrop;
+use core::mem::MaybeUninit;
+use core::ops::{Deref, DerefMut};
+use core::pin::Pin;
+use core::ptr::NonNull;
+use core::result::Result;
 
-use super::{
-    AllocError,
-    Allocator,
-    Flags,
-    NumaNode, //
-};
-
-use crate::{
-    fmt,
-    page::AsPageIter,
-    prelude::*,
-    types::ForeignOwnable, //
-};
-
-use core::{
-    alloc::Layout,
-    borrow::{
-        Borrow,
-        BorrowMut, //
-    },
-    marker::PhantomData,
-    mem::{
-        ManuallyDrop,
-        MaybeUninit, //
-    },
-    ops::{
-        Deref,
-        DerefMut, //
-    },
-    ptr::NonNull,
-    result::Result, //
-};
-
-use pin_init::ZeroableOption;
+use crate::ffi::c_void;
+use crate::fmt;
+use crate::init::InPlaceInit;
+use crate::page::AsPageIter;
+use crate::types::ForeignOwnable;
+use pin_init::{InPlaceWrite, Init, PinInit, ZeroableOption};
 
 /// The kernel's [`Box`] type -- a heap allocation for a single value of type `T`.
 ///
@@ -279,27 +256,6 @@ where
         Ok(Box(ptr.cast(), PhantomData))
     }
 
-    /// Creates a new zero-initialized `Box<T, A>`.
-    ///
-    /// New memory is allocated with `A` and the [`__GFP_ZERO`] flag. The allocation may fail, in
-    /// which case an error is returned. For ZSTs no memory is allocated.
-    ///
-    /// # Examples
-    ///
-    /// ```
-    /// let b = KBox::<[u8; 128]>::zeroed(GFP_KERNEL)?;
-    /// assert_eq!(*b, [0; 128]);
-    /// # Ok::<(), Error>(())
-    /// ```
-    pub fn zeroed(flags: Flags) -> Result<Self, AllocError>
-    where
-        T: Zeroable,
-    {
-        // SAFETY: `__GFP_ZERO` guarantees the memory is zeroed; `T: Zeroable` guarantees that
-        // all-zeroes is a valid bit pattern for `T`.
-        Ok(unsafe { Self::new_uninit(flags | __GFP_ZERO)?.assume_init() })
-    }
-
     /// Constructs a new `Pin<Box<T, A>>`. If `T` does not implement [`Unpin`], then `x` will be
     /// pinned in memory and can't be moved.
     #[inline]
@@ -318,10 +274,7 @@ where
     /// # Examples
     ///
     /// ```
-    /// use kernel::sync::{
-    ///     new_spinlock,
-    ///     SpinLock, //
-    /// };
+    /// use kernel::sync::{new_spinlock, SpinLock};
     ///
     /// struct Inner {
     ///     a: u32,
@@ -458,7 +411,6 @@ where
 {
     type Initialized = Box<T, A>;
 
-    #[inline]
     fn write_init<E>(mut self, init: impl Init<T, E>) -> Result<Self::Initialized, E> {
         let slot = self.as_mut_ptr();
         // SAFETY: When init errors/panics, slot will get deallocated but not dropped,
@@ -468,7 +420,6 @@ where
         Ok(unsafe { Box::assume_init(self) })
     }
 
-    #[inline]
     fn write_pin_init<E>(mut self, init: impl PinInit<T, E>) -> Result<Pin<Self::Initialized>, E> {
         let slot = self.as_mut_ptr();
         // SAFETY: When init errors/panics, slot will get deallocated but not dropped,
@@ -504,7 +455,7 @@ where
 
 // SAFETY: The pointer returned by `into_foreign` comes from a well aligned
 // pointer to `T` allocated by `A`.
-unsafe impl<T, A> ForeignOwnable for Box<T, A>
+unsafe impl<T: 'static, A> ForeignOwnable for Box<T, A>
 where
     A: Allocator,
 {
@@ -514,14 +465,8 @@ where
         core::mem::align_of::<T>()
     };
 
-    type Borrowed<'a>
-        = &'a T
-    where
-        Self: 'a;
-    type BorrowedMut<'a>
-        = &'a mut T
-    where
-        Self: 'a;
+    type Borrowed<'a> = &'a T;
+    type BorrowedMut<'a> = &'a mut T;
 
     fn into_foreign(self) -> *mut c_void {
         Box::into_raw(self).cast()
@@ -549,19 +494,13 @@ where
 
 // SAFETY: The pointer returned by `into_foreign` comes from a well aligned
 // pointer to `T` allocated by `A`.
-unsafe impl<T, A> ForeignOwnable for Pin<Box<T, A>>
+unsafe impl<T: 'static, A> ForeignOwnable for Pin<Box<T, A>>
 where
     A: Allocator,
 {
     const FOREIGN_ALIGN: usize = <Box<T, A> as ForeignOwnable>::FOREIGN_ALIGN;
-    type Borrowed<'a>
-        = Pin<&'a T>
-    where
-        Self: 'a;
-    type BorrowedMut<'a>
-        = Pin<&'a mut T>
-    where
-        Self: 'a;
+    type Borrowed<'a> = Pin<&'a T>;
+    type BorrowedMut<'a> = Pin<&'a mut T>;
 
     fn into_foreign(self) -> *mut c_void {
         // SAFETY: We are still treating the box as pinned.
@@ -628,6 +567,7 @@ where
 ///
 /// ```
 /// # use core::borrow::Borrow;
+/// # use kernel::alloc::KBox;
 /// struct Foo<B: Borrow<u32>>(B);
 ///
 /// // Owned instance.
@@ -655,6 +595,7 @@ where
 ///
 /// ```
 /// # use core::borrow::BorrowMut;
+/// # use kernel::alloc::KBox;
 /// struct Foo<B: BorrowMut<u32>>(B);
 ///
 /// // Owned instance.
@@ -719,13 +660,9 @@ where
 /// # Examples
 ///
 /// ```
-/// use kernel::{
-///     alloc::allocator::VmallocPageIter,
-///     page::{
-///         AsPageIter,
-///         PAGE_SIZE, //
-///     }, //
-/// };
+/// # use kernel::prelude::*;
+/// use kernel::alloc::allocator::VmallocPageIter;
+/// use kernel::page::{AsPageIter, PAGE_SIZE};
 ///
 /// let mut vbox = VBox::new((), GFP_KERNEL)?;
 ///

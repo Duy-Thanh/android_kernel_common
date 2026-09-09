@@ -23,10 +23,10 @@
 #include "pmbus.h"
 
 static const struct i2c_device_id max15301_id[] = {
-	{ .name = "bmr461" },
-	{ .name = "max15301" },
-	{ .name = "max15303" },
-	{ }
+	{ "bmr461" },
+	{ "max15301" },
+	{ "max15303" },
+	{}
 };
 MODULE_DEVICE_TABLE(i2c, max15301_id);
 

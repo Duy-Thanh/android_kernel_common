@@ -275,8 +275,7 @@ static struct midcomms_node *__find_node(int nodeid, int r)
 {
 	struct midcomms_node *node;
 
-	hlist_for_each_entry_srcu(node, &node_hash[r], hlist,
-			srcu_read_lock_held(&nodes_srcu)) {
+	hlist_for_each_entry_rcu(node, &node_hash[r], hlist) {
 		if (node->nodeid == nodeid)
 			return node;
 	}
@@ -356,7 +355,6 @@ int dlm_midcomms_addr(int nodeid, struct sockaddr_storage *addr)
 	if (!node)
 		return -ENOMEM;
 
-	node->debugfs = dlm_create_debug_comms_file(nodeid, node);
 	node->nodeid = nodeid;
 	spin_lock_init(&node->state_lock);
 	spin_lock_init(&node->send_queue_lock);
@@ -370,6 +368,7 @@ int dlm_midcomms_addr(int nodeid, struct sockaddr_storage *addr)
 	hlist_add_head_rcu(&node->hlist, &node_hash[r]);
 	spin_unlock_bh(&nodes_lock);
 
+	node->debugfs = dlm_create_debug_comms_file(nodeid, node);
 	return 0;
 }
 
@@ -969,10 +968,10 @@ static void midcomms_new_msg_cb(void *data)
 	atomic_inc(&mh->node->send_queue_cnt);
 
 	spin_lock_bh(&mh->node->send_queue_lock);
-	/* need to be locked with list_add_tail_rcu() because list is ordered */
-	mh->seq = atomic_fetch_inc(&mh->node->seq_send);
 	list_add_tail_rcu(&mh->list, &mh->node->send_queue);
 	spin_unlock_bh(&mh->node->send_queue_lock);
+
+	mh->seq = atomic_fetch_inc(&mh->node->seq_send);
 }
 
 static struct dlm_msg *dlm_midcomms_get_msg_3_2(struct dlm_mhandle *mh, int nodeid,
@@ -1166,8 +1165,7 @@ void dlm_midcomms_exit(void)
 
 	idx = srcu_read_lock(&nodes_srcu);
 	for (i = 0; i < CONN_HASH_SIZE; i++) {
-		hlist_for_each_entry_srcu(node, &node_hash[i], hlist,
-				srcu_read_lock_held(&nodes_srcu)) {
+		hlist_for_each_entry_rcu(node, &node_hash[i], hlist) {
 			dlm_delete_debug_comms_file(node->debugfs);
 
 			spin_lock(&nodes_lock);
@@ -1327,8 +1325,7 @@ void dlm_midcomms_version_wait(void)
 
 	idx = srcu_read_lock(&nodes_srcu);
 	for (i = 0; i < CONN_HASH_SIZE; i++) {
-		hlist_for_each_entry_srcu(node, &node_hash[i], hlist,
-				srcu_read_lock_held(&nodes_srcu)) {
+		hlist_for_each_entry_rcu(node, &node_hash[i], hlist) {
 			ret = wait_event_timeout(node->shutdown_wait,
 						 node->version != DLM_VERSION_NOT_SET ||
 						 node->state == DLM_CLOSED ||
@@ -1399,8 +1396,7 @@ void dlm_midcomms_shutdown(void)
 	mutex_lock(&close_lock);
 	idx = srcu_read_lock(&nodes_srcu);
 	for (i = 0; i < CONN_HASH_SIZE; i++) {
-		hlist_for_each_entry_srcu(node, &node_hash[i], hlist,
-				srcu_read_lock_held(&nodes_srcu)) {
+		hlist_for_each_entry_rcu(node, &node_hash[i], hlist) {
 			midcomms_shutdown(node);
 		}
 	}
@@ -1408,8 +1404,7 @@ void dlm_midcomms_shutdown(void)
 	dlm_lowcomms_shutdown();
 
 	for (i = 0; i < CONN_HASH_SIZE; i++) {
-		hlist_for_each_entry_srcu(node, &node_hash[i], hlist,
-				srcu_read_lock_held(&nodes_srcu)) {
+		hlist_for_each_entry_rcu(node, &node_hash[i], hlist) {
 			midcomms_node_reset(node);
 		}
 	}

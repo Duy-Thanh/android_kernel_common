@@ -30,6 +30,7 @@
 #include <linux/lcd.h>
 #include <linux/math64.h>
 #include <linux/of.h>
+#include <linux/of_device.h>
 #include <linux/bitfield.h>
 
 #include <linux/regulator/consumer.h>
@@ -879,6 +880,7 @@ static int imxfb_probe(struct platform_device *pdev)
 	struct lcd_device *lcd;
 	struct fb_info *info;
 	struct imx_fb_videomode *m;
+	const struct of_device_id *of_id;
 	struct device_node *display_np;
 	int ret, i;
 	int bytes_per_pixel;
@@ -889,7 +891,9 @@ static int imxfb_probe(struct platform_device *pdev)
 	if (ret < 0)
 		return ret;
 
-	pdev->id_entry = of_device_get_match_data(&pdev->dev);
+	of_id = of_match_device(imxfb_of_dev_id, &pdev->dev);
+	if (of_id)
+		pdev->id_entry = of_id->data;
 
 	info = framebuffer_alloc(sizeof(struct imxfb_info), &pdev->dev);
 	if (!info)

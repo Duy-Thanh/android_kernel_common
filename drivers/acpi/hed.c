@@ -22,7 +22,7 @@ static const struct acpi_device_id acpi_hed_ids[] = {
 };
 MODULE_DEVICE_TABLE(acpi, acpi_hed_ids);
 
-static bool hed_present;
+static acpi_handle hed_handle;
 
 static BLOCKING_NOTIFIER_HEAD(acpi_hed_notify_list);
 
@@ -50,24 +50,33 @@ static void acpi_hed_notify(acpi_handle handle, u32 event, void *data)
 
 static int acpi_hed_probe(struct platform_device *pdev)
 {
+	struct acpi_device *device;
 	int err;
 
+	device = ACPI_COMPANION(&pdev->dev);
+	if (!device)
+		return -ENODEV;
+
 	/* Only one hardware error device */
-	if (hed_present)
+	if (hed_handle)
 		return -EINVAL;
+	hed_handle = device->handle;
 
-	err = devm_acpi_install_notify_handler(&pdev->dev, ACPI_DEVICE_NOTIFY,
-					       acpi_hed_notify, NULL);
+	err = acpi_dev_install_notify_handler(device, ACPI_DEVICE_NOTIFY,
+					      acpi_hed_notify, device);
 	if (err)
-		return err;
+		hed_handle = NULL;
 
-	hed_present = true;
-	return 0;
+	return err;
 }
 
 static void acpi_hed_remove(struct platform_device *pdev)
 {
-	hed_present = false;
+	struct acpi_device *device = ACPI_COMPANION(&pdev->dev);
+
+	acpi_dev_remove_notify_handler(device, ACPI_DEVICE_NOTIFY,
+				       acpi_hed_notify);
+	hed_handle = NULL;
 }
 
 static struct platform_driver acpi_hed_driver = {

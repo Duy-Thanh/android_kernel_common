@@ -278,7 +278,7 @@ static void ti_sn65dsi86_write_u16(struct ti_sn65dsi86 *pdata,
 
 static struct drm_display_mode *
 get_new_adjusted_display_mode(struct drm_bridge *bridge,
-			      struct drm_atomic_commit *state)
+			      struct drm_atomic_state *state)
 {
 	struct drm_connector *connector =
 		drm_atomic_get_new_connector_for_encoder(state, bridge->encoder);
@@ -291,7 +291,7 @@ get_new_adjusted_display_mode(struct drm_bridge *bridge,
 }
 
 static u32 ti_sn_bridge_get_dsi_freq(struct ti_sn65dsi86 *pdata,
-				     struct drm_atomic_commit *state)
+				     struct drm_atomic_state *state)
 {
 	u32 bit_rate_khz, clk_freq_khz;
 	struct drm_display_mode *mode =
@@ -323,7 +323,7 @@ static const u32 ti_sn_bridge_dsiclk_lut[] = {
 };
 
 static void ti_sn_bridge_set_refclk_freq(struct ti_sn65dsi86 *pdata,
-					 struct drm_atomic_commit *state)
+					 struct drm_atomic_state *state)
 {
 	int i;
 	u32 refclk_rate;
@@ -361,7 +361,7 @@ static void ti_sn_bridge_set_refclk_freq(struct ti_sn65dsi86 *pdata,
 }
 
 static void ti_sn65dsi86_enable_comms(struct ti_sn65dsi86 *pdata,
-				      struct drm_atomic_commit *state)
+				      struct drm_atomic_state *state)
 {
 	mutex_lock(&pdata->comms_mutex);
 
@@ -776,6 +776,8 @@ static int ti_sn_bridge_attach(struct drm_bridge *bridge,
 		goto err_initted_aux;
 	}
 
+	drm_connector_attach_encoder(pdata->connector, pdata->bridge.encoder);
+
 	return 0;
 
 err_initted_aux:
@@ -824,7 +826,7 @@ ti_sn_bridge_mode_valid(struct drm_bridge *bridge,
 }
 
 static void ti_sn_bridge_atomic_disable(struct drm_bridge *bridge,
-					struct drm_atomic_commit *state)
+					struct drm_atomic_state *state)
 {
 	struct ti_sn65dsi86 *pdata = bridge_to_ti_sn65dsi86(bridge);
 
@@ -833,7 +835,7 @@ static void ti_sn_bridge_atomic_disable(struct drm_bridge *bridge,
 }
 
 static void ti_sn_bridge_set_dsi_rate(struct ti_sn65dsi86 *pdata,
-				      struct drm_atomic_commit *state)
+				      struct drm_atomic_state *state)
 {
 	unsigned int bit_rate_mhz, clk_freq_mhz;
 	unsigned int val;
@@ -869,7 +871,7 @@ static const unsigned int ti_sn_bridge_dp_rate_lut[] = {
 };
 
 static int ti_sn_bridge_calc_min_dp_rate_idx(struct ti_sn65dsi86 *pdata,
-					     struct drm_atomic_commit *state,
+					     struct drm_atomic_state *state,
 					     unsigned int bpp)
 {
 	unsigned int bit_rate_khz, dp_rate_mhz;
@@ -975,7 +977,7 @@ static unsigned int ti_sn_bridge_read_valid_rates(struct ti_sn65dsi86 *pdata)
 }
 
 static void ti_sn_bridge_set_video_timings(struct ti_sn65dsi86 *pdata,
-					   struct drm_atomic_commit *state)
+					   struct drm_atomic_state *state)
 {
 	struct drm_display_mode *mode =
 		get_new_adjusted_display_mode(&pdata->bridge, state);
@@ -1088,7 +1090,7 @@ exit:
 }
 
 static void ti_sn_bridge_atomic_enable(struct drm_bridge *bridge,
-				       struct drm_atomic_commit *state)
+				       struct drm_atomic_state *state)
 {
 	struct ti_sn65dsi86 *pdata = bridge_to_ti_sn65dsi86(bridge);
 	struct drm_connector *connector;
@@ -1179,7 +1181,7 @@ static void ti_sn_bridge_atomic_enable(struct drm_bridge *bridge,
 }
 
 static void ti_sn_bridge_atomic_pre_enable(struct drm_bridge *bridge,
-					   struct drm_atomic_commit *state)
+					   struct drm_atomic_state *state)
 {
 	struct ti_sn65dsi86 *pdata = bridge_to_ti_sn65dsi86(bridge);
 
@@ -1193,7 +1195,7 @@ static void ti_sn_bridge_atomic_pre_enable(struct drm_bridge *bridge,
 }
 
 static void ti_sn_bridge_atomic_post_disable(struct drm_bridge *bridge,
-					     struct drm_atomic_commit *state)
+					     struct drm_atomic_state *state)
 {
 	struct ti_sn65dsi86 *pdata = bridge_to_ti_sn65dsi86(bridge);
 

@@ -120,7 +120,7 @@ u32 apic_mem_wait_icr_idle_timeout(void)
 	for (cnt = 0; cnt < 1000; cnt++) {
 		if (!(apic_read(APIC_ICR) & APIC_ICR_BUSY))
 			return 0;
-		irq_stat_inc_and_enable(IRQ_COUNT_ICR_READ_RETRY);
+		inc_irq_stat(icr_read_retry_count);
 		udelay(100);
 	}
 	return APIC_ICR_BUSY;

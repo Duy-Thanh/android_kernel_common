@@ -2022,7 +2022,7 @@ static struct rftype res_common_files[] = {
 	},
 	{
 		.name		= "event_filter",
-		.mode		= 0444,
+		.mode		= 0644,
 		.kf_ops		= &rdtgroup_kf_single_ops,
 		.seq_show	= event_filter_show,
 		.write		= event_filter_write,
@@ -2215,15 +2215,6 @@ void resctrl_file_fflags_init(const char *config, unsigned long fflags)
 		rft->fflags = fflags;
 }
 
-void resctrl_file_mode_init(const char *config, umode_t mode)
-{
-	struct rftype *rft;
-
-	rft = rdtgroup_get_rftype_by_name(config);
-	if (rft)
-		rft->mode = mode;
-}
-
 /**
  * rdtgroup_kn_mode_restrict - Restrict user access to named resctrl file
  * @r: The resource group with which the file is associated.
@@ -2340,19 +2331,22 @@ static int resctrl_mkdir_event_configs(struct rdt_resource *r, struct kernfs_nod
 			continue;
 
 		kn_subdir2 = kernfs_create_dir(kn_subdir, mevt->name, kn_subdir->mode, mevt);
-		if (IS_ERR(kn_subdir2))
-			return PTR_ERR(kn_subdir2);
+		if (IS_ERR(kn_subdir2)) {
+			ret = PTR_ERR(kn_subdir2);
+			goto out;
+		}
 
 		ret = rdtgroup_kn_set_ugid(kn_subdir2);
 		if (ret)
-			return ret;
+			goto out;
 
 		ret = rdtgroup_add_files(kn_subdir2, RFTYPE_ASSIGN_CONFIG);
 		if (ret)
-			return ret;
+			break;
 	}
 
-	return 0;
+out:
+	return ret;
 }
 
 static int rdtgroup_mkdir_info_resdir(void *priv, char *name,
@@ -2516,13 +2510,10 @@ static void mba_sc_domain_destroy(struct rdt_resource *r,
 }
 
 /*
- * The MBA software controller is supported only if MBM is supported and MBA is
- * in linear scale, and the MBM monitor scope is the same as MBA control scope.
- *
- * The software controller cannot be supported when the MBM counters are
- * assignable.  There is no guarantee that MBM counters are assigned to the
- * event backing the software controller in all monitoring domains of all
- * monitoring groups.
+ * MBA software controller is supported only if
+ * MBM is supported and MBA is in linear scale,
+ * and the MBM monitor scope is the same as MBA
+ * control scope.
  */
 static bool supports_mba_mbps(void)
 {
@@ -2531,8 +2522,7 @@ static bool supports_mba_mbps(void)
 
 	return (resctrl_is_mbm_enabled() &&
 		r->alloc_capable && is_mba_linear() &&
-		r->ctrl_scope == rmbm->mon_scope &&
-		!rmbm->mon.mbm_cntr_assignable);
+		r->ctrl_scope == rmbm->mon_scope);
 }
 
 /*
@@ -2947,7 +2937,7 @@ static int rdt_parse_param(struct fs_context *fc, struct fs_parameter *param)
 		ctx->enable_cdpl2 = true;
 		return 0;
 	case Opt_mba_mbps:
-		msg = "mba_MBps requires MBM (mbm_event mode not supported) and linear scale MBA at L3 scope";
+		msg = "mba_MBps requires MBM and linear scale MBA at L3 scope";
 		if (!supports_mba_mbps())
 			return invalfc(fc, msg);
 		ctx->enable_mba_mbps = true;

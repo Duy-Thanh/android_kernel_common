@@ -412,11 +412,10 @@ struct xe_vm {
 struct xe_vma_op_map {
 	/** @vma: VMA to map */
 	struct xe_vma *vma;
-	/** @vma_flags: VMA flags for this operation */
 	unsigned int vma_flags;
 	/** @immediate: Immediate bind */
 	bool immediate;
-	/** @invalidate_on_bind: Invalidate on bind */
+	/** @read_only: Read only */
 	bool invalidate_on_bind;
 	/** @request_decompress: schedule decompression for GPU map */
 	bool request_decompress;

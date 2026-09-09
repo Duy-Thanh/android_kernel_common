@@ -51,7 +51,7 @@ struct xsd_errors
     const char *errstring;
 };
 #define XSD_ERROR(x) { x, #x }
-static const struct xsd_errors xsd_errors[] __maybe_unused = {
+static struct xsd_errors xsd_errors[] __attribute__((unused)) = {
     XSD_ERROR(EINVAL),
     XSD_ERROR(EACCES),
     XSD_ERROR(EEXIST),

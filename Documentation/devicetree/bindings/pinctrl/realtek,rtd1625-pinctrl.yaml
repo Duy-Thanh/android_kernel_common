@@ -110,7 +110,7 @@ patternProperties:
 
       input-schmitt-disable: true
 
-      input-threshold-voltage-microvolt:
+      input-voltage-microvolt:
         description: |
           Select the input receiver voltage domain for the pin.
           Valid arguments are:

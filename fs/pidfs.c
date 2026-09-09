@@ -977,16 +977,14 @@ static void pidfs_put_data(void *data)
 }
 
 /**
- * pidfs_register_pid_gfp - register a struct pid in pidfs with custom GFP
- * flags
+ * pidfs_register_pid - register a struct pid in pidfs
  * @pid: pid to pin
- * @gfp: GFP flags for memory allocation
  *
- * Register a struct pid in pidfs with custom GFP flags.
+ * Register a struct pid in pidfs.
  *
  * Return: On success zero, on error a negative error code is returned.
  */
-int pidfs_register_pid_gfp(struct pid *pid, gfp_t gfp)
+int pidfs_register_pid(struct pid *pid)
 {
 	struct pidfs_attr *new_attr __free(kfree) = NULL;
 	struct pidfs_attr *attr;
@@ -1002,7 +1000,7 @@ int pidfs_register_pid_gfp(struct pid *pid, gfp_t gfp)
 	if (attr)
 		return 0;
 
-	new_attr = kmem_cache_zalloc(pidfs_attr_cachep, gfp);
+	new_attr = kmem_cache_zalloc(pidfs_attr_cachep, GFP_KERNEL);
 	if (!new_attr)
 		return -ENOMEM;
 

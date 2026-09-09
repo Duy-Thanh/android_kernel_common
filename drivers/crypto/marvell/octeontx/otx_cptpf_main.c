@@ -283,7 +283,6 @@ static const struct pci_device_id otx_cpt_id_table[] = {
 	{ PCI_DEVICE(PCI_VENDOR_ID_CAVIUM, OTX_CPT_PCI_PF_DEVICE_ID) },
 	{ 0, }  /* end of table */
 };
-MODULE_DEVICE_TABLE(pci, otx_cpt_id_table);
 
 static struct pci_driver otx_cpt_pci_driver = {
 	.name = DRV_NAME,
@@ -299,3 +298,4 @@ MODULE_AUTHOR("Marvell International Ltd.");
 MODULE_DESCRIPTION("Marvell OcteonTX CPT Physical Function Driver");
 MODULE_LICENSE("GPL v2");
 MODULE_VERSION(DRV_VERSION);
+MODULE_DEVICE_TABLE(pci, otx_cpt_id_table);

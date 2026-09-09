@@ -36,7 +36,7 @@
  *  mknod /dev/watchdog c 10 130
  *
  * For an example userspace keep-alive daemon, see:
- *   samples/watchdog/watchdog-simple.c
+ *   Documentation/watchdog/wdt.rst
  */
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt

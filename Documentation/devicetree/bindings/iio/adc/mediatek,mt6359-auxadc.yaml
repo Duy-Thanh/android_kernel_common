@@ -18,17 +18,12 @@ description:
 
 properties:
   compatible:
-    oneOf:
-      - enum:
-          - mediatek,mt6357-auxadc
-          - mediatek,mt6358-auxadc
-          - mediatek,mt6359-auxadc
-          - mediatek,mt6363-auxadc
-          - mediatek,mt6373-auxadc
-      - items:
-          - enum:
-              - mediatek,mt6365-auxadc
-          - const: mediatek,mt6359-auxadc
+    enum:
+      - mediatek,mt6357-auxadc
+      - mediatek,mt6358-auxadc
+      - mediatek,mt6359-auxadc
+      - mediatek,mt6363-auxadc
+      - mediatek,mt6373-auxadc
 
   "#io-channel-cells":
     const: 1

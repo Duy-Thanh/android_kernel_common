@@ -9,6 +9,7 @@ use kernel::{
         Bound,
         Core, //
     },
+    devres::Devres,
     io::{
         register,
         register::Array,
@@ -16,7 +17,8 @@ use kernel::{
     },
     num::Bounded,
     pci,
-    prelude::*, //
+    prelude::*,
+    sync::aref::ARef, //
 };
 
 mod regs {
@@ -43,7 +45,7 @@ mod regs {
     pub(super) const END: usize = 0x10;
 }
 
-type Bar0<'bound> = pci::Bar<'bound, { regs::END }>;
+type Bar0 = pci::Bar<{ regs::END }>;
 
 #[derive(Copy, Clone, Debug)]
 struct TestIndex(u8);
@@ -64,13 +66,13 @@ impl TestIndex {
     const NO_EVENTFD: Self = Self(0);
 }
 
-struct SampleDriverData<'bound> {
-    pdev: &'bound pci::Device,
-    bar: Bar0<'bound>,
+#[pin_data(PinnedDrop)]
+struct SampleDriver {
+    pdev: ARef<pci::Device>,
+    #[pin]
+    bar: Devres<Bar0>,
     index: TestIndex,
 }
-
-struct SampleDriver;
 
 kernel::pci_device_table!(
     PCI_TABLE,
@@ -82,8 +84,8 @@ kernel::pci_device_table!(
     )]
 );
 
-impl SampleDriverData<'_> {
-    fn testdev(index: &TestIndex, bar: &Bar0<'_>) -> Result<u32> {
+impl SampleDriver {
+    fn testdev(index: &TestIndex, bar: &Bar0) -> Result<u32> {
         // Select the test.
         bar.write_reg(regs::TEST::zeroed().with_index(*index));
 
@@ -138,49 +140,51 @@ impl SampleDriverData<'_> {
 
 impl pci::Driver for SampleDriver {
     type IdInfo = TestIndex;
-    type Data<'bound> = SampleDriverData<'bound>;
 
     const ID_TABLE: pci::IdTable<Self::IdInfo> = &PCI_TABLE;
 
-    fn probe<'bound>(
-        pdev: &'bound pci::Device<Core<'_>>,
-        info: &'bound Self::IdInfo,
-    ) -> impl PinInit<Self::Data<'bound>, Error> + 'bound {
-        let vendor = pdev.vendor_id();
-        dev_dbg!(
-            pdev,
-            "Probe Rust PCI driver sample (PCI ID: {}, 0x{:x}).\n",
-            vendor,
-            pdev.device_id()
-        );
+    fn probe(pdev: &pci::Device<Core>, info: &Self::IdInfo) -> impl PinInit<Self, Error> {
+        pin_init::pin_init_scope(move || {
+            let vendor = pdev.vendor_id();
+            dev_dbg!(
+                pdev,
+                "Probe Rust PCI driver sample (PCI ID: {}, 0x{:x}).\n",
+                vendor,
+                pdev.device_id()
+            );
 
-        pdev.enable_device_mem()?;
-        pdev.set_master();
+            pdev.enable_device_mem()?;
+            pdev.set_master();
 
-        let bar = pdev.iomap_region_sized::<{ regs::END }>(0, c"rust_driver_pci")?;
+            Ok(try_pin_init!(Self {
+                bar <- pdev.iomap_region_sized::<{ regs::END }>(0, c"rust_driver_pci"),
+                index: *info,
+                _: {
+                    let bar = bar.access(pdev.as_ref())?;
 
-        dev_info!(
-            pdev,
-            "pci-testdev data-match count: {}\n",
-            SampleDriverData::testdev(info, &bar)?
-        );
-        SampleDriverData::config_space(pdev);
-
-        Ok(SampleDriverData {
-            pdev,
-            bar,
-            index: *info,
+                    dev_info!(
+                        pdev,
+                        "pci-testdev data-match count: {}\n",
+                        Self::testdev(info, bar)?
+                    );
+                    Self::config_space(pdev);
+                },
+                pdev: pdev.into(),
+            }))
         })
     }
 
-    fn unbind<'bound>(_pdev: &'bound pci::Device<Core<'_>>, this: Pin<&Self::Data<'bound>>) {
-        this.bar
-            .write_reg(regs::TEST::zeroed().with_index(this.index));
+    fn unbind(pdev: &pci::Device<Core>, this: Pin<&Self>) {
+        if let Ok(bar) = this.bar.access(pdev.as_ref()) {
+            // Reset pci-testdev by writing a new test index.
+            bar.write_reg(regs::TEST::zeroed().with_index(this.index));
+        }
     }
 }
 
-impl Drop for SampleDriverData<'_> {
-    fn drop(&mut self) {
+#[pinned_drop]
+impl PinnedDrop for SampleDriver {
+    fn drop(self: Pin<&mut Self>) {
         dev_dbg!(self.pdev, "Remove Rust PCI driver sample.\n");
     }
 }

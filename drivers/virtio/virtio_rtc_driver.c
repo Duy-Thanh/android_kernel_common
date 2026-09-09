@@ -1257,15 +1257,6 @@ static int viortc_init_vqs(struct viortc_dev *viortc)
 	return 0;
 }
 
-static void __viortc_remove(struct viortc_dev *viortc)
-{
-	struct virtio_device *vdev = viortc->vdev;
-
-	viortc_clocks_deinit(viortc);
-	virtio_reset_device(vdev);
-	vdev->config->del_vqs(vdev);
-}
-
 /**
  * viortc_probe() - probe a virtio_rtc virtio device
  * @vdev: virtio device
@@ -1291,7 +1282,7 @@ static int viortc_probe(struct virtio_device *vdev)
 
 	ret = viortc_init_vqs(viortc);
 	if (ret)
-		goto err_reset_vdev;
+		return ret;
 
 	virtio_device_ready(vdev);
 
@@ -1338,7 +1329,10 @@ static void viortc_remove(struct virtio_device *vdev)
 {
 	struct viortc_dev *viortc = vdev->priv;
 
-	__viortc_remove(viortc);
+	viortc_clocks_deinit(viortc);
+
+	virtio_reset_device(vdev);
+	vdev->config->del_vqs(vdev);
 }
 
 static int viortc_freeze(struct virtio_device *dev)
@@ -1359,11 +1353,9 @@ static int viortc_restore(struct virtio_device *dev)
 	bool notify = false;
 	int ret;
 
-	dev->config->del_vqs(dev);
-
 	ret = viortc_init_vqs(viortc);
 	if (ret)
-		goto err_remove;
+		return ret;
 
 	alarm_viortc_vq = &viortc->vqs[VIORTC_ALARMQ];
 	alarm_vq = alarm_viortc_vq->vq;
@@ -1372,7 +1364,7 @@ static int viortc_restore(struct virtio_device *dev)
 		ret = viortc_populate_vq(viortc, alarm_viortc_vq,
 					 VIORTC_ALARMQ_BUF_CAP, false);
 		if (ret)
-			goto err_remove;
+			return ret;
 
 		notify = virtqueue_kick_prepare(alarm_vq);
 	}
@@ -1380,12 +1372,8 @@ static int viortc_restore(struct virtio_device *dev)
 	virtio_device_ready(dev);
 
 	if (notify && !virtqueue_notify(alarm_vq))
-		return -EIO;
+		ret = -EIO;
 
-	return 0;
-
-err_remove:
-	__viortc_remove(viortc);
 	return ret;
 }
 

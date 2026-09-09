@@ -9,7 +9,6 @@
 
 #include <linux/atomic.h>
 #include <linux/bitops.h>
-#include <linux/bug.h>
 #include <linux/byteorder/generic.h>
 #include <linux/container_of.h>
 #include <linux/err.h>
@@ -743,7 +742,7 @@ static void batadv_dat_tvlv_container_update(struct batadv_priv *bat_priv)
 {
 	char dat_mode;
 
-	dat_mode = READ_ONCE(bat_priv->distributed_arp_table);
+	dat_mode = atomic_read(&bat_priv->distributed_arp_table);
 
 	switch (dat_mode) {
 	case 0:
@@ -838,7 +837,7 @@ void batadv_dat_free(struct batadv_priv *bat_priv)
 	batadv_tvlv_container_unregister(bat_priv, BATADV_TVLV_DAT, 1);
 	batadv_tvlv_handler_unregister(bat_priv, BATADV_TVLV_DAT, 1);
 
-	disable_delayed_work_sync(&bat_priv->dat.work);
+	cancel_delayed_work_sync(&bat_priv->dat.work);
 
 	batadv_dat_hash_free(bat_priv);
 }
@@ -1139,7 +1138,7 @@ bool batadv_dat_snoop_outgoing_arp_request(struct batadv_priv *bat_priv,
 	int hdr_size = 0;
 	unsigned short vid;
 
-	if (!READ_ONCE(bat_priv->distributed_arp_table))
+	if (!atomic_read(&bat_priv->distributed_arp_table))
 		goto out;
 
 	vid = batadv_dat_get_vid(skb, &hdr_size);
@@ -1234,7 +1233,7 @@ bool batadv_dat_snoop_incoming_arp_request(struct batadv_priv *bat_priv,
 	unsigned short vid;
 	int err;
 
-	if (!READ_ONCE(bat_priv->distributed_arp_table))
+	if (!atomic_read(&bat_priv->distributed_arp_table))
 		goto out;
 
 	vid = batadv_dat_get_vid(skb, &hdr_size);
@@ -1296,7 +1295,7 @@ void batadv_dat_snoop_outgoing_arp_reply(struct batadv_priv *bat_priv,
 	int hdr_size = 0;
 	unsigned short vid;
 
-	if (!READ_ONCE(bat_priv->distributed_arp_table))
+	if (!atomic_read(&bat_priv->distributed_arp_table))
 		return;
 
 	vid = batadv_dat_get_vid(skb, &hdr_size);
@@ -1344,7 +1343,7 @@ bool batadv_dat_snoop_incoming_arp_reply(struct batadv_priv *bat_priv,
 	bool dropped = false;
 	unsigned short vid;
 
-	if (!READ_ONCE(bat_priv->distributed_arp_table))
+	if (!atomic_read(&bat_priv->distributed_arp_table))
 		goto out;
 
 	vid = batadv_dat_get_vid(skb, &hdr_size);
@@ -1714,7 +1713,7 @@ void batadv_dat_snoop_outgoing_dhcp_ack(struct batadv_priv *bat_priv,
 	u8 chaddr[BATADV_DHCP_CHADDR_LEN];
 	__be32 ip_src, yiaddr;
 
-	if (!READ_ONCE(bat_priv->distributed_arp_table))
+	if (!atomic_read(&bat_priv->distributed_arp_table))
 		return;
 
 	if (!batadv_dat_check_dhcp_ack(skb, proto, &ip_src, chaddr, &yiaddr))
@@ -1744,7 +1743,7 @@ void batadv_dat_snoop_incoming_dhcp_ack(struct batadv_priv *bat_priv,
 	__be16 proto;
 	u8 *hw_src;
 
-	if (!READ_ONCE(bat_priv->distributed_arp_table))
+	if (!atomic_read(&bat_priv->distributed_arp_table))
 		return;
 
 	if (unlikely(!pskb_may_pull(skb, hdr_size + ETH_HLEN)))
@@ -1789,7 +1788,7 @@ bool batadv_dat_drop_broadcast_packet(struct batadv_priv *bat_priv,
 	int hdr_size = sizeof(struct batadv_bcast_packet);
 	unsigned short vid;
 
-	if (!READ_ONCE(bat_priv->distributed_arp_table))
+	if (!atomic_read(&bat_priv->distributed_arp_table))
 		goto out;
 
 	/* If this packet is an ARP_REQUEST and the node already has the

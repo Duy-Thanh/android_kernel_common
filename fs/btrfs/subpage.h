@@ -14,15 +14,15 @@ struct folio;
 /*
  * Extra info for subpage bitmap.
  *
- * For subpage we pack all uptodate/dirty/writeback bitmaps into
+ * For subpage we pack all uptodate/dirty/writeback/ordered bitmaps into
  * one larger bitmap.
  *
  * This structure records how they are organized in the bitmap:
  *
- * /- uptodate          /- dirty        /- writeback
+ * /- uptodate          /- dirty        /- ordered
  * |			|		|
  * v			v		v
- * |u|u|u|u|........|u|u|d|d|.......|d|d|w|w|.......|w|w|
+ * |u|u|u|u|........|u|u|d|d|.......|d|d|o|o|.......|o|o|
  * |< sectors_per_page >|
  *
  * Unlike regular macro-like enums, here we do not go upper-case names, as
@@ -40,6 +40,23 @@ enum {
 	 */
 	btrfs_bitmap_nr_writeback,
 
+	/*
+	 * The ordered and checked flags are for COW fixup, already marked
+	 * deprecated, and will be removed eventually.
+	 */
+	btrfs_bitmap_nr_ordered,
+	btrfs_bitmap_nr_checked,
+
+	/*
+	 * The locked bit is for async delalloc range (compression), currently
+	 * async extent is queued with the range locked, until the compression
+	 * is done.
+	 * So an async extent can unlock the range at any random timing.
+	 *
+	 * This will need a rework on the async extent lifespan (mark writeback
+	 * and do compression) before deprecating this flag.
+	 */
+	btrfs_bitmap_nr_locked,
 	btrfs_bitmap_nr_max
 };
 
@@ -116,7 +133,7 @@ void btrfs_folio_end_lock(const struct btrfs_fs_info *fs_info,
 void btrfs_folio_set_lock(const struct btrfs_fs_info *fs_info,
 			  struct folio *folio, u64 start, u32 len);
 void btrfs_folio_end_lock_bitmap(const struct btrfs_fs_info *fs_info,
-				 struct folio *folio, unsigned long *bitmap);
+				 struct folio *folio, unsigned long bitmap);
 /*
  * Template for subpage related operations.
  *
@@ -164,6 +181,8 @@ bool btrfs_meta_folio_test_##name(struct folio *folio, const struct extent_buffe
 DECLARE_BTRFS_SUBPAGE_OPS(uptodate);
 DECLARE_BTRFS_SUBPAGE_OPS(dirty);
 DECLARE_BTRFS_SUBPAGE_OPS(writeback);
+DECLARE_BTRFS_SUBPAGE_OPS(ordered);
+DECLARE_BTRFS_SUBPAGE_OPS(checked);
 
 /*
  * Helper for error cleanup, where a folio will have its dirty flag cleared,
@@ -184,9 +203,9 @@ bool btrfs_subpage_clear_and_test_dirty(const struct btrfs_fs_info *fs_info,
 void btrfs_folio_assert_not_dirty(const struct btrfs_fs_info *fs_info,
 				  struct folio *folio, u64 start, u32 len);
 bool btrfs_meta_folio_clear_and_test_dirty(struct folio *folio, const struct extent_buffer *eb);
-void btrfs_copy_subpage_dirty_bitmap(struct btrfs_fs_info *fs_info,
-				     struct folio *folio,
-				     unsigned long *dst);
+void btrfs_get_subpage_dirty_bitmap(struct btrfs_fs_info *fs_info,
+				    struct folio *folio,
+				    unsigned long *ret_bitmap);
 void __cold btrfs_subpage_dump_bitmap(const struct btrfs_fs_info *fs_info,
 				      struct folio *folio, u64 start, u32 len);
 

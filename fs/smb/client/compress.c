@@ -22,7 +22,7 @@
 #include "cifsproto.h"
 #include "smb2proto.h"
 
-#include "../common/compress/lz77.h"
+#include "compress/lz77.h"
 #include "compress.h"
 
 /*
@@ -43,11 +43,6 @@
 struct bucket {
 	unsigned int count;
 };
-
-static inline size_t pow4(size_t n)
-{
-	return n * n * n * n;
-}
 
 /*
  * has_low_entropy() - Compute Shannon entropy of the sampled data.
@@ -70,6 +65,7 @@ static bool has_low_entropy(struct bucket *bkt, size_t slen)
 	const size_t threshold = 65, max_entropy = 8 * ilog2(16);
 	size_t i, p, p2, len, sum = 0;
 
+#define pow4(n) (n * n * n * n)
 	len = ilog2(pow4(slen));
 
 	for (i = 0; i < 256 && bkt[i].count > 0; i++) {
@@ -333,14 +329,14 @@ int smb_compress(struct TCP_Server_Info *server, struct smb_rqst *rq, compress_s
 		goto err_free;
 	}
 
-	dlen = smb_lz77_compressed_alloc_size(slen);
+	dlen = lz77_compressed_alloc_size(slen);
 	dst = kvzalloc(dlen, GFP_KERNEL);
 	if (!dst) {
 		ret = -ENOMEM;
 		goto err_free;
 	}
 
-	ret = smb_lz77_compress(src, slen, dst, &dlen);
+	ret = lz77_compress(src, slen, dst, &dlen);
 	if (!ret) {
 		struct smb2_compression_hdr hdr = { 0 };
 		struct smb_rqst comp_rq = { .rq_nvec = 3, };

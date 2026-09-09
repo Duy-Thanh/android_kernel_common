@@ -396,6 +396,9 @@ static int __nft_rbtree_insert(const struct net *net, const struct nft_set *set,
 			const struct nft_rbtree_elem *removed_end;
 
 			removed_end = nft_rbtree_gc_elem(set, priv, rbe);
+			if (IS_ERR(removed_end))
+				return PTR_ERR(removed_end);
+
 			if (removed_end == rbe_le || removed_end == rbe_ge)
 				return -EAGAIN;
 
@@ -654,10 +657,8 @@ maybe_grow:
 	}
 
 realloc_array:
-	if (unlikely(nelems > new_max_intervals)) {
-		DEBUG_NET_WARN_ON_ONCE(1);
+	if (WARN_ON_ONCE(nelems > new_max_intervals))
 		return -ENOMEM;
-	}
 
 	if (priv->array_next) {
 		if (max_intervals == new_max_intervals)
@@ -880,7 +881,7 @@ static void nft_rbtree_walk(const struct nft_ctx *ctx,
 		break;
 	default:
 		iter->err = -EINVAL;
-		DEBUG_NET_WARN_ON_ONCE(1);
+		WARN_ON_ONCE(1);
 		break;
 	}
 }

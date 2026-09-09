@@ -349,14 +349,8 @@ SECTIONS
 	_edata = .;
 
 	/* start of zero-init region */
-	BSS_SECTION(SBSS_ALIGN, 0, PAGE_SIZE)
+	BSS_SECTION(SBSS_ALIGN, 0, 0)
 	__pi___bss_start = __bss_start;
-
-	/* page table BSS starts here - preceding data/BSS is omitted from the linear map */
-	.pgtbl : ALIGN(PAGE_SIZE) {
-		*(.bss..pgtbl)
-	}
-	ASSERT(ADDR(.pgtbl) == __bss_stop, ".pgtbl must follow BSS")
 
 	. = ALIGN(PAGE_SIZE);
 	__pi_init_pg_dir = .;
@@ -374,7 +368,6 @@ SECTIONS
 
 	STABS_DEBUG
 	DWARF_DEBUG
-	PROPELLER_DATA
 	MODINFO
 	ELF_DETAILS
 

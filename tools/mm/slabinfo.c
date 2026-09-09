@@ -193,9 +193,10 @@ static unsigned long get_obj_and_str(const char *name, char **x)
 
 	*x = NULL;
 
-	if (!read_obj(name))
+	if (!read_obj(name)) {
+		x = NULL;
 		return 0;
-
+	}
 	result = strtoul(buffer, &p, 10);
 	while (*p == ' ')
 		p++;
@@ -797,7 +798,7 @@ static void slab_debug(struct slabinfo *s)
 			fprintf(stderr, "%s can only enable trace for one slab at a time\n", s->name);
 	}
 	if (!tracing && s->trace)
-		set_obj(s, "trace", 0);
+		set_obj(s, "trace", 1);
 }
 
 static void totals(void)
@@ -1265,6 +1266,7 @@ static void read_slab_dir(void)
 			slab->objects_total = get_obj("objects_total");
 			slab->objs_per_slab = get_obj("objs_per_slab");
 			slab->order = get_obj("order");
+			slab->partial = get_obj("partial");
 			slab->partial = get_obj_and_str("partial", &t);
 			decode_numa_list(slab->numa_partial, t);
 			free(t);

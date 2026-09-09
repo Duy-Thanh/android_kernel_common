@@ -86,8 +86,7 @@ static int gpio_trig_activate(struct led_classdev *led)
 	 * The generic property "trigger-sources" is followed,
 	 * and we hope that this is a GPIO.
 	 */
-	gpio_data->gpiod = gpiod_get_optional(dev, "trigger-sources",
-					      GPIOD_IN | GPIOD_FLAGS_BIT_NONEXCLUSIVE);
+	gpio_data->gpiod = gpiod_get_optional(dev, "trigger-sources", GPIOD_IN);
 	if (IS_ERR(gpio_data->gpiod)) {
 		ret = PTR_ERR(gpio_data->gpiod);
 		kfree(gpio_data);

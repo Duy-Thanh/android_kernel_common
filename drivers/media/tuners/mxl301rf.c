@@ -317,8 +317,8 @@ static void mxl301rf_remove(struct i2c_client *client)
 
 
 static const struct i2c_device_id mxl301rf_id[] = {
-	{ .name = "mxl301rf" },
-	{ }
+	{ "mxl301rf" },
+	{}
 };
 MODULE_DEVICE_TABLE(i2c, mxl301rf_id);
 

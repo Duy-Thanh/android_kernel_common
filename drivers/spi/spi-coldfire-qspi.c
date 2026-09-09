@@ -353,33 +353,39 @@ static int mcfqspi_probe(struct platform_device *pdev)
 		return -EINVAL;
 	}
 
-	host = devm_spi_alloc_host(&pdev->dev, sizeof(*mcfqspi));
-	if (host == NULL)
+	host = spi_alloc_host(&pdev->dev, sizeof(*mcfqspi));
+	if (host == NULL) {
+		dev_dbg(&pdev->dev, "spi_alloc_host failed\n");
 		return -ENOMEM;
+	}
 
 	mcfqspi = spi_controller_get_devdata(host);
 
 	mcfqspi->iobase = devm_platform_ioremap_resource(pdev, 0);
-	if (IS_ERR(mcfqspi->iobase))
-		return PTR_ERR(mcfqspi->iobase);
+	if (IS_ERR(mcfqspi->iobase)) {
+		status = PTR_ERR(mcfqspi->iobase);
+		goto fail0;
+	}
 
 	mcfqspi->irq = platform_get_irq(pdev, 0);
 	if (mcfqspi->irq < 0) {
 		dev_dbg(&pdev->dev, "platform_get_irq failed\n");
-		return -ENXIO;
+		status = -ENXIO;
+		goto fail0;
 	}
 
 	status = devm_request_irq(&pdev->dev, mcfqspi->irq, mcfqspi_irq_handler,
 				0, pdev->name, mcfqspi);
 	if (status) {
 		dev_dbg(&pdev->dev, "request_irq failed\n");
-		return status;
+		goto fail0;
 	}
 
 	mcfqspi->clk = devm_clk_get_enabled(&pdev->dev, "qspi_clk");
 	if (IS_ERR(mcfqspi->clk)) {
 		dev_dbg(&pdev->dev, "clk_get failed\n");
-		return PTR_ERR(mcfqspi->clk);
+		status = PTR_ERR(mcfqspi->clk);
+		goto fail0;
 	}
 
 	host->bus_num = pdata->bus_num;
@@ -389,7 +395,7 @@ static int mcfqspi_probe(struct platform_device *pdev)
 	status = mcfqspi_cs_setup(mcfqspi);
 	if (status) {
 		dev_dbg(&pdev->dev, "error initializing cs_control\n");
-		return status;
+		goto fail0;
 	}
 
 	init_waitqueue_head(&mcfqspi->waitq);
@@ -417,6 +423,8 @@ static int mcfqspi_probe(struct platform_device *pdev)
 fail1:
 	pm_runtime_disable(&pdev->dev);
 	mcfqspi_cs_teardown(mcfqspi);
+fail0:
+	spi_controller_put(host);
 
 	dev_dbg(&pdev->dev, "Coldfire QSPI probe failed\n");
 
@@ -428,6 +436,8 @@ static void mcfqspi_remove(struct platform_device *pdev)
 	struct spi_controller *host = platform_get_drvdata(pdev);
 	struct mcfqspi *mcfqspi = spi_controller_get_devdata(host);
 
+	spi_controller_get(host);
+
 	spi_unregister_controller(host);
 
 	pm_runtime_disable(&pdev->dev);
@@ -435,6 +445,8 @@ static void mcfqspi_remove(struct platform_device *pdev)
 	mcfqspi_wr_qmr(mcfqspi, MCFQSPI_QMR_MSTR);
 
 	mcfqspi_cs_teardown(mcfqspi);
+
+	spi_controller_put(host);
 }
 
 #ifdef CONFIG_PM_SLEEP

@@ -144,8 +144,6 @@ int main(int argc, char **argv)
 		return trigger_uprobe(true /* page-in build ID */);
 
 error:
-	fprintf(stderr,
-		"usage: %s <bench|usdt|uprobe-paged-out|uprobe-paged-in>\n",
-		argv[0]);
+	fprintf(stderr, "usage: %s <bench|usdt>\n", argv[0]);
 	return -1;
 }

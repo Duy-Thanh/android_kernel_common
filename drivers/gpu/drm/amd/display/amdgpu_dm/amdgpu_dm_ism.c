@@ -32,8 +32,6 @@
 #include "amdgpu_dm_ism.h"
 #include "amdgpu_dm_crtc.h"
 #include "amdgpu_dm_trace.h"
-#include "amdgpu_dm_kunit_helpers.h"
-
 
 /**
  * dm_ism_next_state - Get next state based on current state and event
@@ -44,10 +42,9 @@
  * This function defines the idle state management FSM. Invalid transitions
  * are ignored and will not progress the FSM.
  */
-STATIC_IFN_KUNIT
-bool dm_ism_next_state(enum amdgpu_dm_ism_state current_state,
-		       enum amdgpu_dm_ism_event event,
-		       enum amdgpu_dm_ism_state *next_state)
+static bool dm_ism_next_state(enum amdgpu_dm_ism_state current_state,
+			      enum amdgpu_dm_ism_event event,
+			      enum amdgpu_dm_ism_state *next_state)
 {
 	switch (STATE_EVENT(current_state, event)) {
 	case STATE_EVENT(DM_ISM_STATE_FULL_POWER_RUNNING,
@@ -128,10 +125,8 @@ bool dm_ism_next_state(enum amdgpu_dm_ism_state current_state,
 	}
 	return true;
 }
-EXPORT_IF_KUNIT(dm_ism_next_state);
 
-STATIC_IFN_KUNIT
-uint64_t dm_ism_get_sso_delay(const struct amdgpu_dm_ism *ism,
+static uint64_t dm_ism_get_sso_delay(const struct amdgpu_dm_ism *ism,
 				     const struct dc_stream_state *stream)
 {
 	const struct amdgpu_dm_ism_config *config = &ism->config;
@@ -153,7 +148,6 @@ uint64_t dm_ism_get_sso_delay(const struct amdgpu_dm_ism *ism,
 
 	return sso_delay_ns;
 }
-EXPORT_IF_KUNIT(dm_ism_get_sso_delay);
 
 /**
  * dm_ism_get_idle_allow_delay - Calculate hysteresis-based idle allow delay
@@ -163,9 +157,8 @@ EXPORT_IF_KUNIT(dm_ism_get_sso_delay);
  * Calculates the delay before allowing idle optimizations based on recent
  * idle history and the current stream timing.
  */
-STATIC_IFN_KUNIT
-uint64_t dm_ism_get_idle_allow_delay(const struct amdgpu_dm_ism *ism,
-				     const struct dc_stream_state *stream)
+static uint64_t dm_ism_get_idle_allow_delay(const struct amdgpu_dm_ism *ism,
+					    const struct dc_stream_state *stream)
 {
 	const struct amdgpu_dm_ism_config *config = &ism->config;
 	uint32_t v_total, h_total;
@@ -224,14 +217,12 @@ uint64_t dm_ism_get_idle_allow_delay(const struct amdgpu_dm_ism *ism,
 
 	return ret_ns;
 }
-EXPORT_IF_KUNIT(dm_ism_get_idle_allow_delay);
 
 /**
  * dm_ism_insert_record - Insert a record into the circular history buffer
  * @ism: ISM instance
  */
-STATIC_IFN_KUNIT
-void dm_ism_insert_record(struct amdgpu_dm_ism *ism)
+static void dm_ism_insert_record(struct amdgpu_dm_ism *ism)
 {
 	struct amdgpu_dm_ism_record *record;
 
@@ -246,19 +237,15 @@ void dm_ism_insert_record(struct amdgpu_dm_ism *ism)
 	record->duration_ns =
 		record->timestamp_ns - ism->last_idle_timestamp_ns;
 }
-EXPORT_IF_KUNIT(dm_ism_insert_record);
 
 
-STATIC_IFN_KUNIT
-void dm_ism_set_last_idle_ts(struct amdgpu_dm_ism *ism)
+static void dm_ism_set_last_idle_ts(struct amdgpu_dm_ism *ism)
 {
 	ism->last_idle_timestamp_ns = ktime_get_ns();
 }
-EXPORT_IF_KUNIT(dm_ism_set_last_idle_ts);
 
 
-STATIC_IFN_KUNIT
-bool dm_ism_trigger_event(struct amdgpu_dm_ism *ism,
+static bool dm_ism_trigger_event(struct amdgpu_dm_ism *ism,
 				 enum amdgpu_dm_ism_event event)
 {
 	enum amdgpu_dm_ism_state next_state;
@@ -273,7 +260,6 @@ bool dm_ism_trigger_event(struct amdgpu_dm_ism *ism,
 
 	return gotNextState;
 }
-EXPORT_IF_KUNIT(dm_ism_trigger_event);
 
 
 static void dm_ism_commit_idle_optimization_state(struct amdgpu_dm_ism *ism,
@@ -305,16 +291,24 @@ static void dm_ism_commit_idle_optimization_state(struct amdgpu_dm_ism *ism,
 	 */
 	if (stream && stream->link) {
 		/*
-		 * If the OS requires vblank events (or vblank is otherwise enabled),
-		 * do not allow static screen optimizations.
-		 *
-		 * Keep ism->allow_static_screen_optimizations unchanged so the
-		 * hysteresis-based decision can be reused once vblank is disabled.
+		 * If allow_panel_sso is true when disabling vblank, allow
+		 * deeper panel sleep states such as PSR1 and Replay static
+		 * screen optimization.
 		 */
-		allow_panel_sso = allow_panel_sso && !vblank_enabled;
-		amdgpu_dm_crtc_set_static_screen_optimze(
-			dm, stream, allow_panel_sso,
-			acrtc->dm_irq_params.allow_sr_entry);
+		if (!vblank_enabled && allow_panel_sso) {
+			amdgpu_dm_crtc_set_panel_sr_feature(
+				dm, acrtc, stream, false,
+				acrtc->dm_irq_params.allow_sr_entry);
+		} else if (vblank_enabled) {
+			/* Make sure to exit SSO on vblank enable */
+			amdgpu_dm_crtc_set_panel_sr_feature(
+				dm, acrtc, stream, true,
+				acrtc->dm_irq_params.allow_sr_entry);
+		}
+		/*
+		 * Else, vblank_enabled == false and allow_panel_sso == false;
+		 * do nothing here.
+		 */
 	}
 
 	/*
@@ -332,36 +326,15 @@ static void dm_ism_commit_idle_optimization_state(struct amdgpu_dm_ism *ism,
 	}
 }
 
-STATIC_IFN_KUNIT
-enum amdgpu_dm_ism_event dm_ism_dispatch_next_event(
-	enum amdgpu_dm_ism_state current_state,
-	uint64_t delay_ns,
-	uint64_t sso_delay_ns)
-{
-	switch (current_state) {
-	case DM_ISM_STATE_HYSTERESIS_WAITING:
-		if (delay_ns == 0)
-			return DM_ISM_EVENT_IMMEDIATE;
-		break;
-	case DM_ISM_STATE_OPTIMIZED_IDLE:
-		if (sso_delay_ns == 0)
-			return DM_ISM_EVENT_IMMEDIATE;
-		break;
-	case DM_ISM_STATE_TIMER_ABORTED:
-		return DM_ISM_EVENT_IMMEDIATE;
-	default:
-		break;
-	}
-	return DM_ISM_NUM_EVENTS;
-}
-EXPORT_IF_KUNIT(dm_ism_dispatch_next_event);
 
 static enum amdgpu_dm_ism_event dm_ism_dispatch_power_state(
 	struct amdgpu_dm_ism *ism,
-	struct dm_crtc_state *acrtc_state)
+	struct dm_crtc_state *acrtc_state,
+	enum amdgpu_dm_ism_event event)
 {
+	enum amdgpu_dm_ism_event ret = event;
 	const struct amdgpu_dm_ism_config *config = &ism->config;
-	uint64_t delay_ns = 0, sso_delay_ns = 0;
+	uint64_t delay_ns, sso_delay_ns;
 
 	switch (ism->previous_state) {
 	case DM_ISM_STATE_HYSTERESIS_WAITING:
@@ -395,15 +368,30 @@ static enum amdgpu_dm_ism_event dm_ism_dispatch_power_state(
 	switch (ism->current_state) {
 	case DM_ISM_STATE_HYSTERESIS_WAITING:
 		dm_ism_set_last_idle_ts(ism);
-		delay_ns = dm_ism_get_idle_allow_delay(ism, acrtc_state->stream);
+
+		/* CRTC can be disabled; allow immediate idle */
+		if (!acrtc_state->stream) {
+			ret = DM_ISM_EVENT_IMMEDIATE;
+			break;
+		}
+
+		delay_ns = dm_ism_get_idle_allow_delay(ism,
+						       acrtc_state->stream);
+		if (delay_ns == 0) {
+			ret = DM_ISM_EVENT_IMMEDIATE;
+			break;
+		}
+
 		/* Schedule worker */
-		if (delay_ns > 0)
-			mod_delayed_work(system_dfl_wq, &ism->delayed_work,
-					 nsecs_to_jiffies(delay_ns));
+		mod_delayed_work(system_unbound_wq, &ism->delayed_work,
+				 nsecs_to_jiffies(delay_ns));
+
 		break;
 	case DM_ISM_STATE_OPTIMIZED_IDLE:
 		sso_delay_ns = dm_ism_get_sso_delay(ism, acrtc_state->stream);
-		if (sso_delay_ns > 0) {
+		if (sso_delay_ns == 0)
+			ret = DM_ISM_EVENT_IMMEDIATE;
+		else if (config->sso_num_frames < config->filter_num_frames) {
 			/*
 			 * If sso_num_frames is less than hysteresis frames, it
 			 * indicates that allowing idle here, then disallowing
@@ -411,11 +399,14 @@ static enum amdgpu_dm_ism_event dm_ism_dispatch_power_state(
 			 * have a negative power impact. Skip idle allow here,
 			 * and let the sso_delayed_work handle it.
 			 */
-			if (config->sso_num_frames >= config->filter_num_frames)
-				dm_ism_commit_idle_optimization_state(ism, acrtc_state->stream,
-								      false, false);
-
-			mod_delayed_work(system_dfl_wq,
+			mod_delayed_work(system_unbound_wq,
+					 &ism->sso_delayed_work,
+					 nsecs_to_jiffies(sso_delay_ns));
+		} else {
+			/* Enable idle optimization without SSO */
+			dm_ism_commit_idle_optimization_state(
+				ism, acrtc_state->stream, false, false);
+			mod_delayed_work(system_unbound_wq,
 					 &ism->sso_delayed_work,
 					 nsecs_to_jiffies(sso_delay_ns));
 		}
@@ -429,12 +420,13 @@ static enum amdgpu_dm_ism_event dm_ism_dispatch_power_state(
 		dm_ism_insert_record(ism);
 		dm_ism_commit_idle_optimization_state(ism, acrtc_state->stream,
 						      true, false);
+		ret = DM_ISM_EVENT_IMMEDIATE;
 		break;
 	default:
 		break;
 	}
 
-	return dm_ism_dispatch_next_event(ism->current_state, delay_ns, sso_delay_ns);
+	return ret;
 }
 
 static char *dm_ism_events_str[DM_ISM_NUM_EVENTS] = {
@@ -467,8 +459,8 @@ void amdgpu_dm_ism_commit_event(struct amdgpu_dm_ism *ism,
 	struct amdgpu_display_manager *dm = &adev->dm;
 	struct dm_crtc_state *acrtc_state = to_dm_crtc_state(acrtc->base.state);
 
-	/* ISM transitions must be called with dc_lock held */
-	lockdep_assert_held(&dm->dc_lock);
+	/* ISM transitions must be called with mutex acquired */
+	ASSERT(mutex_is_locked(&dm->dc_lock));
 
 	/* ISM should not run after dc is destroyed */
 	ASSERT(dm->dc);
@@ -489,7 +481,8 @@ void amdgpu_dm_ism_commit_event(struct amdgpu_dm_ism *ism,
 				dm_ism_states_str[ism->previous_state],
 				dm_ism_states_str[ism->current_state],
 				dm_ism_events_str[event]);
-			next_event = dm_ism_dispatch_power_state(ism, acrtc_state);
+			next_event = dm_ism_dispatch_power_state(
+				ism, acrtc_state, next_event);
 		} else {
 			trace_amdgpu_dm_ism_event(
 				acrtc->crtc_id,
@@ -531,20 +524,13 @@ static void dm_ism_sso_delayed_work_func(struct work_struct *work)
 }
 
 /**
- * amdgpu_dm_ism_disable - Quiesce ISM workers
+ * amdgpu_dm_ism_disable - Disable the ISM
  *
  * @dm: The amdgpu display manager
  *
- * Cancels and disables any pending or in-flight ISM delayed work and waits
- * for in-progress work to finish. After this returns, no ISM worker can run
- * and subsequent mod_delayed_work() calls become no-ops via
- * clear_pending_if_disabled().
- *
- * Must NOT be called with dc_lock held: the workers themselves take dc_lock,
- * so a synchronous wait under dc_lock would deadlock.
- *
- * The caller is responsible for driving the FSM back to FULL_POWER_RUNNING
- * (under dc_lock) by calling amdgpu_dm_ism_force_full_power().
+ * Disable the idle state manager by disabling any ISM work, canceling pending
+ * work, and waiting for in-progress work to finish. After disabling, the system
+ * is left in DM_ISM_STATE_FULL_POWER_RUNNING state.
  */
 void amdgpu_dm_ism_disable(struct amdgpu_display_manager *dm)
 {
@@ -552,54 +538,21 @@ void amdgpu_dm_ism_disable(struct amdgpu_display_manager *dm)
 	struct amdgpu_crtc *acrtc;
 	struct amdgpu_dm_ism *ism;
 
-	/*
-	 * Caller must NOT hold dc_lock: the ISM delayed work handlers
-	 * acquire dc_lock themselves, so waiting for them via
-	 * disable_delayed_work_sync() while holding dc_lock would
-	 * self-deadlock against an in-flight worker.
-	 */
-	lockdep_assert_not_held(&dm->dc_lock);
+	ASSERT(mutex_is_locked(&dm->dc_lock));
 
 	drm_for_each_crtc(crtc, dm->ddev) {
 		acrtc = to_amdgpu_crtc(crtc);
 		ism = &acrtc->ism;
 
+		/* Cancel and disable any pending work */
 		disable_delayed_work_sync(&ism->delayed_work);
 		disable_delayed_work_sync(&ism->sso_delayed_work);
-	}
-}
-
-/**
- * amdgpu_dm_ism_force_full_power - Force every CRTC's ISM FSM to FULL_POWER
- *
- * @dm: The amdgpu display manager
- *
- * Sends DM_ISM_EVENT_EXIT_IDLE_REQUESTED to every CRTC's ISM, leaving each
- * FSM in FULL_POWER_RUNNING. Intended to be paired with
- * amdgpu_dm_ism_disable(): callers should first quiesce workers (without
- * dc_lock), then take dc_lock and call this helper.
- *
- * Must be called with dc_lock held.
- */
-void amdgpu_dm_ism_force_full_power(struct amdgpu_display_manager *dm)
-{
-	struct drm_crtc *crtc;
-	struct amdgpu_crtc *acrtc;
-
-	/*
-	 * Caller must hold dc_lock: commit_event() drives the FSM and
-	 * may touch dc state via dc_allow_idle_optimizations() etc.
-	 */
-	lockdep_assert_held(&dm->dc_lock);
-
-	drm_for_each_crtc(crtc, dm->ddev) {
-		acrtc = to_amdgpu_crtc(crtc);
 
 		/*
 		 * When disabled, leave in FULL_POWER_RUNNING state.
-		 * EXIT_IDLE will not queue any work.
+		 * EXIT_IDLE will not queue any work
 		 */
-		amdgpu_dm_ism_commit_event(&acrtc->ism,
+		amdgpu_dm_ism_commit_event(ism,
 					   DM_ISM_EVENT_EXIT_IDLE_REQUESTED);
 	}
 }
@@ -640,7 +593,6 @@ void amdgpu_dm_ism_init(struct amdgpu_dm_ism *ism,
 	INIT_DELAYED_WORK(&ism->delayed_work, dm_ism_delayed_work_func);
 	INIT_DELAYED_WORK(&ism->sso_delayed_work, dm_ism_sso_delayed_work_func);
 }
-EXPORT_IF_KUNIT(amdgpu_dm_ism_init);
 
 
 void amdgpu_dm_ism_fini(struct amdgpu_dm_ism *ism)
@@ -648,4 +600,3 @@ void amdgpu_dm_ism_fini(struct amdgpu_dm_ism *ism)
 	cancel_delayed_work_sync(&ism->sso_delayed_work);
 	cancel_delayed_work_sync(&ism->delayed_work);
 }
-EXPORT_IF_KUNIT(amdgpu_dm_ism_fini);

@@ -12,7 +12,6 @@
 #include <linux/init.h>
 #include <linux/module.h>
 #include <linux/platform_device.h>
-#include <linux/string.h>
 
 enum {
 	PI_DRAM_REG = 0,
@@ -146,7 +145,7 @@ static int __init n64cart_probe(struct platform_device *pdev)
 	disk->flags = GENHD_FL_NO_PART;
 	disk->fops = &n64cart_fops;
 	disk->private_data = &pdev->dev;
-	strscpy(disk->disk_name, "n64cart");
+	strcpy(disk->disk_name, "n64cart");
 
 	set_capacity(disk, size >> SECTOR_SHIFT);
 	set_disk_ro(disk, 1);

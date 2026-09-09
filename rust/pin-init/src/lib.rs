@@ -263,6 +263,12 @@
 //! [`impl Init<T, E>`]: crate::Init
 //! [Rust-for-Linux]: https://rust-for-linux.com/
 
+#![cfg_attr(USE_RUSTC_FEATURES, feature(lint_reasons))]
+#![cfg_attr(USE_RUSTC_FEATURES, feature(raw_ref_op))]
+#![cfg_attr(
+    all(any(feature = "alloc", feature = "std"), USE_RUSTC_FEATURES),
+    feature(new_uninit)
+)]
 #![forbid(missing_docs, unsafe_op_in_unsafe_fn)]
 #![cfg_attr(not(feature = "std"), no_std)]
 #![cfg_attr(feature = "alloc", feature(allocator_api))]
@@ -431,7 +437,7 @@ pub use ::pin_init_internal::Zeroable;
 /// ```
 /// use pin_init::MaybeZeroable;
 ///
-/// // implements `Zeroable`
+/// // implmements `Zeroable`
 /// #[derive(MaybeZeroable)]
 /// pub struct DriverData {
 ///     pub(crate) id: i64,
@@ -439,7 +445,7 @@ pub use ::pin_init_internal::Zeroable;
 ///     len: usize,
 /// }
 ///
-/// // does not implement `Zeroable`
+/// // does not implmement `Zeroable`
 /// #[derive(MaybeZeroable)]
 /// pub struct DriverData2 {
 ///     pub(crate) id: i64,
@@ -867,12 +873,12 @@ pub use pin_init_internal::init;
 #[macro_export]
 macro_rules! assert_pinned {
     ($ty:ty, $field:ident, $field_ty:ty, inline) => {
-        // SAFETY: This code is unreachable.
-        let _ = move |ptr: *mut $ty| unsafe {
-            let data = <$ty as $crate::__internal::HasPinData>::__pin_data();
-            _ = data
-                .$field(ptr)
-                .init($crate::__internal::AlwaysFail::<$field_ty>::new());
+        let _ = move |ptr: *mut $field_ty| {
+            // SAFETY: This code is unreachable.
+            let data = unsafe { <$ty as $crate::__internal::HasPinData>::__pin_data() };
+            let init = $crate::__internal::AlwaysFail::<$field_ty>::new();
+            // SAFETY: This code is unreachable.
+            unsafe { data.$field(ptr, init) }.ok();
         };
     };
 
@@ -947,12 +953,12 @@ pub unsafe trait PinInit<T: ?Sized, E = Infallible>: Sized {
     where
         F: FnOnce(Pin<&mut T>) -> Result<(), E>,
     {
-        ChainPinInit(self, f, __internal::PhantomInvariant::new())
+        ChainPinInit(self, f, PhantomData)
     }
 }
 
 /// An initializer returned by [`PinInit::pin_chain`].
-pub struct ChainPinInit<I, F, T: ?Sized, E>(I, F, __internal::PhantomInvariant<(E, T)>);
+pub struct ChainPinInit<I, F, T: ?Sized, E>(I, F, __internal::Invariant<(E, T)>);
 
 // SAFETY: The `__pinned_init` function is implemented such that it
 // - returns `Ok(())` on successful initialization,
@@ -1055,12 +1061,12 @@ pub unsafe trait Init<T: ?Sized, E = Infallible>: PinInit<T, E> {
     where
         F: FnOnce(&mut T) -> Result<(), E>,
     {
-        ChainInit(self, f, __internal::PhantomInvariant::new())
+        ChainInit(self, f, PhantomData)
     }
 }
 
 /// An initializer returned by [`Init::chain`].
-pub struct ChainInit<I, F, T: ?Sized, E>(I, F, __internal::PhantomInvariant<(E, T)>);
+pub struct ChainInit<I, F, T: ?Sized, E>(I, F, __internal::Invariant<(E, T)>);
 
 // SAFETY: The `__init` function is implemented such that it
 // - returns `Ok(())` on successful initialization,
@@ -1092,36 +1098,6 @@ where
     }
 }
 
-/// Implement `PinInit` and `Init` for closures.
-///
-/// It is unsafe to create this type, since the closure needs to fulfill the same safety
-/// requirement as the `__pinned_init`/`__init` functions.
-struct InitClosure<F, T: ?Sized>(F, __internal::PhantomInvariant<T>);
-
-// SAFETY: While constructing the `InitClosure`, the user promised that it upholds the
-// `__init` invariants.
-unsafe impl<T: ?Sized, F, E> Init<T, E> for InitClosure<F, T>
-where
-    F: FnOnce(*mut T) -> Result<(), E>,
-{
-    #[inline]
-    unsafe fn __init(self, slot: *mut T) -> Result<(), E> {
-        (self.0)(slot)
-    }
-}
-
-// SAFETY: While constructing the `InitClosure`, the user promised that it upholds the
-// `__pinned_init` invariants.
-unsafe impl<T: ?Sized, F, E> PinInit<T, E> for InitClosure<F, T>
-where
-    F: FnOnce(*mut T) -> Result<(), E>,
-{
-    #[inline]
-    unsafe fn __pinned_init(self, slot: *mut T) -> Result<(), E> {
-        (self.0)(slot)
-    }
-}
-
 /// Creates a new [`PinInit<T, E>`] from the given closure.
 ///
 /// # Safety
@@ -1138,7 +1114,7 @@ where
 pub const unsafe fn pin_init_from_closure<T: ?Sized, E>(
     f: impl FnOnce(*mut T) -> Result<(), E>,
 ) -> impl PinInit<T, E> {
-    InitClosure(f, __internal::PhantomInvariant::new())
+    __internal::InitClosure(f, PhantomData)
 }
 
 /// Creates a new [`Init<T, E>`] from the given closure.
@@ -1157,7 +1133,7 @@ pub const unsafe fn pin_init_from_closure<T: ?Sized, E>(
 pub const unsafe fn init_from_closure<T: ?Sized, E>(
     f: impl FnOnce(*mut T) -> Result<(), E>,
 ) -> impl Init<T, E> {
-    InitClosure(f, __internal::PhantomInvariant::new())
+    __internal::InitClosure(f, PhantomData)
 }
 
 /// Changes the to be initialized type.
@@ -1169,7 +1145,14 @@ pub const unsafe fn init_from_closure<T: ?Sized, E>(
 pub const unsafe fn cast_pin_init<T, U, E>(init: impl PinInit<T, E>) -> impl PinInit<U, E> {
     // SAFETY: initialization delegated to a valid initializer. Cast is valid by function safety
     // requirements.
-    unsafe { pin_init_from_closure(|ptr: *mut U| init.__pinned_init(ptr.cast::<T>())) }
+    let res = unsafe { pin_init_from_closure(|ptr: *mut U| init.__pinned_init(ptr.cast::<T>())) };
+    // FIXME: this let binding is required to avoid a compiler error (cycle when computing the opaque
+    // type returned by this function) before Rust 1.81. Remove after MSRV bump.
+    #[allow(
+        clippy::let_and_return,
+        reason = "some clippy versions warn about the let binding"
+    )]
+    res
 }
 
 /// Changes the to be initialized type.
@@ -1181,7 +1164,14 @@ pub const unsafe fn cast_pin_init<T, U, E>(init: impl PinInit<T, E>) -> impl Pin
 pub const unsafe fn cast_init<T, U, E>(init: impl Init<T, E>) -> impl Init<U, E> {
     // SAFETY: initialization delegated to a valid initializer. Cast is valid by function safety
     // requirements.
-    unsafe { init_from_closure(|ptr: *mut U| init.__init(ptr.cast::<T>())) }
+    let res = unsafe { init_from_closure(|ptr: *mut U| init.__init(ptr.cast::<T>())) };
+    // FIXME: this let binding is required to avoid a compiler error (cycle when computing the opaque
+    // type returned by this function) before Rust 1.81. Remove after MSRV bump.
+    #[allow(
+        clippy::let_and_return,
+        reason = "some clippy versions warn about the let binding"
+    )]
+    res
 }
 
 /// An initializer that leaves the memory uninitialized.
@@ -1533,6 +1523,27 @@ pub unsafe trait Zeroable {
     }
 }
 
+/// Marker trait for types that allow `Option<Self>` to be set to all zeroes in order to write
+/// `None` to that location.
+///
+/// # Safety
+///
+/// The implementer needs to ensure that `unsafe impl Zeroable for Option<Self> {}` is sound.
+pub unsafe trait ZeroableOption {}
+
+// SAFETY: by the safety requirement of `ZeroableOption`, this is valid.
+unsafe impl<T: ZeroableOption> Zeroable for Option<T> {}
+
+// SAFETY: `Option<&T>` is part of the option layout optimization guarantee:
+// <https://doc.rust-lang.org/stable/std/option/index.html#representation>.
+unsafe impl<T> ZeroableOption for &T {}
+// SAFETY: `Option<&mut T>` is part of the option layout optimization guarantee:
+// <https://doc.rust-lang.org/stable/std/option/index.html#representation>.
+unsafe impl<T> ZeroableOption for &mut T {}
+// SAFETY: `Option<NonNull<T>>` is part of the option layout optimization guarantee:
+// <https://doc.rust-lang.org/stable/std/option/index.html#representation>.
+unsafe impl<T> ZeroableOption for NonNull<T> {}
+
 /// Create an initializer for a zeroed `T`.
 ///
 /// The returned initializer will write `0x00` to every byte of the given `slot`.
@@ -1638,17 +1649,6 @@ macro_rules! impl_tuple_zeroable {
 
 impl_tuple_zeroable!(A, B, C, D, E, F, G, H, I, J);
 
-/// Marker trait for types that allow `Option<Self>` to be set to all zeroes in order to write
-/// `None` to that location.
-///
-/// # Safety
-///
-/// The implementer needs to ensure that `unsafe impl Zeroable for Option<Self> {}` is sound.
-pub unsafe trait ZeroableOption {}
-
-// SAFETY: by the safety requirement of `ZeroableOption`, this is valid.
-unsafe impl<T: ZeroableOption> Zeroable for Option<T> {}
-
 macro_rules! impl_fn_zeroable_option {
     ([$($abi:literal),* $(,)?] $args:tt) => {
         $(impl_fn_zeroable_option!({extern $abi} $args);)*
@@ -1674,27 +1674,18 @@ macro_rules! impl_fn_zeroable_option {
 
 impl_fn_zeroable_option!(["Rust", "C"] { A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U });
 
-macro_rules! impl_zeroable_option {
-    ($($({$($generics:tt)*})? $t:ty, )*) => {
-        // SAFETY: Safety comments written in the macro invocation.
-        $(unsafe impl$($($generics)*)? ZeroableOption for $t {})*
+macro_rules! impl_non_zero_int_zeroable_option {
+    ($($int:ty),* $(,)?) => {
+        // SAFETY: Safety comment written in the macro invocation.
+        $(unsafe impl ZeroableOption for $int {})*
     };
 }
 
-impl_zeroable_option! {
-    // SAFETY: `Option<&T>` is part of the option layout optimization guarantee:
-    // <https://doc.rust-lang.org/stable/std/option/index.html#representation>.
-    {<T: ?Sized>} &T,
-    // SAFETY: `Option<&mut T>` is part of the option layout optimization guarantee:
-    // <https://doc.rust-lang.org/stable/std/option/index.html#representation>.
-    {<T: ?Sized>} &mut T,
-    // SAFETY: `Option<NonNull<T>>` is part of the option layout optimization guarantee:
-    // <https://doc.rust-lang.org/stable/std/option/index.html#representation>.
-    {<T: ?Sized>} NonNull<T>,
+impl_non_zero_int_zeroable_option! {
     // SAFETY: All zeros is equivalent to `None` (option layout optimization guarantee:
     // <https://doc.rust-lang.org/stable/std/option/index.html#representation>).
-    NonZero<u8>, NonZero<u16>, NonZero<u32>, NonZero<u64>, NonZero<u128>, NonZero<usize>,
-    NonZero<i8>, NonZero<i16>, NonZero<i32>, NonZero<i64>, NonZero<i128>, NonZero<isize>,
+    NonZeroU8, NonZeroU16, NonZeroU32, NonZeroU64, NonZeroU128, NonZeroUsize,
+    NonZeroI8, NonZeroI16, NonZeroI32, NonZeroI64, NonZeroI128, NonZeroIsize,
 }
 
 /// This trait allows creating an instance of `Self` which contains exactly one

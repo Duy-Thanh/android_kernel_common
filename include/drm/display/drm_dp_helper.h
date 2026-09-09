@@ -126,7 +126,6 @@ struct drm_dp_as_sdp {
 	int duration_decr_ms;
 	bool target_rr_divider;
 	enum operation_mode mode;
-	int coasting_vtotal;
 };
 
 void drm_dp_as_sdp_log(struct drm_printer *p,

@@ -24,7 +24,7 @@ static int thunderx_spi_probe(struct pci_dev *pdev,
 	struct octeon_spi *p;
 	int ret;
 
-	host = devm_spi_alloc_host(dev, sizeof(struct octeon_spi));
+	host = spi_alloc_host(dev, sizeof(struct octeon_spi));
 	if (!host)
 		return -ENOMEM;
 
@@ -32,15 +32,17 @@ static int thunderx_spi_probe(struct pci_dev *pdev,
 
 	ret = pcim_enable_device(pdev);
 	if (ret)
-		return ret;
+		goto error;
 
 	ret = pcim_request_all_regions(pdev, DRV_NAME);
 	if (ret)
-		return ret;
+		goto error;
 
 	p->register_base = pcim_iomap(pdev, 0, pci_resource_len(pdev, 0));
-	if (!p->register_base)
-		return -EINVAL;
+	if (!p->register_base) {
+		ret = -EINVAL;
+		goto error;
+	}
 
 	p->regs.config = 0x1000;
 	p->regs.status = 0x1008;
@@ -48,8 +50,10 @@ static int thunderx_spi_probe(struct pci_dev *pdev,
 	p->regs.data = 0x1080;
 
 	p->clk = devm_clk_get_enabled(dev, NULL);
-	if (IS_ERR(p->clk))
-		return PTR_ERR(p->clk);
+	if (IS_ERR(p->clk)) {
+		ret = PTR_ERR(p->clk);
+		goto error;
+	}
 
 	p->sys_freq = clk_get_rate(p->clk);
 	if (!p->sys_freq)
@@ -66,7 +70,15 @@ static int thunderx_spi_probe(struct pci_dev *pdev,
 
 	pci_set_drvdata(pdev, host);
 
-	return spi_register_controller(host);
+	ret = spi_register_controller(host);
+	if (ret)
+		goto error;
+
+	return 0;
+
+error:
+	spi_controller_put(host);
+	return ret;
 }
 
 static void thunderx_spi_remove(struct pci_dev *pdev)
@@ -78,10 +90,14 @@ static void thunderx_spi_remove(struct pci_dev *pdev)
 	if (!p)
 		return;
 
+	spi_controller_get(host);
+
 	spi_unregister_controller(host);
 
 	/* Put everything in a known state. */
 	writeq(0, p->register_base + OCTEON_SPI_CFG(p));
+
+	spi_controller_put(host);
 }
 
 static const struct pci_device_id thunderx_spi_pci_id_table[] = {

@@ -11,7 +11,6 @@
 #include <linux/kthread.h>
 #include <linux/kernel.h>
 
-#include "aie.h"
 #include "aie2_msg_priv.h"
 #include "aie2_pci.h"
 #include "amdxdna_error.h"
@@ -250,12 +249,12 @@ static u32 aie2_error_backtrack(struct amdxdna_dev_hdl *ndev, void *err_info, u3
 		enum aie_error_category cat;
 
 		cat = aie_get_error_category(err->row, err->event_id, err->mod_type);
-		XDNA_ERR(ndev->aie.xdna, "Row: %d, Col: %d, module %d, event ID %d, category %d",
+		XDNA_ERR(ndev->xdna, "Row: %d, Col: %d, module %d, event ID %d, category %d",
 			 err->row, err->col, err->mod_type,
 			 err->event_id, cat);
 
 		if (err->col >= 32) {
-			XDNA_WARN(ndev->aie.xdna, "Invalid column number");
+			XDNA_WARN(ndev->xdna, "Invalid column number");
 			break;
 		}
 
@@ -295,7 +294,7 @@ static void aie2_error_worker(struct work_struct *err_work)
 
 	e = container_of(err_work, struct async_event, work);
 
-	xdna = e->ndev->aie.xdna;
+	xdna = e->ndev->xdna;
 
 	if (e->resp.status == MAX_AIE2_STATUS_CODE)
 		return;
@@ -330,7 +329,7 @@ static void aie2_error_worker(struct work_struct *err_work)
 
 void aie2_error_async_events_free(struct amdxdna_dev_hdl *ndev)
 {
-	struct amdxdna_dev *xdna = ndev->aie.xdna;
+	struct amdxdna_dev *xdna = ndev->xdna;
 	struct async_events *events;
 
 	events = ndev->async_events;
@@ -339,13 +338,13 @@ void aie2_error_async_events_free(struct amdxdna_dev_hdl *ndev)
 	destroy_workqueue(events->wq);
 	mutex_lock(&xdna->dev_lock);
 
-	amdxdna_free_msg_buffer(xdna, events->size, events->buf, events->addr);
+	aie2_free_msg_buffer(ndev, events->size, events->buf, events->addr);
 	kfree(events);
 }
 
 int aie2_error_async_events_alloc(struct amdxdna_dev_hdl *ndev)
 {
-	struct amdxdna_dev *xdna = ndev->aie.xdna;
+	struct amdxdna_dev *xdna = ndev->xdna;
 	u32 total_col = ndev->total_col;
 	u32 total_size = ASYNC_BUF_SIZE * total_col;
 	struct async_events *events;
@@ -355,7 +354,7 @@ int aie2_error_async_events_alloc(struct amdxdna_dev_hdl *ndev)
 	if (!events)
 		return -ENOMEM;
 
-	events->buf = amdxdna_alloc_msg_buffer(xdna, &total_size, &events->addr);
+	events->buf = aie2_alloc_msg_buffer(ndev, &total_size, &events->addr);
 	if (IS_ERR(events->buf)) {
 		ret = PTR_ERR(events->buf);
 		goto free_events;
@@ -395,7 +394,7 @@ int aie2_error_async_events_alloc(struct amdxdna_dev_hdl *ndev)
 free_wq:
 	destroy_workqueue(events->wq);
 free_buf:
-	amdxdna_free_msg_buffer(xdna, events->size, events->buf, events->addr);
+	aie2_free_msg_buffer(ndev, events->size, events->buf, events->addr);
 free_events:
 	kfree(events);
 	return ret;
@@ -403,15 +402,12 @@ free_events:
 
 int aie2_get_array_async_error(struct amdxdna_dev_hdl *ndev, struct amdxdna_drm_get_array *args)
 {
-	struct amdxdna_dev *xdna = ndev->aie.xdna;
+	struct amdxdna_dev *xdna = ndev->xdna;
 
 	drm_WARN_ON(&xdna->ddev, !mutex_is_locked(&xdna->dev_lock));
 
-	if (!args->num_element)
-		return -EINVAL;
-
 	args->num_element = 1;
-	args->element_size = min(args->element_size, sizeof(ndev->last_async_err));
+	args->element_size = sizeof(ndev->last_async_err);
 	if (copy_to_user(u64_to_user_ptr(args->buffer),
 			 &ndev->last_async_err, args->element_size))
 		return -EFAULT;

@@ -204,7 +204,8 @@ static void sisfb_search_mode(char *name, bool quiet)
 		return;
 	}
 
-	if (strscpy(strbuf1, name) > 0) {
+	if(strlen(name) <= 19) {
+		strcpy(strbuf1, name);
 		for(i = 0; i < strlen(strbuf1); i++) {
 			if(strbuf1[i] < '0' || strbuf1[i] > '9') strbuf1[i] = ' ';
 		}

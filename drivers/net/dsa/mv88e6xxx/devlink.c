@@ -91,7 +91,6 @@ void mv88e6xxx_teardown_devlink_params(struct dsa_switch *ds)
 }
 
 enum mv88e6xxx_devlink_resource_id {
-	MV88E6XXX_RESOURCE_ID_NONE,  /* DEVLINK_RESOURCE_ID_PARENT_TOP */
 	MV88E6XXX_RESOURCE_ID_ATU,
 	MV88E6XXX_RESOURCE_ID_ATU_BIN_0,
 	MV88E6XXX_RESOURCE_ID_ATU_BIN_1,
@@ -201,7 +200,7 @@ int mv88e6xxx_setup_devlink_resources(struct dsa_switch *ds)
 	err = dsa_devlink_resource_register(ds, "ATU_bin_0",
 					    mv88e6xxx_num_macs(chip) / 4,
 					    MV88E6XXX_RESOURCE_ID_ATU_BIN_0,
-					    DEVLINK_RESOURCE_ID_PARENT_TOP,
+					    MV88E6XXX_RESOURCE_ID_ATU,
 					    &size_params);
 	if (err)
 		goto out;
@@ -209,7 +208,7 @@ int mv88e6xxx_setup_devlink_resources(struct dsa_switch *ds)
 	err = dsa_devlink_resource_register(ds, "ATU_bin_1",
 					    mv88e6xxx_num_macs(chip) / 4,
 					    MV88E6XXX_RESOURCE_ID_ATU_BIN_1,
-					    DEVLINK_RESOURCE_ID_PARENT_TOP,
+					    MV88E6XXX_RESOURCE_ID_ATU,
 					    &size_params);
 	if (err)
 		goto out;
@@ -217,7 +216,7 @@ int mv88e6xxx_setup_devlink_resources(struct dsa_switch *ds)
 	err = dsa_devlink_resource_register(ds, "ATU_bin_2",
 					    mv88e6xxx_num_macs(chip) / 4,
 					    MV88E6XXX_RESOURCE_ID_ATU_BIN_2,
-					    DEVLINK_RESOURCE_ID_PARENT_TOP,
+					    MV88E6XXX_RESOURCE_ID_ATU,
 					    &size_params);
 	if (err)
 		goto out;
@@ -225,7 +224,7 @@ int mv88e6xxx_setup_devlink_resources(struct dsa_switch *ds)
 	err = dsa_devlink_resource_register(ds, "ATU_bin_3",
 					    mv88e6xxx_num_macs(chip) / 4,
 					    MV88E6XXX_RESOURCE_ID_ATU_BIN_3,
-					    DEVLINK_RESOURCE_ID_PARENT_TOP,
+					    MV88E6XXX_RESOURCE_ID_ATU,
 					    &size_params);
 	if (err)
 		goto out;

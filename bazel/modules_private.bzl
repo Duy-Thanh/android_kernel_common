@@ -18,7 +18,6 @@ _COMMON_GKI_MODULES_LIST = [
     "drivers/bluetooth/hci_uart.ko",
     "drivers/char/virtio_console.ko",
     "drivers/gnss/gnss.ko",
-    "drivers/misc/open-dice.ko",
     "drivers/misc/vcpu_stall_detector.ko",
     "drivers/net/can/dev/can-dev.ko",
     "drivers/net/can/slcan/slcan.ko",
@@ -105,11 +104,7 @@ _ARM64_GKI_MODULES_LIST = [
     # keep sorted
     "drivers/android/wonder/wonder.ko",
     "drivers/char/hw_random/cctrng.ko",
-    "drivers/hwtracing/coresight/coresight.ko",
-    "drivers/hwtracing/coresight/coresight-etm4x.ko",
-    "drivers/hwtracing/coresight/coresight-funnel.ko",
-    "drivers/hwtracing/coresight/coresight-replicator.ko",
-    "drivers/hwtracing/coresight/coresight-trbe.ko",
+    "drivers/misc/open-dice.ko",
     "drivers/ptp/ptp_kvm.ko",
 ]
 
@@ -220,6 +215,7 @@ _KUNIT_FRAMEWORK_MODULES = [
 # Modules defined by tools/testing/kunit/configs/android/kunit_defconfig
 _KUNIT_COMMON_MODULES_LIST = [
     # keep sorted
+    "drivers/android/tests/binder_alloc_kunit.ko",
     "drivers/base/regmap/regmap-kunit.ko",
     "drivers/base/regmap/regmap-ram.ko",
     "drivers/base/regmap/regmap-raw-ram.ko",
@@ -247,7 +243,6 @@ _KUNIT_COMMON_MODULES_LIST = [
     "lib/crypto/tests/sha256_kunit.ko",
     "lib/crypto/tests/sha384_kunit.ko",
     "lib/crypto/tests/sha512_kunit.ko",
-    "lib/kunit/backtrace-suppression-test.ko",
     "lib/kunit/kunit-example-test.ko",
     "lib/kunit/kunit-test.ko",
     "lib/kunit/platform-test.ko",

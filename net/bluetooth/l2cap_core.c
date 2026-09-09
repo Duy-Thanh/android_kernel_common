@@ -1,4 +1,3 @@
-// SPDX-License-Identifier: GPL-2.0
 /*
    BlueZ - Bluetooth protocol stack for Linux
    Copyright (C) 2000-2001 Qualcomm Incorporated
@@ -8,6 +7,10 @@
    Copyright (c) 2012 Code Aurora Forum.  All rights reserved.
 
    Written 2000,2001 by Maxim Krasnyansky <maxk@qualcomm.com>
+
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License version 2 as
+   published by the Free Software Foundation;
 
    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
    OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -408,7 +411,7 @@ static void l2cap_chan_timeout(struct work_struct *work)
 
 	BT_DBG("chan %p state %s", chan, state_to_string(chan->state));
 
-	if (test_bit(FLAG_DEL, &chan->flags)) {
+	if (!conn) {
 		l2cap_chan_put(chan);
 		return;
 	}
@@ -418,9 +421,6 @@ static void l2cap_chan_timeout(struct work_struct *work)
 	 * this work. No need to call l2cap_chan_hold(chan) here again.
 	 */
 	l2cap_chan_lock(chan);
-
-	if (test_bit(FLAG_DEL, &chan->flags))
-		goto unlock;
 
 	if (chan->state == BT_CONNECTED || chan->state == BT_CONFIG)
 		reason = ECONNREFUSED;
@@ -434,10 +434,10 @@ static void l2cap_chan_timeout(struct work_struct *work)
 
 	chan->ops->close(chan);
 
-unlock:
 	l2cap_chan_unlock(chan);
-	mutex_unlock(&conn->lock);
 	l2cap_chan_put(chan);
+
+	mutex_unlock(&conn->lock);
 }
 
 struct l2cap_chan *l2cap_chan_create(void)
@@ -489,9 +489,6 @@ static void l2cap_chan_destroy(struct kref *kref)
 	write_lock(&chan_list_lock);
 	list_del(&chan->global_l);
 	write_unlock(&chan_list_lock);
-
-	if (chan->conn)
-		l2cap_conn_put(chan->conn);
 
 	kfree(chan);
 }
@@ -596,7 +593,7 @@ void __l2cap_chan_add(struct l2cap_conn *conn, struct l2cap_chan *chan)
 
 	conn->disc_reason = HCI_ERROR_REMOTE_USER_TERM;
 
-	chan->conn = l2cap_conn_get(conn);
+	chan->conn = conn;
 
 	switch (chan->chan_type) {
 	case L2CAP_CHAN_CONN_ORIENTED:
@@ -651,18 +648,22 @@ void l2cap_chan_add(struct l2cap_conn *conn, struct l2cap_chan *chan)
 
 void l2cap_chan_del(struct l2cap_chan *chan, int err)
 {
+	struct l2cap_conn *conn = chan->conn;
+
 	__clear_chan_timer(chan);
 
-	BT_DBG("chan %p, err %d, state %s", chan, err,
+	BT_DBG("chan %p, conn %p, err %d, state %s", chan, conn, err,
 	       state_to_string(chan->state));
 
 	chan->ops->teardown(chan, err);
 
-	if (!test_and_set_bit(FLAG_DEL, &chan->flags)) {
+	if (conn) {
 		/* Delete from channel list */
 		list_del(&chan->list);
 
 		l2cap_chan_put(chan);
+
+		chan->conn = NULL;
 
 		/* Reference was only held for non-fixed channels or
 		 * fixed channels that explicitly requested it using the
@@ -670,7 +671,7 @@ void l2cap_chan_del(struct l2cap_chan *chan, int err)
 		 */
 		if (chan->chan_type != L2CAP_CHAN_FIXED ||
 		    test_bit(FLAG_HOLD_HCI_CONN, &chan->flags))
-			hci_conn_drop(chan->conn->hcon);
+			hci_conn_drop(conn->hcon);
 	}
 
 	if (test_bit(CONF_NOT_COMPLETE, &chan->conf_state))
@@ -1902,7 +1903,7 @@ static void l2cap_monitor_timeout(struct work_struct *work)
 
 	l2cap_chan_lock(chan);
 
-	if (test_bit(FLAG_DEL, &chan->flags)) {
+	if (!chan->conn) {
 		l2cap_chan_unlock(chan);
 		l2cap_chan_put(chan);
 		return;
@@ -1923,7 +1924,7 @@ static void l2cap_retrans_timeout(struct work_struct *work)
 
 	l2cap_chan_lock(chan);
 
-	if (test_bit(FLAG_DEL, &chan->flags)) {
+	if (!chan->conn) {
 		l2cap_chan_unlock(chan);
 		l2cap_chan_put(chan);
 		return;
@@ -2564,7 +2565,7 @@ int l2cap_chan_send(struct l2cap_chan *chan, struct msghdr *msg, size_t len,
 	int err;
 	struct sk_buff_head seg_queue;
 
-	if (test_bit(FLAG_DEL, &chan->flags))
+	if (!chan->conn)
 		return -ENOTCONN;
 
 	/* Connectionless channel */
@@ -3159,16 +3160,12 @@ static void l2cap_ack_timeout(struct work_struct *work)
 
 	l2cap_chan_lock(chan);
 
-	if (test_bit(FLAG_DEL, &chan->flags))
-		goto unlock;
-
 	frames_to_ack = __seq_offset(chan, chan->buffer_seq,
 				     chan->last_acked_seq);
 
 	if (frames_to_ack)
 		l2cap_send_rr_or_rnr(chan, 0);
 
-unlock:
 	l2cap_chan_unlock(chan);
 	l2cap_chan_put(chan);
 }
@@ -7029,11 +7026,6 @@ static void l2cap_recv_frame(struct l2cap_conn *conn, struct sk_buff *skb)
 		break;
 
 	case L2CAP_CID_CONN_LESS:
-		if (skb->len < L2CAP_PSMLEN_SIZE) {
-			kfree_skb(skb);
-			break;
-		}
-
 		psm = get_unaligned((__le16 *) skb->data);
 		skb_pull(skb, L2CAP_PSMLEN_SIZE);
 		l2cap_conless_channel(conn, psm, skb);

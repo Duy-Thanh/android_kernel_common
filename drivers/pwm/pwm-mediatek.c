@@ -23,8 +23,6 @@
 /* PWM registers and bits definitions */
 #define PWMCON			0x00
 #define PWMCON_CLKDIV			GENMASK(2, 0)
-#define PWMCON_CLKSEL			BIT(3)
-#define PWMCON_OLD_PWM_MODE		BIT(15)
 #define PWMHDUR			0x04
 #define PWMLDUR			0x08
 #define PWMGDUR			0x0c
@@ -40,7 +38,6 @@
 
 struct pwm_mediatek_of_data {
 	unsigned int num_pwms;
-	bool clksel_fixup;
 	bool pwm45_fixup;
 	u16 pwm_ck_26m_sel_reg;
 	unsigned int chanreg_base;
@@ -340,7 +337,6 @@ static int pwm_mediatek_write_waveform(struct pwm_chip *chip,
 
 	if (wfhw->enable) {
 		u32 reg_width = PWMDWIDTH, reg_thres = PWMTHRES;
-		u32 con_val = PWMCON_OLD_PWM_MODE | wfhw->con;
 
 		if (pc->soc->pwm45_fixup && pwm->hwpwm > 2) {
 			/*
@@ -368,11 +364,7 @@ static int pwm_mediatek_write_waveform(struct pwm_chip *chip,
 		if (pc->soc->pwm_ck_26m_sel_reg)
 			writel(0, pc->regs + pc->soc->pwm_ck_26m_sel_reg);
 
-		/* Set BIT(3) to disable clock division */
-		if (pc->soc->clksel_fixup)
-			con_val |= PWMCON_CLKSEL;
-
-		pwm_mediatek_writel(pc, pwm->hwpwm, PWMCON, con_val);
+		pwm_mediatek_writel(pc, pwm->hwpwm, PWMCON, BIT(15) | wfhw->con);
 		pwm_mediatek_writel(pc, pwm->hwpwm, reg_width, wfhw->width);
 		pwm_mediatek_writel(pc, pwm->hwpwm, reg_thres, wfhw->thres);
 	} else {
@@ -504,7 +496,6 @@ static int pwm_mediatek_probe(struct platform_device *pdev)
 
 static const struct pwm_mediatek_of_data mt2712_pwm_data = {
 	.num_pwms = 8,
-	.clksel_fixup = false,
 	.pwm45_fixup = false,
 	.chanreg_base = 0x10,
 	.chanreg_width = 0x40,
@@ -512,7 +503,6 @@ static const struct pwm_mediatek_of_data mt2712_pwm_data = {
 
 static const struct pwm_mediatek_of_data mt6795_pwm_data = {
 	.num_pwms = 7,
-	.clksel_fixup = false,
 	.pwm45_fixup = false,
 	.chanreg_base = 0x10,
 	.chanreg_width = 0x40,
@@ -520,7 +510,6 @@ static const struct pwm_mediatek_of_data mt6795_pwm_data = {
 
 static const struct pwm_mediatek_of_data mt7622_pwm_data = {
 	.num_pwms = 6,
-	.clksel_fixup = false,
 	.pwm45_fixup = false,
 	.pwm_ck_26m_sel_reg = PWM_CK_26M_SEL,
 	.chanreg_base = 0x10,
@@ -529,7 +518,6 @@ static const struct pwm_mediatek_of_data mt7622_pwm_data = {
 
 static const struct pwm_mediatek_of_data mt7623_pwm_data = {
 	.num_pwms = 5,
-	.clksel_fixup = false,
 	.pwm45_fixup = true,
 	.chanreg_base = 0x10,
 	.chanreg_width = 0x40,
@@ -537,15 +525,13 @@ static const struct pwm_mediatek_of_data mt7623_pwm_data = {
 
 static const struct pwm_mediatek_of_data mt7628_pwm_data = {
 	.num_pwms = 4,
-	.clksel_fixup = true,
-	.pwm45_fixup = false,
+	.pwm45_fixup = true,
 	.chanreg_base = 0x10,
 	.chanreg_width = 0x40,
 };
 
 static const struct pwm_mediatek_of_data mt7629_pwm_data = {
 	.num_pwms = 1,
-	.clksel_fixup = false,
 	.pwm45_fixup = false,
 	.chanreg_base = 0x10,
 	.chanreg_width = 0x40,
@@ -553,7 +539,6 @@ static const struct pwm_mediatek_of_data mt7629_pwm_data = {
 
 static const struct pwm_mediatek_of_data mt7981_pwm_data = {
 	.num_pwms = 3,
-	.clksel_fixup = false,
 	.pwm45_fixup = false,
 	.pwm_ck_26m_sel_reg = PWM_CK_26M_SEL,
 	.chanreg_base = 0x80,
@@ -562,7 +547,6 @@ static const struct pwm_mediatek_of_data mt7981_pwm_data = {
 
 static const struct pwm_mediatek_of_data mt7986_pwm_data = {
 	.num_pwms = 2,
-	.clksel_fixup = false,
 	.pwm45_fixup = false,
 	.pwm_ck_26m_sel_reg = PWM_CK_26M_SEL,
 	.chanreg_base = 0x10,
@@ -571,7 +555,6 @@ static const struct pwm_mediatek_of_data mt7986_pwm_data = {
 
 static const struct pwm_mediatek_of_data mt7988_pwm_data = {
 	.num_pwms = 8,
-	.clksel_fixup = false,
 	.pwm45_fixup = false,
 	.chanreg_base = 0x80,
 	.chanreg_width = 0x40,
@@ -579,7 +562,6 @@ static const struct pwm_mediatek_of_data mt7988_pwm_data = {
 
 static const struct pwm_mediatek_of_data mt8183_pwm_data = {
 	.num_pwms = 4,
-	.clksel_fixup = false,
 	.pwm45_fixup = false,
 	.pwm_ck_26m_sel_reg = PWM_CK_26M_SEL,
 	.chanreg_base = 0x10,
@@ -588,7 +570,6 @@ static const struct pwm_mediatek_of_data mt8183_pwm_data = {
 
 static const struct pwm_mediatek_of_data mt8365_pwm_data = {
 	.num_pwms = 3,
-	.clksel_fixup = false,
 	.pwm45_fixup = false,
 	.pwm_ck_26m_sel_reg = PWM_CK_26M_SEL,
 	.chanreg_base = 0x10,
@@ -597,7 +578,6 @@ static const struct pwm_mediatek_of_data mt8365_pwm_data = {
 
 static const struct pwm_mediatek_of_data mt8516_pwm_data = {
 	.num_pwms = 5,
-	.clksel_fixup = false,
 	.pwm45_fixup = false,
 	.pwm_ck_26m_sel_reg = PWM_CK_26M_SEL,
 	.chanreg_base = 0x10,
@@ -606,7 +586,6 @@ static const struct pwm_mediatek_of_data mt8516_pwm_data = {
 
 static const struct pwm_mediatek_of_data mt6991_pwm_data = {
 	.num_pwms = 4,
-	.clksel_fixup = false,
 	.pwm45_fixup = false,
 	.pwm_ck_26m_sel_reg = PWM_CK_26M_SEL_V3,
 	.chanreg_base = 0x100,

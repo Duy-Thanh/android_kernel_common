@@ -69,12 +69,8 @@ static int chromeos_tbmc_probe(struct platform_device *pdev)
 {
 	struct input_dev *idev;
 	struct device *dev = &pdev->dev;
-	struct acpi_device *adev;
+	struct acpi_device *adev = ACPI_COMPANION(dev);
 	int ret;
-
-	adev = ACPI_COMPANION(dev);
-	if (!adev)
-		return -ENODEV;
 
 	idev = devm_input_allocate_device(dev);
 	if (!idev)

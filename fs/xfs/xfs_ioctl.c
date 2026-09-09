@@ -1005,7 +1005,7 @@ xfs_ioc_swapext(
 	if (ip->i_mount != tip->i_mount)
 		return -EINVAL;
 
-	if (I_INO(ip) == I_INO(tip))
+	if (ip->i_ino == tip->i_ino)
 		return -EINVAL;
 
 	if (xfs_is_shutdown(ip->i_mount))

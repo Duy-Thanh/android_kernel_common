@@ -103,6 +103,8 @@ static int dcss_kms_bridge_connector_init(struct dcss_kms_dev *kms)
 		return PTR_ERR(kms->connector);
 	}
 
+	drm_connector_attach_encoder(kms->connector, encoder);
+
 	return 0;
 }
 

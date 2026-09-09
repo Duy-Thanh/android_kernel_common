@@ -17,6 +17,7 @@
 #include <linux/sunrpc/addr.h>
 #include <linux/module.h>
 #include <linux/mount.h>
+#include <uapi/linux/nfs2.h>
 
 #include "lockd.h"
 #include "share.h"
@@ -66,7 +67,7 @@ static inline unsigned int file_hash(struct nfs_fh *f)
 {
 	unsigned int tmp=0;
 	int i;
-	for (i = 0; i < LOCKD_FH_HASH_SIZE; i++)
+	for (i=0; i<NFS2_FHSIZE;i++)
 		tmp += f->data[i];
 	return tmp & (FILE_NRHASH - 1);
 }
@@ -131,7 +132,7 @@ static __be32 nlm_do_fopen(struct svc_rqst *rqstp,
  */
 __be32
 nlm_lookup_file(struct svc_rqst *rqstp, struct nlm_file **result,
-		struct lockd_lock *lock, int mode)
+		struct nlm_lock *lock, int mode)
 {
 	struct nlm_file	*file;
 	unsigned int	hash;
@@ -149,8 +150,6 @@ nlm_lookup_file(struct svc_rqst *rqstp, struct nlm_file **result,
 			mutex_lock(&file->f_mutex);
 			nfserr = nlm_do_fopen(rqstp, file, mode);
 			mutex_unlock(&file->f_mutex);
-			if (nfserr)
-				goto out_unlock;
 			goto found;
 		}
 	nlm_debug_print_fh("creating file for", &lock->fh);
@@ -167,7 +166,7 @@ nlm_lookup_file(struct svc_rqst *rqstp, struct nlm_file **result,
 
 	nfserr = nlm_do_fopen(rqstp, file, mode);
 	if (nfserr)
-		goto out_free;
+		goto out_unlock;
 
 	hlist_add_head(&file->f_list, &nlm_files[hash]);
 

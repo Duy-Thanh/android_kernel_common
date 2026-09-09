@@ -307,10 +307,8 @@ MODULE_DEVICE_TABLE(of, dt_match);
 static int adreno_runtime_resume(struct device *dev)
 {
 	struct msm_gpu *gpu = dev_to_gpu(dev);
-	int ret = gpu->funcs->pm_resume(gpu);
-	if (!ret)
-		ret = msm_perfcntr_resume(gpu);
-	return ret;
+
+	return gpu->funcs->pm_resume(gpu);
 }
 
 static int adreno_runtime_suspend(struct device *dev)
@@ -323,8 +321,6 @@ static int adreno_runtime_suspend(struct device *dev)
 	 * already waited for active jobs to complete.
 	 */
 	WARN_ON_ONCE(gpu->active_submits);
-
-	msm_perfcntr_suspend(gpu);
 
 	return gpu->funcs->pm_suspend(gpu);
 }

@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: Apache-2.0 OR MIT
+// SPDX-License-Identifier: GPL-2.0
 
 use proc_macro2::TokenStream;
 use quote::quote;

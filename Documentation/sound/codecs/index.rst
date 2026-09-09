@@ -7,4 +7,3 @@ Codec-Specific Information
    :maxdepth: 2
 
    cs35l56
-   tas675x

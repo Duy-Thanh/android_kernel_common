@@ -3,8 +3,8 @@
  * Copyright(c) 2019-2025 Intel Corporation. All rights reserved.
  */
 
-#ifndef _XE_NVM_H_
-#define _XE_NVM_H_
+#ifndef __XE_NVM_H__
+#define __XE_NVM_H__
 
 struct xe_device;
 

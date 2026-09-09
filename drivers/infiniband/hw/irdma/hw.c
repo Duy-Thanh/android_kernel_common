@@ -235,7 +235,8 @@ static void irdma_complete_cqp_request(struct irdma_cqp *cqp,
 				       struct irdma_cqp_request *cqp_request)
 {
 	if (cqp_request->waiting) {
-		complete_all(&cqp_request->comp);
+		WRITE_ONCE(cqp_request->request_done, true);
+		wake_up(&cqp_request->waitq);
 	} else if (cqp_request->callback_fcn) {
 		cqp_request->callback_fcn(cqp_request);
 	}
@@ -1106,9 +1107,9 @@ static int irdma_create_cqp(struct irdma_pci_f *rf)
 	INIT_LIST_HEAD(&cqp->cqp_avail_reqs);
 	INIT_LIST_HEAD(&cqp->cqp_pending_reqs);
 
-	/* init the completion of the cqp_requests and add them to the list */
+	/* init the waitqueue of the cqp_requests and add them to the list */
 	for (i = 0; i < sqsize; i++) {
-		init_completion(&cqp->cqp_requests[i].comp);
+		init_waitqueue_head(&cqp->cqp_requests[i].waitq);
 		list_add_tail(&cqp->cqp_requests[i].list, &cqp->cqp_avail_reqs);
 	}
 	init_waitqueue_head(&cqp->remove_wq);

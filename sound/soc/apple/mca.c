@@ -307,7 +307,7 @@ static bool mca_fe_clocks_in_use(struct mca_cluster *cl)
 	struct mca_cluster *be_cl;
 	int stream, i;
 
-	guard(mutex)(&mca->port_mutex);
+	mutex_lock(&mca->port_mutex);
 	for (i = 0; i < mca->nclusters; i++) {
 		be_cl = &mca->clusters[i];
 
@@ -316,10 +316,12 @@ static bool mca_fe_clocks_in_use(struct mca_cluster *cl)
 
 		for_each_pcm_streams(stream) {
 			if (be_cl->clocks_in_use[stream]) {
+				mutex_unlock(&mca->port_mutex);
 				return true;
 			}
 		}
 	}
+	mutex_unlock(&mca->port_mutex);
 	return false;
 }
 
@@ -763,8 +765,9 @@ static int mca_be_startup(struct snd_pcm_substream *substream,
 		       cl->base + REG_PORT_CLOCK_SEL);
 	writel_relaxed(PORT_DATA_SEL_TXA(fe_cl->no),
 		       cl->base + REG_PORT_DATA_SEL);
-	scoped_guard(mutex, &mca->port_mutex)
-		cl->port_driver = fe_cl->no;
+	mutex_lock(&mca->port_mutex);
+	cl->port_driver = fe_cl->no;
+	mutex_unlock(&mca->port_mutex);
 	cl->port_started[substream->stream] = true;
 
 	return 0;
@@ -785,8 +788,9 @@ static void mca_be_shutdown(struct snd_pcm_substream *substream,
 		 */
 		writel_relaxed(0, cl->base + REG_PORT_ENABLES);
 		writel_relaxed(0, cl->base + REG_PORT_DATA_SEL);
-		scoped_guard(mutex, &mca->port_mutex)
-			cl->port_driver = -1;
+		mutex_lock(&mca->port_mutex);
+		cl->port_driver = -1;
+		mutex_unlock(&mca->port_mutex);
 	}
 }
 

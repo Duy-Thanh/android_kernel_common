@@ -589,7 +589,6 @@ static int alloc_carmine_fb(void __iomem *regs, void __iomem *smem_base,
 	return 0;
 
 err_dealloc_cmap:
-	fb_destroy_modelist(&info->modelist);
 	fb_dealloc_cmap(&info->cmap);
 err_free_fb:
 	framebuffer_release(info);
@@ -754,8 +753,9 @@ static void carminefb_remove(struct pci_dev *dev)
 
 #define PCI_VENDOR_ID_FUJITU_LIMITED 0x10cf
 static struct pci_device_id carmine_devices[] = {
-	{ PCI_DEVICE(PCI_VENDOR_ID_FUJITU_LIMITED, 0x202b) },
-	{ }
+{
+	PCI_DEVICE(PCI_VENDOR_ID_FUJITU_LIMITED, 0x202b)},
+	{0, 0, 0, 0, 0, 0, 0}
 };
 
 MODULE_DEVICE_TABLE(pci, carmine_devices);

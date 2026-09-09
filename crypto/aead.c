@@ -136,11 +136,13 @@ static int crypto_aead_init_tfm(struct crypto_tfm *tfm)
 static int __maybe_unused crypto_aead_report(
 	struct sk_buff *skb, struct crypto_alg *alg)
 {
+	struct crypto_report_aead raead;
 	struct aead_alg *aead = container_of(alg, struct aead_alg, base);
-	struct crypto_report_aead raead = {
-		.type = "aead",
-		.geniv = "<none>",
-	};
+
+	memset(&raead, 0, sizeof(raead));
+
+	strscpy(raead.type, "aead", sizeof(raead.type));
+	strscpy(raead.geniv, "<none>", sizeof(raead.geniv));
 
 	raead.blocksize = alg->cra_blocksize;
 	raead.maxauthsize = aead->maxauthsize;

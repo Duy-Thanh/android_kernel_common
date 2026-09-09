@@ -143,6 +143,7 @@ static int spdif_trigger(struct snd_pcm_substream *substream, int cmd,
 {
 	struct snd_soc_pcm_runtime *rtd = snd_soc_substream_to_rtd(substream);
 	struct samsung_spdif_info *spdif = to_info(snd_soc_rtd_to_cpu(rtd, 0));
+	unsigned long flags;
 
 	dev_dbg(spdif->dev, "Entered %s\n", __func__);
 
@@ -150,14 +151,16 @@ static int spdif_trigger(struct snd_pcm_substream *substream, int cmd,
 	case SNDRV_PCM_TRIGGER_START:
 	case SNDRV_PCM_TRIGGER_RESUME:
 	case SNDRV_PCM_TRIGGER_PAUSE_RELEASE:
-		scoped_guard(spinlock_irqsave, &spdif->lock)
-			spdif_snd_txctrl(spdif, 1);
+		spin_lock_irqsave(&spdif->lock, flags);
+		spdif_snd_txctrl(spdif, 1);
+		spin_unlock_irqrestore(&spdif->lock, flags);
 		break;
 	case SNDRV_PCM_TRIGGER_STOP:
 	case SNDRV_PCM_TRIGGER_SUSPEND:
 	case SNDRV_PCM_TRIGGER_PAUSE_PUSH:
-		scoped_guard(spinlock_irqsave, &spdif->lock)
-			spdif_snd_txctrl(spdif, 0);
+		spin_lock_irqsave(&spdif->lock, flags);
+		spdif_snd_txctrl(spdif, 0);
+		spin_unlock_irqrestore(&spdif->lock, flags);
 		break;
 	default:
 		return -EINVAL;
@@ -179,6 +182,7 @@ static int spdif_hw_params(struct snd_pcm_substream *substream,
 	void __iomem *regs = spdif->regs;
 	struct snd_dmaengine_dai_dma_data *dma_data;
 	u32 con, clkcon, cstas;
+	unsigned long flags;
 	int i, ratio;
 
 	dev_dbg(spdif->dev, "Entered %s\n", __func__);
@@ -192,7 +196,7 @@ static int spdif_hw_params(struct snd_pcm_substream *substream,
 
 	snd_soc_dai_set_dma_data(snd_soc_rtd_to_cpu(rtd, 0), substream, dma_data);
 
-	guard(spinlock_irqsave)(&spdif->lock);
+	spin_lock_irqsave(&spdif->lock, flags);
 
 	con = readl(regs + CON) & CON_MASK;
 	cstas = readl(regs + CSTAS) & CSTAS_MASK;
@@ -210,7 +214,7 @@ static int spdif_hw_params(struct snd_pcm_substream *substream,
 		break;
 	default:
 		dev_err(spdif->dev, "Unsupported data size.\n");
-		return -EINVAL;
+		goto err;
 	}
 
 	ratio = spdif->clk_rate / params_rate(params);
@@ -220,7 +224,7 @@ static int spdif_hw_params(struct snd_pcm_substream *substream,
 	if (i == ARRAY_SIZE(spdif_sysclk_ratios)) {
 		dev_err(spdif->dev, "Invalid clock ratio %ld/%d\n",
 				spdif->clk_rate, params_rate(params));
-		return -EINVAL;
+		goto err;
 	}
 
 	con &= ~CON_MCLKDIV_MASK;
@@ -253,7 +257,7 @@ static int spdif_hw_params(struct snd_pcm_substream *substream,
 	default:
 		dev_err(spdif->dev, "Invalid sampling rate %d\n",
 				params_rate(params));
-		return -EINVAL;
+		goto err;
 	}
 
 	cstas &= ~CSTAS_CATEGORY_MASK;
@@ -264,7 +268,12 @@ static int spdif_hw_params(struct snd_pcm_substream *substream,
 	writel(cstas, regs + CSTAS);
 	writel(clkcon, regs + CLKCON);
 
+	spin_unlock_irqrestore(&spdif->lock, flags);
+
 	return 0;
+err:
+	spin_unlock_irqrestore(&spdif->lock, flags);
+	return -EINVAL;
 }
 
 static void spdif_shutdown(struct snd_pcm_substream *substream,

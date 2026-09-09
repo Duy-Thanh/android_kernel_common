@@ -18,6 +18,8 @@
 
 char _license[] SEC("license") = "GPL";
 
+const volatile u32 nr_cpus = 32;	/* !0 for veristat, set during init */
+
 UEI_DEFINE(uei);
 
 /*

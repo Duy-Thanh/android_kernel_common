@@ -53,7 +53,6 @@ void ksmbd_free_work_struct(struct ksmbd_work *work)
 	}
 
 	kfree(work->tr_buf);
-	kvfree(work->compress_buf);
 	kvfree(work->request_buf);
 	kfree(work->iov);
 

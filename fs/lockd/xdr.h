@@ -20,6 +20,8 @@ struct nsm_private {
 	unsigned char		data[SM_PRIV_SIZE];
 };
 
+struct svc_rqst;
+
 #define NLM_MAXCOOKIELEN    	32
 #define NLM_MAXSTRLEN		1024
 
@@ -30,7 +32,7 @@ struct nsm_private {
 #define	nlm_lck_denied_grace_period	cpu_to_be32(NLM_LCK_DENIED_GRACE_PERIOD)
 
 /* Lock info passed via NLM */
-struct lockd_lock {
+struct nlm_lock {
 	char *			caller;
 	unsigned int		len; 	/* length of "caller" */
 	struct nfs_fh		fh;
@@ -47,7 +49,8 @@ struct lockd_lock {
  *	32 bytes.
  */
 
-struct lockd_cookie {
+struct nlm_cookie
+{
 	unsigned char data[NLM_MAXCOOKIELEN];
 	unsigned int len;
 };
@@ -55,31 +58,49 @@ struct lockd_cookie {
 /*
  * Generic lockd arguments for all but sm_notify
  */
-struct lockd_args {
-	struct lockd_cookie	cookie;
-	struct lockd_lock	lock;
+struct nlm_args {
+	struct nlm_cookie	cookie;
+	struct nlm_lock		lock;
 	u32			block;
 	u32			reclaim;
 	u32			state;
+	u32			monitor;
+	u32			fsm_access;
+	u32			fsm_mode;
 };
 
 /*
  * Generic lockd result
  */
-struct lockd_res {
-	struct lockd_cookie	cookie;
+struct nlm_res {
+	struct nlm_cookie	cookie;
 	__be32			status;
-	struct lockd_lock	lock;
+	struct nlm_lock		lock;
 };
 
 /*
  * statd callback when client has rebooted
  */
-struct lockd_reboot {
+struct nlm_reboot {
 	char			*mon;
 	unsigned int		len;
 	u32			state;
 	struct nsm_private	priv;
 };
+
+bool	nlmsvc_decode_void(struct svc_rqst *rqstp, struct xdr_stream *xdr);
+bool	nlmsvc_decode_testargs(struct svc_rqst *rqstp, struct xdr_stream *xdr);
+bool	nlmsvc_decode_lockargs(struct svc_rqst *rqstp, struct xdr_stream *xdr);
+bool	nlmsvc_decode_cancargs(struct svc_rqst *rqstp, struct xdr_stream *xdr);
+bool	nlmsvc_decode_unlockargs(struct svc_rqst *rqstp, struct xdr_stream *xdr);
+bool	nlmsvc_decode_res(struct svc_rqst *rqstp, struct xdr_stream *xdr);
+bool	nlmsvc_decode_reboot(struct svc_rqst *rqstp, struct xdr_stream *xdr);
+bool	nlmsvc_decode_shareargs(struct svc_rqst *rqstp, struct xdr_stream *xdr);
+bool	nlmsvc_decode_notify(struct svc_rqst *rqstp, struct xdr_stream *xdr);
+
+bool	nlmsvc_encode_testres(struct svc_rqst *rqstp, struct xdr_stream *xdr);
+bool	nlmsvc_encode_res(struct svc_rqst *rqstp, struct xdr_stream *xdr);
+bool	nlmsvc_encode_void(struct svc_rqst *rqstp, struct xdr_stream *xdr);
+bool	nlmsvc_encode_shareres(struct svc_rqst *rqstp, struct xdr_stream *xdr);
 
 #endif /* _LOCKD_XDR_H */

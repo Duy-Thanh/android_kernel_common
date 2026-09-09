@@ -35,8 +35,7 @@
 #define RTIWWDRXCTRL	0xa4
 #define RTIWWDSIZECTRL	0xa8
 
-#define RTIWWDRXN_RST	0x5
-#define RTIWWDRXN_NMI	0xa
+#define RTIWWDRX_NMI	0xa
 
 #define RTIWWDSIZE_50P		0x50
 #define RTIWWDSIZE_25P		0x500
@@ -64,29 +63,22 @@
 
 static int heartbeat;
 
-struct rti_wdt_data {
-	bool nmi;
-};
-
 /*
  * struct to hold data for each WDT device
  * @base - base io address of WD device
  * @freq - source clock frequency of WDT
  * @wdd  - hold watchdog device as is in WDT core
- * @nmi - Set if this WDT instance supports generating NMI
  */
 struct rti_wdt_device {
 	void __iomem		*base;
 	unsigned long		freq;
 	struct watchdog_device	wdd;
-	bool			nmi;
 };
 
 static int rti_wdt_start(struct watchdog_device *wdd)
 {
 	u32 timer_margin;
 	struct rti_wdt_device *wdt = watchdog_get_drvdata(wdd);
-	u8 reaction;
 	int ret;
 
 	ret = pm_runtime_resume_and_get(wdd->parent);
@@ -109,13 +101,8 @@ static int rti_wdt_start(struct watchdog_device *wdd)
 	 */
 	wdd->min_hw_heartbeat_ms = 520 * wdd->timeout + MAX_HW_ERROR;
 
-	/* When WDT expires, generate NMI or reset if NMI not supported */
-	if (wdt->nmi)
-		reaction = RTIWWDRXN_NMI;
-	else
-		reaction = RTIWWDRXN_RST;
-
-	writel_relaxed(reaction, wdt->base + RTIWWDRXCTRL);
+	/* Generate NMI when wdt expires */
+	writel_relaxed(RTIWWDRX_NMI, wdt->base + RTIWWDRXCTRL);
 
 	/* Open window size 50%; this is the largest window size available */
 	writel_relaxed(RTIWWDSIZE_50P, wdt->base + RTIWWDSIZECTRL);
@@ -223,7 +210,6 @@ static int rti_wdt_probe(struct platform_device *pdev)
 {
 	int ret = 0;
 	struct device *dev = &pdev->dev;
-	const struct rti_wdt_data *data;
 	struct watchdog_device *wdd;
 	struct rti_wdt_device *wdt;
 	struct clk *clk;
@@ -267,14 +253,6 @@ static int rti_wdt_probe(struct platform_device *pdev)
 		wdt->freq * 1000;
 	wdd->timeout = DEFAULT_HEARTBEAT;
 	wdd->parent = dev;
-
-	data = device_get_match_data(dev);
-	if (!data) {
-		ret = -ENODEV;
-		goto err_iomap;
-	}
-
-	wdt->nmi = data->nmi;
 
 	watchdog_set_drvdata(wdd, wdt);
 	watchdog_set_nowayout(wdd, 1);
@@ -383,17 +361,8 @@ static void rti_wdt_remove(struct platform_device *pdev)
 	pm_runtime_disable(&pdev->dev);
 }
 
-static const struct rti_wdt_data rti_wdt_j7_data = {
-	.nmi = true,
-};
-
-static const struct rti_wdt_data rti_wdt_am62l_data = {
-	.nmi = false,
-};
-
 static const struct of_device_id rti_wdt_of_match[] = {
-	{ .compatible = "ti,j7-rti-wdt", .data = &rti_wdt_j7_data },
-	{ .compatible = "ti,am62l-rti-wdt", .data = &rti_wdt_am62l_data },
+	{ .compatible = "ti,j7-rti-wdt", },
 	{},
 };
 MODULE_DEVICE_TABLE(of, rti_wdt_of_match);

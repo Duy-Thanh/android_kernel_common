@@ -3,8 +3,8 @@
  * Copyright(c) 2024, Intel Corporation. All rights reserved.
  */
 
-#ifndef _XE_PXP_SUBMIT_H_
-#define _XE_PXP_SUBMIT_H_
+#ifndef __XE_PXP_SUBMIT_H__
+#define __XE_PXP_SUBMIT_H__
 
 #include <linux/types.h>
 
@@ -19,4 +19,4 @@ int xe_pxp_submit_session_termination(struct xe_pxp *pxp, u32 id);
 int xe_pxp_submit_session_invalidation(struct xe_pxp_gsc_client_resources *gsc_res,
 				       u32 id);
 
-#endif /* _XE_PXP_SUBMIT_H_ */
+#endif /* __XE_PXP_SUBMIT_H__ */

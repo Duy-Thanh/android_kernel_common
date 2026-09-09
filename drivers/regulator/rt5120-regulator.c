@@ -401,8 +401,8 @@ static int rt5120_regulator_probe(struct platform_device *pdev)
 }
 
 static const struct platform_device_id rt5120_regulator_dev_table[] = {
-	{ .name = "rt5120-regulator" },
-	{ }
+	{ "rt5120-regulator", 0 },
+	{}
 };
 MODULE_DEVICE_TABLE(platform, rt5120_regulator_dev_table);
 

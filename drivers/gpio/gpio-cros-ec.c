@@ -196,8 +196,8 @@ static int cros_ec_gpio_probe(struct platform_device *pdev)
 }
 
 static const struct platform_device_id cros_ec_gpio_id[] = {
-	{ .name = "cros-ec-gpio" },
-	{ }
+	{ "cros-ec-gpio", 0 },
+	{}
 };
 MODULE_DEVICE_TABLE(platform, cros_ec_gpio_id);
 

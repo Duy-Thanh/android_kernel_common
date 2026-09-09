@@ -135,8 +135,9 @@ static int img_spdif_out_get_status(struct snd_kcontrol *kcontrol,
 	struct snd_soc_dai *cpu_dai = snd_kcontrol_chip(kcontrol);
 	struct img_spdif_out *spdif = snd_soc_dai_get_drvdata(cpu_dai);
 	u32 reg;
+	unsigned long flags;
 
-	guard(spinlock_irqsave)(&spdif->lock);
+	spin_lock_irqsave(&spdif->lock, flags);
 
 	reg = img_spdif_out_readl(spdif, IMG_SPDIF_OUT_CSL);
 	ucontrol->value.iec958.status[0] = reg & 0xff;
@@ -149,6 +150,8 @@ static int img_spdif_out_get_status(struct snd_kcontrol *kcontrol,
 		(reg & IMG_SPDIF_OUT_CSH_UV_CSH_MASK) >>
 		IMG_SPDIF_OUT_CSH_UV_CSH_SHIFT;
 
+	spin_unlock_irqrestore(&spdif->lock, flags);
+
 	return 0;
 }
 
@@ -158,13 +161,14 @@ static int img_spdif_out_set_status(struct snd_kcontrol *kcontrol,
 	struct snd_soc_dai *cpu_dai = snd_kcontrol_chip(kcontrol);
 	struct img_spdif_out *spdif = snd_soc_dai_get_drvdata(cpu_dai);
 	u32 reg;
+	unsigned long flags;
 
 	reg = ((u32)ucontrol->value.iec958.status[3] << 24);
 	reg |= ((u32)ucontrol->value.iec958.status[2] << 16);
 	reg |= ((u32)ucontrol->value.iec958.status[1] << 8);
 	reg |= (u32)ucontrol->value.iec958.status[0];
 
-	guard(spinlock_irqsave)(&spdif->lock);
+	spin_lock_irqsave(&spdif->lock, flags);
 
 	img_spdif_out_writel(spdif, reg, IMG_SPDIF_OUT_CSL);
 
@@ -173,6 +177,8 @@ static int img_spdif_out_set_status(struct snd_kcontrol *kcontrol,
 	reg |= (u32)ucontrol->value.iec958.status[4] <<
 			IMG_SPDIF_OUT_CSH_UV_CSH_SHIFT;
 	img_spdif_out_writel(spdif, reg, IMG_SPDIF_OUT_CSH_UV);
+
+	spin_unlock_irqrestore(&spdif->lock, flags);
 
 	return 0;
 }
@@ -199,6 +205,7 @@ static int img_spdif_out_trigger(struct snd_pcm_substream *substream, int cmd,
 {
 	struct img_spdif_out *spdif = snd_soc_dai_get_drvdata(dai);
 	u32 reg;
+	unsigned long flags;
 
 	switch (cmd) {
 	case SNDRV_PCM_TRIGGER_START:
@@ -211,8 +218,9 @@ static int img_spdif_out_trigger(struct snd_pcm_substream *substream, int cmd,
 	case SNDRV_PCM_TRIGGER_STOP:
 	case SNDRV_PCM_TRIGGER_SUSPEND:
 	case SNDRV_PCM_TRIGGER_PAUSE_PUSH:
-		scoped_guard(spinlock_irqsave, &spdif->lock)
-			img_spdif_out_reset(spdif);
+		spin_lock_irqsave(&spdif->lock, flags);
+		img_spdif_out_reset(spdif);
+		spin_unlock_irqrestore(&spdif->lock, flags);
 		break;
 	default:
 		return -EINVAL;

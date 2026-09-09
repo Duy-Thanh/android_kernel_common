@@ -978,10 +978,10 @@ static void ir_remove(struct i2c_client *client)
 
 static const struct i2c_device_id ir_kbd_id[] = {
 	/* Generic entry for any IR receiver */
-	{ .name = "ir_video", .driver_data = 0 },
+	{ "ir_video", 0 },
 	/* IR device specific entries should be added here */
-	{ .name = "ir_z8f0811_haup", .driver_data = FLAG_TX },
-	{ .name = "ir_z8f0811_hdpvr", .driver_data = FLAG_TX | FLAG_HDPVR },
+	{ "ir_z8f0811_haup", FLAG_TX },
+	{ "ir_z8f0811_hdpvr", FLAG_TX | FLAG_HDPVR },
 	{ }
 };
 MODULE_DEVICE_TABLE(i2c, ir_kbd_id);

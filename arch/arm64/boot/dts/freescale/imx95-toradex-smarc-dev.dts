@@ -210,11 +210,6 @@
 	status = "okay";
 };
 
-/* SMARC SER2 */
-&lpuart6 {
-	status = "okay";
-};
-
 /* SMARC MDIO, shared between all ethernet ports */
 &netc_emdio {
 	status = "okay";

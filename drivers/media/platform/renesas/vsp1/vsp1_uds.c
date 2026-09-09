@@ -199,12 +199,15 @@ static int uds_set_format(struct v4l2_subdev *subdev,
 	struct vsp1_uds *uds = to_uds(subdev);
 	struct v4l2_subdev_state *state;
 	struct v4l2_mbus_framefmt *format;
+	int ret = 0;
 
-	guard(mutex)(&uds->entity.lock);
+	mutex_lock(&uds->entity.lock);
 
 	state = vsp1_entity_get_state(&uds->entity, sd_state, fmt->which);
-	if (!state)
-		return -EINVAL;
+	if (!state) {
+		ret = -EINVAL;
+		goto done;
+	}
 
 	uds_try_format(uds, state, fmt->pad, &fmt->format);
 
@@ -219,7 +222,9 @@ static int uds_set_format(struct v4l2_subdev *subdev,
 		uds_try_format(uds, state, UDS_PAD_SOURCE, format);
 	}
 
-	return 0;
+done:
+	mutex_unlock(&uds->entity.lock);
+	return ret;
 }
 
 /* -----------------------------------------------------------------------------

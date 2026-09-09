@@ -78,7 +78,8 @@ struct dentry *simple_lookup(struct inode *dir, struct dentry *dentry, unsigned 
 	if (IS_ENABLED(CONFIG_UNICODE) && IS_CASEFOLDED(dir))
 		return NULL;
 
-	return d_splice_alias(NULL, dentry);
+	d_add(dentry, NULL);
+	return NULL;
 }
 EXPORT_SYMBOL(simple_lookup);
 

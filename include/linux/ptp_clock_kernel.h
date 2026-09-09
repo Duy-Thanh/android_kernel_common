@@ -12,7 +12,6 @@
 #include <linux/pps_kernel.h>
 #include <linux/ptp_clock.h>
 #include <linux/timecounter.h>
-#include <linux/timekeeping.h>
 #include <linux/skbuff.h>
 
 #define PTP_CLOCK_NAME_LEN	32
@@ -46,13 +45,13 @@ struct system_device_crosststamp;
 
 /**
  * struct ptp_system_timestamp - system time corresponding to a PHC timestamp
- * @pre_sts:	system time snapshot before capturing PHC
- * @post_sts:	system time snapshot after capturing PHC
- * @clockid:	clock-base used for capturing the system timestamps
+ * @pre_ts: system timestamp before capturing PHC
+ * @post_ts: system timestamp after capturing PHC
+ * @clockid: clock-base used for capturing the system timestamps
  */
 struct ptp_system_timestamp {
-	struct system_time_snapshot pre_sts;
-	struct system_time_snapshot post_sts;
+	struct timespec64 pre_ts;
+	struct timespec64 post_ts;
 	clockid_t clockid;
 };
 
@@ -511,13 +510,13 @@ static inline ktime_t ptp_convert_timestamp(const ktime_t *hwtstamp,
 static inline void ptp_read_system_prets(struct ptp_system_timestamp *sts)
 {
 	if (sts)
-		ktime_get_snapshot_id(sts->clockid, &sts->pre_sts);
+		ktime_get_clock_ts64(sts->clockid, &sts->pre_ts);
 }
 
 static inline void ptp_read_system_postts(struct ptp_system_timestamp *sts)
 {
 	if (sts)
-		ktime_get_snapshot_id(sts->clockid, &sts->post_sts);
+		ktime_get_clock_ts64(sts->clockid, &sts->post_ts);
 }
 
 #endif

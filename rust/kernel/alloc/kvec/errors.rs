@@ -2,10 +2,8 @@
 
 //! Errors for the [`Vec`] type.
 
-use crate::{
-    fmt,
-    prelude::*, //
-};
+use kernel::fmt;
+use kernel::prelude::*;
 
 /// Error type for [`Vec::push_within_capacity`].
 pub struct PushError<T>(pub T);

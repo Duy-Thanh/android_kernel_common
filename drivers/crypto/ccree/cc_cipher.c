@@ -3,7 +3,6 @@
 
 #include <linux/kernel.h>
 #include <linux/module.h>
-#include <linux/string.h>
 #include <crypto/algapi.h>
 #include <crypto/internal/skcipher.h>
 #include <crypto/internal/des.h>
@@ -1387,9 +1386,11 @@ static struct cc_crypto_alg *cc_create_alg(const struct cc_alg_template *tmpl,
 
 	memcpy(alg, &tmpl->template_skcipher, sizeof(*alg));
 
-	if (strscpy(alg->base.cra_name, tmpl->name) < 0)
+	if (snprintf(alg->base.cra_name, CRYPTO_MAX_ALG_NAME, "%s",
+		     tmpl->name) >= CRYPTO_MAX_ALG_NAME)
 		return ERR_PTR(-EINVAL);
-	if (strscpy(alg->base.cra_driver_name, tmpl->driver_name) < 0)
+	if (snprintf(alg->base.cra_driver_name, CRYPTO_MAX_ALG_NAME, "%s",
+		     tmpl->driver_name) >= CRYPTO_MAX_ALG_NAME)
 		return ERR_PTR(-EINVAL);
 
 	alg->base.cra_module = THIS_MODULE;

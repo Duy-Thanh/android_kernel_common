@@ -88,10 +88,10 @@ static struct vxlan_sock *vxlan_find_sock(struct net *net, sa_family_t family,
 	flags &= VXLAN_F_RCV_FLAGS;
 
 	hlist_for_each_entry_rcu(vs, vs_head(net, port), hlist) {
-		if (inet_sk(vs->sk)->inet_sport == port &&
+		if (inet_sk(vs->sock->sk)->inet_sport == port &&
 		    vxlan_get_sk_family(vs) == family &&
 		    vs->flags == flags &&
-		    vs->sk->sk_bound_dev_if == ifindex)
+		    vs->sock->sk->sk_bound_dev_if == ifindex)
 			return vs;
 	}
 	return NULL;
@@ -657,17 +657,13 @@ static struct vxlanhdr *vxlan_gro_prepare_receive(struct sock *sk,
 						  struct sk_buff *skb,
 						  struct gro_remcsum *grc)
 {
+	struct sk_buff *p;
 	struct vxlanhdr *vh, *vh2;
 	unsigned int hlen, off_vx;
-	struct vxlan_sock *vs;
-	struct sk_buff *p;
+	struct vxlan_sock *vs = rcu_dereference_sk_user_data(sk);
 	__be32 flags;
 
 	skb_gro_remcsum_init(grc);
-
-	vs = rcu_dereference_sk_user_data(sk);
-	if (!vs)
-		return NULL;
 
 	off_vx = skb_gro_offset(skb);
 	hlen = off_vx + sizeof(*vh);
@@ -1497,7 +1493,7 @@ static bool __vxlan_sock_release_prep(struct vxlan_sock *vs)
 		return false;
 
 	hlist_del_rcu(&vs->hlist);
-	udp_tunnel_notify_del_rx_port(vs->sk,
+	udp_tunnel_notify_del_rx_port(vs->sock,
 				      (vs->flags & VXLAN_F_GPE) ?
 				      UDP_TUNNEL_TYPE_VXLAN_GPE :
 				      UDP_TUNNEL_TYPE_VXLAN);
@@ -1515,6 +1511,7 @@ static void vxlan_sock_release(struct vxlan_dev *vxlan)
 #endif
 
 	RCU_INIT_POINTER(vxlan->vn4_sock, NULL);
+	synchronize_net();
 
 	if (vxlan->cfg.flags & VXLAN_F_VNIFILTER)
 		vxlan_vs_del_vnigrp(vxlan);
@@ -1522,14 +1519,14 @@ static void vxlan_sock_release(struct vxlan_dev *vxlan)
 		vxlan_vs_del_dev(vxlan);
 
 	if (__vxlan_sock_release_prep(sock4)) {
-		udp_tunnel_sock_release(sock4->sk);
-		kfree_rcu(sock4, rcu);
+		udp_tunnel_sock_release(sock4->sock);
+		kfree(sock4);
 	}
 
 #if IS_ENABLED(CONFIG_IPV6)
 	if (__vxlan_sock_release_prep(sock6)) {
-		udp_tunnel_sock_release(sock6->sk);
-		kfree_rcu(sock6, rcu);
+		udp_tunnel_sock_release(sock6->sock);
+		kfree(sock6);
 	}
 #endif
 }
@@ -2476,7 +2473,7 @@ void vxlan_xmit_one(struct sk_buff *skb, struct net_device *dev,
 		}
 
 		if (!ifindex)
-			ifindex = sock4->sk->sk_bound_dev_if;
+			ifindex = sock4->sock->sk->sk_bound_dev_if;
 
 		rt = udp_tunnel_dst_lookup(skb, dev, vxlan->net, ifindex,
 					   &saddr, pkey, src_port, dst_port,
@@ -2543,7 +2540,7 @@ void vxlan_xmit_one(struct sk_buff *skb, struct net_device *dev,
 			goto tx_error;
 		}
 
-		udp_tunnel_xmit_skb(rt, sock4->sk, skb, saddr,
+		udp_tunnel_xmit_skb(rt, sock4->sock->sk, skb, saddr,
 				    pkey->u.ipv4.dst, tos, ttl, df,
 				    src_port, dst_port, xnet, !udp_sum,
 				    ipcb_flags);
@@ -2560,9 +2557,9 @@ void vxlan_xmit_one(struct sk_buff *skb, struct net_device *dev,
 		}
 
 		if (!ifindex)
-			ifindex = sock6->sk->sk_bound_dev_if;
+			ifindex = sock6->sock->sk->sk_bound_dev_if;
 
-		ndst = udp_tunnel6_dst_lookup(skb, dev, vxlan->net, sock6->sk,
+		ndst = udp_tunnel6_dst_lookup(skb, dev, vxlan->net, sock6->sock,
 					      ifindex, &saddr, pkey,
 					      src_port, dst_port, tos,
 					      use_cache ? dst_cache : NULL);
@@ -2618,7 +2615,7 @@ void vxlan_xmit_one(struct sk_buff *skb, struct net_device *dev,
 			goto tx_error;
 		}
 
-		udp_tunnel6_xmit_skb(ndst, sock6->sk, skb, dev,
+		udp_tunnel6_xmit_skb(ndst, sock6->sock->sk, skb, dev,
 				     &saddr, &pkey->u.ipv6.dst, tos, ttl,
 				     pkey->label, src_port, dst_port, !udp_sum,
 				     ip6cb_flags);
@@ -3257,7 +3254,7 @@ static int vxlan_fill_metadata_dst(struct net_device *dev, struct sk_buff *skb)
 		if (!sock6)
 			return -EIO;
 
-		ndst = udp_tunnel6_dst_lookup(skb, dev, vxlan->net, sock6->sk,
+		ndst = udp_tunnel6_dst_lookup(skb, dev, vxlan->net, sock6->sock,
 					      0, &info->key.u.ipv6.src,
 					      &info->key,
 					      sport, dport, info->key.tos,
@@ -3335,9 +3332,9 @@ static void vxlan_offload_rx_ports(struct net_device *dev, bool push)
 				type = UDP_TUNNEL_TYPE_VXLAN;
 
 			if (push)
-				udp_tunnel_push_rx_port(dev, vs->sk, type);
+				udp_tunnel_push_rx_port(dev, vs->sock, type);
 			else
-				udp_tunnel_drop_rx_port(dev, vs->sk, type);
+				udp_tunnel_drop_rx_port(dev, vs->sock, type);
 		}
 	}
 }
@@ -3543,8 +3540,8 @@ static const struct ethtool_ops vxlan_ethtool_ops = {
 	.get_link_ksettings	= vxlan_get_link_ksettings,
 };
 
-static struct sock *vxlan_create_sock(struct net *net, bool ipv6,
-				      __be16 port, u32 flags, int ifindex)
+static struct socket *vxlan_create_sock(struct net *net, bool ipv6,
+					__be16 port, u32 flags, int ifindex)
 {
 	struct socket *sock;
 	struct udp_port_cfg udp_conf;
@@ -3570,7 +3567,7 @@ static struct sock *vxlan_create_sock(struct net *net, bool ipv6,
 		return ERR_PTR(err);
 
 	udp_allow_gso(sock->sk);
-	return sock->sk;
+	return sock;
 }
 
 /* Create new listen socket if needed */
@@ -3578,10 +3575,10 @@ static struct vxlan_sock *vxlan_socket_create(struct net *net, bool ipv6,
 					      __be16 port, u32 flags,
 					      int ifindex)
 {
-	struct udp_tunnel_sock_cfg tunnel_cfg;
 	struct vxlan_sock *vs;
-	struct sock *sk;
+	struct socket *sock;
 	unsigned int h;
+	struct udp_tunnel_sock_cfg tunnel_cfg;
 
 	ASSERT_RTNL();
 
@@ -3592,18 +3589,18 @@ static struct vxlan_sock *vxlan_socket_create(struct net *net, bool ipv6,
 	for (h = 0; h < VNI_HASH_SIZE; ++h)
 		INIT_HLIST_HEAD(&vs->vni_list[h]);
 
-	sk = vxlan_create_sock(net, ipv6, port, flags, ifindex);
-	if (IS_ERR(sk)) {
+	sock = vxlan_create_sock(net, ipv6, port, flags, ifindex);
+	if (IS_ERR(sock)) {
 		kfree(vs);
-		return ERR_CAST(sk);
+		return ERR_CAST(sock);
 	}
 
-	vs->sk = sk;
+	vs->sock = sock;
 	refcount_set(&vs->refcnt, 1);
 	vs->flags = (flags & VXLAN_F_RCV_FLAGS);
 
 	hlist_add_head_rcu(&vs->hlist, vs_head(net, port));
-	udp_tunnel_notify_add_rx_port(sk,
+	udp_tunnel_notify_add_rx_port(sock,
 				      (vs->flags & VXLAN_F_GPE) ?
 				      UDP_TUNNEL_TYPE_VXLAN_GPE :
 				      UDP_TUNNEL_TYPE_VXLAN);
@@ -3623,7 +3620,7 @@ static struct vxlan_sock *vxlan_socket_create(struct net *net, bool ipv6,
 		tunnel_cfg.gro_complete = vxlan_gro_complete;
 	}
 
-	setup_udp_tunnel_sock(net, sk, &tunnel_cfg);
+	setup_udp_tunnel_sock(net, sock, &tunnel_cfg);
 
 	return vs;
 }

@@ -492,7 +492,7 @@ static void hbg_shutdown(struct pci_dev *pdev)
 }
 
 static const struct pci_device_id hbg_pci_tbl[] = {
-	{ PCI_VDEVICE(HUAWEI, 0x3730) },
+	{PCI_VDEVICE(HUAWEI, 0x3730), 0},
 	{ }
 };
 MODULE_DEVICE_TABLE(pci, hbg_pci_tbl);

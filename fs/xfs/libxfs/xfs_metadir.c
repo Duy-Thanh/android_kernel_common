@@ -95,7 +95,7 @@ xfs_metadir_lookup(
 		.hashval	= xfs_dir2_hashname(mp, xname),
 		.whichfork	= XFS_DATA_FORK,
 		.op_flags	= XFS_DA_OP_OKNOENT,
-		.owner		= I_INO(dp),
+		.owner		= dp->i_ino,
 	};
 	int			error;
 

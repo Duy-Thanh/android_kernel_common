@@ -338,7 +338,6 @@ static const struct of_device_id aspeed_lpc_ctrl_match[] = {
 	{ .compatible = "aspeed,ast2600-lpc-ctrl" },
 	{ },
 };
-MODULE_DEVICE_TABLE(of, aspeed_lpc_ctrl_match);
 
 static struct platform_driver aspeed_lpc_ctrl_driver = {
 	.driver = {
@@ -351,6 +350,7 @@ static struct platform_driver aspeed_lpc_ctrl_driver = {
 
 module_platform_driver(aspeed_lpc_ctrl_driver);
 
+MODULE_DEVICE_TABLE(of, aspeed_lpc_ctrl_match);
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Cyril Bur <cyrilbur@gmail.com>");
 MODULE_DESCRIPTION("Control for ASPEED LPC HOST to BMC mappings");

@@ -453,7 +453,14 @@ static void vdpasim_net_free(struct vdpasim *vdpasim)
 	kvfree(net->buffer);
 }
 
-static struct device *vdpasim_net_mgmtdev;
+static void vdpasim_net_mgmtdev_release(struct device *dev)
+{
+}
+
+static struct device vdpasim_net_mgmtdev = {
+	.init_name = "vdpasim_net",
+	.release = vdpasim_net_mgmtdev_release,
+};
 
 static int vdpasim_net_dev_add(struct vdpa_mgmt_dev *mdev, const char *name,
 			       const struct vdpa_dev_set_config *config)
@@ -531,6 +538,7 @@ static struct virtio_device_id id_table[] = {
 };
 
 static struct vdpa_mgmt_dev mgmt_dev = {
+	.device = &vdpasim_net_mgmtdev,
 	.id_table = id_table,
 	.ops = &vdpasim_net_mgmtdev_ops,
 	.config_attr_mask = (1 << VDPA_ATTR_DEV_NET_CFG_MACADDR |
@@ -544,25 +552,26 @@ static int __init vdpasim_net_init(void)
 {
 	int ret;
 
-	vdpasim_net_mgmtdev = root_device_register("vdpasim_net");
-	if (IS_ERR(vdpasim_net_mgmtdev))
-		return PTR_ERR(vdpasim_net_mgmtdev);
+	ret = device_register(&vdpasim_net_mgmtdev);
+	if (ret) {
+		put_device(&vdpasim_net_mgmtdev);
+		return ret;
+	}
 
-	mgmt_dev.device = vdpasim_net_mgmtdev;
 	ret = vdpa_mgmtdev_register(&mgmt_dev);
 	if (ret)
 		goto parent_err;
 	return 0;
 
 parent_err:
-	root_device_unregister(vdpasim_net_mgmtdev);
+	device_unregister(&vdpasim_net_mgmtdev);
 	return ret;
 }
 
 static void __exit vdpasim_net_exit(void)
 {
 	vdpa_mgmtdev_unregister(&mgmt_dev);
-	root_device_unregister(vdpasim_net_mgmtdev);
+	device_unregister(&vdpasim_net_mgmtdev);
 }
 
 module_init(vdpasim_net_init);

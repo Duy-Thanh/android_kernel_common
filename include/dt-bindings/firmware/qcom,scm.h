@@ -35,6 +35,5 @@
 #define QCOM_SCM_VMID_NAV		0x2B
 #define QCOM_SCM_VMID_TVM		0x2D
 #define QCOM_SCM_VMID_OEMVM		0x31
-#define QCOM_SCM_VMID_CP_ADSP_SHARED	0x33
 
 #endif

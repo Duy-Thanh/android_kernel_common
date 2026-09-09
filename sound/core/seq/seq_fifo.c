@@ -101,17 +101,13 @@ int snd_seq_fifo_event_in(struct snd_seq_fifo *f,
 			  struct snd_seq_event *event)
 {
 	struct snd_seq_event_cell *cell;
-	struct snd_seq_pool *pool;
-	bool linked;
 	int err;
 
 	if (snd_BUG_ON(!f))
 		return -EINVAL;
 
 	guard(snd_seq_fifo)(f);
-retry:
-	pool = READ_ONCE(f->pool);
-	err = snd_seq_event_dup(pool, event, &cell, 1, NULL, NULL); /* always non-blocking */
+	err = snd_seq_event_dup(f->pool, event, &cell, 1, NULL, NULL); /* always non-blocking */
 	if (err < 0) {
 		if ((err == -ENOMEM) || (err == -EAGAIN))
 			atomic_inc(&f->overflow);
@@ -119,24 +115,14 @@ retry:
 	}
 		
 	/* append new cells to fifo */
-	linked = false;
 	scoped_guard(spinlock_irqsave, &f->lock) {
-		if (cell->pool == f->pool) {
-			if (f->tail)
-				f->tail->next = cell;
-			f->tail = cell;
-			if (!f->head)
-				f->head = cell;
-			cell->next = NULL;
-			f->cells++;
-			linked = true;
-		}
-	}
-
-	if (!linked) {
-		/* Retry against the replacement pool after resize publishes it. */
-		snd_seq_cell_free(cell);
-		goto retry;
+		if (f->tail != NULL)
+			f->tail->next = cell;
+		f->tail = cell;
+		if (f->head == NULL)
+			f->head = cell;
+		cell->next = NULL;
+		f->cells++;
 	}
 
 	/* wakeup client */
@@ -208,21 +194,13 @@ int snd_seq_fifo_cell_out(struct snd_seq_fifo *f,
 void snd_seq_fifo_cell_putback(struct snd_seq_fifo *f,
 			       struct snd_seq_event_cell *cell)
 {
-	bool linked = false;
-
 	if (cell) {
-		scoped_guard(spinlock_irqsave, &f->lock) {
-			if (cell->pool == f->pool) {
-				cell->next = f->head;
-				f->head = cell;
-				if (!f->tail)
-					f->tail = cell;
-				f->cells++;
-				linked = true;
-			}
-		}
-		if (!linked)
-			snd_seq_cell_free(cell);
+		guard(spinlock_irqsave)(&f->lock);
+		cell->next = f->head;
+		f->head = cell;
+		if (!f->tail)
+			f->tail = cell;
+		f->cells++;
 	}
 }
 
@@ -259,7 +237,7 @@ int snd_seq_fifo_resize(struct snd_seq_fifo *f, int poolsize)
 		oldpool = f->pool;
 		oldhead = f->head;
 		/* exchange pools */
-		WRITE_ONCE(f->pool, newpool);
+		f->pool = newpool;
 		f->head = NULL;
 		f->tail = NULL;
 		f->cells = 0;

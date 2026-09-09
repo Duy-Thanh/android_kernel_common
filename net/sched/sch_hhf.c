@@ -360,7 +360,7 @@ static unsigned int hhf_drop(struct Qdisc *sch, struct sk_buff **to_free)
 	if (bucket->head) {
 		struct sk_buff *skb = dequeue_head(bucket);
 
-		qdisc_qlen_dec(sch);
+		sch->q.qlen--;
 		qdisc_qstats_backlog_dec(sch, skb);
 		qdisc_drop(skb, sch, to_free);
 	}
@@ -400,8 +400,7 @@ static int hhf_enqueue(struct sk_buff *skb, struct Qdisc *sch,
 		}
 		bucket->deficit = weight * q->quantum;
 	}
-	qdisc_qlen_inc(sch);
-	if (sch->q.qlen <= sch->limit)
+	if (++sch->q.qlen <= sch->limit)
 		return NET_XMIT_SUCCESS;
 
 	prev_backlog = sch->qstats.backlog;
@@ -444,7 +443,7 @@ begin:
 
 	if (bucket->head) {
 		skb = dequeue_head(bucket);
-		qdisc_qlen_dec(sch);
+		sch->q.qlen--;
 		qdisc_qstats_backlog_dec(sch, skb);
 	}
 

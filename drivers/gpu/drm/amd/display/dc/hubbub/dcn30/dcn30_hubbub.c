@@ -68,17 +68,17 @@ int hubbub3_init_dchub_sys_ctx(struct hubbub *hubbub,
 	struct dcn_vmid_page_table_config phys_config;
 
 	REG_SET(DCN_VM_FB_LOCATION_BASE, 0,
-			FB_BASE, ADDR_HI24(pa_config->system_aperture.fb_base));
+			FB_BASE, pa_config->system_aperture.fb_base >> 24);
 	REG_SET(DCN_VM_FB_LOCATION_TOP, 0,
-			FB_TOP, ADDR_HI24(pa_config->system_aperture.fb_top));
+			FB_TOP, pa_config->system_aperture.fb_top >> 24);
 	REG_SET(DCN_VM_FB_OFFSET, 0,
-			FB_OFFSET, ADDR_HI24(pa_config->system_aperture.fb_offset));
+			FB_OFFSET, pa_config->system_aperture.fb_offset >> 24);
 	REG_SET(DCN_VM_AGP_BOT, 0,
-			AGP_BOT, ADDR_HI24(pa_config->system_aperture.agp_bot));
+			AGP_BOT, pa_config->system_aperture.agp_bot >> 24);
 	REG_SET(DCN_VM_AGP_TOP, 0,
-			AGP_TOP, ADDR_HI24(pa_config->system_aperture.agp_top));
+			AGP_TOP, pa_config->system_aperture.agp_top >> 24);
 	REG_SET(DCN_VM_AGP_BASE, 0,
-			AGP_BASE, ADDR_HI24(pa_config->system_aperture.agp_base));
+			AGP_BASE, pa_config->system_aperture.agp_base >> 24);
 
 	if (pa_config->gart_config.page_table_start_addr != pa_config->gart_config.page_table_end_addr) {
 		phys_config.page_table_start_addr = pa_config->gart_config.page_table_start_addr >> 12;

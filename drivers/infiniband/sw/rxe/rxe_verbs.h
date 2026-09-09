@@ -415,6 +415,7 @@ struct rxe_port {
 	u32			qp_gsi_index;
 };
 
+#define	RXE_PORT	1
 struct rxe_dev {
 	struct ib_device	ib_dev;
 	struct ib_device_attr	attr;
@@ -450,15 +451,14 @@ struct rxe_dev {
 	struct rxe_port		port;
 };
 
+static inline struct net_device *rxe_ib_device_get_netdev(struct ib_device *dev)
+{
+	return ib_device_get_netdev(dev, RXE_PORT);
+}
+
 static inline void rxe_counter_inc(struct rxe_dev *rxe, enum rxe_counters index)
 {
 	atomic64_inc(&rxe->stats_counters[index]);
-}
-
-static inline void rxe_counter_add(struct rxe_dev *rxe, enum rxe_counters index,
-				   s64 val)
-{
-	atomic64_add(val, &rxe->stats_counters[index]);
 }
 
 static inline struct rxe_dev *to_rdev(struct ib_device *dev)

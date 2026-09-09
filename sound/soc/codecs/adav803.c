@@ -14,7 +14,7 @@
 #include "adav80x.h"
 
 static const struct i2c_device_id adav803_id[] = {
-	{ .name = "adav803" },
+	{ "adav803" },
 	{ }
 };
 MODULE_DEVICE_TABLE(i2c, adav803_id);

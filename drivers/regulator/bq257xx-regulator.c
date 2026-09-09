@@ -143,6 +143,7 @@ static int bq257xx_regulator_probe(struct platform_device *pdev)
 {
 	struct device *dev = &pdev->dev;
 	struct bq257xx_reg_data *pdata;
+	struct device_node *np = dev->of_node;
 	struct regulator_config cfg = {};
 
 	device_set_of_node_from_dev(&pdev->dev, pdev->dev.parent);
@@ -158,6 +159,7 @@ static int bq257xx_regulator_probe(struct platform_device *pdev)
 
 	cfg.dev = &pdev->dev;
 	cfg.driver_data = pdata;
+	cfg.of_node = np;
 	cfg.regmap = dev_get_regmap(pdev->dev.parent, NULL);
 	if (!cfg.regmap)
 		return -ENODEV;

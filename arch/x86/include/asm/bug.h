@@ -153,7 +153,7 @@ struct arch_va_list {
 	struct sysv_va_list args;
 };
 extern void *__warn_args(struct arch_va_list *args, struct pt_regs *regs);
-static __always_inline __printf(1, 2) void __WARN_validate_printf(const char *fmt, ...) { }
+#endif /* __ASSEMBLER__ */
 
 #define __WARN_bug_entry(flags, format) ({				\
 	struct bug_entry *bug;						\
@@ -172,7 +172,6 @@ static __always_inline __printf(1, 2) void __WARN_validate_printf(const char *fm
 #define __WARN_print_arg(flags, format, arg...)				\
 do {									\
 	int __flags = (flags) | BUGFLAG_WARNING | BUGFLAG_ARGS ;	\
-	__WARN_validate_printf(format, ## arg);				\
 	static_call_mod(WARN_trap)(__WARN_bug_entry(__flags, format), ## arg); \
 	asm (""); /* inhibit tail-call optimization */			\
 } while (0)
@@ -188,7 +187,6 @@ do {									\
 	}								\
 	__ret_warn_on;							\
 })
-#endif /* __ASSEMBLER__ */
 
 #endif /* HAVE_ARCH_BUG_FORMAT_ARGS */
 

@@ -8,10 +8,8 @@
 #include <linux/slab.h>
 #include <linux/delay.h>
 #include <linux/jiffies.h>
-
 #include <asm/apicdef.h>
 #include <asm/apic.h>
-#include <asm/cpuid/api.h>
 #include <asm/msr.h>
 #include <asm/nmi.h>
 
@@ -1034,7 +1032,7 @@ static int amd_pmu_v2_handle_irq(struct pt_regs *regs)
 	 * Unmasking the LVTPC is not required as the Mask (M) bit of the LVT
 	 * PMI entry is not set by the local APIC when a PMC overflow occurs
 	 */
-	inc_perf_irq_stat();
+	inc_irq_stat(apic_perf_irqs);
 
 done:
 	cpuc->enabled = pmu_enabled;
@@ -1414,11 +1412,11 @@ static int __init amd_core_pmu_init(void)
 	u64 even_ctr_mask = 0ULL;
 	int i;
 
-	/* Avoid calculating the value each time in the NMI handler */
-	perf_nmi_window = msecs_to_jiffies(100);
-
 	if (!boot_cpu_has(X86_FEATURE_PERFCTR_CORE))
 		return 0;
+
+	/* Avoid calculating the value each time in the NMI handler */
+	perf_nmi_window = msecs_to_jiffies(100);
 
 	/*
 	 * If core performance counter extensions exists, we must use

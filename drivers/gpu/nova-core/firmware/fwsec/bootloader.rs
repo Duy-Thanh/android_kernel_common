@@ -280,7 +280,7 @@ impl FwsecFirmwareWithBl {
         &self,
         dev: &Device<device::Bound>,
         falcon: &Falcon<Gsp>,
-        bar: Bar0<'_>,
+        bar: &Bar0,
     ) -> Result<()> {
         // Reset falcon, load the firmware, and run it.
         falcon

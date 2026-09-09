@@ -203,6 +203,6 @@ enum {
 #define TLS_CONF_BASE 1
 #define TLS_CONF_SW 2
 #define TLS_CONF_HW 3
-#define TLS_CONF_HW_RECORD 4 /* unused */
+#define TLS_CONF_HW_RECORD 4
 
 #endif /* _UAPI_LINUX_TLS_H */

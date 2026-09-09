@@ -96,7 +96,7 @@ static const struct crashtype_category *crashtype_categories[] = {
 	&stackleak_crashtypes,
 	&cfi_crashtypes,
 	&fortify_crashtypes,
-#ifdef CONFIG_PPC_BOOK3S_64
+#ifdef CONFIG_PPC_64S_HASH_MMU
 	&powerpc_crashtypes,
 #endif
 };

@@ -363,7 +363,7 @@ MODULE_DEVICE_TABLE(of, max98504_of_match);
 #endif
 
 static const struct i2c_device_id max98504_i2c_id[] = {
-	{ .name = "max98504" },
+	{ "max98504" },
 	{ }
 };
 MODULE_DEVICE_TABLE(i2c, max98504_i2c_id);

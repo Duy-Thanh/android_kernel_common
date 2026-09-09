@@ -3039,17 +3039,6 @@ static int rtw89_pci_mode_op(struct rtw89_dev *rtwdev)
 	return 0;
 }
 
-static bool rtw89_pci_dev_ltr_enabled(struct rtw89_dev *rtwdev)
-{
-	struct rtw89_pci *rtwpci = (struct rtw89_pci *)rtwdev->priv;
-	struct pci_dev *pdev = rtwpci->pdev;
-	u16 cap;
-
-	pcie_capability_read_word(pdev, PCI_EXP_DEVCTL2, &cap);
-
-	return !!(cap & PCI_EXP_DEVCTL2_LTR_EN);
-}
-
 static int rtw89_pci_ops_deinit(struct rtw89_dev *rtwdev)
 {
 	const struct rtw89_pci_info *info = rtwdev->pci_info;
@@ -3154,7 +3143,7 @@ int rtw89_pci_ltr_set(struct rtw89_dev *rtwdev, bool en)
 {
 	u32 val;
 
-	if (!en || !rtw89_pci_dev_ltr_enabled(rtwdev))
+	if (!en)
 		return 0;
 
 	val = rtw89_read32(rtwdev, R_AX_LTR_CTRL_0);
@@ -3189,9 +3178,6 @@ int rtw89_pci_ltr_set_v1(struct rtw89_dev *rtwdev, bool en)
 {
 	u32 dec_ctrl;
 	u32 val32;
-
-	if (!rtw89_pci_dev_ltr_enabled(rtwdev))
-		return 0;
 
 	val32 = rtw89_read32(rtwdev, R_AX_LTR_CTRL_0);
 	if (rtw89_pci_ltr_is_err_reg_val(val32))
@@ -4380,20 +4366,10 @@ static void rtw89_pci_l1ss_cfg(struct rtw89_dev *rtwdev)
 static void rtw89_pci_cpl_timeout_cfg(struct rtw89_dev *rtwdev)
 {
 	struct rtw89_pci *rtwpci = (struct rtw89_pci *)rtwdev->priv;
-	enum rtw89_core_chip_id chip_id = rtwdev->chip->chip_id;
-	struct rtw89_hal *hal = &rtwdev->hal;
 	struct pci_dev *pdev = rtwpci->pdev;
-	bool dis = true;
 
-	if (chip_id == RTL8922D && hal->cid == RTL8922D_CID7090)
-		dis = false;
-
-	if (dis)
-		pcie_capability_set_word(pdev, PCI_EXP_DEVCTL2,
-					 PCI_EXP_DEVCTL2_COMP_TMOUT_DIS);
-	else
-		pcie_capability_clear_word(pdev, PCI_EXP_DEVCTL2,
-					   PCI_EXP_DEVCTL2_COMP_TMOUT_DIS);
+	pcie_capability_set_word(pdev, PCI_EXP_DEVCTL2,
+				 PCI_EXP_DEVCTL2_COMP_TMOUT_DIS);
 }
 
 static int rtw89_pci_poll_io_idle_ax(struct rtw89_dev *rtwdev)
@@ -4648,9 +4624,9 @@ EXPORT_SYMBOL(rtw89_pm_ops);
 static pci_ers_result_t rtw89_pci_io_error_detected(struct pci_dev *pdev,
 						    pci_channel_state_t state)
 {
-	struct ieee80211_hw *hw = pci_get_drvdata(pdev);
+	struct net_device *netdev = pci_get_drvdata(pdev);
 
-	ieee80211_stop_queues(hw);
+	netif_device_detach(netdev);
 
 	return PCI_ERS_RESULT_NEED_RESET;
 }
@@ -4667,12 +4643,12 @@ static pci_ers_result_t rtw89_pci_io_slot_reset(struct pci_dev *pdev)
 
 static void rtw89_pci_io_resume(struct pci_dev *pdev)
 {
-	struct ieee80211_hw *hw = pci_get_drvdata(pdev);
+	struct net_device *netdev = pci_get_drvdata(pdev);
 
 	/* ack any pending wake events, disable PME */
 	pci_enable_wake(pdev, PCI_D0, 0);
 
-	ieee80211_wake_queues(hw);
+	netif_device_attach(netdev);
 }
 
 const struct pci_error_handlers rtw89_pci_err_handler = {
@@ -4772,7 +4748,8 @@ int rtw89_pci_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 	info = (const struct rtw89_driver_info *)id->driver_data;
 
 	rtwdev = rtw89_alloc_ieee80211_hw(&pdev->dev,
-					  sizeof(struct rtw89_pci), info);
+					  sizeof(struct rtw89_pci),
+					  info->chip, info->variant);
 	if (!rtwdev) {
 		dev_err(&pdev->dev, "failed to allocate hw\n");
 		return -ENOMEM;

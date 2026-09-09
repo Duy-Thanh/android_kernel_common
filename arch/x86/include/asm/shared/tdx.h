@@ -4,7 +4,6 @@
 
 #include <linux/bits.h>
 #include <linux/types.h>
-#include <asm/shared/tdx_errno.h>
 
 #define TDX_HYPERCALL_STANDARD  0
 

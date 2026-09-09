@@ -14,7 +14,6 @@
 #include <linux/types.h>
 #include <linux/delay.h>
 #include <linux/stat.h>
-#include <linux/sysfs.h>
 #include <linux/device.h>
 #include <linux/init.h>
 #include <linux/slab.h>
@@ -943,14 +942,14 @@ static ssize_t cmo_##name##_show(struct device *dev,                    \
                                         struct device_attribute *attr,  \
                                          char *buf)                     \
 {                                                                       \
-	return sysfs_emit(buf, "%lu\n", to_vio_dev(dev)->cmo.name);     \
+	return sprintf(buf, "%lu\n", to_vio_dev(dev)->cmo.name);        \
 }
 
 static ssize_t cmo_allocs_failed_show(struct device *dev,
 		struct device_attribute *attr, char *buf)
 {
 	struct vio_dev *viodev = to_vio_dev(dev);
-	return sysfs_emit(buf, "%d\n", atomic_read(&viodev->cmo.allocs_failed));
+	return sprintf(buf, "%d\n", atomic_read(&viodev->cmo.allocs_failed));
 }
 
 static ssize_t cmo_allocs_failed_store(struct device *dev,
@@ -999,7 +998,7 @@ static DEVICE_ATTR_RW(cmo_allocs_failed);
 #define viobus_cmo_rd_attr(name)                                        \
 static ssize_t cmo_bus_##name##_show(const struct bus_type *bt, char *buf)    \
 {                                                                       \
-	return sysfs_emit(buf, "%lu\n", vio_cmo.name);                  \
+	return sprintf(buf, "%lu\n", vio_cmo.name);                     \
 }                                                                       \
 static struct bus_attribute bus_attr_cmo_bus_##name =			\
 	__ATTR(cmo_##name, S_IRUGO, cmo_bus_##name##_show, NULL)
@@ -1008,7 +1007,7 @@ static struct bus_attribute bus_attr_cmo_bus_##name =			\
 static ssize_t                                                          \
 cmo_##name##_##var##_show(const struct bus_type *bt, char *buf)         \
 {                                                                       \
-	return sysfs_emit(buf, "%lu\n", vio_cmo.name.var);              \
+	return sprintf(buf, "%lu\n", vio_cmo.name.var);                 \
 }                                                                       \
 static BUS_ATTR_RO(cmo_##name##_##var)
 
@@ -1023,7 +1022,7 @@ viobus_cmo_pool_rd_attr(excess, free);
 
 static ssize_t cmo_high_show(const struct bus_type *bt, char *buf)
 {
-	return sysfs_emit(buf, "%lu\n", vio_cmo.high);
+	return sprintf(buf, "%lu\n", vio_cmo.high);
 }
 
 static ssize_t cmo_high_store(const struct bus_type *bt, const char *buf,
@@ -1536,7 +1535,7 @@ machine_device_initcall(pseries, vio_device_init);
 static ssize_t name_show(struct device *dev,
 		struct device_attribute *attr, char *buf)
 {
-	return sysfs_emit(buf, "%s\n", to_vio_dev(dev)->name);
+	return sprintf(buf, "%s\n", to_vio_dev(dev)->name);
 }
 static DEVICE_ATTR_RO(name);
 
@@ -1545,7 +1544,7 @@ static ssize_t devspec_show(struct device *dev,
 {
 	struct device_node *of_node = dev->of_node;
 
-	return sysfs_emit(buf, "%pOF\n", of_node);
+	return sprintf(buf, "%pOF\n", of_node);
 }
 static DEVICE_ATTR_RO(devspec);
 
@@ -1557,13 +1556,17 @@ static ssize_t modalias_show(struct device *dev, struct device_attribute *attr,
 	const char *cp;
 
 	dn = dev->of_node;
-	if (!dn)
-		return sysfs_emit(buf, "\n");
+	if (!dn) {
+		strcpy(buf, "\n");
+		return strlen(buf);
+	}
 	cp = of_get_property(dn, "compatible", NULL);
-	if (!cp)
-		return sysfs_emit(buf, "\n");
+	if (!cp) {
+		strcpy(buf, "\n");
+		return strlen(buf);
+	}
 
-	return sysfs_emit(buf, "vio:T%sS%s\n", vio_dev->type, cp);
+	return sprintf(buf, "vio:T%sS%s\n", vio_dev->type, cp);
 }
 static DEVICE_ATTR_RO(modalias);
 

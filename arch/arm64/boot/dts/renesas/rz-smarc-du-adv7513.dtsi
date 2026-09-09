@@ -24,10 +24,19 @@
 	pinctrl-names = "default";
 
 	status = "okay";
-};
 
-&du_out_rgb {
-	remote-endpoint = <&adv7513_in>;
+	ports {
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		port@0 {
+			reg = <0>;
+
+			du_out_rgb: endpoint {
+				remote-endpoint = <&adv7513_in>;
+			};
+		};
+	};
 };
 
 &ADV7513_PARENT_I2C {

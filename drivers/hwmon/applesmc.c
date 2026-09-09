@@ -1305,7 +1305,6 @@ static const struct dmi_system_id applesmc_whitelist[] __initconst = {
 	},
 	{ .ident = NULL }
 };
-MODULE_DEVICE_TABLE(dmi, applesmc_whitelist);
 
 static int __init applesmc_init(void)
 {
@@ -1417,3 +1416,4 @@ module_exit(applesmc_exit);
 MODULE_AUTHOR("Nicolas Boichat");
 MODULE_DESCRIPTION("Apple SMC");
 MODULE_LICENSE("GPL v2");
+MODULE_DEVICE_TABLE(dmi, applesmc_whitelist);

@@ -121,35 +121,35 @@ static struct map_benchmark_ops dma_single_map_benchmark_ops = {
 struct dma_sg_map_param {
 	struct sg_table sgt;
 	struct device *dev;
+	void **buf;
 	u32 npages;
 	u32 dma_dir;
-	void *buf[] __counted_by(npages);
 };
 
 static void *dma_sg_map_benchmark_prepare(struct map_benchmark_data *map)
 {
-	struct dma_sg_map_param *params;
 	struct scatterlist *sg;
-	u32 npages;
 	int i;
 
+	struct dma_sg_map_param *params = kzalloc(sizeof(*params), GFP_KERNEL);
+
+	if (!params)
+		return NULL;
 	/*
 	 * Set the number of scatterlist entries based on the granule.
 	 * In SG mode, 'granule' represents the number of scatterlist entries.
 	 * Each scatterlist entry corresponds to a single page.
 	 */
-	npages = map->bparam.granule;
-
-	params = kzalloc_flex(*params, buf, npages);
-	if (!params)
-		return NULL;
-
-	params->npages = npages;
+	params->npages = map->bparam.granule;
 	params->dma_dir = map->bparam.dma_dir;
 	params->dev = map->dev;
+	params->buf = kmalloc_array(params->npages, sizeof(*params->buf),
+				    GFP_KERNEL);
+	if (!params->buf)
+		goto out;
 
 	if (sg_alloc_table(&params->sgt, params->npages, GFP_KERNEL))
-		goto free_params;
+		goto free_buf;
 
 	for_each_sgtable_sg(&params->sgt, sg, i) {
 		params->buf[i] = (void *)__get_free_page(GFP_KERNEL);
@@ -166,7 +166,9 @@ free_page:
 		free_page((unsigned long)params->buf[i]);
 
 	sg_free_table(&params->sgt);
-free_params:
+free_buf:
+	kfree(params->buf);
+out:
 	kfree(params);
 	return NULL;
 }
@@ -181,6 +183,7 @@ static void dma_sg_map_benchmark_unprepare(void *mparam)
 
 	sg_free_table(&params->sgt);
 
+	kfree(params->buf);
 	kfree(params);
 }
 

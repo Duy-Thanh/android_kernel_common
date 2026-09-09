@@ -407,8 +407,8 @@ static const struct dvb_frontend_ops vidtv_demod_ops = {
 };
 
 static const struct i2c_device_id vidtv_demod_i2c_id_table[] = {
-	{ .name = "dvb_vidtv_demod" },
-	{ }
+	{ "dvb_vidtv_demod" },
+	{}
 };
 MODULE_DEVICE_TABLE(i2c, vidtv_demod_i2c_id_table);
 

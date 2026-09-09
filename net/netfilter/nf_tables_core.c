@@ -314,10 +314,8 @@ next_rule:
 
 	switch (regs.verdict.code) {
 	case NFT_JUMP:
-		if (unlikely(stackptr >= NFT_JUMP_STACK_SIZE)) {
-			DEBUG_NET_WARN_ON_ONCE(1);
-			return NF_DROP_REASON(pkt->skb, SKB_DROP_REASON_NETFILTER_DROP, ELOOP);
-		}
+		if (WARN_ON_ONCE(stackptr >= NFT_JUMP_STACK_SIZE))
+			return NF_DROP;
 		jumpstack[stackptr].rule = nft_rule_next(rule);
 		stackptr++;
 		fallthrough;
@@ -328,7 +326,7 @@ next_rule:
 	case NFT_RETURN:
 		break;
 	default:
-		DEBUG_NET_WARN_ON_ONCE(1);
+		WARN_ON_ONCE(1);
 	}
 
 	if (stackptr > 0) {

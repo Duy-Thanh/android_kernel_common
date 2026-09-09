@@ -223,7 +223,6 @@ struct ntb_transport_mw {
 	void *alloc_addr;
 	void *virt_addr;
 	dma_addr_t dma_addr;
-	dma_addr_t original_dma_addr;
 };
 
 struct ntb_transport_client_dev {
@@ -766,8 +765,8 @@ static void ntb_free_mw(struct ntb_transport_ctx *nt, int num_mw)
 		return;
 
 	ntb_mw_clear_trans(nt->ndev, PIDX, num_mw);
-	dma_free_attrs(dma_dev, mw->alloc_size, mw->alloc_addr,
-		       mw->original_dma_addr, DMA_ATTR_FORCE_CONTIGUOUS);
+	dma_free_coherent(dma_dev, mw->alloc_size,
+			  mw->alloc_addr, mw->dma_addr);
 	mw->xlat_size = 0;
 	mw->buff_size = 0;
 	mw->alloc_size = 0;
@@ -803,7 +802,6 @@ static int ntb_alloc_mw_buffer(struct ntb_transport_mw *mw,
 		return -ENOMEM;
 	}
 	virt_addr = alloc_addr;
-	mw->original_dma_addr = dma_addr;
 
 	/*
 	 * we must ensure that the memory address allocated is BAR size
@@ -828,8 +826,8 @@ static int ntb_alloc_mw_buffer(struct ntb_transport_mw *mw,
 	return 0;
 
 err:
-	dma_free_attrs(ntb_dev, mw->alloc_size, alloc_addr, dma_addr,
-		       DMA_ATTR_FORCE_CONTIGUOUS);
+	dma_free_coherent(ntb_dev, mw->alloc_size, alloc_addr, dma_addr);
+
 	return rc;
 }
 

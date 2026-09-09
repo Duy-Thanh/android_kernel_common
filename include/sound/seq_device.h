@@ -22,7 +22,6 @@ struct snd_seq_device {
 	void *private_data;	/* private data for the caller */
 	void (*private_free)(struct snd_seq_device *device);
 	struct device dev;
-	unsigned char args[];	/* driver-specific argument */
 };
 
 #define to_seq_dev(_dev) \
@@ -65,7 +64,7 @@ void snd_seq_device_load_drivers(void);
 int snd_seq_device_new(struct snd_card *card, int device, const char *id,
 		       int argsize, struct snd_seq_device **result);
 
-#define SNDRV_SEQ_DEVICE_ARGPTR(dev) ((void *)(dev)->args)
+#define SNDRV_SEQ_DEVICE_ARGPTR(dev) (void *)((char *)(dev) + sizeof(struct snd_seq_device))
 
 int __must_check __snd_seq_driver_register(struct snd_seq_driver *drv,
 					   struct module *mod);

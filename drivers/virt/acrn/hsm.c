@@ -16,7 +16,6 @@
 #include <linux/slab.h>
 
 #include <asm/acrn.h>
-#include <asm/cpuid/api.h>
 #include <asm/hypervisor.h>
 
 #include "acrn_drv.h"

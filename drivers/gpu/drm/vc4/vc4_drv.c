@@ -41,6 +41,8 @@
 
 #include <soc/bcm2835/raspberrypi-firmware.h>
 
+#include "uapi/drm/vc4_drm.h"
+
 #include "vc4_drv.h"
 #include "vc4_regs.h"
 

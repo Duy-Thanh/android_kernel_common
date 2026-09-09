@@ -106,14 +106,13 @@ const BOARD_INFO: i2c::I2cBoardInfo =
 
 impl platform::Driver for SampleDriver {
     type IdInfo = ();
-    type Data<'bound> = Self;
     const OF_ID_TABLE: Option<of::IdTable<Self::IdInfo>> = Some(&OF_TABLE);
     const ACPI_ID_TABLE: Option<acpi::IdTable<Self::IdInfo>> = Some(&ACPI_TABLE);
 
-    fn probe<'bound>(
-        pdev: &'bound platform::Device<device::Core<'_>>,
-        _info: Option<&'bound Self::IdInfo>,
-    ) -> impl PinInit<Self, Error> + 'bound {
+    fn probe(
+        pdev: &platform::Device<device::Core>,
+        _info: Option<&Self::IdInfo>,
+    ) -> impl PinInit<Self, Error> {
         dev_info!(
             pdev.as_ref(),
             "Probe Rust I2C Client registration sample.\n"
@@ -130,10 +129,7 @@ impl platform::Driver for SampleDriver {
         })
     }
 
-    fn unbind<'bound>(
-        pdev: &'bound platform::Device<device::Core<'_>>,
-        _this: Pin<&Self::Data<'bound>>,
-    ) {
+    fn unbind(pdev: &platform::Device<device::Core>, _this: Pin<&Self>) {
         dev_info!(
             pdev.as_ref(),
             "Unbind Rust I2C Client registration sample.\n"

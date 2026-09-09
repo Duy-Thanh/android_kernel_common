@@ -704,13 +704,11 @@
 
 &uart2 {
 	pinctrl-0 = <&uart2m0_xfer>;
-	pinctrl-names = "default";
 	status = "okay";
 };
 
 &uart9 {
 	pinctrl-0 = <&uart9m0_xfer>;
-	pinctrl-names = "default";
 	status = "okay";
 };
 

@@ -98,7 +98,7 @@ static int highbank_platform_notifier(struct notifier_block *nb,
 	if (of_property_read_bool(dev->of_node, "dma-coherent")) {
 		val = readl(sregs_base + reg);
 		writel(val | 0xff01, sregs_base + reg);
-		dev_set_dma_coherent(dev);
+		dev->dma_coherent = true;
 	}
 
 	return NOTIFY_OK;

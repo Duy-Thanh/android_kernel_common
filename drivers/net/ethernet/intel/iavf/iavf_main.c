@@ -36,12 +36,12 @@ static const char iavf_copyright[] =
  *   Class, Class Mask, private data (not used) }
  */
 static const struct pci_device_id iavf_pci_tbl[] = {
-	{ PCI_VDEVICE(INTEL, IAVF_DEV_ID_VF) },
-	{ PCI_VDEVICE(INTEL, IAVF_DEV_ID_VF_HV) },
-	{ PCI_VDEVICE(INTEL, IAVF_DEV_ID_X722_VF) },
-	{ PCI_VDEVICE(INTEL, IAVF_DEV_ID_ADAPTIVE_VF) },
+	{PCI_VDEVICE(INTEL, IAVF_DEV_ID_VF), 0},
+	{PCI_VDEVICE(INTEL, IAVF_DEV_ID_VF_HV), 0},
+	{PCI_VDEVICE(INTEL, IAVF_DEV_ID_X722_VF), 0},
+	{PCI_VDEVICE(INTEL, IAVF_DEV_ID_ADAPTIVE_VF), 0},
 	/* required last entry */
-	{ }
+	{0, }
 };
 
 MODULE_DEVICE_TABLE(pci, iavf_pci_tbl);
@@ -1134,12 +1134,10 @@ bool iavf_promiscuous_mode_changed(struct iavf_adapter *adapter)
  * @netdev: network interface device structure
  * @uc: snapshot of uc address list
  * @mc: snapshot of mc address list
- *
- * Return: 0 on success.
  **/
-static int iavf_set_rx_mode(struct net_device *netdev,
-			    struct netdev_hw_addr_list *uc,
-			    struct netdev_hw_addr_list *mc)
+static void iavf_set_rx_mode(struct net_device *netdev,
+			     struct netdev_hw_addr_list *uc,
+			     struct netdev_hw_addr_list *mc)
 {
 	struct iavf_adapter *adapter = netdev_priv(netdev);
 
@@ -1152,8 +1150,6 @@ static int iavf_set_rx_mode(struct net_device *netdev,
 	if (iavf_promiscuous_mode_changed(adapter))
 		adapter->aq_required |= IAVF_FLAG_AQ_CONFIGURE_PROMISC_MODE;
 	spin_unlock_bh(&adapter->current_netdev_promisc_flags_lock);
-
-	return 0;
 }
 
 /**

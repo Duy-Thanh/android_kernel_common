@@ -722,7 +722,7 @@ static void cs42l43_mcu_load_firmware(const struct firmware *firmware, void *con
 	unsigned int loadaddr, val;
 	int ret;
 
-	if (!firmware || firmware->size < sizeof(*hdr)) {
+	if (!firmware) {
 		dev_err(cs42l43->dev, "Failed to load firmware\n");
 		cs42l43->firmware_error = -ENODEV;
 		goto err;

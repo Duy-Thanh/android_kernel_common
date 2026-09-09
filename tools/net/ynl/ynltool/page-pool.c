@@ -327,9 +327,7 @@ static void aggregate_device_stats(struct pp_stats_array *a,
 
 static int do_stats(int argc, char **argv)
 {
-	struct netdev_page_pool_stats_get_req_dump pp_stat_req = {};
 	struct netdev_page_pool_stats_get_list *pp_stats;
-	struct netdev_page_pool_get_req_dump pp_req = {};
 	struct netdev_page_pool_get_list *pools;
 	enum {
 		GROUP_BY_DEVICE,
@@ -376,14 +374,14 @@ static int do_stats(int argc, char **argv)
 		return -1;
 	}
 
-	pools = netdev_page_pool_get_dump(ys, &pp_req);
+	pools = netdev_page_pool_get_dump(ys);
 	if (!pools) {
 		p_err("failed to get page pools: %s", ys->err.msg);
 		ret = -1;
 		goto exit_close;
 	}
 
-	pp_stats = netdev_page_pool_stats_get_dump(ys, &pp_stat_req);
+	pp_stats = netdev_page_pool_stats_get_dump(ys);
 	if (!pp_stats) {
 		p_err("failed to get page pool stats: %s", ys->err.msg);
 		ret = -1;

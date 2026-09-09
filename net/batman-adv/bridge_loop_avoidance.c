@@ -8,7 +8,6 @@
 #include "main.h"
 
 #include <linux/atomic.h>
-#include <linux/bug.h>
 #include <linux/byteorder/generic.h>
 #include <linux/compiler.h>
 #include <linux/container_of.h>
@@ -123,7 +122,7 @@ static bool batadv_compare_backbone_gw(const struct hlist_node *node,
  * @node: list node of the first entry to compare
  * @data2: pointer to the second claims
  *
- * Return: true if the claims have the same data, false otherwise
+ * Return: true if the claim have the same data, 0 otherwise
  */
 static bool batadv_compare_claim(const struct hlist_node *node,
 				 const void *data2)
@@ -513,7 +512,7 @@ batadv_bla_get_backbone_gw(struct batadv_priv *bat_priv, const u8 *orig,
 		return NULL;
 
 	entry->vid = vid;
-	WRITE_ONCE(entry->lasttime, jiffies);
+	entry->lasttime = jiffies;
 	entry->crc = BATADV_BLA_CRC_INIT;
 	entry->bat_priv = bat_priv;
 	spin_lock_init(&entry->crc_lock);
@@ -581,7 +580,7 @@ batadv_bla_update_own_backbone_gw(struct batadv_priv *bat_priv,
 	if (unlikely(!backbone_gw))
 		return;
 
-	WRITE_ONCE(backbone_gw->lasttime, jiffies);
+	backbone_gw->lasttime = jiffies;
 	batadv_backbone_gw_put(backbone_gw);
 }
 
@@ -715,7 +714,7 @@ static void batadv_bla_add_claim(struct batadv_priv *bat_priv,
 		ether_addr_copy(claim->addr, mac);
 		spin_lock_init(&claim->backbone_lock);
 		claim->vid = vid;
-		WRITE_ONCE(claim->lasttime, jiffies);
+		claim->lasttime = jiffies;
 		kref_get(&backbone_gw->refcount);
 		claim->backbone_gw = backbone_gw;
 		kref_init(&claim->refcount);
@@ -737,7 +736,7 @@ static void batadv_bla_add_claim(struct batadv_priv *bat_priv,
 			return;
 		}
 	} else {
-		WRITE_ONCE(claim->lasttime, jiffies);
+		claim->lasttime = jiffies;
 		if (claim->backbone_gw == backbone_gw)
 			/* no need to register a new backbone */
 			goto claim_free_ref;
@@ -770,7 +769,7 @@ static void batadv_bla_add_claim(struct batadv_priv *bat_priv,
 	spin_lock_bh(&backbone_gw->crc_lock);
 	backbone_gw->crc ^= crc16(0, claim->addr, ETH_ALEN);
 	spin_unlock_bh(&backbone_gw->crc_lock);
-	WRITE_ONCE(backbone_gw->lasttime, jiffies);
+	backbone_gw->lasttime = jiffies;
 
 claim_free_ref:
 	batadv_claim_put(claim);
@@ -859,7 +858,7 @@ static bool batadv_handle_announce(struct batadv_priv *bat_priv, u8 *an_addr,
 		return true;
 
 	/* handle as ANNOUNCE frame */
-	WRITE_ONCE(backbone_gw->lasttime, jiffies);
+	backbone_gw->lasttime = jiffies;
 	crc = ntohs(*((__force __be16 *)(&an_addr[4])));
 
 	batadv_dbg(BATADV_DBG_BLA, bat_priv,
@@ -1254,7 +1253,7 @@ static void batadv_bla_purge_backbone_gw(struct batadv_priv *bat_priv, int now)
 						  head, hash_entry) {
 				if (now)
 					goto purge_now;
-				if (!batadv_has_timed_out(READ_ONCE(backbone_gw->lasttime),
+				if (!batadv_has_timed_out(backbone_gw->lasttime,
 							  BATADV_BLA_BACKBONE_TIMEOUT))
 					continue;
 
@@ -1282,7 +1281,7 @@ purge_now:
 
 			if (purged) {
 				/* reference for pending report_work */
-				if (disable_work_sync(&backbone_gw->report_work))
+				if (cancel_work_sync(&backbone_gw->report_work))
 					batadv_backbone_gw_put(backbone_gw);
 
 				/* reference for hash_entry */
@@ -1335,7 +1334,7 @@ static void batadv_bla_purge_claims(struct batadv_priv *bat_priv,
 						primary_if->net_dev->dev_addr))
 				goto skip;
 
-			if (!batadv_has_timed_out(READ_ONCE(claim->lasttime),
+			if (!batadv_has_timed_out(claim->lasttime,
 						  BATADV_BLA_CLAIM_TIMEOUT))
 				goto skip;
 
@@ -1380,7 +1379,7 @@ void batadv_bla_update_orig_address(struct batadv_priv *bat_priv,
 	bat_priv->bla.claim_dest.group = group;
 
 	/* purge everything when bridge loop avoidance is turned off */
-	if (!READ_ONCE(bat_priv->bridge_loop_avoidance))
+	if (!atomic_read(&bat_priv->bridge_loop_avoidance))
 		oldif = NULL;
 
 	if (!oldif) {
@@ -1484,7 +1483,7 @@ static void batadv_bla_periodic_work(struct work_struct *work)
 	batadv_bla_purge_claims(bat_priv, primary_if, 0);
 	batadv_bla_purge_backbone_gw(bat_priv, 0);
 
-	if (!READ_ONCE(bat_priv->bridge_loop_avoidance))
+	if (!atomic_read(&bat_priv->bridge_loop_avoidance))
 		goto out;
 
 	if (atomic_dec_and_test(&bat_priv->bla.loopdetect_next)) {
@@ -1495,7 +1494,7 @@ static void batadv_bla_periodic_work(struct work_struct *work)
 		eth_random_addr(bat_priv->bla.loopdetect_addr);
 		bat_priv->bla.loopdetect_addr[0] = 0xba;
 		bat_priv->bla.loopdetect_addr[1] = 0xbe;
-		WRITE_ONCE(bat_priv->bla.loopdetect_lasttime, jiffies);
+		bat_priv->bla.loopdetect_lasttime = jiffies;
 		atomic_set(&bat_priv->bla.loopdetect_next,
 			   BATADV_BLA_LOOPDETECT_PERIODS);
 
@@ -1516,7 +1515,7 @@ static void batadv_bla_periodic_work(struct work_struct *work)
 						primary_if->net_dev->dev_addr))
 				continue;
 
-			WRITE_ONCE(backbone_gw->lasttime, jiffies);
+			backbone_gw->lasttime = jiffies;
 
 			batadv_bla_send_announce(bat_priv, backbone_gw);
 			if (send_loopdetect)
@@ -1783,7 +1782,7 @@ bool batadv_bla_is_backbone_gw_orig(struct batadv_priv *bat_priv, u8 *orig,
 	struct batadv_bla_backbone_gw *backbone_gw;
 	int i;
 
-	if (!READ_ONCE(bat_priv->bridge_loop_avoidance))
+	if (!atomic_read(&bat_priv->bridge_loop_avoidance))
 		return false;
 
 	if (!hash)
@@ -1821,7 +1820,7 @@ bool batadv_bla_is_backbone_gw(struct sk_buff *skb,
 	struct batadv_bla_backbone_gw *backbone_gw;
 	unsigned short vid;
 
-	if (!READ_ONCE(orig_node->bat_priv->bridge_loop_avoidance))
+	if (!atomic_read(&orig_node->bat_priv->bridge_loop_avoidance))
 		return false;
 
 	/* first, find out the vid. */
@@ -1850,7 +1849,7 @@ void batadv_bla_free(struct batadv_priv *bat_priv)
 {
 	struct batadv_hard_iface *primary_if;
 
-	disable_delayed_work_sync(&bat_priv->bla.work);
+	cancel_delayed_work_sync(&bat_priv->bla.work);
 	primary_if = batadv_primary_if_get_selected(bat_priv);
 
 	if (bat_priv->bla.claim_hash) {
@@ -1900,7 +1899,7 @@ batadv_bla_loopdetect_check(struct batadv_priv *bat_priv, struct sk_buff *skb,
 	/* If the packet came too late, don't forward it on the mesh
 	 * but don't consider that as loop. It might be a coincidence.
 	 */
-	if (batadv_has_timed_out(READ_ONCE(bat_priv->bla.loopdetect_lasttime),
+	if (batadv_has_timed_out(bat_priv->bla.loopdetect_lasttime,
 				 BATADV_BLA_LOOPDETECT_TIMEOUT))
 		return true;
 
@@ -1953,7 +1952,7 @@ bool batadv_bla_rx(struct batadv_priv *bat_priv, struct sk_buff *skb,
 	if (!primary_if)
 		goto handled;
 
-	if (!READ_ONCE(bat_priv->bridge_loop_avoidance))
+	if (!atomic_read(&bat_priv->bridge_loop_avoidance))
 		goto allow;
 
 	if (batadv_bla_loopdetect_check(bat_priv, skb, primary_if, vid))
@@ -2015,7 +2014,7 @@ bool batadv_bla_rx(struct batadv_priv *bat_priv, struct sk_buff *skb,
 
 	if (own_claim) {
 		/* ... allow it in any case */
-		WRITE_ONCE(claim->lasttime, jiffies);
+		claim->lasttime = jiffies;
 		goto allow;
 	}
 
@@ -2085,7 +2084,7 @@ bool batadv_bla_tx(struct batadv_priv *bat_priv, struct sk_buff *skb,
 	if (!primary_if)
 		goto out;
 
-	if (!READ_ONCE(bat_priv->bridge_loop_avoidance))
+	if (!atomic_read(&bat_priv->bridge_loop_avoidance))
 		goto allow;
 
 	if (batadv_bla_process_claim(bat_priv, primary_if, skb))
@@ -2117,7 +2116,7 @@ bool batadv_bla_tx(struct batadv_priv *bat_priv, struct sk_buff *skb,
 		/* if yes, the client has roamed and we have
 		 * to unclaim it.
 		 */
-		if (batadv_has_timed_out(READ_ONCE(claim->lasttime), 100)) {
+		if (batadv_has_timed_out(claim->lasttime, 100)) {
 			/* only unclaim if the last claim entry is
 			 * older than 100 ms to make sure we really
 			 * have a roaming client here.
@@ -2362,7 +2361,7 @@ batadv_bla_backbone_dump_entry(struct sk_buff *msg, u32 portid,
 	backbone_crc = backbone_gw->crc;
 	spin_unlock_bh(&backbone_gw->crc_lock);
 
-	msecs = jiffies_to_msecs(jiffies - READ_ONCE(backbone_gw->lasttime));
+	msecs = jiffies_to_msecs(jiffies - backbone_gw->lasttime);
 
 	if (is_own)
 		if (nla_put_flag(msg, BATADV_ATTR_BLA_OWN)) {
@@ -2505,7 +2504,7 @@ bool batadv_bla_check_claim(struct batadv_priv *bat_priv,
 	struct batadv_hard_iface *primary_if = NULL;
 	bool ret = true;
 
-	if (!READ_ONCE(bat_priv->bridge_loop_avoidance))
+	if (!atomic_read(&bat_priv->bridge_loop_avoidance))
 		return ret;
 
 	primary_if = batadv_primary_if_get_selected(bat_priv);

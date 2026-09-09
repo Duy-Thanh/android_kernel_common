@@ -30,12 +30,11 @@
 #include <signal.h>
 #include "kselftest.h"
 
-#define NSEC_PER_SEC 1000000000LL
-
 /* CLOCK_HWSPECIFIC == CLOCK_SGI_CYCLE (Deprecated) */
 #define CLOCK_HWSPECIFIC		10
 
 #define CALLS_PER_LOOP 64
+#define NSEC_PER_SEC 1000000000ULL
 
 char *clockstring(int clockid)
 {

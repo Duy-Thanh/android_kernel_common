@@ -520,16 +520,6 @@ static uint32_t kgd_gfx_v9_4_3_hqd_sdma_get_doorbell(struct amdgpu_device *adev,
 	return is_active ? doorbell_off >> 2 : 0;
 }
 
-static uint32_t kgd_v9_4_3_ptl_ctrl(struct amdgpu_device *adev,
-				uint32_t cmd,
-				uint32_t *ptl_state,
-				enum amdgpu_ptl_fmt *fmt1,
-				enum amdgpu_ptl_fmt *fmt2)
-{
-	return amdgpu_ptl_perf_monitor_ctrl(adev, cmd,
-			ptl_state, fmt1, fmt2);
-}
-
 const struct kfd2kgd_calls gc_9_4_3_kfd2kgd = {
 	.program_sh_mem_settings = kgd_gfx_v9_program_sh_mem_settings,
 	.set_pasid_vmid_mapping = kgd_gfx_v9_4_3_set_pasid_vmid_mapping,
@@ -565,6 +555,5 @@ const struct kfd2kgd_calls gc_9_4_3_kfd2kgd = {
 	.clear_address_watch = kgd_gfx_v9_4_3_clear_address_watch,
 	.hqd_get_pq_addr = kgd_gfx_v9_hqd_get_pq_addr,
 	.hqd_reset = kgd_gfx_v9_hqd_reset,
-	.hqd_sdma_get_doorbell = kgd_gfx_v9_4_3_hqd_sdma_get_doorbell,
-	.ptl_ctrl = kgd_v9_4_3_ptl_ctrl
+	.hqd_sdma_get_doorbell = kgd_gfx_v9_4_3_hqd_sdma_get_doorbell
 };

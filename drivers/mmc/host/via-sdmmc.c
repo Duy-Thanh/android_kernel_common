@@ -323,8 +323,9 @@ struct via_crdr_mmc_host {
 #define VIA_CMD_TIMEOUT_MS		1000
 
 static const struct pci_device_id via_ids[] = {
-	{ PCI_VDEVICE(VIA, PCI_DEVICE_ID_VIA_9530) },
-	{ }
+	{PCI_VENDOR_ID_VIA, PCI_DEVICE_ID_VIA_9530,
+	  PCI_ANY_ID, PCI_ANY_ID, 0, 0, 0,},
+	{0,}
 };
 
 MODULE_DEVICE_TABLE(pci, via_ids);

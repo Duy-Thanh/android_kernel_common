@@ -10,8 +10,7 @@ CONF_FILE=""
 FLAGS=()
 
 GENERATE_GCOV_REPORT=0
-ENABLE_RDMA=0
-while getopts "gc:r" opt; do
+while getopts "gc:" opt; do
   case ${opt} in
     g)
       GENERATE_GCOV_REPORT=1
@@ -19,11 +18,8 @@ while getopts "gc:r" opt; do
     c)
       CONF_FILE=$OPTARG
       ;;
-    r)
-      ENABLE_RDMA=1
-      ;;
     :)
-      echo "USAGE: config.sh [-g] [-c config] [-r]"
+      echo "USAGE: config.sh [-g] [-c config]"
       exit 1
       ;;
     ?)
@@ -36,6 +32,9 @@ done
 if [[ "$CONF_FILE" != "" ]]; then
 	FLAGS=(--file "$CONF_FILE")
 fi
+
+# no modules
+scripts/config "${FLAGS[@]}" --disable CONFIG_MODULES
 
 # enable RDS
 scripts/config "${FLAGS[@]}" --enable CONFIG_RDS
@@ -59,10 +58,3 @@ scripts/config "${FLAGS[@]}" --enable CONFIG_VETH
 # simulate packet loss
 scripts/config "${FLAGS[@]}" --enable CONFIG_NET_SCH_NETEM
 
-if [ "$ENABLE_RDMA" -eq 1 ]; then
-	# enable RDS over InfiniBand / RDMA (rds_rdma test)
-	scripts/config "${FLAGS[@]}" --enable CONFIG_INFINIBAND
-	scripts/config "${FLAGS[@]}" --enable CONFIG_INFINIBAND_ADDR_TRANS
-	scripts/config "${FLAGS[@]}" --enable CONFIG_RDMA_RXE
-	scripts/config "${FLAGS[@]}" --enable CONFIG_RDS_RDMA
-fi

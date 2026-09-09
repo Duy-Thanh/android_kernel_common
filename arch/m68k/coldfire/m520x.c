@@ -125,11 +125,11 @@ static void __init m520x_qspi_init(void)
 #if IS_ENABLED(CONFIG_SPI_COLDFIRE_QSPI)
 	u16 par;
 	/* setup Port QS for QSPI with gpio CS control */
-	mcf_write8(0x3f, MCF_GPIO_PAR_QSPI);
+	writeb(0x3f, MCF_GPIO_PAR_QSPI);
 	/* make U1CTS and U2RTS gpio for cs_control */
-	par = mcf_read16(MCF_GPIO_PAR_UART);
+	par = readw(MCF_GPIO_PAR_UART);
 	par &= 0x00ff;
-	mcf_write16(par, MCF_GPIO_PAR_UART);
+	writew(par, MCF_GPIO_PAR_UART);
 #endif /* IS_ENABLED(CONFIG_SPI_COLDFIRE_QSPI) */
 }
 
@@ -142,9 +142,9 @@ static void __init m520x_i2c_init(void)
 
 	/* setup Port FECI2C Pin Assignment Register for I2C */
 	/*  set PAR_SCL to SCL and PAR_SDA to SDA */
-	par = mcf_read8(MCF_GPIO_PAR_FECI2C);
+	par = readb(MCF_GPIO_PAR_FECI2C);
 	par |= 0x0f;
-	mcf_write8(par, MCF_GPIO_PAR_FECI2C);
+	writeb(par, MCF_GPIO_PAR_FECI2C);
 #endif /* IS_ENABLED(CONFIG_I2C_IMX) */
 }
 
@@ -156,17 +156,17 @@ static void __init m520x_uarts_init(void)
 	u8 par2;
 
 	/* UART0 and UART1 GPIO pin setup */
-	par = mcf_read16(MCF_GPIO_PAR_UART);
+	par = readw(MCF_GPIO_PAR_UART);
 	par |= MCF_GPIO_PAR_UART_PAR_UTXD0 | MCF_GPIO_PAR_UART_PAR_URXD0;
 	par |= MCF_GPIO_PAR_UART_PAR_UTXD1 | MCF_GPIO_PAR_UART_PAR_URXD1;
-	mcf_write16(par, MCF_GPIO_PAR_UART);
+	writew(par, MCF_GPIO_PAR_UART);
 
 	/* UART1 GPIO pin setup */
-	par2 = mcf_read8(MCF_GPIO_PAR_FECI2C);
+	par2 = readb(MCF_GPIO_PAR_FECI2C);
 	par2 &= ~0x0F;
 	par2 |= MCF_GPIO_PAR_FECI2C_PAR_SCL_UTXD2 |
 		MCF_GPIO_PAR_FECI2C_PAR_SDA_URXD2;
-	mcf_write8(par2, MCF_GPIO_PAR_FECI2C);
+	writeb(par2, MCF_GPIO_PAR_FECI2C);
 }
 
 /***************************************************************************/
@@ -176,11 +176,11 @@ static void __init m520x_fec_init(void)
 	u8 v;
 
 	/* Set multi-function pins to ethernet mode */
-	v = mcf_read8(MCF_GPIO_PAR_FEC);
-	mcf_write8(v | 0xf0, MCF_GPIO_PAR_FEC);
+	v = readb(MCF_GPIO_PAR_FEC);
+	writeb(v | 0xf0, MCF_GPIO_PAR_FEC);
 
-	v = mcf_read8(MCF_GPIO_PAR_FECI2C);
-	mcf_write8(v | 0x0f, MCF_GPIO_PAR_FECI2C);
+	v = readb(MCF_GPIO_PAR_FECI2C);
+	writeb(v | 0x0f, MCF_GPIO_PAR_FECI2C);
 }
 
 /***************************************************************************/

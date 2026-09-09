@@ -218,6 +218,7 @@ static int s3c_pcm_trigger(struct snd_pcm_substream *substream, int cmd,
 {
 	struct snd_soc_pcm_runtime *rtd = snd_soc_substream_to_rtd(substream);
 	struct s3c_pcm_info *pcm = snd_soc_dai_get_drvdata(snd_soc_rtd_to_cpu(rtd, 0));
+	unsigned long flags;
 
 	dev_dbg(pcm->dev, "Entered %s\n", __func__);
 
@@ -225,23 +226,27 @@ static int s3c_pcm_trigger(struct snd_pcm_substream *substream, int cmd,
 	case SNDRV_PCM_TRIGGER_START:
 	case SNDRV_PCM_TRIGGER_RESUME:
 	case SNDRV_PCM_TRIGGER_PAUSE_RELEASE:
-		scoped_guard(spinlock_irqsave, &pcm->lock) {
-			if (substream->stream == SNDRV_PCM_STREAM_CAPTURE)
-				s3c_pcm_snd_rxctrl(pcm, 1);
-			else
-				s3c_pcm_snd_txctrl(pcm, 1);
-		}
+		spin_lock_irqsave(&pcm->lock, flags);
+
+		if (substream->stream == SNDRV_PCM_STREAM_CAPTURE)
+			s3c_pcm_snd_rxctrl(pcm, 1);
+		else
+			s3c_pcm_snd_txctrl(pcm, 1);
+
+		spin_unlock_irqrestore(&pcm->lock, flags);
 		break;
 
 	case SNDRV_PCM_TRIGGER_STOP:
 	case SNDRV_PCM_TRIGGER_SUSPEND:
 	case SNDRV_PCM_TRIGGER_PAUSE_PUSH:
-		scoped_guard(spinlock_irqsave, &pcm->lock) {
-			if (substream->stream == SNDRV_PCM_STREAM_CAPTURE)
-				s3c_pcm_snd_rxctrl(pcm, 0);
-			else
-				s3c_pcm_snd_txctrl(pcm, 0);
-		}
+		spin_lock_irqsave(&pcm->lock, flags);
+
+		if (substream->stream == SNDRV_PCM_STREAM_CAPTURE)
+			s3c_pcm_snd_rxctrl(pcm, 0);
+		else
+			s3c_pcm_snd_txctrl(pcm, 0);
+
+		spin_unlock_irqrestore(&pcm->lock, flags);
 		break;
 
 	default:
@@ -260,6 +265,7 @@ static int s3c_pcm_hw_params(struct snd_pcm_substream *substream,
 	void __iomem *regs = pcm->regs;
 	struct clk *clk;
 	int sclk_div, sync_div;
+	unsigned long flags;
 	u32 clkctl;
 
 	dev_dbg(pcm->dev, "Entered %s\n", __func__);
@@ -272,33 +278,36 @@ static int s3c_pcm_hw_params(struct snd_pcm_substream *substream,
 		return -EINVAL;
 	}
 
-	scoped_guard(spinlock_irqsave, &pcm->lock) {
-		/* Get hold of the PCMSOURCE_CLK */
-		clkctl = readl(regs + S3C_PCM_CLKCTL);
-		if (clkctl & S3C_PCM_CLKCTL_SERCLKSEL_PCLK)
-			clk = pcm->pclk;
-		else
-			clk = pcm->cclk;
+	spin_lock_irqsave(&pcm->lock, flags);
 
-		/* Set the SCLK divider */
-		sclk_div = clk_get_rate(clk) / pcm->sclk_per_fs /
-						params_rate(params) / 2 - 1;
+	/* Get hold of the PCMSOURCE_CLK */
+	clkctl = readl(regs + S3C_PCM_CLKCTL);
+	if (clkctl & S3C_PCM_CLKCTL_SERCLKSEL_PCLK)
+		clk = pcm->pclk;
+	else
+		clk = pcm->cclk;
 
-		clkctl &= ~(S3C_PCM_CLKCTL_SCLKDIV_MASK
-				<< S3C_PCM_CLKCTL_SCLKDIV_SHIFT);
-		clkctl |= ((sclk_div & S3C_PCM_CLKCTL_SCLKDIV_MASK)
-				<< S3C_PCM_CLKCTL_SCLKDIV_SHIFT);
+	/* Set the SCLK divider */
+	sclk_div = clk_get_rate(clk) / pcm->sclk_per_fs /
+					params_rate(params) / 2 - 1;
 
-		/* Set the SYNC divider */
-		sync_div = pcm->sclk_per_fs - 1;
+	clkctl &= ~(S3C_PCM_CLKCTL_SCLKDIV_MASK
+			<< S3C_PCM_CLKCTL_SCLKDIV_SHIFT);
+	clkctl |= ((sclk_div & S3C_PCM_CLKCTL_SCLKDIV_MASK)
+			<< S3C_PCM_CLKCTL_SCLKDIV_SHIFT);
 
-		clkctl &= ~(S3C_PCM_CLKCTL_SYNCDIV_MASK
-					<< S3C_PCM_CLKCTL_SYNCDIV_SHIFT);
-		clkctl |= ((sync_div & S3C_PCM_CLKCTL_SYNCDIV_MASK)
-					<< S3C_PCM_CLKCTL_SYNCDIV_SHIFT);
+	/* Set the SYNC divider */
+	sync_div = pcm->sclk_per_fs - 1;
 
-		writel(clkctl, regs + S3C_PCM_CLKCTL);
-	}
+	clkctl &= ~(S3C_PCM_CLKCTL_SYNCDIV_MASK
+				<< S3C_PCM_CLKCTL_SYNCDIV_SHIFT);
+	clkctl |= ((sync_div & S3C_PCM_CLKCTL_SYNCDIV_MASK)
+				<< S3C_PCM_CLKCTL_SYNCDIV_SHIFT);
+
+	writel(clkctl, regs + S3C_PCM_CLKCTL);
+
+	spin_unlock_irqrestore(&pcm->lock, flags);
+
 	dev_dbg(pcm->dev, "PCMSOURCE_CLK-%lu SCLK=%ufs SCLK_DIV=%d SYNC_DIV=%d\n",
 				clk_get_rate(clk), pcm->sclk_per_fs,
 				sclk_div, sync_div);
@@ -311,11 +320,13 @@ static int s3c_pcm_set_fmt(struct snd_soc_dai *cpu_dai,
 {
 	struct s3c_pcm_info *pcm = snd_soc_dai_get_drvdata(cpu_dai);
 	void __iomem *regs = pcm->regs;
+	unsigned long flags;
+	int ret = 0;
 	u32 ctl;
 
 	dev_dbg(pcm->dev, "Entered %s\n", __func__);
 
-	guard(spinlock_irqsave)(&pcm->lock);
+	spin_lock_irqsave(&pcm->lock, flags);
 
 	ctl = readl(regs + S3C_PCM_CTL);
 
@@ -325,7 +336,8 @@ static int s3c_pcm_set_fmt(struct snd_soc_dai *cpu_dai,
 		break;
 	default:
 		dev_err(pcm->dev, "Unsupported clock inversion!\n");
-		return -EINVAL;
+		ret = -EINVAL;
+		goto exit;
 	}
 
 	switch (fmt & SND_SOC_DAIFMT_CLOCK_PROVIDER_MASK) {
@@ -334,7 +346,8 @@ static int s3c_pcm_set_fmt(struct snd_soc_dai *cpu_dai,
 		break;
 	default:
 		dev_err(pcm->dev, "Unsupported master/slave format!\n");
-		return -EINVAL;
+		ret = -EINVAL;
+		goto exit;
 	}
 
 	switch (fmt & SND_SOC_DAIFMT_CLOCK_MASK) {
@@ -346,7 +359,8 @@ static int s3c_pcm_set_fmt(struct snd_soc_dai *cpu_dai,
 		break;
 	default:
 		dev_err(pcm->dev, "Invalid Clock gating request!\n");
-		return -EINVAL;
+		ret = -EINVAL;
+		goto exit;
 	}
 
 	switch (fmt & SND_SOC_DAIFMT_FORMAT_MASK) {
@@ -360,11 +374,16 @@ static int s3c_pcm_set_fmt(struct snd_soc_dai *cpu_dai,
 		break;
 	default:
 		dev_err(pcm->dev, "Unsupported data format!\n");
-		return -EINVAL;
+		ret = -EINVAL;
+		goto exit;
 	}
 
 	writel(ctl, regs + S3C_PCM_CTL);
-	return 0;
+
+exit:
+	spin_unlock_irqrestore(&pcm->lock, flags);
+
+	return ret;
 }
 
 static int s3c_pcm_set_clkdiv(struct snd_soc_dai *cpu_dai,

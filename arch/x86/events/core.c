@@ -1753,7 +1753,7 @@ int x86_pmu_handle_irq(struct pt_regs *regs)
 	}
 
 	if (handled)
-		inc_perf_irq_stat();
+		inc_irq_stat(apic_perf_irqs);
 
 	return handled;
 }

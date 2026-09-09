@@ -47,10 +47,10 @@ properties:
     maxItems: 1
 
   sram:
-    maxItems: 1
+    $ref: /schemas/types.yaml#/definitions/phandle
     description:
-      SRAM region which is used as temporary storage memory between DMA and
-      MDMA engines.
+      phandle to a reserved SRAM region which is used as temporary
+      storage memory between DMA and MDMA engines.
 
   port:
     $ref: /schemas/graph.yaml#/$defs/port-base

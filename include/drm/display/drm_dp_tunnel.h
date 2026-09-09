@@ -14,7 +14,7 @@ struct drm_dp_aux;
 
 struct drm_device;
 
-struct drm_atomic_commit;
+struct drm_atomic_state;
 struct drm_dp_tunnel_mgr;
 struct drm_dp_tunnel_state;
 
@@ -53,7 +53,6 @@ int drm_dp_tunnel_destroy(struct drm_dp_tunnel *tunnel);
 int drm_dp_tunnel_enable_bw_alloc(struct drm_dp_tunnel *tunnel);
 int drm_dp_tunnel_disable_bw_alloc(struct drm_dp_tunnel *tunnel);
 bool drm_dp_tunnel_bw_alloc_is_enabled(const struct drm_dp_tunnel *tunnel);
-bool drm_dp_tunnel_pr_optimization_supported(const struct drm_dp_tunnel *tunnel);
 int drm_dp_tunnel_alloc_bw(struct drm_dp_tunnel *tunnel, int bw);
 int drm_dp_tunnel_get_allocated_bw(struct drm_dp_tunnel *tunnel);
 int drm_dp_tunnel_update_state(struct drm_dp_tunnel *tunnel);
@@ -70,25 +69,25 @@ int drm_dp_tunnel_available_bw(const struct drm_dp_tunnel *tunnel);
 const char *drm_dp_tunnel_name(const struct drm_dp_tunnel *tunnel);
 
 struct drm_dp_tunnel_state *
-drm_dp_tunnel_atomic_get_state(struct drm_atomic_commit *state,
+drm_dp_tunnel_atomic_get_state(struct drm_atomic_state *state,
 			       struct drm_dp_tunnel *tunnel);
 
 struct drm_dp_tunnel_state *
-drm_dp_tunnel_atomic_get_old_state(struct drm_atomic_commit *state,
+drm_dp_tunnel_atomic_get_old_state(struct drm_atomic_state *state,
 				   const struct drm_dp_tunnel *tunnel);
 
 struct drm_dp_tunnel_state *
-drm_dp_tunnel_atomic_get_new_state(struct drm_atomic_commit *state,
+drm_dp_tunnel_atomic_get_new_state(struct drm_atomic_state *state,
 				   const struct drm_dp_tunnel *tunnel);
 
-int drm_dp_tunnel_atomic_set_stream_bw(struct drm_atomic_commit *state,
+int drm_dp_tunnel_atomic_set_stream_bw(struct drm_atomic_state *state,
 				       struct drm_dp_tunnel *tunnel,
 				       u8 stream_id, int bw);
-int drm_dp_tunnel_atomic_get_group_streams_in_state(struct drm_atomic_commit *state,
+int drm_dp_tunnel_atomic_get_group_streams_in_state(struct drm_atomic_state *state,
 						    const struct drm_dp_tunnel *tunnel,
 						    u32 *stream_mask);
 
-int drm_dp_tunnel_atomic_check_stream_bws(struct drm_atomic_commit *state,
+int drm_dp_tunnel_atomic_check_stream_bws(struct drm_atomic_state *state,
 					  u32 *failed_stream_mask);
 
 int drm_dp_tunnel_atomic_get_required_bw(const struct drm_dp_tunnel_state *tunnel_state);
@@ -137,11 +136,6 @@ static inline int drm_dp_tunnel_disable_bw_alloc(struct drm_dp_tunnel *tunnel)
 }
 
 static inline bool drm_dp_tunnel_bw_alloc_is_enabled(const struct drm_dp_tunnel *tunnel)
-{
-	return false;
-}
-
-static inline bool drm_dp_tunnel_pr_optimization_supported(const struct drm_dp_tunnel *tunnel)
 {
 	return false;
 }
@@ -198,21 +192,21 @@ drm_dp_tunnel_name(const struct drm_dp_tunnel *tunnel)
 }
 
 static inline struct drm_dp_tunnel_state *
-drm_dp_tunnel_atomic_get_state(struct drm_atomic_commit *state,
+drm_dp_tunnel_atomic_get_state(struct drm_atomic_state *state,
 			       struct drm_dp_tunnel *tunnel)
 {
 	return ERR_PTR(-EOPNOTSUPP);
 }
 
 static inline struct drm_dp_tunnel_state *
-drm_dp_tunnel_atomic_get_new_state(struct drm_atomic_commit *state,
+drm_dp_tunnel_atomic_get_new_state(struct drm_atomic_state *state,
 				   const struct drm_dp_tunnel *tunnel)
 {
 	return ERR_PTR(-EOPNOTSUPP);
 }
 
 static inline int
-drm_dp_tunnel_atomic_set_stream_bw(struct drm_atomic_commit *state,
+drm_dp_tunnel_atomic_set_stream_bw(struct drm_atomic_state *state,
 				   struct drm_dp_tunnel *tunnel,
 				   u8 stream_id, int bw)
 {
@@ -220,7 +214,7 @@ drm_dp_tunnel_atomic_set_stream_bw(struct drm_atomic_commit *state,
 }
 
 static inline int
-drm_dp_tunnel_atomic_get_group_streams_in_state(struct drm_atomic_commit *state,
+drm_dp_tunnel_atomic_get_group_streams_in_state(struct drm_atomic_state *state,
 						const struct drm_dp_tunnel *tunnel,
 						u32 *stream_mask)
 {
@@ -228,7 +222,7 @@ drm_dp_tunnel_atomic_get_group_streams_in_state(struct drm_atomic_commit *state,
 }
 
 static inline int
-drm_dp_tunnel_atomic_check_stream_bws(struct drm_atomic_commit *state,
+drm_dp_tunnel_atomic_check_stream_bws(struct drm_atomic_state *state,
 				      u32 *failed_stream_mask)
 {
 	return -EOPNOTSUPP;

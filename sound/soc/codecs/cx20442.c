@@ -236,8 +236,7 @@ err:
 /* Line discipline .close() */
 static void v253_close(struct tty_struct *tty)
 {
-	struct cx20442_codec *codec = tty->disc_data;
-	struct snd_soc_component *component = codec->component;
+	struct snd_soc_component *component = tty->disc_data;
 	struct cx20442_priv *cx20442;
 
 	tty->disc_data = NULL;
@@ -249,7 +248,7 @@ static void v253_close(struct tty_struct *tty)
 
 	/* Prevent the codec driver from further accessing the modem */
 	cx20442->tty = NULL;
-	codec->ready = false;
+	component->card->pop_time = 0;
 }
 
 /* Line discipline .hangup() */
@@ -262,8 +261,7 @@ static void v253_hangup(struct tty_struct *tty)
 static void v253_receive(struct tty_struct *tty, const u8 *cp, const u8 *fp,
 			 size_t count)
 {
-	struct cx20442_codec *codec = tty->disc_data;
-	struct snd_soc_component *component = codec->component;
+	struct snd_soc_component *component = tty->disc_data;
 	struct cx20442_priv *cx20442;
 
 	if (!component)
@@ -276,7 +274,7 @@ static void v253_receive(struct tty_struct *tty, const u8 *cp, const u8 *fp,
 
 		/* Set up codec driver access to modem controls */
 		cx20442->tty = tty;
-		codec->ready = true;
+		component->card->pop_time = 1;
 	}
 }
 
@@ -377,6 +375,7 @@ static int cx20442_component_probe(struct snd_soc_component *component)
 	cx20442->tty = NULL;
 
 	snd_soc_component_set_drvdata(component, cx20442);
+	component->card->pop_time = 0;
 
 	return 0;
 }

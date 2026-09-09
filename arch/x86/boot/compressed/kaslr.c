@@ -219,8 +219,7 @@ static void parse_gb_huge_pages(char *param, char *val)
 
 	if (!strcmp(param, "hugepages") && gbpage_sz) {
 		p = val;
-		if (boot_kstrtoul(p, 0, &max_gb_huge_pages))
-			warn("Failed to parse hugepages= boot parameter\n");
+		max_gb_huge_pages = simple_strtoull(p, &p, 0);
 		return;
 	}
 }

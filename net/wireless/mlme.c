@@ -38,7 +38,6 @@ void cfg80211_rx_assoc_resp(struct net_device *dev,
 					u.assoc_resp.variable),
 		.status = le16_to_cpu(mgmt->u.assoc_resp.status_code),
 		.ap_mld_addr = data->ap_mld_addr,
-		.assoc_encrypted = data->assoc_encrypted,
 	};
 	unsigned int link_id;
 
@@ -361,18 +360,17 @@ cfg80211_mlme_check_mlo_compat(const struct ieee80211_multi_link_elem *mle_a,
 	 * reserved when included in a unicast Probe Response frame and may
 	 * also change when the AP adds/removes links. The BTM MLD
 	 * Recommendation For Multiple APs Support subfield is reserved when
-	 * transmitted by an AP.
+	 * transmitted by an AP. All other bits are currently reserved.
+	 * See IEEE P802.11be/D7.0, Table 9-417o.
 	 */
 	if ((ieee80211_mle_get_ext_mld_capa_op((const u8 *)mle_a) &
 	     (IEEE80211_EHT_ML_EXT_MLD_CAPA_OP_PARAM_UPDATE |
 	      IEEE80211_EHT_ML_EXT_MLD_CAPA_NSTR_UPDATE |
-	      IEEE80211_EHT_ML_EXT_MLD_CAPA_EMLSR_ENA_ON_ONE_LINK |
-	      IEEE80211_UHR_ML_EXT_MLD_CAPA_ML_PM)) !=
+	      IEEE80211_EHT_ML_EXT_MLD_CAPA_EMLSR_ENA_ON_ONE_LINK)) !=
 	    (ieee80211_mle_get_ext_mld_capa_op((const u8 *)mle_b) &
 	     (IEEE80211_EHT_ML_EXT_MLD_CAPA_OP_PARAM_UPDATE |
 	      IEEE80211_EHT_ML_EXT_MLD_CAPA_NSTR_UPDATE |
-	      IEEE80211_EHT_ML_EXT_MLD_CAPA_EMLSR_ENA_ON_ONE_LINK |
-	      IEEE80211_UHR_ML_EXT_MLD_CAPA_ML_PM))) {
+	      IEEE80211_EHT_ML_EXT_MLD_CAPA_EMLSR_ENA_ON_ONE_LINK))) {
 		NL_SET_ERR_MSG(extack,
 			       "extended link MLD capabilities/ops mismatch");
 		return -EINVAL;
@@ -946,7 +944,6 @@ int cfg80211_mlme_mgmt_tx(struct cfg80211_registered_device *rdev,
 			 * fall through, P2P device only supports
 			 * public action frames
 			 */
-		case NL80211_IFTYPE_PD:
 		default:
 			err = -EOPNOTSUPP;
 			break;

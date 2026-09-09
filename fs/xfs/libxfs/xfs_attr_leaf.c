@@ -1429,7 +1429,7 @@ xfs_attr3_leaf_init(
 	struct xfs_da_args	args = {
 		.trans		= tp,
 		.dp		= dp,
-		.owner		= I_INO(dp),
+		.owner		= dp->i_ino,
 		.geo		= dp->i_mount->m_attr_geo,
 	};
 

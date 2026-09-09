@@ -44,7 +44,8 @@ properties:
     description:
       Telling whether or not this PMIC is controlling the system power.
 
-  wakeup-source: true
+  wakeup-source:
+    type: boolean
 
   vcc1-supply:
     description:

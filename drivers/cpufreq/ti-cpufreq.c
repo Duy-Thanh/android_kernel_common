@@ -99,7 +99,6 @@ struct ti_cpufreq_soc_data {
 	unsigned long efuse_shift;
 	unsigned long rev_offset;
 	bool multi_regulator;
-	bool needs_k3_socinfo;
 /* Backward compatibility hack: Might have missing syscon */
 #define TI_QUIRK_SYSCON_MAY_BE_MISSING	0x1
 /* Backward compatibility hack: new syscon size is 1 register wide */
@@ -348,7 +347,6 @@ static struct ti_cpufreq_soc_data am625_soc_data = {
 	.efuse_mask = 0x07c0,
 	.efuse_shift = 0x6,
 	.multi_regulator = false,
-	.needs_k3_socinfo = true,
 	.quirks = TI_QUIRK_SYSCON_IS_SINGLE_REG,
 };
 
@@ -358,7 +356,6 @@ static struct ti_cpufreq_soc_data am62a7_soc_data = {
 	.efuse_mask = 0x07c0,
 	.efuse_shift = 0x6,
 	.multi_regulator = false,
-	.needs_k3_socinfo = true,
 };
 
 static struct ti_cpufreq_soc_data am62l3_soc_data = {
@@ -367,7 +364,6 @@ static struct ti_cpufreq_soc_data am62l3_soc_data = {
 	.efuse_mask = 0x07c0,
 	.efuse_shift = 0x6,
 	.multi_regulator = false,
-	.needs_k3_socinfo = true,
 };
 
 static struct ti_cpufreq_soc_data am62p5_soc_data = {
@@ -376,7 +372,6 @@ static struct ti_cpufreq_soc_data am62p5_soc_data = {
 	.efuse_mask = 0x07c0,
 	.efuse_shift = 0x6,
 	.multi_regulator = false,
-	.needs_k3_socinfo = true,
 };
 
 /**
@@ -447,11 +442,6 @@ static int ti_cpufreq_get_rev(struct ti_cpufreq_data *opp_data,
 		*revision_value = 0x1;
 		goto done;
 	}
-
-	/* Defer if k3-socinfo hasn't registered the SoC device yet */
-	if (opp_data->soc_data->needs_k3_socinfo)
-		return dev_err_probe(opp_data->cpu_dev, -EPROBE_DEFER,
-				     "SoC device not registered by k3-socinfo\n");
 
 	ret = regmap_read(opp_data->syscon, opp_data->soc_data->rev_offset,
 			  &revision);

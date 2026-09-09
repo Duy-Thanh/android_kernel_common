@@ -98,9 +98,6 @@ static int rtw89_ops_config(struct ieee80211_hw *hw, int radio_idx, u32 changed)
 	    !rtwdev->scanning)
 		rtw89_enter_ips(rtwdev);
 
-	if (changed & IEEE80211_CONF_CHANGE_MONITOR)
-		rtw89_physts_parsing_init(rtwdev);
-
 	return 0;
 }
 
@@ -358,11 +355,6 @@ static void rtw89_ops_configure_filter(struct ieee80211_hw *hw,
 			rtwdev->hal.rx_fltr |= B_AX_A_UC_CAM_MATCH;
 		}
 	}
-
-	if (rtwdev->hw->conf.flags & IEEE80211_CONF_MONITOR)
-		rtwdev->hal.rx_fltr |= B_AX_SNIFFER_MODE;
-	else
-		rtwdev->hal.rx_fltr &= ~B_AX_SNIFFER_MODE;
 
 	rx_fltr = rtwdev->hal.rx_fltr;
 
@@ -729,21 +721,14 @@ static void rtw89_ops_vif_cfg_changed(struct ieee80211_hw *hw,
 
 	if (changed & BSS_CHANGED_MLD_VALID_LINKS) {
 		struct rtw89_vif_link *cur = rtw89_get_designated_link(rtwvif);
-		u16 mac_id;
 
 		if (RTW89_CHK_FW_FEATURE_GROUP(WITH_RFK_PRE_NOTIFY, &rtwdev->fw))
 			rtw89_chip_rfk_channel(rtwdev, cur);
 
-		if (hweight16(vif->active_links) == 1) {
-			mac_id = cur->mac_id;
+		if (hweight16(vif->active_links) == 1)
 			rtwvif->mlo_mode = RTW89_MLO_MODE_MLSR;
-		} else {
-			/* Specify for all MAC ID */
-			mac_id = 0xffff;
+		else
 			rtwvif->mlo_mode = RTW89_MLO_MODE_EMLSR;
-		}
-
-		rtw89_fw_h2c_tx_history(rtwdev, mac_id);
 	}
 }
 
@@ -979,8 +964,7 @@ static int rtw89_ops_set_key(struct ieee80211_hw *hw, enum set_key_cmd cmd,
 			rtw89_err(rtwdev, "failed to add key to sec cam\n");
 			return ret;
 		}
-		if (key->flags & IEEE80211_KEY_FLAG_PAIRWISE)
-			rtw89_core_tid_rx_stats_reset(rtwdev);
+		rtw89_core_tid_rx_stats_reset(rtwdev);
 		break;
 	case DISABLE_KEY:
 		flush_work(&rtwdev->txq_work);
@@ -1257,19 +1241,12 @@ static int rtw89_ops_hw_scan(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
 	struct rtw89_dev *rtwdev = hw->priv;
 	struct rtw89_vif *rtwvif = vif_to_rtwvif(vif);
 	struct rtw89_vif_link *rtwvif_link;
-	struct rtw89_hal *hal = &rtwdev->hal;
 	int ret;
 
 	lockdep_assert_wiphy(hw->wiphy);
 
 	if (!RTW89_CHK_FW_FEATURE(SCAN_OFFLOAD, &rtwdev->fw))
 		return 1;
-
-	if (hal->disabled_dm_bitmap & BIT(RTW89_DM_HW_SCAN)) {
-		rtw89_debug(rtwdev, RTW89_DBG_HW_SCAN,
-			    "reject hw scan due to disabled_dm\n");
-		return -EBUSY;
-	}
 
 	if (rtwdev->scanning || rtwvif->offchan)
 		return -EBUSY;

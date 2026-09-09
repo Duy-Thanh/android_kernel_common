@@ -25,7 +25,6 @@
 
 #include <linux/list.h>
 #include <linux/ctype.h>
-#include <linux/mutex.h>
 #include <drm/drm_crtc.h>
 #include <drm/drm_mode.h>
 #include <drm/drm_mode_object.h>
@@ -189,9 +188,6 @@ struct drm_encoder {
 	 * access this field directly.
 	 */
 	struct list_head bridge_chain;
-
-	/** @bridge_chain_mutex: protect bridge_chain from changes while iterating */
-	struct mutex bridge_chain_mutex;
 
 	const struct drm_encoder_funcs *funcs;
 	const struct drm_encoder_helper_funcs *helper_private;

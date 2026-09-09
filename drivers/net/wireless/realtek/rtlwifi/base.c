@@ -1369,19 +1369,18 @@ bool rtl_action_proc(struct ieee80211_hw *hw, struct sk_buff *skb, u8 is_tx)
 	struct rtl_mac *mac = rtl_mac(rtl_priv(hw));
 	struct ieee80211_hdr *hdr = rtl_get_hdr(skb);
 	struct rtl_priv *rtlpriv = rtl_priv(hw);
-	struct ieee80211_mgmt *mgmt;
 	__le16 fc = rtl_get_fc(skb);
+	u8 *act = (u8 *)(((u8 *)skb->data + MAC80211_3ADDR_LEN));
+	u8 category;
 
 	if (!ieee80211_is_action(fc))
 		return true;
 
-	mgmt = (void *)skb->data;
-	if (skb->len < IEEE80211_MIN_ACTION_SIZE(action_code))
-		return true;
-
-	switch (mgmt->u.action.category) {
+	category = *act;
+	act++;
+	switch (category) {
 	case ACT_CAT_BA:
-		switch (mgmt->u.action.action_code) {
+		switch (*act) {
 		case ACT_ADDBAREQ:
 			if (mac->act_scanning)
 				return false;
@@ -1395,10 +1394,8 @@ bool rtl_action_proc(struct ieee80211_hw *hw, struct sk_buff *skb, u8 is_tx)
 				struct ieee80211_sta *sta = NULL;
 				struct rtl_sta_info *sta_entry = NULL;
 				struct rtl_tid_data *tid_data;
+				struct ieee80211_mgmt *mgmt = (void *)skb->data;
 				u16 capab = 0, tid = 0;
-
-				if (skb->len < IEEE80211_MIN_ACTION_SIZE(addba_req))
-					return true;
 
 				rcu_read_lock();
 				sta = rtl_find_sta(hw, hdr->addr3);

@@ -31,8 +31,7 @@
 #include <errno.h>
 #include "kselftest.h"
 
-#define NSEC_PER_SEC 1000000000LL
-
+#define NSEC_PER_SEC 1000000000ULL
 #define UNREASONABLE_LAT (NSEC_PER_SEC * 5) /* hopefully we resume in 5 secs */
 
 #define SUSPEND_SECS 15

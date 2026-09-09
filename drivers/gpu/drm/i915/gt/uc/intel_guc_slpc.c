@@ -16,6 +16,7 @@
 #include "i915_wait_util.h"
 #include "intel_guc_print.h"
 #include "intel_guc_slpc.h"
+#include "intel_mchbar_regs.h"
 
 /**
  * DOC: SLPC - Dynamic Frequency management

@@ -59,7 +59,6 @@
 #include <linux/string.h>
 #include <linux/list.h>
 #include <linux/uaccess.h>
-#include <linux/uio.h>
 
 #include <linux/kernel.h>
 #include <linux/spinlock.h>
@@ -1336,7 +1335,7 @@ static int pppol2tp_session_getsockopt(struct sock *sk,
  * or the special tunnel type.
  */
 static int pppol2tp_getsockopt(struct socket *sock, int level, int optname,
-			       sockopt_t *opt)
+			       char __user *optval, int __user *optlen)
 {
 	struct sock *sk = sock->sk;
 	struct l2tp_session *session;
@@ -1347,7 +1346,9 @@ static int pppol2tp_getsockopt(struct socket *sock, int level, int optname,
 	if (level != SOL_PPPOL2TP)
 		return -EINVAL;
 
-	len = opt->optlen;
+	if (get_user(len, optlen))
+		return -EFAULT;
+
 	if (len < 0)
 		return -EINVAL;
 
@@ -1375,9 +1376,14 @@ static int pppol2tp_getsockopt(struct socket *sock, int level, int optname,
 			goto end_put_sess;
 	}
 
-	opt->optlen = len;
-	if (copy_to_iter(&val, len, &opt->iter_out) != len)
-		err = -EFAULT;
+	err = -EFAULT;
+	if (put_user(len, optlen))
+		goto end_put_sess;
+
+	if (copy_to_user((void __user *)optval, &val, len))
+		goto end_put_sess;
+
+	err = 0;
 
 end_put_sess:
 	l2tp_session_put(session);
@@ -1646,7 +1652,7 @@ static const struct proto_ops pppol2tp_ops = {
 	.listen		= sock_no_listen,
 	.shutdown	= sock_no_shutdown,
 	.setsockopt	= pppol2tp_setsockopt,
-	.getsockopt_iter = pppol2tp_getsockopt,
+	.getsockopt	= pppol2tp_getsockopt,
 	.sendmsg	= pppol2tp_sendmsg,
 	.recvmsg	= pppol2tp_recvmsg,
 	.mmap		= sock_no_mmap,

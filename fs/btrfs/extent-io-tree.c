@@ -1763,7 +1763,7 @@ u64 btrfs_count_range_bits(struct extent_io_tree *tree,
 	u64 cur_start = *start;
 	u64 total_bytes = 0;
 	u64 last = 0;
-	bool found = false;
+	int found = 0;
 
 	if (WARN_ON(search_end < cur_start))
 		return 0;
@@ -1817,7 +1817,7 @@ search:
 				break;
 			if (!found) {
 				*start = max(cur_start, state->start);
-				found = true;
+				found = 1;
 			}
 			last = state->end;
 		} else if (contig && found) {

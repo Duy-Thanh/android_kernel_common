@@ -25,8 +25,10 @@ pub mod code {
             #[doc = $doc]
             )*
             pub const $err: super::Error =
-                super::Error::try_from_errno(-(crate::bindings::$err as i32))
-                    .expect("Invalid errno in `declare_err!`");
+                match super::Error::try_from_errno(-(crate::bindings::$err as i32)) {
+                    Some(err) => err,
+                    None => panic!("Invalid errno in `declare_err!`"),
+                };
         };
     }
 

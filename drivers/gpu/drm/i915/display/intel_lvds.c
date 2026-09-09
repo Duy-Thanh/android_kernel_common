@@ -70,7 +70,7 @@ struct intel_lvds_encoder {
 	struct intel_encoder base;
 
 	bool is_dual_link;
-	intel_reg_t reg;
+	i915_reg_t reg;
 	u32 a3_power;
 
 	struct intel_lvds_pps init_pps;
@@ -85,7 +85,7 @@ static struct intel_lvds_encoder *to_lvds_encoder(struct intel_encoder *encoder)
 }
 
 bool intel_lvds_port_enabled(struct intel_display *display,
-			     intel_reg_t lvds_reg, enum pipe *pipe)
+			     i915_reg_t lvds_reg, enum pipe *pipe)
 {
 	u32 val;
 
@@ -395,19 +395,20 @@ intel_lvds_mode_valid(struct drm_connector *_connector,
 {
 	struct intel_display *display = to_intel_display(_connector->dev);
 	struct intel_connector *connector = to_intel_connector(_connector);
+	const struct drm_display_mode *fixed_mode =
+		intel_panel_fixed_mode(connector, mode);
 	int max_pixclk = display->cdclk.max_dotclk_freq;
 	enum drm_mode_status status;
-	int target_clock;
 
 	status = intel_cpu_transcoder_mode_valid(display, mode);
 	if (status != MODE_OK)
 		return status;
 
-	status = intel_panel_mode_valid(connector, mode, &target_clock);
+	status = intel_panel_mode_valid(connector, mode);
 	if (status != MODE_OK)
 		return status;
 
-	if (target_clock > max_pixclk)
+	if (fixed_mode->clock > max_pixclk)
 		return MODE_CLOCK_HIGH;
 
 	return MODE_OK;
@@ -845,7 +846,7 @@ void intel_lvds_init(struct intel_display *display)
 	struct intel_connector *connector;
 	const struct drm_edid *drm_edid;
 	struct intel_encoder *encoder;
-	intel_reg_t lvds_reg;
+	i915_reg_t lvds_reg;
 	u32 lvds;
 	u8 ddc_pin;
 

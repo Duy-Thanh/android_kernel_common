@@ -36,12 +36,15 @@ static int odroid_card_fe_hw_params(struct snd_pcm_substream *substream,
 {
 	struct snd_soc_pcm_runtime *rtd = snd_soc_substream_to_rtd(substream);
 	struct odroid_priv *priv = snd_soc_card_get_drvdata(rtd->card);
+	unsigned long flags;
+	int ret = 0;
 
-	guard(spinlock_irqsave)(&priv->lock);
+	spin_lock_irqsave(&priv->lock, flags);
 	if (priv->be_active && priv->be_sample_rate != params_rate(params))
-		return -EINVAL;
+		ret = -EINVAL;
+	spin_unlock_irqrestore(&priv->lock, flags);
 
-	return 0;
+	return ret;
 }
 
 static const struct snd_soc_ops odroid_card_fe_ops = {
@@ -55,6 +58,7 @@ static int odroid_card_be_hw_params(struct snd_pcm_substream *substream,
 	struct snd_soc_pcm_runtime *rtd = snd_soc_substream_to_rtd(substream);
 	struct odroid_priv *priv = snd_soc_card_get_drvdata(rtd->card);
 	unsigned int pll_freq, rclk_freq, rfs;
+	unsigned long flags;
 	int ret;
 
 	switch (params_rate(params)) {
@@ -101,8 +105,10 @@ static int odroid_card_be_hw_params(struct snd_pcm_substream *substream,
 			return ret;
 	}
 
-	scoped_guard(spinlock_irqsave, &priv->lock)
-		priv->be_sample_rate = params_rate(params);
+	spin_lock_irqsave(&priv->lock, flags);
+	priv->be_sample_rate = params_rate(params);
+	spin_unlock_irqrestore(&priv->lock, flags);
+
 	return 0;
 }
 
@@ -110,8 +116,9 @@ static int odroid_card_be_trigger(struct snd_pcm_substream *substream, int cmd)
 {
 	struct snd_soc_pcm_runtime *rtd = snd_soc_substream_to_rtd(substream);
 	struct odroid_priv *priv = snd_soc_card_get_drvdata(rtd->card);
+	unsigned long flags;
 
-	guard(spinlock_irqsave)(&priv->lock);
+	spin_lock_irqsave(&priv->lock, flags);
 
 	switch (cmd) {
 	case SNDRV_PCM_TRIGGER_START:
@@ -126,6 +133,8 @@ static int odroid_card_be_trigger(struct snd_pcm_substream *substream, int cmd)
 		priv->be_active = false;
 		break;
 	}
+
+	spin_unlock_irqrestore(&priv->lock, flags);
 
 	return 0;
 }

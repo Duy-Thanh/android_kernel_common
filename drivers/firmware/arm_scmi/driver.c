@@ -17,7 +17,6 @@
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
 #include <linux/bitmap.h>
-#include <linux/cleanup.h>
 #include <linux/debugfs.h>
 #include <linux/device.h>
 #include <linux/export.h>
@@ -134,7 +133,7 @@ struct scmi_protocol_instance {
  *	       usage.
  * @protocols_mtx: A mutex to protect protocols instances initialization.
  * @protocols_imp: List of protocols implemented, currently maximum of
- *		   scmi_base_info.num_protocols elements allocated by the
+ *		   scmi_revision_info.num_protocols elements allocated by the
  *		   base protocol
  * @active_protocols: IDR storing device_nodes for protocols actually defined
  *		      in the DT and confirmed as implemented by fw.
@@ -152,7 +151,7 @@ struct scmi_info {
 	int id;
 	struct device *dev;
 	const struct scmi_desc *desc;
-	struct scmi_base_info version;
+	struct scmi_revision_info version;
 	struct scmi_handle handle;
 	struct scmi_xfers_info tx_minfo;
 	struct scmi_xfers_info rx_minfo;
@@ -266,7 +265,7 @@ scmi_vendor_protocol_lookup(int protocol_id, char *vendor_id,
 }
 
 static const struct scmi_protocol *
-scmi_vendor_protocol_get(int protocol_id, struct scmi_base_info *version)
+scmi_vendor_protocol_get(int protocol_id, struct scmi_revision_info *version)
 {
 	const struct scmi_protocol *proto;
 
@@ -304,7 +303,7 @@ scmi_vendor_protocol_get(int protocol_id, struct scmi_base_info *version)
 }
 
 static const struct scmi_protocol *
-scmi_protocol_get(int protocol_id, struct scmi_base_info *version)
+scmi_protocol_get(int protocol_id, struct scmi_revision_info *version)
 {
 	const struct scmi_protocol *proto = NULL;
 
@@ -1790,113 +1789,84 @@ static void *scmi_iterator_init(const struct scmi_protocol_handle *ph,
 				size_t tx_size, void *priv)
 {
 	int ret;
+	struct scmi_iterator *i;
 
-	struct scmi_iterator *i __free(kfree) = kzalloc(sizeof(*i), GFP_KERNEL);
+	i = devm_kzalloc(ph->dev, sizeof(*i), GFP_KERNEL);
 	if (!i)
 		return ERR_PTR(-ENOMEM);
-
-	if (!ops || !ph)
-		return ERR_PTR(-EINVAL);
 
 	i->ph = ph;
 	i->ops = ops;
 	i->priv = priv;
 
 	ret = ph->xops->xfer_get_init(ph, msg_id, tx_size, 0, &i->t);
-	if (ret)
+	if (ret) {
+		devm_kfree(ph->dev, i);
 		return ERR_PTR(ret);
+	}
 
 	i->state.max_resources = max_resources;
 	i->msg = i->t->tx.buf;
 	i->resp = i->t->rx.buf;
 
-	return no_free_ptr(i);
+	return i;
 }
 
-static int __scmi_iterator_run(void *iter, unsigned int *start, unsigned int *end)
+static int scmi_iterator_run(void *iter)
 {
-	int ret;
+	int ret = -EINVAL;
 	struct scmi_iterator_ops *iops;
 	const struct scmi_protocol_handle *ph;
 	struct scmi_iterator_state *st;
-	struct scmi_iterator *i;
-	unsigned int n;
+	struct scmi_iterator *i = iter;
 
-	if (!iter)
-		return -EINVAL;
+	if (!i || !i->ops || !i->ph)
+		return ret;
 
-	i = iter;
 	iops = i->ops;
 	ph = i->ph;
 	st = &i->state;
-
-	/* Reinitialize state for next run */
-	st->num_returned = 0;
-	st->num_remaining = 0;
-	st->desc_index = start ? *start : 0;
 
 	do {
 		iops->prepare_message(i->msg, st->desc_index, i->priv);
 		ret = ph->xops->do_xfer(ph, i->t);
 		if (ret)
-			return ret;
+			break;
 
 		st->rx_len = i->t->rx.len;
 		ret = iops->update_state(st, i->resp, i->priv);
 		if (ret)
-			return ret;
+			break;
 
 		if (st->num_returned > st->max_resources - st->desc_index) {
 			dev_err(ph->dev,
 				"No. of resources can't exceed %d\n",
 				st->max_resources);
-			return -EINVAL;
+			ret = -EINVAL;
+			break;
 		}
 
-		if (end)
-			n = min(st->num_returned, *end - st->desc_index + 1);
-		else
-			n = st->num_returned;
-		for (st->loop_idx = 0; st->loop_idx < n; st->loop_idx++) {
+		for (st->loop_idx = 0; st->loop_idx < st->num_returned;
+		     st->loop_idx++) {
 			ret = iops->process_response(ph, i->resp, st, i->priv);
 			if (ret)
-				return ret;
+				goto out;
 		}
 
-		st->desc_index += n;
+		st->desc_index += st->num_returned;
 		ph->xops->reset_rx_to_maxsz(ph, i->t);
 		/*
 		 * check for both returned and remaining to avoid infinite
 		 * loop due to buggy firmware
 		 */
-	} while (st->num_returned && st->num_remaining &&
-		 (!end || (st->desc_index <= min(*end, st->max_resources - 1))));
+	} while (st->num_returned && st->num_remaining);
 
-	return 0;
-}
-
-static void scmi_iterator_bound_cleanup(void *iter)
-{
-	struct scmi_iterator *i = iter;
-
-	i->ph->xops->xfer_put(i->ph, i->t);
-	kfree(i);
-}
-
-static int scmi_iterator_run(void *iter)
-{
-	int ret;
-
-	ret = __scmi_iterator_run(iter, NULL, NULL);
-	scmi_iterator_bound_cleanup(iter);
+out:
+	/* Finalize and destroy iterator */
+	ph->xops->xfer_put(ph, i->t);
+	devm_kfree(ph->dev, i);
 
 	return ret;
-}
-
-static int scmi_iterator_run_bound(void *iter, unsigned int *start,
-				   unsigned int *end)
-{
-	return __scmi_iterator_run(iter, start, end);
 }
 
 struct scmi_msg_get_fc_info {
@@ -2077,8 +2047,6 @@ static const struct scmi_proto_helpers_ops helpers_ops = {
 	.get_max_msg_size = scmi_common_get_max_msg_size,
 	.iter_response_init = scmi_iterator_init,
 	.iter_response_run = scmi_iterator_run,
-	.iter_response_run_bound = scmi_iterator_run_bound,
-	.iter_response_bound_cleanup = scmi_iterator_bound_cleanup,
 	.protocol_msg_check = scmi_protocol_msg_check,
 	.fastchannel_init = scmi_common_fastchannel_init,
 	.fastchannel_db_ring = scmi_common_fastchannel_db_ring,
@@ -2095,7 +2063,7 @@ static const struct scmi_proto_helpers_ops helpers_ops = {
  * Return: A reference to the version memory area associated to the SCMI
  *	   instance underlying this protocol handle.
  */
-struct scmi_base_info *
+struct scmi_revision_info *
 scmi_revision_area_get(const struct scmi_protocol_handle *ph)
 {
 	const struct scmi_protocol_instance *pi = ph_to_pi(ph);
@@ -2408,7 +2376,7 @@ scmi_is_protocol_implemented(const struct scmi_handle *handle, u8 prot_id)
 {
 	int i;
 	struct scmi_info *info = handle_to_scmi_info(handle);
-	struct scmi_base_info *rev = handle->version;
+	struct scmi_revision_info *rev = handle->version;
 
 	if (!info->protocols_imp)
 		return false;
@@ -2584,11 +2552,13 @@ static bool scmi_is_transport_atomic(const struct scmi_handle *handle,
  */
 static struct scmi_handle *scmi_handle_get(struct device *dev)
 {
+	struct list_head *p;
 	struct scmi_info *info;
 	struct scmi_handle *handle = NULL;
 
 	mutex_lock(&scmi_list_mutex);
-	list_for_each_entry(info, &scmi_list, node) {
+	list_for_each(p, &scmi_list) {
+		info = list_entry(p, struct scmi_info, node);
 		if (dev->parent == info->dev) {
 			info->users++;
 			handle = &info->handle;
@@ -3201,7 +3171,7 @@ static const struct scmi_desc *scmi_transport_setup(struct device *dev)
 
 static void scmi_enable_matching_quirks(struct scmi_info *info)
 {
-	struct scmi_base_info *rev = &info->version;
+	struct scmi_revision_info *rev = &info->version;
 
 	dev_dbg(info->dev, "Looking for quirks matching: %s/%s/0x%08X\n",
 		rev->vendor_id, rev->sub_vendor_id, rev->impl_ver);

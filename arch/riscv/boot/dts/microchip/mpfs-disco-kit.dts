@@ -199,3 +199,7 @@
 &spi1 {
 	status = "okay";
 };
+
+&syscontroller {
+	status = "okay";
+};

@@ -25,13 +25,12 @@
 #include <linux/sched/signal.h>
 #include <linux/slab.h>
 #include <linux/string.h>
-#include <linux/sysfs.h>
 #include <linux/uaccess.h>
 #include <linux/workqueue.h>
 
 #define RNG_MODULE_NAME		"hw_random"
 
-#define RNG_BUFFER_SIZE		MAX(32, SMP_CACHE_BYTES)
+#define RNG_BUFFER_SIZE (SMP_CACHE_BYTES < 32 ? 32 : SMP_CACHE_BYTES)
 
 static struct hwrng __rcu *current_rng;
 /* the current rng has been explicitly chosen by user via sysfs */
@@ -55,8 +54,12 @@ module_param(default_quality, ushort, 0644);
 MODULE_PARM_DESC(default_quality,
 		 "default maximum entropy content of hwrng per 1024 bits of input");
 
+static void drop_current_rng(void);
 static int hwrng_init(struct hwrng *rng);
 static int hwrng_fillfn(void *unused);
+
+static inline int rng_get_data(struct hwrng *rng, u8 *buffer, size_t size,
+			       int wait);
 
 static size_t rng_buffer_size(void)
 {
@@ -211,8 +214,8 @@ static int rng_dev_open(struct inode *inode, struct file *filp)
 	return 0;
 }
 
-static inline int rng_get_data(struct hwrng *rng, u8 *buffer, size_t size, bool wait)
-{
+static inline int rng_get_data(struct hwrng *rng, u8 *buffer, size_t size,
+			int wait) {
 	int present;
 
 	BUG_ON(!mutex_is_locked(&reading_mutex));
@@ -415,17 +418,21 @@ static ssize_t rng_available_show(struct device *dev,
 				  struct device_attribute *attr,
 				  char *buf)
 {
+	int err;
 	struct hwrng *rng;
-	int len = 0;
 
-	if (mutex_lock_interruptible(&rng_mutex))
+	err = mutex_lock_interruptible(&rng_mutex);
+	if (err)
 		return -ERESTARTSYS;
-	list_for_each_entry(rng, &rng_list, list)
-		len += sysfs_emit_at(buf, len, "%s ", rng->name);
-	len += sysfs_emit_at(buf, len, "none\n");
+	buf[0] = '\0';
+	list_for_each_entry(rng, &rng_list, list) {
+		strlcat(buf, rng->name, PAGE_SIZE);
+		strlcat(buf, " ", PAGE_SIZE);
+	}
+	strlcat(buf, "none\n", PAGE_SIZE);
 	mutex_unlock(&rng_mutex);
 
-	return len;
+	return strlen(buf);
 }
 
 static ssize_t rng_selected_show(struct device *dev,
@@ -531,7 +538,8 @@ static int hwrng_fillfn(void *unused)
 		}
 
 		mutex_lock(&reading_mutex);
-		rc = rng_get_data(rng, rng_fillbuf, rng_buffer_size(), true);
+		rc = rng_get_data(rng, rng_fillbuf,
+				  rng_buffer_size(), 1);
 		if (current_quality != rng->quality)
 			rng->quality = current_quality; /* obsolete */
 		quality = rng->quality;

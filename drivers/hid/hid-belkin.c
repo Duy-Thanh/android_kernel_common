@@ -27,8 +27,7 @@ static int belkin_input_mapping(struct hid_device *hdev, struct hid_input *hi,
 		struct hid_field *field, struct hid_usage *usage,
 		unsigned long **bit, int *max)
 {
-	const struct hid_device_id *id = hid_get_drvdata(hdev);
-	unsigned long quirks = id->driver_data;
+	unsigned long quirks = (unsigned long)hid_get_drvdata(hdev);
 
 	if ((usage->hid & HID_USAGE_PAGE) != HID_UP_CONSUMER ||
 			!(quirks & BELKIN_WKBD))
@@ -49,7 +48,7 @@ static int belkin_probe(struct hid_device *hdev, const struct hid_device_id *id)
 	unsigned long quirks = id->driver_data;
 	int ret;
 
-	hid_set_drvdata(hdev, (void *)id);
+	hid_set_drvdata(hdev, (void *)quirks);
 
 	ret = hid_parse(hdev);
 	if (ret) {

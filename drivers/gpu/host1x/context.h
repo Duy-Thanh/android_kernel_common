@@ -12,7 +12,8 @@
 #include <linux/refcount.h>
 
 struct host1x;
-struct host1x_memory_context;
+
+extern struct bus_type host1x_context_device_bus_type;
 
 struct host1x_memory_context_list {
 	struct mutex lock;

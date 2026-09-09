@@ -58,13 +58,9 @@ kernel::pci_device_table!(
 
 impl pci::Driver for DmaSampleDriver {
     type IdInfo = ();
-    type Data<'bound> = Self;
     const ID_TABLE: pci::IdTable<Self::IdInfo> = &PCI_TABLE;
 
-    fn probe<'bound>(
-        pdev: &'bound pci::Device<Core<'_>>,
-        _info: &'bound Self::IdInfo,
-    ) -> impl PinInit<Self, Error> + 'bound {
+    fn probe(pdev: &pci::Device<Core>, _info: &Self::IdInfo) -> impl PinInit<Self, Error> {
         pin_init::pin_init_scope(move || {
             dev_info!(pdev, "Probe DMA test driver.\n");
 
@@ -77,7 +73,7 @@ impl pci::Driver for DmaSampleDriver {
                 Coherent::zeroed_slice(pdev.as_ref(), TEST_VALUES.len(), GFP_KERNEL)?;
 
             for (i, value) in TEST_VALUES.into_iter().enumerate() {
-                kernel::dma_write!(ca, [try: i], MyStruct::new(value.0, value.1));
+                kernel::dma_write!(ca, [i]?, MyStruct::new(value.0, value.1));
             }
 
             let size = 4 * page::PAGE_SIZE;
@@ -95,14 +91,16 @@ impl pci::Driver for DmaSampleDriver {
 }
 
 impl DmaSampleDriver {
-    fn check_dma(&self) {
+    fn check_dma(&self) -> Result {
         for (i, value) in TEST_VALUES.into_iter().enumerate() {
-            let val0 = kernel::dma_read!(self.ca, [panic: i].h);
-            let val1 = kernel::dma_read!(self.ca, [panic: i].b);
+            let val0 = kernel::dma_read!(self.ca, [i]?.h);
+            let val1 = kernel::dma_read!(self.ca, [i]?.b);
 
             assert_eq!(val0, value.0);
             assert_eq!(val1, value.1);
         }
+
+        Ok(())
     }
 }
 
@@ -111,7 +109,7 @@ impl PinnedDrop for DmaSampleDriver {
     fn drop(self: Pin<&mut Self>) {
         dev_info!(self.pdev, "Unload DMA test driver.\n");
 
-        self.check_dma();
+        assert!(self.check_dma().is_ok());
 
         for (i, entry) in self.sgt.iter().enumerate() {
             dev_info!(

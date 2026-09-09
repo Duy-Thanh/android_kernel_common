@@ -148,7 +148,7 @@ struct b53_device {
 	u8 duplex_reg;
 	u8 jumbo_pm_reg;
 	u8 jumbo_size_reg;
-	struct gpio_desc *reset_gpio;
+	int reset_gpio;
 	u8 num_arl_bins;
 	u16 num_arl_buckets;
 	enum dsa_tag_protocol tag_protocol;
@@ -467,36 +467,23 @@ static inline void b53_arl_search_read(struct b53_device *dev, u8 idx,
 #ifdef CONFIG_BCM47XX
 
 #include <linux/bcm47xx_nvram.h>
-#include <linux/gpio.h>
 #include <bcm47xx_board.h>
-static inline struct gpio_desc *b53_switch_get_reset_gpio(struct b53_device *dev)
+static inline int b53_switch_get_reset_gpio(struct b53_device *dev)
 {
 	enum bcm47xx_board board = bcm47xx_board_get();
-	int gpio, ret;
 
 	switch (board) {
 	case BCM47XX_BOARD_LINKSYS_WRT300NV11:
 	case BCM47XX_BOARD_LINKSYS_WRT310NV1:
-		gpio = 8;
-		break;
+		return 8;
 	default:
-		gpio = bcm47xx_nvram_gpio_pin("robo_reset");
+		return bcm47xx_nvram_gpio_pin("robo_reset");
 	}
-
-	if (!gpio_is_valid(gpio))
-		return ERR_PTR(-EINVAL);
-
-	ret = devm_gpio_request_one(dev->dev, gpio,
-				    GPIOF_OUT_INIT_HIGH, "robo_reset");
-	if (ret)
-		return ERR_PTR(ret);
-
-	return gpio_to_desc(gpio);
 }
 #else
-static inline struct gpio_desc *b53_switch_get_reset_gpio(struct b53_device *dev)
+static inline int b53_switch_get_reset_gpio(struct b53_device *dev)
 {
-	return ERR_PTR(-ENODEV);
+	return -ENOENT;
 }
 #endif
 

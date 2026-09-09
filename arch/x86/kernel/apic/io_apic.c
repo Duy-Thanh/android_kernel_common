@@ -1575,6 +1575,8 @@ static unsigned int startup_ioapic_irq(struct irq_data *data)
 	return was_pending;
 }
 
+atomic_t irq_mis_count;
+
 #ifdef CONFIG_GENERIC_PENDING_IRQ
 static bool io_apic_level_ack_pending(struct mp_chip_data *data)
 {
@@ -1711,7 +1713,7 @@ static void ioapic_ack_level(struct irq_data *irq_data)
 	 * at the cpu.
 	 */
 	if (!(v & (1 << (i & 0x1f)))) {
-		irq_stat_inc_and_enable(IRQ_COUNT_IOAPIC_MISROUTED);
+		atomic_inc(&irq_mis_count);
 		eoi_ioapic_pin(cfg->vector, irq_data->chip_data);
 	}
 

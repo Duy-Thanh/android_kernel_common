@@ -7,7 +7,6 @@
 #include "mt7921.h"
 #include "../dma.h"
 #include "../mt76_connac2_mac.h"
-#include "regd.h"
 #include "mcu.h"
 
 #define MT_WTBL_TXRX_CAP_RATE_OFFSET	7
@@ -531,9 +530,8 @@ static void mt7921_mac_tx_free(struct mt792x_dev *dev, void *data, int len)
 		stat = FIELD_GET(MT_TX_FREE_STATUS, info);
 
 		if (wcid) {
-			u32 count = FIELD_GET(MT_TX_FREE_COUNT, info);
-
-			wcid->stats.tx_retries += count ? count - 1 : 0;
+			wcid->stats.tx_retries +=
+				FIELD_GET(MT_TX_FREE_COUNT, info) - 1;
 			wcid->stats.tx_failed += !!stat;
 		}
 
@@ -677,9 +675,7 @@ void mt7921_mac_reset_work(struct work_struct *work)
 		if (!ret)
 			break;
 	}
-
-	if ((mt76_is_sdio(&dev->mt76) || mt76_is_usb(&dev->mt76)) &&
-	    atomic_read(&dev->mt76.bus_hung))
+	if (mt76_is_sdio(&dev->mt76) && atomic_read(&dev->mt76.bus_hung))
 		return;
 
 	if (i == 10)
@@ -701,8 +697,6 @@ void mt7921_mac_reset_work(struct work_struct *work)
 					    IEEE80211_IFACE_ITER_RESUME_ALL,
 					    mt7921_vif_connect_iter, NULL);
 	mt76_connac_power_save_sched(&dev->mt76.phy, pm);
-
-	mt7921_regd_change(&dev->phy, "00");
 }
 
 void mt7921_coredump_work(struct work_struct *work)

@@ -94,8 +94,9 @@ static int selinux_fs_info_create(struct super_block *sb)
 	return 0;
 }
 
-static void selinux_fs_info_free(struct selinux_fs_info *fsi)
+static void selinux_fs_info_free(struct super_block *sb)
 {
+	struct selinux_fs_info *fsi = sb->s_fs_info;
 	unsigned int i;
 
 	if (fsi) {
@@ -104,7 +105,8 @@ static void selinux_fs_info_free(struct selinux_fs_info *fsi)
 		kfree(fsi->bool_pending_names);
 		kfree(fsi->bool_pending_values);
 	}
-	kfree(fsi);
+	kfree(sb->s_fs_info);
+	sb->s_fs_info = NULL;
 }
 
 #define SEL_INITCON_INO_OFFSET		0x01000000
@@ -783,7 +785,7 @@ static const struct file_operations transaction_ops = {
 /*
  * payload - write methods
  * If the method has a response, the response should be put in buf,
- * and the length returned.  Otherwise return 0 or -error.
+ * and the length returned.  Otherwise return 0 or and -error.
  */
 
 static ssize_t sel_write_access(struct file *file, char *buf, size_t size)
@@ -1242,7 +1244,7 @@ static int sel_make_bools(struct selinux_policy *newpolicy, struct dentry *bool_
 	char **names, *page;
 	u32 i, num;
 
-	page = kzalloc(PAGE_SIZE, GFP_KERNEL);
+	page = (char *)get_zeroed_page(GFP_KERNEL);
 	if (!page)
 		return -ENOMEM;
 
@@ -1288,7 +1290,7 @@ static int sel_make_bools(struct selinux_policy *newpolicy, struct dentry *bool_
 		ret = sel_attach_file(bool_dir, names[i], inode);
 	}
 out:
-	kfree(page);
+	free_page((unsigned long)page);
 	return ret;
 }
 
@@ -1347,14 +1349,14 @@ static ssize_t sel_read_avc_hash_stats(struct file *filp, char __user *buf,
 	char *page;
 	ssize_t length;
 
-	page = kmalloc(PAGE_SIZE, GFP_KERNEL);
+	page = (char *)__get_free_page(GFP_KERNEL);
 	if (!page)
 		return -ENOMEM;
 
 	length = avc_get_hash_stats(page);
 	if (length >= 0)
 		length = simple_read_from_buffer(buf, count, ppos, page, length);
-	kfree(page);
+	free_page((unsigned long)page);
 
 	return length;
 }
@@ -1365,7 +1367,7 @@ static ssize_t sel_read_sidtab_hash_stats(struct file *filp, char __user *buf,
 	char *page;
 	ssize_t length;
 
-	page = kmalloc(PAGE_SIZE, GFP_KERNEL);
+	page = (char *)__get_free_page(GFP_KERNEL);
 	if (!page)
 		return -ENOMEM;
 
@@ -1373,7 +1375,7 @@ static ssize_t sel_read_sidtab_hash_stats(struct file *filp, char __user *buf,
 	if (length >= 0)
 		length = simple_read_from_buffer(buf, count, ppos, page,
 						length);
-	kfree(page);
+	free_page((unsigned long)page);
 
 	return length;
 }
@@ -1957,10 +1959,8 @@ static int sel_init_fs_context(struct fs_context *fc)
 
 static void sel_kill_sb(struct super_block *sb)
 {
-	struct selinux_fs_info *fsi = sb->s_fs_info;
-
+	selinux_fs_info_free(sb);
 	kill_anon_super(sb);
-	selinux_fs_info_free(fsi);
 }
 
 static struct file_system_type sel_fs_type = {
@@ -1973,7 +1973,8 @@ struct path selinux_null __ro_after_init;
 
 int __init init_sel_fs(void)
 {
-	struct qstr null_name = QSTR(NULL_FILE_NAME);
+	struct qstr null_name = QSTR_INIT(NULL_FILE_NAME,
+					  sizeof(NULL_FILE_NAME)-1);
 	int err;
 
 	if (!selinux_enabled_boot)

@@ -29,6 +29,7 @@
 #include <linux/freezer.h>
 #include <linux/uaccess.h>
 #include <linux/fb.h>
+#include <linux/fbcon.h>
 #include <linux/init.h>
 
 #include <asm/cell-regs.h>
@@ -829,7 +830,9 @@ static int ps3fb_ioctl(struct fb_info *info, unsigned int cmd,
 				/* Force, in case only special bits changed */
 				var.activate |= FB_ACTIVATE_FORCE;
 				par->new_mode_id = val;
-				retval = fb_set_var_from_user(info, &var);
+				retval = fb_set_var(info, &var);
+				if (!retval)
+					fbcon_update_vcs(info, var.activate & FB_ACTIVATE_ALL);
 				console_unlock();
 			}
 			break;

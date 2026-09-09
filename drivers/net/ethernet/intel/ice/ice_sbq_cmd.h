@@ -54,9 +54,8 @@ enum ice_sbq_dev_id {
 };
 
 enum ice_sbq_msg_opcode {
-	ice_sbq_msg_rd		= 0x00,
-	ice_sbq_msg_wr		= 0x01,
-	ice_sbq_msg_wr_np	= 0x02
+	ice_sbq_msg_rd	= 0x00,
+	ice_sbq_msg_wr	= 0x01
 };
 
 #define ICE_SBQ_MSG_FLAGS	0x40

@@ -164,7 +164,13 @@ static int update_lmb_associativity_index(struct drmem_lmb *lmb)
 
 static struct memory_block *lmb_to_memblock(struct drmem_lmb *lmb)
 {
-	return memory_block_get(phys_to_block_id(lmb->base_addr));
+	unsigned long section_nr;
+	struct memory_block *mem_block;
+
+	section_nr = pfn_to_section_nr(PFN_DOWN(lmb->base_addr));
+
+	mem_block = find_memory_block(section_nr);
+	return mem_block;
 }
 
 static int get_lmb_range(u32 drc_index, int n_lmbs,
@@ -207,14 +213,14 @@ static int dlpar_change_lmb_state(struct drmem_lmb *lmb, bool online)
 		return -EINVAL;
 	}
 
-	if (online && dev_offline(&mem_block->dev))
+	if (online && mem_block->dev.offline)
 		rc = device_online(&mem_block->dev);
-	else if (!online && !dev_offline(&mem_block->dev))
+	else if (!online && !mem_block->dev.offline)
 		rc = device_offline(&mem_block->dev);
 	else
 		rc = 0;
 
-	memory_block_put(mem_block);
+	put_device(&mem_block->dev);
 
 	return rc;
 }
@@ -313,12 +319,12 @@ static int dlpar_remove_lmb(struct drmem_lmb *lmb)
 
 	rc = dlpar_offline_lmb(lmb);
 	if (rc) {
-		memory_block_put(mem_block);
+		put_device(&mem_block->dev);
 		return rc;
 	}
 
 	__remove_memory(lmb->base_addr, memory_block_size);
-	memory_block_put(mem_block);
+	put_device(&mem_block->dev);
 
 	/* Update memory regions for memory remove */
 	memblock_remove(lmb->base_addr, memory_block_size);

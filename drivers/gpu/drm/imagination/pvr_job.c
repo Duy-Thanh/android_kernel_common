@@ -14,7 +14,6 @@
 #include "pvr_stream.h"
 #include "pvr_stream_defs.h"
 #include "pvr_sync.h"
-#include "pvr_trace.h"
 
 #include <drm/drm_exec.h>
 #include <drm/drm_gem.h>
@@ -327,7 +326,7 @@ prepare_job_syncs(struct pvr_file *pvr_file,
 		  struct pvr_job_data *job_data,
 		  struct xarray *signal_array)
 {
-	struct dma_fence *finished_fence;
+	struct dma_fence *done_fence;
 	int err = pvr_sync_signal_array_collect_ops(signal_array,
 						    from_pvr_file(pvr_file),
 						    job_data->sync_op_count,
@@ -360,13 +359,13 @@ prepare_job_syncs(struct pvr_file *pvr_file,
 			return err;
 	}
 
-	/* We need to arm the job to get the job finished fence. */
-	finished_fence = pvr_queue_job_arm(job_data->job);
+	/* We need to arm the job to get the job done fence. */
+	done_fence = pvr_queue_job_arm(job_data->job);
 
 	err = pvr_sync_signal_array_update_fences(signal_array,
 						  job_data->sync_op_count,
 						  job_data->sync_ops,
-						  finished_fence);
+						  done_fence);
 	return err;
 }
 
@@ -511,8 +510,6 @@ static int pvr_job_data_init(struct pvr_device *pvr_dev,
 		}
 
 		job_data_out[i].sync_op_count = job_args[i].sync_ops.count;
-
-		trace_pvr_job_create(pvr_dev, job_data_out[i].job, job_data_out[i].sync_op_count);
 	}
 
 	return 0;

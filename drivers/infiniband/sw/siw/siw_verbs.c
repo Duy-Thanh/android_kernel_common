@@ -102,7 +102,7 @@ int siw_alloc_ucontext(struct ib_ucontext *base_ctx, struct ib_udata *udata)
 		rv = -EINVAL;
 		goto err_out;
 	}
-	rv = ib_respond_udata(udata, uresp);
+	rv = ib_copy_to_udata(udata, &uresp, sizeof(uresp));
 	if (rv)
 		goto err_out;
 
@@ -130,11 +130,9 @@ int siw_query_device(struct ib_device *base_dev, struct ib_device_attr *attr,
 		     struct ib_udata *udata)
 {
 	struct siw_device *sdev = to_siw_dev(base_dev);
-	int rv;
 
-	rv = ib_is_udata_in_empty(udata);
-	if (rv)
-		return rv;
+	if (udata->inlen || udata->outlen)
+		return -EINVAL;
 
 	memset(attr, 0, sizeof(*attr));
 
@@ -167,7 +165,7 @@ int siw_query_device(struct ib_device *base_dev, struct ib_device_attr *attr,
 	addrconf_addr_eui48((u8 *)&attr->sys_image_guid,
 			    sdev->raw_gid);
 
-	return ib_respond_empty_udata(udata);
+	return 0;
 }
 
 int siw_query_port(struct ib_device *base_dev, u32 port,
@@ -474,7 +472,7 @@ int siw_create_qp(struct ib_qp *ibqp, struct ib_qp_init_attr *attrs,
 			rv = -EINVAL;
 			goto err_out_xa;
 		}
-		rv = ib_respond_udata(udata, uresp);
+		rv = ib_copy_to_udata(udata, &uresp, sizeof(uresp));
 		if (rv)
 			goto err_out_xa;
 	}
@@ -1207,7 +1205,7 @@ int siw_create_cq(struct ib_cq *base_cq, const struct ib_cq_init_attr *attr,
 			rv = -EINVAL;
 			goto err_out;
 		}
-		rv = ib_respond_udata(udata, uresp);
+		rv = ib_copy_to_udata(udata, &uresp, sizeof(uresp));
 		if (rv)
 			goto err_out;
 	}
@@ -1388,7 +1386,7 @@ struct ib_mr *siw_reg_user_mr(struct ib_pd *pd, u64 start, u64 len,
 			rv = -EINVAL;
 			goto err_out;
 		}
-		rv = ib_respond_udata(udata, uresp);
+		rv = ib_copy_to_udata(udata, &uresp, sizeof(uresp));
 		if (rv)
 			goto err_out;
 	}
@@ -1648,7 +1646,7 @@ int siw_create_srq(struct ib_srq *base_srq,
 			rv = -EINVAL;
 			goto err_out;
 		}
-		rv = ib_respond_udata(udata, uresp);
+		rv = ib_copy_to_udata(udata, &uresp, sizeof(uresp));
 		if (rv)
 			goto err_out;
 	}

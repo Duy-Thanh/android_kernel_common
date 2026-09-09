@@ -1985,43 +1985,23 @@ TRACE_EVENT(nfsd_cb_recall_any_done,
 TRACE_EVENT(nfsd_ctl_unlock_ip,
 	TP_PROTO(
 		const struct net *net,
-		const struct sockaddr *addr,
-		const unsigned int addrlen
+		const char *address
 	),
-	TP_ARGS(net, addr, addrlen),
+	TP_ARGS(net, address),
 	TP_STRUCT__entry(
 		__field(unsigned int, netns_ino)
-		__sockaddr(addr, addrlen)
+		__string(address, address)
 	),
 	TP_fast_assign(
 		__entry->netns_ino = net->ns.inum;
-		__assign_sockaddr(addr, addr, addrlen);
+		__assign_str(address);
 	),
-	TP_printk("addr=%pISpc",
-		__get_sockaddr(addr)
+	TP_printk("address=%s",
+		__get_str(address)
 	)
 );
 
 TRACE_EVENT(nfsd_ctl_unlock_fs,
-	TP_PROTO(
-		const struct net *net,
-		const char *path
-	),
-	TP_ARGS(net, path),
-	TP_STRUCT__entry(
-		__field(unsigned int, netns_ino)
-		__string(path, path)
-	),
-	TP_fast_assign(
-		__entry->netns_ino = net->ns.inum;
-		__assign_str(path);
-	),
-	TP_printk("path=%s",
-		__get_str(path)
-	)
-);
-
-TRACE_EVENT(nfsd_ctl_unlock_export,
 	TP_PROTO(
 		const struct net *net,
 		const char *path

@@ -40,8 +40,8 @@
 static const char rocker_driver_name[] = "rocker";
 
 static const struct pci_device_id rocker_pci_id_table[] = {
-	{ PCI_VDEVICE(REDHAT, PCI_DEVICE_ID_REDHAT_ROCKER) },
-	{ }
+	{PCI_VDEVICE(REDHAT, PCI_DEVICE_ID_REDHAT_ROCKER), 0},
+	{0, }
 };
 
 struct rocker_wait {

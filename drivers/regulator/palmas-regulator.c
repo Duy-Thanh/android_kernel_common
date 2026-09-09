@@ -1590,7 +1590,6 @@ static const struct of_device_id of_palmas_match_tbl[] = {
 	},
 	{ /* end */ }
 };
-MODULE_DEVICE_TABLE(of, of_palmas_match_tbl);
 
 static int palmas_regulators_probe(struct platform_device *pdev)
 {
@@ -1685,3 +1684,4 @@ MODULE_AUTHOR("Graeme Gregory <gg@slimlogic.co.uk>");
 MODULE_DESCRIPTION("Palmas voltage regulator driver");
 MODULE_LICENSE("GPL");
 MODULE_ALIAS("platform:palmas-pmic");
+MODULE_DEVICE_TABLE(of, of_palmas_match_tbl);

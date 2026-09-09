@@ -1277,10 +1277,8 @@ fwnode_graph_get_endpoint_by_id(const struct fwnode_handle *fwnode,
 		if (fwnode_ep.port != port)
 			continue;
 
-		if (fwnode_ep.id == endpoint) {
-			fwnode_handle_put(best_ep);
+		if (fwnode_ep.id == endpoint)
 			return ep;
-		}
 
 		if (!endpoint_next)
 			continue;

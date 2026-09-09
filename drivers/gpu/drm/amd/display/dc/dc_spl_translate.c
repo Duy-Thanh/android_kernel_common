@@ -91,7 +91,6 @@ void translate_SPL_in_params_from_pipe_ctx(struct pipe_ctx *pipe_ctx, struct spl
 		break;
 	case DCN_VERSION_4_01:
 	case DCN_VERSION_4_2:
-	case DCN_VERSION_4_2B:
 		spl_in->callbacks = dcn401_spl_callbacks;
 		break;
 	default:

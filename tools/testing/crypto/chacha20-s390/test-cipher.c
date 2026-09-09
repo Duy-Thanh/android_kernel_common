@@ -11,6 +11,7 @@
 #include <crypto/akcipher.h>
 #include <crypto/acompress.h>
 #include <crypto/rng.h>
+#include <crypto/drbg.h>
 #include <crypto/kpp.h>
 #include <crypto/internal/simd.h>
 #include <crypto/chacha.h>

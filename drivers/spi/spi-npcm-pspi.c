@@ -345,7 +345,7 @@ static int npcm_pspi_probe(struct platform_device *pdev)
 	int irq;
 	int ret;
 
-	host = devm_spi_alloc_host(&pdev->dev, sizeof(*priv));
+	host = spi_alloc_host(&pdev->dev, sizeof(*priv));
 	if (!host)
 		return -ENOMEM;
 
@@ -356,18 +356,21 @@ static int npcm_pspi_probe(struct platform_device *pdev)
 	priv->is_save_param = false;
 
 	priv->base = devm_platform_ioremap_resource(pdev, 0);
-	if (IS_ERR(priv->base))
-		return PTR_ERR(priv->base);
+	if (IS_ERR(priv->base)) {
+		ret = PTR_ERR(priv->base);
+		goto out_host_put;
+	}
 
 	priv->clk = devm_clk_get(&pdev->dev, NULL);
 	if (IS_ERR(priv->clk)) {
 		dev_err(&pdev->dev, "failed to get clock\n");
-		return PTR_ERR(priv->clk);
+		ret = PTR_ERR(priv->clk);
+		goto out_host_put;
 	}
 
 	ret = clk_prepare_enable(priv->clk);
 	if (ret)
-		return ret;
+		goto out_host_put;
 
 	irq = platform_get_irq(pdev, 0);
 	if (irq < 0) {
@@ -421,6 +424,8 @@ static int npcm_pspi_probe(struct platform_device *pdev)
 out_disable_clk:
 	clk_disable_unprepare(priv->clk);
 
+out_host_put:
+	spi_controller_put(host);
 	return ret;
 }
 
@@ -429,10 +434,14 @@ static void npcm_pspi_remove(struct platform_device *pdev)
 	struct spi_controller *host = platform_get_drvdata(pdev);
 	struct npcm_pspi *priv = spi_controller_get_devdata(host);
 
+	spi_controller_get(host);
+
 	spi_unregister_controller(host);
 
 	npcm_pspi_reset_hw(priv);
 	clk_disable_unprepare(priv->clk);
+
+	spi_controller_put(host);
 }
 
 static const struct of_device_id npcm_pspi_match[] = {

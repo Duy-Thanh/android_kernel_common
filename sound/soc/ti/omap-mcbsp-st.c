@@ -156,7 +156,7 @@ static int omap_mcbsp_st_set_chgain(struct omap_mcbsp *mcbsp, int channel,
 	if (!st_data)
 		return -ENOENT;
 
-	guard(spinlock_irq)(&mcbsp->lock);
+	spin_lock_irq(&mcbsp->lock);
 	if (channel == 0)
 		st_data->ch0gain = chgain;
 	else if (channel == 1)
@@ -166,6 +166,7 @@ static int omap_mcbsp_st_set_chgain(struct omap_mcbsp *mcbsp, int channel,
 
 	if (st_data->enabled)
 		omap_mcbsp_st_chgain(mcbsp);
+	spin_unlock_irq(&mcbsp->lock);
 
 	return ret;
 }
@@ -179,13 +180,14 @@ static int omap_mcbsp_st_get_chgain(struct omap_mcbsp *mcbsp, int channel,
 	if (!st_data)
 		return -ENOENT;
 
-	guard(spinlock_irq)(&mcbsp->lock);
+	spin_lock_irq(&mcbsp->lock);
 	if (channel == 0)
 		*chgain = st_data->ch0gain;
 	else if (channel == 1)
 		*chgain = st_data->ch1gain;
 	else
 		ret = -EINVAL;
+	spin_unlock_irq(&mcbsp->lock);
 
 	return ret;
 }
@@ -197,9 +199,10 @@ static int omap_mcbsp_st_enable(struct omap_mcbsp *mcbsp)
 	if (!st_data)
 		return -ENODEV;
 
-	guard(spinlock_irq)(&mcbsp->lock);
+	spin_lock_irq(&mcbsp->lock);
 	st_data->enabled = 1;
 	omap_mcbsp_st_start(mcbsp);
+	spin_unlock_irq(&mcbsp->lock);
 
 	return 0;
 }
@@ -212,9 +215,10 @@ static int omap_mcbsp_st_disable(struct omap_mcbsp *mcbsp)
 	if (!st_data)
 		return -ENODEV;
 
-	guard(spinlock_irq)(&mcbsp->lock);
+	spin_lock_irq(&mcbsp->lock);
 	omap_mcbsp_st_stop(mcbsp);
 	st_data->enabled = 0;
+	spin_unlock_irq(&mcbsp->lock);
 
 	return ret;
 }
@@ -237,12 +241,13 @@ static ssize_t st_taps_show(struct device *dev,
 	ssize_t status = 0;
 	int i;
 
-	guard(spinlock_irq)(&mcbsp->lock);
+	spin_lock_irq(&mcbsp->lock);
 	for (i = 0; i < st_data->nr_taps; i++)
 		status += sysfs_emit_at(buf, status, (i ? ", %d" : "%d"),
 					st_data->taps[i]);
 	if (i)
 		status += sysfs_emit_at(buf, status, "\n");
+	spin_unlock_irq(&mcbsp->lock);
 
 	return status;
 }
@@ -255,17 +260,19 @@ static ssize_t st_taps_store(struct device *dev,
 	struct omap_mcbsp_st_data *st_data = mcbsp->st_data;
 	int val, tmp, status, i = 0;
 
-	guard(spinlock_irq)(&mcbsp->lock);
+	spin_lock_irq(&mcbsp->lock);
 	memset(st_data->taps, 0, sizeof(st_data->taps));
 	st_data->nr_taps = 0;
 
 	do {
 		status = sscanf(buf, "%d%n", &val, &tmp);
 		if (status < 0 || status == 0) {
-			return -EINVAL;
+			size = -EINVAL;
+			goto out;
 		}
 		if (val < -32768 || val > 32767) {
-			return -EINVAL;
+			size = -EINVAL;
+			goto out;
 		}
 		st_data->taps[i++] = val;
 		buf += tmp;
@@ -275,6 +282,9 @@ static ssize_t st_taps_store(struct device *dev,
 	} while (1);
 
 	st_data->nr_taps = i;
+
+out:
+	spin_unlock_irq(&mcbsp->lock);
 
 	return size;
 }

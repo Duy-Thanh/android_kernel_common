@@ -1101,8 +1101,8 @@ static int helene_probe(struct i2c_client *client)
 }
 
 static const struct i2c_device_id helene_id[] = {
-	{ .name = "helene" },
-	{ }
+	{ "helene", },
+	{}
 };
 MODULE_DEVICE_TABLE(i2c, helene_id);
 

@@ -12,6 +12,7 @@
 #include <linux/of.h>
 #include <linux/module.h>
 #include <linux/scmi_protocol.h>
+#include <asm/div64.h>
 
 #define NOT_ATOMIC	false
 #define ATOMIC		true
@@ -56,17 +57,35 @@ static unsigned long scmi_clk_recalc_rate(struct clk_hw *hw,
 static int scmi_clk_determine_rate(struct clk_hw *hw,
 				   struct clk_rate_request *req)
 {
-	int ret;
+	u64 fmin, fmax, ftmp;
 	struct scmi_clk *clk = to_scmi_clk(hw);
 
 	/*
-	 * If we could not get a better rate scmi_clk_recalc_rate() will be
-	 * called after the rate is set and we'll know what rate the clock is
+	 * We can't figure out what rate it will be, so just return the
+	 * rate back to the caller. scmi_clk_recalc_rate() will be called
+	 * after the rate is set and we'll know what rate the clock is
 	 * running at then.
 	 */
-	ret = scmi_proto_clk_ops->determine_rate(clk->ph, clk->id, &req->rate);
-	if (ret)
-		return ret;
+	if (clk->info->rate_discrete)
+		return 0;
+
+	fmin = clk->info->range.min_rate;
+	fmax = clk->info->range.max_rate;
+	if (req->rate <= fmin) {
+		req->rate = fmin;
+
+		return 0;
+	} else if (req->rate >= fmax) {
+		req->rate = fmax;
+
+		return 0;
+	}
+
+	ftmp = req->rate - fmin;
+	ftmp += clk->info->range.step_size - 1; /* to round up */
+	do_div(ftmp, clk->info->range.step_size);
+
+	req->rate = ftmp * clk->info->range.step_size + fmin;
 
 	return 0;
 }
@@ -202,6 +221,7 @@ static int scmi_clk_ops_init(struct device *dev, struct scmi_clk *sclk,
 			     const struct clk_ops *scmi_ops)
 {
 	int ret;
+	unsigned long min_rate, max_rate;
 
 	struct clk_init_data init = {
 		.flags = CLK_GET_RATE_NOCACHE,
@@ -216,8 +236,20 @@ static int scmi_clk_ops_init(struct device *dev, struct scmi_clk *sclk,
 	if (ret)
 		return ret;
 
-	clk_hw_set_rate_range(&sclk->hw, sclk->info->min_rate,
-			      sclk->info->max_rate);
+	if (sclk->info->rate_discrete) {
+		int num_rates = sclk->info->list.num_rates;
+
+		if (num_rates <= 0)
+			return -EINVAL;
+
+		min_rate = sclk->info->list.rates[0];
+		max_rate = sclk->info->list.rates[num_rates - 1];
+	} else {
+		min_rate = sclk->info->range.min_rate;
+		max_rate = sclk->info->range.max_rate;
+	}
+
+	clk_hw_set_rate_range(&sclk->hw, min_rate, max_rate);
 	return ret;
 }
 

@@ -2,7 +2,6 @@
 #include <linux/cpu.h>
 
 #include <asm/apic.h>
-#include <asm/cpuid/api.h>
 #include <asm/memtype.h>
 #include <asm/processor.h>
 
@@ -71,7 +70,7 @@ static inline bool topo_subleaf(struct topo_scan *tscan, u32 leaf, u32 subleaf,
 	default: return false;
 	}
 
-	cpuid_read_subleaf(leaf, subleaf, &sl);
+	cpuid_subleaf(leaf, subleaf, &sl);
 
 	if (!sl.num_processors || sl.type == INVALID_TYPE)
 		return false;

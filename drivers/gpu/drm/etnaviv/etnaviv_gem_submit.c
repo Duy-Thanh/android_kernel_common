@@ -32,8 +32,9 @@ static struct etnaviv_gem_submit *submit_create(struct drm_device *dev,
 		struct etnaviv_gpu *gpu, size_t nr_bos, size_t nr_pmrs)
 {
 	struct etnaviv_gem_submit *submit;
+	size_t sz = size_vstruct(nr_bos, sizeof(submit->bos[0]), sizeof(*submit));
 
-	submit = kzalloc_flex(*submit, bos, nr_bos);
+	submit = kzalloc(sz, GFP_KERNEL);
 	if (!submit)
 		return NULL;
 

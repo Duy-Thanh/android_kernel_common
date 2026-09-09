@@ -29,7 +29,7 @@
 #include <signal.h>
 #include "kselftest.h"
 
-#define NSEC_PER_SEC 1000000000LL
+#define NSEC_PER_SEC 1000000000ULL
 
 /* CLOCK_HWSPECIFIC == CLOCK_SGI_CYCLE (Deprecated) */
 #define CLOCK_HWSPECIFIC		10

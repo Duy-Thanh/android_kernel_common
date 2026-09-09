@@ -1077,9 +1077,9 @@ static const struct regmap_config rt286_regmap = {
 };
 
 static const struct i2c_device_id rt286_i2c_id[] = {
-	{ .name = "rt286" },
-	{ .name = "rt288" },
-	{ }
+	{"rt286"},
+	{"rt288"},
+	{}
 };
 MODULE_DEVICE_TABLE(i2c, rt286_i2c_id);
 

@@ -122,6 +122,7 @@ static void xtfpga_spi_remove(struct platform_device *pdev)
 	struct xtfpga_spi *xspi = spi_controller_get_devdata(host);
 
 	spi_bitbang_stop(&xspi->bitbang);
+	spi_controller_put(host);
 }
 
 MODULE_ALIAS("platform:" XTFPGA_SPI_NAME);

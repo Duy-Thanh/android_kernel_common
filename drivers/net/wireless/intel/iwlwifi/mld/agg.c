@@ -64,9 +64,6 @@ static void iwl_mld_release_frames_from_notif(struct iwl_mld *mld,
 	}
 
 	/* pick any STA ID to find the pointer */
-	if (WARN_ON_ONCE(!ba_data->sta_mask))
-		goto out_unlock;
-
 	sta_id = ffs(ba_data->sta_mask) - 1;
 	link_sta = rcu_dereference(mld->fw_id_to_link_sta[sta_id]);
 	if (WARN_ON_ONCE(IS_ERR_OR_NULL(link_sta) || !link_sta->sta))
@@ -169,9 +166,6 @@ void iwl_mld_del_ba(struct iwl_mld *mld, int queue,
 		goto out_unlock;
 
 	/* pick any STA ID to find the pointer */
-	if (WARN_ON_ONCE(!ba_data->sta_mask))
-		goto out_unlock;
-
 	sta_id = ffs(ba_data->sta_mask) - 1;
 	link_sta = rcu_dereference(mld->fw_id_to_link_sta[sta_id]);
 	if (WARN_ON_ONCE(IS_ERR_OR_NULL(link_sta) || !link_sta->sta))
@@ -353,9 +347,6 @@ static void iwl_mld_rx_agg_session_expired(struct timer_list *t)
 	}
 
 	/* timer expired, pick any STA ID to find the pointer */
-	if (WARN_ON_ONCE(!ba_data->sta_mask))
-		goto unlock;
-
 	sta_id = ffs(ba_data->sta_mask) - 1;
 	link_sta = rcu_dereference(ba_data->mld->fw_id_to_link_sta[sta_id]);
 

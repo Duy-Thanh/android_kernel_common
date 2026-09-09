@@ -91,8 +91,9 @@ properties:
     maxItems: 1
 
   sram:
-    maxItems: 1
-    description:
+    $ref: /schemas/types.yaml#/definitions/phandle
+    description: |
+      phandle to a reserved on-chip SRAM regions.
       Some SoCs, like rk3588 provide on-chip SRAM to store temporary
       buffers during decoding.
 

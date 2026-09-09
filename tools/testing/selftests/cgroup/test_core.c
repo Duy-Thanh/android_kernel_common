@@ -87,7 +87,7 @@ static int test_cgcore_destroy(const char *root)
 	int ret = KSFT_FAIL;
 	char *cg_test = NULL;
 	int child_pid;
-	char buf[BUF_SIZE];
+	char buf[PAGE_SIZE];
 
 	cg_test = cg_name(root, "cg_test");
 

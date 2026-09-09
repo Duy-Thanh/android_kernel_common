@@ -2,7 +2,6 @@
 #include <linux/efi.h>
 
 #include <asm/boot.h>
-#include <asm/cpuid/api.h>
 #include <asm/desc.h>
 #include <asm/efi.h>
 

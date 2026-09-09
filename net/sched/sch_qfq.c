@@ -1152,12 +1152,12 @@ static struct sk_buff *qfq_dequeue(struct Qdisc *sch)
 	if (!skb)
 		return NULL;
 
-	qdisc_qlen_dec(sch);
+	sch->q.qlen--;
 
 	skb = agg_dequeue(in_serv_agg, cl, len);
 
 	if (!skb) {
-		qdisc_qlen_inc(sch);
+		sch->q.qlen++;
 		return NULL;
 	}
 
@@ -1264,8 +1264,8 @@ static int qfq_enqueue(struct sk_buff *skb, struct Qdisc *sch,
 	}
 
 	_bstats_update(&cl->bstats, len, gso_segs);
-	qstats_backlog_add(sch, len);
-	qdisc_qlen_inc(sch);
+	sch->qstats.backlog += len;
+	++sch->q.qlen;
 
 	agg = cl->agg;
 	/* if the class is active, then done here */

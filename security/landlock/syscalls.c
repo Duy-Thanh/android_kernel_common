@@ -105,11 +105,8 @@ static void build_check_abi(void)
 	ruleset_size = sizeof(ruleset_attr.handled_access_fs);
 	ruleset_size += sizeof(ruleset_attr.handled_access_net);
 	ruleset_size += sizeof(ruleset_attr.scoped);
-	ruleset_size += sizeof(ruleset_attr.quiet_access_fs);
-	ruleset_size += sizeof(ruleset_attr.quiet_access_net);
-	ruleset_size += sizeof(ruleset_attr.quiet_scoped);
 	BUILD_BUG_ON(sizeof(ruleset_attr) != ruleset_size);
-	BUILD_BUG_ON(sizeof(ruleset_attr) != 48);
+	BUILD_BUG_ON(sizeof(ruleset_attr) != 24);
 
 	path_beneath_size = sizeof(path_beneath_attr.allowed_access);
 	path_beneath_size += sizeof(path_beneath_attr.parent_fd);
@@ -169,7 +166,7 @@ static const struct file_operations ruleset_fops = {
  * If the change involves a fix that requires userspace awareness, also update
  * the errata documentation in Documentation/userspace-api/landlock.rst .
  */
-const int landlock_abi_version = 10;
+const int landlock_abi_version = 9;
 
 /**
  * sys_landlock_create_ruleset - Create a new ruleset
@@ -196,9 +193,6 @@ const int landlock_abi_version = 10;
  * - %EOPNOTSUPP: Landlock is supported by the kernel but disabled at boot time;
  * - %EINVAL: unknown @flags, or unknown access, or unknown scope, or too small
  *   @size;
- * - %EINVAL: quiet_access_fs, quiet_access_net, or quiet_scoped is not a
- *   subset of the corresponding handled_access_fs, handled_access_net, or
- *   scoped;
  * - %E2BIG: @attr or @size inconsistencies;
  * - %EFAULT: @attr or @size inconsistencies;
  * - %ENOMSG: empty &landlock_ruleset_attr.handled_access_fs.
@@ -255,31 +249,12 @@ SYSCALL_DEFINE3(landlock_create_ruleset,
 	if ((ruleset_attr.scoped | LANDLOCK_MASK_SCOPE) != LANDLOCK_MASK_SCOPE)
 		return -EINVAL;
 
-	/*
-	 * Check that quiet masks are subsets of the respective handled masks.
-	 * Because of the checks above this is sufficient to also ensure that
-	 * the quiet masks are valid access masks.
-	 */
-	if ((ruleset_attr.quiet_access_fs | ruleset_attr.handled_access_fs) !=
-	    ruleset_attr.handled_access_fs)
-		return -EINVAL;
-	if ((ruleset_attr.quiet_access_net | ruleset_attr.handled_access_net) !=
-	    ruleset_attr.handled_access_net)
-		return -EINVAL;
-	if ((ruleset_attr.quiet_scoped | ruleset_attr.scoped) !=
-	    ruleset_attr.scoped)
-		return -EINVAL;
-
 	/* Checks arguments and transforms to kernel struct. */
 	ruleset = landlock_create_ruleset(ruleset_attr.handled_access_fs,
 					  ruleset_attr.handled_access_net,
 					  ruleset_attr.scoped);
 	if (IS_ERR(ruleset))
 		return PTR_ERR(ruleset);
-
-	ruleset->quiet_masks.fs = ruleset_attr.quiet_access_fs;
-	ruleset->quiet_masks.net = ruleset_attr.quiet_access_net;
-	ruleset->quiet_masks.scope = ruleset_attr.quiet_scoped;
 
 	/* Creates anonymous FD referring to the ruleset. */
 	ruleset_fd = anon_inode_getfd("[landlock-ruleset]", &ruleset_fops,
@@ -345,7 +320,7 @@ static int get_path_from_fd(const s32 fd, struct path *const path)
 }
 
 static int add_rule_path_beneath(struct landlock_ruleset *const ruleset,
-				 const void __user *const rule_attr, u32 flags)
+				 const void __user *const rule_attr)
 {
 	struct landlock_path_beneath_attr path_beneath_attr;
 	struct path path;
@@ -360,19 +335,14 @@ static int add_rule_path_beneath(struct landlock_ruleset *const ruleset,
 
 	/*
 	 * Informs about useless rule: empty allowed_access (i.e. deny rules)
-	 * are ignored in path walks.  However, the rule is not useless if it is
-	 * there to hold a quiet flag.
+	 * are ignored in path walks.
 	 */
-	if (!flags && !path_beneath_attr.allowed_access)
+	if (!path_beneath_attr.allowed_access)
 		return -ENOMSG;
 
 	/* Checks that allowed_access matches the @ruleset constraints. */
 	mask = ruleset->access_masks[0].fs;
 	if ((path_beneath_attr.allowed_access | mask) != mask)
-		return -EINVAL;
-
-	/* Checks for useless quiet flag. */
-	if (flags & LANDLOCK_ADD_RULE_QUIET && !ruleset->quiet_masks.fs)
 		return -EINVAL;
 
 	/* Gets and checks the new rule. */
@@ -382,13 +352,13 @@ static int add_rule_path_beneath(struct landlock_ruleset *const ruleset,
 
 	/* Imports the new rule. */
 	err = landlock_append_fs_rule(ruleset, &path,
-				      path_beneath_attr.allowed_access, flags);
+				      path_beneath_attr.allowed_access);
 	path_put(&path);
 	return err;
 }
 
 static int add_rule_net_port(struct landlock_ruleset *ruleset,
-			     const void __user *const rule_attr, u32 flags)
+			     const void __user *const rule_attr)
 {
 	struct landlock_net_port_attr net_port_attr;
 	int res;
@@ -401,19 +371,14 @@ static int add_rule_net_port(struct landlock_ruleset *ruleset,
 
 	/*
 	 * Informs about useless rule: empty allowed_access (i.e. deny rules)
-	 * are ignored by network actions.  However, the rule is not useless if
-	 * it is there to hold a quiet flag.
+	 * are ignored by network actions.
 	 */
-	if (!flags && !net_port_attr.allowed_access)
+	if (!net_port_attr.allowed_access)
 		return -ENOMSG;
 
 	/* Checks that allowed_access matches the @ruleset constraints. */
 	mask = landlock_get_net_access_mask(ruleset, 0);
 	if ((net_port_attr.allowed_access | mask) != mask)
-		return -EINVAL;
-
-	/* Checks for useless quiet flag. */
-	if (flags & LANDLOCK_ADD_RULE_QUIET && !ruleset->quiet_masks.net)
 		return -EINVAL;
 
 	/* Denies inserting a rule with port greater than 65535. */
@@ -422,7 +387,7 @@ static int add_rule_net_port(struct landlock_ruleset *ruleset,
 
 	/* Imports the new rule. */
 	return landlock_append_net_rule(ruleset, net_port_attr.port,
-					net_port_attr.allowed_access, flags);
+					net_port_attr.allowed_access);
 }
 
 /**
@@ -433,7 +398,7 @@ static int add_rule_net_port(struct landlock_ruleset *ruleset,
  * @rule_type: Identify the structure type pointed to by @rule_attr:
  *             %LANDLOCK_RULE_PATH_BENEATH or %LANDLOCK_RULE_NET_PORT.
  * @rule_attr: Pointer to a rule (matching the @rule_type).
- * @flags: Must be 0 or %LANDLOCK_ADD_RULE_QUIET.
+ * @flags: Must be 0.
  *
  * This system call enables to define a new rule and add it to an existing
  * ruleset.
@@ -443,25 +408,20 @@ static int add_rule_net_port(struct landlock_ruleset *ruleset,
  * - %EOPNOTSUPP: Landlock is supported by the kernel but disabled at boot time;
  * - %EAFNOSUPPORT: @rule_type is %LANDLOCK_RULE_NET_PORT but TCP/IP is not
  *   supported by the running kernel;
- * - %EINVAL: @flags is not valid;
+ * - %EINVAL: @flags is not 0;
  * - %EINVAL: The rule accesses are inconsistent (i.e.
  *   &landlock_path_beneath_attr.allowed_access or
  *   &landlock_net_port_attr.allowed_access is not a subset of the ruleset
  *   handled accesses)
  * - %EINVAL: &landlock_net_port_attr.port is greater than 65535;
- * - %EINVAL: LANDLOCK_ADD_RULE_QUIET is passed but the ruleset has no
- *   quiet access bits set for the corresponding rule type.
  * - %ENOMSG: Empty accesses (e.g. &landlock_path_beneath_attr.allowed_access is
- *   0) and no flags;
+ *   0);
  * - %EBADF: @ruleset_fd is not a file descriptor for the current thread, or a
  *   member of @rule_attr is not a file descriptor as expected;
  * - %EBADFD: @ruleset_fd is not a ruleset file descriptor, or a member of
  *   @rule_attr is not the expected file descriptor type;
  * - %EPERM: @ruleset_fd has no write access to the underlying ruleset;
  * - %EFAULT: @rule_attr was not a valid address.
- *
- * .. kernel-doc:: include/uapi/linux/landlock.h
- *     :identifiers: landlock_add_rule_flags
  */
 SYSCALL_DEFINE4(landlock_add_rule, const int, ruleset_fd,
 		const enum landlock_rule_type, rule_type,
@@ -472,7 +432,8 @@ SYSCALL_DEFINE4(landlock_add_rule, const int, ruleset_fd,
 	if (!is_initialized())
 		return -EOPNOTSUPP;
 
-	if (flags && flags != LANDLOCK_ADD_RULE_QUIET)
+	/* No flag for now. */
+	if (flags)
 		return -EINVAL;
 
 	/* Gets and checks the ruleset. */
@@ -482,9 +443,9 @@ SYSCALL_DEFINE4(landlock_add_rule, const int, ruleset_fd,
 
 	switch (rule_type) {
 	case LANDLOCK_RULE_PATH_BENEATH:
-		return add_rule_path_beneath(ruleset, rule_attr, flags);
+		return add_rule_path_beneath(ruleset, rule_attr);
 	case LANDLOCK_RULE_NET_PORT:
-		return add_rule_net_port(ruleset, rule_attr, flags);
+		return add_rule_net_port(ruleset, rule_attr);
 	default:
 		return -EINVAL;
 	}

@@ -307,7 +307,6 @@ Accounting Framework
 Block Devices
 =============
 
-.. kernel-doc:: include/linux/bvec.h
 .. kernel-doc:: include/linux/bio.h
 .. kernel-doc:: block/blk-core.c
    :export:

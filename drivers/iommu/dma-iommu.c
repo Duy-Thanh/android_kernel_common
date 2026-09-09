@@ -1469,7 +1469,7 @@ int iommu_dma_map_sg(struct device *dev, struct scatterlist *sg, int nents,
 			 */
 			s->dma_address = pci_p2pdma_bus_addr_map(
 				p2pdma_state.mem, sg_phys(s));
-			sg_dma_len(s) = s->length;
+			sg_dma_len(s) = sg->length;
 			sg_dma_mark_bus_address(s);
 			continue;
 		default:
@@ -2153,14 +2153,11 @@ EXPORT_SYMBOL_GPL(dma_iova_destroy);
 
 void iommu_setup_dma_ops(struct device *dev, struct iommu_domain *domain)
 {
-	bool dma_iommu;
-
 	if (dev_is_pci(dev))
 		dev->iommu->pci_32bit_workaround = !iommu_dma_forcedac;
 
-	dma_iommu = iommu_is_dma_domain(domain);
-	dev_assign_dma_iommu(dev, dma_iommu);
-	if (dma_iommu && iommu_dma_init_domain(domain, dev))
+	dev->dma_iommu = iommu_is_dma_domain(domain);
+	if (dev->dma_iommu && iommu_dma_init_domain(domain, dev))
 		goto out_err;
 
 	trace_android_rvh_iommu_setup_dma_ops(dev);
@@ -2169,7 +2166,7 @@ void iommu_setup_dma_ops(struct device *dev, struct iommu_domain *domain)
 out_err:
 	pr_warn("Failed to set up IOMMU for device %s; retaining platform DMA ops\n",
 		dev_name(dev));
-	dev_clear_dma_iommu(dev);
+	dev->dma_iommu = false;
 }
 
 static bool has_msi_cookie(const struct iommu_domain *domain)

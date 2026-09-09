@@ -20,8 +20,6 @@
 #include <linux/smp.h>
 #include <linux/fs.h>
 
-#include "proc.h"
-
 static LIST_HEAD(irq_domain_list);
 static DEFINE_MUTEX(irq_domain_mutex);
 
@@ -1534,7 +1532,6 @@ int irq_domain_set_hwirq_and_chip(struct irq_domain *domain, unsigned int virq,
 	irq_data->chip = (struct irq_chip *)(chip ? chip : &no_irq_chip);
 	irq_data->chip_data = chip_data;
 
-	irq_proc_update_chip(chip);
 	return 0;
 }
 EXPORT_SYMBOL_GPL(irq_domain_set_hwirq_and_chip);
@@ -2084,7 +2081,7 @@ static void irq_domain_free_one_irq(struct irq_domain *domain, unsigned int virq
 #endif	/* CONFIG_IRQ_DOMAIN_HIERARCHY */
 
 #ifdef CONFIG_GENERIC_IRQ_DEBUGFS
-#include "debugfs.h"
+#include "internals.h"
 
 static struct dentry *domain_dir;
 

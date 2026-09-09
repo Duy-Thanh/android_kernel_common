@@ -10,12 +10,14 @@ use kernel::{
         Bound,
         Core, //
     },
+    devres::Devres,
     driver,
     pci,
     prelude::*,
-    types::ForLt,
     InPlaceModule, //
 };
+
+use core::any::TypeId;
 
 const MODULE_NAME: &CStr = <LocalModule as kernel::ModuleMetadata>::NAME;
 const AUXILIARY_NAME: &CStr = c"auxiliary";
@@ -31,14 +33,10 @@ kernel::auxiliary_device_table!(
 
 impl auxiliary::Driver for AuxiliaryDriver {
     type IdInfo = ();
-    type Data<'bound> = Self;
 
     const ID_TABLE: auxiliary::IdTable<Self::IdInfo> = &AUX_TABLE;
 
-    fn probe<'bound>(
-        adev: &'bound auxiliary::Device<Core<'_>>,
-        _info: &'bound Self::IdInfo,
-    ) -> impl PinInit<Self, Error> + 'bound {
+    fn probe(adev: &auxiliary::Device<Core>, _info: &Self::IdInfo) -> impl PinInit<Self, Error> {
         dev_info!(
             adev,
             "Probing auxiliary driver for auxiliary device with id={}\n",
@@ -51,17 +49,13 @@ impl auxiliary::Driver for AuxiliaryDriver {
     }
 }
 
-struct Data<'bound> {
-    index: u32,
-    parent: &'bound pci::Device<Bound>,
-}
-
-struct ParentDriver;
-
-#[allow(clippy::type_complexity)]
-struct ParentData<'bound> {
-    _reg0: auxiliary::Registration<'bound, ForLt!(Data<'_>)>,
-    _reg1: auxiliary::Registration<'bound, ForLt!(Data<'_>)>,
+#[pin_data]
+struct ParentDriver {
+    private: TypeId,
+    #[pin]
+    _reg0: Devres<auxiliary::Registration>,
+    #[pin]
+    _reg1: Devres<auxiliary::Registration>,
 }
 
 kernel::pci_device_table!(
@@ -73,53 +67,26 @@ kernel::pci_device_table!(
 
 impl pci::Driver for ParentDriver {
     type IdInfo = ();
-    type Data<'bound> = ParentData<'bound>;
 
     const ID_TABLE: pci::IdTable<Self::IdInfo> = &PCI_TABLE;
 
-    fn probe<'bound>(
-        pdev: &'bound pci::Device<Core<'_>>,
-        _info: &'bound Self::IdInfo,
-    ) -> impl PinInit<Self::Data<'bound>, Error> + 'bound {
-        Ok(ParentData {
-            // SAFETY: `ParentData` is the driver's private data, which is dropped when the
-            // device is unbound; i.e. `mem::forget()` is never called on it.
-            _reg0: unsafe {
-                auxiliary::Registration::new_with_lt(
-                    pdev.as_ref(),
-                    AUXILIARY_NAME,
-                    0,
-                    MODULE_NAME,
-                    Data {
-                        index: 0,
-                        parent: pdev,
-                    },
-                )?
-            },
-            // SAFETY: See `_reg0` above.
-            _reg1: unsafe {
-                auxiliary::Registration::new_with_lt(
-                    pdev.as_ref(),
-                    AUXILIARY_NAME,
-                    1,
-                    MODULE_NAME,
-                    Data {
-                        index: 1,
-                        parent: pdev,
-                    },
-                )?
-            },
+    fn probe(pdev: &pci::Device<Core>, _info: &Self::IdInfo) -> impl PinInit<Self, Error> {
+        try_pin_init!(Self {
+            private: TypeId::of::<Self>(),
+            _reg0 <- auxiliary::Registration::new(pdev.as_ref(), AUXILIARY_NAME, 0, MODULE_NAME),
+            _reg1 <- auxiliary::Registration::new(pdev.as_ref(), AUXILIARY_NAME, 1, MODULE_NAME),
         })
     }
 }
 
 impl ParentDriver {
     fn connect(adev: &auxiliary::Device<Bound>) -> Result {
-        let data = adev.registration_data::<ForLt!(Data<'_>)>()?;
-        let pdev = data.parent;
+        let dev = adev.parent();
+        let pdev: &pci::Device<Bound> = dev.try_into()?;
+        let drvdata = dev.drvdata::<Self>()?;
 
         dev_info!(
-            pdev,
+            dev,
             "Connect auxiliary {} with parent: VendorID={}, DeviceID={:#x}\n",
             adev.id(),
             pdev.vendor_id(),
@@ -127,9 +94,9 @@ impl ParentDriver {
         );
 
         dev_info!(
-            pdev,
-            "Connected to auxiliary device with index {}.\n",
-            data.index
+            dev,
+            "We have access to the private data of {:?}.\n",
+            drvdata.private
         );
 
         Ok(())

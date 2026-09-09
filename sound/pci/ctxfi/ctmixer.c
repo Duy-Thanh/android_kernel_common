@@ -221,6 +221,10 @@ ct_mixer_recording_select(struct ct_mixer *mixer, enum CT_AMIXER_CTL type);
 static void
 ct_mixer_recording_unselect(struct ct_mixer *mixer, enum CT_AMIXER_CTL type);
 
+/* FIXME: this static looks like it would fail if more than one card was */
+/* installed. */
+static struct snd_kcontrol *kctls[2] = {NULL};
+
 static enum CT_AMIXER_CTL get_amixer_index(enum CTALSA_MIXER_CTL alsa_index)
 {
 	switch (alsa_index) {
@@ -477,18 +481,17 @@ static struct snd_kcontrol_new mic_source_ctl = {
 static void
 do_line_mic_switch(struct ct_atc *atc, enum CTALSA_MIXER_CTL type)
 {
-	struct ct_mixer *mixer = atc->mixer;
 
 	if (MIXER_LINEIN_C_S == type) {
 		atc->select_line_in(atc);
-		set_switch_state(mixer, MIXER_MIC_C_S, 0);
+		set_switch_state(atc->mixer, MIXER_MIC_C_S, 0);
 		snd_ctl_notify(atc->card, SNDRV_CTL_EVENT_MASK_VALUE,
-			       &mixer->line_mic_kctls[1]->id);
+							&kctls[1]->id);
 	} else if (MIXER_MIC_C_S == type) {
 		atc->select_mic_in(atc);
-		set_switch_state(mixer, MIXER_LINEIN_C_S, 0);
+		set_switch_state(atc->mixer, MIXER_LINEIN_C_S, 0);
 		snd_ctl_notify(atc->card, SNDRV_CTL_EVENT_MASK_VALUE,
-			       &mixer->line_mic_kctls[0]->id);
+							&kctls[0]->id);
 	}
 }
 
@@ -775,9 +778,9 @@ ct_mixer_kcontrol_new(struct ct_mixer *mixer, struct snd_kcontrol_new *new)
 
 	switch (new->private_value) {
 	case MIXER_LINEIN_C_S:
-		mixer->line_mic_kctls[0] = kctl; break;
+		kctls[0] = kctl; break;
 	case MIXER_MIC_C_S:
-		mixer->line_mic_kctls[1] = kctl; break;
+		kctls[1] = kctl; break;
 	default:
 		break;
 	}
@@ -962,20 +965,35 @@ error1:
 static int ct_mixer_get_mem(struct ct_mixer **rmixer)
 {
 	struct ct_mixer *mixer;
-	size_t alloc_size;
+	int err;
 
 	*rmixer = NULL;
 	/* Allocate mem for mixer obj */
-	alloc_size = struct_size(mixer, amixers, NUM_CT_AMIXERS * CHN_NUM);
-	alloc_size += sizeof(*mixer->sums) * NUM_CT_SUMS * CHN_NUM;
-	mixer = kzalloc(alloc_size, GFP_KERNEL);
+	mixer = kzalloc_obj(*mixer);
 	if (!mixer)
 		return -ENOMEM;
 
-	mixer->sums = (struct sum **)(mixer->amixers + (NUM_CT_AMIXERS * CHN_NUM));
+	mixer->amixers = kcalloc(NUM_CT_AMIXERS * CHN_NUM, sizeof(void *),
+				 GFP_KERNEL);
+	if (!mixer->amixers) {
+		err = -ENOMEM;
+		goto error1;
+	}
+	mixer->sums = kcalloc(NUM_CT_SUMS * CHN_NUM, sizeof(void *),
+			      GFP_KERNEL);
+	if (!mixer->sums) {
+		err = -ENOMEM;
+		goto error2;
+	}
 
 	*rmixer = mixer;
 	return 0;
+
+error2:
+	kfree(mixer->amixers);
+error1:
+	kfree(mixer);
+	return err;
 }
 
 static int ct_mixer_topology_build(struct ct_mixer *mixer)
@@ -1210,6 +1228,8 @@ int ct_mixer_destroy(struct ct_mixer *mixer)
 	}
 
 	/* Release mem assigned to mixer object */
+	kfree(mixer->sums);
+	kfree(mixer->amixers);
 	kfree(mixer);
 
 	return 0;

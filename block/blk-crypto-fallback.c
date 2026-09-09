@@ -200,8 +200,8 @@ static struct bio *blk_crypto_alloc_enc_bio(struct bio *bio_src,
 	pages += nr_segs * (PAGE_PTRS_PER_BVEC - 1);
 
 	/*
-	 * Try a bulk allocation first.  This might not fill all allocated
-	 * pages, but we'll fix that up later in mempool_alloc_bulk.
+	 * Try a bulk allocation first.  This could leave random pages in the
+	 * array unallocated, but we'll fix that up later in mempool_alloc_bulk.
 	 *
 	 * Note: alloc_pages_bulk needs the array to be zeroed, as it assumes
 	 * any non-zero slot already contains a valid allocation.
@@ -209,9 +209,8 @@ static struct bio *blk_crypto_alloc_enc_bio(struct bio *bio_src,
 	memset(pages, 0, sizeof(struct page *) * nr_segs);
 	nr_allocated = alloc_pages_bulk(GFP_KERNEL, nr_segs, pages);
 	if (nr_allocated < nr_segs)
-		mempool_alloc_bulk(blk_crypto_bounce_page_pool,
-				(void **)pages + nr_allocated,
-				nr_segs - nr_allocated);
+		mempool_alloc_bulk(blk_crypto_bounce_page_pool, (void **)pages,
+				nr_segs, nr_allocated);
 	memalloc_noio_restore(memflags);
 	*pages_ret = pages;
 	return bio;
@@ -363,7 +362,8 @@ static void blk_crypto_fallback_encrypt_bio(struct bio *src_bio)
 	status = blk_crypto_get_keyslot(blk_crypto_fallback_profile,
 					bc->bc_key, &slot);
 	if (status != BLK_STS_OK) {
-		bio_endio_status(src_bio, status);
+		src_bio->bi_status = status;
+		bio_endio(src_bio);
 		return;
 	}
 	__blk_crypto_fallback_encrypt_bio(src_bio,
@@ -438,7 +438,8 @@ static void blk_crypto_fallback_decrypt_bio(struct work_struct *work)
 	}
 	mempool_free(f_ctx, bio_fallback_crypt_ctx_pool);
 
-	bio_endio_status(bio, status);
+	bio->bi_status = status;
+	bio_endio(bio);
 }
 
 /**
@@ -499,7 +500,8 @@ bool blk_crypto_fallback_bio_prep(struct bio *bio)
 
 	if (!__blk_crypto_cfg_supported(blk_crypto_fallback_profile,
 					&bc->bc_key->crypto_cfg)) {
-		bio_endio_status(bio, BLK_STS_NOTSUPP);
+		bio->bi_status = BLK_STS_NOTSUPP;
+		bio_endio(bio);
 		return false;
 	}
 

@@ -28,11 +28,10 @@
  * @name:		used for debugging/device-node name
  * @ops:		ops struct for this heap
  * @priv:		private data for this heap
- * @heap_devt:		heap device node
- * @list:		list head connecting to list of heaps
- * @heap_cdev:		heap char device
- * @refcount:		reference count for this heap
- * @heap_dev:		heap device struct
+ * @heap_devt		heap device node
+ * @list		list head connecting to list of heaps
+ * @heap_cdev		heap char device
+ * @heap_dev		heap device struct
  *
  * Represents a heap of memory from which buffers can be made.
  */
@@ -54,10 +53,10 @@ static struct class *dma_heap_class;
 static DEFINE_XARRAY_ALLOC(dma_heap_minors);
 
 bool __read_mostly mem_accounting;
+EXPORT_SYMBOL_GPL(mem_accounting);
 module_param(mem_accounting, bool, 0444);
 MODULE_PARM_DESC(mem_accounting,
 		 "Enable cgroup-based memory accounting for dma-buf heap allocations (default=false).");
-EXPORT_SYMBOL_NS_GPL(mem_accounting, "DMA_BUF_HEAP");
 
 struct dma_heap *dma_heap_find(const char *name)
 {

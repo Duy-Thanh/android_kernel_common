@@ -8,7 +8,6 @@
 #include <linux/of_reserved_mem.h>
 #include <linux/platform_data/simplefb.h>
 #include <linux/platform_device.h>
-#include <linux/pm.h>
 #include <linux/pm_domain.h>
 #include <linux/regulator/consumer.h>
 
@@ -25,7 +24,6 @@
 #include <drm/drm_gem_framebuffer_helper.h>
 #include <drm/drm_gem_shmem_helper.h>
 #include <drm/drm_managed.h>
-#include <drm/drm_modeset_helper.h>
 #include <drm/drm_modeset_helper_vtables.h>
 #include <drm/drm_print.h>
 #include <drm/drm_probe_helper.h>
@@ -836,24 +834,6 @@ static struct drm_driver simpledrm_driver = {
  * Platform driver
  */
 
-static int simpledrm_pm_suspend(struct device *dev)
-{
-	struct simpledrm_device *sdev = dev_get_drvdata(dev);
-	struct drm_device *drm = &sdev->sysfb.dev;
-
-	return drm_mode_config_helper_suspend(drm);
-}
-
-static int simpledrm_pm_resume(struct device *dev)
-{
-	struct simpledrm_device *sdev = dev_get_drvdata(dev);
-	struct drm_device *drm = &sdev->sysfb.dev;
-
-	return drm_mode_config_helper_resume(drm);
-}
-
-static DEFINE_SIMPLE_DEV_PM_OPS(simpledrm_pm_ops, simpledrm_pm_suspend, simpledrm_pm_resume);
-
 static int simpledrm_probe(struct platform_device *pdev)
 {
 	struct simpledrm_device *sdev;
@@ -894,7 +874,6 @@ static struct platform_driver simpledrm_platform_driver = {
 	.driver = {
 		.name = "simple-framebuffer", /* connect to sysfb */
 		.of_match_table = simpledrm_of_match_table,
-		.pm = pm_sleep_ptr(&simpledrm_pm_ops),
 	},
 	.probe = simpledrm_probe,
 	.remove = simpledrm_remove,

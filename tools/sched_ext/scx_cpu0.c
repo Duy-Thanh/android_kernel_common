@@ -72,6 +72,8 @@ restart:
 	optind = 1;
 	skel = SCX_OPS_OPEN(cpu0_ops, scx_cpu0);
 
+	skel->rodata->nr_cpus = libbpf_num_possible_cpus();
+
 	while ((opt = getopt(argc, argv, "vh")) != -1) {
 		switch (opt) {
 		case 'v':

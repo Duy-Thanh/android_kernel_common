@@ -182,7 +182,7 @@ xchk_xattr_actor(
 		.namelen		= namelen,
 		.trans			= sc->tp,
 		.valuelen		= valuelen,
-		.owner			= I_INO(ip),
+		.owner			= ip->i_ino,
 	};
 	struct xchk_xattr_buf		*ab;
 	int				error = 0;
@@ -199,7 +199,7 @@ xchk_xattr_actor(
 
 	if (attr_flags & XFS_ATTR_INCOMPLETE) {
 		/* Incomplete attr key, just mark the inode for preening. */
-		xchk_ino_set_preen(sc, I_INO(ip));
+		xchk_ino_set_preen(sc, ip->i_ino);
 		return 0;
 	}
 

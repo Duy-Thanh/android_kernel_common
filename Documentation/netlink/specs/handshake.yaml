@@ -125,7 +125,6 @@ operations:
       name: done
       doc: Handler reports handshake completion
       attribute-set: done
-      flags: [admin-perm]
       do:
         request:
           attributes:

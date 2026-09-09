@@ -850,7 +850,7 @@ bool amd_mce_usable_address(struct mce *m)
 DEFINE_IDTENTRY_SYSVEC(sysvec_deferred_error)
 {
 	trace_deferred_error_apic_entry(DEFERRED_ERROR_VECTOR);
-	inc_irq_stat(DEFERRED_ERROR);
+	inc_irq_stat(irq_deferred_error_count);
 	deferred_error_int_vector();
 	trace_deferred_error_apic_exit(DEFERRED_ERROR_VECTOR);
 	apic_eoi();
@@ -969,13 +969,13 @@ store_threshold_limit(struct threshold_block *b, const char *buf, size_t size)
 
 static ssize_t show_error_count(struct threshold_block *b, char *buf)
 {
-	struct msr val;
+	u32 lo, hi;
 
 	/* CPU might be offline by now */
-	if (rdmsrq_on_cpu(b->cpu, b->address, &val.q))
+	if (rdmsr_on_cpu(b->cpu, b->address, &lo, &hi))
 		return -ENODEV;
 
-	return sprintf(buf, "%u\n", ((val.h & THRESHOLD_MAX) -
+	return sprintf(buf, "%u\n", ((hi & THRESHOLD_MAX) -
 				     (THRESHOLD_MAX - b->threshold_limit)));
 }
 

@@ -105,9 +105,8 @@ static void ast_crtc_fill_gamma(struct ast_device *ast,
 		/* gamma table is used as color palette */
 		drm_crtc_fill_palette_8(crtc, ast_set_gamma_lut);
 		break;
-	case DRM_FORMAT_XRGB1555:
 	case DRM_FORMAT_RGB565:
-		/* also uses 24-bit gamma correction on high-color modes */
+		/* also uses 8-bit gamma ramp on low-color modes */
 		fallthrough;
 	case DRM_FORMAT_XRGB8888:
 		drm_crtc_fill_gamma_888(crtc, ast_set_gamma_lut);
@@ -130,9 +129,8 @@ static void ast_crtc_load_gamma(struct ast_device *ast,
 		/* gamma table is used as color palette */
 		drm_crtc_load_palette_8(crtc, lut, ast_set_gamma_lut);
 		break;
-	case DRM_FORMAT_XRGB1555:
 	case DRM_FORMAT_RGB565:
-		/* also uses 24-bit gamma correction on high-color modes */
+		/* also uses 8-bit gamma ramp on low-color modes */
 		fallthrough;
 	case DRM_FORMAT_XRGB8888:
 		drm_crtc_load_gamma_888(crtc, lut, ast_set_gamma_lut);
@@ -148,35 +146,30 @@ static void ast_set_vbios_color_reg(struct ast_device *ast,
 				    const struct drm_format_info *format,
 				    const struct ast_vbios_enhtable *vmode)
 {
-	u8 vgacr8c = 0x00;
-	u8 vgacr92 = 0x00;
+	u32 color_index;
 
-	switch (format->format) {
-	case DRM_FORMAT_C8:
-		vgacr8c |= AST_IO_VGACR8C_CUR_MODE_VGA;
-		vgacr92 = 8;
+	switch (format->cpp[0]) {
+	case 1:
+		color_index = VGAModeIndex - 1;
 		break;
-	case DRM_FORMAT_XRGB1555:
-		vgacr8c |= AST_IO_VGACR8C_CUR_MODE_15_BPP;
-		vgacr92 = 15;
+	case 2:
+		color_index = HiCModeIndex;
 		break;
-	case DRM_FORMAT_RGB565:
-		vgacr8c |= AST_IO_VGACR8C_CUR_MODE_16_BPP;
-		vgacr92 = 16;
+	case 3:
+	case 4:
+		color_index = TrueCModeIndex;
 		break;
-	case DRM_FORMAT_XRGB8888:
-		vgacr8c |= AST_IO_VGACR8C_CUR_MODE_32_BPP;
-		vgacr92 = 32;
-		break;
+	default:
+		return;
 	}
 
-	ast_set_index_reg(ast, AST_IO_VGACRI, 0x8c, vgacr8c);
+	ast_set_index_reg(ast, AST_IO_VGACRI, 0x8c, (u8)((color_index & 0x0f) << 4));
 
 	ast_set_index_reg(ast, AST_IO_VGACRI, 0x91, 0x00);
 
 	if (vmode->flags & NewModeInfo) {
-		ast_set_index_reg(ast, AST_IO_VGACRI, 0x91, AST_IO_VGACR91_PASSWORD);
-		ast_set_index_reg(ast, AST_IO_VGACRI, 0x92, vgacr92);
+		ast_set_index_reg(ast, AST_IO_VGACRI, 0x91, 0xa8);
+		ast_set_index_reg(ast, AST_IO_VGACRI, 0x92, format->cpp[0] * 8);
 	}
 }
 
@@ -195,7 +188,7 @@ static void ast_set_vbios_mode_reg(struct ast_device *ast,
 	ast_set_index_reg(ast, AST_IO_VGACRI, 0x91, 0x00);
 
 	if (vmode->flags & NewModeInfo) {
-		ast_set_index_reg(ast, AST_IO_VGACRI, 0x91, AST_IO_VGACR91_PASSWORD);
+		ast_set_index_reg(ast, AST_IO_VGACRI, 0x91, 0xa8);
 		ast_set_index_reg(ast, AST_IO_VGACRI, 0x93, adjusted_mode->clock / 1000);
 		ast_set_index_reg(ast, AST_IO_VGACRI, 0x94, adjusted_mode->crtc_hdisplay);
 		ast_set_index_reg(ast, AST_IO_VGACRI, 0x95, adjusted_mode->crtc_hdisplay >> 8);
@@ -388,36 +381,30 @@ static void ast_set_dclk_reg(struct ast_device *ast,
 static void ast_set_color_reg(struct ast_device *ast,
 			      const struct drm_format_info *format)
 {
-	u8 vgacra0 = 0x00;
-	u8 vgacra3 = 0x00;
-	u8 vgacra8 = 0x00;
+	u8 jregA0 = 0, jregA3 = 0, jregA8 = 0;
 
-	vgacra0 |= AST_IO_VGACRA0_MEMORY_CHAIN4_MODE |
-		   AST_IO_VGACRA0_LINEAR_EXT_ACCESS |
-		   AST_IO_VGACRA0_SEGMENTED_EXT_ACCESS;
-
-	switch (format->format) {
-	case DRM_FORMAT_C8:
-		vgacra3 |= AST_IO_VGACRA3_256_COLORS;
-		vgacra8 &= ~AST_IO_VGACRA8_GAMMA_CORRECTION_ENABLED;
+	switch (format->cpp[0] * 8) {
+	case 8:
+		jregA0 = 0x70;
+		jregA3 = 0x01;
+		jregA8 = 0x00;
 		break;
-	case DRM_FORMAT_XRGB1555:
-		vgacra3 |= AST_IO_VGACRA3_15_BPP;
-		vgacra8 |= AST_IO_VGACRA8_GAMMA_CORRECTION_ENABLED;
+	case 15:
+	case 16:
+		jregA0 = 0x70;
+		jregA3 = 0x04;
+		jregA8 = 0x02;
 		break;
-	case DRM_FORMAT_RGB565:
-		vgacra3 |= AST_IO_VGACRA3_16_BPP;
-		vgacra8 |= AST_IO_VGACRA8_GAMMA_CORRECTION_ENABLED;
-		break;
-	case DRM_FORMAT_XRGB8888:
-		vgacra3 |= AST_IO_VGACRA3_32_BPP;
-		vgacra8 |= AST_IO_VGACRA8_GAMMA_CORRECTION_ENABLED;
+	case 32:
+		jregA0 = 0x70;
+		jregA3 = 0x08;
+		jregA8 = 0x02;
 		break;
 	}
 
-	ast_set_index_reg_mask(ast, AST_IO_VGACRI, 0xa0, 0x8f, vgacra0);
-	ast_set_index_reg_mask(ast, AST_IO_VGACRI, 0xa3, 0xf0, vgacra3);
-	ast_set_index_reg_mask(ast, AST_IO_VGACRI, 0xa8, 0xfd, vgacra8);
+	ast_set_index_reg_mask(ast, AST_IO_VGACRI, 0xa0, 0x8f, jregA0);
+	ast_set_index_reg_mask(ast, AST_IO_VGACRI, 0xa3, 0xf0, jregA3);
+	ast_set_index_reg_mask(ast, AST_IO_VGACRI, 0xa8, 0xfd, jregA8);
 }
 
 static void ast_set_crtthd_reg(struct ast_device *ast)
@@ -502,12 +489,11 @@ void __iomem *ast_plane_vaddr(struct ast_plane *ast_plane)
 static const uint32_t ast_primary_plane_formats[] = {
 	DRM_FORMAT_XRGB8888,
 	DRM_FORMAT_RGB565,
-	DRM_FORMAT_XRGB1555,
 	DRM_FORMAT_C8,
 };
 
 static int ast_primary_plane_helper_atomic_check(struct drm_plane *plane,
-						 struct drm_atomic_commit *state)
+						 struct drm_atomic_state *state)
 {
 	struct drm_device *dev = plane->dev;
 	struct drm_plane_state *new_plane_state = drm_atomic_get_new_plane_state(state, plane);
@@ -555,7 +541,7 @@ static void ast_handle_damage(struct ast_plane *ast_plane, struct iosys_map *src
 }
 
 static void ast_primary_plane_helper_atomic_update(struct drm_plane *plane,
-						   struct drm_atomic_commit *state)
+						   struct drm_atomic_state *state)
 {
 	struct drm_device *dev = plane->dev;
 	struct ast_device *ast = to_ast_device(dev);
@@ -599,7 +585,7 @@ static void ast_primary_plane_helper_atomic_update(struct drm_plane *plane,
 }
 
 static void ast_primary_plane_helper_atomic_enable(struct drm_plane *plane,
-						   struct drm_atomic_commit *state)
+						   struct drm_atomic_state *state)
 {
 	struct ast_device *ast = to_ast_device(plane->dev);
 	struct ast_plane *ast_plane = to_ast_plane(plane);
@@ -614,7 +600,7 @@ static void ast_primary_plane_helper_atomic_enable(struct drm_plane *plane,
 }
 
 static void ast_primary_plane_helper_atomic_disable(struct drm_plane *plane,
-						    struct drm_atomic_commit *state)
+						    struct drm_atomic_state *state)
 {
 	/*
 	 * Keep this empty function to avoid calling
@@ -722,7 +708,7 @@ static void ast_crtc_helper_mode_set_nofb(struct drm_crtc *crtc)
 }
 
 static int ast_crtc_helper_atomic_check(struct drm_crtc *crtc,
-					struct drm_atomic_commit *state)
+					struct drm_atomic_state *state)
 {
 	struct drm_crtc_state *crtc_state = drm_atomic_get_new_crtc_state(state, crtc);
 	struct drm_display_mode *adjusted_mode = &crtc_state->adjusted_mode;
@@ -776,10 +762,10 @@ static int ast_crtc_helper_atomic_check(struct drm_crtc *crtc,
 	case DRM_FORMAT_C8:
 		ast_state->std_table = &vbios_stdtable[VGAModeIndex];
 		break;
-	case DRM_FORMAT_XRGB1555:
 	case DRM_FORMAT_RGB565:
 		ast_state->std_table = &vbios_stdtable[HiCModeIndex];
 		break;
+	case DRM_FORMAT_RGB888:
 	case DRM_FORMAT_XRGB8888:
 		ast_state->std_table = &vbios_stdtable[TrueCModeIndex];
 		break;
@@ -822,7 +808,7 @@ static int ast_crtc_helper_atomic_check(struct drm_crtc *crtc,
 
 static void
 ast_crtc_helper_atomic_flush(struct drm_crtc *crtc,
-			     struct drm_atomic_commit *state)
+			     struct drm_atomic_state *state)
 {
 	struct drm_crtc_state *crtc_state = drm_atomic_get_new_crtc_state(state,
 									  crtc);
@@ -844,7 +830,7 @@ ast_crtc_helper_atomic_flush(struct drm_crtc *crtc,
 	}
 }
 
-static void ast_crtc_helper_atomic_enable(struct drm_crtc *crtc, struct drm_atomic_commit *state)
+static void ast_crtc_helper_atomic_enable(struct drm_crtc *crtc, struct drm_atomic_state *state)
 {
 	struct ast_device *ast = to_ast_device(crtc->dev);
 	u8 vgacr17 = 0x00;
@@ -857,7 +843,7 @@ static void ast_crtc_helper_atomic_enable(struct drm_crtc *crtc, struct drm_atom
 	ast_set_index_reg_mask(ast, AST_IO_VGACRI, 0xb6, 0xfc, vgacrb6);
 }
 
-static void ast_crtc_helper_atomic_disable(struct drm_crtc *crtc, struct drm_atomic_commit *state)
+static void ast_crtc_helper_atomic_disable(struct drm_crtc *crtc, struct drm_atomic_state *state)
 {
 	struct drm_crtc_state *old_crtc_state = drm_atomic_get_old_crtc_state(state, crtc);
 	struct ast_device *ast = to_ast_device(crtc->dev);
@@ -966,7 +952,7 @@ static int ast_crtc_init(struct ast_device *ast)
  * Mode config
  */
 
-static void ast_mode_config_helper_atomic_commit_tail(struct drm_atomic_commit *state)
+static void ast_mode_config_helper_atomic_commit_tail(struct drm_atomic_state *state)
 {
 	struct ast_device *ast = to_ast_device(state->dev);
 

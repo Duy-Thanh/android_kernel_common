@@ -3,8 +3,8 @@
  * Copyright © 2022 Intel Corporation
  */
 
-#ifndef _XE_REG_SR_H_
-#define _XE_REG_SR_H_
+#ifndef _XE_REG_SR_
+#define _XE_REG_SR_
 
 /*
  * Reg save/restore bookkeeping

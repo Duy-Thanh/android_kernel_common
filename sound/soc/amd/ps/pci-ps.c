@@ -329,8 +329,7 @@ static struct snd_soc_acpi_mach *acp63_sdw_machine_select(struct device *dev)
 					break;
 			}
 			if (i == acp_data->info.count || !link->num_adr)
-				if (!mach->machine_check || mach->machine_check(acp_data->sdw))
-					break;
+				break;
 		}
 		if (mach && mach->link_mask) {
 			mach->mach_params.links = mach->links;

@@ -944,14 +944,6 @@ xfs_zone_rgbno_is_valid(
 			rtg_rgno(rtg), XFS_RTG_FREE);
 }
 
-void
-xfs_zone_mark_free(
-	struct xfs_rtgroup	*rtg)
-{
-	xfs_group_set_mark(rtg_group(rtg), XFS_RTG_FREE);
-	atomic_inc(&rtg_mount(rtg)->m_zone_info->zi_nr_free_zones);
-}
-
 static void
 xfs_free_open_zones(
 	struct xfs_zone_info	*zi)
@@ -1090,7 +1082,8 @@ xfs_init_zone(
 
 	if (write_pointer == 0) {
 		/* zone is empty */
-		xfs_zone_mark_free(rtg);
+		atomic_inc(&zi->zi_nr_free_zones);
+		xfs_group_set_mark(rtg_group(rtg), XFS_RTG_FREE);
 		iz->available += rtg_blocks(rtg);
 	} else if (write_pointer < rtg_blocks(rtg)) {
 		/* zone is open */

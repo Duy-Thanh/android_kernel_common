@@ -16,7 +16,6 @@
 #include <linux/poll.h>
 #include <linux/proc_fs.h>
 #include <linux/key-type.h>
-#include <linux/uio.h>
 #include <net/net_namespace.h>
 #include <net/sock.h>
 #include <net/af_rxrpc.h>
@@ -744,24 +743,23 @@ error:
  * Get socket options.
  */
 static int rxrpc_getsockopt(struct socket *sock, int level, int optname,
-			    sockopt_t *opt)
+			    char __user *optval, int __user *_optlen)
 {
-	int optlen, val;
+	int optlen;
 
 	if (level != SOL_RXRPC)
 		return -EOPNOTSUPP;
 
-	optlen = opt->optlen;
+	if (get_user(optlen, _optlen))
+		return -EFAULT;
 
 	switch (optname) {
 	case RXRPC_SUPPORTED_CMSG:
 		if (optlen < sizeof(int))
 			return -ETOOSMALL;
-		val = RXRPC__SUPPORTED - 1;
-		if (copy_to_iter(&val, sizeof(val), &opt->iter_out) !=
-		    sizeof(val))
+		if (put_user(RXRPC__SUPPORTED - 1, (int __user *)optval) ||
+		    put_user(sizeof(int), _optlen))
 			return -EFAULT;
-		opt->optlen = sizeof(val);
 		return 0;
 
 	default:
@@ -1011,7 +1009,7 @@ static const struct proto_ops rxrpc_rpc_ops = {
 	.listen		= rxrpc_listen,
 	.shutdown	= rxrpc_shutdown,
 	.setsockopt	= rxrpc_setsockopt,
-	.getsockopt_iter = rxrpc_getsockopt,
+	.getsockopt	= rxrpc_getsockopt,
 	.sendmsg	= rxrpc_sendmsg,
 	.recvmsg	= rxrpc_recvmsg,
 	.mmap		= sock_no_mmap,

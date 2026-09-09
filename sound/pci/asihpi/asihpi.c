@@ -2933,16 +2933,13 @@ static void snd_asihpi_remove(struct pci_dev *pci_dev)
 }
 
 static const struct pci_device_id asihpi_pci_tbl[] = {
-	{
-		PCI_DEVICE_SUB(HPI_PCI_VENDOR_ID_TI, HPI_PCI_DEV_ID_DSP6205,
-			       HPI_PCI_VENDOR_ID_AUDIOSCIENCE, PCI_ANY_ID),
-		.driver_data = (kernel_ulong_t)HPI_6205,
-	}, {
-		PCI_DEVICE_SUB(HPI_PCI_VENDOR_ID_TI, HPI_PCI_DEV_ID_PCI2040,
-			       HPI_PCI_VENDOR_ID_AUDIOSCIENCE, PCI_ANY_ID),
-		.driver_data = (kernel_ulong_t)HPI_6000,
-	},
-	{}
+	{HPI_PCI_VENDOR_ID_TI, HPI_PCI_DEV_ID_DSP6205,
+		HPI_PCI_VENDOR_ID_AUDIOSCIENCE, PCI_ANY_ID, 0, 0,
+		(kernel_ulong_t)HPI_6205},
+	{HPI_PCI_VENDOR_ID_TI, HPI_PCI_DEV_ID_PCI2040,
+		HPI_PCI_VENDOR_ID_AUDIOSCIENCE, PCI_ANY_ID, 0, 0,
+		(kernel_ulong_t)HPI_6000},
+	{0,}
 };
 MODULE_DEVICE_TABLE(pci, asihpi_pci_tbl);
 

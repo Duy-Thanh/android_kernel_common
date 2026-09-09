@@ -271,8 +271,7 @@ static struct connection *__find_con(int nodeid, int r)
 {
 	struct connection *con;
 
-	hlist_for_each_entry_srcu(con, &connection_hash[r], list,
-			srcu_read_lock_held(&connections_srcu)) {
+	hlist_for_each_entry_rcu(con, &connection_hash[r], list) {
 		if (con->nodeid == nodeid)
 			return con;
 	}
@@ -427,8 +426,7 @@ static int addr_to_nodeid(struct sockaddr_storage *addr, int *nodeid,
 
 	idx = srcu_read_lock(&connections_srcu);
 	for (i = 0; i < CONN_HASH_SIZE; i++) {
-		hlist_for_each_entry_srcu(con, &connection_hash[i], list,
-				srcu_read_lock_held(&connections_srcu)) {
+		hlist_for_each_entry_rcu(con, &connection_hash[i], list) {
 			WARN_ON_ONCE(!con->addr_count);
 
 			spin_lock(&con->addrs_lock);
@@ -1731,8 +1729,7 @@ void dlm_lowcomms_shutdown(void)
 
 	idx = srcu_read_lock(&connections_srcu);
 	for (i = 0; i < CONN_HASH_SIZE; i++) {
-		hlist_for_each_entry_srcu(con, &connection_hash[i], list,
-				srcu_read_lock_held(&connections_srcu)) {
+		hlist_for_each_entry_rcu(con, &connection_hash[i], list) {
 			shutdown_connection(con, true);
 			stop_connection_io(con);
 			flush_workqueue(process_workqueue);
@@ -1971,8 +1968,7 @@ void dlm_lowcomms_exit(void)
 
 	idx = srcu_read_lock(&connections_srcu);
 	for (i = 0; i < CONN_HASH_SIZE; i++) {
-		hlist_for_each_entry_srcu(con, &connection_hash[i], list,
-				srcu_read_lock_held(&connections_srcu)) {
+		hlist_for_each_entry_rcu(con, &connection_hash[i], list) {
 			spin_lock(&connections_lock);
 			hlist_del_rcu(&con->list);
 			spin_unlock(&connections_lock);

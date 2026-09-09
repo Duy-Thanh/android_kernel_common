@@ -679,7 +679,6 @@ void ip_tunnel_xmit(struct sk_buff *skb, struct net_device *dev,
 	struct flowi4 fl4;
 	bool md = false;
 	bool connected;
-	int err_count;
 	u8 tos, ttl;
 	__be32 dst;
 	__be16 df;
@@ -808,16 +807,14 @@ void ip_tunnel_xmit(struct sk_buff *skb, struct net_device *dev,
 		goto tx_error;
 	}
 
-	err_count = READ_ONCE(tunnel->err_count);
-	if (err_count > 0) {
+	if (tunnel->err_count > 0) {
 		if (time_before(jiffies,
-				READ_ONCE(tunnel->err_time) + IPTUNNEL_ERR_TIMEO)) {
-			WRITE_ONCE(tunnel->err_count, err_count - 1);
+				tunnel->err_time + IPTUNNEL_ERR_TIMEO)) {
+			tunnel->err_count--;
 
 			dst_link_failure(skb);
-		} else {
-			WRITE_ONCE(tunnel->err_count, 0);
-		}
+		} else
+			tunnel->err_count = 0;
 	}
 
 	tos = ip_tunnel_ecn_encap(tos, inner_iph, skb);

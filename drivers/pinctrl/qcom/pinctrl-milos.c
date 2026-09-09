@@ -1310,7 +1310,6 @@ static const struct of_device_id milos_tlmm_of_match[] = {
 	{ .compatible = "qcom,milos-tlmm" },
 	{ /* sentinel */ }
 };
-MODULE_DEVICE_TABLE(of, milos_tlmm_of_match);
 
 static struct platform_driver milos_tlmm_driver = {
 	.driver = {
@@ -1334,3 +1333,4 @@ module_exit(milos_tlmm_exit);
 
 MODULE_DESCRIPTION("QTI Milos TLMM driver");
 MODULE_LICENSE("GPL");
+MODULE_DEVICE_TABLE(of, milos_tlmm_of_match);

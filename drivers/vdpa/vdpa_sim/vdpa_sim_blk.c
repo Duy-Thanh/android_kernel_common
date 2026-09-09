@@ -397,7 +397,14 @@ static void vdpasim_blk_free(struct vdpasim *vdpasim)
 		kvfree(blk->buffer);
 }
 
-static struct device *vdpasim_blk_mgmtdev;
+static void vdpasim_blk_mgmtdev_release(struct device *dev)
+{
+}
+
+static struct device vdpasim_blk_mgmtdev = {
+	.init_name = "vdpasim_blk",
+	.release = vdpasim_blk_mgmtdev_release,
+};
 
 static int vdpasim_blk_dev_add(struct vdpa_mgmt_dev *mdev, const char *name,
 			       const struct vdpa_dev_set_config *config)
@@ -468,6 +475,7 @@ static struct virtio_device_id id_table[] = {
 };
 
 static struct vdpa_mgmt_dev mgmt_dev = {
+	.device = &vdpasim_blk_mgmtdev,
 	.id_table = id_table,
 	.ops = &vdpasim_blk_mgmtdev_ops,
 };
@@ -476,11 +484,12 @@ static int __init vdpasim_blk_init(void)
 {
 	int ret;
 
-	vdpasim_blk_mgmtdev = root_device_register("vdpasim_blk");
-	if (IS_ERR(vdpasim_blk_mgmtdev))
-		return PTR_ERR(vdpasim_blk_mgmtdev);
+	ret = device_register(&vdpasim_blk_mgmtdev);
+	if (ret) {
+		put_device(&vdpasim_blk_mgmtdev);
+		return ret;
+	}
 
-	mgmt_dev.device = vdpasim_blk_mgmtdev;
 	ret = vdpa_mgmtdev_register(&mgmt_dev);
 	if (ret)
 		goto parent_err;
@@ -498,8 +507,7 @@ static int __init vdpasim_blk_init(void)
 mgmt_dev_err:
 	vdpa_mgmtdev_unregister(&mgmt_dev);
 parent_err:
-	root_device_unregister(vdpasim_blk_mgmtdev);
-
+	device_unregister(&vdpasim_blk_mgmtdev);
 	return ret;
 }
 
@@ -507,7 +515,7 @@ static void __exit vdpasim_blk_exit(void)
 {
 	kvfree(shared_buffer);
 	vdpa_mgmtdev_unregister(&mgmt_dev);
-	root_device_unregister(vdpasim_blk_mgmtdev);
+	device_unregister(&vdpasim_blk_mgmtdev);
 }
 
 module_init(vdpasim_blk_init)

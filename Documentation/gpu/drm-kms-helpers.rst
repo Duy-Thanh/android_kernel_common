@@ -33,8 +33,6 @@ There are a few areas these helpers can grouped into:
   pipeline: Planes, handling rectangles for visibility checking and scissoring,
   flip queues and assorted bits.
 
-.. contents::
-
 Modeset Helper Reference for Common Vtables
 ===========================================
 

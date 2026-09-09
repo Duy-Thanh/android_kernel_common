@@ -476,6 +476,8 @@ static int truly_nt35597_panel_add(struct truly_nt35597 *ctx)
 	/* dual port */
 	gpiod_set_value(ctx->mode_gpio, 0);
 
+	drm_panel_init(&ctx->panel, dev, &truly_nt35597_drm_funcs,
+		       DRM_MODE_CONNECTOR_DSI);
 	drm_panel_add(&ctx->panel);
 
 	return 0;
@@ -521,12 +523,10 @@ static int truly_nt35597_probe(struct mipi_dsi_device *dsi)
 		.node = NULL,
 	};
 
-	ctx = devm_drm_panel_alloc(dev, __typeof(*ctx), panel,
-				  &truly_nt35597_drm_funcs,
-				  DRM_MODE_CONNECTOR_DSI);
+	ctx = devm_kzalloc(dev, sizeof(*ctx), GFP_KERNEL);
 
-	if (IS_ERR(ctx))
-		return PTR_ERR(ctx);
+	if (!ctx)
+		return -ENOMEM;
 
 	/*
 	 * This device represents itself as one with two input ports which are

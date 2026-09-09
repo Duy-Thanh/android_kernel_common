@@ -2894,7 +2894,7 @@ static int gve_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 		goto abort_with_wq;
 
 	if (!gve_is_gqi(priv) && !gve_is_qpl(priv))
-		dev->netmem_tx = NETMEM_TX_DMA;
+		dev->netmem_tx = true;
 
 	err = register_netdev(dev);
 	if (err)
@@ -2967,9 +2967,9 @@ static void gve_shutdown(struct pci_dev *pdev)
 	rtnl_unlock();
 }
 
-static int gve_suspend(struct device *dev)
+#ifdef CONFIG_PM
+static int gve_suspend(struct pci_dev *pdev, pm_message_t state)
 {
-	struct pci_dev *pdev = to_pci_dev(dev);
 	struct net_device *netdev = pci_get_drvdata(pdev);
 	struct gve_priv *priv = netdev_priv(netdev);
 	bool was_up = netif_running(priv->dev);
@@ -2990,9 +2990,8 @@ static int gve_suspend(struct device *dev)
 	return 0;
 }
 
-static int gve_resume(struct device *dev)
+static int gve_resume(struct pci_dev *pdev)
 {
-	struct pci_dev *pdev = to_pci_dev(dev);
 	struct net_device *netdev = pci_get_drvdata(pdev);
 	struct gve_priv *priv = netdev_priv(netdev);
 	int err;
@@ -3005,8 +3004,7 @@ static int gve_resume(struct device *dev)
 	rtnl_unlock();
 	return err;
 }
-
-static DEFINE_SIMPLE_DEV_PM_OPS(gve_pm_ops, gve_suspend, gve_resume);
+#endif /* CONFIG_PM */
 
 static const struct pci_device_id gve_id_table[] = {
 	{ PCI_DEVICE(PCI_VENDOR_ID_GOOGLE, PCI_DEV_ID_GVNIC) },
@@ -3019,7 +3017,10 @@ static struct pci_driver gve_driver = {
 	.probe		= gve_probe,
 	.remove		= gve_remove,
 	.shutdown	= gve_shutdown,
-	.driver.pm	= pm_sleep_ptr(&gve_pm_ops),
+#ifdef CONFIG_PM
+	.suspend        = gve_suspend,
+	.resume         = gve_resume,
+#endif
 };
 
 module_pci_driver(gve_driver);

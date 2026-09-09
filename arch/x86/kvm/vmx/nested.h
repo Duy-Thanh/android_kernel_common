@@ -2,7 +2,7 @@
 #ifndef __KVM_X86_VMX_NESTED_H
 #define __KVM_X86_VMX_NESTED_H
 
-#include "regs.h"
+#include "kvm_cache_regs.h"
 #include "hyperv.h"
 #include "vmcs12.h"
 #include "vmx.h"

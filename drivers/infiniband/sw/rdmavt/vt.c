@@ -6,7 +6,6 @@
 #include <linux/module.h>
 #include <linux/kernel.h>
 #include <linux/dma-mapping.h>
-#include <rdma/uverbs_ioctl.h>
 #include "vt.h"
 #include "cq.h"
 #include "trace.h"
@@ -80,16 +79,14 @@ static int rvt_query_device(struct ib_device *ibdev,
 			    struct ib_udata *uhw)
 {
 	struct rvt_dev_info *rdi = ib_to_rvt(ibdev);
-	int err;
 
-	err = ib_is_udata_in_empty(uhw);
-	if (err)
-		return err;
+	if (uhw->inlen || uhw->outlen)
+		return -EINVAL;
 	/*
 	 * Return rvt_dev_info.dparms.props contents
 	 */
 	*props = rdi->dparms.props;
-	return ib_respond_empty_udata(uhw);
+	return 0;
 }
 
 static int rvt_get_numa_node(struct ib_device *ibdev)

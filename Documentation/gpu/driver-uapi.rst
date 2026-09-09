@@ -2,8 +2,6 @@
 DRM Driver uAPI
 ===============
 
-.. contents::
-
 drm/i915 uAPI
 =============
 

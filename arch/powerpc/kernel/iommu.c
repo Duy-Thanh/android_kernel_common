@@ -13,7 +13,6 @@
 #include <linux/init.h>
 #include <linux/types.h>
 #include <linux/slab.h>
-#include <linux/sysfs.h>
 #include <linux/mm.h>
 #include <linux/spinlock.h>
 #include <linux/string.h>
@@ -142,7 +141,7 @@ late_initcall(fail_iommu_debugfs);
 static ssize_t fail_iommu_show(struct device *dev,
 			       struct device_attribute *attr, char *buf)
 {
-	return sysfs_emit(buf, "%d\n", dev->archdata.fail_iommu);
+	return sprintf(buf, "%d\n", dev->archdata.fail_iommu);
 }
 
 static ssize_t fail_iommu_store(struct device *dev,

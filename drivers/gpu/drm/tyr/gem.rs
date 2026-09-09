@@ -1,14 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0 or MIT
-//! GEM buffer object management for the Tyr driver.
-//!
-//! This module provides buffer object (BO) management functionality using
-//! DRM's GEM subsystem with shmem backing.
 
 use kernel::{
-    drm::{
-        gem,
-        DeviceContext, //
-    },
+    drm::gem,
     prelude::*, //
 };
 
@@ -17,27 +10,15 @@ use crate::driver::{
     TyrDrmDriver, //
 };
 
-/// Tyr's DriverObject type for GEM objects.
+/// GEM Object inner driver data
 #[pin_data]
-pub(crate) struct BoData {
-    flags: u32,
-}
+pub(crate) struct TyrObject {}
 
-/// Provides a way to pass arguments when creating BoData
-/// as required by the gem::DriverObject trait.
-pub(crate) struct BoCreateArgs {
-    flags: u32,
-}
-
-impl gem::DriverObject for BoData {
+impl gem::DriverObject for TyrObject {
     type Driver = TyrDrmDriver;
-    type Args = BoCreateArgs;
+    type Args = ();
 
-    fn new<Ctx: DeviceContext>(
-        _dev: &TyrDrmDevice<Ctx>,
-        _size: usize,
-        args: BoCreateArgs,
-    ) -> impl PinInit<Self, Error> {
-        try_pin_init!(Self { flags: args.flags })
+    fn new(_dev: &TyrDrmDevice, _size: usize, _args: ()) -> impl PinInit<Self, Error> {
+        try_pin_init!(TyrObject {})
     }
 }

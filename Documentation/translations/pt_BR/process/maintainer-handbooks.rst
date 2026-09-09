@@ -6,17 +6,13 @@ Notas sobre o processo de desenvolvimento de subsistemas e mantenedores
 O propósito deste documento é fornecer informações específicas de
 subsistemas que são suplementares ao manual geral do processo de
 desenvolvimento.
-:ref:`Documentation/process <development_process_main>`.
 
-Para desenvolvedores, veja abaixo todos os guias específicos de
-subsistemas conhecidos. Se o subsistema para o qual você está
-contribuindo não tiver um guia listado aqui, é recomendável buscar
-esclarecimentos sobre as questões levantadas em
-Documentation/maintainer/maintainer-entry-profile.rst.
+Conteúdos:
 
-Para mantenedores, considere documentar requisitos adicionais e
-expectativas caso as submissões frequentemente deixem de atender
-a critérios específicos de submissão. Veja
-Documentation/maintainer/maintainer-entry-profile.rst.
+.. toctree::
+   :numbered:
+   :maxdepth: 2
 
-.. maintainers-profile-toc::
+   maintainer-netdev
+   maintainer-soc
+   maintainer-soc-clean-dts

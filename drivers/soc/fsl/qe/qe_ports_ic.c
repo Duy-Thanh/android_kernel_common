@@ -17,7 +17,6 @@
 struct qepic_data {
 	void __iomem *reg;
 	struct irq_domain *host;
-	int irq;
 };
 
 static void qepic_mask(struct irq_data *d)
@@ -93,18 +92,11 @@ static const struct irq_domain_ops qepic_host_ops = {
 	.map = qepic_host_map,
 };
 
-static void qepic_remove(void *res)
-{
-	struct qepic_data *data = res;
-
-	irq_set_chained_handler_and_data(data->irq, NULL, NULL);
-	irq_domain_remove(data->host);
-}
-
 static int qepic_probe(struct platform_device *pdev)
 {
 	struct device *dev = &pdev->dev;
 	struct qepic_data *data;
+	int irq;
 
 	data = devm_kzalloc(dev, sizeof(*data), GFP_KERNEL);
 	if (!data)
@@ -114,18 +106,17 @@ static int qepic_probe(struct platform_device *pdev)
 	if (IS_ERR(data->reg))
 		return PTR_ERR(data->reg);
 
-	data->irq = platform_get_irq(pdev, 0);
-	if (data->irq < 0)
-		return data->irq;
+	irq = platform_get_irq(pdev, 0);
+	if (irq < 0)
+		return irq;
 
-	data->host = irq_domain_create_linear(dev_fwnode(dev), 32, &qepic_host_ops, data);
+	data->host = irq_domain_add_linear(dev->of_node, 32, &qepic_host_ops, data);
 	if (!data->host)
 		return -ENODEV;
 
-	irq_set_chained_handler_and_data(data->irq, qepic_cascade, data);
+	irq_set_chained_handler_and_data(irq, qepic_cascade, data);
 
-	return devm_add_action_or_reset(dev, qepic_remove, data);
-
+	return 0;
 }
 
 static const struct of_device_id qepic_match[] = {

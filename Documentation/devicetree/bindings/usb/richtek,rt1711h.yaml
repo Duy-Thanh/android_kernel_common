@@ -43,7 +43,8 @@ properties:
   vbus-supply:
     description: VBUS power supply
 
-  wakeup-source: true
+  wakeup-source:
+    type: boolean
 
   connector:
     type: object

@@ -1775,6 +1775,7 @@ static int sdma_v4_0_early_init(struct amdgpu_ip_block *ip_block)
 		adev->sdma.has_page_queue = true;
 
 	sdma_v4_0_set_ring_funcs(adev);
+	sdma_v4_0_set_buffer_funcs(adev);
 	amdgpu_sdma_set_vm_pte_scheds(adev, &sdma_v4_0_vm_pte_funcs);
 	sdma_v4_0_set_irq_funcs(adev);
 	sdma_v4_0_set_ras_funcs(adev);
@@ -1960,7 +1961,6 @@ static int sdma_v4_0_sw_fini(struct amdgpu_ip_block *ip_block)
 static int sdma_v4_0_hw_init(struct amdgpu_ip_block *ip_block)
 {
 	struct amdgpu_device *adev = ip_block->adev;
-	int r;
 
 	if (adev->flags & AMD_IS_APU)
 		amdgpu_dpm_set_powergating_by_smu(adev, AMD_IP_BLOCK_TYPE_SDMA, false, 0);
@@ -1968,12 +1968,7 @@ static int sdma_v4_0_hw_init(struct amdgpu_ip_block *ip_block)
 	if (!amdgpu_sriov_vf(adev))
 		sdma_v4_0_init_golden_registers(adev);
 
-	r = sdma_v4_0_start(adev);
-	if (r)
-		return r;
-	sdma_v4_0_set_buffer_funcs(adev);
-
-	return 0;
+	return sdma_v4_0_start(adev);
 }
 
 static int sdma_v4_0_hw_fini(struct amdgpu_ip_block *ip_block)
@@ -2631,9 +2626,13 @@ static const struct amdgpu_buffer_funcs sdma_v4_4_buffer_funcs = {
 static void sdma_v4_0_set_buffer_funcs(struct amdgpu_device *adev)
 {
 	if (amdgpu_ip_version(adev, SDMA0_HWIP, 0) >= IP_VERSION(4, 4, 0))
-		amdgpu_sdma_set_buffer_funcs_scheds(adev, &sdma_v4_4_buffer_funcs);
+		adev->mman.buffer_funcs = &sdma_v4_4_buffer_funcs;
 	else
-		amdgpu_sdma_set_buffer_funcs_scheds(adev, &sdma_v4_0_buffer_funcs);
+		adev->mman.buffer_funcs = &sdma_v4_0_buffer_funcs;
+	if (adev->sdma.has_page_queue)
+		adev->mman.buffer_funcs_ring = &adev->sdma.instance[0].page;
+	else
+		adev->mman.buffer_funcs_ring = &adev->sdma.instance[0].ring;
 }
 
 static void sdma_v4_0_get_ras_error_count(uint32_t value,

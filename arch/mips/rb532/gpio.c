@@ -37,6 +37,7 @@
 #include <asm/mach-rc32434/rb.h>
 #include <asm/mach-rc32434/gpio.h>
 
+#define GPIOBASE	0x050000
 /* Offsets relative to GPIOBASE */
 #define GPIOFUNC	0x00
 #define GPIOCFG		0x04
@@ -49,6 +50,15 @@
 struct rb532_gpio_chip {
 	struct gpio_chip chip;
 	void __iomem	 *regbase;
+};
+
+static struct resource rb532_gpio_reg0_res[] = {
+	{
+		.name	= "gpio_reg0",
+		.start	= REGBASE + GPIOBASE,
+		.end	= REGBASE + GPIOBASE + sizeof(struct rb532_gpio_reg) - 1,
+		.flags	= IORESOURCE_MEM,
+	}
 };
 
 /* rb532_set_bit - sanely set a bit
@@ -189,32 +199,21 @@ void rb532_gpio_set_func(unsigned gpio)
 }
 EXPORT_SYMBOL(rb532_gpio_set_func);
 
-static int rb532_gpio_probe(struct platform_device *pdev)
-{
-	struct device *dev = &pdev->dev;
-	struct resource *res;
-
-	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
-	if (!res)
-		return -EINVAL;
-
-	rb532_gpio_chip->regbase = devm_ioremap_resource(dev, res);
-	if (IS_ERR(rb532_gpio_chip->regbase))
-		return PTR_ERR(rb532_gpio_chip->regbase);
-
-	/* Register our GPIO chip */
-	return devm_gpiochip_add_data(dev, &rb532_gpio_chip->chip, rb532_gpio_chip);
-}
-
-static struct platform_driver rb532_gpio_driver = {
-	.driver = {
-		.name = "rb532-gpio",
-	},
-	.probe = rb532_gpio_probe,
-};
-
 static int __init rb532_gpio_init(void)
 {
-	return platform_driver_register(&rb532_gpio_driver);
+	struct resource *r;
+
+	r = rb532_gpio_reg0_res;
+	rb532_gpio_chip->regbase = ioremap(r->start, resource_size(r));
+
+	if (!rb532_gpio_chip->regbase) {
+		printk(KERN_ERR "rb532: cannot remap GPIO register 0\n");
+		return -ENXIO;
+	}
+
+	/* Register our GPIO chip */
+	gpiochip_add_data(&rb532_gpio_chip->chip, rb532_gpio_chip);
+
+	return 0;
 }
 arch_initcall(rb532_gpio_init);

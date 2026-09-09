@@ -2246,10 +2246,10 @@ duplicate_extents_out:
 
 static int
 smb2_set_compression(const unsigned int xid, struct cifs_tcon *tcon,
-		   struct cifsFileInfo *cfile, __u16 compression_state)
+		   struct cifsFileInfo *cfile)
 {
 	return SMB2_set_compression(xid, tcon, cfile->fid.persistent_fid,
-			    cfile->fid.volatile_fid, compression_state);
+			    cfile->fid.volatile_fid);
 }
 
 static int
@@ -4359,13 +4359,11 @@ static void *smb2_aead_req_alloc(struct crypto_aead *tfm, const struct smb_rqst 
 	unsigned int req_size = sizeof(**req) + crypto_aead_reqsize(tfm);
 	unsigned int iv_size = crypto_aead_ivsize(tfm);
 	unsigned int len;
-	int ret;
 	u8 *p;
 
-	ret = cifs_get_num_sgs(rqst, num_rqst, sig);
-	if (ret < 0)
-		return ERR_PTR(ret);
-	*num_sgs = ret;
+	*num_sgs = cifs_get_num_sgs(rqst, num_rqst, sig);
+	if (IS_ERR_VALUE((long)(int)*num_sgs))
+		return ERR_PTR(*num_sgs);
 
 	len = iv_size;
 	len += crypto_aead_alignmask(tfm) & ~(crypto_tfm_ctx_alignment() - 1);

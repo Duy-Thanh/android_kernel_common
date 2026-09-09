@@ -5,17 +5,13 @@
 * Copyright © 2021 Advanced Micro Devices, Inc.
 */
 
-#include <kunit/test.h>
 #include <linux/slab.h>
 #include <linux/spinlock.h>
 #include <linux/dma-resv.h>
 
-static DEFINE_SPINLOCK(fence_lock);
+#include "selftest.h"
 
-struct dma_resv_usage_param {
-	enum dma_resv_usage usage;
-	const char *desc;
-};
+static struct spinlock fence_lock;
 
 static const char *fence_name(struct dma_fence *f)
 {
@@ -39,14 +35,15 @@ static struct dma_fence *alloc_fence(void)
 	return f;
 }
 
-static void test_sanitycheck(struct kunit *test)
+static int sanitycheck(void *arg)
 {
 	struct dma_resv resv;
 	struct dma_fence *f;
 	int r;
 
 	f = alloc_fence();
-	KUNIT_ASSERT_NOT_NULL(test, f);
+	if (!f)
+		return -ENOMEM;
 
 	dma_fence_enable_sw_signaling(f);
 
@@ -56,46 +53,49 @@ static void test_sanitycheck(struct kunit *test)
 	dma_resv_init(&resv);
 	r = dma_resv_lock(&resv, NULL);
 	if (r)
-		KUNIT_FAIL(test, "Resv locking failed\n");
+		pr_err("Resv locking failed\n");
 	else
 		dma_resv_unlock(&resv);
 	dma_resv_fini(&resv);
+	return r;
 }
 
-static void test_signaling(struct kunit *test)
+static int test_signaling(void *arg)
 {
-	const struct dma_resv_usage_param *param = test->param_value;
-	enum dma_resv_usage usage = param->usage;
+	enum dma_resv_usage usage = (unsigned long)arg;
 	struct dma_resv resv;
 	struct dma_fence *f;
 	int r;
 
 	f = alloc_fence();
-	KUNIT_ASSERT_NOT_NULL(test, f);
+	if (!f)
+		return -ENOMEM;
 
 	dma_fence_enable_sw_signaling(f);
 
 	dma_resv_init(&resv);
 	r = dma_resv_lock(&resv, NULL);
 	if (r) {
-		KUNIT_FAIL(test, "Resv locking failed");
+		pr_err("Resv locking failed\n");
 		goto err_free;
 	}
 
 	r = dma_resv_reserve_fences(&resv, 1);
 	if (r) {
-		KUNIT_FAIL(test, "Resv shared slot allocation failed");
+		pr_err("Resv shared slot allocation failed\n");
 		goto err_unlock;
 	}
 
 	dma_resv_add_fence(&resv, f, usage);
 	if (dma_resv_test_signaled(&resv, usage)) {
-		KUNIT_FAIL(test, "Resv unexpectedly signaled");
+		pr_err("Resv unexpectedly signaled\n");
+		r = -EINVAL;
 		goto err_unlock;
 	}
 	dma_fence_signal(f);
 	if (!dma_resv_test_signaled(&resv, usage)) {
-		KUNIT_FAIL(test, "Resv not reporting signaled");
+		pr_err("Resv not reporting signaled\n");
+		r = -EINVAL;
 		goto err_unlock;
 	}
 err_unlock:
@@ -103,32 +103,33 @@ err_unlock:
 err_free:
 	dma_resv_fini(&resv);
 	dma_fence_put(f);
+	return r;
 }
 
-static void test_for_each(struct kunit *test)
+static int test_for_each(void *arg)
 {
-	const struct dma_resv_usage_param *param = test->param_value;
-	enum dma_resv_usage usage = param->usage;
+	enum dma_resv_usage usage = (unsigned long)arg;
 	struct dma_resv_iter cursor;
 	struct dma_fence *f, *fence;
 	struct dma_resv resv;
 	int r;
 
 	f = alloc_fence();
-	KUNIT_ASSERT_NOT_NULL(test, f);
+	if (!f)
+		return -ENOMEM;
 
 	dma_fence_enable_sw_signaling(f);
 
 	dma_resv_init(&resv);
 	r = dma_resv_lock(&resv, NULL);
 	if (r) {
-		KUNIT_FAIL(test, "Resv locking failed");
+		pr_err("Resv locking failed\n");
 		goto err_free;
 	}
 
 	r = dma_resv_reserve_fences(&resv, 1);
 	if (r) {
-		KUNIT_FAIL(test, "Resv shared slot allocation failed");
+		pr_err("Resv shared slot allocation failed\n");
 		goto err_unlock;
 	}
 
@@ -137,23 +138,24 @@ static void test_for_each(struct kunit *test)
 	r = -ENOENT;
 	dma_resv_for_each_fence(&cursor, &resv, usage, fence) {
 		if (!r) {
-			KUNIT_FAIL(test, "More than one fence found");
+			pr_err("More than one fence found\n");
+			r = -EINVAL;
 			goto err_unlock;
 		}
 		if (f != fence) {
-			KUNIT_FAIL(test, "Unexpected fence");
+			pr_err("Unexpected fence\n");
 			r = -EINVAL;
 			goto err_unlock;
 		}
 		if (dma_resv_iter_usage(&cursor) != usage) {
-			KUNIT_FAIL(test, "Unexpected fence usage");
+			pr_err("Unexpected fence usage\n");
 			r = -EINVAL;
 			goto err_unlock;
 		}
 		r = 0;
 	}
 	if (r) {
-		KUNIT_FAIL(test, "No fence found");
+		pr_err("No fence found\n");
 		goto err_unlock;
 	}
 	dma_fence_signal(f);
@@ -162,32 +164,33 @@ err_unlock:
 err_free:
 	dma_resv_fini(&resv);
 	dma_fence_put(f);
+	return r;
 }
 
-static void test_for_each_unlocked(struct kunit *test)
+static int test_for_each_unlocked(void *arg)
 {
-	const struct dma_resv_usage_param *param = test->param_value;
-	enum dma_resv_usage usage = param->usage;
+	enum dma_resv_usage usage = (unsigned long)arg;
 	struct dma_resv_iter cursor;
 	struct dma_fence *f, *fence;
 	struct dma_resv resv;
 	int r;
 
 	f = alloc_fence();
-	KUNIT_ASSERT_NOT_NULL(test, f);
+	if (!f)
+		return -ENOMEM;
 
 	dma_fence_enable_sw_signaling(f);
 
 	dma_resv_init(&resv);
 	r = dma_resv_lock(&resv, NULL);
 	if (r) {
-		KUNIT_FAIL(test, "Resv locking failed");
+		pr_err("Resv locking failed\n");
 		goto err_free;
 	}
 
 	r = dma_resv_reserve_fences(&resv, 1);
 	if (r) {
-		KUNIT_FAIL(test, "Resv shared slot allocation failed");
+		pr_err("Resv shared slot allocation failed\n");
 		dma_resv_unlock(&resv);
 		goto err_free;
 	}
@@ -199,20 +202,21 @@ static void test_for_each_unlocked(struct kunit *test)
 	dma_resv_iter_begin(&cursor, &resv, usage);
 	dma_resv_for_each_fence_unlocked(&cursor, fence) {
 		if (!r) {
-			KUNIT_FAIL(test, "More than one fence found");
+			pr_err("More than one fence found\n");
+			r = -EINVAL;
 			goto err_iter_end;
 		}
 		if (!dma_resv_iter_is_restarted(&cursor)) {
-			KUNIT_FAIL(test, "No restart flag");
+			pr_err("No restart flag\n");
 			goto err_iter_end;
 		}
 		if (f != fence) {
-			KUNIT_FAIL(test, "Unexpected fence");
+			pr_err("Unexpected fence\n");
 			r = -EINVAL;
 			goto err_iter_end;
 		}
 		if (dma_resv_iter_usage(&cursor) != usage) {
-			KUNIT_FAIL(test, "Unexpected fence usage");
+			pr_err("Unexpected fence usage\n");
 			r = -EINVAL;
 			goto err_iter_end;
 		}
@@ -226,38 +230,40 @@ static void test_for_each_unlocked(struct kunit *test)
 			r = 0;
 		}
 	}
-	KUNIT_EXPECT_EQ(test, r, 0);
+	if (r)
+		pr_err("No fence found\n");
 err_iter_end:
 	dma_resv_iter_end(&cursor);
 	dma_fence_signal(f);
 err_free:
 	dma_resv_fini(&resv);
 	dma_fence_put(f);
+	return r;
 }
 
-static void test_get_fences(struct kunit *test)
+static int test_get_fences(void *arg)
 {
-	const struct dma_resv_usage_param *param = test->param_value;
-	enum dma_resv_usage usage = param->usage;
+	enum dma_resv_usage usage = (unsigned long)arg;
 	struct dma_fence *f, **fences = NULL;
 	struct dma_resv resv;
 	int r, i;
 
 	f = alloc_fence();
-	KUNIT_ASSERT_NOT_NULL(test, f);
+	if (!f)
+		return -ENOMEM;
 
 	dma_fence_enable_sw_signaling(f);
 
 	dma_resv_init(&resv);
 	r = dma_resv_lock(&resv, NULL);
 	if (r) {
-		KUNIT_FAIL(test, "Resv locking failed");
+		pr_err("Resv locking failed\n");
 		goto err_resv;
 	}
 
 	r = dma_resv_reserve_fences(&resv, 1);
 	if (r) {
-		KUNIT_FAIL(test, "Resv shared slot allocation failed");
+		pr_err("Resv shared slot allocation failed\n");
 		dma_resv_unlock(&resv);
 		goto err_resv;
 	}
@@ -267,12 +273,12 @@ static void test_get_fences(struct kunit *test)
 
 	r = dma_resv_get_fences(&resv, usage, &i, &fences);
 	if (r) {
-		KUNIT_FAIL(test, "get_fences failed");
+		pr_err("get_fences failed\n");
 		goto err_free;
 	}
 
 	if (i != 1 || fences[0] != f) {
-		KUNIT_FAIL(test, "get_fences returned unexpected fence");
+		pr_err("get_fences returned unexpected fence\n");
 		goto err_free;
 	}
 
@@ -284,32 +290,27 @@ err_free:
 err_resv:
 	dma_resv_fini(&resv);
 	dma_fence_put(f);
+	return r;
 }
 
-static const struct dma_resv_usage_param dma_resv_usage_params[] = {
-	{ DMA_RESV_USAGE_KERNEL, "kernel" },
-	{ DMA_RESV_USAGE_WRITE, "write" },
-	{ DMA_RESV_USAGE_READ, "read" },
-	{ DMA_RESV_USAGE_BOOKKEEP, "bookkeep" },
-};
+int dma_resv(void)
+{
+	static const struct subtest tests[] = {
+		SUBTEST(sanitycheck),
+		SUBTEST(test_signaling),
+		SUBTEST(test_for_each),
+		SUBTEST(test_for_each_unlocked),
+		SUBTEST(test_get_fences),
+	};
+	enum dma_resv_usage usage;
+	int r;
 
-KUNIT_ARRAY_PARAM_DESC(dma_resv_usage, dma_resv_usage_params, desc);
-
-static struct kunit_case dma_resv_cases[] = {
-	KUNIT_CASE(test_sanitycheck),
-	KUNIT_CASE_PARAM(test_signaling, dma_resv_usage_gen_params),
-	KUNIT_CASE_PARAM(test_for_each, dma_resv_usage_gen_params),
-	KUNIT_CASE_PARAM(test_for_each_unlocked, dma_resv_usage_gen_params),
-	KUNIT_CASE_PARAM(test_get_fences, dma_resv_usage_gen_params),
-	{}
-};
-
-static struct kunit_suite dma_resv_test_suite = {
-	.name = "dma-buf-resv",
-	.test_cases = dma_resv_cases,
-};
-
-kunit_test_suite(dma_resv_test_suite);
-
-MODULE_DESCRIPTION("KUnit tests for DMA-BUF");
-MODULE_LICENSE("GPL");
+	spin_lock_init(&fence_lock);
+	for (usage = DMA_RESV_USAGE_KERNEL; usage <= DMA_RESV_USAGE_BOOKKEEP;
+	     ++usage) {
+		r = subtests(tests, (void *)(unsigned long)usage);
+		if (r)
+			return r;
+	}
+	return 0;
+}

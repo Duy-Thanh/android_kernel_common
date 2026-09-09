@@ -157,8 +157,7 @@ static struct btrfs_ordered_extent *alloc_ordered_extent(
 	       ((1U << BTRFS_ORDERED_NOCOW) | (1U << BTRFS_ORDERED_PREALLOC)));
 
 	/* Only one type flag can be set. */
-	ASSERT(has_single_bit_set(flags & BTRFS_ORDERED_EXCLUSIVE_FLAGS),
-	       "flags=0x%lx", flags);
+	ASSERT(has_single_bit_set(flags & BTRFS_ORDERED_EXCLUSIVE_FLAGS));
 
 	/* DIRECT cannot be set with COMPRESSED nor ENCODED. */
 	if (test_bit(BTRFS_ORDERED_DIRECT, &flags)) {
@@ -303,7 +302,7 @@ struct btrfs_ordered_extent *btrfs_alloc_ordered_extent(
 {
 	struct btrfs_ordered_extent *entry;
 
-	ASSERT((flags & ~BTRFS_ORDERED_TYPE_FLAGS) == 0, "flags=0x%lx", flags);
+	ASSERT((flags & ~BTRFS_ORDERED_TYPE_FLAGS) == 0);
 
 	/*
 	 * For regular writes, we just use the members in @file_extent.
@@ -356,18 +355,6 @@ void btrfs_mark_ordered_extent_error(struct btrfs_ordered_extent *ordered)
 {
 	if (!test_and_set_bit(BTRFS_ORDERED_IOERR, &ordered->flags))
 		mapping_set_error(ordered->inode->vfs_inode.i_mapping, -EIO);
-}
-
-void btrfs_mark_ordered_extent_truncated(struct btrfs_ordered_extent *ordered,
-					 u64 truncate_len)
-{
-	struct btrfs_inode *inode = ordered->inode;
-
-	ASSERT(truncate_len <= ordered->num_bytes);
-	spin_lock(&inode->ordered_tree_lock);
-	set_bit(BTRFS_ORDERED_TRUNCATED, &ordered->flags);
-	ordered->truncated_len = min(ordered->truncated_len, truncate_len);
-	spin_unlock(&inode->ordered_tree_lock);
 }
 
 static void finish_ordered_fn(struct btrfs_work *work)
@@ -1251,7 +1238,7 @@ struct btrfs_ordered_extent *btrfs_split_ordered_extent(
 
 	trace_btrfs_ordered_extent_split(inode, ordered);
 
-	ASSERT(!(flags & (1U << BTRFS_ORDERED_COMPRESSED)), "flags=0x%lx", flags);
+	ASSERT(!(flags & (1U << BTRFS_ORDERED_COMPRESSED)));
 
 	/*
 	 * The entire bio must be covered by the ordered extent, but we can't
@@ -1273,7 +1260,7 @@ struct btrfs_ordered_extent *btrfs_split_ordered_extent(
 	}
 	/* We cannot split partially completed ordered extents. */
 	if (ordered->bytes_left) {
-		ASSERT(!(flags & ~BTRFS_ORDERED_TYPE_FLAGS), "flags=0x%lx", flags);
+		ASSERT(!(flags & ~BTRFS_ORDERED_TYPE_FLAGS));
 		if (WARN_ON_ONCE(ordered->bytes_left != ordered->disk_num_bytes))
 			return ERR_PTR(-EINVAL);
 	}
@@ -1320,8 +1307,7 @@ struct btrfs_ordered_extent *btrfs_split_ordered_extent(
 	ordered->ram_bytes -= len;
 
 	if (test_bit(BTRFS_ORDERED_IO_DONE, &ordered->flags)) {
-		ASSERT(ordered->bytes_left == 0, "ordered->bytes_left=%llu",
-		       ordered->bytes_left);
+		ASSERT(ordered->bytes_left == 0);
 		new->bytes_left = 0;
 	} else {
 		ordered->bytes_left -= len;

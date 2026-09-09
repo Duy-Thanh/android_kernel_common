@@ -596,9 +596,9 @@ static int mshv_vtl_get_set_reg(struct hv_register_assoc *regs, bool set)
 		} else {
 			/* Handle MSRs */
 			if (set)
-				wrmsrq(reg_table[i].msr_addr, *reg64);
+				wrmsrl(reg_table[i].msr_addr, *reg64);
 			else
-				rdmsrq(reg_table[i].msr_addr, *reg64);
+				rdmsrl(reg_table[i].msr_addr, *reg64);
 		}
 		return 0;
 	}

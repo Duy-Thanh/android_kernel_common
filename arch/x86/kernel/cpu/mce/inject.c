@@ -26,7 +26,6 @@
 
 #include <asm/amd/nb.h>
 #include <asm/apic.h>
-#include <asm/cpuid/api.h>
 #include <asm/irq_vectors.h>
 #include <asm/mce.h>
 #include <asm/msr.h>
@@ -317,18 +316,18 @@ static struct notifier_block inject_nb = {
  */
 static int toggle_hw_mce_inject(unsigned int cpu, bool enable)
 {
-	struct msr val;
+	u32 l, h;
 	int err;
 
-	err = rdmsrq_on_cpu(cpu, MSR_K7_HWCR, &val.q);
+	err = rdmsr_on_cpu(cpu, MSR_K7_HWCR, &l, &h);
 	if (err) {
 		pr_err("%s: error reading HWCR\n", __func__);
 		return err;
 	}
 
-	enable ? (val.l |= BIT(18)) : (val.l &= ~BIT(18));
+	enable ? (l |= BIT(18)) : (l &= ~BIT(18));
 
-	err = wrmsrq_on_cpu(cpu, MSR_K7_HWCR, val.q);
+	err = wrmsr_on_cpu(cpu, MSR_K7_HWCR, l, h);
 	if (err)
 		pr_err("%s: error writing HWCR\n", __func__);
 

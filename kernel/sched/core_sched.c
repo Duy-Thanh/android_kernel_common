@@ -136,7 +136,7 @@ int sched_core_share_pid(unsigned int cmd, pid_t pid, enum pid_type type,
 	struct pid *grp;
 	int err = 0;
 
-	if (!sched_smt_active())
+	if (!static_branch_likely(&sched_smt_present))
 		return -ENODEV;
 
 	BUILD_BUG_ON(PR_SCHED_CORE_SCOPE_THREAD != PIDTYPE_PID);

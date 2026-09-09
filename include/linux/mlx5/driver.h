@@ -343,11 +343,9 @@ struct mlx5_cmd_mailbox {
 	struct mlx5_cmd_mailbox *next;
 };
 
-struct mlx5_dma_pool_page;
 struct mlx5_buf_list {
 	void		       *buf;
 	dma_addr_t		map;
-	struct mlx5_dma_pool_page *frag_page;
 };
 
 struct mlx5_frag_buf {
@@ -547,7 +545,6 @@ struct mlx5_debugfs_entries {
 	struct dentry *eq_debugfs;
 	struct dentry *cq_debugfs;
 	struct dentry *cmdif_debugfs;
-	struct dentry *frag_buf_dma_pools_debugfs;
 	struct dentry *pages_debugfs;
 	struct dentry *lag_debugfs;
 };
@@ -557,18 +554,10 @@ enum mlx5_func_type {
 	MLX5_VF,
 	MLX5_SF,
 	MLX5_HOST_PF,
-	MLX5_SPF,
 	MLX5_EC_VF,
 	MLX5_FUNC_TYPE_NUM,
-	MLX5_FUNC_TYPE_NONE = MLX5_FUNC_TYPE_NUM,
 };
 
-enum mlx5_page_mgt_mode {
-	MLX5_PAGE_MGT_MODE_FUNC_ID,
-	MLX5_PAGE_MGT_MODE_VHCA_ID,
-};
-
-struct mlx5_frag_buf_node_pools;
 struct mlx5_ft_pool;
 struct mlx5_priv {
 	/* IRQ table valid only for real pci devices PF or VF */
@@ -586,23 +575,20 @@ struct mlx5_priv {
 	u32			fw_pages_alloc_failed;
 	u32			give_pages_dropped;
 	u32			reclaim_pages_discard;
-	enum mlx5_page_mgt_mode	page_mgt_mode;
 
 	struct mlx5_core_health health;
 	struct list_head	traps;
 
 	struct mlx5_debugfs_entries dbg;
 
-	/* start: alloc stuff */
+	/* start: alloc staff */
 	/* protect buffer allocation according to numa node */
 	struct mutex            alloc_mutex;
 	int                     numa_node;
 
 	struct mutex            pgdir_mutex;
 	struct list_head        pgdir_list;
-
-	struct mlx5_frag_buf_node_pools **frag_buf_node_pools;
-	/* end: alloc stuff */
+	/* end: alloc staff */
 
 	struct mlx5_adev       **adev;
 	int			adev_idx;
@@ -1048,8 +1034,6 @@ void mlx5_pagealloc_start(struct mlx5_core_dev *dev);
 void mlx5_pagealloc_stop(struct mlx5_core_dev *dev);
 void mlx5_pages_debugfs_init(struct mlx5_core_dev *dev);
 void mlx5_pages_debugfs_cleanup(struct mlx5_core_dev *dev);
-void mlx5_pages_by_func_type_debugfs_init(struct mlx5_core_dev *dev);
-void mlx5_pages_by_func_type_debugfs_cleanup(struct mlx5_core_dev *dev);
 int mlx5_satisfy_startup_pages(struct mlx5_core_dev *dev, int boot);
 int mlx5_reclaim_startup_pages(struct mlx5_core_dev *dev);
 void mlx5_register_debugfs(void);

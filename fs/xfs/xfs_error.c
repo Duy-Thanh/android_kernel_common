@@ -369,7 +369,7 @@ xfs_inode_verifier_error(
 
 	xfs_alert(mp, "Metadata %s detected at %pS, inode 0x%llx %s",
 		  error == -EFSBADCRC ? "CRC error" : "corruption",
-		  fa, I_INO(ip), name);
+		  fa, ip->i_ino, name);
 
 	xfs_alert(mp, "Unmount and run xfs_repair");
 

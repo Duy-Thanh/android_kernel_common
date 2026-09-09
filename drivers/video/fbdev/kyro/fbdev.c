@@ -645,8 +645,9 @@ static int kyrofb_ioctl(struct fb_info *info,
 }
 
 static const struct pci_device_id kyrofb_pci_tbl[] = {
-	{ PCI_DEVICE(PCI_VENDOR_ID_ST, PCI_DEVICE_ID_STG4000) },
-	{ }
+	{ PCI_VENDOR_ID_ST, PCI_DEVICE_ID_STG4000,
+	  PCI_ANY_ID, PCI_ANY_ID, 0, 0, 0 },
+	{ 0, }
 };
 
 MODULE_DEVICE_TABLE(pci, kyrofb_pci_tbl);

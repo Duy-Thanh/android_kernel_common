@@ -28,6 +28,7 @@
  * SUCH DAMAGES.
  */
 
+#include <crypto/skcipher.h>
 #include <linux/types.h>
 #include <linux/jiffies.h>
 #include <linux/sunrpc/gss_krb5.h>
@@ -111,9 +112,9 @@ gss_krb5_wrap_v2(struct krb5_ctx *kctx, int offset,
 	*ptr++ = (unsigned char) ((KG2_TOK_WRAP>>8) & 0xff);
 	*ptr++ = (unsigned char) (KG2_TOK_WRAP & 0xff);
 
-	if (!kctx->initiate)
+	if ((kctx->flags & KRB5_CTX_FLAG_INITIATOR) == 0)
 		flags |= KG2_TOKEN_FLAG_SENTBYACCEPTOR;
-	if (kctx->flags & KRB5_CTX_FLAG_ACCEPTOR_SUBKEY)
+	if ((kctx->flags & KRB5_CTX_FLAG_ACCEPTOR_SUBKEY) != 0)
 		flags |= KG2_TOKEN_FLAG_ACCEPTORSUBKEY;
 	/* We always do confidentiality in wrap tokens */
 	flags |= KG2_TOKEN_FLAG_SEALED;
@@ -129,7 +130,7 @@ gss_krb5_wrap_v2(struct krb5_ctx *kctx, int offset,
 	be64ptr = (__be64 *)be16ptr;
 	*be64ptr = cpu_to_be64(atomic64_fetch_inc(&kctx->seq_send64));
 
-	err = gss_krb5_aead_encrypt(kctx, offset, buf, pages);
+	err = (*kctx->gk5e->encrypt)(kctx, offset, buf, pages);
 	if (err)
 		return err;
 
@@ -183,10 +184,10 @@ gss_krb5_unwrap_v2(struct krb5_ctx *kctx, int offset, int len,
 	if (rrc != 0)
 		rotate_left(offset + 16, buf, rrc);
 
-	err = gss_krb5_aead_decrypt(kctx, offset, len, buf,
-				    &headskip, &tailskip);
+	err = (*kctx->gk5e->decrypt)(kctx, offset, len, buf,
+				     &headskip, &tailskip);
 	if (err)
-		return err;
+		return GSS_S_FAILURE;
 
 	/*
 	 * Retrieve the decrypted gss token header and verify

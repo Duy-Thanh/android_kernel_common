@@ -258,7 +258,7 @@ out:
 	else
 		nilfs_transaction_abort(dir->i_sb);
 
-	return err ? ERR_PTR(err) : NULL;
+	return ERR_PTR(err);
 
 out_fail:
 	drop_nlink(inode);

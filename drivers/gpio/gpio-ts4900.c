@@ -175,7 +175,7 @@ static int ts4900_gpio_probe(struct i2c_client *client)
 }
 
 static const struct i2c_device_id ts4900_gpio_id_table[] = {
-	{ .name = "ts4900-gpio" },
+	{ "ts4900-gpio", },
 	{ /* sentinel */ }
 };
 MODULE_DEVICE_TABLE(i2c, ts4900_gpio_id_table);

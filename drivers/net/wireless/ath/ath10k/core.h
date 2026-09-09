@@ -1269,6 +1269,7 @@ struct ath10k {
 	} testmode;
 
 	struct {
+		struct gpio_led wifi_led;
 		struct led_classdev cdev;
 		char label[48];
 		u32 gpio_state_pin;
