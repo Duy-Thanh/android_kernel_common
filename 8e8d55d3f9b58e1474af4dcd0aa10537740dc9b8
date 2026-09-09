@@ -34,6 +34,24 @@
       "parentUuid": "a30eb5e1_b2c248dd",
       "revId": "8e8d55d3f9b58e1474af4dcd0aa10537740dc9b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e69e2e72_baa1939d",
+        "filename": "drivers/dma-buf/heaps/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-09-09T04:46:19Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0f0e68c4_05eaaedf",
+      "revId": "8e8d55d3f9b58e1474af4dcd0aa10537740dc9b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
