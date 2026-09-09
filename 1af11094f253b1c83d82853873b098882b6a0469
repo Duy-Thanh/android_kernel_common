@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d295bdcc_89d6718d",
+        "filename": "drivers/usb/gadget/udc/core.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-09-09T17:16:54Z",
+      "side": 1,
+      "message": "nit: tab does not match surrounding indentation",
+      "range": {
+        "startLine": 50,
+        "startChar": 2,
+        "endLine": 50,
+        "endChar": 3
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4c386dab_2dd67cc6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/usb/gadget/udc/core.c",
+              "range": {
+                "startLine": 50,
+                "startChar": 0,
+                "endLine": 51,
+                "endChar": 0
+              },
+              "replacement": " * new work from being scheduled during cleanup.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "1af11094f253b1c83d82853873b098882b6a0469",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
