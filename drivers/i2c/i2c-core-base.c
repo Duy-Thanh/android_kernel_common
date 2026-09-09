@@ -1476,7 +1476,7 @@ static int i2c_register_adapter(struct i2c_adapter *adap)
 	res = device_register(&adap->dev);
 	if (res) {
 		pr_err("adapter '%s': can't register device (%d)\n", adap->name, res);
-		goto err_remove_irq_domain;
+		goto err_put_adap;
 	}
 
 	res = of_i2c_setup_smbus_alert(adap);
@@ -1518,10 +1518,18 @@ static int i2c_register_adapter(struct i2c_adapter *adap)
 
 out_reg:
 	i2c_deregister_clients(adap);
+<<<<<<< HEAD   (99f39909d8571608301b7ad02381340a15c3ebc5 Merge 8226d0bee05f ("i2c: core: fix hang on adapter registra)
+||||||| BASE   (8226d0bee05f9f33d69a97875ba3e625d2e00b8d i2c: core: fix hang on adapter registration failure)
+	debugfs_remove_recursive(adap->debugfs);
+=======
+	debugfs_remove_recursive(adap->debugfs);
+	device_del(&adap->dev);
+err_put_adap:
+>>>>>>> BRANCH (9b49b2c4e39cef71819548fea841d3fe0fc0e170 i2c: core: fix NULL-deref on adapter registration failure)
 	init_completion(&adap->dev_released);
-	device_unregister(&adap->dev);
+	put_device(&adap->dev);
 	wait_for_completion(&adap->dev_released);
-err_remove_irq_domain:
+
 	i2c_host_notify_irq_teardown(adap);
 out_list:
 	mutex_lock(&core_lock);
