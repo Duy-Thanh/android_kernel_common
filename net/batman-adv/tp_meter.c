@@ -1244,7 +1244,8 @@ out:
 /**
  * batadv_tp_handle_out_of_order() - store an out of order packet
  * @tp_vars: the private data of the current TP meter session
- * @skb: the buffer containing the received packet
+ * @seqno: sequence number of new received packet
+ * @payload_len: length of the received packet
  *
  * Store the out of order packet in the unacked list for late processing. This
  * packets are kept in this list so that they can be ACKed at once as soon as
@@ -1253,21 +1254,24 @@ out:
  * Return: true if the packed has been successfully processed, false otherwise
  */
 static bool batadv_tp_handle_out_of_order(struct batadv_tp_vars *tp_vars,
+<<<<<<< HEAD   (39aab250a42f1d4fb6fd000683bc93476b4d8bc3 Merge b2771326ee79 ("batman-adv: tp_meter: prevent parallel )
 					  const struct sk_buff *skb)
+||||||| BASE   (b2771326ee79a0606b8ec33aa22d0c41df8ac52e batman-adv: tp_meter: prevent parallel modifications of last)
+					  const struct sk_buff *skb)
+	__must_hold(&tp_vars->unacked_lock)
+=======
+					  u32 seqno, u32 payload_len)
+	__must_hold(&tp_vars->unacked_lock)
+>>>>>>> BRANCH (d026ef8d0e127b985f369c01547f982cffad0b61 batman-adv: tp_meter: handle overlapping packets)
 {
-	const struct batadv_icmp_tp_packet *icmp;
 	struct batadv_tp_unacked *un, *new;
-	u32 payload_len;
 	bool added = false;
 
 	new = kmalloc(sizeof(*new), GFP_ATOMIC);
 	if (unlikely(!new))
 		return false;
 
-	icmp = (struct batadv_icmp_tp_packet *)skb->data;
-
-	new->seqno = ntohl(icmp->seqno);
-	payload_len = skb->len - sizeof(struct batadv_unicast_packet);
+	new->seqno = seqno;
 	new->len = payload_len;
 
 	spin_lock_bh(&tp_vars->unacked_lock);
@@ -1435,7 +1439,15 @@ static void batadv_tp_recv_msg(struct batadv_priv *bat_priv,
 {
 	const struct batadv_icmp_tp_packet *icmp;
 	struct batadv_tp_vars *tp_vars;
+<<<<<<< HEAD   (39aab250a42f1d4fb6fd000683bc93476b4d8bc3 Merge b2771326ee79 ("batman-adv: tp_meter: prevent parallel )
 	size_t packet_size;
+||||||| BASE   (b2771326ee79a0606b8ec33aa22d0c41df8ac52e batman-adv: tp_meter: prevent parallel modifications of last)
+	size_t packet_size;
+	u32 to_ack;
+=======
+	u32 payload_len;
+	u32 to_ack;
+>>>>>>> BRANCH (d026ef8d0e127b985f369c01547f982cffad0b61 batman-adv: tp_meter: handle overlapping packets)
 	u32 seqno;
 
 	icmp = (struct batadv_icmp_tp_packet *)skb->data;
@@ -1474,15 +1486,25 @@ static void batadv_tp_recv_msg(struct batadv_priv *bat_priv,
 	/* if the packet is a duplicate, it may be the case that an ACK has been
 	 * lost. Resend the ACK
 	 */
-	if (batadv_seq_before(seqno, tp_vars->last_recv))
+	payload_len = skb->len - sizeof(struct batadv_unicast_packet);
+	to_ack = seqno + payload_len;
+	if (batadv_seq_before(to_ack, tp_vars->last_recv))
 		goto send_ack;
 
 	/* if the packet is out of order enqueue it */
-	if (ntohl(icmp->seqno) != tp_vars->last_recv) {
+	if (batadv_seq_before(tp_vars->last_recv, seqno)) {
 		/* exit immediately (and do not send any ACK) if the packet has
 		 * not been enqueued correctly
 		 */
+<<<<<<< HEAD   (39aab250a42f1d4fb6fd000683bc93476b4d8bc3 Merge b2771326ee79 ("batman-adv: tp_meter: prevent parallel )
 		if (!batadv_tp_handle_out_of_order(tp_vars, skb))
+||||||| BASE   (b2771326ee79a0606b8ec33aa22d0c41df8ac52e batman-adv: tp_meter: prevent parallel modifications of last)
+		if (!batadv_tp_handle_out_of_order(tp_vars, skb)) {
+			spin_unlock_bh(&tp_vars->unacked_lock);
+=======
+		if (!batadv_tp_handle_out_of_order(tp_vars, seqno, payload_len)) {
+			spin_unlock_bh(&tp_vars->unacked_lock);
+>>>>>>> BRANCH (d026ef8d0e127b985f369c01547f982cffad0b61 batman-adv: tp_meter: handle overlapping packets)
 			goto out;
 
 		/* send a duplicate ACK */
@@ -1490,8 +1512,7 @@ static void batadv_tp_recv_msg(struct batadv_priv *bat_priv,
 	}
 
 	/* if everything was fine count the ACKed bytes */
-	packet_size = skb->len - sizeof(struct batadv_unicast_packet);
-	tp_vars->last_recv += packet_size;
+	tp_vars->last_recv = to_ack;
 
 	/* check if this ordered message filled a gap.... */
 	batadv_tp_ack_unordered(tp_vars);
