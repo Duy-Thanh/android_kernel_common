@@ -4690,8 +4690,15 @@ void lru_gen_look_around(struct page_vma_mapped_walk *pvmw)
 	unsigned long end;
 	struct lru_gen_mm_walk *walk;
 	int young = 0;
+<<<<<<< HEAD   (33b1757a843beb0c320f40703c411993c98472a1 Merge 4bd11b1fccaa ("Revert "ptp: add testptp mask test"") i)
 	pte_t *pte = pvmw->pte;
 	unsigned long addr = pvmw->address;
+||||||| BASE   (4bd11b1fccaa1986273279befd73c7ed23293458 Revert "ptp: add testptp mask test")
+	unsigned long bitmap[BITS_TO_LONGS(MIN_LRU_BATCH)] = {};
+=======
+	unsigned long bitmap[BITS_TO_LONGS(MIN_LRU_BATCH)] = {};
+	struct vm_area_struct *vma = pvmw->vma;
+>>>>>>> BRANCH (1971f04f12da085ddd8b12d16fed46b687e8b393 mm/mglru: skip special VMAs in lru_gen_look_around())
 	struct folio *folio = pfn_folio(pvmw->pfn);
 	bool can_swap = !folio_is_file_lru(folio);
 	struct mem_cgroup *memcg = folio_memcg(folio);
@@ -4706,11 +4713,23 @@ void lru_gen_look_around(struct page_vma_mapped_walk *pvmw)
 	if (spin_is_contended(pvmw->ptl))
 		return;
 
+	/* exclude special VMAs containing anon pages from COW */
+	if (vma->vm_flags & VM_SPECIAL)
+		return;
+
 	/* avoid taking the LRU lock under the PTL when possible */
 	walk = current->reclaim_state ? current->reclaim_state->mm_walk : NULL;
 
+<<<<<<< HEAD   (33b1757a843beb0c320f40703c411993c98472a1 Merge 4bd11b1fccaa ("Revert "ptp: add testptp mask test"") i)
 	start = max(addr & PMD_MASK, pvmw->vma->vm_start);
 	end = min(addr | ~PMD_MASK, pvmw->vma->vm_end - 1) + 1;
+||||||| BASE   (4bd11b1fccaa1986273279befd73c7ed23293458 Revert "ptp: add testptp mask test")
+	start = max(pvmw->address & PMD_MASK, pvmw->vma->vm_start);
+	end = min(pvmw->address | ~PMD_MASK, pvmw->vma->vm_end - 1) + 1;
+=======
+	start = max(pvmw->address & PMD_MASK, vma->vm_start);
+	end = min(pvmw->address | ~PMD_MASK, vma->vm_end - 1) + 1;
+>>>>>>> BRANCH (1971f04f12da085ddd8b12d16fed46b687e8b393 mm/mglru: skip special VMAs in lru_gen_look_around())
 
 	if (end - start > MIN_LRU_BATCH * PAGE_SIZE) {
 		if (addr - start < MIN_LRU_BATCH * PAGE_SIZE / 2)
@@ -4734,7 +4753,7 @@ void lru_gen_look_around(struct page_vma_mapped_walk *pvmw)
 	for (i = 0, addr = start; addr != end; i++, addr += PAGE_SIZE) {
 		unsigned long pfn;
 
-		pfn = get_pte_pfn(pte[i], pvmw->vma, addr);
+		pfn = get_pte_pfn(pte[i], vma, addr);
 		if (pfn == -1)
 			continue;
 
@@ -4745,7 +4764,7 @@ void lru_gen_look_around(struct page_vma_mapped_walk *pvmw)
 		if (!folio)
 			continue;
 
-		if (!ptep_test_and_clear_young(pvmw->vma, addr, pte + i))
+		if (!ptep_test_and_clear_young(vma, addr, pte + i))
 			VM_WARN_ON_ONCE(true);
 
 		young++;
