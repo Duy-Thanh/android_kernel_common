@@ -20,11 +20,10 @@ use kernel::{
     c_str,
     error::Result,
     ffi::c_int,
-    fs::file::Offset,
     fs::{File, Kiocb, LocalFile},
     ioctl::_IOC_SIZE,
     iov::IovIterDest,
-    miscdevice::{MiscDevice, MiscDeviceOptions, MiscDeviceRegistration},
+    miscdevice::{loff_t, MiscDevice, MiscDeviceOptions, MiscDeviceRegistration},
     mm::virt::{flags as vma_flags, VmaNew},
     page::{page_align, PAGE_MASK, PAGE_SIZE},
     prelude::*,
@@ -219,7 +218,7 @@ impl MiscDevice for Ashmem {
         Ok(())
     }
 
-    fn llseek(me: Pin<&Ashmem>, file: &LocalFile, offset: Offset, whence: c_int) -> Result<Offset> {
+    fn llseek(me: Pin<&Ashmem>, file: &LocalFile, offset: loff_t, whence: c_int) -> Result<loff_t> {
         let asma_file = {
             let asma = me.inner.lock();
             if asma.size == 0 {
