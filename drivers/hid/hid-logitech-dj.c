@@ -1797,8 +1797,19 @@ static int logi_dj_probe(struct hid_device *hdev,
 	output_report_enum = &hdev->report_enum[HID_OUTPUT_REPORT];
 	rep = output_report_enum->report_id_hash[REPORT_ID_DJ_SHORT];
 
+<<<<<<< HEAD   (1c7c8ccd7b4ac0e3ec9869e3b03a90698362c7fa Merge 5.15.215 into android14-5.15-lts)
 	if (rep && (rep->maxfield < 1 ||
 		    rep->field[0]->report_count != DJREPORT_SHORT_LENGTH - 1)) {
+||||||| BASE   (aabd761612dbeb7d40750d485da219d11433718a Linux 5.15.215)
+=======
+	if (rep && rep->maxfield < 1) {
+		hid_err(hdev, "Expected size of DJ short report is %d, but got 0",
+			DJREPORT_SHORT_LENGTH - 1);
+		return -EINVAL;
+	}
+
+	if (rep && rep->field[0]->report_count != DJREPORT_SHORT_LENGTH - 1) {
+>>>>>>> BRANCH (0eb903b5b519d037c723d47a58c5d4f20eed7342 Linux 5.15.216)
 		hid_err(hdev, "Expected size of DJ short report is %d, but got %d",
 			DJREPORT_SHORT_LENGTH - 1, rep->field[0]->report_count);
 		return -EINVAL;

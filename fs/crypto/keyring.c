@@ -75,7 +75,14 @@ void fscrypt_put_master_key(struct fscrypt_master_key *mk)
 	 * fscrypt_master_key struct itself after an RCU grace period ensures
 	 * that concurrent keyring lookups can no longer find it.
 	 */
+<<<<<<< HEAD   (1c7c8ccd7b4ac0e3ec9869e3b03a90698362c7fa Merge 5.15.215 into android14-5.15-lts)
 	WARN_ON_ONCE(refcount_read(&mk->mk_active_refs) != 0);
+||||||| BASE   (aabd761612dbeb7d40750d485da219d11433718a Linux 5.15.215)
+	WARN_ON(refcount_read(&mk->mk_active_refs) != 0);
+	key_put(mk->mk_users);
+=======
+	WARN_ON(refcount_read(&mk->mk_active_refs) != 0);
+>>>>>>> BRANCH (0eb903b5b519d037c723d47a58c5d4f20eed7342 Linux 5.15.216)
 	clear_mk_users(mk);
 	call_rcu(&mk->mk_rcu_head, fscrypt_free_master_key);
 }
