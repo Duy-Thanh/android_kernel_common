@@ -126,8 +126,10 @@ static void atmel_sha204a_remove(struct i2c_client *client)
 {
 	struct atmel_i2c_client_priv *i2c_priv = i2c_get_clientdata(client);
 
-	devm_hwrng_unregister(&client->dev, &i2c_priv->hwrng);
-	atmel_i2c_flush_queue();
+	if (atomic_read(&i2c_priv->tfm_count)) {
+		dev_emerg(&client->dev, "Device is busy, will remove it anyhow\n");
+		return;
+	}
 
 	kfree((void *)i2c_priv->hwrng.priv);
 }

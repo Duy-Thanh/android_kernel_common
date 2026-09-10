@@ -399,7 +399,7 @@ static int parse_uac2_sample_rate_range(struct snd_usb_audio *chip,
 			nr_rates++;
 			if (nr_rates >= MAX_NR_RATES) {
 				usb_audio_err(chip, "invalid uac2 rates\n");
-				return nr_rates;
+				break;
 			}
 
 skip_rate:

@@ -837,7 +837,7 @@ static int ima_calc_boot_aggregate_tfm(char *digest, u16 alg_id,
 		}
 	}
 	if (!rc)
-		rc = crypto_shash_final(shash, digest);
+		crypto_shash_final(shash, digest);
 	return rc;
 }
 
