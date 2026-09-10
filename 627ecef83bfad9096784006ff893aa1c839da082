@@ -1,0 +1,468 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb795960_5aac4714",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-10T17:54:35Z",
+      "side": 1,
+      "message": "pp",
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c974c75e_7bbc0291",
+        "filename": "drivers/android/wrapfd/content.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-10T17:54:35Z",
+      "side": 1,
+      "message": "DMA specifically is broad; maybe we should have DmaBufContent or WrapDmaBufContent?",
+      "range": {
+        "startLine": 19,
+        "startChar": 18,
+        "endLine": 19,
+        "endChar": 32
+      },
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d181bf02_40c15a95",
+        "filename": "drivers/android/wrapfd/content.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-10T17:54:35Z",
+      "side": 1,
+      "message": "This allocates the memory through `vmalloc()`, which creates a mapping for the page in the kernel\u0027s vmalloc space, and that  mapping is unmapped when we free this. However, that is unnecessary. We can/should just grab the pages directly from the buddy allocator. Perhaps by using `alloc_page()` in `rust/kernel/page.rs` or add a `get_free_page()` invocation so we get a pointer to the page?",
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3de0ec1_85605529",
+        "filename": "drivers/android/wrapfd/content.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-10T17:54:35Z",
+      "side": 1,
+      "message": "Paired with the comment below, does this mean you *have* to dynamically allocate something? Also, if there are only a maximum of 3 bounce buffer objects, I don\u0027t think we need to use `KVVec()`? Why not just `KVec`?",
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "474e3e25_6bf1ce9f",
+        "filename": "drivers/android/wrapfd/content.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-10T17:54:35Z",
+      "side": 1,
+      "message": "This isn\u0027t needed; `get_unused_fd_flags()` only considers `O_CLOEXEC`: https://cs.android.com/android/kernel/superproject/+/common-android-mainline:common/fs/file.c;l\u003d605;drc\u003d1bdf486dbb8bc02c852842a12974242c5b45dda1;bpv\u003d1;bpt\u003d0?q\u003dget_unused_fd\u0026ss\u003dandroid%2Fkernel%2Fsuperproject",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 10
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a50d1269_d483713a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/wrapfd/content.rs",
+              "range": {
+                "startLine": 120,
+                "startChar": 0,
+                "endLine": 125,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c36d0c4f_229c443d",
+        "filename": "drivers/android/wrapfd/content.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-10T17:54:35Z",
+      "side": 1,
+      "message": "Could we please split this up as it is in C where the wrapped buffer type does it\u0027s own specific prep and hands this part an address for the buffer? The generic bits that allocate the bounce buffers and prepare the structures for file reading can live in `wrap.rs`",
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8422580c_21d75b21",
+        "filename": "drivers/android/wrapfd/content.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-10T17:54:35Z",
+      "side": 1,
+      "message": "`dma_buf_begin_cpu_access()` has to be called before we read into the dmabuf to apply whatever cache maintenance is necessary. We\u0027ll be reading into the buffer when we invoke vfs_iocb_iter_read(), so it has to be called as part of prepare, not at complete.",
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "640f0369_4e71e404",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-10T17:54:35Z",
+      "side": 1,
+      "message": "Perhaps something like `create_wrap_file()`?",
+      "range": {
+        "startLine": 24,
+        "startChar": 14,
+        "endLine": 24,
+        "endChar": 33
+      },
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc2e16f9_e98dd217",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-10T17:54:35Z",
+      "side": 1,
+      "message": "Storing the PID is error prone, as PIDs can be reused. Also, I believe different threads--even if they belong to the same process--have different PIDs, at least from looking at `kernel/fork.c::copy_process()`.\n\nCould we use the `group_leader` as we were doing in C?",
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19714f80_ffbff609",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-10T17:54:35Z",
+      "side": 1,
+      "message": "close_on_exec isn\u0027t dmabuf specific, so I think it should be in here instead of in `WrapDMAContent`.",
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b860f42d_211a88df",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-10T17:54:35Z",
+      "side": 1,
+      "message": "Worthwhile mentioning that this is called with the write lock held",
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e55d4012_71c2943b",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-10T17:54:35Z",
+      "side": 1,
+      "message": "nit: I think this should just be a `Wrap` not `WrappedDevice`. It doesn\u0027t represent a device, but rather a buffer that is wrapped by this driver to extend its functionality.",
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b25ec102_0e10318a",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-10T17:54:35Z",
+      "side": 1,
+      "message": "I would argue that `llseek()` modifies state, and should therefore be considered as a write critical section.",
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fd2bd25_368dc6ea",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-10T17:54:35Z",
+      "side": 1,
+      "message": "There used to be an `mmap_prepare()` invocation here, if it was supported. It\u0027s not used, but is there a way to have it be unimplemented and invoke it only if it is implemented as we did before?",
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b8c83ed_9fa2dabe",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-10T17:54:35Z",
+      "side": 1,
+      "message": "Note that `dma_buf_mmap()` calls `vma_set_file()` to change the vma\u0027s file pointer to point to the dmabuf, instead of the wrapfd file, and it decrements the count on the wrapfd file structure. We incremented it before to ensure the wrapfd file and associated data structures are valid as long as there are mappings, so we could track the map_count across forks and remaps, etc. However, with the approach that you\u0027re using of checking the mapping interval tree, I don\u0027t think we need to do that anymore?",
+      "range": {
+        "startLine": 410,
+        "startChar": 1,
+        "endLine": 410,
+        "endChar": 87
+      },
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83d7e0d8_13ddd857",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-10T17:54:35Z",
+      "side": 1,
+      "message": "When would this arise?",
+      "range": {
+        "startLine": 412,
+        "startChar": 0,
+        "endLine": 417,
+        "endChar": 17
+      },
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cae6ae7_8f247615",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-10T17:54:35Z",
+      "side": 1,
+      "message": "This still needs to be implemented.",
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6ce0b63_e5326532",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-10T17:54:35Z",
+      "side": 1,
+      "message": "I\u0027m not sure how useful it was to have the map count as opposed to if the buffer is mapped, but that could be derived by looping through the mappings interval tree, correct?",
+      "range": {
+        "startLine": 486,
+        "startChar": 9,
+        "endLine": 488,
+        "endChar": 56
+      },
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9723948a_56ae0ffa",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-10T17:54:35Z",
+      "side": 1,
+      "message": "nit: Could we have `has_owner()`, as we did before? It\u0027s a lot clearer and quicker to read rather than having double negation here (i.e. ! and None).",
+      "range": {
+        "startLine": 573,
+        "startChar": 7,
+        "endLine": 573,
+        "endChar": 46
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8ae7e515_f88323ea",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/wrapfd/wrapped_device.rs",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\n    fn is_none(\u0026self) -\u003e bool {\n        matches!(self, Self::None)\n    }\n"
+            },
+            {
+              "path": "drivers/android/wrapfd/wrapped_device.rs",
+              "range": {
+                "startLine": 137,
+                "startChar": 0,
+                "endLine": 138,
+                "endChar": 0
+              },
+              "replacement": "            \u0026\u0026 !guard.owner.is_none()\n"
+            },
+            {
+              "path": "drivers/android/wrapfd/wrapped_device.rs",
+              "range": {
+                "startLine": 184,
+                "startChar": 0,
+                "endLine": 185,
+                "endChar": 0
+              },
+              "replacement": "        if !guard.owner.is_none() {\n"
+            },
+            {
+              "path": "drivers/android/wrapfd/wrapped_device.rs",
+              "range": {
+                "startLine": 368,
+                "startChar": 0,
+                "endLine": 369,
+                "endChar": 0
+              },
+              "replacement": "            \u0026\u0026 !guard.owner.is_none()\n"
+            },
+            {
+              "path": "drivers/android/wrapfd/wrapped_device.rs",
+              "range": {
+                "startLine": 573,
+                "startChar": 0,
+                "endLine": 574,
+                "endChar": 0
+              },
+              "replacement": "    if !guard.owner.is_none() \u0026\u0026 !guard.owner.owned_by_current_task() {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37926d18_6f3670af",
+        "filename": "drivers/android/wrapfd/wrapping_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-10T17:54:35Z",
+      "side": 1,
+      "message": "Nit: could we rename this to `WrapFdDevice`? Wrapping device sounds a bit awkward.",
+      "range": {
+        "startLine": 10,
+        "startChar": 18,
+        "endLine": 10,
+        "endChar": 32
+      },
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

@@ -1,0 +1,154 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "589bd299_8658a63f",
+        "filename": "drivers/android/wrapfd/Kbuild",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-10T17:54:35Z",
+      "side": 1,
+      "message": "According to https://docs.kernel.org/kbuild/makefiles.html#the-kbuild-files we should just use `Makefile`, and going off of the contents of your `Makefile` in this patch, I think you can remove this file.",
+      "revId": "e0acc7d234c36f731c39c3a986bee66b1a0076c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76fb44bd_865e7791",
+        "filename": "drivers/android/wrapfd/Kconfig",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-10T17:54:35Z",
+      "side": 1,
+      "message": "Since there\u0027s no C driver on this branch, lets just call this `ANDROID_WRAPFD`.",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 26
+      },
+      "revId": "e0acc7d234c36f731c39c3a986bee66b1a0076c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c207fb32_3c22a2cc",
+        "filename": "drivers/android/wrapfd/Kconfig",
+        "patchSetId": 5
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-10T17:54:35Z",
+      "side": 1,
+      "message": "This should just be `bool` since we want the driver to be built-in. I understand you find it easier to use the driver as a module for your testing, so you can have this CL just add the driver, a follow up CL that adds it to the aarch64 and x86 GKI defconfigs (a separate change is preferred in case we need to do a revert, we can just revert the defconfig change), and then a CL that won\u0027t get merged, which adds all the kernel symbol exports, and config changes to get the driver to build as a module?",
+      "fixSuggestions": [
+        {
+          "fixId": "a2dd003d_2c57a3f4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/wrapfd/Kconfig",
+              "range": {
+                "startLine": 4,
+                "startChar": 0,
+                "endLine": 5,
+                "endChar": 0
+              },
+              "replacement": "\tbool \"WrapFD Driver (Rust)\"\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e0acc7d234c36f731c39c3a986bee66b1a0076c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8be4b1c4_8d40d084",
+        "filename": "fs/file.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1296,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-10T17:54:35Z",
+      "side": 1,
+      "message": "This can be moved to a separate \"do not merge\" patch for the sake of compiling the driver as a module.",
+      "revId": "e0acc7d234c36f731c39c3a986bee66b1a0076c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "888db7ba_66c7f43c",
+        "filename": "mm/vmalloc.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 4233,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-10T17:54:35Z",
+      "side": 1,
+      "message": "can also be moved out to a separate patch for building the driver as a module.",
+      "revId": "e0acc7d234c36f731c39c3a986bee66b1a0076c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8d49e7a_72654306",
+        "filename": "rust/helpers/helpers.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-10T17:54:35Z",
+      "side": 1,
+      "message": "This patch doesn\u0027t have to fix this.",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 16
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e138c155_0b2d1e69",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "rust/helpers/helpers.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "#include \"io_uring.c\"\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e0acc7d234c36f731c39c3a986bee66b1a0076c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
