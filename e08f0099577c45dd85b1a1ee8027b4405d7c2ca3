@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ee09a0a_b62c8930",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-kvm-pv.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1150933
+      },
+      "writtenOn": "2026-09-10T21:20:02Z",
+      "side": 1,
+      "message": "We might have to export this symbol:\n```\nERROR: modpost: \"topup_hyp_memcache\" [arm_smmu_v3_kvm_pv.ko] undefined!\n```",
+      "fixSuggestions": [
+        {
+          "fixId": "0c9b5ed5_7aea60bf",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-kvm-pv.c",
+              "range": {
+                "startLine": 567,
+                "startChar": 0,
+                "endLine": 568,
+                "endChar": 0
+              },
+              "replacement": "\tret \u003d topup_hyp_memcache(\u0026atomic_mc, atomic_pages, atomic_pages);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e08f0099577c45dd85b1a1ee8027b4405d7c2ca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
