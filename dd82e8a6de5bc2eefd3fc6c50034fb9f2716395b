@@ -259,6 +259,30 @@
       },
       "revId": "dd82e8a6de5bc2eefd3fc6c50034fb9f2716395b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0761f208_50544598",
+        "filename": "rust/kernel/anon_inodes.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-10T19:49:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3500c9ed_567ae9b5",
+      "range": {
+        "startLine": 275,
+        "startChar": 0,
+        "endLine": 275,
+        "endChar": 16
+      },
+      "revId": "dd82e8a6de5bc2eefd3fc6c50034fb9f2716395b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
