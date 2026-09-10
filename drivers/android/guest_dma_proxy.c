@@ -10,13 +10,16 @@
 #include <linux/dma-buf.h>
 #include <linux/file.h>
 #include <linux/fs.h>
+#include <linux/interval_tree_generic.h>
 #include <linux/ktime.h>
 #include <linux/miscdevice.h>
 #include <linux/module.h>
+#include <linux/mutex.h>
 #include <linux/of.h>
 #include <linux/of_address.h>
 #include <linux/overflow.h>
 #include <linux/platform_device.h>
+#include <linux/rbtree.h>
 #include <linux/sched.h>
 #include <linux/slab.h>
 #include <linux/uaccess.h>
@@ -30,13 +33,24 @@ struct guest_dma_proxy_device {
 	struct miscdevice misc;
 	phys_addr_t reserved_base;
 	phys_addr_t reserved_size;
+	struct mutex lock;
+	struct rb_root_cached itree;
 };
 
 struct guest_dma_proxy_buf {
 	struct guest_dma_proxy_device *gdev;
 	phys_addr_t paddr;
 	size_t size;
+	struct rb_node rb;
+	phys_addr_t __subtree_last;
 };
+
+#define START(buf) ((buf)->paddr)
+#define LAST(buf) ((buf)->paddr + (buf)->size - 1)
+
+INTERVAL_TREE_DEFINE(struct guest_dma_proxy_buf,
+		     rb, phys_addr_t, __subtree_last,
+		     START, LAST, static inline, guest_dma_proxy_itree);
 
 static struct guest_dma_proxy_device *global_gdev;
 
@@ -184,10 +198,10 @@ static void guest_dma_proxy_release(struct dma_buf *dmabuf)
 	}
 #endif
 
-	/*
-	 * TODO(b/515757062): Add central registry tracking (e.g. interval tree)
-	 * to query or enumerate active DMA-BUFs by address range.
-	 */
+	mutex_lock(&gbuf->gdev->lock);
+	guest_dma_proxy_itree_remove(gbuf, &gbuf->gdev->itree);
+	mutex_unlock(&gbuf->gdev->lock);
+
 	kfree(gbuf);
 }
 
@@ -232,21 +246,30 @@ static long guest_dma_proxy_ioctl(struct file *file, unsigned int cmd, unsigned 
 	if (ret)
 		return ret;
 
-	/*
-	 * TODO(b/515757062): Validate non-overlapping range across active
-	 * imported buffers to prevent multiple overlapping imports.
-	 */
+	/* 2. Validate non-overlapping range across active imported buffers */
+	mutex_lock(&gdev->lock);
+	if (guest_dma_proxy_itree_iter_first(&gdev->itree, args.paddr,
+					     args.paddr + args.size - 1)) {
+		pr_err("guest_dma_proxy: Requested range [0x%llx - 0x%llx] overlaps active buffer\n",
+			args.paddr, args.paddr + args.size);
+		mutex_unlock(&gdev->lock);
+		return -EBUSY;
+	}
 
-	/* 2. Allocate tracking structure */
+	/* 3. Allocate tracking structure */
 	gbuf = kzalloc(sizeof(*gbuf), GFP_KERNEL);
-	if (!gbuf)
+	if (!gbuf) {
+		mutex_unlock(&gdev->lock);
 		return -ENOMEM;
+	}
 
 	gbuf->gdev = gdev;
 	gbuf->paddr = args.paddr;
 	gbuf->size = args.size;
+	guest_dma_proxy_itree_insert(gbuf, &gdev->itree);
+	mutex_unlock(&gdev->lock);
 
-	/* 3. Export dma-buf */
+	/* 4. Export dma-buf */
 	exp_info.ops = &guest_dma_proxy_ops;
 	exp_info.size = args.size;
 	exp_info.flags = O_RDONLY | O_CLOEXEC; /* Enforce read-only */
@@ -255,7 +278,7 @@ static long guest_dma_proxy_ioctl(struct file *file, unsigned int cmd, unsigned 
 	fd = get_unused_fd_flags(exp_info.flags);
 	if (fd < 0) {
 		ret = fd;
-		goto err_free_gbuf;
+		goto err_remove_node;
 	}
 
 	dmabuf = dma_buf_export(&exp_info);
@@ -276,8 +299,8 @@ static long guest_dma_proxy_ioctl(struct file *file, unsigned int cmd, unsigned 
 err_put_dmabuf:
 	/*
 	 * dma_buf_put drops the final reference to dmabuf, which triggers
-	 * guest_dma_proxy_release to free gbuf. Do not cascade to
-	 * err_free_gbuf to avoid a double-free.
+	 * guest_dma_proxy_release to remove the interval node and free gbuf.
+	 * Do not cascade to err_put_fd or err_remove_node to avoid double cleanup.
 	 */
 	dma_buf_put(dmabuf);
 	put_unused_fd(fd);
@@ -285,7 +308,10 @@ err_put_dmabuf:
 
 err_put_fd:
 	put_unused_fd(fd);
-err_free_gbuf:
+err_remove_node:
+	mutex_lock(&gdev->lock);
+	guest_dma_proxy_itree_remove(gbuf, &gdev->itree);
+	mutex_unlock(&gdev->lock);
 	kfree(gbuf);
 	return ret;
 }
@@ -350,6 +376,8 @@ static int __init guest_dma_proxy_init(void)
 	if (!gdev)
 		return -ENOMEM;
 
+	mutex_init(&gdev->lock);
+	gdev->itree = RB_ROOT_CACHED;
 	gdev->reserved_base = r.start;
 	gdev->reserved_size = resource_size(&r);
 	pr_info("guest_dma_proxy: Found DTB reserved memory region [0x%pa - 0x%pa]\n",
