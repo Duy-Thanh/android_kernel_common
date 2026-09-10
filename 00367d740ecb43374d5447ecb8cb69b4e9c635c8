@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9add477_ccdf128a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-10T19:50:21Z",
+      "side": 1,
+      "message": "Not needed/can just say that they\u0027re used in the rust port of the driver 😊",
+      "range": {
+        "startLine": 11,
+        "startChar": 12,
+        "endLine": 11,
+        "endChar": 15
+      },
+      "revId": "00367d740ecb43374d5447ecb8cb69b4e9c635c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
