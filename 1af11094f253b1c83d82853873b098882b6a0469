@@ -63,6 +63,30 @@
       ],
       "revId": "1af11094f253b1c83d82853873b098882b6a0469",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55223b80_3705f60f",
+        "filename": "drivers/usb/gadget/udc/core.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 4531441
+      },
+      "writtenOn": "2026-09-10T06:30:15Z",
+      "side": 1,
+      "message": "Updated indentation.",
+      "parentUuid": "d295bdcc_89d6718d",
+      "range": {
+        "startLine": 50,
+        "startChar": 2,
+        "endLine": 50,
+        "endChar": 3
+      },
+      "revId": "1af11094f253b1c83d82853873b098882b6a0469",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
