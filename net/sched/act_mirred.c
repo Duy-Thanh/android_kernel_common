@@ -383,14 +383,12 @@ static int tcf_blockcast_mirror(struct sk_buff *skb, struct tcf_mirred *m,
 
 static int tcf_blockcast(struct sk_buff *skb, struct tcf_mirred *m,
 			 const u32 blockid, struct tcf_result *res,
-			 int retval)
+			 int m_eaction, int retval)
 {
 	const u32 exception_ifindex = skb->dev->ifindex;
 	struct tcf_block *block;
 	bool is_redirect;
-	int m_eaction;
 
-	m_eaction = READ_ONCE(m->tcfm_eaction);
 	is_redirect = tcf_mirred_is_act_redirect(m_eaction);
 
 	/* we are already under rcu protection, so can call block lookup
@@ -435,16 +433,68 @@ TC_INDIRECT_SCOPE int tcf_mirred_act(struct sk_buff *skb,
 	tcf_action_update_bstats(&m->common, skb);
 
 	blockid = READ_ONCE(m->tcfm_blockid);
+<<<<<<< HEAD   (7542d32487b53ed1a59d02f013a6e6b66804c874 Merge 4c77bb95628f ("iommu: Skip PASID validation for device)
 	if (blockid) {
 		retval = tcf_blockcast(skb, m, blockid, res, retval);
 		goto dec_nest_level;
 	}
+||||||| BASE   (4c77bb95628f85a9080aa24e54897c811ba2c21b iommu: Skip PASID validation for devices without PASID capab)
+	if (blockid)
+		return tcf_blockcast(skb, m, blockid, res, retval);
+
+	is_redirect = tcf_mirred_is_act_redirect(m_eaction);
+=======
+	m_eaction = READ_ONCE(m->tcfm_eaction);
+	want_ingress = tcf_mirred_act_wants_ingress(m_eaction);
+	if (blockid) {
+		if (!want_ingress)
+			xmit->sched_mirred_dev[xmit->sched_mirred_nest++] = NULL;
+		retval = tcf_blockcast(skb, m, blockid, res, m_eaction, retval);
+		if (!want_ingress)
+			xmit->sched_mirred_nest--;
+		return retval;
+	}
+
+	is_redirect = tcf_mirred_is_act_redirect(m_eaction);
+>>>>>>> BRANCH (1d3a00d3bacff25652c96e1527610c69e91f7c38 Linux 6.12.93)
 
 	dev = rcu_dereference_bh(m->tcfm_dev);
 	if (unlikely(!dev)) {
 		pr_notice_once("tc mirred: target device is gone\n");
 		tcf_action_inc_overlimit_qstats(&m->common);
+<<<<<<< HEAD   (7542d32487b53ed1a59d02f013a6e6b66804c874 Merge 4c77bb95628f ("iommu: Skip PASID validation for device)
 		goto dec_nest_level;
+||||||| BASE   (4c77bb95628f85a9080aa24e54897c811ba2c21b iommu: Skip PASID validation for devices without PASID capab)
+		goto err_out;
+	}
+
+	m_eaction = READ_ONCE(m->tcfm_eaction);
+	want_ingress = tcf_mirred_act_wants_ingress(m_eaction);
+	if (!want_ingress) {
+		for (i = 0; i < xmit->sched_mirred_nest; i++) {
+			if (xmit->sched_mirred_dev[i] != dev)
+				continue;
+			pr_notice_once("tc mirred: loop on device %s\n",
+				       netdev_name(dev));
+			tcf_action_inc_overlimit_qstats(&m->common);
+			goto err_out;
+		}
+		xmit->sched_mirred_dev[xmit->sched_mirred_nest++] = dev;
+=======
+		goto err_out;
+	}
+
+	if (!want_ingress) {
+		for (i = 0; i < xmit->sched_mirred_nest; i++) {
+			if (xmit->sched_mirred_dev[i] != dev)
+				continue;
+			pr_notice_once("tc mirred: loop on device %s\n",
+				       netdev_name(dev));
+			tcf_action_inc_overlimit_qstats(&m->common);
+			goto err_out;
+		}
+		xmit->sched_mirred_dev[xmit->sched_mirred_nest++] = dev;
+>>>>>>> BRANCH (1d3a00d3bacff25652c96e1527610c69e91f7c38 Linux 6.12.93)
 	}
 
 	m_mac_header_xmit = READ_ONCE(m->tcfm_mac_header_xmit);

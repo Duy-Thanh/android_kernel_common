@@ -1749,6 +1749,7 @@ retry:
 			break;
 		}
 
+<<<<<<< HEAD   (7542d32487b53ed1a59d02f013a6e6b66804c874 Merge 4c77bb95628f ("iommu: Skip PASID validation for device)
 		nr = do_zap_pte_range(tlb, vma, pte, addr, end, details, rss,
 				      &force_flush, &force_break, &any_skipped);
 		if (any_skipped)
@@ -1757,6 +1758,103 @@ retry:
 			addr += nr * PAGE_SIZE;
 			direct_reclaim = false;
 			break;
+||||||| BASE   (4c77bb95628f85a9080aa24e54897c811ba2c21b iommu: Skip PASID validation for devices without PASID capab)
+		entry = pte_to_swp_entry(ptent);
+		if (is_device_private_entry(entry) ||
+		    is_device_exclusive_entry(entry)) {
+			page = pfn_swap_entry_to_page(entry);
+			folio = page_folio(page);
+			if (unlikely(!should_zap_folio(details, folio)))
+				continue;
+			/*
+			 * Both device private/exclusive mappings should only
+			 * work with anonymous page so far, so we don't need to
+			 * consider uffd-wp bit when zap. For more information,
+			 * see zap_install_uffd_wp_if_needed().
+			 */
+			WARN_ON_ONCE(!vma_is_anonymous(vma));
+			rss[mm_counter(folio)]--;
+			if (is_device_private_entry(entry))
+				folio_remove_rmap_pte(folio, page, vma);
+			folio_put(folio);
+		} else if (!non_swap_entry(entry)) {
+			max_nr = (end - addr) / PAGE_SIZE;
+			nr = swap_pte_batch(pte, max_nr, ptent);
+			/* Genuine swap entries, hence a private anon pages */
+			if (!should_zap_cows(details))
+				continue;
+			rss[MM_SWAPENTS] -= nr;
+			free_swap_and_cache_nr(entry, nr);
+		} else if (is_migration_entry(entry)) {
+			folio = pfn_swap_entry_folio(entry);
+			if (!should_zap_folio(details, folio))
+				continue;
+			rss[mm_counter(folio)]--;
+		} else if (pte_marker_entry_uffd_wp(entry)) {
+			/*
+			 * For anon: always drop the marker; for file: only
+			 * drop the marker if explicitly requested.
+			 */
+			if (!vma_is_anonymous(vma) &&
+			    !zap_drop_file_uffd_wp(details))
+				continue;
+		} else if (is_hwpoison_entry(entry) ||
+			   is_poisoned_swp_entry(entry)) {
+			if (!should_zap_cows(details))
+				continue;
+		} else {
+			/* We should have covered all the swap entry types */
+			pr_alert("unrecognized swap entry 0x%lx\n", entry.val);
+			WARN_ON_ONCE(1);
+=======
+		entry = pte_to_swp_entry(ptent);
+		if (is_device_private_entry(entry) ||
+		    is_device_exclusive_entry(entry)) {
+			page = pfn_swap_entry_to_page(entry);
+			folio = page_folio(page);
+			if (unlikely(!should_zap_folio(details, folio)))
+				continue;
+			/*
+			 * Both device private/exclusive mappings should only
+			 * work with anonymous page so far, so we don't need to
+			 * consider uffd-wp bit when zap. For more information,
+			 * see zap_install_uffd_wp_if_needed().
+			 */
+			WARN_ON_ONCE(!folio_test_anon(folio));
+			rss[mm_counter(folio)]--;
+			if (is_device_private_entry(entry))
+				folio_remove_rmap_pte(folio, page, vma);
+			folio_put(folio);
+		} else if (!non_swap_entry(entry)) {
+			max_nr = (end - addr) / PAGE_SIZE;
+			nr = swap_pte_batch(pte, max_nr, ptent);
+			/* Genuine swap entries, hence a private anon pages */
+			if (!should_zap_cows(details))
+				continue;
+			rss[MM_SWAPENTS] -= nr;
+			free_swap_and_cache_nr(entry, nr);
+		} else if (is_migration_entry(entry)) {
+			folio = pfn_swap_entry_folio(entry);
+			if (!should_zap_folio(details, folio))
+				continue;
+			rss[mm_counter(folio)]--;
+		} else if (pte_marker_entry_uffd_wp(entry)) {
+			/*
+			 * For anon: always drop the marker; for file: only
+			 * drop the marker if explicitly requested.
+			 */
+			if (!vma_is_anonymous(vma) &&
+			    !zap_drop_file_uffd_wp(details))
+				continue;
+		} else if (is_hwpoison_entry(entry) ||
+			   is_poisoned_swp_entry(entry)) {
+			if (!should_zap_cows(details))
+				continue;
+		} else {
+			/* We should have covered all the swap entry types */
+			pr_alert("unrecognized swap entry 0x%lx\n", entry.val);
+			WARN_ON_ONCE(1);
+>>>>>>> BRANCH (1d3a00d3bacff25652c96e1527610c69e91f7c38 Linux 6.12.93)
 		}
 
 	} while (pte += nr, addr += PAGE_SIZE * nr, addr != end);
