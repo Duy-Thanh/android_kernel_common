@@ -34,6 +34,24 @@
       "parentUuid": "644336da_76e47841",
       "revId": "bb176d5b38e3ab0dce900adcc303dfea8a131fa7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcc78af2_3eabadc3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-09-10T16:20:53Z",
+      "side": 1,
+      "message": "If it broke db845, it will likely break other partner drivers. Something in this series caused watchdog_notify_pretimeout to be required. What will happen if this GKI binary is used with drivers that are not rebuilt with these changes? Will they behave correctly?",
+      "parentUuid": "52829eae_70ebc20e",
+      "revId": "bb176d5b38e3ab0dce900adcc303dfea8a131fa7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
