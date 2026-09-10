@@ -356,7 +356,13 @@ static void fixmap_clear_slot(struct hyp_fixmap_slot *slot)
 	 * https://lore.kernel.org/kvm/20221017115209.2099-1-will@kernel.org/T/#mf10dfbaf1eaef9274c581b81c53758918c1d0f03
 	 */
 	dsb(ishst);
+<<<<<<< HEAD   (c3dd858dcf5843346c0a5b9c031ae0e9e0664277 Merge 523bc49979b9 ("KVM: arm64: Remove VPIPT I-cache handli)
 	__tlbi_level(vale2is, __TLBI_VADDR(addr, 0), level);
+||||||| BASE   (523bc49979b9f708e7e419eb4ad6647ff545cfe8 KVM: arm64: Remove VPIPT I-cache handling)
+	__tlbi_level(vale2is, __TLBI_VADDR(addr, 0), (KVM_PGTABLE_MAX_LEVELS - 1));
+=======
+	__tlbi_level(vale2is, __TLBI_VADDR(addr, 0), (KVM_PGTABLE_MAX_LEVELS - 1));
+>>>>>>> BRANCH (fed65bc9de8e96a5848f749a201c009fcc09e62b arm64: tlb: Optimize ARM64_WORKAROUND_REPEAT_TLBI)
 	__tlbi_sync_s1ish_hyp();
 	isb();
 }

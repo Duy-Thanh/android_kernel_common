@@ -440,6 +440,7 @@ static inline void __flush_tlb_range_nosync(struct mm_struct *mm,
 	else
 		__flush_tlb_range_op(vae1is, start, pages, stride, asid, tlb_level, true);
 
+<<<<<<< HEAD   (c3dd858dcf5843346c0a5b9c031ae0e9e0664277 Merge 523bc49979b9 ("KVM: arm64: Remove VPIPT I-cache handli)
 	mmu_notifier_arch_invalidate_secondary_tlbs(mm, start, end);
 }
 
@@ -451,6 +452,13 @@ static inline void __flush_tlb_range(struct vm_area_struct *vma,
 	__flush_tlb_range_nosync(vma->vm_mm, start, end, stride,
 				 last_level, tlb_level);
 	__tlbi_sync_s1ish();
+||||||| BASE   (523bc49979b9f708e7e419eb4ad6647ff545cfe8 KVM: arm64: Remove VPIPT I-cache handling)
+	dsb(ish);
+	mmu_notifier_arch_invalidate_secondary_tlbs(vma->vm_mm, start, end);
+=======
+	__tlbi_sync_s1ish();
+	mmu_notifier_arch_invalidate_secondary_tlbs(vma->vm_mm, start, end);
+>>>>>>> BRANCH (fed65bc9de8e96a5848f749a201c009fcc09e62b arm64: tlb: Optimize ARM64_WORKAROUND_REPEAT_TLBI)
 }
 
 static inline void flush_tlb_range(struct vm_area_struct *vma,
