@@ -1128,6 +1128,7 @@ config ARM64_ERRATUM_3194386
 
 	  If unsure, say Y.
 
+<<<<<<< HEAD   (6a8b5ac63f15d09790787b43c77f35f068dab1f3 Merge 6.12.93 into android16-6.12-lts)
 config ARM64_ERRATUM_4311569
 	bool "SI L1: 4311569: workaround for premature CMO completion erratum"
 	default y
@@ -1147,6 +1148,9 @@ config ARM64_ERRATUM_4311569
 
 	  If unsure, say Y.
 
+||||||| BASE   (1d3a00d3bacff25652c96e1527610c69e91f7c38 Linux 6.12.93)
+=======
+>>>>>>> BRANCH (0b8f247169e487eff2d4c2dd531bc43f7efda2cb Linux 6.12.94)
 config ARM64_ERRATUM_4193714
 	bool "C1-Pro: 4193714: SME DVMSync early acknowledgement"
 	depends on ARM64_SME

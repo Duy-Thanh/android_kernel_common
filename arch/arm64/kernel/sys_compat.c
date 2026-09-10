@@ -37,7 +37,13 @@ __do_compat_cache_op(unsigned long start, unsigned long end)
 			 * We pick the reserved-ASID to minimise the impact.
 			 */
 			__tlbi(aside1is, __TLBI_VADDR(0, 0));
+<<<<<<< HEAD   (6a8b5ac63f15d09790787b43c77f35f068dab1f3 Merge 6.12.93 into android16-6.12-lts)
 			__tlbi_sync_s1ish(current->mm);
+||||||| BASE   (1d3a00d3bacff25652c96e1527610c69e91f7c38 Linux 6.12.93)
+			dsb(ish);
+=======
+			__tlbi_sync_s1ish();
+>>>>>>> BRANCH (0b8f247169e487eff2d4c2dd531bc43f7efda2cb Linux 6.12.94)
 		}
 
 		ret = caches_clean_inval_user_pou(start, start + chunk);

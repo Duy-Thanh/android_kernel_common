@@ -198,7 +198,13 @@ int main(int argc, char *argv[])
 
 	progname = strrchr(argv[0], '/');
 	progname = progname ? 1+progname : argv[0];
+<<<<<<< HEAD   (6a8b5ac63f15d09790787b43c77f35f068dab1f3 Merge 6.12.93 into android16-6.12-lts)
 	while (EOF != (c = getopt(argc, argv, "cd:e:f:F:ghH:i:k:lL:n:o:p:P:sSt:T:w:x:Xz"))) {
+||||||| BASE   (1d3a00d3bacff25652c96e1527610c69e91f7c38 Linux 6.12.93)
+	while (EOF != (c = getopt(argc, argv, "cd:e:f:F:ghH:i:k:lL:n:o:p:P:rsSt:T:w:x:Xy:z"))) {
+=======
+	while (EOF != (c = getopt(argc, argv, "cd:e:f:F:ghH:i:k:lL:n:o:p:P:rsSt:T:w:x:Xz"))) {
+>>>>>>> BRANCH (0b8f247169e487eff2d4c2dd531bc43f7efda2cb Linux 6.12.94)
 		switch (c) {
 		case 'c':
 			capabilities = 1;

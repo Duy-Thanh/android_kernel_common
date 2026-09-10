@@ -389,7 +389,13 @@ static void fixmap_clear_slot(struct hyp_fixmap_slot *slot)
 	 * https://lore.kernel.org/kvm/20221017115209.2099-1-will@kernel.org/T/#mf10dfbaf1eaef9274c581b81c53758918c1d0f03
 	 */
 	dsb(ishst);
+<<<<<<< HEAD   (6a8b5ac63f15d09790787b43c77f35f068dab1f3 Merge 6.12.93 into android16-6.12-lts)
 	__tlbi_level(vale2is, __TLBI_VADDR(addr, 0), level);
+||||||| BASE   (1d3a00d3bacff25652c96e1527610c69e91f7c38 Linux 6.12.93)
+	__tlbi_level(vale2is, __TLBI_VADDR(addr, 0), KVM_PGTABLE_LAST_LEVEL);
+=======
+	__tlbi_level(vale2is, __TLBI_VADDR(addr, 0), KVM_PGTABLE_LAST_LEVEL);
+>>>>>>> BRANCH (0b8f247169e487eff2d4c2dd531bc43f7efda2cb Linux 6.12.94)
 	__tlbi_sync_s1ish_hyp();
 	isb();
 }
