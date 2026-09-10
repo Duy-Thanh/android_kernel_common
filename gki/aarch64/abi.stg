@@ -16569,6 +16569,11 @@ pointer_reference {
   pointee_type_id: 0xa1d6f6c0
 }
 pointer_reference {
+  id: 0x22e696cf
+  kind: POINTER
+  pointee_type_id: 0xa1dabda2
+}
+pointer_reference {
   id: 0x22ee8bee
   kind: POINTER
   pointee_type_id: 0xa1fac927
@@ -49232,6 +49237,11 @@ array {
   id: 0xcac5c418
   number_of_elements: 8
   element_type_id: 0xbbed302a
+}
+array {
+  id: 0xcb2b0dc1
+  number_of_elements: 11
+  element_type_id: 0x0f5baa26
 }
 array {
   id: 0xcb386ed4
@@ -139809,6 +139819,12 @@ member {
   offset: 192
 }
 member {
+  id: 0x29ae1939
+  name: "in_deg"
+  type_id: 0x914dbfdc
+  offset: 16
+}
+member {
   id: 0xe27af1b6
   name: "in_dpm_list"
   type_id: 0x6d7f5ff6
@@ -186950,6 +186966,12 @@ member {
   offset: 128
 }
 member {
+  id: 0xbb8ca52c
+  name: "out_deg"
+  type_id: 0x914dbfdc
+  offset: 32
+}
+member {
   id: 0x0fc2a957
   name: "out_degree"
   type_id: 0x33756485
@@ -193153,6 +193175,11 @@ member {
   name: "phase"
   type_id: 0x914dbfdc
   offset: 304
+}
+member {
+  id: 0x394356ce
+  name: "phase"
+  type_id: 0xcb2b0dc1
 }
 member {
   id: 0x39607a62
@@ -331523,6 +331550,26 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x0f5baa26
+  kind: STRUCT
+  name: "mmc_clk_phase"
+  definition {
+    bytesize: 6
+    member_id: 0xe99519b8
+    member_id: 0x29ae1939
+    member_id: 0xbb8ca52c
+  }
+}
+struct_union {
+  id: 0xa1dabda2
+  kind: STRUCT
+  name: "mmc_clk_phase_map"
+  definition {
+    bytesize: 66
+    member_id: 0x394356ce
+  }
+}
+struct_union {
   id: 0x90e38325
   kind: STRUCT
   name: "mmc_command"
@@ -388730,6 +388777,12 @@ function {
   return_type_id: 0x48b5725f
   parameter_id: 0x054f691a
   parameter_id: 0x6d7f5ff6
+}
+function {
+  id: 0x1085f593
+  return_type_id: 0x48b5725f
+  parameter_id: 0x0258f96e
+  parameter_id: 0x22e696cf
 }
 function {
   id: 0x1088b6ee
@@ -505024,6 +505077,15 @@ elf_symbol {
   full_name: "mmc_of_parse"
 }
 elf_symbol {
+  id: 0xd1a7e1bf
+  name: "mmc_of_parse_clk_phase"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x0d46aa8f
+  type_id: 0x1085f593
+  full_name: "mmc_of_parse_clk_phase"
+}
+elf_symbol {
   id: 0xbb4d4446
   name: "mmc_of_parse_voltage"
   is_defined: true
@@ -547914,6 +547976,7 @@ interface {
   symbol_id: 0xbda89b5c
   symbol_id: 0x20019c31
   symbol_id: 0x3ce0db00
+  symbol_id: 0xd1a7e1bf
   symbol_id: 0xbb4d4446
   symbol_id: 0xdf01e7f5
   symbol_id: 0x5dc5546f
