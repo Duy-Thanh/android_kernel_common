@@ -33,10 +33,6 @@
 #define CREATE_TRACE_POINTS
 #include <trace/events/alarmtimer.h>
 
-EXPORT_TRACEPOINT_SYMBOL_GPL(alarmtimer_start);
-EXPORT_TRACEPOINT_SYMBOL_GPL(alarmtimer_cancel);
-EXPORT_TRACEPOINT_SYMBOL_GPL(alarmtimer_fired);
-
 /**
  * struct alarm_base - Alarm timer bases
  * @lock:		Lock for syncrhonized access to the base
@@ -613,7 +609,7 @@ static s64 alarm_timer_forward(struct k_itimer *timr, ktime_t now)
 {
 	struct alarm *alarm = &timr->it.alarm.alarmtimer;
 
-	return alarm_forward(alarm, now, timr->it_interval);
+	return alarm_forward(alarm, timr->it_interval, now);
 }
 
 /**

@@ -1577,7 +1577,6 @@ static __always_inline bool free_pages_prepare(struct page *page,
 	page_cpupid_reset_last(page);
 	page->flags &= ~PAGE_FLAGS_CHECK_AT_PREP;
 	trace_android_vh_mm_free_page(page);
-	page->private = 0;
 	reset_page_owner(page, order);
 	free_page_pinner(page, order);
 	page_table_check_free(page, order);
@@ -2674,7 +2673,7 @@ inline void post_alloc_hook(struct page *page, unsigned int order,
 	page_table_check_alloc(page, order);
 }
 
-void prep_new_page(struct page *page, unsigned int order, gfp_t gfp_flags,
+static void prep_new_page(struct page *page, unsigned int order, gfp_t gfp_flags,
 							unsigned int alloc_flags)
 {
 	post_alloc_hook(page, order, gfp_flags);
@@ -2694,7 +2693,6 @@ void prep_new_page(struct page *page, unsigned int order, gfp_t gfp_flags,
 		clear_page_pfmemalloc(page);
 	trace_android_vh_test_clear_look_around_ref(page);
 }
-EXPORT_SYMBOL_GPL(prep_new_page);
 
 /*
  * Go through the free lists for the given migratetype and remove
@@ -5075,10 +5073,8 @@ __alloc_pages_direct_reclaim(gfp_t gfp_mask, unsigned int order,
 	unsigned long pflags;
 	bool drained = false;
 	bool skip_pcp_drain = false;
-	u64 stime = 0;
 
 	trace_android_vh_mm_alloc_pages_direct_reclaim_enter(order);
-	trace_android_vh_mm_direct_reclaim_start(&stime);
 	psi_memstall_enter(&pflags);
 	*did_some_progress = __perform_reclaim(gfp_mask, order, ac);
 	if (unlikely(!(*did_some_progress)))
@@ -5105,7 +5101,6 @@ retry:
 out:
 	psi_memstall_leave(&pflags);
 	trace_android_vh_mm_alloc_pages_direct_reclaim_exit(*did_some_progress, retry_times);
-	trace_android_vh_mm_direct_reclaim_end(order, stime);
 	return page;
 }
 

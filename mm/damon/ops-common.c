@@ -23,10 +23,10 @@ struct page *damon_get_page(unsigned long pfn)
 {
 	struct page *page = pfn_to_online_page(pfn);
 
-	if (!page || !get_page_unless_zero(page))
+	if (!page || !PageLRU(page) || !get_page_unless_zero(page))
 		return NULL;
 
-	if (!PageLRU(page)) {
+	if (unlikely(!PageLRU(page))) {
 		put_page(page);
 		page = NULL;
 	}

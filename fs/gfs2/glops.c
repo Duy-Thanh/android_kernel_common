@@ -11,7 +11,6 @@
 #include <linux/bio.h>
 #include <linux/posix_acl.h>
 #include <linux/security.h>
-#include <linux/log2.h>
 
 #include "gfs2.h"
 #include "incore.h"
@@ -405,14 +404,10 @@ static int gfs2_dinode_in(struct gfs2_inode *ip, const void *buf)
 	struct inode *inode = &ip->i_inode;
 	bool is_new = inode->i_state & I_NEW;
 
-	if (unlikely(ip->i_no_addr != be64_to_cpu(str->di_num.no_addr))) {
-		gfs2_consist_inode(ip);
-		return -EIO;
-	}
-	if (unlikely(!is_new && inode_wrong_type(inode, mode))) {
-		gfs2_consist_inode(ip);
-		return -EIO;
-	}
+	if (unlikely(ip->i_no_addr != be64_to_cpu(str->di_num.no_addr)))
+		goto corrupt;
+	if (unlikely(!is_new && inode_wrong_type(inode, mode)))
+		goto corrupt;
 	ip->i_no_formal_ino = be64_to_cpu(str->di_num.no_formal_ino);
 	inode->i_mode = mode;
 	if (is_new) {
@@ -448,33 +443,26 @@ static int gfs2_dinode_in(struct gfs2_inode *ip, const void *buf)
 	/* i_diskflags and i_eattr must be set before gfs2_set_inode_flags() */
 	gfs2_set_inode_flags(inode);
 	height = be16_to_cpu(str->di_height);
-	if (unlikely(height > sdp->sd_max_height)) {
-		gfs2_consist_inode(ip);
-		return -EIO;
-	}
+	if (unlikely(height > sdp->sd_max_height))
+		goto corrupt;
 	ip->i_height = (u8)height;
 
 	depth = be16_to_cpu(str->di_depth);
-	if (unlikely(depth > GFS2_DIR_MAX_DEPTH)) {
-		gfs2_consist_inode(ip);
-		return -EIO;
-	}
-	if ((ip->i_diskflags & GFS2_DIF_EXHASH) &&
-	    depth < ilog2(sdp->sd_hash_ptrs)) {
-		gfs2_consist_inode(ip);
-		return -EIO;
-	}
+	if (unlikely(depth > GFS2_DIR_MAX_DEPTH))
+		goto corrupt;
 	ip->i_depth = (u8)depth;
 	ip->i_entries = be32_to_cpu(str->di_entries);
 
-	if (gfs2_is_stuffed(ip) && inode->i_size > gfs2_max_stuffed_size(ip)) {
-		gfs2_consist_inode(ip);
-		return -EIO;
-	}
+	if (gfs2_is_stuffed(ip) && inode->i_size > gfs2_max_stuffed_size(ip))
+		goto corrupt;
+
 	if (S_ISREG(inode->i_mode))
 		gfs2_set_aops(inode);
 
 	return 0;
+corrupt:
+	gfs2_consist_inode(ip);
+	return -EIO;
 }
 
 /**

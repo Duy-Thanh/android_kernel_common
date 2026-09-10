@@ -524,7 +524,8 @@ int mbox_controller_register(struct mbox_controller *mbox)
 {
 	int i, txdone;
 
-	if (!mbox || !mbox->dev || !mbox->ops || !mbox->chans || !mbox->num_chans)
+	/* Sanity check */
+	if (!mbox || !mbox->dev || !mbox->ops || !mbox->num_chans)
 		return -EINVAL;
 
 	if (mbox->txdone_irq)

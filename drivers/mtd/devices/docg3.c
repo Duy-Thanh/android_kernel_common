@@ -2046,9 +2046,10 @@ err_probe:
  *
  * Returns 0
  */
-static void docg3_release(struct platform_device *pdev)
+static int docg3_release(struct platform_device *pdev)
 {
 	struct docg3_cascade *cascade = platform_get_drvdata(pdev);
+	struct docg3 *docg3 = cascade->floors[0]->priv;
 	int floor;
 
 	doc_unregister_sysfs(pdev, cascade);
@@ -2056,7 +2057,8 @@ static void docg3_release(struct platform_device *pdev)
 		if (cascade->floors[floor])
 			doc_release_device(cascade->floors[floor]);
 
-	bch_free(cascade->bch);
+	bch_free(docg3->cascade->bch);
+	return 0;
 }
 
 #ifdef CONFIG_OF
@@ -2074,7 +2076,7 @@ static struct platform_driver g3_driver = {
 	},
 	.suspend	= docg3_suspend,
 	.resume		= docg3_resume,
-	.remove_new	= docg3_release,
+	.remove		= docg3_release,
 };
 
 module_platform_driver_probe(g3_driver, docg3_probe);
