@@ -247,7 +247,6 @@ static inline void __tlbi_sync_s1ish_hyp(void)
 	dsb(ish);
 	__repeat_tlbi_sync(vale2is, 0);
 }
-
 /*
  *	TLB Invalidation
  *	================

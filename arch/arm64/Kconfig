@@ -1128,25 +1128,6 @@ config ARM64_ERRATUM_3194386
 
 	  If unsure, say Y.
 
-config ARM64_ERRATUM_4311569
-	bool "SI L1: 4311569: workaround for premature CMO completion erratum"
-	default y
-	help
-	  This option adds the workaround for ARM SI L1 erratum 4311569.
-
-	  The erratum of SI L1 can cause an early response to a combined write
-	  and cache maintenance operation (WR+CMO) before the operation is fully
-	  completed to the Point of Serialization (POS).
-	  This can result in a non-I/O coherent agent observing stale data,
-	  potentially leading to system instability or incorrect behavior.
-
-	  Enabling this option implements a software workaround by inserting a
-	  second loop of Cache Maintenance Operation (CMO) immediately following the
-	  end of function to do CMOs. This ensures that the data is correctly serialized
-	  before the buffer is handed off to a non-coherent agent.
-
-	  If unsure, say Y.
-
 config ARM64_ERRATUM_4193714
 	bool "C1-Pro: 4193714: SME DVMSync early acknowledgement"
 	depends on ARM64_SME
@@ -1194,6 +1175,25 @@ config ARM64_ERRATUM_4118414
 	  broadcast TLB invalidation.
 
 	  This issue is also known as CVE-2025-10263.
+
+	  If unsure, say Y.
+
+config ARM64_ERRATUM_4311569
+	bool "SI L1: 4311569: workaround for premature CMO completion erratum"
+	default y
+	help
+	  This option adds the workaround for ARM SI L1 erratum 4311569.
+
+	  The erratum of SI L1 can cause an early response to a combined write
+	  and cache maintenance operation (WR+CMO) before the operation is fully
+	  completed to the Point of Serialization (POS).
+	  This can result in a non-I/O coherent agent observing stale data,
+	  potentially leading to system instability or incorrect behavior.
+
+	  Enabling this option implements a software workaround by inserting a
+	  second loop of Cache Maintenance Operation (CMO) immediately following the
+	  end of function to do CMOs. This ensures that the data is correctly serialized
+	  before the buffer is handed off to a non-coherent agent.
 
 	  If unsure, say Y.
 
