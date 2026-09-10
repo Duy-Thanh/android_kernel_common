@@ -70,6 +70,24 @@
       "parentUuid": "289b4b29_77b85ff3",
       "revId": "e54d464573bb1b184f884720e96bb28504312d16",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebcde41c_70cd1e0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-09-10T16:29:22Z",
+      "side": 1,
+      "message": "Then the \"Fixes:\" tag is misleading. Please update the commit message to tell the whole story of why an android-specific patch is being used to fix the upstream issue cited by \"Fixes:\" and confirm that the issue is fixed upstream (cite the patch that fixes it).",
+      "parentUuid": "46b7907e_e9c5e514",
+      "revId": "e54d464573bb1b184f884720e96bb28504312d16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
