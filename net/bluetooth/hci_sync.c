@@ -1246,8 +1246,7 @@ static int hci_set_ext_adv_data_sync(struct hci_dev *hdev, u8 instance)
 			return 0;
 	}
 
-	len = eir_create_adv_data(hdev, instance, pdu.data,
-				  HCI_MAX_EXT_AD_LENGTH);
+	len = eir_create_adv_data(hdev, instance, pdu.data);
 
 	pdu.cp.length = len;
 	pdu.cp.handle = instance;
@@ -1278,7 +1277,7 @@ static int hci_set_adv_data_sync(struct hci_dev *hdev, u8 instance)
 
 	memset(&cp, 0, sizeof(cp));
 
-	len = eir_create_adv_data(hdev, instance, cp.data, sizeof(cp.data));
+	len = eir_create_adv_data(hdev, instance, cp.data);
 
 	/* There's nothing to do if the data hasn't changed */
 	if (hdev->adv_data_len == len &&
@@ -1698,11 +1697,6 @@ static int hci_adv_bcast_annoucement(struct hci_dev *hdev, struct adv_info *adv)
 	/* Generate Broadcast ID */
 	get_random_bytes(bid, sizeof(bid));
 	len = eir_append_service_data(ad, 0, 0x1852, bid, sizeof(bid));
-	if (adv->adv_data_len > sizeof(ad) - len) {
-		bt_dev_err(hdev, "No room for Broadcast Announcement");
-		return -EINVAL;
-	}
-
 	memcpy(ad + len, adv->adv_data, adv->adv_data_len);
 	hci_set_adv_instance_data(hdev, adv->instance, len + adv->adv_data_len,
 				  ad, 0, NULL);

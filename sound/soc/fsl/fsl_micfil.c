@@ -148,34 +148,10 @@ static int micfil_quality_set(struct snd_kcontrol *kcontrol,
 {
 	struct snd_soc_component *cmpnt = snd_soc_kcontrol_component(kcontrol);
 	struct fsl_micfil *micfil = snd_soc_component_get_drvdata(cmpnt);
-	int val = ucontrol->value.integer.value[0];
-	bool change = false;
-	int old_val;
-	int ret;
 
-	if (val < QUALITY_HIGH || val > QUALITY_VLOW2)
-		return -EINVAL;
+	micfil->quality = ucontrol->value.integer.value[0];
 
-	if (micfil->quality != val) {
-		ret = pm_runtime_resume_and_get(cmpnt->dev);
-		if (ret)
-			return ret;
-
-		old_val = micfil->quality;
-		micfil->quality = val;
-		ret = micfil_set_quality(micfil);
-
-		pm_runtime_put_autosuspend(cmpnt->dev);
-
-		if (ret) {
-			micfil->quality = old_val;
-			return ret;
-		}
-
-		change = true;
-	}
-
-	return change;
+	return micfil_set_quality(micfil);
 }
 
 static const struct snd_kcontrol_new fsl_micfil_snd_controls[] = {

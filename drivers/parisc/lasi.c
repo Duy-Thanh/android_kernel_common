@@ -196,7 +196,8 @@ static int __init lasi_init_chip(struct parisc_device *dev)
 
 	ret = request_irq(lasi->gsc_irq.irq, gsc_asic_intr, 0, "lasi", lasi);
 	if (ret < 0) {
-		goto err_free;
+		kfree(lasi);
+		return ret;
 	}
 
 	/* enable IRQ's for devices below LASI */
@@ -205,7 +206,8 @@ static int __init lasi_init_chip(struct parisc_device *dev)
 	/* Done init'ing, register this driver */
 	ret = gsc_common_setup(dev, lasi);
 	if (ret) {
-		goto err_irq;
+		kfree(lasi);
+		return ret;
 	}    
 
 	gsc_fixup_irqs(dev, lasi, lasi_choose_irq);
@@ -217,12 +219,6 @@ static int __init lasi_init_chip(struct parisc_device *dev)
 	lasi_power_off_hpa = lasi->hpa;
 	chassis_power_off = lasi_power_off;
 	
-	return ret;
-
-err_irq:
-	free_irq(lasi->gsc_irq.irq, lasi);
-err_free:
-	kfree(lasi);
 	return ret;
 }
 

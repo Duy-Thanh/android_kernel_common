@@ -3600,15 +3600,15 @@ static int bpf_iter_unix_seq_show(struct seq_file *seq, void *v)
 	struct bpf_prog *prog;
 	struct sock *sk = v;
 	uid_t uid;
+	bool slow;
 	int ret;
 
 	if (v == SEQ_START_TOKEN)
 		return 0;
 
-	lock_sock(sk);
-	unix_state_lock(sk);
+	slow = lock_sock_fast(sk);
 
-	if (unlikely(sock_flag(sk, SOCK_DEAD))) {
+	if (unlikely(sk_unhashed(sk))) {
 		ret = SEQ_SKIP;
 		goto unlock;
 	}
@@ -3618,8 +3618,7 @@ static int bpf_iter_unix_seq_show(struct seq_file *seq, void *v)
 	prog = bpf_iter_get_info(&meta, false);
 	ret = unix_prog_seq_show(prog, &meta, v, uid);
 unlock:
-	unix_state_unlock(sk);
-	release_sock(sk);
+	unlock_sock_fast(sk, slow);
 	return ret;
 }
 

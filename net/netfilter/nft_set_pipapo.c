@@ -525,8 +525,6 @@ static struct nft_pipapo_elem *pipapo_get(const struct net *net,
 	int i;
 
 	m = priv->clone;
-	if (m->bsize_max == 0)
-		return ret;
 
 	res_map = kmalloc_array(m->bsize_max, sizeof(*res_map), GFP_ATOMIC);
 	if (!res_map) {
@@ -1397,20 +1395,14 @@ static struct nft_pipapo_match *pipapo_clone(struct nft_pipapo_match *old)
 		       src->bsize * sizeof(*dst->lt) *
 		       src->groups * NFT_PIPAPO_BUCKETS(src->bb));
 
-		if (src->rules > 0) {
-			if (src->rules > (INT_MAX / sizeof(*src->mt)))
-				goto out_mt;
+		if (src->rules > (INT_MAX / sizeof(*src->mt)))
+			goto out_mt;
 
-			dst->mt = kvmalloc_array(src->rules, sizeof(*src->mt),
-						 GFP_KERNEL);
-			if (!dst->mt)
-				goto out_mt;
+		dst->mt = kvmalloc(src->rules * sizeof(*src->mt), GFP_KERNEL_ACCOUNT);
+		if (!dst->mt)
+			goto out_mt;
 
-			memcpy(dst->mt, src->mt, src->rules * sizeof(*src->mt));
-		} else {
-			dst->mt = NULL;
-		}
-
+		memcpy(dst->mt, src->mt, src->rules * sizeof(*src->mt));
 		src++;
 		dst++;
 	}
@@ -1849,7 +1841,7 @@ static void nft_pipapo_activate(const struct net *net,
 {
 	struct nft_pipapo_elem *e = elem->priv;
 
-	nft_clear(net, &e->ext);
+	nft_set_elem_change_active(net, set, &e->ext);
 }
 
 /**
@@ -2150,6 +2142,9 @@ static void nft_pipapo_walk(const struct nft_ctx *ctx, struct nft_set *set,
 			goto cont;
 
 		e = f->mt[r].e;
+
+		if (!nft_set_elem_active(&e->ext, iter->genmask))
+			goto cont;
 
 		elem.priv = e;
 
