@@ -212,9 +212,6 @@ DECLARE_HOOK(android_vh_mem_cgroup_css_online,
 DECLARE_HOOK(android_vh_mem_cgroup_css_offline,
 	TP_PROTO(struct cgroup_subsys_state *css, struct mem_cgroup *memcg),
 	TP_ARGS(css, memcg));
-DECLARE_HOOK(android_vh_mem_cgroup_handle_over_high,
-	TP_PROTO(bool *record_psi),
-	TP_ARGS(record_psi));
 DECLARE_HOOK(android_vh_rmqueue_smallest_bypass,
 	TP_PROTO(struct page **page, struct zone *zone, int order, int migratetype),
 	TP_ARGS(page, zone, order, migratetype));
@@ -236,12 +233,6 @@ DECLARE_HOOK(android_vh_look_around,
 DECLARE_HOOK(android_vh_mm_alloc_pages_direct_reclaim_enter,
 	TP_PROTO(unsigned int order),
 	TP_ARGS(order));
-DECLARE_HOOK(android_vh_mm_direct_reclaim_start,
-       TP_PROTO(u64 *stime),
-       TP_ARGS(stime));
-DECLARE_HOOK(android_vh_mm_direct_reclaim_end,
-       TP_PROTO(unsigned int order, u64 stime),
-       TP_ARGS(order, stime));
 DECLARE_HOOK(android_vh_mem_cgroup_charge,
 	TP_PROTO(struct folio *folio, struct mem_cgroup **memcg),
 	TP_ARGS(folio, memcg));
@@ -420,12 +411,6 @@ DECLARE_HOOK(android_vh_swap_writepage_end,
 	TP_PROTO(struct page *page, struct writeback_control *wbc,
 		unsigned long swap_writepage_start, int result),
 	TP_ARGS(page, wbc, swap_writepage_start, result));
-DECLARE_HOOK(android_vh_cma_alloc_lat_start,
-	TP_PROTO(unsigned long long *stime),
-	TP_ARGS(stime));
-DECLARE_HOOK(android_vh_cma_alloc_lat_end,
-	TP_PROTO(unsigned long long stime,unsigned long count),
-	TP_ARGS(stime,count));
 DECLARE_HOOK(android_vh_task_mem,
 	TP_PROTO(struct seq_file *m, struct mm_struct *mm),
 	TP_ARGS(m, mm));
@@ -471,23 +456,6 @@ DECLARE_HOOK(android_vh_folio_end_writeback,
 DECLARE_HOOK(android_vh_folio_start_writeback,
 	TP_PROTO(struct folio *folio),
 	TP_ARGS(folio));
-DECLARE_HOOK(android_vh_cma_alloc_bypass,
-	TP_PROTO(struct cma *cma, unsigned long count, unsigned int align,
-		gfp_t gfp_mask, struct page **page, bool *bypass),
-	TP_ARGS(cma, count, align, gfp_mask, page, bypass));
-DECLARE_HOOK(android_vh_migration_entry_wait_enter,
-	TP_PROTO(swp_entry_t entry, u64 *time, int *zonenum),
-	TP_ARGS(entry, time, zonenum));
-DECLARE_HOOK(android_vh_migration_entry_wait_exit,
-	TP_PROTO(u64 time, int zonenum),
-	TP_ARGS(time, zonenum));
-DECLARE_HOOK(android_vh_migrate_pages_batch_break,
-	TP_PROTO(struct folio *folio, struct list_head *head,
-	int reason, bool *should_break, int *nr_left),
-	TP_ARGS(folio, head, reason, should_break, nr_left));
-DECLARE_HOOK(android_vh_migrate_batch_nr_pages,
-	TP_PROTO(struct list_head *head, int *nr_pages),
-	TP_ARGS(head, nr_pages));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */

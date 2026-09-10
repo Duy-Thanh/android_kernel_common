@@ -19,9 +19,6 @@ enum pkvm_system_misconfiguration {
 	NO_DMA_ISOLATION,
 };
 
-/* Sentinel: distinct from NULL and any real pkvm_hyp_vcpu pointer. */
-#define PKVM_PVMFW_ENTERED ((struct pkvm_hyp_vcpu *)-1L)
-
 /*
  * Holds the relevant data for maintaining the vcpu state completely at hyp.
  */
@@ -65,20 +62,8 @@ struct pkvm_hyp_vm {
 	struct hyp_pool pool;
 	hyp_spinlock_t lock;
 
-	/*
-	 * Primary vCPU slot, set once at first successful init and
-	 * never cleared after the primary has entered pvmfw. Encodings:
-	 *   NULL                - no primary claimed.
-	 *   real vCPU pointer   - claimed; for pvmfw VMs, not yet entered.
-	 *   PKVM_PVMFW_ENTERED  - claimed and has entered pvmfw (sticky).
-	 */
-	struct pkvm_hyp_vcpu *primary_vcpu;
-
-	/*
-	 * Set once the guest relinquishes a page in the pvmfw range: pvmfw
-	 * is never copied into that range again.
-	 */
-	bool pvmfw_relinquished;
+	/* Primary vCPU pending entry to the pvmfw */
+	struct pkvm_hyp_vcpu *pvmfw_entry_vcpu;
 
 	/*
 	 * The number of vcpus initialized and ready to run.
@@ -140,7 +125,7 @@ bool kvm_handle_pvm_restricted(struct kvm_vcpu *vcpu, u64 *exit_code);
 void kvm_reset_pvm_sys_regs(struct kvm_vcpu *vcpu);
 int kvm_check_pvm_sysreg_table(void);
 
-int pkvm_reset_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu);
+void pkvm_reset_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu);
 
 bool kvm_handle_pvm_hvc64(struct kvm_vcpu *vcpu, u64 *exit_code);
 bool kvm_hyp_handle_hvc64(struct kvm_vcpu *vcpu, u64 *exit_code);
@@ -158,7 +143,7 @@ static inline bool pkvm_ipa_range_has_pvmfw(struct pkvm_hyp_vm *vm,
 	struct kvm_protected_vm *pkvm = &vm->kvm.arch.pkvm;
 	u64 pvmfw_load_end = pkvm->pvmfw_load_addr + pvmfw_size;
 
-	if (!pkvm_hyp_vm_has_pvmfw(vm) || vm->pvmfw_relinquished)
+	if (!pkvm_hyp_vm_has_pvmfw(vm))
 		return false;
 
 	return ipa_end > pkvm->pvmfw_load_addr && ipa_start < pvmfw_load_end;

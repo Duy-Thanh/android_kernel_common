@@ -4747,7 +4747,7 @@ static void bnxt_disable_int_sync(struct bnxt *bp)
 {
 	int i;
 
-	if (!bp->irq_tbl || !bp->bnapi)
+	if (!bp->irq_tbl)
 		return;
 
 	atomic_inc(&bp->intr_sem);

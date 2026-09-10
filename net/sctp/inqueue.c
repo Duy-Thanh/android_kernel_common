@@ -201,7 +201,6 @@ new_skb:
 
 			cb->chunk = head_cb->chunk;
 			cb->af = head_cb->af;
-			cb->encap_port = head_cb->encap_port;
 		}
 	}
 

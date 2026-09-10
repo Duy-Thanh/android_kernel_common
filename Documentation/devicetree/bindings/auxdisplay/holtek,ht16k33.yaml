@@ -65,7 +65,7 @@ then:
   required:
     - refresh-rate-hz
 
-unevaluatedProperties: false
+additionalProperties: false
 
 examples:
   - |

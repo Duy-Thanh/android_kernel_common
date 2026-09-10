@@ -449,19 +449,19 @@ static inline int snd_sof_load_firmware(struct snd_sof_dev *sdev)
 
 /* host DSP message data */
 static inline int snd_sof_ipc_msg_data(struct snd_sof_dev *sdev,
-				       struct snd_sof_pcm_stream *sps,
+				       struct snd_pcm_substream *substream,
 				       void *p, size_t sz)
 {
-	return sof_ops(sdev)->ipc_msg_data(sdev, sps, p, sz);
+	return sof_ops(sdev)->ipc_msg_data(sdev, substream, p, sz);
 }
 /* host side configuration of the stream's data offset in stream mailbox area */
 static inline int
 snd_sof_set_stream_data_offset(struct snd_sof_dev *sdev,
-			       struct snd_sof_pcm_stream *sps,
+			       struct snd_pcm_substream *substream,
 			       size_t posn_offset)
 {
 	if (sof_ops(sdev) && sof_ops(sdev)->set_stream_data_offset)
-		return sof_ops(sdev)->set_stream_data_offset(sdev, sps,
+		return sof_ops(sdev)->set_stream_data_offset(sdev, substream,
 							     posn_offset);
 
 	return 0;

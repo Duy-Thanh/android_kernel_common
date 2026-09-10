@@ -281,7 +281,7 @@ int udp_lib_get_port(struct sock *sk, unsigned short snum,
 	} else {
 		hslot = udp_hashslot(udptable, net, snum);
 		spin_lock_bh(&hslot->lock);
-		if (inet_use_hash2_on_bind(sk) && hslot->count > 10) {
+		if (hslot->count > 10) {
 			int exist;
 			unsigned int slot2 = udp_sk(sk)->udp_portaddr_hash ^ snum;
 
@@ -1810,14 +1810,6 @@ try_again:
 	}
 
 	WARN_ON_ONCE(!skb_set_owner_sk_safe(skb, sk));
-
-	/*
-	 * skb->dev still aliases the UDP rx dev_scratch (its charge was freed
-	 * on dequeue above); a sockmap verdict program may deref it via
-	 * bpf_sk_lookup_*(), so clear it -> bpf_skc_lookup() uses skb->sk
-	 */
-	skb->dev = NULL;
-
 	return recv_actor(sk, skb);
 }
 EXPORT_SYMBOL(udp_read_skb);
