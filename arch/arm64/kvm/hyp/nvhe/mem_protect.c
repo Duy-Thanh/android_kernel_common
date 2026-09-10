@@ -1573,7 +1573,7 @@ int __pkvm_guest_share_hyp_page(struct pkvm_hyp_vcpu *vcpu, u64 ipa, u64 *hyp_va
 	phys = kvm_pte_to_phys(pte);
 
 	virt = __hyp_va(phys);
-	if (IS_ENABLED(CONFIG_NVHE_EL2_DEBUG)) {
+	if (IS_ENABLED(CONFIG_PKVM_STRICT_CHECKS)) {
 		ret = __hyp_check_page_state_range(phys, PAGE_SIZE, PKVM_NOPAGE);
 		if (ret)
 			goto unlock;
