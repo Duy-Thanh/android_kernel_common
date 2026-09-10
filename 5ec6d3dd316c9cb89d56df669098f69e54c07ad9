@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a25ec7a3_2a419c5f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-10T20:44:09Z",
+      "side": 1,
+      "message": "Sorry, `BACKPORT` should apparently only be used from commits in Linus\u0027 tree, so can you please just leave it as `ANDROID`?\n\nIf I cherrypick an `ANDROID` patch and want to leave a note that it wasn\u0027t a clean cherry pick, I usually add something like:\n```\n[isaacmanjarres: resolved xyz issue as part of porting from branch X]\n```\nabove my signed off line.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 10
+      },
+      "revId": "5ec6d3dd316c9cb89d56df669098f69e54c07ad9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
