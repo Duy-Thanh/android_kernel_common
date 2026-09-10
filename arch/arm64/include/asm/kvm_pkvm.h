@@ -243,7 +243,7 @@ static inline unsigned long host_s2_mmio_pgtable_pages(void)
 	return __hyp_pgtable_max_pages(SZ_1G >> PAGE_SHIFT);
 }
 
-#ifdef CONFIG_NVHE_EL2_DEBUG
+#ifdef CONFIG_PKVM_SELFTESTS
 static inline unsigned long pkvm_selftest_pages(void) { return 32; }
 #else
 static inline unsigned long pkvm_selftest_pages(void) { return 0; }
