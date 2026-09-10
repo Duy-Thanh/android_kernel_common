@@ -2,7 +2,6 @@
 #include <stddef.h>
 #include <linux/bpf.h>
 #include <bpf/bpf_helpers.h>
-#include "bpf_misc.h"
 
 struct Small {
 	long x;

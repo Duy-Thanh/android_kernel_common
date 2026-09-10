@@ -805,13 +805,12 @@ EXPORT_SYMBOL(kernel_sendmsg_locked);
 
 static bool skb_is_err_queue(const struct sk_buff *skb)
 {
-	/* Error-queue skbs are marked as PACKET_OUTGOING in
-	 * skb_set_err_queue() and use the destructor installed by
-	 * sock_queue_err_skb(). PACKET_OUTGOING alone is not unique:
-	 * AF_PACKET outgoing taps use the same pkt_type.
+	/* pkt_type of skbs enqueued on the error queue are set to
+	 * PACKET_OUTGOING in skb_set_err_queue(). This is only safe to do
+	 * in recvmsg, since skbs received on a local socket will never
+	 * have a pkt_type of PACKET_OUTGOING.
 	 */
-	return skb->pkt_type == PACKET_OUTGOING &&
-	       skb->destructor == sock_rmem_free;
+	return skb->pkt_type == PACKET_OUTGOING;
 }
 
 /* On transmit, software and hardware timestamps are returned independently.

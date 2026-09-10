@@ -356,14 +356,17 @@ static void vpu_m2m_device_run(void *priv)
 {
 }
 
-static int vpu_m2m_job_ready(void *priv)
+static void vpu_m2m_job_abort(void *priv)
 {
-	return 0;
+	struct vpu_inst *inst = priv;
+	struct v4l2_m2m_ctx *m2m_ctx = inst->fh.m2m_ctx;
+
+	v4l2_m2m_job_finish(m2m_ctx->m2m_dev, m2m_ctx);
 }
 
 static const struct v4l2_m2m_ops vpu_m2m_ops = {
 	.device_run = vpu_m2m_device_run,
-	.job_ready = vpu_m2m_job_ready,
+	.job_abort = vpu_m2m_job_abort
 };
 
 static int vpu_vb2_queue_setup(struct vb2_queue *vq,

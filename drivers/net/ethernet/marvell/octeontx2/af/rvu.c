@@ -1130,7 +1130,7 @@ cpt:
 	err = rvu_npc_exact_init(rvu);
 	if (err) {
 		dev_err(rvu->dev, "failed to initialize exact match table\n");
-		goto cgx_err;
+		return err;
 	}
 
 	/* Assign MACs for CGX mapped functions */

@@ -78,15 +78,7 @@ static ssize_t isl68137_avs_enable_show_page(struct i2c_client *client,
 					     int page,
 					     char *buf)
 {
-	int val;
-
-	val = pmbus_lock_interruptible(client);
-	if (val)
-		return val;
-
-	val = pmbus_read_byte_data(client, page, PMBUS_OPERATION);
-
-	pmbus_unlock(client);
+	int val = pmbus_read_byte_data(client, page, PMBUS_OPERATION);
 
 	if (val < 0)
 		return val;
@@ -108,10 +100,6 @@ static ssize_t isl68137_avs_enable_store_page(struct i2c_client *client,
 
 	op_val = result ? ISL68137_VOUT_AVS : 0;
 
-	rc = pmbus_lock_interruptible(client);
-	if (rc)
-		return rc;
-
 	/*
 	 * Writes to VOUT setpoint over AVSBus will persist after the VRM is
 	 * switched to PMBus control. Switching back to AVSBus control
@@ -123,19 +111,16 @@ static ssize_t isl68137_avs_enable_store_page(struct i2c_client *client,
 		rc = pmbus_read_word_data(client, page, 0xff,
 					  PMBUS_VOUT_COMMAND);
 		if (rc < 0)
-			goto unlock;
+			return rc;
 
 		rc = pmbus_write_word_data(client, page, PMBUS_VOUT_COMMAND,
 					   rc);
 		if (rc < 0)
-			goto unlock;
+			return rc;
 	}
 
 	rc = pmbus_update_byte_data(client, page, PMBUS_OPERATION,
 				    ISL68137_VOUT_AVS, op_val);
-
-unlock:
-	pmbus_unlock(client);
 
 	return (rc < 0) ? rc : count;
 }

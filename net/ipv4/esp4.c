@@ -276,13 +276,10 @@ static void esp_output_done(struct crypto_async_request *base, int err)
 		xfrm_dev_resume(skb);
 	} else {
 		if (!err &&
-		    x->encap && x->encap->encap_type == TCP_ENCAP_ESPINTCP) {
-			err = esp_output_tail_tcp(x, skb);
-			if (err != -EINPROGRESS)
-				kfree_skb(skb);
-		} else {
-			xfrm_output_resume(skb_to_full_sk(skb), skb, err);
-		}
+		    x->encap && x->encap->encap_type == TCP_ENCAP_ESPINTCP)
+			esp_output_tail_tcp(x, skb);
+		else
+			xfrm_output_resume(skb->sk, skb, err);
 	}
 }
 
@@ -460,8 +457,8 @@ int esp_output_head(struct xfrm_state *x, struct sk_buff *skb, struct esp_info *
 			return err;
 	}
 
-	if (ALIGN(skb->data_len + tailen, L1_CACHE_BYTES) >
-	    PAGE_SIZE)
+	if (ALIGN(tailen, L1_CACHE_BYTES) > PAGE_SIZE ||
+	    ALIGN(skb->data_len, L1_CACHE_BYTES) > PAGE_SIZE)
 		goto cow;
 
 	if (!skb_cloned(skb)) {

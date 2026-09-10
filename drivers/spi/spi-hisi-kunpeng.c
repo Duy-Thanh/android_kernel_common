@@ -198,18 +198,8 @@ static void hisi_spi_flush_fifo(struct hisi_spi *hs)
 	unsigned long limit = loops_per_jiffy << 1;
 
 	do {
-		unsigned long inner_limit = loops_per_jiffy;
-
-		while (hisi_spi_rx_not_empty(hs) && --inner_limit) {
+		while (hisi_spi_rx_not_empty(hs))
 			readl(hs->regs + HISI_SPI_DOUT);
-			cpu_relax();
-		}
-
-		if (!inner_limit) {
-			dev_warn_ratelimited(hs->dev, "RX FIFO flush timeout\n");
-			break;
-		}
-
 	} while (hisi_spi_busy(hs) && limit--);
 }
 

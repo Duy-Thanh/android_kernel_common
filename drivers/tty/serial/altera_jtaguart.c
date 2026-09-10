@@ -425,7 +425,6 @@ static int altera_jtaguart_probe(struct platform_device *pdev)
 	struct resource *res_mem;
 	int i = pdev->id;
 	int irq;
-	int ret;
 
 	/* -1 emphasizes that the platform must have one port, no .N suffix */
 	if (i == -1)
@@ -465,11 +464,7 @@ static int altera_jtaguart_probe(struct platform_device *pdev)
 	port->flags = UPF_BOOT_AUTOCONF;
 	port->dev = &pdev->dev;
 
-	ret = uart_add_one_port(&altera_jtaguart_driver, port);
-	if (ret) {
-		iounmap(port->membase);
-		return ret;
-	}
+	uart_add_one_port(&altera_jtaguart_driver, port);
 
 	return 0;
 }
