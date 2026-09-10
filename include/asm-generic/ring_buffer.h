@@ -7,7 +7,7 @@
 
 #include <linux/cacheflush.h>
 
-/* Flush cache on ring buffer range if needed */
-#define arch_ring_buffer_flush_range(start, end)	flush_cache_vmap(start, end)
+/* Flush cache on ring buffer range if needed. Do nothing by default. */
+#define arch_ring_buffer_flush_range(start, end)	do { } while (0)
 
 #endif /* __ASM_GENERIC_RING_BUFFER_H__ */

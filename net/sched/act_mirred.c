@@ -383,14 +383,12 @@ static int tcf_blockcast_mirror(struct sk_buff *skb, struct tcf_mirred *m,
 
 static int tcf_blockcast(struct sk_buff *skb, struct tcf_mirred *m,
 			 const u32 blockid, struct tcf_result *res,
-			 int retval)
+			 int m_eaction, int retval)
 {
 	const u32 exception_ifindex = skb->dev->ifindex;
 	struct tcf_block *block;
 	bool is_redirect;
-	int m_eaction;
 
-	m_eaction = READ_ONCE(m->tcfm_eaction);
 	is_redirect = tcf_mirred_is_act_redirect(m_eaction);
 
 	/* we are already under rcu protection, so can call block lookup
