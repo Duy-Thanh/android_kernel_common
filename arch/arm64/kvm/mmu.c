@@ -1616,9 +1616,8 @@ static int __pkvm_pin_user_pages(struct kvm *kvm, struct kvm_memory_slot *memslo
 	if (!pages)
 		return -ENOMEM;
 
-	mmap_read_lock(mm);
+	mmap_assert_locked(mm);
 	ret = pin_user_pages(hva, nr_pages, flags, pages);
-	mmap_read_unlock(mm);
 
 	if (ret == -EHWPOISON) {
 		kvm_send_hwpoison_signal(hva, PAGE_SHIFT);
@@ -1943,15 +1942,22 @@ static int pkvm_mem_abort(struct kvm_vcpu *vcpu, phys_addr_t fault_ipa, size_t s
 	if (nr_pages < 0)
 		return nr_pages;
 
+	mmap_read_lock(mm);
 	ret = __pkvm_pin_user_pages(kvm, memslot, gfn, nr_pages, &pages);
-	if (ret == -EHWPOISON)
+	if (ret == -EHWPOISON) {
+		mmap_read_unlock(mm);
 		return 0;
-	else if (ret == -EREMOTEIO)
+	} else if (ret == -EREMOTEIO) {
+		mmap_read_unlock(mm);
 		return __pkvm_mem_abort_device(vcpu, memslot, gfn, nr_pages);
-	else if (ret)
+	} else if (ret) {
+		mmap_read_unlock(mm);
 		return ret;
+	}
 
 	ret = __pkvm_pages_to_ppages(kvm, memslot, gfn, &nr_pages, pages, &ppages);
+	mmap_read_unlock(mm);
+
 	if (ret) {
 		unpin_user_pages(pages, nr_pages);
 		goto free_pages;
@@ -2066,7 +2072,9 @@ int __pkvm_pgtable_stage2_split(struct kvm_vcpu *vcpu, phys_addr_t ipa, size_t s
 
 	idx = srcu_read_lock(&vcpu->kvm->srcu);
 	memslot = gfn_to_memslot(vcpu->kvm, gfn);
+	mmap_read_lock(current->mm);
 	ret = __pkvm_pin_user_pages(kvm, memslot, gfn, nr_pages, &pages);
+	mmap_read_unlock(current->mm);
 	if (ret)
 		goto unlock_srcu;
 
