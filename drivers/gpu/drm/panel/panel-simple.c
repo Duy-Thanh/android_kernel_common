@@ -1099,7 +1099,7 @@ static const struct panel_desc auo_g190ean01 = {
 		.height = 301,
 	},
 	.delay = {
-		.prepare = 30,
+		.prepare = 50,
 		.enable = 200,
 		.disable = 110,
 		.unprepare = 1000,

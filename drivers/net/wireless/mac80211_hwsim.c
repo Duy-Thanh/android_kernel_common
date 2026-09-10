@@ -2743,6 +2743,7 @@ static void hw_scan_work(struct work_struct *work)
 						      hwsim->tmp_chan->band,
 						      NULL)) {
 				rcu_read_unlock();
+				kfree_skb(probe);
 				continue;
 			}
 

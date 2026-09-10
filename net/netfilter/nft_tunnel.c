@@ -699,7 +699,7 @@ static void nft_tunnel_obj_destroy(const struct nft_ctx *ctx,
 {
 	struct nft_tunnel_obj *priv = nft_obj_data(obj);
 
-	dst_release(&priv->md->dst);
+	metadata_dst_free(priv->md);
 }
 
 static struct nft_object_type nft_tunnel_obj_type;

@@ -444,11 +444,9 @@ static int wcove_start_toggling(struct tcpc_dev *tcpc,
 	return regmap_write(wcove->regmap, USBC_CONTROL1, usbc_ctrl);
 }
 
-static int wcove_read_rx_buffer(struct wcove_typec *wcove,
-				struct pd_message *msg)
+static int wcove_read_rx_buffer(struct wcove_typec *wcove, void *msg)
 {
-	unsigned int info, val, len;
-	u8 *buf = (u8 *)msg;
+	unsigned int info;
 	int ret;
 	int i;
 
@@ -456,13 +454,12 @@ static int wcove_read_rx_buffer(struct wcove_typec *wcove,
 	if (ret)
 		return ret;
 
-	len = min(USBC_RXINFO_RXBYTES(info), sizeof(*msg));
+	/* FIXME: Check that USBC_RXINFO_RXBYTES(info) matches the header */
 
-	for (i = 0; i < len; i++) {
-		ret = regmap_read(wcove->regmap, USBC_RX_DATA + i, &val);
+	for (i = 0; i < USBC_RXINFO_RXBYTES(info); i++) {
+		ret = regmap_read(wcove->regmap, USBC_RX_DATA + i, msg + i);
 		if (ret)
 			return ret;
-		buf[i] = val;
 	}
 
 	return regmap_write(wcove->regmap, USBC_RXSTATUS,
