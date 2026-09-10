@@ -1797,8 +1797,19 @@ static int logi_dj_probe(struct hid_device *hdev,
 	output_report_enum = &hdev->report_enum[HID_OUTPUT_REPORT];
 	rep = output_report_enum->report_id_hash[REPORT_ID_DJ_SHORT];
 
+<<<<<<< HEAD   (6c35ef5f7a13901beb8e243228e9e3a8c17b4a7e Revert "usb: xhci-pci: Limit VIA VL805 DMA addressing to 36 )
 	if (rep && (rep->maxfield < 1 ||
 		    rep->field[0]->report_count != DJREPORT_SHORT_LENGTH - 1)) {
+||||||| BASE   (723bf81751aec13b0c0750f02a15a1406e87985d usb: xhci-pci: Limit VIA VL805 DMA addressing to 36 bits)
+=======
+	if (rep && rep->maxfield < 1) {
+		hid_err(hdev, "Expected size of DJ short report is %d, but got 0",
+			DJREPORT_SHORT_LENGTH - 1);
+		return -EINVAL;
+	}
+
+	if (rep && rep->field[0]->report_count != DJREPORT_SHORT_LENGTH - 1) {
+>>>>>>> BRANCH (0eb903b5b519d037c723d47a58c5d4f20eed7342 Linux 5.15.216)
 		hid_err(hdev, "Expected size of DJ short report is %d, but got %d",
 			DJREPORT_SHORT_LENGTH - 1, rep->field[0]->report_count);
 		return -EINVAL;
