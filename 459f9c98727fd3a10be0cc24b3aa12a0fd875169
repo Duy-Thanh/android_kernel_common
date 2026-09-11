@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a44bde93_b48b04d7",
+        "filename": "drivers/pci/controller/dwc/pcie-designware.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-09-11T23:45:55Z",
+      "side": 1,
+      "message": "This seems like it would also enable this setting for DW_PCIE_VER_365A, DW_PCIE_VER_460A, DW_PCIE_VER_470A, and DW_PCIE_VER_480A.  Is that safe? Or is those excluded from this function somehow?",
+      "revId": "459f9c98727fd3a10be0cc24b3aa12a0fd875169",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
