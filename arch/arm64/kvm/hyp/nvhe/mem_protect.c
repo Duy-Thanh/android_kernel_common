@@ -3274,7 +3274,7 @@ static void init_selftest_vm(void *virt)
 	for (i = 0; i < pkvm_selftest_pages(); i++) {
 		if (p[i].refcount)
 			continue;
-		p[i].refcount = 1;
+		hyp_set_page_refcounted(&p[i]);
 		hyp_put_page(&selftest_vm.pool, hyp_page_to_virt(&p[i]));
 	}
 }
