@@ -187,6 +187,13 @@ int main(int argc, char *argv[])
 	int pps = -1;
 	int seconds = 0;
 	int settime = 0;
+<<<<<<< HEAD   (76b6c9e5475dc599bff99b36af787853a22e8724 Merge 41781f278930 ("net/mlx5: Fix slab-out-of-bounds in mlx)
+||||||| BASE   (41781f2789309462520a93822e946521ed78f97f net/mlx5: Fix slab-out-of-bounds in mlx5_query_nic_vport_mac)
+	int channel = -1;
+	clockid_t ext_clockid = CLOCK_REALTIME;
+=======
+	int channel = -1;
+>>>>>>> BRANCH (d1cfde2d5d15be14123bdd1689162bd27f995a90 Linux 6.6.143)
 
 	int64_t t1, t2, tp;
 	int64_t interval, offset;
@@ -196,7 +203,13 @@ int main(int argc, char *argv[])
 
 	progname = strrchr(argv[0], '/');
 	progname = progname ? 1+progname : argv[0];
+<<<<<<< HEAD   (76b6c9e5475dc599bff99b36af787853a22e8724 Merge 41781f278930 ("net/mlx5: Fix slab-out-of-bounds in mlx)
 	while (EOF != (c = getopt(argc, argv, "cd:e:f:ghH:i:k:lL:n:o:p:P:sSt:T:w:x:Xz"))) {
+||||||| BASE   (41781f2789309462520a93822e946521ed78f97f net/mlx5: Fix slab-out-of-bounds in mlx5_query_nic_vport_mac)
+	while (EOF != (c = getopt(argc, argv, "cd:e:f:F:ghH:i:k:lL:n:o:p:P:rsSt:T:w:x:Xy:z"))) {
+=======
+	while (EOF != (c = getopt(argc, argv, "cd:e:f:F:ghH:i:k:lL:n:o:p:P:rsSt:T:w:x:Xz"))) {
+>>>>>>> BRANCH (d1cfde2d5d15be14123bdd1689162bd27f995a90 Linux 6.6.143)
 		switch (c) {
 		case 'c':
 			capabilities = 1;

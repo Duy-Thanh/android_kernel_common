@@ -610,6 +610,7 @@ static int queue_folios_hugetlb(pte_t *pte, unsigned long hmask,
 	 * See folio_likely_mapped_shared() on possible imprecision when we
 	 * cannot easily detect if a folio is shared.
 	 */
+<<<<<<< HEAD   (76b6c9e5475dc599bff99b36af787853a22e8724 Merge 41781f278930 ("net/mlx5: Fix slab-out-of-bounds in mlx)
 	if (flags & (MPOL_MF_MOVE_ALL) ||
 	    (flags & MPOL_MF_MOVE && !folio_likely_mapped_shared(folio) &&
 	     !hugetlb_pmd_shared(pte))) {
@@ -621,6 +622,17 @@ static int queue_folios_hugetlb(pte_t *pte, unsigned long hmask,
 			 */
 			qp->has_unmovable = true;
 	}
+||||||| BASE   (41781f2789309462520a93822e946521ed78f97f net/mlx5: Fix slab-out-of-bounds in mlx5_query_nic_vport_mac)
+	if ((flags & MPOL_MF_MOVE_ALL) ||
+	    (folio_estimated_sharers(folio) == 1 && !hugetlb_pmd_shared(pte)))
+		if (!isolate_hugetlb(folio, qp->pagelist))
+			qp->nr_failed++;
+=======
+	if ((flags & MPOL_MF_MOVE_ALL) ||
+	    (folio_estimated_sharers(folio) == 1 && !hugetlb_pmd_shared(pte)))
+		if (!folio_isolate_hugetlb(folio, qp->pagelist))
+			qp->nr_failed++;
+>>>>>>> BRANCH (d1cfde2d5d15be14123bdd1689162bd27f995a90 Linux 6.6.143)
 unlock:
 	spin_unlock(ptl);
 #else

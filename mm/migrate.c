@@ -146,7 +146,7 @@ static void putback_movable_folio(struct folio *folio)
  *
  * This function shall be used whenever the isolated pageset has been
  * built from lru, balloon, hugetlbfs page. See isolate_migratepages_range()
- * and isolate_hugetlb().
+ * and folio_isolate_hugetlb().
  */
 void putback_movable_pages(struct list_head *l)
 {
@@ -155,7 +155,7 @@ void putback_movable_pages(struct list_head *l)
 
 	list_for_each_entry_safe(folio, folio2, l, lru) {
 		if (unlikely(folio_test_hugetlb(folio))) {
-			folio_putback_active_hugetlb(folio);
+			folio_putback_hugetlb(folio);
 			continue;
 		}
 		list_del(&folio->lru);
@@ -1420,7 +1420,7 @@ static int unmap_and_move_huge_page(new_folio_t get_new_folio,
 
 	if (folio_ref_count(src) == 1) {
 		/* page was freed from under us. So we are done. */
-		folio_putback_active_hugetlb(src);
+		folio_putback_hugetlb(src);
 		return MIGRATEPAGE_SUCCESS;
 	}
 
@@ -1503,19 +1503,19 @@ out_unlock:
 	folio_unlock(src);
 out:
 	if (rc == MIGRATEPAGE_SUCCESS)
-		folio_putback_active_hugetlb(src);
+		folio_putback_hugetlb(src);
 	else if (rc != -EAGAIN)
 		list_move_tail(&src->lru, ret);
 
 	/*
-	 * If migration was not successful and there's a freeing callback, use
-	 * it.  Otherwise, put_page() will drop the reference grabbed during
-	 * isolation.
+	 * If migration was not successful and there's a freeing callback,
+	 * return the folio to that special allocator. Otherwise, simply drop
+	 * our additional reference.
 	 */
 	if (put_new_folio)
 		put_new_folio(dst, private);
 	else
-		folio_putback_active_hugetlb(dst);
+		folio_put(dst);
 
 	return rc;
 }
@@ -2226,10 +2226,24 @@ static int add_page_for_migration(struct mm_struct *mm, const void __user *p,
 	if (page_mapcount(page) > 1 && !migrate_all)
 		goto out_putfolio;
 
+<<<<<<< HEAD   (76b6c9e5475dc599bff99b36af787853a22e8724 Merge 41781f278930 ("net/mlx5: Fix slab-out-of-bounds in mlx)
 	err = -EBUSY;
 	if (folio_test_hugetlb(folio)) {
 		if (isolate_hugetlb(folio, pagelist))
 			err = 1;
+||||||| BASE   (41781f2789309462520a93822e946521ed78f97f net/mlx5: Fix slab-out-of-bounds in mlx5_query_nic_vport_mac)
+	if (PageHuge(page)) {
+		if (PageHead(page)) {
+			isolated = isolate_hugetlb(page_folio(page), pagelist);
+			err = isolated ? 1 : -EBUSY;
+		}
+=======
+	if (PageHuge(page)) {
+		if (PageHead(page)) {
+			isolated = folio_isolate_hugetlb(page_folio(page), pagelist);
+			err = isolated ? 1 : -EBUSY;
+		}
+>>>>>>> BRANCH (d1cfde2d5d15be14123bdd1689162bd27f995a90 Linux 6.6.143)
 	} else {
 		if (!folio_isolate_lru(folio))
 			goto out_putfolio;

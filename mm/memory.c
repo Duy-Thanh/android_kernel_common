@@ -1640,8 +1640,16 @@ static unsigned long zap_pte_range(struct mmu_gather *tlb,
 			 * consider uffd-wp bit when zap. For more information,
 			 * see zap_install_uffd_wp_if_needed().
 			 */
+<<<<<<< HEAD   (76b6c9e5475dc599bff99b36af787853a22e8724 Merge 41781f278930 ("net/mlx5: Fix slab-out-of-bounds in mlx)
 			WARN_ON_ONCE(!vma_is_anonymous(vma));
 			rss[mm_counter(folio)]--;
+||||||| BASE   (41781f2789309462520a93822e946521ed78f97f net/mlx5: Fix slab-out-of-bounds in mlx5_query_nic_vport_mac)
+			WARN_ON_ONCE(!vma_is_anonymous(vma));
+			rss[mm_counter(page)]--;
+=======
+			WARN_ON_ONCE(!PageAnon(page));
+			rss[mm_counter(page)]--;
+>>>>>>> BRANCH (d1cfde2d5d15be14123bdd1689162bd27f995a90 Linux 6.6.143)
 			if (is_device_private_entry(entry))
 				folio_remove_rmap_pte(folio, page, vma);
 			folio_put(folio);
