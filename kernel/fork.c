@@ -1335,6 +1335,7 @@ struct file *get_task_exe_file(struct task_struct *task)
 	task_unlock(task);
 	return exe_file;
 }
+EXPORT_SYMBOL_GPL(get_task_exe_file);
 
 /**
  * get_task_mm - acquire a reference to the task's mm
