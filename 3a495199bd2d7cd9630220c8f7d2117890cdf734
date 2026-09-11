@@ -16,6 +16,70 @@
       "message": "Can you provide some sense of the size impact enabling these configs have on the resulting vmlinux?",
       "revId": "3a495199bd2d7cd9630220c8f7d2117890cdf734",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7064be99_22a8e7e3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-09-11T23:40:31Z",
+      "side": 1,
+      "message": "why can\u0027t these be vendor modules instead? You can still build them from AOSP source as in-tree modules and include them on your vendor_dlkm or vendor_boot images.\n\nFor example, some vendors are already shipping drm_display_header.ko as a vendor module built from AOSP",
+      "range": {
+        "startLine": 10,
+        "startChar": 42,
+        "endLine": 12,
+        "endChar": 0
+      },
+      "revId": "3a495199bd2d7cd9630220c8f7d2117890cdf734",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e15a53e_272d5bd4",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-09-11T23:40:31Z",
+      "side": 1,
+      "message": "Why do you need this in GKI? GKI should be generic and not include SoC-specific drivers",
+      "range": {
+        "startLine": 8,
+        "startChar": 8,
+        "endLine": 8,
+        "endChar": 32
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e35f655c_14f1c9d9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "init/Kconfig.gki",
+              "range": {
+                "startLine": 8,
+                "startChar": 0,
+                "endLine": 9,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "3a495199bd2d7cd9630220c8f7d2117890cdf734",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
