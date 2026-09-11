@@ -423,7 +423,7 @@ static struct neighbour *ipv4_neigh_lookup(const struct dst_entry *dst,
 					   const void *daddr)
 {
 	const struct rtable *rt = container_of(dst, struct rtable, dst);
-	struct net_device *dev = dst->dev;
+	struct net_device *dev = dst_dev(dst);
 	struct neighbour *n;
 
 	rcu_read_lock_bh();
@@ -450,7 +450,7 @@ static struct neighbour *ipv4_neigh_lookup(const struct dst_entry *dst,
 static void ipv4_confirm_neigh(const struct dst_entry *dst, const void *daddr)
 {
 	const struct rtable *rt = container_of(dst, struct rtable, dst);
-	struct net_device *dev = dst->dev;
+	struct net_device *dev = dst_dev(dst);
 	const __be32 *pkey = daddr;
 
 	if (rt->rt_gw_family == AF_INET) {
@@ -1072,7 +1072,17 @@ static void __ip_rt_update_pmtu(struct rtable *rt, struct flowi4 *fl4, u32 mtu)
 	if (old_mtu < mtu)
 		return;
 
+<<<<<<< HEAD   (0e686ccb904bb4864173a35ff4f3507ca8c8d534 Merge 4c80a7b1ac07 ("net: dst: add four helpers to annotate )
 	if (mtu < ip_rt_min_pmtu) {
+||||||| BASE   (4c80a7b1ac07570accd645ba3b5d13cecde09c8d net: dst: add four helpers to annotate data-races around dst)
+	rcu_read_lock();
+	net = dev_net_rcu(dst->dev);
+	if (mtu < net->ipv4.ip_rt_min_pmtu) {
+=======
+	rcu_read_lock();
+	net = dev_net_rcu(dst_dev(dst));
+	if (mtu < net->ipv4.ip_rt_min_pmtu) {
+>>>>>>> BRANCH (db686880dcade127da4fb1a9462b669027469376 ipv4: adopt dst_dev, skb_dst_dev and skb_dst_dev_net[_rcu])
 		lock = true;
 		mtu = min(old_mtu, ip_rt_min_pmtu);
 	}
