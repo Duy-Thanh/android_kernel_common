@@ -1851,6 +1851,22 @@ static void binder_free_transaction(struct binder_transaction *t)
 {
 	struct binder_thread *target_thread;
 	struct binder_proc *target_proc;
+<<<<<<< HEAD   (38c2ee7f1213aaa84824aa93e0fbfb80bdb3efb6 Merge 6.1.177 into android14-6.1-lts)
+||||||| BASE   (090666d3cc906176fc47363520eb746b94c7d578 Linux 6.1.177)
+=======
+
+	spin_lock(&t->lock);
+	target_proc = t->to_proc;
+	target_thread = t->to_thread;
+	/*
+	 * Pin target_thread to keep target_proc alive. Undelivered
+	 * transactions with !target_thread are safe, as target_proc
+	 * can only be the current context there.
+	 */
+	if (target_thread)
+		atomic_inc(&target_thread->tmp_ref);
+	spin_unlock(&t->lock);
+>>>>>>> BRANCH (dc5c83b7f5f83ea99aea5c771b1ec77458263a15 Linux 6.1.178)
 
 	spin_lock(&t->lock);
 	target_proc = t->to_proc;

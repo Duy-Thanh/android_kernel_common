@@ -847,7 +847,71 @@ static void damon_do_apply_schemes(struct damon_ctx *c,
 		if (!damos_valid_target(c, t, r, s))
 			continue;
 
+<<<<<<< HEAD   (38c2ee7f1213aaa84824aa93e0fbfb80bdb3efb6 Merge 6.1.177 into android14-6.1-lts)
 		damos_apply_scheme(c, t, r, s);
+||||||| BASE   (090666d3cc906176fc47363520eb746b94c7d578 Linux 6.1.177)
+		/* Apply the scheme */
+		if (c->ops.apply_scheme) {
+			if (quota->esz &&
+					quota->charged_sz + sz > quota->esz) {
+				sz = ALIGN_DOWN(quota->esz - quota->charged_sz,
+						DAMON_MIN_REGION);
+				if (!sz)
+					goto update_stat;
+				damon_split_region_at(t, r, sz);
+			}
+			ktime_get_coarse_ts64(&begin);
+			sz_applied = c->ops.apply_scheme(c, t, r, s);
+			ktime_get_coarse_ts64(&end);
+			quota->total_charged_ns += timespec64_to_ns(&end) -
+				timespec64_to_ns(&begin);
+			quota->charged_sz += sz;
+			if (quota->esz && quota->charged_sz >= quota->esz) {
+				quota->charge_target_from = t;
+				quota->charge_addr_from = r->ar.end + 1;
+			}
+		}
+		if (s->action != DAMOS_STAT)
+			r->age = 0;
+
+update_stat:
+		s->stat.nr_tried++;
+		s->stat.sz_tried += sz;
+		if (sz_applied)
+			s->stat.nr_applied++;
+		s->stat.sz_applied += sz_applied;
+=======
+		/* Apply the scheme */
+		if (c->ops.apply_scheme) {
+			if (quota->esz &&
+					quota->charged_sz + sz > quota->esz) {
+				sz = ALIGN_DOWN(quota->esz - quota->charged_sz,
+						DAMON_MIN_REGION);
+				if (!sz)
+					goto update_stat;
+				damon_split_region_at(t, r, sz);
+			}
+			ktime_get_coarse_ts64(&begin);
+			sz_applied = c->ops.apply_scheme(c, t, r, s);
+			ktime_get_coarse_ts64(&end);
+			quota->total_charged_ns += timespec64_to_ns(&end) -
+				timespec64_to_ns(&begin);
+			quota->charged_sz += sz;
+			if (quota->esz && quota->charged_sz >= quota->esz) {
+				quota->charge_target_from = t;
+				quota->charge_addr_from = r->ar.end;
+			}
+		}
+		if (s->action != DAMOS_STAT)
+			r->age = 0;
+
+update_stat:
+		s->stat.nr_tried++;
+		s->stat.sz_tried += sz;
+		if (sz_applied)
+			s->stat.nr_applied++;
+		s->stat.sz_applied += sz_applied;
+>>>>>>> BRANCH (dc5c83b7f5f83ea99aea5c771b1ec77458263a15 Linux 6.1.178)
 	}
 }
 

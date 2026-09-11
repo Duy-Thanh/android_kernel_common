@@ -2109,11 +2109,19 @@ free_it:
 		 * Is there need to periodically free_folio_list? It would
 		 * appear not as the counts should be low
 		 */
+<<<<<<< HEAD   (38c2ee7f1213aaa84824aa93e0fbfb80bdb3efb6 Merge 6.1.177 into android14-6.1-lts)
 		trace_android_vh_folio_trylock_clear(folio);
 		if (unlikely(folio_test_large(folio)))
+||||||| BASE   (090666d3cc906176fc47363520eb746b94c7d578 Linux 6.1.177)
+		if (unlikely(folio_test_large(folio)))
+=======
+		if (unlikely(folio_test_large(folio))) {
+			try_to_unmap_flush();
+>>>>>>> BRANCH (dc5c83b7f5f83ea99aea5c771b1ec77458263a15 Linux 6.1.178)
 			destroy_large_folio(folio);
-		else
+		} else {
 			list_add(&folio->lru, &free_folios);
+		}
 		continue;
 
 activate_locked_split:

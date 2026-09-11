@@ -200,6 +200,52 @@ static int damon_reclaim_turn(bool on)
 	return 0;
 }
 
+<<<<<<< HEAD   (38c2ee7f1213aaa84824aa93e0fbfb80bdb3efb6 Merge 6.1.177 into android14-6.1-lts)
+||||||| BASE   (090666d3cc906176fc47363520eb746b94c7d578 Linux 6.1.177)
+static bool damon_reclaim_enabled(void)
+{
+	if (!ctx)
+		return false;
+	return damon_is_running(ctx);
+}
+
+static struct delayed_work damon_reclaim_timer;
+static void damon_reclaim_timer_fn(struct work_struct *work)
+{
+	bool now_enabled;
+
+	now_enabled = enabled;
+	if (damon_reclaim_enabled() != now_enabled)
+		return;
+	damon_reclaim_turn(now_enabled);
+}
+static DECLARE_DELAYED_WORK(damon_reclaim_timer, damon_reclaim_timer_fn);
+
+static bool damon_reclaim_initialized;
+
+=======
+static bool damon_reclaim_enabled(void)
+{
+	if (!ctx)
+		return false;
+	return damon_is_running(ctx);
+}
+
+static struct delayed_work damon_reclaim_timer;
+static void damon_reclaim_timer_fn(struct work_struct *work)
+{
+	bool now_enabled;
+
+	now_enabled = enabled;
+	if (damon_reclaim_enabled() == now_enabled)
+		return;
+	damon_reclaim_turn(now_enabled);
+}
+static DECLARE_DELAYED_WORK(damon_reclaim_timer, damon_reclaim_timer_fn);
+
+static bool damon_reclaim_initialized;
+
+>>>>>>> BRANCH (dc5c83b7f5f83ea99aea5c771b1ec77458263a15 Linux 6.1.178)
 static int damon_reclaim_enabled_store(const char *val,
 		const struct kernel_param *kp)
 {
