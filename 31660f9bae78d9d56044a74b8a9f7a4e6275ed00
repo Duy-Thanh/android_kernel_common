@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08a83a53_ff322fd8",
+        "filename": "modules.bzl",
+        "patchSetId": 1
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-09-11T23:48:26Z",
+      "side": 1,
+      "message": "@tkjos@google.com, Maybe we should just remove it from GKI completely. These USB drivers were added when we first created the gki_defconfig.",
+      "range": {
+        "startLine": 221,
+        "startChar": 21,
+        "endLine": 221,
+        "endChar": 26
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c7a3bfd2_93343966",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "modules.bzl",
+              "range": {
+                "startLine": 38,
+                "startChar": 0,
+                "endLine": 39,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "modules.bzl",
+              "range": {
+                "startLine": 221,
+                "startChar": 0,
+                "endLine": 222,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "31660f9bae78d9d56044a74b8a9f7a4e6275ed00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
