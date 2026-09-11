@@ -25,7 +25,7 @@
  */
 struct audit_fsnotify_mark {
 	dev_t dev;		/* associated superblock device */
-	unsigned long ino;	/* associated inode number */
+	u64 ino;		/* associated inode number */
 	char *path;		/* insertion path */
 	struct fsnotify_mark mark; /* fsnotify mark on the inode */
 	struct audit_krule *rule;
@@ -71,22 +71,49 @@ static void audit_update_mark(struct audit_fsnotify_mark *audit_mark,
 	audit_mark->ino = inode ? inode->i_ino : AUDIT_INO_UNSET;
 }
 
-struct audit_fsnotify_mark *audit_alloc_mark(struct audit_krule *krule, char *pathname, int len)
+struct audit_fsnotify_mark *audit_alloc_mark(struct audit_krule *krule, char *pathname,
+					     int len, struct audit_watch_ctx *ctx)
 {
 	struct audit_fsnotify_mark *audit_mark;
 	struct path path;
 	struct dentry *dentry;
+<<<<<<< HEAD   (8e55af2f50b38dc7b72ec9daaba3c70fa3b0dc4b Merge 7f125ea143d0 ("VFS/audit: introduce kern_path_parent())
 	struct inode *inode;
 	int ret;
+||||||| BASE   (7f125ea143d05393c107792aa862bb6ae0f09a85 VFS/audit: introduce kern_path_parent() for audit)
+	int ret;
+=======
+	struct inode *dir, *child;
+	int ret, allow_dups;
+>>>>>>> BRANCH (f6fda0ac6661c23b8356dfb1cc423960cc6f0593 audit: fix recursive locking deadlock in audit_dupe_exe())
 
 	if (pathname[0] != '/' || pathname[len-1] == '/')
 		return ERR_PTR(-EINVAL);
 
+<<<<<<< HEAD   (8e55af2f50b38dc7b72ec9daaba3c70fa3b0dc4b Merge 7f125ea143d0 ("VFS/audit: introduce kern_path_parent())
 	dentry = kern_path_locked(pathname, &path);
 	if (IS_ERR(dentry))
 		return ERR_CAST(dentry); /* returning an error */
 	inode = path.dentry->d_inode;
 	inode_unlock(inode);
+||||||| BASE   (7f125ea143d05393c107792aa862bb6ae0f09a85 VFS/audit: introduce kern_path_parent() for audit)
+	dentry = kern_path_parent(pathname, &path);
+	if (IS_ERR(dentry))
+		return ERR_CAST(dentry); /* returning an error */
+=======
+	if (!ctx) {
+		dentry = kern_path_parent(pathname, &path);
+		if (IS_ERR(dentry))
+			return ERR_CAST(dentry); /* returning an error */
+		dir = d_inode(path.dentry);
+		child = d_inode(dentry);
+		allow_dups = 0;
+	} else {
+		dir = ctx->dir;
+		child = ctx->child;
+		allow_dups = 1;
+	}
+>>>>>>> BRANCH (f6fda0ac6661c23b8356dfb1cc423960cc6f0593 audit: fix recursive locking deadlock in audit_dupe_exe())
 
 	audit_mark = kzalloc(sizeof(*audit_mark), GFP_KERNEL);
 	if (unlikely(!audit_mark)) {
@@ -97,18 +124,27 @@ struct audit_fsnotify_mark *audit_alloc_mark(struct audit_krule *krule, char *pa
 	fsnotify_init_mark(&audit_mark->mark, audit_fsnotify_group);
 	audit_mark->mark.mask = AUDIT_FS_EVENTS;
 	audit_mark->path = pathname;
-	audit_update_mark(audit_mark, dentry->d_inode);
 	audit_mark->rule = krule;
 
+<<<<<<< HEAD   (8e55af2f50b38dc7b72ec9daaba3c70fa3b0dc4b Merge 7f125ea143d0 ("VFS/audit: introduce kern_path_parent())
 	ret = fsnotify_add_inode_mark(&audit_mark->mark, inode, true);
+||||||| BASE   (7f125ea143d05393c107792aa862bb6ae0f09a85 VFS/audit: introduce kern_path_parent() for audit)
+	ret = fsnotify_add_inode_mark(&audit_mark->mark, path.dentry->d_inode, 0);
+=======
+	audit_update_mark(audit_mark, child);
+	ret = fsnotify_add_inode_mark(&audit_mark->mark, dir, allow_dups);
+
+>>>>>>> BRANCH (f6fda0ac6661c23b8356dfb1cc423960cc6f0593 audit: fix recursive locking deadlock in audit_dupe_exe())
 	if (ret < 0) {
 		audit_mark->path = NULL;
 		fsnotify_put_mark(&audit_mark->mark);
 		audit_mark = ERR_PTR(ret);
 	}
 out:
-	dput(dentry);
-	path_put(&path);
+	if (!ctx) {
+		dput(dentry);
+		path_put(&path);
+	}
 	return audit_mark;
 }
 
