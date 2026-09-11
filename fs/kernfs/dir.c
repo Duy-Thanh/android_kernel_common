@@ -1158,12 +1158,15 @@ static int kernfs_dop_revalidate(struct dentry *dentry, unsigned int flags)
 		return 1;
 	}
 
-	kn = kernfs_dentry_node(dentry);
-	root = kernfs_root(kn);
+	root = kernfs_root_from_sb(dentry->d_sb);
+	if (!root)
+		return 0;
+
 	down_read(&root->kernfs_rwsem);
 
-	/* The kernfs node has been deactivated */
-	if (!kernfs_active(kn))
+	kn = kernfs_dentry_node(dentry);
+	/* The kernfs node is unlinked or deactivated */
+	if (!kn || !kernfs_active(kn))
 		goto out_bad;
 
 	/* The kernfs node has been moved? */
