@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1530ba2_975afa64",
+        "filename": "arch/x86/kvm/mmu/mmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1641,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-09-11T15:59:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a978d82c_abf90401",
+      "range": {
+        "startLine": 1640,
+        "startChar": 0,
+        "endLine": 1641,
+        "endChar": 9
+      },
+      "revId": "63381a043ac8179c007a5cc78d219e882833d92a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5685a1bc_ec9718ba",
@@ -175,6 +199,30 @@
       "side": 1,
       "message": "Maybe \"Since mmu_lock may be dropped when yielding, the interval tree may get rebuilt between iterations, so it is unsafe to iterate the range simply via for_each_pkvm_mapping(). Instead, iterate it by retrieving the first mapping in the remaining range anew on every iteration.\" ?",
       "parentUuid": "8bee0ac2_d021eb7d",
+      "range": {
+        "startLine": 1648,
+        "startChar": 0,
+        "endLine": 1651,
+        "endChar": 4
+      },
+      "revId": "63381a043ac8179c007a5cc78d219e882833d92a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2400a342_0a0379d6",
+        "filename": "arch/x86/kvm/mmu/mmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1651,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-09-11T15:59:58Z",
+      "side": 1,
+      "message": "Done, PTAL",
+      "parentUuid": "31f1796c_8821f77b",
       "range": {
         "startLine": 1648,
         "startChar": 0,
