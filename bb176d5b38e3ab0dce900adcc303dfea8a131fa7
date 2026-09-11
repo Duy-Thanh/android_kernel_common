@@ -70,6 +70,24 @@
       "parentUuid": "dcc78af2_3eabadc3",
       "revId": "bb176d5b38e3ab0dce900adcc303dfea8a131fa7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bda11e7_7b61b5e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-09-11T22:10:05Z",
+      "side": 1,
+      "message": "This is not common, but this sort of thing comes up occasionally. Somebody needing to change db845 or pixel symbols/drivers is kind of a red flag that we might be introducing breakage if the GKI kernel is replaced without rebuilding all vendor modules.\n\nSo what will happen in this case if the db845 module is not rebuilt for this change? I\u0027m guessing that this watchdog feature will not work properly. If that is true, the next question is whether it is possible to refactor the feature a little so that the old inline function still works.",
+      "parentUuid": "11b4a2cc_7f7f2af3",
+      "revId": "bb176d5b38e3ab0dce900adcc303dfea8a131fa7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
