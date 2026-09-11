@@ -218,6 +218,7 @@ def get_kunit_modules_list(arch = None):
 
 _COMMON_UNPROTECTED_MODULES_LIST = [
     "drivers/block/zram/zram.ko",
+    "drivers/net/usb/r8152.ko",
     "mm/zsmalloc.ko",
 ]
 
