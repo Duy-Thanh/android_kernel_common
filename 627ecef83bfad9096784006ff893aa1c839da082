@@ -743,6 +743,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c229049f_fcf9686d",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-11T16:51:51Z",
+      "side": 1,
+      "message": "Also, shouldn\u0027t this eventually get cleared if there are no mappings? Or if you rewrap the buffer inside of the current wrap, then shouldn\u0027t we also clear this?",
+      "parentUuid": "66af803d_3083c553",
+      "range": {
+        "startLine": 412,
+        "startChar": 0,
+        "endLine": 417,
+        "endChar": 17
+      },
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8cae6ae7_8f247615",
         "filename": "drivers/android/wrapfd/wrapped_device.rs",
         "patchSetId": 7
