@@ -59,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39abf5fb_3f444a1c",
+        "filename": "drivers/android/wrapfd/content.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-11T14:07:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c974c75e_7bbc0291",
+      "range": {
+        "startLine": 19,
+        "startChar": 18,
+        "endLine": 19,
+        "endChar": 32
+      },
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d181bf02_40c15a95",
@@ -78,6 +102,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0cba5ed2_f9f65bb5",
+        "filename": "drivers/android/wrapfd/content.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-11T14:07:22Z",
+      "side": 1,
+      "message": "I used to do this - I implemented a rust api for get_free_page() to stay similar to your original code, but due to some rust peculiarities (you cannot have a ref to something that\u0027s uninitialized memory) it became a rabbit hole. Alice suggested to use VVec of size PAGE_SIZE because it\u0027s guaranteed to be PAGE_SIZE aligned and therefore returns memory with sufficiently similar characteristics without requiring new rust APIs.",
+      "parentUuid": "d181bf02_40c15a95",
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e3de0ec1_85605529",
         "filename": "drivers/android/wrapfd/content.rs",
         "patchSetId": 7
@@ -89,6 +131,24 @@
       "writtenOn": "2026-09-10T17:54:35Z",
       "side": 1,
       "message": "Paired with the comment below, does this mean you *have* to dynamically allocate something? Also, if there are only a maximum of 3 bounce buffer objects, I don\u0027t think we need to use `KVVec()`? Why not just `KVec`?",
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6743fc6_50851d37",
+        "filename": "drivers/android/wrapfd/content.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-11T14:07:22Z",
+      "side": 1,
+      "message": "My comment is about the KVVec vector container that I\u0027d have preferred to just make a static array of size \"MAX_NR_BOUNCE_BUFS\", however, the version of rust we\u0027re currently using does not have the ability to initialize such an array with entries that themselves require dynamic allocation (rust_nightly does). I can switch to KVec, however, if you prefer.",
+      "parentUuid": "e3de0ec1_85605529",
       "revId": "627ecef83bfad9096784006ff893aa1c839da082",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -136,6 +196,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d957cab9_613758bd",
+        "filename": "drivers/android/wrapfd/content.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-11T14:07:22Z",
+      "side": 1,
+      "message": "That appears to be true, but flags are passed to create_wrap_file/open_wrapped_device below which passes it on to anon_inode_create_getfile - and it cares about O_RDWR and O_RDONLY.",
+      "parentUuid": "474e3e25_6bf1ce9f",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 10
+      },
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c36d0c4f_229c443d",
         "filename": "drivers/android/wrapfd/content.rs",
         "patchSetId": 7
@@ -168,6 +252,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "64d2ad67_66d5d6fb",
+        "filename": "drivers/android/wrapfd/content.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-11T14:07:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8422580c_21d75b21",
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "640f0369_4e71e404",
@@ -191,6 +293,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "854f5455_94d652c9",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-11T14:07:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "640f0369_4e71e404",
+      "range": {
+        "startLine": 24,
+        "startChar": 14,
+        "endLine": 24,
+        "endChar": 33
+      },
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cc2e16f9_e98dd217",
@@ -204,6 +330,24 @@
       "writtenOn": "2026-09-10T17:54:35Z",
       "side": 1,
       "message": "Storing the PID is error prone, as PIDs can be reused. Also, I believe different threads--even if they belong to the same process--have different PIDs, at least from looking at `kernel/fork.c::copy_process()`.\n\nCould we use the `group_leader` as we were doing in C?",
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a8c8a26_fb9e927c",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-11T14:07:22Z",
+      "side": 1,
+      "message": "I need to look into this, I did so before and things in the rust api were not terribly obvious to me, i\u0027ll have another look. I was under the impression that we wanted this to assume ownershop on a per-thread basis, not per-process, is that not true? As for PIDs being reused, could this actually be a problem here? If a process dies it clearly takes the reference on the driver with it, right? If that used to think that that pid owned the driver for the time being it would no longer be an issue, or am I misunderstanding?",
+      "parentUuid": "cc2e16f9_e98dd217",
       "revId": "627ecef83bfad9096784006ff893aa1c839da082",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -244,6 +388,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0de3e22a_fcf9502c",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-11T14:07:22Z",
+      "side": 1,
+      "message": "Help me understand why this is worthwhile. (I can see that i happens to be true right now, but doesn\u0027t have to be, you could call this with a read lock only).",
+      "parentUuid": "b860f42d_211a88df",
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e55d4012_71c2943b",
         "filename": "drivers/android/wrapfd/wrapped_device.rs",
         "patchSetId": 7
@@ -255,6 +417,24 @@
       "writtenOn": "2026-09-10T17:54:35Z",
       "side": 1,
       "message": "nit: I think this should just be a `Wrap` not `WrappedDevice`. It doesn\u0027t represent a device, but rather a buffer that is wrapped by this driver to extend its functionality.",
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35b2ac4e_b36f0f5c",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-11T14:07:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e55d4012_71c2943b",
       "revId": "627ecef83bfad9096784006ff893aa1c839da082",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -272,6 +452,24 @@
       "writtenOn": "2026-09-10T17:54:35Z",
       "side": 1,
       "message": "I would argue that `llseek()` modifies state, and should therefore be considered as a write critical section.",
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c7f19c9_e8811d35",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-11T14:07:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b25ec102_0e10318a",
       "revId": "627ecef83bfad9096784006ff893aa1c839da082",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -295,6 +493,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f08b66cc_7c7e7115",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-11T14:07:22Z",
+      "side": 1,
+      "message": "There\u0027s no vtable involved here so \"unimplemented\" would just be an empty (but concrete) implementation. I can sure do that, but I don\u0027t really see the point.",
+      "parentUuid": "0fd2bd25_368dc6ea",
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5b8c83ed_9fa2dabe",
         "filename": "drivers/android/wrapfd/wrapped_device.rs",
         "patchSetId": 7
@@ -306,6 +522,30 @@
       "writtenOn": "2026-09-10T17:54:35Z",
       "side": 1,
       "message": "Note that `dma_buf_mmap()` calls `vma_set_file()` to change the vma\u0027s file pointer to point to the dmabuf, instead of the wrapfd file, and it decrements the count on the wrapfd file structure. We incremented it before to ensure the wrapfd file and associated data structures are valid as long as there are mappings, so we could track the map_count across forks and remaps, etc. However, with the approach that you\u0027re using of checking the mapping interval tree, I don\u0027t think we need to do that anymore?",
+      "range": {
+        "startLine": 410,
+        "startChar": 1,
+        "endLine": 410,
+        "endChar": 87
+      },
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54e576b1_b1c27e2f",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-11T14:07:22Z",
+      "side": 1,
+      "message": "yes, I believe the query to is_mapped() takes care of that case now.",
+      "parentUuid": "5b8c83ed_9fa2dabe",
       "range": {
         "startLine": 410,
         "startChar": 1,
@@ -341,6 +581,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3eda660c_f1fd3636",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-11T14:07:22Z",
+      "side": 1,
+      "message": "This was just a safeguard, as it wasn\u0027t obvious to me that the file\u0027s vma is guaranteed to still be the same at this point. Alice suggested that there was no harm in double checking here. Let me know if you want me to take it on faith and remove this safeguard.",
+      "parentUuid": "83d7e0d8_13ddd857",
+      "range": {
+        "startLine": 412,
+        "startChar": 0,
+        "endLine": 417,
+        "endChar": 17
+      },
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8cae6ae7_8f247615",
         "filename": "drivers/android/wrapfd/wrapped_device.rs",
         "patchSetId": 7
@@ -352,6 +616,24 @@
       "writtenOn": "2026-09-10T17:54:35Z",
       "side": 1,
       "message": "This still needs to be implemented.",
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b49f636b_e9457cec",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-11T14:07:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8cae6ae7_8f247615",
       "revId": "627ecef83bfad9096784006ff893aa1c839da082",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -369,6 +651,30 @@
       "writtenOn": "2026-09-10T17:54:35Z",
       "side": 1,
       "message": "I\u0027m not sure how useful it was to have the map count as opposed to if the buffer is mapped, but that could be derived by looping through the mappings interval tree, correct?",
+      "range": {
+        "startLine": 486,
+        "startChar": 9,
+        "endLine": 488,
+        "endChar": 56
+      },
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9af803b_6185a275",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-11T14:07:22Z",
+      "side": 1,
+      "message": "Isn\u0027t that what is_mapped() is doing?",
+      "parentUuid": "e6ce0b63_e5326532",
       "range": {
         "startLine": 486,
         "startChar": 9,
@@ -462,6 +768,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2aff944a_4e0c0aa7",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-11T14:07:22Z",
+      "side": 1,
+      "message": "I agree that a convenience function would be nicer, on what object would you like that API. The problem here is that in order to get access to the \"owner\" filed you need to acquire the lock (either read or write), and since you probably want to acquire the lock for other purposes as well (and make a bunch of things atomic wrt ownership) an api on Wrap seem unwise. If I made it a method on WrapOwner it seems odd to call \"has_owner\" on an \"owner\" object... Thoughts?",
+      "parentUuid": "9723948a_56ae0ffa",
+      "range": {
+        "startLine": 573,
+        "startChar": 7,
+        "endLine": 573,
+        "endChar": 46
+      },
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "37926d18_6f3670af",
         "filename": "drivers/android/wrapfd/wrapping_device.rs",
         "patchSetId": 7
@@ -473,6 +803,30 @@
       "writtenOn": "2026-09-10T17:54:35Z",
       "side": 1,
       "message": "Nit: could we rename this to `WrapFdDevice`? Wrapping device sounds a bit awkward.",
+      "range": {
+        "startLine": 10,
+        "startChar": 18,
+        "endLine": 10,
+        "endChar": 32
+      },
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cce74f13_610ed791",
+        "filename": "drivers/android/wrapfd/wrapping_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-11T14:07:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37926d18_6f3670af",
       "range": {
         "startLine": 10,
         "startChar": 18,

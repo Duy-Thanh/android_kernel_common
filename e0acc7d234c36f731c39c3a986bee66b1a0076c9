@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e844adb4_81b63302",
+        "filename": "drivers/android/wrapfd/Kbuild",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-11T14:07:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "589bd299_8658a63f",
+      "revId": "e0acc7d234c36f731c39c3a986bee66b1a0076c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76fb44bd_865e7791",
@@ -31,6 +49,30 @@
       "writtenOn": "2026-09-10T17:54:35Z",
       "side": 1,
       "message": "Since there\u0027s no C driver on this branch, lets just call this `ANDROID_WRAPFD`.",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 26
+      },
+      "revId": "e0acc7d234c36f731c39c3a986bee66b1a0076c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "430dfdde_33e95569",
+        "filename": "drivers/android/wrapfd/Kconfig",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-11T14:07:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76fb44bd_865e7791",
       "range": {
         "startLine": 3,
         "startChar": 0,
@@ -76,6 +118,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2cf5ab5_d46d65f3",
+        "filename": "drivers/android/wrapfd/Kconfig",
+        "patchSetId": 5
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-11T14:07:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c207fb32_3c22a2cc",
+      "revId": "e0acc7d234c36f731c39c3a986bee66b1a0076c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8be4b1c4_8d40d084",
@@ -93,6 +153,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "605b23a2_e701262b",
+        "filename": "fs/file.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1296,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-11T14:07:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8be4b1c4_8d40d084",
+      "revId": "e0acc7d234c36f731c39c3a986bee66b1a0076c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "888db7ba_66c7f43c",
@@ -106,6 +184,24 @@
       "writtenOn": "2026-09-10T17:54:35Z",
       "side": 1,
       "message": "can also be moved out to a separate patch for building the driver as a module.",
+      "revId": "e0acc7d234c36f731c39c3a986bee66b1a0076c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d53fc7bc_0354f578",
+        "filename": "mm/vmalloc.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 4233,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-11T14:07:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "888db7ba_66c7f43c",
       "revId": "e0acc7d234c36f731c39c3a986bee66b1a0076c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -147,6 +243,30 @@
           ]
         }
       ],
+      "revId": "e0acc7d234c36f731c39c3a986bee66b1a0076c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6df20d84_7eb791fa",
+        "filename": "rust/helpers/helpers.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-11T14:07:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8d49e7a_72654306",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 16
+      },
       "revId": "e0acc7d234c36f731c39c3a986bee66b1a0076c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
