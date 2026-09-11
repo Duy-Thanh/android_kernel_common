@@ -1002,6 +1002,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "93ed83f6_aea730ef",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-11T16:56:54Z",
+      "side": 1,
+      "message": "Something I just noticed is that `has_owner()` in the C implementation did mutate the owner in case the process died, which I don\u0027t see here, and I\u0027m not sure how you\u0027d do that by using the PID.",
+      "parentUuid": "2d0c0205_7be6c653",
+      "range": {
+        "startLine": 573,
+        "startChar": 7,
+        "endLine": 573,
+        "endChar": 46
+      },
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "37926d18_6f3670af",
         "filename": "drivers/android/wrapfd/wrapping_device.rs",
         "patchSetId": 7
