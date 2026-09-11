@@ -16,6 +16,23 @@
       "message": "branch",
       "revId": "9316062bd7e4d3cd49050ce8b11c7ecf94539e70",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9168e307_e91ed209",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5158012
+      },
+      "writtenOn": "2026-09-11T17:18:32Z",
+      "side": 1,
+      "message": "4290511: Merge 443eb2754f04 (\"net: dst: annotate data-races around dst-\u003einput\") into android13-5.15-lts | https://android-review.googlesource.com/c/kernel/common/+/4290511",
+      "revId": "9316062bd7e4d3cd49050ce8b11c7ecf94539e70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
