@@ -22,6 +22,47 @@
       },
       "revId": "f19eeac389fe8e0fd7ee81c4ab49e2c7f784e407",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91b1ecf8_de45c684",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-09-11T07:10:49Z",
+      "side": 1,
+      "message": "We do not add the \"Test\" tag in kernel commits.",
+      "parentUuid": "5400121a_4d42fd28",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 3
+      },
+      "revId": "f19eeac389fe8e0fd7ee81c4ab49e2c7f784e407",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99a7efe4_f77d3a67",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-09-11T07:10:49Z",
+      "side": 1,
+      "message": "I am not sure about this patch:\n\n  * __pkvm_mem_abort_dmabuf() does fill a ppage.\n  * non-protected VM do not use relinquish.\n  \nThe problem must be somewhere else",
+      "revId": "f19eeac389fe8e0fd7ee81c4ab49e2c7f784e407",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
