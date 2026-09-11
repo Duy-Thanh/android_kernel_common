@@ -52,6 +52,24 @@
       "parentUuid": "52829eae_70ebc20e",
       "revId": "bb176d5b38e3ab0dce900adcc303dfea8a131fa7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11b4a2cc_7f7f2af3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1865564
+      },
+      "writtenOn": "2026-09-11T01:29:45Z",
+      "side": 1,
+      "message": "Before the series, watchdog_notify_pretimeout() is an inline function [1].\n\nAfter enabling CONFIG_WATCHDOG_PRETIMEOUT_GOV\u003dy (via ANDROID: gki_defconfig: Enable \"dump\" pretimeout governor), watchdog_notify_pretimeout()[2] becomes an exported symbol.  qcom-wdt.c relies on the symbol[3].\n\nWithout this patch, it seems the symbol will be \"trimmed\".  As a result, qcom-wdt.c can\u0027t find the symbol.\n\nTodd: Is this common in GKI?  I\u0027d like to learn what is the process to handle this situation.\n\n[1] https://elixir.bootlin.com/linux/v6.12.107/source/include/linux/watchdog.h#L208\n[2] https://elixir.bootlin.com/linux/v6.12.107/source/drivers/watchdog/watchdog_pretimeout.c#L113\n[3] https://elixir.bootlin.com/linux/v6.12.107/source/drivers/watchdog/qcom-wdt.c#L69",
+      "parentUuid": "dcc78af2_3eabadc3",
+      "revId": "bb176d5b38e3ab0dce900adcc303dfea8a131fa7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
