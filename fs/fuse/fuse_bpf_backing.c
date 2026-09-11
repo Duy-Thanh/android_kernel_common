@@ -1357,12 +1357,14 @@ struct dentry *fuse_lookup_finalize(struct fuse_bpf_args *fa, struct inode *dir,
 		}
 
 		get_fuse_inode(inode)->nodeid = feo->nodeid;
-		ret = d_splice_alias(inode, entry);
-		inode = NULL;
-		if (!IS_ERR(ret)) {
-			struct dentry *d = ret ? ret : entry;
-			d->d_time = atomic_read(&get_fuse_conn(dir)->epoch);
-		}
+	}
+
+	ret = d_splice_alias(inode, entry);
+	inode = NULL;
+	if (!IS_ERR(ret)) {
+		struct dentry *d = ret ? ret : entry;
+
+		d->d_time = atomic_read(&get_fuse_conn(dir)->epoch);
 	}
 
 out:
@@ -2061,7 +2063,6 @@ int fuse_getattr_backing(struct fuse_bpf_args *fa,
 		stat = &tmp;
 
 	err = vfs_getattr(backing_path, stat, request_mask, flags);
-
 	if (!err)
 		fuse_stat_to_attr(get_fuse_conn(entry->d_inode),
 				  backing_inode, stat, &fao->attr);
@@ -2076,13 +2077,16 @@ void *fuse_getattr_finalize(struct fuse_bpf_args *fa,
 	struct fuse_attr_out *outarg = fa->out_args[0].value;
 	struct inode *inode = entry->d_inode;
 	u64 attr_version = fuse_get_attr_version(get_fuse_mount(inode)->fc);
-	int err = 0;
 
-	/* TODO: Ensure this doesn't happen if we had an error getting attrs in
-	 * backing.
+	/*
+	 * If backing getattr returned an error (such as a transient -ENOENT or
+	 * -ESTALE), do not pass uninitialized/zeroed attributes to finalize_attr,
+	 * as fuse_invalid_attr() will permanently mark the inode bad (FUSE_I_BAD).
 	 */
-	err = finalize_attr(inode, outarg, attr_version, stat);
-	return ERR_PTR(err);
+	if (fa->error_in)
+		return ERR_PTR(fa->error_in);
+
+	return ERR_PTR(finalize_attr(inode, outarg, attr_version, stat));
 }
 
 static void fattr_to_iattr(struct fuse_conn *fc,
