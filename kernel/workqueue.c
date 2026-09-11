@@ -5641,8 +5641,16 @@ static int alloc_and_link_pwqs(struct workqueue_struct *wq)
 		ret = apply_workqueue_attrs_locked(wq, unbound_std_wq_attrs[highpri]);
 	}
 
+<<<<<<< HEAD   (876d301911d0ec6a34c814d7ad5b6f3ec8082333 Merge 7ce7a08cde16 ("sched/fair: Reimplement NEXT_BUDDY to a)
 oem_skip:
 	return ret;
+||||||| BASE   (7ce7a08cde16bd28d406e870fa0baa076e0eb160 sched/fair: Reimplement NEXT_BUDDY to align with EEVDF goals)
+	return ret;
+=======
+	if (ret)
+		goto enomem;
+	return 0;
+>>>>>>> BRANCH (8adc988e9f2061501340697d9ef581f09891253b KVM: x86: Fix Xen hypercall tracepoint argument assignment)
 
 enomem:
 	if (wq->cpu_pwq) {
