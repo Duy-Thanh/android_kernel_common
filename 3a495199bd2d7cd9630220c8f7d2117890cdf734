@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed556187_b7a99f3f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-09-11T23:35:26Z",
+      "side": 1,
+      "message": "Can you provide some sense of the size impact enabling these configs have on the resulting vmlinux?",
+      "revId": "3a495199bd2d7cd9630220c8f7d2117890cdf734",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
