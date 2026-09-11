@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77fb57e2_6e5df3c1",
+        "filename": "kernel/power/wakeup_reason.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1241955
+      },
+      "writtenOn": "2026-09-11T19:19:12Z",
+      "side": 1,
+      "message": "Apologies for not taking note of this in my first pass. It\u0027s safer to do something like `foo_time \u003d ns_to_timespec64(0);` so the code isn\u0027t tightly coupled to the internal details of `timespec64`.\n\nIf the definition of `timespec64` changes in the future (or for some future compilation target), the current code could break in strange ways.  But using an existing helper function from the time subsystem means this code only breaks if the upstream kernel is broken.\n\nOtherwise LGTM.",
+      "range": {
+        "startLine": 382,
+        "startChar": 0,
+        "endLine": 384,
+        "endChar": 41
+      },
+      "revId": "60598ea060843e0cf30bebe9fd404a7bc1ab24d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
