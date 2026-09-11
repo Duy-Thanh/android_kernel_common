@@ -3322,10 +3322,13 @@ void pkvm_ownership_selftest(void *base)
 	struct pkvm_hyp_vcpu *vcpu = &selftest_vcpu;
 	struct pkvm_hyp_vm *vm = &selftest_vm;
 	u64 phys, size, pfn, gfn;
+	struct hyp_page old;
 
 	WARN_ON(!virt);
 	selftest_page = hyp_virt_to_page(virt);
+	old = *selftest_page;
 	selftest_page->refcount = 0;
+	selftest_page->tag = 0;
 	init_selftest_vm(base);
 
 	size = PAGE_SIZE << selftest_page->order;
@@ -3428,7 +3431,7 @@ void pkvm_ownership_selftest(void *base)
 	selftest_state.hyp = PKVM_PAGE_OWNED;
 	assert_transition_res(0,	__pkvm_host_donate_hyp, pfn, 1);
 
-	selftest_page->refcount = 1;
+	*selftest_page = old;
 	hyp_put_page(&host_s2_pool, virt);
 }
 #endif
