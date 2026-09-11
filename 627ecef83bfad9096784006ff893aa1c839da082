@@ -120,6 +120,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "33d28771_e94781e8",
+        "filename": "drivers/android/wrapfd/content.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-11T16:23:30Z",
+      "side": 1,
+      "message": "@aliceryhl@google.com, is there something similar that doesn\u0027t create any virtual mappings? Using vmalloc() in this scenario isn\u0027t ideal because of the reasons I mentioned above, and there\u0027s no requirement for the pages to be virtually contiguous either.",
+      "parentUuid": "0cba5ed2_f9f65bb5",
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e3de0ec1_85605529",
         "filename": "drivers/android/wrapfd/content.rs",
         "patchSetId": 7
@@ -149,6 +167,24 @@
       "side": 1,
       "message": "My comment is about the KVVec vector container that I\u0027d have preferred to just make a static array of size \"MAX_NR_BOUNCE_BUFS\", however, the version of rust we\u0027re currently using does not have the ability to initialize such an array with entries that themselves require dynamic allocation (rust_nightly does). I can switch to KVec, however, if you prefer.",
       "parentUuid": "e3de0ec1_85605529",
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90701a73_8d17ff8c",
+        "filename": "drivers/android/wrapfd/content.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-11T16:23:30Z",
+      "side": 1,
+      "message": "Yes, please. KVec makes more sense if we know that the upper bound on the number of pages we\u0027d allocate is small, which we do.",
+      "parentUuid": "d6743fc6_50851d37",
       "revId": "627ecef83bfad9096784006ff893aa1c839da082",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -208,6 +244,30 @@
       "side": 1,
       "message": "That appears to be true, but flags are passed to create_wrap_file/open_wrapped_device below which passes it on to anon_inode_create_getfile - and it cares about O_RDWR and O_RDONLY.",
       "parentUuid": "474e3e25_6bf1ce9f",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 10
+      },
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6efedde9_27846095",
+        "filename": "drivers/android/wrapfd/content.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-11T16:23:30Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d957cab9_613758bd",
       "range": {
         "startLine": 120,
         "startChar": 0,
@@ -354,6 +414,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2b9dda27_140da1d0",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-11T16:23:30Z",
+      "side": 1,
+      "message": "\u003e I was under the impression that we wanted this to assume ownershop on a per-thread basis, not per-process, is that not true?\n\nNo. The concept of ownership is meant to be per-process. An application can be made up of multiple threads that might want to operate on the buffer, and having ownership be a thread-level mechanism would be restrictive for that.\n\nWith regard to the PID being reused, thinking about it more, I think you\u0027re right. I need to think about this more; specifically the case where a process has a reference to a wrapfd, and then gives the wrapfd to another driver. The driver can take a reference, the process can die, and at that point, it\u0027s not clear to me what happens since the wrap is still alive because of the driver reference, but its owner is gone.\n\nIf the PID gets reused in that scenario, the new process would have to get an fd to the wrap, which I think could happen if it did share the wrap with other processes and it looks through `/proc/$other_proc_pid/fd`?",
+      "parentUuid": "3a8c8a26_fb9e927c",
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "19714f80_ffbff609",
         "filename": "drivers/android/wrapfd/wrapped_device.rs",
         "patchSetId": 7
@@ -400,6 +478,24 @@
       "side": 1,
       "message": "Help me understand why this is worthwhile. (I can see that i happens to be true right now, but doesn\u0027t have to be, you could call this with a read lock only).",
       "parentUuid": "b860f42d_211a88df",
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6979189_96879d24",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-11T16:23:30Z",
+      "side": 1,
+      "message": "Ah, you can\u0027t call this without the lock anyway, so nevermind, sorry about that.",
+      "parentUuid": "0de3e22a_fcf9502c",
       "revId": "627ecef83bfad9096784006ff893aa1c839da082",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -509,6 +605,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dac448f_e6c59f2b",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-11T16:23:30Z",
+      "side": 1,
+      "message": "I guess it\u0027ll be more important if we ever have a need for it, but I don\u0027t think we should add it if there\u0027s no point for now.",
+      "parentUuid": "f08b66cc_7c7e7115",
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5b8c83ed_9fa2dabe",
@@ -605,6 +719,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "66af803d_3083c553",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-11T16:23:30Z",
+      "side": 1,
+      "message": "I\u0027ll think about this a bit more and get back to you.",
+      "parentUuid": "3eda660c_f1fd3636",
+      "range": {
+        "startLine": 412,
+        "startChar": 0,
+        "endLine": 417,
+        "endChar": 17
+      },
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8cae6ae7_8f247615",
         "filename": "drivers/android/wrapfd/wrapped_device.rs",
         "patchSetId": 7
@@ -675,6 +813,30 @@
       "side": 1,
       "message": "Isn\u0027t that what is_mapped() is doing?",
       "parentUuid": "e6ce0b63_e5326532",
+      "range": {
+        "startLine": 486,
+        "startChar": 9,
+        "endLine": 488,
+        "endChar": 56
+      },
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9d237f4_5630aa6e",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-11T16:23:30Z",
+      "side": 1,
+      "message": "`is_mapped()` just checks if there are mappings. It does not check *how many* mappings there are, which was my point about the count.\n\n\n@surenb@google.com, do you have any thoughts on the usefulness of knowing the number of mappings as opposed to just whether or not the buffer is mapped?",
+      "parentUuid": "c9af803b_6185a275",
       "range": {
         "startLine": 486,
         "startChar": 9,
@@ -780,6 +942,30 @@
       "side": 1,
       "message": "I agree that a convenience function would be nicer, on what object would you like that API. The problem here is that in order to get access to the \"owner\" filed you need to acquire the lock (either read or write), and since you probably want to acquire the lock for other purposes as well (and make a bunch of things atomic wrt ownership) an api on Wrap seem unwise. If I made it a method on WrapOwner it seems odd to call \"has_owner\" on an \"owner\" object... Thoughts?",
       "parentUuid": "9723948a_56ae0ffa",
+      "range": {
+        "startLine": 573,
+        "startChar": 7,
+        "endLine": 573,
+        "endChar": 46
+      },
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d0c0205_7be6c653",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-11T16:23:30Z",
+      "side": 1,
+      "message": "Fair enough.",
+      "parentUuid": "2aff944a_4e0c0aa7",
       "range": {
         "startLine": 573,
         "startChar": 7,
