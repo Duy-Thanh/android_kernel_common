@@ -491,6 +491,10 @@ int kvm_iommu_alloc_domain(pkvm_handle_t domain_id, int type)
 	if (!hyp_vcpu && (domain_id >= (KVM_IOMMU_MAX_DOMAINS >> 1)))
 		return -EINVAL;
 
+	if (domain_id == KVM_IOMMU_DOMAIN_IDMAP_ID &&
+	    (hyp_vcpu || type != KVM_IOMMU_DOMAIN_IDMAP_TYPE))
+		return -EINVAL;
+
 	domain = handle_to_domain(domain_id);
 	if (!domain)
 		return -ENOMEM;
@@ -520,6 +524,9 @@ int kvm_iommu_free_domain(pkvm_handle_t domain_id)
 	struct kvm_hyp_iommu_domain *domain;
 	struct pkvm_hyp_vcpu *hyp_vcpu = __get_vcpu();
 	struct pkvm_hyp_vm *vm = NULL;
+
+	if (domain_id == KVM_IOMMU_DOMAIN_IDMAP_ID)
+		return -EINVAL;
 
 	domain = handle_to_domain(domain_id);
 	if (!domain)
