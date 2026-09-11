@@ -16,6 +16,24 @@
       "message": "Can it be possible to keep this driver hyp agnostic?",
       "revId": "57ffe13ac65ac1e684949d1b25f466427b451ef4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2fe5594_2cfe9e68",
+        "filename": "drivers/android/guest_dma_proxy.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-09-11T17:33:58Z",
+      "side": 1,
+      "message": "Yes, I added a TODO and will be handled separately soon.",
+      "parentUuid": "651e9566_8576bf3b",
+      "revId": "57ffe13ac65ac1e684949d1b25f466427b451ef4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

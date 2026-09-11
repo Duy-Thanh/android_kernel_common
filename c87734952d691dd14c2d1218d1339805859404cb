@@ -52,6 +52,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1edd1881_0e10c154",
+        "filename": "drivers/android/guest_dma_proxy.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-09-11T17:33:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba5a877c_a89db09d",
+      "range": {
+        "startLine": 62,
+        "startChar": 1,
+        "endLine": 62,
+        "endChar": 31
+      },
+      "revId": "c87734952d691dd14c2d1218d1339805859404cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1fedd6b3_d975fc8a",
@@ -89,6 +113,30 @@
           ]
         }
       ],
+      "revId": "c87734952d691dd14c2d1218d1339805859404cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35de07ee_9cdbb1b2",
+        "filename": "drivers/android/guest_dma_proxy.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-09-11T17:33:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1fedd6b3_d975fc8a",
+      "range": {
+        "startLine": 163,
+        "startChar": 3,
+        "endLine": 164,
+        "endChar": 61
+      },
       "revId": "c87734952d691dd14c2d1218d1339805859404cb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -134,6 +182,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5920003f_b3c61874",
+        "filename": "drivers/android/guest_dma_proxy.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-09-11T17:33:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28dc22f1_9e0a0458",
+      "range": {
+        "startLine": 217,
+        "startChar": 0,
+        "endLine": 218,
+        "endChar": 17
+      },
+      "revId": "c87734952d691dd14c2d1218d1339805859404cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d55033f8_3a60eda3",
@@ -175,6 +247,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f91dfa59_dd747c2a",
+        "filename": "drivers/android/guest_dma_proxy.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-09-11T17:33:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d55033f8_3a60eda3",
+      "range": {
+        "startLine": 224,
+        "startChar": 1,
+        "endLine": 224,
+        "endChar": 68
+      },
+      "revId": "c87734952d691dd14c2d1218d1339805859404cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "12b208ff_3b790d71",
@@ -206,6 +302,24 @@
           ]
         }
       ],
+      "revId": "c87734952d691dd14c2d1218d1339805859404cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8800783e_19aea1c7",
+        "filename": "drivers/android/guest_dma_proxy.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-09-11T17:33:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12b208ff_3b790d71",
       "revId": "c87734952d691dd14c2d1218d1339805859404cb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
