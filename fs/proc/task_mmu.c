@@ -167,13 +167,13 @@ static void unlock_ctx_vma(struct proc_maps_locking_ctx *lock_ctx)
 	}
 }
 
-static inline bool lock_vma_range(struct seq_file *m,
-				  struct proc_maps_locking_ctx *lock_ctx)
+static inline int lock_vma_range(struct seq_file *m,
+				 struct proc_maps_locking_ctx *lock_ctx)
 {
 	rcu_read_lock();
 	reset_lock_ctx(lock_ctx);
 
-	return true;
+	return 0;
 }
 
 static inline void unlock_vma_range(struct proc_maps_locking_ctx *lock_ctx)
@@ -238,6 +238,14 @@ static inline void reacquire_rcu(struct proc_maps_private *priv)
 	vma_iter_set(&priv->iter, priv->lock_ctx.locked_vma->vm_end);
 }
 
+static inline bool is_mmap_lock_contended(struct proc_maps_locking_ctx *lock_ctx)
+{
+	if (!lock_ctx->mmap_locked)
+		return false;
+
+	return !!mmap_lock_is_contended(lock_ctx->mm);
+}
+
 #else /* CONFIG_PER_VMA_LOCK */
 
 static inline int lock_ctx_mm(struct proc_maps_locking_ctx *lock_ctx)
@@ -250,10 +258,10 @@ static inline void unlock_ctx_mm(struct proc_maps_locking_ctx *lock_ctx)
 	mmap_read_unlock(lock_ctx->mm);
 }
 
-static inline bool lock_vma_range(struct seq_file *m,
-				  struct proc_maps_locking_ctx *lock_ctx)
+static inline int lock_vma_range(struct seq_file *m,
+				 struct proc_maps_locking_ctx *lock_ctx)
 {
-	return lock_ctx_mm(lock_ctx) == 0;
+	return lock_ctx_mm(lock_ctx);
 }
 
 static inline void unlock_vma_range(struct proc_maps_locking_ctx *lock_ctx)
@@ -271,6 +279,11 @@ static inline bool fallback_to_mmap_lock(struct proc_maps_private *priv,
 					 loff_t pos)
 {
 	return false;
+}
+
+static inline bool is_mmap_lock_contended(struct proc_maps_locking_ctx *lock_ctx)
+{
+	return !!mmap_lock_is_contended(lock_ctx->mm);
 }
 
 static inline void drop_rcu(struct proc_maps_private *priv) {}
@@ -314,6 +327,7 @@ static void *m_start(struct seq_file *m, loff_t *ppos)
 	struct vm_area_struct *vma;
 	loff_t last_addr = *ppos;
 	struct mm_struct *mm;
+	int err;
 
 	/* See m_next(). Zero at the start or after lseek. */
 	if (last_addr == SENTINEL_VMA_END)
@@ -331,11 +345,12 @@ static void *m_start(struct seq_file *m, loff_t *ppos)
 		return NULL;
 	}
 
-	if (!lock_vma_range(m, lock_ctx)) {
+	err = lock_vma_range(m, lock_ctx);
+	if (err) {
 		mmput(mm);
 		put_task_struct(priv->task);
 		priv->task = NULL;
-		return ERR_PTR(-EINTR);
+		return ERR_PTR(err);
 	}
 
 	/*
@@ -1556,12 +1571,14 @@ show_pad:
 static int show_smaps_rollup(struct seq_file *m, void *v)
 {
 	struct proc_maps_private *priv = m->private;
+	struct proc_maps_locking_ctx *lock_ctx = &priv->lock_ctx;
+	struct mm_struct *mm = lock_ctx->mm;
 	struct mem_size_stats mss = {};
-	struct mm_struct *mm = priv->lock_ctx.mm;
+	unsigned long last_vma_end = 0;
+	unsigned long vma_start = 0;
 	struct vm_area_struct *vma;
-	unsigned long vma_start = 0, last_vma_end = 0;
+	loff_t pos = 0;
 	int ret = 0;
-	VMA_ITERATOR(vmi, mm, 0);
 
 	priv->task = get_proc_task(priv->inode);
 	if (!priv->task)
@@ -1572,89 +1589,64 @@ static int show_smaps_rollup(struct seq_file *m, void *v)
 		goto out_put_task;
 	}
 
-	ret = lock_ctx_mm(&priv->lock_ctx);
-	if (ret)
-		goto out_put_mm;
-
 	hold_task_mempolicy(priv);
-	vma = vma_next(&vmi);
+	ret = lock_vma_range(m, lock_ctx);
+	if (ret)
+		goto out_rel_mpol;
 
+	vma_iter_init(&priv->iter, mm, 0);
+	vma = proc_get_vma(m, &pos);
 	if (unlikely(!vma))
 		goto empty_set;
 
-	vma_start = vma->vm_start;
-	do {
-		smap_gather_stats(priv, vma, &mss);
+	if (!IS_ERR(vma))
+		vma_start = vma->vm_start;
+
+	while (vma) {
+		if (IS_ERR(vma)) {
+			ret = PTR_ERR(vma);
+			goto out_unlock;
+		}
+
+		if (vma->vm_start < last_vma_end) {
+			/*
+			 * After retaking the lock, already reported VMA grew
+			 * or got merged with the next one and we found it
+			 * again. Gather stats for the remaining portion by
+			 * starting at last_vma_end.
+			 */
+			smap_gather_stats_range(priv, vma, &mss, last_vma_end);
+		} else {
+			/* Found next unreported VMA, start from its beginning */
+			smap_gather_stats(priv, vma, &mss);
+		}
 		last_vma_end = vma->vm_end;
 
 		/*
-		 * Release mmap_lock temporarily if someone wants to
-		 * access it for write request.
+		 * If the VMA lock is not taken, we hold the often contended
+		 * mmap lock. This can happen if we had to fall back to the
+		 * mmap lock.
+		 *
+		 * To relieve pressure, check if it is indeed contended, then
+		 * temporarily release it.
 		 */
-		if (mmap_lock_is_contended(mm)) {
-			vma_iter_invalidate(&vmi);
+		if (is_mmap_lock_contended(lock_ctx)) {
 			unlock_ctx_mm(&priv->lock_ctx);
-			ret = lock_ctx_mm(&priv->lock_ctx);
-			if (ret) {
-				release_task_mempolicy(priv);
-				goto out_put_mm;
-			}
-
 			/*
-			 * After dropping the lock, there are four cases to
-			 * consider. See the following example for explanation.
-			 *
-			 *   +------+------+-----------+
-			 *   | VMA1 | VMA2 | VMA3      |
-			 *   +------+------+-----------+
-			 *   |      |      |           |
-			 *  4k     8k     16k         400k
-			 *
-			 * Suppose we drop the lock after reading VMA2 due to
-			 * contention, then we get:
-			 *
-			 *	last_vma_end = 16k
-			 *
-			 * 1) VMA2 is freed, but VMA3 exists:
-			 *
-			 *    vma_next(vmi) will return VMA3.
-			 *    In this case, just continue from VMA3.
-			 *
-			 * 2) VMA2 still exists:
-			 *
-			 *    vma_next(vmi) will return VMA3.
-			 *    In this case, just continue from VMA3.
-			 *
-			 * 3) No more VMAs can be found:
-			 *
-			 *    vma_next(vmi) will return NULL.
-			 *    No more things to do, just break.
-			 *
-			 * 4) (last_vma_end - 1) is the middle of a vma (VMA'):
-			 *
-			 *    vma_next(vmi) will return VMA' whose range
-			 *    contains last_vma_end.
-			 *    Iterate VMA' from last_vma_end.
+			 * Even though we previously fell back to mmap lock,
+			 * we try taking VMA lock for the next VMA, since it
+			 * might not be under modification. In the worst case
+			 * we will fall back to mmap lock again.
 			 */
-			vma = vma_next(&vmi);
-			/* Case 3 above */
-			if (!vma)
-				break;
-
-			/* Case 1 and 2 above */
-			if (vma->vm_start >= last_vma_end) {
-				smap_gather_stats(priv, vma, &mss);
-				last_vma_end = vma->vm_end;
-				continue;
-			}
-
-			/* Case 4 above */
-			if (vma->vm_end > last_vma_end) {
-				smap_gather_stats_range(priv, vma, &mss, last_vma_end);
-				last_vma_end = vma->vm_end;
-			}
+			ret = lock_vma_range(m, lock_ctx);
+			if (ret)
+				goto out_rel_mpol;
+			/* Resume from the last position. */
+			pos = last_vma_end;
+			vma_iter_init(&priv->iter, mm, pos);
 		}
-	} for_each_vma(vmi, vma);
+		vma = proc_get_vma(m, &pos);
+	}
 
 empty_set:
 	show_vma_header_prefix(m, vma_start, last_vma_end, 0, 0, 0, 0);
@@ -1663,10 +1655,10 @@ empty_set:
 
 	__show_smap(m, &mss, true);
 
+out_unlock:
+	unlock_vma_range(lock_ctx);
+out_rel_mpol:
 	release_task_mempolicy(priv);
-	unlock_ctx_mm(&priv->lock_ctx);
-
-out_put_mm:
 	mmput(mm);
 out_put_task:
 	put_task_struct(priv->task);
