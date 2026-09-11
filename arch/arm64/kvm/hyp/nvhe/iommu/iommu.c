@@ -521,6 +521,9 @@ int kvm_iommu_free_domain(pkvm_handle_t domain_id)
 	struct pkvm_hyp_vcpu *hyp_vcpu = __get_vcpu();
 	struct pkvm_hyp_vm *vm = NULL;
 
+	if (domain_id == KVM_IOMMU_DOMAIN_IDMAP_ID)
+		return -EINVAL;
+
 	domain = handle_to_domain(domain_id);
 	if (!domain)
 		return -EINVAL;
