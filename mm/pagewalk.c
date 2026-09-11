@@ -437,11 +437,12 @@ static inline void process_vma_walk_lock(struct vm_area_struct *vma,
 	case PGWALK_WRLOCK_VERIFY:
 		vma_assert_write_locked(vma);
 		break;
-	case PGWALK_VMA_RDLOCK_VERIFY:
-		vma_assert_locked(vma);
-		break;
 	case PGWALK_RDLOCK:
 		/* PGWALK_RDLOCK is handled by process_mm_walk_lock */
+		break;
+	default:
+		if (walk_lock == PGWALK_VMA_RDLOCK_VERIFY)
+			vma_assert_locked(vma);
 		break;
 	}
 #endif
