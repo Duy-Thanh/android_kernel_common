@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "954c01e2_a6ad4aa1",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-kvm-pv.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1150933
+      },
+      "writtenOn": "2026-09-11T17:41:44Z",
+      "side": 1,
+      "message": "I think this should be `4`. In certain situations, we can have up to 16 concatenated translation tables.",
+      "range": {
+        "startLine": 564,
+        "startChar": 41,
+        "endLine": 564,
+        "endChar": 42
+      },
+      "revId": "e08f0099577c45dd85b1a1ee8027b4405d7c2ca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2ee09a0a_b62c8930",
         "filename": "drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-kvm-pv.c",
         "patchSetId": 2
