@@ -639,22 +639,25 @@ int kvm_iommu_detach_dev_nested(pkvm_handle_t iommu_id, pkvm_handle_t domain_id,
 	}
 
 	domain = handle_to_domain(domain_id);
-	if (!domain || atomic_read(&domain->refs) <= 1) {
+	if (!domain || domain_get(domain)) {
 		ret = -EINVAL;
 		goto out_put_context;
 	}
 
 	idmap_domain = handle_to_domain(KVM_IOMMU_DOMAIN_IDMAP_ID);
-	if (!idmap_domain || atomic_read(&idmap_domain->refs) <= 1) {
+	if (!idmap_domain || domain_get(idmap_domain)) {
 		ret = -EINVAL;
-		goto out_put_context;
+		goto out_domain_put;
 	}
 
 	ret = kvm_iommu_ops->detach_dev_nested(iommu, domain, idmap_domain, endpoint_id, pasid);
-	if (ret)
-		goto out_put_context;
+	if (!ret) {
+		domain_put(idmap_domain);
+		domain_put(domain);
+	}
 
 	domain_put(idmap_domain);
+out_domain_put:
 	domain_put(domain);
 out_put_context:
 	pkvm_devices_put_context(iommu_id, endpoint_id);
@@ -763,14 +766,14 @@ int kvm_iommu_detach_dev(pkvm_handle_t iommu_id, pkvm_handle_t domain_id,
 		return ret;
 
 	domain = handle_to_domain(domain_id);
-	if (!domain || atomic_read(&domain->refs) <= 1) {
+	if (!domain || domain_get(domain)) {
 		ret = -EINVAL;
 		goto out_unlock;
 	}
 
 	ret = kvm_iommu_ops->detach_dev(iommu, domain, endpoint_id, pasid);
-	if (ret)
-		goto out_unlock;
+	if (!ret)
+		domain_put(domain);
 
 	domain_put(domain);
 
