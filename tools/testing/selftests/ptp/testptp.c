@@ -196,7 +196,13 @@ int main(int argc, char *argv[])
 
 	progname = strrchr(argv[0], '/');
 	progname = progname ? 1+progname : argv[0];
+<<<<<<< HEAD   (93bbc15e5f81decdc48d1318aa0ba5ffb4211059 ANDROID: GKI: add mtree_load to db845c symbol list.)
 	while (EOF != (c = getopt(argc, argv, "cd:e:f:ghH:i:k:lL:n:o:p:P:sSt:T:w:x:Xz"))) {
+||||||| BASE   (d1cfde2d5d15be14123bdd1689162bd27f995a90 Linux 6.6.143)
+	while (EOF != (c = getopt(argc, argv, "cd:e:f:F:ghH:i:k:lL:n:o:p:P:rsSt:T:w:x:Xz"))) {
+=======
+	while (EOF != (c = getopt(argc, argv, "cd:e:f:ghH:i:k:lL:n:o:p:P:rsSt:T:w:x:Xz"))) {
+>>>>>>> BRANCH (da47cbc254661aa66d61ef061485a7080305c4be Linux 6.6.144)
 		switch (c) {
 		case 'c':
 			capabilities = 1;

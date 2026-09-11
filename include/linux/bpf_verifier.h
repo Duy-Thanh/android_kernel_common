@@ -323,6 +323,22 @@ struct bpf_func_state {
 struct bpf_idx_pair {
 	u32 prev_idx;
 	u32 idx;
+<<<<<<< HEAD   (93bbc15e5f81decdc48d1318aa0ba5ffb4211059 ANDROID: GKI: add mtree_load to db845c symbol list.)
+||||||| BASE   (d1cfde2d5d15be14123bdd1689162bd27f995a90 Linux 6.6.143)
+	/* insn idx can't be bigger than 1 million */
+	u32 prev_idx : 22;
+	/* special flags, e.g., whether insn is doing register stack spill/load */
+	u32 flags : 10;
+=======
+	/* insn idx can't be bigger than 1 million */
+	u32 prev_idx : 22;
+	/* special flags, e.g., whether insn is doing register stack spill/load */
+	u32 flags : 10;
+	/* additional registers that need precision tracking when this
+	 * jump is backtracked, vector of six 10-bit records
+	 */
+	u64 linked_regs;
+>>>>>>> BRANCH (da47cbc254661aa66d61ef061485a7080305c4be Linux 6.6.144)
 };
 
 #define MAX_CALL_FRAMES 8

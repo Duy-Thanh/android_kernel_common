@@ -358,8 +358,36 @@ void fuse_file_release(struct inode *inode, struct fuse_file *ff,
 	 * Make the release synchronous if this is a fuseblk mount,
 	 * synchronous RELEASE is allowed (and desirable) in this case
 	 * because the server can be trusted not to screw up.
+<<<<<<< HEAD   (93bbc15e5f81decdc48d1318aa0ba5ffb4211059 ANDROID: GKI: add mtree_load to db845c symbol list.)
+||||||| BASE   (d1cfde2d5d15be14123bdd1689162bd27f995a90 Linux 6.6.143)
+	 *
+	 * Always use the asynchronous file put because the current thread
+	 * might be the fuse server.  This can happen if a process starts some
+	 * aio and closes the fd before the aio completes.  Since aio takes its
+	 * own ref to the file, the IO completion has to drop the ref, which is
+	 * how the fuse server can end up closing its clients' files.
+=======
+	 *
+	 * Always use the asynchronous file put because the current thread
+	 * might be the fuse server.  This can happen if a process starts some
+	 * aio and closes the fd before the aio completes.  Since aio takes its
+	 * own ref to the file, the IO completion has to drop the ref, which is
+	 * how the fuse server can end up closing its clients' files.
+	 *
+	 * Exception is virtio-fs, which is not affected by the above (server is
+	 * on host, cannot close open files in guest).  Virtio-fs needs sync
+	 * release, because the num_waiting mechanism to wait for all requests
+	 * before commencing with fs shutdown doesn't work if submounts are
+	 * used.
+>>>>>>> BRANCH (da47cbc254661aa66d61ef061485a7080305c4be Linux 6.6.144)
 	 */
+<<<<<<< HEAD   (93bbc15e5f81decdc48d1318aa0ba5ffb4211059 ANDROID: GKI: add mtree_load to db845c symbol list.)
 	fuse_file_put(ra->inode, ff, ff->fm->fc->destroy, isdir);
+||||||| BASE   (d1cfde2d5d15be14123bdd1689162bd27f995a90 Linux 6.6.143)
+	fuse_file_put(ff, false);
+=======
+	fuse_file_put(ff, ff->fm->fc->auto_submounts);
+>>>>>>> BRANCH (da47cbc254661aa66d61ef061485a7080305c4be Linux 6.6.144)
 }
 
 void fuse_release_common(struct file *file, bool isdir)
