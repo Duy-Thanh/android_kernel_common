@@ -88,6 +88,24 @@
       "parentUuid": "11b4a2cc_7f7f2af3",
       "revId": "bb176d5b38e3ab0dce900adcc303dfea8a131fa7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b22dda8c_b69ec7d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1865564
+      },
+      "writtenOn": "2026-09-12T04:36:09Z",
+      "side": 1,
+      "message": "I missed your question:\n\n\u003e What will happen if this GKI binary is used with drivers that are not rebuilt with these changes? Will they behave correctly?\n\nThe modules will call into the inline one instead of GKI binary one of watchdog_notify_pretimeout().  It works without breaking things, but incorrectly (from \"dump\" pretimeout governor\u0027s perspective).\n\n---\n\n\u003e Is this common in GKI?\n\nTo provide more context, I had the impression because there was also a similar case recently, https://r.android.com/4129114, the arch_touch_nmi_watchdog() becomes a exported symbol after enabling CONFIG_HARDLOCKUP_DETECTOR\u003dy [4].  And I would like to learn more experience about how to deal with it to make the review smooth in the future.\n\n[4] https://elixir.bootlin.com/linux/v6.12.107/source/include/linux/nmi.h#L91\n\n---\n\n\u003e So what will happen in this case if the db845 module is not rebuilt for this change?\n\nThe \"dump\" pretimeout governor will not work correctly.  The db845 modules should still call into the inline watchdog_notify_pretimeout() which only prints a line of log.\n\n---\n\n\u003e If that is true, the next question is whether it is possible to refactor the feature a little so that the old inline function still works.\n\nI think the old inline function still works even if they don\u0027t rebuild with the new GKI binary.  However, we need to modify gki/aarch64/symbols/db845c here to make new modules build with the exported watchdog_notify_pretimeout().\n\n---\n\nI guess we are lucky here that the old inline function just works.  I would like to learn more about \"refactor\" if it isn\u0027t the case: do you mean we would need to refactor in Linux upstream kernel to make it compliant to GKI (specifically, old modules should work with new GKI binary) before we can land it in GKI?",
+      "parentUuid": "0bda11e7_7b61b5e0",
+      "revId": "bb176d5b38e3ab0dce900adcc303dfea8a131fa7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
