@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/561481078",
       "revId": "284f4fa009342d57263a2e51bd32310e51780a18",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73232bcb_7f811f21",
+        "filename": "include/trace/hooks/blk.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-09-14T19:39:59Z",
+      "side": 1,
+      "message": "I should have caught this in the android16-6.12 review, but android_vh_request_issue_err is added here but looks not to be used in this patch?  I\u0027m not going to block this as it was merged, but we may want to clean this up in android16-6.12",
+      "revId": "284f4fa009342d57263a2e51bd32310e51780a18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
