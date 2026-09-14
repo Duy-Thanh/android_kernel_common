@@ -16,6 +16,24 @@
       "message": "This probably needs to be re-generated with the DRM config changes made to earlier patches in this series.",
       "revId": "fcb6c20407877e7ceb605eda73bb61a043ce12ee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08412653_20ed05c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3386406
+      },
+      "writtenOn": "2026-09-14T19:18:29Z",
+      "side": 1,
+      "message": "I regenerated it earlier after removing the symbols from our symbol list that belonged to DRM_DISPLAY_DP_AUX_BUS and DRM_DISPLAY_HELPER\nThis list/abi.stg representation is void of any functions from those 2 drivers.\n\nThe drm symbols we see in the file all come from the CONFIG_DRM driver",
+      "parentUuid": "96f79b78_86921649",
+      "revId": "fcb6c20407877e7ceb605eda73bb61a043ce12ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
