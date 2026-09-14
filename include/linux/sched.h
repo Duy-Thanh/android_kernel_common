@@ -2279,6 +2279,12 @@ static inline void __clear_task_blocked_on(struct task_struct *p, struct mutex *
 	p->blocked_on_state = BO_RUNNABLE;
 }
 
+static inline void clear_task_blocked_on(struct task_struct *p, struct mutex *m)
+{
+	guard(raw_spinlock_irqsave)(&p->blocked_lock);
+	__clear_task_blocked_on(p, m);
+}
+
 static __always_inline bool need_resched(void)
 {
 	return unlikely(tif_need_resched());

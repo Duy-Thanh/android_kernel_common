@@ -1794,7 +1794,7 @@ static inline void uclamp_rq_dec_id(struct rq *rq, struct task_struct *p,
 
 	bucket = &uc_rq->bucket[uc_se->bucket_id];
 
-	SCHED_WARN_ON(!bucket->tasks);
+	WARN_ON_ONCE(!bucket->tasks);
 	if (likely(bucket->tasks))
 		bucket->tasks--;
 
@@ -1814,7 +1814,7 @@ static inline void uclamp_rq_dec_id(struct rq *rq, struct task_struct *p,
 	 * Defensive programming: this should never happen. If it happens,
 	 * e.g. due to future modification, warn and fix up the expected value.
 	 */
-	SCHED_WARN_ON(bucket->value > rq_clamp);
+	WARN_ON_ONCE(bucket->value > rq_clamp);
 	if (bucket->value >= rq_clamp) {
 		bkt_clamp = uclamp_rq_max_value(rq, clamp_id, uc_se->value);
 		uclamp_rq_set(rq, clamp_id, bkt_clamp);
@@ -2182,6 +2182,19 @@ inline bool dequeue_task(struct rq *rq, struct task_struct *p, int flags)
 	/*
 	 * Must be before ->dequeue_task() because ->dequeue_task() can 'fail'
 	 * and mark the task ->sched_delayed.
+	 *
+	 * Under CONFIG_SCHED_PROXY_EXEC, proxy_migrate_task() and
+	 * hook_sched_balance_newidle() can call deactivate_task()/dequeue_task()
+	 * on a task that was already dequeued by a prior dequeue in the same
+	 * schedule cycle (e.g. blocked_donor at pick_again).
+	 *
+	 * Always call uclamp_rq_dec() here — the uc_se->active check inside
+	 * uclamp_rq_dec_id() prevents double decrement. The previous
+	 * task_on_rq_queued() guard was wrong because deactivate_task() sets
+	 * p->on_rq = TASK_ON_RQ_MIGRATING before calling dequeue_task(),
+	 * which caused uclamp_rq_dec() to be skipped entirely during
+	 * migration, leading to uclamp bucket count imbalance and
+	 * "!bucket->tasks" / "bucket->value > rq_clamp" warnings.
 	 */
 	uclamp_rq_dec(rq, p);
 	trace_android_rvh_dequeue_task(rq, p, flags);
@@ -2337,6 +2350,20 @@ void check_class_changed(struct rq *rq, struct task_struct *p,
 void wakeup_preempt(struct rq *rq, struct task_struct *p, int flags)
 {
 	struct task_struct *donor = rq->donor;
+
+	/*
+	 * Under CONFIG_SCHED_PROXY_EXEC, rq->donor can point to a blocked
+	 * task (e.g. a mutex owner that find_proxy_task() is resolving).
+	 * A blocked task may have been dequeued, and with
+	 * CONFIG_FAIR_GROUP_SCHED its se.cfs_rq can be NULL, causing a
+	 * crash in check_preempt_wakeup_fair() when it dereferences
+	 * cfs_rq_of(se).  If donor is blocked, just reschedule and let
+	 * __schedule() sort out the proxy.
+	 */
+	if (task_is_blocked(donor)) {
+		resched_curr(rq);
+		return;
+	}
 
 	if (p->sched_class == donor->sched_class)
 		donor->sched_class->wakeup_preempt(rq, p, flags);
@@ -7321,15 +7348,11 @@ static void proxy_migrate_task(struct rq *rq, struct rq_flags *rf,
 	 * rq_set_donor(rq->idle) and set_next_task(rq->idle), before
 	 * picking again.
 	 */
-	/* XXX - Added to address problems with changed dl_server semantics - double check */
-	__put_prev_set_next_dl_server(rq, rq->donor, rq->curr);
-	put_prev_task(rq, rq->donor);
-	rq_set_donor(rq, rq->idle);
-	set_next_task(rq, rq->idle);
+	proxy_resched_idle(rq);
 
 	for (; p; p = p->blocked_donor) {
 		WARN_ON(p == rq->curr);
-		deactivate_task(rq, p, 0);
+		deactivate_task(rq, p, DEQUEUE_NOCLOCK);
 		proxy_set_task_cpu(p, target_cpu);
 		/*
 		 * We can abuse blocked_node to migrate the thing,
@@ -7337,6 +7360,12 @@ static void proxy_migrate_task(struct rq *rq, struct rq_flags *rf,
 		 */
 		list_add(&p->migration_node, &migrate_list);
 	}
+	/*
+	 * We have to zap callbacks before unlocking the rq
+	 * as another CPU may jump in and call sched_balance_rq
+	 * which can trip the warning in rq_pin_lock() if we
+	 * leave callbacks set.
+	 */
 	zap_balance_callbacks(rq);
 	rq_unpin_lock(rq, rf);
 	raw_spin_rq_unlock(rq);
@@ -7351,34 +7380,94 @@ static void proxy_migrate_task(struct rq *rq, struct rq_flags *rf,
 	raw_spin_rq_unlock(target_rq);
 	raw_spin_rq_lock(rq);
 	rq_repin_lock(rq, rf);
+	update_rq_clock(rq);
 }
 
 static void proxy_force_return(struct rq *rq, struct rq_flags *rf,
 			       struct task_struct *p)
 {
+	struct rq *this_rq, *target_rq;
+	struct rq_flags this_rf;
+	int cpu, wake_flag = 0;
+
 	lockdep_assert_rq_held(rq);
+	WARN_ON(p == rq->curr);
 
 	_trace_sched_pe_return_migration(p);
 
-	put_prev_task(rq, rq->donor);
-	rq_set_donor(rq, rq->idle);
-	set_next_task(rq, rq->idle);
-
-	WARN_ON(p == rq->curr);
-
-	p->blocked_on_state = BO_WAKING;
 	get_task_struct(p);
-	block_task(rq, p, 0);
 
+	/*
+	 * We have to zap callbacks before unlocking the rq
+	 * as another CPU may jump in and call sched_balance_rq
+	 * which can trip the warning in rq_pin_lock() if we
+	 * leave callbacks set.
+	 */
 	zap_balance_callbacks(rq);
 	rq_unpin_lock(rq, rf);
 	raw_spin_rq_unlock(rq);
 
-	wake_up_process(p);
-	put_task_struct(p);
+	/*
+	 * We drop the rq lock, and re-grab task_rq_lock to get
+	 * the pi_lock (needed for select_task_rq) as well.
+	 */
+	this_rq = task_rq_lock(p, &this_rf);
 
+	/*
+	 * Since we let go of the rq lock, the task may have been
+	 * woken or migrated to another rq before we  got the
+	 * task_rq_lock. So re-check we're on the same RQ. If
+	 * not, the task has already been migrated and that CPU
+	 * will handle any futher migrations.
+	 */
+	if (this_rq != rq)
+		goto err_out;
+
+	/* Similarly, if we've been dequeued, someone else will wake us */
+	if (!task_on_rq_queued(p))
+		goto err_out;
+
+	/*
+	 * Since we should only be calling here from __schedule()
+	 * -> find_proxy_task(), no one else should have
+	 * assigned current out from under us. But check and warn
+	 * if we see this, then bail.
+	 */
+	if (task_current(this_rq, p) || task_on_cpu(this_rq, p)) {
+		WARN_ONCE(1, "%s rq: %i current/on_cpu task %s %d  on_cpu: %i\n",
+			  __func__, cpu_of(this_rq),
+			  p->comm, p->pid, p->on_cpu);
+		goto err_out;
+	}
+
+	update_rq_clock(this_rq);
+	proxy_resched_idle(this_rq);
+	deactivate_task(this_rq, p, DEQUEUE_NOCLOCK);
+	cpu = select_task_rq(p, p->wake_cpu, &wake_flag);
+	set_task_cpu(p, cpu);
+	target_rq = cpu_rq(cpu);
+	clear_task_blocked_on(p, NULL);
+	task_rq_unlock(this_rq, p, &this_rf);
+
+	/* Drop this_rq and grab target_rq for activation */
+	raw_spin_rq_lock(target_rq);
+	activate_task(target_rq, p, 0);
+	wakeup_preempt(target_rq, p, 0);
+	put_task_struct(p);
+	raw_spin_rq_unlock(target_rq);
+
+	/* Finally, re-grab the origianl rq lock and return to pick-again */
 	raw_spin_rq_lock(rq);
 	rq_repin_lock(rq, rf);
+	update_rq_clock(rq);
+	return;
+
+err_out:
+	task_rq_unlock(this_rq, p, &this_rf);
+	put_task_struct(p);
+	raw_spin_rq_lock(rq);
+	rq_repin_lock(rq, rf);
+	update_rq_clock(rq);
 }
 
 static inline bool proxy_can_run_here(struct rq *rq, struct task_struct *p)
@@ -7456,6 +7545,38 @@ static void proxy_enqueue_on_owner(struct rq *rq, struct task_struct *owner,
  * Returns the task that is going to be used as execution context (the one
  * that is actually going to be run on cpu_of(rq)).
  */
+/*
+ * Check if target is in the blocked chain starting from head.
+ * This is used to detect circular dependencies in proxy exec.
+ * Must be called with appropriate locks held.
+ */
+static bool task_in_blocked_chain(struct task_struct *head,
+				  struct task_struct *target)
+{
+	struct task_struct *p = head;
+	int depth = 0;
+
+	if (!sched_proxy_exec())
+		return false;
+
+	while (p && depth < 10) {
+		if (p == target)
+			return true;
+		/*
+		 * Continue traversing if task is blocked or delayed.
+		 * A delayed task is still part of the blocked chain
+		 * even if task_is_blocked() returns false for it.
+		 */
+		if (!task_is_blocked(p) && !p->se.sched_delayed)
+			break;
+		p = READ_ONCE(p->blocked_on) ? __mutex_owner(READ_ONCE(p->blocked_on)) : NULL;
+		depth++;
+	}
+	return false;
+}
+
+#define MAX_PROXY_DEPTH 8
+
 static struct task_struct *
 find_proxy_task(struct rq *rq, struct task_struct *donor, struct rq_flags *rf)
 {
@@ -7465,13 +7586,37 @@ find_proxy_task(struct rq *rq, struct task_struct *donor, struct rq_flags *rf)
 	struct task_struct *p;
 	struct mutex *mutex;
 	int owner_cpu;
+	int depth = 0;
+
+	pr_info("sched_proxy_exec: ENTER donor=%d:%s cpu=%d\n",
+		donor->pid, donor->comm, this_cpu);
 
 	/* Follow blocked_on chain. */
 	for (p = donor; task_is_blocked(p); p = owner) {
+		depth++;
+
+		/*
+		 * Prevent infinite loops from long blocked chains.
+		 * If we exceed MAX_PROXY_DEPTH, force donor to run.
+		 */
+		if (depth > MAX_PROXY_DEPTH) {
+			pr_info("sched_proxy_exec: max_depth_exceeded depth=%d force_runnable donor=%d:%s\n",
+				depth, donor->pid, donor->comm);
+			__force_blocked_on_runnable(donor);
+			/* Clear blocked_on to prevent immediate re-blocking and livelock */
+			donor->blocked_on = NULL;
+			return donor;
+		}
+
+		pr_info("sched_proxy_exec: chain depth=%d blocked=%d:%s state=%d\n",
+			depth, p->pid, p->comm, p->blocked_on_state);
+
 		mutex = p->blocked_on;
 		/* Something changed in the chain, so pick again */
-		if (!mutex)
+		if (!mutex) {
+			pr_info("sched_proxy_exec: mutex=NULL depth=%d return NULL\n", depth);
 			return NULL;
+		}
 		/*
 		 * By taking mutex->wait_lock we hold off concurrent mutex_unlock()
 		 * and ensure @owner sticks around.
@@ -7481,18 +7626,16 @@ find_proxy_task(struct rq *rq, struct task_struct *donor, struct rq_flags *rf)
 
 		/* Check again that p is blocked with blocked_lock held */
 		if (mutex != __get_task_blocked_on(p)) {
-			/*
-			 * Something changed in the blocked_on chain and
-			 * we don't know if only at this level. So, let's
-			 * just bail out completely and let __schedule()
-			 * figure things out (pick_again loop).
-			 */
+			pr_info("sched_proxy_exec: mutex_changed depth=%d return NULL\n", depth);
 			return NULL;
 		}
 
 		/* Double check blocked_on_state now we're holding the lock */
-		if (p->blocked_on_state == BO_RUNNABLE)
+		if (p->blocked_on_state == BO_RUNNABLE) {
+			pr_info("sched_proxy_exec: BO_RUNNABLE depth=%d return p=%d:%s\n",
+				depth, p->pid, p->comm);
 			return p;
+		}
 
 		/*
 		 * If a ww_mutex hits the die/wound case, it marks the task as
@@ -7515,8 +7658,13 @@ find_proxy_task(struct rq *rq, struct task_struct *donor, struct rq_flags *rf)
 			if (task_current(rq, p)) {
 				/* If its current just set it runnable */
 				__force_blocked_on_runnable(p);
+				/* Clear blocked_on to prevent immediate re-blocking and livelock */
+				p->blocked_on = NULL;
+				pr_info("sched_proxy_exec: BO_WAKING+current depth=%d force_runnable return p=%d:%s\n",
+					depth, p->pid, p->comm);
 				return p;
 			}
+			pr_info("sched_proxy_exec: BO_WAKING depth=%d goto needs_return\n", depth);
 			goto needs_return;
 		}
 
@@ -7526,22 +7674,104 @@ find_proxy_task(struct rq *rq, struct task_struct *donor, struct rq_flags *rf)
 		owner = __mutex_owner(mutex);
 		if (!owner) {
 			/* If the owner is null, we may have some work to do */
-			if (!proxy_can_run_here(rq, p))
+			if (!proxy_can_run_here(rq, p)) {
+				pr_info("sched_proxy_exec: owner=NULL can't_run_here depth=%d goto needs_return\n", depth);
 				goto needs_return;
+			}
 
 			__force_blocked_on_runnable(p);
+			/* Clear blocked_on to prevent immediate re-blocking and livelock */
+			p->blocked_on = NULL;
+			pr_info("sched_proxy_exec: owner=NULL force_runnable depth=%d return p=%d:%s\n",
+				depth, p->pid, p->comm);
 			return p;
 		}
 
+		/*
+		 * Detect self-dependency: if owner == donor, we have a cycle.
+		 * This can happen when a task blocks on a lock it "owns" through
+		 * proxy exec mechanism. Force donor to run to break the cycle.
+		 * CRITICAL: Must clear blocked_on to prevent immediate re-blocking!
+		 */
+		if (owner == donor) {
+			pr_info("sched_proxy_exec: self_dependency owner=%d:%s == donor force_runnable\n",
+				owner->pid, owner->comm);
+			__force_blocked_on_runnable(donor);
+			/* Clear blocked_on to prevent immediate re-blocking and livelock */
+			donor->blocked_on = NULL;
+			return donor;
+		}
+
+		pr_info("sched_proxy_exec: owner=%d:%s cpu=%d on_rq=%d delayed=%d\n",
+			owner->pid, owner->comm, task_cpu(owner),
+			READ_ONCE(owner->on_rq), owner->se.sched_delayed);
+
 		if (!READ_ONCE(owner->on_rq) || owner->se.sched_delayed) {
+			/*
+			 * Detect circular dependency FIRST, before the curr_in_chain
+			 * check below, which would skip it and return resched_idle.
+			 *
+			 * Check if donor appears in owner's blocked chain (i.e.
+			 * owner is also blocked, directly or indirectly, on donor).
+			 * This catches ABBA deadlocks like:
+			 *   A blocked_on B, B blocked_on A
+			 * where both tasks are !on_rq.
+			 *
+			 * Note: must use task_in_blocked_chain(owner, donor), NOT
+			 * task_in_blocked_chain(donor, owner) — the latter would
+			 * always return true at depth=1 since donor is blocked on
+			 * owner's mutex, which is the normal case, not a cycle.
+			 *
+			 * CRITICAL: Must clear blocked_on to prevent immediate re-blocking!
+			 */
+			if (task_in_blocked_chain(owner, donor)) {
+				pr_info("sched_proxy_exec: circular_chain depth=%d owner=%d:%s delayed=%d force_runnable donor=%d:%s\n",
+					depth, owner->pid, owner->comm, owner->se.sched_delayed,
+					donor->pid, donor->comm);
+				__force_blocked_on_runnable(donor);
+				/* Clear blocked_on to prevent immediate re-blocking and livelock */
+				donor->blocked_on = NULL;
+				return donor;
+			}
+
+			/*
+			 * Handle the case where owner is on_rq but sched_delayed.
+			 * A delayed task is still on the runqueue but won't run
+			 * immediately. Multiple donors blocked on the same delayed
+			 * owner would cause a thundering herd livelock if we just
+			 * resched_idle repeatedly.
+			 *
+			 * Force the donor to run instead — the owner will run
+			 * eventually when its delay expires, and the donor can
+			 * then block properly at that point.
+			 */
+			if (owner->se.sched_delayed) {
+				pr_info("sched_proxy_exec: owner_delayed depth=%d force_runnable donor=%d:%s\n",
+					depth, donor->pid, donor->comm);
+				__force_blocked_on_runnable(donor);
+				donor->blocked_on = NULL;
+				return donor;
+			}
+
 			/*
 			 * rq->curr must not be added to the blocked_head list or else
 			 * ttwu_do_activate could enqueue it elsewhere before it switches
 			 * out here. The approach to avoid this is the same as in the
 			 * migrate_task case.
+			 *
+			 * CRITICAL: When curr_in_chain is true, we have a circular
+			 * dependency (ABBA deadlock) where the current task is part
+			 * of the blocked chain. Just rescheduling idle won't break
+			 * the cycle — the next pick_again will hit the same deadlock.
+			 * Force the donor to run to break the cycle.
 			 */
-			if (curr_in_chain)
-				return proxy_resched_idle(rq);
+			if (curr_in_chain) {
+				pr_info("sched_proxy_exec: owner_not_on_rq curr_in_chain depth=%d force_runnable donor=%d:%s\n",
+					depth, donor->pid, donor->comm);
+				__force_blocked_on_runnable(donor);
+				donor->blocked_on = NULL;
+				return donor;
+			}
 
 			/*
 			 * If !@owner->on_rq, holding @rq->lock will not pin the task,
@@ -7559,31 +7789,70 @@ find_proxy_task(struct rq *rq, struct task_struct *donor, struct rq_flags *rf)
 			raw_spin_unlock(&owner->blocked_lock);
 			raw_spin_lock(&p->blocked_lock);
 
+			pr_info("sched_proxy_exec: owner_not_on_rq depth=%d enqueue_owner return NULL\n", depth);
 			return NULL; /* retry task selection */
 		}
 
 		owner_cpu = task_cpu(owner);
 		if (owner_cpu != this_cpu) {
 			trace_sched_pe_migration(donor, owner);
+			pr_info("sched_proxy_exec: owner_diff_cpu owner_cpu=%d this_cpu=%d depth=%d\n",
+				owner_cpu, this_cpu, depth);
 			/*
 			 * @owner can disappear, simply migrate to @owner_cpu
 			 * and leave that CPU to sort things out.
 			 */
-			if (curr_in_chain)
+			if (curr_in_chain) {
+				/*
+				 * Check for circular dependency (ABBA deadlock):
+				 * If owner is also blocked on a task in our chain,
+				 * we have a cycle. Force current task to run to break it.
+				 * CRITICAL: Must clear blocked_on to prevent immediate re-blocking!
+				 *
+				 * First, use task_in_blocked_chain() to check if
+				 * donor appears in owner's blocked chain (i.e.
+				 * owner is also blocked, directly or indirectly,
+				 * on donor). This catches cross-CPU ABBA deadlocks
+				 * like: A@cpu1 blocked_on B@cpu7, B@cpu7 blocked_on A@cpu1
+				 * which the simple one-level check below can miss
+				 * due to racing on owner->blocked_on across CPUs.
+				 */
+				if (task_is_blocked(owner) &&
+				    task_in_blocked_chain(owner, donor)) {
+					pr_info("sched_proxy_exec: circular_chain_cross_cpu depth=%d owner=%d:%s force_runnable donor=%d:%s\n",
+						depth, owner->pid, owner->comm,
+						donor->pid, donor->comm);
+					__force_blocked_on_runnable(donor);
+					/* Clear blocked_on to prevent immediate re-blocking and livelock */
+					donor->blocked_on = NULL;
+					return donor;
+				}
+
+				if (task_is_blocked(owner)) {
+					struct mutex *owner_mutex = owner->blocked_on;
+					if (owner_mutex) {
+						struct task_struct *owner_of_owner = __mutex_owner(owner_mutex);
+						if (owner_of_owner == p || owner_of_owner == donor) {
+							pr_info("sched_proxy_exec: circular_dependency depth=%d owner=%d:%s force_runnable donor=%d:%s\n",
+								depth, owner->pid, owner->comm,
+								donor->pid, donor->comm);
+							__force_blocked_on_runnable(donor);
+							/* Clear blocked_on to prevent immediate re-blocking and livelock */
+							donor->blocked_on = NULL;
+							return donor;
+						}
+					}
+				}
+				pr_info("sched_proxy_exec: curr_in_chain resched_idle\n");
 				return proxy_resched_idle(rq);
+			}
+			pr_info("sched_proxy_exec: goto migrate\n");
 			goto migrate;
 		}
 
 		if (task_on_rq_migrating(owner)) {
 			trace_sched_pe_owner_is_migrating(owner, p);
-			/*
-			 * One of the chain of mutex owners is currently migrating to this
-			 * CPU, but has not yet been enqueued because we are holding the
-			 * rq lock. As a simple solution, just schedule rq->idle to give
-			 * the migration a chance to complete. Much like the migrate_task
-			 * case we should end up back in find_proxy_task(), this time
-			 * hopefully with all relevant tasks already enqueued.
-			 */
+			pr_info("sched_proxy_exec: owner_migrating depth=%d resched_idle\n", depth);
 			return proxy_resched_idle(rq);
 		}
 
@@ -7595,55 +7864,64 @@ find_proxy_task(struct rq *rq, struct task_struct *donor, struct rq_flags *rf)
 		 * we are still on this cpu and not migrating. If we get
 		 * inconsistent results, try again.
 		 */
-		if (!task_on_rq_queued(owner) || task_cpu(owner) != this_cpu)
+		if (!task_on_rq_queued(owner) || task_cpu(owner) != this_cpu) {
+			pr_info("sched_proxy_exec: owner_state_changed depth=%d return NULL\n", depth);
 			return NULL;
+		}
 
 		if (owner == p) {
-			/*
-			 * It's possible we interleave with mutex_unlock like:
-			 *
-			 *				lock(&rq->lock);
-			 *				  find_proxy_task()
-			 * mutex_unlock()
-			 *   lock(&wait_lock);
-			 *   donor(owner) = current->blocked_donor;
-			 *   unlock(&wait_lock);
-			 *
-			 *   wake_up_q();
-			 *     ...
-			 *       ttwu_runnable()
-			 *         __task_rq_lock()
-			 *				  lock(&wait_lock);
-			 *				  owner == p
-			 *
-			 * Which leaves us to finish the ttwu_runnable() and make it go.
-			 *
-			 * So schedule rq->idle so that ttwu_runnable() can get the rq
-			 * lock and mark owner as running.
-			 */
+			pr_info("sched_proxy_exec: owner==p self_owned depth=%d resched_idle\n", depth);
 			return proxy_resched_idle(rq);
 		}
+
+		/*
+		 * Check for circular dependency (ABBA deadlock) even when
+		 * owner is on the same CPU. This handles the case where:
+		 *   task_A blocked on task_B's lock
+		 *   task_B blocked on task_A's lock
+		 * Both on same CPU, so owner_cpu == this_cpu.
+		 * CRITICAL: Must clear blocked_on to prevent immediate re-blocking!
+		 */
+		if (task_is_blocked(owner)) {
+			struct mutex *owner_mutex = owner->blocked_on;
+			if (owner_mutex) {
+				struct task_struct *owner_of_owner = __mutex_owner(owner_mutex);
+				if (owner_of_owner == p || owner_of_owner == donor) {
+					pr_info("sched_proxy_exec: circular_dependency_same_cpu depth=%d owner=%d:%s force_runnable donor=%d:%s\n",
+						depth, owner->pid, owner->comm,
+						donor->pid, donor->comm);
+					__force_blocked_on_runnable(donor);
+					/* Clear blocked_on to prevent immediate re-blocking and livelock */
+					donor->blocked_on = NULL;
+					return donor;
+				}
+			}
+		}
+
 		/*
 		 * OK, now we're absolutely sure @owner is on this
 		 * rq, therefore holding @rq->lock is sufficient to
 		 * guarantee its existence, as per ttwu_remote().
 		 */
 		owner->blocked_donor = p;
+		pr_info("sched_proxy_exec: set_donor owner=%d:%s <- donor=%d:%s\n",
+			owner->pid, owner->comm, p->pid, p->comm);
 	}
 
 	WARN_ON_ONCE(owner && !owner->on_rq);
+	pr_info("sched_proxy_exec: EXIT depth=%d owner=%d:%s cpu=%d on_rq=%d\n",
+		depth, owner ? owner->pid : -1, owner ? owner->comm : "null",
+		owner ? task_cpu(owner) : -1, owner ? READ_ONCE(owner->on_rq) : -1);
 	return owner;
 
-	/*
-	 * NOTE: This logic is down here, because we need to call
-	 * the functions with the mutex wait_lock and task
-	 * blocked_lock released, so we have to get out of the
-	 * guard() scope.
-	 */
 migrate:
+	pr_info("sched_proxy_exec: MIGRATE depth=%d p=%d:%s -> cpu=%d\n",
+		depth, p->pid, p->comm, owner_cpu);
 	proxy_migrate_task(rq, rf, p, owner_cpu);
 	return NULL;
 needs_return:
+	pr_info("sched_proxy_exec: NEEDS_RETURN depth=%d p=%d:%s\n",
+		depth, p->pid, p->comm);
 	proxy_force_return(rq, rf, p);
 	return NULL;
 }
@@ -7716,6 +7994,7 @@ static inline void proxy_tag_curr(struct rq *rq, struct task_struct *owner)
 static void __sched notrace __schedule(int sched_mode)
 {
 	struct task_struct *prev, *next;
+	struct task_struct *prev_donor;
 	/*
 	 * On PREEMPT_RT kernel, SM_RTLOCK_WAIT is noted
 	 * as a preemption by schedule_debug() and RCU.
@@ -7733,6 +8012,7 @@ static void __sched notrace __schedule(int sched_mode)
 	cpu = smp_processor_id();
 	rq = cpu_rq(cpu);
 	prev = rq->curr;
+	prev_donor = rq->donor;
 
 	schedule_debug(prev, preempt);
 

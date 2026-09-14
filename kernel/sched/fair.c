@@ -480,9 +480,17 @@ find_matching_se(struct sched_entity **se, struct sched_entity **pse)
 		*pse = parent_entity(*pse);
 	}
 
+	/*
+	 * Under CONFIG_SCHED_PROXY_EXEC, a donor task's sched_entity may
+	 * have been dequeued and its cfs_rq/parent can be stale or NULL.
+	 * Guard against NULL parent_entity() to prevent a NULL pointer
+	 * dereference in is_same_group() which dereferences se->cfs_rq.
+	 */
 	while (!is_same_group(*se, *pse)) {
 		*se = parent_entity(*se);
 		*pse = parent_entity(*pse);
+		if (!*se || !*pse)
+			return;
 	}
 }
 
@@ -1335,7 +1343,11 @@ static void update_curr(struct cfs_rq *cfs_rq)
 
 static void update_curr_fair(struct rq *rq)
 {
-	update_curr(cfs_rq_of(&rq->donor->se));
+	struct cfs_rq *cfs_rq = cfs_rq_of(&rq->donor->se);
+
+	if (unlikely(!cfs_rq))
+		return;
+	update_curr(cfs_rq);
 }
 
 static inline void
@@ -5753,7 +5765,33 @@ void set_next_entity(struct cfs_rq *cfs_rq, struct sched_entity *se)
 	}
 
 	update_stats_curr_start(cfs_rq, se);
-	SCHED_WARN_ON(cfs_rq->curr);
+	/*
+	 * Under CONFIG_SCHED_PROXY_EXEC, set_next_entity() may be called
+	 * on a cfs_rq whose ->curr is still set to a different entity.
+	 * This happens when:
+	 *   - find_proxy_task() returns an owner different from the donor
+	 *     that was set by pick_next_task_fair(), so put_prev_entity()
+	 *     was called on the owner's se while cfs_rq->curr still points
+	 *     to the donor's se.
+	 *   - proxy_migrate_task()/proxy_force_return() calls
+	 *     put_prev_task(rq->donor) then set_next_task(rq->idle) —
+	 *     put_prev_entity handles the mismatch, but if the hierarchy
+	 *     levels differ, some levels may still have a stale ->curr.
+	 *
+	 * When cfs_rq->curr != se, the old curr was removed from the
+	 * rb-tree by a prior set_next_entity(). We must put it back
+	 * before overwriting ->curr, otherwise it is lost forever
+	 * (not in rb-tree, not in ->curr) — a memory leak that also
+	 * corrupts min_vruntime accounting.
+	 */
+	if (cfs_rq->curr && cfs_rq->curr != se) {
+		struct sched_entity *old_curr = cfs_rq->curr;
+		if (old_curr->on_rq) {
+			update_stats_wait_start_fair(cfs_rq, old_curr);
+			__enqueue_entity(cfs_rq, old_curr);
+			update_load_avg(cfs_rq, old_curr, 0);
+		}
+	}
 	cfs_rq->curr = se;
 
 	/*
@@ -5812,7 +5850,40 @@ static bool check_cfs_rq_runtime(struct cfs_rq *cfs_rq);
 
 static void put_prev_entity(struct cfs_rq *cfs_rq, struct sched_entity *prev)
 {
+	struct sched_entity *curr = cfs_rq->curr;
+
 	/*
+	 * Under CONFIG_SCHED_PROXY_EXEC, cfs_rq->curr may not match @prev.
+	 * This happens when find_proxy_task() returns an owner different
+	 * from the donor that was set by pick_next_task_fair():
+	 *
+	 *   1. pick_next_task_fair() calls set_next_entity(donor) which
+	 *      removes donor from the rb-tree and sets cfs_rq->curr = donor.
+	 *   2. find_proxy_task() returns a different task (owner) as the
+	 *      execution context.
+	 *   3. Owner runs, blocks, enters __schedule again.
+	 *   4. put_prev_entity() is called with owner's se, but cfs_rq->curr
+	 *      still points to donor's se.
+	 *
+	 * When mismatched, we must put the actual cfs_rq->curr back into
+	 * the rb-tree (it was removed by set_next_entity), clear cfs_rq->curr,
+	 * and return WITHOUT touching @prev — @prev was never removed from
+	 * the rb-tree (set_next_entity was never called on it), so it is
+	 * already in the rb-tree (if on_rq) and must not be double-enqueued.
+	 */
+	if (curr && curr != prev) {
+		if (curr->on_rq) {
+			update_curr(cfs_rq);
+			update_stats_wait_start_fair(cfs_rq, curr);
+			__enqueue_entity(cfs_rq, curr);
+			update_load_avg(cfs_rq, curr, 0);
+		}
+		cfs_rq->curr = NULL;
+		return;
+	}
+
+	/*
+	 * Normal path: prev == cfs_rq->curr (or cfs_rq->curr is already NULL).
 	 * If still on the runqueue then deactivate_task()
 	 * was not called and update_curr() has to be done:
 	 */
@@ -5829,7 +5900,6 @@ static void put_prev_entity(struct cfs_rq *cfs_rq, struct sched_entity *prev)
 		/* in !on_rq case, update occurred at dequeue */
 		update_load_avg(cfs_rq, prev, 0);
 	}
-	SCHED_WARN_ON(cfs_rq->curr != prev);
 	cfs_rq->curr = NULL;
 }
 
@@ -9028,6 +9098,15 @@ static void check_preempt_wakeup_fair(struct rq *rq, struct task_struct *p, int 
 
 	if (unlikely(se == pse))
 		return;
+
+	/*
+	 * Under CONFIG_SCHED_PROXY_EXEC + CONFIG_FAIR_GROUP_SCHED, a
+	 * blocked donor (dequeued mutex owner) can have se.cfs_rq == NULL.
+	 * Bail out and let __schedule() resolve the proxy.
+	 */
+	if (unlikely(!cfs_rq))
+		return;
+
 	trace_android_rvh_check_preempt_wakeup_ignore(donor, &ignore);
 	if (ignore)
 		return;
@@ -9063,6 +9142,15 @@ static void check_preempt_wakeup_fair(struct rq *rq, struct task_struct *p, int 
 
 	find_matching_se(&se, &pse);
 	WARN_ON_ONCE(!pse);
+
+	/*
+	 * find_matching_se() may return with se or pse == NULL if the
+	 * entities are in different task groups and walking up the parent
+	 * chain reached the root (parent_entity returns NULL). Bail out
+	 * to avoid NULL dereference in se_is_idle() / cfs_rq_of().
+	 */
+	if (unlikely(!se || !pse))
+		return;
 
 	cse_is_idle = se_is_idle(se);
 	pse_is_idle = se_is_idle(pse);
@@ -9130,8 +9218,19 @@ static struct task_struct *pick_task_fair(struct rq *rq)
 {
 	struct sched_entity *se;
 	struct cfs_rq *cfs_rq;
+	int pick_retry = 0;
 
 again:
+	if (++pick_retry > 3) {
+		/*
+		 * Under CONFIG_SCHED_PROXY_EXEC, cfs_rq state can become
+		 * inconsistent during proxy migration / pick_again loops.
+		 * If pick_next_entity keeps returning NULL despite
+		 * nr_running > 0, bail out to avoid infinite loops.
+		 */
+		return NULL;
+	}
+
 	cfs_rq = &rq->cfs;
 	if (!cfs_rq->nr_running)
 		return NULL;
@@ -9149,6 +9248,10 @@ again:
 			goto again;
 		cfs_rq = group_cfs_rq(se);
 	} while (cfs_rq);
+
+	if (unlikely(!se)) {
+		return NULL;
+	}
 
 	return task_of(se);
 }
@@ -9177,6 +9280,15 @@ again:
 #ifdef CONFIG_FAIR_GROUP_SCHED
 	if (prev->sched_class != &fair_sched_class ||
 	    rq->curr != rq->donor)
+		goto simple;
+
+	/*
+	 * Under CONFIG_SCHED_PROXY_EXEC + CONFIG_FAIR_GROUP_SCHED, a blocked
+	 * donor (dequeued mutex owner) can have se.cfs_rq == NULL. Fall back
+	 * to the simple put_prev_set_next_task() path which has protection
+	 * in put_prev_task_fair/set_next_task_fair.
+	 */
+	if (unlikely(!prev->se.cfs_rq))
 		goto simple;
 
 	__put_prev_set_next_dl_server(rq, prev, p);
@@ -9269,6 +9381,16 @@ static void put_prev_task_fair(struct rq *rq, struct task_struct *prev, struct t
 {
 	struct sched_entity *se = &prev->se;
 	struct cfs_rq *cfs_rq;
+
+#ifdef CONFIG_FAIR_GROUP_SCHED
+	/*
+	 * Under CONFIG_SCHED_PROXY_EXEC + CONFIG_FAIR_GROUP_SCHED, a blocked
+	 * donor (dequeued mutex owner) can have se.cfs_rq == NULL. Skip to
+	 * avoid NULL pointer dereference in cfs_rq_of(se).
+	 */
+	if (unlikely(!se->cfs_rq))
+		return;
+#endif
 
 	for_each_sched_entity(se) {
 		cfs_rq = cfs_rq_of(se);
@@ -13652,6 +13774,16 @@ static void __set_next_task_fair(struct rq *rq, struct task_struct *p, bool firs
 static void set_next_task_fair(struct rq *rq, struct task_struct *p, bool first)
 {
 	struct sched_entity *se = &p->se;
+
+#ifdef CONFIG_FAIR_GROUP_SCHED
+	/*
+	 * Under CONFIG_SCHED_PROXY_EXEC + CONFIG_FAIR_GROUP_SCHED, a blocked
+	 * donor (dequeued mutex owner) can have se.cfs_rq == NULL. Skip to
+	 * avoid NULL pointer dereference in cfs_rq_of(se).
+	 */
+	if (unlikely(!se->cfs_rq))
+		return;
+#endif
 
 	for_each_sched_entity(se) {
 		struct cfs_rq *cfs_rq = cfs_rq_of(se);
