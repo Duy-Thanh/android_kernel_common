@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fea445da_e214b997",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1150933
+      },
+      "writtenOn": "2026-09-14T16:54:31Z",
+      "side": 1,
+      "message": "The driver cannot reject `free_domain()` because the return value of `kvm_iommu_ops-\u003efree_domain(domain);` is a void type. Also see line 544 in `arch/arm64/kvm/hyp/nvhe/iommu/iommu.c`",
+      "parentUuid": "7a2c2d31_2c8405b5",
+      "range": {
+        "startLine": 13,
+        "startChar": 22,
+        "endLine": 13,
+        "endChar": 26
+      },
+      "revId": "21c1e2879107f160b1af6425a7112ba2532e461a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "474edbd8_8d4e5dca",
         "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
         "patchSetId": 1
