@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebbfe8eb_f49a95d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3386406
+      },
+      "writtenOn": "2026-09-14T16:12:05Z",
+      "side": 1,
+      "message": "Updated change to remove some drm/related symbols based on feedback to build some drivers as vendor modules in https://android-review.googlesource.com/c/kernel/common/+/4291971",
+      "revId": "c70bdfb090c3a89da9b496caa8573a9da1026ce0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
