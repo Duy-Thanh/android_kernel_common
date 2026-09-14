@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a2c2d31_2c8405b5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-09-14T08:24:44Z",
+      "side": 1,
+      "message": "I am not sure about this, technically devices can be attached/detached from it and leaving it empty so it can be freed in that case as no devices reference it.\nIf a driver is making assumptions about that, it should reject the free_domain().\nIn android17-6.18 to avoid having this kind of special domains, the idmap is not a domain anymore.",
+      "range": {
+        "startLine": 13,
+        "startChar": 22,
+        "endLine": 13,
+        "endChar": 26
+      },
+      "revId": "21c1e2879107f160b1af6425a7112ba2532e461a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "474edbd8_8d4e5dca",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-09-14T08:24:44Z",
+      "side": 1,
+      "message": "The domain type is not used anywhere in the core code, it only guarantees `KVM_IOMMU_DOMAIN_IDMAP_ID` is special.\nI\u0027d leave such checks for the driver.",
+      "range": {
+        "startLine": 495,
+        "startChar": 18,
+        "endLine": 495,
+        "endChar": 53
+      },
+      "revId": "21c1e2879107f160b1af6425a7112ba2532e461a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
