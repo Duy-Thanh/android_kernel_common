@@ -31119,6 +31119,11 @@ pointer_reference {
   pointee_type_id: 0xce6bbee6
 }
 pointer_reference {
+  id: 0x390adc5d
+  kind: POINTER
+  pointee_type_id: 0xce6b97ea
+}
+pointer_reference {
   id: 0x390b641d
   kind: POINTER
   pointee_type_id: 0xce6d76ea
@@ -115253,6 +115258,11 @@ member {
   offset: 256
 }
 member {
+  id: 0xb5e76888
+  name: "head"
+  type_id: 0xbdd18903
+}
+member {
   id: 0x61e179fc
   name: "head_file"
   type_id: 0xd3c80119
@@ -139532,6 +139542,12 @@ member {
   name: "mapping"
   type_id: 0x0759ae47
   offset: 64
+}
+member {
+  id: 0x5df220b3
+  name: "mapping"
+  type_id: 0x18bd6530
+  offset: 128
 }
 member {
   id: 0x5dff125e
@@ -274543,6 +274559,18 @@ struct_union {
   }
 }
 struct_union {
+  id: 0xce6b97ea
+  kind: STRUCT
+  name: "kvm_hyp_memcache"
+  definition {
+    bytesize: 32
+    member_id: 0xb5e76888
+    member_id: 0xe3b1b19e
+    member_id: 0x5df220b3
+    member_id: 0x2d5bf9f3
+  }
+}
+struct_union {
   id: 0x48fc238d
   kind: STRUCT
   name: "kvm_iommu_driver"
@@ -357311,6 +357339,13 @@ function {
   parameter_id: 0xf435685e
 }
 function {
+  id: 0x93035cf3
+  return_type_id: 0x6720d32f
+  parameter_id: 0x390adc5d
+  parameter_id: 0x33756485
+  parameter_id: 0x33756485
+}
+function {
   id: 0x93036ec8
   return_type_id: 0x6720d32f
   parameter_id: 0x396fe4f8
@@ -358260,6 +358295,11 @@ function {
   id: 0x93c23a28
   return_type_id: 0x6720d32f
   parameter_id: 0x390b641d
+}
+function {
+  id: 0x93c25438
+  return_type_id: 0x6720d32f
+  parameter_id: 0x390adc5d
 }
 function {
   id: 0x93c5cc72
@@ -436143,6 +436183,15 @@ elf_symbol {
   full_name: "kvm_iommu_free_domain"
 }
 elf_symbol {
+  id: 0x95ab12b5
+  name: "kvm_iommu_init_atomic_pool"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xab1e5c1c
+  type_id: 0x93c25438
+  full_name: "kvm_iommu_init_atomic_pool"
+}
+elf_symbol {
   id: 0xe0fbfda1
   name: "kvm_iommu_iotlb_inv_nested_domain"
   is_defined: true
@@ -461369,6 +461418,15 @@ elf_symbol {
   full_name: "topology_update_hw_pressure"
 }
 elf_symbol {
+  id: 0xec13d355
+  name: "topup_hyp_memcache"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x7bee81c5
+  type_id: 0x93035cf3
+  full_name: "topup_hyp_memcache"
+}
+elf_symbol {
   id: 0x3217f3a4
   name: "touch_atime"
   is_defined: true
@@ -477411,6 +477469,7 @@ interface {
   symbol_id: 0xa278ae56
   symbol_id: 0x7f2d7a20
   symbol_id: 0x36bd914d
+  symbol_id: 0x95ab12b5
   symbol_id: 0xe0fbfda1
   symbol_id: 0xbe5a651d
   symbol_id: 0x66d22e49
@@ -480212,6 +480271,7 @@ interface {
   symbol_id: 0x18c0f285
   symbol_id: 0xd3e5c9bd
   symbol_id: 0xeb37d3dc
+  symbol_id: 0xec13d355
   symbol_id: 0x3217f3a4
   symbol_id: 0xf7dfdad1
   symbol_id: 0x47d78ddb
