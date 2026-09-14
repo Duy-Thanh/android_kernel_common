@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe1742ef_446ef735",
+        "filename": "kernel/exit.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 842,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2026-09-14T19:11:20Z",
+      "side": 1,
+      "message": "Please use existing `trace_android_vh_exit_check`.",
+      "range": {
+        "startLine": 842,
+        "startChar": 1,
+        "endLine": 842,
+        "endChar": 37
+      },
+      "revId": "3e439f1376b26787624380c107753c65dbbd79cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
