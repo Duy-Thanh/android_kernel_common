@@ -34,6 +34,24 @@
       "parentUuid": "a44bde93_b48b04d7",
       "revId": "459f9c98727fd3a10be0cc24b3aa12a0fd875169",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a391f440_fbb3e1b0",
+        "filename": "drivers/pci/controller/dwc/pcie-designware.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-09-14T19:00:00Z",
+      "side": 1,
+      "message": "Thanks for the clarification, I\u0027m not knowledgeable on the details here, just trying to make sure there isn\u0027t any potential for unintended breakage of in-field devices due to the change applying to more then just newer hardware.",
+      "parentUuid": "5bd11cbf_3c79a605",
+      "revId": "459f9c98727fd3a10be0cc24b3aa12a0fd875169",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
