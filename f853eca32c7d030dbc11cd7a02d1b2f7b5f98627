@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fdac2eab_f2ac22fe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 3541841
+      },
+      "writtenOn": "2026-09-14T15:04:45Z",
+      "side": 1,
+      "message": "Added by the go/android-cherry tool which is what gerrit recommended i use instead of the regular cherry-pick in gerrit. \n\nI will go ahead and redo the cherry-pick via gerrit. \n\nIf go/android-cherry is not a supported tool for kernel, i can go ahead and file an issue to have the suggestion removed so others don\u0027t run into the same issue.",
+      "parentUuid": "d8a96c3d_e90aff7c",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 106
+      },
+      "revId": "f853eca32c7d030dbc11cd7a02d1b2f7b5f98627",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "72226680_06a1590e",
         "filename": "/COMMIT_MSG",
         "patchSetId": 7
@@ -37,6 +61,30 @@
       "writtenOn": "2026-09-14T08:49:04Z",
       "side": 1,
       "message": "what is this tag?",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 52
+      },
+      "revId": "f853eca32c7d030dbc11cd7a02d1b2f7b5f98627",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36379b5d_a506be61",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 3541841
+      },
+      "writtenOn": "2026-09-14T15:04:45Z",
+      "side": 1,
+      "message": "Added by the go/android-cherry tool which is what gerrit recommended i use instead of the regular cherry-pick in gerrit.",
+      "parentUuid": "72226680_06a1590e",
       "range": {
         "startLine": 75,
         "startChar": 0,
