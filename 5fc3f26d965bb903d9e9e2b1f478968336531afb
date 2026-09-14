@@ -239,6 +239,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa235db3_6bfc525e",
+        "filename": "drivers/hid/hid-logitech-hidpp.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 4831,
+      "author": {
+        "id": 3541841
+      },
+      "writtenOn": "2026-09-14T00:41:44Z",
+      "side": 1,
+      "message": "Added to both commit message and the kernel documentation.",
+      "parentUuid": "8df73e68_52e72de4",
+      "range": {
+        "startLine": 4831,
+        "startChar": 0,
+        "endLine": 4831,
+        "endChar": 62
+      },
+      "revId": "5fc3f26d965bb903d9e9e2b1f478968336531afb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "786ddd8b_c4d080b0",
