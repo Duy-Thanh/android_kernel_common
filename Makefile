@@ -5,6 +5,8 @@ SUBLEVEL = 32
 EXTRAVERSION =
 NAME = Baby Opossum Posse
 
+# blank line for canary testing
+
 # *DOCUMENTATION*
 # To see a list of typical targets execute "make help"
 # More info can be located in ./README
