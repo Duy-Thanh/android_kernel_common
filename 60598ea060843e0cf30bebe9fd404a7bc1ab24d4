@@ -22,6 +22,30 @@
       },
       "revId": "60598ea060843e0cf30bebe9fd404a7bc1ab24d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2672e23d_af8365ba",
+        "filename": "kernel/power/wakeup_reason.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 3680452
+      },
+      "writtenOn": "2026-09-14T08:12:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77fb57e2_6e5df3c1",
+      "range": {
+        "startLine": 382,
+        "startChar": 0,
+        "endLine": 384,
+        "endChar": 41
+      },
+      "revId": "60598ea060843e0cf30bebe9fd404a7bc1ab24d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
