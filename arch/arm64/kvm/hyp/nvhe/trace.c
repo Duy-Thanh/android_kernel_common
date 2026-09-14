@@ -433,7 +433,7 @@ static int rb_cpu_init(struct ring_buffer_pack *rb_pack, struct hyp_buffer_page 
 	}
 
 	if (ret) {
-		while (i--)
+		for (; i >= 0; i--)
 			unload_page(bpages[i].page);
 
 		return ret;
