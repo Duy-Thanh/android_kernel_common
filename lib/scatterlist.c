@@ -573,6 +573,64 @@ int sg_alloc_table_from_pages_segment(struct sg_table *sgt, struct page **pages,
 }
 EXPORT_SYMBOL(sg_alloc_table_from_pages_segment);
 
+/**
+ * sg_alloc_table_from_page_slices - allocate an sg table from page slices
+ * @sgt: the sg table header to use
+ * @pages: array of native page pointers
+ * @spans: exact byte interval within each corresponding page
+ * @n_pages: number of entries in @pages and @spans
+ * @size: total number of valid bytes described by the slices
+ * @gfp_mask: GFP allocation mask
+ *
+ * Unlike sg_alloc_table_from_pages(), each input page has an independent
+ * offset and length. The slices are kept as separate SG entries; DMA mapping
+ * may merge entries later when permitted by the DMA implementation.
+ *
+ * Return: 0 on success, negative error on failure.
+ */
+int sg_alloc_table_from_page_slices(struct sg_table *sgt, struct page **pages,
+				    const struct page_span *spans,
+				    unsigned int n_pages,
+				    unsigned long size, gfp_t gfp_mask)
+{
+	struct scatterlist *sg;
+	unsigned int i;
+	int ret;
+
+	if (!n_pages || !size)
+		return -EINVAL;
+
+	ret = sg_alloc_table(sgt, n_pages, gfp_mask);
+	if (ret)
+		return ret;
+
+	for_each_sgtable_sg(sgt, sg, i) {
+		const struct page_span *span = &spans[i];
+
+		if (!pages[i] || !span->length || span->offset >= PAGE_SIZE ||
+		    span->length > PAGE_SIZE - span->offset ||
+		    span->length > size) {
+			ret = -EINVAL;
+			goto err_free;
+		}
+
+		sg_set_page(sg, pages[i], span->length, span->offset);
+		size -= span->length;
+	}
+
+	if (size) {
+		ret = -EINVAL;
+		goto err_free;
+	}
+
+	return 0;
+
+err_free:
+	sg_free_table(sgt);
+	return ret;
+}
+EXPORT_SYMBOL(sg_alloc_table_from_page_slices);
+
 #ifdef CONFIG_SGL_ALLOC
 
 /**

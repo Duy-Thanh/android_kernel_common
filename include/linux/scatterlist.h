@@ -469,6 +469,10 @@ int sg_alloc_table_from_pages_segment(struct sg_table *sgt, struct page **pages,
 				      unsigned int n_pages, unsigned int offset,
 				      unsigned long size,
 				      unsigned int max_segment, gfp_t gfp_mask);
+int sg_alloc_table_from_page_slices(struct sg_table *sgt, struct page **pages,
+				    const struct page_span *spans,
+				    unsigned int n_pages,
+				    unsigned long size, gfp_t gfp_mask);
 
 /**
  * sg_alloc_table_from_pages - Allocate and initialize an sg table from
