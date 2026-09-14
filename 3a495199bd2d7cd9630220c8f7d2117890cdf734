@@ -146,6 +146,30 @@
       },
       "revId": "3a495199bd2d7cd9630220c8f7d2117890cdf734",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6cc26cb8_2540aab7",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-09-14T18:53:24Z",
+      "side": 1,
+      "message": "Looks/sounds reasonable to me.",
+      "parentUuid": "84bfc892_d87c1dfd",
+      "range": {
+        "startLine": 8,
+        "startChar": 8,
+        "endLine": 8,
+        "endChar": 32
+      },
+      "revId": "3a495199bd2d7cd9630220c8f7d2117890cdf734",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
