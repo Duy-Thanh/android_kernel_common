@@ -16,6 +16,24 @@
       "message": "Can you add details as to the vmlinux size impact of enabling this?",
       "revId": "080da881e615d27bd62481a4b4130934f112c1c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f3697fb_036e0f9f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 3386406
+      },
+      "writtenOn": "2026-09-14T03:06:27Z",
+      "side": 1,
+      "message": "Sure John, please find a summary below:\n\nEnabling this option increases the vmlinux size by 4,825 bytes (approximately 4.7 KiB):\n\n- text: +4,825 bytes\n- data: no change\n- BSS: no change\n- total (text + data + BSS): 43,147,994 → 43,152,819 bytes",
+      "parentUuid": "9375a8aa_691ca03d",
+      "revId": "080da881e615d27bd62481a4b4130934f112c1c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
