@@ -468,7 +468,7 @@ static int rb_setup_bpage_backing(struct hyp_trace_pack *pack)
 	if (hyp_buffer_pages_backing.size)
 		return -EBUSY;
 
-	if (!PAGE_ALIGNED(start) || !PAGE_ALIGNED(size))
+	if (!size || !PAGE_ALIGNED(start) || !PAGE_ALIGNED(size))
 		return -EINVAL;
 
 	ret = __pkvm_host_donate_hyp(hyp_virt_to_pfn((void *)start), size >> PAGE_SHIFT);
