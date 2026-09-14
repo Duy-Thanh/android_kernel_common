@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c046d75d_4d396e4e",
+        "filename": "include/trace/hooks/security.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-09-14T23:16:18Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by GKI Guidelines: Please do not add #include statements to headers under include/trace/hooks/. The...\n\nPlease do not add #include statements to headers under include/trace/hooks/. These should only be getting forward decls and not new includes (to avoid CRC changes due to visibility).\\n\\n Refer to go/ack-contribution-guidelines and go/vendor-hooks for details.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 29
+      },
+      "revId": "f253dc4fcbd1c664f370662e9a61490ff7d8bb5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
