@@ -189,6 +189,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f2c765e_60543cbf",
+        "filename": "drivers/android/wrapfd/content.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-14T14:50:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90701a73_8d17ff8c",
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "474e3e25_6bf1ce9f",
@@ -430,6 +448,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be0ce2c8_c36dafda",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-14T14:50:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a8c8a26_fb9e927c",
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19714f80_ffbff609",
@@ -443,6 +479,24 @@
       "writtenOn": "2026-09-10T17:54:35Z",
       "side": 1,
       "message": "close_on_exec isn\u0027t dmabuf specific, so I think it should be in here instead of in `WrapDMAContent`.",
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58c8301c_c16d8db1",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-14T14:50:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19714f80_ffbff609",
       "revId": "627ecef83bfad9096784006ff893aa1c839da082",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -1014,6 +1068,30 @@
       "side": 1,
       "message": "Something I just noticed is that `has_owner()` in the C implementation did mutate the owner in case the process died, which I don\u0027t see here, and I\u0027m not sure how you\u0027d do that by using the PID.",
       "parentUuid": "2d0c0205_7be6c653",
+      "range": {
+        "startLine": 573,
+        "startChar": 7,
+        "endLine": 573,
+        "endChar": 46
+      },
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ac25a7c_659e3c43",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-14T14:50:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93ed83f6_aea730ef",
       "range": {
         "startLine": 573,
         "startChar": 7,
