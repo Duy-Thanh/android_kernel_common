@@ -22,6 +22,30 @@
       },
       "revId": "3e439f1376b26787624380c107753c65dbbd79cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0a646c5_8bccd02d",
+        "filename": "kernel/exit.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 842,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2026-09-14T19:18:22Z",
+      "side": 1,
+      "message": "Or explain in commit message why do you need restricted hook.",
+      "parentUuid": "fe1742ef_446ef735",
+      "range": {
+        "startLine": 842,
+        "startChar": 1,
+        "endLine": 842,
+        "endChar": 37
+      },
+      "revId": "3e439f1376b26787624380c107753c65dbbd79cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
