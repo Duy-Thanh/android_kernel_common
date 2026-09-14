@@ -1901,6 +1901,7 @@ put_out:
 	percpu_ref_put(&si->users);
 	return NULL;
 }
+EXPORT_SYMBOL_GPL(get_swap_device);
 
 /*
  * Free a set of swap slots after their swap count dropped to zero, or will be
