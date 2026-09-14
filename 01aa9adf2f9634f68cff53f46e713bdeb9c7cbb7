@@ -89,6 +89,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf97419f_0e2b8539",
+        "filename": "arch/x86/configs/gki_defconfig",
+        "patchSetId": 9
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2026-09-14T04:23:57Z",
+      "side": 1,
+      "message": "Moved to built-in.",
+      "parentUuid": "ffd147c1_222f6b04",
+      "range": {
+        "startLine": 588,
+        "startChar": 29,
+        "endLine": 588,
+        "endChar": 30
+      },
+      "revId": "01aa9adf2f9634f68cff53f46e713bdeb9c7cbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cffa02f8_43dc2cd2",
@@ -669,6 +693,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b48367fe_ef56a66a",
+        "filename": "drivers/android/bpf/bpf_fd_loader.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2026-09-14T04:23:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a64c54cf_e1fc9751",
+      "range": {
+        "startLine": 329,
+        "startChar": 1,
+        "endLine": 329,
+        "endChar": 41
+      },
+      "revId": "01aa9adf2f9634f68cff53f46e713bdeb9c7cbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d04859b9_30e584bc",
@@ -706,6 +754,30 @@
       "side": 1,
       "message": "It shouldn\u0027t: https://source.corp.google.com/h/android/kernel/common/+/android-mainline:tools/lib/bpf/gen_loader.c;l\u003d146;drc\u003d7fef1796ec4d8c4cce70c374efafdbbc8d6d6cbc",
       "parentUuid": "d04859b9_30e584bc",
+      "range": {
+        "startLine": 331,
+        "startChar": 1,
+        "endLine": 331,
+        "endChar": 62
+      },
+      "revId": "01aa9adf2f9634f68cff53f46e713bdeb9c7cbb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "718916b6_1892ca10",
+        "filename": "drivers/android/bpf/bpf_fd_loader.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2026-09-14T04:23:57Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c8f9ada4_da3efc76",
       "range": {
         "startLine": 331,
         "startChar": 1,
