@@ -702,3 +702,7 @@ xt_unregister_targets
 __tracepoint_android_vh_signal_coredump_check
 __traceiter_android_vh_signal_coredump_check
 
+#required by mi_io_stat.ko
+__traceiter_android_rvh_exit_read_taskinfo
+__tracepoint_android_rvh_exit_read_taskinfo
+
