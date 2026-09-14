@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcfe99d4_ffc906c2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-09-14T10:36:26Z",
+      "side": 1,
+      "message": "Just an observation: in Android\u0027s `android17-6.18` branch it should rather be `449ea50d868c` instead of `d5b0933b7365` which refers to cid of \"https://github.com/intel-staging/pKVM-IA/commit/\". But as it is cherry-pick from there anyway it is probably fine.\n\nSame story for the next patch.",
+      "range": {
+        "startLine": 13,
+        "startChar": 7,
+        "endLine": 13,
+        "endChar": 19
+      },
+      "revId": "d433c34f99c3f4f329cf190e0636c2cd0b228ddc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
