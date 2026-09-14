@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8a96c3d_e90aff7c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-09-14T08:49:04Z",
+      "side": 1,
+      "message": "that\u0027s not a valid cherry-pick id.",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 106
+      },
+      "revId": "f853eca32c7d030dbc11cd7a02d1b2f7b5f98627",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72226680_06a1590e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-09-14T08:49:04Z",
+      "side": 1,
+      "message": "what is this tag?",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 52
+      },
+      "revId": "f853eca32c7d030dbc11cd7a02d1b2f7b5f98627",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
