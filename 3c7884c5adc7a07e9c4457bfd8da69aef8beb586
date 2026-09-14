@@ -33,6 +33,24 @@
       "message": "Commit is missing a cherry pick line pointing to the original commit on the base branch.\n\nExpected a cherry pick line like (cherry picked from commit 68974e23511778586051ef79e24a859b93f0c456).\n\nPlease cherry-pick using: git cherry-pick -s -x 68974e23511778586051ef79e24a859b93f0c456.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\nWas",
       "revId": "3c7884c5adc7a07e9c4457bfd8da69aef8beb586",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3772398f_2719e082",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2055842
+      },
+      "writtenOn": "2026-09-14T17:09:07Z",
+      "side": 1,
+      "message": "Sorry, I forgot about this. I uploaded a newer patchset which fixes the issue.",
+      "parentUuid": "1c70c0ef_89d21cdb",
+      "revId": "3c7884c5adc7a07e9c4457bfd8da69aef8beb586",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
