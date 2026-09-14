@@ -796,3 +796,6 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_swap_page_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_swap_page_done);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_netlink_alloc_skb);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_skb_free_head);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_submit_bio_post);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_submit_bio_pre);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_request_issue_err);
