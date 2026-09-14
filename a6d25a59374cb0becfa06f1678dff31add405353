@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84367dde_9d435622",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2026-09-14T15:13:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98cafbf3_c3afb597",
+      "range": {
+        "startLine": 21,
+        "startChar": 60,
+        "endLine": 21,
+        "endChar": 72
+      },
+      "revId": "a6d25a59374cb0becfa06f1678dff31add405353",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "63eb4cf7_6d3b5a7e",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "688c60f3_629d305a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2026-09-14T15:13:54Z",
+      "side": 1,
+      "message": "Without it the kernel modules signing fails",
+      "parentUuid": "63eb4cf7_6d3b5a7e",
+      "range": {
+        "startLine": 23,
+        "startChar": 30,
+        "endLine": 23,
+        "endChar": 41
+      },
+      "revId": "a6d25a59374cb0becfa06f1678dff31add405353",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ada5b6da_ff5ea510",
@@ -60,6 +108,30 @@
       "writtenOn": "2026-09-14T15:00:35Z",
       "side": 1,
       "message": "Makes more sense to list them in the opposite order, given the dependency between them.",
+      "range": {
+        "startLine": 24,
+        "startChar": 2,
+        "endLine": 24,
+        "endChar": 65
+      },
+      "revId": "a6d25a59374cb0becfa06f1678dff31add405353",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cd7823d_1d1501aa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1432579
+      },
+      "writtenOn": "2026-09-14T15:13:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ada5b6da_ff5ea510",
       "range": {
         "startLine": 24,
         "startChar": 2,
