@@ -16,6 +16,24 @@
       "message": "Is there a reason this can\u0027t wait for upstream reviews and submitted here once it lands in a maintainer tree (FROMGIT)?",
       "revId": "bbecd2efee8589c0215e34cac31af88f814735c6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84264467_5ba6d311",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2027158
+      },
+      "writtenOn": "2026-09-14T07:28:01Z",
+      "side": 1,
+      "message": "Not really - just that the patch owner wants to apply the fix in downstream ASAP.\n\nAnd I found that the maintainer has picked it up few days ago, so here\u0027s the FROMGIT version.",
+      "parentUuid": "d50668f5_267ab4ad",
+      "revId": "bbecd2efee8589c0215e34cac31af88f814735c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
