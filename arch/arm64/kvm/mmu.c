@@ -1803,12 +1803,11 @@ static int __pkvm_mem_abort_dmabuf(struct kvm_vcpu *vcpu, struct kvm_memory_slot
 		return -EFAULT;
 
 	while (nr_pages--) {
-		file = NULL;
 		pfn = ___kvm_faultin_pfn(memslot, gfn, FOLL_WRITE, &writable, &page, &file);
-		if (is_error_pfn(pfn) || !pfn_is_map_memory(pfn))
+		if (is_error_pfn(pfn))
 			return -EFAULT;
 
-		if (!writable || !file || !is_dma_buf_file(file)) {
+		if (!pfn_is_map_memory(pfn) || !writable || !file || !is_dma_buf_file(file)) {
 			if (file)
 				fput(file);
 			kvm_release_page_clean(page);
@@ -2171,7 +2170,7 @@ static int pkvm_mem_abort(struct kvm_vcpu *vcpu, phys_addr_t fault_ipa, size_t s
 
 		ret = __pkvm_mem_abort_dmabuf(vcpu, memslot, gfn, nr_pages, &ppages);
 		if (ret)
-			goto free_pages;
+			goto free_ppages;
 		goto topup;
 	} else if (ret) {
 		return ret;
