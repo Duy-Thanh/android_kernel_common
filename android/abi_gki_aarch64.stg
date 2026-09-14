@@ -360835,6 +360835,12 @@ function {
   parameter_id: 0x1d19a9d5
 }
 function {
+  id: 0xf6ab2a7f
+  return_type_id: 0x6d7f5ff6
+  parameter_id: 0x235889e8
+  parameter_id: 0x3654c061
+}
+function {
   id: 0xf6be4a6e
   return_type_id: 0x6d7f5ff6
   parameter_id: 0x20007040
@@ -362682,6 +362688,15 @@ elf_symbol {
   crc: 0xa3f12f69
   type_id: 0x105b48b9
   full_name: "__crypto_xor"
+}
+elf_symbol {
+  id: 0x5860ef21
+  name: "__d_drop"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x0725f8e8
+  type_id: 0x141901a7
+  full_name: "__d_drop"
 }
 elf_symbol {
   id: 0xc1737e0f
@@ -390135,6 +390150,15 @@ elf_symbol {
   crc: 0xfb04f7c5
   type_id: 0x880a3e61
   full_name: "d_alloc_parallel"
+}
+elf_symbol {
+  id: 0x2023f91e
+  name: "d_delete"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x9199b9f4
+  type_id: 0x141901a7
+  full_name: "d_delete"
 }
 elf_symbol {
   id: 0xfeea461b
@@ -425248,6 +425272,15 @@ elf_symbol {
   full_name: "redirty_page_for_writepage"
 }
 elf_symbol {
+  id: 0x3b03aaea
+  name: "refcount_dec_and_lock"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x5e06bc5c
+  type_id: 0xf6ab2a7f
+  full_name: "refcount_dec_and_lock"
+}
+elf_symbol {
   id: 0xeeb1ddf9
   name: "refcount_dec_and_mutex_lock"
   is_defined: true
@@ -430803,6 +430836,15 @@ elf_symbol {
   crc: 0x104b7efc
   type_id: 0x9a667a13
   full_name: "sk_msg_zerocopy_from_iter"
+}
+elf_symbol {
+  id: 0x216a640a
+  name: "sk_net_refcnt_upgrade"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa8551682
+  type_id: 0x17c95d08
+  full_name: "sk_net_refcnt_upgrade"
 }
 elf_symbol {
   id: 0xb00a73bc
@@ -447593,6 +447635,7 @@ interface {
   symbol_id: 0x42e03bd1
   symbol_id: 0x857a0e42
   symbol_id: 0xe889d441
+  symbol_id: 0x5860ef21
   symbol_id: 0xc1737e0f
   symbol_id: 0x087c7a06
   symbol_id: 0x8f70cdad
@@ -450643,6 +450686,7 @@ interface {
   symbol_id: 0x82537a82
   symbol_id: 0x79187969
   symbol_id: 0x4b8dc0ec
+  symbol_id: 0x2023f91e
   symbol_id: 0xfeea461b
   symbol_id: 0x9534fec7
   symbol_id: 0x66e2e005
@@ -454535,6 +454579,7 @@ interface {
   symbol_id: 0xc61bae77
   symbol_id: 0x2a59e35c
   symbol_id: 0x8fe1956e
+  symbol_id: 0x3b03aaea
   symbol_id: 0xeeb1ddf9
   symbol_id: 0x54bb98b3
   symbol_id: 0x183217e2
@@ -455152,6 +455197,7 @@ interface {
   symbol_id: 0x154f6c3d
   symbol_id: 0x8da4646f
   symbol_id: 0x1befb3d5
+  symbol_id: 0x216a640a
   symbol_id: 0xb00a73bc
   symbol_id: 0x31b3c589
   symbol_id: 0xe6c00408
