@@ -16,6 +16,23 @@
       "message": "Bypassing lint as this is an intentional KABI break.",
       "revId": "8427f135e9bab0324b7a35ef387e27b657819538",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47d63050_6bc2b3e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-09-14T11:41:03Z",
+      "side": 1,
+      "message": "Two things would instill more confidence (pick one):\n\n- document which vendors are affected in the commit message and ensure we have a reviewed-by or whatever from each of them\n- create new hooks, ensure all vendors have switched to them, then the only exceptional piece is dropping the old symbols (and types) in a follow-up change",
+      "revId": "8427f135e9bab0324b7a35ef387e27b657819538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
