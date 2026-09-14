@@ -43,6 +43,48 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d333ac51_d06ac8c6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1050053
+      },
+      "writtenOn": "2026-09-14T12:50:49Z",
+      "side": 1,
+      "message": "Yeah, it\u0027s fair point, the following module can be modulized instead of enabling as build-in module, we will remove it out.\n- DRM_DISPLAY_HELPER\n- DRM_DISPLAY_DP_AUX_BUS",
+      "parentUuid": "7064be99_22a8e7e3",
+      "range": {
+        "startLine": 10,
+        "startChar": 42,
+        "endLine": 12,
+        "endChar": 0
+      },
+      "revId": "3a495199bd2d7cd9630220c8f7d2117890cdf734",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "426d5a23_835d02b4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1050053
+      },
+      "writtenOn": "2026-09-14T12:50:49Z",
+      "side": 1,
+      "message": "Hi John,\nHere is the increases in the vmlinux size for the 3 kconfigs:\n- DP AUX bus: 3,554 bytes\n- Host1x context bus: 484 bytes",
+      "parentUuid": "ed556187_b7a99f3f",
+      "revId": "3a495199bd2d7cd9630220c8f7d2117890cdf734",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9e15a53e_272d5bd4",
         "filename": "init/Kconfig.gki",
         "patchSetId": 1
@@ -78,6 +120,30 @@
           ]
         }
       ],
+      "revId": "3a495199bd2d7cd9630220c8f7d2117890cdf734",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84bfc892_d87c1dfd",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1050053
+      },
+      "writtenOn": "2026-09-14T12:50:49Z",
+      "side": 1,
+      "message": "Thanks. CONFIG_TEGRA_HOST1X_CONTEXT_BUS does not enable the full Host1x driver. It enables a small built-in bus object required by the core IOMMU code. The Host1x driver itself remains a vendor module.\n\nBecause this is a hidden core-kernel option, host1x.ko cannot enable it after GKI is built. GKI already uses similar hidden configuration groups for vendor dependencies, such as GKI_HIDDEN_QCOM_CONFIGS.\n\nFurthermore, the same Tegra configuration was accepted for Android 15/6.6 in change 3634732 (https://android-review.googlesource.com/c/kernel/common/+/3634732).",
+      "parentUuid": "9e15a53e_272d5bd4",
+      "range": {
+        "startLine": 8,
+        "startChar": 8,
+        "endLine": 8,
+        "endChar": 32
+      },
       "revId": "3a495199bd2d7cd9630220c8f7d2117890cdf734",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
