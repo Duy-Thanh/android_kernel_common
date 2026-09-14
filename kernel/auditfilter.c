@@ -582,7 +582,7 @@ static struct audit_entry *audit_data_to_entry(struct audit_rule_data *data,
 				err = PTR_ERR(str);
 				goto exit_free;
 			}
-			audit_mark = audit_alloc_mark(&entry->rule, str, f_val, NULL);
+			audit_mark = audit_alloc_mark(&entry->rule, str, f_val);
 			if (IS_ERR(audit_mark)) {
 				kfree(str);
 				err = PTR_ERR(audit_mark);
@@ -809,8 +809,7 @@ static inline int audit_dupe_lsm_field(struct audit_field *df,
  * rule with the new rule in the filterlist, then free the old rule.
  * The rlist element is undefined; list manipulations are handled apart from
  * the initial copy. */
-struct audit_entry *audit_dupe_rule(struct audit_krule *old,
-				    struct audit_watch_ctx *ctx)
+struct audit_entry *audit_dupe_rule(struct audit_krule *old)
 {
 	u32 fcount = old->field_count;
 	struct audit_entry *entry;
@@ -869,7 +868,7 @@ struct audit_entry *audit_dupe_rule(struct audit_krule *old,
 				new->filterkey = fk;
 			break;
 		case AUDIT_EXE:
-			err = audit_dupe_exe(new, old, ctx);
+			err = audit_dupe_exe(new, old);
 			break;
 		}
 		if (err) {
@@ -1402,7 +1401,7 @@ static int update_lsm_rule(struct audit_krule *r)
 	if (!security_audit_rule_known(r))
 		return 0;
 
-	nentry = audit_dupe_rule(r, NULL);
+	nentry = audit_dupe_rule(r);
 	if (entry->rule.exe)
 		audit_remove_mark(entry->rule.exe);
 	if (IS_ERR(nentry)) {

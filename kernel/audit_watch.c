@@ -243,8 +243,7 @@ static void audit_watch_log_rule_change(struct audit_krule *r, struct audit_watc
 /* Update inode info in audit rules based on filesystem event. */
 static void audit_update_watch(struct audit_parent *parent,
 			       const struct qstr *dname, dev_t dev,
-			       u64 ino, unsigned int invalidating,
-			       struct audit_watch_ctx *ctx)
+			       u64 ino, unsigned int invalidating)
 {
 	struct audit_watch *owatch, *nwatch, *nextw;
 	struct audit_krule *r, *nextr;
@@ -280,7 +279,7 @@ static void audit_update_watch(struct audit_parent *parent,
 			list_del(&oentry->rule.rlist);
 			list_del_rcu(&oentry->list);
 
-			nentry = audit_dupe_rule(&oentry->rule, ctx);
+			nentry = audit_dupe_rule(&oentry->rule);
 			if (IS_ERR(nentry)) {
 				list_del(&oentry->rule.list);
 				audit_panic("error updating watch, removing");
@@ -480,17 +479,10 @@ static int audit_watch_handle_event(struct fsnotify_mark *inode_mark, u32 mask,
 	    WARN_ON_ONCE(!inode))
 		return 0;
 
-	if (mask & (FS_CREATE|FS_MOVED_TO) && inode) {
-		struct audit_watch_ctx ctx = { .dir = dir, .child = inode };
-
-		audit_update_watch(parent, dname, inode->i_sb->s_dev, inode->i_ino, 0,
-				   &ctx);
-	} else if (mask & (FS_DELETE|FS_MOVED_FROM)) {
-		struct audit_watch_ctx ctx = { .dir = dir, .child = NULL };
-
-		audit_update_watch(parent, dname, AUDIT_DEV_UNSET, AUDIT_INO_UNSET, 1,
-				   &ctx);
-	}
+	if (mask & (FS_CREATE|FS_MOVED_TO) && inode)
+		audit_update_watch(parent, dname, inode->i_sb->s_dev, inode->i_ino, 0);
+	else if (mask & (FS_DELETE|FS_MOVED_FROM))
+		audit_update_watch(parent, dname, AUDIT_DEV_UNSET, AUDIT_INO_UNSET, 1);
 	else if (mask & (FS_DELETE_SELF|FS_UNMOUNT|FS_MOVE_SELF))
 		audit_remove_parent_watches(parent);
 
@@ -513,8 +505,7 @@ static int __init audit_watch_init(void)
 }
 device_initcall(audit_watch_init);
 
-int audit_dupe_exe(struct audit_krule *new, struct audit_krule *old,
-		   struct audit_watch_ctx *ctx)
+int audit_dupe_exe(struct audit_krule *new, struct audit_krule *old)
 {
 	struct audit_fsnotify_mark *audit_mark;
 	char *pathname;
@@ -523,7 +514,7 @@ int audit_dupe_exe(struct audit_krule *new, struct audit_krule *old,
 	if (!pathname)
 		return -ENOMEM;
 
-	audit_mark = audit_alloc_mark(new, pathname, strlen(pathname), ctx);
+	audit_mark = audit_alloc_mark(new, pathname, strlen(pathname));
 	if (IS_ERR(audit_mark)) {
 		kfree(pathname);
 		return PTR_ERR(audit_mark);
