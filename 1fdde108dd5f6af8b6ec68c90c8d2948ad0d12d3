@@ -33,6 +33,24 @@
       "message": "what is the upstreaming plan for these two patches?",
       "revId": "1fdde108dd5f6af8b6ec68c90c8d2948ad0d12d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef8b3e82_be03fddd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-09-15T23:47:07Z",
+      "side": 1,
+      "message": "This patch currently only demonstrates how the APF netlink is used; we do not plan to send this patch upstream as a first step (since it is not the real driver use case). As a first step, we plan to submit the APF netlink patch and partner with Intel to send the iwlwifi patch upstream.\n\nOnce we convinced upstream to take the APF netlink, we can talk to Intel to see if there is a clean way so that can get this patch to upstream as well. AFAIK, mac80211_hwsim is reviewed at wirelessdev, so Intel is the maintainer.",
+      "parentUuid": "6f16c0e4_fc2b86b8",
+      "revId": "1fdde108dd5f6af8b6ec68c90c8d2948ad0d12d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
