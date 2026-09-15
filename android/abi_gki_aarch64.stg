@@ -401927,6 +401927,15 @@ elf_symbol {
   full_name: "extcon_set_state_sync"
 }
 elf_symbol {
+  id: 0xad3eb214
+  name: "extcon_sync"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x0c4d179b
+  type_id: 0x989473cc
+  full_name: "extcon_sync"
+}
+elf_symbol {
   id: 0xb107d2cd
   name: "extcon_unregister_notifier"
   is_defined: true
@@ -452323,6 +452332,7 @@ interface {
   symbol_id: 0xb1dfbb02
   symbol_id: 0xacc42253
   symbol_id: 0x0a446897
+  symbol_id: 0xad3eb214
   symbol_id: 0xb107d2cd
   symbol_id: 0x5af879a8
   symbol_id: 0x8628f24d
