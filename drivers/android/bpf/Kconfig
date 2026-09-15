@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: GPL-2.0
+
+config ANDROID_BPF_FD_LOADER
+	tristate "Android BPF FD Loader Driver"
+	depends on BPF_SYSCALL && RUST
+	help
+	  This option enables the Android BPF FD Loader driver.
+	  The loader provides an IOCTL interface on /dev/android_bpf_loader
+	  to load BPF programs and maps using BPF light skeletons from a file
+	  descriptor passed by userspace.
