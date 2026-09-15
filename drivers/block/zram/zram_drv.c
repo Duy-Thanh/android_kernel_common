@@ -3393,6 +3393,7 @@ static const struct block_device_operations zram_devops = {
 	.submit_bio = zram_submit_bio,
 	.swap_slot_free_notify = zram_slot_free_notify,
 	.ioctl = zram_ioctl,
+	.compat_ioctl = blkdev_compat_ptr_ioctl,
 	.owner = THIS_MODULE
 };
 
