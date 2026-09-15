@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c965ee49_82755608",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-09-15T17:57:02Z",
+      "side": 1,
+      "message": "What is unique about your r8152 driver? Why can\u0027t you use the upstream version?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 0
+      },
+      "revId": "31660f9bae78d9d56044a74b8a9f7a4e6275ed00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cd42ce60_a2091f22",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
