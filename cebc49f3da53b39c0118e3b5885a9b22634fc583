@@ -16,6 +16,24 @@
       "message": "I recognize this is already pending, but CANCEL_TIMEOUT is HZ, which is jiffies/sec, which you are treating as a msec and then re-converting it to jiffies.  It seems like you should either define CANCEL_TIMEOUT in msecs (1000 ms if you want it to be a second), or skip the msec_to_jiffies conversion and just set time_left to CANCEL_TIMEOUT? Or am I reading this wrong?",
       "revId": "cebc49f3da53b39c0118e3b5885a9b22634fc583",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24969059_fb461816",
+        "filename": "drivers/i2c/busses/i2c-qcom-geni.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 3662039
+      },
+      "writtenOn": "2026-09-15T09:59:25Z",
+      "side": 1,
+      "message": "We used HZ here instead of a hardcoded 1000, as HZ is configured to 1000 on our target platforms. That said, I agree with your point that using msecs_to_jiffies(HZ) can be confusing since the helper expects a value in milliseconds. We did not receive any comments on this during upstream review, but I am happy to update it for better clarity and readability.",
+      "parentUuid": "eac51c26_2eb3a977",
+      "revId": "cebc49f3da53b39c0118e3b5885a9b22634fc583",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
