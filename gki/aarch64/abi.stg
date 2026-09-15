@@ -36074,6 +36074,11 @@ pointer_reference {
   pointee_type_id: 0xdaa74775
 }
 pointer_reference {
+  id: 0x3c3f3f74
+  kind: POINTER
+  pointee_type_id: 0xdabc1b4d
+}
+pointer_reference {
   id: 0x3c3fe9a7
   kind: POINTER
   pointee_type_id: 0xdabf4001
@@ -400518,6 +400523,12 @@ function {
   parameter_id: 0x3863a91c
 }
 function {
+  id: 0x1e818bd6
+  return_type_id: 0x48b5725f
+  parameter_id: 0x3c3f3f74
+  parameter_id: 0x4585663f
+}
+function {
   id: 0x1e82fda2
   return_type_id: 0x48b5725f
   parameter_id: 0x3860f3c0
@@ -417192,6 +417203,12 @@ function {
   return_type_id: 0x6720d32f
   parameter_id: 0x3806390a
   parameter_id: 0x0665e6b6
+}
+function {
+  id: 0x9399396a
+  return_type_id: 0x6720d32f
+  parameter_id: 0x3c3f3f74
+  parameter_id: 0x4585663f
 }
 function {
   id: 0x93994651
@@ -540974,6 +540991,15 @@ elf_symbol {
   full_name: "xt_register_match"
 }
 elf_symbol {
+  id: 0x450f3768
+  name: "xt_register_targets"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x71a5f134
+  type_id: 0x9399396a
+  full_name: "xt_register_targets"
+}
+elf_symbol {
   id: 0x807b9318
   name: "xt_unregister_match"
   is_defined: true
@@ -540981,6 +541007,15 @@ elf_symbol {
   crc: 0x81a5d3b9
   type_id: 0x12c61c4f
   full_name: "xt_unregister_match"
+}
+elf_symbol {
+  id: 0x7c598ee8
+  name: "xt_unregister_targets"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x795f7f99
+  type_id: 0x1e818bd6
+  full_name: "xt_unregister_targets"
 }
 elf_symbol {
   id: 0x2407d2bf
@@ -551871,7 +551906,9 @@ interface {
   symbol_id: 0xb73c4905
   symbol_id: 0xbb650596
   symbol_id: 0x7a3f2cd6
+  symbol_id: 0x450f3768
   symbol_id: 0x807b9318
+  symbol_id: 0x7c598ee8
   symbol_id: 0x2407d2bf
   symbol_id: 0x5056757e
   symbol_id: 0x0fc8c78d
