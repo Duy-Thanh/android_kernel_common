@@ -87,6 +87,24 @@
       "parentUuid": "8463e93e_a81a535d",
       "revId": "1dc1d20016777e4ee56f2b817d306c0232868f66",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12b4a3e7_b1c16d30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4972211
+      },
+      "writtenOn": "2026-09-15T08:39:27Z",
+      "side": 1,
+      "message": "Hi John, Lee\n\n\n\nInitially, I raised some Gerrits but encountered dependency issues. I later raised Gerrits for all the dependencies.",
+      "parentUuid": "52030344_564d597c",
+      "revId": "1dc1d20016777e4ee56f2b817d306c0232868f66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
