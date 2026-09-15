@@ -320,6 +320,7 @@ static struct task_dma_buf_record *alloc_task_dmabuf_record(void)
 
 static void free_task_dmabuf_record(struct task_dma_buf_record *rec)
 {
+	dma_buf_put(rec->dmabuf);
 	if (local_trylock(&dmabuf_rec_reloads.lock)) {
 		struct task_dma_buf_record_preload *preload = this_cpu_ptr(&dmabuf_rec_reloads);
 
@@ -378,6 +379,7 @@ static void add_task_dmabuf_record(struct task_dma_buf_info *dmabuf_info,
 {
 	lockdep_assert_held(&dmabuf_info->lock);
 
+	get_dma_buf(dmabuf);
 	rec->dmabuf = dmabuf;
 	rec->refcnt = 1;
 	list_add(&rec->node, &dmabuf_info->dmabufs);
