@@ -34,6 +34,24 @@
       "parentUuid": "eac51c26_2eb3a977",
       "revId": "cebc49f3da53b39c0118e3b5885a9b22634fc583",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16594100_6b0f37eb",
+        "filename": "drivers/i2c/busses/i2c-qcom-geni.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-09-15T21:57:16Z",
+      "side": 1,
+      "message": "Fixing it upstream should probably be the first step. Also, be aware, with the GKI HZ is 250.",
+      "parentUuid": "24969059_fb461816",
+      "revId": "cebc49f3da53b39c0118e3b5885a9b22634fc583",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
