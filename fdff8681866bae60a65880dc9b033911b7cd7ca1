@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "caefade1_4a7c503c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-09-15T21:19:33Z",
+      "side": 1,
+      "message": "One logical change per patch is preferred.",
+      "parentUuid": "cf04cad3_f729a885",
+      "revId": "fdff8681866bae60a65880dc9b033911b7cd7ca1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "48774a75_759af836",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "These changes were made specifically for the Android Audio custom feature.",
       "parentUuid": "48774a75_759af836",
+      "revId": "fdff8681866bae60a65880dc9b033911b7cd7ca1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd981411_a320df3d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-09-15T21:19:33Z",
+      "side": 1,
+      "message": "Again, apologies for my ignorance here, I don\u0027t know the details of the \"Android Audio custom feature\". How does that make them not relevant for upstream?",
+      "parentUuid": "5ae8d1b8_de8c1ab8",
       "revId": "fdff8681866bae60a65880dc9b033911b7cd7ca1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
