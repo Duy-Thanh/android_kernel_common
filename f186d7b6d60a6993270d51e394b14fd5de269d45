@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba01f8ed_f0e428d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4979922
+      },
+      "writtenOn": "2026-09-15T06:14:47Z",
+      "side": 1,
+      "message": "Hi Lee Jones,\n\nMay I know the reason for assigning a -1 to all the backport changes? These changes are required for both upcoming and existing automotive platforms, including Lemans, Monaco, NordAU, SECA, and other automotive targets.\n\nThanks,\nPraveen Talari",
+      "revId": "f186d7b6d60a6993270d51e394b14fd5de269d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
