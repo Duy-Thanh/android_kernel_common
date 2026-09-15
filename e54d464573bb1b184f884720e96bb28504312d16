@@ -88,6 +88,24 @@
       "parentUuid": "46b7907e_e9c5e514",
       "revId": "e54d464573bb1b184f884720e96bb28504312d16",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4fa96e4_a4137b45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3963932
+      },
+      "writtenOn": "2026-09-15T04:50:46Z",
+      "side": 1,
+      "message": "Hi Todd,\n\nThis cannot go into upstream, because from the kernel upstream perspective, nan interface is expected to be wdev, but our initial and all the existing android will have the qc drivers which registers it as netdev. We will eventually migrate to wdev, but without this fix, there will be opencount issue due to double decrement when nan is registered as netdev.",
+      "parentUuid": "ebcde41c_70cd1e0b",
+      "revId": "e54d464573bb1b184f884720e96bb28504312d16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
