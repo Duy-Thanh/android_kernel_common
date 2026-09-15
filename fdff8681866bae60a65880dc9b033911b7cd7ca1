@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cf04cad3_f729a885",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1872405
+      },
+      "writtenOn": "2026-09-15T20:30:54Z",
+      "side": 1,
+      "message": "Yes, the following two changes are combined here, but they can be separated if needed:\n-Add comfort noise support.\n-Add support for retrieving the decode capability bitmask and maximum PCM channel count.",
+      "parentUuid": "b932c947_b14d4123",
+      "revId": "fdff8681866bae60a65880dc9b033911b7cd7ca1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "48774a75_759af836",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2026-09-15T17:59:31Z",
       "side": 1,
       "message": "This doesn\u0027t obviously follow from the description. Could you expand a bit as to why this is the case? Has it been submitted upstream and rejected?",
+      "revId": "fdff8681866bae60a65880dc9b033911b7cd7ca1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ae8d1b8_de8c1ab8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1872405
+      },
+      "writtenOn": "2026-09-15T20:30:54Z",
+      "side": 1,
+      "message": "These changes were made specifically for the Android Audio custom feature.",
+      "parentUuid": "48774a75_759af836",
       "revId": "fdff8681866bae60a65880dc9b033911b7cd7ca1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
