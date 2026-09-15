@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b932c947_b14d4123",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-09-15T17:59:31Z",
+      "side": 1,
+      "message": "Apologies with my unfamiliarity with the audio details, but this sounds like its two separate changes combined here. Should this be split apart?",
+      "revId": "fdff8681866bae60a65880dc9b033911b7cd7ca1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48774a75_759af836",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-09-15T17:59:31Z",
+      "side": 1,
+      "message": "This doesn\u0027t obviously follow from the description. Could you expand a bit as to why this is the case? Has it been submitted upstream and rejected?",
+      "revId": "fdff8681866bae60a65880dc9b033911b7cd7ca1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
