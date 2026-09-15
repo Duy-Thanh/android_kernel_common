@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c04e70c7_3d1e4fe4",
+        "filename": "drivers/android/bpf/bpf_fd_loader.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2026-09-15T09:22:56Z",
+      "side": 1,
+      "message": "@aliceryhl@google.com I couldn\u0027t find anything in rust/kernel that could be reused. Does it make sense to define an OwnedFd struct here?",
+      "revId": "ca62cbffa82b40a51c75f3fc7f18af9ce6c0e1c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "475446f9_3da77001",
+        "filename": "drivers/android/bpf/bpf_fd_loader.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2026-09-15T09:22:56Z",
+      "side": 1,
+      "message": "@aliceryhl@google.com Do anonymous structs in unions have a stable name?",
+      "revId": "ca62cbffa82b40a51c75f3fc7f18af9ce6c0e1c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
