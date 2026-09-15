@@ -106,6 +106,24 @@
       "parentUuid": "ebcde41c_70cd1e0b",
       "revId": "e54d464573bb1b184f884720e96bb28504312d16",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab9d6c1f_9e86400a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-09-15T22:08:01Z",
+      "side": 1,
+      "message": "You didn\u0027t read my previous comment. The commit message needs to explain why there is an android-specific fix to a patch cited by Fixes that is upstream. Tell the whole story in the commit message so it is obvious that this needs to be an ANDROID patch.",
+      "parentUuid": "d4fa96e4_a4137b45",
+      "revId": "e54d464573bb1b184f884720e96bb28504312d16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
