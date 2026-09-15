@@ -16,6 +16,24 @@
       "message": "Proper fix to follow.",
       "revId": "61e989e6fd7e0ff081b0314cfb595da7a6a99368",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5abe9e87_864bb4f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2026-09-15T09:45:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4231168_6a1d0136",
+      "revId": "61e989e6fd7e0ff081b0314cfb595da7a6a99368",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
