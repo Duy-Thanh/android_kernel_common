@@ -123,6 +123,24 @@
       "parentUuid": "12b4a3e7_b1c16d30",
       "revId": "1dc1d20016777e4ee56f2b817d306c0232868f66",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "431dc752_f7b7a557",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-09-15T19:14:29Z",
+      "side": 1,
+      "message": "Added a response in the bug.",
+      "parentUuid": "6035dd11_a6063d90",
+      "revId": "1dc1d20016777e4ee56f2b817d306c0232868f66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
