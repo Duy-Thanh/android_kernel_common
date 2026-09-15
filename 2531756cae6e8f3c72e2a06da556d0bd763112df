@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e7472e6_faad73b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-09-15T17:33:42Z",
+      "side": 1,
+      "message": "The KMI break needs to be fixed. Can this be refactored to avoid changing net_device_ops?",
+      "revId": "2531756cae6e8f3c72e2a06da556d0bd763112df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
