@@ -4178,6 +4178,8 @@
   xsk_tx_peek_desc
   xsk_tx_release
   xsk_uses_need_wakeup
+  xt_register_targets
+  xt_unregister_targets
   zap_page_range_single
   zap_vma_ptes
   zlib_deflate
