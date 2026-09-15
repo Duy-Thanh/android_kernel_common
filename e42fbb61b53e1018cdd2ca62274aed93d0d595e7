@@ -16,6 +16,24 @@
       "message": "The aosp/4076368 unmaps the pvmfw from host mmu via setting the owner as pKVM. So the entry in host MMU is also annotated? If os, can below `ept_pte_annotated(\u0026pte)` check covers `is_pvmfw(gpa)` check?",
       "revId": "e42fbb61b53e1018cdd2ca62274aed93d0d595e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0e57853_4238c0cb",
+        "filename": "arch/x86/kvm/pkvm/vmx/ept.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-09-15T09:39:07Z",
+      "side": 1,
+      "message": "Yeah, it seems so... So it seems the only practical difference is that the printed error would be \"Host access to protected MMIO\" instead of \"Host access to protected memory\", which is slightly less accurate (we still don\u0027t treat pvmfw exactly as MMIO, we treat it as a special case)?\n\nSo perhaps it still wouldn\u0027t hurt to keep this check here? (In particular, pvmfw contains very sensitive secrets, so it might make some sense to paranoidally gate it with this earlier check here anyway?)",
+      "parentUuid": "e74c069c_02fc55f1",
+      "revId": "e42fbb61b53e1018cdd2ca62274aed93d0d595e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
