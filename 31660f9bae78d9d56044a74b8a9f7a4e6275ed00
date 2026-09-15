@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d76b777c_08a24576",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 3386406
+      },
+      "writtenOn": "2026-09-15T22:43:14Z",
+      "side": 1,
+      "message": "As for what\u0027s unique about it and why we can\u0027t use the upstream version, the upstream driver doesn\u0027t support a variety of product specific customizations/features that are needed on our platform, hence why we need to use our downstream version of the r8152 driver.\n\nThe reason these features haven\u0027t been upstreamed and backported to GKI is that this driver is owned by the vendor Realtek, and while working with them they themselves suggested to use the downstream driver with our own custom changes.",
+      "parentUuid": "505dee5d_5cb7e392",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 0
+      },
+      "revId": "31660f9bae78d9d56044a74b8a9f7a4e6275ed00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cd42ce60_a2091f22",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
