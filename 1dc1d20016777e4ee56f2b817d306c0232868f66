@@ -69,6 +69,24 @@
       "parentUuid": "764ee6c0_04428a6e",
       "revId": "1dc1d20016777e4ee56f2b817d306c0232868f66",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52030344_564d597c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4979922
+      },
+      "writtenOn": "2026-09-15T08:18:27Z",
+      "side": 1,
+      "message": "Thank you for response. \nI didn\u0027t see Lee\u0027s comment. I have commented on few Gerrits based on subsystem. Sure, will not repeat it.\n\n@harish, please address all bug comments.",
+      "parentUuid": "8463e93e_a81a535d",
+      "revId": "1dc1d20016777e4ee56f2b817d306c0232868f66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
