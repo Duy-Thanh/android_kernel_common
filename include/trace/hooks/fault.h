@@ -31,6 +31,10 @@ DECLARE_HOOK(android_vh_kernel_nofault,
 	TP_PROTO(bool *use_nofault),
 	TP_ARGS(use_nofault));
 
+DECLARE_HOOK(android_vh_arm64_user_fault_unlock_mmap_bypass,
+	TP_PROTO(unsigned long addr, unsigned int mm_flags, bool *bypass),
+	TP_ARGS(addr, mm_flags, bypass));
+
 #endif /* _TRACE_HOOK_FAULT_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
