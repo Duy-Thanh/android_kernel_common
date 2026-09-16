@@ -26,6 +26,7 @@
 #include <trace/hooks/cpuinfo.h>
 #include <trace/hooks/debug.h>
 #include <trace/hooks/dmabuf.h>
+#include <trace/hooks/dmv_debug.h>
 #include <trace/hooks/dtask.h>
 #include <trace/hooks/dwc3.h>
 #include <trace/hooks/epoch.h>
@@ -430,7 +431,13 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_gcma_cc_store_page_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_get_page_wmark);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_gic_set_affinity);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_gic_v3_suspend);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_handle_add_blks_map);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_handle_add_fec_mismatch_blks);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_handle_add_skipped_blks);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_handle_data_error);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_handle_folio_writeback);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_handle_get_b_info);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_handle_metadata_error);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_inet_create);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_inet_csk_clone_lock);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_init_adjust_zone_wmark);
