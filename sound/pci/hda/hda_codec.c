@@ -2391,6 +2391,39 @@ static int snd_hda_spdif_out_switch_put(struct snd_kcontrol *kcontrol,
 	return change;
 }
 
+static int snd_hda_comfort_noise_info(struct snd_kcontrol *kcontrol,
+				      struct snd_ctl_elem_info *uinfo)
+{
+	uinfo->type = SNDRV_CTL_ELEM_TYPE_BOOLEAN;
+	uinfo->count = 1;
+	uinfo->value.integer.min = 0;
+	uinfo->value.integer.max = 1;
+	return 0;
+}
+
+static int snd_hda_comfort_noise_get(struct snd_kcontrol *kcontrol,
+				     struct snd_ctl_elem_value *ucontrol)
+{
+	struct hda_codec *codec = snd_kcontrol_chip(kcontrol);
+
+	ucontrol->value.integer.value[0] = codec->comfort_noise;
+	dev_dbg(&codec->core.dev, "HDA comfort_noise get: %d\n",
+		codec->comfort_noise);
+	return 0;
+}
+
+static int snd_hda_comfort_noise_put(struct snd_kcontrol *kcontrol,
+				     struct snd_ctl_elem_value *ucontrol)
+{
+	struct hda_codec *codec = snd_kcontrol_chip(kcontrol);
+	bool old = codec->comfort_noise;
+	bool new = !!ucontrol->value.integer.value[0];
+
+	codec->comfort_noise = new;
+	dev_info(&codec->core.dev, "HDA comfort_noise set: %d\n", new);
+	return old != new;
+}
+
 static const struct snd_kcontrol_new dig_mixes[] = {
 	{
 		.access = SNDRV_CTL_ELEM_ACCESS_READ,
@@ -2419,6 +2452,17 @@ static const struct snd_kcontrol_new dig_mixes[] = {
 		.info = snd_hda_spdif_out_switch_info,
 		.get = snd_hda_spdif_out_switch_get,
 		.put = snd_hda_spdif_out_switch_put,
+	},
+	{ } /* end */
+};
+
+static const struct snd_kcontrol_new hda_codec_ctls[] = {
+	{
+		.iface = SNDRV_CTL_ELEM_IFACE_MIXER,
+		.name = "HDA Comfort Noise",
+		.info = snd_hda_comfort_noise_info,
+		.get = snd_hda_comfort_noise_get,
+		.put = snd_hda_comfort_noise_put,
 	},
 	{ } /* end */
 };
@@ -2494,6 +2538,20 @@ int snd_hda_create_dig_out_ctls(struct hda_codec *codec,
 			     AC_VERB_GET_DIGI_CONVERT_1, &val);
 	spdif->ctls = val;
 	spdif->status = convert_to_spdif_status(spdif->ctls);
+
+	/* Register codec-global controls once (not per digital output). */
+	if (!find_mixer_ctl(codec, "HDA Comfort Noise", 0, 0)) {
+		const struct snd_kcontrol_new *ctl;
+
+		for (ctl = hda_codec_ctls; ctl->name; ctl++) {
+			kctl = snd_ctl_new1(ctl, codec);
+			if (!kctl)
+				return -ENOMEM;
+			err = snd_hda_ctl_add(codec, associated_nid, kctl);
+			if (err < 0)
+				return err;
+		}
+	}
 	return 0;
 }
 EXPORT_SYMBOL_GPL(snd_hda_create_dig_out_ctls);
