@@ -16,6 +16,24 @@
       "message": "If it is needed for upstream Rust abstractions, why isn\u0027t it upstream? Are we going to have to carry this change in android18-7.x? Please provide information on why this is android-specific in the commit message.",
       "revId": "65b280934efbe11a8136fc691d40fc0d13c6aa20",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9706017e_8c9bcd1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-09-16T16:37:36Z",
+      "side": 1,
+      "message": "This is a small part of the upstream patch. The upstream patch hasn\u0027t landed because of unrelated discussion. I wanted to get in the KMI change asap while we work out other unrelated questions in the patch series.",
+      "parentUuid": "ad8e3820_24767539",
+      "revId": "65b280934efbe11a8136fc691d40fc0d13c6aa20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
