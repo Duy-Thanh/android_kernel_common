@@ -124,6 +124,24 @@
       "parentUuid": "b22dda8c_b69ec7d7",
       "revId": "bb176d5b38e3ab0dce900adcc303dfea8a131fa7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27e18463_af33831d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1865564
+      },
+      "writtenOn": "2026-09-16T01:24:51Z",
+      "side": 1,
+      "message": "If it is an old module that isn\u0027t rebuilt with the new GKI binary, its watchdog_notify_pretimeout() is still the inline function [1] (which just prints a line of log).  It will continue to work as expected, it just won\u0027t have the new pretimeout governor features.\n\nFor modules that are rebuilt, their watchdog_notify_pretimeout() will use the newly exported function [2] and gain the new functionality (which prints all CPU backtraces).\n\nFrom my best understanding, there should be no breakage for other partners who don\u0027t rebuild their modules.\n\n[1] https://elixir.bootlin.com/linux/v6.12.107/source/include/linux/watchdog.h#L208\n[2] https://elixir.bootlin.com/linux/v6.12.107/source/drivers/watchdog/watchdog_pretimeout.c#L113",
+      "parentUuid": "fab4bd8c_42a9b044",
+      "revId": "bb176d5b38e3ab0dce900adcc303dfea8a131fa7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
