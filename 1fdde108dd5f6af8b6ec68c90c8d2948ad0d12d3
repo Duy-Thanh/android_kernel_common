@@ -69,6 +69,24 @@
       "parentUuid": "ef8b3e82_be03fddd",
       "revId": "1fdde108dd5f6af8b6ec68c90c8d2948ad0d12d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df39cb2f_9b5d3cb5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-09-16T00:38:28Z",
+      "side": 1,
+      "message": "In theory, this patch doesn\u0027t have to be merged into ACK to unblock chipset vendor: we are raising the CL here to demonstrate to Intel, Realtek, and Qualcomm how to use the APF netlink API.\n\nHowever, there is a benefit to including it in ACK: we can run APF xTS on Cuttlefish, which increases the test coverage of the newly introduced netlink API as well as the framework side integration.\n\nOn the other hand, merging this also forces ACK to carry tech debt, so whether we should merge this patch into ACK is debatable. If the GKI team has concerns about the tech debt, we are OK with only merging the netlink family code into ACK.",
+      "parentUuid": "d89dffa9_5ffb631b",
+      "revId": "1fdde108dd5f6af8b6ec68c90c8d2948ad0d12d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
