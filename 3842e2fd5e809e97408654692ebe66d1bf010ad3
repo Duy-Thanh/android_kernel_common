@@ -34,6 +34,24 @@
       "parentUuid": "8d6470ab_36e803be",
       "revId": "3842e2fd5e809e97408654692ebe66d1bf010ad3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2261794d_8a9348c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2026-09-16T10:17:52Z",
+      "side": 1,
+      "message": "Not sure I understand the logic.  upstream-linux-6.18.y is just a mirror of Stable\u0027s linux-6.18.y and doesn\u0027t have Change-Ids.\n\nI agree with John, this should have the same `Change-Id` as aosp/4301032",
+      "parentUuid": "55dca490_b13ecbc0",
+      "revId": "3842e2fd5e809e97408654692ebe66d1bf010ad3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
