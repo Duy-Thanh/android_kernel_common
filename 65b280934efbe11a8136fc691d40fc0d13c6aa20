@@ -70,6 +70,24 @@
       "parentUuid": "20a8c722_4e0cd35d",
       "revId": "65b280934efbe11a8136fc691d40fc0d13c6aa20",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7adf551b_df9d1f4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-09-16T18:07:18Z",
+      "side": 1,
+      "message": "I agree. Also, please add the additional information about the upstream patch and the rationale for taking just this piece to the commit message.",
+      "parentUuid": "d2656237_e0b87f72",
+      "revId": "65b280934efbe11a8136fc691d40fc0d13c6aa20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
