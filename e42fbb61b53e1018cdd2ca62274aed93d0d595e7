@@ -52,6 +52,24 @@
       "parentUuid": "d0e57853_4238c0cb",
       "revId": "e42fbb61b53e1018cdd2ca62274aed93d0d595e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d1436c2_90423027",
+        "filename": "arch/x86/kvm/pkvm/vmx/ept.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-09-16T09:09:32Z",
+      "side": 1,
+      "message": "Yeah good point, in that range_contains() check below we are actually relying on the pvmfw PTEs to be annotated, so that we already know that `cur` doesn\u0027t overlap with pvmfw (since `cur` is a subset of the range mapped by `pte` which is *not* annotated) so we don\u0027t need to check that explicitly.\n\nSo, ok, the _only_ reason for this `is_pvmfw()` check here is to not print \"Host access to protected MMIO\" for pvmfw. :) \n\n\u003e To paranoidally gate it, do we want to get the below pvmfw overlaps check back?\n\nI don\u0027t like this idea very much. :) Let\u0027s just forget my point about paranoid check? :D",
+      "parentUuid": "658a22fc_65487535",
+      "revId": "e42fbb61b53e1018cdd2ca62274aed93d0d595e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
