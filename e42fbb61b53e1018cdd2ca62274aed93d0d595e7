@@ -88,6 +88,24 @@
       "parentUuid": "2d1436c2_90423027",
       "revId": "e42fbb61b53e1018cdd2ca62274aed93d0d595e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a24db371_73fbdbfd",
+        "filename": "arch/x86/kvm/pkvm/vmx/ept.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-09-16T10:35:48Z",
+      "side": 1,
+      "message": "Yeah, maybe let\u0027s do that.",
+      "parentUuid": "9d41ca19_fd673458",
+      "revId": "e42fbb61b53e1018cdd2ca62274aed93d0d595e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
