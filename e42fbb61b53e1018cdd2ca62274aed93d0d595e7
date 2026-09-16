@@ -70,6 +70,24 @@
       "parentUuid": "658a22fc_65487535",
       "revId": "e42fbb61b53e1018cdd2ca62274aed93d0d595e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d41ca19_fd673458",
+        "filename": "arch/x86/kvm/pkvm/vmx/ept.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2026-09-16T10:29:39Z",
+      "side": 1,
+      "message": "\u003eSo, ok, the only reason for this is_pvmfw() check here is to not print \"Host access to protected MMIO\" for pvmfw. 😊\n\nIf so, maybe we can move the is_pvmfw() check inside the `if (ept_pte_annotated(\u0026pte))`, so that can specifically print \"Host access to pvmfw at 0x%lx\\n\" since we don\u0027t treat pvmfw as either protected memory or protected MMIO?",
+      "parentUuid": "2d1436c2_90423027",
+      "revId": "e42fbb61b53e1018cdd2ca62274aed93d0d595e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
