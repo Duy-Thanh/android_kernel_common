@@ -16,6 +16,24 @@
       "message": "Any context as to why this hasn\u0027t gone upstream?",
       "revId": "c144859316cb536c8e9a9e7b9ca7247782ae9b33",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9694d7e0_7c0c5e09",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3386406
+      },
+      "writtenOn": "2026-09-16T18:37:33Z",
+      "side": 1,
+      "message": "Oops looks like I took a bit too long to write out my reasoning in the partner bug after pushing this out.\n\nI\u0027ll just copy/paste it below (this is for both changes as part of this earlycon set):\nWe understand that ideally kernel earlycon enablement shouldn\u0027t have to be pushed as an Android specific patch. In this case, for this Android device platform\u0027s kernel earlycon, the TCU was the ideal uart for us to enable earlycon based on our product specifications. \nOur Linux team is against upstreaming changes to enable earlycon for TCU as they find it\u0027s not generally the correct UART to enable earlycon and think earlycon should use a different UART entirely, hence why we\u0027re unable to upstream them. Despite this, on our Android side we still require this functionality to be baked into the boot img to allow our SQA testing to capture early kernel logs for any nv-specific bugs they file when testing our product on gki2.0, especially bugs that are more difficult to reproduce and only show intermittently in stress/stability coverage.",
+      "parentUuid": "eaf6ec9f_5fc46abd",
+      "revId": "c144859316cb536c8e9a9e7b9ca7247782ae9b33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
