@@ -26,6 +26,7 @@
 #include <trace/hooks/cpuinfo.h>
 #include <trace/hooks/debug.h>
 #include <trace/hooks/dmabuf.h>
+#include <trace/hooks/dmv_debug.h>
 #include <trace/hooks/dtask.h>
 #include <trace/hooks/dwc3.h>
 #include <trace/hooks/epoch.h>
@@ -314,6 +315,12 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dma_heap_buffer_alloc_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dma_heap_buffer_alloc_lat_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dma_heap_buffer_alloc_lat_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dma_heap_buffer_alloc_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dmv_add_blks_map);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dmv_add_fec_mismatch_blks);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dmv_add_skipped_blks);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dmv_data_error);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dmv_get_b_info);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dmv_metadata_error);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_anonymous_page);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_async_mmap_readahead);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_fault_around);
