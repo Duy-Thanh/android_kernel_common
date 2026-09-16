@@ -52,6 +52,24 @@
       "parentUuid": "24969059_fb461816",
       "revId": "cebc49f3da53b39c0118e3b5885a9b22634fc583",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc9dcc3f_15b58142",
+        "filename": "drivers/i2c/busses/i2c-qcom-geni.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 4979922
+      },
+      "writtenOn": "2026-09-16T04:07:26Z",
+      "side": 1,
+      "message": "Yes, I was aware of that. Even if HZ is 250, it should still be sufficient for handling the cancel command timeout.",
+      "parentUuid": "16594100_6b0f37eb",
+      "revId": "cebc49f3da53b39c0118e3b5885a9b22634fc583",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
