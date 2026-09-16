@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9314adb2_df77908a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-09-16T17:45:53Z",
+      "side": 1,
+      "message": "It has always done this apparently, since the test was created. It\u0027s pretty disappointing that we have to duplicate and translate every Makefile to bazel. 😞",
+      "range": {
+        "startLine": 11,
+        "startChar": 10,
+        "endLine": 12,
+        "endChar": 34
+      },
+      "revId": "5013777496ea6d1945ad0c3c1791d8db11d38cee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
