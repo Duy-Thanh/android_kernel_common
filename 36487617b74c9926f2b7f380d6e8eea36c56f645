@@ -34,6 +34,24 @@
       "parentUuid": "1e13d2e8_a9cdd4db",
       "revId": "36487617b74c9926f2b7f380d6e8eea36c56f645",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1453315_2b524a9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1872405
+      },
+      "writtenOn": "2026-09-16T19:41:19Z",
+      "side": 1,
+      "message": "This change cannot be upstreamed because it alters the default fill-silence behavior. Instead of inserting silence, the `fill_silence` call fills the buffer with a very low-amplitude, high-frequency signal outside the audible range. On our Android product, this functionality is exposed as a UI-controlled custom feature called \"comfort noise,\" which keeps receivers active and avoids startup latency that could clip the beginning of the audio stream.",
+      "parentUuid": "1ff99794_9453405b",
+      "revId": "36487617b74c9926f2b7f380d6e8eea36c56f645",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
