@@ -52,6 +52,24 @@
       "parentUuid": "1ff99794_9453405b",
       "revId": "36487617b74c9926f2b7f380d6e8eea36c56f645",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71cbb3a3_b4da3c64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-09-16T19:50:29Z",
+      "side": 1,
+      "message": "\u003e change cannot be upstreamed because it alters the default fill-silence behavior\n\nBut it seems to do so in a pretty clean way (adding a new mixer control) that makes it optional and appears to be resolving a real and practical problem.  Its still not clear why upstream would necessarily reject this.",
+      "parentUuid": "f1453315_2b524a9c",
+      "revId": "36487617b74c9926f2b7f380d6e8eea36c56f645",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
