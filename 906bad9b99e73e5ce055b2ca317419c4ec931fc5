@@ -34,6 +34,24 @@
       "parentUuid": "09ef505d_08ae17a1",
       "revId": "906bad9b99e73e5ce055b2ca317419c4ec931fc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c0332a4_189857fa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-09-16T18:09:36Z",
+      "side": 1,
+      "message": "Add this rationale to the commit message and make the same updates to aosp/4289393",
+      "parentUuid": "936d5396_6c57373e",
+      "revId": "906bad9b99e73e5ce055b2ca317419c4ec931fc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
