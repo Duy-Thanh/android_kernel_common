@@ -51,6 +51,24 @@
       "parentUuid": "6f16c0e4_fc2b86b8",
       "revId": "1fdde108dd5f6af8b6ec68c90c8d2948ad0d12d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d89dffa9_5ffb631b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-09-16T00:08:33Z",
+      "side": 1,
+      "message": "If this is not a real driver use case, why is it needed in ACK?",
+      "parentUuid": "ef8b3e82_be03fddd",
+      "revId": "1fdde108dd5f6af8b6ec68c90c8d2948ad0d12d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
