@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89290a08_f1f6ad96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-09-16T16:33:00Z",
+      "side": 1,
+      "message": "move the symbol change to a separate patch on top of this one. Please do not mix content and symbol changes in a single patch",
+      "revId": "4feb96bb04eb15b8e129030aa0a4be2e9e748845",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
