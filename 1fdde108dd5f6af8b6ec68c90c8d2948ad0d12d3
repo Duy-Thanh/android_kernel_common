@@ -87,6 +87,24 @@
       "parentUuid": "d89dffa9_5ffb631b",
       "revId": "1fdde108dd5f6af8b6ec68c90c8d2948ad0d12d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "def36df3_21cc9bfe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-09-16T18:20:18Z",
+      "side": 1,
+      "message": "\u003e we can run APF xTS on Cuttlefish\n\nIs someone working on these tests? I\u0027m ok with this patch if it enables this testing, but not if it is just a dead driver waiting for a test that will never arrive.",
+      "parentUuid": "df39cb2f_9b5d3cb5",
+      "revId": "1fdde108dd5f6af8b6ec68c90c8d2948ad0d12d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
