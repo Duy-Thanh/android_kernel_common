@@ -16,6 +16,24 @@
       "message": "Should this have the same ChagneId as aosp/4301032 ?",
       "revId": "3842e2fd5e809e97408654692ebe66d1bf010ad3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55dca490_b13ecbc0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-09-16T00:34:56Z",
+      "side": 1,
+      "message": "Well, it doesn\u0027t because I picked it from upstream-linux-6.18.y, but it is clean wrt upstream (as is the 6.12 version of aosp/4301032), so I guess since they are to what they would have been if cherry-picked from upstream, they should have the same Change-Id.",
+      "parentUuid": "8d6470ab_36e803be",
+      "revId": "3842e2fd5e809e97408654692ebe66d1bf010ad3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
