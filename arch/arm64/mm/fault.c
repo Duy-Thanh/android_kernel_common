@@ -581,6 +581,7 @@ static int __kprobes do_page_fault(unsigned long far, unsigned long esr,
 	struct vm_area_struct *vma;
 	int si_code;
 	int pkey = -1;
+	bool bypass = false;
 
 	if (kprobe_page_fault(regs, esr))
 		return 0;
@@ -646,7 +647,8 @@ static int __kprobes do_page_fault(unsigned long far, unsigned long esr,
 
 	perf_sw_event(PERF_COUNT_SW_PAGE_FAULTS, 1, regs, addr);
 
-	if (!(mm_flags & FAULT_FLAG_USER))
+	trace_android_vh_arm64_user_fault_lock_vma(addr, mm_flags, &bypass);
+	if (!(mm_flags & FAULT_FLAG_USER) && !bypass)
 		goto lock_mmap;
 
 	vma = lock_vma_under_rcu(mm, addr);
