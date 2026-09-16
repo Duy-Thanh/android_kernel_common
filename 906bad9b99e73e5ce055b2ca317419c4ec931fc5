@@ -16,6 +16,24 @@
       "message": "add more description. Why are these symbols needed? What features do they enable?",
       "revId": "906bad9b99e73e5ce055b2ca317419c4ec931fc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "936d5396_6c57373e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3600567
+      },
+      "writtenOn": "2026-09-16T01:31:06Z",
+      "side": 1,
+      "message": "After updating cifs.ko with the new baseline, these symbol errors are reported when running insmod cifs.ko; these symbol tables need to be updated.",
+      "parentUuid": "09ef505d_08ae17a1",
+      "revId": "906bad9b99e73e5ce055b2ca317419c4ec931fc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
