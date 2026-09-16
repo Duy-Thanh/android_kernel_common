@@ -13,11 +13,21 @@
  * This hook allows the vendor driver to tell the kernel:
  * "Don't allocate a buffer for this stream."
  */
+struct hda_codec;
 struct snd_pcm_substream;
 
 DECLARE_HOOK(android_vh_snd_pcm_check_no_buffer,
 	TP_PROTO(struct snd_pcm_substream *substream, bool *no_buffer),
 	TP_ARGS(substream, no_buffer));
+
+DECLARE_HOOK(android_vh_hda_add_controls,
+	TP_PROTO(struct hda_codec *codec, u16 associated_nid, int *err),
+	TP_ARGS(codec, associated_nid, err));
+
+DECLARE_HOOK(android_vh_hda_pcm_fill_silence,
+	TP_PROTO(struct snd_pcm_substream *substream, int channel,
+		 unsigned long pos, unsigned long bytes, bool *handled),
+	TP_ARGS(substream, channel, pos, bytes, handled));
 
 #endif /* _TRACE_HOOK_SOUND_H */
 

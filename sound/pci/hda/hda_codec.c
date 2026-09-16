@@ -23,6 +23,7 @@
 #include "hda_jack.h"
 #include <sound/hda_hwdep.h>
 #include <sound/hda_component.h>
+#include <trace/hooks/sound.h>
 
 #define codec_in_pm(codec)		snd_hdac_is_in_pm(&codec->core)
 #define hda_codec_is_power_on(codec)	snd_hdac_is_power_on(&codec->core)
@@ -2493,7 +2494,12 @@ int snd_hda_create_dig_out_ctls(struct hda_codec *codec,
 	snd_hdac_regmap_read(&codec->core, cvt_nid,
 			     AC_VERB_GET_DIGI_CONVERT_1, &val);
 	spdif->ctls = val;
+
 	spdif->status = convert_to_spdif_status(spdif->ctls);
+
+	trace_android_vh_hda_add_controls(codec, associated_nid, &err);
+	if (err < 0)
+		return err;
 	return 0;
 }
 EXPORT_SYMBOL_GPL(snd_hda_create_dig_out_ctls);

@@ -8,6 +8,10 @@
 #include <linux/iova.h>
 #include <linux/pm_qos.h>
 #include <linux/futex.h>
+#ifndef __GENKSYMS__
+#include <sound/hda_codec.h>
+#include <sound/pcm.h>
+#endif
 
 #define CREATE_TRACE_POINTS
 #include <trace/hooks/vendor_hooks.h>
@@ -798,6 +802,8 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_pick_swap_device_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_end_writeback);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_start_writeback);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_snd_pcm_check_no_buffer);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_hda_add_controls);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_hda_pcm_fill_silence);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_override_exec_folio_order);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_swap_page_relax);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_swap_page_start);
