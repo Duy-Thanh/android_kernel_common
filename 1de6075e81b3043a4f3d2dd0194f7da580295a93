@@ -16,6 +16,24 @@
       "message": "resolve comment on aosp/4279360 before merging this series.",
       "revId": "1de6075e81b3043a4f3d2dd0194f7da580295a93",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e09ce82e_2525d969",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-09-16T18:15:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0df9dd0f_f2892dc8",
+      "revId": "1de6075e81b3043a4f3d2dd0194f7da580295a93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
