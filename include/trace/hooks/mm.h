@@ -33,6 +33,7 @@ struct address_space;
 struct page_vma_mapped_walk;
 struct cma;
 struct compact_control;
+struct readahead_control;
 
 DECLARE_RESTRICTED_HOOK(android_rvh_set_skip_swapcache_flags,
 			TP_PROTO(gfp_t *flags),
