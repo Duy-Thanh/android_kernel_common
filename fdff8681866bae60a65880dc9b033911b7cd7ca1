@@ -105,6 +105,23 @@
       "parentUuid": "5ae8d1b8_de8c1ab8",
       "revId": "fdff8681866bae60a65880dc9b033911b7cd7ca1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e799f8f_daac2f07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3386406
+      },
+      "writtenOn": "2026-09-16T15:44:02Z",
+      "side": 1,
+      "message": "Abandoning this change in favor of new smaller patch pushed by our audio team\nhttps://android-review.googlesource.com/c/kernel/common/+/4302731",
+      "revId": "fdff8681866bae60a65880dc9b033911b7cd7ca1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
