@@ -387,6 +387,8 @@ Code  Seq#    Include File                                             Comments
 0xB8  all    uapi/linux/mshv.h                                         Microsoft Hyper-V /dev/mshv driver
                                                                        <mailto:linux-hyperv@vger.kernel.org>
 0xBB  all    uapi/linux/zram_ioctl.h                                   Android zram ioctl driver
+0xBC  00-0F  uapi/linux/wrapfd.h                                       WrapFD driver
+                                                                       <mailto:surenb@google.com>
 0xC0  00-0F  linux/usb/iowarrior.h
 0xCA  00-0F  uapi/misc/cxl.h                                           Dead since 6.15
 0xCA  10-2F  uapi/misc/ocxl.h
