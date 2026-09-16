@@ -70,6 +70,24 @@
       "parentUuid": "f1453315_2b524a9c",
       "revId": "36487617b74c9926f2b7f380d6e8eea36c56f645",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80e2fe0b_f3642b7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1872405
+      },
+      "writtenOn": "2026-09-16T22:25:26Z",
+      "side": 1,
+      "message": "Yes, it was designed to be as clean as possible. However, fully leveraging the functionality would require additional HAL changes, and use of silence buffers for comfort noise could make the existing function name could mislead the function usage for others. Given these reasons, upstreaming the change was not pursued.",
+      "parentUuid": "71cbb3a3_b4da3c64",
+      "revId": "36487617b74c9926f2b7f380d6e8eea36c56f645",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
