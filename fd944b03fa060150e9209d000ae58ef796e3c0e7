@@ -3,6 +3,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "bab49e01_dc9b13e4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2026-09-16T06:45:46Z",
+      "side": 1,
+      "message": "Just want to better understand the issue, e.g, the VA from host is VA1, and we perform the security check for its physical page PA (which is got by __pkvm_pa(VA1), is correct). And passing the check, pKVM is trying to access PA by using VA1. However VA1 is not mapped in pKVM\u0027s mmu as we map all physical addresses with direct mapping except for pKVM\u0027s text/data, which is the reason for us couldn\u0027t make __pkvm_pa always returning VA - PAGE_OFFSET for any VA.\n\nSo a malicious host can pass such VA1 to cause a #PF and panic pKVM, right?",
+      "revId": "fd944b03fa060150e9209d000ae58ef796e3c0e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "a01a5957_48883294",
         "filename": "arch/x86/kvm/pkvm/memory.h",
         "patchSetId": 1
