@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1845dc67_0506a08b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-09-16T18:27:55Z",
+      "side": 1,
+      "message": "Please move the symbol list and abi update changes to a separate patch on top of this one.",
+      "revId": "9f669d2862843c5032b6255bf32afd24b2f0b8cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
