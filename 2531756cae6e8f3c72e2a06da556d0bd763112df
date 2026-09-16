@@ -16,6 +16,24 @@
       "message": "The KMI break needs to be fixed. Can this be refactored to avoid changing net_device_ops?",
       "revId": "2531756cae6e8f3c72e2a06da556d0bd763112df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07f33991_855c56fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-09-16T01:25:03Z",
+      "side": 1,
+      "message": "Update to use ANDROID_KABI_USE(1, ...). We prefer using the KABI reserve slot if possible because it aligns with upstream networking patterns (similar to net_shaper_ops, tlsdev_ops, and bpf_offload_ops). If consuming a KABI slot isn\u0027t acceptable, we can switch to an explicit driver registration model (e.g. apf_register_device(dev, ops)) to leave net_device_ops untouched. If we do that, could we migrate it back into net_device_ops during next year\u0027s KMI thaw?",
+      "parentUuid": "6e7472e6_faad73b9",
+      "revId": "2531756cae6e8f3c72e2a06da556d0bd763112df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
