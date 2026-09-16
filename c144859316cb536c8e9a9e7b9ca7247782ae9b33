@@ -34,6 +34,24 @@
       "parentUuid": "eaf6ec9f_5fc46abd",
       "revId": "c144859316cb536c8e9a9e7b9ca7247782ae9b33",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e3eafde_56795ef2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-09-16T19:10:40Z",
+      "side": 1,
+      "message": "Could a shorter version of this be added to the commit message, so we\u0027ll have that context if/when this gets cherry-picked to a future android kernel version?",
+      "parentUuid": "9694d7e0_7c0c5e09",
+      "revId": "c144859316cb536c8e9a9e7b9ca7247782ae9b33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
