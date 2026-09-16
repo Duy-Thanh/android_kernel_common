@@ -105,6 +105,24 @@
       "parentUuid": "df39cb2f_9b5d3cb5",
       "revId": "1fdde108dd5f6af8b6ec68c90c8d2948ad0d12d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6177612f_b6e417a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-09-16T23:10:18Z",
+      "side": 1,
+      "message": "Its defiantly not dead driver, and we already have test work locally (me and maze@ actively working on to make xTS work on APF cuttlefish)\n\nNow the following CTS case work on cuttlefish\npackages/modules/Connectivity/tests/cts/net/src/android/net/cts/ApfIntegrationTest.kt, specifically for (testDropPingReplyV4() and testReplyPingV4(). The test code already merged, as soon as this patch merged, we can make APF integration test run continuously on cuttlefish. \n\nWe plan to add more test case for APFv8 case.\n\nIf GKI team is okay for us to touch mac80211_hwsim for testing purpose, I will need to work with maze@ to make this patch production ready and be ready for merge. We can discuss more today.",
+      "parentUuid": "def36df3_21cc9bfe",
+      "revId": "1fdde108dd5f6af8b6ec68c90c8d2948ad0d12d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
