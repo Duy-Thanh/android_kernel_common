@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad8e3820_24767539",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-09-16T16:20:38Z",
+      "side": 1,
+      "message": "If it is needed for upstream Rust abstractions, why isn\u0027t it upstream? Are we going to have to carry this change in android18-7.x? Please provide information on why this is android-specific in the commit message.",
+      "revId": "65b280934efbe11a8136fc691d40fc0d13c6aa20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
