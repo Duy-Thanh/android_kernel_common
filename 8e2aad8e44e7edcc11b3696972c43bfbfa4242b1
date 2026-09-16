@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e78d0cba_c5e15bd2",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1779,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2026-09-16T08:16:43Z",
+      "side": 1,
+      "message": "Since we don\u0027t have a counter to count how many times the host use a MMIO page for DMA, looks like we cannot change the MMIO state back to PKVM_PAGE_OWNED in pkvm_host_unuse_dma(), which means that once host use a MMIO page as DMA, such MMIO page cannot be donated to pKVM or pVM. Maybe it is worth to mention this as well?",
+      "revId": "8e2aad8e44e7edcc11b3696972c43bfbfa4242b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24bcfcb0_2b7cecd5",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1786,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2026-09-16T08:16:43Z",
+      "side": 1,
+      "message": "So it is possible all MMIO pages in [phys, phys + size) are already borrowed? If so, then we can skip the following pkvm_pgtable_map() to set borrowed again?",
+      "revId": "8e2aad8e44e7edcc11b3696972c43bfbfa4242b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
