@@ -235,10 +235,26 @@ impl DmaBufVmap {
         }
     }
 
-    /// Internal helper for cpu access.
-    fn begin_cpu_access<const READ: bool, const WRITE: bool, F>(&self, f: F) -> Result
+    /// Internal helper for cpu access. This is the fallible version, i.e. the closure passed
+    /// returns some Result type that can express errors of type kernel::Error.
+    fn begin_cpu_access_fallible<const READ: bool, const WRITE: bool, F, T, E>(
+        &self,
+        f: F,
+    ) -> Result<T, E>
     where
-        F: FnOnce(CpuAccess<'_, READ, WRITE>),
+        F: FnOnce(CpuAccess<'_, READ, WRITE>) -> Result<T, E>,
+        E: From<Error>,
+    {
+        match self.begin_cpu_access::<READ, WRITE, _, _>(f) {
+            Ok(res) => res,
+            Err(err) => Err(err.into()),
+        }
+    }
+
+    /// Internal helper for cpu access.
+    fn begin_cpu_access<const READ: bool, const WRITE: bool, F, T>(&self, f: F) -> Result<T>
+    where
+        F: FnOnce(CpuAccess<'_, READ, WRITE>) -> T,
     {
         let dir = const {
             match (READ, WRITE) {
@@ -252,36 +268,63 @@ impl DmaBufVmap {
         // SAFETY: It's always safe to begin cpu access.
         to_result(unsafe { bindings::dma_buf_begin_cpu_access(self.dmabuf.as_ptr(), dir.into()) })?;
         // INVARIANT: Cpu access has begin with the given direction.
-        f(CpuAccess {
+        let result = f(CpuAccess {
             map: &raw mut map,
             size: self.dmabuf.size(),
             _lifetime: PhantomData,
         });
         // SAFETY: We started cpu access, so we can end it.
         to_result(unsafe { bindings::dma_buf_end_cpu_access(self.dmabuf.as_ptr(), dir.into()) })?;
-        Ok(())
+        Ok(result)
+    }
+
+    /// Perform cpu-access that only writes to the device. Fallible version.
+    pub fn begin_cpu_access_to_fallible<F, T, E>(&self, f: F) -> Result<T, E>
+    where
+        F: FnOnce(CpuAccess<'_, false, true>) -> Result<T, E>,
+        E: From<Error>,
+    {
+        self.begin_cpu_access_fallible(f)
     }
 
     /// Perform cpu-access that only writes to the device.
-    pub fn begin_cpu_access_to<F>(&self, f: F) -> Result
+    pub fn begin_cpu_access_to<F, T>(&self, f: F) -> Result<T>
     where
-        F: FnOnce(CpuAccess<'_, false, true>),
+        F: FnOnce(CpuAccess<'_, false, true>) -> T,
     {
         self.begin_cpu_access(f)
+    }
+
+    /// Perform cpu-access that only reads from the device. Fallible version.
+    pub fn begin_cpu_access_from_fallible<F, T, E>(&self, f: F) -> Result<T, E>
+    where
+        F: FnOnce(CpuAccess<'_, true, false>) -> Result<T, E>,
+        E: From<Error>,
+    {
+        self.begin_cpu_access_fallible(f)
     }
 
     /// Perform cpu-access that only reads from the device.
-    pub fn begin_cpu_access_from<F>(&self, f: F) -> Result
+    pub fn begin_cpu_access_from<F, T>(&self, f: F) -> Result<T>
     where
-        F: FnOnce(CpuAccess<'_, true, false>),
+        F: FnOnce(CpuAccess<'_, true, false>) -> T,
     {
         self.begin_cpu_access(f)
     }
 
-    /// Perform bidirectional cpu-access.
-    pub fn begin_cpu_access_bidirectional<F>(&self, f: F) -> Result
+    /// Perform bidirectional cpu-access. Fallible version.
+    pub fn begin_cpu_access_bidirectional_fallible<F, T, E>(&self, f: F) -> Result<T, E>
     where
-        F: FnOnce(CpuAccess<'_, true, true>),
+        F: FnOnce(CpuAccess<'_, true, true>) -> Result<T, E>,
+        E: From<Error>,
+    {
+        self.begin_cpu_access_fallible(f)
+    }
+
+    /// Perform bidirectional cpu-access.
+    pub fn begin_cpu_access_bidirectional<F, T>(&self, f: F) -> Result<T>
+    where
+        F: FnOnce(CpuAccess<'_, true, true>) -> T,
     {
         self.begin_cpu_access(f)
     }
