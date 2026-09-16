@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/561452236",
       "revId": "1e897f81a732a38300fa571e3446c0216b3794fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b3c8b52_f9c98cb4",
+        "filename": "include/trace/hooks/blk.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-16T16:56:30Z",
+      "side": 1,
+      "message": "Can you please add this to the first commit in the chain instead of in the ABI update CL?",
+      "revId": "1e897f81a732a38300fa571e3446c0216b3794fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
