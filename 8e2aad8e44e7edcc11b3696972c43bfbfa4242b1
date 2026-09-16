@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cee0b0c9_3a11e02b",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1779,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2026-09-16T10:25:27Z",
+      "side": 1,
+      "message": "Ah, I missed that. Thanks!",
+      "parentUuid": "8748d048_14ee1423",
+      "revId": "8e2aad8e44e7edcc11b3696972c43bfbfa4242b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24bcfcb0_2b7cecd5",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Indeed. And AFAICS pKVM-ARM\u0027s `__pkvm_use_dma_locked()` does the same: it calls `host_stage2_idmap_locked()` without checking if it is really needed, i.e. if there are any pages in this range that are not borrowed yet.\n\nThis doesn\u0027t seem to be a real issue? This is a rather corner case (and this entire scenario of DMA-mapping regions like RMRRs is not a hot path at all, it should only happen for a few regions at boot time), and in fact it is just a special case of the fact that if there are _any_ already-borrowed pages in the range, `pkvm_pgtable_map()` will needlessly (but harmlessly) create the same PTEs for those pages once again.\n\nThis `if (!ret)` check here is just to prevent returning error when the host legitimately asks to map the same page twice. (BTW maybe on Intel we have no use cases for such multi-mapping of regions like RMRRs, but it doesn\u0027t hurt to allow it anyway, just like pKVM-ARM does.)",
       "parentUuid": "24bcfcb0_2b7cecd5",
+      "revId": "8e2aad8e44e7edcc11b3696972c43bfbfa4242b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7db2b6ad_fcb3177a",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1786,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2026-09-16T10:25:27Z",
+      "side": 1,
+      "message": "It is not a real issue. Just a bit redundant. Keeping it aligned with pKVM-ARM may make it easier to share the code in the future. So I am fine either way.",
+      "parentUuid": "fe74da60_037d2413",
       "revId": "8e2aad8e44e7edcc11b3696972c43bfbfa4242b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
