@@ -26,6 +26,7 @@ TARGETS += drivers/net/netconsole
 TARGETS += drivers/net/team
 TARGETS += drivers/net/virtio_net
 TARGETS += drivers/platform/x86/intel/ifs
+TARGETS += drivers/wrapfd
 TARGETS += dt
 TARGETS += efivarfs
 TARGETS += exec
