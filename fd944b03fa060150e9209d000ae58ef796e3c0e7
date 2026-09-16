@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "062fa557_61f1c0bb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-09-16T08:57:01Z",
+      "side": 1,
+      "message": "Yeah exactly, it seems it is guaranteed that this issue will result in a #PF in pKVM, i.e. just a DoS, so it is not a critical issue.",
+      "parentUuid": "bab49e01_dc9b13e4",
+      "revId": "fd944b03fa060150e9209d000ae58ef796e3c0e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "a01a5957_48883294",
         "filename": "arch/x86/kvm/pkvm/memory.h",
         "patchSetId": 1
