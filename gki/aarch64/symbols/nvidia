@@ -3644,6 +3644,8 @@
   __traceiter_android_vh_gzvm_handle_demand_page_post
   __traceiter_android_vh_gzvm_handle_demand_page_pre
   __traceiter_android_vh_gzvm_vcpu_exit_reason
+  __traceiter_android_vh_hda_add_controls
+  __traceiter_android_vh_hda_pcm_fill_silence
   __traceiter_android_vh_zs_shrinker_adjust
   __traceiter_android_vh_zs_shrinker_bypass
   __traceiter_mmap_lock_acquire_returned
@@ -3656,6 +3658,8 @@
   __tracepoint_android_vh_gzvm_handle_demand_page_post
   __tracepoint_android_vh_gzvm_handle_demand_page_pre
   __tracepoint_android_vh_gzvm_vcpu_exit_reason
+  __tracepoint_android_vh_hda_add_controls
+  __tracepoint_android_vh_hda_pcm_fill_silence
   __tracepoint_android_vh_zs_shrinker_adjust
   __tracepoint_android_vh_zs_shrinker_bypass
   __tracepoint_mmap_lock_acquire_returned
