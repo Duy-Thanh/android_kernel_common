@@ -88,6 +88,24 @@
       "parentUuid": "71cbb3a3_b4da3c64",
       "revId": "36487617b74c9926f2b7f380d6e8eea36c56f645",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e028666_8124994c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-09-16T23:03:47Z",
+      "side": 1,
+      "message": "Adding a feature which is not upstream to a kernel for a single vendor is not the GKI way. The best alternative to upstream is going to be vendor hooks.",
+      "parentUuid": "80e2fe0b_f3642b7a",
+      "revId": "36487617b74c9926f2b7f380d6e8eea36c56f645",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
