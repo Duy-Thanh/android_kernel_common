@@ -84,6 +84,12 @@
   __traceiter_android_vh_alloc_contig_range_not_isolated
   __traceiter_android_vh_dma_heap_buffer_alloc_end
   __traceiter_android_vh_dma_heap_buffer_alloc_start
+  __traceiter_android_vh_dmv_add_blks_map
+  __traceiter_android_vh_dmv_add_fec_mismatch_blks
+  __traceiter_android_vh_dmv_add_skipped_blks
+  __traceiter_android_vh_dmv_data_error
+  __traceiter_android_vh_dmv_get_b_info
+  __traceiter_android_vh_dmv_metadata_error
   __traceiter_android_vh_do_read_fault
   __traceiter_android_vh_do_swap_page_done
   __traceiter_android_vh_dpm_wait_finish
@@ -163,6 +169,12 @@
   __tracepoint_android_vh_alloc_contig_range_not_isolated
   __tracepoint_android_vh_dma_heap_buffer_alloc_end
   __tracepoint_android_vh_dma_heap_buffer_alloc_start
+  __tracepoint_android_vh_dmv_add_blks_map
+  __tracepoint_android_vh_dmv_add_fec_mismatch_blks
+  __tracepoint_android_vh_dmv_add_skipped_blks
+  __tracepoint_android_vh_dmv_data_error
+  __tracepoint_android_vh_dmv_get_b_info
+  __tracepoint_android_vh_dmv_metadata_error
   __tracepoint_android_vh_do_read_fault
   __tracepoint_android_vh_do_swap_page_done
   __tracepoint_android_vh_dpm_wait_finish
