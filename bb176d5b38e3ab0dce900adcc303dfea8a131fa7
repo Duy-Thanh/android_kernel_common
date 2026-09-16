@@ -106,6 +106,24 @@
       "parentUuid": "0bda11e7_7b61b5e0",
       "revId": "bb176d5b38e3ab0dce900adcc303dfea8a131fa7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fab4bd8c_42a9b044",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-09-16T00:19:36Z",
+      "side": 1,
+      "message": "\"refactor\" in this context would mean modifying the patch when it is cherry-picked to ACK (not upstream) so that drivers that aren\u0027t rebuilt still work properly.\n\nI can\u0027t tell from your response whether the refactor is needed. You say \"The \"dump\" pretimeout governor will not work correctly\", but you also way \"we are lucky that the old inline function just works\". Does this mean the watchdog functionality that the db845 does not work? Or does it work as expected, but lacks extra functionality that this patch provides?\n\nIf the feature works as intended for db845 (but lacks some extra features provided by this patch), then I\u0027m fine to go ahead with this. I\u0027m not actually worried about db845, but I\u0027m worried about other partners who might be relying on this behavior.",
+      "parentUuid": "b22dda8c_b69ec7d7",
+      "revId": "bb176d5b38e3ab0dce900adcc303dfea8a131fa7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
