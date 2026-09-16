@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40aa290a_9e81bca7",
+        "filename": "drivers/android/bpf/bpf_fd_loader.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-09-16T06:55:59Z",
+      "side": 1,
+      "message": "`let Ok` is a red flag to me because it says \"I\u0027m ignoring an error here\". What if the string isn\u0027t nul-terminated?",
+      "fixSuggestions": [
+        {
+          "fixId": "e50885c1_35655169",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/bpf/bpf_fd_loader.rs",
+              "range": {
+                "startLine": 368,
+                "startChar": 0,
+                "endLine": 376,
+                "endChar": 0
+              },
+              "replacement": "            let name \u003d CStr::from_bytes_until_nul(\u0026self.secstrings[name_start..])\n                .map_err(|_| ENOEXEC)?;\n            if name \u003d\u003d sect_name {\n                let off \u003d usize::try_from(shdr.sh_offset).map_err(|_| ENOEXEC)?;\n                let sz \u003d usize::try_from(shdr.sh_size).map_err(|_| ENOEXEC)?;\n                let end \u003d off.checked_add(sz).ok_or(ENOEXEC)?;\n                let slice \u003d self.buf.get(off..end).ok_or(ENOEXEC)?;\n                return Ok(slice);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f997e4b4234a1c1a1d1beb2a06aa58fa42889412",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a59f88b9_0b1ea37b",
+        "filename": "drivers/android/bpf/bpf_fd_loader.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-09-16T06:55:59Z",
+      "side": 1,
+      "message": "You must not use `KVec` with a user-defined size because it can trigger a `WARN_ON` inside `kmalloc`. Use `KVVec` instead.",
+      "revId": "f997e4b4234a1c1a1d1beb2a06aa58fa42889412",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

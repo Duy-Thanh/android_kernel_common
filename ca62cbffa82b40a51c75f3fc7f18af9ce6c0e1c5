@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0aa8005a_db2d67f4",
+        "filename": "drivers/android/bpf/bpf_fd_loader.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-09-16T06:55:59Z",
+      "side": 1,
+      "message": "This type is pretty error-prone because userspace can swap out the underlying fd for another one (or close it) while this syscall runs, so you can never rely on this type referencing the file you expect it to.",
+      "parentUuid": "c04e70c7_3d1e4fe4",
+      "revId": "ca62cbffa82b40a51c75f3fc7f18af9ce6c0e1c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "475446f9_3da77001",
         "filename": "drivers/android/bpf/bpf_fd_loader.rs",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2026-09-15T09:22:56Z",
       "side": 1,
       "message": "@aliceryhl@google.com Do anonymous structs in unions have a stable name?",
+      "revId": "ca62cbffa82b40a51c75f3fc7f18af9ce6c0e1c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2f49bda_6799a0ce",
+        "filename": "drivers/android/bpf/bpf_fd_loader.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-09-16T06:55:59Z",
+      "side": 1,
+      "message": "Yes. It\u0027s always numbered in the order they are declared in the header file.",
+      "parentUuid": "475446f9_3da77001",
       "revId": "ca62cbffa82b40a51c75f3fc7f18af9ce6c0e1c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
