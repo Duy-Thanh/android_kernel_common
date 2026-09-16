@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "456890ca_51d2d5e6",
+        "filename": "drivers/tty/serial/tegra-tcu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-09-16T20:01:15Z",
+      "side": 1,
+      "message": "Seeing build failures with //common:kernel_x86_64_allmodconfig\n\nLooks like maybe you are missing a header?\n\n\ndiff: Unknown option \u0027I\u0027 (see \"diff --help\")\nWarning: Kernel ABI header at \u0027tools/arch/x86/lib/insn.c\u0027 differs from latest version at \u0027arch/x86/lib/insn.c\u0027\n...xecroot/_main/common/drivers/tty/serial/tegra-tcu.c:37:10: error: call to undeclared function \u0027readl\u0027; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   37 |                 while (readl(addr) \u0026 TCU_MBOX_INTR_TRIG_BIT)\n      |                        ^\n...xecroot/_main/common/drivers/tty/serial/tegra-tcu.c:39:3: error: call to undeclared function \u0027writel\u0027; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   39 |                 writel(mbox_val, addr);\n      |                 ^\n...xecroot/_main/common/drivers/tty/serial/tegra-tcu.c:68:10: error: call to undeclared function \u0027readl\u0027; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   68 |                 while (readl(addr) \u0026 TCU_MBOX_INTR_TRIG_BIT)\n      |                        ^\n...xecroot/_main/common/drivers/tty/serial/tegra-tcu.c:70:3: error: call to undeclared function \u0027writel\u0027; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n   70 |                 writel(mbox_val, addr);\n      |                 ^\n4 errors generated.",
+      "revId": "128823689331bd61a426b890dc99818fe5389ba7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
