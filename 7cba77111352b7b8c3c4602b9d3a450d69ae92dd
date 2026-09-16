@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02f926e2_addc301f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2026-09-16T19:29:49Z",
+      "side": 1,
+      "message": "tkjos@google.com can you apply Lint +2 to bypass the checkpatch warning?  Or do you want the comments in `fips140_lab_util.c` (both new and existing) to be reformatted to match what checkpatch expects?  That can be done, but there are still other checkpatch warnings in that file that aren\u0027t possible to address, since it\u0027s userspace code, not kernel code.  It isn\u0027t really valid to run checkpatch on that file.",
+      "revId": "7cba77111352b7b8c3c4602b9d3a450d69ae92dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
