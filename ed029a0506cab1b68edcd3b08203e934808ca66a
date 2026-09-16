@@ -16,6 +16,24 @@
       "message": "Shouldn\u0027t think be merged in android-mainline as well?",
       "revId": "ed029a0506cab1b68edcd3b08203e934808ca66a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8549842_b250c1c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1982475
+      },
+      "writtenOn": "2026-09-16T16:40:52Z",
+      "side": 1,
+      "message": "@richardycc@google.com included it when relanding all the zram ioctl code in mainline\n\nhttps://r.android.com/4276803",
+      "parentUuid": "ecbae317_78035c64",
+      "revId": "ed029a0506cab1b68edcd3b08203e934808ca66a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
