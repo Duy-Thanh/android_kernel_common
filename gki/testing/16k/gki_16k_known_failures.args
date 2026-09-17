@@ -1,0 +1,60 @@
+# ============================================================================
+# TPE GKI 16KB Release - Known Failures & Non-Kernel Waive List (Exclude List)
+# Umbrella Strategy Bug: b/559889030
+# Tracking Hotlist: https://b.corp.google.com/hotlists/8973411
+#
+# Policy:
+# Every entry MUST include a comment with:
+#   # [Buganizer ID] [Category: Kernel | Non-Kernel] Reason
+# ============================================================================
+
+# ----------------------------------------------------------------------------
+# PART A: Known Kernel / Architectural Limitations (Assignee: jyescas@)
+# ----------------------------------------------------------------------------
+
+# [b/562751082] [Kernel] F2FS 4KB block size vs 16KB page size mount failure (ref b/520627398)
+--exclude-filter f2fs_test
+
+# [b/562751994] [Kernel] Libcore NIO Files2Test hardcodes 4KB page assumptions (ref b/524355038)
+--exclude-filter CtsLibcoreTestCases libcore.java.nio.file.Files2Test#test_walk
+--exclude-filter CtsLibcoreTestCases libcore.java.nio.file.Files2Test#test_walkFileTree
+
+# [b/562751832] [Kernel] pKVM 16KB guest VM multi-tenancy storage/SELinux alignment (ref b/520109349)
+--exclude-filter VmMultiTenancyTests.CTS
+--exclude-filter VmMultiTenancyTests.VTS
+
+# [b/562752028] [Kernel] KeyMint AIDL target tests shared memory 16KB alignment (ref b/520042674)
+--exclude-filter VtsAidlKeyMintTargetTest
+
+
+# ----------------------------------------------------------------------------
+# PART B: Non-Kernel Userspace / Framework Noise (Excluded from GKI Gating)
+# Routed to 16KB Userspace/Platform Leads (Assignee: kaleshsingh@)
+# ----------------------------------------------------------------------------
+
+# [b/562752249] [Non-Kernel] Native NDK ABI allowlist check (31.6% of all 16KB failures, ref b/525270802)
+--exclude-filter CtsNativeNdkAllowlistTest
+--exclude-filter CtsAllowlistTestCases
+
+# [b/562751263] [Non-Kernel] Heavy Framework suites hitting OOM/Timeouts under 16K RAM overhead
+--exclude-filter CtsAutoFillServiceTestCases
+--exclude-filter CtsHealthFitnessDeviceTestCases
+--exclude-filter CtsAppFunctionTestCases
+--exclude-filter CtsCompanionDeviceManagerCoreTestCases
+--exclude-filter CtsPersonalContextTestCases
+
+# [b/562751876] [Non-Kernel] DevicePolicy multi-user profile timeouts under 16KB (ref b/526469727)
+--exclude-filter CtsDevicePolicyTestCases
+
+# [b/562752306] [Non-Kernel] dEQP / Graphics 4KB buffer alignment assumptions (ref b/489255903)
+--exclude-filter CtsDeqpTestCases
+--exclude-filter CtsGraphicsTestCases
+--exclude-filter CtsUiRenderingTestCases
+
+# [b/562752426] [Non-Kernel] Mainline Telecom / MockModem timeouts (ref b/491401787)
+--exclude-filter MctsTelecomTestCases
+--exclude-filter CtsTelephonyTestCases
+--exclude-filter CtsTelephonyProviderTestCases
+
+# [b/562752330] [Non-Kernel] Vendor Audio HAL buffer size alignment (ref b/520627199)
+--exclude-filter VtsHalAudioCoreTargetTest
