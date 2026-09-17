@@ -16,6 +16,24 @@
       "message": "Depends on: 678386459ffc (\"Bluetooth: SCO: Fix UAF on sco_sock_timeout\")",
       "revId": "06c9ebdb431ef059ed10f725a4a284b0c7d5d490",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1d9c6ab_c02d98a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-09-17T20:09:15Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a0af2904_6de24125",
+      "revId": "06c9ebdb431ef059ed10f725a4a284b0c7d5d490",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
