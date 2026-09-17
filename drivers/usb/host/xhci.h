@@ -1388,8 +1388,7 @@ struct xhci_ring {
 	enum xhci_ring_type	type;
 	u32			old_trb_comp_code;
 	struct radix_tree_root	*trb_address_map;
-
-	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_USE(1, struct dma_pool *segment_pool);
 	ANDROID_KABI_RESERVE(2);
 };
 
@@ -1882,6 +1881,10 @@ void xhci_free_port_bw_ctx(struct xhci_hcd *xhci,
 struct xhci_interrupter *
 xhci_create_secondary_interrupter(struct usb_hcd *hcd, unsigned int segs,
 				  u32 imod_interval, unsigned int intr_num);
+struct xhci_interrupter *
+xhci_create_secondary_interrupter_pool(struct usb_hcd *hcd, unsigned int segs,
+				       struct dma_pool *pool, u32 imod_interval,
+				       unsigned int intr_num);
 void xhci_remove_secondary_interrupter(struct usb_hcd
 				       *hcd, struct xhci_interrupter *ir);
 void xhci_skip_sec_intr_events(struct xhci_hcd *xhci,
