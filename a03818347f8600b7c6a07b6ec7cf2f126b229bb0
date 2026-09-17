@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6144bc44_ddb3af79",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-09-17T13:01:23Z",
+      "side": 1,
+      "message": "Hi Johannes, thanks for taking a look!\n\nHere is the background and overarching plan:\n\nBackground \u0026 Motivation:\nHistorically, APF configuration went through the Android Wi-Fi HAL and was translated into nl80211 vendor commands. It worked for the original Wi-Fi use cases.\nHowever, we now need to support Ethernet as well, which doesn\u0027t use nl80211. Ethtool is not flexible enough to fit this use case (we previously explored adding tunable APIs to ethtool: https://patchwork.kernel.org/project/netdevbpf/patch/20240813223325.3522113-1-maze@google.com/, where upstream asked about use cases). We realized that fitting APF into ethtool would require drastic changes (such as vendor-specific subcommands), which goes against ethtool\u0027s design principles.\nHence, a dedicated Generic Netlink family (`net_apf`) is much cleaner. There is also precedent in upstream networking for using dedicated Generic Netlink families for device offload control (such as `net_shaper`).\n\nOur current plan:\n- Our plan is to first check this into GKI/ACK to enable chipset vendors to build and validate their driver implementations. Eventually, all Android drivers will transition to this Netlink family.\n- Once we have in-tree driver support (e.g. Intel driver) and active users, we plan to send this upstream as an RFC to netdev.\n\nFeel free to let me know if you need more background.",
+      "parentUuid": "2635ea51_a3ccab23",
+      "revId": "a03818347f8600b7c6a07b6ec7cf2f126b229bb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "78547c01_4a3941c1",
