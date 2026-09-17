@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "14a05968_5198fa9f",
+        "filename": "include/linux/netdevice.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 1693,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-09-17T12:57:51Z",
+      "side": 1,
+      "message": "We\u0027ve been told that should happen in the next patch.",
+      "parentUuid": "78547c01_4a3941c1",
+      "revId": "a03818347f8600b7c6a07b6ec7cf2f126b229bb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "598eae20_b12792cf",
         "filename": "include/net/apf.h",
         "patchSetId": 18
@@ -48,6 +66,24 @@
       "writtenOn": "2026-09-17T11:44:17Z",
       "side": 1,
       "message": "upstream still doesn\u0027t do C99 comments (I believe)",
+      "revId": "a03818347f8600b7c6a07b6ec7cf2f126b229bb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96575eb7_50dabb37",
+        "filename": "include/net/apf.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-09-17T12:57:51Z",
+      "side": 1,
+      "message": "I think they\u0027re legal outside of UAPI... or at least in .c files for single line comments.\nObviously we can convert to /* */ style if needed.",
+      "parentUuid": "598eae20_b12792cf",
       "revId": "a03818347f8600b7c6a07b6ec7cf2f126b229bb0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -71,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "383a350b_a475d4de",
+        "filename": "include/net/apf.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-09-17T12:57:51Z",
+      "side": 1,
+      "message": "We need a way to figure out which netdev is on which chip.\n\nSome chips can support multiple netdevs.  Particularly common on wifi (though not only).\nThe limitations on apf ram are at the level of the chip, not the netdev.\n\nThis is needed so we can appropriately partition apf ram in the presence of multiple apf capable netdevs on (potentially) multiple apf capable chips.",
+      "parentUuid": "9e16687f_411ed8a1",
+      "revId": "a03818347f8600b7c6a07b6ec7cf2f126b229bb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cf08f2b9_362716e7",
         "filename": "include/net/apf.h",
         "patchSetId": 18
@@ -82,6 +136,24 @@
       "writtenOn": "2026-09-17T11:44:17Z",
       "side": 1,
       "message": "from a high-level perspective I think it might be worthwhile separating this into capabilities and current info, but I think you just push it both down to the firmware or so?",
+      "revId": "a03818347f8600b7c6a07b6ec7cf2f126b229bb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25354fc7_2732bd13",
+        "filename": "include/net/apf.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-09-17T12:57:51Z",
+      "side": 1,
+      "message": "Yeah, this just comes straight from the firmware.\n\nFor most of this stuff the driver is really just a middle man.\n\nSplitting it out would I think just pointlessly slow things down?\n(since it would require multiple rpcs into the fw)",
+      "parentUuid": "cf08f2b9_362716e7",
       "revId": "a03818347f8600b7c6a07b6ec7cf2f126b229bb0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -105,6 +177,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "111eee3c_3eb2d645",
+        "filename": "include/net/apf.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-09-17T12:57:51Z",
+      "side": 1,
+      "message": "It\u0027s potentially useful for implementing the driver/firmware, but yeah it can be stripped... not sure we\u0027d want to strip it from GKI though...  We were trying to get the .h file to be all you need to read...  Firmware developers seem to have a tendency to not read the documentation.",
+      "parentUuid": "5957d98a_8a6588c6",
+      "revId": "a03818347f8600b7c6a07b6ec7cf2f126b229bb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a81f9b76_1f6ee338",
         "filename": "include/net/apf.h",
         "patchSetId": 18
@@ -116,6 +206,24 @@
       "writtenOn": "2026-09-17T11:44:17Z",
       "side": 1,
       "message": "that would never fly upstream",
+      "revId": "a03818347f8600b7c6a07b6ec7cf2f126b229bb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d417c413_23febdf6",
+        "filename": "include/net/apf.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-09-17T12:57:51Z",
+      "side": 1,
+      "message": "I think we will not include this field when we try to upstream.\n\nI don\u0027t have a better idea of how to do versioning with ACK/GKI for out of tree drivers without doing something like this.",
+      "parentUuid": "a81f9b76_1f6ee338",
       "revId": "a03818347f8600b7c6a07b6ec7cf2f126b229bb0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -139,6 +247,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bff13ddd_25c9900d",
+        "filename": "net/apf/Kconfig",
+        "patchSetId": 18
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-09-17T12:57:51Z",
+      "side": 1,
+      "message": "I think we would do \u0027n\u0027 for upstream, but we\u0027d want it \u0027y\u0027 for GKI.\nWhich means changing multiple defconfigs, which seemed not worth it...\n\nPerhaps we set this to \u0027n\u0027 here and move the n-\u003ey to the gki abi patch?",
+      "parentUuid": "2ec50078_0dc93e99",
+      "revId": "a03818347f8600b7c6a07b6ec7cf2f126b229bb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0cb8aa9e_dc975eab",
         "filename": "net/apf/core.c",
         "patchSetId": 18
@@ -150,6 +276,24 @@
       "writtenOn": "2026-09-17T11:44:17Z",
       "side": 1,
       "message": "you never really use this - other than invalid vs. valid",
+      "revId": "a03818347f8600b7c6a07b6ec7cf2f126b229bb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ec5913a_aeeb62c0",
+        "filename": "net/apf/core.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-09-17T12:57:51Z",
+      "side": 1,
+      "message": "isn\u0027t this used in line 77 and 84",
+      "parentUuid": "0cb8aa9e_dc975eab",
       "revId": "a03818347f8600b7c6a07b6ec7cf2f126b229bb0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
