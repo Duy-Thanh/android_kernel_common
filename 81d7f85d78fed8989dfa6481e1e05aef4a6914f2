@@ -16,6 +16,24 @@
       "message": "Great find Vincent.\n\nIs this the only affected branch?",
       "revId": "81d7f85d78fed8989dfa6481e1e05aef4a6914f2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b39f79b6_8a153747",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-09-17T14:24:54Z",
+      "side": 1,
+      "message": "It should yes, 6.18 is using guard()",
+      "parentUuid": "9530b9a0_e7c9f86d",
+      "revId": "81d7f85d78fed8989dfa6481e1e05aef4a6914f2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
