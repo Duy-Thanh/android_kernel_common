@@ -1687,10 +1687,10 @@ struct net_device_ops {
 	 * @apf_ops: Advanced Packet Filter operations
 	 * see include/net/apf.h
 	 */
-	const struct apf_ops *apf_ops;
-#endif
-
+	ANDROID_KABI_USE(1, const struct apf_ops *apf_ops);
+#else
 	ANDROID_KABI_RESERVE(1);
+#endif
 	ANDROID_KABI_RESERVE(2);
 	ANDROID_KABI_RESERVE(3);
 	ANDROID_KABI_RESERVE(4);
