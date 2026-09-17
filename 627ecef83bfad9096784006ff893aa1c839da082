@@ -839,6 +839,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c339bf77_62778f96",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-17T15:41:52Z",
+      "side": 1,
+      "message": "I have no problem getting rid of this if you agree it\u0027s safe to do. I have no way of knowing when the last mapping goes away.",
+      "parentUuid": "c229049f_fcf9686d",
+      "range": {
+        "startLine": 412,
+        "startChar": 0,
+        "endLine": 417,
+        "endChar": 17
+      },
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8cae6ae7_8f247615",
         "filename": "drivers/android/wrapfd/wrapped_device.rs",
         "patchSetId": 7
@@ -933,6 +957,30 @@
       "side": 1,
       "message": "`is_mapped()` just checks if there are mappings. It does not check *how many* mappings there are, which was my point about the count.\n\n\n@surenb@google.com, do you have any thoughts on the usefulness of knowing the number of mappings as opposed to just whether or not the buffer is mapped?",
       "parentUuid": "c9af803b_6185a275",
+      "range": {
+        "startLine": 486,
+        "startChar": 9,
+        "endLine": 488,
+        "endChar": 56
+      },
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee625fca_d2421e4e",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-17T15:41:52Z",
+      "side": 1,
+      "message": "Nothing int the original plain C driver refers to the absolute count, only the fact that it\u0027s positive.",
+      "parentUuid": "d9d237f4_5630aa6e",
       "range": {
         "startLine": 486,
         "startChar": 9,
