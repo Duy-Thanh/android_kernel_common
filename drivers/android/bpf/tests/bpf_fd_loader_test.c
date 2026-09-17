@@ -18,6 +18,7 @@
 #include <sys/ioctl.h>
 #include <sys/mman.h>
 #include <sys/stat.h>
+#include <sys/syscall.h>
 #include <sys/types.h>
 #include <unistd.h>
 #include <linux/bpf.h>
@@ -25,6 +26,7 @@
 #include <linux/android/bpf_fd_loader.h>
 
 #include "kselftest_harness.h"
+#include "test_loader_lskel.h"
 
 #ifndef BPF_ALU64
 #define BPF_ALU64 0x07
@@ -998,6 +1000,85 @@ TEST(unprivileged_drop_caps)
 	ASSERT_EQ(ret, -1);
 	ASSERT_EQ(errno, EPERM);
 
+	close(elf_fd);
+	close(dev_fd);
+}
+
+TEST(real_light_skeleton)
+{
+	int dev_fd = open_dev_or_skip(_metadata);
+	if (dev_fd < 0)
+		return;
+
+	struct test_loader_lskel skel = { 0 };
+	skel.ctx.sz = (char *)&skel.links - (char *)&skel;
+
+	int elf_fd = create_valid_loader_elf(test_loader_opts_insn, test_loader_opts_insn_sz,
+					     test_loader_opts_data, test_loader_opts_data_sz,
+					     "GPL", 4);
+	ASSERT_GE(elf_fd, 0);
+
+	struct android_bpf_fd_loader_arg arg = {
+		.loader_fd = elf_fd,
+		.ctx_size = skel.ctx.sz,
+		.ctx = (uintptr_t)&skel.ctx,
+	};
+
+	int ret = ioctl(dev_fd, ANDROID_BPF_FD_LOADER_IOCTL_RECEIVE_FD, &arg);
+	ASSERT_EQ(ret, 0);
+
+	EXPECT_TRUE(skel.maps.test_map.map_fd > 0);
+	EXPECT_TRUE(skel.progs.probe.prog_fd > 0);
+
+	/* Verify map metadata */
+	struct bpf_map_info minfo = { 0 };
+	union bpf_attr attr = { 0 };
+	attr.info.bpf_fd = skel.maps.test_map.map_fd;
+	attr.info.info_len = sizeof(minfo);
+	attr.info.info = (uintptr_t)&minfo;
+	ret = syscall(__NR_bpf, BPF_OBJ_GET_INFO_BY_FD, &attr, sizeof(attr));
+	EXPECT_EQ(ret, 0);
+	EXPECT_EQ(minfo.type, BPF_MAP_TYPE_ARRAY);
+	EXPECT_EQ(minfo.key_size, 4U);
+	EXPECT_EQ(minfo.value_size, 8U);
+	EXPECT_EQ(minfo.max_entries, 4U);
+	EXPECT_STREQ("test_map", minfo.name);
+
+	/* Verify map operations (update and lookup) */
+	uint32_t key = 0;
+	uint64_t val = 0xdeadbeefcafebabeULL;
+	uint64_t lookup_val = 0;
+
+	memset(&attr, 0, sizeof(attr));
+	attr.map_fd = skel.maps.test_map.map_fd;
+	attr.key = (uintptr_t)&key;
+	attr.value = (uintptr_t)&val;
+	ret = syscall(__NR_bpf, BPF_MAP_UPDATE_ELEM, &attr, sizeof(attr));
+	EXPECT_EQ(ret, 0);
+
+	memset(&attr, 0, sizeof(attr));
+	attr.map_fd = skel.maps.test_map.map_fd;
+	attr.key = (uintptr_t)&key;
+	attr.value = (uintptr_t)&lookup_val;
+	ret = syscall(__NR_bpf, BPF_MAP_LOOKUP_ELEM, &attr, sizeof(attr));
+	EXPECT_EQ(ret, 0);
+	EXPECT_EQ(lookup_val, val);
+
+	/* Verify prog metadata */
+	struct bpf_prog_info pinfo = { 0 };
+	memset(&attr, 0, sizeof(attr));
+	attr.info.bpf_fd = skel.progs.probe.prog_fd;
+	attr.info.info_len = sizeof(pinfo);
+	attr.info.info = (uintptr_t)&pinfo;
+	ret = syscall(__NR_bpf, BPF_OBJ_GET_INFO_BY_FD, &attr, sizeof(attr));
+	EXPECT_EQ(ret, 0);
+	EXPECT_EQ(pinfo.type, BPF_PROG_TYPE_SOCKET_FILTER);
+	EXPECT_STREQ("probe", pinfo.name);
+
+	if (skel.progs.probe.prog_fd > 0)
+		close(skel.progs.probe.prog_fd);
+	if (skel.maps.test_map.map_fd > 0)
+		close(skel.maps.test_map.map_fd);
 	close(elf_fd);
 	close(dev_fd);
 }
