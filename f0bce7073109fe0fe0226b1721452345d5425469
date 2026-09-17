@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62774414_599268a1",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-17T12:02:29Z",
+      "side": 1,
+      "message": "Your bug mentioned the underflow error here as well, but it\u0027s not part of the fix? This is what I do in the rust port: \n\nlet dio_buf_len \u003d if (dio_buf_offs \u003c buf_end) \u0026\u0026 (buf_end - dio_buf_offs) \u003e\u003d PAGE_SIZE {\n\nreordered to avoid triggering rust unsigned underflow errors in computing the difference.\n\nNevermind, just saw the history of this fix and suren\u0027s comment. Ignore this if you want.",
+      "fixSuggestions": [
+        {
+          "fixId": "e8d4402a_5cfa8e58",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 394,
+                "startChar": 0,
+                "endLine": 395,
+                "endChar": 0
+              },
+              "replacement": "\tif (dio_buf_offs \u003c buf_end \u0026\u0026 (buf_end - dio_buf_offs) \u003e\u003d PAGE_SIZE)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f0bce7073109fe0fe0226b1721452345d5425469",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
