@@ -6871,7 +6871,7 @@ int ring_buffer_read_page(struct trace_buffer *buffer,
 	raw_spin_lock_irqsave(&cpu_buffer->reader_lock, flags);
 
 	if (data_page->order != cpu_buffer->reader_page->order)
-		goto out;
+		goto out_unlock;
 
 	reader = rb_get_reader_page(cpu_buffer);
 	if (!reader)
