@@ -248,6 +248,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ed224ce1_b3676305",
+        "filename": "include/net/apf.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-09-17T13:04:34Z",
+      "side": 1,
+      "message": "Given we don\u0027t plan to send this field to upsteam, I think we shouldn\u0027t include it.\n\nWe should do ANDROID_KABI_RESERVE() thing, it seems it is not too hard to use it anyway and it will give us the way to keep the logic similar to upsteam. Otherwise, the code to deal with `version` field will diverge.",
+      "parentUuid": "d417c413_23febdf6",
+      "revId": "a03818347f8600b7c6a07b6ec7cf2f126b229bb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2ec50078_0dc93e99",
         "filename": "net/apf/Kconfig",
         "patchSetId": 18
