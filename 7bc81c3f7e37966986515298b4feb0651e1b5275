@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddc347a6_a35ddc8d",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-17T13:03:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d61c5c5_fd8095b0",
+      "range": {
+        "startLine": 55,
+        "startChar": 8,
+        "endLine": 55,
+        "endChar": 26
+      },
+      "revId": "7bc81c3f7e37966986515298b4feb0651e1b5275",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "27d35be7_1da96a00",
@@ -37,6 +61,24 @@
       "writtenOn": "2026-09-14T19:30:42Z",
       "side": 1,
       "message": "nit: Could we rename this to `inner` or `info`? The `.lock.lock()` pattern is a bit confusing.",
+      "revId": "7bc81c3f7e37966986515298b4feb0651e1b5275",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00a87949_34ae16fa",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-17T13:03:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27d35be7_1da96a00",
       "revId": "7bc81c3f7e37966986515298b4feb0651e1b5275",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
