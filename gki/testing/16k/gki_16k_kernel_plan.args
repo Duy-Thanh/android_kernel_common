@@ -1,0 +1,38 @@
+# ============================================================================
+# TPE GKI 16KB Release - Dedicated Kernel Test Plan (Include List)
+# Tracking Bug: b/559889030
+#
+# Description:
+# Positive include list for TPE GKI Release TVC testing of 16KB GKI kernels
+# (kernel_aarch64_16k). Restricts execution to core kernel VTS compliance,
+# LTP, filesystem, virtualization (pKVM/Microdroid), KeyMint, and Bionic/OS
+# page-size boundary suites.
+# ============================================================================
+
+# 1. Core Kernel & GKI Compliance VTS
+--include-filter vts_gki_compliance_test
+--include-filter vts_ltp_test_arm_64
+--include-filter vts_security_avb_test
+--include-filter vts_treble_vintf_vendor_test
+--include-filter vts_treble_vintf_framework_test
+
+# 2. Filesystem & Storage Boundary
+--include-filter f2fs_test
+
+# 3. Virtualization / pKVM / Microdroid
+--include-filter VmMultiTenancyTests.VTS
+--include-filter VmMultiTenancyTests.CTS
+--include-filter MicrodroidHostTestCases.VTS
+--include-filter MicrodroidHostTestCases.CTS
+--include-filter vts_libavf_test
+
+# 4. Security & Hardware-backed KeyMint / Keystore
+--include-filter VtsAidlKeyMintTargetTest
+--include-filter keystore2_client_tests
+--include-filter VtsHalRemotelyProvisionedComponentTargetTest
+--include-filter CtsSecurityHostTestCases
+
+# 5. Bionic / Libcore / Core OS Page Size Boundary
+--include-filter CtsOsTestCases
+--include-filter CtsOsHostTestCases
+--include-filter CtsLibcoreTestCases
