@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51efd8cf_97347ef0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-09-17T14:48:35Z",
+      "side": 1,
+      "message": "Hmm. Why do we need to backport upstream patches to forward port wrapfd driver from 6.12 to 6.18?",
+      "revId": "e08fe2761ca377f380e2a94f74fd67810558fe96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
