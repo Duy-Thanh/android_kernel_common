@@ -1501,7 +1501,13 @@ int xhci_endpoint_init(struct xhci_hcd *xhci,
 		avg_trb_len = 8;
 
 	/* Set up the endpoint ring */
-	pool = xhci->segment_pool;
+	{
+		struct xhci_virt_ep *vep = &virt_dev->eps[ep_index];
+		struct xhci_sideband *sb = vep->sideband;
+		struct dma_pool *ep_pool = sb ?
+			container_of(sb, struct xhci_sideband_priv, sb)->ep_pools[ep_index] : NULL;
+		pool = ep_pool ? ep_pool : xhci->segment_pool;
+	}
 	virt_dev->eps[ep_index].new_ring =
 		xhci_ring_alloc_from_pool(xhci, 2, ring_type, max_packet, pool, mem_flags);
 	if (!virt_dev->eps[ep_index].new_ring)

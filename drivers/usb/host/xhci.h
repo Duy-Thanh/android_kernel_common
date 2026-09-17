@@ -18,7 +18,24 @@
 #include <linux/usb/hcd.h>
 #include <linux/io-64-nonatomic-lo-hi.h>
 #include <linux/io-64-nonatomic-hi-lo.h>
+#include <linux/usb/xhci-sideband.h>
 #include <linux/android_kabi.h>
+#include <linux/usb/xhci-sideband.h>
+
+/*
+ * struct xhci_sideband is a KMI-tracked type shared with sideband client
+ * drivers via <linux/usb/xhci-sideband.h>, so its layout must not change.
+ * Per-endpoint pool overrides are kept out of it, in this driver-private
+ * wrapper instead. xhci_sideband_register() allocates this wrapper and
+ * hands out &priv->sb; container_of() recovers it internally.
+ *
+ * ep_pools[] holds the per-endpoint pool set via
+ * xhci_sideband_add_endpoint_pool(); indexed the same way as sb.eps[].
+ */
+struct xhci_sideband_priv {
+	struct xhci_sideband	sb;
+	struct dma_pool		*ep_pools[EP_CTX_PER_DEV];
+};
 
 /* Code sharing between pci-quirks and xhci hcd */
 #include	"xhci-ext-caps.h"
@@ -734,8 +751,6 @@ struct xhci_interval_bw_table {
 	unsigned int		ss_bw_out;
 };
 
-#define EP_CTX_PER_DEV		31
-
 struct xhci_virt_device {
 	int				slot_id;
 	struct usb_device		*udev;
@@ -1258,14 +1273,11 @@ static inline const char *xhci_trb_type_string(u8 type)
 #define NEC_FW_MAJOR(p)		(((p) >> 8) & 0xff)
 
 /*
- * TRBS_PER_SEGMENT must be a multiple of 4,
- * since the command ring is 64-byte aligned.
- * It must also be greater than 16.
+ * TRBS_PER_SEGMENT and TRB_SEGMENT_SIZE are defined in
+ * <linux/usb/xhci-sideband.h>, shared with sideband client drivers.
  */
-#define TRBS_PER_SEGMENT	256
 /* Allow two commands + a link TRB, along with any reserved command TRBs */
 #define MAX_RSVD_CMD_TRBS	(TRBS_PER_SEGMENT - 3)
-#define TRB_SEGMENT_SIZE	(TRBS_PER_SEGMENT*16)
 #define TRB_SEGMENT_SHIFT	(ilog2(TRB_SEGMENT_SIZE))
 /* TRB buffer pointers can't cross 64KB boundaries */
 #define TRB_MAX_BUFF_SHIFT		16
