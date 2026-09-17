@@ -2332,14 +2332,19 @@ cc_binary_with_abi(
 cc_binary_with_abi(
     name = "kselftest_size_test_get_size",
     srcs = ["tools/testing/selftests/size/get_size.c"],
-    copts = _KSELFTEST_COPTS + select({
+    copts = _KSELFTEST_COPTS + [
+        "-ffreestanding",
+    ] + select({
         "//build/kernel/kleaf/platforms/config_settings:android_x86_64": ["-mstackrealign"],
         "//conditions:default": [],
     }),
     includes = [
         "tools/testing/selftests",
     ],
-    linkopts = ["-nostartfiles"],
+    linkopts = [
+        "-static",
+        "-nostartfiles",
+    ],
     path_prefix = _KSELFTEST_DIR,
     target_compatible_with = ["@platforms//os:android"],
     visibility = ["//visibility:private"],
