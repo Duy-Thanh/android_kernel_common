@@ -168,6 +168,9 @@ filegroup(
 
             # ABI and symbol list files
             "gki/**",
+
+            # Bazel files
+            "bazel/**",
         ],
     ),
     visibility = ["//visibility:public"],
