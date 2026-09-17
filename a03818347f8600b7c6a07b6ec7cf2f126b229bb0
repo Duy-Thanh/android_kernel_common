@@ -71,6 +71,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "242eea6d_0a67e84a",
+        "filename": "include/linux/netdevice.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 1693,
+      "author": {
+        "id": 4426965
+      },
+      "writtenOn": "2026-09-17T13:45:16Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "14a05968_5198fa9f",
+      "revId": "a03818347f8600b7c6a07b6ec7cf2f126b229bb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "598eae20_b12792cf",
@@ -106,6 +124,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7397784_885cde1a",
+        "filename": "include/net/apf.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 4426965
+      },
+      "writtenOn": "2026-09-17T13:45:16Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "96575eb7_50dabb37",
+      "revId": "a03818347f8600b7c6a07b6ec7cf2f126b229bb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e16687f_411ed8a1",
@@ -137,6 +173,24 @@
       "side": 1,
       "message": "We need a way to figure out which netdev is on which chip.\n\nSome chips can support multiple netdevs.  Particularly common on wifi (though not only).\nThe limitations on apf ram are at the level of the chip, not the netdev.\n\nThis is needed so we can appropriately partition apf ram in the presence of multiple apf capable netdevs on (potentially) multiple apf capable chips.",
       "parentUuid": "9e16687f_411ed8a1",
+      "revId": "a03818347f8600b7c6a07b6ec7cf2f126b229bb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ad3685c_32b39fc7",
+        "filename": "include/net/apf.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 4426965
+      },
+      "writtenOn": "2026-09-17T13:45:16Z",
+      "side": 1,
+      "message": "but .. \"defaults to 0\"? it\u0027s something that\u0027s actually set separately (maybe it shouldn\u0027t be a separate op but done while installing the program?)",
+      "parentUuid": "383a350b_a475d4de",
       "revId": "a03818347f8600b7c6a07b6ec7cf2f126b229bb0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -348,6 +402,24 @@
       "side": 1,
       "message": "isn\u0027t this used in line 77 and 84",
       "parentUuid": "0cb8aa9e_dc975eab",
+      "revId": "a03818347f8600b7c6a07b6ec7cf2f126b229bb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "796effd3_cfe6d387",
+        "filename": "net/apf/core.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 4426965
+      },
+      "writtenOn": "2026-09-17T13:45:16Z",
+      "side": 1,
+      "message": "oops, right, I missed that.\n\nis that something you really want to enforce as a version? in e.g. nl80211 we simply check if the operation is supported inside the individual calls, might be unnecessarily hard to sell this partitioning upstream - but you don\u0027t have something like registration to APF like wireless where you can immediately flag invalid ops combinations",
+      "parentUuid": "0ec5913a_aeeb62c0",
       "revId": "a03818347f8600b7c6a07b6ec7cf2f126b229bb0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
