@@ -36,6 +36,8 @@ static inline int register_random_vmfork_notifier(struct notifier_block *nb) { r
 static inline int unregister_random_vmfork_notifier(struct notifier_block *nb) { return 0; }
 #endif
 
+void get_boot_id(u8 *uuid);
+
 void get_random_bytes(void *buf, size_t len);
 u8 get_random_u8(void);
 u16 get_random_u16(void);
