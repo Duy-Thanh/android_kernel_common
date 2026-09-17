@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b99fae9_66187d68",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-09-17T18:04:22Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Cherry pick does not have same author date as original commit.\n\nOriginal author ...\n\nCherry pick does not have same author date as original commit.\n\nOriginal author date: Wed Jul 8 12:53:39 2026 +0530\nCherry pick author date: Thu Sep 17 12:00:43 2026 +0530\n\nPlease cherry-pick using: `git cherry-pick -s -x a4447c0693830d5ecadd6e755cb7fdc55d86aacc`.\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "28af1050a23d82f26ec772c3192ea2a3052a2db8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cc3b683_74dbbb55",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-09-17T18:04:22Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Cherry pick does not have same author date as original commit.\n\nOriginal author ...\n\nCherry pick does not have same author date as original commit.\n\nOriginal author date: Wed Jul 8 12:53:39 2026 +0530\nCherry pick author date: Thu Sep 17 12:00:43 2026 +0530\n\nPlease cherry-pick using: `git cherry-pick -s -x a4447c0693830d5ecadd6e755cb7fdc55d86aacc`.\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "28af1050a23d82f26ec772c3192ea2a3052a2db8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0f7e3bc_e8bc1fd3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-09-17T18:04:22Z",
+      "side": 1,
+      "message": "This is not a clean cherry-pick, but there doesn\u0027t appear to be any reason for it to have been modified from the upstream version. Please clean this up.\n```\ndiff --git a/drivers/firmware/arm_scmi/notify.c b/drivers/firmware/arm_scmi/notify.c\nindex f042fb8a0..4f77e1340 100644\n--- a/drivers/firmware/arm_scmi/notify.c\n+++ b/drivers/firmware/arm_scmi/notify.c\n@@ -597,8 +597,8 @@ int scmi_notify(const struct scmi_handle *handle, u8 proto_id, u8 evt_id,\n \t}\n \tif (kfifo_avail(\u0026r_evt-\u003eproto-\u003eequeue.kfifo) \u003c sizeof(eh) + len) {\n \t\tdev_warn_ratelimited(handle-\u003edev,\n-\t\t\t\t     \"queue full, dropping proto_id:%d  evt_id:%d  ts:%lld\\n\",\n-\t\t\t\t     proto_id, evt_id, ktime_to_ns(ts));\n+\t\t\t \"queue full, dropping proto_id:%d  evt_id:%d  ts:%lld\\n\",\n+\t\t\t proto_id, evt_id, ktime_to_ns(ts));\n \t\treturn -ENOMEM;\n \t}\n ```",
+      "revId": "28af1050a23d82f26ec772c3192ea2a3052a2db8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
