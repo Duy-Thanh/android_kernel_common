@@ -4,6 +4,9 @@
 //!
 //! This module allows Rust code to use the kernel's `spinlock_t`.
 
+use crate::sync::lock::Backend;
+use crate::types::NotThreadSafe;
+
 /// Creates a [`SpinLock`] initialiser with the given name and a newly-created lock class.
 ///
 /// It uses the name if one is given, otherwise it generates one based on the file name and line
@@ -142,5 +145,70 @@ unsafe impl super::Backend for SpinLockBackend {
     unsafe fn assert_is_held(ptr: *mut Self::State) {
         // SAFETY: The `ptr` pointer is guaranteed to be valid and initialized before use.
         unsafe { bindings::spin_assert_is_held(ptr) }
+    }
+}
+
+/// A lock guard for a SpinLock held through `lock_irq` inside an irq handler.
+///
+/// Unlike the generic lock guard `Guard`, this does _not_ automatically unlock the spinlock
+/// when it's dropped, but simply allows access to the wrapped data through Deref and DerefMut
+/// traits.
+pub struct SpinLockIrqGuard<'a, T: ?Sized> {
+    lock: &'a SpinLock<T>,
+    _not_send: NotThreadSafe,
+}
+
+// SAFETY: `SpinLockIrqGuard` is sync when the data protected by the lock is also sync.
+unsafe impl<T: Sync + ?Sized> Sync for SpinLockIrqGuard<'_, T> {}
+
+impl<'a, T: ?Sized> core::ops::Deref for SpinLockIrqGuard<'_, T> {
+    type Target = T;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        // SAFETY: The caller owns the lock, so it is safe to deref the protected data.
+        unsafe { &*self.lock.data.get() }
+    }
+}
+
+impl<'a, T: ?Sized> core::ops::DerefMut for SpinLockIrqGuard<'_, T> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        // SAFETY: The caller owns the lock, so it is safe to deref the protected data.
+        unsafe { &mut *self.lock.data.get() }
+    }
+}
+
+impl<'a, T: ?Sized> SpinLockIrqGuard<'a, T> {
+    #[inline]
+    unsafe fn new(lock: &'a SpinLock<T>) -> Self {
+        // SAFETY: The caller can only hold the lock if `SpinLockBackend::init` has already been
+        // called.
+        unsafe { SpinLockBackend::assert_is_held(lock.state.get()) };
+
+        Self {
+            lock,
+            _not_send: NotThreadSafe,
+        }
+    }
+}
+
+impl<T> SpinLock<T> {
+    /// Holds the spinlock inside an irq handler for the duration of the function `f`.
+    /// `f` is passed a guard that allows access to the data wrapped by the SpinLock.
+    pub fn lock_irq<F, R>(&self, f: F) -> R
+    where
+        F: FnOnce(SpinLockIrqGuard<'_, T>) -> R,
+    {
+        let flags = unsafe { bindings::spin_lock_irqsave(self.state.get()) };
+
+        // SAFETY: We have just acquired the spinlock, so it's safe to create the guard.
+        let res = unsafe { f(SpinLockIrqGuard::new(self)) };
+
+        unsafe {
+            bindings::spin_unlock_irqrestore(self.state.get(), flags);
+        }
+
+        res
     }
 }
