@@ -16,6 +16,23 @@
       "message": "Please move the symbol list and abi update changes to a separate patch on top of this one.",
       "revId": "9f669d2862843c5032b6255bf32afd24b2f0b8cc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f77f57c_f23bf1b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-09-17T00:13:06Z",
+      "side": 1,
+      "message": "As we discussed today, file an out-of-tree tracking bug for this (see go/common-kernel-3p) so we can track ownership. Cite the OOT bug in a \"Bug:\" tag on this patch and any others associated with the feature.",
+      "revId": "9f669d2862843c5032b6255bf32afd24b2f0b8cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
