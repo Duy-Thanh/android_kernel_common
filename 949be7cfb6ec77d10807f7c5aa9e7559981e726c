@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a6668f3_797f6f2a",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-17T12:06:35Z",
+      "side": 1,
+      "message": "This is what I did in the rust port:\n\nlet dio_buf_len \u003d if (dio_buf_offs \u003c buf_end) \u0026\u0026 (buf_end - dio_buf_offs) \u003e\u003d PAGE_SIZE {\n  page_align_down(buf_end) - dio_buf_offs\n} else {\n  0\n};\n\nI _think_ that\u0027s equivalent.",
+      "revId": "949be7cfb6ec77d10807f7c5aa9e7559981e726c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
