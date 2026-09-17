@@ -16,6 +16,24 @@
       "message": "You define vendor hooks in this patch, but none of them are called from anywhere. Is that because the call sites for them are all in OGKI code that doesn\u0027t exist in GKI? If not, then why are you not adding the call sites here?",
       "revId": "4b11d0e8009fc3358b7d71a005ea964d585facc9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "412d07fd_1f3f0a2e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3592382
+      },
+      "writtenOn": "2026-09-17T18:16:13Z",
+      "side": 1,
+      "message": "Intention was to keep the minimal set of changes required for the kernel ABI update; uploaded patchset #3 contains hook calls.",
+      "parentUuid": "bb3651f0_b4115082",
+      "revId": "4b11d0e8009fc3358b7d71a005ea964d585facc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
