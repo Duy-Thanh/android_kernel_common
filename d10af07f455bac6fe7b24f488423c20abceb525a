@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a85c835_e56da1ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-09-17T14:51:30Z",
+      "side": 1,
+      "message": "I\u0027m not a fan of squashing all wrapfd patches into one. Merging fixes with the patch they fix is fine but bundling everything loses the history and makes it hard to review. Would it be possible to merge only fixups and keep the main pieces as a logical progression of patches?",
+      "revId": "d10af07f455bac6fe7b24f488423c20abceb525a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
