@@ -34,6 +34,24 @@
       "parentUuid": "ecbae317_78035c64",
       "revId": "ed029a0506cab1b68edcd3b08203e934808ca66a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f328bb8_ffbf08b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-09-17T02:23:23Z",
+      "side": 1,
+      "message": "Thanks @asfez@google.com. Yes, this fix has been included in mainline.",
+      "parentUuid": "d8549842_b250c1c4",
+      "revId": "ed029a0506cab1b68edcd3b08203e934808ca66a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
