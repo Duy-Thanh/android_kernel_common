@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "974197f6_6d7cf5c9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2026-09-17T16:15:52Z",
+      "side": 1,
+      "message": "Needs an explanation about why these hooks are needed, covering each hook individually.  You also need a plan to upstream equivalent functionality, as hooks cannot be carried indefinitely.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 142
+      },
+      "revId": "512a579b7acea202d5dfbb296e55db784609bc00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95f7c5cf_efbb5617",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2026-09-17T16:15:52Z",
+      "side": 1,
+      "message": "These names are too generic.  They should have a subsystem prefix like `dm_verity` or at least `dmv`.",
+      "range": {
+        "startLine": 434,
+        "startChar": 0,
+        "endLine": 440,
+        "endChar": 63
+      },
+      "revId": "512a579b7acea202d5dfbb296e55db784609bc00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66547747_26974334",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2026-09-17T16:15:52Z",
+      "side": 1,
+      "message": "There\u0027s no need to use `#ifdef` here.",
+      "range": {
+        "startLine": 452,
+        "startChar": 0,
+        "endLine": 452,
+        "endChar": 33
+      },
+      "revId": "512a579b7acea202d5dfbb296e55db784609bc00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88375fb9_c175f98f",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2026-09-17T16:15:52Z",
+      "side": 1,
+      "message": "Why does it pass `PRE_FEC` when it\u0027s called *after* FEC?",
+      "range": {
+        "startLine": 462,
+        "startChar": 74,
+        "endLine": 462,
+        "endChar": 97
+      },
+      "revId": "512a579b7acea202d5dfbb296e55db784609bc00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a8acdf5_687b39c9",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1575,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2026-09-17T16:15:52Z",
+      "side": 1,
+      "message": "What does `handle_get_b_info` mean?  What is this hook used for and what does it do with the string passed?",
+      "range": {
+        "startLine": 1575,
+        "startChar": 1,
+        "endLine": 1575,
+        "endChar": 35
+      },
+      "revId": "512a579b7acea202d5dfbb296e55db784609bc00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "552222c1_5a0785af",
+        "filename": "include/trace/hooks/dmv_debug.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2026-09-17T16:15:52Z",
+      "side": 1,
+      "message": "`const char *`",
+      "range": {
+        "startLine": 50,
+        "startChar": 11,
+        "endLine": 50,
+        "endChar": 15
+      },
+      "revId": "512a579b7acea202d5dfbb296e55db784609bc00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
