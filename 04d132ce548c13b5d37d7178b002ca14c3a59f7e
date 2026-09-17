@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ba988eb_340db9ee",
+        "filename": "include/net/apf.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-09-17T09:30:58Z",
+      "side": 1,
+      "message": "Probably better to get intel\u0027s upsteam kernel maintainer to take a look at this as well.",
+      "revId": "04d132ce548c13b5d37d7178b002ca14c3a59f7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
