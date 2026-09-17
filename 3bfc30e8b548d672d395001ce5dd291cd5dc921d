@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6ccf91f_4d07cb51",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-09-17T18:59:57Z",
+      "side": 1,
+      "message": "Actually, I think these should be already covered by this one.",
+      "range": {
+        "startLine": 154,
+        "startChar": 12,
+        "endLine": 154,
+        "endChar": 23
+      },
+      "revId": "3bfc30e8b548d672d395001ce5dd291cd5dc921d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
