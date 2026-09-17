@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1cb32e3_701a5941",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-17T16:41:00Z",
+      "side": 1,
+      "message": "Also, could you explain how the new approach for checking if the buffer is mapped solves the issue with `remap_file_pages()`?\n\nThe original problem is that in `remap_file_pages()`, the VMA file pointer will point to the dmabuf file, not the wrapfd file. So, when it invokes `f_op-\u003emmap()` it will invoke the dmabuf `mmap()` callback, bypassing all the checks we have in place for wrapfd, so don\u0027t we still need to do that?",
+      "revId": "7997e810bc64e3a550fc82b75e857b343c3accce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
