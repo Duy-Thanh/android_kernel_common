@@ -265,6 +265,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "37b93101_fd0a274b",
+        "filename": "net/apf/Kconfig",
+        "patchSetId": 18
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-09-17T12:58:57Z",
+      "side": 1,
+      "message": "(changes in defconfigs have a tendency to cause conflicts...)",
+      "parentUuid": "bff13ddd_25c9900d",
+      "revId": "a03818347f8600b7c6a07b6ec7cf2f126b229bb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0cb8aa9e_dc975eab",
         "filename": "net/apf/core.c",
         "patchSetId": 18
