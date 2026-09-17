@@ -13,6 +13,7 @@
 #include <linux/kernel.h>
 #include <linux/list.h>
 #include <linux/memblock.h>
+#include <linux/random.h>
 #include <linux/rslib.h>
 #include <linux/slab.h>
 #include <linux/uaccess.h>
@@ -28,16 +29,28 @@
  * @sig: Signature to indicate header (PERSISTENT_RAM_SIG xor PRZ-type value)
  * @start: First valid byte in the buffer.
  * @size: Number of valid bytes in the buffer.
+ * @boot_id: 128-bit UUID representing the session where @data was created.
  * @data: The contents of the buffer.
+ *
+ * persistent_ram_buffer_v1 is left for backward compatibility.
  */
 struct persistent_ram_buffer {
+	uint32_t    sig;
+	atomic_t    start;
+	atomic_t    size;
+	uint8_t boot_id[16];
+	uint8_t     data[];
+};
+
+struct persistent_ram_buffer_v1 {
 	uint32_t    sig;
 	atomic_t    start;
 	atomic_t    size;
 	uint8_t     data[];
 };
 
-#define PERSISTENT_RAM_SIG (0x43474244) /* DBGC */
+#define PERSISTENT_RAM_SIG_V1 (0x43474244) /* DBGC */
+#define PERSISTENT_RAM_SIG (0x44474244) /* DBGD */
 
 static inline size_t buffer_size(struct persistent_ram_zone *prz)
 {
@@ -289,6 +302,28 @@ static int notrace persistent_ram_update_user(struct persistent_ram_zone *prz,
 	return ret;
 }
 
+static void persistent_ram_save_old_v1(struct persistent_ram_zone *prz)
+{
+	struct persistent_ram_buffer_v1 *buffer = (void *)prz->buffer;
+	size_t size = buffer_size(prz);
+	size_t start = buffer_start(prz);
+
+	if (!size)
+		return;
+
+	if (!prz->old_log)
+		prz->old_log = kvzalloc(size, GFP_KERNEL);
+
+	if (!prz->old_log) {
+		pr_err("failed to allocate buffer\n");
+		return;
+	}
+
+	prz->old_log_size = size;
+	memcpy_fromio(prz->old_log, &buffer->data[start], size - start);
+	memcpy_fromio(prz->old_log + size - start, &buffer->data[0], start);
+}
+
 void persistent_ram_save_old(struct persistent_ram_zone *prz)
 {
 	struct persistent_ram_buffer *buffer = prz->buffer;
@@ -404,6 +439,7 @@ void persistent_ram_zap(struct persistent_ram_zone *prz)
 {
 	atomic_set(&prz->buffer->start, 0);
 	atomic_set(&prz->buffer->size, 0);
+	get_boot_id(prz->buffer->boot_id);
 	persistent_ram_update_header_ecc(prz);
 }
 
@@ -530,6 +566,8 @@ static int persistent_ram_post_init(struct persistent_ram_zone *prz, u32 sig,
 {
 	int ret;
 	bool zap = !!(prz->flags & PRZ_FLAG_ZAP_OLD);
+	u32 sig_v1 = sig ^ PERSISTENT_RAM_SIG_V1;
+	u32 sig_v2 = sig ^ PERSISTENT_RAM_SIG;
 
 	ret = persistent_ram_init_ecc(prz, ecc_info);
 	if (ret) {
@@ -537,9 +575,7 @@ static int persistent_ram_post_init(struct persistent_ram_zone *prz, u32 sig,
 		return ret;
 	}
 
-	sig ^= PERSISTENT_RAM_SIG;
-
-	if (prz->buffer->sig == sig) {
+	if (prz->buffer->sig == sig_v2) {
 		if (buffer_size(prz) == 0 && buffer_start(prz) == 0) {
 			pr_debug("found existing empty buffer\n");
 			return 0;
@@ -555,10 +591,31 @@ static int persistent_ram_post_init(struct persistent_ram_zone *prz, u32 sig,
 				 buffer_size(prz), buffer_start(prz));
 			persistent_ram_save_old(prz);
 		}
+	} else if (prz->buffer->sig == sig_v1) {
+		/* V1 buffer size capacity is 16 bytes larger */
+		size_t v1_buffer_size = prz->buffer_size +
+			sizeof(struct persistent_ram_buffer) -
+			sizeof(struct persistent_ram_buffer_v1);
+
+		if (buffer_size(prz) == 0 && buffer_start(prz) == 0) {
+			pr_debug("found existing empty v1 buffer\n");
+		} else if (buffer_size(prz) > v1_buffer_size ||
+			   buffer_start(prz) > buffer_size(prz)) {
+			pr_info("found existing invalid v1 buffer, size %zu, start %zu\n",
+				buffer_size(prz), buffer_start(prz));
+		} else {
+			pr_debug("found existing v1 buffer, size %zu, start %zu\n",
+				 buffer_size(prz), buffer_start(prz));
+			persistent_ram_save_old_v1(prz);
+		}
+
+		/* Upgrade signature and reset zone for v2 layout */
+		prz->buffer->sig = sig_v2;
+		zap = true;
 	} else {
 		pr_debug("no valid data in buffer (sig = 0x%08x)\n",
 			 prz->buffer->sig);
-		prz->buffer->sig = sig;
+		prz->buffer->sig = sig_v2;
 		zap = true;
 	}
 

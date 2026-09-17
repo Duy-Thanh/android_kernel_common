@@ -1580,6 +1580,22 @@ const struct file_operations urandom_fops = {
 	.splice_write = iter_file_splice_write,
 };
 
+static u8 sysctl_bootid[UUID_SIZE];
+
+/*
+ * The boot_id is generated on demand and is immutable once generated.
+ */
+void get_boot_id(u8 *uuid)
+{
+	static DEFINE_SPINLOCK(bootid_spinlock);
+
+	spin_lock(&bootid_spinlock);
+	if (!sysctl_bootid[8])
+		generate_random_uuid(sysctl_bootid);
+	memcpy(uuid, sysctl_bootid, UUID_SIZE);
+	spin_unlock(&bootid_spinlock);
+}
+EXPORT_SYMBOL_GPL(get_boot_id);
 
 /********************************************************************
  *
@@ -1618,7 +1634,6 @@ const struct file_operations urandom_fops = {
 static int sysctl_random_min_urandom_seed = CRNG_RESEED_INTERVAL / HZ;
 static int sysctl_random_write_wakeup_bits = POOL_READY_BITS;
 static int sysctl_poolsize = POOL_BITS;
-static u8 sysctl_bootid[UUID_SIZE];
 
 /*
  * This function is used to return both the bootid UUID, and random
@@ -1643,12 +1658,7 @@ static int proc_do_uuid(const struct ctl_table *table, int write, void *buf,
 		uuid = tmp_uuid;
 		generate_random_uuid(uuid);
 	} else {
-		static DEFINE_SPINLOCK(bootid_spinlock);
-
-		spin_lock(&bootid_spinlock);
-		if (!uuid[8])
-			generate_random_uuid(uuid);
-		spin_unlock(&bootid_spinlock);
+		get_boot_id(tmp_uuid);
 	}
 
 	snprintf(uuid_string, sizeof(uuid_string), "%pU", uuid);
