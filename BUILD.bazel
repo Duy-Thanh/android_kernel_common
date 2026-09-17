@@ -1754,6 +1754,7 @@ cc_binary_with_abi(
     name = "kselftest_bpf_fd_loader_test",
     srcs = [
         "drivers/android/bpf/tests/bpf_fd_loader_test.c",
+        "drivers/android/bpf/tests/test_loader_lskel.h",
         "include/uapi/linux/android/bpf_fd_loader.h",
     ],
     copts = _KSELFTEST_COPTS,
