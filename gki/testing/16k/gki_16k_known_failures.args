@@ -1,0 +1,57 @@
+# ============================================================================
+# TPE GKI 16KB Release - Known Failures & Non-Kernel Waive List (Exclude List)
+# Tracking Bug: b/559889030
+#
+# Policy:
+# Every entry MUST include a comment with:
+#   # [Buganizer ID] [Category: Kernel-Limit | Test-Assumption | Non-Kernel] Reason
+# ============================================================================
+
+# ----------------------------------------------------------------------------
+# PART A: Known Kernel / Architectural Limitations (Triaged by Kernel SWE)
+# ----------------------------------------------------------------------------
+
+# [b/520627398] [Kernel-Limit] F2FS 4KB block size vs 16KB page size architectural limit
+--exclude-filter f2fs_test
+
+# [b/524355038] [Test-Assumption] Java NIO Files2Test hardcodes 4KB page assumptions
+--exclude-filter CtsLibcoreTestCases libcore.java.nio.file.Files2Test#test_walk
+--exclude-filter CtsLibcoreTestCases libcore.java.nio.file.Files2Test#test_walkFileTree
+
+# [b/520109349] [Kernel-Limit] pKVM 16KB guest VM multi-tenancy SELinux/storage pending
+--exclude-filter VmMultiTenancyTests.CTS
+--exclude-filter VmMultiTenancyTests.VTS
+
+# [b/520109233] [Kernel-Limit] Microdroid cgroup/page-size config under 16KB guest
+--exclude-filter MicrodroidHostTestCases.CTS
+--exclude-filter MicrodroidHostTestCases.VTS
+
+
+# ----------------------------------------------------------------------------
+# PART B: Non-Kernel Userspace / Framework Noise (Excluded from GKI Gating)
+# ----------------------------------------------------------------------------
+
+# [b/559889030] [Non-Kernel] Native NDK ABI allowlist check (31.6% of all 16KB failures)
+--exclude-filter CtsNativeNdkAllowlistTest
+--exclude-filter CtsAllowlistTestCases
+
+# [b/559889030] [Non-Kernel] High-level Framework suites hitting OOM/Timeouts under 16K RAM overhead
+--exclude-filter CtsAutoFillServiceTestCases
+--exclude-filter CtsHealthFitnessDeviceTestCases
+--exclude-filter CtsAppFunctionTestCases
+--exclude-filter CtsCompanionDeviceManagerCoreTestCases
+--exclude-filter CtsDevicePolicyTestCases
+--exclude-filter CtsPersonalContextTestCases
+
+# [b/489255903] [Non-Kernel] dEQP / Graphics 4KB buffer alignment assumptions
+--exclude-filter CtsDeqpTestCases
+--exclude-filter CtsGraphicsTestCases
+--exclude-filter CtsUiRenderingTestCases
+
+# [b/491401787] [Non-Kernel] Mainline Telecom / MockModem timeouts
+--exclude-filter MctsTelecomTestCases
+--exclude-filter CtsTelephonyTestCases
+--exclude-filter CtsTelephonyProviderTestCases
+
+# [b/520627199] [Non-Kernel] Vendor Audio HAL buffer size alignment
+--exclude-filter VtsHalAudioCoreTargetTest
