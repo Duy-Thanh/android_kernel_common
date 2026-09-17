@@ -430908,6 +430908,15 @@ elf_symbol {
   full_name: "mark_mounts_for_expiry"
 }
 elf_symbol {
+  id: 0x5a1c51ee
+  name: "mark_page_accessed"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x77c6902f
+  type_id: 0x11388634
+  full_name: "mark_page_accessed"
+}
+elf_symbol {
   id: 0xe4eac6bd
   name: "mas_empty_area_rev"
   is_defined: true
@@ -470164,6 +470173,7 @@ interface {
   symbol_id: 0x8014cc22
   symbol_id: 0x18bd1341
   symbol_id: 0x2ea659f2
+  symbol_id: 0x5a1c51ee
   symbol_id: 0xe4eac6bd
   symbol_id: 0x602510fe
   symbol_id: 0xa588af20
