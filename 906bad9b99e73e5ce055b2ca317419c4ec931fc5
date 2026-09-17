@@ -70,6 +70,24 @@
       "parentUuid": "8c0332a4_189857fa",
       "revId": "906bad9b99e73e5ce055b2ca317419c4ec931fc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf0e88b1_5a86e714",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-09-17T18:27:54Z",
+      "side": 1,
+      "message": "The rationale was not added to the commit message. aosp/4289393 must land before this patch so fix the comments in both. Once it lands, make sure this patch is a clean cherry-pick of aosp/4289393.",
+      "parentUuid": "a40ca919_ff4ddc53",
+      "revId": "906bad9b99e73e5ce055b2ca317419c4ec931fc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
