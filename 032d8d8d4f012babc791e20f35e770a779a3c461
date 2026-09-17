@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77d83438_e8320bd4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-09-17T09:53:45Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by Commit Message Validation: Please remove \u0027ABI DIFFERENCES HAVE BEEN DETECTED\u0027 line from the commit message",
+      "range": {
+        "startLine": 11,
+        "startChar": 7,
+        "endLine": 11,
+        "endChar": 41
+      },
+      "revId": "032d8d8d4f012babc791e20f35e770a779a3c461",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
