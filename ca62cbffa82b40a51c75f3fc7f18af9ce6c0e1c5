@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fb9290dc_9adfc2ed",
+        "filename": "drivers/android/bpf/bpf_fd_loader.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2026-09-17T23:57:04Z",
+      "side": 1,
+      "message": "Oh, good point. Hum I think this is a blocker on our approach: even if the kernel verifies the BPF ELF, if userspace can race and swap the loader with something else, that is defeating the whole purpose. Thanks for raising this!",
+      "parentUuid": "0aa8005a_db2d67f4",
+      "revId": "ca62cbffa82b40a51c75f3fc7f18af9ce6c0e1c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "475446f9_3da77001",
         "filename": "drivers/android/bpf/bpf_fd_loader.rs",
         "patchSetId": 1
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Yes. It\u0027s always numbered in the order they are declared in the header file.",
       "parentUuid": "475446f9_3da77001",
+      "revId": "ca62cbffa82b40a51c75f3fc7f18af9ce6c0e1c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d24fa4cc_8787d124",
+        "filename": "drivers/android/bpf/bpf_fd_loader.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2026-09-17T23:57:04Z",
+      "side": 1,
+      "message": "Ack, thanks for confirming.",
+      "parentUuid": "a2f49bda_6799a0ce",
       "revId": "ca62cbffa82b40a51c75f3fc7f18af9ce6c0e1c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
