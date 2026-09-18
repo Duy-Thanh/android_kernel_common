@@ -171,6 +171,9 @@ DECLARE_HOOK(android_vh_mm_customize_pgdat_balanced,
 DECLARE_HOOK(android_vh_mm_customize_reclaim_idx,
 	TP_PROTO(int order, gfp_t gfp, s8 *reclaim_idx, enum zone_type *highest_zoneidx),
 	TP_ARGS(order, gfp, reclaim_idx, highest_zoneidx));
+DECLARE_HOOK(android_vh_can_reclaim_anon_pages,
+	TP_PROTO(struct mem_cgroup *memcg, int nid, gfp_t gfp_mask, bool *skip),
+	TP_ARGS(memcg, nid, gfp_mask, skip));
 #endif /* _TRACE_HOOK_VMSCAN_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
