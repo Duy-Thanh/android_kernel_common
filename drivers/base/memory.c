@@ -649,7 +649,7 @@ int __weak arch_get_memory_phys_device(unsigned long start_pfn)
  *
  * Called under device_hotplug_lock.
  */
-struct memory_block *memory_block_get(unsigned long block_id)
+struct memory_block *find_memory_block_by_id(unsigned long block_id)
 {
 	struct memory_block *mem;
 
@@ -657,6 +657,16 @@ struct memory_block *memory_block_get(unsigned long block_id)
 	if (mem)
 		get_device(&mem->dev);
 	return mem;
+}
+
+/*
+ * Called under device_hotplug_lock.
+ */
+struct memory_block *find_memory_block(unsigned long section_nr)
+{
+	unsigned long block_id = memory_block_id(section_nr);
+
+	return find_memory_block_by_id(block_id);
 }
 
 static struct attribute *memory_memblk_attrs[] = {
@@ -691,7 +701,7 @@ static int __add_memory_block(struct memory_block *memory)
 
 	ret = device_register(&memory->dev);
 	if (ret) {
-		memory_block_put(memory);
+		put_device(&memory->dev);
 		return ret;
 	}
 	ret = xa_err(xa_store(&memory_blocks, memory->dev.id, memory,
@@ -785,9 +795,9 @@ static int add_memory_block(unsigned long block_id, int nid, unsigned long state
 	struct memory_block *mem;
 	int ret = 0;
 
-	mem = memory_block_get(block_id);
+	mem = find_memory_block_by_id(block_id);
 	if (mem) {
-		memory_block_put(mem);
+		put_device(&mem->dev);
 		return -EEXIST;
 	}
 	mem = kzalloc_obj(*mem);
@@ -797,6 +807,7 @@ static int add_memory_block(unsigned long block_id, int nid, unsigned long state
 	mem->start_section_nr = block_id * sections_per_block;
 	mem->state = state;
 	mem->nid = nid;
+	mem->altmap = altmap;
 	INIT_LIST_HEAD(&mem->group_next);
 
 #ifndef CONFIG_NUMA
@@ -813,8 +824,6 @@ static int add_memory_block(unsigned long block_id, int nid, unsigned long state
 	ret = __add_memory_block(mem);
 	if (ret)
 		return ret;
-
-	mem->altmap = altmap;
 
 	if (group) {
 		mem->group = group;
@@ -836,8 +845,8 @@ static void remove_memory_block(struct memory_block *memory)
 		memory->group = NULL;
 	}
 
-	/* drop the ref. we got via memory_block_get() */
-	memory_block_put(memory);
+	/* drop the ref. we got via find_memory_block() */
+	put_device(&memory->dev);
 	device_unregister(&memory->dev);
 }
 
@@ -871,7 +880,7 @@ int create_memory_block_devices(unsigned long start, unsigned long size,
 		end_block_id = block_id;
 		for (block_id = start_block_id; block_id != end_block_id;
 		     block_id++) {
-			mem = memory_block_get(block_id);
+			mem = find_memory_block_by_id(block_id);
 			if (WARN_ON_ONCE(!mem))
 				continue;
 			remove_memory_block(mem);
@@ -899,7 +908,7 @@ void remove_memory_block_devices(unsigned long start, unsigned long size)
 		return;
 
 	for (block_id = start_block_id; block_id != end_block_id; block_id++) {
-		mem = memory_block_get(block_id);
+		mem = find_memory_block_by_id(block_id);
 		if (WARN_ON_ONCE(!mem))
 			continue;
 		num_poisoned_pages_sub(-1UL, memblk_nr_poison(mem));
@@ -1006,12 +1015,12 @@ int walk_memory_blocks(unsigned long start, unsigned long size,
 		return 0;
 
 	for (block_id = start_block_id; block_id <= end_block_id; block_id++) {
-		mem = memory_block_get(block_id);
+		mem = find_memory_block_by_id(block_id);
 		if (!mem)
 			continue;
 
 		ret = func(mem, arg);
-		memory_block_put(mem);
+		put_device(&mem->dev);
 		if (ret)
 			break;
 	}
@@ -1219,22 +1228,22 @@ int walk_dynamic_memory_groups(int nid, walk_memory_groups_func_t func,
 void memblk_nr_poison_inc(unsigned long pfn)
 {
 	const unsigned long block_id = pfn_to_block_id(pfn);
-	struct memory_block *mem = memory_block_get(block_id);
+	struct memory_block *mem = find_memory_block_by_id(block_id);
 
 	if (mem) {
 		atomic_long_inc(&mem->nr_hwpoison);
-		memory_block_put(mem);
+		put_device(&mem->dev);
 	}
 }
 
 void memblk_nr_poison_sub(unsigned long pfn, long i)
 {
 	const unsigned long block_id = pfn_to_block_id(pfn);
-	struct memory_block *mem = memory_block_get(block_id);
+	struct memory_block *mem = find_memory_block_by_id(block_id);
 
 	if (mem) {
 		atomic_long_sub(i, &mem->nr_hwpoison);
-		memory_block_put(mem);
+		put_device(&mem->dev);
 	}
 }
 

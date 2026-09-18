@@ -2,8 +2,8 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#ifndef BUF_SIZE
-#define BUF_SIZE 4096
+#ifndef PAGE_SIZE
+#define PAGE_SIZE 4096
 #endif
 
 #define MB(x) (x << 20)

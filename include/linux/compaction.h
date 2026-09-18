@@ -2,8 +2,6 @@
 #ifndef _LINUX_COMPACTION_H
 #define _LINUX_COMPACTION_H
 
-#include <linux/swap.h>
-
 /*
  * Determines how hard direct compaction should try to succeed.
  * Lower value means higher priority, analogically to reclaim priority.
@@ -75,9 +73,11 @@ static inline unsigned long compact_gap(unsigned int order)
 	 * effectively limited by COMPACT_CLUSTER_MAX, as that's the maximum
 	 * that the migrate scanner can have isolated on migrate list, and free
 	 * scanner is only invoked when the number of isolated free pages is
-	 * lower than that.
+	 * lower than that. But it's not worth to complicate the formula here
+	 * as a bigger gap for higher orders than strictly necessary can also
+	 * improve chances of compaction success.
 	 */
-	return min(2UL << order, COMPACT_CLUSTER_MAX);
+	return 2UL << order;
 }
 
 static inline int current_is_kcompactd(void)
@@ -101,7 +101,7 @@ extern void compaction_defer_reset(struct zone *zone, int order,
 				bool alloc_success);
 
 bool compaction_zonelist_suitable(struct alloc_context *ac, int order,
-					int alloc_flags, gfp_t gfp_mask);
+					int alloc_flags);
 
 extern void __meminit kcompactd_run(int nid);
 extern void __meminit kcompactd_stop(int nid);
