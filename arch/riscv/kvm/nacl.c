@@ -20,7 +20,7 @@ void __kvm_riscv_nacl_hfence(void *shmem,
 			     unsigned long page_count)
 {
 	int i, ent = -1, try_count = 5;
-	__lelong *entp;
+	unsigned long *entp;
 
 again:
 	for (i = 0; i < SBI_NACL_SHMEM_HFENCE_ENTRY_MAX; i++) {

@@ -216,12 +216,15 @@ static int sru_set_format(struct v4l2_subdev *subdev,
 	struct vsp1_sru *sru = to_sru(subdev);
 	struct v4l2_subdev_state *state;
 	struct v4l2_mbus_framefmt *format;
+	int ret = 0;
 
-	guard(mutex)(&sru->entity.lock);
+	mutex_lock(&sru->entity.lock);
 
 	state = vsp1_entity_get_state(&sru->entity, sd_state, fmt->which);
-	if (!state)
-		return -EINVAL;
+	if (!state) {
+		ret = -EINVAL;
+		goto done;
+	}
 
 	sru_try_format(sru, state, fmt->pad, &fmt->format);
 
@@ -236,7 +239,9 @@ static int sru_set_format(struct v4l2_subdev *subdev,
 		sru_try_format(sru, state, SRU_PAD_SOURCE, format);
 	}
 
-	return 0;
+done:
+	mutex_unlock(&sru->entity.lock);
+	return ret;
 }
 
 static const struct v4l2_subdev_pad_ops sru_pad_ops = {

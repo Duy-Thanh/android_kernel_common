@@ -20,8 +20,6 @@
 
 #include <prom.h>
 
-#include "platform.h"
-
 void prom_putchar(char c)
 {
 	if (alchemy_get_cputype() == ALCHEMY_CPU_AU1300)
