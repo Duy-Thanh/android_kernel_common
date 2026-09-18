@@ -33,6 +33,7 @@
 #include <linux/usb/hcd.h>
 
 #include "usb.h"
+#include <trace/hooks/usb.h>
 
 
 /*
@@ -1421,6 +1422,10 @@ static int usb_suspend_both(struct usb_device *udev, pm_message_t msg)
 			udev->state == USB_STATE_SUSPENDED)
 		goto done;
 
+	trace_android_rvh_usb_dev_suspend(udev, msg, &offload_active);
+	if (offload_active)
+		goto done;
+
 	usb_offload_set_pm_locked(udev, true);
 	if (msg.event == PM_EVENT_SUSPEND && usb_offload_check(udev)) {
 		dev_dbg(&udev->dev, "device offloaded, skip suspend.\n");
@@ -1545,6 +1550,11 @@ static int usb_resume_both(struct usb_device *udev, pm_message_t msg)
 		status = -ENODEV;
 		goto done;
 	}
+
+	trace_android_vh_usb_dev_resume(udev, msg, &offload_active);
+	if (offload_active)
+		goto done;
+
 	udev->can_submit = 1;
 	if (msg.event == PM_EVENT_RESUME)
 		offload_active = usb_offload_check(udev);
