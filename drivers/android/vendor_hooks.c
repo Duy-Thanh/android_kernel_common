@@ -266,6 +266,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_build_skb_around);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cache_show);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_calc_alloc_flags);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_calculate_totalreserve_pages);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_can_reclaim_anon_pages);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cgroup_attach);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cgroup_set_task);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_bpf_syscall);
