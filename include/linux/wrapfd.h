@@ -14,9 +14,6 @@ union wrapfd_mappable {
 
 #ifdef CONFIG_ANDROID_WRAPFD
 
-/* Check if the vma is mapping a wrapfd file. */
-bool is_wrapfd_vma(struct vm_area_struct *vma);
-
 /*
  * Get mappable object. Caller also gets buffer ownership.
  * Function does not take file references, therefore the caller should
@@ -56,11 +53,6 @@ int wrapfd_put_mappable(struct file *file, struct device *dev,
 			union wrapfd_mappable *mappable);
 
 #else /* CONFIG_ANDROID_WRAPFD */
-
-static inline bool is_wrapfd_vma(struct vm_area_struct *vma)
-{
-	return false;
-}
 
 static inline int wrapfd_get_mappable(struct file *file, struct device *dev,
 				      union wrapfd_mappable *mappable)
