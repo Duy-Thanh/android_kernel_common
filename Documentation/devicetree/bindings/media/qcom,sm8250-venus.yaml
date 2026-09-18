@@ -10,25 +10,19 @@ maintainers:
   - Stanimir Varbanov <stanimir.varbanov@linaro.org>
 
 description: |
-  The Iris v2.xx IP is a video encode and decode accelerator present on
-  Qualcomm platforms
+  The Venus IP is a video encode and decode accelerator present
+  on Qualcomm platforms
 
 allOf:
   - $ref: qcom,venus-common.yaml#
 
 properties:
   compatible:
-    oneOf:
-      - const: qcom,sm8250-venus
-      - items:
-          - enum:
-              - qcom,sc8280xp-iris
-              - qcom,sm8350-iris
-          - const: qcom,sm8250-venus
+    const: qcom,sm8250-venus
 
   power-domains:
     minItems: 2
-    maxItems: 4
+    maxItems: 3
 
   power-domain-names:
     minItems: 2
@@ -36,7 +30,6 @@ properties:
       - const: venus
       - const: vcodec0
       - const: mx
-      - const: mmcx
 
   clocks:
     maxItems: 3
@@ -121,12 +114,8 @@ examples:
         interrupts = <GIC_SPI 174 IRQ_TYPE_LEVEL_HIGH>;
         power-domains = <&videocc MVS0C_GDSC>,
                         <&videocc MVS0_GDSC>,
-                        <&rpmhpd RPMHPD_MX>,
-                        <&rpmhpd RPMHPD_MMCX>;
-        power-domain-names = "venus",
-                             "vcodec0",
-                             "mx",
-                             "mmcx";
+                        <&rpmhpd RPMHPD_MX>;
+        power-domain-names = "venus", "vcodec0", "mx";
 
         clocks = <&gcc GCC_VIDEO_AXI0_CLK>,
                  <&videocc VIDEO_CC_MVS0C_CLK>,

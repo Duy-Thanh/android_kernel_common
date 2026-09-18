@@ -25,8 +25,7 @@
 #define KVM_MMU_PAGE_PRINTK() ({				        \
 	const char *saved_ptr = trace_seq_buffer_ptr(p);		\
 	static const char *access_str[] = {			        \
-		"----", "r---", "-w--", "rw--", "--u-", "r-u-", "-wu-", "rwu-", \
-		"---x", "r--x", "-w-x", "rw-x", "--ux", "r-ux", "-wux", "rwux"	\
+		"---", "--x", "w--", "w-x", "-u-", "-ux", "wu-", "wux"  \
 	};							        \
 	union kvm_mmu_page_role role;				        \
 								        \
@@ -357,8 +356,8 @@ TRACE_EVENT(
 		__entry->sptep = virt_to_phys(sptep);
 		__entry->level = level;
 		__entry->r = shadow_present_mask || (__entry->spte & PT_PRESENT_MASK);
-		__entry->x = (__entry->spte & (shadow_xs_mask | shadow_nx_mask)) == shadow_xs_mask;
-		__entry->u = !!(__entry->spte & (shadow_xu_mask | shadow_user_mask));
+		__entry->x = is_executable_pte(__entry->spte);
+		__entry->u = shadow_user_mask ? !!(__entry->spte & shadow_user_mask) : -1;
 	),
 
 	TP_printk("gfn %llx spte %llx (%s%s%s%s) level %d at %llx",
@@ -366,32 +365,30 @@ TRACE_EVENT(
 		  __entry->r ? "r" : "-",
 		  __entry->spte & PT_WRITABLE_MASK ? "w" : "-",
 		  __entry->x ? "x" : "-",
-		  __entry->u ? "u" : "-",
+		  __entry->u == -1 ? "" : (__entry->u ? "u" : "-"),
 		  __entry->level, __entry->sptep
 	)
 );
 
 TRACE_EVENT(
 	kvm_mmu_spte_requested,
-	TP_PROTO(struct kvm_page_fault *fault, u8 access),
-	TP_ARGS(fault, access),
+	TP_PROTO(struct kvm_page_fault *fault),
+	TP_ARGS(fault),
 
 	TP_STRUCT__entry(
 		__field(u64, gfn)
 		__field(u64, pfn)
 		__field(u8, level)
-		__field(u8, access)
 	),
 
 	TP_fast_assign(
 		__entry->gfn = fault->gfn;
 		__entry->pfn = fault->pfn | (fault->gfn & (KVM_PAGES_PER_HPAGE(fault->goal_level) - 1));
 		__entry->level = fault->goal_level;
-		__entry->access = access;
 	),
 
-	TP_printk("gfn %llx pfn %llx level %d access %x",
-		  __entry->gfn, __entry->pfn, __entry->level, __entry->access
+	TP_printk("gfn %llx pfn %llx level %d",
+		  __entry->gfn, __entry->pfn, __entry->level
 	)
 );
 

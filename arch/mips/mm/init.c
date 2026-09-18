@@ -272,14 +272,8 @@ static int maar_res_walk(unsigned long start_pfn, unsigned long nr_pages,
 			 void *data)
 {
 	struct maar_walk_info *wi = data;
-	struct maar_config *cfg;
+	struct maar_config *cfg = &wi->cfg[wi->num_cfg];
 	unsigned int maar_align;
-
-	/* Ensure we don't overflow the cfg array */
-	if (WARN_ON(wi->num_cfg >= ARRAY_SIZE(wi->cfg)))
-		return -1;
-
-	cfg = &wi->cfg[wi->num_cfg];
 
 	/* MAAR registers hold physical addresses right shifted by 4 bits */
 	maar_align = BIT(MIPS_MAAR_ADDR_SHIFT + 4);
@@ -289,7 +283,9 @@ static int maar_res_walk(unsigned long start_pfn, unsigned long nr_pages,
 	cfg->upper = ALIGN_DOWN(PFN_PHYS(start_pfn + nr_pages), maar_align) - 1;
 	cfg->attrs = MIPS_MAAR_S;
 
-	wi->num_cfg++;
+	/* Ensure we don't overflow the cfg array */
+	if (!WARN_ON(wi->num_cfg >= ARRAY_SIZE(wi->cfg)))
+		wi->num_cfg++;
 
 	return 0;
 }

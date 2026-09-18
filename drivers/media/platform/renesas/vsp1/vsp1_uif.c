@@ -60,15 +60,18 @@ static int uif_get_selection(struct v4l2_subdev *subdev,
 	struct vsp1_uif *uif = to_uif(subdev);
 	struct v4l2_subdev_state *state;
 	struct v4l2_mbus_framefmt *format;
+	int ret = 0;
 
 	if (sel->pad != UIF_PAD_SINK)
 		return -EINVAL;
 
-	guard(mutex)(&uif->entity.lock);
+	mutex_lock(&uif->entity.lock);
 
 	state = vsp1_entity_get_state(&uif->entity, sd_state, sel->which);
-	if (!state)
-		return -EINVAL;
+	if (!state) {
+		ret = -EINVAL;
+		goto done;
+	}
 
 	switch (sel->target) {
 	case V4L2_SEL_TGT_CROP_BOUNDS:
@@ -85,10 +88,13 @@ static int uif_get_selection(struct v4l2_subdev *subdev,
 		break;
 
 	default:
-		return -EINVAL;
+		ret = -EINVAL;
+		break;
 	}
 
-	return 0;
+done:
+	mutex_unlock(&uif->entity.lock);
+	return ret;
 }
 
 static int uif_set_selection(struct v4l2_subdev *subdev,
@@ -99,16 +105,19 @@ static int uif_set_selection(struct v4l2_subdev *subdev,
 	struct v4l2_subdev_state *state;
 	struct v4l2_mbus_framefmt *format;
 	struct v4l2_rect *selection;
+	int ret = 0;
 
 	if (sel->pad != UIF_PAD_SINK ||
 	    sel->target != V4L2_SEL_TGT_CROP)
 		return -EINVAL;
 
-	guard(mutex)(&uif->entity.lock);
+	mutex_lock(&uif->entity.lock);
 
 	state = vsp1_entity_get_state(&uif->entity, sd_state, sel->which);
-	if (!state)
-		return -EINVAL;
+	if (!state) {
+		ret = -EINVAL;
+		goto done;
+	}
 
 	/* The crop rectangle must be inside the input frame. */
 	format = v4l2_subdev_state_get_format(state, UIF_PAD_SINK);
@@ -124,7 +133,9 @@ static int uif_set_selection(struct v4l2_subdev *subdev,
 	selection = v4l2_subdev_state_get_crop(state, sel->pad);
 	*selection = sel->r;
 
-	return 0;
+done:
+	mutex_unlock(&uif->entity.lock);
+	return ret;
 }
 
 /* -----------------------------------------------------------------------------
