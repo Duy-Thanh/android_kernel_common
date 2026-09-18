@@ -39,6 +39,7 @@
 #include <net/bluetooth/l2cap.h>
 
 #include "smp.h"
+#include "a2mp_compat.h"
 
 #define LE_FLOWCTL_MAX_CREDITS 65535
 
