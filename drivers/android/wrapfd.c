@@ -1052,6 +1052,15 @@ unlock:
 		mapping->file = get_file(file);
 	spin_unlock(&ctx->lock);
 
+	/*
+	 * If remap_file_pages() succeeds on a VMA that maps a wrapped file, it will unconditionally
+	 * set VM_MAYWRITE by invoking do_mmap(), which will refer to the wrapped file's mmap()
+	 * f_op. This allows a read-only wrap to be made writable via mprotect() later.
+	 *
+	 * Setting VM_NO_REMAP_FILE_PAGES prevents remap_file_pages() from working on VMAs
+	 * associated with wrapped files.
+	 */
+	vm_flags_set(vma, VM_NO_REMAP_FILE_PAGES);
 	return 0;
 err_free_mapping:
 	kfree(mapping);
@@ -1533,11 +1542,6 @@ static void wrap_show_fdinfo(struct seq_file *m, struct file *file)
 	spin_unlock(&ctx->lock);
 }
 #endif
-
-bool is_wrapfd_vma(struct vm_area_struct *vma)
-{
-	return vma && vma->vm_ops && (vma->vm_ops->open == wrap_vm_open);
-}
 
 int wrapfd_get_mappable(struct file *file, struct device *dev,
 			union wrapfd_mappable *mappable)
