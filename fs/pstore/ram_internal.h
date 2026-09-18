@@ -77,6 +77,7 @@ struct persistent_ram_zone {
 
 	char *old_log;
 	size_t old_log_size;
+	u8 old_boot_id[16];
 };
 
 struct persistent_ram_zone *persistent_ram_new(phys_addr_t start, size_t size,
@@ -91,6 +92,7 @@ int persistent_ram_write_user(struct persistent_ram_zone *prz,
 			      const void __user *s, unsigned int count);
 
 void persistent_ram_save_old(struct persistent_ram_zone *prz);
+const u8 *persistent_ram_old_boot_id(struct persistent_ram_zone *prz);
 size_t persistent_ram_old_size(struct persistent_ram_zone *prz);
 void *persistent_ram_old(struct persistent_ram_zone *prz);
 void persistent_ram_free_old(struct persistent_ram_zone *prz);

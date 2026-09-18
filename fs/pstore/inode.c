@@ -390,6 +390,8 @@ int pstore_mkfile(struct dentry *root, struct pstore_record *record)
 	char			name[PSTORE_NAMELEN];
 	struct pstore_private	*private __free(pstore_private) = NULL, *pos;
 	size_t			size = record->size + record->ecc_notice_size;
+	char			boot_id_str[37];
+	struct simple_xattr	*xattr;
 
 	if (WARN_ON(!inode_is_locked(d_inode(root))))
 		return -EINVAL;
@@ -426,6 +428,14 @@ int pstore_mkfile(struct dentry *root, struct pstore_record *record)
 	inode->i_op = &pstore_file_inode_operations;
 	private->dentry = dentry;
 	private->record = record;
+	if (!uuid_is_null((uuid_t *)record->boot_id)) {
+		snprintf(boot_id_str, sizeof(boot_id_str), "%pUb", record->boot_id);
+		xattr = simple_xattr_set(&private->xattrs, "user.boot_id", boot_id_str,
+					 strlen(boot_id_str), 0);
+		if (IS_ERR(xattr))
+			pr_err("failed to set boot_id xattr: %ld\n", PTR_ERR(xattr));
+	}
+
 	inode->i_size = private->total_size = size;
 	inode->i_private = private;
 

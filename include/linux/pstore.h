@@ -67,6 +67,7 @@ struct pstore_info;
  * @reason:	kdump reason for notification
  * @part:	position in a multipart record
  * @compressed:	whether the buffer is compressed
+ * @boot_id:	boot_id of the record
  *
  */
 struct pstore_record {
@@ -83,6 +84,7 @@ struct pstore_record {
 	enum kmsg_dump_reason	reason;
 	unsigned int		part;
 	bool			compressed;
+	u8			boot_id[16];
 };
 
 /**
