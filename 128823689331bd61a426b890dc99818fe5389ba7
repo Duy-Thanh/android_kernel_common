@@ -34,6 +34,24 @@
       "parentUuid": "456890ca_51d2d5e6",
       "revId": "128823689331bd61a426b890dc99818fe5389ba7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82edc059_422d1eba",
+        "filename": "drivers/tty/serial/tegra-tcu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 3386406
+      },
+      "writtenOn": "2026-09-18T20:51:28Z",
+      "side": 1,
+      "message": "Hey John, any chance we can re-run the presubmit for these 2 and get review? Thanks for all your support",
+      "parentUuid": "4dd61738_21e3eced",
+      "revId": "128823689331bd61a426b890dc99818fe5389ba7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
