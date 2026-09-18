@@ -430,6 +430,7 @@ extern unsigned int kobjsize(const void *objp);
 #endif
 
 #ifdef CONFIG_64BIT
+#define VM_NO_REMAP_FILE_PAGES	_BITUL(62)
 /* VM is sealed, in vm_flags */
 #define VM_SEALED	_BITUL(63)
 #endif
