@@ -352,16 +352,21 @@ static inline bool can_reclaim_anon_pages(struct mem_cgroup *memcg,
 					  int nid,
 					  struct scan_control *sc)
 {
+	bool skip = false;
+
+	if (sc)
+		trace_android_vh_can_reclaim_anon_pages(memcg, nid, sc->gfp_mask, &skip);
+
 	if (memcg == NULL) {
 		/*
 		 * For non-memcg reclaim, is there
 		 * space in any swap device?
 		 */
-		if (get_nr_swap_pages() > 0)
+		if (get_nr_swap_pages() > 0 && !skip)
 			return true;
 	} else {
 		/* Is the memcg below its swap limit? */
-		if (mem_cgroup_get_nr_swap_pages(memcg) > 0)
+		if (mem_cgroup_get_nr_swap_pages(memcg) > 0 && !skip)
 			return true;
 	}
 
