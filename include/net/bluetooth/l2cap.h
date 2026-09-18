@@ -509,6 +509,9 @@ struct l2cap_seq_list {
 
 struct l2cap_chan {
 	struct l2cap_conn	*conn;
+	struct hci_conn         *hs_hcon;
+	struct hci_chan         *hs_hchan;
+
 	struct kref	kref;
 	atomic_t	nesting;
 
@@ -558,6 +561,12 @@ struct l2cap_chan {
 	unsigned long	conf_state;
 	unsigned long	conn_state;
 	unsigned long	flags;
+
+	__u8            remote_amp_id;
+	__u8            local_amp_id;
+	__u8            move_id;
+	__u8            move_state;
+	__u8            move_role;
 
 	__u16		next_tx_seq;
 	__u16		expected_ack_seq;
