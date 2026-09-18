@@ -268,6 +268,9 @@ static ssize_t ramoops_pstore_read(struct pstore_record *record)
 		goto out;
 	}
 
+	memcpy(record->boot_id, persistent_ram_old_boot_id(prz),
+	       sizeof(record->boot_id));
+
 	size = persistent_ram_old_size(prz) - header_length;
 
 	/* ECC correction notice */

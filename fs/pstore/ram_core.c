@@ -333,6 +333,8 @@ void persistent_ram_save_old(struct persistent_ram_zone *prz)
 	if (!size)
 		return;
 
+	memcpy(prz->old_boot_id, buffer->boot_id, sizeof(prz->old_boot_id));
+
 	/*
 	 * If the existing buffer is differently sized, free it so a new
 	 * one is allocated. This can happen when persistent_ram_save_old()
@@ -416,6 +418,11 @@ int notrace persistent_ram_write_user(struct persistent_ram_zone *prz,
 	persistent_ram_update_header_ecc(prz);
 
 	return unlikely(ret) ? ret : count;
+}
+
+const u8 *persistent_ram_old_boot_id(struct persistent_ram_zone *prz)
+{
+    return prz->old_boot_id;
 }
 
 size_t persistent_ram_old_size(struct persistent_ram_zone *prz)
