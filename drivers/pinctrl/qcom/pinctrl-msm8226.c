@@ -645,7 +645,6 @@ static const struct of_device_id msm8226_pinctrl_of_match[] = {
 	{ .compatible = "qcom,msm8226-pinctrl", },
 	{ },
 };
-MODULE_DEVICE_TABLE(of, msm8226_pinctrl_of_match);
 
 static struct platform_driver msm8226_pinctrl_driver = {
 	.driver = {
@@ -670,3 +669,4 @@ module_exit(msm8226_pinctrl_exit);
 MODULE_AUTHOR("Bartosz Dudziak <bartosz.dudziak@snejp.pl>");
 MODULE_DESCRIPTION("Qualcomm MSM8226 pinctrl driver");
 MODULE_LICENSE("GPL v2");
+MODULE_DEVICE_TABLE(of, msm8226_pinctrl_of_match);

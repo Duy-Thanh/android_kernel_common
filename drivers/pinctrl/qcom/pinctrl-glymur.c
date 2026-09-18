@@ -1777,7 +1777,6 @@ static const struct of_device_id glymur_tlmm_of_match[] = {
 	{ .compatible = "qcom,mahua-tlmm", .data = &mahua_tlmm },
 	{ },
 };
-MODULE_DEVICE_TABLE(of, glymur_tlmm_of_match);
 
 static int glymur_tlmm_probe(struct platform_device *pdev)
 {
@@ -1812,3 +1811,4 @@ module_exit(glymur_tlmm_exit);
 
 MODULE_DESCRIPTION("QTI Glymur TLMM driver");
 MODULE_LICENSE("GPL");
+MODULE_DEVICE_TABLE(of, glymur_tlmm_of_match);

@@ -1012,8 +1012,10 @@ static void msm_gpio_irq_ack(struct irq_data *d)
 
 static void msm_gpio_irq_eoi(struct irq_data *d)
 {
-	if (d->parent_data)
-		irq_chip_eoi_parent(d);
+	d = d->parent_data;
+
+	if (d)
+		d->chip->irq_eoi(d);
 }
 
 static bool msm_gpio_needs_dual_edge_parent_workaround(struct irq_data *d,
@@ -1591,11 +1593,11 @@ int msm_pinctrl_probe(struct platform_device *pdev,
 	pctrl->desc.pins = pctrl->soc->pins;
 	pctrl->desc.npins = pctrl->soc->npins;
 
-	ret = devm_pinctrl_register_and_init(&pdev->dev, &pctrl->desc,
-					     pctrl, &pctrl->pctrl);
-	if (ret)
-		return dev_err_probe(&pdev->dev, ret,
-				     "Couldn't register pinctrl driver\n");
+	pctrl->pctrl = devm_pinctrl_register(&pdev->dev, &pctrl->desc, pctrl);
+	if (IS_ERR(pctrl->pctrl)) {
+		dev_err(&pdev->dev, "Couldn't register pinctrl driver\n");
+		return PTR_ERR(pctrl->pctrl);
+	}
 
 	for (i = 0; i < soc_data->nfunctions; i++) {
 		func = &soc_data->functions[i];
@@ -1604,11 +1606,6 @@ int msm_pinctrl_probe(struct platform_device *pdev,
 		if (ret < 0)
 			return ret;
 	}
-
-	ret = pinctrl_enable(pctrl->pctrl);
-	if (ret)
-		return dev_err_probe(&pdev->dev, ret,
-				     "Couldn't enable pinctrl driver\n");
 
 	ret = msm_gpio_init(pctrl);
 	if (ret)

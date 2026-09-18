@@ -439,7 +439,6 @@ static const struct of_device_id mdm9615_pinctrl_of_match[] = {
 	{ .compatible = "qcom,mdm9615-pinctrl", },
 	{ },
 };
-MODULE_DEVICE_TABLE(of, mdm9615_pinctrl_of_match);
 
 static struct platform_driver mdm9615_pinctrl_driver = {
 	.driver = {
@@ -464,3 +463,4 @@ module_exit(mdm9615_pinctrl_exit);
 MODULE_AUTHOR("Neil Armstrong <narmstrong@baylibre.com>");
 MODULE_DESCRIPTION("Qualcomm MDM9615 pinctrl driver");
 MODULE_LICENSE("GPL v2");
+MODULE_DEVICE_TABLE(of, mdm9615_pinctrl_of_match);

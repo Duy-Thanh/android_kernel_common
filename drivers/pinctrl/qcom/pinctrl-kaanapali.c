@@ -1774,7 +1774,6 @@ static const struct of_device_id kaanapali_tlmm_of_match[] = {
 	{ .compatible = "qcom,kaanapali-tlmm",},
 	{},
 };
-MODULE_DEVICE_TABLE(of, kaanapali_tlmm_of_match);
 
 static struct platform_driver kaanapali_tlmm_driver = {
 	.driver = {
@@ -1798,3 +1797,4 @@ module_exit(kaanapali_tlmm_exit);
 
 MODULE_DESCRIPTION("QTI Kaanapali TLMM driver");
 MODULE_LICENSE("GPL");
+MODULE_DEVICE_TABLE(of, kaanapali_tlmm_of_match);

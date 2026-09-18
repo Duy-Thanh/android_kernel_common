@@ -5303,7 +5303,6 @@ static const struct of_device_id rockchip_pinctrl_dt_match[] = {
 		.data = &rk3588_pin_ctrl },
 	{},
 };
-MODULE_DEVICE_TABLE(of, rockchip_pinctrl_dt_match);
 
 static struct platform_driver rockchip_pinctrl_driver = {
 	.probe		= rockchip_pinctrl_probe,
@@ -5330,3 +5329,4 @@ module_exit(rockchip_pinctrl_drv_unregister);
 MODULE_DESCRIPTION("ROCKCHIP Pin Controller Driver");
 MODULE_LICENSE("GPL");
 MODULE_ALIAS("platform:pinctrl-rockchip");
+MODULE_DEVICE_TABLE(of, rockchip_pinctrl_dt_match);

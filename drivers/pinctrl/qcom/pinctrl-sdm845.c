@@ -1339,7 +1339,6 @@ static const struct of_device_id sdm845_pinctrl_of_match[] = {
 	{ .compatible = "qcom,sdm845-pinctrl", },
 	{ },
 };
-MODULE_DEVICE_TABLE(of, sdm845_pinctrl_of_match);
 
 static struct platform_driver sdm845_pinctrl_driver = {
 	.driver = {
@@ -1365,3 +1364,4 @@ module_exit(sdm845_pinctrl_exit);
 
 MODULE_DESCRIPTION("QTI sdm845 pinctrl driver");
 MODULE_LICENSE("GPL v2");
+MODULE_DEVICE_TABLE(of, sdm845_pinctrl_of_match);

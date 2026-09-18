@@ -1087,7 +1087,6 @@ static const struct of_device_id msm8976_pinctrl_of_match[] = {
 	{ .compatible = "qcom,msm8976-pinctrl", },
 	{ },
 };
-MODULE_DEVICE_TABLE(of, msm8976_pinctrl_of_match);
 
 static struct platform_driver msm8976_pinctrl_driver = {
 	.driver = {
@@ -1111,3 +1110,4 @@ module_exit(msm8976_pinctrl_exit);
 
 MODULE_DESCRIPTION("Qualcomm msm8976 pinctrl driver");
 MODULE_LICENSE("GPL v2");
+MODULE_DEVICE_TABLE(of, msm8976_pinctrl_of_match);

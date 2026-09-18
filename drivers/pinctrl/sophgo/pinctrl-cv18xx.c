@@ -27,9 +27,8 @@
 #include "pinctrl-cv18xx.h"
 
 struct cv1800_priv {
-	void __iomem	*regs[2];
-	unsigned int	num_power_cfg;
-	u32		power_cfg[] __counted_by(num_power_cfg);
+	u32					*power_cfg;
+	void __iomem				*regs[2];
 };
 
 static unsigned int cv1800_dt_get_pin_mux(u32 value)
@@ -334,11 +333,13 @@ static int cv1800_pinconf_compute_config(struct sophgo_pinctrl *pctrl,
 
 		switch (param) {
 		case PIN_CONFIG_BIAS_PULL_DOWN:
-			FIELD_MODIFY(PIN_IO_PULLDOWN, &v, arg);
+			v &= ~PIN_IO_PULLDOWN;
+			v |= FIELD_PREP(PIN_IO_PULLDOWN, arg);
 			m |= PIN_IO_PULLDOWN;
 			break;
 		case PIN_CONFIG_BIAS_PULL_UP:
-			FIELD_MODIFY(PIN_IO_PULLUP, &v, arg);
+			v &= ~PIN_IO_PULLUP;
+			v |= FIELD_PREP(PIN_IO_PULLUP, arg);
 			m |= PIN_IO_PULLUP;
 			break;
 		case PIN_CONFIG_DRIVE_STRENGTH_UA:
@@ -346,7 +347,8 @@ static int cv1800_pinconf_compute_config(struct sophgo_pinctrl *pctrl,
 						    priv->power_cfg, arg);
 			if (ret < 0)
 				return ret;
-			FIELD_MODIFY(PIN_IO_DRIVE, &v, ret);
+			v &= ~PIN_IO_DRIVE;
+			v |= FIELD_PREP(PIN_IO_DRIVE, ret);
 			m |= PIN_IO_DRIVE;
 			break;
 		case PIN_CONFIG_INPUT_SCHMITT_UV:
@@ -354,18 +356,21 @@ static int cv1800_pinconf_compute_config(struct sophgo_pinctrl *pctrl,
 							 priv->power_cfg, arg);
 			if (ret < 0)
 				return ret;
-			FIELD_MODIFY(PIN_IO_SCHMITT, &v, ret);
+			v &= ~PIN_IO_SCHMITT;
+			v |= FIELD_PREP(PIN_IO_SCHMITT, ret);
 			m |= PIN_IO_SCHMITT;
 			break;
 		case PIN_CONFIG_POWER_SOURCE:
 			/* Ignore power source as it is always fixed */
 			break;
 		case PIN_CONFIG_SLEW_RATE:
-			FIELD_MODIFY(PIN_IO_OUT_FAST_SLEW, &v, arg);
+			v &= ~PIN_IO_OUT_FAST_SLEW;
+			v |= FIELD_PREP(PIN_IO_OUT_FAST_SLEW, arg);
 			m |= PIN_IO_OUT_FAST_SLEW;
 			break;
 		case PIN_CONFIG_BIAS_BUS_HOLD:
-			FIELD_MODIFY(PIN_IO_BUS_HOLD, &v, arg);
+			v &= ~PIN_IO_BUS_HOLD;
+			v |= FIELD_PREP(PIN_IO_BUS_HOLD, arg);
 			m |= PIN_IO_BUS_HOLD;
 			break;
 		default:
@@ -412,11 +417,14 @@ static int cv1800_pinctrl_init(struct platform_device *pdev,
 	const struct sophgo_pinctrl_data *pctrl_data = pctrl->data;
 	struct cv1800_priv *priv;
 
-	priv = devm_kzalloc(&pdev->dev, struct_size(priv, power_cfg, pctrl_data->npds),
-			GFP_KERNEL);
+	priv = devm_kzalloc(&pdev->dev, sizeof(struct cv1800_priv), GFP_KERNEL);
 	if (!priv)
 		return -ENOMEM;
-	priv->num_power_cfg = pctrl_data->npds;
+
+	priv->power_cfg = devm_kcalloc(&pdev->dev, pctrl_data->npds,
+				       sizeof(u32), GFP_KERNEL);
+	if (!priv->power_cfg)
+		return -ENOMEM;
 
 	priv->regs[0] = devm_platform_ioremap_resource_byname(pdev, "sys");
 	if (IS_ERR(priv->regs[0]))

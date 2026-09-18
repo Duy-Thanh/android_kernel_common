@@ -1584,7 +1584,6 @@ static const struct of_device_id hawi_tlmm_of_match[] = {
 	{ .compatible = "qcom,hawi-tlmm", },
 	{},
 };
-MODULE_DEVICE_TABLE(of, hawi_tlmm_of_match);
 
 static struct platform_driver hawi_tlmm_driver = {
 	.driver = {
@@ -1608,3 +1607,4 @@ module_exit(hawi_tlmm_exit);
 
 MODULE_DESCRIPTION("QTI Hawi TLMM driver");
 MODULE_LICENSE("GPL");
+MODULE_DEVICE_TABLE(of, hawi_tlmm_of_match);
