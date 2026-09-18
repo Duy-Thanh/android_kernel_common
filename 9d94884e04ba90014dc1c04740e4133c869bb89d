@@ -1,0 +1,153 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0190062b_0719af03",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-09-18T19:11:22Z",
+      "side": 1,
+      "message": "`android_rvh_security_inode_setxattr` and `android_rvh_security_inode_removexattr` dont appear in the symbol list update (next patch), can you please check?",
+      "revId": "9d94884e04ba90014dc1c04740e4133c869bb89d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "956968c0_6c95de54",
+        "filename": "include/trace/hooks/fs.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-09-18T19:11:22Z",
+      "side": 1,
+      "message": "I don\u0027t see call site for this hook `android_vh_fput`. Is it needed?",
+      "fixSuggestions": [
+        {
+          "fixId": "a1bc0a94_8af2b3bf",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/trace/hooks/fs.h",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9d94884e04ba90014dc1c04740e4133c869bb89d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c71bb0e_f1c9cd54",
+        "filename": "include/trace/hooks/security.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-09-18T19:11:22Z",
+      "side": 1,
+      "message": "Declared here but is not exported in vendor_hooks.c, is it really needed? I don\u0027t see a callsite for this hook.",
+      "revId": "9d94884e04ba90014dc1c04740e4133c869bb89d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4c19a17_cdff00cf",
+        "filename": "security/security.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2470,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-09-18T19:11:22Z",
+      "side": 1,
+      "message": "The check here on rc which is uninitialized if vendor hook did not set it, which would be the case for others who do not use this hook. Maybe initialize it to 0 at the top of the function.",
+      "fixSuggestions": [
+        {
+          "fixId": "b2b0d45e_29d1dcb8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "security/security.c",
+              "range": {
+                "startLine": 2456,
+                "startChar": 0,
+                "endLine": 2457,
+                "endChar": 0
+              },
+              "replacement": "\tint rc \u003d 0;\n"
+            },
+            {
+              "path": "security/security.c",
+              "range": {
+                "startLine": 2647,
+                "startChar": 0,
+                "endLine": 2648,
+                "endChar": 0
+              },
+              "replacement": "\tint rc \u003d 0;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9d94884e04ba90014dc1c04740e4133c869bb89d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "051651b7_66f3a9b3",
+        "filename": "security/security.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3228,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-09-18T19:11:22Z",
+      "side": 1,
+      "message": "Should it be `trace_android_rvh_security_file_post_open()` to preserve the naming convention, update the name accordingly so we know it is called in `security_file_post_open()`? And are you sure you don\u0027t need `mask`?",
+      "fixSuggestions": [
+        {
+          "fixId": "75af6762_f0d8e062",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "security/security.c",
+              "range": {
+                "startLine": 3228,
+                "startChar": 0,
+                "endLine": 3229,
+                "endChar": 0
+              },
+              "replacement": "\ttrace_android_rvh_security_file_post_open(file, mask, \u0026ret);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9d94884e04ba90014dc1c04740e4133c869bb89d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
