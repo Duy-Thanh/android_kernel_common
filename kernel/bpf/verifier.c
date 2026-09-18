@@ -18809,6 +18809,13 @@ static int fd_array_get_map_idx_sparse(struct bpf_verifier_env *env, u32 idx)
 
 static int fd_array_get_map_idx(struct bpf_verifier_env *env, u32 idx)
 {
+	if (env->prog->aux->kernel_maps) {
+		if (idx >= env->prog->aux->kernel_map_cnt) {
+			verbose(env, "kernel_map index %u out of bounds\n", idx);
+			return -EINVAL;
+		}
+		return __add_used_map(env, env->prog->aux->kernel_maps[idx]);
+	}
 	if (env->fd_array)
 		return fd_array_get_map_idx_continuous(env, idx);
 	if (env->signature) {
@@ -19095,6 +19102,10 @@ static int check_and_resolve_insns(struct bpf_verifier_env *env)
 			default:
 				if (env->signature) {
 					verbose(env, "signed program cannot reference a map by fd, only via fd_array index\n");
+					return -EINVAL;
+				}
+				if (env->prog->aux->kernel_maps) {
+					verbose(env, "kernel program cannot reference a map by fd\n");
 					return -EINVAL;
 				}
 				map_idx = add_used_map(env, insn[0].imm);

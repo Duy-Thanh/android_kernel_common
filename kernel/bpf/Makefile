@@ -74,3 +74,5 @@ CFLAGS_REMOVE_queue_stack_maps.o = $(CC_FLAGS_FTRACE)
 CFLAGS_REMOVE_lpm_trie.o = $(CC_FLAGS_FTRACE)
 CFLAGS_REMOVE_ringbuf.o = $(CC_FLAGS_FTRACE)
 CFLAGS_REMOVE_rqspinlock.o = $(CC_FLAGS_FTRACE)
+
+obj-$(CONFIG_BPF_SYSCALL) += loader.o

@@ -2914,7 +2914,10 @@ BTF_ID_LIST_GLOBAL_SINGLE(bpf_multi_func_btf_id, func, bpf_multi_func)
 /* last field in 'union bpf_attr' used by this command */
 #define BPF_PROG_LOAD_LAST_FIELD keyring_id
 
-static int bpf_prog_load(union bpf_attr *attr, bpfptr_t uattr, struct bpf_log_attr *attr_log)
+static struct bpf_prog *__bpf_prog_load(union bpf_attr *attr, bpfptr_t uattr,
+					struct bpf_log_attr *attr_log,
+					struct bpf_map **kernel_maps,
+					u32 kernel_map_cnt, bool alloc_id)
 {
 	enum bpf_prog_type type = attr->prog_type;
 	struct bpf_prog *prog, *dst_prog = NULL;
@@ -2926,7 +2929,7 @@ static int bpf_prog_load(union bpf_attr *attr, bpfptr_t uattr, struct bpf_log_at
 	bool multi_func;
 
 	if (CHECK_ATTR(BPF_PROG_LOAD))
-		return -EINVAL;
+		return ERR_PTR(-EINVAL);
 
 	if (attr->prog_flags & ~(BPF_F_STRICT_ALIGNMENT |
 				 BPF_F_ANY_ALIGNMENT |
@@ -2937,14 +2940,14 @@ static int bpf_prog_load(union bpf_attr *attr, bpfptr_t uattr, struct bpf_log_at
 				 BPF_F_XDP_DEV_BOUND_ONLY |
 				 BPF_F_TEST_REG_INVARIANTS |
 				 BPF_F_TOKEN_FD))
-		return -EINVAL;
+		return ERR_PTR(-EINVAL);
 
 	bpf_prog_load_fixup_attach_type(attr);
 
 	if (attr->prog_flags & BPF_F_TOKEN_FD) {
 		token = bpf_token_get_from_fd(attr->prog_token_fd);
 		if (IS_ERR(token))
-			return PTR_ERR(token);
+			return ERR_CAST(token);
 		/* if current token doesn't grant prog loading permissions,
 		 * then we can't use this token, so ignore it and rely on
 		 * system-wide capabilities checks
@@ -3060,6 +3063,8 @@ static int bpf_prog_load(union bpf_attr *attr, bpfptr_t uattr, struct bpf_log_at
 	}
 	prog->aux->dev_bound = !!attr->prog_ifindex;
 	prog->aux->xdp_has_frags = attr->prog_flags & BPF_F_XDP_HAS_FRAGS;
+	prog->aux->kernel_maps = kernel_maps;
+	prog->aux->kernel_map_cnt = kernel_map_cnt;
 
 	/* move token into prog->aux, reuse taken refcnt */
 	prog->aux->token = token;
@@ -3138,9 +3143,14 @@ static int bpf_prog_load(union bpf_attr *attr, bpfptr_t uattr, struct bpf_log_at
 	if (err < 0)
 		goto free_used_maps;
 
-	err = bpf_prog_alloc_id(prog);
-	if (err)
-		goto free_used_maps;
+	/* Android: skip allocating an ID in prog_idr for in-kernel loader
+	 * programs so userland cannot obtain an FD via BPF_PROG_GET_FD_BY_ID.
+	 */
+	if (alloc_id) {
+		err = bpf_prog_alloc_id(prog);
+		if (err)
+			goto free_used_maps;
+	}
 
 	/* Upon success of bpf_prog_alloc_id(), the BPF prog is
 	 * effectively publicly exposed. However, retrieving via
@@ -3160,10 +3170,7 @@ static int bpf_prog_load(union bpf_attr *attr, bpfptr_t uattr, struct bpf_log_at
 	perf_event_bpf_event(prog, PERF_BPF_EVENT_PROG_LOAD, 0);
 	bpf_audit_prog(prog, BPF_AUDIT_LOAD);
 
-	err = bpf_prog_new_fd(prog);
-	if (err < 0)
-		bpf_prog_put(prog);
-	return err;
+	return prog;
 
 free_used_maps:
 	/* In case we have subprogs, we need to wait for a grace
@@ -3171,7 +3178,7 @@ free_used_maps:
 	 * are already exposed under kallsyms.
 	 */
 	__bpf_prog_put_noref(prog, prog->aux->real_func_cnt);
-	return err;
+	return ERR_PTR(err);
 
 free_prog:
 	free_uid(prog->aux->user);
@@ -3180,6 +3187,21 @@ free_prog:
 	bpf_prog_free(prog);
 put_token:
 	bpf_token_put(token);
+	return ERR_PTR(err);
+}
+
+static int bpf_prog_load(union bpf_attr *attr, bpfptr_t uattr, struct bpf_log_attr *attr_log)
+{
+	struct bpf_prog *prog;
+	int err;
+
+	prog = __bpf_prog_load(attr, uattr, attr_log, NULL, 0, true);
+	if (IS_ERR(prog))
+		return PTR_ERR(prog);
+
+	err = bpf_prog_new_fd(prog);
+	if (err < 0)
+		bpf_prog_put(prog);
 	return err;
 }
 
@@ -6758,3 +6780,43 @@ static int __init bpf_syscall_sysctl_init(void)
 }
 late_initcall(bpf_syscall_sysctl_init);
 #endif /* CONFIG_SYSCTL */
+
+#ifdef CONFIG_BPF_JIT
+struct bpf_map *bpf_map_create_kernel(union bpf_attr *attr)
+{
+	struct bpf_map *map = NULL;
+	struct bpf_token *token = NULL;
+	int err;
+
+	err = map_create_alloc(attr, KERNEL_BPFPTR(attr), NULL, &map, &token);
+	if (err)
+		return ERR_PTR(err);
+
+	err = security_bpf_map_create(map, attr, token, true);
+	if (err) {
+		bpf_map_free(map);
+		bpf_token_put(token);
+		return ERR_PTR(err);
+	}
+
+	bpf_map_save_memcg(map);
+	bpf_token_put(token);
+	return map;
+}
+
+struct bpf_prog *bpf_prog_load_kernel(union bpf_attr *attr,
+				      struct bpf_map **kernel_maps,
+				      u32 kernel_map_cnt)
+{
+	struct bpf_log_attr attr_log = {};
+	struct bpf_prog *prog;
+
+	prog = __bpf_prog_load(attr, KERNEL_BPFPTR(attr), &attr_log,
+			       kernel_maps, kernel_map_cnt, false);
+	if (!IS_ERR(prog)) {
+		prog->aux->kernel_maps = NULL;
+		prog->aux->kernel_map_cnt = 0;
+	}
+	return prog;
+}
+#endif

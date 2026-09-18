@@ -1857,6 +1857,8 @@ struct bpf_prog_aux {
 	struct bpf_stream stream[2];
 	struct mutex st_ops_assoc_mutex;
 	struct bpf_map __rcu *st_ops_assoc;
+	struct bpf_map **kernel_maps;
+	u32 kernel_map_cnt;
 };
 
 #define BPF_NR_CONTEXTS        4       /* normal, softirq, hardirq, NMI */
@@ -3563,6 +3565,31 @@ static inline void bpf_prog_report_arena_violation(bool write, unsigned long add
 {
 }
 #endif /* CONFIG_BPF_SYSCALL */
+
+struct bpf_loader_opts {
+	const void *insns;
+	u32 insn_cnt;
+	const void *data;
+	u32 data_sz;
+	const char *license;
+	void *ctx;
+	u32 ctx_sz;
+};
+
+#ifdef CONFIG_BPF_SYSCALL
+int bpf_loader_load_and_run(struct bpf_loader_opts *opts);
+#ifdef CONFIG_BPF_JIT
+struct bpf_map *bpf_map_create_kernel(union bpf_attr *attr);
+struct bpf_prog *bpf_prog_load_kernel(union bpf_attr *attr,
+				      struct bpf_map **kernel_maps,
+				      u32 kernel_map_cnt);
+#endif
+#else
+static inline int bpf_loader_load_and_run(struct bpf_loader_opts *opts)
+{
+	return -EOPNOTSUPP;
+}
+#endif
 
 static inline bool bpf_net_capable(void)
 {
