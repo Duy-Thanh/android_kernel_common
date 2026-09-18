@@ -683,6 +683,26 @@ enum conn_reasons {
 	CONN_REASON_ISO_CONNECT,
 };
 
+/*
+ * struct amp_mgr was removed 78e40feaee07 ("UPSTREAM: Bluetooth: Remove BT_HS").
+ * It was part of the KMI through struct hci_conn, but is not used anywhere
+ * now. Restoring the structure for KMI compliance.
+ */
+struct amp_mgr {
+	struct list_head	list;
+	struct l2cap_conn	*l2cap_conn;
+	struct l2cap_chan	*a2mp_chan;
+	struct l2cap_chan	*bredr_chan;
+	struct kref		kref;
+	__u8			ident;
+	__u8			handle;
+	unsigned long		state;
+	unsigned long		flags;
+
+	struct list_head	amp_ctrls;
+	struct mutex		amp_ctrls_lock;
+};
+
 struct hci_conn {
 	struct list_head list;
 
@@ -768,6 +788,10 @@ struct hci_conn {
 	void		*l2cap_data;
 	void		*sco_data;
 	void		*iso_data;
+	/*
+	 * 78e40feaee07 ("UPSTREAM: Bluetooth: Remove BT_HS") removed this field.
+	 * Restore it for KMI compliance.
+	 */
 	struct amp_mgr	*amp_mgr;
 
 	struct hci_conn	*link;
