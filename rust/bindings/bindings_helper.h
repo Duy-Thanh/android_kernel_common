@@ -182,3 +182,11 @@ const unsigned long RUST_CONST_HELPER_GPU_BUDDY_TRIM_DISABLE = GPU_BUDDY_TRIM_DI
 const size_t RUST_CONST_HELPER_ASHMEM_NAME_PREFIX_LEN = ASHMEM_NAME_PREFIX_LEN;
 const size_t RUST_CONST_HELPER_ASHMEM_FULL_NAME_LEN = ASHMEM_FULL_NAME_LEN;
 #endif
+
+#if IS_ENABLED(CONFIG_ANDROID_BPF_FD_LOADER)
+#include <linux/bpf.h>
+#include <linux/capability.h>
+#include <linux/elf.h>
+#include <linux/kernel_read_file.h>
+#include <uapi/linux/android/bpf_fd_loader.h>
+#endif
