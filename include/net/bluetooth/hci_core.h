@@ -768,7 +768,8 @@ struct hci_conn {
 	void		*l2cap_data;
 	void		*sco_data;
 	void		*iso_data;
-	struct amp_mgr	*amp_mgr;
+	/* formerly struct amp_mgr *amp_mgr */
+	ANDROID_KABI_RESERVE(5);
 
 	struct hci_conn	*link;
 	struct bt_codec codec;
