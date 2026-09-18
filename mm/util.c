@@ -1197,7 +1197,6 @@ void compat_set_desc_from_vma(struct vm_area_desc *desc,
 	desc->vm_file = vma->vm_file;
 	desc->vma_flags = vma->flags;
 	desc->page_prot = vma->vm_page_prot;
-	desc->vm_ops = vma->vm_ops;
 
 	/* Default. */
 	desc->action.type = MMAP_NOTHING;
@@ -1402,6 +1401,8 @@ static int mmap_action_finish(struct vm_area_struct *vma,
 
 	if (!err)
 		err = call_vma_mapped(vma);
+	if (!err && action->success_hook)
+		err = action->success_hook(vma);
 
 	/* do_munmap() might take rmap lock, so release if held. */
 	maybe_rmap_unlock_action(vma, action);
@@ -1419,22 +1420,16 @@ static int mmap_action_finish(struct vm_area_struct *vma,
 	 */
 	len = vma_pages(vma) << PAGE_SHIFT;
 	do_munmap(current->mm, vma->vm_start, len, NULL);
-
-	return action->error_override ?: err;
+	if (action->error_hook) {
+		/* We may want to filter the error. */
+		err = action->error_hook(err);
+		/* The caller should not clear the error. */
+		VM_WARN_ON_ONCE(!err);
+	}
+	return err;
 }
 
 #ifdef CONFIG_MMU
-
-static int check_mmap_action(struct mmap_action *action)
-{
-	const unsigned long override = action->error_override;
-
-	if (WARN_ON_ONCE(override && !IS_ERR_VALUE(override)))
-		return -EINVAL;
-
-	return 0;
-}
-
 /**
  * mmap_action_prepare - Perform preparatory setup for an VMA descriptor
  * action which need to be performed.
@@ -1444,14 +1439,7 @@ static int check_mmap_action(struct mmap_action *action)
  */
 int mmap_action_prepare(struct vm_area_desc *desc)
 {
-	struct mmap_action *action = &desc->action;
-	int err;
-
-	err = check_mmap_action(action);
-	if (err)
-		return err;
-
-	switch (action->type) {
+	switch (desc->action.type) {
 	case MMAP_NOTHING:
 		return 0;
 	case MMAP_REMAP_PFN:
