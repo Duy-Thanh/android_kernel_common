@@ -107,7 +107,7 @@ config ANDROID_VENDOR_OEM_DATA
 
 config ANDROID_WRAPFD
 	bool "WrapFD Driver"
-	depends on MMU
+	depends on MMU && 64BIT
 	help
 	  Enable WrapFD driver to control ability to map a file
 
