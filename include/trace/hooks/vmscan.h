@@ -197,7 +197,9 @@ DECLARE_HOOK(android_vh_may_unmap_folio,
 DECLARE_HOOK(android_vh_skip_cma,
 	TP_PROTO(struct scan_control *sc, bool *bypass),
 	TP_ARGS(sc, bypass));
-
+DECLARE_HOOK(android_vh_can_reclaim_anon_pages,
+	TP_PROTO(struct mem_cgroup *memcg, int nid, gfp_t gfp_mask, bool *skip),
+	TP_ARGS(memcg, nid, gfp_mask, skip));
 #endif /* _TRACE_HOOK_VMSCAN_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
