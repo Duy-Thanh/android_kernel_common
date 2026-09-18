@@ -18140,6 +18140,17 @@ static int check_and_resolve_insns(struct bpf_verifier_env *env)
 				return -EINVAL;
 			}
 
+			if (env->prog->aux->kernel_maps) {
+				u32 idx = insn[0].imm;
+
+				if (idx >= env->prog->aux->kernel_map_cnt) {
+					verbose(env, "kernel_map index %u out of bounds\n", idx);
+					return -EINVAL;
+				}
+				map_idx = __add_used_map(env, env->prog->aux->kernel_maps[idx]);
+				goto map_resolved;
+			}
+
 			switch (insn[0].src_reg) {
 			case BPF_PSEUDO_MAP_IDX_VALUE:
 			case BPF_PSEUDO_MAP_IDX:
@@ -18158,6 +18169,7 @@ static int check_and_resolve_insns(struct bpf_verifier_env *env)
 			}
 
 			map_idx = add_used_map(env, fd);
+map_resolved:
 			if (map_idx < 0)
 				return map_idx;
 			map = env->used_maps[map_idx];
