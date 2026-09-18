@@ -5,6 +5,7 @@
  * Copyright (C) 2010 Intel Corporation <tony.luck@intel.com>
  */
 
+#include <linux/xattr.h>
 #include <linux/module.h>
 #include <linux/fs.h>
 #include <linux/fsnotify.h>
@@ -42,6 +43,7 @@ struct pstore_private {
 	struct dentry *dentry;
 	struct pstore_record *record;
 	size_t total_size;
+	struct simple_xattrs xattrs;
 };
 
 struct pstore_ftrace_seq_data {
@@ -61,6 +63,7 @@ static void free_pstore_private(struct pstore_private *private)
 		kfree(private->record->priv);
 		kfree(private->record);
 	}
+	simple_xattrs_free(&private->xattrs, NULL);
 	kfree(private);
 }
 DEFINE_FREE(pstore_private, struct pstore_private *, free_pstore_private(_T));
@@ -210,9 +213,55 @@ static void pstore_evict_inode(struct inode *inode)
 	free_pstore_private(p);
 }
 
+static ssize_t pstore_listxattr(struct dentry *dentry, char *buffer, size_t size)
+{
+	struct inode *inode = d_inode(dentry);
+	struct pstore_private *p = inode->i_private;
+
+	if (!p)
+		return 0;
+	return simple_xattr_list(inode, &p->xattrs, buffer, size);
+}
+
+static int pstore_xattr_get(const struct xattr_handler *handler,
+			    struct dentry *unused, struct inode *inode,
+			    const char *name, void *buffer, size_t size)
+{
+	struct pstore_private *p = inode->i_private;
+
+	if (!p)
+		return -ENODATA;
+	return simple_xattr_get(&p->xattrs, xattr_full_name(handler, name), buffer, size);
+}
+
+static int pstore_xattr_set(const struct xattr_handler *handler,
+			    struct mnt_idmap *idmap,
+			    struct dentry *unused, struct inode *inode,
+			    const char *name, const void *value,
+			    size_t size, int flags)
+{
+	return -EPERM;
+}
+
+static const struct xattr_handler pstore_xattr_handler = {
+	.prefix = XATTR_USER_PREFIX,
+	.get    = pstore_xattr_get,
+	.set    = pstore_xattr_set,
+};
+
+static const struct xattr_handler * const pstore_xattr_handlers[] = {
+	&pstore_xattr_handler,
+	NULL,
+};
+
+static const struct inode_operations pstore_file_inode_operations = {
+	.listxattr = pstore_listxattr,
+};
+
 static const struct inode_operations pstore_dir_inode_operations = {
 	.lookup		= simple_lookup,
 	.unlink		= pstore_unlink,
+	.listxattr      = pstore_listxattr,
 };
 
 static struct inode *pstore_get_inode(struct super_block *sb)
@@ -368,11 +417,13 @@ int pstore_mkfile(struct dentry *root, struct pstore_record *record)
 	private = kzalloc(sizeof(*private), GFP_KERNEL);
 	if (!private)
 		return -ENOMEM;
+	simple_xattrs_init(&private->xattrs);
 
 	dentry = d_alloc_name(root, name);
 	if (!dentry)
 		return -ENOMEM;
 
+	inode->i_op = &pstore_file_inode_operations;
 	private->dentry = dentry;
 	private->record = record;
 	inode->i_size = private->total_size = size;
@@ -418,15 +469,26 @@ static int pstore_fill_super(struct super_block *sb, struct fs_context *fc)
 	sb->s_magic		= PSTOREFS_MAGIC;
 	sb->s_op		= &pstore_ops;
 	sb->s_time_gran		= 1;
+	sb->s_xattr             = pstore_xattr_handlers;
 
 	pstore_set_kmsg_bytes(ctx->kmsg_bytes);
 
 	inode = pstore_get_inode(sb);
 	if (inode) {
+		struct pstore_private *private;
+
 		inode->i_mode = S_IFDIR | 0750;
 		inode->i_op = &pstore_dir_inode_operations;
 		inode->i_fop = &simple_dir_operations;
 		inc_nlink(inode);
+
+		private = kzalloc(sizeof(*private), GFP_KERNEL);
+		if (!private) {
+			iput(inode);
+			return -ENOMEM;
+		}
+		simple_xattrs_init(&private->xattrs);
+		inode->i_private = private;
 	}
 	sb->s_root = d_make_root(inode);
 	if (!sb->s_root)
