@@ -768,6 +768,10 @@ struct hci_conn {
 	void		*l2cap_data;
 	void		*sco_data;
 	void		*iso_data;
+	/*
+	 * 78e40feaee07 ("UPSTREAM: Bluetooth: Remove BT_HS") removed this field.
+	 * Restore it for KMI compliance.
+	 */
 	struct amp_mgr	*amp_mgr;
 
 	struct hci_conn	*link;
