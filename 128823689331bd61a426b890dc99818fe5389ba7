@@ -52,6 +52,24 @@
       "parentUuid": "4dd61738_21e3eced",
       "revId": "128823689331bd61a426b890dc99818fe5389ba7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30103fc2_5904d610",
+        "filename": "drivers/tty/serial/tegra-tcu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-09-19T06:05:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "82edc059_422d1eba",
+      "revId": "128823689331bd61a426b890dc99818fe5389ba7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
