@@ -2498,9 +2498,22 @@ int vmx_set_msr(struct kvm_vcpu *vcpu, struct msr_data *msr_info)
 		if (kvm_spec_ctrl_test_value(data))
 			return 1;
 
+#ifdef __PKVM_HYP__
+		vmx->spec_ctrl = data |
+			(pkvm_is_protected_vcpu(vcpu) ? this_cpu_read(x86_spec_ctrl_current) : 0);
+
+		/*
+		 * Keep MSR_IA32_SPEC_CTRL msr intercepted for pVMs so Spectre
+		 * mitigations cannot be cleared by pVM itself (always
+		 * intercepted and OR'ed with x86_spec_ctrl_current).
+		 */
+		if (pkvm_is_protected_vcpu(vcpu) || !data)
+			break;
+#else
 		vmx->spec_ctrl = data;
 		if (!data)
 			break;
+#endif
 
 		/*
 		 * For non-nested:
@@ -4501,8 +4514,13 @@ static void vmx_recalc_msr_intercepts(struct kvm_vcpu *vcpu)
 	if (vcpu->arch.xfd_no_write_intercept)
 		vmx_disable_intercept_for_msr(vcpu, MSR_IA32_XFD, MSR_TYPE_RW);
 
+#ifdef __PKVM_HYP__
+	vmx_set_intercept_for_msr(vcpu, MSR_IA32_SPEC_CTRL, MSR_TYPE_RW,
+				  pkvm_is_protected_vcpu(vcpu) || !to_vmx(vcpu)->spec_ctrl);
+#else
 	vmx_set_intercept_for_msr(vcpu, MSR_IA32_SPEC_CTRL, MSR_TYPE_RW,
 				  !to_vmx(vcpu)->spec_ctrl);
+#endif
 
 	if (kvm_cpu_cap_has(X86_FEATURE_XFD))
 		vmx_set_intercept_for_msr(vcpu, MSR_IA32_XFD_ERR, MSR_TYPE_R,
