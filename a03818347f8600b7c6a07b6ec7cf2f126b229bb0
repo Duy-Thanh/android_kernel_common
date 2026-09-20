@@ -197,6 +197,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bc115db2_94478a17",
+        "filename": "include/net/apf.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-09-20T11:13:09Z",
+      "side": 1,
+      "message": "0 should means unset not default, I fixed in the docs. \n\nAlso Renamed apf_id -\u003e chip_id and updated the docs. \n\nWe need seaparte command to set the id, it cannot be part of program installation as we need to know how much RAM available before we can create and install the program.\n\nDetailed sequence is here: https://android.googlesource.com/platform/hardware/google/apf/+/refs/heads/mirror-goog-main/next/apf_interpreter.h#48\n\nFor more background on why we design this field: one chip can run STA+STA or STA+NAN out of a singlepool (8K on current parts). GET_INFO gives the chip-wide used, but not *who* holds it. Before a install program can be called, this will allow user space to have track the chipset RAM use age in the global pool.\n\nFeel free to let me know if the updated code/doc still not clear.",
+      "parentUuid": "6ad3685c_32b39fc7",
+      "revId": "a03818347f8600b7c6a07b6ec7cf2f126b229bb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cf08f2b9_362716e7",
         "filename": "include/net/apf.h",
         "patchSetId": 18
@@ -232,6 +250,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1d58eda0_6bc9ae2d",
+        "filename": "include/net/apf.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-09-20T11:13:09Z",
+      "side": 1,
+      "message": "As maze said, it\u0027s all one apf_get_info() call into the firmware, the driver\njust forwards it. Splitting would be two reads of the same payload.\n\nAlso only used_ram really changes at runtime - apf_version, total_ram,\noverhead and granularity are compile-time constants in the firmware, chip_id\nis whatever userspace set last. So for now I kept one struct and just grouped\nthe fields into identity / static capabilities / dynamic state.\n\nIf you\u0027d still rather split it, what I\u0027d propose is keeping the single\nfirmware call and splitting only the struct:\n\n    struct apf_caps {        // constant while the chip is powered\n        u32 apf_version;\n        u32 total_ram;\n        u32 overhead;\n        u32 granularity;\n    };\n\n    struct apf_state {       // changes at runtime\n        u32 chip_id;\n        u32 used_ram;\n    };\n\n    int (*get_info)(struct net_device *dev, struct netlink_ext_ack *extack,\n                    struct apf_caps *caps, struct apf_state *state);\n\nwith either pointer allowed to be NULL when the caller only needs one half.\nNetlink can stay a single GET_INFO with the same flat attributes, or we add\nGET_CAPS / GET_STATE on top if you want them queried separately.\n\nLet me know which you prefer.",
+      "parentUuid": "25354fc7_2732bd13",
+      "revId": "a03818347f8600b7c6a07b6ec7cf2f126b229bb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5957d98a_8a6588c6",
         "filename": "include/net/apf.h",
         "patchSetId": 18
@@ -261,6 +297,24 @@
       "side": 1,
       "message": "It\u0027s potentially useful for implementing the driver/firmware, but yeah it can be stripped... not sure we\u0027d want to strip it from GKI though...  We were trying to get the .h file to be all you need to read...  Firmware developers seem to have a tendency to not read the documentation.",
       "parentUuid": "5957d98a_8a6588c6",
+      "revId": "a03818347f8600b7c6a07b6ec7cf2f126b229bb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5627736a_5541aef0",
+        "filename": "include/net/apf.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-09-20T11:13:09Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "111eee3c_3eb2d645",
       "revId": "a03818347f8600b7c6a07b6ec7cf2f126b229bb0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -318,6 +372,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "99703a8f_b35555bf",
+        "filename": "include/net/apf.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-09-20T11:13:09Z",
+      "side": 1,
+      "message": "removed version field.",
+      "parentUuid": "ed224ce1_b3676305",
+      "revId": "a03818347f8600b7c6a07b6ec7cf2f126b229bb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2ec50078_0dc93e99",
@@ -367,6 +439,41 @@
       "side": 1,
       "message": "(changes in defconfigs have a tendency to cause conflicts...)",
       "parentUuid": "bff13ddd_25c9900d",
+      "revId": "a03818347f8600b7c6a07b6ec7cf2f126b229bb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aff7c955_77f3cf34",
+        "filename": "net/apf/Kconfig",
+        "patchSetId": 18
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-09-20T11:13:09Z",
+      "side": 1,
+      "message": "made this patch to be default n, change it to default y in next patch",
+      "parentUuid": "37b93101_fd0a274b",
+      "revId": "a03818347f8600b7c6a07b6ec7cf2f126b229bb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "549db83d_db39b3f1",
+        "filename": "net/apf/core.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-09-20T11:13:09Z",
+      "side": 1,
+      "message": "Some of the logic changed due to migrate to use ynl. Jetski summary as follows:\n\n```\nHere is the complete summary of all API and behavioral changes between old-api (PS18 hand-written) and the current YNL-migrated version (b0a8e46032d9):\n  ──────\n  ### 1. Userspace Netlink Naming (include/uapi/linux/net_apf.h)\n\n  Because YNL\u0027s strict genetlink schema forbids underscores in identifiers (^[0-9a-z-]+$), the family and C prefixes changed (while keeping the exact same numeric IDs 1..8 and 1..15):\n\n    Family name:     \"net_apf\"             -\u003e  \"net-apf\"\n    Command enum:    APF_CMD_*      (1..8) -\u003e  NET_APF_CMD_*  (1..8)\n    Attribute enum:  APF_ATTR_*    (1..15) -\u003e  NET_APF_A_*   (1..15)\n    Chip ID attr:    APF_ATTR_INFO_ID  (3) -\u003e  NET_APF_A_CHIP_ID (3)\n  ──────\n  ### 2. Userspace Netlink Wire Format (Attribute Absence Replaces -1 \u0026 u8 Bool)\n\n  YNL forbids negative numbers in checks.min (minimum: 0). Instead of passing required signed attributes with -1 sentinels, attributes are now unsigned and omitting the attribute triggers the default/sentinel behavior (core.c still passes -1 to the driver\u0027s\n  struct apf_ops):\n\n  • NET_APF_CMD_READ\n      • NET_APF_A_OFFSET (s32 → optional u32, 0..32767):\n\t  • Before: Required. Caller had to pass 0.\n\t  • After: Optional. Omitting NET_APF_A_OFFSET defaults to offset \u003d 0.\n      • NET_APF_A_DATA_LEN (s32 → optional u32, 1..32767):\n\t  • Before: Required. Caller passed -1 to read the whole RAM, or 1..32767 for a partial read (0 was rejected in core.c).\n\t  • After: Optional (0 is now rejected by YNL policy). Omitting NET_APF_A_DATA_LEN reads the whole RAM (and still requires OFFSET to be omitted or 0).\n\n  • NET_APF_CMD_WRITE\n      • NET_APF_A_OFFSET (s32 → optional u32, 0..32767):\n\t  • Before: Required. Caller passed -1 to install a new bytecode program, or 0..32767 to write raw bytes at an offset.\n\t  • After: Optional. Omitting NET_APF_A_OFFSET installs a new bytecode program (core.c passes offset \u003d -1 to ops-\u003ewrite); providing NET_APF_A_OFFSET writes at 0..32767.\n      • NET_APF_A_DATA (binary):\n\t  • Before: Empty (0-byte) payload was rejected manually in core.c.\n\t  • After: Rejected automatically by YNL policy (NLA_POLICY_MIN_LEN(1)).\n\n  • NET_APF_CMD_SET_FAST_PATH\n      • NET_APF_A_FP_VLAN_TAG (s16 → optional u16, 0..4095):\n\t  • Before: Required. Caller passed -1 to disable VLAN filtering, or 0..4095 to filter on a VLAN ID.\n\t  • After: Optional. Omitting NET_APF_A_FP_VLAN_TAG disables VLAN filtering (core.c passes vlan_tag \u003d -1 to ops-\u003efast_path).\n      • NET_APF_A_FP_ENABLE_IPV6 (u8 0..1 → NLA_FLAG):\n\t  • Before: Required u8 (0 \u003d disable, 1 \u003d enable).\n\t  • After: NLA_FLAG. Including the flag attribute enables IPv6 fast path (true); omitting it disables IPv6 fast path (false).\n\n\n  ──────\n  ### 3. Driver Capability Validation (enum apf_mode Removed)\n\n  • Before: apf_get_mode() enforced a rigid 3-mode matrix upfront (V6_1 \u003d 4 ops with the other 4 forced NULL; V6_1_FASTPATH \u003d 5 ops; V8 \u003d all 8 ops). Any other combination caused every command on the device to fail with -EOPNOTSUPP.\n  • After: Removed enum apf_mode. net_apf_pre_doit() only checks that dev-\u003enetdev_ops-\u003eapf_ops is non-NULL, and each handler checks its own function pointer (if (!ops-\u003eX) return -EOPNOTSUPP;, plus ops-\u003eget_ram_size when read omits DATA_LEN).\n  ──────\n  ### 4. Locking, Concurrency \u0026 Network Namespaces\n\n  • Global genl_mutex → Per-interface netdev_lock:\n      • Before: .parallel_ops was implicitly false, so all APF commands across the whole system were serialized on the single global genl_mutex, and apf_get_netdev() only took a refcount (dev_get_by_index / dev_put).\n      • After: YNL sets .parallel_ops \u003d true. net_apf_pre_doit() / net_apf_post_doit() take the per-device instance lock via netdev_get_by_index_lock() / netdev_unlock(). Operations on different interfaces run in parallel; operations on the same interface\n      are serialized (keeping the two-step get_ram_size() → read() atomic against enable/disable).\n  • Network Namespaces (.netnsok):\n      • Before: .netnsok was implicitly false (any call from a non-init netns returned -ENOENT).\n      • After: YNL sets .netnsok \u003d true. The family is accessible in non-init network namespaces (resolving ifindex in genl_info_net(info)), while GENL_ADMIN_PERM still requires CAP_NET_ADMIN in init_user_ns.\n      \n  ### 5. In-Kernel Driver API (include/net/apf.h) \u0026 Kconfig\n\n  • struct apf_ops: Removed u32 version;. All 8 callback signatures and their -1 sentinel parameters (s32 offset, s16 vlan_tag) are unchanged.\n  • struct apf_info: Renamed u32 apf_id; → u32 chip_id;.\n  • CONFIG_NET_APF: Changed from tristate to bool (subsys_initcall() instead of module_init/module_exit) because netdev_get_by_index_lock() is not exported to loadable modules.\n```",
       "revId": "a03818347f8600b7c6a07b6ec7cf2f126b229bb0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -424,6 +531,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a06d74c_bd8a9c67",
+        "filename": "net/apf/core.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-09-20T11:13:09Z",
+      "side": 1,
+      "message": "Thanks for the suggestion, I think it make sense for us to follow nl80211 pattern. Updated.",
+      "parentUuid": "796effd3_cfe6d387",
+      "revId": "a03818347f8600b7c6a07b6ec7cf2f126b229bb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b1e9a728_c9013542",
@@ -441,6 +566,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dc73591_608309f2",
+        "filename": "net/apf/core.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-09-20T11:13:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1e9a728_c9013542",
+      "revId": "a03818347f8600b7c6a07b6ec7cf2f126b229bb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef73fdbe_4da5fc3f",
@@ -454,6 +597,24 @@
       "writtenOn": "2026-09-17T11:44:17Z",
       "side": 1,
       "message": "might be nicer - and allow you to generate userspace code too - to use ynl for these things and the uapi header file too",
+      "revId": "a03818347f8600b7c6a07b6ec7cf2f126b229bb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c9e8a21_0d21b5f3",
+        "filename": "net/apf/core.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-09-20T11:13:09Z",
+      "side": 1,
+      "message": "Done. update to use ynl instead of manually written netlink policy.",
+      "parentUuid": "ef73fdbe_4da5fc3f",
       "revId": "a03818347f8600b7c6a07b6ec7cf2f126b229bb0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

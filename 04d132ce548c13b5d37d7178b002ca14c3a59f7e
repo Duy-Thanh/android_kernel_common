@@ -16,6 +16,24 @@
       "message": "Probably better to get intel\u0027s upsteam kernel maintainer to take a look at this as well.",
       "revId": "04d132ce548c13b5d37d7178b002ca14c3a59f7e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79ec88ec_5a2c0245",
+        "filename": "include/net/apf.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-09-20T11:13:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9ba988eb_340db9ee",
+      "revId": "04d132ce548c13b5d37d7178b002ca14c3a59f7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
