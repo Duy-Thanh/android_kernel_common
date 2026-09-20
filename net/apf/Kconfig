@@ -8,6 +8,7 @@
 config NET_APF
 	bool "Advanced Packet Filter (APF) Subsystem"
 	depends on NET
+	default y
 	help
 	  This enables the Advanced Packet Filter (APF) subsystem, which provides
 	  a generic netlink interface for userspace to configure network driver
