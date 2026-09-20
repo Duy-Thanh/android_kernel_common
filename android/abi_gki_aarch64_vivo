@@ -473,6 +473,11 @@
   __traceiter_android_rvh_create_worker
   __traceiter_android_rvh_balance_fair
   __traceiter_android_rvh_before_pick_task_fair
+  __traceiter_android_vh_get_swap_pages_bypass
+  __traceiter_android_vh_pick_swap_device_bypass
+  __traceiter_android_vh_check_swap_range_free
+  __traceiter_android_vh_free_swap_slot_bypass
+  __traceiter_android_vh_swap_device_swapon
   __traceiter_binder_transaction_received
   __traceiter_block_rq_insert
   __traceiter_clock_set_rate
@@ -686,6 +691,11 @@
   __tracepoint_android_rvh_create_worker
   __tracepoint_android_rvh_balance_fair
   __tracepoint_android_rvh_before_pick_task_fair
+  __tracepoint_android_vh_get_swap_pages_bypass
+  __tracepoint_android_vh_pick_swap_device_bypass
+  __tracepoint_android_vh_check_swap_range_free
+  __tracepoint_android_vh_free_swap_slot_bypass
+  __tracepoint_android_vh_swap_device_swapon
   __tracepoint_binder_transaction_received
   __tracepoint_block_rq_insert
   __tracepoint_clock_set_rate
