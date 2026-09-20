@@ -16,6 +16,24 @@
       "message": "why is this needed? Why can\u0027t pool-\u003emp_ops be in rodata?",
       "revId": "2991236013ca98e83f0cffd31969383597c7872a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92bd2a93_30f04095",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1991256
+      },
+      "writtenOn": "2026-09-20T02:17:15Z",
+      "side": 1,
+      "message": "is_kernel_rodata() only checks id the address falls within the kernel core .rodata section.A static const structure defined in a loadable module resides in the module\u0027s own .rodata section,which is not covered by this check, so it fails with -EFAULT.",
+      "parentUuid": "9fe051ee_0e9845c2",
+      "revId": "2991236013ca98e83f0cffd31969383597c7872a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
