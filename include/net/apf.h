@@ -8,6 +8,7 @@
 #ifndef _NET_APF_H
 #define _NET_APF_H
 
+#include <linux/android_kabi.h>
 #include <linux/if_ether.h>
 #include <linux/types.h>
 
@@ -83,6 +84,16 @@ struct apf_ops {
 	int (*fast_path)(struct net_device *dev, struct netlink_ext_ack *extack,
 			 const u8 ucast_mac[ETH_ALEN], s16 vlan_tag,
 			 __be32 ucast_addr4, bool enable_ipv6_fastpath);
+
+	/* private: */
+	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_RESERVE(2);
+	ANDROID_KABI_RESERVE(3);
+	ANDROID_KABI_RESERVE(4);
+	ANDROID_KABI_RESERVE(5);
+	ANDROID_KABI_RESERVE(6);
+	ANDROID_KABI_RESERVE(7);
+	ANDROID_KABI_RESERVE(8);
 };
 
 #endif /* _NET_APF_H */
