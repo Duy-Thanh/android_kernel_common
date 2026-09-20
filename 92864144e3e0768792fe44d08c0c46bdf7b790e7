@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0619850_2f0edeb8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5086015
+      },
+      "writtenOn": "2026-09-20T07:52:38Z",
+      "side": 1,
+      "message": "@tkjos@google.com @gprocida@google.com\n \nPlease review the submitted changes; our functionality depends on this commit, and kernel-6.18 has already been merged. tks",
+      "revId": "92864144e3e0768792fe44d08c0c46bdf7b790e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
