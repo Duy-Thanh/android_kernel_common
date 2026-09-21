@@ -190,6 +190,60 @@ static bool kvm_handle_pvm_sys64(struct kvm_vcpu *vcpu, u64 *exit_code)
 		kvm_handle_pvm_sysreg(vcpu, exit_code));
 }
 
+/*
+ * Handler for protected VM data aborts.
+ *
+ * A device assigned with "pkvm,el2-managed-mmio" has no stage-2 mapping, so
+ * every guest access to it faults here. Offer the fault to the EL2 modules
+ * for emulation before giving up and exiting to the host.
+ *
+ * Returns true if the hypervisor has handled the exit, and control should go
+ * back to the guest, or false if it hasn't.
+ */
+static bool kvm_handle_pvm_dabt_low(struct kvm_vcpu *vcpu, u64 *exit_code)
+{
+	enum pkvm_mmio_handler_ret ret;
+	unsigned int size;
+	bool is_write;
+	u64 ipa, data;
+	int rd;
+
+	if (kvm_hyp_handle_dabt_low(vcpu, exit_code))
+		return true;
+
+	if (!kvm_vcpu_trap_is_translation_fault(vcpu) ||
+	    !kvm_vcpu_dabt_isvalid(vcpu) ||
+	    kvm_vcpu_abt_issea(vcpu) ||
+	    kvm_vcpu_abt_iss1tw(vcpu))
+		return false;
+
+	ipa = kvm_vcpu_get_fault_ipa(vcpu);
+	ipa |= FAR_TO_FIPA_OFFSET(kvm_vcpu_get_hfar(vcpu));
+	size = kvm_vcpu_dabt_get_as(vcpu);
+	is_write = kvm_vcpu_dabt_iswrite(vcpu);
+	rd = kvm_vcpu_dabt_get_rd(vcpu);
+	data = is_write ? vcpu_get_reg(vcpu, rd) : 0;
+
+	ret = module_handle_guest_mmio_abt(ipa, is_write, &data, size,
+					  vcpu->kvm->arch.pkvm.handle);
+	if (ret != GUEST_MMIO_HANDLED)
+		return false;
+
+	if (!is_write) {
+		if (kvm_vcpu_dabt_issext(vcpu)) {
+			switch (size) {
+			case 1: data = (s64)(s8)data;  break;
+			case 2: data = (s64)(s16)data; break;
+			case 4: data = (s64)(s32)data; break;
+			}
+		}
+		vcpu_set_reg(vcpu, rd, data);
+	}
+
+	__kvm_skip_instr(vcpu);
+	return true;
+}
+
 static const exit_handler_fn hyp_exit_handlers[] = {
 	[0 ... ESR_ELx_EC_MAX]		= NULL,
 	[ESR_ELx_EC_CP15_32]		= kvm_hyp_handle_cp15_32,
@@ -211,7 +265,7 @@ static const exit_handler_fn pvm_exit_handlers[] = {
 	[ESR_ELx_EC_SME]		= kvm_handle_pvm_restricted,
 	[ESR_ELx_EC_FP_ASIMD]		= kvm_hyp_handle_fpsimd,
 	[ESR_ELx_EC_IABT_LOW]		= kvm_hyp_handle_iabt_low,
-	[ESR_ELx_EC_DABT_LOW]		= kvm_hyp_handle_dabt_low,
+	[ESR_ELx_EC_DABT_LOW]		= kvm_handle_pvm_dabt_low,
 	[ESR_ELx_EC_WATCHPT_LOW]	= kvm_hyp_handle_watchpt_low,
 	[ESR_ELx_EC_MOPS]		= kvm_hyp_handle_mops,
 };

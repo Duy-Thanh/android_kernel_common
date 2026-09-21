@@ -1,3 +1,4 @@
+#include <asm/kvm_pkvm_module.h>
 #include <asm/kvm_pgtable.h>
 #include <linux/kvm_host.h>
 #include <linux/arm-smccc.h>
@@ -12,6 +13,7 @@ int __pkvm_register_hyp_panic_notifier(void (*cb)(struct user_pt_regs *));
 int __pkvm_register_unmask_serror(bool (*unmask)(void), void (*mask)(void));
 
 enum pkvm_psci_notification;
+struct pkvm_hyp_vm;
 int __pkvm_register_psci_notifier(void (*cb)(enum pkvm_psci_notification, struct user_pt_regs *));
 
 void __pkvm_unmask_serror(void);
@@ -30,6 +32,9 @@ const uuid_t *module_get_guest_trng_uuid(void);
 u64 module_get_guest_trng_rng(u64 *entropy, int nbits);
 
 int module_guest_accept_module_owned_share(u64 phys, u64 ipa, u64 size, struct pkvm_hyp_vm *vm);
+enum pkvm_mmio_handler_ret
+module_handle_guest_mmio_abt(u64 ipa, bool is_write, u64 *data,
+			     unsigned int size, pkvm_handle_t handle);
 #else
 static inline int __pkvm_init_module(void *module_init) { return -EOPNOTSUPP; }
 static inline int
@@ -52,5 +57,11 @@ module_handle_guest_smc(struct arm_smccc_1_2_regs *regs, struct arm_smccc_1_2_re
 static inline int module_guest_accept_module_owned_share(u64 phys, u64 ipa, u64 size, struct pkvm_hyp_vm *vm)
 {
 	return -EPERM;
+}
+static inline enum pkvm_mmio_handler_ret
+module_handle_guest_mmio_abt(u64 ipa, bool is_write, u64 *data,
+			     unsigned int size, pkvm_handle_t handle)
+{
+	return GUEST_MMIO_NOT_HANDLED;
 }
 #endif

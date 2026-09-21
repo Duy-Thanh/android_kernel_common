@@ -127,6 +127,7 @@ enum mod_handler_type {
 	HOST_SMC_HANDLER,
 	GUEST_SMC_HANDLER,
 	GUEST_ACCEPT_MODULE_OWNED_HANDLER,
+	GUEST_MMIO_ABT_HANDLER,
 	NUM_MOD_HANDLER_TYPES,
 };
 
@@ -284,6 +285,31 @@ int module_guest_accept_module_owned_share(u64 phys, u64 ipa, u64 size, struct p
 	return -EPERM;
 }
 
+static int
+__register_guest_mmio_abort_handler(enum pkvm_mmio_handler_ret (*cb)(u64 ipa, bool is_write,
+				    u64 *data, unsigned int size, pkvm_handle_t handle))
+{
+	return mod_handler_register(GUEST_MMIO_ABT_HANDLER, cb);
+}
+
+enum pkvm_mmio_handler_ret
+module_handle_guest_mmio_abt(u64 ipa, bool is_write, u64 *data,
+			     unsigned int size, pkvm_handle_t handle)
+{
+	enum pkvm_mmio_handler_ret (*cb)(u64 ipa, bool is_write, u64 *data,
+					 unsigned int size, pkvm_handle_t handle);
+	enum pkvm_mmio_handler_ret ret;
+	int i;
+
+	for_each_mod_handler(GUEST_MMIO_ABT_HANDLER, cb, i) {
+		ret = cb(ipa, is_write, data, size, handle);
+		if (ret == GUEST_MMIO_HANDLED)
+			return ret;
+	}
+
+	return GUEST_MMIO_NOT_HANDLED;
+}
+
 const struct pkvm_module_ops module_ops = {
 	.create_private_mapping = __pkvm_create_private_mapping,
 	.alloc_module_va = __pkvm_alloc_module_va,
@@ -349,6 +375,8 @@ const struct pkvm_module_ops module_ops = {
 	.arm_smccc_1_2_smc = nvhe_arm_smccc_1_2_smc,
 	.request_hyp_alloc = kvm_iommu_request_hyp_alloc,
 	.host_stage2_set_owned = module_set_host_page_owned,
+	.register_guest_mmio_abort_handler = __register_guest_mmio_abort_handler,
+	.get_device_by_guest_ipa = pkvm_get_device_by_guest_ipa,
 };
 
 static void *pkvm_module_hyp_va(struct pkvm_el2_module *mod, void *kern_va)

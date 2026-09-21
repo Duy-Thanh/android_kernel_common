@@ -23,6 +23,16 @@ struct iommu_iotlb_gather;
 struct pkvm_device;
 
 /**
+ * enum pkvm_mmio_handler_ret - return codes for guest MMIO abort callbacks
+ * @GUEST_MMIO_HANDLED:     Access was emulated; data populated for reads.
+ * @GUEST_MMIO_NOT_HANDLED: Not recognised by this handler; try the next.
+ */
+enum pkvm_mmio_handler_ret {
+	GUEST_MMIO_HANDLED,
+	GUEST_MMIO_NOT_HANDLED,
+};
+
+/**
  * struct pkvm_module_trng_ops - pKVM TRNG implementation modules callbacks
  * @trng_uuid:	  Implementation's UUID advertised on TRNG_GET_UUID call
  * @trng_rnd64:	  TRNG implementation call for generating entropy for TRNG_RND64
@@ -238,6 +248,17 @@ struct pkvm_device_ops {
  *				hypervisor exit and entry actions.
  * @request_hyp_alloc:		Request an alloc request based on current IOMMU context.
  * @host_stage2_set_owned:	Set the host page ownership state for a range of pages.
+ * @register_guest_mmio_abort_handler: Register a callback that emulates data aborts from a
+ *				protected guest. The hypervisor tries handlers in registration order
+ *				and stops at the first GUEST_MMIO_HANDLED. The callback runs in EL2
+ *				with the faulting vCPU loaded. It must not sleep and must not re-enter
+ *				the hypervisor. The hypervisor parses the ESR, writes the destination
+ *				register and advances PC; the callback only moves the data.
+ *				ipa: faulting IPA (page offset included), is_write: true for a store,
+ *				data: value to store or return on load, size: 1/2/4/8 bytes,
+ *				handle: handle of the faulting VM.
+ * @get_device_by_guest_ipa:	Return the el2_managed device that VM @handle sees at @ipa,
+ *				or NULL. Call from the abort callback to map a fault to a device.
  */
 struct pkvm_module_ops {
 	int (*create_private_mapping)(phys_addr_t phys, size_t size,
@@ -318,7 +339,13 @@ struct pkvm_module_ops {
 				  struct arm_smccc_1_2_regs *regs);
 	int (*request_hyp_alloc)(void);
 	ANDROID_KABI_USE(1, int (*host_stage2_set_owned)(u64 pfn, u64 nr_pages, bool owned));
-	ANDROID_KABI_RESERVE(2);
+	ANDROID_KABI_USE(2,
+		int (*register_guest_mmio_abort_handler)(
+			enum pkvm_mmio_handler_ret (*cb)(u64 ipa, bool is_write,
+							 u64 *data, unsigned int size,
+							 pkvm_handle_t handle)));
+	ANDROID_KABI_USE(3,
+		struct pkvm_device *(*get_device_by_guest_ipa)(pkvm_handle_t handle, u64 ipa));
 	ANDROID_KABI_RESERVE(3);
 	ANDROID_KABI_RESERVE(4);
 	ANDROID_KABI_RESERVE(5);
