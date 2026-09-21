@@ -9,7 +9,11 @@
 #include <linux/highmem.h>
 #include <linux/userfaultfd_k.h>
 #include <linux/huge_mm.h>
+#include <linux/oom.h>
 #include <linux/pgtable.h>
+#ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
+#include <asm/p3s/mte.h>
+#endif
 
 /*
  * vma_pte_add_slice - Apply subpage slice offset to a PTE value
@@ -280,5 +284,151 @@ static inline bool vma_anon_index_matches(const struct vm_area_struct *vma,
 	first = vma->vm_start + ((pgoff - vma->vm_pgoff) << PAGE_SHIFT_4KB);
 	return (first & PAGE_MASK_KERNEL) == (addr & PAGE_MASK_KERNEL);
 }
+
+#ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
+
+/*
+ * p3s_anon_folio_lookaround_pte - Find adjacent anonymous folio in slice window
+ * @vma: Pointer to struct vm_area_struct
+ * @pte: Faulting PTE pointer
+ * @addr: Faulting virtual address
+ *
+ * Returns a referenced sibling folio whose slice for @addr is unused, or
+ * NULL. A folio qualifies only if every mapping of it is a sibling PTE in
+ * this window: a slice moved elsewhere (for example by mremap()), still
+ * referenced by a swap entry (folio in the swap cache), or replaced by a
+ * migration entry is in use, and mapping it again would alias it. The
+ * folio lock excludes in-flight migration and reclaim.
+ */
+static inline struct folio *p3s_anon_folio_lookaround_pte(struct vm_area_struct *vma,
+							  pte_t *pte,
+							  unsigned long addr)
+{
+	unsigned int total_slices;
+	unsigned long window_start;
+	pte_t *pte_base;
+	unsigned int i;
+
+	if (!vma_is_p3s_4k(vma))
+		return NULL;
+
+	vma_folio_slice_bounds(vma, addr, &total_slices, &window_start);
+	if (total_slices <= 1)
+		return NULL;
+
+	pte_base = pte - ((addr - window_start) >> PAGE_SHIFT_4KB);
+
+	for (i = 0; i < total_slices; i++) {
+		unsigned long slice_addr = window_start + (i << PAGE_SHIFT_4KB);
+		pte_t ptent = ptep_get(pte_base + i);
+		struct folio *f;
+		bool ok;
+
+		if (!pte_present(ptent))
+			continue;
+
+		f = vm_normal_folio(vma, slice_addr, ptent);
+		if (!f || !folio_test_anon(f) || folio_test_large(f) ||
+		    folio_test_ksm(f))
+			continue;
+
+		if (!PageAnonExclusive(&f->page))
+			continue;
+
+		if (!folio_trylock(f))
+			continue;
+		ok = !folio_test_swapcache(f) &&
+		     p3s_count_folio_slices(vma, pte_base, window_start,
+					    total_slices, f) == folio_mapcount(f) &&
+		     folio_try_get(f);
+		folio_unlock(f);
+		if (ok)
+			return f;
+	}
+
+	return NULL;
+}
+
+/*
+ * p3s_anon_folio_reuse - Update accounting when reusing an existing folio
+ * @folio: Anonymous folio being reused
+ * @vma: Pointer to struct vm_area_struct
+ *
+ * The folio reference taken by p3s_anon_folio_lookaround_pte() is
+ * transferred to the new slice mapping.
+ */
+static inline void p3s_anon_folio_reuse(struct folio *folio,
+					struct vm_area_struct *vma)
+{
+	atomic_inc(&folio->_mapcount);
+	inc_mm_counter(vma->vm_mm, MM_ANONPAGES);
+}
+
+#ifdef CONFIG_USERFAULTFD
+/*
+ * p3s_uffd_install_anon_folio - Look around and reuse existing folio slice for userfaultfd
+ * @dst_vma: Destination VMA
+ * @dst_pte: Destination PTE pointer
+ * @dst_addr: Destination virtual address
+ * @folio: Newly allocated source folio
+ * @dst_pte_val: Output PTE value to install
+ * @writable: Whether the mapping should be writable
+ * @flags: Userfaultfd atomic flags
+ *
+ * Returns true if an existing slice was reused and folio_put was called on @folio.
+ */
+static inline bool p3s_uffd_install_anon_folio(struct vm_area_struct *dst_vma,
+					       pte_t *dst_pte,
+					       unsigned long dst_addr,
+					       struct folio *folio,
+					       pte_t *dst_pte_val,
+					       bool writable,
+					       uffd_flags_t flags)
+{
+	struct folio *existing_folio =
+		p3s_anon_folio_lookaround_pte(dst_vma, dst_pte, dst_addr);
+	unsigned long offset;
+
+	if (!existing_folio)
+		return false;
+
+	offset = (unsigned long)vma_slice_offset(dst_vma, dst_addr) << PAGE_SHIFT_4KB;
+
+	/* The data is replaced below; the old allocation tags must go too */
+	if (dst_vma->vm_flags & VM_MTE)
+		mte_zero_clear_slice_tags(folio_address(existing_folio) + offset);
+	memcpy(folio_address(existing_folio) + offset,
+	       folio_address(folio) + offset, PAGE_SIZE_4KB);
+	flush_dcache_folio(existing_folio);
+
+	p3s_anon_folio_reuse(existing_folio, dst_vma);
+	*dst_pte_val = vma_folio_mk_pte(dst_vma, existing_folio, dst_addr);
+	*dst_pte_val = pte_mkdirty(*dst_pte_val);
+	if (writable)
+		*dst_pte_val = pte_mkwrite(*dst_pte_val, dst_vma);
+	if (flags & MFILL_ATOMIC_WP)
+		*dst_pte_val = pte_mkuffd_wp(*dst_pte_val);
+
+	folio_put(folio);
+	return true;
+}
+#endif /* CONFIG_USERFAULTFD */
+
+#else /* !CONFIG_ARM64_PER_PROCESS_PAGE_SIZE */
+
+#ifdef CONFIG_USERFAULTFD
+static inline bool p3s_uffd_install_anon_folio(struct vm_area_struct *dst_vma,
+					       pte_t *dst_pte,
+					       unsigned long dst_addr,
+					       struct folio *folio,
+					       pte_t *dst_pte_val,
+					       bool writable,
+					       uffd_flags_t flags)
+{
+	return false;
+}
+#endif
+
+#endif /* CONFIG_ARM64_PER_PROCESS_PAGE_SIZE */
 
 #endif /* __MM_P3S_H */
