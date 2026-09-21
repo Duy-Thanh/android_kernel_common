@@ -975,6 +975,9 @@ struct mm_struct {
 #endif
 		unsigned long task_size;	/* size of task vm space */
 		pgd_t * pgd;
+#ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
+		u8 pte_shift;
+#endif
 
 #ifdef CONFIG_MEMBARRIER
 		/**
@@ -1867,5 +1870,8 @@ static inline unsigned long mmf_init_legacy_flags(unsigned long flags)
 			   (1UL << MMF_HAS_MDWE_NO_INHERIT));
 	return flags & MMF_INIT_LEGACY_MASK;
 }
+
+/* Keep at the end to ensure struct mm_struct and vm_area_struct are defined. */
+#include <linux/p3s.h>
 
 #endif /* _LINUX_MM_TYPES_H */
