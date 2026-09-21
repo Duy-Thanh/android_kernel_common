@@ -32,6 +32,7 @@
 #include <asm/pgalloc.h>
 
 #include "internal.h"
+#include <linux/p3s_user_pages.h>
 
 /* Classify the kind of remap operation being performed. */
 enum mremap_type {
@@ -672,6 +673,9 @@ static bool can_realign_addr(struct pagetable_move_control *pmc,
 	unsigned long pagetable_size = align_mask + 1;
 	unsigned long old_align_next = pagetable_size - old_align;
 
+	if (pmc->for_stack)
+		return false;
+
 	/*
 	 * We don't want to have to go hunting for VMAs from the end of the old
 	 * VMA to the next page table boundary, also we want to make sure the
@@ -945,8 +949,7 @@ static unsigned long vrm_set_new_addr(struct vma_remap_struct *vrm)
 	struct vm_area_struct *vma = vrm->vma;
 	unsigned long map_flags = 0;
 	/* Page Offset _into_ the VMA. */
-	pgoff_t internal_pgoff = (vrm->addr - vma->vm_start) >> PAGE_SHIFT;
-	pgoff_t pgoff = vma->vm_pgoff + internal_pgoff;
+	pgoff_t pgoff = vma_pgoff_offset(vma, vrm->addr);
 	unsigned long new_addr = vrm_implies_new_addr(vrm) ? vrm->new_addr : 0;
 	unsigned long res;
 
@@ -955,8 +958,9 @@ static unsigned long vrm_set_new_addr(struct vma_remap_struct *vrm)
 	if (vma->vm_flags & VM_MAYSHARE)
 		map_flags |= MAP_SHARED;
 
-	res = get_unmapped_area(vma->vm_file, new_addr, vrm->new_len, pgoff,
-				map_flags);
+	res = mm_mremap_get_unmapped_area(vma->vm_file, new_addr, vrm->new_len,
+					  pgoff, map_flags, vrm->addr,
+					  vrm->flags);
 	if (IS_ERR_VALUE(res))
 		return res;
 
@@ -1182,9 +1186,7 @@ static void unmap_source_vma(struct vma_remap_struct *vrm)
 static int copy_vma_and_data(struct vma_remap_struct *vrm,
 			     struct vm_area_struct **new_vma_ptr)
 {
-	unsigned long internal_offset = vrm->addr - vrm->vma->vm_start;
-	unsigned long internal_pgoff = internal_offset >> PAGE_SHIFT;
-	unsigned long new_pgoff = vrm->vma->vm_pgoff + internal_pgoff;
+	unsigned long new_pgoff = vma_pgoff_offset(vrm->vma, vrm->addr);
 	unsigned long moved_len;
 	struct vm_area_struct *vma = vrm->vma;
 	struct vm_area_struct *new_vma;
