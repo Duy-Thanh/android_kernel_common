@@ -2296,6 +2296,17 @@ int __pkvm_pgtable_stage2_split(struct kvm_vcpu *vcpu, phys_addr_t ipa, size_t s
 		goto end;
 	}
 
+	/*
+	 * Ensure userspace has not remapped the HVA since the huge page was
+	 * donated; every newly pinned page's PFN (HPA) must match ppage.
+	 */
+	for (p = 0; p < nr_pages; p++) {
+		if (page_to_pfn(pages[p]) != ppage->pfn + 1 + p) {
+			ret = -EFAULT;
+			goto end;
+		}
+	}
+
 	arm_smccc_1_1_hvc(KVM_HOST_SMCCC_FUNC(__pkvm_host_split_guest),
 			  ipa >> PAGE_SHIFT, size, &res);
 	WARN_ON(res.a0 != SMCCC_RET_SUCCESS);
