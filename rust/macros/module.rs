@@ -148,7 +148,7 @@ impl<'a> ModInfoBuilder<'a> {
                                 #[cfg(not(MODULE))]
                                 mod_: ::core::ptr::null_mut(),
                                 ops: core::ptr::from_ref(&{ops}),
-                                perm: 0, // Will not appear in sysfs
+                                perm: 0o444, // Will appear read-only in sysfs
                                 level: -1,
                                 flags: 0,
                                 __bindgen_anon_1: ::kernel::bindings::kernel_param__bindgen_ty_1 {{
