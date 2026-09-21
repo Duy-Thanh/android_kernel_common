@@ -131,4 +131,51 @@ static inline unsigned long mm_stack_guard_gap(const struct mm_struct *mm)
 {
 	return (stack_guard_gap >> PAGE_SHIFT_KERNEL) << mm_pte_shift(mm);
 }
+
+/*
+ * mm_mmap_pgoff - Convert userspace process pgoff to host folio pgoff
+ * @mm: Pointer to struct mm_struct
+ * @pgoff: Page offset passed to mmap in process page units
+ *
+ * For 4KB compat processes on a 16KB kernel, shifts out the subpage slice
+ * bits (pgoff >> 2) to obtain the enclosing 16KB Page Cache folio index:
+ *
+ * ┌─────────────────────────────────────────────────────────┐
+ * │ Backing File (4KB Process Page Offsets)                 │
+ * ├─────────────┬─────────────┬─────────────┬───────────────┤
+ * │   pgoff 4   │   pgoff 5   │   pgoff 6   │    pgoff 7    │
+ * │  (Slice 0)  │  (Slice 1)  │  (Slice 2)  │   (Slice 3)   │
+ * ├─────────────┴─────────────┴─────────────┴───────────────┤
+ * │ Enclosing Host 16KB Folio (vm_pgoff = 4 >> 2 = 1)       │
+ * └─────────────────────────────────────────────────────────┘
+ *               ▲
+ *               └── mmap(pgoff = 5) -> mm_mmap_pgoff = 1
+ */
+static inline pgoff_t mm_mmap_pgoff(const struct mm_struct *mm, pgoff_t pgoff)
+{
+	return mm_is_compat(mm) ? (pgoff >> P3S_SLICE_SHIFT) : pgoff;
+}
+
+/*
+ * mm_mmap_slice_off - Extract subpage slice offset from userspace pgoff
+ * @mm: Pointer to struct mm_struct
+ * @pgoff: Page offset passed to mmap in process page units
+ *
+ * For 4KB compat processes on a 16KB kernel, extracts the starting 4KB
+ * subpage slice index (0..3) within the host 16KB folio:
+ *
+ * ┌─────────────────────────────────────────────────────────┐
+ * │ 16KB Host Folio (Physical Page)                         │
+ * ├─────────────┬─────────────┬─────────────┬───────────────┤
+ * │   Slice 0   │   Slice 1   │   Slice 2   │    Slice 3    │
+ * └─────────────┴─────────────┴─────────────┴───────────────┘
+ *               ▲
+ *               └── mmap(pgoff = 5) -> mm_mmap_slice_off = 1
+ */
+static inline unsigned short mm_mmap_slice_off(const struct mm_struct *mm,
+					       pgoff_t pgoff)
+{
+	return mm_is_compat(mm) ? (pgoff & P3S_SLICE_MASK) : 0;
+}
+
 #endif /* _LINUX_P3S_MM_H */
