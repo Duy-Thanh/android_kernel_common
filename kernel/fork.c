@@ -1551,6 +1551,9 @@ static int copy_mm(u64 clone_flags, struct task_struct *tsk)
 
 	tsk->mm = NULL;
 	tsk->active_mm = NULL;
+#ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
+	tsk->p3s_remote_mm = NULL;
+#endif
 
 	/*
 	 * Are we cloning a kernel thread?
