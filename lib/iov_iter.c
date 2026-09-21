@@ -12,6 +12,7 @@
 #include <linux/scatterlist.h>
 #include <linux/instrumented.h>
 #include <linux/iov_iter.h>
+#include <linux/p3s/iov_iter.h>
 
 static __always_inline
 size_t copy_to_user_iter(void __user *iter_to, size_t progress,
@@ -1071,15 +1072,15 @@ static ssize_t __iov_iter_get_pages_alloc(struct iov_iter *i,
 			gup_flags |= FOLL_NOFAULT;
 
 		addr = first_iovec_segment(i, &maxsize);
-		*start = addr % PAGE_SIZE;
-		addr &= PAGE_MASK;
-		n = want_pages_array(pages, maxsize, *start, maxpages);
+		*start = mm_offset_in_page(current->mm, addr);
+		addr &= mm_pte_mask(current->mm);
+		n = want_user_pages_array(pages, maxsize, *start, maxpages);
 		if (!n)
 			return -ENOMEM;
 		res = get_user_pages_fast(addr, n, gup_flags, *pages);
 		if (unlikely(res <= 0))
 			return res;
-		maxsize = min_t(size_t, maxsize, res * PAGE_SIZE - *start);
+		maxsize = min_t(size_t, maxsize, res * mm_pte_size(current->mm) - *start);
 		iov_iter_advance(i, maxsize);
 		return maxsize;
 	}
@@ -1185,12 +1186,15 @@ int iov_iter_npages(const struct iov_iter *i, int maxpages)
 	if (unlikely(!i->count))
 		return 0;
 	if (likely(iter_is_ubuf(i))) {
-		unsigned offs = offset_in_page(i->ubuf + i->iov_offset);
-		int npages = DIV_ROUND_UP(offs + i->count, PAGE_SIZE);
+		unsigned long addr = (unsigned long)i->ubuf + i->iov_offset;
+		unsigned long offs = mm_offset_in_page(current->mm, addr);
+		int npages = DIV_ROUND_UP(offs + i->count, mm_pte_size(current->mm));
+
 		return min(npages, maxpages);
 	}
-	/* iovec and kvec have identical layouts */
-	if (likely(iter_is_iovec(i) || iov_iter_is_kvec(i)))
+	if (likely(iter_is_iovec(i)))
+		return user_iov_npages(i, maxpages);
+	if (iov_iter_is_kvec(i))
 		return iov_npages(i, maxpages);
 	if (iov_iter_is_bvec(i))
 		return bvec_npages(i, maxpages);
@@ -1743,15 +1747,15 @@ static ssize_t iov_iter_extract_user_pages(struct iov_iter *i,
 		gup_flags |= FOLL_NOFAULT;
 
 	addr = first_iovec_segment(i, &maxsize);
-	*offset0 = offset = addr % PAGE_SIZE;
-	addr &= PAGE_MASK;
-	maxpages = want_pages_array(pages, maxsize, offset, maxpages);
+	*offset0 = offset = mm_offset_in_page(current->mm, addr);
+	addr &= mm_pte_mask(current->mm);
+	maxpages = want_user_pages_array(pages, maxsize, offset, maxpages);
 	if (!maxpages)
 		return -ENOMEM;
 	res = pin_user_pages_fast(addr, maxpages, gup_flags, *pages);
 	if (unlikely(res <= 0))
 		return res;
-	maxsize = min_t(size_t, maxsize, res * PAGE_SIZE - offset);
+	maxsize = min_t(size_t, maxsize, res * mm_pte_size(current->mm) - offset);
 	iov_iter_advance(i, maxsize);
 	return maxsize;
 }
