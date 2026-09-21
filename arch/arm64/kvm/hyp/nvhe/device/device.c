@@ -63,7 +63,7 @@ static struct pkvm_device *pkvm_get_device(u64 addr, size_t size)
 	return NULL;
 }
 
-static bool pkvm_device_has_resource(struct pkvm_device *dev, u64 phys)
+static struct pkvm_dev_resource *pkvm_dev_resource_by_phys(struct pkvm_device *dev, u64 phys)
 {
 	int i;
 
@@ -71,10 +71,10 @@ static bool pkvm_device_has_resource(struct pkvm_device *dev, u64 phys)
 		struct pkvm_dev_resource *res = &dev->resources[i];
 
 		if ((phys >= res->base) && (phys < res->base + res->size))
-			return true;
+			return res;
 	}
 
-	return false;
+	return NULL;
 }
 
 static struct pkvm_device *pkvm_get_device_by_addr(u64 addr)
@@ -84,7 +84,7 @@ static struct pkvm_device *pkvm_get_device_by_addr(u64 addr)
 
 	for (i = 0 ; i < registered_devices_nr ; ++i) {
 		dev = &registered_devices[i];
-		if (pkvm_device_has_resource(dev, addr))
+		if (pkvm_dev_resource_by_phys(dev, addr))
 			return dev;
 	}
 
@@ -111,6 +111,9 @@ int pkvm_device_hyp_assign_mmio(u64 pfn, u64 nr_pages)
 	dev = pkvm_get_device(phys, size);
 	if (!dev)
 		return -ENODEV;
+
+	if (dev->el2_managed)
+		return 0;
 
 	hyp_spin_lock(&device_spinlock);
 	/* A VM already have this device, no take backs. */
@@ -149,6 +152,9 @@ int pkvm_device_reclaim_mmio(u64 pfn, u64 nr_pages)
 	dev = pkvm_get_device(phys, size);
 	if (!dev)
 		return -ENODEV;
+
+	if (dev->el2_managed)
+		return 0;
 
 	hyp_spin_lock(&device_spinlock);
 	if (dev->ctxt) {
@@ -217,11 +223,19 @@ static int __pkvm_device_assign(struct pkvm_device *dev, struct pkvm_hyp_vm *vm)
 
 	hyp_assert_lock_held(&device_spinlock);
 
-	for (i = 0 ; i < dev->nr_resources; ++i) {
-		res = &dev->resources[i];
-		ret = hyp_check_range_owned(res->base, res->size);
-		if (ret)
-			return ret;
+	/*
+	 * The host keeps an el2_managed device: it shares the MMIO with the
+	 * guest and drives it through its own driver. The hypervisor therefore
+	 * never takes ownership of those pages, and only an EL2 module reaches
+	 * them on the guest's behalf. Skip the ownership check for them.
+	 */
+	if (!dev->el2_managed) {
+		for (i = 0 ; i < dev->nr_resources; ++i) {
+			res = &dev->resources[i];
+			ret = hyp_check_range_owned(res->base, res->size);
+			if (ret)
+				return ret;
+		}
 	}
 
 	if (dev->ops && dev->ops->power_lock) {
@@ -300,11 +314,112 @@ int pkvm_host_map_guest_mmio(struct pkvm_hyp_vcpu *hyp_vcpu, u64 pfn, u64 gfn)
 	if (ret)
 		goto out_ret;
 
-	ret = __pkvm_install_guest_mmio(hyp_vcpu, pfn, gfn);
+	if (dev->el2_managed) {
+		/*
+		 * Learn the IPA the VMM picked for this resource, then return
+		 * without installing a stage-2 mapping. The guest re-faults on
+		 * the next access and an EL2 module emulates it.
+		 */
+		struct pkvm_dev_resource *res;
+		u64 phys = hyp_pfn_to_phys(pfn);
+
+		/* dev was looked up by @phys, so it owns a resource for it. */
+		res = pkvm_dev_resource_by_phys(dev, phys);
+		if (WARN_ON(!res)) {
+			ret = -EINVAL;
+			goto out_ret;
+		}
+		if (!res->guest_ipa)
+			res->guest_ipa = (gfn << PAGE_SHIFT) - (phys - res->base);
+	} else {
+		ret = __pkvm_install_guest_mmio(hyp_vcpu, pfn, gfn);
+	}
 
 out_ret:
 	hyp_spin_unlock(&device_spinlock);
 	return ret;
+}
+
+static struct pkvm_dev_resource *
+pkvm_dev_resource_by_guest_ipa(struct pkvm_device *dev, u64 ipa)
+{
+	int i;
+
+	for (i = 0 ; i < dev->nr_resources; ++i) {
+		struct pkvm_dev_resource *res = &dev->resources[i];
+
+		if (res->guest_ipa && (ipa >= res->guest_ipa) &&
+		    (ipa < res->guest_ipa + res->size))
+			return res;
+	}
+
+	return NULL;
+}
+
+/* Return the el2_managed device @vm sees at @ipa, or NULL. */
+static struct pkvm_device *__pkvm_get_device_by_guest_ipa(struct pkvm_hyp_vm *vm, u64 ipa)
+{
+	int i;
+
+	hyp_assert_lock_held(&device_spinlock);
+
+	for (i = 0 ; i < registered_devices_nr ; ++i) {
+		struct pkvm_device *dev = &registered_devices[i];
+
+		if (!dev->el2_managed || dev->ctxt != vm)
+			continue;
+		if (pkvm_dev_resource_by_guest_ipa(dev, ipa))
+			return dev;
+	}
+
+	return NULL;
+}
+
+/*
+ * Translate a guest IPA of an el2_managed device to its physical address.
+ * Returns false if @vm owns no el2_managed device at @ipa.
+ */
+static bool pkvm_el2_managed_ipa_to_phys(struct pkvm_hyp_vm *vm, u64 ipa, u64 *out_phys)
+{
+	struct pkvm_dev_resource *res;
+	struct pkvm_device *dev;
+	bool found = false;
+
+	hyp_spin_lock(&device_spinlock);
+	dev = __pkvm_get_device_by_guest_ipa(vm, ipa);
+	if (dev) {
+		res = pkvm_dev_resource_by_guest_ipa(dev, ipa);
+		*out_phys = res->base + (ipa - res->guest_ipa);
+		found = true;
+	}
+	hyp_spin_unlock(&device_spinlock);
+
+	return found;
+}
+
+/*
+ * Look up the el2_managed device that the VM @handle sees at @ipa. EL2 modules
+ * call this from the MMIO abort path to find the device to emulate. The @handle
+ * check keeps one VM from reaching another VM's device at the same IPA.
+ *
+ * The device can only leave the VM at teardown, and a tearing-down VM runs no
+ * vCPU, so the returned pointer stays valid for the caller of the abort.
+ */
+struct pkvm_device *pkvm_get_device_by_guest_ipa(pkvm_handle_t handle, u64 ipa)
+{
+	struct pkvm_hyp_vm *vm = get_pkvm_hyp_vm(handle);
+	struct pkvm_device *dev;
+
+	if (!vm)
+		return NULL;
+
+	hyp_spin_lock(&device_spinlock);
+	dev = __pkvm_get_device_by_guest_ipa(vm, ipa);
+	hyp_spin_unlock(&device_spinlock);
+
+	put_pkvm_hyp_vm(vm);
+
+	return dev;
 }
 
 static struct pkvm_device *pkvm_get_vm_device_by_addr(struct pkvm_hyp_vm *hyp_vm, u64 phys)
@@ -319,7 +434,7 @@ static struct pkvm_device *pkvm_get_vm_device_by_addr(struct pkvm_hyp_vm *hyp_vm
 		if (dev->ctxt != hyp_vm)
 			continue;
 
-		if (pkvm_device_has_resource(dev, phys))
+		if (pkvm_dev_resource_by_phys(dev, phys))
 			return dev;
 	}
 
@@ -340,6 +455,18 @@ bool pkvm_device_request_mmio(struct pkvm_hyp_vcpu *hyp_vcpu, u64 *exit_code)
 	if (smccc_get_arg2(vcpu) || smccc_get_arg3(vcpu) || smccc_get_arg4(vcpu) ||
 	    smccc_get_arg5(vcpu) || smccc_get_arg6(vcpu) || !PAGE_ALIGNED(ipa))
 		goto out_inval;
+
+	/*
+	 * An el2_managed device has no stage-2 mapping, so the walk below can
+	 * never resolve it. Translate through the recorded guest_ipa instead.
+	 * On the first call the IPA is still unknown: the walk then reserves a
+	 * MAP request and the guest replays the HVC once EL1 has called
+	 * pkvm_host_map_guest_mmio().
+	 */
+	if (pkvm_el2_managed_ipa_to_phys(vm, ipa, &token)) {
+		smccc_set_retval(vcpu, SMCCC_RET_SUCCESS, token, 0, 0);
+		return true;
+	}
 
 	ret = pkvm_get_guest_pa_request(hyp_vcpu, ipa, PAGE_SIZE,
 					&token, &level);
@@ -375,6 +502,9 @@ static void pkvm_devices_reclaim_device(struct pkvm_device *dev)
 
 	for (i = 0 ; i < dev->nr_resources ; ++i) {
 		struct pkvm_dev_resource *res = &dev->resources[i];
+
+		/* The next VM gets its own IPA for this resource. */
+		res->guest_ipa = 0;
 
 		hyp_spin_lock(&host_mmu.lock);
 		WARN_ON(host_stage2_set_owner_locked(res->base, res->size, PKVM_ID_HOST));

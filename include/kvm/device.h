@@ -10,12 +10,17 @@
 #include <asm/kvm_host.h>
 
 /*
- * @base: physical address of MMIO resource.
- * @size: size of resource in bytes.
+ * @base:      physical address of MMIO resource.
+ * @size:      size of resource in bytes.
+ * @guest_ipa: IPA the owning guest sees this resource at. Only el2_managed
+ *             devices use it. The VMM picks the IPA, so the hypervisor learns
+ *             it on the first guest access and clears it at VM teardown.
+ *             Zero means "not known yet".
  */
 struct pkvm_dev_resource {
 	u64 base;
 	u64 size;
+	u64 guest_ipa;
 };
 
 /*
@@ -39,6 +44,12 @@ struct pkvm_device {
 	void *ctxt; /* Current context of the device */
 	unsigned short refcount;
 	bool power_locked;
+	/*
+	 * When true, the hypervisor never installs a stage-2 mapping for this
+	 * device, so every guest access traps to EL2 and an EL2 module emulates
+	 * it. Set from the "pkvm,el2-managed-mmio" DT property.
+	 */
+	bool el2_managed;
 	struct pkvm_device_ops *ops;
 	void *cookie; /* cookie from drivers. */
 };

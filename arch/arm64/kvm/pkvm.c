@@ -724,6 +724,7 @@ static int pkvm_register_device(struct of_phandle_args *args,
 	dev->nr_iommus = j;
 	dev->ctxt = NULL;
 	dev->group_id = group_id;
+	dev->el2_managed = of_property_read_bool(np, "pkvm,el2-managed-mmio");
 
 	return 0;
 }
