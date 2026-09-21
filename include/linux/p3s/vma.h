@@ -195,6 +195,39 @@ static inline loff_t vma_file_offset_at(const struct vm_area_struct *vma,
 }
 
 /*
+ * vma_linear_page_index - Map virtual address to host folio index
+ * @vma: Pointer to struct vm_area_struct
+ * @addr: Virtual address within @vma
+ *
+ * Translates a 4KB virtual address to the enclosing 16KB host folio index
+ * in the file Page Cache (or 4KB page index for anonymous VMAs):
+ *
+ * ┌─────────────────────────────────────────────────────────┐
+ * │ 16KB Page Cache Folio (vm_pgoff = N)                    │
+ * ├─────────────┬─────────────┬─────────────┬───────────────┤
+ * │   Slice 0   │   Slice 1   │   Slice 2   │    Slice 3    │
+ * └─────────────┴─────────────┴─────────────┴───────────────┘
+ *               ▲                           ▲
+ *               ├── vma->vm_start (off=1)   └── addr (off=3)
+ *               └───────────────────────────────► returns folio N
+ */
+static inline pgoff_t vma_linear_page_index(const struct vm_area_struct *vma,
+					    unsigned long addr)
+{
+	if (!vma_is_p3s_4k(vma) || (vma->vm_ops && !vma->vm_file))
+		return vma->vm_pgoff +
+		       ((addr - vma->vm_start) >> PAGE_SHIFT_KERNEL);
+
+	if (!vma->vm_ops)
+		return vma->vm_pgoff +
+		       ((addr - vma->vm_start) >> PAGE_SHIFT_4KB);
+
+	return vma->vm_pgoff +
+	       ((vma_slice_off(vma) + ((addr - vma->vm_start) >> PAGE_SHIFT_4KB)) >>
+		P3S_SLICE_SHIFT);
+}
+
+/*
  * vma_native_pages - Number of native 16KB folios spanned by VMA
  * @vma: Pointer to struct vm_area_struct
  *
@@ -276,6 +309,35 @@ static inline void vma_unmap_mapping_range_bounds(const struct vm_area_struct *v
 
 	*start = vma_pgoff_to_address(vma, start_idx);
 	*end = vma_pgoff_to_address(vma, end_idx);
+}
+
+/*
+ * vma_set_split_offset - Update pgoff and slice offset after VMA split
+ * @target: Newly created or adjusted VMA
+ * @src: Source VMA being split
+ * @addr: Split boundary address
+ */
+static inline void vma_set_split_offset(struct vm_area_struct *target,
+					const struct vm_area_struct *src,
+					unsigned long addr)
+{
+	target->vm_pgoff = vma_linear_page_index(src, addr);
+	vma_set_slice_off(target, vma_slice_offset(src, addr));
+}
+
+/*
+ * vma_expand_downwards_range - Adjust start, pgoff, and slice offset for downward stack expansion
+ * @vma: Pointer to struct vm_area_struct
+ * @address: New lower virtual address
+ * @grow: Number of pages to grow downwards
+ */
+static inline void vma_expand_downwards_range(struct vm_area_struct *vma,
+					     unsigned long address,
+					     unsigned long grow)
+{
+	vma->vm_start = address;
+	vma->vm_pgoff -= grow;
+	vma_set_slice_off(vma, 0);
 }
 
 /*
