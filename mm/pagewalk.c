@@ -10,6 +10,7 @@
 #include <asm/tlbflush.h>
 
 #include "internal.h"
+#include <linux/p3s_user_pages.h>
 
 /*
  * We want to know the real level where a entry is located ignoring any
@@ -289,6 +290,7 @@ static int walk_p4d_range(pgd_t *pgd, unsigned long addr, unsigned long end,
 static int walk_pgd_range(unsigned long addr, unsigned long end,
 			  struct mm_walk *walk)
 {
+	P3S_CONTEXT_REMOTE_MM(walk->mm);
 	pgd_t *pgd;
 	unsigned long next;
 	const struct mm_walk_ops *ops = walk->ops;
@@ -796,7 +798,6 @@ int walk_page_mapping(struct address_space *mapping, pgoff_t first_index,
 		.private	= private,
 	};
 	struct vm_area_struct *vma;
-	pgoff_t vba, vea, cba, cea;
 	unsigned long start_addr, end_addr;
 	int err = 0;
 
@@ -806,16 +807,9 @@ int walk_page_mapping(struct address_space *mapping, pgoff_t first_index,
 	lockdep_assert_held(&mapping->i_mmap_rwsem);
 	vma_interval_tree_foreach(vma, &mapping->i_mmap, first_index,
 				  first_index + nr - 1) {
-		/* Clip to the vma */
-		vba = vma->vm_pgoff;
-		vea = vba + vma_pages(vma);
-		cba = first_index;
-		cba = max(cba, vba);
-		cea = first_index + nr;
-		cea = min(cea, vea);
-
-		start_addr = ((cba - vba) << PAGE_SHIFT) + vma->vm_start;
-		end_addr = ((cea - vba) << PAGE_SHIFT) + vma->vm_start;
+		vma_unmap_mapping_range_bounds(vma, first_index,
+					       first_index + nr - 1,
+					       &start_addr, &end_addr);
 		if (start_addr >= end_addr)
 			continue;
 
@@ -905,6 +899,7 @@ struct folio *folio_walk_start(struct folio_walk *fw,
 	spinlock_t *ptl;
 	pgd_t *pgdp;
 	p4d_t *p4dp;
+	P3S_CONTEXT_REMOTE_MM(vma->vm_mm);
 
 	mmap_assert_locked(vma->vm_mm);
 	vma_pgtable_walk_begin(vma);
@@ -1036,7 +1031,7 @@ not_found:
 found:
 	if (expose_page)
 		/* Note: Offset from the mapped page, not the folio start. */
-		fw->page = page + ((addr & (entry_size - 1)) >> PAGE_SHIFT);
+		fw->page = page + ((addr & (entry_size - 1)) >> PAGE_SHIFT_KERNEL);
 	else
 		fw->page = NULL;
 	fw->ptl = ptl;

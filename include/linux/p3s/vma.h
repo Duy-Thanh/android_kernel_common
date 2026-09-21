@@ -276,6 +276,77 @@ static inline pgoff_t vma_native_pages(const struct vm_area_struct *vma)
 }
 
 /*
+ * vma_pgoff_to_address - Address in @vma where page offset @pgoff starts
+ * @vma: Pointer to struct vm_area_struct
+ * @pgoff: Page offset to look up
+ *
+ * For a file VMA, returns the address that maps slice 0 of file page
+ * @pgoff, clamped to the VMA: vm_start, plus (@pgoff - vm_pgoff) file
+ * pages, minus the vm_slice_off slices of file page vm_pgoff that are
+ * before vm_start.
+ *
+ * For example, with vm_slice_off = 1, @pgoff = vm_pgoff + 1 gives vm_start
+ * plus one 16KB file page (0x4000) minus one slice (0x1000), which is
+ * vm_start + 0x3000, the start of VMA page 3. File page vm_pgoff starts
+ * before vm_start, so @pgoff = vm_pgoff gives vm_start:
+ *
+ *  @pgoff        vm_pgoff        vm_pgoff + 1
+ *                    ▼                 ▼
+ *                    ┌─────┬─────┬─────┬─────┬─────┐
+ *  VMA pages         │  0  │  1  │  2  │  3  │  4  │
+ *                    └─────┴─────┴─────┴─────┴─────┘
+ *              ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
+ *  slices      │  0  │  1  │  2  │  3  │  0  │  1  │  2  │  3  │
+ *              ├─────┴─────┴─────┴─────┼─────┴─────┴─────┴─────┤
+ *  file pages  │        vm_pgoff       │      vm_pgoff + 1     │
+ *              └───────────────────────┴───────────────────────┘
+ *
+ * A page after the VMA gives vm_end. For a VMA without a file, @pgoff
+ * counts pages of the process page size.
+ */
+static inline unsigned long
+vma_pgoff_to_address(const struct vm_area_struct *vma, pgoff_t pgoff)
+{
+	unsigned long addr;
+
+	if (pgoff <= vma->vm_pgoff)
+		return vma->vm_start;
+
+	if (vma->vm_file) {
+		addr = vma->vm_start +
+			((pgoff - vma->vm_pgoff) << PAGE_SHIFT_KERNEL) -
+			((unsigned long)vma_slice_off(vma) << PAGE_SHIFT_4KB);
+	} else {
+		addr = vma->vm_start +
+			((pgoff - vma->vm_pgoff) << mm_pte_shift(vma->vm_mm));
+	}
+
+	return min(addr, vma->vm_end);
+}
+
+/*
+ * vma_unmap_mapping_range_bounds - Calculate address bounds for unmapping
+ * @vma: Pointer to struct vm_area_struct
+ * @first_index: Start folio index
+ * @last_index: End folio index
+ * @start: Pointer to output start address
+ * @end: Pointer to output end address
+ */
+static inline void vma_unmap_mapping_range_bounds(const struct vm_area_struct *vma,
+						  pgoff_t first_index,
+						  pgoff_t last_index,
+						  unsigned long *start,
+						  unsigned long *end)
+{
+	const pgoff_t start_idx = max(first_index, vma->vm_pgoff);
+	const pgoff_t end_idx = min(last_index,
+				    vma->vm_pgoff + vma_native_pages(vma) - 1) + 1;
+
+	*start = vma_pgoff_to_address(vma, start_idx);
+	*end = vma_pgoff_to_address(vma, end_idx);
+}
+
+/*
  * p3s_adjust_unmapped_area_info - Align unmapped area allocations to host page
  * @info: Pointer to struct vm_unmapped_area_info
  *
