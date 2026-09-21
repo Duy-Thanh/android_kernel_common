@@ -238,6 +238,37 @@ static inline loff_t vma_file_offset_at(const struct vm_area_struct *vma,
 }
 
 /*
+ * p3s_filemap_fault_check_eof - Check fault index and subpage bounds against EOF
+ * @vma: Pointer to struct vm_area_struct
+ * @addr: Faulting virtual address
+ * @pgoff: Faulting page offset index
+ * @inode: Backing inode pointer
+ * @max_idx: Max page index derived from inode size
+ *
+ * Delivers SIGBUS when 4KB subpage slice accesses extend past EOF within
+ * the final 16KB Page Cache folio:
+ *
+ * ┌─────────────────────────────────────────────────────────┐
+ * │ Final 16KB Folio in Page Cache                          │
+ * ├─────────────┬─────────────┬─────────────┬───────────────┤
+ * │   Slice 0   │   Slice 1   │   Slice 2   │    Slice 3    │
+ * │  (Valid)    │  (Valid)    │  (Past EOF) │  (Past EOF)   │
+ * └─────────────┴─────────────┴─────────────┴───────────────┘
+ *                             ▲             ▲
+ *                             └── isize     └── addr -> SIGBUS
+ */
+#ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
+#define p3s_filemap_fault_check_eof(vma, addr, pgoff, inode, max_idx) \
+	unlikely((pgoff) >= (max_idx) || \
+		 (vma_is_compat(vma) && \
+		  vma_file_offset_at((vma), (addr)) >= i_size_read(inode)))
+#else
+#define p3s_filemap_fault_check_eof(vma, addr, pgoff, inode, max_idx) \
+	(((void)(vma), (void)(addr), (void)(inode)), unlikely((pgoff) >= (max_idx)))
+#endif
+
+
+/*
  * vma_linear_page_index - Map virtual address to host folio index
  * @vma: Pointer to struct vm_area_struct
  * @addr: Virtual address within @vma
@@ -343,6 +374,56 @@ vma_pgoff_to_address(const struct vm_area_struct *vma, pgoff_t pgoff)
 	}
 
 	return min(addr, vma->vm_end);
+}
+
+/*
+ * vma_folio_slice_bounds - Compute valid contiguous slice span for address
+ * @vma: Pointer to struct vm_area_struct
+ * @addr: Virtual address within @vma
+ * @nr_slices: Output number of contiguous slices (1..4)
+ * @start_addr: Output starting virtual address of the slice span
+ *
+ * Computes contiguous slice boundaries clamped to folio, VMA, and PMD:
+ *
+ * ┌─────────────────────────────────────────────────────────┐
+ * │ 16KB Host Folio                                         │
+ * ├─────────────┬─────────────┬─────────────┬───────────────┤
+ * │   Slice 0   │   Slice 1   │   Slice 2   │    Slice 3    │
+ * └─────────────┴─────────────┴─────────────┴───────────────┘
+ *               ▲             ▲             ▲
+ *               ├── start_addr│             └── end of span
+ *               │   (slice 1) └── addr (fault)
+ *               ◄───────── nr_slices = 3 ──────────►
+ */
+static inline void vma_folio_slice_bounds(const struct vm_area_struct *vma,
+					  unsigned long addr,
+					  unsigned int *nr_slices,
+					  unsigned long *start_addr)
+{
+	unsigned int slices_per_folio = P3S_SLICES_PER_PAGE;
+	unsigned int sub, left, right;
+	unsigned long vma_before, vma_after, pt_before, pt_after;
+
+	if (!vma_is_compat(vma)) {
+		*nr_slices = 1;
+		*start_addr = addr;
+		return;
+	}
+
+	addr &= PAGE_MASK_4KB;
+	sub = vma_slice_offset(vma, addr);
+	vma_before = (addr >= vma->vm_start) ?
+		((addr - vma->vm_start) >> PAGE_SHIFT_4KB) : 0;
+	vma_after = (vma->vm_end > addr) ?
+		((vma->vm_end - addr) >> PAGE_SHIFT_4KB) : 0;
+	pt_before = (addr >> PAGE_SHIFT_4KB) & 511;
+	pt_after = 512 - pt_before;
+
+	left = min3((unsigned long)sub, vma_before, pt_before);
+	right = min3((unsigned long)(slices_per_folio - sub), vma_after, pt_after);
+
+	*nr_slices = left + right;
+	*start_addr = addr - ((unsigned long)left << PAGE_SHIFT_4KB);
 }
 
 /*
