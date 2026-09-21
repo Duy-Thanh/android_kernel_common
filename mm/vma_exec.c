@@ -9,6 +9,7 @@
 #include "vma.h"
 
 #include <linux/page_size_compat.h>
+#include <linux/p3s_user_pages.h>
 
 /*
  * Relocate a VMA downwards by shift bytes. There cannot be any VMAs between
@@ -37,8 +38,9 @@ int relocate_vma_down(struct vm_area_struct *vma, unsigned long shift)
 	unsigned long length = old_end - old_start;
 	unsigned long new_start = old_start - shift;
 	unsigned long new_end = old_end - shift;
+	pgoff_t new_pgoff = new_start >> __PAGE_SHIFT;
 	VMA_ITERATOR(vmi, mm, new_start);
-	VMG_STATE(vmg, mm, &vmi, new_start, old_end, 0, vma->vm_pgoff);
+	VMG_STATE(vmg, mm, &vmi, new_start, old_end, 0, new_pgoff);
 	struct vm_area_struct *next;
 	struct mmu_gather tlb;
 	PAGETABLE_MOVE(pmc, vma, vma, old_start, new_start, length);
@@ -90,7 +92,7 @@ int relocate_vma_down(struct vm_area_struct *vma, unsigned long shift)
 
 	vma_prev(&vmi);
 	/* Shrink the vma to just the new range */
-	return vma_shrink(&vmi, vma, new_start, new_end, vma->vm_pgoff);
+	return vma_shrink(&vmi, vma, new_start, new_end, new_pgoff);
 }
 
 /*
@@ -109,6 +111,7 @@ int relocate_vma_down(struct vm_area_struct *vma, unsigned long shift)
 int create_init_stack_vma(struct mm_struct *mm, struct vm_area_struct **vmap,
 			  unsigned long *top_mem_p)
 {
+	P3S_CONTEXT_REMOTE_MM(mm);
 	int err;
 	struct vm_area_struct *vma = vm_area_alloc(mm);
 
@@ -139,6 +142,7 @@ int create_init_stack_vma(struct mm_struct *mm, struct vm_area_struct **vmap,
 	BUILD_BUG_ON(VM_STACK_FLAGS & VM_STACK_INCOMPLETE_SETUP);
 	vma->vm_end = STACK_TOP_MAX;
 	vma->vm_start = vma->vm_end - __PAGE_SIZE;
+	vma->vm_pgoff = vma->vm_start >> __PAGE_SHIFT;
 	vm_flags_init(vma, VM_SOFTDIRTY | VM_STACK_FLAGS | VM_STACK_INCOMPLETE_SETUP);
 	vma->vm_page_prot = vm_get_page_prot(vma->vm_flags);
 
