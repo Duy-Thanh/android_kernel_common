@@ -52,6 +52,24 @@
       "parentUuid": "224cb70a_81518ea7",
       "revId": "0803bd98a18d65c3711ecb92b1a67cefc267209f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d34acac5_880a1df3",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-09-21T23:00:39Z",
+      "side": 1,
+      "message": "\u003e There is already a \"yet\" in this sentence.\n\nAhh yes, probably remove \"lazily\" then?\n\n\u003e IMHO the forest can\u0027t be seen through the trees in this.\n\nI didn\u0027t understand fully except that you rejected this :-)\n\nResolving",
+      "parentUuid": "978b19e8_bb57b10c",
+      "revId": "0803bd98a18d65c3711ecb92b1a67cefc267209f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
