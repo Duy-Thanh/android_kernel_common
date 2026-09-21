@@ -62,6 +62,7 @@
 #include <trace/hooks/mm.h>
 
 #include "internal.h"
+#include <linux/p3s_user_pages.h>
 
 EXPORT_TRACEPOINT_SYMBOL_GPL(vm_unmapped_area);
 
@@ -191,7 +192,7 @@ SYSCALL_DEFINE1(brk, unsigned long, brk)
 	 * expansion area
 	 */
 	vma_iter_init(&vmi, mm, oldbrk);
-	next = vma_find(&vmi, newbrk + __PAGE_SIZE + stack_guard_gap);
+	next = vma_find(&vmi, newbrk + __PAGE_SIZE + mm_stack_guard_gap(mm));
 	if (next && newbrk + __PAGE_SIZE > vm_start_gap(next))
 		goto out;
 
@@ -680,6 +681,8 @@ unsigned long vm_unmapped_area(struct vm_unmapped_area_info *info)
 {
 	unsigned long addr;
 
+	p3s_adjust_unmapped_area_info(info);
+
 	if (info->flags & VM_UNMAPPED_AREA_TOPDOWN)
 		addr = unmapped_area_topdown(info);
 	else
@@ -956,7 +959,7 @@ find_vma_prev(struct mm_struct *mm, unsigned long addr,
 }
 
 /* enforced gap between the expanding stack and other mappings. */
-unsigned long stack_guard_gap = 256UL<<PAGE_SHIFT;
+unsigned long stack_guard_gap = 256UL << PAGE_SHIFT_KERNEL;
 
 static int __init cmdline_parse_stack_guard_gap(char *p)
 {
@@ -965,7 +968,7 @@ static int __init cmdline_parse_stack_guard_gap(char *p)
 
 	val = simple_strtoul(p, &endptr, 10);
 	if (!*endptr)
-		stack_guard_gap = val << PAGE_SHIFT;
+		stack_guard_gap = val << PAGE_SHIFT_KERNEL;
 
 	return 1;
 }
@@ -1278,6 +1281,7 @@ EXPORT_SYMBOL(vm_brk_flags);
 /* Release all mmaps. */
 void exit_mmap(struct mm_struct *mm)
 {
+	P3S_CONTEXT_REMOTE_MM(mm);
 	struct mmu_gather tlb;
 	struct vm_area_struct *vma;
 	unsigned long nr_accounted = 0;
