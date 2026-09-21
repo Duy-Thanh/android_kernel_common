@@ -340,6 +340,9 @@ struct attribute_group khugepaged_attr_group = {
 int hugepage_madvise(struct vm_area_struct *vma,
 		     vm_flags_t *vm_flags, int advice)
 {
+	if (vma_is_p3s_4k(vma))
+		return -EINVAL;
+
 	switch (advice) {
 	case MADV_HUGEPAGE:
 #ifdef CONFIG_S390
@@ -432,6 +435,9 @@ void __khugepaged_enter(struct mm_struct *mm)
 {
 	struct mm_slot *slot;
 	int wakeup;
+
+	if (mm_is_p3s_4k(mm))
+		return;
 
 	/* __khugepaged_exit() must not run from under us */
 	VM_BUG_ON_MM(hpage_collapse_test_exit(mm), mm);
