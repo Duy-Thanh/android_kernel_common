@@ -32,6 +32,7 @@
 #include <linux/swapops.h>
 #include <linux/miscdevice.h>
 #include <linux/uio.h>
+#include <linux/p3s_user_pages.h>
 
 static int sysctl_unprivileged_userfaultfd __read_mostly;
 
@@ -277,6 +278,7 @@ static inline bool userfaultfd_must_wait(struct userfaultfd_ctx *ctx,
 					 unsigned long reason)
 {
 	struct mm_struct *mm = ctx->mm;
+	P3S_CONTEXT_REMOTE_MM(mm);
 	unsigned long address = vmf->address;
 	pgd_t *pgd;
 	p4d_t *p4d;
@@ -1214,6 +1216,7 @@ static __always_inline int validate_unaligned_range(
 	struct mm_struct *mm, __u64 start, __u64 len)
 {
 	__u64 task_size = mm->task_size;
+	P3S_CONTEXT_REMOTE_MM(mm);
 
 	if (len & ~PAGE_MASK)
 		return -EINVAL;
@@ -1231,6 +1234,8 @@ static __always_inline int validate_unaligned_range(
 static __always_inline int validate_range(struct mm_struct *mm,
 					  __u64 start, __u64 len)
 {
+	P3S_CONTEXT_REMOTE_MM(mm);
+
 	if (start & ~PAGE_MASK)
 		return -EINVAL;
 
