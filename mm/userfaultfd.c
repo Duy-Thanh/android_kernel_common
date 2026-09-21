@@ -19,6 +19,7 @@
 #include <asm/tlb.h>
 #include "internal.h"
 #include "swap.h"
+#include <linux/p3s_user_pages.h>
 
 static __always_inline
 bool validate_dst_vma(struct vm_area_struct *dst_vma, unsigned long dst_end)
@@ -179,7 +180,7 @@ int mfill_atomic_install_pte(pmd_t *dst_pmd,
 	struct folio *folio = page_folio(page);
 	bool page_in_cache = folio_mapping(folio);
 
-	_dst_pte = mk_pte(page, dst_vma->vm_page_prot);
+	_dst_pte = vma_folio_mk_pte(dst_vma, folio, dst_addr);
 	_dst_pte = pte_mkdirty(_dst_pte);
 	if (page_in_cache && !vm_shared)
 		writable = false;
@@ -213,6 +214,10 @@ int mfill_atomic_install_pte(pmd_t *dst_pmd,
 			folio_add_lru(folio);
 		folio_add_file_rmap_pte(folio, page, dst_vma);
 	} else {
+		if (p3s_uffd_install_anon_folio(dst_vma, dst_pte, dst_addr,
+						folio, &_dst_pte, writable, flags))
+			goto setpte;
+
 		folio_add_new_anon_rmap(folio, dst_vma, dst_addr, RMAP_EXCLUSIVE);
 		folio_add_lru_vma(folio, dst_vma);
 	}
@@ -223,6 +228,7 @@ int mfill_atomic_install_pte(pmd_t *dst_pmd,
 	 */
 	inc_mm_counter(dst_mm, mm_counter(folio));
 
+setpte:
 	set_pte_at(dst_mm, dst_addr, dst_pte, _dst_pte);
 
 	/* No need to invalidate - it was non-present before */
@@ -253,6 +259,8 @@ static int mfill_atomic_pte_copy(pmd_t *dst_pmd,
 			goto out;
 
 		kaddr = kmap_local_folio(folio, 0);
+		if (vma_is_compat(dst_vma))
+			memset(kaddr, 0, folio_size(folio));
 		/*
 		 * The read mmap_lock is held here.  Despite the
 		 * mmap_lock being read recursive a deadlock is still
@@ -269,7 +277,8 @@ static int mfill_atomic_pte_copy(pmd_t *dst_pmd,
 		 * and retry the copy outside the mmap_lock.
 		 */
 		pagefault_disable();
-		ret = copy_from_user(kaddr, (const void __user *) src_addr,
+		ret = copy_from_user(kaddr + vma_folio_offset(dst_vma, dst_addr),
+				     (const void __user *)src_addr,
 				     PAGE_SIZE);
 		pagefault_enable();
 		kunmap_local(kaddr);
@@ -707,6 +716,7 @@ static __always_inline ssize_t mfill_atomic(struct userfaultfd_ctx *ctx,
 	unsigned long src_addr, dst_addr;
 	long copied;
 	struct folio *folio;
+	P3S_CONTEXT_REMOTE_MM(dst_mm);
 
 	/*
 	 * Sanitize the command parameters:
@@ -814,6 +824,7 @@ retry:
 		cond_resched();
 
 		if (unlikely(err == -ENOENT)) {
+			unsigned long offset = vma_folio_offset(dst_vma, dst_addr);
 			void *kaddr;
 
 			up_read(&ctx->map_changing_lock);
@@ -821,8 +832,8 @@ retry:
 			VM_WARN_ON_ONCE(!folio);
 
 			kaddr = kmap_local_folio(folio, 0);
-			err = copy_from_user(kaddr,
-					     (const void __user *) src_addr,
+			err = copy_from_user(kaddr + offset,
+					     (const void __user *)src_addr,
 					     PAGE_SIZE);
 			kunmap_local(kaddr);
 			if (unlikely(err)) {
@@ -936,6 +947,7 @@ int mwriteprotect_range(struct userfaultfd_ctx *ctx, unsigned long start,
 	unsigned long page_mask;
 	long err;
 	VMA_ITERATOR(vmi, dst_mm, start);
+	P3S_CONTEXT_REMOTE_MM(dst_mm);
 
 	/*
 	 * Sanitize the command parameters:
@@ -1110,7 +1122,7 @@ static long move_present_ptes(struct mm_struct *mm,
 		folio_move_anon_rmap(src_folio, dst_vma);
 		src_folio->index = linear_page_index(dst_vma, dst_addr);
 
-		orig_dst_pte = folio_mk_pte(src_folio, dst_vma->vm_page_prot);
+		orig_dst_pte = vma_folio_mk_pte(dst_vma, src_folio, dst_addr);
 		/* Set soft dirty bit so userspace can notice the pte was moved */
 #ifdef CONFIG_MEM_SOFT_DIRTY
 		orig_dst_pte = pte_mksoft_dirty(orig_dst_pte);
@@ -1771,6 +1783,7 @@ ssize_t move_pages(struct userfaultfd_ctx *ctx, unsigned long dst_start,
 	pmd_t *src_pmd, *dst_pmd;
 	long err = -EINVAL;
 	ssize_t moved = 0;
+	P3S_CONTEXT_REMOTE_MM(mm);
 
 	/* Sanitize the command parameters. */
 	VM_WARN_ON_ONCE(src_start & ~PAGE_MASK);
