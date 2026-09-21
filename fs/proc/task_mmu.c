@@ -31,6 +31,7 @@
 #include <asm/tlb.h>
 #include <asm/tlbflush.h>
 #include "internal.h"
+#include <linux/p3s_user_pages.h>
 
 #define SENTINEL_VMA_END	-1
 #define SENTINEL_VMA_GATE	-2
@@ -41,6 +42,7 @@ void task_mem(struct seq_file *m, struct mm_struct *mm)
 {
 	unsigned long text, lib, swap, anon, file, shmem;
 	unsigned long hiwater_vm, total_vm, hiwater_rss, total_rss;
+	P3S_CONTEXT_REMOTE_MM(mm);
 
 	anon = get_mm_counter_sum(mm, MM_ANONPAGES);
 	file = get_mm_counter_sum(mm, MM_FILEPAGES);
@@ -92,6 +94,8 @@ void task_mem(struct seq_file *m, struct mm_struct *mm)
 
 unsigned long task_vsize(struct mm_struct *mm)
 {
+	P3S_CONTEXT_REMOTE_MM(mm);
+
 	return PAGE_SIZE * mm->total_vm;
 }
 
@@ -99,6 +103,8 @@ unsigned long task_statm(struct mm_struct *mm,
 			 unsigned long *shared, unsigned long *text,
 			 unsigned long *data, unsigned long *resident)
 {
+	P3S_CONTEXT_REMOTE_MM(mm);
+
 	*shared = __page_size_count(get_mm_counter_sum(mm, MM_FILEPAGES) +
 			get_mm_counter_sum(mm, MM_SHMEMPAGES));
 	*text = (__PAGE_ALIGN(mm->end_code) - (mm->start_code & __PAGE_MASK))
@@ -513,7 +519,7 @@ show_map_vma(struct seq_file *m, struct vm_area_struct *vma)
 
 		dev = inode->i_sb->s_dev;
 		ino = inode->i_ino;
-		pgoff = ((loff_t)vma->vm_pgoff) << PAGE_SHIFT;
+		pgoff = vma_file_offset(vma);
 	}
 
 	start = vma->vm_start;
@@ -538,6 +544,7 @@ show_map_vma(struct seq_file *m, struct vm_area_struct *vma)
 static int show_map(struct seq_file *m, void *v)
 {
 	struct vm_area_struct *vma = v;
+	P3S_CONTEXT_REMOTE_MM(vma->vm_mm);
 
 	if (vma_data_pages(vma))
 		show_map_vma(m, vma);
@@ -696,6 +703,7 @@ no_vma:
 
 static int do_procmap_query(struct mm_struct *mm, void __user *uarg)
 {
+	P3S_CONTEXT_REMOTE_MM(mm);
 	struct proc_maps_locking_ctx lock_ctx = { .mm = mm };
 	struct procmap_query karg;
 	struct vm_area_struct *vma;
@@ -760,7 +768,7 @@ static int do_procmap_query(struct mm_struct *mm, void __user *uarg)
 	if (vma->vm_file) {
 		const struct inode *inode = file_user_inode(vma->vm_file);
 
-		karg.vma_offset = ((__u64)vma->vm_pgoff) << PAGE_SHIFT;
+		karg.vma_offset = vma_file_offset(vma);
 		karg.dev_major = MAJOR(inode->i_sb->s_dev);
 		karg.dev_minor = MINOR(inode->i_sb->s_dev);
 		karg.inode = inode->i_ino;
@@ -966,7 +974,8 @@ static void smaps_account(struct mem_size_stats *mss, struct page *page,
 {
 	struct folio *folio = page_folio(page);
 	int i, nr = compound ? compound_nr(page) : 1;
-	unsigned long size = nr * PAGE_SIZE;
+	unsigned long page_size = compound ? PAGE_SIZE_KERNEL : PAGE_SIZE;
+	unsigned long size = nr * page_size;
 	bool exclusive;
 	int mapcount;
 
@@ -1021,7 +1030,7 @@ static void smaps_account(struct mem_size_stats *mss, struct page *page,
 	 * mapcount atomically.
 	 */
 	for (i = 0; i < nr; i++, page++) {
-		unsigned long pss = PAGE_SIZE << PSS_SHIFT;
+		unsigned long pss = page_size << PSS_SHIFT;
 
 		if (IS_ENABLED(CONFIG_PAGE_MAPCOUNT)) {
 			mapcount = folio_precise_page_mapcount(folio, page);
@@ -1030,8 +1039,8 @@ static void smaps_account(struct mem_size_stats *mss, struct page *page,
 
 		if (mapcount >= 2)
 			pss /= mapcount;
-		smaps_page_accumulate(mss, folio, PAGE_SIZE, pss,
-				dirty, locked, exclusive);
+		smaps_page_accumulate(mss, folio, page_size, pss,
+				      dirty, locked, exclusive);
 	}
 }
 
@@ -1492,6 +1501,7 @@ static int show_smap(struct seq_file *m, void *v)
 	struct proc_maps_private *priv = m->private;
 	struct vm_area_struct *vma = v;
 	struct mem_size_stats mss = {};
+	P3S_CONTEXT_REMOTE_MM(vma->vm_mm);
 
 	if (!vma_data_pages(vma))
 		goto show_pad;
@@ -1526,6 +1536,7 @@ static int show_smaps_rollup(struct seq_file *m, void *v)
 	struct proc_maps_private *priv = m->private;
 	struct mem_size_stats mss = {};
 	struct mm_struct *mm = priv->lock_ctx.mm;
+	P3S_CONTEXT_REMOTE_MM(mm);
 	struct vm_area_struct *vma;
 	unsigned long vma_start = 0, last_vma_end = 0;
 	int ret = 0;
@@ -2067,7 +2078,7 @@ static pagemap_entry_t pte_to_pagemap_entry(struct pagemapread *pm,
 
 	if (pte_present(pte)) {
 		if (pm->show_pfn)
-			frame = pte_pfn(pte);
+			frame = vma_phys_pfn(vma, __pte_to_phys(pte));
 		flags |= PM_PRESENT;
 		page = vm_normal_page(vma, addr, pte);
 		if (pte_soft_dirty(pte))
@@ -2147,7 +2158,8 @@ static int pagemap_pmd_range(pmd_t *pmdp, unsigned long addr, unsigned long end,
 			if (pmd_uffd_wp(pmd))
 				flags |= PM_UFFD_WP;
 			if (pm->show_pfn)
-				frame = pmd_pfn(pmd) + idx;
+				frame = (pmd_pfn(pmd) <<
+					 (PAGE_SHIFT_KERNEL - PAGE_SHIFT)) + idx;
 		}
 #ifdef CONFIG_ARCH_ENABLE_THP_MIGRATION
 		else if (is_swap_pmd(pmd)) {
@@ -2259,7 +2271,7 @@ static int pagemap_hugetlb_range(pte_t *ptep, unsigned long hmask,
 
 		flags |= PM_PRESENT;
 		if (pm->show_pfn)
-			frame = pte_pfn(pte) +
+			frame = vma_phys_pfn(vma, __pte_to_phys(pte)) +
 				((addr & ~hmask) >> PAGE_SHIFT);
 	} else if (pte_swp_uffd_wp_any(pte)) {
 		flags |= PM_UFFD_WP;
@@ -2353,6 +2365,7 @@ static ssize_t pagemap_read(struct file *file, char __user *buf,
 	unsigned long start_vaddr;
 	unsigned long end_vaddr;
 	int ret = 0, copied = 0;
+	P3S_CONTEXT_REMOTE_MM(mm);
 	unsigned int nr_subpages = __PAGE_SIZE / PAGE_SIZE;
 	pagemap_entry_t *res = NULL;
 
@@ -3173,6 +3186,7 @@ static long do_pagemap_scan(struct mm_struct *mm, unsigned long uarg)
 	unsigned long walk_start;
 	size_t n_ranges_out = 0;
 	int ret;
+	P3S_CONTEXT_REMOTE_MM(mm);
 
 	ret = pagemap_scan_get_args(&p.arg, uarg);
 	if (ret)
