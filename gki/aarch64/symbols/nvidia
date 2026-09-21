@@ -3640,6 +3640,7 @@
   trace_event_raw_init
   trace_event_reg
   trace_handle_return
+  __traceiter_android_vh_dw_pcie_remove_msi_capabilities
   __traceiter_android_vh_gzvm_destroy_vm_post_process
   __traceiter_android_vh_gzvm_handle_demand_page_post
   __traceiter_android_vh_gzvm_handle_demand_page_pre
@@ -3652,6 +3653,7 @@
   __traceiter_sk_data_ready
   __traceiter_xdp_exception
   trace_output_call
+  __tracepoint_android_vh_dw_pcie_remove_msi_capabilities
   __tracepoint_android_vh_gzvm_destroy_vm_post_process
   __tracepoint_android_vh_gzvm_handle_demand_page_post
   __tracepoint_android_vh_gzvm_handle_demand_page_pre
