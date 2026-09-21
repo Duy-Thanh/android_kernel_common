@@ -147,12 +147,12 @@ static bool valid_vma(struct vm_area_struct *vma, bool is_register)
 
 static unsigned long offset_to_vaddr(struct vm_area_struct *vma, loff_t offset)
 {
-	return vma->vm_start + offset - ((loff_t)vma->vm_pgoff << PAGE_SHIFT);
+	return vma->vm_start + offset - vma_file_offset(vma);
 }
 
 static loff_t vaddr_to_offset(struct vm_area_struct *vma, unsigned long vaddr)
 {
-	return ((loff_t)vma->vm_pgoff << PAGE_SHIFT) + (vaddr - vma->vm_start);
+	return vma_file_offset_at(vma, vaddr);
 }
 
 /**
@@ -408,7 +408,7 @@ static int __uprobe_write(struct vm_area_struct *vma,
 		unsigned long insn_vaddr, uprobe_opcode_t *insn, int nbytes,
 		bool is_register)
 {
-	const unsigned long vaddr = insn_vaddr & PAGE_MASK;
+	const unsigned long vaddr = insn_vaddr & vma_page_mask(vma);
 	bool pmd_mappable;
 
 	/* For now, we'll only handle PTE-mapped folios. */
@@ -503,7 +503,7 @@ int uprobe_write(struct arch_uprobe *auprobe, struct vm_area_struct *vma,
 		 uprobe_write_verify_t verify, bool is_register, bool do_update_ref_ctr,
 		 void *data)
 {
-	const unsigned long vaddr = insn_vaddr & PAGE_MASK;
+	const unsigned long vaddr = insn_vaddr & vma_page_mask(vma);
 	struct mm_struct *mm = vma->vm_mm;
 	struct uprobe *uprobe;
 	int ret, ref_ctr_updated = 0;
@@ -566,7 +566,7 @@ retry:
 		 * be able to do it under PTL.
 		 */
 		mmu_notifier_range_init(&range, MMU_NOTIFY_CLEAR, 0, mm,
-					vaddr, vaddr + PAGE_SIZE);
+					vaddr, vaddr + vma_page_size(vma));
 		mmu_notifier_invalidate_range_start(&range);
 	}
 
@@ -1486,7 +1486,7 @@ static int unapply_uprobe(struct uprobe *uprobe, struct mm_struct *mm)
 		    file_inode(vma->vm_file) != uprobe->inode)
 			continue;
 
-		offset = (loff_t)vma->vm_pgoff << PAGE_SHIFT;
+		offset = vma_file_offset(vma);
 		if (uprobe->offset <  offset ||
 		    uprobe->offset >= offset + vma->vm_end - vma->vm_start)
 			continue;
@@ -2457,7 +2457,7 @@ static struct uprobe *find_active_uprobe_speculative(unsigned long bp_vaddr)
 	if (!vm_file)
 		return NULL;
 
-	offset = (loff_t)(vma->vm_pgoff << PAGE_SHIFT) + (bp_vaddr - vma->vm_start);
+	offset = vaddr_to_offset(vma, bp_vaddr);
 	uprobe = find_uprobe_rcu(vm_file->f_inode, offset);
 	if (!uprobe)
 		return NULL;
