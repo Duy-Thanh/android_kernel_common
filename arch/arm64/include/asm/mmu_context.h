@@ -72,15 +72,7 @@ static inline void cpu_switch_mm(pgd_t *pgd, struct mm_struct *mm)
  */
 static inline void __cpu_set_tcr_t0sz(unsigned long t0sz)
 {
-	unsigned long tcr = read_sysreg(tcr_el1);
-
-	if ((tcr & TCR_T0SZ_MASK) == t0sz)
-		return;
-
-	tcr &= ~TCR_T0SZ_MASK;
-	tcr |= t0sz;
-	write_sysreg(tcr, tcr_el1);
-	isb();
+	mm_cpu_set_native_tcr_t0sz(t0sz);
 }
 
 #define cpu_set_default_tcr_t0sz()	__cpu_set_tcr_t0sz(TCR_T0SZ(vabits_actual))
