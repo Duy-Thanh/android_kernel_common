@@ -4,9 +4,11 @@
 //!
 //! C header: [`include/linux/moduleparam.h`](srctree/include/linux/moduleparam.h)
 
+use crate::page::PAGE_SIZE;
 use crate::prelude::*;
-use crate::str::BStr;
+use crate::str::{BStr, RawFormatter};
 use bindings;
+use core::fmt::Write;
 use kernel::sync::SetOnce;
 
 /// Newtype to make `bindings::kernel_param` [`Sync`].
@@ -105,6 +107,43 @@ impl_int_module_param!(u64);
 impl_int_module_param!(isize);
 impl_int_module_param!(usize);
 
+/// # Safety
+///
+/// - `buf` must point to a valid writable buffer of at least `PAGE_SIZE` bytes.
+/// - `param` must point to a valid `kernel_param` whose `arg` points to an initialized
+/// `ModuleParamAccess<T>`.
+unsafe extern "C" fn get_param<T>(buf: *mut c_char, param: *const bindings::kernel_param) -> c_int
+where
+    T: core::fmt::Display,
+{
+    if buf.is_null() {
+        // TODO: Use pr_warn_once available.
+        crate::pr_warn!("Null pointer passed to `module_param::get_param`");
+        return EINVAL.to_errno();
+    }
+
+    // SAFETY: By function safety contract, `buf` is a pointer to memory at least PAGE_SIZE in size,
+    // it is safe to write to for the duration of this function. We leave room for a terminating
+    // NUL byte at the end.
+    let mut writer = unsafe { RawFormatter::from_buffer(buf, PAGE_SIZE - 1) };
+
+    // SAFETY: By function safety contract, `param` is valid and its `arg` field points to a
+    // valid `ModuleParamAccess<T>` instance initialized by the `module!` macro.
+    let container = unsafe { &*((*param).__bindgen_anon_1.arg.cast::<ModuleParamAccess<T>>()) };
+
+    let _ = writeln!(writer, "{}", container.value());
+
+    // SAFETY: `writer.pos <= PAGE_SIZE - 1 < PAGE_SIZE` is guaranteed by our range specification
+    // to RawFormatter::from_buffer above.
+    unsafe {
+        *writer.pos() = 0;
+    }
+
+    // 0 <= bytes_written() < PAGE_SIZE which won't come close to affecting the sign bit in case
+    // we were worried about this cast from usize to c_int.
+    writer.bytes_written() as c_int
+}
+
 /// A wrapper for kernel parameters.
 ///
 /// This type is instantiated by the [`module!`] macro when module parameters are
@@ -163,7 +202,7 @@ macro_rules! make_param_ops {
         pub static $ops: $crate::bindings::kernel_param_ops = $crate::bindings::kernel_param_ops {
             flags: 0,
             set: Some(set_param::<$ty>),
-            get: None,
+            get: Some(get_param::<$ty>),
             free: None,
         };
     };
