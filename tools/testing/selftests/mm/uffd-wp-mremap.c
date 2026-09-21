@@ -172,7 +172,10 @@ static void test_one_folio(uffd_global_test_opts_t *gopts, size_t size, bool pri
 	/* Allocate a folio of required size and type. */
 	mem = alloc_one_folio(size, private, hugetlb);
 	if (!mem) {
-		ksft_test_result_fail("alloc_one_folio() failed\n");
+		if (hugetlb)
+			ksft_test_result_skip("alloc_one_folio(hugetlb) failed\n");
+		else
+			ksft_test_result_fail("alloc_one_folio() failed\n");
 		goto out;
 	}
 
