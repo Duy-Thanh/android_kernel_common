@@ -76,6 +76,7 @@
 #undef CREATE_TRACE_POINTS
 #include <trace/hooks/vmscan.h>
 #include <trace/hooks/mm.h>
+#include <linux/p3s_user_pages.h>
 
 EXPORT_TRACEPOINT_SYMBOL_GPL(mm_vmscan_direct_reclaim_begin);
 EXPORT_TRACEPOINT_SYMBOL_GPL(mm_vmscan_direct_reclaim_end);
@@ -4390,6 +4391,7 @@ bool lru_gen_look_around(struct page_vma_mapped_walk *pvmw)
 	struct lru_gen_mm_state *mm_state = get_mm_state(lruvec);
 	DEFINE_MAX_SEQ(lruvec);
 	int gen = lru_gen_from_seq(max_seq);
+	P3S_CONTEXT_REMOTE_MM(vma->vm_mm);
 
 	lockdep_assert_held(pvmw->ptl);
 	VM_WARN_ON_ONCE_FOLIO(folio_test_lru(folio), folio);
