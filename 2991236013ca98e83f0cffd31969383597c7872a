@@ -34,6 +34,24 @@
       "parentUuid": "9fe051ee_0e9845c2",
       "revId": "2991236013ca98e83f0cffd31969383597c7872a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2a5cb92_32230f82",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-09-21T15:45:15Z",
+      "side": 1,
+      "message": "Please add that rationale to the commit message. This seems like an upstream bug then, what vendor driver is implementing these ops? The ideal solution would be to fix this upstream, but there needs to be an upstream module that needs it.",
+      "parentUuid": "92bd2a93_30f04095",
+      "revId": "2991236013ca98e83f0cffd31969383597c7872a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
