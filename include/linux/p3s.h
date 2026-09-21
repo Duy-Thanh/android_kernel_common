@@ -6,6 +6,7 @@
 #include <linux/p3s/mm.h>
 
 #ifdef CONFIG_ARM64
+#include <asm/p3s/mmu.h>
 #include <asm/p3s.h>
 #else
 #ifndef __ASSEMBLY__
