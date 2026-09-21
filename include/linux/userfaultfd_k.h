@@ -222,6 +222,15 @@ static inline bool vma_can_userfault(struct vm_area_struct *vma,
 		return false;
 
 	/*
+	 * A 4KB compat task maps 4KB slices of 16KB shmem folios, which have a
+	 * single folio lock: a UFFDIO_COPY holding the folio lock for one slice
+	 * can deadlock against a fault on another slice of the same folio. Only
+	 * anonymous memory userfaultfd is supported for 4KB compat tasks.
+	 */
+	if (vma_is_p3s_4k(vma) && !vma_is_anonymous(vma))
+		return false;
+
+	/*
 	 * If wp async enabled, and WP is the only mode enabled, allow any
 	 * memory type.
 	 */
