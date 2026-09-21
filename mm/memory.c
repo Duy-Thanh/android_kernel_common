@@ -884,6 +884,10 @@ static void restore_exclusive_pte(struct vm_area_struct *vma,
 	VM_WARN_ON_FOLIO(!folio_test_locked(folio), folio);
 
 	pte = pte_mkold(mk_pte(page, READ_ONCE(vma->vm_page_prot)));
+	if (vma_is_p3s_4k(vma))
+		pte = pte_advance_phys(pte,
+			(unsigned long)vma_slice_offset(vma, address) <<
+			PAGE_SHIFT_4KB);
 	if (pte_swp_soft_dirty(orig_pte))
 		pte = pte_mksoft_dirty(pte);
 
@@ -4952,6 +4956,10 @@ check_folio:
 	add_mm_counter(vma->vm_mm, MM_ANONPAGES, nr_pages);
 	add_mm_counter(vma->vm_mm, MM_SWAPENTS, -nr_pages);
 	pte = mk_pte(page, vma->vm_page_prot);
+	if (vma_is_p3s_4k(vma))
+		pte = pte_advance_phys(pte,
+			(unsigned long)vma_slice_offset(vma, address) <<
+			PAGE_SHIFT_4KB);
 	if (pte_swp_soft_dirty(vmf->orig_pte))
 		pte = pte_mksoft_dirty(pte);
 	if (pte_swp_uffd_wp(vmf->orig_pte))
