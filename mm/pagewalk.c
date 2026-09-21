@@ -10,6 +10,7 @@
 #include <asm/tlbflush.h>
 
 #include "internal.h"
+#include <linux/p3s_user_pages.h>
 
 /*
  * We want to know the real level where a entry is located ignoring any
@@ -289,6 +290,7 @@ static int walk_p4d_range(pgd_t *pgd, unsigned long addr, unsigned long end,
 static int walk_pgd_range(unsigned long addr, unsigned long end,
 			  struct mm_walk *walk)
 {
+	P3S_CONTEXT_REMOTE_MM(walk->mm);
 	pgd_t *pgd;
 	unsigned long next;
 	const struct mm_walk_ops *ops = walk->ops;
@@ -808,14 +810,14 @@ int walk_page_mapping(struct address_space *mapping, pgoff_t first_index,
 				  first_index + nr - 1) {
 		/* Clip to the vma */
 		vba = vma->vm_pgoff;
-		vea = vba + vma_pages(vma);
+		vea = vba + vma_native_pages(vma);
 		cba = first_index;
 		cba = max(cba, vba);
 		cea = first_index + nr;
 		cea = min(cea, vea);
 
-		start_addr = ((cba - vba) << PAGE_SHIFT) + vma->vm_start;
-		end_addr = ((cea - vba) << PAGE_SHIFT) + vma->vm_start;
+		start_addr = vma_pgoff_to_address(vma, cba);
+		end_addr = vma_pgoff_to_address(vma, cea);
 		if (start_addr >= end_addr)
 			continue;
 
@@ -905,6 +907,7 @@ struct folio *folio_walk_start(struct folio_walk *fw,
 	spinlock_t *ptl;
 	pgd_t *pgdp;
 	p4d_t *p4dp;
+	P3S_CONTEXT_REMOTE_MM(vma->vm_mm);
 
 	mmap_assert_locked(vma->vm_mm);
 	vma_pgtable_walk_begin(vma);
