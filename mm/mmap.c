@@ -579,12 +579,19 @@ unsigned long ksys_mmap_pgoff(unsigned long addr, unsigned long len,
 	struct file *file = NULL;
 	unsigned long retval;
 
+	if ((flags & MAP_HUGETLB) && mm_is_p3s_4k(current->mm))
+		return -EINVAL;
+
 	if (!(flags & MAP_ANONYMOUS)) {
 		audit_mmap_fd(fd, flags);
 		file = fget(fd);
 		if (!file)
 			return -EBADF;
 		if (is_file_hugepages(file)) {
+			if (mm_is_p3s_4k(current->mm)) {
+				retval = -EINVAL;
+				goto out_fput;
+			}
 			len = ALIGN(len, huge_page_size(hstate_file(file)));
 		} else if (unlikely(flags & MAP_HUGETLB)) {
 			retval = -EINVAL;
