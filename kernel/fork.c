@@ -108,6 +108,7 @@
 #include <linux/tick.h>
 #include <linux/unwind_deferred.h>
 #include <linux/dma-buf.h>
+#include <linux/p3s.h>
 
 #include <asm/pgalloc.h>
 #include <linux/uaccess.h>
@@ -1146,6 +1147,7 @@ EXPORT_SYMBOL_IF_KUNIT(mm_alloc);
 
 static inline void __mmput(struct mm_struct *mm)
 {
+	P3S_CONTEXT_REMOTE_MM(mm);
 	VM_BUG_ON(atomic_read(&mm->mm_users));
 
 	uprobe_clear_state(mm);
@@ -1551,6 +1553,9 @@ static int copy_mm(u64 clone_flags, struct task_struct *tsk)
 
 	tsk->mm = NULL;
 	tsk->active_mm = NULL;
+#ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
+	tsk->p3s_remote_mm = NULL;
+#endif
 
 	/*
 	 * Are we cloning a kernel thread?
