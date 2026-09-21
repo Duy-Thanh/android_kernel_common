@@ -14,6 +14,7 @@
 #include <linux/mm_types.h>
 #include <linux/sched.h>
 #include <linux/mmu_notifier.h>
+#include <linux/p3s/mm.h>
 #include <asm/cputype.h>
 #include <asm/mmu.h>
 
@@ -80,6 +81,9 @@ static inline unsigned long get_trans_granule(void)
 	}
 }
 
+#define get_trans_granule_mm(mm) \
+	(mm_is_p3s_4k(mm) ? TLBI_TTL_TG_4K : get_trans_granule())
+
 #ifdef CONFIG_ARM64_ERRATUM_4193714
 
 extern cpumask_t sme_active_cpus;
@@ -130,13 +134,13 @@ static inline void sme_dvmsync_batch(void)
 
 #define TLBI_TTL_UNKNOWN	INT_MAX
 
-#define __tlbi_level(op, addr, level) do {				\
+#define __tlbi_level_tg(op, addr, level, tg) do {			\
 	u64 arg = addr;							\
 									\
 	if (alternative_has_cap_unlikely(ARM64_HAS_ARMv8_4_TTL) &&	\
 	    level >= 0 && level <= 3) {					\
 		u64 ttl = level & 3;					\
-		ttl |= get_trans_granule() << 2;			\
+		ttl |= (tg) << 2;					\
 		arg &= ~TLBI_TTL_MASK;					\
 		arg |= FIELD_PREP(TLBI_TTL_MASK, ttl);			\
 	}								\
@@ -144,10 +148,16 @@ static inline void sme_dvmsync_batch(void)
 	__tlbi(op, arg);						\
 } while(0)
 
-#define __tlbi_user_level(op, arg, level) do {				\
+#define __tlbi_user_level_tg(op, arg, level, tg) do {			\
 	if (arm64_kernel_unmapped_at_el0())				\
-		__tlbi_level(op, (arg | USER_ASID_FLAG), level);	\
+		__tlbi_level_tg(op, (arg | USER_ASID_FLAG), level, tg);	\
 } while (0)
+
+#define __tlbi_level(op, addr, level) \
+	__tlbi_level_tg(op, addr, level, get_trans_granule())
+
+#define __tlbi_user_level(op, arg, level) \
+	__tlbi_user_level_tg(op, arg, level, get_trans_granule())
 
 /*
  * This macro creates a properly formatted VA operand for the TLB RANGE. The
