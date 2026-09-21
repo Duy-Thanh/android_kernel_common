@@ -142,6 +142,24 @@
       "parentUuid": "ab9d6c1f_9e86400a",
       "revId": "e54d464573bb1b184f884720e96bb28504312d16",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b4036ae_ff4396a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-09-21T22:25:42Z",
+      "side": 1,
+      "message": "Please be very clear in the commit message why this needs to be an android-specific fix. Why does this issue exist only for Android? Can you cite an ANDROID patch with a Fixes tag? If this is caused by android-specific behavior in vendor modules, then explain that and why those vendor modules can\u0027t be fixed.",
+      "parentUuid": "8debd19c_b4681360",
+      "revId": "e54d464573bb1b184f884720e96bb28504312d16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
