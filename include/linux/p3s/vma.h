@@ -237,6 +237,45 @@ static inline loff_t vma_file_offset_at(const struct vm_area_struct *vma,
 }
 
 /*
+ * p3s_filemap_fault_check_eof - Check whether a file fault is past EOF
+ * @vma: Pointer to struct vm_area_struct
+ * @addr: Faulting virtual address
+ * @pgoff: Faulting page offset index
+ * @inode: Backing inode pointer
+ * @max_idx: Max page index derived from inode size
+ *
+ * A fault is past EOF if file page @pgoff is at or after @max_idx, the first
+ * file page that is entirely past EOF. In a 4KB VMA, a 4KB page in the last
+ * file page can also be past EOF: the fault is past EOF if the file offset
+ * that @addr maps, vma_file_offset_at(), is at or after i_size.
+ *
+ * For example, with i_size = 0x9800, @max_idx is
+ * DIV_ROUND_UP(0x9800, PAGE_SIZE_KERNEL) = 3, so file page 2, at file
+ * offsets 0x8000 to 0xbfff, is the last one. Its slice 1 starts at 0x9000,
+ * before i_size, so it can be mapped. Its slices 2 and 3 start at 0xa000
+ * and 0xb000, after i_size, so faults on them get SIGBUS:
+ *
+ *               0x8000    0x9000    0xa000    0xb000    0xc000
+ *               ┌─────────┬─────────┬─────────┬─────────┐
+ *  file page 2  │ slice 0 │ slice 1 │ slice 2 │ slice 3 │
+ *               ├─────────┴─────────┼─────────┴─────────┤
+ *  fault        │       mapped      │       SIGBUS      │
+ *               └───────────────────┴───────────────────┘
+ *                              ▲
+ *                              └─ i_size = 0x9800
+ */
+#ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
+#define p3s_filemap_fault_check_eof(vma, addr, pgoff, inode, max_idx) \
+	unlikely((pgoff) >= (max_idx) || \
+		 (vma_is_p3s_4k(vma) && \
+		  vma_file_offset_at((vma), (addr)) >= i_size_read(inode)))
+#else
+#define p3s_filemap_fault_check_eof(vma, addr, pgoff, inode, max_idx) \
+	(((void)(vma), (void)(addr), (void)(inode)), unlikely((pgoff) >= (max_idx)))
+#endif
+
+
+/*
  * vma_linear_page_index - Page offset that @addr maps
  * @vma: Pointer to struct vm_area_struct
  * @addr: Virtual address within @vma
