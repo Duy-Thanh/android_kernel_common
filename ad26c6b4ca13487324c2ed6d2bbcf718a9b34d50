@@ -16,6 +16,24 @@
       "message": "Why exactly is it a problem to allow a pVM to disable some of the mitigations if it wants to?\n\nI see Linux pVMs indeed disable SPEC_CTRL_SSBD by default (and so does the host, actually), since Linux kernel sets `ssb_mode \u003d SPEC_STORE_BYPASS_PRCTL` by default, i.e. SPEC_CTRL_SSBD is only enabled when switching to a userspace process that enabled it via prctl(PR_SET_SPECULATION_CTRL).\n\nBut as I understand, there is a reason for that. Frankly I\u0027m very ignorant about how these CPU vulnerabilities work, but I see this in `should_mitigate_vuln()`:\n\n```\n\tcase X86_BUG_SPEC_STORE_BYPASS:\n\t\treturn cpu_attack_vector_mitigated(CPU_MITIGATE_USER_USER);\n```\n\ni.e. SSB only allows attacks from userspace to userspace (within the same guest if this is in a guest), not from guest to guest (in particular, not from the host VM to a pVM)? So forcing enabling it would only cause an unneeded perf penalty?\n\nBTW also it looks like for the same reason we don\u0027t need to enable SPEC_CTRL_SSBD for the hypervisor (in pKVM\u0027s `mitigate_spec_store_bypass()`) either?",
       "revId": "ad26c6b4ca13487324c2ed6d2bbcf718a9b34d50",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6a0ab2a_006c90a6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-09-21T13:06:16Z",
+      "side": 1,
+      "message": "+1. I also think we need not block a pVM from manipulating MSR_IA32_SPEC_CTRL as it might be doing it for a reason",
+      "parentUuid": "51d0231f_c9202528",
+      "revId": "ad26c6b4ca13487324c2ed6d2bbcf718a9b34d50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
