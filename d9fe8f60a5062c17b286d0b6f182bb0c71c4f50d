@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "940e05e4_7df356e7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-09-21T19:19:31Z",
+      "side": 1,
+      "message": "So the linter hit the following error:\n\nThe second line of the commit message must be blank.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\nUnfortuantely it seems the linter didn\u0027t run on the original change that landed in the android17-6.18 tree, so for consistency I\u0027m going to override the lint -2 here. \n\nBut in the future, please do avoid splitting the subject over multiple lines.",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 0
+      },
+      "revId": "d9fe8f60a5062c17b286d0b6f182bb0c71c4f50d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "d48b655d_e7920d98",
