@@ -16,6 +16,7 @@
 #include <linux/of_pci.h>
 #include <linux/pci_regs.h>
 #include <linux/platform_device.h>
+#include <trace/hooks/pci.h>
 
 #include "../../pci.h"
 #include "pcie-designware.h"
@@ -816,6 +817,7 @@ static int dw_pcie_iatu_setup(struct dw_pcie_rp *pp)
 int dw_pcie_setup_rc(struct dw_pcie_rp *pp)
 {
 	struct dw_pcie *pci = to_dw_pcie_from_pp(pp);
+	bool remove_msi_capabilities = false;
 	u32 val, ctrl, num_ctrls;
 	int ret;
 
@@ -887,6 +889,22 @@ int dw_pcie_setup_rc(struct dw_pcie_rp *pp)
 	dw_pcie_writel_dbi(pci, PCIE_LINK_WIDTH_SPEED_CONTROL, val);
 
 	dw_pcie_dbi_ro_wr_dis(pci);
+
+	/*
+	 * The iMSI-RX module does not support receiving MSI or MSI-X generated
+	 * by the Root Port. Allow affected platforms using iMSI-RX as the MSI
+	 * controller to remove these capabilities so the drivers fall back to
+	 * INTx instead.
+	 */
+	if (pp->has_msi_ctrl) {
+		trace_android_vh_dw_pcie_remove_msi_capabilities(
+			pci->dev, &remove_msi_capabilities);
+
+		if (remove_msi_capabilities) {
+			dw_pcie_remove_capability(pci, PCI_CAP_ID_MSI);
+			dw_pcie_remove_capability(pci, PCI_CAP_ID_MSIX);
+		}
+	}
 
 	return 0;
 }
