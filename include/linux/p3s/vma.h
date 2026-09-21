@@ -238,6 +238,52 @@ static inline loff_t vma_file_offset_at(const struct vm_area_struct *vma,
 }
 
 /*
+ * vma_linear_page_index - Map virtual address to host folio index
+ * @vma: Pointer to struct vm_area_struct
+ * @addr: Virtual address within @vma
+ *
+ * Translates a 4KB virtual address to the enclosing 16KB host folio index
+ * in the file Page Cache (or 4KB page index for anonymous VMAs):
+ *
+ * ┌─────────────────────────────────────────────────────────┐
+ * │ 16KB Page Cache Folio (vm_pgoff = N)                    │
+ * ├─────────────┬─────────────┬─────────────┬───────────────┤
+ * │   Slice 0   │   Slice 1   │   Slice 2   │    Slice 3    │
+ * └─────────────┴─────────────┴─────────────┴───────────────┘
+ *               ▲                           ▲
+ *               ├── vma->vm_start (off=1)   └── addr (off=3)
+ *               └───────────────────────────────► returns folio N
+ */
+static inline pgoff_t vma_linear_page_index(const struct vm_area_struct *vma,
+					    unsigned long addr)
+{
+	if (!vma_is_compat(vma) || (vma->vm_ops && !vma->vm_file))
+		return vma->vm_pgoff +
+		       ((addr - vma->vm_start) >> PAGE_SHIFT_KERNEL);
+
+	if (!vma->vm_ops)
+		return vma->vm_pgoff +
+		       ((addr - vma->vm_start) >> PAGE_SHIFT_4KB);
+
+	return vma->vm_pgoff +
+	       ((vma_slice_off(vma) + ((addr - vma->vm_start) >> PAGE_SHIFT_4KB)) >>
+		P3S_SLICE_SHIFT);
+}
+
+/*
+ * vma_pgoff_offset - Translate virtual address to VMA page offset
+ * @vma: Pointer to struct vm_area_struct
+ * @addr: Virtual address within @vma
+ *
+ * Assumes addr >= vma->vm_start.
+ */
+static inline pgoff_t vma_pgoff_offset(const struct vm_area_struct *vma,
+				       unsigned long addr)
+{
+	return vma_linear_page_index(vma, addr);
+}
+
+/*
  * vma_native_pages - Number of native 16KB folios spanned by VMA
  * @vma: Pointer to struct vm_area_struct
  *
@@ -297,6 +343,49 @@ vma_pgoff_to_address(const struct vm_area_struct *vma, pgoff_t pgoff)
 	}
 
 	return min(addr, vma->vm_end);
+}
+
+/*
+ * VMA Merge Struct Geometry Abstractions (vmg)
+ */
+#define vmg_is_compat(vmg)	mm_is_compat((vmg)->mm)
+
+/*
+ * vma_can_merge_offsets - Verify offset & slice continuity across adjacent VMAs
+ * @left: Left (lower-address) VMA
+ * @right_pgoff: Page offset of right (higher-address) range
+ * @right_slice: Starting subpage slice of right range (0..3)
+ * @boundary: Virtual address where left ends and right begins
+ * @is_compat: Whether process is running in 4KB compat mode
+ * @is_file: Whether mapping is file-backed
+ *
+ * ┌───────────────────────────┬───────────────────────────┐
+ * │ Left Range (lower addr)   │ Right Range (higher addr) │
+ * ├───────────────────────────┼───────────────────────────┤
+ * │ left->vm_start            │ right->vm_start           │
+ * │              left->vm_end │ (right_pgoff, right_slice)│
+ * └───────────────────────────┴───────────────────────────┘
+ *                             ▲
+ *                             └── Boundary: boundary == right->vm_start
+ *
+ * ┌───────────────────────────┬───────────────────────────┐
+ * │ Host Folio N (Left End)   │ Host Folio N+1 (Right)    │
+ * ├──────┬──────┬──────┬──────┼──────┬──────┬──────┬──────┤
+ * │  S0  │  S1  │  S2  │  S3  │  S0  │  S1  │  S2  │  S3  │
+ * └──────┴──────┴──────┴──────┴──────┴──────┴──────┴──────┘
+ *                             ▲
+ *                             └── linear_page_index(left, boundary) == right_pgoff
+ *                             └── slice_offset(left, boundary) == right_slice
+ */
+static inline bool vma_can_merge_offsets(const struct vm_area_struct *left,
+					 pgoff_t right_pgoff,
+					 unsigned short right_slice,
+					 unsigned long boundary,
+					 bool is_compat, bool is_file)
+{
+	return left && vma_linear_page_index(left, boundary) == right_pgoff &&
+	       (!is_compat || !is_file ||
+		vma_slice_offset(left, boundary) == right_slice);
 }
 
 /*
