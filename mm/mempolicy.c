@@ -117,6 +117,7 @@
 #include <linux/memory.h>
 
 #include "internal.h"
+#include <linux/p3s_user_pages.h>
 
 /* Internal flags */
 #define MPOL_MF_DISCONTIG_OK (MPOL_MF_INTERNAL << 0)	/* Skip checks for continuous vmas */
@@ -3182,7 +3183,7 @@ int mpol_set_shared_policy(struct shared_policy *sp,
 {
 	int err;
 	struct sp_node *new = NULL;
-	unsigned long sz = vma_pages(vma);
+	unsigned long sz = vma_native_pages(vma);
 
 	if (pol) {
 		new = sp_alloc(vma->vm_pgoff, vma->vm_pgoff + sz, pol);
