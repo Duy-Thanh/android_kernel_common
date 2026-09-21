@@ -248,4 +248,50 @@ static inline unsigned long mm_stack_guard_gap(const struct mm_struct *mm)
 {
 	return (stack_guard_gap >> PAGE_SHIFT_KERNEL) << mm_pte_shift(mm);
 }
+
+/*
+ * mm_mmap_pgoff - vm_pgoff for the page offset passed to mmap()
+ * @mm: Pointer to struct mm_struct
+ * @pgoff: Page offset passed to mmap in process page units
+ *
+ * A 4KB process passes @pgoff in 4KB pages, but vm_pgoff counts 16KB file
+ * pages. Split @pgoff into the file page, @pgoff >> P3S_SLICE_SHIFT, which
+ * is returned here, and the slice of that page, @pgoff & P3S_SLICE_MASK,
+ * which mm_mmap_slice_off() returns for vm_slice_off.
+ *
+ * For example, @pgoff = 5 is in file page 5 >> P3S_SLICE_SHIFT = 1, at
+ * slice 5 & P3S_SLICE_MASK = 1:
+ *
+ *                                            @pgoff
+ *                                               ▼
+ *              ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
+ *  4KB pages   │  0  │  1  │  2  │  3  │  4  │  5  │  6  │  7  │
+ *              ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
+ *  slices      │  0  │  1  │  2  │  3  │  0  │  1  │  2  │  3  │
+ *              ├─────┴─────┴─────┴─────┼─────┴─────┴─────┴─────┤
+ *  file pages  │           0           │           1           │
+ *              └───────────────────────┴───────────────────────┘
+ *
+ * For other processes, this returns @pgoff unchanged.
+ */
+static inline pgoff_t mm_mmap_pgoff(const struct mm_struct *mm, pgoff_t pgoff)
+{
+	return mm_is_p3s_4k(mm) ? (pgoff >> P3S_SLICE_SHIFT) : pgoff;
+}
+
+/*
+ * mm_mmap_slice_off - vm_slice_off for the page offset passed to mmap()
+ * @mm: Pointer to struct mm_struct
+ * @pgoff: Page offset passed to mmap in process page units
+ *
+ * For a 4KB process, 4KB page @pgoff is slice @pgoff & P3S_SLICE_MASK of
+ * file page mm_mmap_pgoff(), and this returns that slice (see the diagram
+ * at mm_mmap_pgoff()). Returns 0 for other processes.
+ */
+static inline unsigned short mm_mmap_slice_off(const struct mm_struct *mm,
+					       pgoff_t pgoff)
+{
+	return mm_is_p3s_4k(mm) ? (pgoff & P3S_SLICE_MASK) : 0;
+}
+
 #endif /* _LINUX_P3S_MM_H */
