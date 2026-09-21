@@ -222,6 +222,79 @@ static inline pgoff_t vma_native_pages(const struct vm_area_struct *vma)
 }
 
 /*
+ * vma_pgoff_to_address - Convert Page Cache pgoff to virtual address
+ * @vma: Pointer to struct vm_area_struct
+ * @pgoff: Page offset in host 16KB folio units
+ *
+ * ┌─────────────────────────────────────────────────────────┐
+ * │ Backing File Page Cache (16KB Folios)                   │
+ * ├───────────────────────────┬─────────────────────────────┤
+ * │ Folio 0 (pgoff = 0)       │ Folio 1 (pgoff = 1)         │
+ * │ [ S0 │ S1 │ S2 │ S3 ]     │ [ S0 │ S1 │ S2 │ S3 ]       │
+ * └───────────────────────────┴─────────────────────────────┘
+ *                                    ▲
+ *                                    └── pgoff=1, vma_slice_off=1
+ *                                        maps to vma->vm_start
+ */
+static inline unsigned long
+vma_pgoff_to_address(const struct vm_area_struct *vma, pgoff_t pgoff)
+{
+	unsigned long addr;
+
+	if (pgoff <= vma->vm_pgoff)
+		return vma->vm_start;
+
+	if (vma->vm_file) {
+		addr = vma->vm_start +
+			((pgoff - vma->vm_pgoff) << PAGE_SHIFT_KERNEL) -
+			((unsigned long)vma_slice_off(vma) << PAGE_SHIFT_4KB);
+	} else {
+		addr = vma->vm_start +
+			((pgoff - vma->vm_pgoff) << mm_pte_shift(vma->vm_mm));
+	}
+
+	return min(addr, vma->vm_end);
+}
+
+/*
+ * vma_unmap_mapping_range_bounds - Calculate address bounds for unmapping
+ * @vma: Pointer to struct vm_area_struct
+ * @first_index: Start folio index
+ * @last_index: End folio index
+ * @start: Pointer to output start address
+ * @end: Pointer to output end address
+ */
+static inline void vma_unmap_mapping_range_bounds(const struct vm_area_struct *vma,
+						  pgoff_t first_index,
+						  pgoff_t last_index,
+						  unsigned long *start,
+						  unsigned long *end)
+{
+	const pgoff_t start_idx = max(first_index, vma->vm_pgoff);
+	const pgoff_t end_idx = min(last_index,
+				    vma->vm_pgoff + vma_native_pages(vma) - 1) + 1;
+
+	*start = vma_pgoff_to_address(vma, start_idx);
+	*end = vma_pgoff_to_address(vma, end_idx);
+}
+
+/*
+ * vma_remote_access_chunk - Compute folio offset and clamped length for remote access
+ * @vma: Pointer to struct vm_area_struct
+ * @addr: Virtual address being accessed
+ * @len: Maximum bytes to transfer
+ * @offset: Pointer to output byte offset within host folio
+ * @bytes: Pointer to output transferable byte count within virtual page
+ */
+static inline void vma_remote_access_chunk(const struct vm_area_struct *vma,
+					   unsigned long addr, int len,
+					   int *offset, int *bytes)
+{
+	*offset = vma_folio_offset(vma, addr);
+	*bytes = min_t(int, len, vma_page_size(vma) - vma_offset_in_page(vma, addr));
+}
+
+/*
  * p3s_adjust_unmapped_area_info - Align unmapped area allocations to host page
  * @info: Pointer to struct vm_unmapped_area_info
  *
