@@ -284,6 +284,19 @@ static inline pgoff_t vma_linear_page_index(const struct vm_area_struct *vma,
 }
 
 /*
+ * vma_pgoff_offset - Translate virtual address to VMA page offset
+ * @vma: Pointer to struct vm_area_struct
+ * @addr: Virtual address within @vma
+ *
+ * Assumes addr >= vma->vm_start.
+ */
+static inline pgoff_t vma_pgoff_offset(const struct vm_area_struct *vma,
+				       unsigned long addr)
+{
+	return vma_linear_page_index(vma, addr);
+}
+
+/*
  * vma_native_pages - Number of page offsets that @vma covers
  * @vma: Pointer to struct vm_area_struct
  *
@@ -372,6 +385,54 @@ vma_pgoff_to_address(const struct vm_area_struct *vma, pgoff_t pgoff)
 }
 
 /*
+ * VMA Merge Struct Geometry Abstractions (vmg)
+ */
+#define vmg_is_p3s_4k(vmg)	mm_is_p3s_4k((vmg)->mm)
+
+/*
+ * vma_can_merge_offsets - Check that the range at @boundary continues @left
+ * @left: Left (lower-address) VMA
+ * @right_pgoff: Page offset of right (higher-address) range
+ * @right_slice: Starting subpage slice of right range (0..3)
+ * @boundary: Virtual address where left ends and right begins
+ * @is_p3s_4k: Whether process is running in 4KB compat mode
+ * @is_file: Whether mapping is file-backed
+ *
+ * The range at @boundary can merge with @left only if it starts with what
+ * @left would map at @boundary: page offset vma_linear_page_index() and,
+ * for a 4KB file VMA, slice vma_slice_offset() of @left at @boundary.
+ *
+ * For example, let @left have vm_slice_off = 1 and let @boundary be
+ * left->vm_start + 0x4000, (0x4000 >> PAGE_SHIFT_4KB) = 4 pages after
+ * left->vm_start, or 1 + 4 = 5 slices after the start of file page
+ * vm_pgoff. Then the right range must start at slice 5 & P3S_SLICE_MASK = 1
+ * of file page vm_pgoff + (5 >> P3S_SLICE_SHIFT) = vm_pgoff + 1:
+ *
+ *             left->vm_start             @boundary
+ *                    ▼                       ▼
+ *                    ┌───────────────────────┬─────────────────┐
+ *  VMAs              │         @left         │   right range   │
+ *                    └───────────────────────┴─────────────────┘
+ *              ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
+ *  slices      │  0  │  1  │  2  │  3  │  0  │  1  │  2  │  3  │
+ *              ├─────┴─────┴─────┴─────┼─────┴─────┴─────┴─────┤
+ *  file pages  │        vm_pgoff       │      vm_pgoff + 1     │
+ *              └───────────────────────┴───────────────────────┘
+ *
+ * Native and anonymous VMAs only need matching page offsets.
+ */
+static inline bool vma_can_merge_offsets(const struct vm_area_struct *left,
+					 pgoff_t right_pgoff,
+					 unsigned short right_slice,
+					 unsigned long boundary,
+					 bool is_p3s_4k, bool is_file)
+{
+	return left && vma_linear_page_index(left, boundary) == right_pgoff &&
+	       (!is_p3s_4k || !is_file ||
+		vma_slice_offset(left, boundary) == right_slice);
+}
+
+/*
  * vma_unmap_mapping_range_bounds - Calculate address bounds for unmapping
  * @vma: Pointer to struct vm_area_struct
  * @first_index: Start folio index
@@ -393,6 +454,9 @@ static inline void vma_unmap_mapping_range_bounds(const struct vm_area_struct *v
 	*end = vma_pgoff_to_address(vma, end_idx);
 }
 
+/* Forward declarations for VMA lifecycle operations */
+int anon_vma_clone(struct vm_area_struct *, struct vm_area_struct *);
+
 /*
  * vma_set_split_offset - Update pgoff and slice offset after VMA split
  * @target: Newly created or adjusted VMA
@@ -408,6 +472,23 @@ static inline void vma_set_split_offset(struct vm_area_struct *target,
 }
 
 /*
+ * vma_set_range_slice - Set VMA range and update subpage slice offset
+ * @vma: Pointer to struct vm_area_struct
+ * @start: Starting virtual address
+ * @end: Ending virtual address
+ * @pgoff: Page offset
+ */
+static inline void vma_set_range_slice(struct vm_area_struct *vma,
+				       unsigned long start, unsigned long end,
+				       pgoff_t pgoff)
+{
+	vma->vm_start = start;
+	vma->vm_end = end;
+	vma->vm_pgoff = pgoff;
+	vma_set_slice_off(vma, vma_slice_offset(vma, start));
+}
+
+/*
  * vma_expand_downwards_range - Adjust start, pgoff, and slice offset for downward stack expansion
  * @vma: Pointer to struct vm_area_struct
  * @address: New lower virtual address
@@ -420,6 +501,57 @@ static inline void vma_expand_downwards_range(struct vm_area_struct *vma,
 	vma->vm_start = address;
 	vma->vm_pgoff -= grow;
 	vma_set_slice_off(vma, 0);
+}
+
+/*
+ * copy_vma_set_range - Set range and slice offset for duplicated VMA
+ * @new_vma: Duplicated target VMA
+ * @vma: Original source VMA
+ * @addr: Starting virtual address
+ * @len: Length of range
+ * @pgoff: Page offset
+ * @faulted_in_anon_vma: Whether source VMA had faulted anon_vma
+ */
+static inline void copy_vma_set_range(struct vm_area_struct *new_vma,
+				      const struct vm_area_struct *vma,
+				      unsigned long addr, unsigned long len,
+				      pgoff_t pgoff, bool faulted_in_anon_vma)
+{
+	new_vma->vm_start = addr;
+	new_vma->vm_end = addr + len;
+	new_vma->vm_pgoff = pgoff;
+	vma_set_slice_off(new_vma, faulted_in_anon_vma ? vma_slice_offset(vma, addr) : 0);
+}
+
+/*
+ * vma_filter_merge_neighbor - Invalidate neighbor reference if it points to self
+ * @neighbor: Potential neighbor VMA to merge with
+ * @vma: Source VMA being copied
+ * @faulted_in_anon_vma: Whether source VMA had faulted anon_vma
+ */
+static inline struct vm_area_struct *
+vma_filter_merge_neighbor(struct vm_area_struct *neighbor,
+			  const struct vm_area_struct *vma,
+			  bool faulted_in_anon_vma)
+{
+	return (faulted_in_anon_vma && neighbor == vma) ? NULL : neighbor;
+}
+
+/*
+ * copy_vma_clone_anon_vma - Clone anon_vma into merged target VMA if needed
+ * @new_vma: Merged target VMA
+ * @vma: Original source VMA
+ * @faulted_in_anon_vma: Whether source VMA had faulted anon_vma
+ */
+static inline int copy_vma_clone_anon_vma(struct vm_area_struct *new_vma,
+					 struct vm_area_struct *vma,
+					 bool faulted_in_anon_vma)
+{
+	if (faulted_in_anon_vma && !new_vma->anon_vma) {
+		new_vma->anon_vma = vma->anon_vma;
+		return anon_vma_clone(new_vma, vma);
+	}
+	return 0;
 }
 
 /*
