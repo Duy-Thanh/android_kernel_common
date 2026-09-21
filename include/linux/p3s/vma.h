@@ -424,6 +424,68 @@ vma_pgoff_to_address(const struct vm_area_struct *vma, pgoff_t pgoff)
 }
 
 /*
+ * vma_folio_slice_bounds - 4KB pages around @addr that map the same 16KB page
+ * @vma: Pointer to struct vm_area_struct
+ * @addr: Virtual address within @vma
+ * @nr_slices: Output number of contiguous slices (1..4)
+ * @start_addr: Output starting virtual address of the slice span
+ *
+ * In a 4KB VMA, finds the 4KB pages around @addr that map slices of the
+ * 16KB page backing @addr, without crossing the VMA or the PTE table that
+ * maps @addr. Sets @start_addr to the first of them and @nr_slices to
+ * their number.
+ *
+ * For example, with vm_slice_off = 1 and @addr = vm_start + 0x2000, @addr
+ * is at slice 1 + (0x2000 >> PAGE_SHIFT_4KB) = 3 of file page vm_pgoff.
+ * Slices 1 to 3 of that page are in the VMA, but slice 0 is before
+ * vm_start, so @start_addr is vm_start and @nr_slices is 3:
+ *
+ *                vm_start         @addr
+ *                    ▼              ▼
+ *                    ┌─────┬─────┬─────┬─────┬─────┐
+ *  VMA pages         │  0  │  1  │  2  │  3  │  4  │
+ *                    └─────┴─────┴─────┴─────┴─────┘
+ *                    │◄───────────────►│ @nr_slices = 3
+ *              ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
+ *  slices      │  0  │  1  │  2  │  3  │  0  │  1  │  2  │  3  │
+ *              ├─────┴─────┴─────┴─────┼─────┴─────┴─────┴─────┤
+ *  file pages  │        vm_pgoff       │      vm_pgoff + 1     │
+ *              └───────────────────────┴───────────────────────┘
+ *
+ * For a native VMA, @nr_slices is 1 and @start_addr is @addr.
+ */
+static inline void vma_folio_slice_bounds(const struct vm_area_struct *vma,
+					  unsigned long addr,
+					  unsigned int *nr_slices,
+					  unsigned long *start_addr)
+{
+	unsigned int slices_per_folio = P3S_SLICES_PER_PAGE;
+	unsigned int sub, left, right;
+	unsigned long vma_before, vma_after, pt_before, pt_after;
+
+	if (!vma_is_p3s_4k(vma)) {
+		*nr_slices = 1;
+		*start_addr = addr;
+		return;
+	}
+
+	addr &= PAGE_MASK_4KB;
+	sub = vma_slice_offset(vma, addr);
+	vma_before = (addr >= vma->vm_start) ?
+		((addr - vma->vm_start) >> PAGE_SHIFT_4KB) : 0;
+	vma_after = (vma->vm_end > addr) ?
+		((vma->vm_end - addr) >> PAGE_SHIFT_4KB) : 0;
+	pt_before = (addr >> PAGE_SHIFT_4KB) & 511;
+	pt_after = 512 - pt_before;
+
+	left = min3((unsigned long)sub, vma_before, pt_before);
+	right = min3((unsigned long)(slices_per_folio - sub), vma_after, pt_after);
+
+	*nr_slices = left + right;
+	*start_addr = addr - ((unsigned long)left << PAGE_SHIFT_4KB);
+}
+
+/*
  * VMA Merge Struct Geometry Abstractions (vmg)
  */
 #define vmg_is_p3s_4k(vmg)	mm_is_p3s_4k((vmg)->mm)
