@@ -275,6 +275,7 @@ struct ublksrv_ctrl_dev_info {
 #define		UBLK_IO_F_FUA			(1U << 13)
 #define		UBLK_IO_F_NOUNMAP		(1U << 15)
 #define		UBLK_IO_F_SWAP			(1U << 16)
+#define		UBLK_IO_F_IDLE_PRIO		(1U << 20)
 
 /*
  * io cmd is described by this structure, and stored in share memory, indexed
