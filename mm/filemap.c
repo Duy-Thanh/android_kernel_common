@@ -3411,7 +3411,7 @@ static struct file *do_sync_mmap_readahead(struct vm_fault *vmf)
 		 */
 		struct vm_area_struct *vma = vmf->vma;
 		unsigned long start = vma->vm_pgoff;
-		unsigned long end = start + vma_data_pages(vma);
+		unsigned long end = start + vma_native_pages(vma);
 		unsigned long ra_end;
 
 		ra->order = exec_folio_order();
@@ -3572,7 +3572,7 @@ vm_fault_t filemap_fault(struct vm_fault *vmf)
 	bool mapping_locked = false;
 
 	max_idx = DIV_ROUND_UP(i_size_read(inode), __PAGE_SIZE) * (__PAGE_SIZE / PAGE_SIZE);
-	if (unlikely(index >= max_idx))
+	if (p3s_filemap_fault_check_eof(vmf->vma, vmf->address, index, inode, max_idx))
 		return VM_FAULT_SIGBUS;
 
 	max_idx = DIV_ROUND_UP(i_size_read(inode), PAGE_SIZE);
@@ -3682,7 +3682,7 @@ retry_find:
 	 * We must recheck i_size under page lock.
 	 */
 	max_idx = DIV_ROUND_UP(i_size_read(inode), __PAGE_SIZE) * (__PAGE_SIZE / PAGE_SIZE);
-	if (unlikely(index >= max_idx)) {
+	if (p3s_filemap_fault_check_eof(vmf->vma, vmf->address, index, inode, max_idx)) {
 		folio_unlock(folio);
 		folio_put(folio);
 		return VM_FAULT_SIGBUS;
@@ -3958,6 +3958,9 @@ vm_fault_t filemap_map_pages(struct vm_fault *vmf,
 	 */
 	file_end = DIV_ROUND_UP(i_size_read(mapping->host), PAGE_SIZE) - 1;
 	end_pgoff = min(end_pgoff, file_end);
+
+	if (vma_is_p3s_4k(vma))
+		return 0;
 
 	rcu_read_lock();
 	folio = next_uptodate_folio(&xas, mapping, end_pgoff);
