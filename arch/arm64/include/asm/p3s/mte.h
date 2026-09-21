@@ -23,4 +23,19 @@ static inline void mte_remote_tags_chunk(const struct vm_area_struct *vma,
 	*tags = min(len, (vma_page_size(vma) - page_offset) / MTE_GRANULE_SIZE);
 }
 
+/*
+ * mte_zero_clear_slice_tags - Zero a 4KB slice and its allocation tags
+ * @addr: Kernel address of a 4KB slice of a host page
+ *
+ * The 4KB counterpart of mte_zero_clear_page_tags(), for PROT_MTE mappings.
+ * mte_sync_tags() initialises a host page's tags only the first time the
+ * page is mapped tagged, so a slice of an already tagged host page that is
+ * handed out again keeps the tags of its previous mapping unless they are
+ * cleared here.
+ */
+static inline void mte_zero_clear_slice_tags(void *addr)
+{
+	mte_set_mem_tag_range(addr, PAGE_SIZE_4KB, 0, true);
+}
+
 #endif /* _ASM_ARM64_P3S_MTE_H */
