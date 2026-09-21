@@ -4585,7 +4585,7 @@ int remap_vmalloc_range_partial(struct vm_area_struct *vma, unsigned long uaddr,
 
 	size = PAGE_ALIGN(size);
 
-	if (!PAGE_ALIGNED(uaddr) || !PAGE_ALIGNED(kaddr))
+	if (!mm_pte_aligned(vma->vm_mm, uaddr) || !PAGE_ALIGNED_KERNEL(kaddr))
 		return -EINVAL;
 
 	area = find_vm_area(kaddr);
