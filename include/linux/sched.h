@@ -989,6 +989,9 @@ struct task_struct {
 
 	struct mm_struct		*mm;
 	struct mm_struct		*active_mm;
+#ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
+	struct mm_struct		*p3s_remote_mm;
+#endif
 	struct address_space		*faults_disabled_mapping;
 
 	int				exit_state;
