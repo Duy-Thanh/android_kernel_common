@@ -383,6 +383,106 @@ static inline void vma_remote_access_chunk(const struct vm_area_struct *vma,
 	*bytes = min_t(int, len, vma_page_size(vma) - vma_offset_in_page(vma, addr));
 }
 
+/* Forward declarations for VMA lifecycle operations */
+int anon_vma_clone(struct vm_area_struct *, struct vm_area_struct *);
+
+/*
+ * vma_set_split_offset - Update pgoff and slice offset after VMA split
+ * @target: Newly created or adjusted VMA
+ * @src: Source VMA being split
+ * @addr: Split boundary address
+ */
+static inline void vma_set_split_offset(struct vm_area_struct *target,
+					const struct vm_area_struct *src,
+					unsigned long addr)
+{
+	target->vm_pgoff = vma_linear_page_index(src, addr);
+	vma_set_slice_off(target, vma_slice_offset(src, addr));
+}
+
+/*
+ * vma_set_range_slice - Set VMA range and update subpage slice offset
+ * @vma: Pointer to struct vm_area_struct
+ * @start: Starting virtual address
+ * @end: Ending virtual address
+ * @pgoff: Page offset
+ */
+static inline void vma_set_range_slice(struct vm_area_struct *vma,
+				       unsigned long start, unsigned long end,
+				       pgoff_t pgoff)
+{
+	vma->vm_start = start;
+	vma->vm_end = end;
+	vma->vm_pgoff = pgoff;
+	vma_set_slice_off(vma, vma_slice_offset(vma, start));
+}
+
+/*
+ * vma_expand_downwards_range - Adjust start, pgoff, and slice offset for downward stack expansion
+ * @vma: Pointer to struct vm_area_struct
+ * @address: New lower virtual address
+ * @grow: Number of pages to grow downwards
+ */
+static inline void vma_expand_downwards_range(struct vm_area_struct *vma,
+					     unsigned long address,
+					     unsigned long grow)
+{
+	vma->vm_start = address;
+	vma->vm_pgoff -= grow;
+	vma_set_slice_off(vma, 0);
+}
+
+/*
+ * copy_vma_set_range - Set range and slice offset for duplicated VMA
+ * @new_vma: Duplicated target VMA
+ * @vma: Original source VMA
+ * @addr: Starting virtual address
+ * @len: Length of range
+ * @pgoff: Page offset
+ * @faulted_in_anon_vma: Whether source VMA had faulted anon_vma
+ */
+static inline void copy_vma_set_range(struct vm_area_struct *new_vma,
+				      const struct vm_area_struct *vma,
+				      unsigned long addr, unsigned long len,
+				      pgoff_t pgoff, bool faulted_in_anon_vma)
+{
+	new_vma->vm_start = addr;
+	new_vma->vm_end = addr + len;
+	new_vma->vm_pgoff = pgoff;
+	vma_set_slice_off(new_vma, faulted_in_anon_vma ? vma_slice_offset(vma, addr) : 0);
+}
+
+/*
+ * vma_filter_merge_neighbor - Invalidate neighbor reference if it points to self
+ * @neighbor: Potential neighbor VMA to merge with
+ * @vma: Source VMA being copied
+ * @faulted_in_anon_vma: Whether source VMA had faulted anon_vma
+ */
+static inline struct vm_area_struct *
+vma_filter_merge_neighbor(struct vm_area_struct *neighbor,
+			  const struct vm_area_struct *vma,
+			  bool faulted_in_anon_vma)
+{
+	return (faulted_in_anon_vma && neighbor == vma) ? NULL : neighbor;
+}
+
+/*
+ * copy_vma_clone_anon_vma - Clone anon_vma into merged target VMA if needed
+ * @new_vma: Merged target VMA
+ * @vma: Original source VMA
+ * @faulted_in_anon_vma: Whether source VMA had faulted anon_vma
+ */
+static inline int copy_vma_clone_anon_vma(struct vm_area_struct *new_vma,
+					 struct vm_area_struct *vma,
+					 bool faulted_in_anon_vma)
+{
+	if (faulted_in_anon_vma && !new_vma->anon_vma) {
+		new_vma->anon_vma = vma->anon_vma;
+		return anon_vma_clone(new_vma, vma);
+	}
+	return 0;
+}
+
 /*
  * p3s_adjust_unmapped_area_info - Align unmapped area allocations to host page
  * @info: Pointer to struct vm_unmapped_area_info
