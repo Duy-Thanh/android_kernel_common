@@ -195,6 +195,37 @@ static inline loff_t vma_file_offset_at(const struct vm_area_struct *vma,
 }
 
 /*
+ * p3s_filemap_fault_check_eof - Check fault index and subpage bounds against EOF
+ * @vma: Pointer to struct vm_area_struct
+ * @addr: Faulting virtual address
+ * @pgoff: Faulting page offset index
+ * @inode: Backing inode pointer
+ * @max_idx: Max page index derived from inode size
+ *
+ * Delivers SIGBUS when 4KB subpage slice accesses extend past EOF within
+ * the final 16KB Page Cache folio:
+ *
+ * ┌─────────────────────────────────────────────────────────┐
+ * │ Final 16KB Folio in Page Cache                          │
+ * ├─────────────┬─────────────┬─────────────┬───────────────┤
+ * │   Slice 0   │   Slice 1   │   Slice 2   │    Slice 3    │
+ * │  (Valid)    │  (Valid)    │  (Past EOF) │  (Past EOF)   │
+ * └─────────────┴─────────────┴─────────────┴───────────────┘
+ *                             ▲             ▲
+ *                             └── isize     └── addr -> SIGBUS
+ */
+#ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
+#define p3s_filemap_fault_check_eof(vma, addr, pgoff, inode, max_idx) \
+	unlikely((pgoff) >= (max_idx) || \
+		 (vma_is_p3s_4k(vma) && \
+		  vma_file_offset_at((vma), (addr)) >= i_size_read(inode)))
+#else
+#define p3s_filemap_fault_check_eof(vma, addr, pgoff, inode, max_idx) \
+	(((void)(vma), (void)(addr), (void)(inode)), unlikely((pgoff) >= (max_idx)))
+#endif
+
+
+/*
  * vma_linear_page_index - Map virtual address to host folio index
  * @vma: Pointer to struct vm_area_struct
  * @addr: Virtual address within @vma
