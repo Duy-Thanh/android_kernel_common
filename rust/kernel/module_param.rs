@@ -7,6 +7,7 @@
 use crate::prelude::*;
 use crate::str::BStr;
 use bindings;
+use core::fmt::Write;
 use kernel::sync::SetOnce;
 
 /// Newtype to make `bindings::kernel_param` [`Sync`].
@@ -105,6 +106,68 @@ impl_int_module_param!(u64);
 impl_int_module_param!(isize);
 impl_int_module_param!(usize);
 
+struct RawBufWriter {
+    buf: *mut crate::ffi::c_char,
+    pos: usize,
+    cap: usize,
+}
+
+impl Write for RawBufWriter {
+    fn write_str(&mut self, s: &str) -> core::fmt::Result {
+        let bytes = s.as_bytes();
+        // Leave room for a trailing NUL byte.
+        let avail = self.cap.saturating_sub(1).saturating_sub(self.pos);
+        let to_copy = bytes.len().min(avail);
+        if to_copy > 0 {
+            // SAFETY: `self.buf` points to a valid sysfs buffer of size `self.cap` (`PAGE_SIZE`),
+            // and `self.pos + to_copy < self.cap`.
+            unsafe {
+                core::ptr::copy_nonoverlapping(
+                    bytes.as_ptr(),
+                    self.buf.add(self.pos).cast::<u8>(),
+                    to_copy,
+                );
+            }
+            self.pos += to_copy;
+        }
+        Ok(())
+    }
+}
+
+/// # Safety
+///
+/// - `buf` must point to a valid writable buffer of at least `PAGE_SIZE` bytes.
+/// - `param` must point to a valid `kernel_param` whose `arg` points to an initialized
+/// `ModuleParamAccess<T>`.
+unsafe extern "C" fn get_param<T>(buf: *mut c_char, param: *const bindings::kernel_param) -> c_int
+where
+    T: core::fmt::Display,
+{
+    if buf.is_null() {
+        // TODO: Use pr_warn_once available.
+        crate::pr_warn!("Null pointer passed to `module_param::get_param`");
+        return EINVAL.to_errno();
+    }
+
+    // SAFETY: By function safety contract, `param` is valid and its `arg` field points to a
+    // valid `ModuleParamAccess<T>` instance initialized by the `module!` macro.
+    let container = unsafe { &*((*param).__bindgen_anon_1.arg.cast::<ModuleParamAccess<T>>()) };
+
+    let mut writer = RawBufWriter {
+        buf,
+        pos: 0,
+        cap: crate::page::PAGE_SIZE,
+    };
+    let _ = writeln!(writer, "{}", container.value());
+
+    // SAFETY: `writer.pos < PAGE_SIZE` is guaranteed by `RawBufWriter::write_str`.
+    unsafe {
+        *buf.add(writer.pos) = 0;
+    }
+
+    writer.pos as c_int
+}
+
 /// A wrapper for kernel parameters.
 ///
 /// This type is instantiated by the [`module!`] macro when module parameters are
@@ -163,7 +226,7 @@ macro_rules! make_param_ops {
         pub static $ops: $crate::bindings::kernel_param_ops = $crate::bindings::kernel_param_ops {
             flags: 0,
             set: Some(set_param::<$ty>),
-            get: None,
+            get: Some(get_param::<$ty>),
             free: None,
         };
     };
