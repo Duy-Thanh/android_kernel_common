@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "224cb70a_81518ea7",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-09-21T20:22:00Z",
+      "side": 1,
+      "message": "minor:\n\u003e A non-present pte means that the MMIO page has not been lazily mapped in the host MMU yet. \n\n\"lazily\" here seems a bit confusing, s/lazily/yet/ ? Or to make the intent clear, something like:\n```\n/*\n * At this point(during pKVM init), all MMIO pages are still owned by\n * the host. A non-present pte simply means the page is not mapped in\n * the host MMU; it will be mapped on demand on the first host access\n * (see pkvm_handle_host_ept_violation()), or annotated later if the\n * pages are donated to hyp (e.g. IOMMU MMIO, see hyp_iommu_init()).\n * Either way its state (PKVM_PAGE_OWNED, PKVM_ID_HOST) is already\n * effectively set, since the pte is zeroed.\n */\n```",
+      "fixSuggestions": [
+        {
+          "fixId": "35af2acf_c5844815",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 281,
+                "startChar": 0,
+                "endLine": 286,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t * At this point (during pKVM init), all MMIO pages are still owned by\n\t\t\t * the host. A non-present pte simply means the page is not mapped in\n\t\t\t * the host MMU; it will be mapped on demand on the first host access\n\t\t\t * (see pkvm_handle_host_ept_violation()), or annotated later if the\n\t\t\t * pages are donated to hyp (e.g. IOMMU MMIO, see hyp_iommu_init()).\n\t\t\t *\n\t\t\t * Either way its state (PKVM_PAGE_OWNED, PKVM_ID_HOST) is already\n\t\t\t * effectively set, since the pte is zeroed.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0803bd98a18d65c3711ecb92b1a67cefc267209f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
