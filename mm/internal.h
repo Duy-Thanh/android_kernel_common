@@ -21,6 +21,7 @@
 
 /* Internal core VMA manipulation functions. */
 #include "vma.h"
+#include "p3s.h"
 
 struct folio_batch;
 
@@ -981,7 +982,7 @@ folio_within_range(struct folio *folio, struct vm_area_struct *vma,
 		unsigned long start, unsigned long end)
 {
 	pgoff_t pgoff, addr;
-	unsigned long vma_pglen = vma_pages(vma);
+	unsigned long vma_pglen = vma_native_pages(vma);
 
 	VM_WARN_ON_FOLIO(folio_test_ksm(folio), folio);
 	if (start > end)
@@ -999,7 +1000,7 @@ folio_within_range(struct folio *folio, struct vm_area_struct *vma,
 	if (!in_range(pgoff, vma->vm_pgoff, vma_pglen))
 		return false;
 
-	addr = vma->vm_start + ((pgoff - vma->vm_pgoff) << PAGE_SHIFT);
+	addr = vma_pgoff_to_address(vma, pgoff);
 
 	return !(addr < start || end - addr < folio_size(folio));
 }
@@ -1074,8 +1075,7 @@ static inline unsigned long vma_address(const struct vm_area_struct *vma,
 	unsigned long address;
 
 	if (pgoff >= vma->vm_pgoff) {
-		address = vma->vm_start +
-			((pgoff - vma->vm_pgoff) << PAGE_SHIFT);
+		address = vma_pgoff_to_address(vma, pgoff);
 		/* Check for address beyond vma (or wrapped through 0?) */
 		if (address < vma->vm_start || address >= vma->vm_end)
 			address = -EFAULT;
@@ -1100,10 +1100,10 @@ static inline unsigned long vma_address_end(struct page_vma_mapped_walk *pvmw)
 
 	/* Common case, plus ->pgoff is invalid for KSM */
 	if (pvmw->nr_pages == 1)
-		return pvmw->address + PAGE_SIZE;
+		return pvmw->address + vma_page_size(vma);
 
 	pgoff = pvmw->pgoff + pvmw->nr_pages;
-	address = vma->vm_start + ((pgoff - vma->vm_pgoff) << PAGE_SHIFT);
+	address = vma_pgoff_to_address(vma, pgoff);
 	/* Check for address beyond vma (or wrapped through 0?) */
 	if (address < vma->vm_start || address > vma->vm_end)
 		address = vma->vm_end;
