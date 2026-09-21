@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "59ae55cb_cde21e28",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 3592382
+      },
+      "writtenOn": "2026-09-21T17:13:09Z",
+      "side": 1,
+      "message": "Not actually needed, removed from vendor_hooks.c, security.h and security.c",
+      "parentUuid": "0190062b_0719af03",
+      "revId": "9d94884e04ba90014dc1c04740e4133c869bb89d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "956968c0_6c95de54",
@@ -53,6 +71,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "126e82bc_adadcdfa",
+        "filename": "include/trace/hooks/fs.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 3592382
+      },
+      "writtenOn": "2026-09-21T17:13:09Z",
+      "side": 1,
+      "message": "Redundant, removed",
+      "parentUuid": "956968c0_6c95de54",
+      "revId": "9d94884e04ba90014dc1c04740e4133c869bb89d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c71bb0e_f1c9cd54",
@@ -66,6 +102,24 @@
       "writtenOn": "2026-09-18T19:11:22Z",
       "side": 1,
       "message": "Declared here but is not exported in vendor_hooks.c, is it really needed? I don\u0027t see a callsite for this hook.",
+      "revId": "9d94884e04ba90014dc1c04740e4133c869bb89d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05e20847_3e2de617",
+        "filename": "include/trace/hooks/security.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 3592382
+      },
+      "writtenOn": "2026-09-21T17:13:09Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "6c71bb0e_f1c9cd54",
       "revId": "9d94884e04ba90014dc1c04740e4133c869bb89d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -115,6 +169,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "070efe4e_93ef6a6b",
+        "filename": "security/security.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2470,
+      "author": {
+        "id": 3592382
+      },
+      "writtenOn": "2026-09-21T17:13:09Z",
+      "side": 1,
+      "message": "trace_android_rvh_security_inode_setxattr and android_rvh_security_inode_removexattr hooks removed",
+      "parentUuid": "f4c19a17_cdff00cf",
+      "revId": "9d94884e04ba90014dc1c04740e4133c869bb89d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "051651b7_66f3a9b3",
@@ -146,6 +218,24 @@
           ]
         }
       ],
+      "revId": "9d94884e04ba90014dc1c04740e4133c869bb89d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41648d3a_c1849093",
+        "filename": "security/security.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3228,
+      "author": {
+        "id": 3592382
+      },
+      "writtenOn": "2026-09-21T17:13:09Z",
+      "side": 1,
+      "message": "Moved trace_android_rvh_security_file_open() hook call to security_file_open().\nThanks for your review.",
+      "parentUuid": "051651b7_66f3a9b3",
       "revId": "9d94884e04ba90014dc1c04740e4133c869bb89d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
