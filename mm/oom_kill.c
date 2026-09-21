@@ -60,6 +60,9 @@
 
 EXPORT_TRACEPOINT_SYMBOL_GPL(mark_victim);
 
+#undef K
+#define K(x) mm_pages_to_kb(mm, (x))
+
 static int sysctl_panic_on_oom;
 static int sysctl_oom_kill_allocating_task;
 static int sysctl_oom_dump_tasks = 1;
@@ -245,8 +248,10 @@ long oom_badness(struct task_struct *p, unsigned long totalpages)
 	 * The baseline for the badness score is the proportion of RAM that each
 	 * task's rss, pagetable and swap space use.
 	 */
-	points = get_mm_rss(p->mm) + get_mm_counter(p->mm, MM_SWAPENTS) +
-		mm_pgtables_bytes(p->mm) / PAGE_SIZE;
+	points = DIV_ROUND_UP(get_mm_rss(p->mm) +
+			      get_mm_counter(p->mm, MM_SWAPENTS),
+			      mm_slices_per_page(p->mm)) +
+		 mm_pgtables_bytes(p->mm) / PAGE_SIZE;
 	task_unlock(p);
 
 	/* Normalize to oom_score_adj units */
