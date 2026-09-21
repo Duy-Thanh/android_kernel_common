@@ -195,6 +195,33 @@ static inline loff_t vma_file_offset_at(const struct vm_area_struct *vma,
 }
 
 /*
+ * vma_native_pages - Number of native 16KB folios spanned by VMA
+ * @vma: Pointer to struct vm_area_struct
+ *
+ * Calculates the number of 16KB physical folios covered across
+ * subpage slice boundaries:
+ *
+ * ┌───────────────────────────┬─────────────────────────────┐
+ * │ Host Folio 0 (16KB)       │ Host Folio 1 (16KB)         │
+ * ├─────┬─────┬───────┬───────┼───────┬─────┬───────┬───────┤
+ * │ S0  │ S1  │  S2   │  S3   │  S0   │ S1  │  S2   │  S3   │
+ * └─────┴─────┴───────┴───────┴───────┴─────┴───────┴───────┘
+ *             ▲                               ▲
+ *             ├── vma->vm_start (S2)          └── vma->vm_end (S1)
+ *             ◄──────── vma_native_pages: 2 ────────►
+ */
+static inline pgoff_t vma_native_pages(const struct vm_area_struct *vma)
+{
+	unsigned long nr_slices = vma_size(vma) >> mm_pte_shift(vma->vm_mm);
+
+	if (!vma_is_p3s_4k(vma) || !vma->vm_ops)
+		return nr_slices;
+
+	return DIV_ROUND_UP(vma_slice_off(vma) + nr_slices,
+			    P3S_SLICES_PER_PAGE);
+}
+
+/*
  * p3s_adjust_unmapped_area_info - Align unmapped area allocations to host page
  * @info: Pointer to struct vm_unmapped_area_info
  *
