@@ -1456,6 +1456,17 @@ config ARM64_64K_PAGES
 
 endchoice
 
+config ARM64_PER_PROCESS_PAGE_SIZE
+	bool "Per-process page size support"
+	depends on ARM64_16K_PAGES && ARM64_VA_BITS_47 && MMU && !COMPAT
+	default n
+	help
+	  Allows native 16KB kernels to execute processes mapped with 4KB
+	  translation granules. This is useful for running legacy 4KB
+	  binaries on hardware that performs better with 16KB page size.
+
+	  If unsure, say N.
+
 choice
 	prompt "Virtual address space size"
 	default ARM64_VA_BITS_52
