@@ -87,6 +87,7 @@
 #include <trace/hooks/mm.h>
 
 #include "internal.h"
+#include <linux/p3s_user_pages.h>
 
 static struct kmem_cache *anon_vma_cachep;
 static struct kmem_cache *anon_vma_chain_cachep;
@@ -794,6 +795,7 @@ unsigned long page_address_in_vma(const struct folio *folio,
  */
 pmd_t *mm_find_pmd(struct mm_struct *mm, unsigned long address)
 {
+	P3S_CONTEXT_REMOTE_MM(mm);
 	pgd_t *pgd;
 	p4d_t *p4d;
 	pud_t *pud;
@@ -1426,7 +1428,8 @@ static __always_inline void __folio_add_anon_rmap(struct folio *folio,
 		}
 	}
 
-	VM_WARN_ON_FOLIO(!folio_test_large(folio) && PageAnonExclusive(page) &&
+	VM_WARN_ON_FOLIO(!vma_is_compat(vma) && !folio_test_large(folio) &&
+			 PageAnonExclusive(page) &&
 			 atomic_read(&folio->_mapcount) > 0, folio);
 	for (i = 0; i < nr_pages; i++) {
 		struct page *cur_page = page + i;
@@ -1441,7 +1444,8 @@ static __always_inline void __folio_add_anon_rmap(struct folio *folio,
 		 * While PTE-mapping a THP we have a PMD and a PTE
 		 * mapping.
 		 */
-		VM_WARN_ON_FOLIO(atomic_read(&cur_page->_mapcount) > 0 &&
+		VM_WARN_ON_FOLIO(!vma_is_compat(vma) &&
+				 atomic_read(&cur_page->_mapcount) > 0 &&
 				 PageAnonExclusive(cur_page), folio);
 	}
 
@@ -1523,6 +1527,7 @@ void folio_add_new_anon_rmap(struct folio *folio, struct vm_area_struct *vma,
 {
 	const bool exclusive = flags & RMAP_EXCLUSIVE;
 	int nr = 1, nr_pmdmapped = 0;
+	P3S_CONTEXT_REMOTE_MM(vma->vm_mm);
 
 	VM_WARN_ON_FOLIO(folio_test_hugetlb(folio), folio);
 	VM_WARN_ON_FOLIO(!exclusive && !folio_test_locked(folio), folio);
@@ -1861,6 +1866,7 @@ static bool try_to_unmap_one(struct folio *folio, struct vm_area_struct *vma,
 		     unsigned long address, void *arg)
 {
 	struct mm_struct *mm = vma->vm_mm;
+	P3S_CONTEXT_REMOTE_MM(vma->vm_mm);
 	DEFINE_FOLIO_VMA_WALK(pvmw, folio, vma, address, 0);
 	bool anon_exclusive, ret = true;
 	pte_t pteval;
@@ -2289,6 +2295,7 @@ static bool try_to_migrate_one(struct folio *folio, struct vm_area_struct *vma,
 		     unsigned long address, void *arg)
 {
 	struct mm_struct *mm = vma->vm_mm;
+	P3S_CONTEXT_REMOTE_MM(vma->vm_mm);
 	DEFINE_FOLIO_VMA_WALK(pvmw, folio, vma, address, 0);
 	bool anon_exclusive, writable, ret = true;
 	pte_t pteval;
@@ -2684,6 +2691,7 @@ struct page *make_device_exclusive(struct mm_struct *mm, unsigned long addr,
 	swp_entry_t entry;
 	pte_t swp_pte;
 	int ret;
+	P3S_CONTEXT_REMOTE_MM(mm);
 
 	mmap_assert_locked(mm);
 	addr = PAGE_ALIGN_DOWN(addr);
