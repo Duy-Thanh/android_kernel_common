@@ -426,6 +426,9 @@ static blk_status_t ublk_setup_iod_zoned(struct ublk_queue *ubq,
 			iod->op_flags = ublk_op | ublk_req_build_flags(req);
 			iod->nr_zones = desc->nr_zones;
 			iod->start_sector = desc->sector;
+			iod->ioprio = req_get_ioprio(req);
+			iod->pad0 = 0;
+			iod->pad1 = 0;
 			return BLK_STS_OK;
 		default:
 			return BLK_STS_IOERR;
@@ -441,6 +444,9 @@ static blk_status_t ublk_setup_iod_zoned(struct ublk_queue *ubq,
 	iod->nr_sectors = blk_rq_sectors(req);
 	iod->start_sector = blk_rq_pos(req);
 	iod->addr = io->addr;
+	iod->ioprio = req_get_ioprio(req);
+	iod->pad0 = 0;
+	iod->pad1 = 0;
 
 	return BLK_STS_OK;
 }
@@ -1009,6 +1015,9 @@ static blk_status_t ublk_setup_iod(struct ublk_queue *ubq, struct request *req)
 	iod->nr_sectors = blk_rq_sectors(req);
 	iod->start_sector = blk_rq_pos(req);
 	iod->addr = io->addr;
+	iod->ioprio = req_get_ioprio(req);
+	iod->pad0 = 0;
+	iod->pad1 = 0;
 
 	return BLK_STS_OK;
 }

@@ -275,7 +275,6 @@ struct ublksrv_ctrl_dev_info {
 #define		UBLK_IO_F_FUA			(1U << 13)
 #define		UBLK_IO_F_NOUNMAP		(1U << 15)
 #define		UBLK_IO_F_SWAP			(1U << 16)
-
 /*
  * io cmd is described by this structure, and stored in share memory, indexed
  * by request tag.
@@ -297,6 +296,11 @@ struct ublksrv_io_desc {
 
 	/* buffer address in ublksrv daemon vm space, from ublk driver */
 	__u64		addr;
+
+	/* I/O priority */
+	__u16		ioprio;
+	__u16		pad0;
+	__u32		pad1;
 };
 
 static inline __u8 ublksrv_get_op(const struct ublksrv_io_desc *iod)
@@ -307,6 +311,11 @@ static inline __u8 ublksrv_get_op(const struct ublksrv_io_desc *iod)
 static inline __u32 ublksrv_get_flags(const struct ublksrv_io_desc *iod)
 {
 	return iod->op_flags >> 8;
+}
+
+static inline __u16 ublksrv_get_ioprio(const struct ublksrv_io_desc *iod)
+{
+	return iod->ioprio;
 }
 
 /* issued to ublk driver via /dev/ublkcN */
