@@ -2267,6 +2267,10 @@ static int unuse_pte(struct vm_area_struct *vma, pmd_t *pmd,
 		folio_add_lru_vma(folio, vma);
 	}
 	new_pte = pte_mkold(mk_pte(page, vma->vm_page_prot));
+	if (vma_is_p3s_4k(vma))
+		new_pte = pte_advance_phys(new_pte,
+			(unsigned long)vma_slice_offset(vma, addr) <<
+			PAGE_SHIFT_4KB);
 	if (pte_swp_soft_dirty(old_pte))
 		new_pte = pte_mksoft_dirty(new_pte);
 	if (pte_swp_uffd_wp(old_pte))
