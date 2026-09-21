@@ -90,6 +90,12 @@ function get_machine_hugepage_size() {
 
 MB=$(get_machine_hugepage_size)
 
+# Check if hugetlb allocation is supported (e.g. 4KB compat mode disables hugetlb)
+if ! ./write_to_hugetlbfs -p /tmp/hugetlb_test_probe -s "$((MB * 1024 * 1024))" -m 1 2>/dev/null; then
+  echo "Hugetlb is unsupported or disabled in this configuration. Skipping..."
+  exit $ksft_skip
+fi
+
 function setup_cgroup() {
   local name="$1"
   local cgroup_limit="$2"
@@ -115,11 +121,17 @@ function setup_cgroup() {
 function wait_for_hugetlb_memory_to_get_depleted() {
   local cgroup="$1"
   local path="$cgroup_path/$cgroup/hugetlb.${MB}MB.$reservation_usage_file"
+  local tries=0
   # Wait for hugetlbfs memory to get depleted.
   while [ $(cat $path) != 0 ]; do
     echo Waiting for hugetlb memory to get depleted.
     cat $path
     sleep 0.5
+    tries=$((tries + 1))
+    if [ $tries -ge 10 ]; then
+      echo "Timed out waiting for hugetlb memory to get depleted."
+      break
+    fi
   done
 }
 
@@ -128,11 +140,17 @@ function wait_for_hugetlb_memory_to_get_reserved() {
   local size="$2"
 
   local path="$cgroup_path/$cgroup/hugetlb.${MB}MB.$reservation_usage_file"
+  local tries=0
   # Wait for hugetlbfs memory to get written.
   while [ $(cat $path) != $size ]; do
     echo Waiting for hugetlb memory reservation to reach size $size.
     cat $path
     sleep 0.5
+    tries=$((tries + 1))
+    if [ $tries -ge 10 ]; then
+      echo "Timed out waiting for hugetlb memory reservation."
+      break
+    fi
   done
 }
 
@@ -141,11 +159,17 @@ function wait_for_hugetlb_memory_to_get_written() {
   local size="$2"
 
   local path="$cgroup_path/$cgroup/hugetlb.${MB}MB.$fault_usage_file"
+  local tries=0
   # Wait for hugetlbfs memory to get written.
   while [ $(cat $path) != $size ]; do
     echo Waiting for hugetlb memory to reach size $size.
     cat $path
     sleep 0.5
+    tries=$((tries + 1))
+    if [ $tries -ge 10 ]; then
+      echo "Timed out waiting for hugetlb memory to get written."
+      break
+    fi
   done
 }
 
