@@ -23,6 +23,7 @@
 #include <linux/uaccess.h>
 #include "swap.h"
 #include "internal.h"
+#include <linux/p3s_user_pages.h>
 
 static int mincore_hugetlb(pte_t *pte, unsigned long hmask, unsigned long addr,
 			unsigned long end, struct mm_walk *walk)
@@ -129,11 +130,12 @@ static int __mincore_unmapped_range(unsigned long addr, unsigned long end,
 	int i;
 
 	if (vma->vm_file) {
-		pgoff_t pgoff;
+		for (i = 0; i < nr; i++) {
+			pgoff_t pgoff = linear_page_index(vma,
+					addr + (i * PAGE_SIZE));
 
-		pgoff = linear_page_index(vma, addr);
-		for (i = 0; i < nr; i++, pgoff++)
 			vec[i] = mincore_page(vma->vm_file->f_mapping, pgoff);
+		}
 	} else {
 		for (i = 0; i < nr; i++)
 			vec[i] = 0;
