@@ -1456,6 +1456,23 @@ config ARM64_64K_PAGES
 
 endchoice
 
+config ARM64_PER_PROCESS_PAGE_SIZE
+	bool "Per-process page size support"
+	# ARM64_VA_BITS_47 is the standard 16KB Android GKI configuration,
+	# providing 128TB of address space with 3-level page tables. 36-bit
+	# (2 levels / 64GB) is too small for 64-bit Android, while 48/52-bit
+	# introduces a 4th level. P3S requires this 3-level host hierarchy
+	# (PGTABLE_LEVELS = 3) so that 4KB compatibility tasks (which use
+	# 3 levels for a 39-bit / 512GB VA) share the same folded P4D/PUD structures.
+	depends on ARM64_16K_PAGES && ARM64_VA_BITS_47 && MMU && !COMPAT
+	default n
+	help
+	  Allows native 16KB kernels to execute processes mapped with 4KB
+	  translation granules. This is useful for running legacy 4KB
+	  binaries on hardware that performs better with 16KB page size.
+
+	  If unsure, say N.
+
 choice
 	prompt "Virtual address space size"
 	default ARM64_VA_BITS_52
