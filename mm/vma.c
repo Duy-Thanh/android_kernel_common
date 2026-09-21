@@ -14,6 +14,7 @@
 #include "vma.h"
 #undef CREATE_TRACE_POINTS
 #include <trace/hooks/mm.h>
+#include <linux/p3s_user_pages.h>
 
 struct mmap_state {
 	struct mm_struct *mm;
@@ -22,6 +23,7 @@ struct mmap_state {
 	unsigned long addr;
 	unsigned long end;
 	pgoff_t pgoff;
+	unsigned short slice_off;
 	unsigned long pglen;
 	vm_flags_t vm_flags;
 	struct file *file;
@@ -51,8 +53,9 @@ struct mmap_state {
 		.vmi = vmi_,						\
 		.addr = addr_,						\
 		.end = (addr_) + (len_),				\
-		.pgoff = pgoff_,					\
-		.pglen = PHYS_PFN(len_),				\
+		.pgoff = mm_mmap_pgoff(mm_, file_, pgoff_),		\
+		.slice_off = mm_mmap_slice_off(mm_, file_, pgoff_),	\
+		.pglen = (len_) >> PAGE_SHIFT,				\
 		.vm_flags = vm_flags_,					\
 		.file = file_,						\
 		.page_prot = vm_get_page_prot(vm_flags_),		\
@@ -537,7 +540,7 @@ __split_vma(struct vma_iterator *vmi, struct vm_area_struct *vma,
 		new->vm_end = addr;
 	} else {
 		new->vm_start = addr;
-		new->vm_pgoff += ((addr - vma->vm_start) >> PAGE_SHIFT);
+		vma_set_split_offset(new, vma, addr);
 	}
 
 	err = -ENOMEM;
@@ -584,7 +587,7 @@ __split_vma(struct vma_iterator *vmi, struct vm_area_struct *vma,
 
 	if (new_below) {
 		vma->vm_start = addr;
-		vma->vm_pgoff += (addr - new->vm_start) >> PAGE_SHIFT;
+		vma_set_split_offset(vma, new, addr);
 	} else {
 		vma->vm_end = addr;
 	}
@@ -2540,6 +2543,7 @@ static int __mmap_new_vma(struct mmap_state *map, struct vm_area_struct **vmap)
 
 	vma_iter_config(vmi, map->addr, map->end);
 	vma_set_range(vma, map->addr, map->end, map->pgoff);
+	vma_set_slice_off(vma, map->slice_off);
 	vm_flags_init(vma, map->vm_flags);
 	vma->vm_page_prot = map->page_prot;
 
@@ -2859,7 +2863,7 @@ int do_brk_flags(struct vma_iterator *vmi, struct vm_area_struct *vma,
 	 * occur after forking, so the expand will only happen on new VMAs.
 	 */
 	if (vma && vma->vm_end == addr) {
-		VMG_STATE(vmg, mm, vmi, addr, addr + len, vm_flags, PHYS_PFN(addr));
+		VMG_STATE(vmg, mm, vmi, addr, addr + len, vm_flags, addr >> PAGE_SHIFT);
 
 		vmg.prev = vma;
 		/* vmi is positioned at prev, which this mode expects. */
@@ -3146,6 +3150,7 @@ int expand_upwards(struct vm_area_struct *vma, unsigned long address)
 int expand_downwards(struct vm_area_struct *vma, unsigned long address)
 {
 	struct mm_struct *mm = vma->vm_mm;
+	P3S_CONTEXT_REMOTE_MM(mm);
 	struct vm_area_struct *prev;
 	int error = 0;
 	VMA_ITERATOR(vmi, mm, vma->vm_start);
