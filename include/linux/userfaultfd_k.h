@@ -222,6 +222,15 @@ static inline bool vma_can_userfault(struct vm_area_struct *vma,
 		return false;
 
 	/*
+	 * In 4KB compat mode on 16KB host kernels, pagecache (shmem) and hugetlb
+	 * folios operate at 16KB+ host page size and hold folio_lock. Subpage
+	 * slicing on pagecache folios can cause lock contention / deadlocks.
+	 * Only anonymous memory userfaultfd is supported for 4KB compat tasks.
+	 */
+	if (vma_is_compat(vma) && !vma_is_anonymous(vma))
+		return false;
+
+	/*
 	 * If wp async enabled, and WP is the only mode enabled, allow any
 	 * memory type.
 	 */
