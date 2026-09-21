@@ -1390,8 +1390,8 @@ static void __page_check_anon_rmap(const struct folio *folio,
 	 */
 	VM_BUG_ON_FOLIO(folio_anon_vma(folio)->root != vma->anon_vma->root,
 			folio);
-	VM_BUG_ON_PAGE(page_pgoff(folio, page) != linear_page_index(vma, address),
-		       page);
+	VM_BUG_ON_PAGE(!vma_anon_index_matches(vma, page_pgoff(folio, page),
+					       address), page);
 }
 
 static __always_inline void __folio_add_anon_rmap(struct folio *folio,
@@ -1992,6 +1992,9 @@ static bool try_to_unmap_one(struct folio *folio, struct vm_area_struct *vma,
 		address = pvmw.address;
 		anon_exclusive = folio_test_anon(folio) &&
 				 PageAnonExclusive(subpage);
+		if (anon_exclusive && !(flags & TTU_HWPOISON) &&
+		    !p3s_folio_slices_in_window(vma, folio, address, pvmw.pte))
+			goto walk_abort;
 
 		if (folio_test_hugetlb(folio)) {
 			bool anon = folio_test_anon(folio);
@@ -2192,7 +2195,7 @@ static bool try_to_unmap_one(struct folio *folio, struct vm_area_struct *vma,
 			dec_mm_counter(mm, MM_ANONPAGES);
 			inc_mm_counter(mm, MM_SWAPENTS);
 			swp_pte = swp_entry_to_pte(entry);
-			if (anon_exclusive)
+			if (anon_exclusive && !p3s_folio_mapped_by_slices(vma, folio))
 				swp_pte = pte_swp_mkexclusive(swp_pte);
 			if (likely(pte_present(pteval))) {
 				if (pte_soft_dirty(pteval))
@@ -2234,7 +2237,7 @@ discard:
 		 * If we are sure that we batched the entire folio and cleared
 		 * all PTEs, we can just optimize and stop right here.
 		 */
-		if (nr_pages == folio_nr_pages(folio))
+		if (nr_pages == folio_nr_pages(folio) && !vma_is_p3s_4k(vma))
 			goto walk_done;
 		continue;
 walk_abort:
@@ -2389,6 +2392,12 @@ static bool try_to_migrate_one(struct folio *folio, struct vm_area_struct *vma,
 		address = pvmw.address;
 		anon_exclusive = folio_test_anon(folio) &&
 				 PageAnonExclusive(subpage);
+		if (anon_exclusive &&
+		    !p3s_folio_slices_in_window(vma, folio, address, pvmw.pte)) {
+			ret = false;
+			page_vma_mapped_walk_done(&pvmw);
+			break;
+		}
 
 		if (folio_test_hugetlb(folio)) {
 			bool anon = folio_test_anon(folio);
@@ -2469,7 +2478,7 @@ static bool try_to_migrate_one(struct folio *folio, struct vm_area_struct *vma,
 		}
 
 		VM_WARN_ON_FOLIO(writable && folio_test_anon(folio) &&
-				!anon_exclusive, folio);
+				!anon_exclusive && !vma_is_p3s_4k(vma), folio);
 
 		/* Update high watermark before we lower rss */
 		update_hiwater_rss(mm);
@@ -2862,6 +2871,7 @@ static void rmap_walk_anon(struct folio *folio,
 				folio_nr_pages(folio));
 
 		VM_BUG_ON_VMA(address == -EFAULT, vma);
+		address = vma_slice_walk_start(vma, address);
 		cond_resched();
 
 		if (rwc->invalid_vma && rwc->invalid_vma(vma, rwc->arg))
@@ -2925,6 +2935,7 @@ lookup:
 		unsigned long address = vma_address(vma, pgoff_start, nr_pages);
 
 		VM_BUG_ON_VMA(address == -EFAULT, vma);
+		address = vma_slice_walk_start(vma, address);
 		cond_resched();
 
 		if (rwc->invalid_vma && rwc->invalid_vma(vma, rwc->arg))

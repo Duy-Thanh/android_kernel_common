@@ -334,6 +334,56 @@ vma_pgoff_to_address(const struct vm_area_struct *vma, pgoff_t pgoff)
 }
 
 /*
+ * vma_folio_slice_bounds - Compute valid contiguous slice span for address
+ * @vma: Pointer to struct vm_area_struct
+ * @addr: Virtual address within @vma
+ * @nr_slices: Output number of contiguous slices (1..4)
+ * @start_addr: Output starting virtual address of the slice span
+ *
+ * Computes contiguous slice boundaries clamped to folio, VMA, and PMD:
+ *
+ * ┌─────────────────────────────────────────────────────────┐
+ * │ 16KB Host Folio                                         │
+ * ├─────────────┬─────────────┬─────────────┬───────────────┤
+ * │   Slice 0   │   Slice 1   │   Slice 2   │    Slice 3    │
+ * └─────────────┴─────────────┴─────────────┴───────────────┘
+ *               ▲             ▲             ▲
+ *               ├── start_addr│             └── end of span
+ *               │   (slice 1) └── addr (fault)
+ *               ◄───────── nr_slices = 3 ──────────►
+ */
+static inline void vma_folio_slice_bounds(const struct vm_area_struct *vma,
+					  unsigned long addr,
+					  unsigned int *nr_slices,
+					  unsigned long *start_addr)
+{
+	unsigned int slices_per_folio = P3S_SLICES_PER_PAGE;
+	unsigned int sub, left, right;
+	unsigned long vma_before, vma_after, pt_before, pt_after;
+
+	if (!vma_is_p3s_4k(vma)) {
+		*nr_slices = 1;
+		*start_addr = addr;
+		return;
+	}
+
+	addr &= PAGE_MASK_4KB;
+	sub = vma_slice_offset(vma, addr);
+	vma_before = (addr >= vma->vm_start) ?
+		((addr - vma->vm_start) >> PAGE_SHIFT_4KB) : 0;
+	vma_after = (vma->vm_end > addr) ?
+		((vma->vm_end - addr) >> PAGE_SHIFT_4KB) : 0;
+	pt_before = (addr >> PAGE_SHIFT_4KB) & 511;
+	pt_after = 512 - pt_before;
+
+	left = min3((unsigned long)sub, vma_before, pt_before);
+	right = min3((unsigned long)(slices_per_folio - sub), vma_after, pt_after);
+
+	*nr_slices = left + right;
+	*start_addr = addr - ((unsigned long)left << PAGE_SHIFT_4KB);
+}
+
+/*
  * VMA Merge Struct Geometry Abstractions (vmg)
  */
 #define vmg_is_p3s_4k(vmg)	mm_is_p3s_4k((vmg)->mm)
