@@ -160,12 +160,20 @@ static inline bool vmg_nomem(struct vma_merge_struct *vmg)
 	return vmg->state == VMA_MERGE_ERROR_NOMEM;
 }
 
-/* Assumes addr >= vma->vm_start. */
-static inline pgoff_t vma_pgoff_offset(struct vm_area_struct *vma,
-				       unsigned long addr)
+#ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
+bool vmg_can_merge_offsets(struct vma_merge_struct *vmg, bool merge_next);
+#else
+static inline bool vmg_can_merge_offsets(struct vma_merge_struct *vmg, bool merge_next)
 {
-	return vma->vm_pgoff + PHYS_PFN(addr - vma->vm_start);
+	if (merge_next)
+		return vmg->next->vm_pgoff == vmg->pgoff + PHYS_PFN(vmg->end - vmg->start);
+
+	if (!vmg->prev)
+		return false;
+
+	return vmg->pgoff == vmg->prev->vm_pgoff + PHYS_PFN(vmg->start - vmg->prev->vm_start);
 }
+#endif
 
 #define VMG_STATE(name, mm_, vmi_, start_, end_, vm_flags_, pgoff_)	\
 	struct vma_merge_struct name = {				\
