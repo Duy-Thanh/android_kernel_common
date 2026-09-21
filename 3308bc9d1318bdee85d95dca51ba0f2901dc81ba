@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "272a1cfe_05589a71",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-09-21T22:16:30Z",
+      "side": 1,
+      "message": "All but 2 of these hooks were defined in previous releases. Please cherry-pick those patches and reduce this patch down to only new hooks.",
+      "revId": "3308bc9d1318bdee85d95dca51ba0f2901dc81ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
