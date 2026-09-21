@@ -33,4 +33,17 @@ static inline unsigned long mm_task_unmapped_base(const struct mm_struct *mm)
 	return mm_is_compat(mm) ? TASK_UNMAPPED_BASE_4KB :
 				   PAGE_ALIGN_KERNEL(DEFAULT_MAP_WINDOW / 4);
 }
+
+static inline void mm_init_new_context(const struct task_struct *tsk,
+				       struct mm_struct *mm)
+{
+	mm_init_pte_shift(mm, tsk);
+}
+
+static inline void mm_dup_mmap(const struct mm_struct *oldmm,
+			       struct mm_struct *mm)
+{
+	mm_set_pte_shift(mm, mm_pte_shift(oldmm));
+}
+
 #endif /* _ASM_ARM64_P3S_MMU_H */
