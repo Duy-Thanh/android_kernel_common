@@ -16,6 +16,23 @@
       "message": "create a patch on top of this one to add the new symbols to your symbol list",
       "revId": "a7ac488d6c18090c20547046ea3e343f121d81ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdd82fce_d3295251",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-09-21T15:50:51Z",
+      "side": 1,
+      "message": "Please leverage the existing xhci sideband infrastructure upstream. It was developed for this exact use case and has the necessary suspend/resume hooks.",
+      "revId": "a7ac488d6c18090c20547046ea3e343f121d81ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
