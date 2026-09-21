@@ -32,6 +32,7 @@
 #include <linux/swapops.h>
 #include <linux/miscdevice.h>
 #include <linux/uio.h>
+#include <linux/p3s_user_pages.h>
 
 static int sysctl_unprivileged_userfaultfd __read_mostly;
 
@@ -2017,6 +2018,9 @@ static long userfaultfd_ioctl(struct file *file, unsigned cmd,
 {
 	int ret = -EINVAL;
 	struct userfaultfd_ctx *ctx = file->private_data;
+
+	/* Range checks and page steps use the page size of ctx->mm */
+	P3S_CONTEXT_REMOTE_MM(ctx->mm);
 
 	if (cmd != UFFDIO_API && !userfaultfd_is_initialized(ctx))
 		return -EINVAL;
