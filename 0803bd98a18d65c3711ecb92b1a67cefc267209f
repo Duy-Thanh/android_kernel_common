@@ -34,6 +34,24 @@
       ],
       "revId": "0803bd98a18d65c3711ecb92b1a67cefc267209f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "978b19e8_bb57b10c",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-09-21T22:52:12Z",
+      "side": 1,
+      "message": "\u003e s/lazily/yet/ \n\nThere is already a \"yet\" in this sentence.\n\n\u003e Or to make the intent clear, something like: [...]\n\nIMHO the forest can\u0027t be seen through the trees in this.",
+      "parentUuid": "224cb70a_81518ea7",
+      "revId": "0803bd98a18d65c3711ecb92b1a67cefc267209f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
