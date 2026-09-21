@@ -2188,6 +2188,7 @@ EXPORT_SYMBOL(fault_in_readable);
  * get_dump_page() - pin user page in memory while writing it to core dump
  * @addr: user address
  * @locked: a pointer to an int denoting whether the mmap sem is held
+ * @page_offset: returns the byte offset of @addr in the pinned native page
  *
  * Returns struct page pointer of user page pinned for dump,
  * to be freed afterwards by put_page().
@@ -2200,12 +2201,21 @@ EXPORT_SYMBOL(fault_in_readable);
  * Called without mmap_lock (takes and releases the mmap_lock by itself).
  */
 #ifdef CONFIG_ELF_CORE
-struct page *get_dump_page(unsigned long addr, int *locked)
+struct page *get_dump_page(unsigned long addr, int *locked, unsigned long *page_offset)
 {
+	struct mm_struct *mm = current->mm;
+	struct vm_area_struct *vma;
 	struct page *page;
 	int ret;
 
-	ret = __get_user_pages_locked(current->mm, addr, 1, &page, locked,
+	if (page_offset) {
+		vma = vma_lookup(mm, addr);
+		if (!vma)
+			return NULL;
+		*page_offset = vma_folio_offset(vma, addr);
+	}
+
+	ret = __get_user_pages_locked(mm, addr, 1, &page, locked,
 				      FOLL_FORCE | FOLL_DUMP | FOLL_GET);
 	return (ret == 1) ? page : NULL;
 }
