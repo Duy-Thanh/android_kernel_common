@@ -1636,8 +1636,10 @@ int main(int __attribute__((unused)) argc, char *argv[])
 	/* 7. File Hugetlb testing */
 	mem_size = 2*1024*1024;
 	fd = memfd_create("uffd-test", MFD_HUGETLB | MFD_NOEXEC_SEAL);
-	if (fd < 0)
-		ksft_exit_fail_msg("uffd-test creation failed %d %s\n", errno, strerror(errno));
+	if (fd < 0) {
+		base_tests("Hugetlb shmem testing:", NULL, 0, 1);
+		goto skip_hugetlb_file;
+	}
 	mem = mmap(NULL, mem_size, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
 	if (mem != MAP_FAILED) {
 		wp_init(mem, mem_size);
@@ -1651,6 +1653,7 @@ int main(int __attribute__((unused)) argc, char *argv[])
 		base_tests("Hugetlb shmem testing:", NULL, 0, 1);
 	}
 	close(fd);
+skip_hugetlb_file:
 
 	/* 8. File memory testing */
 	buf_size = page_size * 10;
