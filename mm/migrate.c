@@ -390,6 +390,10 @@ static bool remove_migration_pte(struct folio *folio,
 
 		folio_get(folio);
 		pte = mk_pte(new, READ_ONCE(vma->vm_page_prot));
+		if (vma_is_compat(vma))
+			pte = pte_advance_phys(pte,
+				(unsigned long)vma_slice_offset(vma, pvmw.address) <<
+				PAGE_SHIFT_4KB);
 
 		entry = pte_to_swp_entry(old_pte);
 		if (!is_migration_entry_young(entry))
