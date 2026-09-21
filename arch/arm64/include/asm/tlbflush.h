@@ -184,7 +184,7 @@ static inline void sme_dvmsync_batch(void)
 #define TLBIR_TTL_MASK		GENMASK_ULL(38, 37)
 #define TLBIR_BADDR_MASK	GENMASK_ULL(36,  0)
 
-#define __TLBI_VADDR_RANGE(baddr, asid, scale, num, ttl)		\
+#define __TLBI_VADDR_RANGE(baddr, asid, scale, num, ttl, tg)		\
 	({								\
 		unsigned long __ta = 0;					\
 		unsigned long __ttl = (ttl >= 1 && ttl <= 3) ? ttl : 0;	\
@@ -192,7 +192,7 @@ static inline void sme_dvmsync_batch(void)
 		__ta |= FIELD_PREP(TLBIR_TTL_MASK, __ttl);		\
 		__ta |= FIELD_PREP(TLBIR_NUM_MASK, num);		\
 		__ta |= FIELD_PREP(TLBIR_SCALE_MASK, scale);		\
-		__ta |= FIELD_PREP(TLBIR_TG_MASK, get_trans_granule());	\
+		__ta |= FIELD_PREP(TLBIR_TG_MASK, tg);			\
 		__ta |= FIELD_PREP(TLBIR_ASID_MASK, asid);		\
 		__ta;							\
 	})
@@ -445,13 +445,13 @@ static inline void arch_tlbbatch_flush(struct arch_tlbflush_unmap_batch *batch)
  *    ensure 64KB start alignment is maintained for the LPA2 case.
  */
 #define __flush_tlb_range_op(op, start, pages, stride,			\
-				asid, tlb_level, tlbi_user, lpa2)	\
+				asid, tlb_level, tlbi_user, lpa2, tg, page_shift) \
 do {									\
 	typeof(start) __flush_start = start;				\
 	typeof(pages) __flush_pages = pages;				\
 	int num = 0;							\
 	int scale = 3;							\
-	int shift = lpa2 ? 16 : PAGE_SHIFT;				\
+	int shift = lpa2 ? 16 : page_shift;				\
 	unsigned long addr;						\
 									\
 	while (__flush_pages > 0) {					\
@@ -459,22 +459,22 @@ do {									\
 		    __flush_pages == 1 ||				\
 		    (lpa2 && __flush_start != ALIGN(__flush_start, SZ_64K))) {	\
 			addr = __TLBI_VADDR(__flush_start, asid);	\
-			__tlbi_level(op, addr, tlb_level);		\
+			__tlbi_level_tg(op, addr, tlb_level, tg);	\
 			if (tlbi_user)					\
-				__tlbi_user_level(op, addr, tlb_level);	\
+				__tlbi_user_level_tg(op, addr, tlb_level, tg);	\
 			__flush_start += stride;			\
-			__flush_pages -= stride >> PAGE_SHIFT;		\
+			__flush_pages -= stride >> page_shift;		\
 			continue;					\
 		}							\
 									\
 		num = __TLBI_RANGE_NUM(__flush_pages, scale);		\
 		if (num >= 0) {						\
 			addr = __TLBI_VADDR_RANGE(__flush_start >> shift, asid, \
-						scale, num, tlb_level);	\
+						scale, num, tlb_level, tg);	\
 			__tlbi(r##op, addr);				\
 			if (tlbi_user)					\
 				__tlbi_user(r##op, addr);		\
-			__flush_start += __TLBI_RANGE_PAGES(num, scale) << PAGE_SHIFT; \
+			__flush_start += __TLBI_RANGE_PAGES(num, scale) << page_shift; \
 			__flush_pages -= __TLBI_RANGE_PAGES(num, scale);\
 		}							\
 		scale--;						\
@@ -482,7 +482,8 @@ do {									\
 } while (0)
 
 #define __flush_s2_tlb_range_op(op, start, pages, stride, tlb_level) \
-	__flush_tlb_range_op(op, start, pages, stride, 0, tlb_level, false, kvm_lpa2_is_enabled());
+	__flush_tlb_range_op(op, start, pages, stride, 0, tlb_level, \
+			     false, kvm_lpa2_is_enabled(), get_trans_granule(), PAGE_SHIFT);
 
 static inline bool __flush_tlb_range_limit_excess(unsigned long start,
 		unsigned long end, unsigned long pages, unsigned long stride)
@@ -507,10 +508,12 @@ static inline void __flush_tlb_range_nosync(struct mm_struct *mm,
 				     int tlb_level)
 {
 	unsigned long asid, pages;
+	unsigned long tg = get_trans_granule_mm(mm);
+	unsigned int page_shift = mm_pte_shift(mm);
 
 	start = round_down(start, stride);
 	end = round_up(end, stride);
-	pages = (end - start) >> PAGE_SHIFT;
+	pages = (end - start) >> page_shift;
 
 	if (__flush_tlb_range_limit_excess(start, end, pages, stride)) {
 		flush_tlb_mm(mm);
@@ -522,10 +525,10 @@ static inline void __flush_tlb_range_nosync(struct mm_struct *mm,
 
 	if (last_level)
 		__flush_tlb_range_op(vale1is, start, pages, stride, asid,
-				     tlb_level, true, lpa2_is_enabled());
+				     tlb_level, true, lpa2_is_enabled(), tg, page_shift);
 	else
 		__flush_tlb_range_op(vae1is, start, pages, stride, asid,
-				     tlb_level, true, lpa2_is_enabled());
+				     tlb_level, true, lpa2_is_enabled(), tg, page_shift);
 
 	mmu_notifier_arch_invalidate_secondary_tlbs(mm, start, end);
 }
@@ -549,13 +552,14 @@ static inline void flush_tlb_range(struct vm_area_struct *vma,
 	 * Set the tlb_level to TLBI_TTL_UNKNOWN because we can not get enough
 	 * information here.
 	 */
-	__flush_tlb_range(vma, start, end, PAGE_SIZE, false, TLBI_TTL_UNKNOWN);
+	__flush_tlb_range(vma, start, end, vma_page_size(vma), false, TLBI_TTL_UNKNOWN);
 }
 
 static inline void flush_tlb_kernel_range(unsigned long start, unsigned long end)
 {
 	const unsigned long stride = PAGE_SIZE;
 	unsigned long pages;
+	unsigned long tg = get_trans_granule();
 
 	start = round_down(start, stride);
 	end = round_up(end, stride);
@@ -568,7 +572,7 @@ static inline void flush_tlb_kernel_range(unsigned long start, unsigned long end
 
 	dsb(ishst);
 	__flush_tlb_range_op(vaale1is, start, pages, stride, 0,
-			     TLBI_TTL_UNKNOWN, false, lpa2_is_enabled());
+			     TLBI_TTL_UNKNOWN, false, lpa2_is_enabled(), tg, PAGE_SHIFT);
 	__tlbi_sync_s1ish_kernel();
 	isb();
 }
@@ -590,7 +594,7 @@ static inline void __flush_tlb_kernel_pgtable(unsigned long kaddr)
 static inline void arch_tlbbatch_add_pending(struct arch_tlbflush_unmap_batch *batch,
 		struct mm_struct *mm, unsigned long start, unsigned long end)
 {
-	__flush_tlb_range_nosync(mm, start, end, PAGE_SIZE, true, 3);
+	__flush_tlb_range_nosync(mm, start, end, mm_pte_size(mm), true, 3);
 }
 #endif
 
