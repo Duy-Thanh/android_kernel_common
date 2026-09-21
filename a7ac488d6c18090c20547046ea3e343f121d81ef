@@ -33,6 +33,24 @@
       "message": "Please leverage the existing xhci sideband infrastructure upstream. It was developed for this exact use case and has the necessary suspend/resume hooks.",
       "revId": "a7ac488d6c18090c20547046ea3e343f121d81ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a377c456_44ad44c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1764430
+      },
+      "writtenOn": "2026-09-21T17:56:19Z",
+      "side": 1,
+      "message": "Looks like there were a lot of issues currently being reported with the existing upstream suspend/resume framework, as depending on the type of audio device connected, etc the logic breaks.  On our platforms currently, we aren\u0027t leveraging this mechanism yet, but going forward we\u0027re planning to do so, and addressing those issues much earlier upstream.",
+      "parentUuid": "fdd82fce_d3295251",
+      "revId": "a7ac488d6c18090c20547046ea3e343f121d81ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
