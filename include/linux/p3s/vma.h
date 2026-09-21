@@ -196,6 +196,47 @@ static inline unsigned long vma_folio_offset(const struct vm_area_struct *vma,
 	       vma_offset_in_page(vma, addr);
 }
 
+/*
+ * vma_file_offset - Calculate starting byte offset in backing file
+ * @vma: Pointer to struct vm_area_struct
+ *
+ * Combines 16KB Page Cache folio index (vm_pgoff << 14) with subpage
+ * slice offset (vm_slice_off << 12) for 4KB compat file mappings:
+ *
+ * ┌─────────────────────────────────────────────────────────┐
+ * │ Backing File Page Cache (16KB Folios)                   │
+ * ├───────────────────────────┬─────────────────────────────┤
+ * │ Folio 0 (vm_pgoff = 0)    │ Folio 1 (vm_pgoff = 1)      │
+ * │ [ S0 │ S1 │ S2 │ S3 ]     │ [ S0 │ S1 │ S2 │ S3 ]       │
+ * └───────────────────────────┴─────────────────────────────┘
+ *                                    ▲
+ *                                    └── vm_pgoff=1, slice_off=1
+ * ◄──────────────── vma_file_offset: 20 KB ────────────────►
+ */
+static inline loff_t vma_file_offset(const struct vm_area_struct *vma)
+{
+	return ((loff_t)vma->vm_pgoff << PAGE_SHIFT_KERNEL) +
+	       ((loff_t)vma_slice_off(vma) << PAGE_SHIFT_4KB);
+}
+
+/*
+ * vma_file_offset_at - Calculate byte offset in backing file for an address
+ * @vma: Pointer to struct vm_area_struct
+ * @addr: Virtual address within @vma
+ *
+ * ┌─────────────────────────────────────────────────────────┐
+ * │ Backing File Byte Stream                                │
+ * ├─────────────────────────────────────────────────────────┤
+ * │ ◄────── vma_file_offset ──────► ▲                       │
+ * │ ◄────────────── vma_file_offset_at ──────────────►     │
+ * └─────────────────────────────────────────────────────────┘
+ */
+static inline loff_t vma_file_offset_at(const struct vm_area_struct *vma,
+					unsigned long addr)
+{
+	return vma_file_offset(vma) + (addr - vma->vm_start);
+}
+
 #ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
 #define p3s_adjust_unmapped_area_info(info) do { \
 	if (!(info)->align_mask && current->mm && mm_is_compat(current->mm)) \
