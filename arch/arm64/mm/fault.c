@@ -582,6 +582,7 @@ static int __kprobes do_page_fault(unsigned long far, unsigned long esr,
 	int si_code;
 	int pkey = -1;
 	bool bypass = false;
+	bool vma_retry = false;
 
 	if (kprobe_page_fault(regs, esr))
 		return 0;
@@ -651,6 +652,7 @@ static int __kprobes do_page_fault(unsigned long far, unsigned long esr,
 	if (!(mm_flags & FAULT_FLAG_USER) && !bypass)
 		goto lock_mmap;
 
+lock_vma:
 	vma = lock_vma_under_rcu(mm, addr);
 	if (!vma)
 		goto lock_mmap;
@@ -697,6 +699,11 @@ static int __kprobes do_page_fault(unsigned long far, unsigned long esr,
 			goto no_context;
 		return 0;
 	}
+
+	trace_android_vh_arm64_do_page_fault_retry_vma_lock(&vma_retry);
+	if (vma_retry)
+		goto lock_vma;
+
 lock_mmap:
 
 retry:
