@@ -177,6 +177,24 @@ static inline loff_t vma_file_offset(const struct vm_area_struct *vma)
 }
 
 /*
+ * vma_file_offset_at - Calculate byte offset in backing file for an address
+ * @vma: Pointer to struct vm_area_struct
+ * @addr: Virtual address within @vma
+ *
+ * ┌─────────────────────────────────────────────────────────┐
+ * │ Backing File Byte Stream                                │
+ * ├─────────────────────────────────────────────────────────┤
+ * │ ◄────── vma_file_offset ──────► ▲                       │
+ * │ ◄────────────── vma_file_offset_at ──────────────►     │
+ * └─────────────────────────────────────────────────────────┘
+ */
+static inline loff_t vma_file_offset_at(const struct vm_area_struct *vma,
+					unsigned long addr)
+{
+	return vma_file_offset(vma) + (addr - vma->vm_start);
+}
+
+/*
  * p3s_adjust_unmapped_area_info - Align unmapped area allocations to host page
  * @info: Pointer to struct vm_unmapped_area_info
  *
