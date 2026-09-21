@@ -15,6 +15,7 @@
 #include <linux/syscalls.h>
 #include <linux/sched.h>
 #include "internal.h"
+#include <linux/p3s_user_pages.h>
 
 /*
  * mseal() disallows an input range which contain unmapped ranges (VMA holes).
