@@ -34,6 +34,24 @@
       "parentUuid": "51d0231f_c9202528",
       "revId": "ad26c6b4ca13487324c2ed6d2bbcf718a9b34d50",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e098a01_7b1d73f0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-09-22T12:37:53Z",
+      "side": 1,
+      "message": "Yeah, I think you are right. My original intention was to not allow pVMs (especially non-Linux based ones) to accidentally disable all those mitigations. But to be honest, when I was preparing it I also had doubts if it was worth it: at the end of the day it is the pVM\u0027s responsibility to not do dummy things + as you noted it is better to not forbid the guest from applying its own policies for optimization purposes, so yeah I think we can drop this one.",
+      "parentUuid": "c6a0ab2a_006c90a6",
+      "revId": "ad26c6b4ca13487324c2ed6d2bbcf718a9b34d50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
