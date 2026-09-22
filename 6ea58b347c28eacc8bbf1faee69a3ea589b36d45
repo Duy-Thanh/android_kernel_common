@@ -16,6 +16,24 @@
       "message": "The build break error:\n\n```\nInconsistent kallsyms data\nTry \"make KALLSYMS_EXTRA_PASS\u003d1\" as a workaround\n```\n\nLooks similar to what was fixed by @draszik@google.com in b/537534186, though in this case it looks like it only affects the `--gcov` targets.",
       "revId": "6ea58b347c28eacc8bbf1faee69a3ea589b36d45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "759604bb_e1e940d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-09-22T12:21:50Z",
+      "side": 1,
+      "message": "Yes looks like the exact same bug. This branch doesn\u0027t have the fix yet.",
+      "parentUuid": "1ae47d35_d207ae41",
+      "revId": "6ea58b347c28eacc8bbf1faee69a3ea589b36d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
