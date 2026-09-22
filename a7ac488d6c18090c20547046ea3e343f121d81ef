@@ -104,6 +104,24 @@
       "parentUuid": "bc9d1734_76fec053",
       "revId": "a7ac488d6c18090c20547046ea3e343f121d81ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "646fc8a9_db70fe94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-09-22T15:50:09Z",
+      "side": 1,
+      "message": "As the authors of the upstream patchset, surely you are the ones best suited to fix it?",
+      "parentUuid": "a377c456_44ad44c0",
+      "revId": "a7ac488d6c18090c20547046ea3e343f121d81ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
