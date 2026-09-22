@@ -70,6 +70,24 @@
       "parentUuid": "f2a5cb92_32230f82",
       "revId": "2991236013ca98e83f0cffd31969383597c7872a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b3f6264_9c654c94",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-09-22T16:38:14Z",
+      "side": 1,
+      "message": "discussed offline in b/562777823.",
+      "parentUuid": "0c66354b_8b4e9602",
+      "revId": "2991236013ca98e83f0cffd31969383597c7872a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
