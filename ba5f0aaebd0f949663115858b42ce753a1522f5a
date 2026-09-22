@@ -70,6 +70,30 @@
       ],
       "revId": "ba5f0aaebd0f949663115858b42ce753a1522f5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79c97d52_1e4ae942",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1779,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-09-22T13:43:59Z",
+      "side": 1,
+      "message": "We know we will need to do this anyway for device assignment, so why not do this right away? (Now that after the refactoring done in aosp/4232681 we can do this easily.)\n\nAlso this aligns the design with pKVM-ARM, which is not a bad thing?\n\nIf we just keep current implementation for now, it means we keep that ugly dangerous assumption that `pkvm_host_donate_hyp_mmio()` will never be used at runtime. We could \"fix\" that by removing `pkvm_host_donate_hyp_mmio()` and inlining it in the IOMMU init, yes, but for device assignment we\u0027re gonna need `pkvm_host_donate_hyp_mmio()` again?\n\n\u003e With device assignment we might need to support unuse_dma operation as well and hence need to revisit this.\n\nWhy? We\u0027re not gonna use use_dma/unuse_dma for MMIO of devices assigned to pVMs. Quite the opposite, we will need to _prevent_ use_dma for such MMIO (which is exactly what this change is about). And again, pKVM-ARM does the same.",
+      "parentUuid": "29610d8e_bfbfd0b0",
+      "range": {
+        "startLine": 1779,
+        "startChar": 25,
+        "endLine": 1779,
+        "endChar": 51
+      },
+      "revId": "ba5f0aaebd0f949663115858b42ce753a1522f5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
