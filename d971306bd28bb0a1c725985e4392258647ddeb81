@@ -1,0 +1,108 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4e92118_a61b9b53",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-09-22T20:33:13Z",
+      "side": 1,
+      "message": "Again, mention the upstream posting https://lore.kernel.org/all/20260903040131.4016290-1-zhangbo56@xiaomi.com/ as the attempt to fix this upstream and that this hook won\u0027t be needed once upstream solution is in place.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 0
+      },
+      "revId": "d971306bd28bb0a1c725985e4392258647ddeb81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16977175_39b65e06",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-09-22T20:33:13Z",
+      "side": 1,
+      "message": "How about this instead? I think functionally it\u0027s the same:\n```\n\tif (sc) {\n\t\tbool skip \u003d false;\n\t\ttrace_android_vh_can_reclaim_anon_pages(memcg, nid, sc-\u003egfp_mask, \u0026skip);\n\t\tif (skip)\n\t\t\tgoto can_demote;\n\t}\n\n\tif (memcg \u003d\u003d NULL) {\n\t\t/*\n\t\t * For non-memcg reclaim, is there\n\t\t * space in any swap device?\n\t\t */\n\t\tif (get_nr_swap_pages() \u003e 0)\n\t\t\treturn true;\n\t} else {\n\t\t/* Is the memcg below its swap limit? */\n\t\tif (mem_cgroup_get_nr_swap_pages(memcg) \u003e 0)\n\t\t\treturn true;\n\t}\n\n\t/*\n\t * The page can not be swapped.\n\t *\n\t * Can it be reclaimed from this node via demotion?\n\t */\ncan_demote:\n\treturn can_demote(nid, sc);\n}\n```",
+      "range": {
+        "startLine": 355,
+        "startChar": 0,
+        "endLine": 380,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ceb0e456_4754489b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/vmscan.c",
+              "range": {
+                "startLine": 355,
+                "startChar": 0,
+                "endLine": 358,
+                "endChar": 0
+              },
+              "replacement": "\tif (sc) {\n\t\tbool skip \u003d false;\n"
+            },
+            {
+              "path": "mm/vmscan.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (skip)\n\t\t\tgoto can_demote;\n\t}\n"
+            },
+            {
+              "path": "mm/vmscan.c",
+              "range": {
+                "startLine": 365,
+                "startChar": 0,
+                "endLine": 366,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (get_nr_swap_pages() \u003e 0)\n"
+            },
+            {
+              "path": "mm/vmscan.c",
+              "range": {
+                "startLine": 369,
+                "startChar": 0,
+                "endLine": 370,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (mem_cgroup_get_nr_swap_pages(memcg) \u003e 0)\n"
+            },
+            {
+              "path": "mm/vmscan.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "can_demote:\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d971306bd28bb0a1c725985e4392258647ddeb81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
