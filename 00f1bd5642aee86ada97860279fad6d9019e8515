@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b004f7eb_f020af57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2026-09-22T13:35:51Z",
+      "side": 1,
+      "message": "It would be better if `kernel_aarch64_microdroid` used `common_kernel` target. Other similar targets like `kernel_aarch64_tv` are using `common_kernel` already.",
+      "revId": "00f1bd5642aee86ada97860279fad6d9019e8515",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f3990ee_b6494d3e",
