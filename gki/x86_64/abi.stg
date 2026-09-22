@@ -337886,7 +337886,7 @@ elf_symbol {
   name: "usb_autopm_get_interface"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x37f5d6a7
+  crc: 0xfb4b1179
   type_id: 0x95c144d5
   full_name: "usb_autopm_get_interface"
 }
@@ -337895,7 +337895,7 @@ elf_symbol {
   name: "usb_autopm_get_interface_async"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x37f5d6a7
+  crc: 0xfb4b1179
   type_id: 0x95c144d5
   full_name: "usb_autopm_get_interface_async"
 }
@@ -337904,7 +337904,7 @@ elf_symbol {
   name: "usb_autopm_get_interface_no_resume"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xaf83df2e
+  crc: 0xf748ae6b
   type_id: 0x18d9f669
   full_name: "usb_autopm_get_interface_no_resume"
 }
@@ -337913,7 +337913,7 @@ elf_symbol {
   name: "usb_autopm_put_interface"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xaf83df2e
+  crc: 0xf748ae6b
   type_id: 0x18d9f669
   full_name: "usb_autopm_put_interface"
 }
@@ -337922,7 +337922,7 @@ elf_symbol {
   name: "usb_autopm_put_interface_async"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xaf83df2e
+  crc: 0xf748ae6b
   type_id: 0x18d9f669
   full_name: "usb_autopm_put_interface_async"
 }
@@ -338057,7 +338057,7 @@ elf_symbol {
   name: "usb_deregister"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x08c8a4b8
+  crc: 0xc932493e
   type_id: 0x1fbef67f
   full_name: "usb_deregister"
 }
@@ -338075,7 +338075,7 @@ elf_symbol {
   name: "usb_disable_autosuspend"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xb31769d3
+  crc: 0x57e66bb2
   type_id: 0x13c76860
   full_name: "usb_disable_autosuspend"
 }
@@ -338093,7 +338093,7 @@ elf_symbol {
   name: "usb_driver_claim_interface"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x3a581a92
+  crc: 0x33a0ac7d
   type_id: 0x922471e5
   full_name: "usb_driver_claim_interface"
 }
@@ -338102,7 +338102,7 @@ elf_symbol {
   name: "usb_driver_release_interface"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x5c7079cc
+  crc: 0x5139bc02
   type_id: 0x1f3aec00
   full_name: "usb_driver_release_interface"
 }
@@ -338111,7 +338111,7 @@ elf_symbol {
   name: "usb_enable_autosuspend"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xb31769d3
+  crc: 0x57e66bb2
   type_id: 0x13c76860
   full_name: "usb_enable_autosuspend"
 }
@@ -338345,7 +338345,7 @@ elf_symbol {
   name: "usb_match_id"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xdf905bf0
+  crc: 0x95e6bfbd
   type_id: 0x170370af
   full_name: "usb_match_id"
 }
@@ -338453,7 +338453,7 @@ elf_symbol {
   name: "usb_register_driver"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x08a507b2
+  crc: 0xc94f38c3
   type_id: 0x92855f9f
   full_name: "usb_register_driver"
 }
