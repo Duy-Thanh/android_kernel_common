@@ -1007,6 +1007,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "67805601_ff8962e0",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-22T19:21:10Z",
+      "side": 1,
+      "message": "This is now cleared lazily in is_mapped, and is_mapped itself is called on mmap.",
+      "parentUuid": "14584804_03598134",
+      "range": {
+        "startLine": 412,
+        "startChar": 0,
+        "endLine": 417,
+        "endChar": 17
+      },
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8cae6ae7_8f247615",
         "filename": "drivers/android/wrapfd/wrapped_device.rs",
         "patchSetId": 7
