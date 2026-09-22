@@ -87,6 +87,24 @@
       "message": "Please upload backports to 16-6.12 and 15-6.6",
       "revId": "5586a3979aeb7f26edde4f1f1ee1f599567d63c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc16ce5a_523b10c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-09-22T17:21:19Z",
+      "side": 1,
+      "message": "Done, thanks. aosp/4313926 and aosp/4313946",
+      "parentUuid": "ddc3e8ab_9af45bc7",
+      "revId": "5586a3979aeb7f26edde4f1f1ee1f599567d63c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
