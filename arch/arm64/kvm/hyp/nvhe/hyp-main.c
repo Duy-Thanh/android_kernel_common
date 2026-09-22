@@ -2020,10 +2020,10 @@ static void handle___pkvm_pviommu_attach(struct kvm_cpu_context *host_ctxt)
 static void handle___pkvm_pviommu_add_vsid(struct kvm_cpu_context *host_ctxt)
 {
 	DECLARE_REG(struct kvm *, host_kvm, host_ctxt, 1);
-	DECLARE_REG(pkvm_handle_t, pviommu, host_ctxt, 2);
+	DECLARE_REG(int, pviommu, host_ctxt, 2);
 	DECLARE_REG(pkvm_handle_t, iommu, host_ctxt, 3);
-	DECLARE_REG(pkvm_handle_t, sid, host_ctxt, 4);
-	DECLARE_REG(pkvm_handle_t, vsid, host_ctxt, 5);
+	DECLARE_REG(u32, sid, host_ctxt, 4);
+	DECLARE_REG(u32, vsid, host_ctxt, 5);
 
 	cpu_reg(host_ctxt, 1) = pkvm_pviommu_add_vsid(host_kvm, pviommu, iommu, sid, vsid);
 }
