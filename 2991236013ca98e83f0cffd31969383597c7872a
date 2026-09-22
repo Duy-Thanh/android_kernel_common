@@ -52,6 +52,24 @@
       "parentUuid": "92bd2a93_30f04095",
       "revId": "2991236013ca98e83f0cffd31969383597c7872a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c66354b_8b4e9602",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1991256
+      },
+      "writtenOn": "2026-09-22T03:21:39Z",
+      "side": 1,
+      "message": "thanks for the review and the dstailed explanation.the driver is sipa,UNISOC\u0027s network accelerator,running as an out-of-tree GKI vendor module. it can\u0027t be upstreamed in the near term - it depends on undocumented UNISOC soc hardware,and there is no UNISOC bringup in mainline that could exercise it.out rx buffers come from a dedicated cma area,so we register \u0027mp_ops-\u003erelease_netmem\u0027 to return pages to that CMA pool via \u0027cma_release\u0027 instead of the buddy allocator.However,the mp_ops rodata check only accepts vmlinux rodata,which effectively blocks any GKI vendor module from using the memory-provider mechanism. given the driver can\u0027t be upstreamed soon,could you suggest a more reasonable way forward on the kernel side?",
+      "parentUuid": "f2a5cb92_32230f82",
+      "revId": "2991236013ca98e83f0cffd31969383597c7872a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
