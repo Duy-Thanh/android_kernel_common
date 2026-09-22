@@ -142,6 +142,30 @@
       },
       "revId": "ba5f0aaebd0f949663115858b42ce753a1522f5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a4baeb3_72090f59",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1779,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-09-22T15:24:49Z",
+      "side": 1,
+      "message": "\u003e Even if we somehow supported such sharing, why would we need use_dma for MMIO, not just for normal RAM? Literally the only reason why we support use_dma for MMIO in the first place is to support RMRRs (for the GPU in our case), , which is quite a corner case, and which the host just permanently DMA-maps at boot time (which is why we don\u0027t need to support unuse_dma for this case).\n\nSo what would we need to support device assignment for a device which has memory in RMRR? We would have to somehow make it possible for the host to relinquish control of that reserved memory and give it to pVM and then back to host when pVM is shutdown? I understand, currently we have RMRR only for gpu, but are we sure that we will not have RMRR for any other device in future(like npu or such)? I might be mistaken and this usecase may never arise. And if this is not a valid usecase, my concerns are moot.\n\n\n\u003e\u003e But if the usecase is permanent allocation of a device to pVM\n\n\u003e Who said it was permanent?\n\nNobody said and I also didn\u0027t mention that anybody said. I was just asking if the expected usecase is about permanant assignment of a device to a pVM.\n\n\u003e The fundamental problem we are addressing here is to prevent donating host\u0027s MMIO (to either hyp or guest) while the host may be doing DMA on this MMIO, right?\n\nExactly. My point was, if we needed to support unuse_dma for MMIO(for the reasons mentioned above), this implementation is not adequate and need rework, so why bother change existing code. But if we are sure that unuse_dma is not a valid usecase with device assignment, I am fine with this change to have parity with ARM.",
+      "parentUuid": "e27a6fa8_fffb7c2e",
+      "range": {
+        "startLine": 1779,
+        "startChar": 25,
+        "endLine": 1779,
+        "endChar": 51
+      },
+      "revId": "ba5f0aaebd0f949663115858b42ce753a1522f5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
