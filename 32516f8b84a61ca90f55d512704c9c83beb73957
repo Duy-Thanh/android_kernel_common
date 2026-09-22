@@ -16,6 +16,24 @@
       "message": "Please add more description. Why are these symbols needed? What features do they enable? What driver relies on them?",
       "revId": "32516f8b84a61ca90f55d512704c9c83beb73957",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34dfca2f_5aed9661",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5179135
+      },
+      "writtenOn": "2026-09-22T09:09:57Z",
+      "side": 1,
+      "message": "In Our project, we need to utilize the ip l2tp command to configure L2TP tunnels for Internet access.\nBackground: Google has updated the L2TP module and certain APIs: https://android-review.googlesource.com/c/kernel/common/+/4108874 \nl2tp_tunnel_dec_refcount -\u003e l2tp_tunnel_put \nl2tp_session_dec_refcount -\u003e l2tp_session_put\n\nPreliminary Analysis：Please review the error message below; the protected symbol used previously has been modified this time.\nl2tp_netlink: Protected symbol: l2tp_tunnel_put (err -13)\nl2tp_netlink: Protected symbol: l2tp_session_put (err -13) \nl2tp_ip: Protected symbol: l2tp_session_put (err -13)\n\nWe need to update the corresponding abi_symbol_list.\n\nFor detailed information, please refer to the following submission.\nhttps://partnerissuetracker.corp.google.com/issues/563396012 \n\nI would appreciate it if you could please confirm.",
+      "parentUuid": "56e3d0d8_fe03ae3b",
+      "revId": "32516f8b84a61ca90f55d512704c9c83beb73957",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
