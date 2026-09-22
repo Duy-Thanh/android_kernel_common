@@ -16,6 +16,23 @@
       "message": "This is still pending.\nCan you please check this?",
       "revId": "bd3ec47f07c5a7b9856779763cce73676cf962b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f54c7bfa_a427a866",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1988826
+      },
+      "writtenOn": "2026-09-22T04:29:49Z",
+      "side": 1,
+      "message": "This is long pending.\nCould you please proceed to submit this change?",
+      "revId": "bd3ec47f07c5a7b9856779763cce73676cf962b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
