@@ -16,6 +16,24 @@
       "message": "nit: in the latest SDM it is 11.7.1.",
       "revId": "e1f1725e5cc32aac7bc44ba20c3f72c0a62a3e31",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0938d64_f1997583",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-09-22T12:46:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3abecc3c_4249ce34",
+      "revId": "e1f1725e5cc32aac7bc44ba20c3f72c0a62a3e31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
