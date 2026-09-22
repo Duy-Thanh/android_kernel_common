@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2c259b9_226f3389",
+        "filename": "rust/kernel/sync/lock/spinlock.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-09-22T11:51:16Z",
+      "side": 1,
+      "message": "It might make sense to move this to a separate `SpinLockIrq` type so that you cannot accidentally invoke the non-irq lock call on this lock. Mixing irq and non-irq operations could lead to deadlocks.\n\nOtherwise LGTM.",
+      "revId": "65577d7d69ca22c04d83b501dc3dd24acfbae317",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
