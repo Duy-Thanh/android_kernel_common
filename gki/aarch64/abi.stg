@@ -429604,6 +429604,13 @@ function {
   parameter_id: 0x38d23361
 }
 function {
+  id: 0x9b477493
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x38d23361
+  parameter_id: 0x2e18f543
+}
+function {
   id: 0x9b478d6a
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -454417,6 +454424,15 @@ elf_symbol {
   full_name: "__traceiter_android_rvh_psci_cpu_suspend"
 }
 elf_symbol {
+  id: 0xf68dd8a6
+  name: "__traceiter_android_rvh_psci_system_reset2"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xaa115501
+  type_id: 0x9b477493
+  full_name: "__traceiter_android_rvh_psci_system_reset2"
+}
+elf_symbol {
   id: 0xe41b0c78
   name: "__traceiter_android_rvh_psci_tos_resident_on"
   is_defined: true
@@ -463154,6 +463170,15 @@ elf_symbol {
   crc: 0x7c5aa8a7
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_rvh_psci_cpu_suspend"
+}
+elf_symbol {
+  id: 0x243da444
+  name: "__tracepoint_android_rvh_psci_system_reset2"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_psci_system_reset2"
 }
 elf_symbol {
   id: 0x261c997e
@@ -544645,6 +544670,7 @@ interface {
   symbol_id: 0xeccbc3c1
   symbol_id: 0x9931b363
   symbol_id: 0xbd2d27dc
+  symbol_id: 0xf68dd8a6
   symbol_id: 0xe41b0c78
   symbol_id: 0xccc56122
   symbol_id: 0xeb5708b8
@@ -545616,6 +545642,7 @@ interface {
   symbol_id: 0x50605d97
   symbol_id: 0x2bd6c0d5
   symbol_id: 0xa5e991f6
+  symbol_id: 0x243da444
   symbol_id: 0x261c997e
   symbol_id: 0xbdd6ef2c
   symbol_id: 0xeda23c8e
