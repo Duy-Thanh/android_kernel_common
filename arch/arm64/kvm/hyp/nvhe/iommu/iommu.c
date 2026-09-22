@@ -685,7 +685,7 @@ int kvm_iommu_detach_dev(pkvm_handle_t iommu_id, pkvm_handle_t domain_id,
 
 	hyp_spin_lock(&kvm_iommu_domain_lock);
 	domain = handle_to_domain(domain_id);
-	if (!domain || atomic_read(&domain->refs) <= 1) {
+	if (!domain || atomic_read(&domain->refs) <= 1 || domain->owner != vm) {
 		ret = -EINVAL;
 		goto out_unlock;
 	}
