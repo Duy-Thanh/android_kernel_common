@@ -104,6 +104,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a9d7a9e_9ab1246f",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-22T18:50:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33692a07_7f2099e4",
+      "revId": "116823e2b5429c6c20c8551f3d25aff4547cf65d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb48922d_82760abb",
@@ -139,6 +157,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f7c481f_4214c05c",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-22T18:50:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb48922d_82760abb",
+      "revId": "116823e2b5429c6c20c8551f3d25aff4547cf65d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e28c996_187cc8b7",
@@ -152,6 +188,30 @@
       "writtenOn": "2026-09-22T13:10:02Z",
       "side": 1,
       "message": "C driver returns EINVAL here.",
+      "range": {
+        "startLine": 276,
+        "startChar": 0,
+        "endLine": 282,
+        "endChar": 9
+      },
+      "revId": "116823e2b5429c6c20c8551f3d25aff4547cf65d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a7427f2_69b9ffcd",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-22T18:50:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e28c996_187cc8b7",
       "range": {
         "startLine": 276,
         "startChar": 0,
@@ -221,6 +281,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "627657fb_b411db70",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 560,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-22T18:50:57Z",
+      "side": 1,
+      "message": "The original driver did not acquire any lock, nor do I see one guarding exp_name.",
+      "parentUuid": "d4a20a0c_501fadca",
+      "range": {
+        "startLine": 558,
+        "startChar": 0,
+        "endLine": 560,
+        "endChar": 50
+      },
+      "revId": "116823e2b5429c6c20c8551f3d25aff4547cf65d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cf282c35_36d73dec",
         "filename": "drivers/android/wrapfd/wrap.rs",
         "patchSetId": 16
@@ -232,6 +316,30 @@
       "writtenOn": "2026-09-22T12:42:06Z",
       "side": 1,
       "message": "This would ideally be added to the dma-buf abstraction instead. Also, you can use the Rust spinlock type here.\n```\nlet name_lock \u003d unsafe { SpinLock::from_raw(\u0026raw mut (*dmabuf).name_lock) };\nlet guard \u003d name_lock.lock();\n```",
+      "range": {
+        "startLine": 567,
+        "startChar": 0,
+        "endLine": 573,
+        "endChar": 13
+      },
+      "revId": "116823e2b5429c6c20c8551f3d25aff4547cf65d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "503a02ae_c8938316",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-22T18:50:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf282c35_36d73dec",
       "range": {
         "startLine": 567,
         "startChar": 0,
@@ -265,6 +373,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "416ecd8a_196fb4ec",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-22T18:50:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d31462f_9f4fe80e",
+      "range": {
+        "startLine": 593,
+        "startChar": 0,
+        "endLine": 594,
+        "endChar": 12
+      },
+      "revId": "116823e2b5429c6c20c8551f3d25aff4547cf65d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc4272a6_3e3a5237",
@@ -282,6 +414,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe6ad4f5_2869e9ef",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-22T18:50:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc4272a6_3e3a5237",
+      "revId": "116823e2b5429c6c20c8551f3d25aff4547cf65d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "618084a6_819f7b1d",
@@ -295,6 +445,24 @@
       "writtenOn": "2026-09-22T12:56:20Z",
       "side": 1,
       "message": "Unfortunately it\u0027s not guaranteed that this call to `build()` references the same global as the other call to `build()` in `anon_inode_create_getfile`. What you can do to fix this is use a `static` to guarantee unique address.\n```\npub struct AnonInodeFileVTable\u003cT: AnonInodeFileInterface\u003e {\n    fops: bindings::file_operations,\n    _marker: PhantomData\u003cT\u003e,\n}\n\n// SAFETY: `file_operations` contains only function pointers and module metadata.\nunsafe impl\u003cT: AnonInodeFileInterface\u003e Sync for AnonInodeFileVTable\u003cT\u003e {}\n\nimpl\u003cT: AnonInodeFileInterface\u003e AnonInodeFileVTable\u003cT\u003e {\n    pub const fn new() -\u003e Self {\n        Self {\n            fops: /* Your build() function */,\n            _marker: PhantomData,\n        }\n    }\n\n    /// If `file` was created using this `AnonInodeFileVTable`, returns a borrow of its\n    /// private data `T::Ptr`.\n    pub fn borrow_private\u003c\u0027a\u003e(\n        \u0026\u0027static self,\n        file: \u0026\u0027a File,\n    ) -\u003e Option\u003c\u003cT::Ptr as ForeignOwnable\u003e::Borrowed\u003c\u0027a\u003e\u003e {\n        // SAFETY: `file.as_ptr()` is a valid pointer to `struct file`.\n        let f_op \u003d unsafe { (*file.as_ptr()).f_op };\n        if !core::ptr::eq(f_op, \u0026self.fops) {\n            return None;\n        }\n\n        // SAFETY: Because `f_op` points to `self.fops` (which is private and only attached to\n        // files in `anon_inode_create_getfile`), `private_data` is guaranteed to be a valid\n        // pointer produced by `T::Ptr::into_foreign()` that remains alive while `file` is live.\n        let private \u003d unsafe { (*file.as_ptr()).private_data };\n        Some(unsafe { \u003cT::Ptr as ForeignOwnable\u003e::borrow(private.cast()) })\n    }\n}\n```\nThen in wrapfd you declare:\n```\nstatic WRAP_FOPS: AnonInodeFileVTable\u003cWrap\u003e \u003d AnonInodeFileVTable::new();\n```\nUsing a static (not a const). Then to ensure everyone uses the same vtable, update `anon_inode_create_getfile()` to take a `\u0026\u0027static AnonInodeFileVTable\u003cT\u003e` argument, and also use that same static to compare pointers in `wrapfd_get_mappable`/`wrapfd_put_mappable` (using `borrow_private` to do the comparison).",
+      "revId": "116823e2b5429c6c20c8551f3d25aff4547cf65d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "046488d7_536d4aba",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-22T18:50:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "618084a6_819f7b1d",
       "revId": "116823e2b5429c6c20c8551f3d25aff4547cf65d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
