@@ -11,6 +11,7 @@ use crate::{
     error::{from_err_ptr, to_result},
     fs::File,
     prelude::*,
+    sync::SpinLock,
     types::{ARef, AlwaysRefCounted, Opaque},
 };
 use core::{
@@ -127,6 +128,41 @@ impl DmaBuf {
     pub fn file(&self) -> &File {
         // SAFETY: `self.opaque.get()` is valid.
         unsafe { File::from_raw_file((*self.as_ptr()).file) }
+    }
+
+    /// Returns the exporter name `exp_name` of the underlying `dma_buf`.
+    pub fn exporter_name(&self) -> &CStr {
+        // SAFETY: `self.as_ptr()` returns a valid pointer to `struct dma_buf`. There's no need
+        // to hold any lock as `exp_name` is immutable after the dma-buf's creation, it's also
+        // guaranteed not to be NULL.
+        let exporter_name = unsafe { (*self.as_ptr()).exp_name };
+
+        // SAFETY: `exporter_name` is a valid pointer to a `NUL`-terminated C string.
+        unsafe { CStr::from_char_ptr(exporter_name) }
+    }
+
+    /// Calls the closure `f` with the dmabuf's `name` (or None if the field is NULL).
+    /// Holds the dmabuf's `name_lock` SpinLock for the duration.
+    pub fn with_name<T>(&self, f: impl FnOnce(Option<&CStr>) -> T) -> T {
+        // SAFETY: `self.as_ptr()` returns a valid pointer to `struct dma_buf`.
+        let name_lock = unsafe { &raw mut (*self.as_ptr()).name_lock };
+
+        // SAFETY: `name_lock` is a valid pointer to a `spinlock_t`.
+        let _guard = unsafe { SpinLock::from_raw(name_lock) }.lock();
+
+        // SAFETY: `self.as_ptr()` returns a valid pointer to `struct dma_buf`. We're holding
+        // the `name_lock` as long as we're accessing `name`.
+        let name = unsafe { (*self.as_ptr()).name };
+
+        let opt_name = if name.is_null() {
+            None
+        } else {
+            // SAFETY: `name` is a valid pointer to a `NUL`-terminated C string.
+            let name_as_cstr = unsafe { CStr::from_char_ptr(name) };
+            Some(name_as_cstr)
+        };
+
+        f(opt_name)
     }
 }
 
