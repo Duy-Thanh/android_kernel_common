@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54312755_b25b9542",
+        "filename": "rust/kernel/page.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-09-22T11:55:37Z",
+      "side": 1,
+      "message": "What about 16k page support? See also `rust/kernel/page_size_compat.rs`.\n\nOtherwise LGTM.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 1
+      },
+      "revId": "056ca63cb5cf6f11e24ce2a84e4800fd49553acb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
