@@ -1,0 +1,91 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14c1543d_1652a9a9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-09-22T20:14:58Z",
+      "side": 1,
+      "message": "I assume this is based on the RFC posted upstream at https://lore.kernel.org/all/20260802074018.73887-1-baohua@kernel.org/ ?\nIf so, please mention this in the bug of commit message that this vendor hook will not be needed once this upstream change lands.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 15
+      },
+      "revId": "3a3d60b60333ef730d001122a6be80bf8ec8e4d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6558f3c0_fdfee78a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-09-22T20:14:58Z",
+      "side": 1,
+      "message": "SHAs between 6.12 and 6.18 backports of the same patch should be the same, so this should be `I8ffa5e262fcfb3e627f1ad8ec9d3d391c25756c4` in this case.\n\nAll the patches after this should adhere to the same rule.",
+      "range": {
+        "startLine": 26,
+        "startChar": 11,
+        "endLine": 26,
+        "endChar": 52
+      },
+      "revId": "3a3d60b60333ef730d001122a6be80bf8ec8e4d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48541e54_257aa968",
+        "filename": "arch/arm64/mm/fault.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-09-22T20:14:58Z",
+      "side": 1,
+      "message": "I would change the name like this:\n\n```\nbool lock_vma \u003d false;\n\n...\ntrace_android_vh_arm64_user_fault_lock_vma(addr, mm_flags, \u0026lock_vma)\nif (!(mm_flags \u0026 FAULT_FLAG_USER) \u0026\u0026 !lock_vma)\n        goto lock_mmap;\n...\n\n```",
+      "range": {
+        "startLine": 622,
+        "startChar": 1,
+        "endLine": 622,
+        "endChar": 53
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8ce3033d_d94941b8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/mm/fault.c",
+              "range": {
+                "startLine": 622,
+                "startChar": 0,
+                "endLine": 623,
+                "endChar": 0
+              },
+              "replacement": "\ttrace_android_vh_arm64_user_fault_lock_vma(addr, mm_flags, \u0026bypass);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3a3d60b60333ef730d001122a6be80bf8ec8e4d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
