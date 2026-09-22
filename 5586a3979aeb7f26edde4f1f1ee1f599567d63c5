@@ -34,6 +34,24 @@
       "parentUuid": "a68e18f2_d89c89ad",
       "revId": "5586a3979aeb7f26edde4f1f1ee1f599567d63c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e993601_8f46c392",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-09-22T09:30:12Z",
+      "side": 1,
+      "message": "Yes, this surely will have to be backported all the way down to android15.\n\nThat\u0027s similar to the issue I\u0027ve fixed recently on the original path with the mmu_read_lock().",
+      "parentUuid": "8218e112_9d409f1f",
+      "revId": "5586a3979aeb7f26edde4f1f1ee1f599567d63c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
