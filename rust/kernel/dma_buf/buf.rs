@@ -5,12 +5,15 @@
 //! C header: [`include/linux/dma-buf.h`](srctree/include/linux/dma-buf.h)
 
 use crate::{
+    alloc::AllocError,
     bindings,
     device::Device,
     dma::DataDirection,
     error::{from_err_ptr, to_result},
     fs::File,
     prelude::*,
+    str::CString,
+    sync::SpinLock,
     types::{ARef, AlwaysRefCounted, Opaque},
 };
 use core::{
@@ -127,6 +130,26 @@ impl DmaBuf {
     pub fn file(&self) -> &File {
         // SAFETY: `self.opaque.get()` is valid.
         unsafe { File::from_raw_file((*self.as_ptr()).file) }
+    }
+
+    /// Returns the underlying `dma_buf`'s name if any.
+    pub fn name(&self) -> Result<Option<CString>, AllocError> {
+        // SAFETY: `self.as_ptr()` returns a valid pointer to `struct dma_buf`.
+        let name_lock = unsafe { &raw mut (*self.as_ptr()).name_lock };
+
+        // SAFETY: `name_lock` is a valid pointer to a `spinlock_t`.
+        let _guard = unsafe { SpinLock::from_raw(name_lock) }.lock();
+
+        // SAFETY: `self.as_ptr()` returns a valid pointer to `struct dma_buf`.
+        let name = unsafe { (*self.as_ptr()).name };
+        if name.is_null() {
+            return Ok(None);
+        }
+
+        // SAFETY: `name` is a valid pointer to a `NUL`-terminated C string.
+        let name_as_cstr = unsafe { CStr::from_char_ptr(name) };
+
+        Ok(Some(name_as_cstr.to_cstring()?))
     }
 }
 
