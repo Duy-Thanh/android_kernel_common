@@ -1346,8 +1346,8 @@ static void mxl692_remove(struct i2c_client *client)
 }
 
 static const struct i2c_device_id mxl692_id_table[] = {
-	{ .name = "mxl692" },
-	{ }
+	{ "mxl692" },
+	{}
 };
 MODULE_DEVICE_TABLE(i2c, mxl692_id_table);
 

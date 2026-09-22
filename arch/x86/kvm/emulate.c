@@ -20,7 +20,7 @@
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
 
 #include <linux/kvm_host.h>
-#include "regs.h"
+#include "kvm_cache_regs.h"
 #include "kvm_emulate.h"
 #include <linux/stringify.h>
 #include <asm/debugreg.h>
@@ -540,9 +540,8 @@ static int emulate_exception(struct x86_emulate_ctxt *ctxt, int vec,
 	return X86EMUL_PROPAGATE_FAULT;
 }
 
-static int emulate_db(struct x86_emulate_ctxt *ctxt, unsigned long dr6)
+static int emulate_db(struct x86_emulate_ctxt *ctxt)
 {
-	ctxt->exception.dr6 = dr6;
 	return emulate_exception(ctxt, DB_VECTOR, 0, false);
 }
 
@@ -3594,8 +3593,12 @@ static int em_sti(struct x86_emulate_ctxt *ctxt)
 static int em_cpuid(struct x86_emulate_ctxt *ctxt)
 {
 	u32 eax, ebx, ecx, edx;
+	u64 msr = 0;
 
-	if (!ctxt->ops->is_cpuid_allowed(ctxt))
+	ctxt->ops->get_msr(ctxt, MSR_MISC_FEATURES_ENABLES, &msr);
+	if (!ctxt->ops->is_smm(ctxt) &&
+	    (msr & MSR_MISC_FEATURES_ENABLES_CPUID_FAULT) &&
+	    ctxt->ops->cpl(ctxt))
 		return emulate_gp(ctxt, 0);
 
 	eax = reg_read(ctxt, VCPU_REGS_RAX);
@@ -3844,8 +3847,15 @@ static int check_dr_read(struct x86_emulate_ctxt *ctxt)
 	if ((cr4 & X86_CR4_DE) && (dr == 4 || dr == 5))
 		return emulate_ud(ctxt);
 
-	if (ctxt->ops->get_effective_dr7(ctxt) & DR7_GD)
-		return emulate_db(ctxt, DR6_BD);
+	if (ctxt->ops->get_dr(ctxt, 7) & DR7_GD) {
+		ulong dr6;
+
+		dr6 = ctxt->ops->get_dr(ctxt, 6);
+		dr6 &= ~DR_TRAP_BITS;
+		dr6 |= DR6_BD | DR6_ACTIVE_LOW;
+		ctxt->ops->set_dr(ctxt, 6, dr6);
+		return emulate_db(ctxt);
+	}
 
 	return X86EMUL_CONTINUE;
 }

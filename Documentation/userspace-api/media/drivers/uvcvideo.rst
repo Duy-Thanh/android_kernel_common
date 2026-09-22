@@ -109,8 +109,6 @@ IOCTL reference
 UVCIOC_CTRL_MAP - Map a UVC control to a V4L2 control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**This IOCTL is deprecated and will be eventually removed**
-
 Argument: struct uvc_xu_control_mapping
 
 **Description**:

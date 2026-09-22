@@ -594,10 +594,8 @@ static int __init vidtv_bridge_init(void)
 	int ret;
 
 	ret = platform_device_register(&vidtv_bridge_dev);
-	if (ret) {
-		platform_device_put(&vidtv_bridge_dev);
+	if (ret)
 		return ret;
-	}
 
 	ret = platform_driver_register(&vidtv_bridge_driver);
 	if (ret)

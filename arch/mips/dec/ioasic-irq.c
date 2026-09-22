@@ -78,7 +78,10 @@ static struct irq_chip ioasic_dma_irq_type = {
  * cleared.  This cannot be done until after a corrective action has been
  * taken and this also means they will not retrigger.  Therefore they use
  * the `handle_fasteoi_irq' handler that only clears the request on the
- * way out.
+ * way out.  Because MIPS processor interrupt inputs, one of which the I/O
+ * ASIC is cascaded to, are level-triggered it is recommended that error
+ * DMA interrupt action handlers are registered with the IRQF_ONESHOT flag
+ * set so that they are run with the interrupt line masked.
  *
  * This mask has `1' bits in the positions of informational interrupts.
  */

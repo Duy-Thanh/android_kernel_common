@@ -46,7 +46,6 @@
 #include <linux/of.h>
 #include <linux/slab.h>
 #include <linux/stat.h>
-#include <linux/sysfs.h>
 #include <linux/of_platform.h>
 #include <linux/platform_device.h>
 #include <asm/ibmebus.h>
@@ -400,7 +399,7 @@ static ssize_t devspec_show(struct device *dev,
 	struct platform_device *ofdev;
 
 	ofdev = to_platform_device(dev);
-	return sysfs_emit(buf, "%pOF\n", ofdev->dev.of_node);
+	return sprintf(buf, "%pOF\n", ofdev->dev.of_node);
 }
 static DEVICE_ATTR_RO(devspec);
 
@@ -410,7 +409,7 @@ static ssize_t name_show(struct device *dev,
 	struct platform_device *ofdev;
 
 	ofdev = to_platform_device(dev);
-	return sysfs_emit(buf, "%pOFn\n", ofdev->dev.of_node);
+	return sprintf(buf, "%pOFn\n", ofdev->dev.of_node);
 }
 static DEVICE_ATTR_RO(name);
 
