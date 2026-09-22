@@ -122,6 +122,24 @@
       "parentUuid": "a377c456_44ad44c0",
       "revId": "a7ac488d6c18090c20547046ea3e343f121d81ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5b41e33_61100279",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1764430
+      },
+      "writtenOn": "2026-09-22T19:36:56Z",
+      "side": 1,
+      "message": "For the offload PM mechanisms, it wasn\u0027t from our contributions, so its something that we\u0027ll need to take a look at.  I was involved in some of the earlier reviews w/ Guanyu, but I wasn\u0027t able to actually test the changes on our platform at the time.",
+      "parentUuid": "646fc8a9_db70fe94",
+      "revId": "a7ac488d6c18090c20547046ea3e343f121d81ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
