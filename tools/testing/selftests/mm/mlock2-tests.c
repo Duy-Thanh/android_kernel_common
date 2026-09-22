@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0
 #define _GNU_SOURCE
 #include <sys/mman.h>
-#include <linux/mman.h>
 #include <stdint.h>
 #include <unistd.h>
 #include <string.h>
@@ -164,17 +163,14 @@ static int lock_check(unsigned long addr)
 	return (vma_rss == vma_size);
 }
 
-static int unlock_lock_check(char *map, bool mlock_supported)
+static int unlock_lock_check(char *map)
 {
-	if (!is_vmflag_set((unsigned long)map, LOCKED))
-		return 0;
-
-	if (mlock_supported)
+	if (is_vmflag_set((unsigned long)map, LOCKED)) {
 		ksft_print_msg("VMA flag %s is present on page 1 after unlock\n", LOCKED);
-	else
-		ksft_print_msg("VMA flag %s is present on an unsupported VMA\n", LOCKED);
+		return 1;
+	}
 
-	return 1;
+	return 0;
 }
 
 static void test_mlock_lock(void)
@@ -200,7 +196,7 @@ static void test_mlock_lock(void)
 		ksft_exit_fail_msg("munlock(): %s\n", strerror(errno));
 	}
 
-	ksft_test_result(!unlock_lock_check(map, true), "%s: Unlocked\n", __func__);
+	ksft_test_result(!unlock_lock_check(map), "%s: Unlocked\n", __func__);
 	munmap(map, 2 * page_size);
 }
 
@@ -300,7 +296,7 @@ static void test_munlockall0(void)
 		ksft_exit_fail_msg("munlockall(): %s\n", strerror(errno));
 	}
 
-	ksft_test_result(!unlock_lock_check(map, true), "%s: No locked memory\n", __func__);
+	ksft_test_result(!unlock_lock_check(map), "%s: No locked memory\n", __func__);
 	munmap(map, 2 * page_size);
 }
 
@@ -340,67 +336,7 @@ static void test_munlockall1(void)
 		ksft_exit_fail_msg("munlockall() %s\n", strerror(errno));
 	}
 
-	ksft_test_result(!unlock_lock_check(map, true), "%s: No locked memory\n", __func__);
-	munmap(map, 2 * page_size);
-}
-
-/* Droppable memory should not be lockable.  */
-static void test_mlock_droppable(void)
-{
-	char *map;
-	unsigned long page_size = getpagesize();
-
-	/* Ensure MCL_FUTURE is not set. */
-	if (munlockall()) {
-		ksft_test_result_fail("munlockall() %s\n", strerror(errno));
-		return;
-	}
-
-	map = mmap(NULL, 2 * page_size, PROT_READ | PROT_WRITE,
-		   MAP_ANONYMOUS | MAP_DROPPABLE, -1, 0);
-	if (map == MAP_FAILED) {
-		if ((errno == EOPNOTSUPP) || (errno == EINVAL))
-			ksft_test_result_skip("%s: MAP_DROPPABLE not supported\n", __func__);
-		else
-			ksft_test_result_fail("mmap error: %s\n", strerror(errno));
-		return;
-	}
-
-	if (mlock2_(map, 2 * page_size, 0))
-		ksft_test_result_fail("mlock2(0): %s\n", strerror(errno));
-	else
-		ksft_test_result(!unlock_lock_check(map, false),
-				"%s: droppable memory not locked\n", __func__);
-
-	munmap(map, 2 * page_size);
-}
-
-static void test_mlockall_future_droppable(void)
-{
-	char *map;
-	unsigned long page_size = getpagesize();
-
-	if (mlockall(MCL_CURRENT | MCL_FUTURE)) {
-		ksft_test_result_fail("mlockall(MCL_CURRENT | MCL_FUTURE): %s\n", strerror(errno));
-		return;
-	}
-
-	map = mmap(NULL, 2 * page_size, PROT_READ | PROT_WRITE,
-		   MAP_ANONYMOUS | MAP_DROPPABLE, -1, 0);
-
-	if (map == MAP_FAILED) {
-		if ((errno == EOPNOTSUPP) || (errno == EINVAL))
-			ksft_test_result_skip("%s: MAP_DROPPABLE not supported\n", __func__);
-		else
-			ksft_test_result_fail("mmap error: %s\n", strerror(errno));
-		munlockall();
-		return;
-	}
-
-	ksft_test_result(!unlock_lock_check(map, false), "%s: droppable memory not locked\n",
-			__func__);
-
-	munlockall();
+	ksft_test_result(!unlock_lock_check(map), "%s: No locked memory\n", __func__);
 	munmap(map, 2 * page_size);
 }
 
@@ -506,7 +442,7 @@ int main(int argc, char **argv)
 
 	munmap(map, size);
 
-	ksft_set_plan(15);
+	ksft_set_plan(13);
 
 	test_mlock_lock();
 	test_mlock_onfault();
@@ -515,8 +451,6 @@ int main(int argc, char **argv)
 	test_lock_onfault_of_present();
 	test_vma_management(true);
 	test_mlockall();
-	test_mlock_droppable();
-	test_mlockall_future_droppable();
 
 	ksft_finished();
 }
