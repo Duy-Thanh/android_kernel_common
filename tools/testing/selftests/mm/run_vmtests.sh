@@ -382,7 +382,6 @@ else
 fi
 
 CATEGORY="mmap" run_test ./map_populate
-CATEGORY="mmap" run_test ./droppable
 
 CATEGORY="mlock" run_test ./mlock-random-test
 

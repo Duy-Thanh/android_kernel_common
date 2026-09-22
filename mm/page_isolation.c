@@ -167,40 +167,48 @@ static int set_migratetype_isolate(struct page *page, enum pb_isolate_mode mode,
 {
 	struct zone *zone = page_zone(page);
 	struct page *unmovable;
+	unsigned long flags;
 	unsigned long check_unmovable_start, check_unmovable_end;
 
 	if (PageUnaccepted(page))
 		accept_page(page);
 
-	scoped_guard(spinlock_irqsave, &zone->lock) {
-		/*
-		 * We assume the caller intended to SET migrate type to
-		 * isolate. If it is already set, then someone else must have
-		 * raced and set it before us.
-		 */
-		if (is_migrate_isolate_page(page))
-			return -EBUSY;
+	spin_lock_irqsave(&zone->lock, flags);
 
-		/*
-		 * FIXME: Now, memory hotplug doesn't call shrink_slab() by
-		 * itself. We just check MOVABLE pages.
-		 *
-		 * Pass the intersection of [start_pfn, end_pfn) and the page's
-		 * pageblock to avoid redundant checks.
-		 */
-		check_unmovable_start = max(page_to_pfn(page), start_pfn);
-		check_unmovable_end = min(pageblock_end_pfn(page_to_pfn(page)),
-					  end_pfn);
-
-		unmovable = has_unmovable_pages(check_unmovable_start,
-				check_unmovable_end, mode);
-		if (!unmovable) {
-			if (!pageblock_isolate_and_move_free_pages(zone, page))
-				return -EBUSY;
-			zone->nr_isolate_pageblock++;
-			return 0;
-		}
+	/*
+	 * We assume the caller intended to SET migrate type to isolate.
+	 * If it is already set, then someone else must have raced and
+	 * set it before us.
+	 */
+	if (is_migrate_isolate_page(page)) {
+		spin_unlock_irqrestore(&zone->lock, flags);
+		return -EBUSY;
 	}
+
+	/*
+	 * FIXME: Now, memory hotplug doesn't call shrink_slab() by itself.
+	 * We just check MOVABLE pages.
+	 *
+	 * Pass the intersection of [start_pfn, end_pfn) and the page's pageblock
+	 * to avoid redundant checks.
+	 */
+	check_unmovable_start = max(page_to_pfn(page), start_pfn);
+	check_unmovable_end = min(pageblock_end_pfn(page_to_pfn(page)),
+				  end_pfn);
+
+	unmovable = has_unmovable_pages(check_unmovable_start, check_unmovable_end,
+			mode);
+	if (!unmovable) {
+		if (!pageblock_isolate_and_move_free_pages(zone, page)) {
+			spin_unlock_irqrestore(&zone->lock, flags);
+			return -EBUSY;
+		}
+		zone->nr_isolate_pageblock++;
+		spin_unlock_irqrestore(&zone->lock, flags);
+		return 0;
+	}
+
+	spin_unlock_irqrestore(&zone->lock, flags);
 	if (mode == PB_ISOLATE_MODE_MEM_OFFLINE) {
 		/*
 		 * printk() with zone->lock held will likely trigger a
@@ -215,14 +223,15 @@ static int set_migratetype_isolate(struct page *page, enum pb_isolate_mode mode,
 static void unset_migratetype_isolate(struct page *page)
 {
 	struct zone *zone;
+	unsigned long flags;
 	bool isolated_page = false;
 	unsigned int order;
 	struct page *buddy;
 
 	zone = page_zone(page);
-	guard(spinlock_irqsave)(&zone->lock);
+	spin_lock_irqsave(&zone->lock, flags);
 	if (!is_migrate_isolate_page(page))
-		return;
+		goto out;
 
 	/*
 	 * Because freepage with more than pageblock_order on isolated
@@ -270,6 +279,8 @@ static void unset_migratetype_isolate(struct page *page)
 		__putback_isolated_page(page, order, get_pageblock_migratetype(page));
 	}
 	zone->nr_isolate_pageblock--;
+out:
+	spin_unlock_irqrestore(&zone->lock, flags);
 }
 
 static inline struct page *
