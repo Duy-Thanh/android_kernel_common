@@ -689,6 +689,12 @@ int kvm_iommu_detach_dev(pkvm_handle_t iommu_id, pkvm_handle_t domain_id,
 		ret = -EINVAL;
 		goto out_unlock;
 	}
+
+	if (domain->owner != vm) {
+		ret = -EPERM;
+		goto out_unlock;
+	}
+
 	kvm_iommu_ops = domain->driver;
 	if (!kvm_iommu_ops || !kvm_iommu_ops->detach_dev) {
 		ret = -ENODEV;
