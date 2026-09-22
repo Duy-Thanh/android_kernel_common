@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d912b0e_4dfa3044",
+        "filename": "gki/aarch64/abi.stg",
+        "patchSetId": 6
+      },
+      "lineNbr": 453603,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-09-22T16:53:13Z",
+      "side": 0,
+      "message": "CRC changes like this are KMI breaks. The CRC issue must be fixed. (see parent patch)",
+      "revId": "bd96a50569fce26eb6440b912f579ee764c4a963",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
