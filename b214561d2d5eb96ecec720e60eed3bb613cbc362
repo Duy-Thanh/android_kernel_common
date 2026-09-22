@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae66d3a3_8860e7c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-09-22T19:01:29Z",
+      "side": 1,
+      "message": "Please cherry-pick the patch from 6.12 or 6.18 so the Change-Id is preserved.\n\nAlso, create a patch on top of that patch to add the new symbols to your symbol list",
+      "revId": "b214561d2d5eb96ecec720e60eed3bb613cbc362",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
