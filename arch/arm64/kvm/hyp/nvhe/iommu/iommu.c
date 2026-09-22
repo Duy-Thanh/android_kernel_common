@@ -774,6 +774,11 @@ int kvm_iommu_detach_dev(pkvm_handle_t iommu_id, pkvm_handle_t domain_id,
 		goto out_unlock;
 	}
 
+	if (domain->vm != vm) {
+		ret = -EPERM;
+		goto out_unlock;
+	}
+
 	ret = kvm_iommu_ops->detach_dev(iommu, domain, endpoint_id, pasid);
 	if (!ret)
 		domain_put(domain);
