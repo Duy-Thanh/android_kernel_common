@@ -190,6 +190,30 @@
       },
       "revId": "ba5f0aaebd0f949663115858b42ce753a1522f5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9894490_5e33e3ee",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1779,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-09-22T19:19:46Z",
+      "side": 1,
+      "message": "Thanks for digging more and your analysis is correct. I think the only chance of calling unuse_dma on RMRR memory is when the group gets torn down (only if all devices in the group are hotplugged out).\n\nMy initial understanding was, i915 driver was using this GSM/DSM memory reserved in RMRR and hence guest driver(which is unmodified) would also need it espescially during the device reset when attached to VM. After doing a research with the help of gemini, it is not entirely accurate. This reserved memory is used by system firmware to setup preboot framebuffer and related structures. i915 queries this memory and keeps using this memory, but there are some quirks that help the i915 driver in guest to use it correctly and we do not need RMRR and we do not need to map it to the domain used by the assigned device in guest. The whole setup is finicky and built on assumptions that driver and device behave well.\n\nBut coming back to our discussion, you are right that reserved memory through RMRR for devices that needs to be assigned to pVMs are highly unlikely and it should be fine for marking the MMIO space permanently non-donatable.\n\nI am fine with implementing it this way.",
+      "parentUuid": "57946074_ad7d7b79",
+      "range": {
+        "startLine": 1779,
+        "startChar": 25,
+        "endLine": 1779,
+        "endChar": 51
+      },
+      "revId": "ba5f0aaebd0f949663115858b42ce753a1522f5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
