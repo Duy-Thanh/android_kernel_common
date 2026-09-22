@@ -94,6 +94,30 @@
       },
       "revId": "ba5f0aaebd0f949663115858b42ce753a1522f5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a0e1897_01cbaa37",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1779,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-09-22T14:03:39Z",
+      "side": 1,
+      "message": "\u003e Why? We\u0027re not gonna use use_dma/unuse_dma for MMIO of devices assigned to pVMs. \n\nWould we have a use case where a device is shared between host and pVM(like camera) where host calls use_dma and then need to unuse_dma before giving the control of the device to pVM? \n\nBut if the usecase is permanent allocation of a device to pVM and happens at boot, then again, would the existing solution be good enough? changing the ownership to hypervisor at boot will make sure that host is not able to donate again.\n\n\u003e but for device assignment we\u0027re gonna need pkvm_host_donate_hyp_mmio() again?\n\nFor device assignment, I was thinking we would need a guest donation api which will be a bit more involved. But if the idea is to have device permanently assigned to pKVM from boot, we can have the pkvm_host_donate_hyp_mmio() at boot and then let pKVM donate to guest when it boots.\n\n\u003e And again, pKVM-ARM does the same.\n\nYeah if we plan to keep this APIs, then it makes sense to be at parity with pKVM-ARM",
+      "parentUuid": "79c97d52_1e4ae942",
+      "range": {
+        "startLine": 1779,
+        "startChar": 25,
+        "endLine": 1779,
+        "endChar": 51
+      },
+      "revId": "ba5f0aaebd0f949663115858b42ce753a1522f5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
