@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f3990ee_b6494d3e",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2026-09-22T13:33:08Z",
+      "side": 1,
+      "message": "I think `kernel_abi` target should be consistent with `kernel_abi_wrapped_dist`, which is setting `enable_add_vmlinux \u003d True` internally.",
+      "fixSuggestions": [
+        {
+          "fixId": "b77b4e6e_c0628d83",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 562,
+                "startChar": 0,
+                "endLine": 563,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "00f1bd5642aee86ada97860279fad6d9019e8515",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
