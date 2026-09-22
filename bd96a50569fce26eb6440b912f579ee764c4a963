@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2795330_0313111d",
+        "filename": "security/security.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-09-22T16:59:40Z",
+      "side": 1,
+      "message": "This is causing a change of visibility of some structure (probably from decl-only to full definition).\n\nThe most common case is the inclusion of tracing information via trace_hooks/vendor_hooks.h. Try adding this above the inclusion of security.h:\n```\n#include \u003cLinux/android_kabi.h\u003e\nANDROID_KABI_DECLONLY(trace_eval_map);\n```\n\nIf that doesn\u0027t solve the CRC issue, please follow the steps to isolate the CRC issue in the [\"Resolve CRC mismatches\" documentation](https://source.android.com/docs/core/architecture/kernel/abi-monitor#fixing-crc-mismatch)",
+      "revId": "bd96a50569fce26eb6440b912f579ee764c4a963",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
