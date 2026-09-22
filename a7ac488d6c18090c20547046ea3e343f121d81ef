@@ -86,6 +86,24 @@
       "message": "These hooks are all present in the android15-6.6 kernel. Some are in other kernel versions. Please abandon this patch and cherry-pick the patches from the other releases to preserve the Change-Id or provide rational for why this can\u0027t be done in the commit message.",
       "revId": "a7ac488d6c18090c20547046ea3e343f121d81ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a32d64f_26c734d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-09-22T15:48:03Z",
+      "side": 1,
+      "message": "(that\u0027s assuming you really can\u0027t follow Neill\u0027s guidance which is the ideal solution). Resolve that comment first.",
+      "parentUuid": "bc9d1734_76fec053",
+      "revId": "a7ac488d6c18090c20547046ea3e343f121d81ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
