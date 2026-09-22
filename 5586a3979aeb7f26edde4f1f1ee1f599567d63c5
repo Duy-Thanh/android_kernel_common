@@ -16,6 +16,24 @@
       "message": "The fix looks fine by me.\n\nBut I wonder if we wouldn\u0027t want something closer to what I have done upstream\n\nhttps://lore.kernel.org/all/20260911135053.146435-21-vdonnefort@google.com/\n\nwhich doesn\u0027t use hva at all for the split. The tradeoff would be refactor way bigger.\n\n@willdeacon@google.com, WDYS?",
       "revId": "5586a3979aeb7f26edde4f1f1ee1f599567d63c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8218e112_9d409f1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-09-22T09:06:36Z",
+      "side": 1,
+      "message": "Do we need to fix any older kernels? If so, I\u0027d favour the smallest delta.",
+      "parentUuid": "a68e18f2_d89c89ad",
+      "revId": "5586a3979aeb7f26edde4f1f1ee1f599567d63c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
