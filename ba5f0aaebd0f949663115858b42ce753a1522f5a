@@ -166,6 +166,30 @@
       },
       "revId": "ba5f0aaebd0f949663115858b42ce753a1522f5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57946074_ad7d7b79",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1779,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-09-22T17:43:38Z",
+      "side": 1,
+      "message": "My understanding is that RMRRs are legacy and rarely used on modern platforms. I\u0027m not sure why exactly Chromebooks still use it for the GPU, I guess it is to support seamless splash screen. (FWIW on a Thinkpad X1 Carbon Gen12, for example, I don\u0027t see any RMRR in the DMAR.)\n\nI\u0027ve just dug a bit into the code around RMRR handling in kernel, and I found for example this in `drivers/iommu/intel/iommu.c`:\n```\n/**\n * device_rmrr_is_relaxable - Test whether the RMRR of this device\n * is relaxable (ie. is allowed to be not enforced under some conditions)\n * @dev: device handle\n *\n * We assume that PCI USB devices with RMRRs have them largely\n * for historical reasons and that the RMRR space is not actively used post\n * boot.  This exclusion may change if vendors begin to abuse it.\n *\n * The same exception is made for graphics devices, with the requirement that\n * any use of the RMRR regions will be torn down before assigning the device\n * to a guest.\n *\n * Return: true if the RMRR is relaxable, false otherwise\n */\nstatic bool device_rmrr_is_relaxable(struct device *dev)\n{\n\tstruct pci_dev *pdev;\n\n\tif (!dev_is_pci(dev))\n\t\treturn false;\n\n\tpdev \u003d to_pci_dev(dev);\n\tif (IS_USB_DEVICE(pdev) || IS_GFX_DEVICE(pdev))\n\t\treturn true;\n\telse\n\t\treturn false;\n}\n```\n\nSo, looks like GPU devices on Intel are assignable to guests even if they have RMRRs.\n\nBut when a device is assigned to a guest, it is attached to a different IOMMU domain, and as far as I can see, the device\u0027s RMRRs are *not* mapped in that domain at that moment? I.e. the device will *not* have access to the RMRRs as long as it is assigned to a guest (which suggests that guests are not expected to rely on RMRRs)?\n\nIOW, AFAICS, the host only ever maps RMRRs in the device\u0027s default domain (`iommu_create_device_direct_mappings()` is only called for the default domain), and *never* unmaps them in the default domain. So it never needs unuse_dma for RMRRs even if we assign such devices to VMs. Am I correct?",
+      "parentUuid": "7a4baeb3_72090f59",
+      "range": {
+        "startLine": 1779,
+        "startChar": 25,
+        "endLine": 1779,
+        "endChar": 51
+      },
+      "revId": "ba5f0aaebd0f949663115858b42ce753a1522f5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
