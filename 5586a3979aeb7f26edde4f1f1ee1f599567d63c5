@@ -70,6 +70,23 @@
       "parentUuid": "5e993601_8f46c392",
       "revId": "5586a3979aeb7f26edde4f1f1ee1f599567d63c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddc3e8ab_9af45bc7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-09-22T13:01:49Z",
+      "side": 1,
+      "message": "Please upload backports to 16-6.12 and 15-6.6",
+      "revId": "5586a3979aeb7f26edde4f1f1ee1f599567d63c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
