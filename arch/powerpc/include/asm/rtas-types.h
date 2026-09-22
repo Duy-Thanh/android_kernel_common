@@ -42,9 +42,8 @@ struct rtas_error_log {
 	 */
 	u8		byte3;			/* General event or error*/
 	__be32		extended_log_length;	/* length in bytes */
-
-	/* Start of extended log, variable length */
-	unsigned char	buffer[] __counted_by_be(extended_log_length);
+	unsigned char	buffer[1];		/* Start of extended log */
+						/* Variable length.      */
 };
 
 /* RTAS general extended event log, Version 6. The extended log starts

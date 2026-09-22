@@ -10,7 +10,6 @@
 
 / {
 	compatible = "fsl,mpc8377wlan";
-	model = "fsl,mpc8377wlan";
 	#address-cells = <1>;
 	#size-cells = <1>;
 

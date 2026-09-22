@@ -12,7 +12,6 @@
 #include <linux/rbtree.h>
 #include <linux/module.h>
 #include <linux/slab.h>
-#include <linux/sysfs.h>
 #include <linux/vmalloc.h>
 
 #include <asm/cputhreads.h>
@@ -435,19 +434,19 @@ static ssize_t cpumask_show(struct device *dev,
 static ssize_t sockets_show(struct device *dev,
 			    struct device_attribute *attr, char *buf)
 {
-	return sysfs_emit(buf, "%d\n", phys_sockets);
+	return sprintf(buf, "%d\n", phys_sockets);
 }
 
 static ssize_t chipspersocket_show(struct device *dev,
 				   struct device_attribute *attr, char *buf)
 {
-	return sysfs_emit(buf, "%d\n", phys_chipspersocket);
+	return sprintf(buf, "%d\n", phys_chipspersocket);
 }
 
 static ssize_t coresperchip_show(struct device *dev,
 				 struct device_attribute *attr, char *buf)
 {
-	return sysfs_emit(buf, "%d\n", phys_coresperchip);
+	return sprintf(buf, "%d\n", phys_coresperchip);
 }
 
 static struct attribute *device_str_attr_create_(char *name, char *str)
@@ -1062,7 +1061,7 @@ e_free:
 static ssize_t domains_show(struct device *dev, struct device_attribute *attr,
 			    char *page)
 {
-	int d, count = 0;
+	int d, n, count = 0;
 	const char *str;
 
 	for (d = 0; d < HV_PERF_DOMAIN_MAX; d++) {
@@ -1070,7 +1069,12 @@ static ssize_t domains_show(struct device *dev, struct device_attribute *attr,
 		if (!str)
 			continue;
 
-		count += sysfs_emit_at(page, count, "%d: %s\n", d, str);
+		n = sprintf(page, "%d: %s\n", d, str);
+		if (n < 0)
+			break;
+
+		count += n;
+		page += n;
 	}
 	return count;
 }
@@ -1091,7 +1095,7 @@ static ssize_t _name##_show(struct device *dev,			\
 		ret = -EIO;					\
 		goto e_free;					\
 	}							\
-	ret = sysfs_emit(buf, _fmt, _expr);			\
+	ret = sprintf(buf, _fmt, _expr);			\
 e_free:								\
 	kmem_cache_free(hv_page_cache, page);			\
 	return ret;						\

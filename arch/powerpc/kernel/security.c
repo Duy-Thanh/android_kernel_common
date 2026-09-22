@@ -11,7 +11,6 @@
 #include <linux/nospec.h>
 #include <linux/prctl.h>
 #include <linux/seq_buf.h>
-#include <linux/sysfs.h>
 #include <linux/debugfs.h>
 
 #include <asm/asm-prototypes.h>
@@ -164,13 +163,13 @@ ssize_t cpu_show_meltdown(struct device *dev, struct device_attribute *attr, cha
 	}
 
 	if (thread_priv)
-		return sysfs_emit(buf, "Vulnerable: L1D private per thread\n");
+		return sprintf(buf, "Vulnerable: L1D private per thread\n");
 
 	if (!security_ftr_enabled(SEC_FTR_L1D_FLUSH_HV) &&
 	    !security_ftr_enabled(SEC_FTR_L1D_FLUSH_PR))
-		return sysfs_emit(buf, "Not affected\n");
+		return sprintf(buf, "Not affected\n");
 
-	return sysfs_emit(buf, "Vulnerable\n");
+	return sprintf(buf, "Vulnerable\n");
 }
 
 ssize_t cpu_show_l1tf(struct device *dev, struct device_attribute *attr, char *buf)
@@ -353,14 +352,14 @@ ssize_t cpu_show_spec_store_bypass(struct device *dev, struct device_attribute *
 		default:
 			type = "unknown";
 		}
-		return sysfs_emit(buf, "Mitigation: Kernel entry/exit barrier (%s)\n", type);
+		return sprintf(buf, "Mitigation: Kernel entry/exit barrier (%s)\n", type);
 	}
 
 	if (!security_ftr_enabled(SEC_FTR_L1D_FLUSH_HV) &&
 	    !security_ftr_enabled(SEC_FTR_L1D_FLUSH_PR))
-		return sysfs_emit(buf, "Not affected\n");
+		return sprintf(buf, "Not affected\n");
 
-	return sysfs_emit(buf, "Vulnerable\n");
+	return sprintf(buf, "Vulnerable\n");
 }
 
 static int ssb_prctl_get(struct task_struct *task)

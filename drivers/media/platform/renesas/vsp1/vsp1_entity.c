@@ -172,9 +172,9 @@ int vsp1_subdev_get_pad_format(struct v4l2_subdev *subdev,
 	if (!state)
 		return -EINVAL;
 
-	guard(mutex)(&entity->lock);
-
+	mutex_lock(&entity->lock);
 	fmt->format = *v4l2_subdev_state_get_format(state, fmt->pad);
+	mutex_unlock(&entity->lock);
 
 	return 0;
 }
@@ -216,10 +216,10 @@ int vsp1_subdev_enum_mbus_code(struct v4l2_subdev *subdev,
 		if (!state)
 			return -EINVAL;
 
-		scoped_guard(mutex, &entity->lock) {
-			format = v4l2_subdev_state_get_format(state, 0);
-			code->code = format->code;
-		}
+		mutex_lock(&entity->lock);
+		format = v4l2_subdev_state_get_format(state, 0);
+		code->code = format->code;
+		mutex_unlock(&entity->lock);
 	}
 
 	return 0;
@@ -308,19 +308,22 @@ int vsp1_subdev_set_pad_format(struct v4l2_subdev *subdev,
 	struct v4l2_mbus_framefmt *format;
 	struct v4l2_rect *selection;
 	unsigned int i;
+	int ret = 0;
 
-	guard(mutex)(&entity->lock);
+	mutex_lock(&entity->lock);
 
 	state = vsp1_entity_get_state(entity, sd_state, fmt->which);
-	if (!state)
-		return -EINVAL;
+	if (!state) {
+		ret = -EINVAL;
+		goto done;
+	}
 
 	format = v4l2_subdev_state_get_format(state, fmt->pad);
 
 	if (fmt->pad == entity->source_pad) {
 		/* The output format can't be modified. */
 		fmt->format = *format;
-		return 0;
+		goto done;
 	}
 
 	/*
@@ -366,7 +369,9 @@ int vsp1_subdev_set_pad_format(struct v4l2_subdev *subdev,
 	selection->width = format->width;
 	selection->height = format->height;
 
-	return 0;
+done:
+	mutex_unlock(&entity->lock);
+	return ret;
 }
 
 static int vsp1_entity_init_state(struct v4l2_subdev *subdev,
