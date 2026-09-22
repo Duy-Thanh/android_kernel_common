@@ -1,0 +1,75 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29610d8e_bfbfd0b0",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1779,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-09-22T13:19:10Z",
+      "side": 1,
+      "message": "I am wondering if we need this change. Our guest/hyp donation apis doesn\u0027t support donation of MMIO pages and if I am understanding correctly, donation apis return -EINVAL for MMIO range. We have a mmio donation api and the only place we use it is for donating IOMMU MMIO to hyp. That happens early in the boot(I am thinking if we can remove the mmio donate api even and inline the ownership change in iommu_init). With device assignment we might need to support unuse_dma operation as well and hence need to revisit this. Since this change is not adding any extra value, would it be better to drop the change and keep the old implementation?",
+      "range": {
+        "startLine": 1779,
+        "startChar": 25,
+        "endLine": 1779,
+        "endChar": 51
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6ade5866_4b08fa63",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 1754,
+                "startChar": 0,
+                "endLine": 1755,
+                "endChar": 0
+              },
+              "replacement": "\tif (!is_valid_addr_range(phys, size, true) || !is_memory_range(phys, size))\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 1759,
+                "startChar": 0,
+                "endLine": 1794,
+                "endChar": 0
+              },
+              "replacement": "\tret \u003d check_host_mem_pgstate_mask(phys, size,\n\t\t\t\t\t  BIT(PKVM_PAGE_OWNED) |\n\t\t\t\t\t  BIT(PKVM_PAGE_SHARED_OWNED),\n\t\t\t\t\t  PKVM_ID_HOST, false);\n\tif (ret)\n\t\tgoto unlock;\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 1795,
+                "startChar": 0,
+                "endLine": 1804,
+                "endChar": 0
+              },
+              "replacement": "\tfor_each_pkvm_page(page, phys, size)\n\t\tpkvm_page_ref_inc(page);\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 1826,
+                "startChar": 0,
+                "endLine": 1829,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "ba5f0aaebd0f949663115858b42ce753a1522f5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
