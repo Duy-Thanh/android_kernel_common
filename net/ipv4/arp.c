@@ -791,11 +791,33 @@ static int arp_process(struct net *net, struct sock *sk, struct sk_buff *skb)
 	    (!IN_DEV_ROUTE_LOCALNET(in_dev) && ipv4_is_loopback(tip)))
 		goto out_free_skb;
 
- /*
-  *	For some 802.11 wireless deployments (and possibly other networks),
-  *	there will be an ARP proxy and gratuitous ARP frames are attacks
-  *	and thus should not be accepted.
-  */
+/*
+ * Hole-196 defense for ARP:
+ * If drop_unicast_in_l2_multicast sysctl is enabled on this interface,
+ * drop ARP Replies in L2 BMC frames, and ARP Requests in L2 BMC frames
+ * that specify a non-zero unicast Target Hardware Address (tha).
+ */
+	if ((skb->pkt_type == PACKET_BROADCAST ||
+	     skb->pkt_type == PACKET_MULTICAST) &&
+	    in_dev && IN_DEV_ORCONF(in_dev, DROP_UNICAST_IN_L2_MULTICAST)) {
+		if (arp->ar_op == htons(ARPOP_REPLY)) {
+			pr_warn_ratelimited("ARP: Drop ARP Reply in L2 BMC on %s\n",
+					    dev->name);
+			goto out_free_skb;
+		}
+		if (tha && !is_zero_ether_addr(tha) &&
+		    !is_multicast_ether_addr(tha)) {
+			pr_warn_ratelimited("ARP: Drop unicast THA ARP Req in L2 BMC on %s\n",
+					    dev->name);
+			goto out_free_skb;
+		}
+	}
+
+/*
+ *  For some 802.11 wireless deployments (and possibly other networks),
+ *  there will be an ARP proxy and gratuitous ARP frames are attacks
+ *  and thus should not be accepted.
+ */
 	if (sip == tip && IN_DEV_ORCONF(in_dev, DROP_GRATUITOUS_ARP))
 		goto out_free_skb;
 

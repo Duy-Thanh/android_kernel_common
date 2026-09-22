@@ -274,10 +274,16 @@ static struct sk_buff *ip6_rcv_core(struct sk_buff *skb, struct net_device *dev,
 	 * multicast or broadcast to protected against the so-called "hole-196"
 	 * attack in 802.11 wireless.
 	 */
+	/* Hole-196 defense:
+	 * Drop unicast IP packets received over L2 BMC frames and log warning.
+	 */
 	if (!ipv6_addr_is_multicast(&hdr->daddr) &&
 	    (skb->pkt_type == PACKET_BROADCAST ||
 	     skb->pkt_type == PACKET_MULTICAST) &&
 	    READ_ONCE(idev->cnf.drop_unicast_in_l2_multicast)) {
+		pr_warn_ratelimited("IPv6: Drop unicast IP %pI6c in L2 BMC on %s\n",
+				    &hdr->daddr, dev->name);
+		__IP6_INC_STATS(net, idev, IPSTATS_MIB_INHDRERRORS);
 		SKB_DR_SET(reason, UNICAST_IN_L2_MULTICAST);
 		goto err;
 	}
