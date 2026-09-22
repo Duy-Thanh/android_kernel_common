@@ -33,6 +33,24 @@
       "message": "The cherry pick line does not point to the correct original commit on the base branch.\n\nExpected commit: f0f9229eed8a0a405f7e28f6d0215d7a4d1068de\nFound commit: 5ee73ae8cfcda2960f99aacf6fbc0bc955d20f1a\n\nPlease cherry-pick using: git cherry-pick -s -x f0f9229eed8a0a405f7e28f6d0215d7a4d1068de.\n\nPlease refer to the contribution guidelines for details:\nhttps://source.android.com/docs/core/architecture/kernel/gki-respin#source-of-truth",
       "revId": "6766836d7cd483ef36909a1ea0851e4789523b87",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0f1c2fd_0210c3f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1983857
+      },
+      "writtenOn": "2026-09-22T01:58:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "463bc884_84af64dd",
+      "revId": "6766836d7cd483ef36909a1ea0851e4789523b87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
