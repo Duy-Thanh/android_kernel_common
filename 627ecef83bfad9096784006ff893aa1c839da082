@@ -192,6 +192,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3f230d1d_007023f2",
+        "filename": "drivers/android/wrapfd/content.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-09-22T12:42:06Z",
+      "side": 1,
+      "message": "So, you *can* allocate zeroed memory with `Page` by passing `__GFP_ZEROED` to the construct. But I think you should just keep using `VVec\u003cu8\u003e`. Using `Page` is micro-optimization IMO.",
+      "parentUuid": "43017fcd_f2babdbc",
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e3de0ec1_85605529",
         "filename": "drivers/android/wrapfd/content.rs",
         "patchSetId": 7
@@ -929,6 +947,30 @@
       "side": 1,
       "message": "If we don\u0027t have a way of knowing when this is unmapped, then I don\u0027t think we can support this. It\u0027s also not clear to me when it\u0027s relevant, so I think it would be best to remove it.",
       "parentUuid": "c339bf77_62778f96",
+      "range": {
+        "startLine": 412,
+        "startChar": 0,
+        "endLine": 417,
+        "endChar": 17
+      },
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8f68496_384fef5b",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-09-22T12:42:06Z",
+      "side": 1,
+      "message": "I suggested this to Andreas originally because the `RB_EMPTY_ROOT` check assumes all the mappings are on the same file. I can\u0027t imagine a dma_buf ever setting *different* files here, so probably unreachable code, but if a weird dma-buf exists then `RB_EMPTY_ROOT` would miss the mappings.",
+      "parentUuid": "32618d85_f854fbb4",
       "range": {
         "startLine": 412,
         "startChar": 0,
