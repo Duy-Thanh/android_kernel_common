@@ -118,6 +118,30 @@
       },
       "revId": "ba5f0aaebd0f949663115858b42ce753a1522f5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e27a6fa8_fffb7c2e",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1779,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-09-22T14:42:00Z",
+      "side": 1,
+      "message": "\u003e Would we have a use case where a device is shared between host and pVM(like camera) where host calls use_dma and then need to unuse_dma before giving the control of the device to pVM?\n\nEven if we somehow supported such sharing, why would we need use_dma _for MMIO_, not just for normal RAM? Literally the only reason why we support use_dma for MMIO in the first place is to support RMRRs (for the GPU in our case), which is quite a corner case, and which the host just permanently DMA-maps at boot time (which is why we don\u0027t need to support unuse_dma for this case).\n\n\u003e But if the usecase is permanent allocation of a device to pVM\n\nWho said it was permanent?\n\nPlease take at look at how and when pKVM-ARM does that in `pkvm_device_hyp_assign_mmio()`.\n\n\u003e For device assignment, I was thinking we would need a guest donation api which will be a bit more involved.\n\npKVM-ARM does that in two stages (both triggered by the host): donate mmio from host to hyp in `pkvm_device_hyp_assign_mmio()` and then donate it from hyp to guest in `pkvm_host_map_guest_mmio()`. I didn\u0027t check why exactly it does it this way, maybe we will do it differently and have a separate API for donating mmio directly from host to guest, but that doesn\u0027t fundamentally change anything here? The fundamental problem we are addressing here is to prevent donating host\u0027s MMIO (to either hyp or guest) while the host may be doing DMA on this MMIO, right?",
+      "parentUuid": "6a0e1897_01cbaa37",
+      "range": {
+        "startLine": 1779,
+        "startChar": 25,
+        "endLine": 1779,
+        "endChar": 51
+      },
+      "revId": "ba5f0aaebd0f949663115858b42ce753a1522f5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
