@@ -308,7 +308,7 @@ static int __init register_moveable_regions(void)
 {
 	struct memblock_region *reg;
 	struct device_node *np;
-	int i = 0, ret = 0, idx = 0;
+	int i = 0, ret = 0, idx;
 
 	for_each_mem_region(reg) {
 		if (i >= PKVM_NR_MOVEABLE_REGS)
@@ -329,6 +329,7 @@ static int __init register_moveable_regions(void)
 	for_each_compatible_node(np, NULL, PKVM_DEVICE_ASSIGN_COMPAT) {
 		struct of_phandle_args args;
 
+		idx = 0;
 		while (!of_parse_phandle_with_fixed_args(np, "devices", 1, idx, &args)) {
 			idx++;
 			ret = register_moveable_fdt_resource(args.np, PKVM_MREG_ASSIGN_MMIO);
