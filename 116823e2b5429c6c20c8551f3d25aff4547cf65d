@@ -141,6 +141,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8e28c996_187cc8b7",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-09-22T13:10:02Z",
+      "side": 1,
+      "message": "C driver returns EINVAL here.",
+      "range": {
+        "startLine": 276,
+        "startChar": 0,
+        "endLine": 282,
+        "endChar": 9
+      },
+      "revId": "116823e2b5429c6c20c8551f3d25aff4547cf65d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4236c2b0_e76f3d61",
         "filename": "drivers/android/wrapfd/wrap.rs",
         "patchSetId": 16
@@ -152,6 +175,23 @@
       "writtenOn": "2026-09-22T12:42:06Z",
       "side": 1,
       "message": "If this is equal to `_file`, then consider not storing and let `None` mean \"current file\". Otherwise the file references itself and will never be freed.",
+      "revId": "116823e2b5429c6c20c8551f3d25aff4547cf65d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8185ae72_e1e0d834",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-09-22T13:10:02Z",
+      "side": 1,
+      "message": "If this hits the `_ \u003d\u003e device.file_ioctl(cmd, arg),` case, then this maps to `unlocked_ioctl` for the actual `dma_buf`.",
       "revId": "116823e2b5429c6c20c8551f3d25aff4547cf65d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -197,6 +237,29 @@
         "startChar": 0,
         "endLine": 573,
         "endChar": 13
+      },
+      "revId": "116823e2b5429c6c20c8551f3d25aff4547cf65d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d31462f_9f4fe80e",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-09-22T13:10:02Z",
+      "side": 1,
+      "message": "If you add the header file to the bindings helper, then using `#[export]` should work here. It will verify that the signature matches what is in the C header.",
+      "range": {
+        "startLine": 593,
+        "startChar": 0,
+        "endLine": 594,
+        "endChar": 12
       },
       "revId": "116823e2b5429c6c20c8551f3d25aff4547cf65d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"

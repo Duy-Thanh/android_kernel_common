@@ -983,6 +983,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "14584804_03598134",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-09-22T13:10:02Z",
+      "side": 1,
+      "message": "Most likely `empty` and `rewrap` ioctls need to clear this file to avoid tripping this check. Does the selftests cover this case?",
+      "parentUuid": "e8f68496_384fef5b",
+      "range": {
+        "startLine": 412,
+        "startChar": 0,
+        "endLine": 417,
+        "endChar": 17
+      },
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8cae6ae7_8f247615",
         "filename": "drivers/android/wrapfd/wrapped_device.rs",
         "patchSetId": 7
