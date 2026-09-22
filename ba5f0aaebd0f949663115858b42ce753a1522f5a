@@ -214,6 +214,30 @@
       },
       "revId": "ba5f0aaebd0f949663115858b42ce753a1522f5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf4cf4b0_877b7a0c",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1779,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-09-22T20:22:00Z",
+      "side": 1,
+      "message": "\u003e I think the only chance of calling unuse_dma on RMRR memory is when the group gets torn down (only if all devices in the group are hotplugged out).\n\nMakes sense. Which means this will not happen in practice, since no one uses RMRRs for hotpluggable devices (that wouldn\u0027t make a lot of sense)?",
+      "parentUuid": "f9894490_5e33e3ee",
+      "range": {
+        "startLine": 1779,
+        "startChar": 25,
+        "endLine": 1779,
+        "endChar": 51
+      },
+      "revId": "ba5f0aaebd0f949663115858b42ce753a1522f5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
