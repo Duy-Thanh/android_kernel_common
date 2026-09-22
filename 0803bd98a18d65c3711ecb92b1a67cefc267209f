@@ -70,6 +70,24 @@
       "parentUuid": "978b19e8_bb57b10c",
       "revId": "0803bd98a18d65c3711ecb92b1a67cefc267209f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "beb166a8_c43f4b00",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-09-22T12:49:40Z",
+      "side": 1,
+      "message": "How about just \"[...] A non-present pte means that the MMIO page was not mapped initially in pkvm_host_mmu_init() (it may be mapped later on the first host access). [...]\" ?",
+      "parentUuid": "d34acac5_880a1df3",
+      "revId": "0803bd98a18d65c3711ecb92b1a67cefc267209f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
