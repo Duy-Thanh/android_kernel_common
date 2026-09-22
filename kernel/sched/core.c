@@ -2288,7 +2288,8 @@ void deactivate_task(struct rq *rq, struct task_struct *p, int flags)
 }
 EXPORT_SYMBOL_GPL(deactivate_task);
 
-static void block_task(struct rq *rq, struct task_struct *p, unsigned long task_state)
+static bool dequeue_block_task(struct rq *rq, struct task_struct *p,
+			       unsigned long task_state)
 {
 	int flags = DEQUEUE_NOCLOCK;
 
@@ -2309,9 +2310,15 @@ static void block_task(struct rq *rq, struct task_struct *p, unsigned long task_
 	 *
 	 * Where __schedule() and ttwu() have matching control dependencies.
 	 *
-	 * After this, schedule() must not care about p->state any more.
+	 * Once the caller invokes __block_task(), schedule() must not care about
+	 * p->state any more.
 	 */
-	if (dequeue_task(rq, p, DEQUEUE_SLEEP | flags))
+	return dequeue_task(rq, p, DEQUEUE_SLEEP | flags);
+}
+
+static void block_task(struct rq *rq, struct task_struct *p, unsigned long task_state)
+{
+	if (dequeue_block_task(rq, p, task_state))
 		__block_task(rq, p);
 }
 
@@ -3857,6 +3864,8 @@ static inline void proxy_reset_donor(struct rq *rq)
  */
 static inline bool proxy_needs_return(struct rq *rq, struct task_struct *p)
 {
+	bool dequeued;
+
 	/*
 	 * Typically per __set_task_cpu(), task_cpu(p) == p->wake_cpu.
 	 *
@@ -3879,12 +3888,23 @@ static inline bool proxy_needs_return(struct rq *rq, struct task_struct *p)
 		/* If already current, don't need to return migrate */
 		if (task_current(rq, p))
 			return false;
-
-		/* If we're return migrating the rq->donor, switch it out for idle */
-		if (task_current_donor(rq, p))
-			proxy_reset_donor(rq);
 	}
-	block_task(rq, p, TASK_WAKING);
+
+	dequeued = dequeue_block_task(rq, p, TASK_WAKING);
+
+	/*
+	 * Dequeue @p from its scheduling class before resetting rq->donor.
+	 * In particular, sched_ext needs to end the donor's running session
+	 * and clear SCX_TASK_QUEUED before put_prev_task_scx() is called by
+	 * proxy_reset_donor(); otherwise it would reenqueue the blocked donor.
+	 *
+	 * Keep on_rq set until all donor references have been replaced.
+	 */
+	if (task_current_donor(rq, p))
+		proxy_reset_donor(rq);
+
+	if (dequeued)
+		__block_task(rq, p);
 	return true;
 }
 #else /* !CONFIG_SCHED_PROXY_EXEC */
