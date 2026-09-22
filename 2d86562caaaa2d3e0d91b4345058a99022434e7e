@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41637371_65fa7335",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-09-22T20:18:56Z",
+      "side": 1,
+      "message": "Is this related to https://lore.kernel.org/all/20260804095219.46213-1-zhanghongru@xiaomi.com/ ? If so, please mention it here and that we won\u0027t need this vendor hook once this or similar upstream solution is merged.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 15
+      },
+      "revId": "2d86562caaaa2d3e0d91b4345058a99022434e7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c85638a_eeb7a673",
+        "filename": "arch/arm64/mm/fault.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-09-22T20:18:56Z",
+      "side": 1,
+      "message": "`retry_vma_lock` would be more specific.",
+      "range": {
+        "startLine": 565,
+        "startChar": 6,
+        "endLine": 565,
+        "endChar": 11
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d55c7190_339e9ccf",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/mm/fault.c",
+              "range": {
+                "startLine": 565,
+                "startChar": 0,
+                "endLine": 566,
+                "endChar": 0
+              },
+              "replacement": "\tbool vma_retry \u003d false;\n"
+            },
+            {
+              "path": "arch/arm64/mm/fault.c",
+              "range": {
+                "startLine": 668,
+                "startChar": 0,
+                "endLine": 670,
+                "endChar": 0
+              },
+              "replacement": "\ttrace_android_vh_arm64_do_page_fault_retry_vma_lock(\u0026vma_retry);\n\tif (vma_retry)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2d86562caaaa2d3e0d91b4345058a99022434e7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
