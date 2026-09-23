@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d01d8532_a53f9e97",
+        "filename": "rust/kernel/dma_buf/buf.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-09-23T07:27:02Z",
+      "side": 1,
+      "message": "This allocates under the spinlock.\n\nShould you instead return a `NameGuard` that owns the spinlock and derefs to the name? Then the caller can read the name without the copy.\n\nOther option is to do a loop where you allocate, copy over the string, and retry if allocation is too small.",
+      "revId": "67347e9bed998d6b0937aecf5331ae4e152df967",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
