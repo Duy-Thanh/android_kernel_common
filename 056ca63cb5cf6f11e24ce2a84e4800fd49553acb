@@ -22,6 +22,30 @@
       },
       "revId": "056ca63cb5cf6f11e24ce2a84e4800fd49553acb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "634b9362_78f29e8b",
+        "filename": "rust/kernel/page.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-23T19:12:38Z",
+      "side": 1,
+      "message": "After consulting with @isaacmanjarres@google.com and discussion with @kaleshsingh@google.com this appears to not be a concern for our use cases.",
+      "parentUuid": "54312755_b25b9542",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 1
+      },
+      "revId": "056ca63cb5cf6f11e24ce2a84e4800fd49553acb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
