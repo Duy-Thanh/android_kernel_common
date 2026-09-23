@@ -2275,6 +2275,7 @@ static inline int fuse_bpf_run(struct bpf_prog *prog, struct fuse_bpf_args *fba)
 			fuse_bpf_run(fuse_inode->bpf, &fa) :		\
 			FUSE_BPF_BACKING;				\
 		if (ext_flags < 0) {					\
+			fa.error_in = ext_flags;				\
 			fer = (struct fuse_err_ret) {			\
 				ERR_PTR(ext_flags),			\
 				true,					\
@@ -2287,6 +2288,7 @@ static inline int fuse_bpf_run(struct bpf_prog *prog, struct fuse_bpf_args *fba)
 			res = fuse_bpf_simple_request(fm, &fa);		\
 			fuse_unlock_inode(inode, locked);		\
 			if (res < 0) {					\
+				fa.error_in = res;					\
 				fer = (struct fuse_err_ret) {		\
 					ERR_PTR(res),			\
 					true,				\
@@ -2329,6 +2331,7 @@ static inline int fuse_bpf_run(struct bpf_prog *prog, struct fuse_bpf_args *fba)
 				};					\
 		ext_flags = fuse_bpf_run(fuse_inode->bpf, &fa);		\
 		if (ext_flags < 0) {					\
+			fa.error_in = ext_flags;				\
 			fer = (struct fuse_err_ret) {			\
 				ERR_PTR(ext_flags),			\
 				true,					\
@@ -2345,6 +2348,7 @@ static inline int fuse_bpf_run(struct bpf_prog *prog, struct fuse_bpf_args *fba)
 		res = fuse_bpf_simple_request(fm, &fa);			\
 		fuse_unlock_inode(inode, locked);			\
 		if (res < 0) {						\
+			fa.error_in = res;					\
 			fer.result = ERR_PTR(res);			\
 			break;						\
 		}							\
@@ -2352,7 +2356,10 @@ static inline int fuse_bpf_run(struct bpf_prog *prog, struct fuse_bpf_args *fba)
 									\
 	if (initialized && fer.ret) {					\
 		err = finalize(&fa, args);				\
-		if (err)						\
+		/* Finalizers may clean up output, but must not replace the I/O error. */ \
+		if (IS_ERR(fer.result) && fa.error_in)					\
+			fer.result = ERR_PTR((int)fa.error_in);			\
+		else if (err)					\
 			fer.result = err;				\
 	}								\
 									\
