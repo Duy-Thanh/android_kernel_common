@@ -327,6 +327,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d37a87b3_0f0fb4a8",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 560,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-23T15:31:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13d98627_b19ef73f",
+      "range": {
+        "startLine": 558,
+        "startChar": 0,
+        "endLine": 560,
+        "endChar": 50
+      },
+      "revId": "116823e2b5429c6c20c8551f3d25aff4547cf65d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf282c35_36d73dec",
@@ -470,6 +494,24 @@
       "side": 1,
       "message": "I\u0027d also suggest converting the raw pointers to Rust types via the helper boundary as well, like in my above example.",
       "parentUuid": "fe6ad4f5_2869e9ef",
+      "revId": "116823e2b5429c6c20c8551f3d25aff4547cf65d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e30c83b4_3dfb9e74",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-23T15:31:50Z",
+      "side": 1,
+      "message": "If I do that we\u0027re back to square one, where I have to validate the raw pointers coming in and return errors before I can possibly convert them to Rust types, aren\u0027t we? I\u0027ve refactored the code again to avoid code duplication instead (get and put are identical up to a point).",
+      "parentUuid": "25cc982f_ebe265fe",
       "revId": "116823e2b5429c6c20c8551f3d25aff4547cf65d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
