@@ -501,8 +501,15 @@ static int fuse_flush(struct file *file, fl_owner_t id)
 			       fuse_flush_initialize, fuse_flush_backing,
 			       fuse_flush_finalize,
 			       file, id);
-	if (fer.ret)
+	if (fer.ret) {
+		/* The backing flush bypasses the normal writeback path. */
+		if (!fer.result) {
+			err = write_inode_now(inode, 1);
+			if (err)
+				return err;
+		}
 		return PTR_ERR(fer.result);
+	}
 #endif
 
 	if (fuse_is_bad(inode))
@@ -2103,6 +2110,10 @@ int fuse_write_inode(struct inode *inode, struct writeback_control *wbc)
 	 * The question is why we are getting those writes
 	 */
 	if (!S_ISREG(inode->i_mode))
+		return 0;
+
+	/* Backing files own metadata writeback; there is no FUSE server request. */
+	if (get_fuse_inode(inode)->backing_inode)
 		return 0;
 
 	ff = __fuse_write_file_get(fi);
