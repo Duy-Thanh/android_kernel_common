@@ -1490,6 +1490,10 @@ int fuse_mknod_backing(
 	}
 	d_instantiate(entry, inode);
 	entry->d_time = atomic_read(&get_fuse_conn(dir)->epoch);
+	if (get_fuse_inode(inode)->bpf)
+		bpf_prog_put(get_fuse_inode(inode)->bpf);
+	get_fuse_inode(inode)->bpf = get_fuse_dentry(entry)->bpf;
+	get_fuse_dentry(entry)->bpf = NULL;
 out:
 	path_put(&backing_path);
 	return err;
