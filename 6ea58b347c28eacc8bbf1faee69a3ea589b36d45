@@ -34,6 +34,24 @@
       "parentUuid": "1ae47d35_d207ae41",
       "revId": "6ea58b347c28eacc8bbf1faee69a3ea589b36d45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc731847_5e39bede",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981286
+      },
+      "writtenOn": "2026-09-23T12:07:40Z",
+      "side": 1,
+      "message": "We could cherry-pick the patch to ACK, since ACK is a bit behind upstream at the moment. It just hadn\u0027t happened again since that bug, so we decided to simply let this flow into ACK via normal upstream merges.",
+      "parentUuid": "759604bb_e1e940d4",
+      "revId": "6ea58b347c28eacc8bbf1faee69a3ea589b36d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
