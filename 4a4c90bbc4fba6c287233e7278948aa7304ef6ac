@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e91ffcc_da986771",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-09-23T16:31:48Z",
+      "side": 1,
+      "message": "You made significant changes to this patch as part of the backport. Please explain in the commit message. Why were the two rvh hooks dropped and additional vh hooks added?",
+      "revId": "4a4c90bbc4fba6c287233e7278948aa7304ef6ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
