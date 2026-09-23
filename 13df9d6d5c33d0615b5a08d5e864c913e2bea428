@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aedb0546_ebe489db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2026-09-23T15:48:48Z",
+      "side": 1,
+      "message": "I have updated patch to include ABI file update and removed extra space before symbol name.",
+      "revId": "13df9d6d5c33d0615b5a08d5e864c913e2bea428",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
