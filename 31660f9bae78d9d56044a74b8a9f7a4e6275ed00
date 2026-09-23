@@ -195,6 +195,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "befaf08e_0dde04bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3386406
+      },
+      "writtenOn": "2026-09-23T16:25:09Z",
+      "side": 1,
+      "message": "Have provided some additional details in the partner bug, thanks",
+      "parentUuid": "0ebf493d_731b525b",
+      "revId": "31660f9bae78d9d56044a74b8a9f7a4e6275ed00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "08a83a53_ff322fd8",
         "filename": "modules.bzl",
         "patchSetId": 1
