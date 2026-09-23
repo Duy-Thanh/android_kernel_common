@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bee1176c_11eed481",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-09-23T03:13:03Z",
+      "side": 1,
+      "message": "Why is it a `BACKPORT:`? What did you change and why? You need to document this when you change patches. Similar to how Dmitry Osipenko has the: `[dmitry...: improve error messages]`.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "aaabc0b6af206c7155230b1e3d2f5970d270e37d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b06f8d03_5f698ad2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-09-23T03:13:03Z",
+      "side": 1,
+      "message": "Please keep the correct chronological order of tags. If you see our examples this should have been after the upstream tags:\n\n```\n...\n[dmitry.osipenko@collabora.com: cosmetic change to virtio_gpu_wait_queue()]\n[dmitry.osipenko@collabora.com: improve error messages]\n\nBug: 558906028\n(cherry picked from ...)\n```",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 14
+      },
+      "revId": "aaabc0b6af206c7155230b1e3d2f5970d270e37d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcfa79c3_8606ea84",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-09-23T03:13:03Z",
+      "side": 1,
+      "message": "I don\u0027t think this is entirely correct. The `[ Upstream commit cad6a879a7fbbed85e1e59f8f8dd82a98d25980c ]` seems to suggest you picked this from stable yet you claimed to have picked this from upstream master. One of the two is not correct. Please fix.\n\nAlso it should be \"cherry picked\" not \"cherry-picked\", please use `git cherry-pick -x` to avoid these issues.",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 142
+      },
+      "revId": "aaabc0b6af206c7155230b1e3d2f5970d270e37d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e690db9_1c34eece",
+        "filename": "drivers/gpu/drm/virtio/virtgpu_kms.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-09-23T03:13:03Z",
+      "side": 1,
+      "message": "Is this coming from this patch? It looks like you are adding more than",
+      "range": {
+        "startLine": 117,
+        "startChar": 1,
+        "endLine": 120,
+        "endChar": 3
+      },
+      "revId": "aaabc0b6af206c7155230b1e3d2f5970d270e37d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
