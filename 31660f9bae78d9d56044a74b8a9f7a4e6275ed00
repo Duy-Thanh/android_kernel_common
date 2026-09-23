@@ -159,6 +159,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d85dbb66_ce1f258c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3386406
+      },
+      "writtenOn": "2026-09-23T15:57:14Z",
+      "side": 1,
+      "message": "Hi Maciej, as mentioned before there are a few reasons why we can\u0027t use the upstream driver and instead have our own downstream customizations\n\nThe upstream driver doesn\u0027t support a variety of product specific customizations/features that are needed on our platform. Hence why we need to use our downstream version of the r8152 driver.\nI can provide more info regarding these features/customizations in the associated partner bug if you\u0027d like.\n\nFurther, the reason these features haven\u0027t been upstreamed and backported to GKI for this driver is that this driver is owned by the vendor Realtek. While working with them on this platform they themselves suggested to use the downstream driver with our own custom changes rather than the necessary changes being upstreamed.\n\nFor these reasons we\u0027re requesting that the r8152 driver be moved to unprotected gki modules, so we may be allowed to load our downstream version with our custom required functionality.\n\nPlease ask any questions you may have. Thanks for taking a look!",
+      "parentUuid": "97bc592c_54c9791c",
+      "revId": "31660f9bae78d9d56044a74b8a9f7a4e6275ed00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "08a83a53_ff322fd8",
         "filename": "modules.bzl",
         "patchSetId": 1
