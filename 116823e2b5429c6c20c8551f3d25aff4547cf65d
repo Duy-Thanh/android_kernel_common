@@ -305,6 +305,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "13d98627_b19ef73f",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 560,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-09-23T07:25:02Z",
+      "side": 1,
+      "message": "If it\u0027s immutable, that\u0027s fine, but please state so explicitly it in the safety comment.",
+      "parentUuid": "627657fb_b411db70",
+      "range": {
+        "startLine": 558,
+        "startChar": 0,
+        "endLine": 560,
+        "endChar": 50
+      },
+      "revId": "116823e2b5429c6c20c8551f3d25aff4547cf65d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cf282c35_36d73dec",
         "filename": "drivers/android/wrapfd/wrap.rs",
         "patchSetId": 16
@@ -428,6 +452,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "bc4272a6_3e3a5237",
+      "revId": "116823e2b5429c6c20c8551f3d25aff4547cf65d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25cc982f_ebe265fe",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-09-23T07:25:02Z",
+      "side": 1,
+      "message": "I\u0027d also suggest converting the raw pointers to Rust types via the helper boundary as well, like in my above example.",
+      "parentUuid": "fe6ad4f5_2869e9ef",
       "revId": "116823e2b5429c6c20c8551f3d25aff4547cf65d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
