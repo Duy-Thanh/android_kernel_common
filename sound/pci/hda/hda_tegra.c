@@ -29,6 +29,12 @@
 
 #include <sound/hda_codec.h>
 #include "hda_controller.h"
+#include "hda_local.h"
+#if IS_ENABLED(CONFIG_ANDROID_VENDOR_HOOKS) && \
+	__has_include("trace/hooks/sound.h")
+#include <trace/hooks/sound.h>
+#define HDA_TEGRA_VENDOR_HOOKS
+#endif
 
 /* Defines for Nvidia Tegra HDA support */
 #define HDA_BAR0           0x8000
@@ -88,6 +94,9 @@ struct hda_tegra {
 	void __iomem *regs;
 	struct work_struct probe_work;
 	const struct hda_tegra_soc *soc;
+	bool comfort_noise;
+	bool comfort_noise_control_added;
+	int idle_sample_value;
 };
 
 #ifdef CONFIG_PM
@@ -100,6 +109,111 @@ MODULE_PARM_DESC(power_save,
 #endif
 
 static const struct hda_controller_ops hda_tegra_ops; /* nothing special */
+#ifdef HDA_TEGRA_VENDOR_HOOKS
+static int hda_tegra_comfort_noise_info(struct snd_kcontrol *kcontrol,
+					struct snd_ctl_elem_info *uinfo)
+{
+	uinfo->type = SNDRV_CTL_ELEM_TYPE_BOOLEAN;
+	uinfo->count = 1;
+	uinfo->value.integer.min = 0;
+	uinfo->value.integer.max = 1;
+	return 0;
+}
+
+static int hda_tegra_comfort_noise_get(struct snd_kcontrol *kcontrol,
+				       struct snd_ctl_elem_value *ucontrol)
+{
+	struct hda_tegra *hda = snd_kcontrol_chip(kcontrol);
+
+	ucontrol->value.integer.value[0] = READ_ONCE(hda->comfort_noise);
+	return 0;
+}
+
+static int hda_tegra_comfort_noise_put(struct snd_kcontrol *kcontrol,
+				       struct snd_ctl_elem_value *ucontrol)
+{
+	struct hda_tegra *hda = snd_kcontrol_chip(kcontrol);
+	bool comfort_noise = !!ucontrol->value.integer.value[0];
+	bool old = READ_ONCE(hda->comfort_noise);
+
+	WRITE_ONCE(hda->comfort_noise, comfort_noise);
+	return old != comfort_noise;
+}
+
+static const struct snd_kcontrol_new hda_tegra_comfort_noise_ctl = {
+	.iface = SNDRV_CTL_ELEM_IFACE_MIXER,
+	.name = "HDA Comfort Noise",
+	.info = hda_tegra_comfort_noise_info,
+	.get = hda_tegra_comfort_noise_get,
+	.put = hda_tegra_comfort_noise_put,
+};
+
+static void hda_tegra_add_controls(void *data, struct hda_codec *codec,
+				   u16 associated_nid, int *err)
+{
+	struct azx *chip = bus_to_azx(&codec->bus->core);
+	struct hda_tegra *hda;
+	struct snd_kcontrol *kctl;
+
+	if (*err || chip->ops != &hda_tegra_ops)
+		return;
+
+	hda = container_of(chip, struct hda_tegra, chip);
+	if (hda->comfort_noise_control_added)
+		return;
+
+	kctl = snd_ctl_new1(&hda_tegra_comfort_noise_ctl, hda);
+	if (!kctl) {
+		*err = -ENOMEM;
+		return;
+	}
+
+	*err = snd_hda_ctl_add(codec, associated_nid, kctl);
+	if (!*err) {
+		hda->comfort_noise_control_added = true;
+		dev_info(hda->dev, "HDA comfort noise control added\n");
+	}
+}
+
+static void hda_tegra_fill_silence(void *data,
+				   struct snd_pcm_substream *substream, int channel,
+				   unsigned long pos, unsigned long bytes, bool *handled)
+{
+	struct snd_pcm_runtime *runtime = substream->runtime;
+	struct azx_pcm *apcm = snd_pcm_substream_chip(substream);
+	struct hda_tegra *hda;
+	snd_pcm_uframes_t count;
+	int i, j;
+
+	if (!apcm || apcm->chip->ops != &hda_tegra_ops)
+		return;
+
+	hda = container_of(apcm->chip, struct hda_tegra, chip);
+	if (!READ_ONCE(hda->comfort_noise))
+		return;
+
+	count = bytes_to_frames(runtime, bytes);
+	if (runtime->format == SNDRV_PCM_FORMAT_S32_LE) {
+		s32 *buf = (s32 *)((char *)runtime->dma_area + pos);
+
+		for (i = 0; i < count; i++) {
+			for (j = 0; j < runtime->channels; j++)
+				*buf++ = hda->idle_sample_value;
+			hda->idle_sample_value = -hda->idle_sample_value;
+		}
+	} else {
+		s16 *buf = (s16 *)((char *)runtime->dma_area + pos);
+
+		for (i = 0; i < count; i++) {
+			for (j = 0; j < runtime->channels; j++)
+				*buf++ = hda->idle_sample_value;
+			hda->idle_sample_value = -hda->idle_sample_value;
+		}
+	}
+
+	*handled = true;
+}
+#endif
 
 static void hda_tegra_init(struct hda_tegra *hda)
 {
@@ -523,6 +637,7 @@ static int hda_tegra_probe(struct platform_device *pdev)
 	if (!hda)
 		return -ENOMEM;
 	hda->dev = &pdev->dev;
+	hda->idle_sample_value = 1;
 	chip = &hda->chip;
 
 	hda->soc = of_device_get_match_data(&pdev->dev);
@@ -648,7 +763,48 @@ static struct platform_driver tegra_platform_hda = {
 	.remove_new = hda_tegra_remove,
 	.shutdown = hda_tegra_shutdown,
 };
-module_platform_driver(tegra_platform_hda);
 
 MODULE_DESCRIPTION("Tegra HDA bus driver");
+static int __init hda_tegra_module_init(void)
+{
+	int err;
+
+#ifdef HDA_TEGRA_VENDOR_HOOKS
+	err = register_trace_android_vh_hda_add_controls(hda_tegra_add_controls,
+							 NULL);
+	if (err)
+		return err;
+
+	err = register_trace_android_vh_hda_pcm_fill_silence(hda_tegra_fill_silence,
+							     NULL);
+	if (err) {
+		unregister_trace_android_vh_hda_add_controls(hda_tegra_add_controls,
+							     NULL);
+		return err;
+	}
+#endif
+
+	err = platform_driver_register(&tegra_platform_hda);
+#ifdef HDA_TEGRA_VENDOR_HOOKS
+	if (err) {
+		unregister_trace_android_vh_hda_pcm_fill_silence(hda_tegra_fill_silence,
+								 NULL);
+		unregister_trace_android_vh_hda_add_controls(hda_tegra_add_controls,
+							     NULL);
+	}
+#endif
+	return err;
+}
+module_init(hda_tegra_module_init);
+
+static void __exit hda_tegra_module_exit(void)
+{
+	platform_driver_unregister(&tegra_platform_hda);
+#ifdef HDA_TEGRA_VENDOR_HOOKS
+	unregister_trace_android_vh_hda_pcm_fill_silence(hda_tegra_fill_silence,
+							 NULL);
+	unregister_trace_android_vh_hda_add_controls(hda_tegra_add_controls, NULL);
+#endif
+}
+module_exit(hda_tegra_module_exit);
 MODULE_LICENSE("GPL v2");
