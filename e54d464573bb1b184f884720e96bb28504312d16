@@ -160,6 +160,24 @@
       "parentUuid": "8debd19c_b4681360",
       "revId": "e54d464573bb1b184f884720e96bb28504312d16",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83a5f395_d403bf8e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-09-23T17:19:52Z",
+      "side": 1,
+      "message": "The short story is that qcom still has a driver creating a NAN iface via netdev. This is no longer a use-case supported upstream. Migrating to the newer design is a significant effort. So in the meantime this is needed.\n\nPlease add this info to the commit message.",
+      "parentUuid": "8b4036ae_ff4396a0",
+      "revId": "e54d464573bb1b184f884720e96bb28504312d16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
