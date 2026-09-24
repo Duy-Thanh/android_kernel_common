@@ -124,6 +124,24 @@
       "parentUuid": "7488f290_46aca2ce",
       "revId": "6ea58b347c28eacc8bbf1faee69a3ea589b36d45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fac45bb_9fc321e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-09-24T12:48:08Z",
+      "side": 1,
+      "message": "IIUC, this can happen to _any_ build. Why isn\u0027t this being picked up by stable? Is there a Fixes tag associated with this? I\u0027m guessing this could also happen in stable.",
+      "parentUuid": "7488f290_46aca2ce",
+      "revId": "6ea58b347c28eacc8bbf1faee69a3ea589b36d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
