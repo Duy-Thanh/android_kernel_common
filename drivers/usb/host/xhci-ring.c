@@ -369,6 +369,7 @@ unsigned int xhci_num_trbs_free(struct xhci_ring *ring)
 
 	return free;
 }
+EXPORT_SYMBOL_GPL(xhci_num_trbs_free);
 
 /*
  * Check to see if there's room to enqueue num_trbs on the ring and make sure
