@@ -1,0 +1,114 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f81dabbe_852e9ca9",
+        "filename": "net/ipv4/arp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 798,
+      "author": {
+        "id": 1332974
+      },
+      "writtenOn": "2026-09-24T05:03:00Z",
+      "side": 1,
+      "message": "Unconditionally dropping all ARPOP_REPLY and unicast-tha ARPOP_REQUEST frames in L2 broadcast when drop_unicast_in_l2_multicast is enabled will break legitimate Gratuitous ARP (GARP) and RFC 5227 Address Announcements:\n\n1. GARP Reply (ARPOP_REPLY with sip \u003d\u003d tip): Legitimate GARP replies (e.g., during router VRRP/HSRP failover) are sent as L2 broadcast (PACKET_BROADCAST) with tha \u003d\u003d sha (see arp_is_garp() in this file, which explicitly requires !memcmp(tha, sha, dev-\u003eaddr_len)). Dropping all ARPOP_REPLY in L2 BMC makes arp_is_garp() unreachable for GARP replies.\n2. GARP Request / ARP Announcement (ARPOP_REQUEST with sip \u003d\u003d tip): Per RFC 5227 §2.1.2, ARP Announcements sent via L2 broadcast may set tha \u003d\u003d sha (the sender\u0027s own unicast MAC) instead of all-zeros.\n3. Separation of sysctls: Linux already provides a separate DROP_GRATUITOUS_ARP sysctl right below (line 798) for networks with ARP proxies (e.g. Hotspot 2.0). DROP_UNICAST_IN_L2_MULTICAST should not implicitly drop legitimate GARP when DROP_GRATUITOUS_ARP is disabled.\n\nSuggested fix: Exempt valid GARP frames (sip \u003d\u003d tip where tha is zero, multicast/broadcast, or equal to sha) so they are deferred to DROP_GRATUITOUS_ARP",
+      "range": {
+        "startLine": 798,
+        "startChar": 35,
+        "endLine": 798,
+        "endChar": 41
+      },
+      "revId": "be82ae004ce4b00923a57d4ef086c55c992dd048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "265c45db_9f2b3887",
+        "filename": "net/ipv4/ip_input.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1332974
+      },
+      "writtenOn": "2026-09-24T05:03:00Z",
+      "side": 1,
+      "message": "do we need to check if !ip_is_fragment(iph) before checking the UDP header?",
+      "range": {
+        "startLine": 463,
+        "startChar": 6,
+        "endLine": 463,
+        "endChar": 9
+      },
+      "revId": "be82ae004ce4b00923a57d4ef086c55c992dd048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "730f28f7_df1e8e2f",
+        "filename": "net/ipv4/ip_input.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1332974
+      },
+      "writtenOn": "2026-09-24T05:03:00Z",
+      "side": 1,
+      "message": "must reload iph, skb might have changed in pskb_may_pull.",
+      "range": {
+        "startLine": 468,
+        "startChar": 10,
+        "endLine": 468,
+        "endChar": 13
+      },
+      "revId": "be82ae004ce4b00923a57d4ef086c55c992dd048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78496899_86e66819",
+        "filename": "net/ipv6/ip6_input.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1332974
+      },
+      "writtenOn": "2026-09-24T05:03:00Z",
+      "side": 1,
+      "message": "double counting? err: seems will count already",
+      "range": {
+        "startLine": 286,
+        "startChar": 2,
+        "endLine": 286,
+        "endChar": 17
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8ee43ae0_ca95c1d6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "net/ipv6/ip6_input.c",
+              "range": {
+                "startLine": 286,
+                "startChar": 0,
+                "endLine": 287,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "be82ae004ce4b00923a57d4ef086c55c992dd048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
