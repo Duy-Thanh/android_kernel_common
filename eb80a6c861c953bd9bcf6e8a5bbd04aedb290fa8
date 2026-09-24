@@ -34,6 +34,24 @@
       "parentUuid": "8a174a89_27be31a1",
       "revId": "eb80a6c861c953bd9bcf6e8a5bbd04aedb290fa8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "179c30d0_14b3fb4d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-09-24T22:43:52Z",
+      "side": 1,
+      "message": "I opened OOT bug b/565896457, I need data from dogfooding to verify effectiveness. I will upstream it once I have stronger data points.",
+      "parentUuid": "5c7c94cc_1ba1ffef",
+      "revId": "eb80a6c861c953bd9bcf6e8a5bbd04aedb290fa8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
