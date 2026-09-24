@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5f42132_7a3d7278",
+        "filename": "drivers/android/guest_dma_proxy.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2026-09-24T03:31:52Z",
+      "side": 1,
+      "message": "This check is already done in init(). Do we need it here again ?",
+      "revId": "721f8fbf7b1ea389523dc4748c79aa149e5030e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38161dbb_ce3164e0",
+        "filename": "drivers/android/guest_dma_proxy.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2026-09-24T03:31:52Z",
+      "side": 1,
+      "message": "any reason why this has to be ratelimited ? Any failure to relinquish would mean host will not be able to map those pages back. However, there is no way for the host to find that out. So, If we miss any of the error logs, it might be hard to debug.",
+      "revId": "721f8fbf7b1ea389523dc4748c79aa149e5030e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa71694b_1609e097",
+        "filename": "drivers/android/guest_dma_proxy.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2026-09-24T03:31:52Z",
+      "side": 1,
+      "message": "is this really required for every 4k page ?",
+      "revId": "721f8fbf7b1ea389523dc4748c79aa149e5030e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
