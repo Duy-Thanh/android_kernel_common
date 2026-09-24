@@ -88,6 +88,24 @@
       "parentUuid": "4ac4a8b1_659faa97",
       "revId": "6ea58b347c28eacc8bbf1faee69a3ea589b36d45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7488f290_46aca2ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-09-24T12:45:41Z",
+      "side": 1,
+      "message": "hmmm... more likely this: `14b8b4bf2d7b (\"kbuild: link-vmlinux.sh: improve detection of third pass requirement\")`.",
+      "parentUuid": "e0726153_4a508777",
+      "revId": "6ea58b347c28eacc8bbf1faee69a3ea589b36d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
