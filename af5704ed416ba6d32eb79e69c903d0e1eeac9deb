@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cd64cbc_61d59ba8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4991269
+      },
+      "writtenOn": "2026-09-24T00:33:36Z",
+      "side": 1,
+      "message": "4291032: Revert \"wifi: ath6kl: fix use-after-free in aggr_reset_state()\" | https://android-review.googlesource.com/c/kernel/common/+/4291032",
+      "revId": "af5704ed416ba6d32eb79e69c903d0e1eeac9deb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
