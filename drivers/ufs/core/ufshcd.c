@@ -3382,6 +3382,10 @@ static int ufshcd_issue_dev_cmd(struct ufs_hba *hba, struct ufshcd_lrb *lrbp,
 {
 	int err;
 
+	trace_android_vh_ufs_prepare_command(hba, NULL, lrbp, &err);
+	if (err)
+		return err;
+
 	ufshcd_add_query_upiu_trace(hba, UFS_QUERY_SEND, lrbp->ucd_req_ptr);
 	ufshcd_send_command(hba, tag, hba->dev_cmd_queue);
 	err = ufshcd_wait_for_dev_cmd(hba, lrbp, timeout);
