@@ -140,6 +140,24 @@
       "parentUuid": "646fc8a9_db70fe94",
       "revId": "a7ac488d6c18090c20547046ea3e343f121d81ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "214e9474_2029c6a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1789397
+      },
+      "writtenOn": "2026-09-24T06:01:34Z",
+      "side": 1,
+      "message": "Hi Neil, Given the complexity and challenges around adopting the upstream mechanism, could we please consider merging these vhooks for the current platform?\n\nWe continue to receive strong customer demand for this functionality, and supporting it through vhooks would help address the immediate platform requirements while the longer-term upstream solution evolves.\nPlease let us know",
+      "parentUuid": "d5b41e33_61100279",
+      "revId": "a7ac488d6c18090c20547046ea3e343f121d81ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
