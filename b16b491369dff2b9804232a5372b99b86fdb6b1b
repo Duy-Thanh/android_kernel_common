@@ -1,0 +1,150 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb01d0a4_296dea0a",
+        "filename": "arch/arm64/include/asm/p3s.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2026-09-24T23:44:04Z",
+      "side": 1,
+      "message": "s/p3s_enter_remote_mm/p3s_set_remote_mm",
+      "range": {
+        "startLine": 33,
+        "startChar": 32,
+        "endLine": 33,
+        "endChar": 51
+      },
+      "revId": "b16b491369dff2b9804232a5372b99b86fdb6b1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1d79c88_ea488716",
+        "filename": "arch/arm64/include/asm/p3s.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2026-09-24T23:44:04Z",
+      "side": 1,
+      "message": "Include the end of comment for CONFIG_ARM64_PER_PROCESS_PAGE_SIZE",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 6
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "72214308_c19cdcaa",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/include/asm/p3s.h",
+              "range": {
+                "startLine": 67,
+                "startChar": 0,
+                "endLine": 68,
+                "endChar": 0
+              },
+              "replacement": "#endif /* CONFIG_ARM64_PER_PROCESS_PAGE_SIZE */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b16b491369dff2b9804232a5372b99b86fdb6b1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dda0f5be_83dda28f",
+        "filename": "include/linux/p3s.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2026-09-24T23:44:04Z",
+      "side": 1,
+      "message": "do you mean CONFIG_ARM64_PER_PROCESS_PAGE_SIZE?",
+      "range": {
+        "startLine": 8,
+        "startChar": 7,
+        "endLine": 8,
+        "endChar": 19
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "5affb5a4_2389bdee",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/p3s.h",
+              "range": {
+                "startLine": 8,
+                "startChar": 0,
+                "endLine": 9,
+                "endChar": 0
+              },
+              "replacement": "#ifdef CONFIG_P3S\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b16b491369dff2b9804232a5372b99b86fdb6b1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db14dc00_f9cebc72",
+        "filename": "include/linux/p3s.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2026-09-24T23:44:04Z",
+      "side": 1,
+      "message": "let\u0027s add the comment that indicates the end.",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 6
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ee34d500_0508c56c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/p3s.h",
+              "range": {
+                "startLine": 20,
+                "startChar": 0,
+                "endLine": 22,
+                "endChar": 0
+              },
+              "replacement": "#endif /* __ASSEMBLY__ */\n#endif /* CONFIG_ARM64 */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b16b491369dff2b9804232a5372b99b86fdb6b1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
