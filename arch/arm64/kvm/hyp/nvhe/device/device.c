@@ -431,10 +431,17 @@ int pkvm_devices_get_context(u64 iommu_id, u32 endpoint_id, struct pkvm_hyp_vm *
 		return vm ? -EPERM : 0;
 
 	hyp_spin_lock(&device_spinlock);
-	if (dev->ctxt != vm)
+	if (dev->ctxt != vm) {
 		ret = -EPERM;
-	else
+		trace_hyp_printk(
+			"pkvm_devices_get_context: iommu_id=0x%llx endpoint_id=0x%llx dev->ctxt != vm",
+			iommu_id, endpoint_id);
+	} else {
 		hyp_refcount_inc(dev->refcount);
+		trace_hyp_printk(
+			"pkvm_devices_get_context: iommu_id=0x%llx endpoint_id=0x%llx refcount=%d",
+			iommu_id, endpoint_id, dev->refcount);
+	}
 	hyp_spin_unlock(&device_spinlock);
 	return ret;
 }
@@ -448,6 +455,9 @@ void pkvm_devices_put_context(u64 iommu_id, u32 endpoint_id)
 
 	hyp_spin_lock(&device_spinlock);
 	hyp_refcount_dec(dev->refcount);
+	trace_hyp_printk(
+		"pkvm_devices_put_context: iommu_id=0x%llx endpoint_id=0x%llx refcount=%d",
+		iommu_id, endpoint_id, dev->refcount);
 	hyp_spin_unlock(&device_spinlock);
 }
 
