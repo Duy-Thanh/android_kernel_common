@@ -19,6 +19,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e824d6d6_106c9c78",
+        "filename": "net/ipv4/arp.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 1898675
+      },
+      "writtenOn": "2026-09-24T16:15:07Z",
+      "side": 1,
+      "message": "Thanks Roger! Updated and added comments explaining the GARP validation logic.",
+      "parentUuid": "2a6d2410_8e2320e0",
+      "revId": "e998060e5314b77d33efbc18208f7998d2d623e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aae8c6c4_c4124e1d",
@@ -33,6 +51,24 @@
       "side": 1,
       "message": "Nit: Could we check if (in_dev \u0026\u0026 IN_DEV_ORCONF(in_dev, DROP_UNICAST_IN_L2_MULTICAST)) first, and only run the UDP/pskb_may_pull() check inside that block? That avoids calling pskb_may_pull() on every L2 BMC UDP packet when drop_unicast_in_l2_multicast is disabled (and avoids declaring bool is_dhcp_resp mid-block after the comment).",
       "isAi": true,
+      "revId": "e998060e5314b77d33efbc18208f7998d2d623e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d73c276_1ec8a830",
+        "filename": "net/ipv4/ip_input.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1898675
+      },
+      "writtenOn": "2026-09-24T16:15:07Z",
+      "side": 1,
+      "message": "Thanks Roger! Updated.",
+      "parentUuid": "aae8c6c4_c4124e1d",
       "revId": "e998060e5314b77d33efbc18208f7998d2d623e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
