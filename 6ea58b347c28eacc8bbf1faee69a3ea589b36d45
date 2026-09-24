@@ -52,6 +52,24 @@
       "parentUuid": "759604bb_e1e940d4",
       "revId": "6ea58b347c28eacc8bbf1faee69a3ea589b36d45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ac4a8b1_659faa97",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-09-24T11:30:23Z",
+      "side": 1,
+      "message": "@cmllamas@google.com Thoughts on whether a cherry-pick is warranted? The patch in question landed in v7.3-rc1.",
+      "parentUuid": "dc731847_5e39bede",
+      "revId": "6ea58b347c28eacc8bbf1faee69a3ea589b36d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
