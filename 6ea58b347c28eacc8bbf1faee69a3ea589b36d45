@@ -160,6 +160,24 @@
       "parentUuid": "9fac45bb_9fc321e2",
       "revId": "6ea58b347c28eacc8bbf1faee69a3ea589b36d45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73dc9cc5_86096bed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-09-24T13:04:34Z",
+      "side": 1,
+      "message": "If it needs to be backported, we should let the stable team know.",
+      "parentUuid": "ff84e377_4fc37427",
+      "revId": "6ea58b347c28eacc8bbf1faee69a3ea589b36d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
