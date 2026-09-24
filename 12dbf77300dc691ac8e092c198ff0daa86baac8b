@@ -22,6 +22,30 @@
       },
       "revId": "12dbf77300dc691ac8e092c198ff0daa86baac8b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96706498_270ab6e3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5176396
+      },
+      "writtenOn": "2026-09-24T05:22:31Z",
+      "side": 1,
+      "message": "No upstream discussion yet. The legacy LRU direct reclaim path has\ntwo inefficiencies we observed on production devices: shrink_lruvec()\ncontinues scanning even after the reclaim target is met, causing\nover-reclaim, and shrink_node_memcgs() walks nearly-empty memcgs\nwith zero scan targets, wasting CPU cycles. We needed a near-term\nsolution via vendor hooks to address these under tight project\ntimelines.",
+      "parentUuid": "15c54e47_afe797ed",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 0
+      },
+      "revId": "12dbf77300dc691ac8e092c198ff0daa86baac8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
