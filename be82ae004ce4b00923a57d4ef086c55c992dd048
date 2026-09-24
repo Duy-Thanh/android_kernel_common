@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f77c47a_91b2f7c8",
+        "filename": "net/ipv4/arp.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 798,
+      "author": {
+        "id": 1898675
+      },
+      "writtenOn": "2026-09-24T09:22:44Z",
+      "side": 1,
+      "message": "Thanks Roger! Thanks for catching on GARP and RFC 5227 Address Announcements. I\u0027ve updated the logic with if (sip !\u003d tip) to explicitly exempt Gratuitous ARP and ARP Announcements (sip \u003d\u003d tip) from the drop_unicast_in_l2_multicast drop check. This ensures valid GARP frames are deferred to the DROP_GRATUITOUS_ARP sysctl check below. Updated in Patchset 3.",
+      "parentUuid": "f81dabbe_852e9ca9",
+      "range": {
+        "startLine": 798,
+        "startChar": 35,
+        "endLine": 798,
+        "endChar": 41
+      },
+      "revId": "be82ae004ce4b00923a57d4ef086c55c992dd048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "265c45db_9f2b3887",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db7cffc5_51958b6a",
+        "filename": "net/ipv4/ip_input.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1898675
+      },
+      "writtenOn": "2026-09-24T09:22:44Z",
+      "side": 1,
+      "message": "Added !ip_is_fragment(iph) to ensure we only inspect the UDP header on non-fragmented IP packets. Updated in Patchset 3.",
+      "parentUuid": "265c45db_9f2b3887",
+      "range": {
+        "startLine": 463,
+        "startChar": 6,
+        "endLine": 463,
+        "endChar": 9
+      },
+      "revId": "be82ae004ce4b00923a57d4ef086c55c992dd048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "730f28f7_df1e8e2f",
@@ -60,6 +108,30 @@
       "writtenOn": "2026-09-24T05:03:00Z",
       "side": 1,
       "message": "must reload iph, skb might have changed in pskb_may_pull.",
+      "range": {
+        "startLine": 468,
+        "startChar": 10,
+        "endLine": 468,
+        "endChar": 13
+      },
+      "revId": "be82ae004ce4b00923a57d4ef086c55c992dd048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "189cf228_7d20b261",
+        "filename": "net/ipv4/ip_input.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1898675
+      },
+      "writtenOn": "2026-09-24T09:22:44Z",
+      "side": 1,
+      "message": "Thanks for catching this! Reloaded iph \u003d ip_hdr(skb); immediately after pskb_may_pull() to prevent accessing a dangling pointer if skb-\u003ehead was reallocated. Updated in Patchset 3.",
+      "parentUuid": "730f28f7_df1e8e2f",
       "range": {
         "startLine": 468,
         "startChar": 10,
@@ -107,6 +179,30 @@
           ]
         }
       ],
+      "revId": "be82ae004ce4b00923a57d4ef086c55c992dd048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fca1c34_d774b22d",
+        "filename": "net/ipv6/ip6_input.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1898675
+      },
+      "writtenOn": "2026-09-24T09:22:44Z",
+      "side": 1,
+      "message": "You\u0027re completely right! The err: label below already increments IPSTATS_MIB_INHDRERRORS. Removed the redundant __IP6_INC_STATS call here to prevent double counting. Updated in Patchset 3.",
+      "parentUuid": "78496899_86e66819",
+      "range": {
+        "startLine": 286,
+        "startChar": 2,
+        "endLine": 286,
+        "endChar": 17
+      },
       "revId": "be82ae004ce4b00923a57d4ef086c55c992dd048",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
