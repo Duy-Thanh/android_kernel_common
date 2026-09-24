@@ -1684,6 +1684,82 @@ unlock:
 }
 EXPORT_SYMBOL_GPL(wrapfd_put_mappable);
 
+int wrapfd_acquire_ownership(struct file *file, struct device *dev)
+{
+	struct wrap_ctx *ctx;
+	int ret;
+
+	if (WARN_ON(!dev))
+		return -ENODEV;
+
+	if (file->f_op != &wrap_fops)
+		return -EBADF;
+
+	ctx = file->private_data;
+
+	spin_lock(&ctx->lock);
+
+	if (has_owner(ctx)) {
+		if (is_owner_dev(ctx, dev))
+			goto already_owned;
+		ret = -EBUSY;
+		goto unlock;
+	}
+
+	if (ctx->map_count > 0 || ctx->use_count > 0) {
+		ret = -EINVAL;
+		goto unlock;
+	}
+
+	if (!ctx->content) {
+		ret = -ENOENT;
+		goto unlock;
+	}
+
+	ctx->owner.dev = dev;
+already_owned:
+	ret = 0;
+unlock:
+	spin_unlock(&ctx->lock);
+
+	return ret;
+}
+EXPORT_SYMBOL_GPL(wrapfd_acquire_ownership);
+
+int wrapfd_release_ownership(struct file *file, struct device *dev)
+{
+	struct wrap_ctx *ctx;
+	int ret;
+
+	if (WARN_ON(!dev))
+		return -ENODEV;
+
+	if (file->f_op != &wrap_fops)
+		return -EBADF;
+
+	ctx = file->private_data;
+
+	spin_lock(&ctx->lock);
+
+	if (!is_owner_dev(ctx, dev)) {
+		ret = -EBUSY;
+		goto unlock;
+	}
+
+	if (ctx->map_count > 0 || ctx->use_count > 0) {
+		ret = -EINVAL;
+		goto unlock;
+	}
+
+	ctx->owner.dev = NULL;
+	ret = 0;
+unlock:
+	spin_unlock(&ctx->lock);
+
+	return ret;
+}
+EXPORT_SYMBOL_GPL(wrapfd_release_ownership);
+
 int wrapfd_add_listener(struct file *file, struct device *dev,
 			const struct wrapfd_listener_operations *ops,
 			void *param, void **handlep)
