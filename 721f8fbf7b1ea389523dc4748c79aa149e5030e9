@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb28baf0_7792eab3",
+        "filename": "drivers/android/guest_dma_proxy.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-09-24T21:36:41Z",
+      "side": 1,
+      "message": "This is so that relinquish calls are called only in protected VM case. And the check is not costly. So lets keep it, I will think about more cleanup when we make it agnostic.",
+      "parentUuid": "b5f42132_7a3d7278",
+      "revId": "721f8fbf7b1ea389523dc4748c79aa149e5030e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "38161dbb_ce3164e0",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e58cb0a0_6422de6e",
+        "filename": "drivers/android/guest_dma_proxy.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-09-24T21:36:41Z",
+      "side": 1,
+      "message": "I agree that technically failure should never happen. But For large memory, its better to rate limit than loggingg for every page.",
+      "parentUuid": "38161dbb_ce3164e0",
+      "revId": "721f8fbf7b1ea389523dc4748c79aa149e5030e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa71694b_1609e097",
@@ -48,6 +84,24 @@
       "writtenOn": "2026-09-24T03:31:52Z",
       "side": 1,
       "message": "is this really required for every 4k page ?",
+      "revId": "721f8fbf7b1ea389523dc4748c79aa149e5030e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ecebcc6_50fea282",
+        "filename": "drivers/android/guest_dma_proxy.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-09-24T21:36:41Z",
+      "side": 1,
+      "message": "Good point, I will modify to call it for a batch of pages instead.",
+      "parentUuid": "fa71694b_1609e097",
       "revId": "721f8fbf7b1ea389523dc4748c79aa149e5030e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
