@@ -214,6 +214,24 @@
       "parentUuid": "47c5b390_16c7cd4b",
       "revId": "6ea58b347c28eacc8bbf1faee69a3ea589b36d45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0edf724b_fa31753d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981286
+      },
+      "writtenOn": "2026-09-24T15:31:48Z",
+      "side": 1,
+      "message": "kbuild patch applied to ACK (hopefully the error was caused for the same reason), backport request tracked in original b/537534186.",
+      "parentUuid": "78db5557_fcabf3a6",
+      "revId": "6ea58b347c28eacc8bbf1faee69a3ea589b36d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
