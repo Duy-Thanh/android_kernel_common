@@ -1616,13 +1616,9 @@ int wrapfd_get_mappable(struct file *file, struct device *dev,
 
 	spin_lock(&ctx->lock);
 
-	if (has_owner(ctx) && !is_owner_dev(ctx, dev)) {
+	if (has_owner(ctx) && !is_owner_dev(ctx, dev) &&
+	    !is_owner_task(ctx, current)) {
 		ret = -EBUSY;
-		goto unlock;
-	}
-
-	if (ctx->map_count > 0 || ctx->use_count > 0) {
-		ret = -EINVAL;
 		goto unlock;
 	}
 
@@ -1631,21 +1627,22 @@ int wrapfd_get_mappable(struct file *file, struct device *dev,
 		goto unlock;
 	}
 
-	ctx->owner.dev = dev;
-	/* Device is the owner, context can't change from under us. */
-	ret = 0;
+	/*
+	 * If usage is blocked, the content is being rewrapped or emptied.
+	 * Treat this as if the wrap is already empty.
+	 */
+	if (!context_use(ctx)) {
+		ret = -ENOENT;
+		goto unlock;
+	}
+
+	ret = ctx->content->ops->get_mappable(ctx->content, dev, mappable);
+	if (!ret)
+		ctx->map_count++;
+
+	context_unuse(ctx);
 unlock:
 	spin_unlock(&ctx->lock);
-
-	if (!ret) {
-		ret = ctx->content->ops->get_mappable(ctx->content, dev,
-						      mappable);
-		if (ret) {
-			spin_lock(&ctx->lock);
-			ctx->owner.dev = NULL;
-			spin_unlock(&ctx->lock);
-		}
-	}
 
 	return ret;
 }
@@ -1655,7 +1652,6 @@ int wrapfd_put_mappable(struct file *file, struct device *dev,
 			union wrapfd_mappable *mappable)
 {
 	struct wrap_ctx *ctx;
-	int ret;
 
 	if (WARN_ON(!dev))
 		return -ENODEV;
@@ -1667,20 +1663,13 @@ int wrapfd_put_mappable(struct file *file, struct device *dev,
 
 	spin_lock(&ctx->lock);
 
-	if (!is_owner_dev(ctx, dev)) {
-		ret = -EBUSY;
-		goto unlock;
-	}
-
-	ctx->owner.dev = NULL;
-	ret = 0;
-unlock:
-	spin_unlock(&ctx->lock);
-
-	if (!ret && ctx->content->ops->put_mappable)
+	if (ctx->content->ops->put_mappable)
 		ctx->content->ops->put_mappable(ctx->content, mappable);
 
-	return ret;
+	ctx->map_count--;
+	spin_unlock(&ctx->lock);
+
+	return 0;
 }
 EXPORT_SYMBOL_GPL(wrapfd_put_mappable);
 
