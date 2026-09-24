@@ -1,0 +1,40 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a6d2410_8e2320e0",
+        "filename": "net/ipv4/arp.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 1332974
+      },
+      "writtenOn": "2026-09-24T11:41:08Z",
+      "side": 1,
+      "message": "Wrapping the entire check in if (sip !\u003d tip) without checking tha leaves a bypass when sip \u003d\u003d tip:\n\n1. Unicast-THA ARPOP_REQUEST with sip \u003d\u003d tip (tha !\u003d sha): An attacker can send an ARPOP_REQUEST in L2 BMC with sip \u003d\u003d tip (e.g. gateway IP) and tha set to a victim\u0027s unicast MAC (tha !\u003d sha). Because arp_is_garp() (line 672) does not check tha for ARPOP_REQUEST, Linux treats it as a valid GARP (is_garp \u003d true) if a neighbour entry exists (line 921) and overwrites the ARP cache entry with NEIGH_UPDATE_F_OVERRIDE (line 951).\n2. ARPOP_REPLY with sip \u003d\u003d tip and tha !\u003d sha: Per arp_is_garp() (line 682), a valid GARP Reply requires tha \u0026\u0026 !memcmp(tha, sha, dev-\u003eaddr_len). If an ARPOP_REPLY in L2 BMC has sip \u003d\u003d tip but tha !\u003d sha, it bypasses this filter and can still update an existing neighbour entry once LOCKTIME (1s) has elapsed (line 951).\n\nSuggested fix: Only exempt sip \u003d\u003d tip when tha \u003d\u003d sha (for ARPOP_REQUEST, zero/broadcast tha is already permitted by the second condition):\n\nbool is_garp \u003d (sip \u003d\u003d tip) \u0026\u0026 tha \u0026\u0026 !memcmp(tha, sha, dev-\u003eaddr_len);\n\nif (arp-\u003ear_op \u003d\u003d htons(ARPOP_REPLY) \u0026\u0026 !is_garp) {\n    ...\n}\nif (tha \u0026\u0026 !is_zero_ether_addr(tha) \u0026\u0026\n    !is_multicast_ether_addr(tha) \u0026\u0026 !is_garp) {\n    ...\n}",
+      "isAi": true,
+      "revId": "e998060e5314b77d33efbc18208f7998d2d623e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aae8c6c4_c4124e1d",
+        "filename": "net/ipv4/ip_input.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1332974
+      },
+      "writtenOn": "2026-09-24T11:41:08Z",
+      "side": 1,
+      "message": "Nit: Could we check if (in_dev \u0026\u0026 IN_DEV_ORCONF(in_dev, DROP_UNICAST_IN_L2_MULTICAST)) first, and only run the UDP/pskb_may_pull() check inside that block? That avoids calling pskb_may_pull() on every L2 BMC UDP packet when drop_unicast_in_l2_multicast is disabled (and avoids declaring bool is_dhcp_resp mid-block after the comment).",
+      "isAi": true,
+      "revId": "e998060e5314b77d33efbc18208f7998d2d623e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
