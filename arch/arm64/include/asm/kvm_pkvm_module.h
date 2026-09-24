@@ -241,6 +241,13 @@ struct pkvm_module_trng_ops {
  *				for pVMs. The @ops.trng_uuid is used to advertise the
  *				identity of TRNG implementation. @ops.trng_rnd64 is used
  *				to generate entropy bits to guest.
+ * @host_device_get_context:	Query and acquire host context (vm == NULL) for an
+ *				IOMMU stream (@iommu_id, @endpoint_id). Returns 0 if
+ *				device is unassigned/non-assignable (or currently owned
+ *				by host, incrementing refcount); returns -EPERM if
+ *				device is assigned to a guest VM.
+ * @host_device_put_context:	Release host context for an IOMMU stream
+ *				(@iommu_id, @endpoint_id), decrementing refcount.
  */
 struct pkvm_module_ops {
 	int (*create_private_mapping)(phys_addr_t phys, size_t size,
@@ -323,8 +330,8 @@ struct pkvm_module_ops {
 	ANDROID_KABI_USE(4, int (*request_hyp_alloc)(void));
 	ANDROID_KABI_USE(5, int (*device_register_power_lock)(u64 phys, void *cookie,
 					     int(*cb)(void *cookie, bool lock)));
-	ANDROID_KABI_RESERVE(6);
-	ANDROID_KABI_RESERVE(7);
+	ANDROID_KABI_USE(6, int (*host_device_get_context)(u64 iommu_id, u32 endpoint_id));
+	ANDROID_KABI_USE(7, void (*host_device_put_context)(u64 iommu_id, u32 endpoint_id));
 	ANDROID_KABI_RESERVE(8);
 	ANDROID_KABI_RESERVE(9);
 	ANDROID_KABI_RESERVE(10);
