@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "51c0c321_e10d3062",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4966542
+      },
+      "writtenOn": "2026-09-24T03:15:02Z",
+      "side": 1,
+      "message": "thanks for suggestion, I updated the commit message as your guide",
+      "parentUuid": "974197f6_6d7cf5c9",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 142
+      },
+      "revId": "512a579b7acea202d5dfbb296e55db784609bc00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "95f7c5cf_efbb5617",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-09-17T16:15:52Z",
       "side": 1,
       "message": "These names are too generic.  They should have a subsystem prefix like `dm_verity` or at least `dmv`.",
+      "range": {
+        "startLine": 434,
+        "startChar": 0,
+        "endLine": 440,
+        "endChar": 63
+      },
+      "revId": "512a579b7acea202d5dfbb296e55db784609bc00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d426a366_925c31df",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 4966542
+      },
+      "writtenOn": "2026-09-24T03:15:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95f7c5cf_efbb5617",
       "range": {
         "startLine": 434,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1b30360_82c6835b",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 4966542
+      },
+      "writtenOn": "2026-09-24T03:15:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66547747_26974334",
+      "range": {
+        "startLine": 452,
+        "startChar": 0,
+        "endLine": 452,
+        "endChar": 33
+      },
+      "revId": "512a579b7acea202d5dfbb296e55db784609bc00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "88375fb9_c175f98f",
@@ -83,6 +155,30 @@
       "writtenOn": "2026-09-17T16:15:52Z",
       "side": 1,
       "message": "Why does it pass `PRE_FEC` when it\u0027s called *after* FEC?",
+      "range": {
+        "startLine": 462,
+        "startChar": 74,
+        "endLine": 462,
+        "endChar": 97
+      },
+      "revId": "512a579b7acea202d5dfbb296e55db784609bc00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4651173e_a9478da1",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 4966542
+      },
+      "writtenOn": "2026-09-24T03:15:02Z",
+      "side": 1,
+      "message": "updated event",
+      "parentUuid": "88375fb9_c175f98f",
       "range": {
         "startLine": 462,
         "startChar": 74,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f43f750_381edad4",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1575,
+      "author": {
+        "id": 4966542
+      },
+      "writtenOn": "2026-09-24T03:15:02Z",
+      "side": 1,
+      "message": "Provide the target device information needed by the vendor debug\nmodule to maintain dm-verity block statistics.",
+      "parentUuid": "7a8acdf5_687b39c9",
+      "range": {
+        "startLine": 1575,
+        "startChar": 1,
+        "endLine": 1575,
+        "endChar": 35
+      },
+      "revId": "512a579b7acea202d5dfbb296e55db784609bc00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "552222c1_5a0785af",
@@ -129,6 +249,30 @@
       "writtenOn": "2026-09-17T16:15:52Z",
       "side": 1,
       "message": "`const char *`",
+      "range": {
+        "startLine": 50,
+        "startChar": 11,
+        "endLine": 50,
+        "endChar": 15
+      },
+      "revId": "512a579b7acea202d5dfbb296e55db784609bc00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4e8318f_b9b5fd9f",
+        "filename": "include/trace/hooks/dmv_debug.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 4966542
+      },
+      "writtenOn": "2026-09-24T03:15:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "552222c1_5a0785af",
       "range": {
         "startLine": 50,
         "startChar": 11,
