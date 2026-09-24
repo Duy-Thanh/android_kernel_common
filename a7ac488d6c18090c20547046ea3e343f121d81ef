@@ -176,6 +176,24 @@
       "parentUuid": "214e9474_2029c6a5",
       "revId": "a7ac488d6c18090c20547046ea3e343f121d81ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c6f554d_eb37c0be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1764430
+      },
+      "writtenOn": "2026-09-24T23:40:20Z",
+      "side": 1,
+      "message": "We did not commit to implementing this because the overall changes landed midway through our project cycle (from our QC dev cycle), so to avoid the risk of introducing new issues, we were planning to do this on our next iteration.  Especially for a bigger feature like this, the changes needed to have been available much earlier so we could plan around it.\n\nThe only reason why it was on 6.6, 6.12, etc was because of the combined timeline of first getting support for USB audio offload upstream, which took awhile to achieve, and then with the time it took to get the reference counting upstream as well.  Without the audio offload code, it was impossible to get the reference counting in.\n\nIn the end, the next GKI version basically has all the pieces in place from the get go, so that is where it will be different going forward.",
+      "parentUuid": "e728e4a7_01489059",
+      "revId": "a7ac488d6c18090c20547046ea3e343f121d81ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
