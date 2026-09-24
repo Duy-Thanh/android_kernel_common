@@ -178,6 +178,24 @@
       "parentUuid": "ff84e377_4fc37427",
       "revId": "6ea58b347c28eacc8bbf1faee69a3ea589b36d45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47c5b390_16c7cd4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981286
+      },
+      "writtenOn": "2026-09-24T13:08:37Z",
+      "side": 1,
+      "message": "I can upload it, sure. Re Fixes tag / stable - I guess an oversight, and nobody noticed. This issue has been plaguing people for years, and I believe I might have found it hard to pinpoint an exact commit, but can\u0027t remember...",
+      "parentUuid": "73dc9cc5_86096bed",
+      "revId": "6ea58b347c28eacc8bbf1faee69a3ea589b36d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
