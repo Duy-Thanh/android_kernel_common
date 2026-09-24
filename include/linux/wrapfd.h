@@ -57,6 +57,38 @@ int wrapfd_get_mappable(struct file *file, struct device *dev,
 int wrapfd_put_mappable(struct file *file, struct device *dev,
 			union wrapfd_mappable *mappable);
 
+/*
+ * Take file ownersip.
+ * Function does not take file references, therefore the caller should
+ * ensure the file is stable until wrapfd_put_ownership() is called.
+ *
+ * file: wrap file to get the mappable object.
+ * dev: device requesting the operation.
+ *
+ * On success returns mappable object. On error returns:
+ * -EBADF: file is invalid.
+ * -ENODEV: device is invalid.
+ * -EINVAL: buffer is mapped.
+ * -EBUSY: buffer is owned by another device.
+ * -ENOENT: wrap is empty (buffer got freed or moved)
+ * -EOPNOTSUPP: wrapfd driver is not enabled
+ */
+int wrapfd_get_ownership(struct file *file, struct device *dev);
+
+/*
+ * Release buffer ownership. The caller should own the buffer.
+ *
+ * file: wrap file associated with the mappable object.
+ * dev: device requesting the operation.
+ *
+ * On success returns 0. On error returns:
+ * -EBADF: file is invalid.
+ * -ENODEV: device is invalid.
+ * -EBUSY: buffer is not owned by the caller.
+ * -EOPNOTSUPP: wrapfd driver is not enabled
+ */
+int wrapfd_put_ownership(struct file *file, struct device *dev);
+
 #else /* CONFIG_ANDROID_WRAPFD */
 
 static inline bool is_wrapfd_vma(struct vm_area_struct *vma)
@@ -72,6 +104,16 @@ static inline int wrapfd_get_mappable(struct file *file, struct device *dev,
 
 static inline int wrapfd_put_mappable(struct file *file, struct device *dev,
 				      union wrapfd_mappable *mappable)
+{
+	return -EOPNOTSUPP;
+}
+
+static inline int wrapfd_get_ownership(struct file *file, struct device *dev)
+{
+	return -EOPNOTSUPP;
+}
+
+static inline int wrapfd_put_ownership(struct file *file, struct device *dev)
 {
 	return -EOPNOTSUPP;
 }

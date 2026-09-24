@@ -1623,6 +1623,77 @@ unlock:
 }
 EXPORT_SYMBOL_GPL(wrapfd_put_mappable);
 
+int wrapfd_get_ownership(struct file *file, struct device *dev)
+{
+	struct wrap_ctx *ctx;
+	int ret;
+
+	if (WARN_ON(!dev))
+		return -ENODEV;
+
+	if (file->f_op != &wrap_fops)
+		return -EBADF;
+
+	ctx = file->private_data;
+
+	spin_lock(&ctx->lock);
+
+	if (has_owner(ctx)) {
+		if (is_owner_dev(ctx, dev))
+			goto already_owned;
+		ret = -EBUSY;
+		goto unlock;
+	}
+
+	if (ctx->map_count > 0 || ctx->use_count > 0) {
+		ret = -EINVAL;
+		goto unlock;
+	}
+
+	if (!ctx->content) {
+		ret = -ENOENT;
+		goto unlock;
+	}
+
+	ctx->owner.dev = dev;
+	/* Device is the owner, context can't change from under us. */
+already_owned:
+	ret = 0;
+unlock:
+	spin_unlock(&ctx->lock);
+
+	return ret;
+}
+EXPORT_SYMBOL_GPL(wrapfd_get_ownership);
+
+int wrapfd_put_ownership(struct file *file, struct device *dev)
+{
+	struct wrap_ctx *ctx;
+	int ret;
+
+	if (WARN_ON(!dev))
+		return -ENODEV;
+
+	if (file->f_op != &wrap_fops)
+		return -EBADF;
+
+	ctx = file->private_data;
+
+	spin_lock(&ctx->lock);
+
+	if (is_owner_dev(ctx, dev)) {
+		ctx->owner.dev = NULL;
+		ret = 0;
+	} else {
+		ret = -EBUSY;
+	}
+
+	spin_unlock(&ctx->lock);
+
+	return ret;
+}
+EXPORT_SYMBOL_GPL(wrapfd_put_ownership);
+
 static const struct file_operations wrap_fops = {
 	.owner		= THIS_MODULE,
 	.llseek		= wrap_llseek,
