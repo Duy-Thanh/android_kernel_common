@@ -70,6 +70,24 @@
       "parentUuid": "dc731847_5e39bede",
       "revId": "6ea58b347c28eacc8bbf1faee69a3ea589b36d45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0726153_4a508777",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-09-24T12:42:21Z",
+      "side": 1,
+      "message": "I think we should cherry-pick Andre\u0027s patch. I don\u0027t see a reason to wait. Would that be: `d6bf11a7e8a8 (\"kallsyms: add symbol size for kallsyms symbols that can change size\")`?",
+      "parentUuid": "4ac4a8b1_659faa97",
+      "revId": "6ea58b347c28eacc8bbf1faee69a3ea589b36d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
