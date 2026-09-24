@@ -196,6 +196,24 @@
       "parentUuid": "73dc9cc5_86096bed",
       "revId": "6ea58b347c28eacc8bbf1faee69a3ea589b36d45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78db5557_fcabf3a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-09-24T13:12:19Z",
+      "side": 1,
+      "message": "Yeah I do recall seeing this issue before. Thanks for fixing it. Stable only needs to know how far to backport it. As of now, all the way would be 5.10.y.",
+      "parentUuid": "47c5b390_16c7cd4b",
+      "revId": "6ea58b347c28eacc8bbf1faee69a3ea589b36d45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
