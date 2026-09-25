@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12c056d1_e86f881b",
+        "filename": "include/linux/p3s_user_pages.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2026-09-25T00:16:35Z",
+      "side": 1,
+      "message": "is this right? it seems like a recursive definition.",
+      "range": {
+        "startLine": 54,
+        "startChar": 59,
+        "endLine": 54,
+        "endChar": 72
+      },
+      "revId": "5033bfe30a6cd35d2c05fd5be29c4ec75a524423",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3538ae9a_ba27d431",
+        "filename": "include/linux/p3s_user_pages.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2026-09-25T00:16:35Z",
+      "side": 1,
+      "message": "same as above",
+      "range": {
+        "startLine": 55,
+        "startChar": 56,
+        "endLine": 55,
+        "endChar": 65
+      },
+      "revId": "5033bfe30a6cd35d2c05fd5be29c4ec75a524423",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
