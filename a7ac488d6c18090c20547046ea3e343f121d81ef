@@ -194,6 +194,24 @@
       "parentUuid": "e728e4a7_01489059",
       "revId": "a7ac488d6c18090c20547046ea3e343f121d81ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3f798bd_a1832fc7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-09-25T08:01:43Z",
+      "side": 1,
+      "message": "Why can\u0027t we just backport the needed work from upstream to resolve this issue here properly?  6.18 is going to be around and supported for a while, getting that to work properly for everyone, without vendor hooks, should be the priority first, before worrying about older kernel versions.",
+      "parentUuid": "9c6f554d_eb37c0be",
+      "revId": "a7ac488d6c18090c20547046ea3e343f121d81ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
