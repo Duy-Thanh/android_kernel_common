@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "564fbf2d_3db9dbfb",
+        "filename": "include/linux/mm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-09-25T09:16:07Z",
+      "side": 1,
+      "message": "Is it 64-bit only? I thought vma\u0027s now used bitflags and support any number of flags.",
+      "revId": "ee499fd052b1dc8fe5292bb9196e7d2944fda68f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
