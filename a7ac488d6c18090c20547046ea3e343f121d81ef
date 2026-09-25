@@ -212,6 +212,24 @@
       "parentUuid": "9c6f554d_eb37c0be",
       "revId": "a7ac488d6c18090c20547046ea3e343f121d81ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e228def0_6a897cb2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1764430
+      },
+      "writtenOn": "2026-09-25T17:26:40Z",
+      "side": 1,
+      "message": "Hi Greg, looks like there are issues w/ the current implementation itself that exists upstream.  We\u0027ve been getting reports saying that with certain devices and more robust testing, the current solution doesn\u0027t seem to hold.  So unfortunately, there is nothing we can backport, and it would be needing more upstream work, which we are starting to do, but for the next product cycle.  If you need more details about where the push is coming from we can discuss more on the buganizer. Thanks!",
+      "parentUuid": "b3f798bd_a1832fc7",
+      "revId": "a7ac488d6c18090c20547046ea3e343f121d81ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
