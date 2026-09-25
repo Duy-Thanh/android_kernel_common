@@ -256,8 +256,12 @@ enum sdebug_z_type {
 	ZBC_ZTYPE_CNV	= 0x1,
 	ZBC_ZTYPE_SWR	= 0x2,
 	ZBC_ZTYPE_SWP	= 0x3,
+<<<<<<< HEAD   (2d0fc90f05f3023a4af34a062370387ab04d7cb4 Merge android14-5.15 into android14-5.15-lts)
 	/* ZBC_ZTYPE_SOBR = 0x4, */
 	ZBC_ZTYPE_GAP	= 0x5,
+||||||| BASE   (3a5f728b6596260ed235f48ee8f2efe515c3a50e ALSA: hda: conexant: Remove mic bias threshold override)
+=======
+>>>>>>> BRANCH (945fa863f02cf8b1638546907f72dd0fc4d6ba85 Linux 5.15.217)
 };
 
 /* enumeration names taken from table 26, zbcr05 */
@@ -2714,6 +2718,7 @@ static struct sdeb_zone_state *zbc_zone(struct sdebug_dev_info *devip,
 static inline bool zbc_zone_is_conv(struct sdeb_zone_state *zsp)
 {
 	return zsp->z_type == ZBC_ZTYPE_CNV;
+<<<<<<< HEAD   (2d0fc90f05f3023a4af34a062370387ab04d7cb4 Merge android14-5.15 into android14-5.15-lts)
 }
 
 static inline bool zbc_zone_is_gap(struct sdeb_zone_state *zsp)
@@ -2724,6 +2729,9 @@ static inline bool zbc_zone_is_gap(struct sdeb_zone_state *zsp)
 static inline bool zbc_zone_is_seq(struct sdeb_zone_state *zsp)
 {
 	return !zbc_zone_is_conv(zsp) && !zbc_zone_is_gap(zsp);
+||||||| BASE   (3a5f728b6596260ed235f48ee8f2efe515c3a50e ALSA: hda: conexant: Remove mic bias threshold override)
+=======
+>>>>>>> BRANCH (945fa863f02cf8b1638546907f72dd0fc4d6ba85 Linux 5.15.217)
 }
 
 static void zbc_close_zone(struct sdebug_dev_info *devip,
@@ -4395,6 +4403,7 @@ static int resp_report_zones(struct scsi_cmnd *scp,
 	u32 alloc_len, rep_opts, rep_len;
 	bool partial;
 	u64 lba, zs_lba;
+	u64 arr_len;
 	u8 *arr = NULL, *desc;
 	u8 *cmd = scp->cmnd;
 	struct sdeb_zone_state *zsp = NULL;
@@ -4417,9 +4426,21 @@ static int resp_report_zones(struct scsi_cmnd *scp,
 		return check_condition_result;
 	}
 
+<<<<<<< HEAD   (2d0fc90f05f3023a4af34a062370387ab04d7cb4 Merge android14-5.15 into android14-5.15-lts)
 	rep_max_zones = (alloc_len - 64) >> ilog2(RZONES_DESC_HD);
+||||||| BASE   (3a5f728b6596260ed235f48ee8f2efe515c3a50e ALSA: hda: conexant: Remove mic bias threshold override)
+	max_zones = devip->nr_zones - (zs_lba >> devip->zsize_shift);
+	rep_max_zones = min((alloc_len - 64) >> ilog2(RZONES_DESC_HD),
+			    max_zones);
+=======
+	max_zones = devip->nr_zones - (zs_lba >> devip->zsize_shift);
+	rep_max_zones = (ALIGN((u64)alloc_len, RZONES_DESC_HD) - RZONES_DESC_HD) >>
+			ilog2(RZONES_DESC_HD);
+	rep_max_zones = min_t(unsigned int, rep_max_zones, max_zones);
+	arr_len = (u64)RZONES_DESC_HD * (rep_max_zones + 1);
+>>>>>>> BRANCH (945fa863f02cf8b1638546907f72dd0fc4d6ba85 Linux 5.15.217)
 
-	arr = kzalloc(alloc_len, GFP_ATOMIC | __GFP_NOWARN);
+	arr = kzalloc(arr_len, GFP_ATOMIC | __GFP_NOWARN);
 	if (!arr) {
 		mk_sense_buffer(scp, ILLEGAL_REQUEST, INSUFF_RES_ASC,
 				INSUFF_RES_ASCQ);

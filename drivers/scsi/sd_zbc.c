@@ -50,12 +50,16 @@ static unsigned int sd_zbc_get_zone_wp_offset(struct blk_zone *zone)
 	}
 }
 
+<<<<<<< HEAD   (2d0fc90f05f3023a4af34a062370387ab04d7cb4 Merge android14-5.15 into android14-5.15-lts)
 /* Whether or not a SCSI zone descriptor describes a gap zone. */
 static bool sd_zbc_is_gap_zone(const u8 buf[64])
 {
 	return (buf[0] & 0xf) == ZBC_ZONE_TYPE_GAP;
 }
 
+||||||| BASE   (3a5f728b6596260ed235f48ee8f2efe515c3a50e ALSA: hda: conexant: Remove mic bias threshold override)
+=======
+>>>>>>> BRANCH (945fa863f02cf8b1638546907f72dd0fc4d6ba85 Linux 5.15.217)
 /**
  * sd_zbc_parse_report - Parse a SCSI zone descriptor
  * @sdkp: SCSI disk pointer.
@@ -273,6 +277,7 @@ int sd_zbc_report_zones(struct gendisk *disk, sector_t sector,
 
 	while (zone_idx < nr_zones && lba < sdkp->capacity) {
 		ret = sd_zbc_do_report_zones(sdkp, buf, buflen, lba, true);
+<<<<<<< HEAD   (2d0fc90f05f3023a4af34a062370387ab04d7cb4 Merge android14-5.15 into android14-5.15-lts)
 		if (ret && zone_idx) {
 			sd_printk(KERN_WARNING, sdkp,
 				  "ZBC violation: %llu LBAs are not associated with a zone (zone length %llu)\n",
@@ -284,6 +289,10 @@ int sd_zbc_report_zones(struct gendisk *disk, sector_t sector,
 			ret = 0;
 			break;
 		}
+||||||| BASE   (3a5f728b6596260ed235f48ee8f2efe515c3a50e ALSA: hda: conexant: Remove mic bias threshold override)
+				sectors_to_logical(sdkp->device, sector), true);
+=======
+>>>>>>> BRANCH (945fa863f02cf8b1638546907f72dd0fc4d6ba85 Linux 5.15.217)
 		if (ret)
 			goto out;
 
@@ -324,6 +333,14 @@ int sd_zbc_report_zones(struct gendisk *disk, sector_t sector,
 
 			zone_idx++;
 		}
+<<<<<<< HEAD   (2d0fc90f05f3023a4af34a062370387ab04d7cb4 Merge android14-5.15 into android14-5.15-lts)
+||||||| BASE   (3a5f728b6596260ed235f48ee8f2efe515c3a50e ALSA: hda: conexant: Remove mic bias threshold override)
+
+		sector += sd_zbc_zone_sectors(sdkp) * i;
+=======
+
+		lba += sdkp->zone_info.zone_blocks * i;
+>>>>>>> BRANCH (945fa863f02cf8b1638546907f72dd0fc4d6ba85 Linux 5.15.217)
 	}
 
 	ret = zone_idx;
@@ -657,6 +674,7 @@ static int sd_zbc_check_zoned_characteristics(struct scsi_disk *sdkp,
 		sdkp->zones_optimal_nonseq = get_unaligned_be32(&buf[12]);
 		sdkp->zones_max_open = 0;
 		return 0;
+<<<<<<< HEAD   (2d0fc90f05f3023a4af34a062370387ab04d7cb4 Merge android14-5.15 into android14-5.15-lts)
 	}
 
 	/* Host-managed */
@@ -686,7 +704,21 @@ static int sd_zbc_check_zoned_characteristics(struct scsi_disk *sdkp,
 	default:
 		sd_printk(KERN_ERR, sdkp, "Invalid zone alignment method\n");
 		return -ENODEV;
+||||||| BASE   (3a5f728b6596260ed235f48ee8f2efe515c3a50e ALSA: hda: conexant: Remove mic bias threshold override)
+		/* Host-managed */
+		sdkp->urswrz = buf[4] & 1;
+		sdkp->zones_optimal_open = 0;
+		sdkp->zones_optimal_nonseq = 0;
+		sdkp->zones_max_open = get_unaligned_be32(&buf[16]);
+=======
+>>>>>>> BRANCH (945fa863f02cf8b1638546907f72dd0fc4d6ba85 Linux 5.15.217)
 	}
+
+	/* Host-managed */
+	sdkp->urswrz = buf[4] & 1;
+	sdkp->zones_optimal_open = 0;
+	sdkp->zones_optimal_nonseq = 0;
+	sdkp->zones_max_open = get_unaligned_be32(&buf[16]);
 
 	/*
 	 * Check for unconstrained reads: host-managed devices with
@@ -767,8 +799,14 @@ static void sd_zbc_print_zones(struct scsi_disk *sdkp)
 	if (!sd_is_zoned(sdkp) || !sdkp->capacity)
 		return;
 
+<<<<<<< HEAD   (2d0fc90f05f3023a4af34a062370387ab04d7cb4 Merge android14-5.15 into android14-5.15-lts)
 	div64_u64_rem(sdkp->capacity, sdkp->zone_info.zone_blocks, &remainder);
 	if (remainder)
+||||||| BASE   (3a5f728b6596260ed235f48ee8f2efe515c3a50e ALSA: hda: conexant: Remove mic bias threshold override)
+	if (sdkp->capacity & (sdkp->zone_blocks - 1))
+=======
+	if (sdkp->capacity & (sdkp->zone_info.zone_blocks - 1))
+>>>>>>> BRANCH (945fa863f02cf8b1638546907f72dd0fc4d6ba85 Linux 5.15.217)
 		sd_printk(KERN_NOTICE, sdkp,
 			  "%u zones of %u logical blocks + 1 runt zone\n",
 			  sdkp->zone_info.nr_zones - 1,
