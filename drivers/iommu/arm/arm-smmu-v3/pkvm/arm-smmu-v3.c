@@ -1634,7 +1634,7 @@ static int smmu_id_to_token(pkvm_handle_t smmu_id, u64 *out_token)
 static int smmu_dev_block_dma(struct kvm_hyp_iommu *iommu, u32 sid, bool is_host2guest)
 {
 	struct hyp_arm_smmu_v3_device *smmu = to_smmu(iommu);
-	static struct arm_smmu_ste *dst;
+	struct arm_smmu_ste *dst;
 	int ret = 0;
 	u64 *cd_table = NULL;
 	size_t cd_sz;
