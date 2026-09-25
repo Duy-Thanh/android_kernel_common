@@ -1573,11 +1573,9 @@ int __pkvm_guest_share_hyp_page(struct pkvm_hyp_vcpu *vcpu, u64 ipa, u64 *hyp_va
 	phys = kvm_pte_to_phys(pte);
 
 	virt = __hyp_va(phys);
-	if (IS_ENABLED(CONFIG_NVHE_EL2_DEBUG)) {
-		ret = __hyp_check_page_state_range(phys, PAGE_SIZE, PKVM_NOPAGE);
-		if (ret)
-			goto unlock;
-	}
+	ret = __hyp_check_page_state_range(phys, PAGE_SIZE, PKVM_NOPAGE);
+	if (ret)
+		goto unlock;
 
 	__hyp_set_page_state_range(phys, PAGE_SIZE, PKVM_PAGE_SHARED_BORROWED);
 	prot = pkvm_mkstate(PAGE_HYP, PKVM_PAGE_SHARED_BORROWED);
@@ -3233,7 +3231,7 @@ int host_stage2_get_leaf(phys_addr_t phys, kvm_pte_t *ptep, s8 *level)
 	return ret;
 }
 
-#ifdef CONFIG_NVHE_EL2_DEBUG
+#ifdef CONFIG_PKVM_SELFTESTS
 struct pkvm_expected_state {
 	enum pkvm_page_state host;
 	enum pkvm_page_state hyp;
@@ -3274,7 +3272,7 @@ static void init_selftest_vm(void *virt)
 	for (i = 0; i < pkvm_selftest_pages(); i++) {
 		if (p[i].refcount)
 			continue;
-		p[i].refcount = 1;
+		hyp_set_page_refcounted(&p[i]);
 		hyp_put_page(&selftest_vm.pool, hyp_page_to_virt(&p[i]));
 	}
 }
@@ -3322,10 +3320,13 @@ void pkvm_ownership_selftest(void *base)
 	struct pkvm_hyp_vcpu *vcpu = &selftest_vcpu;
 	struct pkvm_hyp_vm *vm = &selftest_vm;
 	u64 phys, size, pfn, gfn;
+	struct hyp_page old;
 
 	WARN_ON(!virt);
 	selftest_page = hyp_virt_to_page(virt);
+	old = *selftest_page;
 	selftest_page->refcount = 0;
+	selftest_page->tag = 0;
 	init_selftest_vm(base);
 
 	size = PAGE_SIZE << selftest_page->order;
@@ -3428,7 +3429,7 @@ void pkvm_ownership_selftest(void *base)
 	selftest_state.hyp = PKVM_PAGE_OWNED;
 	assert_transition_res(0,	__pkvm_host_donate_hyp, pfn, 1);
 
-	selftest_page->refcount = 1;
+	*selftest_page = old;
 	hyp_put_page(&host_s2_pool, virt);
 }
 #endif

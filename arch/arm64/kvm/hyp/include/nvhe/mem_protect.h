@@ -136,7 +136,7 @@ int __pkvm_host_unuse_dma(phys_addr_t phys_addr, size_t size);
 
 int __pkvm_accept_module_prot_page(u64 ipa, u64 nr_pages);
 
-#ifdef CONFIG_NVHE_EL2_DEBUG
+#ifdef CONFIG_PKVM_SELFTESTS
 void pkvm_ownership_selftest(void *base);
 #else
 static inline void pkvm_ownership_selftest(void *base) { }
