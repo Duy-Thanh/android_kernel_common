@@ -11,17 +11,40 @@
 use crate::{
     bindings,
     device::Device,
+<<<<<<< HEAD   (b65d626af24dc19e9bd91e12c179c4f8e1aecdf6 Merge 364f4a55c661 ("Merge tag 'usb-7.2-rc1' of git://git.ke)
     error::{to_result, Error, Result, VTABLE_DEFAULT_ERROR},
     ffi::{c_int, c_long, c_uint, c_ulong},
     fs::file::Offset,
     fs::{File, Kiocb, LocalFile},
     iov::{IovIterDest, IovIterSource},
+||||||| BASE   (364f4a55c661641c02c86a849f0608d8fc3c0006 Merge tag 'usb-7.2-rc1' of git://git.kernel.org/pub/scm/linu)
+    error::{to_result, Error, Result, VTABLE_DEFAULT_ERROR},
+    ffi::{c_int, c_long, c_uint, c_ulong},
+    fs::{File, Kiocb},
+    iov::{IovIterDest, IovIterSource},
+=======
+    error::{
+        to_result,
+        VTABLE_DEFAULT_ERROR, //
+    },
+    fs::{
+        File,
+        Kiocb, //
+    },
+    iov::{
+        IovIterDest,
+        IovIterSource, //
+    },
+>>>>>>> BRANCH (0000d9ccbcfa90411c88f70850501723389312b9 Merge tag 'char-misc-7.2-rc1' of git://git.kernel.org/pub/sc)
     mm::virt::VmaNew,
     prelude::*,
     seq_file::SeqFile,
-    types::{ForeignOwnable, Opaque},
+    types::{
+        ForeignOwnable,
+        Opaque, //
+    },
 };
-use core::{marker::PhantomData, pin::Pin};
+use core::marker::PhantomData;
 
 /// Options for creating a misc device.
 #[derive(Copy, Clone)]
