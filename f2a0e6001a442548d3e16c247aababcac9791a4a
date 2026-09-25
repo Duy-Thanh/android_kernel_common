@@ -1,0 +1,247 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e03d105_32dc04f0",
+        "filename": "include/linux/mm_types.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 979,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2026-09-25T00:07:18Z",
+      "side": 1,
+      "message": "should we use the p3s_ prefix? in this way we avoid future name conflicts.",
+      "range": {
+        "startLine": 979,
+        "startChar": 5,
+        "endLine": 979,
+        "endChar": 14
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "07fae3d0_c46105bb",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/mm_types.h",
+              "range": {
+                "startLine": 979,
+                "startChar": 0,
+                "endLine": 980,
+                "endChar": 0
+              },
+              "replacement": "\t\tu8 p3s_pte_shift;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f2a0e6001a442548d3e16c247aababcac9791a4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5aeeb20_cc7e2616",
+        "filename": "include/linux/mm_types.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 979,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2026-09-25T00:07:18Z",
+      "side": 1,
+      "message": "please add a comment",
+      "range": {
+        "startLine": 979,
+        "startChar": 5,
+        "endLine": 979,
+        "endChar": 14
+      },
+      "revId": "f2a0e6001a442548d3e16c247aababcac9791a4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ece40789_a8b6512b",
+        "filename": "include/linux/p3s/mm.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2026-09-25T00:07:18Z",
+      "side": 1,
+      "message": "please add a comment because it is not clear the difference betwee ON and ALTERNATE modes.",
+      "range": {
+        "startLine": 16,
+        "startChar": 1,
+        "endLine": 17,
+        "endChar": 24
+      },
+      "revId": "f2a0e6001a442548d3e16c247aababcac9791a4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dcf0fe4_cc7e3aa5",
+        "filename": "include/linux/p3s/mm.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2026-09-25T00:07:18Z",
+      "side": 1,
+      "message": "I thinking that we should prefix all the new functions and fields related to p3s with p3s_.",
+      "range": {
+        "startLine": 20,
+        "startChar": 12,
+        "endLine": 20,
+        "endChar": 15
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6c5c222d_ad859d2c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/p3s/mm.h",
+              "range": {
+                "startLine": 20,
+                "startChar": 0,
+                "endLine": 21,
+                "endChar": 0
+              },
+              "replacement": "extern enum p3s_mode sysctl_p3s_mode;\n"
+            },
+            {
+              "path": "include/linux/p3s/mm.h",
+              "range": {
+                "startLine": 44,
+                "startChar": 0,
+                "endLine": 46,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tsysctl_p3s_mode \u003d\u003d P3S_MODE_ON ||\n\t\t\t(sysctl_p3s_mode \u003d\u003d P3S_MODE_ALTERNATE \u0026\u0026\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f2a0e6001a442548d3e16c247aababcac9791a4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dcdcac7_70e6c811",
+        "filename": "include/linux/p3s/mm.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2026-09-25T00:07:18Z",
+      "side": 1,
+      "message": "a comment would be handy, explain why (p ? p-\u003epid : current-\u003epid) \u0026 1)",
+      "range": {
+        "startLine": 41,
+        "startChar": 1,
+        "endLine": 47,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "5b7074c0_231a96dc",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/p3s/mm.h",
+              "range": {
+                "startLine": 41,
+                "startChar": 0,
+                "endLine": 47,
+                "endChar": 0
+              },
+              "replacement": "\tbool use_4kb \u003d personality_4kb_pages(current-\u003epersonality) ||\n\t\t       (p \u0026\u0026 personality_4kb_pages(p-\u003epersonality)) ||\n\t\t       p3s_mode \u003d\u003d P3S_MODE_ON ||\n\t\t       (p3s_mode \u003d\u003d P3S_MODE_ALTERNATE \u0026\u0026\n\t\t\t((p ? p-\u003epid : current-\u003epid) \u0026 1));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f2a0e6001a442548d3e16c247aababcac9791a4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daf61267_f5aa0c44",
+        "filename": "include/linux/p3s/mm.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2026-09-25T00:07:18Z",
+      "side": 1,
+      "message": "what does this mean? app compatibility, or something else?",
+      "range": {
+        "startLine": 84,
+        "startChar": 19,
+        "endLine": 84,
+        "endChar": 31
+      },
+      "revId": "f2a0e6001a442548d3e16c247aababcac9791a4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98da69ae_9e4d101e",
+        "filename": "include/linux/p3s/mm.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2026-09-25T00:07:18Z",
+      "side": 1,
+      "message": "there are 2 endifs but only one ifdef.",
+      "range": {
+        "startLine": 134,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 28
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "663398b0_93c7b66c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/p3s/mm.h",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f2a0e6001a442548d3e16c247aababcac9791a4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
