@@ -1359,6 +1359,7 @@ static void handle_host_hcall(struct kvm_cpu_context *host_ctxt)
 	if (static_branch_unlikely(&kvm_protected_mode_initialized))
 		hcall_min = __KVM_HOST_SMCCC_FUNC___pkvm_prot_finalize;
 
+	id &= ~ARM_SMCCC_CALL_HINTS;
 	id -= KVM_HOST_SMCCC_ID(0);
 
 	if (unlikely(id < hcall_min || id >= ARRAY_SIZE(host_hcall)))
@@ -1389,9 +1390,11 @@ static void handle_host_smc(struct kvm_cpu_context *host_ctxt)
 	if (hyp_vcpu && hyp_vcpu->vcpu.arch.fp_state == FP_STATE_GUEST_OWNED)
 		fpsimd_host_restore();
 
-	handled = kvm_host_psci_handler(host_ctxt);
+	func_id &= ~ARM_SMCCC_CALL_HINTS;
+
+	handled = kvm_host_psci_handler(host_ctxt, func_id);
 	if (!handled)
-		handled = kvm_host_ffa_handler(host_ctxt);
+		handled = kvm_host_ffa_handler(host_ctxt, func_id);
 	if (!handled && smp_load_acquire(&default_host_smc_handler))
 		handled = default_host_smc_handler(host_ctxt);
 
