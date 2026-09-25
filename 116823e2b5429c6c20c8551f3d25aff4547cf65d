@@ -168,6 +168,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b751ad46_05db5ed9",
+        "filename": "drivers/android/wrapfd/content.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-09-25T07:53:19Z",
+      "side": 1,
+      "message": "Not blocking, but since you\u0027re adding an Arc that\u0027s no longer the case. You can now clone the Arc, then lock the mutex via the clone.",
+      "parentUuid": "17228b7f_4a67e4a0",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 82
+      },
+      "revId": "116823e2b5429c6c20c8551f3d25aff4547cf65d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1a8bb2cd_37a6cd05",
         "filename": "drivers/android/wrapfd/defs.rs",
         "patchSetId": 16
@@ -197,6 +221,24 @@
       "side": 1,
       "message": "Is there a reason not to use the general macro you wrote for binder?",
       "parentUuid": "1a8bb2cd_37a6cd05",
+      "revId": "116823e2b5429c6c20c8551f3d25aff4547cf65d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ec8a2ad_3cca0486",
+        "filename": "drivers/android/wrapfd/defs.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-09-25T07:53:19Z",
+      "side": 1,
+      "message": "It\u0027s just a bit of a hacky workaround that Binder only uses because the uapi structs has padding.",
+      "parentUuid": "2751b2ba_e0aecab7",
       "revId": "116823e2b5429c6c20c8551f3d25aff4547cf65d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -384,6 +426,24 @@
       "side": 1,
       "message": "the logic here is the same as in the original driver, isn\u0027t it?",
       "parentUuid": "8185ae72_e1e0d834",
+      "revId": "116823e2b5429c6c20c8551f3d25aff4547cf65d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a93fd5ca_56038a07",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-09-25T07:53:19Z",
+      "side": 1,
+      "message": "But isn\u0027t it wrong? If the underlying file has ioctls that take pointers, they will not be properly converted.",
+      "parentUuid": "8c102126_a6c41cfc",
       "revId": "116823e2b5429c6c20c8551f3d25aff4547cf65d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
