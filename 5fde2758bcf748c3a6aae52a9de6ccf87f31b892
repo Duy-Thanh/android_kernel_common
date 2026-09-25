@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b46b122f_650752e4",
+        "filename": "rust/kernel/module_param.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-09-25T11:49:36Z",
+      "side": 1,
+      "message": "There\u0027s a `RawFormatter` upstream in `rust/kernel/str.rs` you can backport.",
+      "revId": "5fde2758bcf748c3a6aae52a9de6ccf87f31b892",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
