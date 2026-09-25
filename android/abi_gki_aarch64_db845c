@@ -493,6 +493,7 @@
   pinctrl_pm_select_sleep_state
   pinctrl_utils_free_map
   platform_bus_type
+  platform_device_del
   platform_device_register_full
   platform_device_unregister
   __platform_driver_register
