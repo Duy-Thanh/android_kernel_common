@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7978f246_ae795dbf",
+        "filename": "gki/aarch64/symbols/lenovo",
+        "patchSetId": 1
+      },
+      "lineNbr": 2160,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-09-25T11:46:00Z",
+      "side": 1,
+      "message": "What\u0027s this doing here?",
+      "range": {
+        "startLine": 2160,
+        "startChar": 2,
+        "endLine": 2160,
+        "endChar": 25
+      },
+      "revId": "7c0a9e9455ffe2029b795cb638d34a8d3d4d5ea8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
