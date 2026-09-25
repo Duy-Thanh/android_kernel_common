@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ba05f364_90e6c577",
+        "filename": "rust/kernel/anon_inodes.rs",
+        "patchSetId": 13
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-09-25T10:25:22Z",
+      "side": 1,
+      "message": "The `file_operations` struct has a field called `this_module` containing a pointer to the `.ko` that owns this vtable. When files using that vtable are open, the kernel takes a refcount on that module, which prevents its code from being unloaded in case someone tries unload said kernel module.\n\nIf this field is not set and the vtable is declared in a loadable kernel module, then the module could be unloaded, freeing both the vtable global variable and the code associated with all the functions.",
+      "parentUuid": "11da8bb8_06c64b8c",
+      "revId": "e1dd750a074a6dfb22eb5cc577a1645d17ac65e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9d26b798_865d110a",
         "filename": "rust/kernel/anon_inodes.rs",
         "patchSetId": 13
