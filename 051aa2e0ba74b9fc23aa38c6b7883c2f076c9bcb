@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61e4afb4_cade24bc",
+        "filename": "arch/arm64/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 1461,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2026-09-25T00:25:48Z",
+      "side": 1,
+      "message": "add an explanation why it has to be ARM64_VA_BITS_47 instead of ARM64_VA_BITS_48 or ARM64_VA_BITS_36",
+      "range": {
+        "startLine": 1461,
+        "startChar": 31,
+        "endLine": 1461,
+        "endChar": 47
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ec2e44f6_586f9e4b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/Kconfig",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\t# 47-bit VAs with 16KB pages use 3 levels of page tables. This avoids the\n\t# additional complexity of supporting 4-level page tables (required for\n\t# 48-bit VAs) in the mixed translation granule folding logic.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "051aa2e0ba74b9fc23aa38c6b7883c2f076c9bcb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
