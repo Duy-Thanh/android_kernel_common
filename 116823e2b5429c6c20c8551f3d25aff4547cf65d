@@ -474,6 +474,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a89570e7_530c8ae7",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-25T21:27:27Z",
+      "side": 1,
+      "message": "I don\u0027t think it\u0027s wrong, because `DmabufContent::ioctl` checks if this is a compat syscall, and invokes the file\u0027s `compat_ioctl()` callback, which should handle converting the pointers, or am I missing something?",
+      "parentUuid": "a93fd5ca_56038a07",
+      "revId": "116823e2b5429c6c20c8551f3d25aff4547cf65d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d4a20a0c_501fadca",
         "filename": "drivers/android/wrapfd/wrap.rs",
         "patchSetId": 16

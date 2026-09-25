@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25b96e48_5d102d96",
+        "filename": "drivers/android/wrapfd/content.rs",
+        "patchSetId": 21
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-25T21:27:27Z",
+      "side": 1,
+      "message": "Why do we need this if it\u0027s not used anywhere?",
+      "range": {
+        "startLine": 47,
+        "startChar": 22,
+        "endLine": 47,
+        "endChar": 26
+      },
+      "revId": "f058a0ed7fa5bc5466b1d1c68497845efb219ca0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
