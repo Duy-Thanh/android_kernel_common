@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cb7b8b1_1f1dd7ec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-09-25T11:45:01Z",
+      "side": 1,
+      "message": "Doesn\u0027t the guidelines require this format?\n```\nReviewed-by: Benno Lossin \u003clossin@kernel.org\u003e\nSigned-off-by: Andreas Hindborg \u003ca.hindborg@kernel.org\u003e\nTested-by: Daniel Gomez \u003cda.gomez@samsung.com\u003e\nSigned-off-by: Daniel Gomez \u003cda.gomez@kernel.org\u003e\n\nBug: \u003cNUM\u003e\nChange-Id: I4797f8ec88c1f665787df1db686f7d3dc6590756\n(cherry picked from commit 0b24f9740f26ac7ad91ac0f4de27717c14de91bd)\n[andih: I changed foo and bar for baz reason]\nSigned-off-by: Andreas Huber \u003candih@google.com\u003e\n```",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 52
+      },
+      "revId": "248c3b2d88d730a35a38211152eaad53dab4dab1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
