@@ -504,6 +504,22 @@ unmap_out:
 	return err;
 }
 
+static inline erofs_off_t z_erofs_ext_la(const struct z_erofs_extent *ext,
+					 unsigned int recsz)
+{
+	erofs_off_t la = le32_to_cpu(ext->lstart_lo);
+
+	if (recsz > offsetof(struct z_erofs_extent, lstart_hi))
+		la |= (u64)le32_to_cpu(ext->lstart_hi) << 32;
+	return la;
+}
+
+static inline erofs_off_t z_erofs_ext_pa(const struct z_erofs_extent *ext)
+{
+	return le32_to_cpu(ext->pstart_lo) |
+		(u64)le32_to_cpu(ext->pstart_hi) << 32;
+}
+
 static int z_erofs_map_blocks_ext(struct inode *inode,
 				  struct erofs_map_blocks *map, int flags)
 {
@@ -554,35 +570,160 @@ static int z_erofs_map_blocks_ext(struct inode *inode,
 		lend = min(lstart, lend);
 		lstart -= 1 << vi->z_lclusterbits;
 	} else {
+		erofs_off_t nblocks = DIV_ROUND_UP_ULL(inode->i_size,
+						       1ULL << vi->z_lclusterbits);
+		unsigned int step = 0;
+		unsigned int hint = READ_ONCE(vi->z_last_ext_idx);
+		erofs_off_t hint_la = READ_ONCE(vi->z_last_ext_la);
+		erofs_off_t hint_lend = READ_ONCE(vi->z_last_ext_lend);
+		erofs_off_t l_la = 0, r_la = inode->i_size;
+
 		lstart = lend;
-		for (l = 0, r = vi->z_extents; l < r; ) {
-			mid = l + (r - l) / 2;
-			ext = erofs_read_metabuf(&map->buf, sb,
-						 pos + mid * recsz, in_mbox);
+		for (l = 0, r = vi->z_extents; l < r; ++step) {
+			struct z_erofs_extent ev_buf;
+			erofs_off_t epos;
+			unsigned int off_in_page;
+
+			if (step == 0) {
+				if (vi->z_extents == nblocks)
+					mid = min_t(erofs_off_t,
+						    map->m_la >> vi->z_lclusterbits,
+						    r - 1);
+				else if (map->m_la == 0)
+					mid = 0;
+				else if (hint < r && hint_lend > hint_la &&
+					 map->m_la >= hint_la &&
+					 map->m_la < hint_lend)
+					mid = hint;
+				else if (hint + 1 < r && hint_lend > hint_la &&
+					 map->m_la >= hint_lend &&
+					 map->m_la < hint_lend +
+						 (2ULL << max_t(u8, vi->z_lclusterbits, 15)))
+					mid = hint + 1;
+				else
+					mid = clamp_t(erofs_off_t,
+						      div64_u64((u64)map->m_la * vi->z_extents,
+								max_t(erofs_off_t, inode->i_size, 1)),
+						      l, r - 1);
+			} else if (step <= 2 && r - l > 4 && r_la > l_la &&
+				   map->m_la >= l_la && map->m_la < r_la) {
+				mid = l + clamp_t(erofs_off_t,
+						  div64_u64((u64)(map->m_la - l_la) * (r - l),
+							    r_la - l_la),
+						  0, r - l - 1);
+			} else {
+				mid = l + (r - l) / 2;
+			}
+
+			epos = pos + (erofs_off_t)mid * recsz;
+			off_in_page = epos & (sb->s_blocksize - 1);
+			ext = erofs_read_metabuf(&map->buf, sb, epos, in_mbox);
 			if (IS_ERR(ext))
 				return PTR_ERR(ext);
+			if (unlikely(off_in_page + recsz > sb->s_blocksize)) {
+				unsigned int first = sb->s_blocksize - off_in_page;
+				void *ext2;
 
-			la = le32_to_cpu(ext->lstart_lo);
-			pa = le32_to_cpu(ext->pstart_lo) |
-				(u64)le32_to_cpu(ext->pstart_hi) << 32;
-			if (recsz > offsetof(struct z_erofs_extent, lstart_hi))
-				la |= (u64)le32_to_cpu(ext->lstart_hi) << 32;
+				memcpy(&ev_buf, ext, first);
+				ext2 = erofs_read_metabuf(&map->buf, sb,
+							  epos + first, in_mbox);
+				if (IS_ERR(ext2))
+					return PTR_ERR(ext2);
+				memcpy((u8 *)&ev_buf + first, ext2, recsz - first);
+				ext = (struct z_erofs_extent *)&ev_buf;
 
-			if (la > map->m_la) {
-				r = mid;
-				if (la > lend) {
-					DBG_BUGON(1);
-					return -EFSCORRUPTED;
+				la = z_erofs_ext_la(ext, recsz);
+				pa = z_erofs_ext_pa(ext);
+				if (la > map->m_la) {
+					r = mid;
+					if (la > lend) {
+						DBG_BUGON(1);
+						return -EFSCORRUPTED;
+					}
+					lend = la;
+					r_la = la;
+				} else {
+					l = mid + 1;
+					lstart = la;
+					l_la = la;
+					map->m_plen = le32_to_cpu(ext->plen);
+					map->m_pa = pa;
 				}
-				lend = la;
-			} else {
-				l = mid + 1;
-				if (map->m_la == la)
-					r = min(l + 1, r);
-				lstart = la;
-				map->m_plen = le32_to_cpu(ext->plen);
-				map->m_pa = pa;
+				continue;
 			}
+
+			/*
+			 * In-page search across all complete extents [p_first .. p_last]
+			 * residing on the already-mapped 4 KiB metadata page.
+			 */
+			{
+				u8 *page_base = (u8 *)ext - off_in_page;
+				erofs_off_t p_first = mid - min_t(erofs_off_t,
+								  mid - l,
+								  off_in_page / recsz);
+				erofs_off_t p_last = min_t(erofs_off_t, r - 1,
+							   mid + (sb->s_blocksize - off_in_page) / recsz - 1);
+				struct z_erofs_extent *efirst = (struct z_erofs_extent *)
+					(page_base + off_in_page + (ssize_t)(p_first - mid) * recsz);
+				struct z_erofs_extent *elast = (struct z_erofs_extent *)
+					(page_base + off_in_page + (ssize_t)(p_last - mid) * recsz);
+				erofs_off_t first_la = z_erofs_ext_la(efirst, recsz);
+				erofs_off_t last_la = z_erofs_ext_la(elast, recsz);
+
+				if (map->m_la < first_la) {
+					if (first_la > lend) {
+						DBG_BUGON(1);
+						return -EFSCORRUPTED;
+					}
+					r = p_first;
+					lend = first_la;
+					r_la = first_la;
+					continue;
+				}
+				if (p_last + 1 < r && map->m_la >= last_la) {
+					l = p_last + 1;
+					lstart = last_la;
+					l_la = last_la;
+					map->m_plen = le32_to_cpu(elast->plen);
+					map->m_pa = z_erofs_ext_pa(elast);
+					continue;
+				}
+
+				/* Target extent is guaranteed inside [p_first .. p_last] */
+				{
+					erofs_off_t lo = p_first, hi = p_last;
+					struct z_erofs_extent *ek;
+
+					while (lo < hi) {
+						erofs_off_t m = lo + (hi - lo + 1) / 2;
+						struct z_erofs_extent *em = (struct z_erofs_extent *)
+							(page_base + off_in_page + (ssize_t)(m - mid) * recsz);
+
+						if (z_erofs_ext_la(em, recsz) <= map->m_la)
+							lo = m;
+						else
+							hi = m - 1;
+					}
+					ek = (struct z_erofs_extent *)
+						(page_base + off_in_page + (ssize_t)(lo - mid) * recsz);
+					lstart = z_erofs_ext_la(ek, recsz);
+					map->m_plen = le32_to_cpu(ek->plen);
+					map->m_pa = z_erofs_ext_pa(ek);
+					if (lo < p_last) {
+						struct z_erofs_extent *enext =
+							(struct z_erofs_extent *)((u8 *)ek + recsz);
+
+						lend = z_erofs_ext_la(enext, recsz);
+					}
+					l = lo + 1;
+					break;
+				}
+			}
+		}
+		if (lstart < lend && l > 0) {
+			WRITE_ONCE(vi->z_last_ext_idx, l - 1);
+			WRITE_ONCE(vi->z_last_ext_la, lstart);
+			WRITE_ONCE(vi->z_last_ext_lend, lend);
 		}
 		last = (l >= vi->z_extents);
 	}

@@ -297,6 +297,9 @@ struct erofs_inode {
 			};
 			erofs_off_t    z_fragmentoff;
 			unsigned short z_idata_size;
+			unsigned int   z_last_ext_idx;
+			erofs_off_t    z_last_ext_la;
+			erofs_off_t    z_last_ext_lend;
 		};
 #endif	/* CONFIG_EROFS_FS_ZIP */
 	};
