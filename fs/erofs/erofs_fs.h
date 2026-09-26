@@ -35,8 +35,9 @@
 #define EROFS_FEATURE_INCOMPAT_XATTR_PREFIXES	0x00000040
 #define EROFS_FEATURE_INCOMPAT_48BIT		0x00000080
 #define EROFS_FEATURE_INCOMPAT_METABOX		0x00000100
+#define EROFS_FEATURE_INCOMPAT_VERITY		0x00000200
 #define EROFS_ALL_FEATURE_INCOMPAT		\
-	((EROFS_FEATURE_INCOMPAT_METABOX << 1) - 1)
+	((EROFS_FEATURE_INCOMPAT_VERITY << 1) - 1)
 
 #define EROFS_SB_EXTSLOT_SIZE	16
 
@@ -353,7 +354,7 @@ struct z_erofs_zstd_cfgs {
 #define Z_EROFS_ADVISE_FRAGMENT_PCLUSTER	0x0020
 /* Indicate the record size for each extent if extent metadata is used */
 #define Z_EROFS_ADVISE_EXTRECSZ_BIT		1
-#define Z_EROFS_ADVISE_EXTRECSZ_MASK		0x3
+#define Z_EROFS_ADVISE_EXTRECSZ_MASK		0x7
 
 #define Z_EROFS_FRAGMENT_INODE_BIT              7
 struct z_erofs_map_header {
@@ -428,6 +429,26 @@ struct z_erofs_extent {
 	__le32 lstart_lo;	/* logical offset */
 	__le32 lstart_hi;	/* logical offset MSB (>= 4GiB inodes) */
 	__u8 reserved[12];	/* for future use */
+};
+
+struct z_erofs_extent_verity {
+	__le32 plen;		/* encoded length */
+	__le32 pstart_lo;	/* physical offset */
+	__le32 pstart_hi;	/* physical offset MSB */
+	__le32 lstart_lo;	/* logical offset */
+	__le32 lstart_hi;	/* logical offset MSB (>= 4GiB inodes) */
+	__u8 reserved[12];	/* for future use */
+	__u8 sha256[32];	/* SHA-256 of on-disk compressed pcluster */
+};
+
+/* 80 bytes (5 extslots immediately following struct erofs_super_block) */
+struct erofs_verity_sb_ext {
+	__le32 meta_verity_startblk;
+	__le32 meta_verity_blocks;
+	__le32 meta_merkle_blkaddr;
+	__le32 meta_merkle_blocks;
+	__u8   meta_merkle_root[32];
+	__u8   verity_salt[32];
 };
 
 static inline int z_erofs_extent_recsize(unsigned int advise)
