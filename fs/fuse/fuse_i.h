@@ -136,12 +136,12 @@ static inline struct fuse_dentry *get_fuse_dentry(const struct dentry *entry)
 #endif
 
 #ifdef CONFIG_FUSE_BPF
-static inline void get_fuse_backing_path(const struct dentry *d,
-					  struct path *path)
+static inline void get_fuse_backing_path_locked(const struct dentry *d,
+						struct path *path)
 {
 	struct fuse_dentry *di = get_fuse_dentry(d);
 
-	if (!di) {
+	if (!di || !di->backing_path.dentry || !di->backing_path.mnt) {
 		*path = (struct path) {};
 		return;
 	}
@@ -149,6 +149,7 @@ static inline void get_fuse_backing_path(const struct dentry *d,
 	*path = di->backing_path;
 	path_get(path);
 }
+
 #endif
 
 /** FUSE inode */
@@ -162,6 +163,9 @@ struct fuse_inode {
 	 * If this is set, nodeid is 0.
 	 */
 	struct inode *backing_inode;
+
+	/* Serializes backing inode/path replacement with backing users. */
+	struct mutex backing_mutex;
 
 	/**
 	 * bpf_prog, run on all operations to determine whether to pass through
@@ -1138,6 +1142,34 @@ static inline struct fuse_inode *get_fuse_inode(struct inode *inode)
 	return container_of(inode, struct fuse_inode, inode);
 }
 
+#ifdef CONFIG_FUSE_BPF
+static inline void get_fuse_backing_path(const struct dentry *d,
+					 struct path *path)
+{
+	struct inode *inode = d_inode(d);
+
+	if (inode)
+		mutex_lock(&get_fuse_inode(inode)->backing_mutex);
+	get_fuse_backing_path_locked(d, path);
+	if (inode)
+		mutex_unlock(&get_fuse_inode(inode)->backing_mutex);
+}
+
+static inline struct inode *fuse_get_backing_inode(struct inode *inode)
+{
+	struct fuse_inode *fi = get_fuse_inode(inode);
+	struct inode *backing_inode;
+
+	mutex_lock(&fi->backing_mutex);
+	backing_inode = fi->backing_inode;
+	if (backing_inode)
+		ihold(backing_inode);
+	mutex_unlock(&fi->backing_mutex);
+
+	return backing_inode;
+}
+#endif
+
 static inline u64 get_node_id(struct inode *inode)
 {
 	return get_fuse_inode(inode)->nodeid;
@@ -1964,7 +1996,7 @@ struct fuse_lookup_io {
 };
 
 int fuse_handle_backing(struct fuse_entry_bpf *feb, struct inode **backing_inode,
-			struct path *backing_path);
+			struct path *backing_path, struct mutex *backing_mutex);
 int fuse_handle_bpf_prog(struct fuse_entry_bpf *feb, struct inode *parent,
 			 struct bpf_prog **bpf);
 
@@ -2206,6 +2238,12 @@ struct fuse_err_ret {
 	bool ret;
 };
 
+/*
+ * Kernel-private state for a raced backing open. This bit is consumed before
+ * running a postfilter or forwarding the request to userspace.
+ */
+#define FUSE_BPF_INTERNAL_FALLBACK	BIT(31)
+
 int __init fuse_bpf_init(void);
 void __exit fuse_bpf_cleanup(void);
 
@@ -2233,13 +2271,16 @@ static inline int fuse_bpf_run(struct bpf_prog *prog, struct fuse_bpf_args *fba)
  * void *finalize(struct fuse_bpf_args *, args...): function that performs any final
  *	work needed to commit the backing io
  */
-#define fuse_bpf_backing(inode, io, initialize, backing, finalize,	\
+#define __fuse_bpf_backing(inode, require_backing, io, initialize, backing,\
+			       finalize,	\
 			 args...)					\
 ({									\
 	struct fuse_err_ret fer = {0};					\
 	int ext_flags;							\
-	struct fuse_inode *fuse_inode = get_fuse_inode(inode);		\
-	struct fuse_mount *fm = get_fuse_mount(inode);			\
+	typeof(inode) __fuse_bpf_inode = (inode);				\
+	struct fuse_inode *fuse_inode = get_fuse_inode(__fuse_bpf_inode);\
+	struct fuse_mount *fm = get_fuse_mount(__fuse_bpf_inode);		\
+	typeof(inode) backing_inode = NULL;			\
 	io feo = {0};							\
 	struct fuse_bpf_args fa = {0}, fa_backup = {0};			\
 	bool locked;							\
@@ -2249,8 +2290,14 @@ static inline int fuse_bpf_run(struct bpf_prog *prog, struct fuse_bpf_args *fba)
 	bool initialized = false;					\
 									\
 	do {								\
-		if (!fuse_inode || !fuse_inode->backing_inode)		\
+		if (!fuse_inode)					\
 			break;						\
+		if (require_backing) {				\
+			backing_inode = fuse_get_backing_inode(__fuse_bpf_inode);\
+			if (!backing_inode)				\
+				break;					\
+			iput(backing_inode);				\
+		}						\
 									\
 		err = ERR_PTR(initialize(&fa, &feo, args));		\
 		if (err) {						\
@@ -2315,6 +2362,10 @@ static inline int fuse_bpf_run(struct bpf_prog *prog, struct fuse_bpf_args *fba)
 			ERR_PTR(backing(&fa, args)),			\
 			true,						\
 		};							\
+		if (fa.flags & FUSE_BPF_INTERNAL_FALLBACK)			\
+			fer = (struct fuse_err_ret) { 0 };			\
+		if (!fer.ret)						\
+			break;						\
 		if (IS_ERR(fer.result))					\
 			fa.error_in = PTR_ERR(fer.result);		\
 		if (!(ext_flags & FUSE_BPF_POST_FILTER))		\
@@ -2358,6 +2409,15 @@ static inline int fuse_bpf_run(struct bpf_prog *prog, struct fuse_bpf_args *fba)
 									\
 	fer;								\
 })
+
+#define fuse_bpf_backing(inode, io, initialize, backing, finalize,	\
+			 args...)					\
+	__fuse_bpf_backing(inode, true, io, initialize, backing, finalize, args)
+
+/* File operations retain their backing file after inode association changes. */
+#define fuse_bpf_backing_file(inode, io, initialize, backing, finalize,	\
+			     args...)					\
+	__fuse_bpf_backing(inode, false, io, initialize, backing, finalize, args)
 
 #endif /* CONFIG_FUSE_BPF */
 
