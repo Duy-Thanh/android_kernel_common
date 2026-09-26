@@ -86,8 +86,17 @@ struct z_erofs_pcluster {
 	/* I/L: Native EROFS Verity digest and verification state */
 	bool in_pslots;
 	bool has_verity;
+	bool has_split_folio;
+	bool async_eio;
+	bool async_full_decomp;
 	atomic_t verify_state;
+	int async_queued;
 	u8 sha256[32];
+	struct super_block *async_sb;
+	union {
+		struct kthread_work async_kwork;
+		struct work_struct async_work;
+	};
 
 	/* A: compressed bvecs (can be cached or inplaced pages) */
 	struct z_erofs_bvec compressed_bvecs[];
@@ -790,7 +799,12 @@ static int z_erofs_register_pcluster(struct z_erofs_frontend *fe)
 	pcl->from_meta = map->m_flags & EROFS_MAP_META;
 	pcl->in_pslots = !pcl->from_meta && z_erofs_need_pslots(sbi);
 	pcl->has_verity = map->m_has_verity;
+	pcl->has_split_folio = false;
+	pcl->async_eio = false;
+	pcl->async_full_decomp = false;
 	atomic_set(&pcl->verify_state, 0);
+	pcl->async_queued = 0;
+	pcl->async_sb = NULL;
 	if (map->m_has_verity)
 		memcpy(pcl->sha256, map->m_sha256, 32);
 	fe->mode = Z_EROFS_PCLUSTER_FOLLOWED;
@@ -1045,17 +1059,19 @@ static int z_erofs_read_fragment(struct super_block *sb, struct folio *folio,
 }
 
 static int z_erofs_scan_folio(struct z_erofs_frontend *f,
-			      struct folio *folio, bool ra)
+			      struct folio *folio, bool ra,
+			      bool parallel_decomp)
 {
 	struct inode *const inode = f->inode;
 	struct erofs_map_blocks *const map = &f->map;
 	const loff_t offset = folio_pos(folio);
 	const unsigned int bs = i_blocksize(inode);
+	const bool allow_tight = (bs == PAGE_SIZE) && !parallel_decomp;
 	unsigned int end = folio_size(folio), split = 0, cur, pgs;
 	bool tight, excl;
 	int err = 0;
 
-	tight = (bs == PAGE_SIZE);
+	tight = allow_tight;
 	erofs_onlinefolio_init(folio);
 	do {
 		if (offset + end - 1 < map->m_la ||
@@ -1094,6 +1110,8 @@ static int z_erofs_scan_folio(struct z_erofs_frontend *f,
 			}
 
 			pgs = round_down(end - 1, PAGE_SIZE);
+			if (!parallel_decomp)
+				f->pcl->has_split_folio = true;
 			/*
 			 * Ensure this partial page belongs to this submit chain
 			 * rather than other concurrent submit chains or
@@ -1131,7 +1149,7 @@ static int z_erofs_scan_folio(struct z_erofs_frontend *f,
 		map->m_flags &= ~EROFS_MAP_FULL_MAPPED;
 		if (cur <= pgs) {
 			split = cur < pgs;
-			tight = (bs == PAGE_SIZE);
+			tight = allow_tight;
 		}
 	} while ((end = cur) > 0);
 	erofs_onlinefolio_end(folio, err, false);
@@ -1359,6 +1377,66 @@ static int z_erofs_verify_pcluster(struct super_block *sb,
 	return 0;
 }
 
+static bool z_erofs_try_claim_pcluster_bvecs(struct z_erofs_pcluster *pcl)
+{
+	unsigned int pclusterpages, pgnr;
+
+	if (!pcl->has_verity || pcl->from_meta)
+		return false;
+	if (atomic_cmpxchg(&pcl->verify_state, 0, 1) != 0)
+		return false;
+
+	pclusterpages = z_erofs_pclusterpages(pcl);
+	for (pgnr = 0; pgnr < pclusterpages; ++pgnr) {
+		struct page *page = READ_ONCE(pcl->compressed_bvecs[pgnr].page);
+
+		if (IS_ERR_OR_NULL(page)) {
+			atomic_set_release(&pcl->verify_state, 0);
+			return false;
+		}
+	}
+	return true;
+}
+
+static void z_erofs_verify_pcluster_bvecs_claimed(struct super_block *sb,
+						  struct z_erofs_pcluster *pcl)
+{
+	struct erofs_sb_info *sbi = EROFS_SB(sb);
+	struct sha256_ctx ctx = sbi->verity_init_ctx;
+	unsigned int rem = pcl->pclustersize;
+	unsigned int cur_ofs = pcl->pageofs_in;
+	unsigned int pgnr = 0;
+	u8 actual[32];
+
+	while (rem > 0) {
+		unsigned int chunk = min_t(unsigned int, rem,
+					   PAGE_SIZE - cur_ofs);
+		struct page *page = READ_ONCE(pcl->compressed_bvecs[pgnr].page);
+		const u8 *addr = kmap_local_page(page);
+
+		sha256_update(&ctx, addr + cur_ofs, chunk);
+		kunmap_local(addr);
+		rem -= chunk;
+		cur_ofs = 0;
+		pgnr++;
+	}
+	sha256_final(&ctx, actual);
+	if (unlikely(memcmp(actual, pcl->sha256, 32) != 0)) {
+		erofs_err(sb, "verity: pcluster SHA-256 mismatch @ pa %llu size %u",
+			  pcl->pos, pcl->pclustersize);
+		atomic_set_release(&pcl->verify_state, 3);
+		return;
+	}
+	atomic_set_release(&pcl->verify_state, 2);
+}
+
+static void z_erofs_verify_pcluster_bvecs(struct super_block *sb,
+					  struct z_erofs_pcluster *pcl)
+{
+	if (z_erofs_try_claim_pcluster_bvecs(pcl))
+		z_erofs_verify_pcluster_bvecs_claimed(sb, pcl);
+}
+
 static int z_erofs_decompress_pcluster(struct z_erofs_backend *be, bool eio)
 {
 	struct erofs_sb_info *const sbi = EROFS_SB(be->sb);
@@ -1483,6 +1561,11 @@ static int z_erofs_decompress_pcluster(struct z_erofs_backend *be, bool eio)
 	pcl->besteffort = false;
 	pcl->bvset.nextpage = NULL;
 	pcl->vcnt = 0;
+	pcl->has_split_folio = false;
+	if (pcl->async_full_decomp) {
+		pcl->async_queued = 0;
+		pcl->async_full_decomp = false;
+	}
 
 	/* pcluster lock MUST be taken before the following line */
 	WRITE_ONCE(pcl->next, NULL);
@@ -1494,6 +1577,48 @@ static int z_erofs_decompress_pcluster(struct z_erofs_backend *be, bool eio)
 		z_erofs_put_pcluster(sbi, pcl, try_free);
 	return err;
 }
+
+static void z_erofs_async_verify_run(struct z_erofs_pcluster *pcl)
+{
+	struct super_block *sb = pcl->async_sb;
+
+	if (pcl->async_full_decomp) {
+		struct page *pagepool = NULL;
+		struct z_erofs_backend be = {
+			.sb = sb,
+			.pagepool = &pagepool,
+			.decompressed_secondary_bvecs =
+				LIST_HEAD_INIT(be.decompressed_secondary_bvecs),
+			.pcl = pcl,
+		};
+
+		z_erofs_decompress_pcluster(&be, pcl->async_eio);
+		erofs_release_pages(&pagepool);
+		return;
+	}
+
+	z_erofs_verify_pcluster_bvecs(sb, pcl);
+	WRITE_ONCE(pcl->async_queued, 0);
+	z_erofs_put_pcluster(EROFS_SB(sb), pcl, false);
+}
+
+static void z_erofs_async_verify_wq(struct work_struct *work)
+{
+	struct z_erofs_pcluster *pcl =
+		container_of(work, struct z_erofs_pcluster, async_work);
+
+	z_erofs_async_verify_run(pcl);
+}
+
+#ifdef CONFIG_EROFS_FS_PCPU_KTHREAD
+static void z_erofs_async_verify_kthread(struct kthread_work *work)
+{
+	struct z_erofs_pcluster *pcl =
+		container_of(work, struct z_erofs_pcluster, async_kwork);
+
+	z_erofs_async_verify_run(pcl);
+}
+#endif
 
 void erofs_queue_verity_work(int cpu, struct kthread_work *kwork,
 			     kthread_work_func_t kfn,
@@ -1516,6 +1641,70 @@ void erofs_queue_verity_work(int cpu, struct kthread_work *kwork,
 #endif
 	INIT_WORK(work, wfn);
 	queue_work_on(cpu, z_erofs_workqueue ?: system_highpri_wq, work);
+}
+
+static void z_erofs_shard_verify_pclusters(struct super_block *sb,
+					   struct z_erofs_pcluster *head,
+					   bool eio)
+{
+	struct z_erofs_pcluster **pprev, *pcl, *next;
+	int cpu;
+
+	if (head == Z_EROFS_PCLUSTER_TAIL)
+		return;
+	pprev = &head->next;
+	pcl = READ_ONCE(*pprev);
+	if (pcl == Z_EROFS_PCLUSTER_TAIL)
+		return;
+
+	cpu = raw_smp_processor_id();
+	for (; pcl != Z_EROFS_PCLUSTER_TAIL; pcl = next) {
+		next = READ_ONCE(pcl->next);
+		if (pcl->from_meta || !pcl->has_verity) {
+			pprev = &pcl->next;
+			continue;
+		}
+		if (xchg(&pcl->async_queued, 1) == 0) {
+			if (pcl->has_split_folio) {
+				if (!z_erofs_get_pcluster(pcl)) {
+					WRITE_ONCE(pcl->async_queued, 0);
+					pprev = &pcl->next;
+					continue;
+				}
+				pcl->async_sb = sb;
+				pcl->async_eio = eio;
+				pcl->async_full_decomp = false;
+				pprev = &pcl->next;
+			} else {
+				WRITE_ONCE(*pprev, next);
+				WRITE_ONCE(pcl->next, Z_EROFS_PCLUSTER_TAIL);
+				pcl->async_sb = sb;
+				pcl->async_eio = eio;
+				pcl->async_full_decomp = true;
+			}
+			cpu = cpumask_next_wrap(cpu, cpu_online_mask);
+#ifdef CONFIG_EROFS_FS_PCPU_KTHREAD
+			rcu_read_lock();
+			{
+				struct kthread_worker *worker =
+					rcu_dereference(z_erofs_pcpu_workers[cpu]);
+
+				if (worker) {
+					kthread_init_work(&pcl->async_kwork,
+							  z_erofs_async_verify_kthread);
+					kthread_queue_work(worker, &pcl->async_kwork);
+					rcu_read_unlock();
+					continue;
+				}
+			}
+			rcu_read_unlock();
+#endif
+			INIT_WORK(&pcl->async_work, z_erofs_async_verify_wq);
+			queue_work_on(cpu, z_erofs_workqueue, &pcl->async_work);
+			continue;
+		}
+		pprev = &pcl->next;
+	}
 }
 
 static int z_erofs_decompress_queue(const struct z_erofs_decompressqueue *io,
@@ -1574,16 +1763,33 @@ static void z_erofs_decompress_kickoff(struct z_erofs_decompressqueue *io,
 	struct erofs_sb_info *const sbi = EROFS_SB(io->sb);
 	int gfp_flag;
 
-	/* wake up the caller thread for sync decompression */
-	if (io->sync) {
-		if (!atomic_add_return(bios, &io->pending_bios))
-			complete(&io->u.done);
-		return;
-	}
-
 	if (atomic_add_return(bios, &io->pending_bios))
 		return;
+
+	if (!io->eio && erofs_sb_has_verity(sbi) &&
+	    io->head != Z_EROFS_PCLUSTER_TAIL)
+		z_erofs_shard_verify_pclusters(io->sb, io->head, io->eio);
+
+	/* wake up the caller thread for sync decompression */
+	if (io->sync) {
+		struct super_block *sb = io->sb;
+		struct z_erofs_pcluster *head = io->head;
+		bool verify_head = !io->eio && erofs_sb_has_verity(sbi) &&
+				   head != Z_EROFS_PCLUSTER_TAIL &&
+				   z_erofs_in_atomic() &&
+				   z_erofs_try_claim_pcluster_bvecs(head);
+
+		complete(&io->u.done);
+		if (verify_head)
+			z_erofs_verify_pcluster_bvecs_claimed(sb, head);
+		return;
+	}
 	if (z_erofs_in_atomic()) {
+		struct super_block *sb = io->sb;
+		struct z_erofs_pcluster *head = io->head;
+		bool verify_head = !io->eio && erofs_sb_has_verity(sbi) &&
+				   head != Z_EROFS_PCLUSTER_TAIL &&
+				   z_erofs_try_claim_pcluster_bvecs(head);
 #ifdef CONFIG_EROFS_FS_PCPU_KTHREAD
 		struct kthread_worker *worker;
 
@@ -1603,6 +1809,8 @@ static void z_erofs_decompress_kickoff(struct z_erofs_decompressqueue *io,
 		/* enable sync decompression for readahead */
 		if (sbi->opt.sync_decompress == EROFS_SYNC_DECOMPRESS_AUTO)
 			sbi->opt.sync_decompress = EROFS_SYNC_DECOMPRESS_FORCE_ON;
+		if (verify_head)
+			z_erofs_verify_pcluster_bvecs_claimed(sb, head);
 		return;
 	}
 	gfp_flag = memalloc_noio_save();
@@ -1933,6 +2141,11 @@ static int z_erofs_runqueue(struct z_erofs_frontend *f, unsigned int rapages)
 	z_erofs_submit_queue(f, io, &force_fg, !!rapages);
 
 	/* handle bypass queue (no i/o pclusters) immediately */
+	if (erofs_sb_has_verity(sbi) &&
+	    io[JQ_BYPASS].head != Z_EROFS_PCLUSTER_TAIL)
+		z_erofs_shard_verify_pclusters(io[JQ_BYPASS].sb,
+					       io[JQ_BYPASS].head,
+					       io[JQ_BYPASS].eio);
 	err = z_erofs_decompress_queue(&io[JQ_BYPASS], &f->pagepool);
 	if (!force_fg)
 		return err;
@@ -1949,7 +2162,8 @@ static int z_erofs_runqueue(struct z_erofs_frontend *f, unsigned int rapages)
  * approximate readmore strategies as a start.
  */
 static void z_erofs_pcluster_readmore(struct z_erofs_frontend *f,
-		struct readahead_control *rac, bool backmost)
+		struct readahead_control *rac, bool backmost,
+		bool parallel_decomp)
 {
 	struct inode *inode = f->inode;
 	struct erofs_map_blocks *map = &f->map;
@@ -1990,7 +2204,8 @@ static void z_erofs_pcluster_readmore(struct z_erofs_frontend *f,
 			if (folio_test_uptodate(folio))
 				folio_unlock(folio);
 			else
-				z_erofs_scan_folio(f, folio, !!rac);
+				z_erofs_scan_folio(f, folio, !!rac,
+						   parallel_decomp);
 			folio_put(folio);
 		}
 
@@ -2007,9 +2222,9 @@ static int z_erofs_read_folio(struct file *file, struct folio *folio)
 	int err;
 
 	trace_erofs_read_folio(folio, false);
-	z_erofs_pcluster_readmore(&f, NULL, true);
-	err = z_erofs_scan_folio(&f, folio, false);
-	z_erofs_pcluster_readmore(&f, NULL, false);
+	z_erofs_pcluster_readmore(&f, NULL, true, false);
+	err = z_erofs_scan_folio(&f, folio, false, false);
+	z_erofs_pcluster_readmore(&f, NULL, false, false);
 	z_erofs_pcluster_end(&f);
 
 	/* if some pclusters are ready, need submit them anyway */
@@ -2028,11 +2243,13 @@ static void z_erofs_readahead(struct readahead_control *rac)
 	struct inode *const inode = rac->mapping->host;
 	Z_EROFS_DEFINE_FRONTEND(f, inode, readahead_pos(rac));
 	unsigned int nrpages = readahead_count(rac);
+	bool parallel_decomp = nrpages > 8 &&
+			       erofs_sb_has_verity(EROFS_I_SB(inode));
 	struct folio *head = NULL, *folio;
 	int err;
 
 	trace_erofs_readahead(inode, readahead_index(rac), nrpages, false);
-	z_erofs_pcluster_readmore(&f, rac, true);
+	z_erofs_pcluster_readmore(&f, rac, true, parallel_decomp);
 	while ((folio = readahead_folio(rac))) {
 		folio->private = head;
 		head = folio;
@@ -2043,12 +2260,12 @@ static void z_erofs_readahead(struct readahead_control *rac)
 		folio = head;
 		head = folio_get_private(folio);
 
-		err = z_erofs_scan_folio(&f, folio, true);
+		err = z_erofs_scan_folio(&f, folio, true, parallel_decomp);
 		if (err && err != -EINTR)
 			erofs_err(inode->i_sb, "readahead error at folio %lu @ nid %llu",
 				  folio->index, EROFS_I(inode)->nid);
 	}
-	z_erofs_pcluster_readmore(&f, rac, false);
+	z_erofs_pcluster_readmore(&f, rac, false, parallel_decomp);
 	z_erofs_pcluster_end(&f);
 
 	(void)z_erofs_runqueue(&f, nrpages);
