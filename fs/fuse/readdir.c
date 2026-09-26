@@ -603,10 +603,14 @@ int fuse_readdir(struct file *file, struct dir_context *ctx)
 	bool is_continued = false;
 
 again:
-	fer = fuse_bpf_backing(inode, struct fuse_read_io,
-			       fuse_readdir_initialize, fuse_readdir_backing,
-			       fuse_readdir_finalize,
-			       file, ctx, &force_again, &allow_force, is_continued);
+	if (ff->backing_file)
+		fer = fuse_bpf_backing_file(inode, struct fuse_read_io,
+					    fuse_readdir_initialize, fuse_readdir_backing,
+					    fuse_readdir_finalize,
+					    file, ctx, &force_again, &allow_force,
+					    is_continued);
+	else
+		fer = (struct fuse_err_ret) { 0 };
 	if (force_again && !IS_ERR(fer.result)) {
 		is_continued = true;
 		goto again;
