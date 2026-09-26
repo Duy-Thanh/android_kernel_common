@@ -18,6 +18,7 @@
 #include <linux/slab.h>
 #include <linux/vmalloc.h>
 #include <linux/iomap.h>
+#include <linux/kthread.h>
 #include <crypto/sha2.h>
 #include "erofs_fs.h"
 
@@ -448,6 +449,8 @@ void erofs_put_metabuf(struct erofs_buf *buf);
 void *erofs_bread(struct erofs_buf *buf, erofs_off_t offset, bool need_kmap);
 int erofs_verify_metabuf_page(struct super_block *sb, struct page *page,
 			      pgoff_t index);
+int erofs_verify_data_folio(struct super_block *sb, struct folio *folio,
+			    const u8 *expected_sha256);
 int erofs_init_metabuf(struct erofs_buf *buf, struct super_block *sb,
 		       bool in_metabox);
 void *erofs_read_metabuf(struct erofs_buf *buf, struct super_block *sb,
@@ -519,6 +522,9 @@ int z_erofs_gbuf_growsize(unsigned int nrpages);
 int __init z_erofs_gbuf_init(void);
 void z_erofs_gbuf_exit(void);
 int z_erofs_parse_cfgs(struct super_block *sb, struct erofs_super_block *dsb);
+void erofs_queue_verity_work(int cpu, struct kthread_work *kwork,
+			     kthread_work_func_t kfn,
+			     struct work_struct *work, work_func_t wfn);
 #else
 static inline void erofs_shrinker_register(struct super_block *sb) {}
 static inline void erofs_shrinker_unregister(struct super_block *sb) {}
@@ -527,6 +533,14 @@ static inline void erofs_exit_shrinker(void) {}
 static inline int z_erofs_init_subsystem(void) { return 0; }
 static inline void z_erofs_exit_subsystem(void) {}
 static inline int z_erofs_init_super(struct super_block *sb) { return 0; }
+static inline void erofs_queue_verity_work(int cpu, struct kthread_work *kwork,
+					   kthread_work_func_t kfn,
+					   struct work_struct *work,
+					   work_func_t wfn)
+{
+	INIT_WORK(work, wfn);
+	queue_work_on(cpu, system_highpri_wq, work);
+}
 #endif	/* !CONFIG_EROFS_FS_ZIP */
 
 #ifdef CONFIG_EROFS_FS_BACKED_BY_FILE

@@ -295,6 +295,23 @@ int erofs_verify_metabuf_page(struct super_block *sb, struct page *page,
 	return 0;
 }
 
+int erofs_verify_data_folio(struct super_block *sb, struct folio *folio,
+			    const u8 *expected_sha256)
+{
+	struct erofs_sb_info *sbi = EROFS_SB(sb);
+	u8 actual[32];
+	void *kaddr;
+
+	kaddr = kmap_local_folio(folio, 0);
+	erofs_sha256_salted(sbi, kaddr, PAGE_SIZE, actual);
+	kunmap_local(kaddr);
+	if (unlikely(memcmp(actual, expected_sha256, 32))) {
+		erofs_err(sb, "verity: flat data corruption detected");
+		return -EIO;
+	}
+	return 0;
+}
+
 static int erofs_init_verity(struct super_block *sb, void *sb_block_data,
 			     struct erofs_super_block *dsb)
 {

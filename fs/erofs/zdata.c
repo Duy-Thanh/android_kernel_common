@@ -1495,6 +1495,29 @@ static int z_erofs_decompress_pcluster(struct z_erofs_backend *be, bool eio)
 	return err;
 }
 
+void erofs_queue_verity_work(int cpu, struct kthread_work *kwork,
+			     kthread_work_func_t kfn,
+			     struct work_struct *work, work_func_t wfn)
+{
+#ifdef CONFIG_EROFS_FS_PCPU_KTHREAD
+	rcu_read_lock();
+	if (z_erofs_pcpu_workers) {
+		struct kthread_worker *worker =
+			rcu_dereference(z_erofs_pcpu_workers[cpu]);
+
+		if (worker) {
+			kthread_init_work(kwork, kfn);
+			kthread_queue_work(worker, kwork);
+			rcu_read_unlock();
+			return;
+		}
+	}
+	rcu_read_unlock();
+#endif
+	INIT_WORK(work, wfn);
+	queue_work_on(cpu, z_erofs_workqueue ?: system_highpri_wq, work);
+}
+
 static int z_erofs_decompress_queue(const struct z_erofs_decompressqueue *io,
 				    struct page **pagepool)
 {
