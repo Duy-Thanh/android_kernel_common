@@ -11,6 +11,8 @@
 #include <linux/fs_parser.h>
 #include <linux/exportfs.h>
 #include <linux/backing-dev.h>
+#include <linux/hex.h>
+#include <crypto/hash.h>
 #include "xattr.h"
 
 #define CREATE_TRACE_POINTS
@@ -260,6 +262,132 @@ static int erofs_scan_devices(struct super_block *sb,
 	return err;
 }
 
+int erofs_verify_metabuf_page(struct super_block *sb, struct page *page,
+			      pgoff_t index)
+{
+	struct erofs_sb_info *sbi = EROFS_SB(sb);
+	u32 rel_blk;
+	u8 actual[32];
+	void *kaddr;
+
+	if (!index)
+		return 0;
+	if (unlikely(index < sbi->meta_verity_startblk ||
+		     index >= sbi->meta_verity_startblk + sbi->meta_verity_blocks)) {
+		erofs_err(sb, "verity: metadata read outside verified region (blk %lu)",
+			  index);
+		return -EIO;
+	}
+	rel_blk = index - sbi->meta_verity_startblk;
+	if (test_bit(rel_blk, sbi->meta_verified_bitmap))
+		return 0;
+
+	kaddr = kmap_local_page(page);
+	erofs_sha256_salted(sbi, kaddr, PAGE_SIZE, actual);
+	kunmap_local(kaddr);
+
+	if (unlikely(memcmp(actual, sbi->meta_merkle_leaves + (size_t)rel_blk * 32, 32))) {
+		erofs_err(sb, "verity: metadata corruption detected at block %lu",
+			  index);
+		return -EIO;
+	}
+	set_bit(rel_blk, sbi->meta_verified_bitmap);
+	return 0;
+}
+
+static int erofs_init_verity(struct super_block *sb, void *sb_block_data,
+			     struct erofs_super_block *dsb)
+{
+	struct erofs_sb_info *sbi = EROFS_SB(sb);
+	struct erofs_verity_sb_ext *vse;
+	u32 merkle_blkaddr, merkle_blocks, b;
+	u8 actual_sb_digest[32], actual_root[32];
+	u8 *l1_digests = NULL;
+
+	if (sbi->sb_size < sizeof(struct erofs_super_block) + sizeof(*vse)) {
+		erofs_err(sb, "verity: superblock too small for verity extension");
+		return -EFSCORRUPTED;
+	}
+	vse = (struct erofs_verity_sb_ext *)(dsb + 1);
+
+	if (sbi->opt.has_root_digest) {
+		sha256(sb_block_data, PAGE_SIZE, actual_sb_digest);
+		if (memcmp(actual_sb_digest, sbi->opt.root_digest, 32) != 0) {
+			erofs_err(sb, "verity: superblock root_digest mismatch!");
+			return -EIO;
+		}
+	}
+
+	memcpy(sbi->verity_salt, vse->verity_salt, 32);
+	sha256_init(&sbi->verity_init_ctx);
+	sha256_update(&sbi->verity_init_ctx, sbi->verity_salt, 32);
+
+	sbi->meta_verity_startblk = le32_to_cpu(vse->meta_verity_startblk);
+	sbi->meta_verity_blocks = le32_to_cpu(vse->meta_verity_blocks);
+	merkle_blkaddr = le32_to_cpu(vse->meta_merkle_blkaddr);
+	merkle_blocks = le32_to_cpu(vse->meta_merkle_blocks);
+
+	if (!sbi->meta_verity_blocks ||
+	    merkle_blocks != DIV_ROUND_UP(sbi->meta_verity_blocks, 128U)) {
+		erofs_err(sb, "verity: invalid metadata merkle geometry (%u, %u)",
+			  sbi->meta_verity_blocks, merkle_blocks);
+		return -EFSCORRUPTED;
+	}
+
+	sbi->meta_merkle_leaves = kvmalloc_array(merkle_blocks, PAGE_SIZE,
+						 GFP_KERNEL);
+	sbi->meta_verified_bitmap = bitmap_zalloc(sbi->meta_verity_blocks,
+						  GFP_KERNEL);
+	l1_digests = kmalloc_array(merkle_blocks, 32, GFP_KERNEL);
+	if (!sbi->meta_merkle_leaves || !sbi->meta_verified_bitmap || !l1_digests) {
+		kfree(l1_digests);
+		return -ENOMEM;
+	}
+
+	for (b = 0; b < merkle_blocks; ++b) {
+		struct erofs_buf mbuf = __EROFS_BUF_INITIALIZER;
+		void *mptr;
+
+		mptr = erofs_read_metabuf(&mbuf, sb,
+					  erofs_pos(sb, merkle_blkaddr + b),
+					  false);
+		if (IS_ERR(mptr)) {
+			kfree(l1_digests);
+			return PTR_ERR(mptr);
+		}
+		memcpy(sbi->meta_merkle_leaves + (size_t)b * PAGE_SIZE,
+		       mptr, PAGE_SIZE);
+		erofs_put_metabuf(&mbuf);
+	}
+
+	for (b = 0; b + 1 < merkle_blocks; b += 2) {
+		sha256_finup_2x(&sbi->verity_init_ctx,
+				sbi->meta_merkle_leaves + (size_t)b * PAGE_SIZE,
+				sbi->meta_merkle_leaves + (size_t)(b + 1) * PAGE_SIZE,
+				PAGE_SIZE,
+				l1_digests + b * 32,
+				l1_digests + (b + 1) * 32);
+	}
+	if (b < merkle_blocks) {
+		erofs_sha256_salted(sbi,
+				    sbi->meta_merkle_leaves + (size_t)b * PAGE_SIZE,
+				    PAGE_SIZE, l1_digests + b * 32);
+	}
+
+	erofs_sha256_salted(sbi, l1_digests, merkle_blocks * 32, actual_root);
+	kfree(l1_digests);
+
+	if (memcmp(actual_root, vse->meta_merkle_root, 32) != 0) {
+		erofs_err(sb, "verity: metadata Merkle root mismatch!");
+		return -EIO;
+	}
+
+	sbi->verity_ready = true;
+	erofs_info(sb, "Native EROFS Verity enabled: %u metadata blocks pinned (%u KiB)",
+		   sbi->meta_verity_blocks, (merkle_blocks * 4));
+	return 0;
+}
+
 static int erofs_read_superblock(struct super_block *sb)
 {
 	struct erofs_sb_info *sbi = EROFS_SB(sb);
@@ -359,6 +487,14 @@ static int erofs_read_superblock(struct super_block *sb)
 		goto out;
 
 	ret = erofs_scan_devices(sb, dsb);
+	if (ret < 0)
+		goto out;
+
+	if (erofs_sb_has_verity(sbi)) {
+		ret = erofs_init_verity(sb, data, dsb);
+		if (ret < 0)
+			goto out;
+	}
 
 	if (erofs_sb_has_48bit(sbi))
 		erofs_info(sb, "EXPERIMENTAL 48-bit layout support in use. Use at your own risk!");
@@ -389,6 +525,7 @@ static void erofs_default_options(struct erofs_sb_info *sbi)
 enum {
 	Opt_user_xattr, Opt_acl, Opt_cache_strategy, Opt_dax, Opt_dax_enum,
 	Opt_device, Opt_fsid, Opt_domain_id, Opt_directio, Opt_fsoffset,
+	Opt_root_digest,
 };
 
 static const struct constant_table erofs_param_cache_strategy[] = {
@@ -416,6 +553,7 @@ static const struct fs_parameter_spec erofs_fs_parameters[] = {
 	fsparam_string("domain_id",	Opt_domain_id),
 	fsparam_flag_no("directio",	Opt_directio),
 	fsparam_u64("fsoffset",		Opt_fsoffset),
+	fsparam_string("root_digest",	Opt_root_digest),
 	{}
 };
 
@@ -541,6 +679,14 @@ static int erofs_fc_parse_param(struct fs_context *fc,
 		break;
 	case Opt_fsoffset:
 		sbi->dif0.fsoff = result.uint_64;
+		break;
+	case Opt_root_digest:
+		if (strlen(param->string) != 64 ||
+		    hex2bin(sbi->opt.root_digest, param->string, 32) < 0) {
+			errorfc(fc, "invalid root_digest (expected 64 hex chars)");
+			return -EINVAL;
+		}
+		sbi->opt.has_root_digest = true;
 		break;
 	}
 	return 0;
@@ -850,6 +996,8 @@ static void erofs_free_dev_context(struct erofs_dev_context *devs)
 
 static void erofs_sb_free(struct erofs_sb_info *sbi)
 {
+	kvfree(sbi->meta_merkle_leaves);
+	bitmap_free(sbi->meta_verified_bitmap);
 	erofs_free_dev_context(sbi->devs);
 	kfree(sbi->fsid);
 	kfree(sbi->domain_id);

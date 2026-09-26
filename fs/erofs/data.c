@@ -42,6 +42,16 @@ void *erofs_bread(struct erofs_buf *buf, erofs_off_t offset, bool need_kmap)
 			return folio;
 	}
 	buf->page = folio_file_page(folio, index);
+	if (buf->sb && erofs_sb_has_verity(EROFS_SB(buf->sb)) &&
+	    EROFS_SB(buf->sb)->verity_ready &&
+	    buf->mapping == buf->sb->s_bdev->bd_mapping) {
+		int err = erofs_verify_metabuf_page(buf->sb, buf->page, index);
+
+		if (unlikely(err)) {
+			erofs_put_metabuf(buf);
+			return ERR_PTR(err);
+		}
+	}
 	if (!need_kmap)
 		return NULL;
 	if (!buf->base)
@@ -54,6 +64,7 @@ int erofs_init_metabuf(struct erofs_buf *buf, struct super_block *sb,
 {
 	struct erofs_sb_info *sbi = EROFS_SB(sb);
 
+	buf->sb = sb;
 	buf->file = NULL;
 	if (in_metabox) {
 		if (unlikely(!sbi->metabox_inode))
@@ -369,7 +380,48 @@ int erofs_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
  */
 static int erofs_read_folio(struct file *file, struct folio *folio)
 {
+	struct inode *inode = folio->mapping->host;
+	struct super_block *sb = inode->i_sb;
+
 	trace_erofs_read_folio(folio, true);
+
+	if (erofs_sb_has_verity(EROFS_SB(sb))) {
+		struct erofs_map_blocks map = {
+			.m_la = folio_pos(folio),
+			.m_llen = folio_size(folio),
+		};
+		struct erofs_buf buf = __EROFS_BUF_INITIALIZER;
+		void *ptr;
+		size_t copy_len;
+		int err;
+
+		err = erofs_map_blocks(inode, &map);
+		if (err < 0) {
+			folio_end_read(folio, false);
+			return 0;
+		}
+		if (!(map.m_flags & EROFS_MAP_MAPPED)) {
+			folio_zero_range(folio, 0, folio_size(folio));
+			folio_end_read(folio, true);
+			return 0;
+		}
+		ptr = erofs_read_metabuf(&buf, sb, map.m_pa,
+					 erofs_inode_in_metabox(inode));
+		if (IS_ERR(ptr)) {
+			folio_end_read(folio, false);
+			return 0;
+		}
+		copy_len = min_t(u64, folio_size(folio), map.m_llen);
+		copy_len = min_t(size_t, copy_len,
+				 sb->s_blocksize - erofs_blkoff(sb, map.m_pa));
+		memcpy_to_folio(folio, 0, ptr, copy_len);
+		if (copy_len < folio_size(folio))
+			folio_zero_range(folio, copy_len,
+					 folio_size(folio) - copy_len);
+		erofs_put_metabuf(&buf);
+		folio_end_read(folio, true);
+		return 0;
+	}
 
 	return iomap_read_folio(folio, &erofs_iomap_ops);
 }

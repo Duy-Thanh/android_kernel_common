@@ -18,6 +18,7 @@
 #include <linux/slab.h>
 #include <linux/vmalloc.h>
 #include <linux/iomap.h>
+#include <crypto/sha2.h>
 #include "erofs_fs.h"
 
 __printf(2, 3) void _erofs_printk(struct super_block *sb, const char *fmt, ...);
@@ -64,6 +65,8 @@ struct erofs_mount_opts {
 	/* threshold for decompression synchronously */
 	unsigned int max_sync_decompress_pages;
 	unsigned int mount_opt;
+	u8 root_digest[32];
+	bool has_root_digest;
 };
 
 struct erofs_dev_context {
@@ -157,6 +160,15 @@ struct erofs_sb_info {
 	u32 feature_compat;
 	u32 feature_incompat;
 
+	/* Native EROFS Verity state */
+	struct sha256_ctx verity_init_ctx;
+	u8 verity_salt[32];
+	u32 meta_verity_startblk;
+	u32 meta_verity_blocks;
+	u8 *meta_merkle_leaves;
+	unsigned long *meta_verified_bitmap;
+	bool verity_ready;
+
 	/* sysfs support */
 	struct kobject s_kobj;		/* /sys/fs/erofs/<devname> */
 	struct completion s_kobj_unregister;
@@ -171,6 +183,15 @@ struct erofs_sb_info {
 
 #define EROFS_SB(sb) ((struct erofs_sb_info *)(sb)->s_fs_info)
 #define EROFS_I_SB(inode) ((struct erofs_sb_info *)(inode)->i_sb->s_fs_info)
+
+static inline void erofs_sha256_salted(const struct erofs_sb_info *sbi,
+				       const void *data, size_t len, u8 *out)
+{
+	struct sha256_ctx ctx = sbi->verity_init_ctx;
+
+	sha256_update(&ctx, data, len);
+	sha256_final(&ctx, out);
+}
 
 /* Mount flags set via mount options or defaults */
 #define EROFS_MOUNT_XATTR_USER		0x00000010
@@ -201,6 +222,7 @@ enum {
 };
 
 struct erofs_buf {
+	struct super_block *sb;
 	struct address_space *mapping;
 	struct file *file;
 	u64 off;
@@ -232,6 +254,7 @@ EROFS_FEATURE_FUNCS(dedupe, incompat, INCOMPAT_DEDUPE)
 EROFS_FEATURE_FUNCS(xattr_prefixes, incompat, INCOMPAT_XATTR_PREFIXES)
 EROFS_FEATURE_FUNCS(48bit, incompat, INCOMPAT_48BIT)
 EROFS_FEATURE_FUNCS(metabox, incompat, INCOMPAT_METABOX)
+EROFS_FEATURE_FUNCS(verity, incompat, INCOMPAT_VERITY)
 EROFS_FEATURE_FUNCS(sb_chksum, compat, COMPAT_SB_CHKSUM)
 EROFS_FEATURE_FUNCS(xattr_filter, compat, COMPAT_XATTR_FILTER)
 EROFS_FEATURE_FUNCS(shared_ea_in_metabox, compat, COMPAT_SHARED_EA_IN_METABOX)
@@ -421,6 +444,8 @@ void *erofs_read_metadata(struct super_block *sb, struct erofs_buf *buf,
 void erofs_unmap_metabuf(struct erofs_buf *buf);
 void erofs_put_metabuf(struct erofs_buf *buf);
 void *erofs_bread(struct erofs_buf *buf, erofs_off_t offset, bool need_kmap);
+int erofs_verify_metabuf_page(struct super_block *sb, struct page *page,
+			      pgoff_t index);
 int erofs_init_metabuf(struct erofs_buf *buf, struct super_block *sb,
 		       bool in_metabox);
 void *erofs_read_metabuf(struct erofs_buf *buf, struct super_block *sb,
