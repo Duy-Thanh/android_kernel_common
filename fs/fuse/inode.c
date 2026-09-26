@@ -112,6 +112,7 @@ static struct inode *fuse_alloc_inode(struct super_block *sb)
 
 #ifdef CONFIG_FUSE_BPF
 	fi->backing_inode = NULL;
+	mutex_init(&fi->backing_mutex);
 	fi->bpf = NULL;
 #endif
 
@@ -157,6 +158,7 @@ static void fuse_free_inode(struct inode *inode)
 #ifdef CONFIG_FUSE_BPF
 	if (fi->bpf)
 		bpf_prog_put(fi->bpf);
+	mutex_destroy(&fi->backing_mutex);
 #endif
 	kmem_cache_free(fuse_inode_cachep, fi);
 }
