@@ -511,8 +511,9 @@ static int z_erofs_map_blocks_ext(struct inode *inode,
 	struct super_block *sb = inode->i_sb;
 	bool interlaced = vi->z_advise & Z_EROFS_ADVISE_INTERLACED_PCLUSTER;
 	unsigned int recsz = z_erofs_extent_recsize(vi->z_advise);
-	erofs_off_t pos = round_up(Z_EROFS_MAP_HEADER_END(erofs_iloc(inode) +
-				   vi->inode_isize + vi->xattr_isize), recsz);
+	erofs_off_t pos = erofs_iloc(inode) +
+		round_up(Z_EROFS_MAP_HEADER_END(vi->inode_isize +
+						vi->xattr_isize), recsz);
 	unsigned int bmask = sb->s_blocksize - 1;
 	bool in_mbox = erofs_inode_in_metabox(inode);
 	erofs_off_t lend = inode->i_size;
