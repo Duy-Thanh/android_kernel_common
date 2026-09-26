@@ -2113,6 +2113,7 @@ cc_binary_with_abi(
     visibility = ["//visibility:private"],
     deps = [
         ":kselftest_headers_lib",
+        ":kselftest_mm_vm_util",
         "@libcap",
     ],
 )
@@ -2127,21 +2128,6 @@ cc_binary_with_abi(
     visibility = ["//visibility:private"],
     deps = [
         ":kselftest_headers_lib",
-        "@libcap",
-    ],
-)
-
-cc_binary_with_abi(
-    name = "kselftest_mm_map_hugetlb",
-    srcs = ["tools/testing/selftests/mm/map_hugetlb.c"],
-    copts = _KSELFTEST_COPTS,
-    includes = ["tools/testing/selftests"],
-    path_prefix = _KSELFTEST_DIR,
-    target_compatible_with = ["@platforms//os:android"],
-    visibility = ["//visibility:private"],
-    deps = [
-        ":kselftest_headers_lib",
-        ":kselftest_mm_vm_util",
         "@libcap",
     ],
 )
@@ -2865,7 +2851,6 @@ pkg_filegroup(
         ":kselftest_mm_compaction_test_x86_64",
         ":kselftest_mm_hugepage_mmap_x86_64",
         ":kselftest_mm_hugepage_shm_x86_64",
-        ":kselftest_mm_map_hugetlb_x86_64",
         ":kselftest_mm_mlock2_tests_x86_64",
         ":kselftest_mm_mlock_random_test_x86_64",
         ":kselftest_mm_mremap_dontunmap_x86_64",
@@ -2981,7 +2966,6 @@ pkg_filegroup(
         ":kselftest_mm_compaction_test_x86",
         ":kselftest_mm_hugepage_mmap_x86",
         ":kselftest_mm_hugepage_shm_x86",
-        ":kselftest_mm_map_hugetlb_x86",
         ":kselftest_mm_mlock2_tests_x86",
         ":kselftest_mm_mlock_random_test_x86",
         ":kselftest_mm_mremap_dontunmap_x86",
@@ -3096,7 +3080,6 @@ pkg_filegroup(
         ":kselftest_mm_compaction_test_arm",
         ":kselftest_mm_hugepage_mmap_arm",
         ":kselftest_mm_hugepage_shm_arm",
-        ":kselftest_mm_map_hugetlb_arm",
         ":kselftest_mm_mlock2_tests_arm",
         #":kselftest_mm_mlock_random_test_arm",
         ":kselftest_mm_mremap_dontunmap_arm",
@@ -3202,7 +3185,6 @@ pkg_filegroup(
         ":kselftest_mm_compaction_test_arm64",
         ":kselftest_mm_hugepage_mmap_arm64",
         ":kselftest_mm_hugepage_shm_arm64",
-        ":kselftest_mm_map_hugetlb_arm64",
         ":kselftest_mm_mlock2_tests_arm64",
         ":kselftest_mm_mlock_random_test_arm64",
         ":kselftest_mm_mremap_dontunmap_arm64",
