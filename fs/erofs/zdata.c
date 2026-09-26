@@ -693,9 +693,23 @@ static int z_erofs_attach_page(struct z_erofs_frontend *fe,
 	int ret;
 
 	if (exclusive) {
-		/* Inplace I/O is limited to one page for uncompressed data */
-		if (pcl->algorithmformat < Z_EROFS_COMPRESSION_MAX ||
-		    fe->icur <= 1) {
+		if (pcl->algorithmformat == Z_EROFS_COMPRESSION_SHIFTED &&
+		    !pcl->pageofs_in && !pcl->pageofs_out &&
+		    bvec->offset >= 0 && !(bvec->offset & ~PAGE_MASK) &&
+		    bvec->end == PAGE_SIZE) {
+			unsigned int pgnr = bvec->offset >> PAGE_SHIFT;
+
+			if (pgnr < z_erofs_pclusterpages(pcl)) {
+				spin_lock(&pcl->lockref.lock);
+				if (!pcl->compressed_bvecs[pgnr].page) {
+					pcl->compressed_bvecs[pgnr] = *bvec;
+					spin_unlock(&pcl->lockref.lock);
+					return 0;
+				}
+				spin_unlock(&pcl->lockref.lock);
+			}
+		} else if (pcl->algorithmformat < Z_EROFS_COMPRESSION_MAX ||
+			   fe->icur <= 1) {
 			/* Try to prioritize inplace I/O here */
 			spin_lock(&pcl->lockref.lock);
 			while (fe->icur > 0) {
@@ -1064,7 +1078,8 @@ static int z_erofs_scan_folio(struct z_erofs_frontend *f,
 			tight &= (f->mode >= Z_EROFS_PCLUSTER_FOLLOWED);
 			excl = false;
 			if (cur <= pgs) {
-				excl = (split <= 1) || tight;
+				excl = (split <= 1 && end - pgs == PAGE_SIZE) ||
+				       tight;
 				cur = pgs;
 			}
 

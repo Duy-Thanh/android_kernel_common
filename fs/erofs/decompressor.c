@@ -316,6 +316,10 @@ static int z_erofs_transform_plain(struct z_erofs_decompress_req *rq,
 		rq->outputsize -= insz;
 		if (!rq->in[ni])
 			continue;
+		if (!((rq->pageofs_out + cur) & ~PAGE_MASK) &&
+		    !rq->pageofs_in &&
+		    rq->out[(rq->pageofs_out + cur) >> PAGE_SHIFT] == rq->in[ni])
+			continue;
 		kin = kmap_local_page(rq->in[ni]);
 		pi = 0;
 		do {
@@ -323,10 +327,11 @@ static int z_erofs_transform_plain(struct z_erofs_decompress_req *rq,
 			po = (rq->pageofs_out + cur + pi) & ~PAGE_MASK;
 			DBG_BUGON(no >= nrpages_out);
 			cnt = min(insz - pi, PAGE_SIZE - po);
-			if (rq->out[no] == rq->in[ni])
-				memmove(kin + po,
-					kin + rq->pageofs_in + pi, cnt);
-			else if (rq->out[no])
+			if (rq->out[no] == rq->in[ni]) {
+				if (po != rq->pageofs_in + pi)
+					memmove(kin + po,
+						kin + rq->pageofs_in + pi, cnt);
+			} else if (rq->out[no])
 				memcpy_to_page(rq->out[no], po,
 					       kin + rq->pageofs_in + pi, cnt);
 			pi += cnt;
