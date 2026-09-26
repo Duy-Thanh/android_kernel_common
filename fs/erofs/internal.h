@@ -391,6 +391,8 @@ struct erofs_map_blocks {
 	unsigned short m_deviceid;
 	char m_algorithmformat;
 	unsigned int m_flags;
+	u8 m_sha256[32];
+	bool m_has_verity;
 };
 
 /*

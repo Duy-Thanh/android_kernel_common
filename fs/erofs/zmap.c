@@ -539,6 +539,7 @@ static int z_erofs_map_blocks_ext(struct inode *inode,
 	bool last;
 
 	map->m_flags = 0;
+	map->m_has_verity = false;
 	if (recsz <= offsetof(struct z_erofs_extent, pstart_hi)) {
 		if (recsz <= offsetof(struct z_erofs_extent, pstart_lo)) {
 			ext = erofs_read_metabuf(&map->buf, sb, pos, in_mbox);
@@ -580,7 +581,7 @@ static int z_erofs_map_blocks_ext(struct inode *inode,
 
 		lstart = lend;
 		for (l = 0, r = vi->z_extents; l < r; ++step) {
-			struct z_erofs_extent ev_buf;
+			struct z_erofs_extent_verity ev_buf;
 			erofs_off_t epos;
 			unsigned int off_in_page;
 
@@ -648,6 +649,12 @@ static int z_erofs_map_blocks_ext(struct inode *inode,
 					l_la = la;
 					map->m_plen = le32_to_cpu(ext->plen);
 					map->m_pa = pa;
+					if (recsz >= sizeof(struct z_erofs_extent_verity)) {
+						memcpy(map->m_sha256,
+						       ((struct z_erofs_extent_verity *)ext)->sha256,
+						       32);
+						map->m_has_verity = true;
+					}
 				}
 				continue;
 			}
@@ -686,6 +693,12 @@ static int z_erofs_map_blocks_ext(struct inode *inode,
 					l_la = last_la;
 					map->m_plen = le32_to_cpu(elast->plen);
 					map->m_pa = z_erofs_ext_pa(elast);
+					if (recsz >= sizeof(struct z_erofs_extent_verity)) {
+						memcpy(map->m_sha256,
+						       ((struct z_erofs_extent_verity *)elast)->sha256,
+						       32);
+						map->m_has_verity = true;
+					}
 					continue;
 				}
 
@@ -709,6 +722,12 @@ static int z_erofs_map_blocks_ext(struct inode *inode,
 					lstart = z_erofs_ext_la(ek, recsz);
 					map->m_plen = le32_to_cpu(ek->plen);
 					map->m_pa = z_erofs_ext_pa(ek);
+					if (recsz >= sizeof(struct z_erofs_extent_verity)) {
+						memcpy(map->m_sha256,
+						       ((struct z_erofs_extent_verity *)ek)->sha256,
+						       32);
+						map->m_has_verity = true;
+					}
 					if (lo < p_last) {
 						struct z_erofs_extent *enext =
 							(struct z_erofs_extent *)((u8 *)ek + recsz);

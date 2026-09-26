@@ -7,6 +7,7 @@
 #include "compress.h"
 #include <linux/psi.h>
 #include <linux/cpuhotplug.h>
+#include <crypto/hash.h>
 #include <trace/events/erofs.h>
 
 #define Z_EROFS_PCLUSTER_MAX_PAGES	(Z_EROFS_PCLUSTER_MAX_SIZE / PAGE_SIZE)
@@ -81,7 +82,12 @@ struct z_erofs_pcluster {
 
 	/* L: whether extra buffer allocations are best-effort */
 	bool besteffort;
+
+	/* I/L: Native EROFS Verity digest and verification state */
 	bool in_pslots;
+	bool has_verity;
+	atomic_t verify_state;
+	u8 sha256[32];
 
 	/* A: compressed bvecs (can be cached or inplaced pages) */
 	struct z_erofs_bvec compressed_bvecs[];
@@ -783,6 +789,10 @@ static int z_erofs_register_pcluster(struct z_erofs_frontend *fe)
 	pcl->pageofs_out = map->m_la & ~PAGE_MASK;
 	pcl->from_meta = map->m_flags & EROFS_MAP_META;
 	pcl->in_pslots = !pcl->from_meta && z_erofs_need_pslots(sbi);
+	pcl->has_verity = map->m_has_verity;
+	atomic_set(&pcl->verify_state, 0);
+	if (map->m_has_verity)
+		memcpy(pcl->sha256, map->m_sha256, 32);
 	fe->mode = Z_EROFS_PCLUSTER_FOLLOWED;
 
 	/*
@@ -1295,6 +1305,60 @@ static int z_erofs_parse_in_bvecs(struct z_erofs_backend *be, bool *overlapped)
 	return err;
 }
 
+static int z_erofs_verify_pcluster(struct super_block *sb,
+				   struct z_erofs_pcluster *pcl,
+				   struct page **compressed_pages)
+{
+	struct erofs_sb_info *sbi = EROFS_SB(sb);
+	struct sha256_ctx ctx;
+	unsigned int rem = pcl->pclustersize;
+	unsigned int cur_ofs = pcl->pageofs_in;
+	unsigned int pgnr = 0;
+	u8 actual[32];
+	int state;
+
+	if (unlikely(!pcl->has_verity)) {
+		erofs_err(sb, "verity: missing pcluster digest @ pa %llu",
+			  pcl->pos);
+		return -EIO;
+	}
+	state = atomic_read_acquire(&pcl->verify_state);
+	if (state == 2)
+		return 0;
+	if (unlikely(state == 3))
+		return -EIO;
+	if (state == 1 || atomic_cmpxchg(&pcl->verify_state, 0, 1) != 0) {
+		while ((state = atomic_read_acquire(&pcl->verify_state)) == 1)
+			cpu_relax();
+		if (state == 2)
+			return 0;
+		if (unlikely(state == 3))
+			return -EIO;
+	}
+
+	ctx = sbi->verity_init_ctx;
+	while (rem > 0) {
+		unsigned int chunk = min_t(unsigned int, rem,
+					   PAGE_SIZE - cur_ofs);
+		const u8 *addr = kmap_local_page(compressed_pages[pgnr]);
+
+		sha256_update(&ctx, addr + cur_ofs, chunk);
+		kunmap_local(addr);
+		rem -= chunk;
+		cur_ofs = 0;
+		pgnr++;
+	}
+	sha256_final(&ctx, actual);
+	if (unlikely(memcmp(actual, pcl->sha256, 32) != 0)) {
+		erofs_err(sb, "verity: pcluster SHA-256 mismatch @ pa %llu size %u",
+			  pcl->pos, pcl->pclustersize);
+		atomic_set_release(&pcl->verify_state, 3);
+		return -EIO;
+	}
+	atomic_set_release(&pcl->verify_state, 2);
+	return 0;
+}
+
 static int z_erofs_decompress_pcluster(struct z_erofs_backend *be, bool eio)
 {
 	struct erofs_sb_info *const sbi = EROFS_SB(be->sb);
@@ -1337,6 +1401,15 @@ static int z_erofs_decompress_pcluster(struct z_erofs_backend *be, bool eio)
 	err2 = z_erofs_parse_in_bvecs(be, &overlapped);
 	if (err2)
 		err = err2;
+	if (erofs_sb_has_verity(sbi)) {
+		if (!err) {
+			err = z_erofs_verify_pcluster(be->sb, pcl,
+						      be->compressed_pages);
+		} else if (atomic_cmpxchg(&pcl->verify_state, 0, 3) == 1) {
+			while (atomic_read_acquire(&pcl->verify_state) == 1)
+				cpu_relax();
+		}
+	}
 	if (!err)
 		err = decomp->decompress(&(struct z_erofs_decompress_req) {
 					.sb = be->sb,
