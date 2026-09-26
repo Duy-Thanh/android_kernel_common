@@ -81,6 +81,7 @@ struct z_erofs_pcluster {
 
 	/* L: whether extra buffer allocations are best-effort */
 	bool besteffort;
+	bool in_pslots;
 
 	/* A: compressed bvecs (can be cached or inplaced pages) */
 	struct z_erofs_bvec compressed_bvecs[];
@@ -544,7 +545,8 @@ static void z_erofs_bind_cache(struct z_erofs_frontend *fe)
 	unsigned int i;
 
 	if (i_blocksize(fe->inode) != PAGE_SIZE ||
-	    fe->mode < Z_EROFS_PCLUSTER_FOLLOWED)
+	    fe->mode < Z_EROFS_PCLUSTER_FOLLOWED ||
+	    EROFS_I_SB(fe->inode)->opt.cache_strategy <= EROFS_ZIP_CACHE_DISABLED)
 		return;
 
 	for (i = 0; i < pclusterpages; ++i) {
@@ -750,6 +752,12 @@ static bool z_erofs_get_pcluster(struct z_erofs_pcluster *pcl)
 	return true;
 }
 
+static inline bool z_erofs_need_pslots(struct erofs_sb_info *sbi)
+{
+	return sbi->opt.cache_strategy > EROFS_ZIP_CACHE_DISABLED ||
+	       erofs_sb_has_dedupe(sbi);
+}
+
 static int z_erofs_register_pcluster(struct z_erofs_frontend *fe)
 {
 	struct erofs_map_blocks *map = &fe->map;
@@ -774,6 +782,7 @@ static int z_erofs_register_pcluster(struct z_erofs_frontend *fe)
 	pcl->pageofs_in = pageofs_in;
 	pcl->pageofs_out = map->m_la & ~PAGE_MASK;
 	pcl->from_meta = map->m_flags & EROFS_MAP_META;
+	pcl->in_pslots = !pcl->from_meta && z_erofs_need_pslots(sbi);
 	fe->mode = Z_EROFS_PCLUSTER_FOLLOWED;
 
 	/*
@@ -783,7 +792,7 @@ static int z_erofs_register_pcluster(struct z_erofs_frontend *fe)
 	mutex_init(&pcl->lock);
 	DBG_BUGON(!mutex_trylock(&pcl->lock));
 
-	if (!pcl->from_meta) {
+	if (pcl->in_pslots) {
 		while (1) {
 			xa_lock(&sbi->managed_pslots);
 			pre = __xa_cmpxchg(&sbi->managed_pslots, pcl->pos,
@@ -818,6 +827,7 @@ static int z_erofs_pcluster_begin(struct z_erofs_frontend *fe)
 {
 	struct erofs_map_blocks *map = &fe->map;
 	struct super_block *sb = fe->inode->i_sb;
+	struct erofs_sb_info *sbi = EROFS_SB(sb);
 	struct z_erofs_pcluster *pcl = NULL;
 	void *ptr = NULL;
 	int ret;
@@ -838,10 +848,10 @@ static int z_erofs_pcluster_begin(struct z_erofs_frontend *fe)
 			return PTR_ERR(ptr);
 		}
 		ptr = map->buf.page;
-	} else {
+	} else if (z_erofs_need_pslots(sbi)) {
 		while (1) {
 			rcu_read_lock();
-			pcl = xa_load(&EROFS_SB(sb)->managed_pslots, map->m_pa);
+			pcl = xa_load(&sbi->managed_pslots, map->m_pa);
 			if (!pcl || z_erofs_get_pcluster(pcl)) {
 				DBG_BUGON(pcl && map->m_pa != pcl->pos);
 				rcu_read_unlock();
@@ -963,6 +973,12 @@ static void z_erofs_put_pcluster(struct erofs_sb_info *sbi,
 
 	DBG_BUGON(__lockref_is_dead(&pcl->lockref));
 	if (!--pcl->lockref.count) {
+		if (!pcl->in_pslots) {
+			lockref_mark_dead(&pcl->lockref);
+			spin_unlock(&pcl->lockref.lock);
+			z_erofs_free_pcluster(pcl);
+			return;
+		}
 		if (try_free && xa_trylock(&sbi->managed_pslots)) {
 			free = __erofs_try_to_release_pcluster(sbi, pcl);
 			xa_unlock(&sbi->managed_pslots);
