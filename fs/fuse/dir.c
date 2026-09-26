@@ -190,16 +190,24 @@ static bool backing_data_changed(struct fuse_inode *fi, struct dentry *entry,
 	int err;
 	bool ret = true;
 
-	if (!entry || !fi->backing_inode) {
+	if (!entry)
+		ret = false;
+	if (!ret)
+		goto put_backing_file;
+
+	mutex_lock(&fi->backing_mutex);
+	if (!fi->backing_inode) {
+		mutex_unlock(&fi->backing_mutex);
 		ret = false;
 		goto put_backing_file;
 	}
-
-	get_fuse_backing_path(entry, &new_backing_path);
+	get_fuse_backing_path_locked(entry, &new_backing_path);
 	new_backing_inode = fi->backing_inode;
 	ihold(new_backing_inode);
+	mutex_unlock(&fi->backing_mutex);
 
-	err = fuse_handle_backing(bpf_arg, &new_backing_inode, &new_backing_path);
+	err = fuse_handle_backing(bpf_arg, &new_backing_inode, &new_backing_path,
+				  &fi->backing_mutex);
 
 	if (err)
 		goto put_inode;
@@ -208,8 +216,10 @@ static bool backing_data_changed(struct fuse_inode *fi, struct dentry *entry,
 	if (err)
 		goto put_bpf;
 
+	mutex_lock(&fi->backing_mutex);
 	ret = (bpf != fi->bpf || fi->backing_inode != new_backing_inode ||
 			!path_equal(&get_fuse_dentry(entry)->backing_path, &new_backing_path));
+	mutex_unlock(&fi->backing_mutex);
 put_bpf:
 	if (bpf)
 		bpf_prog_put(bpf);
@@ -255,7 +265,15 @@ static int fuse_dentry_revalidate(struct inode *dir, const struct qstr *name,
 	 * If the lower filesystem says the entry is invalid, FUSE probably shouldn't
 	 * try to fix that without going through the normal lookup path...
 	 */
-	if (get_fuse_dentry(entry)->backing_path.dentry) {
+	if (flags & LOOKUP_RCU) {
+		struct fuse_dentry *fd = get_fuse_dentry(entry);
+
+		/* A backing dentry needs a sleeping revalidation path. */
+		if (fd && READ_ONCE(fd->backing_path.dentry)) {
+			ret = -ECHILD;
+			goto out;
+		}
+	} else {
 		ret = fuse_revalidate_backing(dir, name, entry, flags);
 		if (ret <= 0) {
 			goto out;
@@ -285,10 +303,16 @@ static int fuse_dentry_revalidate(struct inode *dir, const struct qstr *name,
 		/* TODO: Once we're handling timeouts for backing inodes, do a
 		 * bpf based lookup_revalidate here.
 		 */
-		if (get_fuse_inode(parent->d_inode)->backing_inode) {
-			dput(parent);
-			ret = 1;
-			goto out;
+		{
+			struct inode *backing_inode =
+				fuse_get_backing_inode(parent->d_inode);
+
+			if (backing_inode) {
+				iput(backing_inode);
+				dput(parent);
+				ret = 1;
+				goto out;
+			}
 		}
 #endif
 		forget = fuse_alloc_forget();
@@ -431,7 +455,7 @@ static int fuse_dentry_canonical_path(const struct path *path,
 			       fuse_canonical_path_backing,
 			       fuse_canonical_path_finalize, path,
 			       canonical_path);
-	if (fer.ret)
+	if (fer.ret && PTR_ERR(fer.result) != -ENOENT)
 		return PTR_ERR(fer.result);
 #endif
 
@@ -550,7 +574,8 @@ int fuse_lookup_name(struct super_block *sb, u64 nodeid, const struct qstr *name
 
 		err = fuse_handle_backing(&bpf_arg,
 				&get_fuse_inode(*inode)->backing_inode,
-				&get_fuse_dentry(entry)->backing_path);
+				&get_fuse_dentry(entry)->backing_path,
+				&get_fuse_inode(*inode)->backing_mutex);
 		if (!err)
 			err = fuse_handle_bpf_prog(&bpf_arg, NULL,
 					   &get_fuse_inode(*inode)->bpf);
@@ -1884,11 +1909,21 @@ static int fuse_permission(struct mnt_idmap *idmap,
 		return -EACCES;
 
 #ifdef CONFIG_FUSE_BPF
-	fer = fuse_bpf_backing(inode, struct fuse_access_in,
-			       fuse_access_initialize, fuse_access_backing,
-			       fuse_access_finalize, inode, mask);
-	if (fer.ret)
-		return PTR_ERR(fer.result);
+	if (mask & MAY_NOT_BLOCK) {
+		/*
+		 * A backing permission check needs backing_mutex, which cannot
+		 * be taken during RCU walk. Without backing, the ordinary FUSE
+		 * permission path is safe to continue.
+		 */
+		if (READ_ONCE(fi->backing_inode))
+			return -ECHILD;
+	} else {
+		fer = fuse_bpf_backing(inode, struct fuse_access_in,
+				       fuse_access_initialize, fuse_access_backing,
+				       fuse_access_finalize, inode, mask);
+		if (fer.ret)
+			return PTR_ERR(fer.result);
+	}
 #endif
 
 	/*
@@ -2089,14 +2124,19 @@ static int fuse_dir_fsync(struct file *file, loff_t start, loff_t end,
 
 #ifdef CONFIG_FUSE_BPF
 	{
+		struct fuse_file *ff;
 		struct fuse_err_ret fer;
 
-		fer = fuse_bpf_backing(inode, struct fuse_fsync_in,
-				fuse_dir_fsync_initialize, fuse_fsync_backing,
-				fuse_fsync_finalize,
-				file, start, end, datasync);
-		if (fer.ret)
-			return PTR_ERR(fer.result);
+		ff = file->private_data;
+		if (ff->backing_file) {
+			fer = fuse_bpf_backing_file(inode, struct fuse_fsync_in,
+						    fuse_dir_fsync_initialize,
+						    fuse_fsync_backing,
+						    fuse_fsync_finalize,
+						    file, start, end, datasync);
+			if (fer.ret)
+				return PTR_ERR(fer.result);
+		}
 	}
 #endif
 
