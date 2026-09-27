@@ -11,6 +11,7 @@
 #include <linux/sched.h>
 #include <linux/list.h>
 #include <linux/mm.h>
+#include <linux/p3s/mm.h>
 #include <linux/swap.h>
 #include <linux/slab.h>
 #include <linux/sched/task.h>
@@ -187,6 +188,10 @@ static int zram_ioctl_process_scan(struct zram *zram, unsigned int cmd,
 	if (!mm) {
 		ret = -ESRCH;
 		goto release_task;
+	}
+	if (mm_is_p3s_4k(mm)) {
+		ret = -EOPNOTSUPP;
+		goto release_mm;
 	}
 
 	if (start_addr >= mm->task_size) {
