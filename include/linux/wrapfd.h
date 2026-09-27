@@ -91,6 +91,11 @@ int wrapfd_get_ownership(struct file *file, struct device *dev);
  */
 int wrapfd_put_ownership(struct file *file, struct device *dev);
 
+#if IS_ENABLED(CONFIG_KUNIT)
+int create_wrapfd(int fd, int prot);
+int empty_wrapfd(struct file *file, struct device *dev);
+#endif
+
 #else /* CONFIG_ANDROID_WRAPFD */
 
 static inline bool is_wrapfd_vma(struct vm_area_struct *vma)

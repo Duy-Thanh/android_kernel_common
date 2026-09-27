@@ -1787,6 +1787,20 @@ static long wrapfd_dev_ioctl(struct file *file, unsigned int cmd,
 	return ret;
 }
 
+#if IS_ENABLED(CONFIG_KUNIT)
+int create_wrapfd(int fd, int prot)
+{
+	return __create_wrapfd(fd, prot);
+}
+EXPORT_SYMBOL_GPL(create_wrapfd);
+
+int empty_wrapfd(struct file *file, struct device *dev)
+{
+	return wrap_file_empty(file->private_data, dev);
+}
+EXPORT_SYMBOL_GPL(empty_wrapfd);
+#endif
+
 static const struct file_operations wrapfd_dev_fops = {
 	.owner = THIS_MODULE,
 	.unlocked_ioctl = wrapfd_dev_ioctl,
