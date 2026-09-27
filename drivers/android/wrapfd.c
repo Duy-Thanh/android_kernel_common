@@ -26,6 +26,7 @@
 #include <linux/uio.h>
 #include <linux/wrapfd.h>
 #include <uapi/linux/wrapfd.h>
+#include "wrapfd_internal.h"
 
 /* 1 buffer for the start, and at most 2 at the end. */
 #define MAX_NR_BOUNCE_BUFS 3
@@ -1947,6 +1948,20 @@ static long wrapfd_dev_ioctl(struct file *file, unsigned int cmd,
 
 	return ret;
 }
+
+#if IS_ENABLED(CONFIG_ANDROID_WRAPFD_KUNIT_TEST)
+int create_wrapfd(int fd, int prot)
+{
+	return __create_wrapfd(fd, prot);
+}
+EXPORT_SYMBOL_GPL(create_wrapfd);
+
+int empty_wrapfd(struct file *file, struct device *dev)
+{
+	return wrap_file_empty(file->private_data, dev);
+}
+EXPORT_SYMBOL_GPL(empty_wrapfd);
+#endif
 
 static const struct file_operations wrapfd_dev_fops = {
 	.owner = THIS_MODULE,
