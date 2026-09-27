@@ -32,6 +32,7 @@
 #include <linux/swapops.h>
 #include <linux/miscdevice.h>
 #include <linux/uio.h>
+#include <linux/p3s/mm.h>
 #include <linux/p3s_user_pages.h>
 
 static int sysctl_unprivileged_userfaultfd __read_mostly;
@@ -1242,6 +1243,19 @@ static __always_inline int validate_range(struct mm_struct *mm,
 	return validate_unaligned_range(mm, start, len);
 }
 
+/* COPY reads from the ioctl caller, whose VA window can exceed ctx->mm's. */
+static int validate_copy_source(struct mm_struct *dst_mm, __u64 src,
+				u64 len)
+{
+	u64 task_size = current->mm->task_size;
+
+	src = untagged_addr(src);
+	if (!len || (len & (mm_pte_size(dst_mm) - 1)) ||
+	    src >= task_size || len > task_size - src)
+		return -EINVAL;
+	return 0;
+}
+
 static int userfaultfd_register(struct userfaultfd_ctx *ctx,
 				unsigned long arg)
 {
@@ -1615,8 +1629,8 @@ static int userfaultfd_copy(struct userfaultfd_ctx *ctx,
 			   sizeof(uffdio_copy)-sizeof(__s64)))
 		goto out;
 
-	ret = validate_unaligned_range(ctx->mm, uffdio_copy.src,
-				       uffdio_copy.len);
+	ret = validate_copy_source(ctx->mm, uffdio_copy.src,
+				   uffdio_copy.len);
 	if (ret)
 		goto out;
 	ret = validate_range(ctx->mm, uffdio_copy.dst, uffdio_copy.len);
