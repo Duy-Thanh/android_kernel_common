@@ -1327,6 +1327,12 @@ static int userfaultfd_register(struct userfaultfd_ctx *ctx,
 		VM_WARN_ON_ONCE(!!cur->vm_userfaultfd_ctx.ctx ^
 				!!(cur->vm_flags & __VM_UFFD_FLAGS));
 
+		/* 4K compat userfaultfd intentionally supports anonymous VMAs only. */
+		if (vma_is_p3s_4k(cur) && !vma_is_anonymous(cur)) {
+			ret = -EOPNOTSUPP;
+			goto out_unlock;
+		}
+
 		/* check not compatible vmas */
 		ret = -EINVAL;
 		if (!vma_can_userfault(cur, vm_flags, wp_async))
