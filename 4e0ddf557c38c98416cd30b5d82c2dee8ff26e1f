@@ -16,6 +16,24 @@
       "message": "Hi @Sarthak, thanks for the effort!\nBTW, I wonder if this work is intended for Linux upstream? if yes, I wonder why we consider a per-inode verification digests rather than dm-verity-compatible metadata approach so that the same metadata can be used for dm-verity and erofs file-backed mounts.\nAlso the digest list is not absolutely secure since the on-disk metadata can still be compromised, and it complexs the EROFS metadata layout a lot (since we need to design digest metadata for each inode layout.)\nI once hope if there is not a particularly specific requirement, the verify metadata would be better to be dm-verity compatible, and it\u0027s totally decoupled from the erofs metadata details so it\u0027s simplifed.",
       "revId": "4e0ddf557c38c98416cd30b5d82c2dee8ff26e1f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e2ce5a5_494e10df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1244290
+      },
+      "writtenOn": "2026-09-27T19:38:59Z",
+      "side": 1,
+      "message": "Hi Gao, thank you for looking at this! \n\nPlease note this is a pretty early stage prototype, but I\u0027m seeing strong performance gains vs using dm-verity + erofs on cold read; I\u0027m definitely interested in working with you and addressing your feedback to upstream.\n\n\u003e Also the digest list is not absolutely secure since the on-disk metadata can still be compromised\n\nIn patch 6/9 (4324131), all metadata (inodes, xattrs, dirs, inline files, and the extent/flat digest tables) is placed in a contiguous metazone covered by a 128-ary SHA-256 Merkle tree anchored in the superblock extension, and Block 0 is verified against `-o root_digest\u003d\u003chex\u003e` at mount time. `erofs_bread()` verifies every 4K metadata block against that Merkle tree before any inode or digest is read, so tampered on-disk metadata/digests fail with -EIO.\n\n\u003e I wonder why we consider a per-inode verification digests rather than dm-verity-compatible metadata approach so that the same metadata can be used for dm-verity and erofs file-backed mounts.\n\nMy thought here was to see if we can split the merkle tree for metadata / data verification separately vs relying on verity\u0027s full device tree:\n\n- Metadata: the metadata merkle tree becomes much smaller (\u003c 1% of the dm-verity merkle tree) and we can simply pin it (speeds up a lot of the metadata operations and we get verification for inline files for free)\n\n- For cold reads or under memory pressure when the dm-verity merkle tree is evicted, it adds an extra hop to use dm-bufio to fetch the merkle tree. Having the digests in the inode metadata amortizes this cost to within what we\u0027d already do for a read path (and for inline files, we get verification for \"free\"). \n\n\u003e since we need to design digest metadata for each inode layout.\n\nWe could also separate this out from per-inode to a separate segment so that it doesn\u0027t necessarily have to be baked in. But I do think having a separate layout from dm-verity might be beneficial performance wise. WDYT?",
+      "parentUuid": "8c64d1cb_81ac893a",
+      "revId": "4e0ddf557c38c98416cd30b5d82c2dee8ff26e1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
