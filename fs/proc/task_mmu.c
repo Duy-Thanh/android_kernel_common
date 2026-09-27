@@ -31,6 +31,7 @@
 #include <asm/tlb.h>
 #include <asm/tlbflush.h>
 #include "internal.h"
+#include <linux/p3s/mm.h>
 #include <linux/p3s_user_pages.h>
 
 #define SENTINEL_VMA_END	-1
@@ -1521,7 +1522,9 @@ static int show_smap(struct seq_file *m, void *v)
 
 	SEQ_PUT_DEC("Size:           ", VMA_PAD_START(vma) - vma->vm_start);
 	SEQ_PUT_DEC(" kB\nKernelPageSize: ", vma_kernel_pagesize(vma));
-	SEQ_PUT_DEC(" kB\nMMUPageSize:    ", vma_mmu_pagesize(vma));
+	SEQ_PUT_DEC(" kB\nMMUPageSize:    ",
+		    is_vm_hugetlb_page(vma) ? vma_mmu_pagesize(vma) :
+		    mm_pte_size(vma->vm_mm));
 	seq_puts(m, " kB\n");
 
 	__show_smap(m, &mss, false);
