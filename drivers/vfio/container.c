@@ -5,6 +5,8 @@
  * VFIO container (/dev/vfio/vfio)
  */
 #include <linux/file.h>
+#include <linux/mm.h>
+#include <linux/p3s/mm.h>
 #include <linux/slab.h>
 #include <linux/fs.h>
 #include <linux/capability.h>
@@ -332,6 +334,9 @@ static long vfio_fops_unl_ioctl(struct file *filep,
 	void *data;
 	long ret = -EINVAL;
 
+	if (mm_is_p3s_4k(current->mm))
+		return -EOPNOTSUPP;
+
 	if (!container)
 		return ret;
 
@@ -359,6 +364,9 @@ static long vfio_fops_unl_ioctl(struct file *filep,
 static int vfio_fops_open(struct inode *inode, struct file *filep)
 {
 	struct vfio_container *container;
+
+	if (mm_is_p3s_4k(current->mm))
+		return -EOPNOTSUPP;
 
 	container = kzalloc(sizeof(*container), GFP_KERNEL_ACCOUNT);
 	if (!container)

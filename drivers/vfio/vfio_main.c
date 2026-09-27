@@ -11,6 +11,8 @@
  */
 
 #include <linux/cdev.h>
+#include <linux/mm.h>
+#include <linux/p3s/mm.h>
 #include <linux/compat.h>
 #include <linux/device.h>
 #include <linux/fs.h>
@@ -1295,6 +1297,9 @@ static long vfio_device_fops_unl_ioctl(struct file *filep,
 	void __user *uptr = (void __user *)arg;
 	int ret;
 
+	if (mm_is_p3s_4k(current->mm))
+		return -EOPNOTSUPP;
+
 	if (cmd == VFIO_DEVICE_BIND_IOMMUFD)
 		return vfio_df_ioctl_bind_iommufd(df, uptr);
 
@@ -1342,6 +1347,9 @@ static ssize_t vfio_device_fops_read(struct file *filep, char __user *buf,
 	struct vfio_device_file *df = filep->private_data;
 	struct vfio_device *device = df->device;
 
+	if (mm_is_p3s_4k(current->mm))
+		return -EOPNOTSUPP;
+
 	/* Paired with smp_store_release() following vfio_df_open() */
 	if (!smp_load_acquire(&df->access_granted))
 		return -EINVAL;
@@ -1359,6 +1367,9 @@ static ssize_t vfio_device_fops_write(struct file *filep,
 	struct vfio_device_file *df = filep->private_data;
 	struct vfio_device *device = df->device;
 
+	if (mm_is_p3s_4k(current->mm))
+		return -EOPNOTSUPP;
+
 	/* Paired with smp_store_release() following vfio_df_open() */
 	if (!smp_load_acquire(&df->access_granted))
 		return -EINVAL;
@@ -1373,6 +1384,9 @@ static int vfio_device_fops_mmap(struct file *filep, struct vm_area_struct *vma)
 {
 	struct vfio_device_file *df = filep->private_data;
 	struct vfio_device *device = df->device;
+
+	if (mm_is_p3s_4k(vma->vm_mm))
+		return -EOPNOTSUPP;
 
 	/* Paired with smp_store_release() following vfio_df_open() */
 	if (!smp_load_acquire(&df->access_granted))

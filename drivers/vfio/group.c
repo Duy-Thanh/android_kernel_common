@@ -11,6 +11,8 @@
  */
 
 #include <linux/vfio.h>
+#include <linux/mm.h>
+#include <linux/p3s/mm.h>
 #include <linux/iommufd.h>
 #include <linux/anon_inodes.h>
 #include "vfio.h"
@@ -380,6 +382,9 @@ static long vfio_group_fops_unl_ioctl(struct file *filep,
 	struct vfio_group *group = filep->private_data;
 	void __user *uarg = (void __user *)arg;
 
+	if (mm_is_p3s_4k(current->mm))
+		return -EOPNOTSUPP;
+
 	switch (cmd) {
 	case VFIO_GROUP_GET_DEVICE_FD:
 		return vfio_group_ioctl_get_device_fd(group, uarg);
@@ -426,6 +431,9 @@ static int vfio_group_fops_open(struct inode *inode, struct file *filep)
 	struct vfio_group *group =
 		container_of(inode->i_cdev, struct vfio_group, cdev);
 	int ret;
+
+	if (mm_is_p3s_4k(current->mm))
+		return -EOPNOTSUPP;
 
 	mutex_lock(&group->group_lock);
 
