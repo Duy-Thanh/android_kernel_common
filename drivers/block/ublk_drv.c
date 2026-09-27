@@ -1610,6 +1610,9 @@ static int ublk_ch_open(struct inode *inode, struct file *filp)
 	struct ublk_device *ub = container_of(inode->i_cdev,
 			struct ublk_device, cdev);
 
+	if (p3s_4k_unsupported(current->mm))
+		return -EOPNOTSUPP;
+
 	if (test_and_set_bit(UB_STATE_OPEN, &ub->state))
 		return -EBUSY;
 	filp->private_data = ub;
@@ -1847,6 +1850,9 @@ static int ublk_ch_mmap(struct file *filp, struct vm_area_struct *vma)
 	unsigned max_sz = ublk_max_cmd_buf_size();
 	unsigned long pfn, end, phys_off = vma->vm_pgoff << PAGE_SHIFT;
 	int q_id, ret = 0;
+
+	if (p3s_4k_unsupported(vma->vm_mm))
+		return -EOPNOTSUPP;
 
 	spin_lock(&ub->lock);
 	if (!ub->mm)
