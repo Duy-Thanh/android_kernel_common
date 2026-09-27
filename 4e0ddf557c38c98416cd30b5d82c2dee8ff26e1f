@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c64d1cb_81ac893a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1639124
+      },
+      "writtenOn": "2026-09-27T08:45:14Z",
+      "side": 1,
+      "message": "Hi @Sarthak, thanks for the effort!\nBTW, I wonder if this work is intended for Linux upstream? if yes, I wonder why we consider a per-inode verification digests rather than dm-verity-compatible metadata approach so that the same metadata can be used for dm-verity and erofs file-backed mounts.\nAlso the digest list is not absolutely secure since the on-disk metadata can still be compromised, and it complexs the EROFS metadata layout a lot (since we need to design digest metadata for each inode layout.)\nI once hope if there is not a particularly specific requirement, the verify metadata would be better to be dm-verity compatible, and it\u0027s totally decoupled from the erofs metadata details so it\u0027s simplifed.",
+      "revId": "4e0ddf557c38c98416cd30b5d82c2dee8ff26e1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
