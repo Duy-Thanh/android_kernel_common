@@ -14,6 +14,7 @@
 #include <linux/ptrace.h>
 #include <linux/slab.h>
 #include <linux/syscalls.h>
+#include <linux/p3s/vma.h>
 #include <linux/p3s_user_pages.h>
 
 /**
@@ -59,6 +60,50 @@ static int process_vm_rw_pages(struct page **pages,
 /* Maximum number of pages that can be stored at a time */
 #define PVM_MAX_USER_PAGES (PVM_MAX_KMALLOC_PAGES * PAGE_SIZE / sizeof(struct page *))
 
+/* The PTE-sized addresses of a compat mm can share one native struct page. */
+static int process_vm_rw_compat(unsigned long addr, unsigned long len,
+				struct iov_iter *iter, struct mm_struct *mm,
+				int vm_write)
+{
+	unsigned int flags = vm_write ? FOLL_WRITE : 0;
+
+	while (len && iov_iter_count(iter)) {
+		struct vm_area_struct *vma;
+		struct page *page;
+		unsigned long pa = addr & mm_pte_mask(mm);
+		size_t copied;
+		int offset, bytes, locked = 1;
+		long pinned;
+
+		mmap_read_lock(mm);
+		vma = find_vma(mm, addr);
+		if (!vma || addr < vma->vm_start) {
+			mmap_read_unlock(mm);
+			return -EFAULT;
+		}
+		vma_remote_access_chunk(vma, addr,
+				min_t(unsigned long, len, mm_pte_size(mm)),
+				&offset, &bytes);
+		pinned = pin_user_pages_remote(mm, pa, 1, flags, &page,
+					       &locked);
+		if (locked)
+			mmap_read_unlock(mm);
+		if (pinned != 1)
+			return -EFAULT;
+
+		if (vm_write)
+			copied = copy_page_from_iter(page, offset, bytes, iter);
+		else
+			copied = copy_page_to_iter(page, offset, bytes, iter);
+		unpin_user_pages_dirty_lock(&page, 1, vm_write);
+		if (copied != bytes)
+			return -EFAULT;
+		addr += bytes;
+		len -= bytes;
+	}
+	return 0;
+}
+
 /**
  * process_vm_rw_single_vec - read/write pages from task specified
  * @addr: start memory address of target process
@@ -85,6 +130,9 @@ static int process_vm_rw_single_vec(unsigned long addr,
 	unsigned long nr_pages;
 	ssize_t rc = 0;
 	unsigned int flags = 0;
+
+	if (mm_is_p3s_4k(mm))
+		return process_vm_rw_compat(addr, len, iter, mm, vm_write);
 
 	/* Work out address and page range required */
 	if (len == 0)
