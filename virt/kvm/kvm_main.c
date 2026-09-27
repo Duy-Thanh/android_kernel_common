@@ -13,6 +13,7 @@
 #include <kvm/iodev.h>
 
 #include <linux/kvm_host.h>
+#include <linux/p3s/mm.h>
 #include <linux/kvm.h>
 #include <linux/module.h>
 #include <linux/errno.h>
@@ -121,10 +122,12 @@ static const struct file_operations stat_fops_per_vm;
 
 static long kvm_vcpu_ioctl(struct file *file, unsigned int ioctl,
 			   unsigned long arg);
+static int kvm_dev_open(struct inode *inode, struct file *file);
 #ifdef CONFIG_KVM_COMPAT
 static long kvm_vcpu_compat_ioctl(struct file *file, unsigned int ioctl,
 				  unsigned long arg);
-#define KVM_COMPAT(c)	.compat_ioctl	= (c)
+#define KVM_COMPAT(c)	.compat_ioctl	= (c),	\
+			.open		= kvm_dev_open
 #else
 /*
  * For architectures that don't implement a compat infrastructure,
@@ -136,13 +139,20 @@ static long kvm_vcpu_compat_ioctl(struct file *file, unsigned int ioctl,
 static long kvm_no_compat_ioctl(struct file *file, unsigned int ioctl,
 				unsigned long arg) { return -EINVAL; }
 
-static int kvm_no_compat_open(struct inode *inode, struct file *file)
-{
-	return is_compat_task() ? -ENODEV : 0;
-}
 #define KVM_COMPAT(c)	.compat_ioctl	= kvm_no_compat_ioctl,	\
-			.open		= kvm_no_compat_open
+			.open		= kvm_dev_open
 #endif
+
+static int kvm_dev_open(struct inode *inode, struct file *file)
+{
+	if (mm_is_p3s_4k(current->mm))
+		return -EOPNOTSUPP;
+#ifndef CONFIG_KVM_COMPAT
+	if (is_compat_task())
+		return -ENODEV;
+#endif
+	return 0;
+}
 
 static void kvm_io_bus_destroy(struct kvm_io_bus *bus);
 
@@ -4103,6 +4113,9 @@ static int kvm_vcpu_mmap(struct file *file, struct vm_area_struct *vma)
 	struct kvm_vcpu *vcpu = file->private_data;
 	unsigned long pages = vma_pages(vma);
 
+	if (mm_is_p3s_4k(vma->vm_mm))
+		return -EOPNOTSUPP;
+
 	if ((kvm_page_in_dirty_ring(vcpu->kvm, vma->vm_pgoff) ||
 	     kvm_page_in_dirty_ring(vcpu->kvm, vma->vm_pgoff + pages - 1)) &&
 	    ((vma->vm_flags & VM_EXEC) || !(vma->vm_flags & VM_SHARED)))
@@ -4309,6 +4322,9 @@ static ssize_t kvm_vcpu_stats_read(struct file *file, char __user *user_buffer,
 {
 	struct kvm_vcpu *vcpu = file->private_data;
 
+	if (mm_is_p3s_4k(current->mm))
+		return -EOPNOTSUPP;
+
 	return kvm_stats_read(vcpu->stats_id, &kvm_vcpu_stats_header,
 			&kvm_vcpu_stats_desc[0], &vcpu->stat,
 			sizeof(vcpu->stat), user_buffer, size, offset);
@@ -4435,6 +4451,9 @@ static long kvm_vcpu_ioctl(struct file *filp,
 	int r;
 	struct kvm_fpu *fpu = NULL;
 	struct kvm_sregs *kvm_sregs = NULL;
+
+	if (mm_is_p3s_4k(current->mm))
+		return -EOPNOTSUPP;
 
 	if (vcpu->kvm->mm != current->mm || vcpu->kvm->vm_dead)
 		return -EIO;
@@ -4679,6 +4698,9 @@ static long kvm_vcpu_compat_ioctl(struct file *filp,
 	void __user *argp = compat_ptr(arg);
 	int r;
 
+	if (mm_is_p3s_4k(current->mm))
+		return -EOPNOTSUPP;
+
 	if (vcpu->kvm->mm != current->mm || vcpu->kvm->vm_dead)
 		return -EIO;
 
@@ -4718,6 +4740,9 @@ static int kvm_device_mmap(struct file *filp, struct vm_area_struct *vma)
 {
 	struct kvm_device *dev = filp->private_data;
 
+	if (mm_is_p3s_4k(vma->vm_mm))
+		return -EOPNOTSUPP;
+
 	if (dev->ops->mmap)
 		return dev->ops->mmap(dev, vma);
 
@@ -4744,6 +4769,9 @@ static long kvm_device_ioctl(struct file *filp, unsigned int ioctl,
 			     unsigned long arg)
 {
 	struct kvm_device *dev = filp->private_data;
+
+	if (mm_is_p3s_4k(current->mm))
+		return -EOPNOTSUPP;
 
 	if (dev->kvm->mm != current->mm || dev->kvm->vm_dead)
 		return -EIO;
@@ -5112,6 +5140,9 @@ static ssize_t kvm_vm_stats_read(struct file *file, char __user *user_buffer,
 {
 	struct kvm *kvm = file->private_data;
 
+	if (mm_is_p3s_4k(current->mm))
+		return -EOPNOTSUPP;
+
 	return kvm_stats_read(kvm->stats_id, &kvm_vm_stats_header,
 				&kvm_vm_stats_desc[0], &kvm->stat,
 				sizeof(kvm->stat), user_buffer, size, offset);
@@ -5168,6 +5199,9 @@ static long kvm_vm_ioctl(struct file *filp,
 	struct kvm *kvm = filp->private_data;
 	void __user *argp = (void __user *)arg;
 	int r;
+
+	if (mm_is_p3s_4k(current->mm))
+		return -EOPNOTSUPP;
 
 	if (kvm->mm != current->mm || kvm->vm_dead)
 		return -EIO;
@@ -5433,6 +5467,9 @@ static long kvm_vm_compat_ioctl(struct file *filp,
 	struct kvm *kvm = filp->private_data;
 	int r;
 
+	if (mm_is_p3s_4k(current->mm))
+		return -EOPNOTSUPP;
+
 	if (kvm->mm != current->mm || kvm->vm_dead)
 		return -EIO;
 
@@ -5541,6 +5578,9 @@ static long kvm_dev_ioctl(struct file *filp,
 			  unsigned int ioctl, unsigned long arg)
 {
 	int r = -EINVAL;
+
+	if (mm_is_p3s_4k(current->mm))
+		return -EOPNOTSUPP;
 
 	switch (ioctl) {
 	case KVM_GET_API_VERSION:
