@@ -7,6 +7,8 @@
 #define dev_fmt(fmt)	"VFIO: " fmt
 
 #include <linux/device.h>
+#include <linux/mm.h>
+#include <linux/p3s/mm.h>
 #include <linux/acpi.h>
 #include <linux/iommu.h>
 #include <linux/module.h>
@@ -621,6 +623,9 @@ int vfio_platform_mmap(struct vfio_device *core_vdev, struct vm_area_struct *vma
 	struct vfio_platform_device *vdev =
 		container_of(core_vdev, struct vfio_platform_device, vdev);
 	unsigned int index;
+
+	if (mm_is_p3s_4k(vma->vm_mm))
+		return -EOPNOTSUPP;
 
 	index = vma->vm_pgoff >> (VFIO_PLATFORM_OFFSET_SHIFT - PAGE_SHIFT);
 

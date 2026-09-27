@@ -3,6 +3,8 @@
  * Copyright (c) 2023 Intel Corporation.
  */
 #include <linux/vfio.h>
+#include <linux/mm.h>
+#include <linux/p3s/mm.h>
 #include <linux/iommufd.h>
 
 #include "vfio.h"
@@ -26,6 +28,9 @@ int vfio_device_fops_cdev_open(struct inode *inode, struct file *filep)
 						  struct vfio_device, cdev);
 	struct vfio_device_file *df;
 	int ret;
+
+	if (mm_is_p3s_4k(current->mm))
+		return -EOPNOTSUPP;
 
 	/* Paired with the put in vfio_device_fops_release() */
 	if (!vfio_device_try_get_registration(device))
