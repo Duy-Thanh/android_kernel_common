@@ -40,6 +40,7 @@
 #include <linux/blk-mq.h>
 #include <linux/delay.h>
 #include <linux/mm.h>
+#include <linux/p3s/mm.h>
 #include <linux/page_size_compat.h>
 #include <asm/page.h>
 #include <linux/task_work.h>
@@ -884,6 +885,9 @@ static int ublk_open(struct gendisk *disk, blk_mode_t mode)
 {
 	struct ublk_device *ub = disk->private_data;
 
+	if (mm_is_p3s_4k(current->mm))
+		return -EOPNOTSUPP;
+
 	if (capable(CAP_SYS_ADMIN))
 		return 0;
 
@@ -1610,6 +1614,9 @@ static int ublk_ch_open(struct inode *inode, struct file *filp)
 	struct ublk_device *ub = container_of(inode->i_cdev,
 			struct ublk_device, cdev);
 
+	if (mm_is_p3s_4k(current->mm))
+		return -EOPNOTSUPP;
+
 	if (test_and_set_bit(UB_STATE_OPEN, &ub->state))
 		return -EBUSY;
 	filp->private_data = ub;
@@ -1847,6 +1854,9 @@ static int ublk_ch_mmap(struct file *filp, struct vm_area_struct *vma)
 	unsigned max_sz = ublk_max_cmd_buf_size();
 	unsigned long pfn, end, phys_off = vma->vm_pgoff << PAGE_SHIFT;
 	int q_id, ret = 0;
+
+	if (mm_is_p3s_4k(vma->vm_mm))
+		return -EOPNOTSUPP;
 
 	spin_lock(&ub->lock);
 	if (!ub->mm)
@@ -2613,6 +2623,9 @@ static int ublk_ch_uring_cmd(struct io_uring_cmd *cmd, unsigned int issue_flags)
 		return 0;
 	}
 
+	if (mm_is_p3s_4k(current->mm))
+		return -EOPNOTSUPP;
+
 	/* well-implemented server won't run into unlocked */
 	if (unlikely(issue_flags & IO_URING_F_UNLOCKED)) {
 		io_uring_cmd_complete_in_task(cmd, ublk_ch_uring_cmd_cb);
@@ -2648,6 +2661,9 @@ static struct request *ublk_check_and_get_req(struct kiocb *iocb,
 	struct request *req;
 	size_t buf_off;
 	u16 tag, q_id;
+
+	if (mm_is_p3s_4k(current->mm))
+		return ERR_PTR(-EOPNOTSUPP);
 
 	if (!ub)
 		return ERR_PTR(-EACCES);
@@ -3846,6 +3862,9 @@ static int ublk_ctrl_uring_cmd(struct io_uring_cmd *cmd,
 	u32 cmd_op = cmd->cmd_op;
 	int ret = -EINVAL;
 
+	if (mm_is_p3s_4k(current->mm))
+		return -EOPNOTSUPP;
+
 	if (issue_flags & IO_URING_F_NONBLOCK)
 		return -EAGAIN;
 
@@ -3929,8 +3948,15 @@ static int ublk_ctrl_uring_cmd(struct io_uring_cmd *cmd,
 	return ret;
 }
 
+static int ublk_ctrl_open(struct inode *inode, struct file *file)
+{
+	if (mm_is_p3s_4k(current->mm))
+		return -EOPNOTSUPP;
+	return nonseekable_open(inode, file);
+}
+
 static const struct file_operations ublk_ctl_fops = {
-	.open		= nonseekable_open,
+	.open		= ublk_ctrl_open,
 	.uring_cmd      = ublk_ctrl_uring_cmd,
 	.owner		= THIS_MODULE,
 	.llseek		= noop_llseek,
