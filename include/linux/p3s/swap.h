@@ -10,6 +10,22 @@
 
 #if defined(CONFIG_ARM64_PER_PROCESS_PAGE_SIZE) && defined(CONFIG_SWAP)
 
+/**
+ * p3s_swap_entry_repeats - Skip repeated slices of one native swap slot
+ * @last: Last entry visited, initially zero
+ * @entry: Current swap entry
+ *
+ * Several 4KB PTEs can refer to the same native swap slot. Slot zero is
+ * reserved for the swap header, so it cannot match the initial value.
+ */
+static inline bool p3s_swap_entry_repeats(swp_entry_t *last, swp_entry_t entry)
+{
+	bool repeats = last->val == entry.val;
+
+	*last = entry;
+	return repeats;
+}
+
 /*
  * mkswap writes the 10-byte "SWAPSPACE2" signature (magic.magic of union
  * swap_header) at the very end of the header page, after the info fields
@@ -128,6 +144,11 @@ static inline int p3s_convert_swap_header(union swap_header *swap_header)
 }
 
 #else /* !(CONFIG_ARM64_PER_PROCESS_PAGE_SIZE && CONFIG_SWAP) */
+
+static inline bool p3s_swap_entry_repeats(swp_entry_t *last, swp_entry_t entry)
+{
+	return false;
+}
 
 static inline unsigned long p3s_swap_header_max_badpages(const union swap_header *swap_header)
 {

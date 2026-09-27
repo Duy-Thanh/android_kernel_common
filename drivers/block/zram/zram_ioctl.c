@@ -16,6 +16,7 @@
 #include <linux/sched/task.h>
 #include <linux/pagewalk.h>
 #include <linux/swapops.h>
+#include <linux/p3s/swap.h>
 #include <uapi/linux/zram_ioctl.h>
 
 #include "zram_drv.h"
@@ -30,6 +31,7 @@ struct zram_process_walk_private {
 	unsigned int cmd;
 	u64 nr_remaining_pages;
 	unsigned long next_addr;
+	swp_entry_t last_entry;
 };
 
 static inline bool can_do_file_pageout(struct vm_area_struct *vma)
@@ -69,12 +71,7 @@ static int zram_process_walker(pmd_t *pmd, unsigned long start,
 	unsigned long index;
 	u64 nr_pages = zram->disksize >> PAGE_SHIFT;
 
-	for (addr = start; addr < end; addr += PAGE_SIZE) {
-		if (private->nr_remaining_pages == 0) {
-			private->next_addr = addr;
-			return 1;
-		}
-
+	for (addr = start; addr < end; addr += mm_pte_size(walk->mm)) {
 		ptep = pte_offset_map_lock(vma->vm_mm, pmd, addr, &ptl);
 		if (!ptep)
 			break;
@@ -126,6 +123,14 @@ static int zram_process_walker(pmd_t *pmd, unsigned long start,
 		index = swp_offset(entry);
 		if (unlikely(index >= nr_pages))
 			goto unlock_swap_device;
+
+		if (p3s_swap_entry_repeats(&private->last_entry, entry))
+			goto unlock_swap_device;
+		if (private->nr_remaining_pages == 0) {
+			private->next_addr = addr;
+			put_swap_device(sis);
+			return 1;
+		}
 
 		if (cmd == ZRAM_ANDROID_IOC_PROCESS_RANGE_WRITEBACK) {
 			/* Use PAGE_WRITEBACK for single index */
@@ -194,7 +199,7 @@ static int zram_ioctl_process_scan(struct zram *zram, unsigned int cmd,
 		goto release_mm;
 	}
 
-	if (!IS_ALIGNED(start_addr, PAGE_SIZE)) {
+	if (!IS_ALIGNED(start_addr, mm_pte_size(mm))) {
 		ret = -EINVAL;
 		goto release_mm;
 	}
