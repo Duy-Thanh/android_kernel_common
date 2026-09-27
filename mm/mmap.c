@@ -876,7 +876,7 @@ __get_unmapped_area(struct file *file, unsigned long addr, unsigned long len,
 
 	if (addr > TASK_SIZE - len)
 		return -ENOMEM;
-	if (offset_in_page(addr))
+	if (!mm_pte_aligned(p3s_current_mm(), addr))
 		return -EINVAL;
 
 	error = security_mmap_addr(addr);
