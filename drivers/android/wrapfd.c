@@ -23,6 +23,7 @@
 #include <linux/uaccess.h>
 #include <linux/uio.h>
 #include <linux/wrapfd.h>
+#include <kunit/visibility.h>
 #include <uapi/linux/wrapfd.h>
 
 /* 1 buffer for the start, and at most 2 at the end. */
@@ -861,10 +862,11 @@ static void context_unuse(struct wrap_ctx *ctx)
 }
 
 static int can_modify(struct wrap_ctx *ctx, struct task_struct *task,
-		      bool check_content)
+		      struct device *dev, bool check_content)
 {
 	assert_spin_locked(&ctx->lock);
-	if (!is_owner_task(ctx, task))
+	if (!is_owner_task(ctx, task) &&
+	    !(dev && is_owner_dev(ctx, dev)))
 		return -EBUSY;
 
 	if (ctx->map_count > 0 || ctx->use_count > 0)
@@ -876,12 +878,12 @@ static int can_modify(struct wrap_ctx *ctx, struct task_struct *task,
 	return 0;
 }
 
-static int block_usage(struct wrap_ctx *ctx)
+static int block_usage(struct wrap_ctx *ctx, struct device *dev)
 {
 	int ret;
 
 	assert_spin_locked(&ctx->lock);
-	ret = can_modify(ctx, current, true);
+	ret = can_modify(ctx, current, dev, true);
 	if (ret)
 		return ret;
 
@@ -1187,7 +1189,7 @@ static int wrap_file_release_ownership(struct wrap_ctx *ctx)
 
 	spin_lock(&ctx->lock);
 
-	ret = can_modify(ctx, current, false);
+	ret = can_modify(ctx, current, NULL, false);
 	if (ret)
 		goto unlock;
 
@@ -1308,7 +1310,7 @@ static int wrap_file_rewrap(struct wrap_ctx *ctx,
 		return -EINVAL;
 
 	spin_lock(&ctx->lock);
-	ret = block_usage(ctx);
+	ret = block_usage(ctx, NULL);
 	if (!ret) {
 		content = ctx->content;
 		ctx->content = NULL;
@@ -1363,14 +1365,14 @@ out:
 	return ret;
 }
 
-static int wrap_file_empty(struct wrap_ctx *ctx)
+static int wrap_file_empty(struct wrap_ctx *ctx, struct device *dev)
 {
 	struct wrap_content *content;
 	int ret = 0;
 
 	spin_lock(&ctx->lock);
 
-	ret = block_usage(ctx);
+	ret = block_usage(ctx, dev);
 	if (ret)
 		goto unlock;
 
@@ -1392,7 +1394,7 @@ static int wrap_file_allow_guests(struct wrap_ctx *ctx, bool allow)
 
 	spin_lock(&ctx->lock);
 
-	ret = can_modify(ctx, current, true);
+	ret = can_modify(ctx, current, NULL, true);
 	if (ret)
 		goto unlock;
 
@@ -1474,7 +1476,7 @@ static long wrap_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 				       (struct wrapfd_rewrap __user *)arg);
 		break;
 	case WRAPFD_DEV_IOC_EMPTY:
-		ret = wrap_file_empty(ctx);
+		ret = wrap_file_empty(ctx, NULL);
 		break;
 	case WRAPFD_DEV_IOC_ALLOW_GUESTS:
 		ret = wrap_file_allow_guests(ctx, true);
