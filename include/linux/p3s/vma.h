@@ -118,11 +118,10 @@ static inline unsigned int vma_slice_offset(const struct vm_area_struct *vma,
 		return 0;
 
 	/*
-	 * An anonymous folio covers a 16KB-aligned window of virtual
-	 * addresses, so the index of @addr's 4KB page in that window is its
-	 * slice.
+	 * Anonymous folios cover 16KB-aligned virtual windows. /dev/zero can
+	 * retain vm_file without vm_ops, and follows the file slice offset.
 	 */
-	if (!vma->vm_ops)
+	if (!vma->vm_file && !vma->vm_ops)
 		return (addr >> PAGE_SHIFT_4KB) & P3S_SLICE_MASK;
 
 	/*
@@ -326,7 +325,7 @@ static inline pgoff_t vma_linear_page_index(const struct vm_area_struct *vma,
 		return vma->vm_pgoff +
 		       ((addr - vma->vm_start) >> PAGE_SHIFT_KERNEL);
 
-	if (!vma->vm_ops)
+	if (!vma->vm_file && !vma->vm_ops)
 		return (pgoff_t)((s64)vma->vm_pgoff +
 				 (delta >> PAGE_SHIFT_4KB));
 
@@ -380,7 +379,7 @@ static inline pgoff_t vma_native_pages(const struct vm_area_struct *vma)
 {
 	unsigned long nr_slices = vma_size(vma) >> mm_pte_shift(vma->vm_mm);
 
-	if (!vma_is_p3s_4k(vma) || !vma->vm_ops)
+	if (!vma_is_p3s_4k(vma) || (!vma->vm_file && !vma->vm_ops))
 		return nr_slices;
 
 	return DIV_ROUND_UP(vma_slice_off(vma) + nr_slices,
