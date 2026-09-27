@@ -406,13 +406,20 @@ unsigned long __weak arch_randomize_brk(struct mm_struct *mm)
 unsigned long arch_mmap_rnd(void)
 {
 	unsigned long rnd;
+	unsigned int rnd_bits;
 
 #ifdef CONFIG_HAVE_ARCH_MMAP_RND_COMPAT_BITS
 	if (is_compat_task())
-		rnd = get_random_long() & ((1UL << mmap_rnd_compat_bits) - 1);
+		rnd_bits = mmap_rnd_compat_bits;
 	else
 #endif /* CONFIG_HAVE_ARCH_MMAP_RND_COMPAT_BITS */
-		rnd = get_random_long() & ((1UL << mmap_rnd_bits) - 1);
+		rnd_bits = mmap_rnd_bits;
+
+	/* The 4K page tables have a 39-bit VA window, not the native one. */
+	if (mm_is_p3s_4k(current->mm))
+		rnd_bits = min_t(unsigned int, rnd_bits,
+			     VA_BITS_4KB - mm_pte_shift(current->mm) - 3);
+	rnd = get_random_long() & ((1UL << rnd_bits) - 1);
 
 	return rnd << PAGE_SHIFT;
 }
