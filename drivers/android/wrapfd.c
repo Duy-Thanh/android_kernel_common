@@ -1721,28 +1721,19 @@ static struct wrap_content *create_content_for(int fd, unsigned long prot)
 	return content;
 }
 
-static int wrap_file(struct wrap_ctx *ctx,
-		     struct wrapfd_wrap __user *user_wrapfd_wrap)
+static int wrap_file(struct wrap_ctx *ctx, __u32 fd, __u32 prot)
 {
-	struct wrapfd_wrap wrapfd_wrap;
 	struct wrap_content *content;
 	int wrapfd;
 
-	if (copy_from_user(&wrapfd_wrap, user_wrapfd_wrap,
-			   sizeof(wrapfd_wrap)))
-		return -EFAULT;
-
-	if (wrapfd_wrap.prot & ~(PROT_WRITE | PROT_READ))
+	if (prot & ~(PROT_WRITE | PROT_READ))
 		return -EINVAL;
 
-	if (wrapfd_wrap.reserved)
-		return -EINVAL;
-
-	content = create_content_for(wrapfd_wrap.fd, wrapfd_wrap.prot);
+	content = create_content_for(fd, prot);
 	if (IS_ERR(content))
 		return PTR_ERR(content);
 
-	content->close_on_exec = get_close_on_exec(wrapfd_wrap.fd);
+	content->close_on_exec = get_close_on_exec(fd);
 	wrapfd = publish_wrap(ctx, content);
 	if (wrapfd < 0) {
 		ctx->content = NULL;
@@ -1752,24 +1743,40 @@ static int wrap_file(struct wrap_ctx *ctx,
 	return wrapfd;
 }
 
+static int __create_wrapfd(int fd, int prot)
+{
+	struct wrap_ctx *ctx;
+	int ret;
+
+	ctx = create_wrap_ctx();
+	if (!ctx)
+		return -ENOMEM;
+
+	ret = wrap_file(ctx, fd, prot);
+	if (ret < 0)
+		kfree(ctx);
+
+	return ret;
+}
+
 static long wrapfd_dev_ioctl(struct file *file, unsigned int cmd,
 			     unsigned long arg)
 {
-	struct wrap_ctx *ctx;
+	struct wrapfd_wrap wrapfd_wrap;
 	int ret;
 
 	VM_WARN_ON_ONCE(!current->mm);
 
 	switch (cmd) {
 	case WRAPFD_DEV_IOC_WRAP:
-		ctx = create_wrap_ctx();
-		if (!ctx)
-			return -ENOMEM;
+		if (copy_from_user(&wrapfd_wrap, (struct wrapfd_wrap __user *)arg,
+				   sizeof(wrapfd_wrap)))
+			return -EFAULT;
 
-		ret = wrap_file(ctx, (struct wrapfd_wrap __user *)arg);
-		if (ret < 0)
-			kfree(ctx);
+		if (wrapfd_wrap.reserved)
+			return -EINVAL;
 
+		ret = __create_wrapfd(wrapfd_wrap.fd, wrapfd_wrap.prot);
 		break;
 	default:
 		return -ENOIOCTLCMD;
