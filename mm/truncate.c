@@ -22,6 +22,10 @@
 #include <linux/shmem_fs.h>
 #include <linux/cleancache.h>
 #include <linux/rmap.h>
+#include <linux/uaccess.h>
+#ifdef CONFIG_ARM64
+#include <asm/virt.h>
+#endif
 #include "internal.h"
 
 #undef CREATE_TRACE_POINTS
@@ -210,6 +214,50 @@ static int try_folio_split_or_unmap(struct folio *folio, struct page *split_at,
 }
 
 /*
+ * pKVM unmaps the pages it donates to a protected guest from the host stage-2,
+ * so touching one through the linear map takes an abort which is fatal unless
+ * the access has an exception table fixup. Donated pages are swap-backed.
+ *
+ * Do not narrow this by folio_maybe_dma_pinned(): a page can be pinned and
+ * donated after the check but before the zeroing, and pkvm_mem_abort() donates
+ * without holding the folio lock, so the pin state is not stable here.
+ */
+static bool folio_maybe_hyp_protected(struct folio *folio)
+{
+#ifdef CONFIG_ARM64
+	return is_pkvm_initialized() && folio_test_swapbacked(folio);
+#else
+	return false;
+#endif
+}
+
+static void truncate_zero_range(struct folio *folio, size_t offset,
+				size_t length)
+{
+	const void *zeroes = page_address(ZERO_PAGE(0));
+
+	if (likely(!folio_maybe_hyp_protected(folio))) {
+		folio_zero_range(folio, offset, length);
+		return;
+	}
+
+	while (length) {
+		size_t len = min_t(size_t, length,
+				   PAGE_SIZE - offset_in_page(offset));
+		void *kaddr = kmap_local_folio(folio, offset);
+
+		if (copy_to_kernel_nofault(kaddr, zeroes, len))
+			pr_warn_ratelimited("truncate: pfn %#lx is hypervisor-protected, not zeroed\n",
+					    folio_pfn(folio) + (offset >> PAGE_SHIFT));
+		kunmap_local(kaddr);
+
+		offset += len;
+		length -= len;
+	}
+	flush_dcache_folio(folio);
+}
+
+/*
  * Handle partial folios.  The folio may be entirely within the
  * range if a split has raced with us.  If not, we zero the part of the
  * folio that's within the [start, end] range, and then split the folio if
@@ -249,7 +297,7 @@ bool truncate_inode_partial_folio(struct folio *folio, loff_t start, loff_t end)
 	 * anyway if the page split fails.
 	 */
 	if (!mapping_inaccessible(folio->mapping))
-		folio_zero_range(folio, offset, length);
+		truncate_zero_range(folio, offset, length);
 
 	cleancache_invalidate_page(folio->mapping, &folio->page);
 	if (folio_needs_release(folio))
