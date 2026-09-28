@@ -639,7 +639,8 @@ int setup_arg_pages(struct linux_binprm *bprm,
 	bprm->p = vma->vm_end - stack_shift;
 #else
 	stack_top = arch_align_stack(stack_top);
-	stack_top = __PAGE_ALIGN(stack_top);
+	/* The new stack VMA is mapped in the exec mm's PTE granule. */
+	stack_top = ALIGN(stack_top, mm_pte_size(mm));
 
 	if (unlikely(stack_top < mmap_min_addr) ||
 	    unlikely(vma->vm_end - vma->vm_start >= stack_top - mmap_min_addr))
