@@ -109,6 +109,7 @@ static inline pte_t mm_frame_pte(const struct mm_struct *mm,
 		     ((pteval_t)(frame & P3S_SLICE_MASK) << PAGE_SHIFT_4KB));
 }
 
+#ifdef CONFIG_USERFAULTFD
 /*
  * vma_pfnmap_phys - Physical address of the frame a PFN mapping maps
  * @vma: Pointer to struct vm_area_struct
@@ -125,6 +126,7 @@ static inline phys_addr_t vma_pfnmap_phys(const struct vm_area_struct *vma,
 	return ((phys_addr_t)pfn << PAGE_SHIFT_KERNEL) +
 	       ((phys_addr_t)vma_slice_offset(vma, addr) << PAGE_SHIFT_4KB);
 }
+#endif
 
 /*
  * p3s_pte_maps_folio - Check if a PTE maps the given normal folio at addr
