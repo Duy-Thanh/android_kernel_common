@@ -34,6 +34,23 @@
       "parentUuid": "54e9555d_00f6364b",
       "revId": "dc4580fd8bb16cc923404ef19ed9390576083f38",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84dd2823_8258183d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1984890
+      },
+      "writtenOn": "2026-09-28T09:39:18Z",
+      "side": 1,
+      "message": "Doug found out a better alternative: pa/4440088. Let\u0027s wait for that to get merged, then I\u0027ll abandon this change.",
+      "revId": "dc4580fd8bb16cc923404ef19ed9390576083f38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
