@@ -7,20 +7,10 @@
 
 #include "vma_internal.h"
 #include "vma.h"
+#include "p3s.h"
 
 #include <linux/page_size_compat.h>
 #include <linux/p3s_user_pages.h>
-
-#ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
-struct p3s_mremap_ctx;
-struct p3s_mremap_ctx *p3s_mremap_prepare(struct vm_area_struct *src_vma,
-		struct vm_area_struct *dst_vma, unsigned long old_addr,
-		unsigned long new_addr, unsigned long len);
-void p3s_mremap_reslice(struct p3s_mremap_ctx *ctx,
-		struct vm_area_struct *vma, unsigned long new_addr,
-		unsigned long len);
-void p3s_mremap_finish(struct p3s_mremap_ctx *ctx);
-#endif
 
 /*
  * Relocate a VMA downwards by shift bytes. There cannot be any VMAs between
