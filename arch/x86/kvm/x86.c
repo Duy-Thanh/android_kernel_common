@@ -15001,6 +15001,11 @@ static int __pkvm_vcpu_enter_guest(struct kvm_vcpu *vcpu, bool force_immediate_e
 
 		if (kvm_check_request(KVM_REQ_RECALC_INTERCEPTS, vcpu))
 			kvm_x86_call(recalc_intercepts)(vcpu);
+
+		if (kvm_check_request(KVM_REQ_TRIPLE_FAULT, vcpu)) {
+			pkvm_make_req_to_host(HOST_TRIPLE_FAULT, vcpu);
+			return 0;
+		}
 	}
 
 	kvm_x86_call(prepare_switch_to_guest)(vcpu);

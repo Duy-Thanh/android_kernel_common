@@ -1444,6 +1444,11 @@ static fastpath_t pkvm_vcpu_run(struct kvm_vcpu *vcpu, u64 run_flags)
 
 		if (test_and_clear_bit(HOST_APF_READY, &reqs_to_host))
 			kvm_make_request(KVM_REQ_APF_READY, vcpu);
+
+		if (test_and_clear_bit(HOST_TRIPLE_FAULT, &reqs_to_host)) {
+			vcpu->run->exit_reason = KVM_EXIT_SHUTDOWN;
+			exit_fastpath = EXIT_FASTPATH_EXIT_USERSPACE;
+		}
 	}
 
 	if (exit_fastpath == EXIT_FASTPATH_EXIT_HANDLED ||
