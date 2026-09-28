@@ -71,6 +71,9 @@ static inline bool is_pfn_swap_entry(swp_entry_t entry);
 /* Clear all flags but only keep swp_entry_t related information */
 static inline pte_t pte_swp_clear_flags(pte_t pte)
 {
+#ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
+	pte = pte_swp_clear_slice(pte);
+#endif
 	if (pte_swp_exclusive(pte))
 		pte = pte_swp_clear_exclusive(pte);
 	if (pte_swp_soft_dirty(pte))

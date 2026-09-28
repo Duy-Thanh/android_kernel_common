@@ -2192,6 +2192,17 @@ static bool try_to_unmap_one(struct folio *folio, struct vm_area_struct *vma,
 			dec_mm_counter(mm, MM_ANONPAGES);
 			inc_mm_counter(mm, MM_SWAPENTS);
 			swp_pte = swp_entry_to_pte(entry);
+#ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
+			if (vma_is_p3s_4k(vma)) {
+				unsigned int slice;
+
+				if (pte_present(pteval))
+					slice = (pte_val(pteval) >> PAGE_SHIFT_4KB) & 3;
+				else
+					slice = pte_swp_slice(pteval);
+				swp_pte = pte_swp_mkslice(swp_pte, slice);
+			}
+#endif
 			if (anon_exclusive)
 				swp_pte = pte_swp_mkexclusive(swp_pte);
 			if (likely(pte_present(pteval))) {
