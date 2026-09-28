@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cae80f35_e19bfb72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-09-28T20:35:44Z",
+      "side": 1,
+      "message": "The upstream fix was finally applied with an additional patch that avoided the regression, so this should not be necessary.",
+      "revId": "4dfe66c71509160de6f5fff191648b903797a6e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
