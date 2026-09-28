@@ -36,9 +36,11 @@ int generic_fadvise(struct file *file, loff_t offset, loff_t len, int advice)
 	struct address_space *mapping;
 	struct backing_dev_info *bdi;
 	loff_t endbyte;			/* inclusive */
+	u64 discard_start, discard_end;
 	pgoff_t start_index;
 	pgoff_t end_index;
 	unsigned long nrpages;
+	unsigned long process_page_size;
 
 	inode = file_inode(file);
 	if (S_ISFIFO(inode->i_mode))
@@ -116,35 +118,28 @@ int generic_fadvise(struct file *file, loff_t offset, loff_t len, int advice)
 		spin_unlock(&file->f_lock);
 		break;
 	case POSIX_FADV_DONTNEED:
+		process_page_size = current->mm ? mm_pte_size(current->mm) : PAGE_SIZE;
 		__filemap_fdatawrite_range(mapping, offset, endbyte,
 					   WB_SYNC_NONE);
 
 		/*
-		 * First and last FULL page! Partial pages are deliberately
-		 * preserved on the expectation that it is better to preserve
-		 * needed memory than to discard unneeded memory.
+		 * Round at the process PTE granule. The page cache still uses
+		 * native folios, so a full compat-page hint may evict neighbors.
 		 */
-		start_index = (offset+(PAGE_SIZE-1)) >> PAGE_SHIFT;
-		end_index = (endbyte >> PAGE_SHIFT);
-		/*
-		 * The page at end_index will be inclusively discarded according
-		 * by invalidate_mapping_pages(), so subtracting 1 from
-		 * end_index means we will skip the last page.  But if endbyte
-		 * is page aligned or is at the end of file, we should not skip
-		 * that page - discarding the last page is safe enough.
-		 */
-		if ((endbyte & ~PAGE_MASK) != ~PAGE_MASK &&
-				endbyte != inode->i_size - 1) {
-			/* First page is tricky as 0 - 1 = -1, but pgoff_t
-			 * is unsigned, so the end_index >= start_index
-			 * check below would be true and we'll discard the whole
-			 * file cache which is not what was asked.
-			 */
-			if (end_index == 0)
+		discard_start = ALIGN((u64)offset, process_page_size);
+		discard_end = endbyte;
+		if ((discard_end & (process_page_size - 1)) !=
+		    process_page_size - 1 && endbyte != inode->i_size - 1) {
+			discard_end = ALIGN_DOWN(discard_end + 1,
+						 process_page_size);
+			if (!discard_end)
 				break;
-
-			end_index--;
+			discard_end--;
 		}
+		if (discard_end < discard_start)
+			break;
+		start_index = discard_start >> PAGE_SHIFT;
+		end_index = discard_end >> PAGE_SHIFT;
 
 		if (end_index >= start_index) {
 			unsigned long nr_failed = 0;
