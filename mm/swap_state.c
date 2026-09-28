@@ -687,36 +687,46 @@ static int swap_vma_ra_win(struct vm_fault *vmf, unsigned long *start,
 			   unsigned long *end)
 {
 	struct vm_area_struct *vma = vmf->vma;
+	struct mm_struct *mm = vma->vm_mm;
 	unsigned long ra_val;
-	unsigned long faddr, prev_faddr, left, right;
+	unsigned long faddr, fpage, prev_page, left, right, pmd_mask;
 	unsigned int max_win, hits, prev_win, win;
 
 	max_win = 1 << min(READ_ONCE(page_cluster), SWAP_RA_ORDER_CEILING);
 	if (max_win == 1)
 		return 1;
 
+	/*
+	 * Compat PTEs map slices of one native swap folio.  Keep
+	 * the readahead history and window in that same native-folio unit;
+	 * walking the selected window below still uses the process PTE size.
+	 */
 	faddr = vmf->address;
+	fpage = faddr & PAGE_MASK_KERNEL;
 	ra_val = GET_SWAP_RA_VAL(vma);
-	prev_faddr = SWAP_RA_ADDR(ra_val);
+	prev_page = SWAP_RA_ADDR(ra_val) & PAGE_MASK_KERNEL;
 	prev_win = SWAP_RA_WIN(ra_val);
 	hits = SWAP_RA_HITS(ra_val);
-	win = __swapin_nr_pages(PFN_DOWN(prev_faddr), PFN_DOWN(faddr), hits,
-				max_win, prev_win);
+	win = __swapin_nr_pages(prev_page >> PAGE_SHIFT_KERNEL,
+				fpage >> PAGE_SHIFT_KERNEL,
+				hits, max_win, prev_win);
 	atomic_long_set(&vma->swap_readahead_info, SWAP_RA_VAL(faddr, win, 0));
 	if (win == 1)
 		return 1;
 
-	if (faddr == prev_faddr + PAGE_SIZE)
-		left = faddr;
-	else if (prev_faddr == faddr + PAGE_SIZE)
-		left = faddr - (win << PAGE_SHIFT) + PAGE_SIZE;
+	if (fpage == prev_page + PAGE_SIZE_KERNEL)
+		left = fpage;
+	else if (prev_page == fpage + PAGE_SIZE_KERNEL)
+		left = fpage - (win << PAGE_SHIFT_KERNEL) + PAGE_SIZE_KERNEL;
 	else
-		left = faddr - (((win - 1) / 2) << PAGE_SHIFT);
-	right = left + (win << PAGE_SHIFT);
+		left = fpage - (((win - 1) / 2) << PAGE_SHIFT_KERNEL);
+	right = left + (win << PAGE_SHIFT_KERNEL);
 	if ((long)left < 0)
 		left = 0;
-	*start = max3(left, vma->vm_start, faddr & PMD_MASK);
-	*end = min3(right, vma->vm_end, (faddr & PMD_MASK) + PMD_SIZE);
+	pmd_mask = ~(mm_pmd_size(mm) - 1);
+	*start = max3(left, vma->vm_start, faddr & pmd_mask);
+	*end = min3(right, vma->vm_end,
+		    (faddr & pmd_mask) + mm_pmd_size(mm));
 
 	return win;
 }
