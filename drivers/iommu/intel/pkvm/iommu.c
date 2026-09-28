@@ -215,6 +215,16 @@ static int initialize_qi(struct intel_iommu *iommu)
 	writeq(val, iommu->reg + DMAR_IQA_REG);
 
 	/*
+	 * Clear any invalidation queue errors left over from the previous,
+	 * host-owned queue. QI is disabled at this point, so this cannot make
+	 * hardware resume fetching from the old ring. A stale IQE would stall
+	 * the new ring and qi_check_fault() would blame it on the hypervisor's
+	 * first descriptor, silently dropping that invalidation.
+	 */
+	writel(DMA_FSTS_IQE | DMA_FSTS_ICE | DMA_FSTS_ITE,
+	       iommu->reg + DMAR_FSTS_REG);
+
+	/*
 	 * QIE is not oneshot bit for enabling thus should not be failed unless
 	 * there is a code bug.
 	 */
