@@ -82,7 +82,6 @@ void bacct_add_tsk(struct user_namespace *user_ns,
 #ifdef CONFIG_TASK_XACCT
 
 #define KB 1024
-#define MB (1024*KB)
 #define KB_MASK (~(KB-1))
 /*
  * fill in extended accounting fields
@@ -91,16 +90,16 @@ void xacct_add_tsk(struct taskstats *stats, struct task_struct *p)
 {
 	struct mm_struct *mm;
 
-	/* convert pages-nsec/1024 to Mbyte-usec, see __acct_update_integrals */
-	stats->coremem = p->acct_rss_mem1 * PAGE_SIZE;
-	do_div(stats->coremem, 1000 * KB);
-	stats->virtmem = p->acct_vm_mem1 * PAGE_SIZE;
-	do_div(stats->virtmem, 1000 * KB);
+	/* Mbyte-nsec to Mbyte-usec; page units were resolved before exec. */
+	stats->coremem = p->acct_rss_mem1;
+	do_div(stats->coremem, 1000);
+	stats->virtmem = p->acct_vm_mem1;
+	do_div(stats->virtmem, 1000);
 	mm = get_task_mm(p);
 	if (mm) {
 		/* adjust to KB unit */
-		stats->hiwater_rss   = get_mm_hiwater_rss(mm) * PAGE_SIZE / KB;
-		stats->hiwater_vm    = get_mm_hiwater_vm(mm)  * PAGE_SIZE / KB;
+		stats->hiwater_rss = mm_pages_to_kb(mm, get_mm_hiwater_rss(mm));
+		stats->hiwater_vm = mm_pages_to_kb(mm, get_mm_hiwater_vm(mm));
 		mmput(mm);
 	}
 	stats->read_char	= p->ioac.rchar & KB_MASK;
@@ -118,7 +117,6 @@ void xacct_add_tsk(struct taskstats *stats, struct task_struct *p)
 #endif
 }
 #undef KB
-#undef MB
 
 static void __acct_update_integrals(struct task_struct *tsk,
 				    u64 utime, u64 stime)
@@ -135,13 +133,11 @@ static void __acct_update_integrals(struct task_struct *tsk,
 		return;
 
 	tsk->acct_timexpd = time;
-	/*
-	 * Divide by 1024 to avoid overflow, and to avoid division.
-	 * The final unit reported to userspace is Mbyte-usecs,
-	 * the rest of the math is done in xacct_add_tsk.
-	 */
-	tsk->acct_rss_mem1 += delta * get_mm_rss(tsk->mm) >> 10;
-	tsk->acct_vm_mem1 += delta * READ_ONCE(tsk->mm->total_vm) >> 10;
+	/* Resolve the process-page units before a later exec can change them. */
+	tsk->acct_rss_mem1 += delta * get_mm_rss(tsk->mm) >>
+		(20 - mm_pte_shift(tsk->mm));
+	tsk->acct_vm_mem1 += delta * READ_ONCE(tsk->mm->total_vm) >>
+		(20 - mm_pte_shift(tsk->mm));
 }
 
 /**
