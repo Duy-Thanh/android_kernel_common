@@ -498,6 +498,55 @@ static inline unsigned int p3s_uffd_move_nr_slices(struct vm_area_struct *vma,
 	}
 	return nr;
 }
+
+/*
+ * Select the PTEs of a non-exclusive swap entry while both PTLs are held.
+ * Keep the existing full-window contract: partial windows still fall back
+ * to UFFDIO_COPY. The generic move path owns cache lookup, locking and retry.
+ */
+static inline int p3s_uffd_swap_nr(unsigned long src_addr, unsigned long dst_addr,
+				   unsigned long len, pte_t *src_pte, pte_t *dst_pte,
+				   pte_t orig_pte, struct folio *folio,
+				   swp_entry_t entry)
+{
+	unsigned int i;
+
+	if (pte_swp_exclusive(orig_pte))
+		return 1;
+	if (!IS_ALIGNED(src_addr, PAGE_SIZE_KERNEL) ||
+	    !IS_ALIGNED(dst_addr, PAGE_SIZE_KERNEL) || len < PAGE_SIZE_KERNEL)
+		return -EBUSY;
+	for (i = 0; i < P3S_SLICES_PER_PAGE; i++) {
+		pte_t pte = ptep_get(src_pte + i);
+
+		if (!is_swap_pte(pte) || pte_to_swp_entry(pte).val != entry.val)
+			return -EBUSY;
+		if (!pte_none(ptep_get(dst_pte + i)))
+			return -EBUSY;
+	}
+	if (swp_swapcount(entry) != P3S_SLICES_PER_PAGE ||
+	    (folio && (folio_mapped(folio) || folio_maybe_dma_pinned(folio))))
+		return -EBUSY;
+	return P3S_SLICES_PER_PAGE;
+}
+
+static inline void p3s_uffd_move_swap_siblings(struct mm_struct *mm,
+					       unsigned long dst_addr,
+					       unsigned long src_addr,
+					       pte_t *dst_pte, pte_t *src_pte,
+					       int nr)
+{
+	int i;
+
+	for (i = 1; i < nr; i++) {
+		pte_t pte = ptep_get_and_clear(mm,
+				src_addr + i * PAGE_SIZE_4KB, src_pte + i);
+
+		pte = pte_swp_mksoft_dirty(pte);
+		set_pte_at(mm, dst_addr + i * PAGE_SIZE_4KB, dst_pte + i, pte);
+	}
+}
+
 #endif /* CONFIG_USERFAULTFD */
 
 /*
@@ -849,6 +898,22 @@ static inline unsigned int p3s_uffd_move_nr_slices(struct vm_area_struct *vma,
 						   struct folio *folio)
 {
 	return 1;
+}
+
+static inline int p3s_uffd_swap_nr(unsigned long src_addr, unsigned long dst_addr,
+				   unsigned long len, pte_t *src_pte, pte_t *dst_pte,
+				   pte_t orig_pte, struct folio *folio,
+				   swp_entry_t entry)
+{
+	return 1;
+}
+
+static inline void p3s_uffd_move_swap_siblings(struct mm_struct *mm,
+					       unsigned long dst_addr,
+					       unsigned long src_addr,
+					       pte_t *dst_pte, pte_t *src_pte,
+					       int nr)
+{
 }
 #endif
 
