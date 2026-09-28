@@ -16,6 +16,23 @@
       "message": "android.os.usertype.full.SYSTEM",
       "revId": "dbe2d2eb8f5e3243de8bf86a62c1e3b4e6747566",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aaf62e60_a876f9a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5190645
+      },
+      "writtenOn": "2026-09-28T13:22:48Z",
+      "side": 1,
+      "message": "external/perfetto/protos/perfetto/trace/android/viewcapture.proto",
+      "revId": "dbe2d2eb8f5e3243de8bf86a62c1e3b4e6747566",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
