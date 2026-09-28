@@ -13,6 +13,7 @@
 
 use crate::{
     bindings,
+    page::PAGE_SHIFT,
     sync::aref::{ARef, AlwaysRefCounted},
     types::{NotThreadSafe, Opaque},
 };
@@ -121,6 +122,107 @@ impl Mm {
     #[inline]
     pub fn as_raw(&self) -> *mut bindings::mm_struct {
         self.mm.get()
+    }
+
+    /// Returns the page shift used by this address space.
+    ///
+    /// This is the Rust equivalent of `MM_PAGE_SHIFT(mm)`.
+    #[inline]
+    pub fn page_shift(&self) -> usize {
+        #[cfg(CONFIG_ARM64_PER_PROCESS_PAGE_SIZE)]
+        {
+            // SAFETY: `pte_shift` is initialized before the mm is published and does not change
+            // afterwards. The pointer is valid by the type invariant of `Mm`.
+            let page_shift = unsafe {
+                (*self.as_raw()).__bindgen_anon_1.context.pte_shift as usize
+            };
+
+            if page_shift != 0 {
+                return page_shift;
+            }
+        }
+
+        PAGE_SHIFT
+    }
+
+    /// Returns the page size used by this address space.
+    ///
+    /// This is the Rust equivalent of `MM_PAGE_SIZE(mm)`.
+    #[inline]
+    pub fn page_size(&self) -> usize {
+        1usize << self.page_shift()
+    }
+
+    /// Returns the page mask used by this address space.
+    ///
+    /// This is the Rust equivalent of `MM_PAGE_MASK(mm)`.
+    #[inline]
+    pub fn page_mask(&self) -> usize {
+        !(self.page_size() - 1)
+    }
+
+    /// Rounds `addr` up to this address space's page size.
+    ///
+    /// This is the Rust equivalent of `MM_PAGE_ALIGN(mm, addr)`. It is incorrect to pass an
+    /// address for which the aligned result does not fit in a [`usize`].
+    #[inline]
+    pub fn page_align(&self, addr: usize) -> usize {
+        let page_size = self.page_size();
+
+        (addr + (page_size - 1)) & !(page_size - 1)
+    }
+
+    /// Returns whether `addr` is aligned to this address space's page size.
+    ///
+    /// This is the Rust equivalent of `MM_PAGE_ALIGNED(mm, addr)`.
+    #[inline]
+    pub fn page_aligned(&self, addr: usize) -> bool {
+        addr & !self.page_mask() == 0
+    }
+
+    /// Returns the userspace ABI page shift for this address space.
+    ///
+    /// This is the Rust equivalent of `MM_UAPI_PAGE_SHIFT(mm)`: PPPS uses the per-mm geometry,
+    /// while other architectures retain the global page-size-emulation behavior.
+    #[inline]
+    pub fn uapi_page_shift(&self) -> usize {
+        #[cfg(CONFIG_ARM64_PER_PROCESS_PAGE_SIZE)]
+        {
+            self.page_shift()
+        }
+        #[cfg(not(CONFIG_ARM64_PER_PROCESS_PAGE_SIZE))]
+        {
+            crate::page_size_compat::__page_shift()
+        }
+    }
+
+    /// Returns the userspace ABI page size for this address space.
+    #[inline]
+    pub fn uapi_page_size(&self) -> usize {
+        1usize << self.uapi_page_shift()
+    }
+
+    /// Returns the userspace ABI page mask for this address space.
+    #[inline]
+    pub fn uapi_page_mask(&self) -> usize {
+        !(self.uapi_page_size() - 1)
+    }
+
+    /// Rounds `addr` up to this address space's userspace ABI page size.
+    ///
+    /// It is incorrect to pass an address for which the aligned result does not fit in a
+    /// [`usize`].
+    #[inline]
+    pub fn uapi_page_align(&self, addr: usize) -> usize {
+        let page_size = self.uapi_page_size();
+
+        (addr + (page_size - 1)) & !(page_size - 1)
+    }
+
+    /// Returns whether `addr` is aligned to this address space's userspace ABI page size.
+    #[inline]
+    pub fn uapi_page_aligned(&self, addr: usize) -> bool {
+        addr & !self.uapi_page_mask() == 0
     }
 
     /// Obtain a reference from a raw pointer.
