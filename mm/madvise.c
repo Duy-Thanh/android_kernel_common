@@ -725,7 +725,7 @@ static int madvise_free_pte_range(pmd_t *pmd, unsigned long addr,
 	struct folio *folio;
 	int nr_swap = 0;
 	unsigned long next;
-	int nr, max_nr;
+	int nr, max_nr, folio_nr_ptes;
 
 	next = pmd_addr_end(addr, end);
 	if (pmd_trans_huge(*pmd))
@@ -777,13 +777,16 @@ static int madvise_free_pte_range(pmd_t *pmd, unsigned long addr,
 		 * fail to split a folio, leave it in place and advance to the
 		 * next pte in the range.
 		 */
-		if (folio_test_large(folio)) {
+		folio_nr_ptes = folio_size(folio) / mm_pte_size(mm);
+		if (folio_nr_ptes > 1) {
 			nr = madvise_folio_pte_batch(vma, addr, end, folio,
 						     pte, &ptent);
-			if (nr < folio_nr_pages(folio)) {
+			if (nr < folio_nr_ptes) {
 				int err;
 
 				if (folio_maybe_mapped_shared(folio))
+					continue;
+				if (!folio_test_large(folio))
 					continue;
 				if (!folio_trylock(folio))
 					continue;
@@ -810,11 +813,12 @@ static int madvise_free_pte_range(pmd_t *pmd, unsigned long addr,
 			if (!folio_trylock(folio))
 				continue;
 			/*
-			 * If we have a large folio at this point, we know it is
-			 * fully mapped so if its mapcount is the same as its
-			 * number of pages, it must be exclusive.
+			 * The folio is fully covered by process PTEs here.  A
+			 * 16K native folio can have four 4K process PTEs;
+			 * all of them must be exclusively mapped before we
+			 * clear the folio-wide dirty state.
 			 */
-			if (folio_mapcount(folio) != folio_nr_pages(folio)) {
+			if (folio_mapcount(folio) != folio_nr_ptes) {
 				folio_unlock(folio);
 				continue;
 			}
