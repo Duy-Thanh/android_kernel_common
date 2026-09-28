@@ -277,6 +277,7 @@ static int nfsaclsvc_encode_getaclres(struct svc_rqst *rqstp, __be32 *p)
 	int n;
 	int w;
 
+<<<<<<< HEAD   (f5a30e5a3ab83709e886d3efc199e01beda06b7e Merge android12-5.10 into android12-5.10-lts)
 	*p++ = resp->status;
 	if (resp->status != nfs_ok)
 		return xdr_ressize_check(rqstp, p);
@@ -303,6 +304,42 @@ static int nfsaclsvc_encode_getaclres(struct svc_rqst *rqstp, __be32 *p)
 		if (!*(rqstp->rq_next_page++))
 			return 0;
 		w -= PAGE_SIZE;
+||||||| BASE   (be0af8204173441616d0775a54a95ca612a84ba8 Linux 5.10.269)
+	if (!svcxdr_encode_stat(xdr, resp->status))
+		return false;
+
+	if (dentry == NULL || d_really_is_negative(dentry))
+		return true;
+	inode = d_inode(dentry);
+
+	if (!svcxdr_encode_fattr(rqstp, xdr, &resp->fh, &resp->stat))
+		return false;
+	if (xdr_stream_encode_u32(xdr, resp->mask) < 0)
+		return false;
+
+	if (!nfs_stream_encode_acl(xdr, inode, resp->acl_access,
+				   resp->mask & NFS_ACL, 0))
+		return false;
+	if (!nfs_stream_encode_acl(xdr, inode, resp->acl_default,
+				   resp->mask & NFS_DFACL, NFS_ACL_DEFAULT))
+=======
+	if (!svcxdr_encode_stat(xdr, resp->status))
+		return false;
+	switch (resp->status) {
+	case nfs_ok:
+		inode = d_inode(dentry);
+		if (!svcxdr_encode_fattr(rqstp, xdr, &resp->fh, &resp->stat))
+			return false;
+		if (xdr_stream_encode_u32(xdr, resp->mask) < 0)
+			return false;
+		if (!nfs_stream_encode_acl(xdr, inode, resp->acl_access,
+					   resp->mask & NFS_ACL, 0))
+			return false;
+		if (!nfs_stream_encode_acl(xdr, inode, resp->acl_default,
+					   resp->mask & NFS_DFACL, NFS_ACL_DEFAULT))
+			return false;
+		break;
+>>>>>>> BRANCH (1797d8bf8d0c2e74defad605d14e3553d43a3caf Linux 5.10.270)
 	}
 
 	n = nfsacl_encode(&rqstp->rq_res, base, inode,
