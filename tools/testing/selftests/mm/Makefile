@@ -56,6 +56,7 @@ PAGE_FRAG_WARNING = "missing Module.symvers, please have the kernel built first"
 endif
 
 TEST_GEN_FILES = cow
+TEST_GEN_FILES += fadvise_dontneed_ppps
 TEST_GEN_FILES += compaction_test
 TEST_GEN_FILES += gup_longterm
 TEST_GEN_FILES += gup_test
