@@ -13,10 +13,18 @@ static inline sector_t mb_to_sects(unsigned long mb)
 
 static inline unsigned int null_zone_no(struct nullb_device *dev, sector_t sect)
 {
+<<<<<<< HEAD   (7e505717b3a71ca117610a0206603ff695736e50 Merge 04ba24bce61c ("ocfs2: fix missing metadata reservation)
 	if (dev->zone_size_sects_shift)
 		return sect >> dev->zone_size_sects_shift;
 
 	return div64_u64(sect, dev->zone_size_sects);
+||||||| BASE   (04ba24bce61c917b5b3009f0db470cbb72e26a0d ocfs2: fix missing metadata reservation for large xattrs)
+	return sect >> ilog2(dev->zone_size_sects);
+=======
+	if (WARN_ON_ONCE(!dev->zone_size_sects))
+		return 0;
+	return sect >> ilog2(dev->zone_size_sects);
+>>>>>>> BRANCH (c602274e2b2a42de8b65ab17ec3e2a7cc7250907 KVM: x86/mmu: Document the "rules" for using host_pfn_mappin)
 }
 
 static inline void null_lock_zone_res(struct nullb_device *dev)
@@ -65,6 +73,18 @@ int null_init_zoned_dev(struct nullb_device *dev, struct request_queue *q)
 	sector_t sector = 0;
 	unsigned int i;
 
+<<<<<<< HEAD   (7e505717b3a71ca117610a0206603ff695736e50 Merge 04ba24bce61c ("ocfs2: fix missing metadata reservation)
+||||||| BASE   (04ba24bce61c917b5b3009f0db470cbb72e26a0d ocfs2: fix missing metadata reservation for large xattrs)
+	if (!is_power_of_2(dev->zone_size)) {
+		pr_err("zone_size must be power-of-two\n");
+		return -EINVAL;
+	}
+=======
+	if (!dev->zone_size || !is_power_of_2(dev->zone_size)) {
+		pr_err("zone_size must be non-zero power-of-two\n");
+		return -EINVAL;
+	}
+>>>>>>> BRANCH (c602274e2b2a42de8b65ab17ec3e2a7cc7250907 KVM: x86/mmu: Document the "rules" for using host_pfn_mappin)
 	if (dev->zone_size > dev->size) {
 		pr_err("Zone size larger than device capacity\n");
 		return -EINVAL;
@@ -93,6 +113,18 @@ int null_init_zoned_dev(struct nullb_device *dev, struct request_queue *q)
 	zone_capacity_sects = mb_to_sects(dev->zone_capacity);
 	dev_capacity_sects = mb_to_sects(dev->size);
 	dev->zone_size_sects = mb_to_sects(dev->zone_size);
+<<<<<<< HEAD   (7e505717b3a71ca117610a0206603ff695736e50 Merge 04ba24bce61c ("ocfs2: fix missing metadata reservation)
+||||||| BASE   (04ba24bce61c917b5b3009f0db470cbb72e26a0d ocfs2: fix missing metadata reservation for large xattrs)
+	dev->nr_zones = round_up(dev_capacity_sects, dev->zone_size_sects)
+		>> ilog2(dev->zone_size_sects);
+=======
+	if (!dev->zone_size_sects) {
+		pr_err("zone_size too large or too small, leads to zero sectors\n");
+		return -EINVAL;
+	}
+	dev->nr_zones = round_up(dev_capacity_sects, dev->zone_size_sects)
+		>> ilog2(dev->zone_size_sects);
+>>>>>>> BRANCH (c602274e2b2a42de8b65ab17ec3e2a7cc7250907 KVM: x86/mmu: Document the "rules" for using host_pfn_mappin)
 
 	if (is_power_of_2(dev->zone_size_sects))
 		dev->zone_size_sects_shift = ilog2(dev->zone_size_sects);
