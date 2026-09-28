@@ -25,6 +25,7 @@
 #include <linux/sched/task.h>
 #include <linux/delayacct.h>
 #include <linux/zswap.h>
+#include <linux/p3s/const.h>
 #include "swap.h"
 
 #undef CREATE_TRACE_POINTS
@@ -96,7 +97,7 @@ int generic_swapfile_activate(struct swap_info_struct *sis,
 	int ret;
 
 	blkbits = inode->i_blkbits;
-	blocks_per_page = PAGE_SIZE >> blkbits;
+	blocks_per_page = PAGE_SIZE_KERNEL >> blkbits;
 
 	/*
 	 * Map all the blocks into the extent tree.  This code doesn't try
@@ -141,7 +142,7 @@ int generic_swapfile_activate(struct swap_info_struct *sis,
 			}
 		}
 
-		first_block >>= (PAGE_SHIFT - blkbits);
+		first_block >>= (PAGE_SHIFT_KERNEL - blkbits);
 		if (page_no) {	/* exclude the header page */
 			if (first_block < lowest_block)
 				lowest_block = first_block;
@@ -181,9 +182,9 @@ static bool is_folio_zero_filled(struct folio *folio)
 	unsigned long *data;
 	unsigned int i;
 
-	last_pos = PAGE_SIZE / sizeof(*data) - 1;
+	last_pos = PAGE_SIZE_KERNEL / sizeof(*data) - 1;
 	for (i = 0; i < folio_nr_pages(folio); i++) {
-		data = kmap_local_folio(folio, i * PAGE_SIZE);
+		data = kmap_local_folio(folio, i * PAGE_SIZE_KERNEL);
 		/*
 		 * Check last word first, incase the page is zero-filled at
 		 * the start and has non-zero data at the end, which is common

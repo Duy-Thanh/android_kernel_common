@@ -1098,6 +1098,13 @@ static inline unsigned long vma_address_end(struct page_vma_mapped_walk *pvmw)
 	pgoff_t pgoff;
 	unsigned long address;
 
+	/* A native folio may span four process PTEs in a compat VMA. */
+	if (pvmw->nr_pages == 1 && vma_is_p3s_4k(vma))
+		return min(vma->vm_end, pvmw->address +
+			   (P3S_SLICES_PER_PAGE -
+			    vma_slice_offset(vma, pvmw->address)) *
+			   PAGE_SIZE_4KB);
+
 	/* Common case, plus ->pgoff is invalid for KSM */
 	if (pvmw->nr_pages == 1)
 		return pvmw->address + vma_page_size(vma);

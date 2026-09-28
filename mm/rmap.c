@@ -2234,7 +2234,8 @@ discard:
 		 * If we are sure that we batched the entire folio and cleared
 		 * all PTEs, we can just optimize and stop right here.
 		 */
-		if (nr_pages == folio_nr_pages(folio))
+		if (!vma_is_p3s_4k(vma) &&
+		    nr_pages == folio_nr_pages(folio))
 			goto walk_done;
 		continue;
 walk_abort:
@@ -2862,6 +2863,12 @@ static void rmap_walk_anon(struct folio *folio,
 				folio_nr_pages(folio));
 
 		VM_BUG_ON_VMA(address == -EFAULT, vma);
+		if (vma_is_p3s_4k(vma) && folio_nr_pages(folio) == 1) {
+			unsigned int nr_slices;
+
+			/* The anon index can name any slice of this native folio. */
+			vma_folio_slice_bounds(vma, address, &nr_slices, &address);
+		}
 		cond_resched();
 
 		if (rwc->invalid_vma && rwc->invalid_vma(vma, rwc->arg))

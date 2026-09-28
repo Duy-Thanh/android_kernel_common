@@ -352,11 +352,32 @@ static inline bool can_do_file_pageout(struct vm_area_struct *vma)
 	       file_permission(vma->vm_file, MAY_WRITE) == 0;
 }
 
-static inline int madvise_folio_pte_batch(unsigned long addr, unsigned long end,
+static inline int madvise_folio_pte_batch(struct vm_area_struct *vma,
+					  unsigned long addr, unsigned long end,
 					  struct folio *folio, pte_t *ptep,
 					  pte_t *ptentp)
 {
-	int max_nr = (end - addr) / PAGE_SIZE;
+	struct mm_struct *mm = vma->vm_mm;
+	int max_nr = (end - addr) / mm_pte_size(mm);
+	int nr;
+
+	/* A native folio can span several 4K process PTEs. */
+	if (mm_is_p3s_4k(mm)) {
+		max_nr = min_t(int, max_nr, folio_size(folio) / mm_pte_size(mm));
+		for (nr = 1; nr < max_nr; nr++) {
+			pte_t next = ptep_get(ptep + nr);
+
+			if (!pte_present(next) ||
+			    vm_normal_folio(vma, addr + nr * mm_pte_size(mm),
+					    next) != folio)
+				break;
+			if (pte_young(next))
+				*ptentp = pte_mkyoung(*ptentp);
+			if (pte_dirty(next))
+				*ptentp = pte_mkdirty(*ptentp);
+		}
+		return nr;
+	}
 
 	return folio_pte_batch_flags(folio, NULL, ptep, ptentp, max_nr,
 				     FPB_MERGE_YOUNG_DIRTY);
@@ -378,6 +399,7 @@ static int madvise_cold_or_pageout_pte_range(pmd_t *pmd,
 	bool pageout_anon_only_filter;
 	unsigned int batch_count = 0;
 	bool abort_madvise = false;
+	int folio_nr_ptes;
 	int nr;
 	int ret = 0;
 
@@ -503,16 +525,19 @@ restart:
 		 * fail to split a folio, leave it in place and advance to the
 		 * next pte in the range.
 		 */
-		if (folio_test_large(folio)) {
-			nr = madvise_folio_pte_batch(addr, end, folio, pte, &ptent);
-			if (nr < folio_nr_pages(folio)) {
+		folio_nr_ptes = folio_size(folio) / mm_pte_size(mm);
+		if (folio_nr_ptes > 1) {
+			nr = madvise_folio_pte_batch(vma, addr, end, folio,
+						     pte, &ptent);
+			if (nr < folio_nr_ptes) {
 				int err;
 				bool bypass = false;
 
 				trace_android_vh_split_large_folio_bypass(&bypass);
 				if (bypass)
 					continue;
-				if (folio_maybe_mapped_shared(folio))
+				if (folio_maybe_mapped_shared(folio) ||
+				    !folio_test_large(folio))
 					continue;
 				if (pageout_anon_only_filter && !folio_test_anon(folio))
 					continue;
@@ -539,12 +564,11 @@ restart:
 
 		/*
 		 * Do not interfere with other mappings of this folio and
-		 * non-LRU folio. If we have a large folio at this point, we
-		 * know it is fully mapped so if its mapcount is the same as its
-		 * number of pages, it must be exclusive.
+		 * non-LRU folio. A fully mapped folio is exclusive to this VMA
+		 * only when its mapcount matches its process PTE count.
 		 */
 		if (!folio_test_lru(folio) ||
-		    folio_mapcount(folio) != folio_nr_pages(folio))
+		    folio_mapcount(folio) != folio_nr_ptes)
 			continue;
 
 		if (pageout_anon_only_filter && !folio_test_anon(folio))
@@ -754,7 +778,8 @@ static int madvise_free_pte_range(pmd_t *pmd, unsigned long addr,
 		 * next pte in the range.
 		 */
 		if (folio_test_large(folio)) {
-			nr = madvise_folio_pte_batch(addr, end, folio, pte, &ptent);
+			nr = madvise_folio_pte_batch(vma, addr, end, folio,
+						     pte, &ptent);
 			if (nr < folio_nr_pages(folio)) {
 				int err;
 

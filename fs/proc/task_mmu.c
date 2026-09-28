@@ -1094,6 +1094,15 @@ static void smaps_pte_entry(pte_t *pte, unsigned long addr,
 
 			mss->swap += PAGE_SIZE;
 			mapcount = swp_swapcount(swpent);
+			/*
+			 * Every compat PTE of a swapped native folio holds a
+			 * reference on the same native swap entry.  Estimate
+			 * the number of whole-folio sharers so a private folio
+			 * is not reported as shared by its own slices.
+			 */
+			if (vma_is_p3s_4k(vma))
+				mapcount = DIV_ROUND_UP(mapcount,
+							P3S_SLICES_PER_PAGE);
 			if (mapcount >= 2) {
 				u64 pss_delta = (u64)PAGE_SIZE << PSS_SHIFT;
 

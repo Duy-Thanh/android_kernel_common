@@ -315,8 +315,8 @@ static int discard_swap(struct swap_info_struct *si)
 
 	/* Do not discard the swap header page! */
 	se = first_se(si);
-	start_block = (se->start_block + 1) << (PAGE_SHIFT - 9);
-	nr_blocks = ((sector_t)se->nr_pages - 1) << (PAGE_SHIFT - 9);
+	start_block = (se->start_block + 1) << (PAGE_SHIFT_KERNEL - 9);
+	nr_blocks = ((sector_t)se->nr_pages - 1) << (PAGE_SHIFT_KERNEL - 9);
 	if (nr_blocks) {
 		err = blkdev_issue_discard(si->bdev, start_block,
 				nr_blocks, GFP_KERNEL);
@@ -326,8 +326,8 @@ static int discard_swap(struct swap_info_struct *si)
 	}
 
 	for (se = next_se(se); se; se = next_se(se)) {
-		start_block = se->start_block << (PAGE_SHIFT - 9);
-		nr_blocks = (sector_t)se->nr_pages << (PAGE_SHIFT - 9);
+		start_block = se->start_block << (PAGE_SHIFT_KERNEL - 9);
+		nr_blocks = (sector_t)se->nr_pages << (PAGE_SHIFT_KERNEL - 9);
 
 		err = blkdev_issue_discard(si->bdev, start_block,
 				nr_blocks, GFP_KERNEL);
@@ -369,7 +369,7 @@ sector_t swap_folio_sector(struct folio *folio)
 	offset = swp_offset(folio->swap);
 	se = offset_to_swap_extent(sis, offset);
 	sector = se->start_block + (offset - se->start_page);
-	return sector << (PAGE_SHIFT - 9);
+	return sector << (PAGE_SHIFT_KERNEL - 9);
 }
 
 /*
@@ -391,8 +391,8 @@ static void discard_swap_cluster(struct swap_info_struct *si,
 		start_page += nr_blocks;
 		nr_pages -= nr_blocks;
 
-		start_block <<= PAGE_SHIFT - 9;
-		nr_blocks <<= PAGE_SHIFT - 9;
+		start_block <<= PAGE_SHIFT_KERNEL - 9;
+		nr_blocks <<= PAGE_SHIFT_KERNEL - 9;
 		if (blkdev_issue_discard(si->bdev, start_block,
 					nr_blocks, GFP_NOIO))
 			break;
@@ -1854,7 +1854,7 @@ int swp_swapcount(swp_entry_t entry)
 	n = SWAP_MAP_MAX + 1;
 
 	page = vmalloc_to_page(si->swap_map + offset);
-	offset &= ~PAGE_MASK;
+	offset &= ~PAGE_MASK_KERNEL;
 	VM_BUG_ON(page_private(page) != SWP_CONTINUED);
 
 	do {
@@ -2250,6 +2250,14 @@ static int unuse_pte(struct vm_area_struct *vma, pmd_t *pmd,
 		VM_BUG_ON_FOLIO(folio_test_writeback(folio), folio);
 		if (pte_swp_exclusive(old_pte))
 			rmap_flags |= RMAP_EXCLUSIVE;
+		/*
+		 * A native swap entry can still belong to other 4K PTEs of
+		 * this folio, which do_swap_page() requires to stay
+		 * !PageAnonExclusive while they are swap PTEs.
+		 */
+		if (vma_is_p3s_4k(vma) &&
+		    (__swap_count(entry) > 1 || folio_mapped(folio)))
+			rmap_flags &= ~RMAP_EXCLUSIVE;
 		/*
 		 * We currently only expect small !anon folios, which are either
 		 * fully exclusive or fully shared. If we ever get large folios
@@ -3960,7 +3968,7 @@ int add_swap_count_continuation(swp_entry_t entry, gfp_t gfp_mask)
 	}
 
 	head = vmalloc_to_page(si->swap_map + offset);
-	offset &= ~PAGE_MASK;
+	offset &= ~PAGE_MASK_KERNEL;
 
 	spin_lock(&si->cont_lock);
 	/*
@@ -4033,7 +4041,7 @@ static bool swap_count_continued(struct swap_info_struct *si,
 	}
 
 	spin_lock(&si->cont_lock);
-	offset &= ~PAGE_MASK;
+	offset &= ~PAGE_MASK_KERNEL;
 	page = list_next_entry(head, lru);
 	map = kmap_local_page(page) + offset;
 
@@ -4106,7 +4114,7 @@ static void free_swap_count_continuations(struct swap_info_struct *si)
 {
 	pgoff_t offset;
 
-	for (offset = 0; offset < si->max; offset += PAGE_SIZE) {
+	for (offset = 0; offset < si->max; offset += PAGE_SIZE_KERNEL) {
 		struct page *head;
 		head = vmalloc_to_page(si->swap_map + offset);
 		if (page_private(head)) {

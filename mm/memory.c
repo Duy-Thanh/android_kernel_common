@@ -4796,6 +4796,7 @@ vm_fault_t do_swap_page(struct vm_fault *vmf)
 	rmap_t rmap_flags = RMAP_NONE;
 	bool need_clear_cache = false;
 	bool exclusive = false;
+	bool compat_swapcache_shared = false;
 	swp_entry_t entry;
 	pte_t pte;
 	vm_fault_t ret = 0;
@@ -5081,6 +5082,10 @@ check_folio:
 	 */
 	BUG_ON(!folio_test_anon(folio) && folio_test_mappedtodisk(folio));
 	BUG_ON(folio_test_anon(folio) && PageAnonExclusive(page));
+	/* A native swap entry can still belong to other 4K PTEs of this folio. */
+	if (vma_is_p3s_4k(vma) && folio == swapcache)
+		compat_swapcache_shared = __swap_count(entry) > nr_pages ||
+					  folio_mapped(folio);
 
 	/*
 	 * Check under PT lock (to protect against concurrent fork() sharing
@@ -5137,6 +5142,7 @@ check_folio:
 	add_mm_counter(vma->vm_mm, MM_ANONPAGES, nr_pages);
 	add_mm_counter(vma->vm_mm, MM_SWAPENTS, -nr_pages);
 	pte = mk_pte(page, vma->vm_page_prot);
+	pte = vma_pte_add_slice(vma, address, pte);
 	if (pte_swp_soft_dirty(vmf->orig_pte))
 		pte = pte_mksoft_dirty(pte);
 	if (pte_swp_uffd_wp(vmf->orig_pte))
@@ -5149,7 +5155,7 @@ check_folio:
 	 * exposing them to the swapcache or because the swap entry indicates
 	 * exclusivity.
 	 */
-	if (!folio_test_ksm(folio) &&
+	if (!folio_test_ksm(folio) && !compat_swapcache_shared &&
 	    (exclusive || folio_ref_count(folio) == 1)) {
 		if ((vma->vm_flags & VM_WRITE) && !userfaultfd_pte_wp(vma, pte) &&
 		    !pte_needs_soft_dirty_wp(vma, pte)) {
