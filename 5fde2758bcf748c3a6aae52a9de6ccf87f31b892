@@ -16,6 +16,24 @@
       "message": "There\u0027s a `RawFormatter` upstream in `rust/kernel/str.rs` you can backport.",
       "revId": "5fde2758bcf748c3a6aae52a9de6ccf87f31b892",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce9f6e99_faa44b15",
+        "filename": "rust/kernel/module_param.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-28T15:57:33Z",
+      "side": 1,
+      "message": "Fortunately that RawFormatter that I was unaware of is already in 6.18. Switched to using it.",
+      "parentUuid": "b46b122f_650752e4",
+      "revId": "5fde2758bcf748c3a6aae52a9de6ccf87f31b892",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
