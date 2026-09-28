@@ -240,8 +240,24 @@ prune_bucket(struct nfsd_drc_bucket *b, struct nfsd_net *nn)
 		if (atomic_read(&nn->num_drc_entries) <= nn->max_drc_entries &&
 		    time_before(jiffies, rp->c_timestamp + RC_EXPIRE))
 			break;
+<<<<<<< HEAD   (903d9c6a2636675cab70ad55c37c96fe3bb6172c Merge ab7405bd8633 ("ubifs: fix out-of-bounds read in signat)
 		nfsd_reply_cache_free_locked(b, rp, nn);
 		freed++;
+||||||| BASE   (ab7405bd86331cc2dbc8201699d4adc33bea75e7 ubifs: fix out-of-bounds read in signature length check)
+
+		nfsd_cacherep_unlink_locked(nn, b, rp);
+		list_add(&rp->c_lru, dispose);
+
+		if (max && ++freed > max)
+			break;
+=======
+
+		nfsd_cacherep_unlink_locked(nn, b, rp);
+		list_add(&rp->c_lru, dispose);
+
+		if (max && ++freed >= max)
+			break;
+>>>>>>> BRANCH (42d7954b0a1907d4ef122aef94561952a033cdc3 NFSD: Prevent lock owner use-after-free during client teardo)
 	}
 	return freed;
 }

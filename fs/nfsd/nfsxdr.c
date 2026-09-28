@@ -12,6 +12,16 @@
 #define NFSDDBG_FACILITY		NFSDDBG_XDR
 
 /*
+ * Sun convention: a sattr time-useconds field of one full second (an
+ * otherwise out-of-range value) means "set this time to the current
+ * server time." It's needed to make permissions checks for the "touch"
+ * program across NFSv2 mounts work correctly. See description of
+ * sattr in section 6.1 of "NFS Illustrated" by Brent Callaghan,
+ * Addison-Wesley, ISBN 0-201-32750-5
+ */
+#define NFS2_SATTR_SET_TO_SERVER_TIME	(1000000)
+
+/*
  * Mapping of S_IF* types to NFS file types
  */
 static u32	nfs_ftypes[] = {
@@ -99,15 +109,59 @@ decode_sattr(__be32 *p, struct iattr *iap, struct user_namespace *userns)
 		iap->ia_valid |= ATTR_SIZE;
 		iap->ia_size = tmp;
 	}
+<<<<<<< HEAD   (903d9c6a2636675cab70ad55c37c96fe3bb6172c Merge ab7405bd8633 ("ubifs: fix out-of-bounds read in signat)
 	tmp  = ntohl(*p++); tmp1 = ntohl(*p++);
 	if (tmp != (u32)-1 && tmp1 != (u32)-1) {
+||||||| BASE   (ab7405bd86331cc2dbc8201699d4adc33bea75e7 ubifs: fix out-of-bounds read in signature length check)
+
+	tmp1 = be32_to_cpup(p++);
+	tmp2 = be32_to_cpup(p++);
+	if (tmp1 != (u32)-1 && tmp2 != (u32)-1) {
+=======
+
+	tmp1 = be32_to_cpup(p++);
+	tmp2 = be32_to_cpup(p++);
+	if (tmp1 != (u32)-1 && tmp2 != (u32)-1) {
+		/*
+		 * Range test here to prevent the multiplication from
+		 * wrapping to a valid (but incorrect) value on 32-bit
+		 * platforms.
+		 */
+		if (tmp2 > NFS2_SATTR_SET_TO_SERVER_TIME)
+			return false;
+>>>>>>> BRANCH (42d7954b0a1907d4ef122aef94561952a033cdc3 NFSD: Prevent lock owner use-after-free during client teardo)
 		iap->ia_valid |= ATTR_ATIME | ATTR_ATIME_SET;
+<<<<<<< HEAD   (903d9c6a2636675cab70ad55c37c96fe3bb6172c Merge ab7405bd8633 ("ubifs: fix out-of-bounds read in signat)
 		iap->ia_atime.tv_sec = tmp;
 		iap->ia_atime.tv_nsec = tmp1 * 1000; 
+||||||| BASE   (ab7405bd86331cc2dbc8201699d4adc33bea75e7 ubifs: fix out-of-bounds read in signature length check)
+		iap->ia_atime.tv_sec = tmp1;
+		iap->ia_atime.tv_nsec = tmp2 * NSEC_PER_USEC;
+=======
+		iap->ia_atime.tv_sec = tmp1;
+		iap->ia_atime.tv_nsec = tmp2 * NSEC_PER_USEC;
+		if (tmp2 == NFS2_SATTR_SET_TO_SERVER_TIME)
+			iap->ia_valid &= ~ATTR_ATIME_SET;
+>>>>>>> BRANCH (42d7954b0a1907d4ef122aef94561952a033cdc3 NFSD: Prevent lock owner use-after-free during client teardo)
 	}
+<<<<<<< HEAD   (903d9c6a2636675cab70ad55c37c96fe3bb6172c Merge ab7405bd8633 ("ubifs: fix out-of-bounds read in signat)
 	tmp  = ntohl(*p++); tmp1 = ntohl(*p++);
 	if (tmp != (u32)-1 && tmp1 != (u32)-1) {
+||||||| BASE   (ab7405bd86331cc2dbc8201699d4adc33bea75e7 ubifs: fix out-of-bounds read in signature length check)
+
+	tmp1 = be32_to_cpup(p++);
+	tmp2 = be32_to_cpup(p++);
+	if (tmp1 != (u32)-1 && tmp2 != (u32)-1) {
+=======
+
+	tmp1 = be32_to_cpup(p++);
+	tmp2 = be32_to_cpup(p++);
+	if (tmp1 != (u32)-1 && tmp2 != (u32)-1) {
+		if (tmp2 > NFS2_SATTR_SET_TO_SERVER_TIME)
+			return false;
+>>>>>>> BRANCH (42d7954b0a1907d4ef122aef94561952a033cdc3 NFSD: Prevent lock owner use-after-free during client teardo)
 		iap->ia_valid |= ATTR_MTIME | ATTR_MTIME_SET;
+<<<<<<< HEAD   (903d9c6a2636675cab70ad55c37c96fe3bb6172c Merge ab7405bd8633 ("ubifs: fix out-of-bounds read in signat)
 		iap->ia_mtime.tv_sec = tmp;
 		iap->ia_mtime.tv_nsec = tmp1 * 1000; 
 		/*
@@ -120,6 +174,24 @@ decode_sattr(__be32 *p, struct iattr *iap, struct user_namespace *userns)
 		 * Brent Callaghan, Addison-Wesley, ISBN 0-201-32750-5
 		 */
 		if (tmp1 == 1000000)
+||||||| BASE   (ab7405bd86331cc2dbc8201699d4adc33bea75e7 ubifs: fix out-of-bounds read in signature length check)
+		iap->ia_mtime.tv_sec = tmp1;
+		iap->ia_mtime.tv_nsec = tmp2 * NSEC_PER_USEC;
+		/*
+		 * Passing the invalid value useconds=1000000 for mtime
+		 * is a Sun convention for "set both mtime and atime to
+		 * current server time".  It's needed to make permissions
+		 * checks for the "touch" program across v2 mounts to
+		 * Solaris and Irix boxes work correctly. See description of
+		 * sattr in section 6.1 of "NFS Illustrated" by
+		 * Brent Callaghan, Addison-Wesley, ISBN 0-201-32750-5
+		 */
+		if (tmp2 == 1000000)
+=======
+		iap->ia_mtime.tv_sec = tmp1;
+		iap->ia_mtime.tv_nsec = tmp2 * NSEC_PER_USEC;
+		if (tmp2 == NFS2_SATTR_SET_TO_SERVER_TIME)
+>>>>>>> BRANCH (42d7954b0a1907d4ef122aef94561952a033cdc3 NFSD: Prevent lock owner use-after-free during client teardo)
 			iap->ia_valid &= ~(ATTR_ATIME_SET|ATTR_MTIME_SET);
 	}
 	return p;
