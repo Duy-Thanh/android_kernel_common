@@ -16,6 +16,24 @@
       "message": "should this also be submitted upstream?",
       "revId": "dc4580fd8bb16cc923404ef19ed9390576083f38",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53d7395c_a0d64550",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1984890
+      },
+      "writtenOn": "2026-09-28T09:38:15Z",
+      "side": 1,
+      "message": "no, because there\u0027s no user upstream that needs it. But Doug discovered that we can remove the num trbs free usage in the downstream driver, so we can abandon this change. Here\u0027s Doug patch: pa/4440088.",
+      "parentUuid": "54e9555d_00f6364b",
+      "revId": "dc4580fd8bb16cc923404ef19ed9390576083f38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
