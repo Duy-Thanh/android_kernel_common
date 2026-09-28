@@ -1660,7 +1660,7 @@ static int fill_files_note(struct memelfnote *note, struct coredump_params *cprm
 
 	/* Now we know exact count of files, can store it */
 	data[0] = count;
-	data[1] = PAGE_SIZE;
+	data[1] = mm_pte_size(current->mm);
 	/*
 	 * Count usually is less than mm->map_count,
 	 * we need to move filenames down.
@@ -2047,7 +2047,7 @@ static int elf_core_dump(struct coredump_params *cprm)
 		offset += sz;
 	}
 
-	dataoff = offset = roundup(offset, ELF_EXEC_PAGESIZE);
+	dataoff = offset = roundup(offset, mm_pte_size(current->mm));
 
 	offset += cprm->vma_data_size;
 	offset += elf_core_extra_data_size(cprm);
@@ -2087,7 +2087,7 @@ static int elf_core_dump(struct coredump_params *cprm)
 			phdr.p_flags |= PF_W;
 		if (meta->flags & VM_EXEC)
 			phdr.p_flags |= PF_X;
-		phdr.p_align = ELF_EXEC_PAGESIZE;
+		phdr.p_align = mm_pte_size(current->mm);
 
 		if (!dump_emit(cprm, &phdr, sizeof(phdr)))
 			goto end_coredump;
