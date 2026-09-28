@@ -240,8 +240,24 @@ prune_bucket(struct nfsd_drc_bucket *b, struct nfsd_net *nn)
 		if (atomic_read(&nn->num_drc_entries) <= nn->max_drc_entries &&
 		    time_before(jiffies, rp->c_timestamp + RC_EXPIRE))
 			break;
+<<<<<<< HEAD   (c5d8ec7afea29a23d30a8110d48bbb586c1c275a Merge android13-5.10 into android13-5.10-lts)
 		nfsd_reply_cache_free_locked(b, rp, nn);
 		freed++;
+||||||| BASE   (be0af8204173441616d0775a54a95ca612a84ba8 Linux 5.10.269)
+
+		nfsd_cacherep_unlink_locked(nn, b, rp);
+		list_add(&rp->c_lru, dispose);
+
+		if (max && ++freed > max)
+			break;
+=======
+
+		nfsd_cacherep_unlink_locked(nn, b, rp);
+		list_add(&rp->c_lru, dispose);
+
+		if (max && ++freed >= max)
+			break;
+>>>>>>> BRANCH (1797d8bf8d0c2e74defad605d14e3553d43a3caf Linux 5.10.270)
 	}
 	return freed;
 }

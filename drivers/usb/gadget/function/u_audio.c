@@ -611,6 +611,7 @@ void u_audio_stop_playback(struct g_audio *audio_dev)
 }
 EXPORT_SYMBOL_GPL(u_audio_stop_playback);
 
+<<<<<<< HEAD   (c5d8ec7afea29a23d30a8110d48bbb586c1c275a Merge android13-5.10 into android13-5.10-lts)
 static int u_audio_pitch_info(struct snd_kcontrol *kcontrol,
 				   struct snd_ctl_elem_info *uinfo)
 {
@@ -679,6 +680,22 @@ static const struct snd_kcontrol_new u_audio_controls[]  = {
 	.put =          u_audio_pitch_put,
 },
 };
+||||||| BASE   (be0af8204173441616d0775a54a95ca612a84ba8 Linux 5.10.269)
+=======
+static void u_audio_card_free(struct snd_card *card)
+{
+	struct snd_uac_chip *uac = card->private_data;
+
+	if (!uac)
+		return;
+
+	kfree(uac->p_prm.ureq);
+	kfree(uac->c_prm.ureq);
+	kfree(uac->p_prm.rbuf);
+	kfree(uac->c_prm.rbuf);
+	kfree(uac);
+}
+>>>>>>> BRANCH (1797d8bf8d0c2e74defad605d14e3553d43a3caf Linux 5.10.270)
 
 int g_audio_setup(struct g_audio *g_audio, const char *pcm_name,
 					const char *card_name)
@@ -757,6 +774,8 @@ int g_audio_setup(struct g_audio *g_audio, const char *pcm_name,
 		goto fail;
 
 	uac->card = card;
+	card->private_data = uac;
+	card->private_free = u_audio_card_free;
 
 	/*
 	 * Create first PCM device
@@ -805,6 +824,8 @@ int g_audio_setup(struct g_audio *g_audio, const char *pcm_name,
 
 snd_fail:
 	snd_card_free(card);
+	return err;
+
 fail:
 	kfree(uac->p_prm.reqs);
 	kfree(uac->c_prm.reqs);
@@ -830,12 +851,22 @@ void g_audio_cleanup(struct g_audio *g_audio)
 	card = uac->card;
 	if (card)
 		snd_card_free_when_closed(card);
+<<<<<<< HEAD   (c5d8ec7afea29a23d30a8110d48bbb586c1c275a Merge android13-5.10 into android13-5.10-lts)
 
 	kfree(uac->p_prm.reqs);
 	kfree(uac->c_prm.reqs);
 	kfree(uac->p_prm.rbuf);
 	kfree(uac->c_prm.rbuf);
 	kfree(uac);
+||||||| BASE   (be0af8204173441616d0775a54a95ca612a84ba8 Linux 5.10.269)
+
+	kfree(uac->p_prm.ureq);
+	kfree(uac->c_prm.ureq);
+	kfree(uac->p_prm.rbuf);
+	kfree(uac->c_prm.rbuf);
+	kfree(uac);
+=======
+>>>>>>> BRANCH (1797d8bf8d0c2e74defad605d14e3553d43a3caf Linux 5.10.270)
 }
 EXPORT_SYMBOL_GPL(g_audio_cleanup);
 

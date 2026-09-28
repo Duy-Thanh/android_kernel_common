@@ -701,9 +701,27 @@ nfsd4_decode_create(struct nfsd4_compoundargs *argp, struct nfsd4_create *create
 	create->cr_type = be32_to_cpup(p++);
 	switch (create->cr_type) {
 	case NF4LNK:
+<<<<<<< HEAD   (c5d8ec7afea29a23d30a8110d48bbb586c1c275a Merge android13-5.10 into android13-5.10-lts)
 		READ_BUF(4);
 		create->cr_datalen = be32_to_cpup(p++);
 		READ_BUF(create->cr_datalen);
+||||||| BASE   (be0af8204173441616d0775a54a95ca612a84ba8 Linux 5.10.269)
+		if (xdr_stream_decode_u32(argp->xdr, &create->cr_datalen) < 0)
+			return nfserr_bad_xdr;
+		p = xdr_inline_decode(argp->xdr, create->cr_datalen);
+		if (!p)
+			return nfserr_bad_xdr;
+=======
+		if (xdr_stream_decode_u32(argp->xdr, &create->cr_datalen) < 0)
+			return nfserr_bad_xdr;
+		if (create->cr_datalen == 0)
+			return nfserr_inval;
+		if (create->cr_datalen > NFS4_MAXPATHLEN)
+			return nfserr_nametoolong;
+		p = xdr_inline_decode(argp->xdr, create->cr_datalen);
+		if (!p)
+			return nfserr_bad_xdr;
+>>>>>>> BRANCH (1797d8bf8d0c2e74defad605d14e3553d43a3caf Linux 5.10.270)
 		create->cr_data = svcxdr_dupstr(argp, p, create->cr_datalen);
 		if (!create->cr_data)
 			return nfserr_jukebox;
@@ -1764,6 +1782,13 @@ static __be32 nfsd4_decode_nl4_server(struct nfsd4_compoundargs *argp,
 {
 	DECODE_HEAD;
 	struct nfs42_netaddr *naddr;
+<<<<<<< HEAD   (c5d8ec7afea29a23d30a8110d48bbb586c1c275a Merge android13-5.10 into android13-5.10-lts)
+||||||| BASE   (be0af8204173441616d0775a54a95ca612a84ba8 Linux 5.10.269)
+	__be32 *p;
+=======
+	__be32 *p;
+	u32 str_len;
+>>>>>>> BRANCH (1797d8bf8d0c2e74defad605d14e3553d43a3caf Linux 5.10.270)
 
 	READ_BUF(4);
 	ns->nl4_type = be32_to_cpup(p++);
@@ -1788,6 +1813,18 @@ static __be32 nfsd4_decode_nl4_server(struct nfsd4_compoundargs *argp,
 		READ_BUF(naddr->addr_len);
 		COPYMEM(naddr->addr, naddr->addr_len);
 		break;
+	case NL4_NAME:
+	case NL4_URL:
+		/*
+		 * Well-formed XDR, but only NL4_NETADDR is supported. Consume
+		 * the utf8str_cis to keep the stream aligned, then return
+		 * NFS4ERR_NOTSUPP rather than the misleading NFS4ERR_BADXDR.
+		 */
+		if (xdr_stream_decode_u32(argp->xdr, &str_len) < 0)
+			return nfserr_bad_xdr;
+		if (!xdr_inline_decode(argp->xdr, str_len))
+			return nfserr_bad_xdr;
+		return nfserr_notsupp;
 	default:
 		goto xdr_error;
 	}

@@ -896,6 +896,7 @@ config ARCH_HAS_HUGEPD
 config MAPPING_DIRTY_HELPERS
         bool
 
+<<<<<<< HEAD   (c5d8ec7afea29a23d30a8110d48bbb586c1c275a Merge android13-5.10 into android13-5.10-lts)
 # Some architectures want callbacks for all IO mappings in order to
 # track the physical addresses that get used as devices.
 config ARCH_HAS_IOREMAP_PHYS_HOOKS
@@ -942,5 +943,10 @@ config LRU_GEN_STATS
 # }
 
 source "mm/damon/Kconfig"
+||||||| BASE   (be0af8204173441616d0775a54a95ca612a84ba8 Linux 5.10.269)
+=======
+config KMAP_LOCAL
+	bool
+>>>>>>> BRANCH (1797d8bf8d0c2e74defad605d14e3553d43a3caf Linux 5.10.270)
 
 endmenu
