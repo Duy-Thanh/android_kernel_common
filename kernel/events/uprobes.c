@@ -30,6 +30,7 @@
 #include <linux/srcu.h>
 #include <linux/oom.h>          /* check_stable_address_space */
 #include <linux/pagewalk.h>
+#include <linux/p3s.h>
 
 #include <linux/uprobes.h>
 
@@ -310,14 +311,15 @@ __update_ref_ctr(struct mm_struct *mm, unsigned long vaddr, short d)
 {
 	void *kaddr;
 	struct page *page;
+	struct page_span span;
 	int ret;
 	short *ptr;
 
 	if (!vaddr || !d)
 		return -EINVAL;
 
-	ret = get_user_pages_remote(mm, vaddr, 1,
-				    FOLL_WRITE, &page, NULL);
+	ret = get_user_pages_range_locked(mm, vaddr, sizeof(*ptr), 1,
+				  FOLL_WRITE, &page, &span);
 	if (unlikely(ret <= 0)) {
 		/*
 		 * We are asking for 1 page. If get_user_pages_remote() fails,
@@ -327,7 +329,7 @@ __update_ref_ctr(struct mm_struct *mm, unsigned long vaddr, short d)
 	}
 
 	kaddr = kmap_atomic(page);
-	ptr = kaddr + (vaddr & ~PAGE_MASK);
+	ptr = kaddr + span.offset;
 
 	if (unlikely(*ptr + d < 0)) {
 		pr_warn("ref_ctr going negative. vaddr: 0x%lx, "
@@ -409,11 +411,15 @@ static int __uprobe_write(struct vm_area_struct *vma,
 		bool is_register)
 {
 	const unsigned long vaddr = insn_vaddr & vma_page_mask(vma);
+	unsigned long page_offset = insn_vaddr;
 	bool pmd_mappable;
 
 	/* For now, we'll only handle PTE-mapped folios. */
 	if (fw->level != FW_LEVEL_PTE)
 		return -EFAULT;
+	if (mm_is_p3s_4k(vma->vm_mm))
+		page_offset = (__pte_to_phys(fw->pte) & (PAGE_SIZE_KERNEL - 1)) +
+			mm_offset_in_page(vma->vm_mm, insn_vaddr);
 
 	/*
 	 * See can_follow_write_pte(): we'd actually prefer a writable PTE here,
@@ -433,14 +439,15 @@ static int __uprobe_write(struct vm_area_struct *vma,
 	 */
 	flush_cache_page(vma, vaddr, pte_pfn(fw->pte));
 	fw->pte = ptep_clear_flush(vma, vaddr, fw->ptep);
-	copy_to_page(fw->page, insn_vaddr, insn, nbytes);
+	copy_to_page(fw->page, page_offset, insn, nbytes);
+	flush_dcache_page(fw->page);
 	trace_android_vh_uprobes_uprobe_write(page_folio(fw->page), folio);
 
 	/*
 	 * When unregistering, we may only zap a PTE if uffd is disabled and
 	 * there are no unexpected folio references ...
 	 */
-	if (is_register || userfaultfd_missing(vma) ||
+	if (is_register || mm_is_p3s_4k(vma->vm_mm) || userfaultfd_missing(vma) ||
 	    (folio_ref_count(folio) != folio_expected_ref_count(folio) + 1))
 		goto remap;
 
@@ -512,6 +519,7 @@ int uprobe_write(struct arch_uprobe *auprobe, struct vm_area_struct *vma,
 	struct folio_walk fw;
 	struct folio *folio;
 	struct page *page;
+	struct page_span span;
 
 	uprobe = container_of(auprobe, struct uprobe, arch);
 
@@ -530,12 +538,23 @@ int uprobe_write(struct arch_uprobe *auprobe, struct vm_area_struct *vma,
 		gup_flags |= FOLL_WRITE | FOLL_SPLIT_PMD;
 
 retry:
-	ret = get_user_pages_remote(mm, vaddr, 1, gup_flags, &page, NULL);
+	if (mm_is_p3s_4k(mm))
+		ret = get_user_pages_range_locked(mm, insn_vaddr, nbytes, 1,
+					  gup_flags, &page, &span);
+	else
+		ret = get_user_pages_remote(mm, vaddr, 1, gup_flags,
+					    &page, NULL);
 	if (ret <= 0)
 		goto out;
 	folio = page_folio(page);
+	if (mm_is_p3s_4k(mm) && WARN_ON_ONCE(span.length != nbytes)) {
+		folio_put(folio);
+		ret = -EFAULT;
+		goto out;
+	}
 
-	ret = verify(page, insn_vaddr, insn, nbytes, data);
+	ret = verify(page, mm_is_p3s_4k(mm) ? span.offset : insn_vaddr,
+		     insn, nbytes, data);
 	if (ret <= 0) {
 		folio_put(folio);
 		goto out;
@@ -2404,6 +2423,7 @@ static void mmf_recalc_uprobes(struct mm_struct *mm)
 static int is_trap_at_addr(struct mm_struct *mm, unsigned long vaddr)
 {
 	struct page *page;
+	struct page_span span;
 	uprobe_opcode_t opcode;
 	int result;
 
@@ -2417,11 +2437,14 @@ static int is_trap_at_addr(struct mm_struct *mm, unsigned long vaddr)
 	if (likely(result == 0))
 		goto out;
 
-	result = get_user_pages(vaddr, 1, FOLL_FORCE, &page);
+	result = get_user_pages_range_locked(mm, vaddr, UPROBE_SWBP_INSN_SIZE,
+				      1, FOLL_FORCE, &page, &span);
 	if (result < 0)
 		return result;
+	if (!result)
+		return -EFAULT;
 
-	uprobe_copy_from_page(page, vaddr, &opcode, UPROBE_SWBP_INSN_SIZE);
+	uprobe_copy_from_page(page, span.offset, &opcode, UPROBE_SWBP_INSN_SIZE);
 	put_page(page);
  out:
 	/* This needs to return true for any variant of the trap insn */
