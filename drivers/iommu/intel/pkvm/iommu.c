@@ -726,6 +726,10 @@ int pkvm_iommu_mmio_write(u64 phys, int len, u64 val)
 			pkvm_err("iommu%d: FSTS 0x%llx has reserved bits set\n",
 				 iommu->seq_id, val);
 			ret = -EINVAL;
+		} else if (!iommu->qi && (val & (DMA_FSTS_IQE | DMA_FSTS_ITE))) {
+			pkvm_err("iommu%d: clearing FSTS IQE/ITE not allowed before QI init\n",
+				 iommu->seq_id);
+			ret = -EPERM;
 		} else {
 			/* RW1C for clearing fault status bits */
 			ret = iommu_direct_mmio_write(iommu, phys, len, 4, val);
