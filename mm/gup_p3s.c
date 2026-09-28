@@ -8,7 +8,7 @@ static long gup_user_range(struct mm_struct *mm, unsigned long start,
 			   size_t length, unsigned long capacity,
 			   unsigned int gup_flags, struct page **pages,
 			   struct page_span *spans,
-			   bool pin)
+			   bool pin, bool caller_locked)
 {
 	unsigned long nr_pages = mm_user_range_pages(mm, start, length);
 	unsigned long addr, end, page_size = mm_pte_size(mm);
@@ -25,9 +25,13 @@ static long gup_user_range(struct mm_struct *mm, unsigned long start,
 		return -EOVERFLOW;
 	if (!pages || !spans)
 		return -EINVAL;
+	if (caller_locked)
+		mmap_assert_locked(mm);
 
 	/* The native local-mm path retains fast GUP. */
-	if (mm == current->mm && !compat) {
+	if (caller_locked) {
+		start = untagged_addr_remote(mm, start);
+	} else if (mm == current->mm && !compat) {
 		start = untagged_addr(start);
 	} else {
 		mmap_read_lock(mm);
@@ -65,7 +69,7 @@ static long gup_user_range(struct mm_struct *mm, unsigned long start,
 			ret = __get_user_pages(mm, start, nr_pages, flags,
 					       pages, &lock_state, spans);
 		}
-	} else if (locked) {
+	} else if (locked || caller_locked) {
 		ret = pin ? pin_user_pages_remote(mm, start, nr_pages,
 						  gup_flags, pages, NULL) :
 			    get_user_pages_remote(mm, start, nr_pages,
@@ -119,7 +123,7 @@ long pin_user_pages_range(struct mm_struct *mm, unsigned long start,
 			  struct page_span *spans)
 {
 	return gup_user_range(mm, start, length, capacity, gup_flags, pages,
-			      spans, true);
+			      spans, true, false);
 }
 EXPORT_SYMBOL_GPL(pin_user_pages_range);
 
@@ -142,6 +146,17 @@ long get_user_pages_range(struct mm_struct *mm, unsigned long start,
 			  struct page_span *spans)
 {
 	return gup_user_range(mm, start, length, capacity, gup_flags, pages,
-			      spans, false);
+			      spans, false, false);
 }
 EXPORT_SYMBOL_GPL(get_user_pages_range);
+
+/* The caller holds mm->mmap_lock for read or write across this request. */
+long get_user_pages_range_locked(struct mm_struct *mm, unsigned long start,
+				size_t length, unsigned long capacity,
+				unsigned int gup_flags, struct page **pages,
+				struct page_span *spans)
+{
+	return gup_user_range(mm, start, length, capacity, gup_flags, pages,
+			      spans, false, true);
+}
+EXPORT_SYMBOL_GPL(get_user_pages_range_locked);
