@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4045838_2b3bd3be",
+        "filename": "include/linux/p3s_user_pages.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-09-28T21:06:46Z",
+      "side": 1,
+      "message": "Agreed, it looks confusing.\n\nThough it is valid syntax. IOW when a macro expands to its own name, the preprocessor stops expanding i.e the underlying static inline function will be called.\n\nI\u0027ve updated the patch to use parentheses and added a comment to make the intent clear.",
+      "parentUuid": "12c056d1_e86f881b",
+      "range": {
+        "startLine": 54,
+        "startChar": 59,
+        "endLine": 54,
+        "endChar": 72
+      },
+      "revId": "5033bfe30a6cd35d2c05fd5be29c4ec75a524423",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3538ae9a_ba27d431",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-09-25T00:16:35Z",
       "side": 1,
       "message": "same as above",
+      "range": {
+        "startLine": 55,
+        "startChar": 56,
+        "endLine": 55,
+        "endChar": 65
+      },
+      "revId": "5033bfe30a6cd35d2c05fd5be29c4ec75a524423",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "593fbefe_323df6e6",
+        "filename": "include/linux/p3s_user_pages.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-09-28T21:06:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3538ae9a_ba27d431",
       "range": {
         "startLine": 55,
         "startChar": 56,
