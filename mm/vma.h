@@ -171,7 +171,19 @@ static inline pgoff_t vma_pgoff_offset(struct vm_area_struct *vma,
 
 #ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
 bool vmg_can_merge_offsets(struct vma_merge_struct *vmg, bool merge_next);
+
+static inline void vmg_set_slice_off(struct vma_merge_struct *vmg,
+				     unsigned short slice_off)
+{
+	vmg->slice_off = slice_off;
+}
+
 #else
+static inline void vmg_set_slice_off(struct vma_merge_struct *vmg,
+				     unsigned short slice_off)
+{
+}
+
 static inline bool vmg_can_merge_offsets(struct vma_merge_struct *vmg, bool merge_next)
 {
 	if (merge_next)
@@ -337,7 +349,8 @@ void vma_link_file(struct vm_area_struct *vma);
 int vma_link(struct mm_struct *mm, struct vm_area_struct *vma);
 
 struct vm_area_struct *copy_vma(struct vm_area_struct **vmap,
-	unsigned long addr, unsigned long len, pgoff_t pgoff,
+	unsigned long old_addr, unsigned long addr, unsigned long len,
+	pgoff_t pgoff,
 	bool *need_rmap_locks);
 
 struct anon_vma *find_mergeable_anon_vma(struct vm_area_struct *vma);
