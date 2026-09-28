@@ -2845,6 +2845,9 @@ static vm_fault_t shmem_fault(struct vm_fault *vmf)
 	max_idx = DIV_ROUND_UP(i_size_read(inode), __PAGE_SIZE) * (__PAGE_SIZE / PAGE_SIZE);
 	if (unlikely(vmf->pgoff >= max_idx))
 		return VM_FAULT_SIGBUS;
+	if (unlikely(vma_is_p3s_4k(vmf->vma) &&
+		     vma_file_offset_at(vmf->vma, vmf->address) >= i_size_read(inode)))
+		return VM_FAULT_SIGBUS;
 
 	max_idx = DIV_ROUND_UP(i_size_read(inode), PAGE_SIZE);
 	if (unlikely(vmf->pgoff >= max_idx))
