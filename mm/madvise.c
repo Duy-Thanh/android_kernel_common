@@ -900,6 +900,8 @@ static int madvise_free_single_vma(struct madvise_behavior *madv_behavior)
 			&walk_ops, tlb);
 	tlb_end_vma(tlb, vma);
 	mmu_notifier_invalidate_range_end(&range);
+	/* Publish queued lazy-free folios before returning to userspace. */
+	lru_add_drain();
 	return 0;
 }
 
