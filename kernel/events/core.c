@@ -6532,7 +6532,7 @@ static void perf_event_init_userpage(struct perf_event *event)
 	/* Allow new userspace to detect that bit 0 is deprecated */
 	userpg->cap_bit0_is_deprecated = 1;
 	userpg->size = offsetof(struct perf_event_mmap_page, __reserved);
-	userpg->data_offset = __PAGE_SIZE;
+	userpg->data_offset = p3s_perf_mmap_page_size(rb);
 	userpg->data_size = perf_data_size(rb);
 
 unlock:
@@ -6856,6 +6856,9 @@ out_put:
 
 static vm_fault_t perf_mmap_pfn_mkwrite(struct vm_fault *vmf)
 {
+	if (vma_is_p3s_4k(vmf->vma))
+		return p3s_perf_mmap_pfn_mkwrite(vmf);
+
 	/* The first page is the user control page, others are read-only. */
 	return vmf->pgoff == 0 ? 0 : VM_FAULT_SIGBUS;
 }
@@ -6881,6 +6884,9 @@ static int map_range(struct perf_buffer *rb, struct vm_area_struct *vma)
 	unsigned long nr_pages = vma_kernel_pages(vma);
 	int err = 0;
 	unsigned long pagenum;
+
+	if (mm_is_p3s_4k(vma->vm_mm) && !vma->vm_pgoff)
+		return p3s_perf_map_main(rb, vma);
 
 	/*
 	 * We map this as a VM_PFNMAP VMA.
@@ -7007,7 +7013,9 @@ static int perf_mmap_rb(struct vm_area_struct *vma, struct perf_event *event,
 	WARN_ON_ONCE(event->ctx->parent_ctx);
 
 	if (event->rb) {
-		if (data_page_nr(event->rb) != nr_pages)
+		if (data_page_nr(event->rb) != nr_pages ||
+		    p3s_perf_mmap_page_size(event->rb) !=
+		    p3s_perf_mm_page_size(vma->vm_mm))
 			return -EINVAL;
 
 		/*
@@ -7053,6 +7061,7 @@ static int perf_mmap_rb(struct vm_area_struct *vma, struct perf_event *event,
 	refcount_set(&rb->mmap_count, 1);
 	rb->mmap_user = get_current_user();
 	rb->mmap_locked = extra;
+	p3s_perf_set_mmap_page_size(rb, p3s_perf_mm_page_size(vma->vm_mm));
 
 	ring_buffer_attach(event, rb);
 
@@ -7167,7 +7176,7 @@ static int perf_mmap(struct file *file, struct vm_area_struct *vma)
 	if (ret)
 		return ret;
 
-	vma_size = vma->vm_end - vma->vm_start;
+	vma_size = p3s_perf_mmap_size(vma);
 	nr_pages = vma_size / PAGE_SIZE;
 
 	if (nr_pages > INT_MAX)
