@@ -2211,7 +2211,7 @@ static int pagemap_pmd_range(pmd_t *pmdp, unsigned long addr, unsigned long end,
 			pagemap_entry_t pme;
 
 			if (folio && (flags & PM_PRESENT) &&
-			    __folio_page_mapped_exclusively(folio, page, 1))
+			    __folio_page_mapped_exclusively(folio, page + idx, 1))
 				cur_flags |= PM_MMAP_EXCLUSIVE;
 
 			pme = make_pme(frame, cur_flags);
