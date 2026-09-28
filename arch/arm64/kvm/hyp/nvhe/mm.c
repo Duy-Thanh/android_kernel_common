@@ -389,7 +389,13 @@ static void fixmap_clear_slot(struct hyp_fixmap_slot *slot)
 	 * https://lore.kernel.org/kvm/20221017115209.2099-1-will@kernel.org/T/#mf10dfbaf1eaef9274c581b81c53758918c1d0f03
 	 */
 	dsb(ishst);
+<<<<<<< HEAD   (57041e4a7e52342473871000827584f966d8cbd3 Revert "net/sched: act_api: use RCU with deferred freeing fo)
 	__tlbi_level(vale2is, __TLBI_VADDR(addr, 0), level);
+||||||| BASE   (e9f803bf2b038ab009661985c5dd704b82bd2118 ptp: vclock: Switch from RCU to SRCU)
+	__tlbi_level(vale2is, __TLBI_VADDR(addr, 0), KVM_PGTABLE_LAST_LEVEL);
+=======
+	__tlbi_level(vale2is, __TLBI_VADDR(addr, 0), KVM_PGTABLE_LAST_LEVEL);
+>>>>>>> BRANCH (d41020725194995ca9dc39fbd233ea243627488d rds: mark snapshot pages dirty in rds_info_getsockopt())
 	__tlbi_sync_s1ish_hyp();
 	isb();
 }
