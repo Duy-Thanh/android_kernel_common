@@ -3085,6 +3085,68 @@ int remap_pfn_range(struct vm_area_struct *vma, unsigned long addr,
 #endif
 EXPORT_SYMBOL(remap_pfn_range);
 
+#ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
+/* Map one process PTE to an explicit slice of a native PFNMAP page. */
+int remap_pfn_range_slice(struct vm_area_struct *vma, unsigned long addr,
+		unsigned long pfn, unsigned int slice, unsigned long size,
+		pgprot_t prot)
+{
+	struct mm_struct *mm = vma->vm_mm;
+	P3S_CONTEXT_REMOTE_MM(mm);
+	pgd_t *pgd;
+	p4d_t *p4d;
+	pud_t *pud;
+	pmd_t *pmd;
+	pte_t *pte;
+	pte_t entry;
+	spinlock_t *ptl;
+	int err = 0;
+
+	if (!mm_is_p3s_4k(mm) || size != mm_pte_size(mm) ||
+	    !mm_pte_aligned(mm, addr) ||
+	    addr < vma->vm_start || size > vma->vm_end - addr ||
+	    slice >= mm_slices_per_page(mm))
+		return -EINVAL;
+	if (!pfn_modify_allowed(pfn, prot))
+		return -EACCES;
+	vm_flags_set(vma, VM_IO | VM_PFNMAP | VM_DONTEXPAND | VM_DONTDUMP);
+
+	pgd = pgd_offset(mm, addr);
+	p4d = p4d_alloc(mm, pgd, addr);
+	if (!p4d)
+		return -ENOMEM;
+	pud = pud_alloc(mm, p4d, addr);
+	if (!pud)
+		return -ENOMEM;
+	pmd = pmd_alloc(mm, pud, addr);
+	if (!pmd)
+		return -ENOMEM;
+	pte = pte_alloc_map_lock(mm, pmd, addr, &ptl);
+	if (!pte)
+		return -ENOMEM;
+	if (!pte_none(ptep_get(pte))) {
+		err = -EBUSY;
+		goto unlock;
+	}
+
+	entry = pfn_pte(pfn, prot);
+	entry = __pte(pte_val(entry) + ((pteval_t)slice << PAGE_SHIFT_4KB));
+	set_pte_at(mm, addr, pte, pte_mkspecial(entry));
+unlock:
+	pte_unmap_unlock(pte, ptl);
+	return err;
+}
+EXPORT_SYMBOL(remap_pfn_range_slice);
+#else
+int remap_pfn_range_slice(struct vm_area_struct *vma, unsigned long addr,
+			  unsigned long pfn, unsigned int slice,
+			  unsigned long size, pgprot_t prot)
+{
+	return -EOPNOTSUPP;
+}
+EXPORT_SYMBOL(remap_pfn_range_slice);
+#endif
+
 /**
  * vm_iomap_memory - remap memory to userspace
  * @vma: user vma to map to
