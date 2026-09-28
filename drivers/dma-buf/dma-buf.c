@@ -29,6 +29,7 @@
 #include <linux/dma-resv.h>
 #include <linux/mm.h>
 #include <linux/mount.h>
+#include <linux/overflow.h>
 #include <linux/pseudo_fs.h>
 #include <linux/fdtable.h>
 
@@ -796,6 +797,8 @@ err_retries:
 static int dma_buf_mmap_internal(struct file *file, struct vm_area_struct *vma)
 {
 	struct dma_buf *dmabuf;
+	u64 mmap_size;
+	u64 offset;
 	int ret;
 
 	if (!is_dma_buf_file(file))
@@ -807,9 +810,16 @@ static int dma_buf_mmap_internal(struct file *file, struct vm_area_struct *vma)
 	if (!dmabuf->ops->mmap)
 		return -EINVAL;
 
-	/* check for overflowing the buffer's size */
-	if (vma->vm_pgoff + vma_pages(vma) >
-	    dmabuf->size >> PAGE_SHIFT)
+	if (check_add_overflow((u64)dmabuf->size,
+			       (u64)mm_pte_size(vma->vm_mm) - 1,
+			       &mmap_size))
+		return -EOVERFLOW;
+	mmap_size &= ~((u64)mm_pte_size(vma->vm_mm) - 1);
+	offset = vma_file_offset(vma);
+
+	/* The final partial process page remains mappable. */
+	if (offset > mmap_size ||
+	    vma->vm_end - vma->vm_start > mmap_size - offset)
 		return -EINVAL;
 
 	ret = dmabuf->ops->mmap(dmabuf, vma);
@@ -2133,6 +2143,8 @@ EXPORT_SYMBOL_GPL(dma_buf_end_cpu_access_partial);
 int dma_buf_mmap(struct dma_buf *dmabuf, struct vm_area_struct *vma,
 		 unsigned long pgoff)
 {
+	u64 mmap_size;
+	u64 offset;
 	int ret;
 
 	if (WARN_ON(!dmabuf || !vma))
@@ -2142,18 +2154,24 @@ int dma_buf_mmap(struct dma_buf *dmabuf, struct vm_area_struct *vma,
 	if (!dmabuf->ops->mmap)
 		return -EINVAL;
 
-	/* check for offset overflow */
-	if (pgoff + vma_pages(vma) < pgoff)
+	/* @pgoff is expressed in native pages, not process pages. */
+	if (pgoff > U64_MAX >> PAGE_SHIFT)
 		return -EOVERFLOW;
+	offset = (u64)pgoff << PAGE_SHIFT;
+	if (check_add_overflow((u64)dmabuf->size,
+			       (u64)mm_pte_size(vma->vm_mm) - 1,
+			       &mmap_size))
+		return -EOVERFLOW;
+	mmap_size &= ~((u64)mm_pte_size(vma->vm_mm) - 1);
 
-	/* check for overflowing the buffer's size */
-	if (pgoff + vma_pages(vma) >
-	    dmabuf->size >> PAGE_SHIFT)
+	if (offset > mmap_size ||
+	    vma->vm_end - vma->vm_start > mmap_size - offset)
 		return -EINVAL;
 
 	/* readjust the vma */
 	vma_set_file(vma, dmabuf->file);
 	vma->vm_pgoff = pgoff;
+	vma_set_slice_off(vma, 0);
 
 	ret = dmabuf->ops->mmap(dmabuf, vma);
 	if (!ret && vma->vm_file == dmabuf->file) {

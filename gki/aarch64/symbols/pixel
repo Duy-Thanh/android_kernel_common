@@ -2162,6 +2162,7 @@
   release_firmware
   __release_region
   remap_pfn_range
+  remap_pfn_range_slice
   remap_vmalloc_range
   remove_cpu
   remove_proc_entry

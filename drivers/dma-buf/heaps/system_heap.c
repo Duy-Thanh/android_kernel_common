@@ -246,6 +246,32 @@ static int system_heap_mmap(struct dma_buf *dmabuf, struct vm_area_struct *vma)
 	if (buffer->uncached)
 		vma->vm_page_prot = pgprot_writecombine(vma->vm_page_prot);
 
+	if (vma_is_p3s_4k(vma)) {
+		unsigned long page_size = mm_pte_size(vma->vm_mm);
+		loff_t offset = vma_file_offset(vma);
+		unsigned long pgoff = offset >> PAGE_SHIFT_KERNEL;
+		unsigned int slice = (offset & ~PAGE_MASK_KERNEL) /
+					 page_size;
+
+		for_each_sgtable_page(table, &piter, pgoff) {
+			struct page *page = sg_page_iter_page(&piter);
+
+			for (; slice < mm_slices_per_page(vma->vm_mm); slice++) {
+				ret = remap_pfn_range_slice(vma, addr,
+							    page_to_pfn(page), slice,
+							    page_size,
+							    vma->vm_page_prot);
+				if (ret)
+					return ret;
+				addr += page_size;
+				if (addr >= vma->vm_end)
+					return 0;
+			}
+			slice = 0;
+		}
+		return 0;
+	}
+
 	for_each_sgtable_page(table, &piter, vma->vm_pgoff) {
 		struct page *page = sg_page_iter_page(&piter);
 
