@@ -43,6 +43,7 @@
 #include <linux/unicode.h>
 #include <linux/mm_inline.h>
 #include <linux/page_size_compat.h>
+#include <linux/p3s/vma.h>
 #include "swap.h"
 
 #undef CREATE_TRACE_POINTS
@@ -989,7 +990,7 @@ static long shmem_free_swap(struct address_space *mapping,
  * as long as the inode doesn't go away and racy results are not a problem.
  */
 unsigned long shmem_partial_swap_usage(struct address_space *mapping,
-						pgoff_t start, pgoff_t end)
+					pgoff_t start, pgoff_t end)
 {
 	XA_STATE(xas, &mapping->i_pages, start);
 	struct folio *folio;
@@ -1012,6 +1013,45 @@ unsigned long shmem_partial_swap_usage(struct address_space *mapping,
 	rcu_read_unlock();
 
 	return swapped << PAGE_SHIFT;
+}
+
+/* Count only the bytes of swapped native folios covered by a compat VMA. */
+unsigned long shmem_partial_swap_usage_bytes(struct address_space *mapping,
+						    u64 start, u64 end)
+{
+	pgoff_t first, last;
+	XA_STATE(xas, &mapping->i_pages, 0);
+	unsigned long swapped = 0;
+	struct folio *folio;
+
+	if (end <= start)
+		return 0;
+	first = start >> PAGE_SHIFT_KERNEL;
+	last = (end - 1) >> PAGE_SHIFT_KERNEL;
+	xas_set(&xas, first);
+
+	rcu_read_lock();
+	xas_for_each(&xas, folio, last) {
+		if (xas_retry(&xas, folio))
+			continue;
+		if (xa_is_value(folio)) {
+			unsigned long nr_pages = 1UL << xas_get_order(&xas);
+			pgoff_t base = round_down(xas.xa_index, nr_pages);
+			u64 entry_start = (u64)base << PAGE_SHIFT_KERNEL;
+			u64 entry_end = (u64)(base + nr_pages) << PAGE_SHIFT_KERNEL;
+
+			swapped += min(end, entry_end) - max(start, entry_start);
+		}
+		if (xas.xa_index == last)
+			break;
+		if (need_resched()) {
+			xas_pause(&xas);
+			cond_resched_rcu();
+		}
+	}
+	rcu_read_unlock();
+
+	return swapped;
 }
 
 /*
@@ -1039,10 +1079,17 @@ unsigned long shmem_swap_usage(struct vm_area_struct *vma)
 	if (!swapped)
 		return 0;
 
-	if (!vma->vm_pgoff && vma->vm_end - vma->vm_start >= inode->i_size)
+	if (!vma_is_p3s_4k(vma) && !vma->vm_pgoff &&
+	    vma->vm_end - vma->vm_start >= inode->i_size)
 		return swapped << PAGE_SHIFT;
 
 	/* Here comes the more involved part */
+	if (vma_is_p3s_4k(vma)) {
+		u64 start = vma_file_offset(vma);
+
+		return shmem_partial_swap_usage_bytes(mapping, start,
+						     start + vma_size(vma));
+	}
 	return shmem_partial_swap_usage(mapping, vma->vm_pgoff,
 					vma->vm_pgoff + vma_pages(vma));
 }
