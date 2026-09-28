@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddbac533_68ec43c2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2055842
+      },
+      "writtenOn": "2026-09-28T10:27:38Z",
+      "side": 1,
+      "message": "```suggestion\nEnable CONFIG_NVME_HWMON to expose NVMe SMART composite temperature sensors.\n```",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 75
+      },
+      "revId": "50bc5871b5be41ffea84b812b4c314a5b3d3c153",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
