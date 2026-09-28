@@ -800,7 +800,7 @@ static struct folio *swap_vma_readahead(swp_entry_t targ_entry, gfp_t gfp_mask,
 			continue;
 		if (page_allocated) {
 			swap_read_folio(folio, &splug);
-			if (addr != vmf->address) {
+			if (entry.val != targ_entry.val) {
 				folio_set_readahead(folio);
 				count_vm_event(SWAP_RA);
 			}
