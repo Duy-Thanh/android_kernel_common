@@ -287,6 +287,7 @@ static inline void p3s_anon_install_folio(struct vm_area_struct *vma,
 	folio_add_lru_vma(folio, vma);
 }
 
+#ifdef CONFIG_USERFAULTFD
 /*
  * p3s_uffd_install_anon_folio - Look around and reuse existing folio slice for userfaultfd
  * @dst_vma: Destination VMA
@@ -329,6 +330,7 @@ static inline bool p3s_uffd_install_anon_folio(struct vm_area_struct *dst_vma,
 	folio_put(folio);
 	return true;
 }
+#endif
 
 /*
  * p3s_pte_maps_folio - Check if a PTE maps the given normal folio at addr
@@ -592,6 +594,7 @@ static inline void p3s_anon_install_folio(struct vm_area_struct *vma,
 	folio_add_lru_vma(folio, vma);
 }
 
+#ifdef CONFIG_USERFAULTFD
 static inline bool p3s_uffd_install_anon_folio(struct vm_area_struct *dst_vma,
 					       pte_t *dst_pte,
 					       unsigned long dst_addr,
@@ -602,6 +605,7 @@ static inline bool p3s_uffd_install_anon_folio(struct vm_area_struct *dst_vma,
 {
 	return false;
 }
+#endif
 
 static inline bool p3s_wp_can_reuse_anon_folio(struct folio *folio,
 					       struct vm_area_struct *vma,
