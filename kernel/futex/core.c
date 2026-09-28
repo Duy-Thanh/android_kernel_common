@@ -44,7 +44,7 @@
 #include <linux/prctl.h>
 #include <linux/mempolicy.h>
 #include <linux/mmap_lock.h>
-#include <linux/p3s/futex.h>
+#include <linux/p3s/mm.h>
 
 #include "futex.h"
 #include "../locking/rtmutex_common.h"
@@ -555,6 +555,7 @@ int get_futex_key(u32 __user *uaddr, unsigned int flags, union futex_key *key,
 	struct page *page;
 	struct folio *folio;
 	struct address_space *mapping;
+	unsigned int futex_offset;
 	int node, err, size, ro = 0;
 	bool node_updated = false;
 	bool fshared;
@@ -567,10 +568,11 @@ int get_futex_key(u32 __user *uaddr, unsigned int flags, union futex_key *key,
 	/*
 	 * The futex address must be "naturally" aligned.
 	 */
-	key->both.offset = address % PAGE_SIZE;
+	futex_offset = mm_offset_in_page(mm, address);
+	key->both.offset = futex_offset;
 	if (unlikely((address % size) != 0))
 		return -EINVAL;
-	address -= key->both.offset;
+	address -= futex_offset;
 
 	if (unlikely(!access_ok(uaddr, size)))
 		return -EFAULT;
@@ -637,19 +639,29 @@ again:
 	if (unlikely(should_fail_futex(true)))
 		return -EFAULT;
 
-	err = get_user_pages_fast((unsigned long)uaddr, 1, FOLL_WRITE, &page);
-	/*
-	 * If write access is not required (eg. FUTEX_WAIT), try
-	 * and get read-only access.
-	 */
-	if (err == -EFAULT && rw == FUTEX_READ) {
-		err = get_user_pages_fast((unsigned long)uaddr, 1, 0, &page);
-		ro = 1;
+	if (mm_is_p3s_4k(mm)) {
+		struct page_span span;
+
+		/* Capture the mapped host-page offset with the page reference. */
+		err = get_user_pages_range(mm, (unsigned long)uaddr, size, 1,
+					   FOLL_WRITE, &page, &span);
+		if (err == -EFAULT && rw == FUTEX_READ) {
+			err = get_user_pages_range(mm, (unsigned long)uaddr, size,
+						   1, 0, &page, &span);
+			ro = 1;
+		}
+		if (err == 1)
+			key->both.offset = span.offset;
+	} else {
+		err = get_user_pages_fast(address, 1, FOLL_WRITE, &page);
+		if (err == -EFAULT && rw == FUTEX_READ) {
+			err = get_user_pages_fast(address, 1, 0, &page);
+			ro = 1;
+		}
 	}
-	if (err < 0)
-		return err;
-	else
-		err = 0;
+	if (err != 1)
+		return err < 0 ? err : -EFAULT;
+	err = 0;
 
 	/*
 	 * The treatment of mapping from this point on is critical. The folio
@@ -731,9 +743,6 @@ again:
 
 	} else {
 		struct inode *inode;
-
-		key->both.offset = futex_page_offset(mm, (unsigned long)uaddr,
-						     key->both.offset);
 
 		/*
 		 * The associated futex object in this case is the inode and
