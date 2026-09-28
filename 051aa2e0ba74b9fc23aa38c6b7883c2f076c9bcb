@@ -40,6 +40,30 @@
       ],
       "revId": "051aa2e0ba74b9fc23aa38c6b7883c2f076c9bcb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b66e5f0_10c7a508",
+        "filename": "arch/arm64/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 1461,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-09-28T20:45:53Z",
+      "side": 1,
+      "message": "Added a comment explaining this. Thanks.",
+      "parentUuid": "61e4afb4_cade24bc",
+      "range": {
+        "startLine": 1461,
+        "startChar": 31,
+        "endLine": 1461,
+        "endChar": 47
+      },
+      "revId": "051aa2e0ba74b9fc23aa38c6b7883c2f076c9bcb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
