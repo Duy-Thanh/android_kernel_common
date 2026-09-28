@@ -575,6 +575,22 @@ static inline pte_t pte_swp_clear_exclusive(pte_t pte)
 	return clear_pte_bit(pte, __pgprot(PTE_SWP_EXCLUSIVE));
 }
 
+static inline pte_t pte_swp_mkslice(pte_t pte, unsigned int slice)
+{
+	return __pte((pte_val(pte) & ~PTE_SWP_SLICE_MASK) |
+		     ((pteval_t)slice << PTE_SWP_SLICE_SHIFT));
+}
+
+static inline unsigned int pte_swp_slice(pte_t pte)
+{
+	return (pte_val(pte) & PTE_SWP_SLICE_MASK) >> PTE_SWP_SLICE_SHIFT;
+}
+
+static inline pte_t pte_swp_clear_slice(pte_t pte)
+{
+	return __pte(pte_val(pte) & ~PTE_SWP_SLICE_MASK);
+}
+
 #ifdef CONFIG_HAVE_ARCH_USERFAULTFD_WP
 static inline pte_t pte_swp_mkuffd_wp(pte_t pte)
 {
@@ -1540,6 +1556,7 @@ static inline pmd_t pmdp_establish(struct vm_area_struct *vma,
  *	bits 0-1:	present (must be zero)
  *	bits 2:		remember PG_anon_exclusive
  *	bit  3:		remember uffd-wp state
+ *	bits 4-5:	compat 4K offset in the native folio (when PPPS is enabled)
  *	bits 6-10:	swap type
  *	bit  11:	PTE_PRESENT_INVALID (must be zero)
  *	bits 12-61:	swap offset

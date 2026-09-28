@@ -2274,10 +2274,12 @@ static int unuse_pte(struct vm_area_struct *vma, pmd_t *pmd,
 		folio_add_lru_vma(folio, vma);
 	}
 	new_pte = pte_mkold(mk_pte(page, vma->vm_page_prot));
+#ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
 	if (vma_is_p3s_4k(vma))
 		new_pte = pte_advance_phys(new_pte,
-			(unsigned long)vma_slice_offset(vma, addr) <<
+			(unsigned long)pte_swp_slice(old_pte) <<
 			PAGE_SHIFT_4KB);
+#endif
 	if (pte_swp_soft_dirty(old_pte))
 		new_pte = pte_mksoft_dirty(new_pte);
 	if (pte_swp_uffd_wp(old_pte))

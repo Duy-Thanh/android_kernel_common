@@ -15,6 +15,9 @@
  */
 #define PTE_WRITE		(PTE_DBM)		 /* same as DBM (51) */
 #define PTE_SWP_EXCLUSIVE	(_AT(pteval_t, 1) << 2)	 /* only for swp ptes */
+/* Bits 4-5 retain a compat anonymous PTE's 4K offset in its native folio. */
+#define PTE_SWP_SLICE_SHIFT	4
+#define PTE_SWP_SLICE_MASK	(_AT(pteval_t, 3) << PTE_SWP_SLICE_SHIFT)
 #define PTE_DIRTY		(_AT(pteval_t, 1) << 55)
 #define PTE_SPECIAL		(_AT(pteval_t, 1) << 56)
 
