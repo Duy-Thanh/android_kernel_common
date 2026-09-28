@@ -277,6 +277,7 @@ static int nfsaclsvc_encode_getaclres(struct svc_rqst *rqstp, __be32 *p)
 	int n;
 	int w;
 
+<<<<<<< HEAD   (ff6dd115c1134e47a87324d31dc64d7221cf06a2 Merge ab7405bd8633 ("ubifs: fix out-of-bounds read in signat)
 	*p++ = resp->status;
 	if (resp->status != nfs_ok)
 		return xdr_ressize_check(rqstp, p);
@@ -303,6 +304,42 @@ static int nfsaclsvc_encode_getaclres(struct svc_rqst *rqstp, __be32 *p)
 		if (!*(rqstp->rq_next_page++))
 			return 0;
 		w -= PAGE_SIZE;
+||||||| BASE   (ab7405bd86331cc2dbc8201699d4adc33bea75e7 ubifs: fix out-of-bounds read in signature length check)
+	if (!svcxdr_encode_stat(xdr, resp->status))
+		return false;
+
+	if (dentry == NULL || d_really_is_negative(dentry))
+		return true;
+	inode = d_inode(dentry);
+
+	if (!svcxdr_encode_fattr(rqstp, xdr, &resp->fh, &resp->stat))
+		return false;
+	if (xdr_stream_encode_u32(xdr, resp->mask) < 0)
+		return false;
+
+	if (!nfs_stream_encode_acl(xdr, inode, resp->acl_access,
+				   resp->mask & NFS_ACL, 0))
+		return false;
+	if (!nfs_stream_encode_acl(xdr, inode, resp->acl_default,
+				   resp->mask & NFS_DFACL, NFS_ACL_DEFAULT))
+=======
+	if (!svcxdr_encode_stat(xdr, resp->status))
+		return false;
+	switch (resp->status) {
+	case nfs_ok:
+		inode = d_inode(dentry);
+		if (!svcxdr_encode_fattr(rqstp, xdr, &resp->fh, &resp->stat))
+			return false;
+		if (xdr_stream_encode_u32(xdr, resp->mask) < 0)
+			return false;
+		if (!nfs_stream_encode_acl(xdr, inode, resp->acl_access,
+					   resp->mask & NFS_ACL, 0))
+			return false;
+		if (!nfs_stream_encode_acl(xdr, inode, resp->acl_default,
+					   resp->mask & NFS_DFACL, NFS_ACL_DEFAULT))
+			return false;
+		break;
+>>>>>>> BRANCH (42d7954b0a1907d4ef122aef94561952a033cdc3 NFSD: Prevent lock owner use-after-free during client teardo)
 	}
 
 	n = nfsacl_encode(&rqstp->rq_res, base, inode,
