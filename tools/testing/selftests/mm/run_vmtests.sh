@@ -274,6 +274,18 @@ run_test() {
 	fi # test_selected
 }
 
+# Run a PPPS test that needs one of the fixture modules in ppps_modules/:
+# load <module>_ppps_module.ko, make sure /dev/<module>_ppps exists, run the
+# command, unload the module again.
+ppps_runner=./ppps_run_module.sh
+[ -x "$ppps_runner" ] || ppps_runner=../ppps/ppps_run_module.sh
+run_ppps_module_test() {
+	local module=$1
+	shift
+	run_test "$ppps_runner" "ppps_modules/${module}_ppps_module.ko" \
+		"/dev/${module}_ppps" -- "$@"
+}
+
 echo "TAP version 13" | tap_output
 
 CATEGORY="hugetlb" run_test ./hugepage-mmap
@@ -309,8 +321,69 @@ if test_selected "hugetlb"; then
 fi
 
 CATEGORY="mmap" run_test ./map_fixed_noreplace
+CATEGORY="mmap" run_test ./mglru_folded_ppps
+if [ -x ./elf_4k_align_ppps ]; then
+	CATEGORY="mmap" run_test ./elf_4k_align_ppps
+fi
+CATEGORY="mmap" run_test ./elf_core_ppps
+CATEGORY="mmap" run_test ./taskstats_ppps
+CATEGORY="mmap" run_test ./rusage_ppps
+CATEGORY="mmap" run_test ./oom_anon_score_ppps
+CATEGORY="mmap" run_test ./sysv_shm_ppps
+CATEGORY="mlock" run_test ./sysv_shm_lock_ppps
+CATEGORY="mmap" run_test ./io_uring_mmap_ppps
+CATEGORY="mmap" run_test ./aio_ring_ppps
+CATEGORY="mmap" run_test ./stack_guard_gap_ppps
+CATEGORY="mmap" run_test ./mglru_ppps
+CATEGORY="mmap" run_test ./mmu_notifier_ppps.sh
+CATEGORY="mmap" run_test ./anon_pageout_ppps
+CATEGORY="mmap" run_test ./madvise_free_ppps
+CATEGORY="mmap" run_test ./madvise_guard_ppps
+CATEGORY="mmap" run_test ./thp_mmap_offset_ppps
+CATEGORY="mmap" run_test ./shmem_mmap_offset_ppps
+CATEGORY="mmap" run_test ./memfd_eof_ppps secretmem
+CATEGORY="mmap" run_test ./memfd_eof_ppps shmem
+CATEGORY="mmap" run_test ./mincore_ppps
+CATEGORY="mmap" run_test ./mincore_ppps --native
+CATEGORY="mmap" run_ppps_module_test gup_retry ./mmap_action_cleanup_ppps
+CATEGORY="mmap" run_test ./selinux_status_mmap_ppps.sh
+CATEGORY="mmap" run_ppps_module_test vm_iomap_memory ./vm_iomap_memory_ppps
+CATEGORY="mmap" run_ppps_module_test remap_pfn_cow ./remap_pfn_cow_ppps
+CATEGORY="mmap" run_ppps_module_test dma_mmap_attrs ./dma_mmap_ppps attrs
+CATEGORY="mmap" run_ppps_module_test dma_mmap_pages ./dma_mmap_ppps pages
+CATEGORY="mmap" run_test ./iommu_dma_mmap_ppps.sh
+CATEGORY="mmap" run_test ./v9fs_mmap_close_ppps.sh
+CATEGORY="mmap" run_ppps_module_test vm_map_pages ./vm_map_pages_ppps
+CATEGORY="mmap" run_ppps_module_test vb2_mmap sh -c './vb2_mmap_ppps --native && exec ./vb2_mmap_ppps'
+CATEGORY="mmap" run_ppps_module_test vb2_userptr ./vb2_userptr_ppps
+CATEGORY="mmap" run_test ./mmap_hint_ppps
+CATEGORY="mmap" run_test ./brk_aslr_ppps
+CATEGORY="mmap" run_test ./elf_brk_gap_ppps
+CATEGORY="mmap" run_test ./mmap_aslr_ppps
+CATEGORY="mmap" run_test ./exec_aslr_ppps
+CATEGORY="mmap" run_test ./shmem_thp_mmap_ppps
+CATEGORY="mmap" run_test ./smaps_page_size_ppps
+CATEGORY="mmap" run_test ./fork_page_size_ppps
+CATEGORY="mmap" run_test ./mmap_page_zero_ppps
+CATEGORY="mmap" run_test ./exec_stack_random_ppps
+CATEGORY="mmap" run_test ./vma_range_slice_ppps
+CATEGORY="mmap" run_test ./stack_aslr_ppps
+CATEGORY="mmap" run_test ./perf_mmap_offset_ppps
+CATEGORY="mmap" run_test ./perf_page_size_ppps
+CATEGORY="mmap" run_test ./perf_phys_addr_ppps
+CATEGORY="mmap" run_test ./rss_stat_trace_ppps
+CATEGORY="mmap" run_test ./pci_mmap_ppps
 CATEGORY="mmap" run_test ./anon_vma_name_ppps
-CATEGORY="mmap" run_test ./madvise_remove_ppps
+CATEGORY="mmap" run_test ./print_vma_addr_ppps
+CATEGORY="mmap" run_ppps_module_test pagewalk ./pagewalk_ppps
+CATEGORY="mmap" run_ppps_module_test folio_within_range ./folio_within_range_ppps
+CATEGORY="mmap" run_test ./remap_file_pages_ppps
+CATEGORY="mmap" run_test ./shmem_swap_usage_ppps
+CATEGORY="mmap" run_test ./shmem_quota_ppps
+CATEGORY="mmap" run_test ./swap_header_ppps
+CATEGORY="mmap" run_test ./swap_pss_ppps
+CATEGORY="mmap" run_test ./trace_ring_buffer_mmap_ppps
+CATEGORY="mmap" run_test ./truncate_ppps
 
 if $RUN_ALL; then
     run_gup_matrix
@@ -325,8 +398,21 @@ fi
 # Dump pages 0, 19, and 4096, using pin_user_pages:
 CATEGORY="gup_test" run_test ./gup_test -ct -F 0x1 0 19 0x1000
 CATEGORY="gup_test" run_test ./gup_longterm
+CATEGORY="gup_test" run_ppps_module_test gup_retry ./gup_retry_ppps
+CATEGORY="gup_test" run_ppps_module_test frame_vector ./frame_vector_ppps
+CATEGORY="gup_test" run_ppps_module_test iov_iter ./iov_iter_ppps
+CATEGORY="gup_test" run_ppps_module_test iov_iter ./page_range_ppps
+CATEGORY="gup_test" run_ppps_module_test iov_iter ./page_range_ppps --native
+CATEGORY="gup_test" run_ppps_module_test fault_in ./fault_in_ppps
+CATEGORY="mmap" run_test ./futex_shared_ppps
+CATEGORY="mmap" run_test ./xdp_umem_ppps
+CATEGORY="mmap" run_ppps_module_test xdp_pin_probe ./xdp_umem_race_ppps
+CATEGORY="mmap" run_test ./tcp_zerocopy_align_ppps
 
 CATEGORY="userfaultfd" run_test ./uffd-unit-tests
+CATEGORY="userfaultfd" run_test ./userfaultfd_mixed_ppps
+CATEGORY="userfaultfd" run_test ./userfaultfd_remap_ppps
+CATEGORY="userfaultfd" run_test ./userfaultfd_shmem_ppps
 uffd_stress_bin=./uffd-stress
 CATEGORY="userfaultfd" run_test ${uffd_stress_bin} anon 20 16
 # Hugetlb tests require source and destination huge pages. Pass in almost half
@@ -378,14 +464,32 @@ else
 fi
 
 CATEGORY="mmap" run_test ./map_populate
+CATEGORY="mempolicy" run_test ./mbind_ppps
 
 CATEGORY="mlock" run_test ./mlock-random-test
 
 CATEGORY="mlock" run_test ./mlock2-tests
+CATEGORY="mlock" run_test ./mlock_onfault_ppps
+CATEGORY="mlock" run_test ./mlock_onfault_ppps --native
+
+CATEGORY="mlock" run_test ./mlock_large_file_ppps
+CATEGORY="mlock" run_test ./mlock_partial_file_ppps
+
+CATEGORY="mlock" run_test ./mlock_reclaim_ppps
 
 CATEGORY="process_mrelease" run_test ./mrelease_test
 
 CATEGORY="mremap" run_test ./mremap_test
+CATEGORY="mremap" run_test ./mremap_rlimit_ppps
+CATEGORY="mremap" run_test ./mremap_commit_ppps
+CATEGORY="mremap" run_test ./mremap_hint_ppps
+CATEGORY="mremap" run_ppps_module_test mremap_pgoff ./mremap_pgoff_ppps
+CATEGORY="mmap" run_test ./msync_offset_ppps
+CATEGORY="mmap" run_test ./bpf_array_mmap_ppps
+CATEGORY="mmap" run_test ./bpf_ringbuf_mmap_ppps
+CATEGORY="mmap" run_test ./fork_filemap_ppps
+CATEGORY="mmap" run_test ./munmap_ppps
+CATEGORY="mmap" run_test ./bpf_stack_build_id_ppps
 
 CATEGORY="hugetlb" run_test ./thuge-gen
 CATEGORY="hugetlb" run_test ./charge_reserved_hugetlb.sh -cgroup-v2
@@ -437,11 +541,17 @@ CATEGORY="madv_guard" run_test ./guard-regions
 
 # MADV_POPULATE_READ and MADV_POPULATE_WRITE tests
 CATEGORY="madv_populate" run_test ./madv_populate
+CATEGORY="madv_populate" run_test ./madvise_remove_ppps
+CATEGORY="madv_populate" run_test ./madvise_willneed_ppps "$TMPDIR/madvise-willneed-ppps.bin"
 
 # PROCESS_MADV test
 CATEGORY="process_madv" run_test ./process_madv
 
 CATEGORY="vma_merge" run_test ./merge
+CATEGORY="process_madv" run_test ./process_madvise_ppps
+CATEGORY="process_madv" run_test ./process_vm_access_ppps
+CATEGORY="process_madv" run_test ./mixed_context_switch_ppps
+CATEGORY="process_madv" run_test ./mixed_mm_access_ppps
 
 if [ -x ./memfd_secret ]
 then
@@ -491,8 +601,11 @@ then
 fi
 
 CATEGORY="pagemap" run_test ./pagemap_ioctl
+CATEGORY="pagemap" run_test ./pagemap_ioctl_ppps
+CATEGORY="pagemap" run_test ./pagemap_scan_ppps
 
 CATEGORY="pfnmap" run_test ./pfnmap
+CATEGORY="pfnmap" run_test ./remap_pfn_range_ppps
 
 # COW tests
 CATEGORY="cow" run_test ./cow

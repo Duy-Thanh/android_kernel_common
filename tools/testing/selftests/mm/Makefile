@@ -44,19 +44,57 @@ LDLIBS = -lrt -lpthread -lm
 # warnings.
 CFLAGS += -U_FORTIFY_SOURCE
 
-KDIR ?= /lib/modules/$(shell uname -r)/build
-ifneq (,$(wildcard $(KDIR)/Module.symvers))
-ifneq (,$(wildcard $(KDIR)/include/linux/page_frag_cache.h))
-TEST_GEN_MODS_DIR := page_frag
-else
-PAGE_FRAG_WARNING = "missing page_frag_cache.h, please use a newer kernel"
-endif
-else
-PAGE_FRAG_WARNING = "missing Module.symvers, please have the kernel built first"
-endif
+# PPPS (per-process page size) tests.  Those needing a kernel-side fixture get
+# it from the modules in ppps_modules/, loaded by ../ppps/ppps_run_module.sh.
+PPPS_TESTS := \
+	aio_ring_ppps anon_pageout_ppps anon_vma_name_ppps ashmem_ppps \
+	bpf_array_mmap_ppps bpf_ringbuf_mmap_ppps bpf_stack_build_id_ppps \
+	dma_heap_ppps dma_mmap_ppps elf_core_ppps \
+	exec_user_args_ppps fadvise_dontneed_ppps fault_in_ppps \
+	file_cow_ppps file_cow_refs_ppps filemap_eof_ppps folio_within_range_ppps frame_vector_ppps \
+	fork_filemap_ppps fork_page_size_ppps \
+	futex_shared_ppps \
+	gup_retry_ppps hole_anon_ppps \
+	io_uring_mmap_ppps iommu_dma_mmap_ppps iov_iter_ppps kcov_ppps \
+	madv_cold_large_file_ppps madvise_free_ppps madvise_guard_ppps \
+	madvise_remove_ppps madvise_willneed_ppps mbind_ppps memfd_eof_ppps \
+	memory_failure_anon_ppps mglru_folded_ppps mglru_ppps mincore_ppps mixed_context_switch_ppps \
+	mixed_mm_access_ppps mlock_large_file_ppps mlock_onfault_ppps \
+	mlock_partial_file_ppps mlock_reclaim_ppps \
+	mmap_action_cleanup_ppps mmap_hint_ppps mmap_page_zero_ppps \
+	mmu_notifier_ppps mremap_commit_ppps mremap_file_slice_ppps mremap_hint_ppps mremap_split_ppps \
+	mremap_pgoff_ppps mremap_rlimit_ppps msync_offset_ppps munmap_ppps \
+	oom_anon_score_ppps oom_score_ppps oom_trace_ppps packed_anon_ppps \
+	packed_swap_ppps page_range_ppps pagemap_exclusive_ppps pagemap_ioctl_ppps pagemap_scan_ppps pagewalk_ppps pci_mmap_ppps \
+	perf_mmap_offset_ppps perf_page_size_ppps perf_phys_addr_ppps \
+	print_vma_addr_ppps proc_pagewalk_ppps process_madvise_ppps \
+	process_mrelease_ppps process_vm_access_ppps remap_file_pages_ppps \
+	remap_pfn_cow_ppps remap_pfn_range_ppps rmap_file_referenced_ppps rss_stat_trace_ppps \
+	rusage_ppps selinux_status_mmap_ppps sg_page_slices_ppps \
+	shmem_mmap_offset_ppps \
+	shmem_quota_ppps shmem_swap_usage_ppps smaps_native_fallback_ppps smaps_page_size_ppps \
+	smaps_pss_ppps \
+	stack_guard_gap_ppps swap_header_ppps swap_pss_ppps swap_vma_readahead_ppps swapoff_ppps \
+	sysv_shm_lock_ppps sysv_shm_ppps taskstats_ppps \
+	tcp_zerocopy_align_ppps thp_mmap_offset_ppps \
+	trace_ring_buffer_mmap_ppps truncate_ppps truncate_remote_ppps \
+	userfaultfd_mixed_ppps userfaultfd_poison_remote_ppps uffd_move_retry_ppps \
+	userfaultfd_remap_ppps userfaultfd_remote_ppps \
+	userfaultfd_shmem_ppps \
+	userfaultfd_unregister_remote_ppps userfaultfd_wp_remote_ppps \
+	v9fs_mmap_close_ppps vb2_mmap_ppps \
+	vb2_userptr_ppps vhost_dirty_log_ppps vm_iomap_memory_ppps \
+	vma_range_slice_ppps \
+	vm_map_pages_ppps vmalloc_align_ppps xdp_umem_ppps xdp_umem_race_ppps
+
+PPPS_TESTS_arm64 := \
+	brk_aslr_ppps brk_aslr_ppps_sample elf_brk_gap_ppps exec_aslr_ppps \
+	elf_4k_align_ppps elf_4k_align_probe \
+	exec_aslr_ppps_helper exec_aslr_ppps_interp exec_stack_ppps \
+	exec_stack_random_ppps mmap_aslr_ppps mte_anon_ppps \
+	shmem_thp_mmap_ppps stack_aslr_ppps uprobe_ppps
 
 TEST_GEN_FILES = cow
-TEST_GEN_FILES += fadvise_dontneed_ppps
 TEST_GEN_FILES += compaction_test
 TEST_GEN_FILES += gup_longterm
 TEST_GEN_FILES += gup_test
@@ -70,13 +108,10 @@ TEST_GEN_FILES += hugepage-shm
 TEST_GEN_FILES += hugepage-vmemmap
 TEST_GEN_FILES += khugepaged
 TEST_GEN_FILES += madv_populate
-TEST_GEN_FILES += smaps_pss_ppps
 TEST_GEN_FILES += map_fixed_noreplace
 TEST_GEN_FILES += map_hugetlb
 TEST_GEN_FILES += map_populate
-TEST_GEN_FILES += anon_vma_name_ppps
-TEST_GEN_FILES += madvise_remove_ppps
-ifneq (,$(filter $(ARCH),arm64 riscv riscv64 x86 x86_64))
+ifneq (,$(filter $(ARCH),arm64 riscv riscv64 x86 x86_64 loongarch32 loongarch64))
 TEST_GEN_FILES += memfd_secret
 endif
 TEST_GEN_FILES += migration
@@ -85,14 +120,10 @@ TEST_GEN_FILES += mlock-random-test
 TEST_GEN_FILES += mlock2-tests
 TEST_GEN_FILES += mrelease_test
 TEST_GEN_FILES += mremap_dontunmap
-TEST_GEN_FILES += mremap_slice_cow_ppps
 TEST_GEN_FILES += mremap_test
 TEST_GEN_FILES += mseal_test
 TEST_GEN_FILES += on-fault-limit
 TEST_GEN_FILES += pagemap_ioctl
-TEST_GEN_FILES += pagemap_exclusive_ppps
-TEST_GEN_FILES += swap_slice_mremap_ppps
-TEST_GEN_FILES += uffd_move_retry_ppps
 TEST_GEN_FILES += pfnmap
 TEST_GEN_FILES += process_madv
 TEST_GEN_FILES += prctl_thp_disable
@@ -112,6 +143,10 @@ TEST_GEN_FILES += droppable
 TEST_GEN_FILES += guard-regions
 TEST_GEN_FILES += merge
 TEST_GEN_FILES += rmap
+TEST_GEN_FILES += $(PPPS_TESTS)
+ifeq ($(ARCH),arm64)
+TEST_GEN_FILES += $(PPPS_TESTS_arm64)
+endif
 
 ifneq ($(ARCH),arm64)
 TEST_GEN_FILES += soft-dirty
@@ -154,24 +189,47 @@ endif
 TEST_GEN_FILES += write_to_hugetlbfs
 endif
 
-TEST_PROGS := run_vmtests.sh
+TEST_PROGS := run_vmtests.sh sg_page_slices_ppps.sh vmalloc_align_ppps.sh
+TEST_GEN_PROGS += uffd_copy_tuple_ppps
+TEST_GEN_PROGS += mremap_slice_cow_ppps
+TEST_GEN_PROGS += swap_slice_mremap_ppps
 
 TEST_FILES := test_vmalloc.sh
 TEST_FILES += test_hmm.sh
 TEST_FILES += va_high_addr_switch.sh
 TEST_FILES += charge_reserved_hugetlb.sh
 TEST_FILES += hugetlb_reparenting_test.sh
-TEST_FILES += test_page_frag.sh
+TEST_FILES += iommu_dma_mmap_ppps.sh mmu_notifier_ppps.sh \
+	      selinux_status_mmap_ppps.sh v9fs_mmap_close_ppps.sh \
+	      ../ppps/ppps_run_module.sh
 
 # required by charge_reserved_hugetlb.sh
 TEST_FILES += write_hugetlb_memory.sh
 
+TEST_GEN_MODS_DIR := ppps_modules
+
+# Keep the upstream page_frag fixture alongside the PPPS module directory.
+KDIR ?= /lib/modules/$(shell uname -r)/build
+ifneq (,$(wildcard $(KDIR)/Module.symvers))
+PAGE_FRAG_MODULE := page_frag/page_frag_test.ko
+TEST_FILES += test_page_frag.sh $(PAGE_FRAG_MODULE)
+else
+PAGE_FRAG_WARNING = "missing Module.symvers, please have the kernel built first"
+endif
+
 include ../lib.mk
 
-$(OUTPUT)/anon_vma_name_ppps: CFLAGS += -I..
-$(OUTPUT)/anon_vma_name_ppps: ../kselftest_ppps.h
-$(OUTPUT)/madvise_remove_ppps: CFLAGS += -I..
-$(OUTPUT)/madvise_remove_ppps: ../kselftest_ppps.h
+$(OUTPUT)/brk_aslr_ppps_sample: brk_aslr_ppps_sample.S
+	$(CC) -nostdlib -static -no-pie $< -o $@
+
+$(OUTPUT)/exec_aslr_ppps_helper: exec_aslr_ppps_helper.S
+	$(CC) -nostdlib -pie -Wl,-e,_start \
+		-Wl,--dynamic-linker=/proc/self/fd/3 -Wl,--build-id=none \
+		-Wl,-z,max-page-size=16384 $< -o $@
+
+$(OUTPUT)/exec_aslr_ppps_interp: exec_aslr_ppps_interp.S
+	$(CC) -nostdlib -static-pie -Wl,-e,_start -Wl,--build-id=none \
+		-Wl,-z,max-page-size=16384 $< -o $@
 
 $(TEST_GEN_PROGS): vm_util.c thp_settings.c
 $(TEST_GEN_FILES): vm_util.c thp_settings.c
@@ -181,6 +239,30 @@ $(OUTPUT)/uffd-unit-tests: uffd-common.c
 $(OUTPUT)/uffd-wp-mremap: uffd-common.c
 $(OUTPUT)/protection_keys: pkey_util.c
 $(OUTPUT)/pkey_sighandler_tests: pkey_util.c
+
+# Headers a PPPS test shares with its fixture module or with the other tuple
+# tests.  Declaring them per target (instead of in LOCAL_HDRS) keeps a header
+# edit from rebuilding the whole directory; the target-specific LOCAL_HDRS
+# keeps lib.mk's link rule from passing the header to the compiler.
+define ppps_test_hdrs
+$(OUTPUT)/$(1): LOCAL_HDRS += $(2)
+$(OUTPUT)/$(1): $(2)
+endef
+$(eval $(call ppps_test_hdrs,fault_in_ppps,fault_in_ppps.h))
+$(eval $(call ppps_test_hdrs,folio_within_range_ppps,folio_within_range_ppps.h))
+$(eval $(call ppps_test_hdrs,frame_vector_ppps,frame_vector_ppps.h))
+$(eval $(call ppps_test_hdrs,gup_retry_ppps,gup_retry_ppps.h))
+$(eval $(call ppps_test_hdrs,iov_iter_ppps,iov_iter_ppps.h))
+$(eval $(call ppps_test_hdrs,page_range_ppps,iov_iter_ppps.h page_range_ppps.h))
+$(eval $(call ppps_test_hdrs,file_cow_refs_ppps,iov_iter_ppps.h page_range_ppps.h))
+$(eval $(call ppps_test_hdrs,mmu_notifier_ppps,mmu_notifier_ppps.h))
+$(eval $(call ppps_test_hdrs,pagewalk_ppps,pagewalk_ppps.h))
+$(eval $(call ppps_test_hdrs,vm_map_pages_ppps,vm_map_pages_ppps.h))
+$(foreach t,mincore_ppps mlock_onfault_ppps, \
+	$(eval $(call ppps_test_hdrs,$(t),../kselftest_ppps.h)))
+$(foreach t,file_cow_ppps hole_anon_ppps mte_anon_ppps packed_anon_ppps \
+	    packed_swap_ppps uffd_copy_tuple_ppps uffd_move_retry_ppps, \
+	$(eval $(call ppps_test_hdrs,$(t),ppps_tuple_test.h)))
 
 ifeq ($(ARCH),x86_64)
 BINARIES_32 := $(patsubst %,$(OUTPUT)/%,$(BINARIES_32))
@@ -236,6 +318,23 @@ endif
 # IOURING_EXTRA_LIBS may get set in local_config.mk, or it may be left empty.
 $(OUTPUT)/cow: LDLIBS += $(IOURING_EXTRA_LIBS)
 
+# Use one coherent set of libc UAPI headers for the taskstats netlink ABI.
+$(OUTPUT)/taskstats_ppps: CFLAGS := -Wall -O2 $(EXTRA_CFLAGS)
+$(OUTPUT)/taskstats_ppps: CFLAGS += -Wunreachable-code -U_FORTIFY_SOURCE
+$(OUTPUT)/taskstats_ppps: CFLAGS += -I$(selfdir)
+
+$(OUTPUT)/vb2_mmap_ppps: LDFLAGS += -Wl,-z,max-page-size=16384
+$(OUTPUT)/anon_vma_name_ppps $(OUTPUT)/iov_iter_ppps \
+$(OUTPUT)/mremap_pgoff_ppps: LDFLAGS += -pie -Wl,-z,max-page-size=16384
+$(OUTPUT)/frame_vector_ppps $(OUTPUT)/pagemap_ioctl \
+$(OUTPUT)/pagemap_ioctl_ppps $(OUTPUT)/pagemap_scan_ppps: LDFLAGS += -Wl,-z,max-page-size=16384
+$(OUTPUT)/process_madvise_ppps: LDFLAGS += -Wl,-z,max-page-size=16384
+$(OUTPUT)/exec_aslr_ppps: LDFLAGS += -Wl,-z,max-page-size=16384
+$(OUTPUT)/fork_filemap_ppps: LDFLAGS += -Wl,-z,max-page-size=16384
+$(OUTPUT)/io_uring_mmap_ppps: LDFLAGS += -Wl,-z,max-page-size=16384
+$(OUTPUT)/munmap_ppps: LDFLAGS += -Wl,-z,max-page-size=16384
+$(OUTPUT)/ashmem_ppps: LDFLAGS += -Wl,-z,max-page-size=16384
+
 $(OUTPUT)/gup_longterm: LDLIBS += $(IOURING_EXTRA_LIBS)
 
 $(OUTPUT)/mlock-random-test $(OUTPUT)/memfd_secret: LDLIBS += -lcap
@@ -245,6 +344,9 @@ $(OUTPUT)/ksm_tests: LDLIBS += -lnuma
 $(OUTPUT)/migration: LDLIBS += -lnuma
 
 $(OUTPUT)/rmap: LDLIBS += -lnuma
+$(OUTPUT)/elf_4k_align_probe: elf_4k_align_probe.S
+	$(CC) -nostdlib -static -Wl,-no-pie -Wl,--build-id=none \
+		-Wl,-z,max-page-size=4096 $< -o $@
 
 local_config.mk local_config.h: check_config.sh
 	/bin/sh ./check_config.sh $(CC)
@@ -268,3 +370,15 @@ warn_missing_page_frag:
 	echo "Warning: $(PAGE_FRAG_WARNING). page_frag test will be skipped." ; \
 	echo
 endif
+
+ifneq ($(PAGE_FRAG_MODULE),)
+all: $(PAGE_FRAG_MODULE)
+$(PAGE_FRAG_MODULE): page_frag/page_frag_test.c page_frag/Makefile
+	+$(MAKE) -C page_frag KDIR=$(KDIR)
+.PHONY: clean_page_frag_module
+clean_page_frag_module:
+	+$(MAKE) -C page_frag KDIR=$(KDIR) clean
+clean: clean_page_frag_module
+endif
+
+$(eval $(call ppps_test_hdrs,sg_page_slices_ppps,sg_page_slices_ppps.h))

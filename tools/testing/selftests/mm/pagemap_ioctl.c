@@ -38,6 +38,7 @@ int uffd;
 size_t page_size;
 size_t hpage_size;
 const char *progname;
+static int ppps_compat;
 
 #define LEN(region)	((region.end - region.start)/page_size)
 
@@ -93,8 +94,17 @@ static long pagemap_ioc(void *start, int len, void *vec, int vec_len, int flag,
 int init_uffd(void)
 {
 	struct uffdio_api uffdio_api;
+	int dev;
 
 	uffd = syscall(__NR_userfaultfd, O_CLOEXEC | O_NONBLOCK | UFFD_USER_MODE_ONLY);
+	if (uffd == -1) {
+		dev = open("/dev/userfaultfd", O_RDWR | O_CLOEXEC);
+		if (dev >= 0) {
+			uffd = ioctl(dev, USERFAULTFD_IOC_NEW,
+				     O_CLOEXEC | O_NONBLOCK | UFFD_USER_MODE_ONLY);
+			close(dev);
+		}
+	}
 	if (uffd == -1)
 		return uffd;
 
@@ -785,6 +795,10 @@ void *gethugepage(int map_size)
 	int ret;
 	char *map;
 
+	/* PPPS compat tasks cannot use PMD THPs. */
+	if (ppps_compat)
+		return NULL;
+
 	map = memalign(hpage_size, map_size);
 	if (!map)
 		ksft_exit_fail_msg("memalign failed %d %s\n", errno, strerror(errno));
@@ -1017,9 +1031,13 @@ static void test_simple(void)
 	char *map;
 	struct page_region vec;
 
-	map = aligned_alloc(page_size, page_size);
-	if (!map)
-		ksft_exit_fail_msg("aligned_alloc failed\n");
+	if (ppps_compat)
+		map = mmap(NULL, page_size, PROT_READ | PROT_WRITE,
+			   MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+	else
+		map = aligned_alloc(page_size, page_size);
+	if (!map || map == MAP_FAILED)
+		ksft_exit_fail_msg("page allocation failed\n");
 
 	wp_init(map, page_size);
 	wp_addr_range(map, page_size);
@@ -1044,7 +1062,10 @@ static void test_simple(void)
 		wp_addr_range(map, page_size);
 	}
 	wp_free(map, page_size);
-	free(map);
+	if (ppps_compat)
+		munmap(map, page_size);
+	else
+		free(map);
 
 	ksft_test_result(i == TEST_ITERATIONS, "Test %s\n", __func__);
 }
@@ -1056,7 +1077,6 @@ int sanity_tests(void)
 	struct page_region *vec;
 	char *mem, *fmem;
 	struct stat sbuf;
-	char *tmp_buf;
 
 	/* 1. wrong operation */
 	mem_size = 10 * page_size;
@@ -1167,8 +1187,8 @@ int sanity_tests(void)
 	if (fmem == MAP_FAILED)
 		ksft_exit_fail_msg("error nomem %d %s\n", errno, strerror(errno));
 
-	tmp_buf = malloc(sbuf.st_size);
-	memcpy(tmp_buf, fmem, sbuf.st_size);
+	for (i = 0; i < sbuf.st_size; i += page_size)
+		(void)__atomic_load_n(&fmem[i], __ATOMIC_RELAXED);
 
 	ret = pagemap_ioctl(fmem, sbuf.st_size, vec, vec_size, 0, 0,
 			    0, PAGEMAP_NON_WRITTEN_BITS, 0, PAGEMAP_NON_WRITTEN_BITS);
@@ -1197,24 +1217,29 @@ int sanity_tests(void)
 	if (fmem == MAP_FAILED)
 		ksft_exit_fail_msg("error nomem %d %s\n", errno, strerror(errno));
 
-	wp_init(fmem, buf_size);
-	wp_addr_range(fmem, buf_size);
+	if (ppps_compat) {
+		ksft_test_result_skip("%s file-backed UFFD-WP is unavailable\n",
+				      __func__);
+	} else {
+		wp_init(fmem, buf_size);
+		wp_addr_range(fmem, buf_size);
 
-	for (i = 0; i < buf_size; i++)
-		fmem[i] = 'z';
+		for (i = 0; i < buf_size; i++)
+			fmem[i] = 'z';
 
-	msync(fmem, buf_size, MS_SYNC);
+		msync(fmem, buf_size, MS_SYNC);
 
-	ret = pagemap_ioctl(fmem, buf_size, vec, vec_size, 0, 0,
-			    PAGE_IS_WRITTEN, PAGE_IS_PRESENT | PAGE_IS_SWAPPED | PAGE_IS_FILE, 0,
-			    PAGEMAP_BITS_ALL);
+		ret = pagemap_ioctl(fmem, buf_size, vec, vec_size, 0, 0,
+				    PAGE_IS_WRITTEN, PAGE_IS_PRESENT | PAGE_IS_SWAPPED | PAGE_IS_FILE, 0,
+				    PAGEMAP_BITS_ALL);
 
-	ksft_test_result(ret >= 0 && vec[0].start == (uintptr_t)fmem &&
-			 LEN(vec[0]) == (buf_size/page_size) &&
-			 (vec[0].categories & PAGE_IS_WRITTEN),
-			 "%s Read/write to memory\n", __func__);
+		ksft_test_result(ret >= 0 && vec[0].start == (uintptr_t)fmem &&
+				 LEN(vec[0]) == (buf_size/page_size) &&
+				 (vec[0].categories & PAGE_IS_WRITTEN),
+				 "%s Read/write to memory\n", __func__);
 
-	wp_free(fmem, buf_size);
+		wp_free(fmem, buf_size);
+	}
 	munmap(fmem, buf_size);
 	close(fd);
 
@@ -1508,6 +1533,12 @@ void zeropfn_tests(void)
 
 	munmap(mem, mem_size);
 
+	if (ppps_compat) {
+		ksft_test_result_skip("%s compat PPPS does not support PMD THP\n",
+				      __func__);
+		return;
+	}
+
 	/* Test with huge page if user_zero_page is set to 1 */
 	if (!detect_huge_zeropage()) {
 		ksft_test_result_skip("%s use_zero_page not supported or set to 1\n", __func__);
@@ -1541,7 +1572,7 @@ void zeropfn_tests(void)
 	munmap(mmap_mem, mem_size);
 }
 
-int main(int __attribute__((unused)) argc, char *argv[])
+int main(int argc, char *argv[])
 {
 	int shmid, buf_size, fd, i, ret;
 	unsigned long long mem_size;
@@ -1549,6 +1580,10 @@ int main(int __attribute__((unused)) argc, char *argv[])
 	struct stat sbuf;
 
 	progname = argv[0];
+	if (argc == 2 && !strcmp(argv[1], "--ppps-compat"))
+		ppps_compat = 1;
+	else if (argc != 1)
+		ksft_exit_fail_msg("Usage: %s [--ppps-compat]\n", progname);
 
 	ksft_print_header();
 
@@ -1636,78 +1671,89 @@ int main(int __attribute__((unused)) argc, char *argv[])
 	/* 7. File Hugetlb testing */
 	mem_size = 2*1024*1024;
 	fd = memfd_create("uffd-test", MFD_HUGETLB | MFD_NOEXEC_SEAL);
-	if (fd < 0)
-		ksft_exit_fail_msg("uffd-test creation failed %d %s\n", errno, strerror(errno));
-	mem = mmap(NULL, mem_size, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
-	if (mem != MAP_FAILED) {
-		wp_init(mem, mem_size);
-		wp_addr_range(mem, mem_size);
-
-		base_tests("Hugetlb shmem testing:", mem, mem_size, 0);
-
-		wp_free(mem, mem_size);
-		shmctl(shmid, IPC_RMID, NULL);
+	if (fd < 0) {
+		base_tests("File Hugetlb testing:", NULL, 0, 1);
 	} else {
-		base_tests("Hugetlb shmem testing:", NULL, 0, 1);
+		mem = mmap(NULL, mem_size, PROT_READ | PROT_WRITE,
+			   MAP_SHARED, fd, 0);
+		if (mem != MAP_FAILED) {
+			wp_init(mem, mem_size);
+			wp_addr_range(mem, mem_size);
+
+			base_tests("File Hugetlb testing:", mem, mem_size, 0);
+
+			wp_free(mem, mem_size);
+			munmap(mem, mem_size);
+		} else {
+			base_tests("File Hugetlb testing:", NULL, 0, 1);
+		}
+		close(fd);
 	}
-	close(fd);
 
 	/* 8. File memory testing */
-	buf_size = page_size * 10;
+	if (ppps_compat) {
+		base_tests("File memory testing:", NULL, 0, 1);
+	} else {
+		buf_size = page_size * 10;
 
-	fd = open(__FILE__".tmp0", O_RDWR | O_CREAT, 0777);
-	if (fd < 0)
-		ksft_exit_fail_msg("Create and read/write to a memory mapped file: %s\n",
-				   strerror(errno));
+		fd = open(__FILE__".tmp0", O_RDWR | O_CREAT, 0777);
+		if (fd < 0)
+			ksft_exit_fail_msg("Create and read/write to a memory mapped file: %s\n",
+					   strerror(errno));
 
-	for (i = 0; i < buf_size; i++)
-		if (write(fd, "c", 1) < 0)
-			ksft_exit_fail_msg("Create and read/write to a memory mapped file\n");
+		for (i = 0; i < buf_size; i++)
+			if (write(fd, "c", 1) < 0)
+				ksft_exit_fail_msg("Create and read/write to a memory mapped file\n");
 
-	ret = stat(__FILE__".tmp0", &sbuf);
-	if (ret < 0)
-		ksft_exit_fail_msg("error %d %d %s\n", ret, errno, strerror(errno));
+		ret = stat(__FILE__".tmp0", &sbuf);
+		if (ret < 0)
+			ksft_exit_fail_msg("error %d %d %s\n", ret, errno, strerror(errno));
 
-	fmem = mmap(NULL, sbuf.st_size, PROT_READ | PROT_WRITE, MAP_PRIVATE, fd, 0);
-	if (fmem == MAP_FAILED)
-		ksft_exit_fail_msg("error nomem %d %s\n", errno, strerror(errno));
+		fmem = mmap(NULL, sbuf.st_size, PROT_READ | PROT_WRITE, MAP_PRIVATE, fd, 0);
+		if (fmem == MAP_FAILED)
+			ksft_exit_fail_msg("error nomem %d %s\n", errno, strerror(errno));
 
-	wp_init(fmem, sbuf.st_size);
-	wp_addr_range(fmem, sbuf.st_size);
+		wp_init(fmem, sbuf.st_size);
+		wp_addr_range(fmem, sbuf.st_size);
 
-	base_tests("File memory testing:", fmem, sbuf.st_size, 0);
+		base_tests("File memory testing:", fmem, sbuf.st_size, 0);
 
-	wp_free(fmem, sbuf.st_size);
-	munmap(fmem, sbuf.st_size);
-	close(fd);
+		wp_free(fmem, sbuf.st_size);
+		munmap(fmem, sbuf.st_size);
+		close(fd);
+	}
 
 	/* 9. File memory testing */
-	buf_size = page_size * 10;
+	if (ppps_compat) {
+		base_tests("File anonymous memory testing:", NULL, 0, 1);
+	} else {
+		buf_size = page_size * 10;
 
-	fd = memfd_create(__FILE__".tmp00", MFD_NOEXEC_SEAL);
-	if (fd < 0)
-		ksft_exit_fail_msg("Create and read/write to a memory mapped file: %s\n",
-				   strerror(errno));
+		fd = memfd_create(__FILE__".tmp00", MFD_NOEXEC_SEAL);
+		if (fd < 0)
+			ksft_exit_fail_msg("Create and read/write to a memory mapped file: %s\n",
+					   strerror(errno));
 
-	if (ftruncate(fd, buf_size))
-		ksft_exit_fail_msg("Error ftruncate\n");
+		if (ftruncate(fd, buf_size))
+			ksft_exit_fail_msg("Error ftruncate\n");
 
-	for (i = 0; i < buf_size; i++)
-		if (write(fd, "c", 1) < 0)
-			ksft_exit_fail_msg("Create and read/write to a memory mapped file\n");
+		for (i = 0; i < buf_size; i++)
+			if (write(fd, "c", 1) < 0)
+				ksft_exit_fail_msg("Create and read/write to a memory mapped file\n");
 
-	fmem = mmap(NULL, buf_size, PROT_READ | PROT_WRITE, MAP_PRIVATE, fd, 0);
-	if (fmem == MAP_FAILED)
-		ksft_exit_fail_msg("error nomem %d %s\n", errno, strerror(errno));
+		fmem = mmap(NULL, buf_size, PROT_READ | PROT_WRITE, MAP_PRIVATE, fd, 0);
+		if (fmem == MAP_FAILED)
+			ksft_exit_fail_msg("error nomem %d %s\n", errno, strerror(errno));
 
-	wp_init(fmem, buf_size);
-	wp_addr_range(fmem, buf_size);
+		wp_init(fmem, buf_size);
+		wp_addr_range(fmem, buf_size);
 
-	base_tests("File anonymous memory testing:", fmem, buf_size, 0);
+		base_tests("File anonymous memory testing:", fmem, buf_size, 0);
 
-	wp_free(fmem, buf_size);
-	munmap(fmem, buf_size);
-	close(fd);
+		wp_free(fmem, buf_size);
+		munmap(fmem, buf_size);
+		close(fd);
+	}
 
 	/* 10. Huge page tests */
 	hpage_unit_tests();
@@ -1734,5 +1780,5 @@ int main(int __attribute__((unused)) argc, char *argv[])
 	zeropfn_tests();
 
 	close(pagemap_fd);
-	ksft_exit_pass();
+	ksft_finished();
 }
