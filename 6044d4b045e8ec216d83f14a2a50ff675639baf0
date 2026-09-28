@@ -16,6 +16,24 @@
       "message": "shouldn\u0027t this also have a Reapply?",
       "revId": "6044d4b045e8ec216d83f14a2a50ff675639baf0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0f66f22_58a91b3b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-09-28T20:28:34Z",
+      "side": 1,
+      "message": "Ah, yeah, I just cherry-picked and change for testing initially and forgot here. Thanks for catching this.",
+      "parentUuid": "82e271c4_911e7566",
+      "revId": "6044d4b045e8ec216d83f14a2a50ff675639baf0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
