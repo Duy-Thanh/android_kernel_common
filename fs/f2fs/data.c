@@ -3597,6 +3597,7 @@ static int prepare_atomic_write_begin(struct f2fs_sb_info *sbi,
 	pgoff_t index = page->index;
 	int err = 0;
 	block_t ori_blk_addr = NULL_ADDR;
+	bool cow_has_reserved_block = false;
 
 	/* If pos is beyond the end of file, reserve a new block in COW inode */
 	if ((pos & PAGE_MASK) >= i_size_read(inode))
@@ -3606,13 +3607,25 @@ static int prepare_atomic_write_begin(struct f2fs_sb_info *sbi,
 	err = __find_data_block(cow_inode, index, blk_addr);
 	if (err) {
 		return err;
+<<<<<<< HEAD   (b933cf370392374d82fdf01403fcc4b8765995dd ANDROID: GKI: add platform_device_del symbol to db845c list)
 	} else if (*blk_addr != NULL_ADDR) {
 		*use_cow = true;
+||||||| BASE   (173b61c9276c7b3a5fbcc63ae7aafc897fee1e18 device property: initialize the remaining fields of fwnode_h)
+	else if (*blk_addr != NULL_ADDR)
+=======
+	else if (__is_valid_data_blkaddr(*blk_addr))
+>>>>>>> BRANCH (b7d6ef5d83b2e66e1501dfc1587d0424c03e3b00 f2fs: keep atomic write retry from zeroing original data)
 		return 0;
+<<<<<<< HEAD   (b933cf370392374d82fdf01403fcc4b8765995dd ANDROID: GKI: add platform_device_del symbol to db845c list)
 	}
 
 	if (is_inode_flag_set(inode, FI_ATOMIC_REPLACE))
 		goto reserve_block;
+||||||| BASE   (173b61c9276c7b3a5fbcc63ae7aafc897fee1e18 device property: initialize the remaining fields of fwnode_h)
+=======
+	else if (*blk_addr == NEW_ADDR)
+		cow_has_reserved_block = true;
+>>>>>>> BRANCH (b7d6ef5d83b2e66e1501dfc1587d0424c03e3b00 f2fs: keep atomic write retry from zeroing original data)
 
 	/* Look for the block in the original inode */
 	err = __find_data_block(inode, index, &ori_blk_addr);
@@ -3621,10 +3634,13 @@ static int prepare_atomic_write_begin(struct f2fs_sb_info *sbi,
 
 reserve_block:
 	/* Finally, we should reserve a new block in COW inode for the update */
-	err = __reserve_data_block(cow_inode, index, blk_addr, node_changed);
-	if (err)
-		return err;
-	inc_atomic_write_cnt(inode);
+	if (!cow_has_reserved_block) {
+		err = __reserve_data_block(cow_inode, index, blk_addr,
+					   node_changed);
+		if (err)
+			return err;
+		inc_atomic_write_cnt(inode);
+	}
 
 	if (ori_blk_addr != NULL_ADDR)
 		*blk_addr = ori_blk_addr;
