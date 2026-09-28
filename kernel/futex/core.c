@@ -44,6 +44,9 @@
 #include <linux/prctl.h>
 #include <linux/mempolicy.h>
 #include <linux/mmap_lock.h>
+#include <linux/p3s/mm.h>
+#include <linux/p3s/vma.h>
+#include <linux/uaccess.h>
 
 #include "futex.h"
 #include "../locking/rtmutex_common.h"
@@ -554,6 +557,7 @@ int get_futex_key(u32 __user *uaddr, unsigned int flags, union futex_key *key,
 	struct page *page;
 	struct folio *folio;
 	struct address_space *mapping;
+	unsigned int futex_offset;
 	int node, err, size, ro = 0;
 	bool node_updated = false;
 	bool fshared;
@@ -566,10 +570,11 @@ int get_futex_key(u32 __user *uaddr, unsigned int flags, union futex_key *key,
 	/*
 	 * The futex address must be "naturally" aligned.
 	 */
-	key->both.offset = address % PAGE_SIZE;
+	futex_offset = mm_offset_in_page(mm, address);
+	key->both.offset = futex_offset;
 	if (unlikely((address % size) != 0))
 		return -EINVAL;
-	address -= key->both.offset;
+	address -= futex_offset;
 
 	if (unlikely(!access_ok(uaddr, size)))
 		return -EFAULT;
@@ -636,19 +641,41 @@ again:
 	if (unlikely(should_fail_futex(true)))
 		return -EFAULT;
 
-	err = get_user_pages_fast(address, 1, FOLL_WRITE, &page);
-	/*
-	 * If write access is not required (eg. FUTEX_WAIT), try
-	 * and get read-only access.
-	 */
-	if (err == -EFAULT && rw == FUTEX_READ) {
-		err = get_user_pages_fast(address, 1, 0, &page);
-		ro = 1;
+	if (mm_is_p3s_4k(mm)) {
+		struct vm_area_struct *vma;
+		unsigned long gup_address;
+
+		/* The file key needs the backing folio slice, not the virtual
+		 * alignment: two aliases of one futex word can begin on different
+		 * virtual 4K slices. GUP must also operate on the process page.
+		 */
+		mmap_read_lock(mm);
+		gup_address = untagged_addr_remote(mm, address);
+		vma = vma_lookup(mm, gup_address);
+		if (!vma) {
+			err = -EFAULT;
+			goto unlock_compat;
+		}
+		key->both.offset = futex_offset +
+			(vma_slice_offset(vma, gup_address) << PAGE_SHIFT_4KB);
+		err = get_user_pages(gup_address, 1, FOLL_WRITE, &page);
+		if (err == -EFAULT && rw == FUTEX_READ) {
+			err = get_user_pages(gup_address, 1, 0, &page);
+			ro = 1;
+		}
+unlock_compat:
+		mmap_read_unlock(mm);
+	} else {
+		err = get_user_pages_fast(address, 1, FOLL_WRITE, &page);
+		/* If write access is not required (eg. FUTEX_WAIT), retry RO. */
+		if (err == -EFAULT && rw == FUTEX_READ) {
+			err = get_user_pages_fast(address, 1, 0, &page);
+			ro = 1;
+		}
 	}
-	if (err < 0)
-		return err;
-	else
-		err = 0;
+	if (err != 1)
+		return err < 0 ? err : -EFAULT;
+	err = 0;
 
 	/*
 	 * The treatment of mapping from this point on is critical. The folio
