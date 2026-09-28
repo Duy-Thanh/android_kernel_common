@@ -11,6 +11,17 @@
 #include <linux/page_size_compat.h>
 #include <linux/p3s_user_pages.h>
 
+#ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
+struct p3s_mremap_ctx;
+struct p3s_mremap_ctx *p3s_mremap_prepare(struct vm_area_struct *src_vma,
+		struct vm_area_struct *dst_vma, unsigned long old_addr,
+		unsigned long new_addr, unsigned long len);
+void p3s_mremap_reslice(struct p3s_mremap_ctx *ctx,
+		struct vm_area_struct *vma, unsigned long new_addr,
+		unsigned long len);
+void p3s_mremap_finish(struct p3s_mremap_ctx *ctx);
+#endif
+
 /*
  * Relocate a VMA downwards by shift bytes. There cannot be any VMAs between
  * this VMA and its relocated range, which will now reside at [vma->vm_start -
@@ -42,6 +53,9 @@ int relocate_vma_down(struct vm_area_struct *vma, unsigned long shift)
 	VMG_STATE(vmg, mm, &vmi, new_start, old_end, 0, vma->vm_pgoff);
 	struct vm_area_struct *next;
 	struct mmu_gather tlb;
+#ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
+	struct p3s_mremap_ctx *p3s_ctx;
+#endif
 	PAGETABLE_MOVE(pmc, vma, vma, old_start, new_start, length);
 
 	BUG_ON(new_start > new_end);
@@ -66,8 +80,21 @@ int relocate_vma_down(struct vm_area_struct *vma, unsigned long shift)
 	 * process cleanup to remove whatever mess we made.
 	 */
 	pmc.for_stack = true;
-	if (length != move_page_tables(&pmc))
+#ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
+	p3s_ctx = p3s_mremap_prepare(vma, vma, old_start, new_start, length);
+	if (IS_ERR(p3s_ctx))
+		return PTR_ERR(p3s_ctx);
+#endif
+	if (length != move_page_tables(&pmc)) {
+#ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
+		p3s_mremap_finish(p3s_ctx);
+#endif
 		return -ENOMEM;
+	}
+#ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
+	p3s_mremap_reslice(p3s_ctx, vma, new_start, length);
+	p3s_mremap_finish(p3s_ctx);
+#endif
 
 	tlb_gather_mmu(&tlb, mm);
 	next = vma_next(&vmi);
