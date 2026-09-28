@@ -1,0 +1,31 @@
+# SPDX-License-Identifier: GPL-2.0
+# Kernel-side fixtures for the mm PPPS selftests, one misc device each.
+obj-m += gup_retry_ppps_module.o
+obj-m += iov_iter_ppps_module.o
+obj-m += fault_in_ppps_module.o
+obj-m += mremap_pgoff_ppps_module.o
+obj-m += vm_iomap_memory_ppps_module.o
+obj-m += vm_iomap_unaligned_ppps_module.o
+obj-m += remap_pfn_cow_ppps_module.o
+obj-m += dma_mmap_attrs_ppps_module.o
+obj-m += dma_mmap_pages_ppps_module.o
+obj-m += vm_map_pages_ppps_module.o
+obj-m += iommu_dma_mmap_ppps_module.o
+obj-m += folio_within_range_ppps_module.o
+ifneq ($(CONFIG_MAPPING_DIRTY_HELPERS),)
+obj-m += pagewalk_ppps_module.o
+endif
+ifneq ($(CONFIG_MMU_NOTIFIER),)
+obj-m += mmu_notifier_ppps_module.o
+endif
+ifneq ($(CONFIG_VIDEOBUF2_VMALLOC),)
+obj-m += vb2_mmap_ppps_module.o
+ifneq ($(CONFIG_VIDEOBUF2_DMA_SG),)
+obj-m += vb2_userptr_ppps_module.o
+endif
+endif
+obj-m += frame_vector_abi_ppps_module.o
+obj-m += anon_exclusive_probe_ppps_module.o
+obj-m += sg_page_slices_ppps_module.o
+obj-m += vmalloc_align_ppps_module.o
+obj-m += xdp_pin_probe_ppps_module.o
