@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53397eb4_0f371b4a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-09-28T15:50:23Z",
+      "side": 1,
+      "message": "Why is this empty line in between tags for?",
+      "revId": "31ec08330a1bf0ce1980a0d8c93d2e218095c5e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e107d72_7259d876",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-09-28T15:50:23Z",
+      "side": 1,
+      "message": "Is this really needed on android-mainline or a GKI branch?",
+      "revId": "31ec08330a1bf0ce1980a0d8c93d2e218095c5e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
