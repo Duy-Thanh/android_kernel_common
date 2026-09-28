@@ -18,6 +18,7 @@
 #include <linux/secretmem.h>
 #include <linux/set_memory.h>
 #include <linux/sched/signal.h>
+#include <linux/p3s/vma.h>
 
 #include <uapi/linux/magic.h>
 
@@ -58,7 +59,7 @@ static vm_fault_t secretmem_fault(struct vm_fault *vmf)
 	vm_fault_t ret;
 	int err;
 
-	if (((loff_t)vmf->pgoff << PAGE_SHIFT) >= i_size_read(inode))
+	if (vma_file_offset_at(vmf->vma, vmf->address) >= i_size_read(inode))
 		return vmf_error(-EINVAL);
 
 	filemap_invalidate_lock_shared(mapping);
