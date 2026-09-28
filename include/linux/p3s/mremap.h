@@ -48,17 +48,12 @@ unsigned long __get_unmapped_area(struct file *file, unsigned long addr,
  *                                             ▲
  *                                             └─ res
  *
- * A destination hint from MREMAP_DONTUNMAP (@addr) is used as is if it is
- * free and at the same slice as @old_addr. Otherwise the search starts from
- * the 16KB window that contains it.
+ * A destination hint from MREMAP_DONTUNMAP (@addr) is used as is when free.
+ * A cross-slice anonymous move is repacked by p3s_mremap_reslice().
  *
- * With MREMAP_FIXED, @addr must be at the same slice as @old_addr, that is
- * ((@old_addr ^ @addr) & ~PAGE_MASK_KERNEL) == 0, or this returns -EINVAL.
- * Copying the pages to new folios at other slices would break
- * get_user_pages() and DMA pins on the old folios. Android ART's
- * MREMAP_FIXED users, MarkCompact::KernelPrepareRangeForUffd (2MB-aligned
- * ranges) and MemMap::ReplaceWith (16KB-aligned mmap() addresses), always
- * meet this.
+ * With MREMAP_FIXED, keep the requested target. If an anonymous mapping
+ * changes its slice alignment, p3s_mremap_prepare() rejects pinned source
+ * folios and p3s_mremap_reslice() copies their live slices to new folios.
  */
 static inline unsigned long mm_mremap_get_unmapped_area(struct file *file,
 		unsigned long addr, unsigned long len, unsigned long pgoff,
@@ -69,20 +64,16 @@ static inline unsigned long mm_mremap_get_unmapped_area(struct file *file,
 		unsigned int slice =
 			(old_addr >> PAGE_SHIFT_4KB) & P3S_SLICE_MASK;
 
-		if (mremap_flags & MREMAP_FIXED) {
-			if ((old_addr ^ addr) & ~PAGE_MASK_KERNEL)
-				return -EINVAL;
-		} else if (slice || addr) {
+		if (!(mremap_flags & MREMAP_FIXED) && (slice || addr)) {
 			unsigned long res;
 
 			/*
 			 * MREMAP_DONTUNMAP treats a non-zero destination as an
-			 * mmap-style hint. Use an available hint as is only if
-			 * it is at the source slice. Otherwise search from the
-			 * start of its 16KB window, adding padding to preserve
-			 * the source slice.
+			 * mmap-style hint. Use an available hint as is; the
+			 * cross-slice move path will repack anonymous PTEs.
+			 * Otherwise add padding to preserve the source slice.
 			 */
-			if (addr && !((old_addr ^ addr) & ~PAGE_MASK_KERNEL)) {
+			if (addr) {
 				res = __get_unmapped_area(file, addr, len,
 							  pgoff, map_flags, 0);
 				if (res == addr || IS_ERR_VALUE(res))

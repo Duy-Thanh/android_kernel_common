@@ -32,6 +32,7 @@
 #include <asm/pgalloc.h>
 
 #include "internal.h"
+#include "p3s.h"
 #include <linux/p3s_user_pages.h>
 
 /* Classify the kind of remap operation being performed. */
@@ -1196,6 +1197,7 @@ static int copy_vma_and_data(struct vma_remap_struct *vrm,
 	unsigned long moved_len;
 	struct vm_area_struct *vma = vrm->vma;
 	struct vm_area_struct *new_vma;
+	struct p3s_mremap_ctx *p3s_ctx;
 	int err = 0;
 	PAGETABLE_MOVE(pmc, NULL, NULL, vrm->addr, vrm->new_addr, vrm->old_len);
 
@@ -1215,11 +1217,22 @@ static int copy_vma_and_data(struct vma_remap_struct *vrm,
 	pmc.old = vma;
 	pmc.new = new_vma;
 
-	moved_len = move_page_tables(&pmc);
-	if (moved_len < vrm->old_len)
-		err = -ENOMEM;
-	else if (vma->vm_ops && vma->vm_ops->mremap)
-		err = vma->vm_ops->mremap(new_vma);
+	p3s_ctx = p3s_mremap_prepare(vma, new_vma, vrm->addr,
+				     vrm->new_addr, vrm->old_len);
+	if (IS_ERR(p3s_ctx)) {
+		err = PTR_ERR(p3s_ctx);
+		p3s_ctx = NULL;
+		moved_len = 0;
+	} else {
+		moved_len = move_page_tables(&pmc);
+		if (moved_len < vrm->old_len)
+			err = -ENOMEM;
+		else if (vma->vm_ops && vma->vm_ops->mremap)
+			err = vma->vm_ops->mremap(new_vma);
+		if (!err)
+			p3s_mremap_reslice(p3s_ctx, new_vma, vrm->new_addr,
+					     vrm->old_len);
+	}
 
 	if (unlikely(err)) {
 		PAGETABLE_MOVE(pmc_revert, new_vma, vma, vrm->new_addr,
@@ -1240,6 +1253,7 @@ static int copy_vma_and_data(struct vma_remap_struct *vrm,
 		mremap_userfaultfd_prep(new_vma, vrm->uf);
 	}
 
+	p3s_mremap_finish(p3s_ctx);
 	fixup_hugetlb_reservations(vma);
 
 	*new_vma_ptr = new_vma;
@@ -1770,7 +1784,7 @@ static unsigned long check_mremap_params(struct vma_remap_struct *vrm)
 		return -EINVAL;
 
 	/* Start address must be page-aligned. */
-	if (__offset_in_page_log(addr))
+	if (!mm_pte_aligned(current->mm, addr))
 		return -EINVAL;
 
 	/*
@@ -1794,7 +1808,7 @@ static unsigned long check_mremap_params(struct vma_remap_struct *vrm)
 		return -EINVAL;
 
 	/* The new address must be page-aligned. */
-	if (__offset_in_page(vrm->new_addr))
+	if (!mm_pte_aligned(current->mm, vrm->new_addr))
 		return -EINVAL;
 
 	/* A fixed address implies a move. */
@@ -1924,8 +1938,8 @@ static unsigned long do_mremap(struct vma_remap_struct *vrm)
 	unsigned long res;
 	bool failed;
 
-	vrm->old_len = __PAGE_ALIGN(vrm->old_len);
-	vrm->new_len = __PAGE_ALIGN(vrm->new_len);
+	vrm->old_len = ALIGN(vrm->old_len, mm_pte_size(mm));
+	vrm->new_len = ALIGN(vrm->new_len, mm_pte_size(mm));
 
 	res = check_mremap_params(vrm);
 	if (res)
