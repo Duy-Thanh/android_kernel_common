@@ -362,7 +362,13 @@ static int handle_gcmd_te(struct intel_iommu *iommu, bool enable)
 		if (iommu->vgsts & DMA_GSTS_TES) {
 			pkvm_err("iommu%d: TE allowed only once\n", iommu->seq_id);
 			return -EBUSY;
-		} else if (!(iommu->vgsts & DMA_GSTS_RTPS)) {
+		} else if (!iommu->root_entry) {
+			/*
+			 * Check root_entry rather than GSTS.RTPS: RTPS may already
+			 * be set in hardware before pKVM init, for a root table the
+			 * hypervisor does not own. root_entry is only set once the
+			 * hypervisor has protected and installed the root table.
+			 */
 			pkvm_err("iommu%d: TE not allowed before SRTP\n", iommu->seq_id);
 			return -EINVAL;
 		}
