@@ -2375,7 +2375,16 @@ static int pagemap_ppps_file_pte_range(pmd_t *pmdp, unsigned long addr,
 			ppps_file_page_mapcounts(folio, page, mapcounts);
 		}
 
-		mapcount = mapcounts[vma_slice_offset(vma, addr)];
+		if (vma_is_p3s_4k(vma)) {
+			mapcount = mapcounts[vma_slice_offset(vma, addr)];
+		} else {
+			unsigned int slice;
+
+			/* A native PTE covers every slice of the file folio. */
+			mapcount = 0;
+			for (slice = 0; slice < P3S_SLICES_PER_PAGE; slice++)
+				mapcount = max(mapcount, mapcounts[slice]);
+		}
 		mapcount = max(mapcount, 1);
 		pme = pte_to_pagemap_entry(pm, vma, addr, ptent, mapcount);
 add_entry:
