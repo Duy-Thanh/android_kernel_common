@@ -65,6 +65,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60b49a99_eb076e74",
+        "filename": "include/linux/mm_types.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 979,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-09-28T20:52:56Z",
+      "side": 1,
+      "message": "I\u0027d like to avoid prefixing in mm fields/helpers with `p3s_` which looks hacky and out of place in core MM code. \n\nMM abstractions that represent per-address-space page geometry use `mm_*`\n\nP3S-specific mechanisms later in the series use the prefix you suggested (e.g., `p3s_mode`, `P3S_CONTEXT_REMOTE_MM()`, `p3s_assert_mm()`, `p3s_wp_can_reuse_anon_folio()`)",
+      "parentUuid": "3e03d105_32dc04f0",
+      "range": {
+        "startLine": 979,
+        "startChar": 5,
+        "endLine": 979,
+        "endChar": 14
+      },
+      "revId": "f2a0e6001a442548d3e16c247aababcac9791a4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e616cff_ddf537ed",
+        "filename": "include/linux/mm_types.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 979,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-09-28T20:52:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5aeeb20_cc7e2616",
+      "range": {
+        "startLine": 979,
+        "startChar": 5,
+        "endLine": 979,
+        "endChar": 14
+      },
+      "revId": "f2a0e6001a442548d3e16c247aababcac9791a4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ece40789_a8b6512b",
@@ -78,6 +126,30 @@
       "writtenOn": "2026-09-25T00:07:18Z",
       "side": 1,
       "message": "please add a comment because it is not clear the difference betwee ON and ALTERNATE modes.",
+      "range": {
+        "startLine": 16,
+        "startChar": 1,
+        "endLine": 17,
+        "endChar": 24
+      },
+      "revId": "f2a0e6001a442548d3e16c247aababcac9791a4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a09b4bcc_56093bc0",
+        "filename": "include/linux/p3s/mm.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-09-28T20:52:56Z",
+      "side": 1,
+      "message": "Done. Added comment explaining the different p3s modes.",
+      "parentUuid": "ece40789_a8b6512b",
       "range": {
         "startLine": 16,
         "startChar": 1,
@@ -139,6 +211,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e1289cd_50b177ec",
+        "filename": "include/linux/p3s/mm.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-09-28T20:52:56Z",
+      "side": 1,
+      "message": "See previous comment :)",
+      "parentUuid": "4dcf0fe4_cc7e3aa5",
+      "range": {
+        "startLine": 20,
+        "startChar": 12,
+        "endLine": 20,
+        "endChar": 15
+      },
+      "revId": "f2a0e6001a442548d3e16c247aababcac9791a4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9dcdcac7_70e6c811",
@@ -180,6 +276,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a01da236_72e88337",
+        "filename": "include/linux/p3s/mm.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-09-28T20:52:56Z",
+      "side": 1,
+      "message": "Added comment explaining alternate mode (`\u0026 1`).",
+      "parentUuid": "9dcdcac7_70e6c811",
+      "range": {
+        "startLine": 41,
+        "startChar": 1,
+        "endLine": 47,
+        "endChar": 0
+      },
+      "revId": "f2a0e6001a442548d3e16c247aababcac9791a4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "daf61267_f5aa0c44",
@@ -193,6 +313,30 @@
       "writtenOn": "2026-09-25T00:07:18Z",
       "side": 1,
       "message": "what does this mean? app compatibility, or something else?",
+      "range": {
+        "startLine": 84,
+        "startChar": 19,
+        "endLine": 84,
+        "endChar": 31
+      },
+      "revId": "f2a0e6001a442548d3e16c247aababcac9791a4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86b90d75_1b9cd061",
+        "filename": "include/linux/p3s/mm.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-09-28T20:52:56Z",
+      "side": 1,
+      "message": "Added comment explaining this.",
+      "parentUuid": "daf61267_f5aa0c44",
       "range": {
         "startLine": 84,
         "startChar": 19,
