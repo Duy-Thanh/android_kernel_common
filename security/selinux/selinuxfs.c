@@ -15,6 +15,7 @@
 #include <linux/kernel.h>
 #include <linux/pagemap.h>
 #include <linux/page_size_compat.h>
+#include <linux/p3s/vma.h>
 #include <linux/slab.h>
 #include <linux/vmalloc.h>
 #include <linux/fs.h>
@@ -248,8 +249,8 @@ static int sel_mmap_handle_status(struct file *filp,
 
 	BUG_ON(!status);
 
-	/* only allows one page from the head */
-	if (vma->vm_pgoff > 0 || size != __PAGE_SIZE)
+	/* The status ABI occupies one page in the caller's page geometry. */
+	if (vma_file_offset(vma) || size != vma_page_size(vma))
 		return -EIO;
 	/* disallow writable mapping */
 	if (vma->vm_flags & VM_WRITE)
@@ -421,6 +422,7 @@ static ssize_t sel_read_policy(struct file *filp, char __user *buf,
 static vm_fault_t sel_mmap_policy_fault(struct vm_fault *vmf)
 {
 	struct policy_load_memory *plm = vmf->vma->vm_file->private_data;
+	loff_t file_offset = vma_file_offset_at(vmf->vma, vmf->address);
 	unsigned long offset;
 	struct page *page;
 
@@ -428,7 +430,7 @@ static vm_fault_t sel_mmap_policy_fault(struct vm_fault *vmf)
 		return VM_FAULT_SIGBUS;
 
 	offset = vmf->pgoff << PAGE_SHIFT;
-	if (offset >= roundup(plm->len, PAGE_SIZE))
+	if (file_offset >= plm->len)
 		return VM_FAULT_SIGBUS;
 
 	page = vmalloc_to_page(plm->data + offset);
