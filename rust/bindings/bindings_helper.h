@@ -71,6 +71,7 @@
 #include <linux/of_device.h>
 #include <linux/pci.h>
 #include <linux/page_size_compat.h>
+#include <linux/p3s/const.h>
 #include <linux/phy.h>
 #include <linux/pid_namespace.h>
 #include <linux/platform_device.h>
