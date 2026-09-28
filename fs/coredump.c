@@ -1274,7 +1274,7 @@ EXPORT_SYMBOL(dump_skip);
 
 #ifdef CONFIG_ELF_CORE
 static int dump_emit_page(struct coredump_params *cprm, struct page *page,
-			  unsigned long offset)
+			  unsigned long offset, unsigned long size)
 {
 	struct bio_vec bvec;
 	struct iov_iter iter;
@@ -1290,19 +1290,19 @@ static int dump_emit_page(struct coredump_params *cprm, struct page *page,
 			return 0;
 		cprm->to_skip = 0;
 	}
-	if (cprm->written + PAGE_SIZE > cprm->limit)
+	if (cprm->written + size > cprm->limit)
 		return 0;
 	if (dump_interrupted())
 		return 0;
 	pos = file->f_pos;
-	bvec_set_page(&bvec, page, PAGE_SIZE, offset);
-	iov_iter_bvec(&iter, ITER_SOURCE, &bvec, 1, PAGE_SIZE);
+	bvec_set_page(&bvec, page, size, offset);
+	iov_iter_bvec(&iter, ITER_SOURCE, &bvec, 1, size);
 	n = __kernel_write_iter(cprm->file, &iter, &pos);
-	if (n != PAGE_SIZE)
+	if (n != size)
 		return 0;
 	file->f_pos = pos;
-	cprm->written += PAGE_SIZE;
-	cprm->pos += PAGE_SIZE;
+	cprm->written += size;
+	cprm->pos += size;
 
 	return 1;
 }
@@ -1339,6 +1339,7 @@ static inline struct page *dump_page_copy(struct page *src, struct page *dst)
 int dump_user_range(struct coredump_params *cprm, unsigned long start,
 		    unsigned long len)
 {
+	unsigned long page_size = mm_pte_size(current->mm);
 	unsigned long addr;
 	struct page *dump_page;
 	int locked, ret;
@@ -1349,7 +1350,7 @@ int dump_user_range(struct coredump_params *cprm, unsigned long start,
 
 	ret = 0;
 	locked = 0;
-	for (addr = start; addr < start + len; addr += PAGE_SIZE) {
+	for (addr = start; addr < start + len; addr += page_size) {
 		unsigned long page_offset = 0;
 		struct page *page;
 
@@ -1374,12 +1375,12 @@ int dump_user_range(struct coredump_params *cprm, unsigned long start,
 			}
 			int stop = !dump_emit_page(cprm,
 						   dump_page_copy(page, dump_page),
-						   page_offset);
+						   page_offset, page_size);
 			put_page(page);
 			if (stop)
 				goto out;
 		} else {
-			dump_skip(cprm, PAGE_SIZE);
+			dump_skip(cprm, page_size);
 		}
 
 		if (dump_interrupted())
@@ -1653,7 +1654,7 @@ static unsigned long vma_dump_size(struct vm_area_struct *vma,
 	if (FILTER(ELF_HEADERS) &&
 	    !vma_file_offset(vma) && (vma->vm_flags & VM_READ)) {
 		if ((READ_ONCE(file_inode(vma->vm_file)->i_mode) & 0111) != 0)
-			return PAGE_SIZE;
+			return mm_pte_size(vma->vm_mm);
 
 		/*
 		 * ELF libraries aren't always executable.
@@ -1753,7 +1754,7 @@ static bool dump_vma_snapshot(struct coredump_params *cprm)
 		m->end = vma->vm_end;
 		m->flags = vma->vm_flags;
 		m->dump_size = vma_dump_size(vma, cprm->mm_flags);
-		m->pgoff = vma->vm_pgoff;
+		m->pgoff = vma_file_offset(vma) >> mm_pte_shift(mm);
 		m->file = vma->vm_file;
 		if (m->file)
 			get_file(m->file);
@@ -1772,7 +1773,7 @@ static bool dump_vma_snapshot(struct coredump_params *cprm)
 					memcmp(elfmag, ELFMAG, SELFMAG) != 0) {
 				m->dump_size = 0;
 			} else {
-				m->dump_size = PAGE_SIZE;
+				m->dump_size = mm_pte_size(mm);
 			}
 		}
 
