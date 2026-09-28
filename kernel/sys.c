@@ -1940,7 +1940,7 @@ out_thread:
 	}
 
 out_children:
-	r->ru_maxrss = maxrss * (PAGE_SIZE / 1024); /* convert pages to KBs */
+	r->ru_maxrss = maxrss;
 	r->ru_utime = ns_to_kernel_old_timeval(utime);
 	r->ru_stime = ns_to_kernel_old_timeval(stime);
 }
