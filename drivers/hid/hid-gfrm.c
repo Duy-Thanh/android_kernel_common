@@ -65,16 +65,32 @@ static int gfrm_raw_event(struct hid_device *hdev, struct hid_report *report,
 	 */
 	switch (data[1]) {
 	case GFRM100_SEARCH_KEY_DOWN:
+<<<<<<< HEAD   (dbe2d2eb8f5e3243de8bf86a62c1e3b4e6747566 Merge android17-6.18 into android17-6.18-lts)
 		ret = __hid_report_raw_event(hdev, HID_INPUT_REPORT, search_key_dn,
 					     sizeof(search_key_dn), sizeof(search_key_dn), 1);
+||||||| BASE   (8adc988e9f2061501340697d9ef581f09891253b KVM: x86: Fix Xen hypercall tracepoint argument assignment)
+		ret = hid_report_raw_event(hdev, HID_INPUT_REPORT, search_key_dn,
+					   sizeof(search_key_dn), 1);
+=======
+		ret = hid_report_raw_event(hdev, HID_INPUT_REPORT, search_key_dn,
+					   sizeof(search_key_dn), sizeof(search_key_dn), 1);
+>>>>>>> BRANCH (3ab135238832446399614e7a4bb796d620717806 HID: core: Fix size_t specifier in hid_report_raw_event())
 		break;
 
 	case GFRM100_SEARCH_KEY_AUDIO_DATA:
 		break;
 
 	case GFRM100_SEARCH_KEY_UP:
+<<<<<<< HEAD   (dbe2d2eb8f5e3243de8bf86a62c1e3b4e6747566 Merge android17-6.18 into android17-6.18-lts)
 		ret = __hid_report_raw_event(hdev, HID_INPUT_REPORT, search_key_up,
 					     sizeof(search_key_up), sizeof(search_key_up), 1);
+||||||| BASE   (8adc988e9f2061501340697d9ef581f09891253b KVM: x86: Fix Xen hypercall tracepoint argument assignment)
+		ret = hid_report_raw_event(hdev, HID_INPUT_REPORT, search_key_up,
+					   sizeof(search_key_up), 1);
+=======
+		ret = hid_report_raw_event(hdev, HID_INPUT_REPORT, search_key_up,
+					   sizeof(search_key_up), sizeof(search_key_up), 1);
+>>>>>>> BRANCH (3ab135238832446399614e7a4bb796d620717806 HID: core: Fix size_t specifier in hid_report_raw_event())
 		break;
 
 	default:

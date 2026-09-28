@@ -3663,8 +3663,16 @@ static int hidpp10_consumer_keys_raw_event(struct hidpp_device *hidpp,
 	consumer_report[0] = 0x03;
 	memcpy(&consumer_report[1], &data[3], 4);
 	/* We are called from atomic context */
+<<<<<<< HEAD   (dbe2d2eb8f5e3243de8bf86a62c1e3b4e6747566 Merge android17-6.18 into android17-6.18-lts)
 	__hid_report_raw_event(hidpp->hid_dev, HID_INPUT_REPORT,
 			       consumer_report, sizeof(consumer_report), 5, 1);
+||||||| BASE   (8adc988e9f2061501340697d9ef581f09891253b KVM: x86: Fix Xen hypercall tracepoint argument assignment)
+	hid_report_raw_event(hidpp->hid_dev, HID_INPUT_REPORT,
+			     consumer_report, 5, 1);
+=======
+	hid_report_raw_event(hidpp->hid_dev, HID_INPUT_REPORT,
+			     consumer_report, sizeof(consumer_report), 5, 1);
+>>>>>>> BRANCH (3ab135238832446399614e7a4bb796d620717806 HID: core: Fix size_t specifier in hid_report_raw_event())
 
 	return 1;
 }

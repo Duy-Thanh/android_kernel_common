@@ -84,8 +84,16 @@ void vivaldi_feature_mapping(struct hid_device *hdev,
 		report_len--;
 	}
 
+<<<<<<< HEAD   (dbe2d2eb8f5e3243de8bf86a62c1e3b4e6747566 Merge android17-6.18 into android17-6.18-lts)
 	ret = __hid_report_raw_event(hdev, HID_FEATURE_REPORT, report_data,
 				     report_len, report_len, 0);
+||||||| BASE   (8adc988e9f2061501340697d9ef581f09891253b KVM: x86: Fix Xen hypercall tracepoint argument assignment)
+	ret = hid_report_raw_event(hdev, HID_FEATURE_REPORT, report_data,
+				   report_len, 0);
+=======
+	ret = hid_report_raw_event(hdev, HID_FEATURE_REPORT, report_data,
+				   report_len, report_len, 0);
+>>>>>>> BRANCH (3ab135238832446399614e7a4bb796d620717806 HID: core: Fix size_t specifier in hid_report_raw_event())
 	if (ret) {
 		dev_warn(&hdev->dev, "failed to report feature %d\n",
 			 field->report->id);

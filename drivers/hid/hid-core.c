@@ -2029,8 +2029,16 @@ out:
 }
 EXPORT_SYMBOL_GPL(__hid_request);
 
+<<<<<<< HEAD   (dbe2d2eb8f5e3243de8bf86a62c1e3b4e6747566 Merge android17-6.18 into android17-6.18-lts)
 int __hid_report_raw_event(struct hid_device *hid, enum hid_report_type type, u8 *data,
 			   size_t bufsize, u32 size, int interrupt)
+||||||| BASE   (8adc988e9f2061501340697d9ef581f09891253b KVM: x86: Fix Xen hypercall tracepoint argument assignment)
+int hid_report_raw_event(struct hid_device *hid, enum hid_report_type type, u8 *data, u32 size,
+			 int interrupt)
+=======
+int hid_report_raw_event(struct hid_device *hid, enum hid_report_type type, u8 *data,
+			 size_t bufsize, u32 size, int interrupt)
+>>>>>>> BRANCH (3ab135238832446399614e7a4bb796d620717806 HID: core: Fix size_t specifier in hid_report_raw_event())
 {
 	struct hid_report_enum *report_enum = hid->report_enum + type;
 	struct hid_report *report;
@@ -2173,7 +2181,13 @@ static int __hid_input_report(struct hid_device *hid, enum hid_report_type type,
 			goto unlock;
 	}
 
+<<<<<<< HEAD   (dbe2d2eb8f5e3243de8bf86a62c1e3b4e6747566 Merge android17-6.18 into android17-6.18-lts)
 	ret = __hid_report_raw_event(hid, type, data, bufsize, size, interrupt);
+||||||| BASE   (8adc988e9f2061501340697d9ef581f09891253b KVM: x86: Fix Xen hypercall tracepoint argument assignment)
+	ret = hid_report_raw_event(hid, type, data, size, interrupt);
+=======
+	ret = hid_report_raw_event(hid, type, data, bufsize, size, interrupt);
+>>>>>>> BRANCH (3ab135238832446399614e7a4bb796d620717806 HID: core: Fix size_t specifier in hid_report_raw_event())
 
 unlock:
 	if (!lock_already_taken)

@@ -529,8 +529,16 @@ static void mt_get_feature(struct hid_device *hdev, struct hid_report *report)
 			goto free;
 		}
 
+<<<<<<< HEAD   (dbe2d2eb8f5e3243de8bf86a62c1e3b4e6747566 Merge android17-6.18 into android17-6.18-lts)
 		ret = __hid_report_raw_event(hdev, HID_FEATURE_REPORT, buf,
 					     size, size, 0);
+||||||| BASE   (8adc988e9f2061501340697d9ef581f09891253b KVM: x86: Fix Xen hypercall tracepoint argument assignment)
+		ret = hid_report_raw_event(hdev, HID_FEATURE_REPORT, buf,
+					   size, 0);
+=======
+		ret = hid_report_raw_event(hdev, HID_FEATURE_REPORT, buf,
+					   size, size, 0);
+>>>>>>> BRANCH (3ab135238832446399614e7a4bb796d620717806 HID: core: Fix size_t specifier in hid_report_raw_event())
 		if (ret)
 			dev_warn(&hdev->dev, "failed to report feature\n");
 	}

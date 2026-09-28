@@ -90,7 +90,13 @@ static void wacom_wac_queue_flush(struct hid_device *hdev,
 			kfree(buf);
 			continue;
 		}
+<<<<<<< HEAD   (dbe2d2eb8f5e3243de8bf86a62c1e3b4e6747566 Merge android17-6.18 into android17-6.18-lts)
 		err = __hid_report_raw_event(hdev, HID_INPUT_REPORT, buf, size, size, false);
+||||||| BASE   (8adc988e9f2061501340697d9ef581f09891253b KVM: x86: Fix Xen hypercall tracepoint argument assignment)
+		err = hid_report_raw_event(hdev, HID_INPUT_REPORT, buf, size, false);
+=======
+		err = hid_report_raw_event(hdev, HID_INPUT_REPORT, buf, size, size, false);
+>>>>>>> BRANCH (3ab135238832446399614e7a4bb796d620717806 HID: core: Fix size_t specifier in hid_report_raw_event())
 		if (err) {
 			hid_warn(hdev, "%s: unable to flush event due to error %d\n",
 				 __func__, err);
@@ -333,7 +339,13 @@ static void wacom_feature_mapping(struct hid_device *hdev,
 			ret = wacom_get_report(hdev, HID_FEATURE_REPORT,
 					       data, n, WAC_CMD_RETRIES);
 			if (ret == n && features->type == HID_GENERIC) {
+<<<<<<< HEAD   (dbe2d2eb8f5e3243de8bf86a62c1e3b4e6747566 Merge android17-6.18 into android17-6.18-lts)
 				ret = __hid_report_raw_event(hdev,
+||||||| BASE   (8adc988e9f2061501340697d9ef581f09891253b KVM: x86: Fix Xen hypercall tracepoint argument assignment)
+				ret = hid_report_raw_event(hdev,
+=======
+				ret = hid_report_raw_event(hdev,
+>>>>>>> BRANCH (3ab135238832446399614e7a4bb796d620717806 HID: core: Fix size_t specifier in hid_report_raw_event())
 					HID_FEATURE_REPORT, data, n, n, 0);
 			} else if (ret == 2 && features->type != HID_GENERIC) {
 				features->touch_max = data[1];
@@ -395,8 +407,16 @@ static void wacom_feature_mapping(struct hid_device *hdev,
 		ret = wacom_get_report(hdev, HID_FEATURE_REPORT,
 					data, n, WAC_CMD_RETRIES);
 		if (ret == n) {
+<<<<<<< HEAD   (dbe2d2eb8f5e3243de8bf86a62c1e3b4e6747566 Merge android17-6.18 into android17-6.18-lts)
 			ret = __hid_report_raw_event(hdev, HID_FEATURE_REPORT,
 						     data, n, n, 0);
+||||||| BASE   (8adc988e9f2061501340697d9ef581f09891253b KVM: x86: Fix Xen hypercall tracepoint argument assignment)
+			ret = hid_report_raw_event(hdev, HID_FEATURE_REPORT,
+						   data, n, 0);
+=======
+			ret = hid_report_raw_event(hdev, HID_FEATURE_REPORT,
+						   data, n, n, 0);
+>>>>>>> BRANCH (3ab135238832446399614e7a4bb796d620717806 HID: core: Fix size_t specifier in hid_report_raw_event())
 		} else {
 			hid_warn(hdev, "%s: could not retrieve sensor offsets\n",
 				 __func__);
