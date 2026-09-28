@@ -64,10 +64,7 @@ static inline unsigned long mm_mremap_get_unmapped_area(struct file *file,
 		unsigned int slice =
 			(old_addr >> PAGE_SHIFT_4KB) & P3S_SLICE_MASK;
 
-		if (mremap_flags & MREMAP_FIXED) {
-			if ((old_addr ^ addr) & ~PAGE_MASK_KERNEL)
-				return -EINVAL;
-		} else if (slice) {
+		if (!(mremap_flags & MREMAP_FIXED) && slice) {
 			unsigned long res;
 
 			/*

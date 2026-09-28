@@ -12,6 +12,37 @@
 #include <linux/pgtable.h>
 #include <asm/mte.h>
 
+#ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
+struct p3s_mremap_ctx;
+
+struct p3s_mremap_ctx *p3s_mremap_prepare(struct vm_area_struct *src_vma,
+		struct vm_area_struct *dst_vma, unsigned long old_addr,
+		unsigned long new_addr, unsigned long len);
+void p3s_mremap_reslice(struct p3s_mremap_ctx *ctx,
+		struct vm_area_struct *vma, unsigned long new_addr,
+		unsigned long len);
+void p3s_mremap_finish(struct p3s_mremap_ctx *ctx);
+#else
+struct p3s_mremap_ctx;
+
+static inline struct p3s_mremap_ctx *p3s_mremap_prepare(
+		struct vm_area_struct *src_vma, struct vm_area_struct *dst_vma,
+		unsigned long old_addr, unsigned long new_addr, unsigned long len)
+{
+	return NULL;
+}
+
+static inline void p3s_mremap_reslice(struct p3s_mremap_ctx *ctx,
+		struct vm_area_struct *vma, unsigned long new_addr,
+		unsigned long len)
+{
+}
+
+static inline void p3s_mremap_finish(struct p3s_mremap_ctx *ctx)
+{
+}
+#endif
+
 /*
  * vma_pte_add_slice - Apply subpage slice offset to a PTE value
  * @vma: Pointer to struct vm_area_struct
