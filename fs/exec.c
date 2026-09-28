@@ -453,6 +453,8 @@ static int copy_strings(int argc, struct user_arg_ptr argv,
 {
 	struct page *kmapped_page = NULL;
 	char *kaddr = NULL;
+	unsigned long pte_size = mm_pte_size(bprm->mm);
+	unsigned long pte_mask = mm_pte_mask(bprm->mm);
 	unsigned long kpos = 0;
 	int ret;
 
@@ -490,9 +492,9 @@ static int copy_strings(int argc, struct user_arg_ptr argv,
 			}
 			cond_resched();
 
-			offset = pos % PAGE_SIZE;
+			offset = pos % pte_size;
 			if (offset == 0)
-				offset = PAGE_SIZE;
+				offset = pte_size;
 
 			bytes_to_copy = offset;
 			if (bytes_to_copy > len)
@@ -503,7 +505,7 @@ static int copy_strings(int argc, struct user_arg_ptr argv,
 			str -= bytes_to_copy;
 			len -= bytes_to_copy;
 
-			if (!kmapped_page || kpos != (pos & PAGE_MASK)) {
+			if (!kmapped_page || kpos != (pos & pte_mask)) {
 				struct page *page;
 
 				page = get_arg_page(bprm, pos, 1);
@@ -519,10 +521,12 @@ static int copy_strings(int argc, struct user_arg_ptr argv,
 				}
 				kmapped_page = page;
 				kaddr = kmap_local_page(kmapped_page);
-				kpos = pos & PAGE_MASK;
+				kpos = pos & pte_mask;
 				flush_arg_page(bprm, kpos, kmapped_page);
 			}
-			if (copy_from_user(kaddr+offset, str, bytes_to_copy)) {
+			/* get_arg_page() returns the containing native folio. */
+			offset = offset_in_page(pos);
+			if (copy_from_user(kaddr + offset, str, bytes_to_copy)) {
 				ret = -EFAULT;
 				goto out;
 			}
@@ -544,6 +548,7 @@ out:
 int copy_string_kernel(const char *arg, struct linux_binprm *bprm)
 {
 	int len = strnlen(arg, MAX_ARG_STRLEN) + 1 /* terminating NUL */;
+	unsigned long pte_size = mm_pte_size(bprm->mm);
 	unsigned long pos = bprm->p;
 
 	if (len == 0)
@@ -559,7 +564,7 @@ int copy_string_kernel(const char *arg, struct linux_binprm *bprm)
 
 	while (len > 0) {
 		unsigned int bytes_to_copy = min_t(unsigned int, len,
-				min_not_zero(offset_in_page(pos), PAGE_SIZE));
+				min_not_zero(pos % pte_size, pte_size));
 		struct page *page;
 
 		pos -= bytes_to_copy;
@@ -636,7 +641,8 @@ int setup_arg_pages(struct linux_binprm *bprm,
 	bprm->p = vma->vm_end - stack_shift;
 #else
 	stack_top = arch_align_stack(stack_top);
-	stack_top = __PAGE_ALIGN(stack_top);
+	/* The new stack VMA is mapped in the exec mm's PTE granule. */
+	stack_top = ALIGN(stack_top, mm_pte_size(mm));
 
 	if (unlikely(stack_top < mmap_min_addr) ||
 	    unlikely(vma->vm_end - vma->vm_start >= stack_top - mmap_min_addr))
