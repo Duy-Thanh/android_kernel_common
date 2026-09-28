@@ -201,7 +201,7 @@ static void stack_map_get_build_id_offset(struct bpf_stack_build_id *id_offs,
 			continue;
 		}
 build_id_valid:
-		id_offs[i].offset = (vma->vm_pgoff << PAGE_SHIFT) + ip - vma->vm_start;
+		id_offs[i].offset = vma_file_offset_at(vma, ip);
 		id_offs[i].status = BPF_STACK_BUILD_ID_VALID;
 		prev_vma = vma;
 		prev_build_id = id_offs[i].build_id;
