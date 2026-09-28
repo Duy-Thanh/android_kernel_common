@@ -3682,7 +3682,7 @@ static inline unsigned long vm_end_gap(const struct vm_area_struct *vma)
 	if (vma->vm_flags & VM_GROWSUP) {
 		vm_end += mm_stack_guard_gap(vma->vm_mm);
 		if (vm_end < vma->vm_end)
-			vm_end = -PAGE_SIZE;
+			vm_end = -mm_pte_size(vma->vm_mm);
 	}
 	return vm_end;
 }
