@@ -43,6 +43,7 @@
 #include <linux/unicode.h>
 #include <linux/mm_inline.h>
 #include <linux/page_size_compat.h>
+#include <linux/p3s/shmem.h>
 #include "swap.h"
 
 #undef CREATE_TRACE_POINTS
@@ -1039,6 +1040,9 @@ unsigned long shmem_swap_usage(struct vm_area_struct *vma)
 	 */
 	if (!swapped)
 		return 0;
+
+	if (vma_is_p3s_4k(vma))
+		return vma_shmem_swap_usage(vma, vma->vm_start, vma->vm_end);
 
 	if (!vma->vm_pgoff && vma->vm_end - vma->vm_start >= inode->i_size)
 		return swapped << PAGE_SHIFT;
