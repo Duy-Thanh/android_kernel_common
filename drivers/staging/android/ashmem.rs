@@ -26,7 +26,7 @@ use kernel::{
     iov::IovIterDest,
     miscdevice::{MiscDevice, MiscDeviceOptions, MiscDeviceRegistration},
     mm::virt::{flags as vma_flags, VmaNew},
-    page::{page_align, PAGE_MASK, PAGE_SIZE},
+    page::page_align,
     page_size_compat::__page_align,
     prelude::*,
     seq_file::{seq_print, SeqFile},
@@ -47,6 +47,12 @@ const PROT_READ: usize = bindings::PROT_READ as usize;
 const PROT_EXEC: usize = bindings::PROT_EXEC as usize;
 const PROT_WRITE: usize = bindings::PROT_WRITE as usize;
 const PROT_MASK: usize = PROT_EXEC | PROT_READ | PROT_WRITE;
+
+/// Keep shared range indices in the smallest page unit supported by P3S.
+///
+/// A native process and a 4KB process can share an ashmem fd and its range tree.
+pub(crate) const ASHMEM_RANGE_PAGE_SHIFT: usize = bindings::PAGE_SHIFT_4KB as usize;
+pub(crate) const ASHMEM_RANGE_PAGE_SIZE: usize = 1usize << ASHMEM_RANGE_PAGE_SHIFT;
 
 mod ashmem_shrinker;
 
@@ -426,6 +432,10 @@ impl Ashmem {
             (pin.offset as usize, pin.len as usize)
         };
 
+        let current = current!();
+        let mm = current.mm().ok_or(EINVAL)?;
+        let page_mask = mm.page_mask();
+
         // If `pin`/`unpin` needs a new range, they will take it from this `Option`. Otherwise,
         // they will leave it here, and it gets dropped after the mutexes are released.
         let new_range = if cmd == ASHMEM_GET_PIN_STATUS {
@@ -453,7 +463,7 @@ impl Ashmem {
         // Per custom, you can pass zero for len to mean "everything onward".
         let len = if cmd_len == 0 { remaining } else { cmd_len };
 
-        if (offset | len) & !PAGE_MASK != 0 {
+        if (offset | len) & !page_mask != 0 {
             return Err(EINVAL);
         }
         let len_plus_offset = offset.checked_add(len).ok_or(EINVAL)?;
@@ -469,8 +479,8 @@ impl Ashmem {
             };
         }
 
-        let pgstart = offset / PAGE_SIZE;
-        let pgend = pgstart + (len / PAGE_SIZE) - 1;
+        let pgstart = offset >> ASHMEM_RANGE_PAGE_SHIFT;
+        let pgend = pgstart + (len >> ASHMEM_RANGE_PAGE_SHIFT) - 1;
 
         match cmd {
             ASHMEM_PIN => {
@@ -502,11 +512,19 @@ impl Ashmem {
         if !has_cap_sys_admin() {
             return Err(EPERM);
         }
+        let current = current!();
+        let mm = current.mm().ok_or(EINVAL)?;
+
+        // Shared range indices use fixed 4KB units, not the caller's process-page size.
+        let pages_per_process_page = mm.page_size() / ASHMEM_RANGE_PAGE_SIZE;
         let mut guard = AshmemGuard(ASHMEM_MUTEX.lock());
-        let total_num_pages = LRU_COUNT.load(Ordering::Relaxed);
+        let total_num_range_pages = LRU_COUNT.load(Ordering::Relaxed);
         let _num_freed = guard.free_lru(usize::MAX);
-        // ASHMEM_PURGE_ALL_CACHES returns the total number of pages even if we stopped early.
-        Ok(isize::try_from(total_num_pages).unwrap_or(isize::MAX))
+        // ASHMEM_PURGE_ALL_CACHES returns the total number of caller-visible pages even if we
+        // stopped early. Round up when a 4KB process created a partial kernel-page range.
+
+        let total_num_process_pages = total_num_range_pages.div_ceil(pages_per_process_page);
+        Ok(isize::try_from(total_num_process_pages).unwrap_or(isize::MAX))
     }
 }
 

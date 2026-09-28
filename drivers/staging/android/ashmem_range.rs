@@ -20,7 +20,6 @@ use core::{
 use kernel::{
     c_str,
     list::{List, ListArc, ListLinks},
-    page::PAGE_SIZE,
     prelude::*,
     sync::{GlobalGuard, GlobalLockedBy, UniqueArc},
 };
@@ -388,8 +387,8 @@ impl AshmemGuard {
     pub(crate) fn free_lru(&mut self, stop_after: usize) -> usize {
         let mut freed = 0;
         while let Some(range) = self.lru_list.pop_back() {
-            let start = range.pgstart(self) * PAGE_SIZE;
-            let end = (range.pgend(self) + 1) * PAGE_SIZE;
+            let start = range.pgstart(self) * crate::ASHMEM_RANGE_PAGE_SIZE;
+            let end = (range.pgend(self) + 1) * crate::ASHMEM_RANGE_PAGE_SIZE;
             range.set_purged(self);
             self.remove_lru(&range);
             freed += range.size(self);
@@ -482,7 +481,7 @@ fn range_test() -> Result {
 
     const SIZE: usize = 16;
 
-    let file = ShmemFile::new(c_str!("test_file"), SIZE * PAGE_SIZE, 0)?;
+    let file = ShmemFile::new(c_str!("test_file"), SIZE * crate::ASHMEM_RANGE_PAGE_SIZE, 0)?;
     let mut area = Area::new();
     let mut unpinned = [false; SIZE];
 
