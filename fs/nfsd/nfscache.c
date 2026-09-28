@@ -238,7 +238,7 @@ prune_bucket(struct nfsd_drc_bucket *b, struct nfsd_net *nn)
 		if (rp->c_state == RC_INPROG)
 			continue;
 		if (atomic_read(&nn->num_drc_entries) <= nn->max_drc_entries &&
-		    time_before(jiffies, rp->c_timestamp + RC_EXPIRE))
+\t\t    time_before(jiffies, rp->c_timestamp + RC_EXPIRE))
 			break;
 		nfsd_reply_cache_free_locked(b, rp, nn);
 		freed++;
