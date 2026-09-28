@@ -1125,8 +1125,7 @@ static unsigned long __thp_get_unmapped_area(struct file *filp,
 	loff_t off_align = round_up(off, size);
 	unsigned long len_pad, ret, off_sub;
 
-	if (!IS_ENABLED(CONFIG_64BIT) || in_compat_syscall() ||
-	    (current->mm && mm_is_p3s_4k(current->mm)))
+	if (!IS_ENABLED(CONFIG_64BIT) || in_compat_syscall())
 		return 0;
 
 	if (off_end <= off_align || (off_end - off_align) < size)
@@ -1137,7 +1136,8 @@ static unsigned long __thp_get_unmapped_area(struct file *filp,
 		return 0;
 
 	ret = mm_get_unmapped_area_vmflags(current->mm, filp, addr, len_pad,
-					   off >> PAGE_SHIFT, flags, vm_flags);
+					   off >> mm_pte_shift(current->mm),
+					   flags, vm_flags);
 
 	/*
 	 * The failure might be due to length padding. The caller will retry
@@ -1167,7 +1167,7 @@ unsigned long thp_get_unmapped_area_vmflags(struct file *filp, unsigned long add
 		vm_flags_t vm_flags)
 {
 	unsigned long ret;
-	loff_t off = (loff_t)pgoff << PAGE_SHIFT;
+	loff_t off = (loff_t)pgoff << mm_pte_shift(current->mm);
 
 	ret = __thp_get_unmapped_area(filp, addr, len, off, flags, PMD_SIZE, vm_flags);
 	if (ret)
