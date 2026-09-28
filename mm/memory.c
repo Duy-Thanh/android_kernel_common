@@ -2301,7 +2301,8 @@ static int validate_page_before_insert(struct vm_area_struct *vma,
 
 static int insert_page_into_pte_locked(struct vm_area_struct *vma, pte_t *pte,
 				unsigned long addr, struct page *page,
-				pgprot_t prot, bool mkwrite)
+				pgprot_t prot, bool mkwrite,
+				unsigned int slice_idx)
 {
 	struct folio *folio = page_folio(page);
 	pte_t pteval = ptep_get(pte);
@@ -2337,7 +2338,9 @@ static int insert_page_into_pte_locked(struct vm_area_struct *vma, pte_t *pte,
 		folio_add_file_rmap_pte(folio, page, vma);
 	}
 
-	pteval = vma_pte_add_slice(vma, addr, pteval);
+	if (vma_is_p3s_4k(vma))
+		pteval = pte_advance_phys(pteval,
+				(unsigned long)slice_idx << PAGE_SHIFT_4KB);
 	set_pte_at(vma->vm_mm, addr, pte, pteval);
 	return 0;
 }
@@ -2376,7 +2379,8 @@ static int insert_page_slices(struct vm_area_struct *vma, unsigned long addr,
 }
 
 static int insert_page(struct vm_area_struct *vma, unsigned long addr,
-			struct page *page, pgprot_t prot, bool mkwrite)
+			struct page *page, pgprot_t prot, bool mkwrite,
+			unsigned int slice_idx, bool single_slice)
 {
 	int retval;
 	pte_t *pte;
@@ -2385,14 +2389,14 @@ static int insert_page(struct vm_area_struct *vma, unsigned long addr,
 	retval = validate_page_before_insert(vma, page);
 	if (retval)
 		goto out;
-	if (vma_is_p3s_4k(vma) && !mkwrite)
+	if (vma_is_p3s_4k(vma) && !mkwrite && !single_slice)
 		return insert_page_slices(vma, addr, page, prot);
 	retval = -ENOMEM;
 	pte = get_locked_pte(vma->vm_mm, addr, &ptl);
 	if (!pte)
 		goto out;
 	retval = insert_page_into_pte_locked(vma, pte, addr, page, prot,
-					mkwrite);
+					mkwrite, slice_idx);
 	pte_unmap_unlock(pte, ptl);
 out:
 	return retval;
@@ -2406,20 +2410,20 @@ static int insert_page_in_batch_locked(struct vm_area_struct *vma, pte_t *pte,
 	err = validate_page_before_insert(vma, page);
 	if (err)
 		return err;
-	return insert_page_into_pte_locked(vma, pte, addr, page, prot, false);
+	return insert_page_into_pte_locked(vma, pte, addr, page, prot,
+					   false, vma_slice_offset(vma, addr));
 }
 
-/* insert_pages() for 4KB compatibility VMAs, one kernel page at a time. */
+/* vm_insert_pages() counts process PTEs, even for 4KB compatibility VMAs. */
 static int insert_pages_slices(struct vm_area_struct *vma, unsigned long addr,
 			       struct page **pages, unsigned long *num,
 			       pgprot_t prot)
 {
 	int ret;
 
-	for (; *num; (*num)--, pages++, addr += PAGE_SIZE_KERNEL) {
-		ret = validate_page_before_insert(vma, *pages);
-		if (!ret)
-			ret = insert_page_slices(vma, addr, *pages, prot);
+	for (; *num; (*num)--, pages++, addr += PAGE_SIZE_4KB) {
+		ret = insert_page(vma, addr, *pages, prot, false,
+				  vma_slice_offset(vma, addr), true);
 		if (ret)
 			return ret;
 	}
@@ -2565,9 +2569,29 @@ int vm_insert_page(struct vm_area_struct *vma, unsigned long addr,
 		BUG_ON(vma->vm_flags & VM_PFNMAP);
 		vm_flags_set(vma, VM_MIXEDMAP);
 	}
-	return insert_page(vma, addr, page, vma->vm_page_prot, false);
+	return insert_page(vma, addr, page, vma->vm_page_prot, false,
+			   vma_slice_offset(vma, addr), false);
 }
 EXPORT_SYMBOL(vm_insert_page);
+
+int vm_insert_page_slice(struct vm_area_struct *vma, unsigned long addr,
+			 struct page *page, unsigned int slice_idx)
+{
+	P3S_CONTEXT_REMOTE_MM(vma->vm_mm);
+
+	if (!vma_is_p3s_4k(vma) || slice_idx >= P3S_SLICES_PER_PAGE)
+		return -EINVAL;
+	if (addr < vma->vm_start || addr >= vma->vm_end)
+		return -EFAULT;
+	if (!(vma->vm_flags & VM_MIXEDMAP)) {
+		BUG_ON(mmap_read_trylock(vma->vm_mm));
+		BUG_ON(vma->vm_flags & VM_PFNMAP);
+		vm_flags_set(vma, VM_MIXEDMAP);
+	}
+	return insert_page(vma, addr, page, vma->vm_page_prot, false,
+			   slice_idx, true);
+}
+EXPORT_SYMBOL(vm_insert_page_slice);
 
 /*
  * __vm_map_pages - maps range of kernel pages into user vma
@@ -2865,7 +2889,8 @@ static vm_fault_t __vm_insert_mixed(struct vm_area_struct *vma,
 		 * result in pfn_t_has_page() == false.
 		 */
 		page = pfn_to_page(pfn);
-		err = insert_page(vma, addr, page, pgprot, mkwrite);
+		err = insert_page(vma, addr, page, pgprot, mkwrite,
+				vma_slice_offset(vma, addr), false);
 	} else {
 		return insert_pfn(vma, addr, pfn, pgprot, mkwrite,
 				  vma_slice_offset(vma, addr));
@@ -2889,7 +2914,8 @@ vm_fault_t vmf_insert_page_mkwrite(struct vm_fault *vmf, struct page *page,
 	if (addr < vmf->vma->vm_start || addr >= vmf->vma->vm_end)
 		return VM_FAULT_SIGBUS;
 
-	err = insert_page(vmf->vma, addr, page, pgprot, write);
+	err = insert_page(vmf->vma, addr, page, pgprot, write,
+			  vma_slice_offset(vmf->vma, addr), false);
 	if (err == -ENOMEM)
 		return VM_FAULT_OOM;
 	if (err < 0 && err != -EBUSY)
