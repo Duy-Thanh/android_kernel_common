@@ -1222,6 +1222,106 @@ static int move_swap_pte(struct mm_struct *mm, struct vm_area_struct *dst_vma,
 	return PAGE_SIZE;
 }
 
+/*
+ * A compat mm can map a native swap folio with four process PTEs.  The
+ * exclusive bit is not carried by every sibling PTE, so the single-PTE
+ * MOVE path cannot relocate the second slice.  Move the entire native
+ * swap slot only when its swap count proves that these are all its users.
+ *
+ * The caller has both PTE tables mapped, which is an RCU read-side critical
+ * section, so this must not sleep.  If the swapcache folio is locked, return
+ * -EAGAIN with a reference to it in @wait_folio for the caller to wait on
+ * once the PTEs are unmapped.
+ */
+static long move_compat_swap_folio(struct mm_struct *mm,
+		struct vm_area_struct *dst_vma, unsigned long dst_addr,
+		unsigned long src_addr, pte_t *dst_pte, pte_t *src_pte,
+		pmd_t *dst_pmd, pmd_t dst_pmdval,
+		spinlock_t *dst_ptl, spinlock_t *src_ptl,
+		struct folio **wait_folio)
+{
+	const unsigned int nr = PAGE_SIZE_KERNEL / PAGE_SIZE_4KB;
+	struct swap_info_struct *si = NULL;
+	struct folio *folio = NULL;
+	pte_t first, src[PAGE_SIZE_KERNEL / PAGE_SIZE_4KB];
+	swp_entry_t entry;
+	long ret = -EOPNOTSUPP;
+	unsigned int i;
+
+	first = ptep_get(src_pte);
+	if (pte_none(first) || pte_present(first))
+		return ret;
+	entry = pte_to_swp_entry(first);
+	if (non_swap_entry(entry))
+		return ret;
+	si = get_swap_device(entry);
+	if (!si)
+		return -EAGAIN;
+	folio = swap_cache_get_folio(entry);
+	if (folio) {
+		if (!folio_trylock(folio)) {
+			*wait_folio = folio;
+			put_swap_device(si);
+			return -EAGAIN;
+		}
+		if (!folio_test_swapcache(folio) || folio->swap.val != entry.val) {
+			ret = -EAGAIN;
+			goto out;
+		}
+	}
+
+	double_pt_lock(dst_ptl, src_ptl);
+	ret = -EAGAIN;
+	if (!pmd_same(dst_pmdval, pmdp_get_lockless(dst_pmd)) ||
+	    !pte_same(first, ptep_get(src_pte)))
+		goto unlock;
+	for (i = 0; i < nr; i++) {
+		src[i] = ptep_get(src_pte + i);
+		if (pte_none(src[i]) || pte_present(src[i]) ||
+		    non_swap_entry(pte_to_swp_entry(src[i])) ||
+		    pte_to_swp_entry(src[i]).val != entry.val) {
+			ret = -EOPNOTSUPP;
+			goto unlock;
+		}
+		if (!pte_none(ptep_get(dst_pte + i))) {
+			ret = -EEXIST;
+			goto unlock;
+		}
+	}
+	ret = -EBUSY;
+	if (swp_swapcount(entry) != nr ||
+	    (folio && (folio_mapcount(folio) || folio_test_large(folio) ||
+		       folio_maybe_dma_pinned(folio))))
+		goto unlock;
+	if (folio) {
+		folio_move_anon_rmap(folio, dst_vma);
+		folio->index = linear_page_index(dst_vma, dst_addr);
+	} else if (READ_ONCE(si->swap_map[swp_offset(entry)]) & SWAP_HAS_CACHE) {
+		ret = -EAGAIN;
+		goto unlock;
+	}
+	for (i = 0; i < nr; i++) {
+		unsigned long src_slice = src_addr + i * PAGE_SIZE_4KB;
+		unsigned long dst_slice = dst_addr + i * PAGE_SIZE_4KB;
+		pte_t moved = ptep_get_and_clear(mm, src_slice, src_pte + i);
+
+#ifdef CONFIG_MEM_SOFT_DIRTY
+		moved = pte_swp_mksoft_dirty(moved);
+#endif
+		set_pte_at(mm, dst_slice, dst_pte + i, moved);
+	}
+	ret = PAGE_SIZE_KERNEL;
+unlock:
+	double_pt_unlock(dst_ptl, src_ptl);
+out:
+	if (folio) {
+		folio_unlock(folio);
+		folio_put(folio);
+	}
+	put_swap_device(si);
+	return ret;
+}
+
 static int move_zeropage_pte(struct mm_struct *mm,
 			     struct vm_area_struct *dst_vma,
 			     struct vm_area_struct *src_vma,
@@ -1310,6 +1410,34 @@ retry:
 	if (unlikely(!src_pte)) {
 		ret = -EAGAIN;
 		goto out;
+	}
+	/*
+	 * A source folio locked by an earlier pass may now sit in the swap
+	 * cache behind a swap PTE; leave that case to the generic recheck.
+	 */
+	if (!src_folio && vma_is_p3s_4k(src_vma) &&
+	    IS_ALIGNED(src_addr, PAGE_SIZE_KERNEL) &&
+	    IS_ALIGNED(dst_addr, PAGE_SIZE_KERNEL) &&
+	    len >= PAGE_SIZE_KERNEL &&
+	    src_addr + PAGE_SIZE_KERNEL <= src_vma->vm_end &&
+	    dst_addr + PAGE_SIZE_KERNEL <= dst_vma->vm_end) {
+		struct folio *wait_folio = NULL;
+
+		ret = move_compat_swap_folio(mm, dst_vma, dst_addr, src_addr,
+					     dst_pte, src_pte, dst_pmd,
+					     dst_pmdval, dst_ptl, src_ptl,
+					     &wait_folio);
+		if (wait_folio) {
+			/* Sleep on the folio lock only with the PTEs unmapped. */
+			pte_unmap(src_pte);
+			pte_unmap(dst_pte);
+			src_pte = dst_pte = NULL;
+			folio_wait_locked(wait_folio);
+			folio_put(wait_folio);
+			goto retry;
+		}
+		if (ret != -EOPNOTSUPP)
+			goto out;
 	}
 
 	/* Sanity checks before the operation */
