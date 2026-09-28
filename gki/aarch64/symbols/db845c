@@ -941,6 +941,7 @@
   __wake_up
   __warn_printk
   watchdog_init_timeout
+  watchdog_notify_pretimeout
   ww_mutex_lock
   ww_mutex_lock_interruptible
   ww_mutex_unlock
