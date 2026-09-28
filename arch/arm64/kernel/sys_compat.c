@@ -37,7 +37,13 @@ __do_compat_cache_op(unsigned long start, unsigned long end)
 			 * We pick the reserved-ASID to minimise the impact.
 			 */
 			__tlbi(aside1is, __TLBI_VADDR(0, 0));
+<<<<<<< HEAD   (3e946e0d300e5304b3c46b526c409bf9c9067dd7 Merge android16-6.12 into android16-6.12-lts)
 			__tlbi_sync_s1ish(current->mm);
+||||||| BASE   (e9f803bf2b038ab009661985c5dd704b82bd2118 ptp: vclock: Switch from RCU to SRCU)
+			dsb(ish);
+=======
+			__tlbi_sync_s1ish();
+>>>>>>> BRANCH (d41020725194995ca9dc39fbd233ea243627488d rds: mark snapshot pages dirty in rds_info_getsockopt())
 		}
 
 		ret = caches_clean_inval_user_pou(start, start + chunk);

@@ -218,6 +218,7 @@ do {										\
  * Complete broadcast TLB maintenance issued by the host which invalidates
  * stage 1 information in the host's own translation regime.
  */
+<<<<<<< HEAD   (3e946e0d300e5304b3c46b526c409bf9c9067dd7 Merge android16-6.12 into android16-6.12-lts)
 static inline void __tlbi_sync_s1ish(struct mm_struct *mm)
 {
 	dsb(ish);
@@ -233,6 +234,10 @@ static inline void __tlbi_sync_s1ish_batch(void)
 }
 
 static inline void __tlbi_sync_s1ish_kernel(void)
+||||||| BASE   (e9f803bf2b038ab009661985c5dd704b82bd2118 ptp: vclock: Switch from RCU to SRCU)
+=======
+static inline void __tlbi_sync_s1ish(void)
+>>>>>>> BRANCH (d41020725194995ca9dc39fbd233ea243627488d rds: mark snapshot pages dirty in rds_info_getsockopt())
 {
 	dsb(ish);
 	__repeat_tlbi_sync(vale1is, 0);
@@ -333,7 +338,13 @@ static inline void flush_tlb_all(void)
 {
 	dsb(ishst);
 	__tlbi(vmalle1is);
+<<<<<<< HEAD   (3e946e0d300e5304b3c46b526c409bf9c9067dd7 Merge android16-6.12 into android16-6.12-lts)
 	__tlbi_sync_s1ish_kernel();
+||||||| BASE   (e9f803bf2b038ab009661985c5dd704b82bd2118 ptp: vclock: Switch from RCU to SRCU)
+	dsb(ish);
+=======
+	__tlbi_sync_s1ish();
+>>>>>>> BRANCH (d41020725194995ca9dc39fbd233ea243627488d rds: mark snapshot pages dirty in rds_info_getsockopt())
 	isb();
 }
 
@@ -345,7 +356,13 @@ static inline void flush_tlb_mm(struct mm_struct *mm)
 	asid = __TLBI_VADDR(0, ASID(mm));
 	__tlbi(aside1is, asid);
 	__tlbi_user(aside1is, asid);
+<<<<<<< HEAD   (3e946e0d300e5304b3c46b526c409bf9c9067dd7 Merge android16-6.12 into android16-6.12-lts)
 	__tlbi_sync_s1ish(mm);
+||||||| BASE   (e9f803bf2b038ab009661985c5dd704b82bd2118 ptp: vclock: Switch from RCU to SRCU)
+	dsb(ish);
+=======
+	__tlbi_sync_s1ish();
+>>>>>>> BRANCH (d41020725194995ca9dc39fbd233ea243627488d rds: mark snapshot pages dirty in rds_info_getsockopt())
 	mmu_notifier_arch_invalidate_secondary_tlbs(mm, 0, -1UL);
 }
 
@@ -372,7 +389,13 @@ static inline void flush_tlb_page(struct vm_area_struct *vma,
 				  unsigned long uaddr)
 {
 	flush_tlb_page_nosync(vma, uaddr);
+<<<<<<< HEAD   (3e946e0d300e5304b3c46b526c409bf9c9067dd7 Merge android16-6.12 into android16-6.12-lts)
 	__tlbi_sync_s1ish(vma->vm_mm);
+||||||| BASE   (e9f803bf2b038ab009661985c5dd704b82bd2118 ptp: vclock: Switch from RCU to SRCU)
+	dsb(ish);
+=======
+	__tlbi_sync_s1ish();
+>>>>>>> BRANCH (d41020725194995ca9dc39fbd233ea243627488d rds: mark snapshot pages dirty in rds_info_getsockopt())
 }
 
 static inline bool arch_tlbbatch_should_defer(struct mm_struct *mm)
@@ -410,7 +433,13 @@ static inline void arch_flush_tlb_batched_pending(struct mm_struct *mm)
  */
 static inline void arch_tlbbatch_flush(struct arch_tlbflush_unmap_batch *batch)
 {
+<<<<<<< HEAD   (3e946e0d300e5304b3c46b526c409bf9c9067dd7 Merge android16-6.12 into android16-6.12-lts)
 	__tlbi_sync_s1ish_batch();
+||||||| BASE   (e9f803bf2b038ab009661985c5dd704b82bd2118 ptp: vclock: Switch from RCU to SRCU)
+	dsb(ish);
+=======
+	__tlbi_sync_s1ish();
+>>>>>>> BRANCH (d41020725194995ca9dc39fbd233ea243627488d rds: mark snapshot pages dirty in rds_info_getsockopt())
 }
 
 /*
@@ -536,7 +565,13 @@ static inline void __flush_tlb_range(struct vm_area_struct *vma,
 {
 	__flush_tlb_range_nosync(vma, start, end, stride,
 				 last_level, tlb_level);
+<<<<<<< HEAD   (3e946e0d300e5304b3c46b526c409bf9c9067dd7 Merge android16-6.12 into android16-6.12-lts)
 	__tlbi_sync_s1ish(vma->vm_mm);
+||||||| BASE   (e9f803bf2b038ab009661985c5dd704b82bd2118 ptp: vclock: Switch from RCU to SRCU)
+	dsb(ish);
+=======
+	__tlbi_sync_s1ish();
+>>>>>>> BRANCH (d41020725194995ca9dc39fbd233ea243627488d rds: mark snapshot pages dirty in rds_info_getsockopt())
 }
 
 static inline void flush_tlb_range(struct vm_area_struct *vma,
@@ -566,7 +601,13 @@ static inline void flush_tlb_kernel_range(unsigned long start, unsigned long end
 	dsb(ishst);
 	for (addr = start; addr < end; addr += 1 << (PAGE_SHIFT - 12))
 		__tlbi(vaale1is, addr);
+<<<<<<< HEAD   (3e946e0d300e5304b3c46b526c409bf9c9067dd7 Merge android16-6.12 into android16-6.12-lts)
 	__tlbi_sync_s1ish_kernel();
+||||||| BASE   (e9f803bf2b038ab009661985c5dd704b82bd2118 ptp: vclock: Switch from RCU to SRCU)
+	dsb(ish);
+=======
+	__tlbi_sync_s1ish();
+>>>>>>> BRANCH (d41020725194995ca9dc39fbd233ea243627488d rds: mark snapshot pages dirty in rds_info_getsockopt())
 	isb();
 }
 
@@ -580,7 +621,13 @@ static inline void __flush_tlb_kernel_pgtable(unsigned long kaddr)
 
 	dsb(ishst);
 	__tlbi(vaae1is, addr);
+<<<<<<< HEAD   (3e946e0d300e5304b3c46b526c409bf9c9067dd7 Merge android16-6.12 into android16-6.12-lts)
 	__tlbi_sync_s1ish_kernel();
+||||||| BASE   (e9f803bf2b038ab009661985c5dd704b82bd2118 ptp: vclock: Switch from RCU to SRCU)
+	dsb(ish);
+=======
+	__tlbi_sync_s1ish();
+>>>>>>> BRANCH (d41020725194995ca9dc39fbd233ea243627488d rds: mark snapshot pages dirty in rds_info_getsockopt())
 	isb();
 }
 #endif
