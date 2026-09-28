@@ -323,6 +323,22 @@ struct bpf_func_state {
 struct bpf_idx_pair {
 	u32 prev_idx;
 	u32 idx;
+<<<<<<< HEAD   (8aaa4a09ab09b36ba5e66fdf0900e49af0e660e8 Merge b741c9c6ef59 ("af_unix: Reject SIOCATMARK on non-strea)
+||||||| BASE   (b741c9c6ef59f17c1f104ddf1217ef77f79ed29b af_unix: Reject SIOCATMARK on non-stream sockets)
+	/* insn idx can't be bigger than 1 million */
+	u32 prev_idx : 22;
+	/* special flags, e.g., whether insn is doing register stack spill/load */
+	u32 flags : 10;
+=======
+	/* insn idx can't be bigger than 1 million */
+	u32 prev_idx : 22;
+	/* special flags, e.g., whether insn is doing register stack spill/load */
+	u32 flags : 10;
+	/* additional registers that need precision tracking when this
+	 * jump is backtracked, vector of six 10-bit records
+	 */
+	u64 linked_regs;
+>>>>>>> BRANCH (0252b9d262222687ed445a97e2b22a5c8c0eb0bb bpf: Track equal scalars history on per-instruction level)
 };
 
 #define MAX_CALL_FRAMES 8
