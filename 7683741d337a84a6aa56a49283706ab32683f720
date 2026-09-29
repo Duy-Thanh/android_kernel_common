@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43debc5e_d3f0439c",
+        "filename": "arch/arm64/include/asm/kvm_pkvm_module.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-09-29T08:55:26Z",
+      "side": 1,
+      "message": "I\u0027d suggest to make this a single function, something as `module_host_device_set_context(bool get)`\nTo save some of the ABI pointers as this should be maintained for years and we don\u0027t want to run out of them.",
+      "range": {
+        "startLine": 333,
+        "startChar": 27,
+        "endLine": 333,
+        "endChar": 50
+      },
+      "revId": "7683741d337a84a6aa56a49283706ab32683f720",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
