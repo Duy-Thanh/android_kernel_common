@@ -3722,6 +3722,12 @@ vm_fault_t vmf_insert_page_mkwrite(struct vm_fault *vmf, struct page *page,
 			bool write);
 vm_fault_t vmf_insert_pfn(struct vm_area_struct *vma, unsigned long addr,
 			unsigned long pfn);
+vm_fault_t vmf_insert_pfn_slice(struct vm_area_struct *vma,
+				unsigned long addr, unsigned long pfn,
+				unsigned int slice_idx);
+vm_fault_t vmf_insert_pfn_prot_slice(struct vm_area_struct *vma,
+				     unsigned long addr, unsigned long pfn,
+				     unsigned int slice_idx, pgprot_t pgprot);
 vm_fault_t vmf_insert_pfn_prot(struct vm_area_struct *vma, unsigned long addr,
 			unsigned long pfn, pgprot_t pgprot);
 vm_fault_t vmf_insert_mixed(struct vm_area_struct *vma, unsigned long addr,
