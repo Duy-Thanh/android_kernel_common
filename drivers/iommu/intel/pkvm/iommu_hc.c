@@ -515,6 +515,12 @@ int pkvm_iommu_modify_irte(struct modify_irte_data *data)
 
 	pkvm_spin_lock(&iommu->lock);
 
+	if (!iommu->qi) {
+		pkvm_err("iommu%d: modify_irte: QI not set up\n", iommu->seq_id);
+		ret = -EINVAL;
+		goto unlock;
+	}
+
 	if (!iommu->ir_table) {
 		pkvm_err("iommu%d: modify_irte: IR table not set up\n", iommu->seq_id);
 		ret = -EINVAL;
