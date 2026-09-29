@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecc0fbf8_a03e9b7d",
+        "filename": "include/linux/mm_types.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1051,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-09-29T16:48:39Z",
+      "side": 1,
+      "message": "Note that the placement of mmap_lock within mm_struct is very important for performance (it should be between two cache lines), so we need to be careful not to change it. Please run pahole and see how this change moves things around (I believe 8 bytes you are adding will also introduce extra padding).",
+      "revId": "3513a521db4fc33fc86c0bfe27fcb11f7f7b3f31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6532a19c_ab36ccd6",
+        "filename": "include/linux/p3s/mm.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-09-29T16:48:39Z",
+      "side": 1,
+      "message": "Maybe call these P3S_4K_MODE_xxx? Because you are not enabling P3S you are enabling 4K mode here IIUC.",
+      "range": {
+        "startLine": 21,
+        "startChar": 1,
+        "endLine": 21,
+        "endChar": 13
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8102f6f8_585e16c9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/p3s/mm.h",
+              "range": {
+                "startLine": 16,
+                "startChar": 0,
+                "endLine": 19,
+                "endChar": 0
+              },
+              "replacement": " * P3S_4K_MODE_OFF:       Standard behavior (controlled via personality)\n * P3S_4K_MODE_ON:        Force 4KB pages for all processes after boot\n * P3S_4K_MODE_ALTERNATE: Alternate 4KB (odd PIDs) and 16KB (even PIDs) for stress testing\n"
+            },
+            {
+              "path": "include/linux/p3s/mm.h",
+              "range": {
+                "startLine": 21,
+                "startChar": 0,
+                "endLine": 24,
+                "endChar": 0
+              },
+              "replacement": "\tP3S_4K_MODE_OFF \u003d 0,\n\tP3S_4K_MODE_ON \u003d 1,\n\tP3S_4K_MODE_ALTERNATE \u003d 2,\n"
+            },
+            {
+              "path": "include/linux/p3s/mm.h",
+              "range": {
+                "startLine": 54,
+                "startChar": 0,
+                "endLine": 56,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tp3s_mode \u003d\u003d P3S_4K_MODE_ON ||\n\t\t\t(p3s_mode \u003d\u003d P3S_4K_MODE_ALTERNATE \u0026\u0026\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3513a521db4fc33fc86c0bfe27fcb11f7f7b3f31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef9c357e_234676ab",
+        "filename": "include/linux/p3s/mm.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-09-29T16:48:39Z",
+      "side": 1,
+      "message": "So, this is confusing. I think you should be using `p-\u003epersonality` if `p!\u003dNULL` or `current-\u003epersonality` if p is NULL. But in here you use `p-\u003epersonality` as a fallback. Is that correct?\n\nAlso would be more readable if this long expression could be split into separate `ifs`. Maybe with `use_4kb \u003d false` to start with and then setting it when one of the conditions are met.",
+      "range": {
+        "startLine": 52,
+        "startChar": 9,
+        "endLine": 53,
+        "endChar": 50
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "17e9789f_8eca591d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/p3s/mm.h",
+              "range": {
+                "startLine": 51,
+                "startChar": 0,
+                "endLine": 57,
+                "endChar": 0
+              },
+              "replacement": "\tbool use_4kb \u003d false;\n\n\tif (system_state \u003e\u003d SYSTEM_RUNNING) {\n\t\tunsigned long pers \u003d p ? p-\u003epersonality : current-\u003epersonality;\n\t\tint pid \u003d p ? p-\u003epid : current-\u003epid;\n\n\t\tif (personality_4kb_pages(pers))\n\t\t\tuse_4kb \u003d true;\n\t\telse if (p3s_mode \u003d\u003d P3S_MODE_ON)\n\t\t\tuse_4kb \u003d true;\n\t\telse if (p3s_mode \u003d\u003d P3S_MODE_ALTERNATE \u0026\u0026 (pid \u0026 1))\n\t\t\tuse_4kb \u003d true;\n\t}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3513a521db4fc33fc86c0bfe27fcb11f7f7b3f31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
