@@ -16,6 +16,24 @@
       "message": "This change couldn\u0027t be related to PTS failure in b/567230996",
       "revId": "17d998d6073914f011d341c96af5e47a4ce94b7e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d03b2bf9_fe467798",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1827146
+      },
+      "writtenOn": "2026-09-29T23:39:36Z",
+      "side": 1,
+      "message": "verified that with revert it is still failing https://android-build.corp.google.com/builds/tests/view?invocationId\u003dI59300010634359237\u0026testResultId\u003dTR38730416454205236",
+      "parentUuid": "a45f27ac_666d3de9",
+      "revId": "17d998d6073914f011d341c96af5e47a4ce94b7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
