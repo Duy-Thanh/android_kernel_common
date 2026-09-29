@@ -44,7 +44,14 @@ impl DmaBufContent {
 
         self.writable = writable;
 
+        self.clear()?;
+
         Ok(())
+    }
+
+    fn clear(&mut self) -> Result {
+        let map = self.dmabuf.vmap()?;
+        map.begin_cpu_access_to(|mut access| access.memset(0, 0, self.dmabuf.size()))
     }
 
     pub(crate) fn is_writable(&self) -> bool {
