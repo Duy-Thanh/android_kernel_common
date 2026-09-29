@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b48ad85a_30f21e9f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2026-09-29T19:54:47Z",
+      "side": 1,
+      "message": "Remove the `Fixes` line, since this does not fix anything.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 64
+      },
+      "revId": "bc8be37f41554e9ffac6365c1d0e0e1422d10900",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3fc3d5b8_cb53269f",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 8
