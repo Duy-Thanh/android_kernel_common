@@ -49,7 +49,7 @@ CFLAGS += -U_FORTIFY_SOURCE
 PPPS_TESTS := \
 	aio_ring_ppps anon_pageout_ppps anon_vma_name_ppps ashmem_ppps \
 	bpf_array_mmap_ppps bpf_ringbuf_mmap_ppps bpf_stack_build_id_ppps \
-	dma_heap_ppps dma_mmap_ppps elf_core_ppps \
+	dma_heap_ppps dma_mmap_ppps dontneed_refault_ppps elf_core_ppps \
 	exec_user_args_ppps fadvise_dontneed_ppps fault_in_ppps \
 	file_cow_ppps file_cow_refs_ppps filemap_eof_ppps folio_within_range_ppps frame_vector_ppps \
 	fork_filemap_ppps fork_page_size_ppps \
@@ -260,7 +260,7 @@ $(eval $(call ppps_test_hdrs,pagewalk_ppps,pagewalk_ppps.h))
 $(eval $(call ppps_test_hdrs,vm_map_pages_ppps,vm_map_pages_ppps.h))
 $(foreach t,mincore_ppps mlock_onfault_ppps, \
 	$(eval $(call ppps_test_hdrs,$(t),../kselftest_ppps.h)))
-$(foreach t,file_cow_ppps hole_anon_ppps mte_anon_ppps packed_anon_ppps \
+$(foreach t,dontneed_refault_ppps file_cow_ppps hole_anon_ppps mte_anon_ppps packed_anon_ppps \
 	    packed_swap_ppps uffd_copy_tuple_ppps uffd_move_retry_ppps, \
 	$(eval $(call ppps_test_hdrs,$(t),ppps_tuple_test.h)))
 
