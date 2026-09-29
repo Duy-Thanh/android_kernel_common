@@ -81,6 +81,16 @@ static inline void mm_dup_mmap(const struct mm_struct *oldmm,
 
 #ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
 
+static inline bool mm_tcr_needs_switch(const struct mm_struct *mm)
+{
+	unsigned long geometry;
+
+	if (mm == &init_mm)
+		return false;
+	geometry = read_sysreg(tcr_el1) & (TCR_TG0_MASK | TCR_T0SZ_MASK);
+	return geometry != mm_tcr_geometry(mm);
+}
+
 #define mm_switch_tcr(mm)						\
 do {									\
 	if ((mm) != &init_mm)						\
@@ -88,6 +98,11 @@ do {									\
 } while (0)
 
 #else /* !CONFIG_ARM64_PER_PROCESS_PAGE_SIZE */
+
+static inline bool mm_tcr_needs_switch(const struct mm_struct *mm)
+{
+	return false;
+}
 
 #define mm_switch_tcr(mm)	do { } while (0)
 
