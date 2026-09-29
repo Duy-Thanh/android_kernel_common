@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bbccabc_ba7b92f2",
+        "filename": "include/linux/p3s_user_pages.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-09-29T20:29:48Z",
+      "side": 1,
+      "message": "I don\u0027t see you redefining the components of these macros. Does this redefinition change anything?",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 69
+      },
+      "revId": "173bddcb3452ba6692b088a602092e6e49b8c4df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
