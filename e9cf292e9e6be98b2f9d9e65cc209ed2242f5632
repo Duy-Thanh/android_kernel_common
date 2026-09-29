@@ -16,6 +16,24 @@
       "message": "This is an empty commit from the branch perspective. Is it just to update the merge base?",
       "revId": "e9cf292e9e6be98b2f9d9e65cc209ed2242f5632",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72bd8d51_d183e7d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-09-29T14:04:09Z",
+      "side": 1,
+      "message": "It\u0027s a \"we need to take our side of the merge\" type of commit, and empty on purpose.",
+      "parentUuid": "3c766d21_bfaed117",
+      "revId": "e9cf292e9e6be98b2f9d9e65cc209ed2242f5632",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
