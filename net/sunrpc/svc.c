@@ -339,6 +339,7 @@ svc_pool_for_cpu(struct svc_serv *serv, int cpu)
 {
 	struct svc_pool_map *m = &svc_pool_map;
 	unsigned int pidx = 0;
+	unsigned int i;
 
 	/*
 	 * An uninitialised map happens in a pure client when
@@ -355,7 +356,41 @@ svc_pool_for_cpu(struct svc_serv *serv, int cpu)
 			break;
 		}
 	}
+<<<<<<< HEAD   (64205e2c7d13ba3eef1fac47f1af02b405141494 Merge bb38ff8b4daf ("NFSD: Prevent lock owner use-after-free)
 	return &serv->sv_pools[pidx % serv->sv_nrpools];
+||||||| BASE   (bb38ff8b4dafbbd1781ad37cd96722fdf2cd972a NFSD: Prevent lock owner use-after-free during client teardo)
+
+	return &serv->sv_pools[pidx % serv->sv_nrpools];
+=======
+	pidx %= serv->sv_nrpools;
+
+	/*
+	 * It's possible to have a pool with no threads. Userland can just set
+	 * things up this way directly. Also, when threads are autodistributed
+	 * they are spread evenly across the pools, but when there are fewer
+	 * threads than pools some pools can end up with none.
+	 *
+	 * A transport enqueued on a threadless pool would never be picked up,
+	 * since each thread only services its own pool. Fall back to the next
+	 * populated pool, trading NUMA locality for a guarantee that the
+	 * transport is serviced.
+	 */
+	for (i = 0; i < serv->sv_nrpools; i++) {
+		struct svc_pool *pool = &serv->sv_pools[pidx];
+
+		/* This is set under the service mutex and rarely ever
+		 * changes. A data race here is harmless.
+		 */
+		if (data_race(pool->sp_nrthreads))
+			return pool;
+
+		if (++pidx >= serv->sv_nrpools)
+			pidx = 0;
+	}
+
+	/* No pool has any threads; nothing can service the transport. */
+	return &serv->sv_pools[pidx];
+>>>>>>> BRANCH (fb10e0e9b220a2eed08931a60dbaad9a2370c908 net: skbuff: don't skb_tx_error() the source skb in skb_zero)
 }
 
 int svc_rpcb_setup(struct svc_serv *serv, struct net *net)
