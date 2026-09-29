@@ -331322,6 +331322,13 @@ function {
   parameter_id: 0x0b27dc43
 }
 function {
+  id: 0x100bb93b
+  return_type_id: 0x48b5725f
+  parameter_id: 0x06835e9c
+  parameter_id: 0x4585663f
+  parameter_id: 0x94aa5e96
+}
+function {
   id: 0x100bdee9
   return_type_id: 0x48b5725f
   parameter_id: 0x038de60c
@@ -426202,6 +426209,15 @@ elf_symbol {
   full_name: "free_hpage"
 }
 elf_symbol {
+  id: 0x03cc6f0e
+  name: "free_hpage_order"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x9a98c7ff
+  type_id: 0x100bb93b
+  full_name: "free_hpage_order"
+}
+elf_symbol {
   id: 0x9b815cdc
   name: "free_io_pgtable_ops"
   is_defined: true
@@ -448221,6 +448237,15 @@ elf_symbol {
   crc: 0x38a781ac
   type_id: 0x12ef7c12
   full_name: "prep_new_hpage"
+}
+elf_symbol {
+  id: 0x2ea3188f
+  name: "prep_new_hpage_order"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xcfff9c10
+  type_id: 0x1013ec0e
+  full_name: "prep_new_hpage_order"
 }
 elf_symbol {
   id: 0x4e6d24f1
@@ -476604,6 +476629,7 @@ interface {
   symbol_id: 0xd76e68de
   symbol_id: 0x1b00ff86
   symbol_id: 0xb511ce50
+  symbol_id: 0x03cc6f0e
   symbol_id: 0x9b815cdc
   symbol_id: 0x998ad938
   symbol_id: 0x27e49ce0
@@ -479046,6 +479072,7 @@ interface {
   symbol_id: 0xd46a0ddb
   symbol_id: 0x0da24a9a
   symbol_id: 0xaeaf7c63
+  symbol_id: 0x2ea3188f
   symbol_id: 0x4e6d24f1
   symbol_id: 0x98d05c44
   symbol_id: 0x80c0972e
