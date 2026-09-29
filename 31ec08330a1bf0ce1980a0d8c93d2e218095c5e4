@@ -87,6 +87,24 @@
       "parentUuid": "8d15bd65_3b87adbb",
       "revId": "31ec08330a1bf0ce1980a0d8c93d2e218095c5e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "879896d3_1a0ea5f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-09-29T13:48:42Z",
+      "side": 1,
+      "message": "Huh? I\u0027m asking why on this branch? I just want to make sure it is not a \"so that it automatically lands in future branches\" response. Anyway, this is a _very_ small config so I don\u0027t see any problems.",
+      "parentUuid": "da728665_317c209e",
+      "revId": "31ec08330a1bf0ce1980a0d8c93d2e218095c5e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
