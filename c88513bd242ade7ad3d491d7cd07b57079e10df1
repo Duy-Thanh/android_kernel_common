@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b95e6eee_5a7a2cc7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4270060
+      },
+      "writtenOn": "2026-09-29T03:15:55Z",
+      "side": 1,
+      "message": "1. wait merge in mainline\n2.  hi hmazur@google.com, should we split abi/symbols changes to separated CL",
+      "revId": "c88513bd242ade7ad3d491d7cd07b57079e10df1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
