@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "748c68d6_8d8ed355",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-29T21:21:35Z",
+      "side": 1,
+      "message": "This is a clean cherry-pick, so it should be tagged as `UPSTREAM`.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "aa6d32095863df617e7fe7ff3a3f27fcbbc880ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
