@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbe3bbd9_5861ba89",
+        "filename": "include/linux/p3s/const.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-09-29T16:20:12Z",
+      "side": 1,
+      "message": "A comment why we start at 1/4 of the vm space would be helpful.",
+      "range": {
+        "startLine": 50,
+        "startChar": 8,
+        "endLine": 50,
+        "endChar": 30
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6cd7c68c_f627933d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/p3s/const.h",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\n/* 4KB process layout constants */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "89b0047344f90771e5bfc82c0d92710d720bb96a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
