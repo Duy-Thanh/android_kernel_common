@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fc3d5b8_cb53269f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2026-09-29T19:47:49Z",
+      "side": 1,
+      "message": "Is the implementation of these hooks available?  These can\u0027t be reviewed properly without seeing the implementation.\n\nAdditionally, there needs to be an upstream plan, as vendor hooks cannot be carried indefinitely, especially in security-critical components like dm-verity.  We can help with upstreaming equivalent functionality, but we would need the implementation to understand the requirements.",
+      "revId": "bc8be37f41554e9ffac6365c1d0e0e1422d10900",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
