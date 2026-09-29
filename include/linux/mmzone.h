@@ -615,6 +615,7 @@ void lru_gen_online_memcg(struct mem_cgroup *memcg);
 void lru_gen_offline_memcg(struct mem_cgroup *memcg);
 void lru_gen_release_memcg(struct mem_cgroup *memcg);
 void lru_gen_soft_reclaim(struct mem_cgroup *memcg, int nid);
+void lru_gen_notify_oom_score_adj(struct task_struct *task, int old_adj, int new_adj);
 
 #else /* !CONFIG_LRU_GEN */
 
@@ -652,6 +653,11 @@ static inline void lru_gen_release_memcg(struct mem_cgroup *memcg)
 }
 
 static inline void lru_gen_soft_reclaim(struct mem_cgroup *memcg, int nid)
+{
+}
+
+static inline void lru_gen_notify_oom_score_adj(struct task_struct *task,
+						int old_adj, int new_adj)
 {
 }
 

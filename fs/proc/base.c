@@ -1185,16 +1185,24 @@ static int __set_oom_adj(struct file *file, int oom_adj, bool legacy)
 		}
 	}
 
-	task->signal->oom_score_adj = oom_adj;
-	if (!legacy && has_capability_noaudit(current, CAP_SYS_RESOURCE))
-		task->signal->oom_score_adj_min = (short)oom_adj;
-	trace_oom_score_adj_update(task);
+	{
+		int old_adj = task->signal->oom_score_adj;
+
+		task->signal->oom_score_adj = oom_adj;
+		if (!legacy && has_capability_noaudit(current, CAP_SYS_RESOURCE))
+			task->signal->oom_score_adj_min = (short)oom_adj;
+		trace_oom_score_adj_update(task);
+		lru_gen_notify_oom_score_adj(task, old_adj, oom_adj);
+	}
 
 	if (mm) {
 		struct task_struct *p;
 
 		rcu_read_lock();
 		for_each_process(p) {
+			bool notify = false;
+			int p_old_adj = 0;
+
 			if (same_thread_group(task, p))
 				continue;
 
@@ -1204,11 +1212,16 @@ static int __set_oom_adj(struct file *file, int oom_adj, bool legacy)
 
 			task_lock(p);
 			if (!p->vfork_done && process_shares_mm(p, mm)) {
+				p_old_adj = p->signal->oom_score_adj;
+
 				p->signal->oom_score_adj = oom_adj;
 				if (!legacy && has_capability_noaudit(current, CAP_SYS_RESOURCE))
 					p->signal->oom_score_adj_min = (short)oom_adj;
+				notify = true;
 			}
 			task_unlock(p);
+			if (notify)
+				lru_gen_notify_oom_score_adj(p, p_old_adj, oom_adj);
 		}
 		rcu_read_unlock();
 		mmdrop(mm);
