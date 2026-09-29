@@ -12,6 +12,7 @@
 #include <nvhe/mem_protect.h>
 #include <nvhe/modules.h>
 #include <nvhe/mm.h>
+#include <nvhe/pkvm.h>
 #include <nvhe/serial.h>
 #include <nvhe/spinlock.h>
 #include <nvhe/trace.h>
@@ -290,6 +291,15 @@ int module_unmap_module_pages(u64 pfn, void *va, u64 nr_pages)
 	return __pkvm_unmap_module_pages(pfn, va, nr_pages);
 }
 
+static int module_host_device_set_context(u64 iommu_id, u32 endpoint_id, bool get)
+{
+	if (get)
+		return pkvm_devices_get_context(iommu_id, endpoint_id, NULL);
+
+	pkvm_devices_put_context(iommu_id, endpoint_id);
+	return 0;
+}
+
 const struct pkvm_module_ops module_ops = {
 	.create_private_mapping = __pkvm_create_private_mapping,
 	.alloc_module_va = __pkvm_alloc_module_va,
@@ -359,6 +369,7 @@ const struct pkvm_module_ops module_ops = {
 	.device_register_power_lock = pkvm_device_register_power_lock,
 	.register_guest_trng_ops = __register_guest_trng_ops,
 	.request_hyp_alloc = kvm_iommu_request_hyp_alloc,
+	.host_device_set_context = module_host_device_set_context,
 };
 
 static void *pkvm_module_hyp_va(struct pkvm_el2_module *mod, void *kern_va)
