@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf722f44_167597a0",
+        "filename": "arch/arm64/include/asm/p3s/mmu.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-09-29T20:20:04Z",
+      "side": 1,
+      "message": "Maybe define this value as `TASK_UNMAPPED_BASE_KERNEL` inside `include/linux/p3s/const.h` and use it here?",
+      "range": {
+        "startLine": 34,
+        "startChar": 7,
+        "endLine": 34,
+        "endChar": 48
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "14ca60f7_cf93937e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/include/asm/p3s/mmu.h",
+              "range": {
+                "startLine": 34,
+                "startChar": 0,
+                "endLine": 35,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\t   TASK_UNMAPPED_BASE;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ea19496a0754b171f00525b46e35b26f4a69d000",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
