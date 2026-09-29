@@ -351937,6 +351937,13 @@ function {
   parameter_id: 0x3f0185ef
 }
 function {
+  id: 0x8d1d48c3
+  return_type_id: 0xd41e888f
+  parameter_id: 0x33a9d455
+  parameter_id: 0x295c7202
+  parameter_id: 0x00c72527
+}
+function {
   id: 0x8d1d790a
   return_type_id: 0xd41e888f
   parameter_id: 0x33a9d455
@@ -430558,6 +430565,15 @@ elf_symbol {
   full_name: "i2c_register_driver"
 }
 elf_symbol {
+  id: 0xa0ad366a
+  name: "i2c_smbus_read_block_data"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x4ba1b78b
+  type_id: 0x8d1d48c3
+  full_name: "i2c_smbus_read_block_data"
+}
+elf_symbol {
   id: 0x6079aa3a
   name: "i2c_smbus_read_byte"
   is_defined: true
@@ -443311,6 +443327,15 @@ elf_symbol {
   namespace: "PWM"
   type_id: 0x0ad6ec83
   full_name: "of_pwm_xlate_with_flags"
+}
+elf_symbol {
+  id: 0x4c4068c3
+  name: "of_regulator_get_optional"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xeb636102
+  type_id: 0x85702b8a
+  full_name: "of_regulator_get_optional"
 }
 elf_symbol {
   id: 0x31405e51
@@ -477087,6 +477112,7 @@ interface {
   symbol_id: 0xda059fd6
   symbol_id: 0xf9a63f6b
   symbol_id: 0xfc041c30
+  symbol_id: 0xa0ad366a
   symbol_id: 0x6079aa3a
   symbol_id: 0x01d46904
   symbol_id: 0x5bf25f7e
@@ -478501,6 +478527,7 @@ interface {
   symbol_id: 0x22e56ff2
   symbol_id: 0x6df0c91f
   symbol_id: 0xb4e1cb45
+  symbol_id: 0x4c4068c3
   symbol_id: 0x31405e51
   symbol_id: 0x64a1a905
   symbol_id: 0xf3ce8bfd
