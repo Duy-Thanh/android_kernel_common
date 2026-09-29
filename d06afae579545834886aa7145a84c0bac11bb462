@@ -1,0 +1,137 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcdc8f6a_1e049aea",
+        "filename": "drivers/usb/gadget/udc/core.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-09-29T05:24:02Z",
+      "side": 1,
+      "message": "not really andoid specific, you just moved this into this structure to keep the abi.",
+      "range": {
+        "startLine": 49,
+        "startChar": 14,
+        "endLine": 49,
+        "endChar": 21
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "774faa4b_0cd0f165",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/usb/gadget/udc/core.c",
+              "range": {
+                "startLine": 49,
+                "startChar": 0,
+                "endLine": 50,
+                "endChar": 0
+              },
+              "replacement": " * @teardown: True if the device is undergoing teardown, used to prevent\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d06afae579545834886aa7145a84c0bac11bb462",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9aa86b98_8652fbae",
+        "filename": "drivers/usb/gadget/udc/core.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1133,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-09-29T05:24:02Z",
+      "side": 1,
+      "message": "guard()?",
+      "range": {
+        "startLine": 1133,
+        "startChar": 1,
+        "endLine": 1133,
+        "endChar": 18
+      },
+      "revId": "d06afae579545834886aa7145a84c0bac11bb462",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a95d7e6d_249ae0c6",
+        "filename": "drivers/usb/gadget/udc/core.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1146,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-09-29T05:24:02Z",
+      "side": 1,
+      "message": "you are just using the global lock, this isn\u0027t android-specific logic.",
+      "range": {
+        "startLine": 1146,
+        "startChar": 4,
+        "endLine": 1146,
+        "endChar": 11
+      },
+      "revId": "d06afae579545834886aa7145a84c0bac11bb462",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ff23bf4_c363c8e4",
+        "filename": "drivers/usb/gadget/udc/core.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1199,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-09-29T05:24:02Z",
+      "side": 1,
+      "message": "why is this android-only?  The previous commit handles this in a different way how?",
+      "range": {
+        "startLine": 1199,
+        "startChar": 4,
+        "endLine": 1199,
+        "endChar": 11
+      },
+      "revId": "d06afae579545834886aa7145a84c0bac11bb462",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18d55a39_0012d08b",
+        "filename": "drivers/usb/gadget/udc/core.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1200,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-09-29T05:24:02Z",
+      "side": 1,
+      "message": "guard()?",
+      "range": {
+        "startLine": 1200,
+        "startChar": 1,
+        "endLine": 1200,
+        "endChar": 18
+      },
+      "revId": "d06afae579545834886aa7145a84c0bac11bb462",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
