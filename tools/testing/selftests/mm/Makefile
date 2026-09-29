@@ -82,6 +82,7 @@ PPPS_TESTS := \
 	userfaultfd_remap_ppps userfaultfd_remote_ppps \
 	userfaultfd_shmem_ppps \
 	userfaultfd_unregister_remote_ppps userfaultfd_wp_remote_ppps \
+	uffd_sigbus_anon_ppps \
 	v9fs_mmap_close_ppps vb2_mmap_ppps \
 	vb2_userptr_ppps vhost_dirty_log_ppps vm_iomap_memory_ppps \
 	vma_range_slice_ppps \
