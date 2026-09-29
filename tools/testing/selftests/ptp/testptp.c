@@ -196,7 +196,13 @@ int main(int argc, char *argv[])
 
 	progname = strrchr(argv[0], '/');
 	progname = progname ? 1+progname : argv[0];
+<<<<<<< HEAD   (e9cf292e9e6be98b2f9d9e65cc209ed2242f5632 Merge 2181a09ba980 ("virtiofs: fix UAF on submount umount") )
 	while (EOF != (c = getopt(argc, argv, "cd:e:f:ghH:i:k:lL:n:o:p:P:sSt:T:w:x:Xz"))) {
+||||||| BASE   (2181a09ba980f142650fb053666350ead4471cfe virtiofs: fix UAF on submount umount)
+	while (EOF != (c = getopt(argc, argv, "cd:e:f:F:ghH:i:k:lL:n:o:p:P:rsSt:T:w:x:Xz"))) {
+=======
+	while (EOF != (c = getopt(argc, argv, "cd:e:f:ghH:i:k:lL:n:o:p:P:rsSt:T:w:x:Xz"))) {
+>>>>>>> BRANCH (03ef56495f0be2aa8221b883e26b6add832da93e err.h: use __always_inline on all error pointer helpers)
 		switch (c) {
 		case 'c':
 			capabilities = 1;
