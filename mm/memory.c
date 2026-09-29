@@ -3850,6 +3850,7 @@ static vm_fault_t wp_page_copy(struct vm_fault *vmf)
 	struct mmu_notifier_range range;
 	vm_fault_t ret;
 	bool pfn_is_zero;
+	bool reused_zero_folio = false;
 
 	delayacct_wpcopy_start();
 
@@ -3900,6 +3901,9 @@ static vm_fault_t wp_page_copy(struct vm_fault *vmf)
 	 */
 	vmf->pte = pte_offset_map_lock(mm, vmf->pmd, vmf->address, &vmf->ptl);
 	if (likely(vmf->pte && pte_same(ptep_get(vmf->pte), vmf->orig_pte))) {
+		if (pfn_is_zero)
+			reused_zero_folio =
+				p3s_wp_reuse_zero_folio(&new_folio, vmf);
 		if (old_folio) {
 			if (!folio_test_anon(old_folio)) {
 				dec_mm_counter(mm, mm_counter_file(old_folio));
@@ -3923,6 +3927,14 @@ static vm_fault_t wp_page_copy(struct vm_fault *vmf)
 
 		if (p3s_wp_install_folio_slices(new_folio, old_folio, vmf))
 			goto pte_installed;
+		if (reused_zero_folio) {
+			ptep_clear_flush(vma, vmf->address, vmf->pte);
+			atomic_inc(&new_folio->_mapcount);
+			set_pte_at(mm, vmf->address, vmf->pte, entry);
+			update_mmu_cache_range(vmf, vma, vmf->address,
+					       vmf->pte, 1);
+			goto pte_installed;
+		}
 
 		/*
 		 * Clear the pte entry and flush it first, before updating the

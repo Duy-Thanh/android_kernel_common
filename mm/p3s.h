@@ -10,6 +10,7 @@
 #include <linux/userfaultfd_k.h>
 #include <linux/huge_mm.h>
 #include <linux/pgtable.h>
+#include <asm/mte.h>
 
 /*
  * vma_pte_add_slice - Apply subpage slice offset to a PTE value
@@ -139,6 +140,27 @@ static inline void vma_folio_clamp_none_ptes(const struct vm_area_struct *vma,
 
 #ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
 
+static inline void p3s_copy_folio_range(struct folio *dst, struct folio *src,
+					unsigned long offset, unsigned long size)
+{
+	void *from = kmap_local_page(&src->page);
+	void *to = kmap_local_page(&dst->page);
+	void *from_slice = from + offset;
+	void *to_slice = to + offset;
+
+	memcpy(to_slice, from_slice, size);
+#ifdef CONFIG_ARM64_MTE
+	if (system_supports_mte() && page_mte_tagged(&dst->page) &&
+	    page_mte_tagged(&src->page))
+		mte_copy_tags_range(to_slice, from_slice, size);
+#endif
+	kunmap_local(to);
+	kunmap_local(from);
+	flush_dcache_folio(dst);
+	/* Publish copied data before the caller installs the destination PTE. */
+	smp_wmb();
+}
+
 /*
  * p3s_anon_folio_lookaround_pte - Find adjacent anonymous folio in slice window
  * @vma: Pointer to struct vm_area_struct
@@ -225,6 +247,23 @@ static inline void p3s_anon_install_folio(struct vm_area_struct *vma,
 		existing_folio = p3s_anon_folio_lookaround_pte(vma, vmf->pte, addr);
 
 	if (existing_folio) {
+		unsigned long offset =
+			(unsigned long)vma_slice_offset(vma, addr) << PAGE_SHIFT_4KB;
+		unsigned long size =
+			(unsigned long)nr_pages << PAGE_SHIFT_4KB;
+
+		/*
+		 * An anonymous refault must replace stale slice contents with
+		 * the newly allocated (normally zeroed) slice.  The exception
+		 * is the remote GUP that builds an exec stack: it populates the
+		 * returned page only after this function returns, so copying
+		 * here would erase argv and environment strings already stored
+		 * in siblings.  Other remote faults (ptrace, /proc/pid/mem,
+		 * process_vm_writev) must not expose stale data either.
+		 */
+		if (!(vmf->flags & FAULT_FLAG_REMOTE) ||
+		    !vma_is_temporary_stack(vma))
+			p3s_copy_folio_range(existing_folio, folio, offset, size);
 		folio_put(folio);
 		*foliop = folio = existing_folio;
 	}
@@ -277,8 +316,7 @@ static inline bool p3s_uffd_install_anon_folio(struct vm_area_struct *dst_vma,
 
 	offset = (unsigned long)vma_slice_offset(dst_vma, dst_addr) << PAGE_SHIFT_4KB;
 
-	memcpy(folio_address(existing_folio) + offset,
-	       folio_address(folio) + offset, PAGE_SIZE_4KB);
+	p3s_copy_folio_range(existing_folio, folio, offset, PAGE_SIZE_4KB);
 
 	p3s_anon_folio_reuse(existing_folio, dst_vma, 1);
 	*dst_pte_val = vma_folio_mk_pte(dst_vma, existing_folio, dst_addr);
@@ -504,6 +542,33 @@ static inline bool p3s_wp_install_folio_slices(struct folio *new_folio,
 	return true;
 }
 
+/*
+ * Reuse an adjacent packed folio when replacing a compat zero-page PTE.
+ * The reference returned by the lookaround becomes the new PTE reference.
+ */
+static inline bool
+p3s_wp_reuse_zero_folio(struct folio **new_foliop, struct vm_fault *vmf)
+{
+	struct vm_area_struct *vma = vmf->vma;
+	struct folio *existing_folio;
+	unsigned long offset;
+
+	if (!vma_is_p3s_4k(vma))
+		return false;
+
+	existing_folio = p3s_anon_folio_lookaround_pte(vma, vmf->pte,
+						       vmf->address);
+	if (!existing_folio)
+		return false;
+
+	offset = (unsigned long)vma_slice_offset(vma, vmf->address) <<
+		 PAGE_SHIFT_4KB;
+	p3s_copy_folio_range(existing_folio, *new_foliop, offset, PAGE_SIZE_4KB);
+	folio_put(*new_foliop);
+	*new_foliop = existing_folio;
+	return true;
+}
+
 #else /* !CONFIG_ARM64_PER_PROCESS_PAGE_SIZE */
 
 static inline void p3s_anon_install_folio(struct vm_area_struct *vma,
@@ -556,6 +621,12 @@ static inline int p3s_wp_copy_folio_slices(struct folio *new_folio,
 static inline bool p3s_wp_install_folio_slices(struct folio *new_folio,
 					       struct folio *old_folio,
 					       struct vm_fault *vmf)
+{
+	return false;
+}
+
+static inline bool
+p3s_wp_reuse_zero_folio(struct folio **new_foliop, struct vm_fault *vmf)
 {
 	return false;
 }
