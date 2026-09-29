@@ -245,17 +245,19 @@ static inline loff_t vma_file_offset_at(const struct vm_area_struct *vma,
 static inline pgoff_t vma_linear_page_index(const struct vm_area_struct *vma,
 					    unsigned long addr)
 {
+	s64 delta = (s64)addr - (s64)vma->vm_start;
+
 	if (!vma_is_p3s_4k(vma) || (vma->vm_ops && !vma->vm_file))
 		return vma->vm_pgoff +
 		       ((addr - vma->vm_start) >> PAGE_SHIFT_KERNEL);
 
 	if (!vma->vm_ops)
-		return vma->vm_pgoff +
-		       ((addr - vma->vm_start) >> PAGE_SHIFT_4KB);
+		return (pgoff_t)((s64)vma->vm_pgoff +
+				 (delta >> PAGE_SHIFT_4KB));
 
-	return vma->vm_pgoff +
-	       ((vma_slice_off(vma) + ((addr - vma->vm_start) >> PAGE_SHIFT_4KB)) >>
-		P3S_SLICE_SHIFT);
+	return (pgoff_t)((((s64)vma->vm_pgoff << P3S_SLICE_SHIFT) +
+			  vma_slice_off(vma) + (delta >> PAGE_SHIFT_4KB)) >>
+			 P3S_SLICE_SHIFT);
 }
 
 /*
@@ -492,10 +494,12 @@ static inline void vma_set_range_slice(struct vm_area_struct *vma,
 				       unsigned long start, unsigned long end,
 				       pgoff_t pgoff)
 {
+	unsigned short slice_off = vma_slice_offset(vma, start);
+
 	vma->vm_start = start;
 	vma->vm_end = end;
 	vma->vm_pgoff = pgoff;
-	vma_set_slice_off(vma, vma_slice_offset(vma, start));
+	vma_set_slice_off(vma, slice_off);
 }
 
 /*
