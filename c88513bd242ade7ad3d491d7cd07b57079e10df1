@@ -34,6 +34,24 @@
       "parentUuid": "b95e6eee_5a7a2cc7",
       "revId": "c88513bd242ade7ad3d491d7cd07b57079e10df1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59f9131c_1f7ab4f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2055842
+      },
+      "writtenOn": "2026-09-29T05:06:26Z",
+      "side": 1,
+      "message": "You will need to cherry-pick again, as the commit SHA may change. Also, there is a line missing `cherry-picked from...`. Once the change lands on android-mainline, cherry-pick it with `-sx` flags and resend.\n\n\u003e hi hmazur@google.com, should we split abi/symbols changes to separated CL\n\nYes, please.\n\n\u003c Do we need(and how) to udpate abi/symbols for arm64 repo in my android17-6.18-desktop-intel branch?\n\nwe will see whether it would be required.",
+      "parentUuid": "fb21bb1b_b21b7769",
+      "revId": "c88513bd242ade7ad3d491d7cd07b57079e10df1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
