@@ -994,17 +994,133 @@ static __u32 fanotify_mark_add_to_mask(struct fsnotify_mark *fsn_mark,
 				       __u32 mask,
 				       unsigned int flags)
 {
+<<<<<<< HEAD   (7f7c58523d6d0f96dd5e6e4fbea32b4388e3ce9c Merge 8709e7e1dd7d ("entry: Fix seccomp bypass after ptrace )
 	__u32 oldmask = -1;
+||||||| BASE   (8709e7e1dd7d7de0651e61700edf24f5784f9243 entry: Fix seccomp bypass after ptrace with TSYNC)
+	bool want_iref = !(fan_flags & FAN_MARK_EVICTABLE);
+	unsigned int ignore = fan_flags & FANOTIFY_MARK_IGNORE_BITS;
+	bool recalc = false;
+
+	/*
+	 * When using FAN_MARK_IGNORE for the first time, mark starts using
+	 * independent event flags in ignore mask.  After that, trying to
+	 * update the ignore mask with the old FAN_MARK_IGNORED_MASK API
+	 * will result in EEXIST error.
+	 */
+	if (ignore == FAN_MARK_IGNORE)
+		fsn_mark->flags |= FSNOTIFY_MARK_FLAG_HAS_IGNORE_FLAGS;
+
+	/*
+	 * Setting FAN_MARK_IGNORED_SURV_MODIFY for the first time may lead to
+	 * the removal of the FS_MODIFY bit in calculated mask if it was set
+	 * because of an ignore mask that is now going to survive FS_MODIFY.
+	 */
+	if (ignore && (fan_flags & FAN_MARK_IGNORED_SURV_MODIFY) &&
+	    !(fsn_mark->flags & FSNOTIFY_MARK_FLAG_IGNORED_SURV_MODIFY)) {
+		fsn_mark->flags |= FSNOTIFY_MARK_FLAG_IGNORED_SURV_MODIFY;
+		if (!(fsn_mark->mask & FS_MODIFY))
+			recalc = true;
+	}
+
+	if (fsn_mark->connector->type != FSNOTIFY_OBJ_TYPE_INODE ||
+	    want_iref == !(fsn_mark->flags & FSNOTIFY_MARK_FLAG_NO_IREF))
+		return recalc;
+
+	/*
+	 * NO_IREF may be removed from a mark, but not added.
+	 * When removed, fsnotify_recalc_mask() will take the inode ref.
+	 */
+	WARN_ON_ONCE(!want_iref);
+	fsn_mark->flags &= ~FSNOTIFY_MARK_FLAG_NO_IREF;
+
+	return true;
+}
+
+static bool fanotify_mark_add_to_mask(struct fsnotify_mark *fsn_mark,
+				      __u32 mask, unsigned int fan_flags)
+{
+	bool recalc;
+=======
+	bool want_iref = !(fan_flags & FAN_MARK_EVICTABLE);
+	unsigned int ignore = fan_flags & FANOTIFY_MARK_IGNORE_BITS;
+	bool recalc = false;
+
+	/*
+	 * When using FAN_MARK_IGNORE for the first time, mark starts using
+	 * independent event flags in ignore mask.  After that, trying to
+	 * update the ignore mask with the old FAN_MARK_IGNORED_MASK API
+	 * will result in EEXIST error.
+	 */
+	if (ignore == FAN_MARK_IGNORE)
+		fsn_mark->flags |= FSNOTIFY_MARK_FLAG_HAS_IGNORE_FLAGS;
+
+	/*
+	 * Setting FAN_MARK_IGNORED_SURV_MODIFY for the first time may lead to
+	 * the removal of the FS_MODIFY bit in calculated mask if it was set
+	 * because of an ignore mask that is now going to survive FS_MODIFY.
+	 */
+	if (ignore && (fan_flags & FAN_MARK_IGNORED_SURV_MODIFY) &&
+	    !(fsn_mark->flags & FSNOTIFY_MARK_FLAG_IGNORED_SURV_MODIFY)) {
+		fsn_mark->flags |= FSNOTIFY_MARK_FLAG_IGNORED_SURV_MODIFY;
+		if (!(fsn_mark->mask & FS_MODIFY))
+			recalc = true;
+	}
+
+	if (fsn_mark->connector->type != FSNOTIFY_OBJ_TYPE_INODE ||
+	    want_iref == !(fsn_mark->flags & FSNOTIFY_MARK_FLAG_NO_IREF))
+		return recalc;
+
+	/*
+	 * NO_IREF may be removed from a mark, but not added.
+	 * When removed, fsnotify_recalc_mask() will take the inode ref.
+	 */
+	WARN_ON_ONCE(!want_iref);
+	fsn_mark->flags &= ~FSNOTIFY_MARK_FLAG_NO_IREF;
+
+	return true;
+}
+
+static bool fanotify_mark_add_to_mask(struct fsnotify_mark *fsn_mark,
+				      __u32 mask, unsigned int fan_flags)
+{
+	__u32 old_mask;
+	bool recalc;
+>>>>>>> BRANCH (2f09f08d602647fc4e328fc27ecb4c3008d10338 fsnotify: Fix stale object mask after concurrent mark update)
 
 	spin_lock(&fsn_mark->lock);
+<<<<<<< HEAD   (7f7c58523d6d0f96dd5e6e4fbea32b4388e3ce9c Merge 8709e7e1dd7d ("entry: Fix seccomp bypass after ptrace )
 	if (!(flags & FAN_MARK_IGNORED_MASK)) {
 		oldmask = fsn_mark->mask;
+||||||| BASE   (8709e7e1dd7d7de0651e61700edf24f5784f9243 entry: Fix seccomp bypass after ptrace with TSYNC)
+	if (!(fan_flags & FANOTIFY_MARK_IGNORE_BITS))
+=======
+	if (!(fan_flags & FANOTIFY_MARK_IGNORE_BITS)) {
+		old_mask = fsn_mark->mask;
+>>>>>>> BRANCH (2f09f08d602647fc4e328fc27ecb4c3008d10338 fsnotify: Fix stale object mask after concurrent mark update)
 		fsn_mark->mask |= mask;
+<<<<<<< HEAD   (7f7c58523d6d0f96dd5e6e4fbea32b4388e3ce9c Merge 8709e7e1dd7d ("entry: Fix seccomp bypass after ptrace )
 	} else {
 		fsn_mark->ignored_mask |= mask;
 		if (flags & FAN_MARK_IGNORED_SURV_MODIFY)
 			fsn_mark->flags |= FSNOTIFY_MARK_FLAG_IGNORED_SURV_MODIFY;
 	}
+||||||| BASE   (8709e7e1dd7d7de0651e61700edf24f5784f9243 entry: Fix seccomp bypass after ptrace with TSYNC)
+	else
+		fsn_mark->ignore_mask |= mask;
+
+	recalc = fsnotify_calc_mask(fsn_mark) &
+		~fsnotify_conn_mask(fsn_mark->connector);
+
+	recalc |= fanotify_mark_update_flags(fsn_mark, fan_flags);
+=======
+		recalc = old_mask != fsn_mark->mask;
+	} else {
+		fsn_mark->ignore_mask |= mask;
+		recalc = true;
+	}
+
+	recalc |= fanotify_mark_update_flags(fsn_mark, fan_flags);
+>>>>>>> BRANCH (2f09f08d602647fc4e328fc27ecb4c3008d10338 fsnotify: Fix stale object mask after concurrent mark update)
 	spin_unlock(&fsn_mark->lock);
 
 	return mask & ~oldmask;
