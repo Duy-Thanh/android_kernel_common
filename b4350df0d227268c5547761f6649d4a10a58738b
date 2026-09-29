@@ -16,6 +16,24 @@
       "message": "Nit: a duplicate Signed-off-by: Carlos Llamas \u003ccmllamas@google.com\u003e in the commit message (lines 25 and 31).",
       "revId": "b4350df0d227268c5547761f6649d4a10a58738b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de124574_cb2aa7a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-09-29T14:07:46Z",
+      "side": 1,
+      "message": "Yes, this is the \"expected\" way to do it. One Sob when authoring the patch and then a second one during the cherry-pick and tags. Always keeping the \"chronological\" order of these.",
+      "parentUuid": "23963110_5d7632e0",
+      "revId": "b4350df0d227268c5547761f6649d4a10a58738b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
