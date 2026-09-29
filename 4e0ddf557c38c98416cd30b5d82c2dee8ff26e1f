@@ -70,6 +70,24 @@
       "parentUuid": "2546a661_3525309f",
       "revId": "4e0ddf557c38c98416cd30b5d82c2dee8ff26e1f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a1442cd_97494cd7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1639124
+      },
+      "writtenOn": "2026-09-29T07:37:54Z",
+      "side": 1,
+      "message": "If we find a way to trigger verity node digest block in advance and invent a new clever way to arrange such tail digest block close to the fs metadata in a fs-metadata-independent way, that would be much better to apply intrusive modification to EROFS_INODE_FLAT_PLAIN and EROFS_INODE_COMPRESSED_FULL since EROFS_INODE_COMPRESSED_COMPACT is common for small pclusters (and many android users) and EROFS_INODE_CHUNK_BASED is used for some container images for example.",
+      "parentUuid": "c60f32ef_b13139c3",
+      "revId": "4e0ddf557c38c98416cd30b5d82c2dee8ff26e1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
