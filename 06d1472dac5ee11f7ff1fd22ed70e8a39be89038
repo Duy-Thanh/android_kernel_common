@@ -1,0 +1,68 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1adc9ae5_87b16a86",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-09-29T20:50:48Z",
+      "side": 1,
+      "message": "Please document more specifically what each one means. On \u003d all userspace processes start as 4K and personality can override it, Off \u003d all userspace processes start as 16K and personality can override it, Alternate \u003d all userspace processes start with 4K if PID is even, 16K if it\u0027s odd and personality can override it.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 56
+      },
+      "revId": "06d1472dac5ee11f7ff1fd22ed70e8a39be89038",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e1e10ff_6cab36b5",
+        "filename": "mm/p3s.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-09-29T20:50:48Z",
+      "side": 1,
+      "message": "`p3s\u003d\"on/1|off/0|alternate\"`",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 1
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "74a89c03_7d74c526",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/p3s.c",
+              "range": {
+                "startLine": 23,
+                "startChar": 0,
+                "endLine": 24,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (val \u003c P3S_MODE_MAX) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "06d1472dac5ee11f7ff1fd22ed70e8a39be89038",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
