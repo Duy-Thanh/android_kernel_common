@@ -437,6 +437,7 @@ void f2fs_balance_fs(struct f2fs_sb_info *sbi, bool need)
 	if (has_enough_free_secs(sbi, 0, 0))
 		return;
 
+<<<<<<< HEAD   (1159f3cb156838d322f9311248aa955eaec3aeb0 Merge c3e05522daae ("f2fs: bound i_inline_xattr_size for non)
 	if (test_opt(sbi, GC_MERGE) && sbi->gc_thread &&
 				sbi->gc_thread->f2fs_gc_task) {
 		DEFINE_WAIT(wait);
@@ -456,6 +457,49 @@ void f2fs_balance_fs(struct f2fs_sb_info *sbi, bool need)
 			.nr_free_secs = 1 };
 		f2fs_down_write_trace(&sbi->gc_lock, &gc_control.lc);
 		f2fs_gc(sbi, &gc_control);
+||||||| BASE   (c3e05522daae4e7348a1ea81eeb321d25aa0fd3b f2fs: bound i_inline_xattr_size for non-inline-xattr inodes)
+			prepare_to_wait(&sbi->gc_thread->fggc_wq, &wait,
+						TASK_UNINTERRUPTIBLE);
+			wake_up(&sbi->gc_thread->gc_wait_queue_head);
+			io_schedule();
+			finish_wait(&sbi->gc_thread->fggc_wq, &wait);
+		} else {
+			struct f2fs_gc_control gc_control = {
+				.victim_segno = NULL_SEGNO,
+				.init_gc_type = BG_GC,
+				.no_bg_gc = true,
+				.should_migrate_blocks = false,
+				.err_gc_skipped = false,
+				.nr_free_secs = 1 };
+			f2fs_down_write(&sbi->gc_lock);
+			f2fs_gc(sbi, &gc_control);
+		}
+=======
+			prepare_to_wait(&sbi->gc_thread->fggc_wq, &wait,
+						TASK_UNINTERRUPTIBLE);
+			wake_up(&sbi->gc_thread->gc_wait_queue_head);
+			io_schedule();
+			finish_wait(&sbi->gc_thread->fggc_wq, &wait);
+		} else {
+			struct f2fs_gc_control gc_control = {
+				.victim_segno = NULL_SEGNO,
+				.init_gc_type = BG_GC,
+				.no_bg_gc = true,
+				.should_migrate_blocks = false,
+				.err_gc_skipped = false,
+				.nr_free_secs = 1 };
+
+			/*
+			 * Submit all cached OPU/IPU DATA bios before triggering
+			 * foreground GC to avoid potential deadlocks.
+			 */
+			f2fs_submit_merged_write(sbi, DATA);
+			f2fs_submit_all_merged_ipu_writes(sbi);
+
+			f2fs_down_write(&sbi->gc_lock);
+			f2fs_gc(sbi, &gc_control);
+		}
+>>>>>>> BRANCH (e273116fbb6dfd7f027c0623e7c5109241be1919 f2fs: fix potential deadlock in f2fs_balance_fs())
 	}
 }
 
