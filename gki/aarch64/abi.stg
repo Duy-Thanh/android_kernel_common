@@ -16989,6 +16989,11 @@ pointer_reference {
   pointee_type_id: 0xba2a9386
 }
 pointer_reference {
+  id: 0x241ded8b
+  kind: POINTER
+  pointee_type_id: 0xba3750b0
+}
+pointer_reference {
   id: 0x24265283
   kind: POINTER
   pointee_type_id: 0xbad9ac93
@@ -50934,6 +50939,10 @@ member {
   type_id: 0x3893701c
 }
 member {
+  id: 0x2df13677
+  type_id: 0x38eaa9ce
+}
+member {
   id: 0x2e080f29
   type_id: 0x370e4cb6
 }
@@ -52598,6 +52607,11 @@ member {
   id: 0x3e670f18
   type_id: 0x76b2536c
   offset: 320
+}
+member {
+  id: 0x3e7338eb
+  type_id: 0x76e2a1b2
+  offset: 4224
 }
 member {
   id: 0x3e7e5067
@@ -59812,16 +59826,15 @@ member {
   offset: 7104
 }
 member {
+  id: 0x821bb455
+  name: "__kabi_reserved6"
+  type_id: 0x92233392
+}
+member {
   id: 0x821bb6a6
   name: "__kabi_reserved6"
   type_id: 0x92233392
   offset: 1408
-}
-member {
-  id: 0x821bb8d6
-  name: "__kabi_reserved6"
-  type_id: 0x92233392
-  offset: 4224
 }
 member {
   id: 0x821bb9fb
@@ -134253,6 +134266,11 @@ member {
   name: "host_data"
   type_id: 0x18bd6530
   offset: 448
+}
+member {
+  id: 0x804c368c
+  name: "host_device_set_context"
+  type_id: 0x241ded8b
 }
 member {
   id: 0x93f7cd86
@@ -280006,6 +280024,14 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x38eaa9ce
+  kind: STRUCT
+  definition {
+    bytesize: 8
+    member_id: 0x821bb455
+  }
+}
+struct_union {
   id: 0x390911ef
   kind: STRUCT
   definition {
@@ -284338,6 +284364,16 @@ struct_union {
     member_id: 0x5a01ffcb
     member_id: 0xf6e79dd5
     member_id: 0xbed29020
+  }
+}
+struct_union {
+  id: 0x76e2a1b2
+  kind: UNION
+  definition {
+    bytesize: 8
+    member_id: 0x804c368c
+    member_id: 0x2df13677
+    member_id: 0x36752b74
   }
 }
 struct_union {
@@ -340034,7 +340070,7 @@ struct_union {
     member_id: 0x39de7de3
     member_id: 0x342a4a25
     member_id: 0x3efbeff0
-    member_id: 0x821bb8d6
+    member_id: 0x3e7338eb
     member_id: 0xc3d41219
     member_id: 0x35905373
     member_id: 0x77502c3a
@@ -444150,6 +444186,13 @@ function {
   id: 0xba0eb204
   return_type_id: 0x3e10b518
   parameter_id: 0xa12a969e
+}
+function {
+  id: 0xba3750b0
+  return_type_id: 0x6720d32f
+  parameter_id: 0x92233392
+  parameter_id: 0xc9082b19
+  parameter_id: 0x6d7f5ff6
 }
 function {
   id: 0xba5ef4b3

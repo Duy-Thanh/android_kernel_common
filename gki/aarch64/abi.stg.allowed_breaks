@@ -343,3 +343,6 @@ type 'struct fscrypt_master_key' changed
   3 members ('siphash_key_t mk_ino_hash_key' .. 'bool mk_present') changed
     offset changed by -4032
 
+type 'struct pkvm_module_ops' changed
+  member 'u64 __kabi_reserved6' was removed
+  member 'union { int(* host_device_set_context)(u64, u32, bool); struct { u64 __kabi_reserved6; }; union { }; }' was added
