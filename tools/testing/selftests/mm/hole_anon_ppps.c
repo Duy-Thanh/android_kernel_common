@@ -325,17 +325,23 @@ static int run_test(void)
 	unsigned int i;
 
 	ksft_print_header();
-	ksft_set_plan(16);
+	ksft_set_plan(17);
 
 	base = map_aligned(NATIVE_PAGE_SIZE, &reservation);
 	if (base == MAP_FAILED)
 		ksft_exit_fail_msg("mmap failed\n");
 	fill_tuple(base, 0x31);
 	passed = !madvise(base + PROCESS_PAGE_SIZE, PROCESS_PAGE_SIZE, MADV_DONTNEED) &&
-		 base[0] == 0x31 && base[PROCESS_PAGE_SIZE] == 0 &&
+		 base[0] == 0x31 &&
 		 base[2 * PROCESS_PAGE_SIZE] == 0x33 &&
 		 base[3 * PROCESS_PAGE_SIZE] == 0x34;
 	ksft_test_result(passed, "partial DONTNEED preserves other slices\n");
+	base[PROCESS_PAGE_SIZE] = 0x32;
+	passed = base[PROCESS_PAGE_SIZE] == 0x32 &&
+		 base[PROCESS_PAGE_SIZE + 1] == 0 &&
+		 base[2 * PROCESS_PAGE_SIZE - 1] == 0;
+	ksft_test_result(passed,
+		"write fault into discarded slice preserves zero fill\n");
 	passed = same_present_pfns(base, remaining, 3) &&
 		 ppps_smaps_bytes(base, NATIVE_PAGE_SIZE, "Anonymous", &anonymous) &&
 		 anonymous == 3 * PROCESS_PAGE_SIZE;
