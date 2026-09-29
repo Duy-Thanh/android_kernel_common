@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "339d7590_b1d374e9",
+        "filename": "arch/arm64/include/asm/memory.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-09-29T20:55:51Z",
+      "side": 1,
+      "message": "You include `include/linux/p3s/const.h` later and it already contains this definition. Please explain why can\u0027t you include that header here and avoid duplication.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 6
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "7ae07288_35f3a0b4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/include/asm/memory.h",
+              "range": {
+                "startLine": 16,
+                "startChar": 0,
+                "endLine": 20,
+                "endChar": 0
+              },
+              "replacement": "#include \u003clinux/p3s/const.h\u003e\n"
+            },
+            {
+              "path": "arch/arm64/include/asm/memory.h",
+              "range": {
+                "startLine": 225,
+                "startChar": 0,
+                "endLine": 226,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "2679d6d44289fe4c9cdb7312c621d5723d642298",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
