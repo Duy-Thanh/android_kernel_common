@@ -65,6 +65,16 @@ struct acc_hid_dev {
 	int report_desc_offset;
 };
 
+struct acc_file {
+	struct acc_dev *dev;
+	struct list_head list;
+	/*
+	 * disconnected indicates state of open & function_disable
+	 * Set to true when we disconnect.
+	 */
+	bool disconnected;
+};
+
 struct acc_dev {
 	struct usb_function function;
 	struct usb_composite_dev *cdev;
@@ -80,11 +90,8 @@ struct acc_dev {
 	 */
 	bool online;
 
-	/*
-	 * disconnected indicates state of open & release
-	 * Set to true when we disconnect.
-	 */
-	bool disconnected;
+	/* list of open files */
+	struct list_head open_files;
 
 	/* strings sent by the host */
 	char manufacturer[ACC_STRING_SIZE];
@@ -389,6 +396,18 @@ static void acc_free_all_requests(struct acc_dev *dev)
 	}
 }
 
+static void acc_set_disconnected(struct acc_dev *dev)
+{
+	struct acc_file *af;
+	unsigned long flags;
+
+	spin_lock_irqsave(&dev->lock, flags);
+	list_for_each_entry(af, &dev->open_files, list)
+		WRITE_ONCE(af->disconnected, true);
+	dev->online = false;
+	spin_unlock_irqrestore(&dev->lock, flags);
+}
+
 static void acc_complete_in(struct usb_ep *ep, struct usb_request *req)
 {
 	struct acc_dev *dev = get_acc_dev();
@@ -398,7 +417,7 @@ static void acc_complete_in(struct usb_ep *ep, struct usb_request *req)
 
 	if (req->status == -ESHUTDOWN) {
 		pr_debug("set disconnected\n");
-		dev->disconnected = true;
+		acc_set_disconnected(dev);
 	}
 
 	req_put(dev, &dev->tx_idle, req);
@@ -417,7 +436,7 @@ static void acc_complete_out(struct usb_ep *ep, struct usb_request *req)
 	dev->rx_done = 1;
 	if (req->status == -ESHUTDOWN) {
 		pr_debug("set disconnected\n");
-		dev->disconnected = true;
+		acc_set_disconnected(dev);
 	}
 
 	wake_up(&dev->read_wq);
@@ -711,14 +730,15 @@ fail:
 static ssize_t acc_read(struct file *fp, char __user *buf,
 	size_t count, loff_t *pos)
 {
-	struct acc_dev *dev = fp->private_data;
+	struct acc_file *af = fp->private_data;
+	struct acc_dev *dev = af->dev;
 	struct usb_request *req;
 	ssize_t r = count;
 	ssize_t data_length;
 	unsigned int xfer;
 	int ret = 0;
 
-	if (dev->disconnected) {
+	if (READ_ONCE(af->disconnected)) {
 		pr_debug("disconnected\n");
 		return -ENODEV;
 	}
@@ -728,9 +748,14 @@ static ssize_t acc_read(struct file *fp, char __user *buf,
 
 	/* we will block until we're online */
 	pr_debug("waiting for online\n");
-	ret = wait_event_interruptible(dev->read_wq, dev->online);
+	ret = wait_event_interruptible(dev->read_wq,
+				       dev->online || READ_ONCE(af->disconnected));
 	if (ret < 0) {
 		r = ret;
+		goto done;
+	}
+	if (READ_ONCE(af->disconnected)) {
+		r = -ENODEV;
 		goto done;
 	}
 
@@ -783,7 +808,7 @@ requeue_req:
 
 copy_data:
 	dev->rx_done = 0;
-	if (dev->online) {
+	if (dev->online && !READ_ONCE(af->disconnected)) {
 		/* If we got a 0-len packet, throw it back and try again. */
 		if (req->actual == 0)
 			goto requeue_req;
@@ -804,13 +829,14 @@ done:
 static ssize_t acc_write(struct file *fp, const char __user *buf,
 	size_t count, loff_t *pos)
 {
-	struct acc_dev *dev = fp->private_data;
+	struct acc_file *af = fp->private_data;
+	struct acc_dev *dev = af->dev;
 	struct usb_request *req = 0;
 	ssize_t r = count;
 	unsigned int xfer;
 	int ret;
 
-	if (!dev->online || dev->disconnected) {
+	if (!dev->online || READ_ONCE(af->disconnected)) {
 		pr_debug("disconnected or not online\n");
 		return -ENODEV;
 	}
@@ -819,8 +845,9 @@ static ssize_t acc_write(struct file *fp, const char __user *buf,
 		/* get an idle tx request to use */
 		req = 0;
 		ret = wait_event_interruptible(dev->write_wq,
-			((req = req_get(dev, &dev->tx_idle)) || !dev->online));
-		if (!dev->online || dev->disconnected) {
+			(!dev->online || READ_ONCE(af->disconnected) ||
+			 (req = req_get(dev, &dev->tx_idle))));
+		if (!dev->online || READ_ONCE(af->disconnected)) {
 			pr_debug("dev->error\n");
 			r = -EIO;
 			break;
@@ -871,7 +898,8 @@ static ssize_t acc_write(struct file *fp, const char __user *buf,
 
 static long acc_ioctl(struct file *fp, unsigned int code, unsigned long value)
 {
-	struct acc_dev *dev = fp->private_data;
+	struct acc_file *af = fp->private_data;
+	struct acc_dev *dev = af->dev;
 	char *src = NULL;
 	int ret;
 
@@ -911,28 +939,46 @@ static long acc_ioctl(struct file *fp, unsigned int code, unsigned long value)
 static int acc_open(struct inode *ip, struct file *fp)
 {
 	struct acc_dev *dev = get_acc_dev();
+	struct acc_file *af;
+	unsigned long flags;
 
 	if (!dev)
 		return -ENODEV;
 
-	dev->disconnected = false;
-	fp->private_data = dev;
+	af = kzalloc(sizeof(*af), GFP_KERNEL);
+	if (!af) {
+		put_acc_dev(dev);
+		return -ENOMEM;
+	}
+
+	af->dev = dev;
+	af->disconnected = false;
+
+	spin_lock_irqsave(&dev->lock, flags);
+	list_add_tail(&af->list, &dev->open_files);
+	spin_unlock_irqrestore(&dev->lock, flags);
+
+	fp->private_data = af;
 	return 0;
 }
 
 static int acc_release(struct inode *ip, struct file *fp)
 {
-	struct acc_dev *dev = fp->private_data;
+	struct acc_file *af = fp->private_data;
+	struct acc_dev *dev;
+	unsigned long flags;
 
-	if (!dev)
+	if (!af)
 		return -ENOENT;
 
-	/* indicate that we are disconnected
-	 * still could be online so don't touch online flag
-	 */
-	dev->disconnected = true;
+	dev = af->dev;
+
+	spin_lock_irqsave(&dev->lock, flags);
+	list_del(&af->list);
+	spin_unlock_irqrestore(&dev->lock, flags);
 
 	fp->private_data = NULL;
+	kfree(af);
 	put_acc_dev(dev);
 	return 0;
 }
@@ -1087,7 +1133,7 @@ static void acc_function_unbind(struct usb_configuration *c,
 {
 	struct acc_dev *dev = func_to_dev(f);
 
-	dev->online = false;		/* clear online flag */
+	acc_set_disconnected(dev);
 	wake_up(&dev->read_wq);		/* unblock reads on closure */
 	wake_up(&dev->write_wq);	/* likewise for writes */
 
@@ -1238,7 +1284,6 @@ static int acc_function_set_alt(struct usb_function *f,
 	}
 
 	dev->online = true;
-	dev->disconnected = false; /* if online then not disconnected */
 
 	/* readers may be blocked waiting for us to go online */
 	wake_up(&dev->read_wq);
@@ -1250,8 +1295,7 @@ static void acc_function_disable(struct usb_function *f)
 	struct acc_dev *dev = func_to_dev(f);
 	struct usb_composite_dev *cdev = dev->cdev;
 
-	dev->disconnected = true;
-	dev->online = false; /* so now need to clear online flag here too */
+	acc_set_disconnected(dev);
 	usb_ep_disable(dev->ep_in);
 	usb_ep_disable(dev->ep_out);
 
@@ -1281,6 +1325,7 @@ static int acc_init(void)
 	spin_lock_init(&dev->lock);
 	init_waitqueue_head(&dev->read_wq);
 	init_waitqueue_head(&dev->write_wq);
+	INIT_LIST_HEAD(&dev->open_files);
 	INIT_LIST_HEAD(&dev->tx_idle);
 	INIT_LIST_HEAD(&dev->hid_list);
 	INIT_LIST_HEAD(&dev->new_hid_list);
