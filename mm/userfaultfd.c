@@ -1070,6 +1070,199 @@ static struct folio *check_ptes_for_batched_move(struct vm_area_struct *src_vma,
 	return folio;
 }
 
+#ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
+static void move_compat_copy_slice(struct folio *dst, unsigned int dst_slice,
+				   struct folio *src, unsigned int src_slice)
+{
+	void *from = kmap_local_page(&src->page);
+	void *to = kmap_local_page(&dst->page);
+	void *from_slice = from + ((unsigned long)src_slice << PAGE_SHIFT_4KB);
+	void *to_slice = to + ((unsigned long)dst_slice << PAGE_SHIFT_4KB);
+
+	memcpy(to_slice, from_slice, PAGE_SIZE_4KB);
+#ifdef CONFIG_ARM64_MTE
+	if (system_supports_mte() && page_mte_tagged(&dst->page) &&
+	    page_mte_tagged(&src->page))
+		mte_copy_tags_range(to_slice, from_slice, PAGE_SIZE_4KB);
+#endif
+	kunmap_local(to);
+	kunmap_local(from);
+	flush_dcache_folio(dst);
+	/* Publish copied bytes and tags before installing the destination PTE. */
+	smp_wmb();
+}
+
+static pte_t move_compat_new_pte(struct vm_area_struct *dst_vma,
+				 struct folio *folio, unsigned long dst_addr,
+				 pte_t old)
+{
+	pte_t entry = vma_folio_mk_pte(dst_vma, folio, dst_addr);
+
+	if (pte_young(old))
+		entry = pte_mkyoung(entry);
+	if (pte_dirty(old))
+		entry = pte_mkdirty(entry);
+#ifdef CONFIG_MEM_SOFT_DIRTY
+	entry = pte_mksoft_dirty(entry);
+#endif
+	if (pte_uffd_wp(old))
+		entry = pte_mkuffd_wp(entry);
+	if (pte_write(old))
+		entry = pte_mkwrite(entry, dst_vma);
+	return entry;
+}
+
+/* Move a complete packed folio without changing its rmap or slice layout. */
+static long
+move_compat_present_folio(struct mm_struct *mm,
+			  struct vm_area_struct *dst_vma,
+			  unsigned long dst_addr,
+			  struct vm_area_struct *src_vma,
+			  unsigned long src_addr, pte_t *dst_pte,
+			  pte_t *src_pte, pte_t orig_dst_pte,
+			  pte_t orig_src_pte, pmd_t *dst_pmd,
+			  pmd_t dst_pmdval, spinlock_t *dst_ptl,
+			  spinlock_t *src_ptl, struct folio *folio,
+			  unsigned long len)
+{
+	const unsigned int nr = PAGE_SIZE_KERNEL / PAGE_SIZE_4KB;
+	pte_t src[PAGE_SIZE_KERNEL / PAGE_SIZE_4KB];
+	long ret = -EOPNOTSUPP;
+	unsigned int i;
+
+	if (!IS_ALIGNED(src_addr, PAGE_SIZE_KERNEL) ||
+	    !IS_ALIGNED(dst_addr, PAGE_SIZE_KERNEL) || len < PAGE_SIZE_KERNEL ||
+	    src_addr + PAGE_SIZE_KERNEL > src_vma->vm_end ||
+	    dst_addr + PAGE_SIZE_KERNEL > dst_vma->vm_end)
+		return ret;
+
+	double_pt_lock(dst_ptl, src_ptl);
+	ret = -EAGAIN;
+	if (!is_pte_pages_stable(dst_pte, src_pte, orig_dst_pte,
+				 orig_src_pte, dst_pmd, dst_pmdval))
+		goto out;
+	for (i = 0; i < nr; i++) {
+		unsigned long src_slice = src_addr + i * PAGE_SIZE_4KB;
+		unsigned long dst_slice = dst_addr + i * PAGE_SIZE_4KB;
+		unsigned int src_off;
+
+		src[i] = ptep_get(src_pte + i);
+		if (!pte_present(src[i]) || pte_special(src[i]) ||
+		    vm_normal_folio(src_vma, src_slice, src[i]) != folio) {
+			ret = -EOPNOTSUPP;
+			goto out;
+		}
+		if (!pte_none(ptep_get(dst_pte + i))) {
+			ret = -EEXIST;
+			goto out;
+		}
+		src_off = (__pte_to_phys(src[i]) & (PAGE_SIZE_KERNEL - 1)) >>
+			PAGE_SHIFT_4KB;
+		if (src_off != vma_slice_offset(dst_vma, dst_slice)) {
+			ret = -EOPNOTSUPP;
+			goto out;
+		}
+	}
+	ret = -EBUSY;
+	if (folio_maybe_dma_pinned(folio) || folio_mapcount(folio) != nr)
+		goto out;
+
+	folio_move_anon_rmap(folio, dst_vma);
+	folio->index = linear_page_index(dst_vma, dst_addr);
+	for (i = 0; i < nr; i++) {
+		unsigned long src_slice = src_addr + i * PAGE_SIZE_4KB;
+		unsigned long dst_slice = dst_addr + i * PAGE_SIZE_4KB;
+		pte_t moved = ptep_get_and_clear(mm, src_slice, src_pte + i);
+
+#ifdef CONFIG_MEM_SOFT_DIRTY
+		moved = pte_mksoft_dirty(moved);
+#endif
+		moved = pte_mkwrite(moved, dst_vma);
+		set_pte_at(mm, dst_slice, dst_pte + i, moved);
+	}
+	flush_tlb_range(src_vma, src_addr, src_addr + PAGE_SIZE_KERNEL);
+	ret = PAGE_SIZE_KERNEL;
+out:
+	double_pt_unlock(dst_ptl, src_ptl);
+	return ret;
+}
+
+/*
+ * Allocate the destination folio for move_compat_single_pte().  This can
+ * sleep, so the caller must not have the page tables mapped.
+ */
+static struct folio *move_compat_alloc_folio(struct mm_struct *mm,
+					     struct vm_area_struct *dst_vma,
+					     unsigned long dst_addr)
+{
+	struct folio *folio;
+
+	folio = vma_alloc_zeroed_movable_folio(dst_vma, dst_addr);
+	if (!folio)
+		return NULL;
+	if (mem_cgroup_charge(folio, mm, GFP_KERNEL)) {
+		folio_put(folio);
+		return NULL;
+	}
+	folio_throttle_swaprate(folio, GFP_KERNEL);
+	return folio;
+}
+
+/*
+ * Depack one present compat PTE so sibling slices retain their folio owner.
+ * *@new_folio_p comes from move_compat_alloc_folio(); it is consumed (and the
+ * pointer cleared) only on success.
+ */
+static long move_compat_single_pte(struct mm_struct *mm,
+				   struct vm_area_struct *dst_vma,
+			       unsigned long dst_addr,
+			       struct vm_area_struct *src_vma,
+			       unsigned long src_addr, pte_t *dst_pte,
+			       pte_t *src_pte, pte_t orig_dst_pte,
+			       pte_t orig_src_pte, pmd_t *dst_pmd,
+			       pmd_t dst_pmdval, spinlock_t *dst_ptl,
+			       spinlock_t *src_ptl,
+			       struct folio *src_folio,
+			       struct folio **new_folio_p)
+{
+	struct folio *new_folio = *new_folio_p;
+	unsigned int src_slice, dst_slice;
+	pte_t entry;
+	long ret;
+
+	double_pt_lock(dst_ptl, src_ptl);
+	ret = -EAGAIN;
+	if (!is_pte_pages_stable(dst_pte, src_pte, orig_dst_pte,
+				 orig_src_pte, dst_pmd, dst_pmdval) ||
+	    vm_normal_folio(src_vma, src_addr, orig_src_pte) != src_folio)
+		goto unlock;
+	ret = -EBUSY;
+	if (folio_maybe_dma_pinned(src_folio))
+		goto unlock;
+
+	ptep_get_and_clear(mm, src_addr, src_pte);
+	flush_tlb_page(src_vma, src_addr);
+	src_slice = (__pte_to_phys(orig_src_pte) & (PAGE_SIZE_KERNEL - 1)) >>
+		PAGE_SHIFT_4KB;
+	dst_slice = vma_slice_offset(dst_vma, dst_addr);
+	move_compat_copy_slice(new_folio, dst_slice, src_folio, src_slice);
+	__folio_mark_uptodate(new_folio);
+	folio_add_new_anon_rmap(new_folio, dst_vma, dst_addr, RMAP_EXCLUSIVE);
+	folio_add_lru_vma(new_folio, dst_vma);
+	entry = move_compat_new_pte(dst_vma, new_folio, dst_addr,
+				    orig_src_pte);
+	set_pte_at(mm, dst_addr, dst_pte, entry);
+	update_mmu_cache(dst_vma, dst_addr, dst_pte);
+	folio_remove_rmap_pte(src_folio, &src_folio->page, src_vma);
+	folio_put(src_folio);
+	*new_folio_p = NULL;
+	ret = PAGE_SIZE_4KB;
+unlock:
+	double_pt_unlock(dst_ptl, src_ptl);
+	return ret;
+}
+#endif
+
 /*
  * Moves src folios to dst in a batch as long as they are not large, and can
  * successfully take the lock via folio_trylock().
@@ -1371,6 +1564,9 @@ static long move_pages_ptes(struct mm_struct *mm, pmd_t *dst_pmd, pmd_t *src_pmd
 	pmd_t dummy_pmdval;
 	pmd_t dst_pmdval;
 	struct folio *src_folio = NULL;
+#ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
+	struct folio *compat_folio = NULL;
+#endif
 	struct mmu_notifier_range range;
 	long ret = 0;
 
@@ -1558,6 +1754,41 @@ retry:
 			goto retry;
 		}
 
+#ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
+		if (vma_is_p3s_4k(src_vma)) {
+			ret = move_compat_present_folio(mm, dst_vma, dst_addr,
+							src_vma, src_addr,
+							dst_pte, src_pte,
+							orig_dst_pte,
+							orig_src_pte, dst_pmd,
+							dst_pmdval, dst_ptl,
+							src_ptl, src_folio, len);
+			if (ret == -EOPNOTSUPP && !compat_folio) {
+				/* Allocating can sleep: unmap the PTEs first. */
+				pte_unmap(src_pte);
+				pte_unmap(dst_pte);
+				src_pte = dst_pte = NULL;
+				compat_folio = move_compat_alloc_folio(mm, dst_vma,
+								       dst_addr);
+				if (!compat_folio) {
+					ret = -ENOMEM;
+					goto out;
+				}
+				goto retry;
+			}
+			if (ret == -EOPNOTSUPP)
+				ret = move_compat_single_pte(mm, dst_vma, dst_addr,
+							     src_vma, src_addr,
+							     dst_pte, src_pte,
+							     orig_dst_pte,
+							     orig_src_pte, dst_pmd,
+							     dst_pmdval, dst_ptl,
+							     src_ptl, src_folio,
+							     &compat_folio);
+			goto out;
+		}
+#endif
+
 		ret = move_present_ptes(mm, dst_vma, src_vma,
 					dst_addr, src_addr, dst_pte, src_pte,
 					orig_dst_pte, orig_src_pte, dst_pmd,
@@ -1632,6 +1863,10 @@ out:
 		folio_unlock(src_folio);
 		folio_put(src_folio);
 	}
+#ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
+	if (compat_folio)
+		folio_put(compat_folio);
+#endif
 	/*
 	 * Unmap in reverse order (LIFO) to maintain proper kmap_local
 	 * index ordering when CONFIG_HIGHPTE is enabled. We mapped dst_pte

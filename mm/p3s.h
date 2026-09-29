@@ -10,9 +10,31 @@
 #include <linux/userfaultfd_k.h>
 #include <linux/huge_mm.h>
 #include <linux/pgtable.h>
-#include <asm/mte.h>
 
 #ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
+
+#include <asm/mte.h>
+
+static inline void p3s_copy_folio_range(struct folio *dst, struct folio *src,
+					unsigned long offset, unsigned long size)
+{
+	void *from = kmap_local_page(&src->page);
+	void *to = kmap_local_page(&dst->page);
+	void *from_slice = from + offset;
+	void *to_slice = to + offset;
+
+	memcpy(to_slice, from_slice, size);
+#ifdef CONFIG_ARM64_MTE
+	if (system_supports_mte() && page_mte_tagged(&dst->page) &&
+	    page_mte_tagged(&src->page))
+		mte_copy_tags_range(to_slice, from_slice, size);
+#endif
+	kunmap_local(to);
+	kunmap_local(from);
+	flush_dcache_folio(dst);
+	/* Publish copied data before the caller installs the destination PTE. */
+	smp_wmb();
+}
 struct p3s_mremap_ctx;
 
 struct p3s_mremap_ctx *p3s_mremap_prepare(struct vm_area_struct *src_vma,
@@ -170,27 +192,6 @@ static inline void vma_folio_clamp_none_ptes(const struct vm_area_struct *vma,
 }
 
 #ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
-
-static inline void p3s_copy_folio_range(struct folio *dst, struct folio *src,
-					unsigned long offset, unsigned long size)
-{
-	void *from = kmap_local_page(&src->page);
-	void *to = kmap_local_page(&dst->page);
-	void *from_slice = from + offset;
-	void *to_slice = to + offset;
-
-	memcpy(to_slice, from_slice, size);
-#ifdef CONFIG_ARM64_MTE
-	if (system_supports_mte() && page_mte_tagged(&dst->page) &&
-	    page_mte_tagged(&src->page))
-		mte_copy_tags_range(to_slice, from_slice, size);
-#endif
-	kunmap_local(to);
-	kunmap_local(from);
-	flush_dcache_folio(dst);
-	/* Publish copied data before the caller installs the destination PTE. */
-	smp_wmb();
-}
 
 /*
  * p3s_anon_folio_lookaround_pte - Find adjacent anonymous folio in slice window
