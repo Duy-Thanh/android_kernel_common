@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23963110_5d7632e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4079418
+      },
+      "writtenOn": "2026-09-29T04:39:15Z",
+      "side": 1,
+      "message": "Nit: a duplicate Signed-off-by: Carlos Llamas \u003ccmllamas@google.com\u003e in the commit message (lines 25 and 31).",
+      "revId": "b4350df0d227268c5547761f6649d4a10a58738b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
