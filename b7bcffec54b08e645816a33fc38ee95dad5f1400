@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47da877d_9ce89a3a",
+        "filename": "fs/f2fs/segment.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2835,
+      "author": {
+        "id": 1651802
+      },
+      "writtenOn": "2026-09-29T16:59:31Z",
+      "side": 1,
+      "message": "max_secno",
+      "range": {
+        "startLine": 2835,
+        "startChar": 14,
+        "endLine": 2835,
+        "endChar": 28
+      },
+      "revId": "b7bcffec54b08e645816a33fc38ee95dad5f1400",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9986245b_c2c4f7ba",
+        "filename": "fs/f2fs/segment.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2839,
+      "author": {
+        "id": 1651802
+      },
+      "writtenOn": "2026-09-29T16:59:31Z",
+      "side": 1,
+      "message": "max_secno",
+      "range": {
+        "startLine": 2839,
+        "startChar": 51,
+        "endLine": 2839,
+        "endChar": 65
+      },
+      "revId": "b7bcffec54b08e645816a33fc38ee95dad5f1400",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37553c1f_95f79966",
+        "filename": "fs/f2fs/segment.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2842,
+      "author": {
+        "id": 1651802
+      },
+      "writtenOn": "2026-09-29T16:59:31Z",
+      "side": 1,
+      "message": "max_secno",
+      "range": {
+        "startLine": 2842,
+        "startChar": 8,
+        "endLine": 2842,
+        "endChar": 22
+      },
+      "revId": "b7bcffec54b08e645816a33fc38ee95dad5f1400",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe63a81c_0a6806c4",
+        "filename": "fs/f2fs/segment.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2843,
+      "author": {
+        "id": 1651802
+      },
+      "writtenOn": "2026-09-29T16:59:31Z",
+      "side": 1,
+      "message": "max_secno",
+      "range": {
+        "startLine": 2843,
+        "startChar": 15,
+        "endLine": 2843,
+        "endChar": 29
+      },
+      "revId": "b7bcffec54b08e645816a33fc38ee95dad5f1400",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63738b3f_3ff80367",
+        "filename": "fs/f2fs/segment.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2845,
+      "author": {
+        "id": 1651802
+      },
+      "writtenOn": "2026-09-29T16:59:31Z",
+      "side": 1,
+      "message": "ret \u003d (pinning \u0026\u0026 has_unpinned_area(sbi)) ? -EAGAIN : -ENOSPC;\n\t\t\tf2fs_bug_on(sbi, !pinning);",
+      "range": {
+        "startLine": 2844,
+        "startChar": 3,
+        "endLine": 2845,
+        "endChar": 23
+      },
+      "revId": "b7bcffec54b08e645816a33fc38ee95dad5f1400",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
