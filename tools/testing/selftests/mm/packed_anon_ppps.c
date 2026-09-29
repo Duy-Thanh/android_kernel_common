@@ -476,6 +476,7 @@ struct uffd_move_result {
 	bool supported;
 	bool register_preserved;
 	bool move_preserved;
+	bool cross_slice_move_preserved;
 	bool unregistered_source_preserved;
 	bool tuple_move_preserved;
 	bool tuple_move_rss_preserved;
@@ -772,6 +773,31 @@ static struct uffd_move_result userfaultfd_move_depacks(void)
 		 base[3 * PROCESS_PAGE_SIZE] != 0x34)
 		result.move_preserved = false;
 
+	if (madvise(base, NATIVE_PAGE_SIZE, MADV_DONTNEED) ||
+	    madvise(dst, NATIVE_PAGE_SIZE, MADV_DONTNEED))
+		goto out;
+	populate(base);
+	uffd_register.range.start = (uintptr_t)register_base;
+	uffd_register.range.len = 5 * NATIVE_PAGE_SIZE;
+	uffd_register.mode = UFFDIO_REGISTER_MODE_MISSING;
+	if (ioctl(uffd, UFFDIO_REGISTER, &uffd_register))
+		goto out;
+	memset(&uffd_move, 0, sizeof(uffd_move));
+	uffd_move.dst = (uintptr_t)(dst + PROCESS_PAGE_SIZE);
+	uffd_move.src = (uintptr_t)base;
+	uffd_move.len = PROCESS_PAGE_SIZE;
+	if (!ioctl(uffd, UFFDIO_MOVE, &uffd_move) &&
+	    uffd_move.move == PROCESS_PAGE_SIZE &&
+	    dst[PROCESS_PAGE_SIZE] == 0x31 &&
+	    base[PROCESS_PAGE_SIZE] == 0x32 &&
+	    base[2 * PROCESS_PAGE_SIZE] == 0x33 &&
+	    base[3 * PROCESS_PAGE_SIZE] == 0x34)
+		result.cross_slice_move_preserved = true;
+	uffd_unregister.start = (uintptr_t)register_base;
+	uffd_unregister.len = 5 * NATIVE_PAGE_SIZE;
+	if (ioctl(uffd, UFFDIO_UNREGISTER, &uffd_unregister))
+		result.cross_slice_move_preserved = false;
+
 	src_unregistered = map_aligned(2 * NATIVE_PAGE_SIZE, &src_reservation);
 	dst_registered = map_aligned(2 * NATIVE_PAGE_SIZE, &dst_reservation);
 	if (src_unregistered == MAP_FAILED || dst_registered == MAP_FAILED)
@@ -848,7 +874,7 @@ static int run_test(void)
 	unsigned char value = 1;
 
 	ksft_print_header();
-	ksft_set_plan(30);
+	ksft_set_plan(31);
 
 	base = map_aligned(2 * NATIVE_PAGE_SIZE, &reservation);
 	ksft_test_result(base != MAP_FAILED, "map anonymous test range\n");
@@ -945,11 +971,14 @@ static int run_test(void)
 		ksft_test_result_skip("UFFDIO_MOVE is unavailable\n");
 		ksft_test_result_skip("UFFDIO_MOVE is unavailable\n");
 		ksft_test_result_skip("UFFDIO_MOVE is unavailable\n");
+		ksft_test_result_skip("UFFDIO_MOVE is unavailable\n");
 	} else {
 		ksft_test_result(uffd_move.register_preserved,
 				 "userfaultfd registration preserves tuple folios\n");
 		ksft_test_result(uffd_move.move_preserved,
 				 "single-slice UFFDIO_MOVE preserves tuple data\n");
+		ksft_test_result(uffd_move.cross_slice_move_preserved,
+				 "cross-slice UFFDIO_MOVE preserves tuple data\n");
 		ksft_test_result(uffd_move.unregistered_source_preserved,
 				 "UFFDIO_MOVE depacks an unregistered source tuple\n");
 		ksft_test_result(uffd_move.tuple_move_preserved,
