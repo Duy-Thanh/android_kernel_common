@@ -2980,6 +2980,8 @@
   __vma_start_write
   vmf_insert_pfn
   vmf_insert_pfn_prot
+  vmf_insert_pfn_prot_slice
+  vmf_insert_pfn_slice
   vm_get_page_prot
   vm_iomap_memory
   vm_map_ram

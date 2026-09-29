@@ -2586,7 +2586,8 @@ int vm_map_pages_zero(struct vm_area_struct *vma, struct page **pages,
 EXPORT_SYMBOL(vm_map_pages_zero);
 
 static vm_fault_t insert_pfn(struct vm_area_struct *vma, unsigned long addr,
-			unsigned long pfn, pgprot_t prot, bool mkwrite)
+			unsigned long pfn, pgprot_t prot, bool mkwrite,
+			unsigned int slice_idx)
 {
 	struct mm_struct *mm = vma->vm_mm;
 	pte_t *pte, entry;
@@ -2628,7 +2629,9 @@ static vm_fault_t insert_pfn(struct vm_area_struct *vma, unsigned long addr,
 		entry = maybe_mkwrite(pte_mkdirty(entry), vma);
 	}
 
-	entry = vma_pte_add_slice(vma, addr, entry);
+	if (vma_is_p3s_4k(vma))
+		entry = __pte(pte_val(entry) +
+			      ((pteval_t)slice_idx << PAGE_SHIFT_4KB));
 
 	set_pte_at(mm, addr, pte, entry);
 	update_mmu_cache(vma, addr, pte); /* XXX: why not for insert_page? */
@@ -2639,10 +2642,11 @@ out_unlock:
 }
 
 /**
- * vmf_insert_pfn_prot - insert single pfn into user vma with specified pgprot
+ * vmf_insert_pfn_prot_slice - insert a PFN slice with specified pgprot
  * @vma: user vma to map to
  * @addr: target user address of this page
  * @pfn: source kernel pfn
+ * @slice_idx: process-page slice within the native page
  * @pgprot: pgprot flags for the inserted page
  *
  * This is exactly like vmf_insert_pfn(), except that it allows drivers
@@ -2671,8 +2675,9 @@ out_unlock:
  * Context: Process context.  May allocate using %GFP_KERNEL.
  * Return: vm_fault_t value.
  */
-vm_fault_t vmf_insert_pfn_prot(struct vm_area_struct *vma, unsigned long addr,
-			unsigned long pfn, pgprot_t pgprot)
+vm_fault_t vmf_insert_pfn_prot_slice(struct vm_area_struct *vma,
+				     unsigned long addr, unsigned long pfn,
+				     unsigned int slice_idx, pgprot_t pgprot)
 {
 	/*
 	 * Technically, architectures with pte_special can avoid all these
@@ -2688,13 +2693,23 @@ vm_fault_t vmf_insert_pfn_prot(struct vm_area_struct *vma, unsigned long addr,
 
 	if (addr < vma->vm_start || addr >= vma->vm_end)
 		return VM_FAULT_SIGBUS;
+	if (slice_idx >= P3S_SLICES_PER_PAGE)
+		return VM_FAULT_SIGBUS;
 
 	if (!pfn_modify_allowed(pfn, pgprot))
 		return VM_FAULT_SIGBUS;
 
 	pfnmap_setup_cachemode_pfn(pfn, &pgprot);
 
-	return insert_pfn(vma, addr, pfn, pgprot, false);
+	return insert_pfn(vma, addr, pfn, pgprot, false, slice_idx);
+}
+EXPORT_SYMBOL(vmf_insert_pfn_prot_slice);
+
+vm_fault_t vmf_insert_pfn_prot(struct vm_area_struct *vma, unsigned long addr,
+			unsigned long pfn, pgprot_t pgprot)
+{
+	return vmf_insert_pfn_prot_slice(vma, addr, pfn,
+			vma_slice_offset(vma, addr), pgprot);
 }
 EXPORT_SYMBOL(vmf_insert_pfn_prot);
 
@@ -2724,6 +2739,24 @@ vm_fault_t vmf_insert_pfn(struct vm_area_struct *vma, unsigned long addr,
 	return vmf_insert_pfn_prot(vma, addr, pfn, vma->vm_page_prot);
 }
 EXPORT_SYMBOL(vmf_insert_pfn);
+
+/**
+ * vmf_insert_pfn_slice - insert a native PFN at a PPPS slice
+ * @vma: user vma to map to
+ * @addr: target process-page-aligned user address
+ * @pfn: source native page frame number
+ * @slice_idx: process-page slice within the native page
+ *
+ * Return: vm_fault_t value.
+ */
+vm_fault_t vmf_insert_pfn_slice(struct vm_area_struct *vma,
+				unsigned long addr, unsigned long pfn,
+				unsigned int slice_idx)
+{
+	return vmf_insert_pfn_prot_slice(vma, addr, pfn, slice_idx,
+					 vma->vm_page_prot);
+}
+EXPORT_SYMBOL(vmf_insert_pfn_slice);
 
 static bool vm_mixed_ok(struct vm_area_struct *vma, unsigned long pfn,
 			bool mkwrite)
@@ -2774,7 +2807,8 @@ static vm_fault_t __vm_insert_mixed(struct vm_area_struct *vma,
 		page = pfn_to_page(pfn);
 		err = insert_page(vma, addr, page, pgprot, mkwrite);
 	} else {
-		return insert_pfn(vma, addr, pfn, pgprot, mkwrite);
+		return insert_pfn(vma, addr, pfn, pgprot, mkwrite,
+				  vma_slice_offset(vma, addr));
 	}
 
 	if (err == -ENOMEM)
