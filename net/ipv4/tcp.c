@@ -302,10 +302,10 @@ DEFINE_PER_CPU(u32, tcp_tw_isn);
 EXPORT_PER_CPU_SYMBOL_GPL(tcp_tw_isn);
 
 long sysctl_tcp_mem[3] __read_mostly;
-EXPORT_SYMBOL(sysctl_tcp_mem);
+EXPORT_IPV6_MOD(sysctl_tcp_mem);
 
 atomic_long_t tcp_memory_allocated ____cacheline_aligned_in_smp;	/* Current allocated memory. */
-EXPORT_SYMBOL(tcp_memory_allocated);
+EXPORT_IPV6_MOD(tcp_memory_allocated);
 DEFINE_PER_CPU(int, tcp_memory_per_cpu_fw_alloc);
 EXPORT_PER_CPU_SYMBOL_GPL(tcp_memory_per_cpu_fw_alloc);
 
@@ -318,7 +318,7 @@ EXPORT_SYMBOL(tcp_have_smc);
  * Current number of TCP sockets.
  */
 struct percpu_counter tcp_sockets_allocated ____cacheline_aligned_in_smp;
-EXPORT_SYMBOL(tcp_sockets_allocated);
+EXPORT_IPV6_MOD(tcp_sockets_allocated);
 
 /*
  * TCP splice context
@@ -351,7 +351,7 @@ void tcp_enter_memory_pressure(struct sock *sk)
 	if (!cmpxchg(&tcp_memory_pressure, 0, val))
 		NET_INC_STATS(sock_net(sk), LINUX_MIB_TCPMEMORYPRESSURES);
 }
-EXPORT_SYMBOL_GPL(tcp_enter_memory_pressure);
+EXPORT_IPV6_MOD_GPL(tcp_enter_memory_pressure);
 
 void tcp_leave_memory_pressure(struct sock *sk)
 {
@@ -364,7 +364,7 @@ void tcp_leave_memory_pressure(struct sock *sk)
 		NET_ADD_STATS(sock_net(sk), LINUX_MIB_TCPMEMORYPRESSURESCHRONO,
 			      jiffies_to_msecs(jiffies - val));
 }
-EXPORT_SYMBOL_GPL(tcp_leave_memory_pressure);
+EXPORT_IPV6_MOD_GPL(tcp_leave_memory_pressure);
 
 /* Convert seconds to retransmits based on initial and max timeout */
 static u8 secs_to_retrans(int seconds, int timeout, int rto_max)
@@ -477,7 +477,7 @@ void tcp_init_sock(struct sock *sk)
 	sk_sockets_allocated_inc(sk);
 	xa_init_flags(&sk->sk_user_frags, XA_FLAGS_ALLOC1);
 }
-EXPORT_SYMBOL(tcp_init_sock);
+EXPORT_IPV6_MOD(tcp_init_sock);
 
 static void tcp_tx_timestamp(struct sock *sk, u16 tsflags)
 {
@@ -664,7 +664,7 @@ int tcp_ioctl(struct sock *sk, int cmd, int *karg)
 	*karg = answ;
 	return 0;
 }
-EXPORT_SYMBOL(tcp_ioctl);
+EXPORT_IPV6_MOD(tcp_ioctl);
 
 void tcp_mark_push(struct tcp_sock *tp, struct sk_buff *skb)
 {
@@ -880,7 +880,7 @@ ssize_t tcp_splice_read(struct socket *sock, loff_t *ppos,
 
 	return ret;
 }
-EXPORT_SYMBOL(tcp_splice_read);
+EXPORT_IPV6_MOD(tcp_splice_read);
 
 struct sk_buff *tcp_stream_alloc_skb(struct sock *sk, gfp_t gfp,
 				     bool force_schedule)
@@ -1383,7 +1383,7 @@ void tcp_splice_eof(struct socket *sock)
 	tcp_push(sk, 0, mss_now, tp->nonagle, size_goal);
 	release_sock(sk);
 }
-EXPORT_SYMBOL_GPL(tcp_splice_eof);
+EXPORT_IPV6_MOD_GPL(tcp_splice_eof);
 
 /*
  *	Handle reading urgent data. BSD has very simple semantics for
@@ -1693,7 +1693,7 @@ int tcp_read_skb(struct sock *sk, skb_read_actor_t recv_actor)
 	}
 	return copied;
 }
-EXPORT_SYMBOL(tcp_read_skb);
+EXPORT_IPV6_MOD(tcp_read_skb);
 
 void tcp_read_done(struct sock *sk, size_t len)
 {
@@ -1738,7 +1738,7 @@ int tcp_peek_len(struct socket *sock)
 {
 	return tcp_inq(sock->sk);
 }
-EXPORT_SYMBOL(tcp_peek_len);
+EXPORT_IPV6_MOD(tcp_peek_len);
 
 /* Make sure sk_rcvbuf is big enough to satisfy SO_RCVLOWAT hint */
 int tcp_set_rcvlowat(struct sock *sk, int val)
@@ -1768,7 +1768,7 @@ int tcp_set_rcvlowat(struct sock *sk, int val)
 	}
 	return 0;
 }
-EXPORT_SYMBOL(tcp_set_rcvlowat);
+EXPORT_IPV6_MOD(tcp_set_rcvlowat);
 
 void tcp_update_recv_tstamps(struct sk_buff *skb,
 			     struct scm_timestamping_internal *tss)
@@ -1801,7 +1801,7 @@ int tcp_mmap(struct file *file, struct socket *sock,
 	vma->vm_ops = &tcp_vm_ops;
 	return 0;
 }
-EXPORT_SYMBOL(tcp_mmap);
+EXPORT_IPV6_MOD(tcp_mmap);
 
 static skb_frag_t *skb_advance_to_frag(struct sk_buff *skb, u32 offset_skb,
 				       u32 *offset_frag)
@@ -2890,7 +2890,7 @@ int tcp_recvmsg(struct sock *sk, struct msghdr *msg, size_t len, int flags,
 
 	return ret;
 }
-EXPORT_SYMBOL(tcp_recvmsg);
+EXPORT_IPV6_MOD(tcp_recvmsg);
 
 void tcp_set_state(struct sock *sk, int state)
 {
@@ -3022,7 +3022,7 @@ void tcp_shutdown(struct sock *sk, int how)
 			tcp_send_fin(sk);
 	}
 }
-EXPORT_SYMBOL(tcp_shutdown);
+EXPORT_IPV6_MOD(tcp_shutdown);
 
 int tcp_orphan_count_sum(void)
 {
@@ -3527,7 +3527,7 @@ static int tcp_repair_options_est(struct sock *sk, sockptr_t optbuf,
 }
 
 DEFINE_STATIC_KEY_FALSE(tcp_tx_delay_enabled);
-EXPORT_SYMBOL(tcp_tx_delay_enabled);
+EXPORT_IPV6_MOD(tcp_tx_delay_enabled);
 
 static void tcp_enable_tx_delay(void)
 {
@@ -4065,7 +4065,7 @@ int tcp_setsockopt(struct sock *sk, int level, int optname, sockptr_t optval,
 								optval, optlen);
 	return do_tcp_setsockopt(sk, level, optname, optval, optlen);
 }
-EXPORT_SYMBOL(tcp_setsockopt);
+EXPORT_IPV6_MOD(tcp_setsockopt);
 
 static void tcp_get_info_chrono_stats(const struct tcp_sock *tp,
 				      struct tcp_info *info)
@@ -4697,7 +4697,7 @@ bool tcp_bpf_bypass_getsockopt(int level, int optname)
 
 	return false;
 }
-EXPORT_SYMBOL(tcp_bpf_bypass_getsockopt);
+EXPORT_IPV6_MOD(tcp_bpf_bypass_getsockopt);
 
 int tcp_getsockopt(struct sock *sk, int level, int optname, char __user *optval,
 		   int __user *optlen)
@@ -4711,11 +4711,11 @@ int tcp_getsockopt(struct sock *sk, int level, int optname, char __user *optval,
 	return do_tcp_getsockopt(sk, level, optname, USER_SOCKPTR(optval),
 				 USER_SOCKPTR(optlen));
 }
-EXPORT_SYMBOL(tcp_getsockopt);
+EXPORT_IPV6_MOD(tcp_getsockopt);
 
 #ifdef CONFIG_TCP_MD5SIG
 int tcp_md5_sigpool_id = -1;
-EXPORT_SYMBOL_GPL(tcp_md5_sigpool_id);
+EXPORT_IPV6_MOD_GPL(tcp_md5_sigpool_id);
 
 int tcp_md5_alloc_sigpool(void)
 {
@@ -4761,7 +4761,7 @@ int tcp_md5_hash_key(struct tcp_sigpool *hp,
 	 */
 	return data_race(crypto_ahash_update(hp->req));
 }
-EXPORT_SYMBOL(tcp_md5_hash_key);
+EXPORT_IPV6_MOD(tcp_md5_hash_key);
 
 /* Called with rcu_read_lock() */
 static enum skb_drop_reason
@@ -4881,7 +4881,7 @@ tcp_inbound_hash(struct sock *sk, const struct request_sock *req,
 	return tcp_inbound_md5_hash(sk, skb, saddr, daddr, family,
 				    l3index, md5_location);
 }
-EXPORT_SYMBOL_GPL(tcp_inbound_hash);
+EXPORT_IPV6_MOD_GPL(tcp_inbound_hash);
 
 void tcp_done(struct sock *sk)
 {

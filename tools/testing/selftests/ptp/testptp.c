@@ -198,7 +198,13 @@ int main(int argc, char *argv[])
 
 	progname = strrchr(argv[0], '/');
 	progname = progname ? 1+progname : argv[0];
+<<<<<<< HEAD   (f12efc7756a7bae1e1d4b87e5835c3b57a85c93b Merge 2321cb9e80ea ("arm64: errata: Mitigate TLBI errata on )
 	while (EOF != (c = getopt(argc, argv, "cd:e:f:F:ghH:i:k:lL:n:o:p:P:sSt:T:w:x:Xz"))) {
+||||||| BASE   (2321cb9e80eaeedbc22ede60ee03404fe521cd56 arm64: errata: Mitigate TLBI errata on Microsoft Azure Cobal)
+	while (EOF != (c = getopt(argc, argv, "cd:e:f:F:ghH:i:k:lL:n:o:p:P:rsSt:T:w:x:Xy:z"))) {
+=======
+	while (EOF != (c = getopt(argc, argv, "cd:e:f:F:ghH:i:k:lL:n:o:p:P:rsSt:T:w:x:Xz"))) {
+>>>>>>> BRANCH (0b8f247169e487eff2d4c2dd531bc43f7efda2cb Linux 6.12.94)
 		switch (c) {
 		case 'c':
 			capabilities = 1;
