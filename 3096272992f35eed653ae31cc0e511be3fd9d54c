@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22c57893_8c04b3eb",
+        "filename": "arch/arm64/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 1466,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-09-29T18:25:16Z",
+      "side": 1,
+      "message": "I need to clarify that this is to ensure we have a 3-level walk in both native 16KB and compat-4KB modes.",
+      "range": {
+        "startLine": 1461,
+        "startChar": 0,
+        "endLine": 1466,
+        "endChar": 78
+      },
+      "revId": "3096272992f35eed653ae31cc0e511be3fd9d54c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
