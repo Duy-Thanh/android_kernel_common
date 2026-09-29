@@ -46489,6 +46489,11 @@ member {
   offset: 320
 }
 member {
+  id: 0x31721112
+  type_id: 0x4ae63ab1
+  offset: 832
+}
+member {
   id: 0x318695b6
   type_id: 0x49340c50
   offset: 896
@@ -196699,6 +196704,11 @@ member {
   offset: 19392
 }
 member {
+  id: 0x70526e8b
+  name: "segment_pool"
+  type_id: 0x30e6c2b9
+}
+member {
   id: 0x1e1ecce7
   name: "segment_probs"
   type_id: 0x3e3c1b86
@@ -243477,6 +243487,16 @@ struct_union {
     bytesize: 16
     member_id: 0x71ef81cb
     member_id: 0xd490db84
+  }
+}
+struct_union {
+  id: 0x4ae63ab1
+  kind: UNION
+  definition {
+    bytesize: 8
+    member_id: 0x70526e8b
+    member_id: 0x21c53df9
+    member_id: 0x36752b74
   }
 }
 struct_union {
@@ -308291,7 +308311,7 @@ struct_union {
     member_id: 0x5c04ba90
     member_id: 0x86c40d17
     member_id: 0xc9bb1edd
-    member_id: 0x415b0f06
+    member_id: 0x31721112
     member_id: 0xb116e0ee
   }
 }
@@ -470854,7 +470874,7 @@ elf_symbol {
   name: "xhci_get_ep_ctx"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x2832d35b
+  crc: 0xaa11db9f
   type_id: 0xcbd33190
   full_name: "xhci_get_ep_ctx"
 }
@@ -470946,7 +470966,7 @@ elf_symbol {
   name: "xhci_sideband_add_endpoint"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x56440c35
+  crc: 0x10a6cb6c
   type_id: 0x9ebbeb61
   full_name: "xhci_sideband_add_endpoint"
 }
@@ -470955,7 +470975,7 @@ elf_symbol {
   name: "xhci_sideband_check"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xcb148580
+  crc: 0x2021c1b4
   type_id: 0xf7fa53dc
   full_name: "xhci_sideband_check"
 }
@@ -470964,7 +470984,7 @@ elf_symbol {
   name: "xhci_sideband_create_interrupter"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xf0eb73df
+  crc: 0x8ef8924e
   type_id: 0x9f316da2
   full_name: "xhci_sideband_create_interrupter"
 }
@@ -470973,7 +470993,7 @@ elf_symbol {
   name: "xhci_sideband_get_endpoint_buffer"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x7ffff491
+  crc: 0xa7833206
   type_id: 0x42476815
   full_name: "xhci_sideband_get_endpoint_buffer"
 }
@@ -470982,7 +471002,7 @@ elf_symbol {
   name: "xhci_sideband_get_event_buffer"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xefca29cf
+  crc: 0x00be90ee
   type_id: 0x42490fa5
   full_name: "xhci_sideband_get_event_buffer"
 }
@@ -470991,7 +471011,7 @@ elf_symbol {
   name: "xhci_sideband_register"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x4b2f64a4
+  crc: 0x23b20db5
   type_id: 0x56df99a5
   full_name: "xhci_sideband_register"
 }
@@ -471000,7 +471020,7 @@ elf_symbol {
   name: "xhci_sideband_remove_endpoint"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x56440c35
+  crc: 0x10a6cb6c
   type_id: 0x9ebbeb61
   full_name: "xhci_sideband_remove_endpoint"
 }
@@ -471009,7 +471029,7 @@ elf_symbol {
   name: "xhci_sideband_remove_interrupter"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x80de7378
+  crc: 0xbb016cc2
   type_id: 0x13ad3e6d
   full_name: "xhci_sideband_remove_interrupter"
 }
@@ -471018,7 +471038,7 @@ elf_symbol {
   name: "xhci_sideband_stop_endpoint"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x56440c35
+  crc: 0x10a6cb6c
   type_id: 0x9ebbeb61
   full_name: "xhci_sideband_stop_endpoint"
 }
@@ -471027,7 +471047,7 @@ elf_symbol {
   name: "xhci_sideband_unregister"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x80de7378
+  crc: 0xbb016cc2
   type_id: 0x13ad3e6d
   full_name: "xhci_sideband_unregister"
 }
