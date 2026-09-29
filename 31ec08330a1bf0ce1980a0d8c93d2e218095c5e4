@@ -69,6 +69,24 @@
       "parentUuid": "6e107d72_7259d876",
       "revId": "31ec08330a1bf0ce1980a0d8c93d2e218095c5e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da728665_317c209e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2055842
+      },
+      "writtenOn": "2026-09-29T05:03:51Z",
+      "side": 1,
+      "message": "\u003e Is this really needed on android-mainline or a GKI branch?\n\nYes, there is no possibility of moving this into a vendor space. The `NVME_HWMON` is a boolean used under [drivers/nvme/host/nvme.h](https://source.corp.google.com/h/android/kernel/common/+/android-mainline:drivers/nvme/host/nvme.h;l\u003d1220)\n\nThe `nvme.h` is included in the [`drivers/nvme/host/core.c`](https://source.corp.google.com/h/android/kernel/common/+/android-mainline:drivers/nvme/host/core.c;l\u003d27) file that is dependent on the [`CONFIG_NVME_CORE` option](https://source.corp.google.com/h/android/kernel/common/+/android-mainline:drivers/nvme/host/Makefile;l\u003d13), that is set to `y` in gki_defconfig.\n\nGiven the above - the `NVME_HWMON` option is resolved inside a GKI kernel, so setting it up as a vendor module won\u0027t take any effect.\n\nEnabling this config allows us to add support for full nvme temp monitoring from its sensors.",
+      "parentUuid": "8d15bd65_3b87adbb",
+      "revId": "31ec08330a1bf0ce1980a0d8c93d2e218095c5e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
