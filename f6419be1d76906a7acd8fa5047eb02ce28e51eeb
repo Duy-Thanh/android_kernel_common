@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "051db7b4_8eb30fdc",
+        "filename": "arch/arm64/include/asm/p3s.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-09-29T17:01:34Z",
+      "side": 1,
+      "message": "`p3s_assert_mm` is vague. Maybe `p3s_assert_current_mm_valid` or something like this?",
+      "range": {
+        "startLine": 26,
+        "startChar": 28,
+        "endLine": 26,
+        "endChar": 41
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "dcdba502_c33400be",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/include/asm/p3s.h",
+              "range": {
+                "startLine": 26,
+                "startChar": 0,
+                "endLine": 27,
+                "endChar": 0
+              },
+              "replacement": "static __always_inline void p3s_assert_current_mm(const struct mm_struct *mm)\n"
+            },
+            {
+              "path": "arch/arm64/include/asm/p3s.h",
+              "range": {
+                "startLine": 64,
+                "startChar": 0,
+                "endLine": 65,
+                "endChar": 0
+              },
+              "replacement": "static inline void p3s_assert_current_mm(const struct mm_struct *mm)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f6419be1d76906a7acd8fa5047eb02ce28e51eeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
