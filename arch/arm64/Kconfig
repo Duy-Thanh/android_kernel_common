@@ -1128,6 +1128,7 @@ config ARM64_ERRATUM_3194386
 
 	  If unsure, say Y.
 
+<<<<<<< HEAD   (c35ef25cd7f520cf706d7d000029d5a851083db7 Merge 2125f57780e4 ("arm64: cputype: Add C1-Premium definiti)
 config ARM64_ERRATUM_4311569
 	bool "SI L1: 4311569: workaround for premature CMO completion erratum"
 	default y
@@ -1147,6 +1148,9 @@ config ARM64_ERRATUM_4311569
 
 	  If unsure, say Y.
 
+||||||| BASE   (2125f57780e4d81424f47d9ec432ac733e9a2fb2 arm64: cputype: Add C1-Premium definitions)
+=======
+>>>>>>> BRANCH (2321cb9e80eaeedbc22ede60ee03404fe521cd56 arm64: errata: Mitigate TLBI errata on Microsoft Azure Cobal)
 config ARM64_ERRATUM_4193714
 	bool "C1-Pro: 4193714: SME DVMSync early acknowledgement"
 	depends on ARM64_SME
