@@ -262,7 +262,15 @@ switch_mm_fastpath:
 
 	arm64_apply_bp_hardening();
 
-	mm_switch_tcr(mm);
+	/*
+	 * TCR_EL1 describes how TTBR0_EL1 is decoded.  Stop speculative walks
+	 * through the old address space before changing its translation geometry.
+	 */
+	if (mm_tcr_needs_switch(mm)) {
+		cpu_set_reserved_ttbr0();
+		local_flush_tlb_all();
+		mm_switch_tcr(mm);
+	}
 
 	/*
 	 * Defer TTBR0_EL1 setting for user threads to uaccess_enable() when
