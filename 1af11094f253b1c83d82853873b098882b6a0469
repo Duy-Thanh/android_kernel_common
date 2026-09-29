@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ac72c459_1ed6c0d4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-09-29T05:20:02Z",
+      "side": 1,
+      "message": "Yes, do not duplicate the changelog text here from the original commit, just document that you are attempting to fix up the abi issues from the previous patch in the series.",
+      "parentUuid": "13a4fe97_835643e8",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 0
+      },
+      "revId": "1af11094f253b1c83d82853873b098882b6a0469",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d295bdcc_89d6718d",
         "filename": "drivers/usb/gadget/udc/core.c",
         "patchSetId": 7
