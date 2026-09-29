@@ -403,6 +403,19 @@ impl<'a, const READ: bool> CpuAccess<'a, READ, true> {
         // enabled.
         unsafe { bindings::iosys_map_memcpy_to(self.map, offset, src.as_ptr().cast(), src.len()) };
     }
+
+    /// Sets a range of `len` bytes starting at `offset` into the buffer to `value`.
+    #[inline]
+    #[track_caller]
+    pub fn memset(&mut self, offset: usize, value: u8, len: usize) {
+        let (end, end_overflow) = offset.overflowing_add(len);
+        if end_overflow || end > self.size {
+            panic!("memset of {len} bytes at {offset} in dma-buf out of bounds",);
+        }
+        // SAFETY: The bounds check ensures we don't write out of bounds. The guard has WRITE
+        // enabled.
+        unsafe { bindings::iosys_map_memset(self.map, offset, value as c_int, len) };
+    }
 }
 
 impl<'a, const WRITE: bool> CpuAccess<'a, true, WRITE> {
