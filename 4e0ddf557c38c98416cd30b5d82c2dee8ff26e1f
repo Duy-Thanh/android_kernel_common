@@ -52,6 +52,24 @@
       "parentUuid": "1e2ce5a5_494e10df",
       "revId": "4e0ddf557c38c98416cd30b5d82c2dee8ff26e1f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c60f32ef_b13139c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1639124
+      },
+      "writtenOn": "2026-09-29T07:30:45Z",
+      "side": 1,
+      "message": "Hi Sarthak,\n\nThanks for your reply!\n\nMy main thought is the current design complicates the fs on-disk details and add some limitations so that it can only apply to a subset of EROFS (like metadata must be in a contiguous metadata zone), and cannot be applied to many use cases like container images because they need incremental metadata updates;\nIt seems \"Pinned 128-ary Metadata Merkle Tree\" can be an on-disk optimization to enhance dm-verity on-disk layout by applying proper per-zone strategy.\nI hope it would be better to analysis the dm-verity bottleneck first, e.g. I wonder if it\u0027s possible to get the better performance compared with dm-verity (because dm-verify cannot apply more readahead strategis) by triggering corresponding merkle tree readahead when reading an erofs inode or index with more accurate strategies, and designing a way to arranging tail merkle tree blocks close to the real fs metadata instead (since the design above integrates the sha256 digest into erofs compressed extent format [although this index format is more friendly to much larger pclusters like 1MiB, I don\u0027t think it\u0027s effective for small pclusters like 4k], I guess it\u0027s also possible to have a way to just arrange fs-independent tail merkle tree block close to the inode metadata?)\n\nI think fs-layout-independent verity format would be better than applying verity details into every detailed erofs layout, since fs on-disk expension can always introduce some edge cases and make the overall on-disk spec harder to follow.\nEROFS is unlike f2fs because it aims to be an advanced package format (like zip and tar) for various caes , so I hope the overall format can be maintained in a reasonable complexity and can be standardized finally.  That is why on-disk changes is more cautious now.\n\nNevertheless, some addditional fixes are useful I think we could land to upstream in advance.",
+      "parentUuid": "2546a661_3525309f",
+      "revId": "4e0ddf557c38c98416cd30b5d82c2dee8ff26e1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
