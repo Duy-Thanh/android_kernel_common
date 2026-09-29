@@ -3082,6 +3082,8 @@ void lru_gen_del_mm(struct mm_struct *mm)
 }
 
 #ifdef CONFIG_MEMCG
+static void lru_gen_on_migrate_mm(struct mem_cgroup *memcg, struct task_struct *task);
+
 void lru_gen_migrate_mm(struct mm_struct *mm)
 {
 	struct mem_cgroup *memcg;
@@ -3108,6 +3110,7 @@ void lru_gen_migrate_mm(struct mm_struct *mm)
 
 	lru_gen_del_mm(mm);
 	lru_gen_add_mm(mm);
+	lru_gen_on_migrate_mm(memcg, task);
 }
 #endif
 
@@ -4420,20 +4423,138 @@ enum {
 	MEMCG_LRU_HEAD,
 	MEMCG_LRU_TAIL,
 	MEMCG_LRU_OLD,
+	MEMCG_LRU_OLD_TAIL,
 	MEMCG_LRU_YOUNG,
 };
+
+#define MEMCG_OOM_ADJ_VALID		BIT(16)
+#define MEMCG_OOM_ADJ_OFFLINE		BIT(17)
+#define MEMCG_OOM_ADJ_UNSET		INT_MIN
+#define MEMCG_PRE_AGE_BATCH		16
+
+/*
+ * Runtime mode switch (/sys/kernel/mm/lru_gen/importance_mode and oom_adj_mode):
+ * 0: Stock MGLRU (control)
+ * 1: Naive MEMCG_LRU_OLD (head of OLD) at oom_score_adj >= 700
+ * 2: MEMCG_LRU_OLD_TAIL (tail of OLD) at oom_score_adj >= 700
+ * 3: Full 8-Bin Importance-Tiered MGLRU with MEMCG_LRU_OLD_TAIL & <= 0 cutoff
+ */
+static unsigned int lru_gen_oom_adj_mode __read_mostly = 3;
+
+static inline bool lru_gen_is_memcg_offlined(const struct mem_cgroup *memcg)
+{
+#ifdef CONFIG_MEMCG
+	if (!memcg || mem_cgroup_is_root((struct mem_cgroup *)memcg))
+		return false;
+	return !!(READ_ONCE(memcg->__kabi_reserved_backport1) & MEMCG_OOM_ADJ_OFFLINE);
+#else
+	return false;
+#endif
+}
+
+static inline int lru_gen_get_memcg_oom_adj(const struct mem_cgroup *memcg)
+{
+#ifdef CONFIG_MEMCG
+	u64 val;
+
+	if (!memcg || mem_cgroup_is_root((struct mem_cgroup *)memcg))
+		return MEMCG_OOM_ADJ_UNSET;
+	val = READ_ONCE(memcg->__kabi_reserved_backport1);
+	if (!(val & MEMCG_OOM_ADJ_VALID))
+		return MEMCG_OOM_ADJ_UNSET;
+	return (int)(s16)(u16)(val & 0xffffU);
+#else
+	return MEMCG_OOM_ADJ_UNSET;
+#endif
+}
+
+static inline void lru_gen_set_memcg_oom_adj(struct mem_cgroup *memcg, int adj)
+{
+#ifdef CONFIG_MEMCG
+	u64 old_val, val;
+
+	if (!memcg || mem_cgroup_is_root(memcg))
+		return;
+	old_val = READ_ONCE(memcg->__kabi_reserved_backport1) & ~(0xffffULL | MEMCG_OOM_ADJ_VALID);
+	val = old_val | ((u16)(s16)clamp(adj, OOM_SCORE_ADJ_MIN, OOM_SCORE_ADJ_MAX)) |
+	      MEMCG_OOM_ADJ_VALID;
+	WRITE_ONCE(memcg->__kabi_reserved_backport1, val);
+#endif
+}
+
+static inline unsigned long lru_gen_get_pre_aged_seq(const struct mem_cgroup *memcg)
+{
+#ifdef CONFIG_MEMCG
+	if (!memcg || mem_cgroup_is_root((struct mem_cgroup *)memcg))
+		return 0;
+	return (unsigned long)(u32)(READ_ONCE(memcg->__kabi_reserved_backport1) >> 32);
+#else
+	return 0;
+#endif
+}
+
+static inline void lru_gen_set_pre_aged_seq(struct mem_cgroup *memcg, unsigned long seq)
+{
+#ifdef CONFIG_MEMCG
+	u64 old_val;
+
+	if (!memcg || mem_cgroup_is_root(memcg))
+		return;
+	old_val = READ_ONCE(memcg->__kabi_reserved_backport1) & 0xffffffffULL;
+	WRITE_ONCE(memcg->__kabi_reserved_backport1, old_val | ((u64)(u32)seq << 32));
+#endif
+}
+
+static int lru_gen_memcg_bin_for_adj(const struct mem_cgroup *memcg, int adj,
+				     unsigned int mode)
+{
+	if (mode == 0)
+		return get_random_u32_below(MEMCG_NR_BINS);
+	if (mode == 1 || mode == 2)
+		return 0;
+	if (!memcg || lru_gen_is_memcg_offlined(memcg))
+		return 0;
+	if (adj == MEMCG_OOM_ADJ_UNSET)
+		return 2;
+	if (adj >= 950)
+		return 0; /* Tier 3_EMPTY: CACHED_EMPTY (950+) & offlined memcgs */
+	if (adj >= 900)
+		return 1; /* Tier 3A: CACHED_APP (900..949, oldest-first FIFO) */
+	if (adj >= 800 || (adj >= 500 && adj < 600))
+		return 2; /* Tier 3B: SERVICE_B (800) & SERVICE (500) */
+	if (adj >= 600)
+		return 5; /* Tier 1: HOME (600) & PREVIOUS (700) - protected behind bins 0..4 */
+	if (adj >= 250)
+		return 3; /* Tier 2B: PERCEPTIBLE_LOW (250), BACKUP (300), HEAVY (400) */
+	if (adj >= 100)
+		return 4; /* Tier 2A: VISIBLE (100), FGS / VoiceInteractor / NLS (200..225) */
+	if (adj >= 0)
+		return 6; /* Tier 0B: TOP FOREGROUND_APP (0) */
+	return 7;         /* Tier 0A: PERSISTENT / SYSTEM / NATIVE (< 0) */
+}
+
+static int lru_gen_memcg_bin(const struct mem_cgroup *memcg)
+{
+	unsigned int mode = READ_ONCE(lru_gen_oom_adj_mode);
+
+	return lru_gen_memcg_bin_for_adj(memcg, lru_gen_get_memcg_oom_adj(memcg), mode);
+}
 
 static void lru_gen_rotate_memcg(struct lruvec *lruvec, int op)
 {
 	int seg;
 	int old, new;
 	unsigned long flags;
-	int bin = get_random_u32_below(MEMCG_NR_BINS);
 	struct pglist_data *pgdat = lruvec_pgdat(lruvec);
+	struct mem_cgroup *memcg = lruvec_memcg(lruvec);
+	int bin = lru_gen_memcg_bin(memcg);
 
 	spin_lock_irqsave(&pgdat->memcg_lru.lock, flags);
 
-	VM_WARN_ON_ONCE(hlist_nulls_unhashed(&lruvec->lrugen.list));
+	if (hlist_nulls_unhashed(&lruvec->lrugen.list)) {
+		spin_unlock_irqrestore(&pgdat->memcg_lru.lock, flags);
+		return;
+	}
 
 	seg = 0;
 	new = old = lruvec->lrugen.gen;
@@ -4443,11 +4564,12 @@ static void lru_gen_rotate_memcg(struct lruvec *lruvec, int op)
 		seg = MEMCG_LRU_HEAD;
 	else if (op == MEMCG_LRU_TAIL)
 		seg = MEMCG_LRU_TAIL;
-	else if (op == MEMCG_LRU_OLD)
+	else if (op == MEMCG_LRU_OLD || op == MEMCG_LRU_OLD_TAIL)
 		new = get_memcg_gen(pgdat->memcg_lru.seq);
-	else if (op == MEMCG_LRU_YOUNG)
+	else if (op == MEMCG_LRU_YOUNG) {
 		new = get_memcg_gen(pgdat->memcg_lru.seq + 1);
-	else
+		lru_gen_set_pre_aged_seq(memcg, 0);
+	} else
 		VM_WARN_ON_ONCE(true);
 
 	WRITE_ONCE(lruvec->lrugen.seg, seg);
@@ -4471,11 +4593,103 @@ static void lru_gen_rotate_memcg(struct lruvec *lruvec, int op)
 
 #ifdef CONFIG_MEMCG
 
+static void lru_gen_apply_memcg_oom_adj(struct mem_cgroup *memcg, int prev_adj,
+					int new_adj, bool force)
+{
+	int nid;
+	unsigned int mode = READ_ONCE(lru_gen_oom_adj_mode);
+
+	if (!memcg || mem_cgroup_is_root(memcg) || lru_gen_is_memcg_offlined(memcg))
+		return;
+	if (!force && prev_adj == new_adj)
+		return;
+	if (mode == 0)
+		return;
+
+	for_each_node(nid) {
+		struct pglist_data *pgdat = NODE_DATA(nid);
+		struct lruvec *lruvec = get_lruvec(memcg, nid);
+		int old_gen = get_memcg_gen(READ_ONCE(pgdat->memcg_lru.seq));
+		int young_gen = get_memcg_gen(READ_ONCE(pgdat->memcg_lru.seq) + 1);
+		int cur_gen = READ_ONCE(lruvec->lrugen.gen);
+
+		if (mode == 1) {
+			if (new_adj >= 700 && (force || prev_adj == MEMCG_OOM_ADJ_UNSET || prev_adj < 700))
+				lru_gen_rotate_memcg(lruvec, MEMCG_LRU_OLD);
+			else if (new_adj <= 0 && (force || prev_adj == MEMCG_OOM_ADJ_UNSET || prev_adj > 0))
+				lru_gen_rotate_memcg(lruvec, MEMCG_LRU_YOUNG);
+		} else if (mode == 2) {
+			if (new_adj >= 700 && (force || prev_adj == MEMCG_OOM_ADJ_UNSET || prev_adj < 700))
+				lru_gen_rotate_memcg(lruvec, MEMCG_LRU_OLD_TAIL);
+			else if (new_adj <= 0 && (force || prev_adj == MEMCG_OOM_ADJ_UNSET || prev_adj > 0))
+				lru_gen_rotate_memcg(lruvec, MEMCG_LRU_YOUNG);
+		} else {
+			int old_bin = lru_gen_memcg_bin_for_adj(memcg, prev_adj, mode);
+			int new_bin = lru_gen_memcg_bin_for_adj(memcg, new_adj, mode);
+
+			if (new_adj < 100) {
+				if (force || prev_adj == MEMCG_OOM_ADJ_UNSET ||
+				    old_bin != new_bin || cur_gen != young_gen)
+					lru_gen_rotate_memcg(lruvec, MEMCG_LRU_YOUNG);
+			} else {
+				if (force || prev_adj == MEMCG_OOM_ADJ_UNSET ||
+				    old_bin != new_bin || cur_gen != old_gen)
+					lru_gen_rotate_memcg(lruvec, MEMCG_LRU_OLD_TAIL);
+			}
+		}
+	}
+}
+
+void lru_gen_notify_oom_score_adj(struct task_struct *task, int old_adj, int new_adj)
+{
+	struct mem_cgroup *memcg;
+	int prev_memcg_adj;
+
+	if (!lru_gen_enabled() || mem_cgroup_disabled() || !task)
+		return;
+
+	rcu_read_lock();
+	memcg = mem_cgroup_from_task(task);
+	if (!memcg || mem_cgroup_is_root(memcg) || !mem_cgroup_tryget(memcg)) {
+		rcu_read_unlock();
+		return;
+	}
+	rcu_read_unlock();
+
+	prev_memcg_adj = lru_gen_get_memcg_oom_adj(memcg);
+	lru_gen_set_memcg_oom_adj(memcg, new_adj);
+	lru_gen_apply_memcg_oom_adj(memcg, prev_memcg_adj, new_adj, false);
+
+	mem_cgroup_put(memcg);
+}
+
+static void lru_gen_on_migrate_mm(struct mem_cgroup *memcg, struct task_struct *task)
+{
+	int adj;
+	int prev_memcg_adj;
+
+	if (!lru_gen_enabled() || mem_cgroup_disabled() || !memcg ||
+	    mem_cgroup_is_root(memcg) || !task || !task->signal)
+		return;
+
+	adj = READ_ONCE(task->signal->oom_score_adj);
+	/* Ignore Zygote pre-specialize (-900) and default unset (0) on attach */
+	if (adj == -900 || adj == 0)
+		return;
+
+	prev_memcg_adj = lru_gen_get_memcg_oom_adj(memcg);
+	if (prev_memcg_adj != MEMCG_OOM_ADJ_UNSET)
+		return;
+
+	lru_gen_set_memcg_oom_adj(memcg, adj);
+	lru_gen_apply_memcg_oom_adj(memcg, prev_memcg_adj, adj, true);
+}
+
 void lru_gen_online_memcg(struct mem_cgroup *memcg)
 {
 	int gen;
 	int nid;
-	int bin = get_random_u32_below(MEMCG_NR_BINS);
+	int bin = lru_gen_memcg_bin(memcg);
 
 	for_each_node(nid) {
 		struct pglist_data *pgdat = NODE_DATA(nid);
@@ -4499,6 +4713,9 @@ void lru_gen_online_memcg(struct mem_cgroup *memcg)
 void lru_gen_offline_memcg(struct mem_cgroup *memcg)
 {
 	int nid;
+	u64 val = READ_ONCE(memcg->__kabi_reserved_backport1);
+
+	WRITE_ONCE(memcg->__kabi_reserved_backport1, val | MEMCG_OOM_ADJ_OFFLINE);
 
 	for_each_node(nid) {
 		struct lruvec *lruvec = get_lruvec(memcg, nid);
@@ -4926,35 +5143,120 @@ static bool should_run_aging(struct lruvec *lruvec, unsigned long max_seq,
  * 1. Defer try_to_inc_max_seq() to workqueues to reduce latency for memcg
  *    reclaim.
  */
+static bool lru_gen_memcg_is_demoted(struct mem_cgroup *memcg, unsigned int mode)
+{
+	int adj;
+
+	if (!mode || !memcg)
+		return false;
+	if (!mem_cgroup_online(memcg) || lru_gen_is_memcg_offlined(memcg))
+		return true;
+	adj = lru_gen_get_memcg_oom_adj(memcg);
+	if (adj == MEMCG_OOM_ADJ_UNSET)
+		return false;
+	if (mode == 1 || mode == 2)
+		return adj >= 700;
+	return adj >= 100;
+}
+
 static long get_nr_to_scan(struct lruvec *lruvec, struct scan_control *sc, int swappiness)
 {
 	bool success;
 	unsigned long nr_to_scan;
 	struct mem_cgroup *memcg = lruvec_memcg(lruvec);
-	DEFINE_MAX_SEQ(lruvec);
+	unsigned long max_seq;
 	bool bypass = false;
 	bool young = false;
+	unsigned int mode = READ_ONCE(lru_gen_oom_adj_mode);
+	bool demoted = lru_gen_memcg_is_demoted(memcg, mode);
+	int adj = lru_gen_get_memcg_oom_adj(memcg);
+	bool is_cached_tier = demoted && ((mode == 1 || mode == 2) ?
+		(adj >= 700) : (adj >= 800 || !mem_cgroup_online(memcg) ||
+				lru_gen_is_memcg_offlined(memcg)));
 
 	if (mem_cgroup_below_min(sc->target_mem_cgroup, memcg))
 		return -1;
 
+	if (demoted) {
+		spin_lock_irq(&lruvec->lru_lock);
+		try_to_inc_min_seq(lruvec, swappiness);
+		spin_unlock_irq(&lruvec->lru_lock);
+	}
+
+	max_seq = READ_ONCE(lruvec->lrugen.max_seq);
 	success = should_run_aging(lruvec, max_seq, swappiness, &nr_to_scan);
 
-	/* try to scrape all its memory if this memcg was deleted */
-	if (nr_to_scan && !mem_cgroup_online(memcg))
+	/* try to scrape all its memory if this memcg was deleted or is cached */
+	if (nr_to_scan && (!mem_cgroup_online(memcg) || is_cached_tier))
 		return nr_to_scan;
 
-	/* try to get away with not aging at the default priority */
-	if (!success || sc->priority == DEF_PRIORITY)
-		return nr_to_scan >> sc->priority;
+	/*
+	 * If a demoted perceptible memcg (FGS) already has evictable folios in
+	 * min_seq (nr_to_scan > 0), drain min_seq before aging again.
+	 */
+	if (!success || (demoted && nr_to_scan) || (sc->priority == DEF_PRIORITY && !demoted)) {
+		unsigned long scan = nr_to_scan >> sc->priority;
+
+		if (demoted && nr_to_scan && !scan)
+			scan = min_t(unsigned long, nr_to_scan, MIN_LRU_BATCH);
+		return scan;
+	}
+
+	/*
+	 * Once a demoted perceptible memcg (100 <= adj < 600) has completed
+	 * both Pass 1 (pre_aged_seq) and Pass 2 (pre_aged_seq + 1) in this
+	 * OLD cycle and drained all cold folios from min_seq (nr_to_scan == 0),
+	 * rotate it to MEMCG_LRU_YOUNG instead of aging its hot working set.
+	 */
+	if (demoted && !is_cached_tier) {
+		unsigned long pre_aged_seq = lru_gen_get_pre_aged_seq(memcg);
+
+		if (pre_aged_seq && max_seq > pre_aged_seq)
+			return -1;
+	}
 
 	trace_android_vh_mglru_aging_bypass(lruvec, max_seq,
 		swappiness, &bypass, &young);
 	if (bypass)
 		return young ? -1 : 0;
 
+	if (!try_to_inc_max_seq(lruvec, max_seq, swappiness, false))
+		return 0;
+
+	if (demoted) {
+		unsigned long pre_aged_seq = lru_gen_get_pre_aged_seq(memcg);
+
+		spin_lock_irq(&lruvec->lru_lock);
+		try_to_inc_min_seq(lruvec, swappiness);
+		spin_unlock_irq(&lruvec->lru_lock);
+
+		max_seq = READ_ONCE(lruvec->lrugen.max_seq);
+		should_run_aging(lruvec, max_seq, swappiness, &nr_to_scan);
+
+		if (is_cached_tier && !nr_to_scan) {
+			if (try_to_inc_max_seq(lruvec, max_seq, swappiness, false)) {
+				spin_lock_irq(&lruvec->lru_lock);
+				try_to_inc_min_seq(lruvec, swappiness);
+				spin_unlock_irq(&lruvec->lru_lock);
+				max_seq = READ_ONCE(lruvec->lrugen.max_seq);
+				should_run_aging(lruvec, max_seq, swappiness, &nr_to_scan);
+			}
+		}
+
+		if (is_cached_tier)
+			return nr_to_scan ? nr_to_scan : -1;
+
+		if (!pre_aged_seq || max_seq != pre_aged_seq + 1) {
+			lru_gen_set_pre_aged_seq(memcg, max_seq);
+			return 0;
+		}
+		if (nr_to_scan)
+			return max_t(unsigned long, nr_to_scan >> sc->priority,
+				     MIN_LRU_BATCH);
+	}
+
 	/* stop scanning this lruvec as it's low on cold folios */
-	return try_to_inc_max_seq(lruvec, max_seq, swappiness, false) ? -1 : 0;
+	return -1;
 }
 
 static bool should_abort_scan(struct lruvec *lruvec, struct scan_control *sc)
@@ -5040,6 +5342,8 @@ static int shrink_one(struct lruvec *lruvec, struct scan_control *sc)
 	unsigned long reclaimed = sc->nr_reclaimed;
 	struct mem_cgroup *memcg = lruvec_memcg(lruvec);
 	struct pglist_data *pgdat = lruvec_pgdat(lruvec);
+	unsigned int mode = READ_ONCE(lru_gen_oom_adj_mode);
+	int adj = lru_gen_get_memcg_oom_adj(memcg);
 
 	/* lru_gen_age_node() called mem_cgroup_calculate_protection() */
 	if (mem_cgroup_below_min(NULL, memcg))
@@ -5052,6 +5356,15 @@ static int shrink_one(struct lruvec *lruvec, struct scan_control *sc)
 
 		memcg_memory_event(memcg, MEMCG_LOW);
 	}
+
+	/*
+	 * In mode 3, if a TOP or PERSISTENT memcg (adj < 100) lands in OLD due
+	 * to memcg_lru.seq rollover, protect it at normal reclaim priorities.
+	 */
+	if (mode == 3 && mem_cgroup_online(memcg) &&
+	    adj != MEMCG_OOM_ADJ_UNSET && adj < 100 &&
+	    sc->priority >= DEF_PRIORITY - 2)
+		return MEMCG_LRU_YOUNG;
 
 	success = try_to_shrink_lruvec(lruvec, sc);
 
@@ -5066,12 +5379,87 @@ static int shrink_one(struct lruvec *lruvec, struct scan_control *sc)
 	if (success && mem_cgroup_online(memcg))
 		return MEMCG_LRU_YOUNG;
 
-	if (!success && lruvec_is_sizable(lruvec, sc))
-		return 0;
+	if (!success && lruvec_is_sizable(lruvec, sc)) {
+		if (mode == 0)
+			return 0;
+		/*
+		 * In mode 3, perceptible background services (100 <= adj < 600,
+		 * bins 3 & 4) round-robin via MEMCG_LRU_TAIL within their bin so
+		 * cold bloat is trimmed evenly across concurrent FGS processes
+		 * while giving each live service time to re-reference hot PTEs.
+		 */
+		if (mode == 3 && adj >= 100 && adj < 600) {
+			unsigned long pre_aged_seq = lru_gen_get_pre_aged_seq(memcg);
+
+			if (sc->nr_reclaimed > reclaimed ||
+			    (pre_aged_seq && READ_ONCE(lruvec->lrugen.max_seq) == pre_aged_seq))
+				return MEMCG_LRU_TAIL;
+			return READ_ONCE(lruvec->lrugen.seg) != MEMCG_LRU_TAIL ?
+			       MEMCG_LRU_TAIL : MEMCG_LRU_YOUNG;
+		}
+		/* Never wedge the head of a bin if 0 pages were reclaimed */
+		if (sc->nr_reclaimed > reclaimed)
+			return 0;
+	}
 
 	/* one retry if offlined or too small */
 	return READ_ONCE(lruvec->lrugen.seg) != MEMCG_LRU_TAIL ?
 	       MEMCG_LRU_TAIL : MEMCG_LRU_YOUNG;
+}
+
+static bool lru_gen_fgs_needs_pre_age(struct lru_gen_folio *lrugen,
+				      const struct mem_cgroup *memcg,
+				      int swappiness)
+{
+	unsigned long max_seq = READ_ONCE(lrugen->max_seq);
+	unsigned long min_seq[ANON_AND_FILE] = {
+		READ_ONCE(lrugen->min_seq[LRU_GEN_ANON]),
+		READ_ONCE(lrugen->min_seq[LRU_GEN_FILE]),
+	};
+
+	if (lru_gen_get_pre_aged_seq(memcg))
+		return false;
+	return max_seq == MIN_NR_GENS + 1 ||
+	       evictable_min_seq(min_seq, swappiness) + MIN_NR_GENS > max_seq;
+}
+
+static void lru_gen_pre_age_fgs_bins(struct pglist_data *pgdat, int gen, int swappiness)
+{
+	int bin;
+
+	for (bin = 3; bin <= 4; bin++) {
+		struct lruvec *batch[MEMCG_PRE_AGE_BATCH];
+		struct lru_gen_folio *lrugen;
+		struct hlist_nulls_node *pos;
+		int i, nr = 0;
+
+		rcu_read_lock();
+		hlist_nulls_for_each_entry_rcu(lrugen, pos, &pgdat->memcg_lru.fifo[gen][bin], list) {
+			struct lruvec *lruvec = container_of(lrugen, struct lruvec, lrugen);
+			struct mem_cgroup *memcg = lruvec_memcg(lruvec);
+
+			if (!lru_gen_fgs_needs_pre_age(lrugen, memcg, swappiness))
+				continue;
+			if (!mem_cgroup_tryget(memcg))
+				continue;
+			batch[nr++] = lruvec;
+			if (nr == MEMCG_PRE_AGE_BATCH)
+				break;
+		}
+		rcu_read_unlock();
+
+		for (i = 0; i < nr; i++) {
+			struct lruvec *lruvec = batch[i];
+			struct mem_cgroup *memcg = lruvec_memcg(lruvec);
+			unsigned long max_seq = READ_ONCE(lruvec->lrugen.max_seq);
+
+			if (lru_gen_fgs_needs_pre_age(&lruvec->lrugen, memcg, swappiness)) {
+				if (try_to_inc_max_seq(lruvec, max_seq, swappiness, false))
+					lru_gen_set_pre_aged_seq(memcg, READ_ONCE(lruvec->lrugen.max_seq));
+			}
+			mem_cgroup_put(memcg);
+		}
+	}
 }
 
 static void shrink_many(struct pglist_data *pgdat, struct scan_control *sc)
@@ -5085,12 +5473,17 @@ static void shrink_many(struct pglist_data *pgdat, struct scan_control *sc)
 	struct mem_cgroup *memcg;
 	struct hlist_nulls_node *pos;
 	bool bypass = false;
+	unsigned int mode = READ_ONCE(lru_gen_oom_adj_mode);
+	unsigned long bin_reclaimed;
+	bool allow_contended = false;
+	bool skipped_contended = false;
 
 	gen = get_memcg_gen(READ_ONCE(pgdat->memcg_lru.seq));
-	bin = first_bin = get_random_u32_below(MEMCG_NR_BINS);
+	bin = first_bin = mode ? 0 : get_random_u32_below(MEMCG_NR_BINS);
 restart:
 	op = 0;
 	memcg = NULL;
+	bin_reclaimed = sc->nr_reclaimed;
 
 	rcu_read_lock();
 
@@ -5119,6 +5512,18 @@ restart:
 		if (bypass)
 			continue;
 
+		/*
+		 * In mode 3, if multiple direct reclaimers concurrently enter
+		 * low-importance bins (0..4), skip cgroups whose lru_lock is
+		 * already held by another active reclaimer so threads spread
+		 * across distinct cgroups without serializing on the bin head.
+		 */
+		if (mode == 3 && !current_is_kswapd() && !allow_contended &&
+		    bin <= 4 && spin_is_locked(&lruvec->lru_lock)) {
+			skipped_contended = true;
+			continue;
+		}
+
 		rcu_read_unlock();
 
 		op = shrink_one(lruvec, sc);
@@ -5136,12 +5541,33 @@ restart:
 
 	mem_cgroup_put(memcg);
 
-	if (!is_a_nulls(pos))
+	if (!is_a_nulls(pos)) {
+		if (mode == 3 && bin <= 2)
+			lru_gen_pre_age_fgs_bins(pgdat, gen, MAX_SWAPPINESS / 2);
 		return;
+	}
 
 	/* restart if raced with lru_gen_rotate_memcg() */
 	if (gen != get_nulls_value(pos))
 		goto restart;
+
+	/*
+	 * In mode 3, keep draining the current lower-importance bin before
+	 * advancing to a higher-importance bin as long as it is yielding pages.
+	 */
+	if (mode == 3 && sc->nr_reclaimed > bin_reclaimed)
+		goto restart;
+
+	/*
+	 * Before spilling from low-importance bins (0..4) into protected
+	 * PREVIOUS/TOP bins (5..7), retry contended cgroups in bins 0..4.
+	 */
+	if (mode == 3 && bin == 4 && skipped_contended && !allow_contended) {
+		allow_contended = true;
+		skipped_contended = false;
+		bin = 0;
+		goto restart;
+	}
 
 	/* try the rest of the bins of the current generation */
 	bin = get_memcg_bin(bin + 1);
@@ -5421,9 +5847,56 @@ static ssize_t enabled_store(struct kobject *kobj, struct kobj_attribute *attr,
 
 static struct kobj_attribute lru_gen_enabled_attr = __ATTR_RW(enabled);
 
+static ssize_t oom_adj_mode_show(struct kobject *kobj, struct kobj_attribute *attr, char *buf)
+{
+	return sysfs_emit(buf, "%u\n", READ_ONCE(lru_gen_oom_adj_mode));
+}
+
+static ssize_t oom_adj_mode_store(struct kobject *kobj, struct kobj_attribute *attr,
+				  const char *buf, size_t len)
+{
+	unsigned int mode;
+	struct mem_cgroup *memcg;
+
+	if (kstrtouint(buf, 0, &mode) || mode > 3)
+		return -EINVAL;
+
+	WRITE_ONCE(lru_gen_oom_adj_mode, mode);
+
+#ifdef CONFIG_MEMCG
+	if (!mem_cgroup_disabled()) {
+		memcg = mem_cgroup_iter(NULL, NULL, NULL);
+		do {
+			int nid;
+			int adj = lru_gen_get_memcg_oom_adj(memcg);
+
+			if (mem_cgroup_is_root(memcg))
+				continue;
+			if (mode == 0 || adj == MEMCG_OOM_ADJ_UNSET) {
+				for_each_node(nid) {
+					struct lruvec *lruvec = get_lruvec(memcg, nid);
+
+					lru_gen_rotate_memcg(lruvec, MEMCG_LRU_OLD_TAIL);
+				}
+			} else {
+				lru_gen_apply_memcg_oom_adj(memcg, adj, adj, true);
+			}
+		} while ((memcg = mem_cgroup_iter(NULL, memcg, NULL)));
+	}
+#endif
+
+	return len;
+}
+
+static struct kobj_attribute lru_gen_oom_adj_mode_attr = __ATTR_RW(oom_adj_mode);
+static struct kobj_attribute lru_gen_importance_mode_attr =
+	__ATTR(importance_mode, 0644, oom_adj_mode_show, oom_adj_mode_store);
+
 static struct attribute *lru_gen_attrs[] = {
 	&lru_gen_min_ttl_attr.attr,
 	&lru_gen_enabled_attr.attr,
+	&lru_gen_oom_adj_mode_attr.attr,
+	&lru_gen_importance_mode_attr.attr,
 	NULL
 };
 
@@ -5783,6 +6256,84 @@ static const struct file_operations lru_gen_ro_fops = {
 	.release = seq_release,
 };
 
+static int lru_gen_fifo_show(struct seq_file *m, void *v)
+{
+	int nid;
+	char *path = kvmalloc(PATH_MAX, GFP_KERNEL);
+
+	if (!path)
+		return -ENOMEM;
+
+	for_each_node_state(nid, N_MEMORY) {
+		struct pglist_data *pgdat = NODE_DATA(nid);
+		unsigned long seq = READ_ONCE(pgdat->memcg_lru.seq);
+		int g, bin;
+
+		seq_printf(m, "node %d seq %lu old_gen %lu young_gen %lu mode %u nr_memcgs [%lu %lu %lu]\n",
+			   nid, seq, get_memcg_gen(seq), get_memcg_gen(seq + 1),
+			   READ_ONCE(lru_gen_oom_adj_mode),
+			   READ_ONCE(pgdat->memcg_lru.nr_memcgs[0]),
+			   READ_ONCE(pgdat->memcg_lru.nr_memcgs[1]),
+			   READ_ONCE(pgdat->memcg_lru.nr_memcgs[2]));
+
+		for (g = 0; g < 2; g++) {
+			int gen = get_memcg_gen(seq + g);
+			const char *role = g == 0 ? "OLD" : "YOUNG";
+
+			for (bin = 0; bin < MEMCG_NR_BINS; bin++) {
+				struct lru_gen_folio *lrugen;
+				struct hlist_nulls_node *pos;
+				int idx = 0;
+
+				rcu_read_lock();
+				hlist_nulls_for_each_entry_rcu(lrugen, pos,
+						&pgdat->memcg_lru.fifo[gen][bin], list) {
+					struct lruvec *lruvec = container_of(lrugen, struct lruvec, lrugen);
+					struct mem_cgroup *memcg = lruvec_memcg(lruvec);
+					int adj = lru_gen_get_memcg_oom_adj(memcg);
+					unsigned long max_seq = READ_ONCE(lrugen->max_seq);
+					unsigned long min_anon = READ_ONCE(lrugen->min_seq[LRU_GEN_ANON]);
+					unsigned long min_file = READ_ONCE(lrugen->min_seq[LRU_GEN_FILE]);
+					unsigned long anon_pages = 0, file_pages = 0;
+					unsigned long s;
+					int zone;
+
+					for (s = min_anon; s <= max_seq; s++) {
+						int lgen = lru_gen_from_seq(s);
+
+						for (zone = 0; zone < MAX_NR_ZONES; zone++)
+							anon_pages += max(READ_ONCE(lrugen->nr_pages[lgen][LRU_GEN_ANON][zone]), 0L);
+					}
+					for (s = min_file; s <= max_seq; s++) {
+						int lgen = lru_gen_from_seq(s);
+
+						for (zone = 0; zone < MAX_NR_ZONES; zone++)
+							file_pages += max(READ_ONCE(lrugen->nr_pages[lgen][LRU_GEN_FILE][zone]), 0L);
+					}
+
+					path[0] = '\0';
+#ifdef CONFIG_MEMCG
+					if (memcg)
+						cgroup_path(memcg->css.cgroup, path, PATH_MAX);
+#endif
+					seq_printf(m, "  %s gen=%d bin=%d idx=%d seg=%d adj=%d online=%d id=%hu anon=%lu file=%lu seq=%lu/%lu..%lu path=%s\n",
+						   role, gen, bin, idx++, READ_ONCE(lrugen->seg),
+						   adj == MEMCG_OOM_ADJ_UNSET ? -9999 : adj,
+						   memcg ? (int)!lru_gen_is_memcg_offlined(memcg) : 1,
+						   mem_cgroup_id(memcg),
+						   anon_pages, file_pages,
+						   min_anon, min_file, max_seq, path);
+				}
+				rcu_read_unlock();
+			}
+		}
+	}
+
+	kvfree(path);
+	return 0;
+}
+DEFINE_SHOW_ATTRIBUTE(lru_gen_fifo);
+
 /******************************************************************************
  *                          initialization
  ******************************************************************************/
@@ -5871,6 +6422,7 @@ static int __init init_lru_gen(void)
 
 	debugfs_create_file("lru_gen", 0644, NULL, NULL, &lru_gen_rw_fops);
 	debugfs_create_file("lru_gen_full", 0444, NULL, NULL, &lru_gen_ro_fops);
+	debugfs_create_file("lru_gen_fifo", 0444, NULL, NULL, &lru_gen_fifo_fops);
 
 	return 0;
 };
