@@ -286,7 +286,7 @@ struct dmar_domain *pkvm_alloc_iommu_domain(struct alloc_domain_data *data,
 static int iommu_domain_map(struct domain_map_data *data)
 {
 	struct dmar_domain *domain;
-	u64 iova, phys, size, end;
+	u64 iova, phys, size, iova_end, phys_end;
 	int ret;
 
 	/* Check for possible overflows that may have security implications */
@@ -296,9 +296,9 @@ static int iommu_domain_map(struct domain_map_data *data)
 		return -EINVAL;
 	if (check_mul_overflow(data->nr_pages, VTD_PAGE_SIZE, &size))
 		return -EINVAL;
-	if (check_add_overflow(iova, size, &end))
+	if (check_add_overflow(iova, size, &iova_end))
 		return -EINVAL;
-	if (check_add_overflow(phys, size, &end))
+	if (check_add_overflow(phys, size, &phys_end))
 		return -EINVAL;
 
 	domain = __pkvm_get_iommu_domain(pkvm_host_gpa_to_virt(data->pgd_gpa));
@@ -306,6 +306,19 @@ static int iommu_domain_map(struct domain_map_data *data)
 		pkvm_err("%s: failed to get the domain [pgd:%llx]\n",
 			 __func__, data->pgd_gpa);
 		return -EINVAL;
+	}
+
+	/*
+	 * domain_map() only checks the IOVA against the page table width
+	 * (AGAW), which can be larger than the domain's GAW. Mappings above
+	 * GAW are unusable by hardware and are never unmapped when the
+	 * domain is freed, so reject them, like the host driver does.
+	 */
+	if (iova_end > __DOMAIN_MAX_ADDR(domain->gaw) + 1) {
+		pkvm_err("%s: iova end %llx beyond domain gaw %d\n",
+			 __func__, iova_end, domain->gaw);
+		ret = -EINVAL;
+		goto out_put_domain;
 	}
 
 	pkvm_spin_lock(&domain->lock);
@@ -327,6 +340,7 @@ static int iommu_domain_map(struct domain_map_data *data)
 
 out_unlock:
 	pkvm_spin_unlock(&domain->lock);
+out_put_domain:
 	pkvm_put_iommu_domain(domain);
 
 	return ret;
