@@ -22,6 +22,30 @@
       },
       "revId": "d15f41286f39aad5de8eb948835ba46b8c028f2d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4530d3d3_009162a0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-09-30T05:19:10Z",
+      "side": 1,
+      "message": "The idea was to not let kernel headers should never use the dynamic page shift.\n\nIf a header function needs to know the process page size, it takes mm or vma explicitly (like mm_pte_shift(mm) or vma_pages(vma)).\n\np3s_user_pages.h is strictly for C source files (translation units) that opt in at the very end of their include list so only that specific file evaluates PAGE_SIZE dynamically.\n\nUpdated the commit description to clarify that header files must never use dynamic page size and must never include p3s_user_pages.h; and added a compile-time check in include/linux/p3s_user_pages.h",
+      "parentUuid": "403e6ff8_ef3cc9e4",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 49
+      },
+      "revId": "d15f41286f39aad5de8eb948835ba46b8c028f2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
