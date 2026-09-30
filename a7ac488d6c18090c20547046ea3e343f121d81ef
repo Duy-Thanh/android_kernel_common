@@ -230,6 +230,24 @@
       "parentUuid": "b3f798bd_a1832fc7",
       "revId": "a7ac488d6c18090c20547046ea3e343f121d81ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c92d7b82_e54082d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1789397
+      },
+      "writtenOn": "2026-09-30T05:29:08Z",
+      "side": 1,
+      "message": "Hi Todd. \n\nI\u0027ll abandon this patch and cherry-pick the full change from the older branch to preserve the original Change-Id.\n\nRegarding Neill\u0027s feedback, I guess the below comments would give context around using the upstream xHCI sideband infrastructure. The current concern is that the existing upstream implementation still has unresolved issues for some devices/use cases, so there is not yet a proven upstream solution that can simply be backported. I\u0027ll address the Change-Id issue first",
+      "parentUuid": "3a32d64f_26c734d6",
+      "revId": "a7ac488d6c18090c20547046ea3e343f121d81ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
