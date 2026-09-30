@@ -611,6 +611,7 @@ void u_audio_stop_playback(struct g_audio *audio_dev)
 }
 EXPORT_SYMBOL_GPL(u_audio_stop_playback);
 
+<<<<<<< HEAD   (27ea5541934cd3e0aa0c955eb5c135a3d718c501 Merge f121db2df18d ("platform/chrome: sensorhub: Fix dropped)
 static int u_audio_pitch_info(struct snd_kcontrol *kcontrol,
 				   struct snd_ctl_elem_info *uinfo)
 {
@@ -679,6 +680,22 @@ static const struct snd_kcontrol_new u_audio_controls[]  = {
 	.put =          u_audio_pitch_put,
 },
 };
+||||||| BASE   (f121db2df18dde8b4d8751cda206bfa4fd5924f4 platform/chrome: sensorhub: Fix dropped timestamp events and)
+=======
+static void u_audio_card_free(struct snd_card *card)
+{
+	struct snd_uac_chip *uac = card->private_data;
+
+	if (!uac)
+		return;
+
+	kfree(uac->p_prm.ureq);
+	kfree(uac->c_prm.ureq);
+	kfree(uac->p_prm.rbuf);
+	kfree(uac->c_prm.rbuf);
+	kfree(uac);
+}
+>>>>>>> BRANCH (a7ecd1a04f4f485d7be6443d0f0b2c61a800cb82 usb: gadget: u_audio: Fix use-after-free on sound card disco)
 
 int g_audio_setup(struct g_audio *g_audio, const char *pcm_name,
 					const char *card_name)
@@ -757,6 +774,8 @@ int g_audio_setup(struct g_audio *g_audio, const char *pcm_name,
 		goto fail;
 
 	uac->card = card;
+	card->private_data = uac;
+	card->private_free = u_audio_card_free;
 
 	/*
 	 * Create first PCM device
@@ -805,6 +824,8 @@ int g_audio_setup(struct g_audio *g_audio, const char *pcm_name,
 
 snd_fail:
 	snd_card_free(card);
+	return err;
+
 fail:
 	kfree(uac->p_prm.reqs);
 	kfree(uac->c_prm.reqs);
@@ -830,12 +851,22 @@ void g_audio_cleanup(struct g_audio *g_audio)
 	card = uac->card;
 	if (card)
 		snd_card_free_when_closed(card);
+<<<<<<< HEAD   (27ea5541934cd3e0aa0c955eb5c135a3d718c501 Merge f121db2df18d ("platform/chrome: sensorhub: Fix dropped)
 
 	kfree(uac->p_prm.reqs);
 	kfree(uac->c_prm.reqs);
 	kfree(uac->p_prm.rbuf);
 	kfree(uac->c_prm.rbuf);
 	kfree(uac);
+||||||| BASE   (f121db2df18dde8b4d8751cda206bfa4fd5924f4 platform/chrome: sensorhub: Fix dropped timestamp events and)
+
+	kfree(uac->p_prm.ureq);
+	kfree(uac->c_prm.ureq);
+	kfree(uac->p_prm.rbuf);
+	kfree(uac->c_prm.rbuf);
+	kfree(uac);
+=======
+>>>>>>> BRANCH (a7ecd1a04f4f485d7be6443d0f0b2c61a800cb82 usb: gadget: u_audio: Fix use-after-free on sound card disco)
 }
 EXPORT_SYMBOL_GPL(g_audio_cleanup);
 
