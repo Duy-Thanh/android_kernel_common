@@ -40,6 +40,30 @@
       ],
       "revId": "c1292d54b237b6d5c0c1a16c8be4cd6d298713bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d77ae99_ff4e656c",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-09-30T21:46:55Z",
+      "side": 1,
+      "message": "We could, but AFAICS it is not necessary: kernel enables X86_FEATURE_RSB_VMEXIT only if eIBRS is not enabled, while we require eIBRS.",
+      "parentUuid": "cd795d71_e5552e95",
+      "range": {
+        "startLine": 493,
+        "startChar": 21,
+        "endLine": 493,
+        "endChar": 48
+      },
+      "revId": "c1292d54b237b6d5c0c1a16c8be4cd6d298713bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
