@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f34f2df_6e9e5933",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-30T18:06:05Z",
+      "side": 1,
+      "message": "We\u0027re not using anything from here in this patch?",
+      "revId": "e77369a963a50a47e056eabf1510da73bea5142a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
