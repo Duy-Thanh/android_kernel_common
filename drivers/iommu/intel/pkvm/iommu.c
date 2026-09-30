@@ -301,7 +301,12 @@ static int handle_gcmd_srtp(struct intel_iommu *iommu)
 	} else if (iommu->root_entry) {
 		pkvm_warn("iommu%d: SRTP allowed only once", iommu->seq_id);
 		return -EBUSY;
-	} else if (!cap_esrtps(iommu->cap) && !iommu->qi) {
+	} else if (!iommu->qi) {
+		/*
+		 * set_root_table() requires QI only in the absence of ESRTPS,
+		 * but pKVM requires QI for every invalidation once translation
+		 * is set up: without QI, qi_submit_sync() is a silent nop.
+		 */
 		pkvm_warn("iommu%d: QI is required but not initialized yet", iommu->seq_id);
 		return -EINVAL;
 	}
