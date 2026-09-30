@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd795d71_e5552e95",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-09-30T19:49:14Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we `|| boot_cpu_has(X86_FEATURE_RSB_VMEXIT);`  similar as `pbrsb_eibrs_state()` does?",
+      "range": {
+        "startLine": 493,
+        "startChar": 21,
+        "endLine": 493,
+        "endChar": 48
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c3251cdd_1c6e2132",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm_init.c",
+              "range": {
+                "startLine": 493,
+                "startChar": 0,
+                "endLine": 494,
+                "endChar": 0
+              },
+              "replacement": "\treturn boot_cpu_has(X86_FEATURE_RSB_VMEXIT_LITE) ||\n\t       boot_cpu_has(X86_FEATURE_RSB_VMEXIT);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c1292d54b237b6d5c0c1a16c8be4cd6d298713bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
