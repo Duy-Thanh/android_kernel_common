@@ -80,6 +80,30 @@
       ],
       "revId": "ef47ea1769b17e1459aa596cf3953a52d38c4cf7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "526ca30b_f2988e73",
+        "filename": "arch/arm64/include/asm/p3s/mmu.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-09-30T20:54:22Z",
+      "side": 1,
+      "message": "Thanks Juan, updated to `mm_is_p3s_4k` similar to the naming of the kernel cmdline parameter. Also did the same for `s/vma_is_compat()/vma_is_p3s_4k()` and `s/vmg_is_compat()/vmg_is_p3s_4k()` across the series.",
+      "parentUuid": "71b973ff_98f8e2af",
+      "range": {
+        "startLine": 33,
+        "startChar": 8,
+        "endLine": 33,
+        "endChar": 20
+      },
+      "revId": "ef47ea1769b17e1459aa596cf3953a52d38c4cf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
