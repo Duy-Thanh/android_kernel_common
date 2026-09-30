@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d67e9db3_6931b35f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-09-30T19:14:44Z",
+      "side": 1,
+      "message": "nit: I am not sure if it is worth it. This patch extends `if (kvm_check_request(KVM_REQ_TRIPLE_FAULT, vcpu)) {` block in `__pkvm_vcpu_enter_guest()`, which doesn\u0027t exist without the previous patch. So perhaps it is better to squash this one with previous? Then we can add `Fixes: 14ecba79222a0 (\"ANDROID: pKVM: VMX: Prevent re-running vCPU after a triple fault\")` as well?",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 20
+      },
+      "revId": "b600c289241bb195d0e88da179d7e38ed8a11c91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
