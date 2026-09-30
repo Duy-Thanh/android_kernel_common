@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd793759_81a8b4bd",
+        "filename": "include/linux/mm_types.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1051,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-09-30T04:48:05Z",
+      "side": 1,
+      "message": "Thanks Suren. Moved pte_shift out of struct mm_struct and placed it into the 7-byte trailing padding of mm_context_t",
+      "parentUuid": "ecc0fbf8_a03e9b7d",
+      "revId": "3513a521db4fc33fc86c0bfe27fcb11f7f7b3f31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6532a19c_ab36ccd6",
@@ -79,6 +97,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "63d27bce_2d3fee62",
+        "filename": "include/linux/p3s/mm.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-09-30T04:48:05Z",
+      "side": 1,
+      "message": "Done. Renamed to enum p3s_4k_mode with values P3S_4K_MODE_OFF, P3S_4K_MODE_ON, and P3S_4K_MODE_ALTERNATE.",
+      "parentUuid": "6532a19c_ab36ccd6",
+      "range": {
+        "startLine": 21,
+        "startChar": 1,
+        "endLine": 21,
+        "endChar": 13
+      },
+      "revId": "3513a521db4fc33fc86c0bfe27fcb11f7f7b3f31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef9c357e_234676ab",
@@ -116,6 +158,30 @@
           ]
         }
       ],
+      "revId": "3513a521db4fc33fc86c0bfe27fcb11f7f7b3f31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b702f4bd_a20fe00c",
+        "filename": "include/linux/p3s/mm.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-09-30T04:48:05Z",
+      "side": 1,
+      "message": "Done. Refactored into clean if blocks and prioritized p over current",
+      "parentUuid": "ef9c357e_234676ab",
+      "range": {
+        "startLine": 52,
+        "startChar": 9,
+        "endLine": 53,
+        "endChar": 50
+      },
       "revId": "3513a521db4fc33fc86c0bfe27fcb11f7f7b3f31",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
