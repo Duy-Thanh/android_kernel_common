@@ -22,6 +22,30 @@
       },
       "revId": "b600c289241bb195d0e88da179d7e38ed8a11c91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a755bb4_55b02f79",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-09-30T21:33:56Z",
+      "side": 1,
+      "message": "It depends on what will be the order of patches in 7.x. My idea is that the previous patch will be applied as a part of pvVMCS patches (because it is a part of basic pvVMCS functionality, required for its _correctness_), while 14ecba79222a0 will be applied later, as a part of pvmfw-related security enforcements (like it was in 6.18).",
+      "parentUuid": "d67e9db3_6931b35f",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 20
+      },
+      "revId": "b600c289241bb195d0e88da179d7e38ed8a11c91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
