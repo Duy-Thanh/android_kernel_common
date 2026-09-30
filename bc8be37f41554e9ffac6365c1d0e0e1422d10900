@@ -81,6 +81,24 @@
       "parentUuid": "3fc3d5b8_cb53269f",
       "revId": "bc8be37f41554e9ffac6365c1d0e0e1422d10900",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a4356a9_2791184f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2026-09-30T21:56:54Z",
+      "side": 1,
+      "message": "Well, first please file a bug requesting these hooks.  Currently this change links to two bugs, but neither is actually a request for the hooks, but rather they just describe problems in the 6.12 version of these hooks.  Once that is done, you could provide your code as an attachment on the bug.",
+      "parentUuid": "ad2eef96_877d7ce9",
+      "revId": "bc8be37f41554e9ffac6365c1d0e0e1422d10900",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
