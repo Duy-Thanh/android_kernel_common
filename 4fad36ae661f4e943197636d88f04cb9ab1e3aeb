@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78f2cebc_8f96e59a",
+        "filename": "include/linux/p3s/mm.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-09-30T06:33:42Z",
+      "side": 1,
+      "message": "@jyescas@google.com see here for alternate mode PTE shift initialization.",
+      "revId": "4fad36ae661f4e943197636d88f04cb9ab1e3aeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
