@@ -50,6 +50,30 @@
       ],
       "revId": "f6419be1d76906a7acd8fa5047eb02ce28e51eeb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c90a373_317b46f1",
+        "filename": "arch/arm64/include/asm/p3s.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-09-30T04:51:27Z",
+      "side": 1,
+      "message": "Thanks Renamed to `p3s_assert_matching_pte_shift(mm)` and added a comment explaining that translation granule shifts are checked rather than mm pointer equality.",
+      "parentUuid": "051db7b4_8eb30fdc",
+      "range": {
+        "startLine": 26,
+        "startChar": 28,
+        "endLine": 26,
+        "endChar": 41
+      },
+      "revId": "f6419be1d76906a7acd8fa5047eb02ce28e51eeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
