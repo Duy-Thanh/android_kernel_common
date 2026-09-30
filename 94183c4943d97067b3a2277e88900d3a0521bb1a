@@ -22,6 +22,30 @@
       },
       "revId": "94183c4943d97067b3a2277e88900d3a0521bb1a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aea00091_37142cfe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-30T17:28:32Z",
+      "side": 1,
+      "message": "The mainline branches had other changes that I didn\u0027t cherry-pick that revamped parsing of the ModuleInfo. Without those changes the fields (authors, description, ...) had to be extracted by reference, i.e. let Some(authors) \u003d info.authors \u003d\u003e let Some(ref authors) \u003d info.authors.",
+      "parentUuid": "7686ca98_3df88623",
+      "range": {
+        "startLine": 19,
+        "startChar": 1,
+        "endLine": 19,
+        "endChar": 67
+      },
+      "revId": "94183c4943d97067b3a2277e88900d3a0521bb1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
