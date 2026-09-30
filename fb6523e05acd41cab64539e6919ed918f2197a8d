@@ -16,6 +16,24 @@
       "message": "is there a plan to create a linear mapping for 4kb processes?",
       "revId": "fb6523e05acd41cab64539e6919ed918f2197a8d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "494dbcd8_5ef886ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-09-30T06:30:37Z",
+      "side": 1,
+      "message": "No the linear mapping is always 16KB native so we won\u0027t need the 4kb equivalent.",
+      "parentUuid": "776d5678_5b6ff7f4",
+      "revId": "fb6523e05acd41cab64539e6919ed918f2197a8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
