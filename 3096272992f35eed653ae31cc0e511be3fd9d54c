@@ -22,6 +22,30 @@
       },
       "revId": "3096272992f35eed653ae31cc0e511be3fd9d54c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c546fcf4_be540d17",
+        "filename": "arch/arm64/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 1466,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-09-30T04:26:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22c57893_8c04b3eb",
+      "range": {
+        "startLine": 1461,
+        "startChar": 0,
+        "endLine": 1466,
+        "endChar": 78
+      },
+      "revId": "3096272992f35eed653ae31cc0e511be3fd9d54c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
