@@ -22,6 +22,30 @@
       },
       "revId": "173bddcb3452ba6692b088a602092e6e49b8c4df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f86f83fe_e64c1bed",
+        "filename": "include/linux/p3s_user_pages.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-09-30T04:53:52Z",
+      "side": 1,
+      "message": "Hi Suren,\n\nIn `arch/arm64/include/asm/pgtable-hwdef.h`, PMD_SHIFT, PUD_SHIFT, and PTRS_PER_PMD are defined directly in terms of PAGE_SHIFT so making PAGE_SHIFT dynamic automatically changes their values.\n\nIn `include/linux/pgtable.h` is `pmd_index()`, `pud_index()`, and `pmd_offset()` as static inline functions compiled earlier in the file with static 16KB shifts (and aliases by macors `#define pmd_index pmd_index`).\n\n#undef and redefining them here as function like macros shadows those static inline functions, forcing subsequent callers in this translation unit to evaluate using the new dynamic shifts instead.",
+      "parentUuid": "6bbccabc_ba7b92f2",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 69
+      },
+      "revId": "173bddcb3452ba6692b088a602092e6e49b8c4df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
