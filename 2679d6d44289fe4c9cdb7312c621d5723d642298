@@ -50,6 +50,30 @@
       ],
       "revId": "2679d6d44289fe4c9cdb7312c621d5723d642298",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3e458c0_8af73e8d",
+        "filename": "arch/arm64/include/asm/memory.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-09-30T05:24:41Z",
+      "side": 1,
+      "message": "Hi Suren, the #include \u003clinux/p3s/const.h\u003e at the top would pull in linux/types.h ... which breaks assembly compilation.\n\nAdded assembly guards in \u003clinux/p3s/const.h\u003e (in prior patch) to avoid this redefinition.",
+      "parentUuid": "339d7590_b1d374e9",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 6
+      },
+      "revId": "2679d6d44289fe4c9cdb7312c621d5723d642298",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
