@@ -107,7 +107,12 @@ const RUST_BINDER_LAYOUT: rust_binder_layout = rust_binder_layout {
 fn next_debug_id() -> usize {
     static NEXT_DEBUG_ID: AtomicUsize = AtomicUsize::new(0);
 
-    NEXT_DEBUG_ID.fetch_add(1, Ordering::Relaxed)
+    loop {
+        let id = NEXT_DEBUG_ID.fetch_add(1, Ordering::Relaxed);
+        if id != 0 {
+            return id;
+        }
+    }
 }
 
 /// Provides a single place to write Binder return values via the
