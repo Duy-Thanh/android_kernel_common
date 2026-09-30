@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "88664cb1_c957edf2",
+        "filename": "fs/f2fs/segment.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2835,
+      "author": {
+        "id": 4893047
+      },
+      "writtenOn": "2026-09-30T03:53:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47da877d_9ce89a3a",
+      "range": {
+        "startLine": 2835,
+        "startChar": 14,
+        "endLine": 2835,
+        "endChar": 28
+      },
+      "revId": "b7bcffec54b08e645816a33fc38ee95dad5f1400",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9986245b_c2c4f7ba",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-09-29T16:59:31Z",
       "side": 1,
       "message": "max_secno",
+      "range": {
+        "startLine": 2839,
+        "startChar": 51,
+        "endLine": 2839,
+        "endChar": 65
+      },
+      "revId": "b7bcffec54b08e645816a33fc38ee95dad5f1400",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81dd277b_e92fdb52",
+        "filename": "fs/f2fs/segment.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2839,
+      "author": {
+        "id": 4893047
+      },
+      "writtenOn": "2026-09-30T03:53:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9986245b_c2c4f7ba",
       "range": {
         "startLine": 2839,
         "startChar": 51,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6eff8639_5a14eeed",
+        "filename": "fs/f2fs/segment.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2842,
+      "author": {
+        "id": 4893047
+      },
+      "writtenOn": "2026-09-30T03:53:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37553c1f_95f79966",
+      "range": {
+        "startLine": 2842,
+        "startChar": 8,
+        "endLine": 2842,
+        "endChar": 22
+      },
+      "revId": "b7bcffec54b08e645816a33fc38ee95dad5f1400",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe63a81c_0a6806c4",
@@ -93,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3d60b3b_eccf4f07",
+        "filename": "fs/f2fs/segment.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2843,
+      "author": {
+        "id": 4893047
+      },
+      "writtenOn": "2026-09-30T03:53:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe63a81c_0a6806c4",
+      "range": {
+        "startLine": 2843,
+        "startChar": 15,
+        "endLine": 2843,
+        "endChar": 29
+      },
+      "revId": "b7bcffec54b08e645816a33fc38ee95dad5f1400",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "63738b3f_3ff80367",
@@ -106,6 +202,30 @@
       "writtenOn": "2026-09-29T16:59:31Z",
       "side": 1,
       "message": "ret \u003d (pinning \u0026\u0026 has_unpinned_area(sbi)) ? -EAGAIN : -ENOSPC;\n\t\t\tf2fs_bug_on(sbi, !pinning);",
+      "range": {
+        "startLine": 2844,
+        "startChar": 3,
+        "endLine": 2845,
+        "endChar": 23
+      },
+      "revId": "b7bcffec54b08e645816a33fc38ee95dad5f1400",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89cec43f_e57acb4b",
+        "filename": "fs/f2fs/segment.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2845,
+      "author": {
+        "id": 4893047
+      },
+      "writtenOn": "2026-09-30T03:53:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63738b3f_3ff80367",
       "range": {
         "startLine": 2844,
         "startChar": 3,
