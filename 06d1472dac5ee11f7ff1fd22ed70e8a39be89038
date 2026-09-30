@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "83f1ca65_5c1b7ae8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-09-30T05:22:42Z",
+      "side": 1,
+      "message": "Updated description to document off, on, and alternate modes",
+      "parentUuid": "1adc9ae5_87b16a86",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 56
+      },
+      "revId": "06d1472dac5ee11f7ff1fd22ed70e8a39be89038",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e1e10ff_6cab36b5",
@@ -61,6 +85,30 @@
           ]
         }
       ],
+      "revId": "06d1472dac5ee11f7ff1fd22ed70e8a39be89038",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "607c9772_8b924151",
+        "filename": "mm/p3s.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-09-30T05:22:42Z",
+      "side": 1,
+      "message": "Added \"alternate\" and removed the if (!str) special case so passing no parameter returns -EINVAL.",
+      "parentUuid": "9e1e10ff_6cab36b5",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 1
+      },
       "revId": "06d1472dac5ee11f7ff1fd22ed70e8a39be89038",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
