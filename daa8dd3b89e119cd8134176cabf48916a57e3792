@@ -1,0 +1,68 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3767fbb_c9dbb986",
+        "filename": "net/ipv4/arp.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 816,
+      "author": {
+        "id": 1332974
+      },
+      "writtenOn": "2026-09-30T08:32:23Z",
+      "side": 1,
+      "message": "suggestion : use is_valid_ether_addr(tha), which is defined as !is_multicast_ether_addr(addr) \u0026\u0026 !is_zero_ether_addr(addr).\n\nnote - arp_process() is called for all ARP-capable device types, not just Ethernet. is_zero_ether_addr() and is_multicast_ether_addr() unconditionally read ETH_ALEN (6) bytes and require u16 alignment. On a non-Ethernet or virtual/syzkaller netdev with dev-\u003eaddr_len \u003c ETH_ALEN (e.g., addr_len \u003d\u003d 1), arp_rcv() only pulls arp_hdr_len(dev) bytes (tha is dev-\u003eaddr_len bytes followed by 4 bytes of tip), causing an unaligned read and a 1-byte out-of-bounds read past the pulled ARP header.",
+      "range": {
+        "startLine": 816,
+        "startChar": 7,
+        "endLine": 816,
+        "endChar": 30
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "0fb2a3b1_f8e884b0",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "net/ipv4/arp.c",
+              "range": {
+                "startLine": 815,
+                "startChar": 0,
+                "endLine": 817,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (tha \u0026\u0026 is_valid_ether_addr(tha) \u0026\u0026 !is_garp) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "daa8dd3b89e119cd8134176cabf48916a57e3792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "041e500e_91229546",
+        "filename": "net/ipv4/ip_input.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1332974
+      },
+      "writtenOn": "2026-09-30T08:32:23Z",
+      "side": 1,
+      "message": "ip_rcv_options() unconditionally calls skb_cow(skb, skb_headroom(skb)) (line 281). If skb is cloned (e.g., when tcpdump or an AF_PACKET socket is active) or lacks headroom, skb_cow() calls pskb_expand_head(), which reallocates skb-\u003ehead and frees the old buffer.\n\nSuggested fix: Reload iph \u003d ip_hdr(skb); at the start of the if (in_dev \u0026\u0026 IN_DEV_ORCONF(in_dev, DROP_UNICAST_IN_L2_MULTICAST)) block)\n\n\t\tif (in_dev \u0026\u0026\n\t\t    IN_DEV_ORCONF(in_dev, DROP_UNICAST_IN_L2_MULTICAST)) {\n\t\t\tbool is_dhcp_resp \u003d false;\n\t\t\tiph \u003d ip_hdr(skb);",
+      "range": {
+        "startLine": 467,
+        "startChar": 7,
+        "endLine": 467,
+        "endChar": 10
+      },
+      "revId": "daa8dd3b89e119cd8134176cabf48916a57e3792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
