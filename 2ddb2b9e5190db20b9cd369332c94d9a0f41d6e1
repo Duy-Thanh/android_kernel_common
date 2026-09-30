@@ -1,0 +1,375 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb55b9b2_64518468",
+        "filename": "drivers/android/wrapfd/content.rs",
+        "patchSetId": 26
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-30T01:24:53Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this use the `mode()` accessor that you added?",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 45
+      },
+      "revId": "2ddb2b9e5190db20b9cd369332c94d9a0f41d6e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "999e257e_011efb63",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 26
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-30T01:24:53Z",
+      "side": 1,
+      "message": "How so? Taking a reference here would prevent the file structure corresponding to the wrap from being freed, yes, but how exactly does that imply that the driver cannot be unloaded?",
+      "range": {
+        "startLine": 90,
+        "startChar": 61,
+        "endLine": 91,
+        "endChar": 32
+      },
+      "revId": "2ddb2b9e5190db20b9cd369332c94d9a0f41d6e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0c43596_e84096fa",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 26
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-30T01:24:53Z",
+      "side": 1,
+      "message": "Nit: It might be better to place each comment block above the enum that it pertains to.",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 57
+      },
+      "revId": "2ddb2b9e5190db20b9cd369332c94d9a0f41d6e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2861d77_9ff7ca79",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 26
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-30T01:24:53Z",
+      "side": 1,
+      "message": "This would  fail if the wrap was being emptied or rewrapped in the old version of the driver, not if others were using it, so this should also block.",
+      "fixSuggestions": [
+        {
+          "fixId": "502c3fd7_f355ca57",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/wrapfd/wrap.rs",
+              "range": {
+                "startLine": 214,
+                "startChar": 0,
+                "endLine": 215,
+                "endChar": 0
+              },
+              "replacement": "        let mut guard \u003d self.inner.lock();\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2ddb2b9e5190db20b9cd369332c94d9a0f41d6e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54350353_d1f13fbb",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 26
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-30T01:24:53Z",
+      "side": 1,
+      "message": "So this case is when someone is using the wrap, right (i.e. mmap, load, etc). The original driver returned EINVAL in those scenarios.",
+      "fixSuggestions": [
+        {
+          "fixId": "ffa93b09_87463154",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/wrapfd/wrap.rs",
+              "range": {
+                "startLine": 256,
+                "startChar": 0,
+                "endLine": 257,
+                "endChar": 0
+              },
+              "replacement": "        let mut guard \u003d self.inner.try_lock().ok_or(EINVAL)?;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2ddb2b9e5190db20b9cd369332c94d9a0f41d6e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1b0e7ed_6c3ff399",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 26
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-30T01:24:53Z",
+      "side": 1,
+      "message": "EINVAL per the logic from earlier?",
+      "range": {
+        "startLine": 280,
+        "startChar": 52,
+        "endLine": 280,
+        "endChar": 57
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "03a9cfb6_346e34c8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/wrapfd/wrap.rs",
+              "range": {
+                "startLine": 280,
+                "startChar": 0,
+                "endLine": 281,
+                "endChar": 0
+              },
+              "replacement": "        let mut guard \u003d self.inner.try_lock().ok_or(EINVAL)?;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2ddb2b9e5190db20b9cd369332c94d9a0f41d6e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7853a630_99fd8081",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 26
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-30T01:24:53Z",
+      "side": 1,
+      "message": "EINVAL",
+      "range": {
+        "startLine": 362,
+        "startChar": 52,
+        "endLine": 362,
+        "endChar": 57
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "372a2e1a_572ee475",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/wrapfd/wrap.rs",
+              "range": {
+                "startLine": 362,
+                "startChar": 0,
+                "endLine": 363,
+                "endChar": 0
+              },
+              "replacement": "        let mut guard \u003d self.inner.try_lock().ok_or(EINVAL)?;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2ddb2b9e5190db20b9cd369332c94d9a0f41d6e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4038a51_9445a90b",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 26
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-30T01:24:53Z",
+      "side": 1,
+      "message": "As discussed previously, the object being created is a wrap, not a device, so please update references to device to wrap.",
+      "revId": "2ddb2b9e5190db20b9cd369332c94d9a0f41d6e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1fe0b38_076b3d28",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 26
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-30T01:24:53Z",
+      "side": 1,
+      "message": "EINVAL",
+      "range": {
+        "startLine": 396,
+        "startChar": 52,
+        "endLine": 396,
+        "endChar": 57
+      },
+      "revId": "2ddb2b9e5190db20b9cd369332c94d9a0f41d6e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fd2b580_8d754a82",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 26
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-30T01:24:53Z",
+      "side": 1,
+      "message": "EINVAL as per above?",
+      "range": {
+        "startLine": 407,
+        "startChar": 52,
+        "endLine": 407,
+        "endChar": 57
+      },
+      "revId": "2ddb2b9e5190db20b9cd369332c94d9a0f41d6e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fc69f3c_1655bf2d",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 26
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-30T01:24:53Z",
+      "side": 1,
+      "message": "Please remove this and other such instances.",
+      "revId": "2ddb2b9e5190db20b9cd369332c94d9a0f41d6e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46efb664_2b3f6e87",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 26
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-30T01:24:53Z",
+      "side": 1,
+      "message": "I don\u0027t think this should fail if someone else is using the wrap. Previously, if someone else was using it, you could use it alongside them. The only scenario that would cause a failure was if the `context` structure was marked as unusable, which happens when the wrap is emptied or rewrapped (i.e. the content will be gone on success).\n\nYou are checking the content after acquiring the lock, so you\u0027re already handling the rewrap and empty cases, so I think this can also just block instead of using `try_lock()`.",
+      "fixSuggestions": [
+        {
+          "fixId": "c79b6466_8a0dd0ea",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/wrapfd/wrap.rs",
+              "range": {
+                "startLine": 427,
+                "startChar": 0,
+                "endLine": 428,
+                "endChar": 0
+              },
+              "replacement": "        let mut guard \u003d device.inner.lock();\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2ddb2b9e5190db20b9cd369332c94d9a0f41d6e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6851c525_ea7b29c5",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 26
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-30T01:24:53Z",
+      "side": 1,
+      "message": "Consider the case where the wrap is owned and the owner allows guests. Two distinct processes try to mmap the same wrap. Only one of them will succeed and the other one will fail, but in the original driver, I believe that would allow both processes to map the wrap. So, can we just have this block instead of `try_lock()`?",
+      "fixSuggestions": [
+        {
+          "fixId": "fca76988_8095f6e3",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/wrapfd/wrap.rs",
+              "range": {
+                "startLine": 443,
+                "startChar": 0,
+                "endLine": 444,
+                "endChar": 0
+              },
+              "replacement": "        let mut guard \u003d device.inner.lock();\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2ddb2b9e5190db20b9cd369332c94d9a0f41d6e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
