@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61a796e9_ff9403fb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2026-09-30T05:54:10Z",
+      "side": 1,
+      "message": "This means that init and all its childrem will run with 4kb page size. Is this correct?",
+      "range": {
+        "startLine": 15,
+        "startChar": 3,
+        "endLine": 16,
+        "endChar": 67
+      },
+      "revId": "ad07a824059bf8565e0ab44ff6671813fbd6f3df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
