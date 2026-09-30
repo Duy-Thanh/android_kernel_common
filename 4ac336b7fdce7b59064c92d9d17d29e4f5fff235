@@ -1,0 +1,79 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a513b737_d00ac041",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/pviommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-09-30T09:58:18Z",
+      "side": 1,
+      "message": "nit: You could avoid allocated_here by just setting guest_domain-\u003eallocated only if the attach_dev succeeded. the guest_domain_lock is held, so this should be safe.",
+      "fixSuggestions": [
+        {
+          "fixId": "89bb9e00_2ac74a88",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/iommu/pviommu.c",
+              "range": {
+                "startLine": 105,
+                "startChar": 0,
+                "endLine": 106,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/iommu/pviommu.c",
+              "range": {
+                "startLine": 129,
+                "startChar": 0,
+                "endLine": 131,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/iommu/pviommu.c",
+              "range": {
+                "startLine": 135,
+                "startChar": 0,
+                "endLine": 136,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (!guest_domain-\u003eallocated)\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/iommu/pviommu.c",
+              "range": {
+                "startLine": 137,
+                "startChar": 0,
+                "endLine": 139,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/iommu/pviommu.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\tguest_domain-\u003eallocated \u003d true;\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4ac336b7fdce7b59064c92d9d17d29e4f5fff235",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
