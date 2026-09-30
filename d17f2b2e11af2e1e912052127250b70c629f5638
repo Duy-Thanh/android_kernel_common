@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0113047_c998ec74",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-09-30T09:52:08Z",
+      "side": 1,
+      "message": "Could this help later debugging to use ENOPERM here?",
+      "fixSuggestions": [
+        {
+          "fixId": "298efed4_d99885a7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+              "range": {
+                "startLine": 688,
+                "startChar": 0,
+                "endLine": 689,
+                "endChar": 0
+              },
+              "replacement": "\tif (!domain || domain-\u003eowner !\u003d vm || atomic_read(\u0026domain-\u003erefs) \u003c\u003d 1) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d17f2b2e11af2e1e912052127250b70c629f5638",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
