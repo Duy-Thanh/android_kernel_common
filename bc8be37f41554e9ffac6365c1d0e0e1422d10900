@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c987dc1f_468159cd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 4966542
+      },
+      "writtenOn": "2026-09-30T11:07:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b48ad85a_30f21e9f",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 64
+      },
+      "revId": "bc8be37f41554e9ffac6365c1d0e0e1422d10900",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3fc3d5b8_cb53269f",
@@ -37,6 +61,24 @@
       "writtenOn": "2026-09-29T19:47:49Z",
       "side": 1,
       "message": "Is the implementation of these hooks available?  These can\u0027t be reviewed properly without seeing the implementation.\n\nAdditionally, there needs to be an upstream plan, as vendor hooks cannot be carried indefinitely, especially in security-critical components like dm-verity.  We can help with upstreaming equivalent functionality, but we would need the implementation to understand the requirements.",
+      "revId": "bc8be37f41554e9ffac6365c1d0e0e1422d10900",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad2eef96_877d7ce9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4966542
+      },
+      "writtenOn": "2026-09-30T11:07:18Z",
+      "side": 1,
+      "message": "Thanks. Yes, the Samsung-side implementation is available. If you want to see, pls let me know how to send it to you.\n\nFor the upstream plan, I agree that these vendor hooks should not be permanent.\n\nI will first share the Samsung implementation so that the actual requirements can be reviewed. Based on that, I would appreciate your help in identifying which functionality should be provided by dm-verity upstream and what the appropriate upstream interfaces should be.\n\nOnce equivalent upstream functionality is available, Samsung can migrate to it and the Android vendor hooks can be removed.",
+      "parentUuid": "3fc3d5b8_cb53269f",
       "revId": "bc8be37f41554e9ffac6365c1d0e0e1422d10900",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
