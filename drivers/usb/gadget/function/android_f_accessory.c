@@ -758,6 +758,17 @@ static ssize_t acc_read(struct file *fp, char __user *buf,
 requeue_req:
 	/* queue a request */
 	req = dev->rx_req[0];
+
+	/*
+	 * If the request is still in-flight from a previous queue
+	 * (e.g. zero-length packet received and we're re-queuing),
+	 * dequeue it first to reset its status to completed.
+	 * Otherwise usb_ep_queue() will reject it with -EINVAL,
+	 * causing an infinite loop in the AOARead thread.
+	 */
+	if (req->status == -EINPROGRESS)
+		usb_ep_dequeue(dev->ep_out, req);
+
 	req->length = data_length;
 	dev->rx_done = 0;
 	ret = usb_ep_queue(dev->ep_out, req, GFP_KERNEL);
