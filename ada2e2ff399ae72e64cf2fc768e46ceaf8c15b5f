@@ -16,6 +16,23 @@
       "message": "For posterity, the following test VM can be used to reproduce the described scenario (infinite loop in pkvm_vcpu_enter_guest() triggered by a #DF with task gate):\n\ndoublefault_taskgate.s:\n```\n_hello:\n\t.asciz \"Hello\\n\"\n_goodbye:\n\t.asciz \"Goodbye\\n\"\n\n.macro puts ptr\n\tmov\t$0x3f8, %dx\n\tmov\t$\\ptr, %ebx\nloop_\\ptr:\n\tmov\t(%ebx), %al\n\ttest\t%al, %al\n\tjz\tout_\\ptr\n\toutb\t%al, %dx\n\tinc\t%ebx\n\tjmp\tloop_\\ptr\nout_\\ptr:\n.endm\n\nidt:\n\t/* vectors 0-7 */\n\n\t.word 0x0000\n\t.word 0x0000\n\t.byte 0x00\n\t.byte 0x00\n\t.word 0x0000\n\n\t.word 0x0000\n\t.word 0x0000\n\t.byte 0x00\n\t.byte 0x00\n\t.word 0x0000\n\n\t.word 0x0000\n\t.word 0x0000\n\t.byte 0x00\n\t.byte 0x00\n\t.word 0x0000\n\n\t.word 0x0000\n\t.word 0x0000\n\t.byte 0x00\n\t.byte 0x00\n\t.word 0x0000\n\n\t.word 0x0000\n\t.word 0x0000\n\t.byte 0x00\n\t.byte 0x00\n\t.word 0x0000\n\n\t.word 0x0000\n\t.word 0x0000\n\t.byte 0x00\n\t.byte 0x00\n\t.word 0x0000\n\n\t.word 0x0000\n\t.word 0x0000\n\t.byte 0x00\n\t.byte 0x00\n\t.word 0x0000\n\n\t.word 0x0000\n\t.word 0x0000\n\t.byte 0x00\n\t.byte 0x00\n\t.word 0x0000\n\n\t/* vector 8 (#DF) */\n\t.word 0x0000\n\t.word 0x0008\t/* extra TSS (see below) */\n\t.byte 0x00\n\t.byte 0x85\t/* Present\u003d1 Type\u003d0x5 */\n\t.word 0x0000\nidt_end:\n\nidtr:\n\t.word idt_end - idt - 1\n\t.long idt\n\ngdtr:\n\t.word 0x27\t/* crosvm\u0027s GDT size \u003d 5 * 8 - 1 */\n\t.long 0x1500\t/* crosvm\u0027s GDT addr */\n\n.globl start\nstart:\n\t/*\n\t * Insert extra TSS descriptor into crosvm\u0027s GDT in place of\n\t * the unused zeroed descriptor at offset 0x8.\n\t * BOOT_GDT_OFFSET \u003d 0x1500 in crosvm.\n\t */\n\tmov\t$0x1508, %eax\n\tmovw\t$0xffff, (%eax)\t\t/* Limit[15:0] */\n\tadd\t$2, %eax\n\tmovw\t$0, (%eax)\t\t/* Base[15:0] */\n\tadd\t$2, %eax\n\tmovb\t$0, (%eax)\t\t/* Base[23:16] */\n\tinc\t%eax\n\tmovb\t$0x89, (%eax)\t\t/* Access: Present\u003d1, Type \u003d 32-bit TSS Available */\n\tinc\t%eax\n\tmovb\t$0x8f, (%eax)\t\t/* (Flags \u003c\u003c 4) | Limit[19:16] (Flags \u003d 0x8, Limit[19:16] \u003d 0xf) */\n\tinc\t%eax\n\tmovb\t$0, (%eax)\t\t/* Base[31:24] */\n\tlgdt\tgdtr\n\n\t// to test that the TSS descriptor is valid:\n\t// mov\t$0x8, %ax\n\t// ltr\t%ax\n\n\tlidt\tidtr\n\tputs\t_hello\n\tmov\t$666, %eax\n\tmov\t(%eax), %ss\t/* trigger #GP */\n\tputs\t_goodbye\n\tint3\n```\n\ndoublefault_taskgate.ld:\n```\nENTRY(start)\n\nSECTIONS\n{\n        .text 0x200000 : {\n                *doublefault_taskgate.o(.text)\n        }\n}\n```\n\nCompile it as a 32-bit ELF:\n```\nas --32 doublefault_taskgate.s -o doublefault_taskgate.o\nld -m elf_i386 doublefault_taskgate.o -o doublefault_taskgate -T doublefault_taskgate.ld\n```\n\nAnd run it via crosvm (it will start it in 32-bit flat protected mode) as a pVM:\n```\ncrosvm run --disable-sandbox doublefault_taskgate --protected-vm-without-firmware\n```",
       "revId": "ada2e2ff399ae72e64cf2fc768e46ceaf8c15b5f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c124ce7_cab3d506",
+        "filename": "arch/x86/kvm/vmx/pkvm_host.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1449,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2026-09-30T06:36:28Z",
+      "side": 1,
+      "message": "nit: shall we also explicilty clear mmio_needed? It seems all other places handling triple fault are clearing mmio_needed explicitly, e.g, vmx.c handle_triple_fault(), x86.c vcpu_enter_guest() handles KVM_REQ_TRIPLE_FAULT. So maybe we can also clear mmio_needed explicitly, to keep it consistent with the other places, even it most likely is 0?\nIf so, then maybe we can just call handle_triple_fault() here?",
+      "revId": "ada2e2ff399ae72e64cf2fc768e46ceaf8c15b5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
