@@ -46,6 +46,47 @@
       },
       "revId": "173bddcb3452ba6692b088a602092e6e49b8c4df",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32ed02da_9f513eb6",
+        "filename": "include/linux/p3s_user_pages.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2026-09-30T21:00:12Z",
+      "side": 1,
+      "message": "should we rename it to vma_is_p3s_4k to avoid confusion?",
+      "range": {
+        "startLine": 59,
+        "startChar": 8,
+        "endLine": 59,
+        "endChar": 21
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "24697486_df3d39e2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/p3s_user_pages.h",
+              "range": {
+                "startLine": 59,
+                "startChar": 0,
+                "endLine": 60,
+                "endChar": 0
+              },
+              "replacement": "#define vma_is_p3s_4k(vma)\t({ p3s_assert_mm((vma)-\u003evm_mm); (vma_is_p3s_4k)(vma); })\n"
+            }
+          ]
+        }
+      ],
+      "revId": "173bddcb3452ba6692b088a602092e6e49b8c4df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
