@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bbba38c_f656bcb8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-09-30T20:53:54Z",
+      "side": 1,
+      "message": "This driver is not part of GKI builds. This should be maintained in a downstream branch for vendor modules.",
+      "revId": "f75f6e19612fb1e9852db8682e9c7f057b280167",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
