@@ -16,6 +16,24 @@
       "message": "You can use `Bug: 503346180` for this. I also updated my CL to match yours, so you can just mention that you updated the bit nr.",
       "revId": "7e95c2649a20bef87de561f812e401179526773d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d31f561_6f570aae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-09-30T13:14:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56c1b445_338ec8c9",
+      "revId": "7e95c2649a20bef87de561f812e401179526773d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
