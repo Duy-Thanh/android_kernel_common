@@ -1047,6 +1047,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06e06251_ef4b8f13",
+        "filename": "drivers/android/wrapfd/wrapped_device.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-30T16:50:25Z",
+      "side": 1,
+      "message": "This seems complete now, so I\u0027ll mark it as resolved.",
+      "parentUuid": "67805601_ff8962e0",
+      "range": {
+        "startLine": 412,
+        "startChar": 0,
+        "endLine": 417,
+        "endChar": 17
+      },
+      "revId": "627ecef83bfad9096784006ff893aa1c839da082",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8cae6ae7_8f247615",
