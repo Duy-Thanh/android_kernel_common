@@ -40,6 +40,30 @@
       ],
       "revId": "ea19496a0754b171f00525b46e35b26f4a69d000",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac4aea03_32cb36c9",
+        "filename": "arch/arm64/include/asm/p3s/mmu.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-09-30T04:52:03Z",
+      "side": 1,
+      "message": "You are right. added this const and switched to `TASK_UNMAPPED_BASE_KERNEL`",
+      "parentUuid": "bf722f44_167597a0",
+      "range": {
+        "startLine": 34,
+        "startChar": 7,
+        "endLine": 34,
+        "endChar": 48
+      },
+      "revId": "ea19496a0754b171f00525b46e35b26f4a69d000",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
