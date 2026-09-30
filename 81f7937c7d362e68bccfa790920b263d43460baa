@@ -1,0 +1,148 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f91e4715_734498fe",
+        "filename": "drivers/android/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-30T23:46:14Z",
+      "side": 1,
+      "message": "Need to define a makefile in `tests/`",
+      "revId": "81f7937c7d362e68bccfa790920b263d43460baa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb959f0d_b3f6543e",
+        "filename": "drivers/android/tests/wrapfd_kunit.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-30T23:46:14Z",
+      "side": 1,
+      "message": "Not that it really matters, but if we ever needed a valid list, you could take care of that now by allocating a struct page pointer array, populate it with `alloc_pages()` and then call `sg_alloc_table_from_pages()` to get an sgt.",
+      "fixSuggestions": [
+        {
+          "fixId": "dced69af_e96bed30",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/tests/wrapfd_kunit.c",
+              "range": {
+                "startLine": 66,
+                "startChar": 0,
+                "endLine": 67,
+                "endChar": 0
+              },
+              "replacement": "\tpriv-\u003evaddr \u003d vzalloc(size);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "81f7937c7d362e68bccfa790920b263d43460baa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c31cc5d_27726e3c",
+        "filename": "drivers/android/tests/wrapfd_kunit.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-30T23:46:14Z",
+      "side": 1,
+      "message": "Doesn\u0027t `close_fd()` `fput()` the dmabuf file, so wouldn\u0027t this lead to a use after free since you follow it up with `dma_buf_put()`?",
+      "revId": "81f7937c7d362e68bccfa790920b263d43460baa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41215264_374fa3ef",
+        "filename": "drivers/android/tests/wrapfd_kunit.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-30T23:46:14Z",
+      "side": 1,
+      "message": "We need `dma_buf_put()` here too?",
+      "revId": "81f7937c7d362e68bccfa790920b263d43460baa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dba54130_0f2ce548",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1791,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-30T23:46:14Z",
+      "side": 1,
+      "message": "You can also ditch the `IS_ENABLED()` guard and write this as:\n\n\n```\nVISIBLE_IF_KUNIT int create_wrapfd(...)\n{\n        ...\n}\nEXPORT_SYMBOL_IF_KUNIT(create_wrapfd);\n```\n\nSo that it is only visible to external compilation units when Kunit is enabled, and so that you export the symbol only into the Kunit namespace.\n\nDitto with `empty_wrapfd()`.",
+      "revId": "81f7937c7d362e68bccfa790920b263d43460baa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "885fd094_6b1c22a6",
+        "filename": "include/linux/wrapfd.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-09-30T23:46:14Z",
+      "side": 1,
+      "message": "Unless we plan to export these to kernel clients, I think we should move this to a private header in `drivers/android`",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 6
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "1dc5157a_cf40605a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/wrapfd.h",
+              "range": {
+                "startLine": 94,
+                "startChar": 0,
+                "endLine": 99,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "81f7937c7d362e68bccfa790920b263d43460baa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
