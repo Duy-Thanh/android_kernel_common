@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7aa51f52_9f100288",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-09-30T15:48:15Z",
+      "side": 1,
+      "message": "I see this is acked by Thinh, can we wait until it lands in a maintainers tree as a \u0027FROMGIT\u0027?",
+      "revId": "7a337b4e8ea56ec396de41c8493e39ab08053c5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
