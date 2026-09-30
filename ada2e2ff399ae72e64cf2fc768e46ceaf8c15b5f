@@ -33,6 +33,24 @@
       "message": "nit: shall we also explicilty clear mmio_needed? It seems all other places handling triple fault are clearing mmio_needed explicitly, e.g, vmx.c handle_triple_fault(), x86.c vcpu_enter_guest() handles KVM_REQ_TRIPLE_FAULT. So maybe we can also clear mmio_needed explicitly, to keep it consistent with the other places, even it most likely is 0?\nIf so, then maybe we can just call handle_triple_fault() here?",
       "revId": "ada2e2ff399ae72e64cf2fc768e46ceaf8c15b5f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2db63bcc_c52b737e",
+        "filename": "arch/x86/kvm/vmx/pkvm_host.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1449,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-09-30T09:40:03Z",
+      "side": 1,
+      "message": "Yeah, thanks for noticing. I was actually thinking about reusing handle_triple_fault(), but somehow forgot about it. :)\n\nIt seems actually desirable to clear mmio_needed for correctness (BTW I\u0027ve just realized that it is used for pVMs, not just for npVMs, since it is not about emulating MMIO via instruction decoding but about notifying userspace to handle MMIO).",
+      "parentUuid": "1c124ce7_cab3d506",
+      "revId": "ada2e2ff399ae72e64cf2fc768e46ceaf8c15b5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
