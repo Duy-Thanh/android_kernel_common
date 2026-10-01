@@ -187,6 +187,7 @@ int tty_alloc_file(struct file *file)
 	priv = kmalloc(sizeof(*priv), GFP_KERNEL);
 	if (!priv)
 		return -ENOMEM;
+	priv->pty_opened = false;
 
 	file->private_data = priv;
 
