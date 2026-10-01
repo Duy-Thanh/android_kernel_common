@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcebb94b_ddcd7464",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 28
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-10-01T12:26:55Z",
+      "side": 1,
+      "message": "I can see usage of this variant, so I think you can remove this `#[allow(_)]`.",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 33
+      },
+      "revId": "e0870895e8e1a26e46802f4e2f18817f119918eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f56d04d7_310e9d3d",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 28
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-10-01T12:26:55Z",
+      "side": 1,
+      "message": "Do this before calling `dma_buf_mmap`. You should not have any failure paths after that call that are expected to be possible to hit in normal code.",
+      "revId": "e0870895e8e1a26e46802f4e2f18817f119918eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6825d36_326b0988",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 28
+      },
+      "lineNbr": 748,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-10-01T12:26:55Z",
+      "side": 1,
+      "message": "```suggestion\n    let Some(wrap) \u003d WRAP_FOPS.borrow_private(file) else {\n        return Err(EBADF);\n    };\n\n    f(\u0026wrap)\n```",
+      "range": {
+        "startLine": 735,
+        "startChar": 0,
+        "endLine": 748,
+        "endChar": 12
+      },
+      "revId": "e0870895e8e1a26e46802f4e2f18817f119918eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "438c5f13_0471c750",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 28
+      },
+      "lineNbr": 790,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-10-01T12:26:55Z",
+      "side": 1,
+      "message": "This dma-buf could be immediately freed on another thread when you release the lock, right? Should you increment the refcount before passing the pointer to the caller?",
+      "range": {
+        "startLine": 786,
+        "startChar": 0,
+        "endLine": 790,
+        "endChar": 9
+      },
+      "revId": "e0870895e8e1a26e46802f4e2f18817f119918eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3668d65c_8869431c",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 28
+      },
+      "lineNbr": 824,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-10-01T12:26:55Z",
+      "side": 1,
+      "message": "This looks like an unnecessary increment.\n```suggestion\n        // SAFETY: `dev` is verified non-null and points to a valid C `struct device`, and\n        // it\u0027s valid for the duration of this call.\n        let device \u003d unsafe { device::Device::from_raw(dev) };\n```",
+      "range": {
+        "startLine": 822,
+        "startChar": 0,
+        "endLine": 824,
+        "endChar": 64
+      },
+      "revId": "e0870895e8e1a26e46802f4e2f18817f119918eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
