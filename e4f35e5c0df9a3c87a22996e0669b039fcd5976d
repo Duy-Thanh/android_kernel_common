@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ab0e952_065cd057",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-10-01T16:54:42Z",
+      "side": 1,
+      "message": "nit: added lru_gen_set_refs() missing in 5.15",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 28
+      },
+      "revId": "e4f35e5c0df9a3c87a22996e0669b039fcd5976d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
