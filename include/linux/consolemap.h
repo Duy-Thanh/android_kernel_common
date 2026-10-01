@@ -28,7 +28,8 @@ int conv_uni_to_pc(struct vc_data *conp, long ucs);
 u32 conv_8bit_to_uni(unsigned char c);
 int conv_uni_to_8bit(u32 uni);
 void console_map_init(void);
-unsigned int ucs_get_width(uint32_t cp);
+bool ucs_is_double_width(uint32_t cp);
+bool ucs_is_zero_width(uint32_t cp);
 u32 ucs_recompose(u32 base, u32 mark);
 u32 ucs_get_fallback(u32 cp);
 #else
@@ -61,9 +62,14 @@ static inline int conv_uni_to_8bit(u32 uni)
 
 static inline void console_map_init(void) { }
 
-static inline unsigned int ucs_get_width(uint32_t cp)
+static inline bool ucs_is_double_width(uint32_t cp)
 {
-	return 1;
+	return false;
+}
+
+static inline bool ucs_is_zero_width(uint32_t cp)
+{
+	return false;
 }
 
 static inline u32 ucs_recompose(u32 base, u32 mark)

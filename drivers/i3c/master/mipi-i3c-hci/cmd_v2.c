@@ -296,7 +296,9 @@ static int hci_cmd_v2_daa(struct i3c_hci *hci)
 		 * TODO: Extend the subsystem layer to allow for registering
 		 * new device and provide BCR/DCR/PID at the same time.
 		 */
-		i3c_master_add_i3c_dev_locked(&hci->master, next_addr);
+		ret = i3c_master_add_i3c_dev_locked(&hci->master, next_addr);
+		if (ret)
+			break;
 	}
 
 	hci_free_xfer(xfer, 2);

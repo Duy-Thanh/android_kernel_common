@@ -132,4 +132,4 @@ RS485 Serial Communications
 6. References
 =============
 
-.. [#DT-bindings]	Documentation/devicetree/bindings/serial/rs485.yaml
+.. [#DT-bindings]	Documentation/devicetree/bindings/serial/rs485.txt

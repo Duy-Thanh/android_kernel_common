@@ -13,4 +13,3 @@ more additions are needed here:
    rtla/index
    rv/index
    python
-   sbom/sbom

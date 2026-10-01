@@ -51,6 +51,7 @@ struct plat_sci_port_ops {
  */
 struct plat_sci_port {
 	unsigned int	type;			/* SCI / SCIF / IRDA / HSCIF */
+	upf_t		flags;			/* UPF_* flags */
 
 	unsigned int	sampling_rate;
 	unsigned int	scscr;			/* SCSCR initialization */
