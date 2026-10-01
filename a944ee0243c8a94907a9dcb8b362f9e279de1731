@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3aa3a930_3d9a379d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-10-01T15:43:19Z",
+      "side": 1,
+      "message": "\u003e I think the AI is missing the fact that READ_ONCE(vcpu-\u003emode) \u003d\u003d EXITING_GUEST_MODE is almost always false \n\nBut would `kvm_request_pending()` be true if KVM_REQ_TRIPLE_FAULT is set? :\n```\n»       } else if (READ_ONCE(vcpu-\u003emode) \u003d\u003d EXITING_GUEST_MODE ||\n»       »        kvm_request_pending(vcpu)) { \u003c\u003d\u003d\u003d this check\n```\n\n\u003e That doesn\u0027t make the problem less serious though. pKVM still gets stuck, it re-enters the guest on every iteration but it never returns to the host, so the host never gets a chance to re-schedule this CPU.\n\nI fully agree. I was just suggesting a wording change here to live lock instead of guest enter. But if you indeed see guest enter, then it should be fine to keep the wording as it is or probably have  a mention about possibility of livelock as well.",
+      "parentUuid": "3f754a43_d9437b4a",
+      "revId": "a944ee0243c8a94907a9dcb8b362f9e279de1731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "490de7da_e38cd9a2",
         "filename": "arch/x86/kvm/x86.c",
         "patchSetId": 3
