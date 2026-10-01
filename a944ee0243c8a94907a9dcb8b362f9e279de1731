@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b1564f56_e3f3289a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-01T16:18:18Z",
+      "side": 1,
+      "message": "Hmm indeed, I missed that there is `||`, not `\u0026\u0026`. I stand corrected: I\u0027ve repeated my qemu test and now I see it indeed doesn\u0027t re-enter the guest, and a TASK_SWITCH vmexit happens just once, at the beginning.\n\nI\u0027ll fix the description.\n\nI\u0027m not sure why the AI called a mere infinite loop on a single CPU a \"livelock\" though.",
+      "parentUuid": "3aa3a930_3d9a379d",
+      "revId": "a944ee0243c8a94907a9dcb8b362f9e279de1731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "490de7da_e38cd9a2",
         "filename": "arch/x86/kvm/x86.c",
         "patchSetId": 3
