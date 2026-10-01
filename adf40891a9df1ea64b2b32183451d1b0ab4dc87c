@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afa29e5c_ed4b66b2",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1562,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-01T22:34:55Z",
+      "side": 1,
+      "message": "We also need to support the case where the buffer already has an owner, and the owner is the current thread.",
+      "range": {
+        "startLine": 1558,
+        "startChar": 1,
+        "endLine": 1562,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "0cb7c534_d3ae2c22",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 1558,
+                "startChar": 0,
+                "endLine": 1559,
+                "endChar": 0
+              },
+              "replacement": "\tif (has_owner(ctx) \u0026\u0026 !is_owner_dev(ctx, dev) \u0026\u0026\n\t    !is_owner_task(ctx, current)) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "adf40891a9df1ea64b2b32183451d1b0ab4dc87c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
