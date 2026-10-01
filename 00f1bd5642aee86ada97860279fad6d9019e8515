@@ -51,6 +51,24 @@
       ],
       "revId": "00f1bd5642aee86ada97860279fad6d9019e8515",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41d881a6_995a6e1a",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-10-01T14:43:39Z",
+      "side": 1,
+      "message": "Yes, this is not ideal. Because in this case `microdroid` is already a base build, it should not need a transition to force build a `vmlinux`, and because `kernel_abi_wrapped_dist_internal` is not exposed, the only path left is to use the `common_kernel` target. I\u0027ll abandon this CL in favor of that approach.",
+      "parentUuid": "8f3990ee_b6494d3e",
+      "revId": "00f1bd5642aee86ada97860279fad6d9019e8515",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
