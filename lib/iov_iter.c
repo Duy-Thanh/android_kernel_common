@@ -1049,6 +1049,37 @@ static struct page *first_bvec_segment(const struct iov_iter *i,
 	return page;
 }
 
+/*
+ * A compat PTE can select any 4K slice of a native page. Capture the actual
+ * byte offset with the page reference instead of inferring it from the VMA.
+ */
+static ssize_t
+iov_iter_extract_compat_page(struct iov_iter *i, struct page ***pages,
+			     unsigned long addr, size_t maxsize,
+			     unsigned int maxpages, unsigned int gup_flags,
+			     size_t *start, bool pin)
+{
+	struct page_span span;
+	long res;
+
+	maxsize = min_t(size_t, maxsize,
+			mm_pte_size(current->mm) -
+			mm_offset_in_page(current->mm, addr));
+	if (!want_user_pages_array(pages, maxsize, 0, maxpages))
+		return -ENOMEM;
+
+	res = pin ? pin_user_pages_range(current->mm, addr, maxsize, 1,
+					 gup_flags, *pages, &span) :
+		    get_user_pages_range(current->mm, addr, maxsize, 1,
+					 gup_flags, *pages, &span);
+	if (res <= 0)
+		return res;
+
+	*start = span.offset;
+	iov_iter_advance(i, span.length);
+	return span.length;
+}
+
 static ssize_t __iov_iter_get_pages_alloc(struct iov_iter *i,
 		   struct page ***pages, size_t maxsize,
 		   unsigned int maxpages, size_t *start)
@@ -1073,9 +1104,9 @@ static ssize_t __iov_iter_get_pages_alloc(struct iov_iter *i,
 
 		addr = first_iovec_segment(i, &maxsize);
 		if (mm_is_p3s_4k(current->mm))
-			return p3s_iov_iter_extract_pages(i, pages, addr, maxsize,
-							  maxpages, gup_flags,
-							  false, start);
+			return iov_iter_extract_compat_page(i, pages, addr,
+					maxsize, maxpages, gup_flags, start,
+					false);
 		*start = addr % PAGE_SIZE;
 		addr &= PAGE_MASK;
 		n = want_pages_array(pages, maxsize, *start, maxpages);
@@ -1752,9 +1783,8 @@ static ssize_t iov_iter_extract_user_pages(struct iov_iter *i,
 
 	addr = first_iovec_segment(i, &maxsize);
 	if (mm_is_p3s_4k(current->mm))
-		return p3s_iov_iter_extract_pages(i, pages, addr, maxsize,
-						  maxpages, gup_flags, true,
-						  offset0);
+		return iov_iter_extract_compat_page(i, pages, addr, maxsize,
+					maxpages, gup_flags, offset0, true);
 	*offset0 = offset = addr % PAGE_SIZE;
 	addr &= PAGE_MASK;
 	maxpages = want_pages_array(pages, maxsize, offset, maxpages);
