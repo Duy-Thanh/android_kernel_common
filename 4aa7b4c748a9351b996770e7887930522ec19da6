@@ -50,6 +50,30 @@
       ],
       "revId": "4aa7b4c748a9351b996770e7887930522ec19da6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2064c095_3701fc97",
+        "filename": "arch/arm64/include/asm/mmu.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-10-01T07:51:24Z",
+      "side": 1,
+      "message": "Thanks Suren.\n\nThe mm_context_t is embedded directly into struct mm_struct Accessing `mm-\u003econtext.pte_shift` does not introduce an extra pointer dereference it should compile to a single offset from the mm base similar  to having `mm-\u003epte_shift` directly in `mm_struct`.\n\nThe inline helper we have is `mm_pte_shift()`. This is already used as the accessor to avoid ifdefs sprinkled throughout and since we need to not affect the 4KB ABI.\n\nSo we can change it easily in a follow up if needed",
+      "parentUuid": "eb2282cd_1f98c4f5",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 6
+      },
+      "revId": "4aa7b4c748a9351b996770e7887930522ec19da6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
