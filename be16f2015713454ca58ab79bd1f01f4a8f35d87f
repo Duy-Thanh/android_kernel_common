@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3f2003f_b3230b0f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-10-01T16:55:25Z",
+      "side": 1,
+      "message": "If you cherry-picked it from linux-stable/linux-6.6.y, please use cherry-pick -x and add that to the commit message. Add your signoff too.",
+      "revId": "be16f2015713454ca58ab79bd1f01f4a8f35d87f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
