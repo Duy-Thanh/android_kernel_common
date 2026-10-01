@@ -64,6 +64,30 @@
       },
       "revId": "c1292d54b237b6d5c0c1a16c8be4cd6d298713bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a7961bf_d5f0a983",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-10-01T08:40:46Z",
+      "side": 1,
+      "message": "Ok, make sense.",
+      "parentUuid": "5d77ae99_ff4e656c",
+      "range": {
+        "startLine": 493,
+        "startChar": 21,
+        "endLine": 493,
+        "endChar": 48
+      },
+      "revId": "c1292d54b237b6d5c0c1a16c8be4cd6d298713bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
