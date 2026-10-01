@@ -2177,6 +2177,22 @@ cc_binary_with_abi(
     deps = [":kselftest_memfd"],
 )
 
+cc_library(
+    name = "kselftest_mm_hugepage_settings",
+    srcs = ["tools/testing/selftests/mm/hugepage_settings.c"],
+    hdrs = ["tools/testing/selftests/mm/hugepage_settings.h"],
+    copts = _KSELFTEST_COPTS,
+    includes = [
+        "include/uapi/",
+        "tools/testing/selftests",
+    ],
+    visibility = ["//visibility:private"],
+    deps = [
+        ":kselftest_headers_lib",
+        ":kselftest_mm_vm_util",
+    ],
+)
+
 cc_binary_with_abi(
     name = "kselftest_mm_compaction_test",
     srcs = ["tools/testing/selftests/mm/compaction_test.c"],
@@ -2187,6 +2203,7 @@ cc_binary_with_abi(
     visibility = ["//visibility:private"],
     deps = [
         ":kselftest_headers_lib",
+        ":kselftest_mm_hugepage_settings",
         "@libcap",
     ],
 )
@@ -2201,6 +2218,7 @@ cc_binary_with_abi(
     visibility = ["//visibility:private"],
     deps = [
         ":kselftest_headers_lib",
+        ":kselftest_mm_hugepage_settings",
         ":kselftest_mm_vm_util",
         "@libcap",
     ],
@@ -2216,6 +2234,7 @@ cc_binary_with_abi(
     visibility = ["//visibility:private"],
     deps = [
         ":kselftest_headers_lib",
+        ":kselftest_mm_hugepage_settings",
         ":kselftest_mm_vm_util",
         "@libcap",
     ],
@@ -2335,6 +2354,7 @@ cc_binary_with_abi(
     visibility = ["//visibility:private"],
     deps = [
         ":kselftest_headers_lib",
+        ":kselftest_mm_hugepage_settings",
         ":kselftest_mm_vm_util",
         "@libcap",
     ],
@@ -2342,11 +2362,7 @@ cc_binary_with_abi(
 
 cc_binary_with_abi(
     name = "kselftest_mm_transhuge_stress",
-    srcs = [
-        "tools/testing/selftests/mm/hugepage_settings.c",
-        "tools/testing/selftests/mm/hugepage_settings.h",
-        "tools/testing/selftests/mm/transhuge-stress.c",
-    ],
+    srcs = ["tools/testing/selftests/mm/transhuge-stress.c"],
     copts = _KSELFTEST_COPTS,
     includes = [
         "tools/testing/selftests",
@@ -2357,6 +2373,7 @@ cc_binary_with_abi(
     visibility = ["//visibility:private"],
     deps = [
         ":kselftest_headers_lib",
+        ":kselftest_mm_hugepage_settings",
         ":kselftest_mm_vm_util",
         "@libcap",
     ],
@@ -2379,6 +2396,7 @@ cc_library(
     visibility = ["//visibility:private"],
     deps = [
         ":kselftest_headers_lib",
+        ":kselftest_mm_hugepage_settings",
         ":kselftest_mm_vm_util",
     ],
 )
