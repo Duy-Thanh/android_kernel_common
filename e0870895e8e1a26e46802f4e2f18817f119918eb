@@ -227,6 +227,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2083a9f3_607b6706",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 28
+      },
+      "lineNbr": 790,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-01T16:49:25Z",
+      "side": 1,
+      "message": "Sorry, I meant \"...before calling `wrapfd_put_mappable()`...\".",
+      "parentUuid": "1c9820ef_9ca14de5",
+      "range": {
+        "startLine": 786,
+        "startChar": 0,
+        "endLine": 790,
+        "endChar": 9
+      },
+      "revId": "e0870895e8e1a26e46802f4e2f18817f119918eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3668d65c_8869431c",
         "filename": "drivers/android/wrapfd/wrap.rs",
         "patchSetId": 28
