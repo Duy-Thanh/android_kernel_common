@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f72c80c4_3464da7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-10-01T14:50:38Z",
+      "side": 1,
+      "message": "\u003e So it incorrectly enters the guest which is in a broken state,\n\nI was reading the bug and it mentions about a live lock instead of entering the guest. From reading the code, I think that is true. if pKVM doesn\u0027t handle the event in `__pkvm_vcpu_enter_guest`, then it may return 1 and cause an unbounded for loop live lock in `pkvm_vcpu_enter_guest`. There is a case where we will not return 1 - if `force_immediate_exit` is true and that happens only with `KVM_RUN_FORCE_IMMEDIATE_EXIT` which doesn\u0027t seem to be set for pVMs. The other case for `req_immediate_exit` to be true is via `kvm_check_and_inject_events` but that only for nested which we don\u0027t support.\n\nIs my understanding correct?",
+      "revId": "a944ee0243c8a94907a9dcb8b362f9e279de1731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "490de7da_e38cd9a2",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 14996,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-10-01T14:50:38Z",
+      "side": 1,
+      "message": "I was wondering if there are more events that we don\u0027t check in pKVM and may lead to live lock? If we don\u0027t process it in here, we would return 1 in this function and then live locks in the for loop in `pkvm_vcpu_enter_guest`:\n```\n»       for (;;) {\n»       »       ret \u003d __pkvm_vcpu_enter_guest(vcpu, force_immediate_exit);\n»       »       if (ret \u003c\u003d 0) \n»       »       »       break;\n»       }\n```\n\nIf there might be more events, would it be better to check it here (if any WARN_ON(unexpected events), then handle it accordingly)?",
+      "revId": "a944ee0243c8a94907a9dcb8b362f9e279de1731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
