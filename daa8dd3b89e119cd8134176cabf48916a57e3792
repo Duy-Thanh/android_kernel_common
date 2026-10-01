@@ -44,6 +44,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3eb8d89c_baae750e",
+        "filename": "net/ipv4/arp.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 816,
+      "author": {
+        "id": 1898675
+      },
+      "writtenOn": "2026-10-01T10:00:05Z",
+      "side": 1,
+      "message": "Added dev-\u003eaddr_len \u003d\u003d ETH_ALEN guard and switched to is_valid_ether_addr(tha)",
+      "parentUuid": "c3767fbb_c9dbb986",
+      "range": {
+        "startLine": 816,
+        "startChar": 7,
+        "endLine": 816,
+        "endChar": 30
+      },
+      "revId": "daa8dd3b89e119cd8134176cabf48916a57e3792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "041e500e_91229546",
         "filename": "net/ipv4/ip_input.c",
         "patchSetId": 4
@@ -55,6 +79,30 @@
       "writtenOn": "2026-09-30T08:32:23Z",
       "side": 1,
       "message": "ip_rcv_options() unconditionally calls skb_cow(skb, skb_headroom(skb)) (line 281). If skb is cloned (e.g., when tcpdump or an AF_PACKET socket is active) or lacks headroom, skb_cow() calls pskb_expand_head(), which reallocates skb-\u003ehead and frees the old buffer.\n\nSuggested fix: Reload iph \u003d ip_hdr(skb); at the start of the if (in_dev \u0026\u0026 IN_DEV_ORCONF(in_dev, DROP_UNICAST_IN_L2_MULTICAST)) block)\n\n\t\tif (in_dev \u0026\u0026\n\t\t    IN_DEV_ORCONF(in_dev, DROP_UNICAST_IN_L2_MULTICAST)) {\n\t\t\tbool is_dhcp_resp \u003d false;\n\t\t\tiph \u003d ip_hdr(skb);",
+      "range": {
+        "startLine": 467,
+        "startChar": 7,
+        "endLine": 467,
+        "endChar": 10
+      },
+      "revId": "daa8dd3b89e119cd8134176cabf48916a57e3792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c7ba786_b58ee1c1",
+        "filename": "net/ipv4/ip_input.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1898675
+      },
+      "writtenOn": "2026-10-01T10:00:05Z",
+      "side": 1,
+      "message": "Added iph \u003d ip_hdr(skb); right at the start of the sysctl check block.",
+      "parentUuid": "041e500e_91229546",
       "range": {
         "startLine": 467,
         "startChar": 7,
