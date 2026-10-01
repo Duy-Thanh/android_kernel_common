@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb2282cd_1f98c4f5",
+        "filename": "arch/arm64/include/asm/mmu.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-10-01T05:54:58Z",
+      "side": 1,
+      "message": "We will need to measure the performance and see if this placement is ok because pte_shift is used quite often. Technically you need just one bit to encode 4k vs 16k. We might be able to squeeze it into the first cacheline of mm_struct but for now this is ok. What I would suggest is to create an inline helper:\n```\nstatic int u8 get_pte_shift(const struct mm_struct *mm)\n{\n    return mm-\u003econtext.pte_shift;\n}\n```\nAnd use it everywhere to access pte_shift. If we decide to change its location, we will need to only change this helper.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 6
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2e8f82d5_bec473cf",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/include/asm/mmu.h",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "#ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE\n\t/* Process virtual page shift (PAGE_SHIFT_4KB or PAGE_SHIFT_KERNEL) */\n\tu8\t\tpte_shift;\n#endif\n"
+            },
+            {
+              "path": "arch/arm64/include/asm/mmu.h",
+              "range": {
+                "startLine": 36,
+                "startChar": 0,
+                "endLine": 40,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "4aa7b4c748a9351b996770e7887930522ec19da6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
