@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e61f9eb_50b661a4",
+        "filename": "kernel/sched/stats.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1060234
+      },
+      "writtenOn": "2026-10-01T23:14:14Z",
+      "side": 1,
+      "message": "I\u0027m seeing warnings like\n\n```\npsi: inconsistent task state! task\u003d86:kworker/1:3 cpu\u003d1 psi_flags\u003d0 clear\u003d4 set\u003d0\n```\n\nI think one issue is related to delayed dequeue. Tasks with `p-\u003ese.sched_delayed` will be left on the rq, but `psi_sched_switch()` clears their TSK_RUNNING flag.\n\nI added an `|| p-\u003ese.sched_delayed` here as well, which did get rid of that inconsistent task state. However, there\u0027s still something wrong. If I run a very heavy memory pressure workload (psi.mem.some of ~25%), I will see this error eventually:\n\n```\npsi: inconsistent task state! task\u003d4376:dd cpu\u003d3 psi_flags\u003d2 clear\u003d0 set\u003de\n```\n\nThis is a task with `TSK_MEMSTALL` already being set when the system tries to set it. I think this is probably occurring when we migrate a task but don\u0027t clear its `TSK_MEMSTALL` flag. This results in the source CPU\u0027s count of `TSK_MEMSTALL` becoming permanently non-zero, leading to very exaggerated memory PSI.\n\nHere is a snippet of ftrace around it. It looks like task `4376:dd` is being dequeued on cpu 2 inside `block_task()` and then being enqueued on cpu 3 by `do_activate_blocked_waiter()`:\n\n```\n     highpool[7]-5179    [002] dN.4.  1250.419894: block_task: psi_dequeue new 4376:dd cpu\u003d2 flags\u003d9 psi_flags\u003de memstall\u003d1 iowait\u003d0 \n     highpool[7]-5179    [002] dN.4.  1250.419896: \u003cstack trace\u003e\n \u003d\u003e stack_trace_save\n \u003d\u003e __ftrace_trace_stack\n \u003d\u003e trace_dump_stack\n \u003d\u003e block_task\n \u003d\u003e __schedule\n \u003d\u003e preempt_schedule\n \u003d\u003e preempt_schedule_thunk\n \u003d\u003e __mutex_unlock_slowpath\n \u003d\u003e mutex_unlock\n \u003d\u003e zram_submit_bio\n \u003d\u003e submit_bio_noacct\n \u003d\u003e submit_bio_wait\n \u003d\u003e __swap_writepage\n \u003d\u003e swap_writeout\n \u003d\u003e pageout\n \u003d\u003e shrink_folio_list.cold\n \u003d\u003e evict_folios\n \u003d\u003e shrink_one\n \u003d\u003e shrink_node\n \u003d\u003e do_try_to_free_pages\n \u003d\u003e try_to_free_pages\n \u003d\u003e __alloc_frozen_pages_noprof\n \u003d\u003e __folio_alloc_noprof\n \u003d\u003e page_cache_ra_unbounded\n \u003d\u003e page_cache_ra_order\n \u003d\u003e filemap_fault.cold\n \u003d\u003e do_pte_missing\n \u003d\u003e handle_mm_fault\n \u003d\u003e do_user_addr_fault\n \u003d\u003e exc_page_fault\n \u003d\u003e asm_fred_exit_user\n          \u003cidle\u003e-0       [003] dN.4.  1250.419901: activate_task: psi_enqueue new 4376:dd cpu\u003d3 flags\u003d49 psi_flags\u003d2 memstall\u003d1 iowait\u003d0 set\u003de clear\u003d0 \n          \u003cidle\u003e-0       [003] dN.4.  1250.419902: psi_task_change.cold: psi: inconsistent task state! task\u003d4376:dd cpu\u003d3 psi_flags\u003d2 clear\u003d0 set\u003de \n          \u003cidle\u003e-0       [003] dN.4.  1250.419907: \u003cstack trace\u003e\n \u003d\u003e stack_trace_save\n \u003d\u003e __ftrace_trace_stack\n \u003d\u003e trace_dump_stack\n \u003d\u003e psi_task_change.cold\n \u003d\u003e activate_task\n \u003d\u003e do_activate_blocked_waiter\n \u003d\u003e sched_ttwu_pending\n \u003d\u003e __flush_smp_call_function_queue\n \u003d\u003e flush_smp_call_function_queue\n \u003d\u003e do_idle\n \u003d\u003e cpu_startup_entry\n \u003d\u003e start_secondary\n \u003d\u003e common_startup_64\n```",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 195,
+        "endChar": 10
+      },
+      "revId": "e8081e186a299ed39a77f0294f6405fd7811a599",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
