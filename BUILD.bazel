@@ -1656,7 +1656,7 @@ ddk_headers(
         "drivers/android/dbitmap.h",
         "kernel/sched/cpudeadline.h",
         "kernel/sched/cpupri.h",
-        "kernel/sched/ext.h",
+        "kernel/sched/ext/ext.h",
         "kernel/sched/features.h",
         "kernel/sched/sched.h",
         "kernel/sched/stats.h",
