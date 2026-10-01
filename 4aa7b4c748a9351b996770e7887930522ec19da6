@@ -98,6 +98,30 @@
       },
       "revId": "4aa7b4c748a9351b996770e7887930522ec19da6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d1745da_0241da14",
+        "filename": "arch/arm64/include/asm/mmu.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-10-01T18:29:27Z",
+      "side": 1,
+      "message": "I see. I can investigate this further where we can find an extra bit in favorable cachelines to store it.\n\nFor the helper we have it as `mm_pte_shift()` in [p3s/mm.h](https://android-review.git.corp.google.com/c/kernel/common/+/4312459/9/include/linux/p3s/mm.h)\n\n```\nstatic inline unsigned int mm_pte_shift(const struct mm_struct *mm)\n{\n\treturn (mm \u0026\u0026 mm-\u003econtext.pte_shift) ? mm-\u003econtext.pte_shift :\n\t\t\t\t\t       PAGE_SHIFT_KERNEL;\n}\n```",
+      "parentUuid": "4b3745ce_02071243",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 6
+      },
+      "revId": "4aa7b4c748a9351b996770e7887930522ec19da6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
