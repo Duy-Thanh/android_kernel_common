@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c2d857d_2e780be8",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6079,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-10-01T17:07:13Z",
+      "side": 1,
+      "message": "Note: I think it can introduce fairness issue depending on reclaimable slab and order of memcg reclamation. Those that get reclaimed first are more favorable as they might satisfy from the shrink_slab() and those that go after reclaimable slab is exhausted will pay the penalty.\n\nI don\u0027t see better tradeoff for immediate fix.",
+      "range": {
+        "startLine": 6079,
+        "startChar": 4,
+        "endLine": 6079,
+        "endChar": 75
+      },
+      "revId": "dbfdeff39dde7f4d6c592384f9342ec75a509af9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
