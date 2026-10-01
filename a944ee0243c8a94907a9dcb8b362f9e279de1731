@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3f754a43_d9437b4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-01T15:29:15Z",
+      "side": 1,
+      "message": "In my tests I can see it does enter the guest (and then the guest immediately vmexits with TASK_SWITCH again).\n\nI think the AI is missing the fact that `READ_ONCE(vcpu-\u003emode) \u003d\u003d EXITING_GUEST_MODE` is almost always false (`vcpu-\u003emode` is set to IN_GUEST_MODE shortly before this check, in `pkvm_set_vcpu_in_guest()` at line 15013). It is only true in the rare case when another CPU has kicked this vCPU in the meantime (e.g. for TLB flush).\n\nThat doesn\u0027t make the problem less serious though. pKVM still gets stuck, it re-enters the guest on every iteration but it never returns to the _host_, so the host never gets a chance to re-schedule this CPU.",
+      "parentUuid": "f72c80c4_3464da7a",
+      "revId": "a944ee0243c8a94907a9dcb8b362f9e279de1731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "490de7da_e38cd9a2",
         "filename": "arch/x86/kvm/x86.c",
         "patchSetId": 3
