@@ -530,8 +530,6 @@ struct gunyah_hypercall_vcpu_run_resp {
 			GUNYAH_VCPU_ADDRSPACE_VMMIO_WRITE	= 5,
 			/* VCPU blocked on fault where we can demand page */
 			GUNYAH_VCPU_ADDRSPACE_PAGE_FAULT	= 7,
-			/* VCPU is sleeping until an interrupt arrives or timeout expires */
-			GUNYAH_VCPU_STATE_EXPECTS_WAKEUP_OR_TIMEOUT	= 8,
 			/* VCPU is powered off due to some system event/reset */
 			GUNYAH_VCPU_STATE_SYSTEM_OFF		= 0x100,
 			/* clang-format on */
@@ -567,7 +565,6 @@ enum {
  *      Resource Manager.
  * @ticket: resource ticket to claim vCPU# for the VM
  * @kref: Reference counter
- * @wakeup_timer: High-resolution timer for EXPECTS_WAKEUP_OR_TIMEOUT state
  */
 struct gunyah_vcpu {
 	struct gunyah_vm_function_instance *f;
@@ -597,7 +594,6 @@ struct gunyah_vcpu {
 	struct notifier_block nb;
 	struct gunyah_vm_resource_ticket ticket;
 	struct kref kref;
-	struct hrtimer wakeup_timer;
 };
 
 enum gunyah_error
