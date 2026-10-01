@@ -22,6 +22,30 @@
       },
       "revId": "669eac914bb502bbae13175215b1bbe5c5de1440",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a3e1635_fa71fc4f",
+        "filename": "include/net/apf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-10-01T01:09:53Z",
+      "side": 1,
+      "message": "Looks like jetski doesn\u0027t like the idea of do runtime check. I kind agree with it, here is the summary I got from jetski\n\n```\nNo, we should not check that the reserved slots are zero-initialized at runtime:\n\n - Compiler guarantee: Drivers declare static const struct apf_ops with designated initializers. Under ISO C99 §6.7.8, any struct member omitted from the initializer list is guaranteed by the compiler to be initialized to zero in .rodata.\n\n- Future breakage: When a slot is eventually consumed in a future release via ANDROID_KABI_USE(1, ...), newer drivers implementing that callback will set it to a non-zero function pointer. A runtime check asserting that reserved slots must be zero would reject those drivers.\n\n - Standard GKI pattern: None of the other KABI-padded structures in GKI (net_device_ops, ethtool_ops, pkvm_module_ops, etc.) inspect reserved padding at runtime. When a slot is consumed, the kernel simply checks `if (ops-\u003enew_callback)`.\n\n```",
+      "parentUuid": "75363423_55886294",
+      "range": {
+        "startLine": 89,
+        "startChar": 1,
+        "endLine": 89,
+        "endChar": 21
+      },
+      "revId": "669eac914bb502bbae13175215b1bbe5c5de1440",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
