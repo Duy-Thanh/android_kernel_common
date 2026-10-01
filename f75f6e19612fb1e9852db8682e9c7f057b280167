@@ -16,6 +16,24 @@
       "message": "This driver is not part of GKI builds. This should be maintained in a downstream branch for vendor modules.",
       "revId": "f75f6e19612fb1e9852db8682e9c7f057b280167",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8ea7add_0447f3ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1898165
+      },
+      "writtenOn": "2026-10-01T06:23:19Z",
+      "side": 1,
+      "message": "I originally cherry-picked only the Kconfig changes but it failed presubmit builds because of the other missing patches. All 5 patches are complementary and necessary to use mtk pinctrl as vendor modules.",
+      "parentUuid": "9bbba38c_f656bcb8",
+      "revId": "f75f6e19612fb1e9852db8682e9c7f057b280167",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
