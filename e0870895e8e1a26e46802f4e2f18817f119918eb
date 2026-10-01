@@ -203,6 +203,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1c9820ef_9ca14de5",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 28
+      },
+      "lineNbr": 790,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-01T16:48:42Z",
+      "side": 1,
+      "message": "\u003e I guess the case you are considering is when userspace closes the wrapfd file without calling wrapfd_put_mappable (which is technically a userspace bug but we don\u0027t want to crash the whole system if this happens)? \n\nWouldn\u0027t the driver still have a reference? I was imagining the flow in the scenario you\u0027re describing to be something like:\n\n- Userspace acquires wrapfd (lets assume the dmabuf fd is closed after wrapfd is acquired):  wrapfd refcount: 1 dmabuf refcount: 1\n- Kernel driver acquires wrapfd from userspace via an ioctl and gets the file structure associated with the wrapfd: wrapfd refcount: 2 dmabuf refcount: 1\n- Kernel driver invokes `wrapfd_get_mappable()`: no change in refcounts\n- Userspace closes wrapfd: wrapfd refcount: 1 dma buf refcount: 1\n\nThere\u0027s a problem if the driver calls `fput()` on the wrapfd file structure before calling `wrapfd_get_mappable()`, but that\u0027s a driver bug, and the driver should fix that?",
+      "parentUuid": "0bfc74e1_4d3f154b",
+      "range": {
+        "startLine": 786,
+        "startChar": 0,
+        "endLine": 790,
+        "endChar": 9
+      },
+      "revId": "e0870895e8e1a26e46802f4e2f18817f119918eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3668d65c_8869431c",
         "filename": "drivers/android/wrapfd/wrap.rs",
         "patchSetId": 28
