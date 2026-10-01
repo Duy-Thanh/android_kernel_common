@@ -541,6 +541,7 @@ kernel_build(
         "drivers/iommu/pkvm-pviommu.ko",
     ],
     protected_module_names_list = ":microdroid_aarch64_protected_module_names",
+    strip_modules = True,
     trim_nonlisted_kmi = True,
 )
 
@@ -595,11 +596,14 @@ kernel_build(
     ],
     arch = "arm64",
     defconfig = "arch/arm64/configs/microdroid_defconfig",
+    kmi_symbol_list = "microdroid/aarch64/symbols/base",
     make_goals = [
         "Image",
     ],
     makefile = ":Makefile",
     page_size = "16k",
+    protected_module_names_list = ":microdroid_aarch64_protected_module_names",
+    trim_nonlisted_kmi = True,
 )
 
 pkg_files(
