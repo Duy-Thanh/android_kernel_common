@@ -130,6 +130,10 @@ enum {
 	RUST_CONST_HELPER_FMODE_CAN_ODIRECT = FMODE_CAN_ODIRECT,
 };
 
+#ifdef CONFIG_64BIT
+const vm_flags_t RUST_CONST_HELPER_VM_NO_REMAP_FILE_PAGES = VM_NO_REMAP_FILE_PAGES;
+#endif
+
 #if IS_ENABLED(CONFIG_ANDROID_BINDER_IPC_RUST)
 #include "../../drivers/android/binder_pick.h"
 #include "../../drivers/android/binder/rust_binder.h"
@@ -141,4 +145,8 @@ enum {
 #include "../../drivers/staging/android/ashmem.h"
 const size_t RUST_CONST_HELPER_ASHMEM_NAME_PREFIX_LEN = ASHMEM_NAME_PREFIX_LEN;
 const size_t RUST_CONST_HELPER_ASHMEM_FULL_NAME_LEN = ASHMEM_FULL_NAME_LEN;
+#endif
+
+#if IS_ENABLED(CONFIG_ANDROID_WRAPFD)
+#include <linux/wrapfd.h>
 #endif
