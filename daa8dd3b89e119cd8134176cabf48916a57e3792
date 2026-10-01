@@ -66,6 +66,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "148e1188_8f245495",
+        "filename": "net/ipv4/arp.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 816,
+      "author": {
+        "id": 1898675
+      },
+      "writtenOn": "2026-10-01T10:25:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3eb8d89c_baae750e",
+      "range": {
+        "startLine": 816,
+        "startChar": 7,
+        "endLine": 816,
+        "endChar": 30
+      },
+      "revId": "daa8dd3b89e119cd8134176cabf48916a57e3792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "041e500e_91229546",
@@ -103,6 +127,30 @@
       "side": 1,
       "message": "Added iph \u003d ip_hdr(skb); right at the start of the sysctl check block.",
       "parentUuid": "041e500e_91229546",
+      "range": {
+        "startLine": 467,
+        "startChar": 7,
+        "endLine": 467,
+        "endChar": 10
+      },
+      "revId": "daa8dd3b89e119cd8134176cabf48916a57e3792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1af2f16c_1ac0c4a7",
+        "filename": "net/ipv4/ip_input.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1898675
+      },
+      "writtenOn": "2026-10-01T10:25:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c7ba786_b58ee1c1",
       "range": {
         "startLine": 467,
         "startChar": 7,
