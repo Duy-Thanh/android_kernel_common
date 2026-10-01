@@ -179,6 +179,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0bfc74e1_4d3f154b",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 28
+      },
+      "lineNbr": 790,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-10-01T16:05:19Z",
+      "side": 1,
+      "message": "To call `wrapfd_get_mappable` we should have a stable `wrapfd` file which should remain valid until we call `wrapfd_put_mappable`. wrapfd already holds a refcount for that dmabuf, so it should not go away from under us.\n\nThinking a bit more...\nI guess the case you are considering is when userspace closes the wrapfd file without calling `wrapfd_put_mappable` (which is technically a userspace bug but we don\u0027t want to crash the whole system if this happens)? I guess taking a dmabuf refcount here would result in a memory leak vs a possible UAF it we don\u0027t. That\u0027s definitely a better alternative, so taking a refcount on dmabuf in get_mappable and dropping it in put_mappable seems reasonable to me.",
+      "parentUuid": "7fcff592_b422f6f9",
+      "range": {
+        "startLine": 786,
+        "startChar": 0,
+        "endLine": 790,
+        "endChar": 9
+      },
+      "revId": "e0870895e8e1a26e46802f4e2f18817f119918eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3668d65c_8869431c",
         "filename": "drivers/android/wrapfd/wrap.rs",
         "patchSetId": 28
