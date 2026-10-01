@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4edb10b_413a827e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-10-01T17:42:55Z",
+      "side": 1,
+      "message": "This looks like the vendorhook implementation? This change likely should be kept in the driver tree and not submitted to GKI",
+      "revId": "1647b24cd3d7c9b60e6711faa72d135034880e14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
