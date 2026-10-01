@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5c32634_67d68516",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 19
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-10-01T01:10:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a2130ea_959a3710",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 59
+      },
+      "revId": "d97179c8b640283dd93c2fa99677968202e111af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5ebde0c_5b534f19",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-09-29T09:22:15Z",
       "side": 1,
       "message": "info-chip-id",
+      "range": {
+        "startLine": 136,
+        "startChar": 14,
+        "endLine": 136,
+        "endChar": 21
+      },
+      "revId": "d97179c8b640283dd93c2fa99677968202e111af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf16a315_f60ffa2e",
+        "filename": "Documentation/netlink/specs/net_apf.yaml",
+        "patchSetId": 19
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-10-01T01:10:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5ebde0c_5b534f19",
       "range": {
         "startLine": 136,
         "startChar": 14,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdab5629_a702d6bb",
+        "filename": "Documentation/netlink/specs/net_apf.yaml",
+        "patchSetId": 19
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-10-01T01:10:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b7c6abc_9ca65eaf",
+      "range": {
+        "startLine": 239,
+        "startChar": 0,
+        "endLine": 239,
+        "endChar": 3
+      },
+      "revId": "d97179c8b640283dd93c2fa99677968202e111af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f4154341_1644fa10",
@@ -83,6 +155,30 @@
       "writtenOn": "2026-09-29T09:22:15Z",
       "side": 1,
       "message": "net_apf_nl_pre_doit",
+      "range": {
+        "startLine": 77,
+        "startChar": 14,
+        "endLine": 77,
+        "endChar": 30
+      },
+      "revId": "d97179c8b640283dd93c2fa99677968202e111af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68d33e60_6e44c1c3",
+        "filename": "net/apf/apf_nl_gen.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-10-01T01:10:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4154341_1644fa10",
       "range": {
         "startLine": 77,
         "startChar": 14,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfa1b871_56362ee4",
+        "filename": "net/apf/apf_nl_gen.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-10-01T01:10:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "892427dc_bf7bfb7d",
+      "range": {
+        "startLine": 79,
+        "startChar": 15,
+        "endLine": 79,
+        "endChar": 32
+      },
+      "revId": "d97179c8b640283dd93c2fa99677968202e111af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b97dda0_08c89f90",
@@ -139,6 +259,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b8a0223_13f15ae4",
+        "filename": "net/apf/core.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-10-01T01:10:02Z",
+      "side": 1,
+      "message": "Actually no, I think the current style follows other code in kernel. nl80211 also do directly use `info-user_ptr[0]` to get the cfg80211_registered_device. Will keep it to follow the kernel style.",
+      "parentUuid": "6b97dda0_08c89f90",
+      "range": {
+        "startLine": 74,
+        "startChar": 1,
+        "endLine": 74,
+        "endChar": 44
+      },
+      "revId": "d97179c8b640283dd93c2fa99677968202e111af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bdad4abf_58e0a35d",
@@ -152,6 +296,30 @@
       "writtenOn": "2026-09-29T09:22:15Z",
       "side": 1,
       "message": "missing is zero, we don\u0027t require this.",
+      "range": {
+        "startLine": 286,
+        "startChar": 31,
+        "endLine": 286,
+        "endChar": 55
+      },
+      "revId": "d97179c8b640283dd93c2fa99677968202e111af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4ba7302_0c77ef04",
+        "filename": "net/apf/core.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-10-01T01:10:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bdad4abf_58e0a35d",
       "range": {
         "startLine": 286,
         "startChar": 31,

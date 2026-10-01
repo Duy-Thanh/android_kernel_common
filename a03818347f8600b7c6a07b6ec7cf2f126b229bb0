@@ -213,6 +213,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d677ef4_f3906d94",
+        "filename": "include/net/apf.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-10-01T01:10:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "bc115db2_94478a17",
+      "revId": "a03818347f8600b7c6a07b6ec7cf2f126b229bb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf08f2b9_362716e7",
@@ -262,6 +280,24 @@
       "side": 1,
       "message": "As maze said, it\u0027s all one apf_get_info() call into the firmware, the driver\njust forwards it. Splitting would be two reads of the same payload.\n\nAlso only used_ram really changes at runtime - apf_version, total_ram,\noverhead and granularity are compile-time constants in the firmware, chip_id\nis whatever userspace set last. So for now I kept one struct and just grouped\nthe fields into identity / static capabilities / dynamic state.\n\nIf you\u0027d still rather split it, what I\u0027d propose is keeping the single\nfirmware call and splitting only the struct:\n\n    struct apf_caps {        // constant while the chip is powered\n        u32 apf_version;\n        u32 total_ram;\n        u32 overhead;\n        u32 granularity;\n    };\n\n    struct apf_state {       // changes at runtime\n        u32 chip_id;\n        u32 used_ram;\n    };\n\n    int (*get_info)(struct net_device *dev, struct netlink_ext_ack *extack,\n                    struct apf_caps *caps, struct apf_state *state);\n\nwith either pointer allowed to be NULL when the caller only needs one half.\nNetlink can stay a single GET_INFO with the same flat attributes, or we add\nGET_CAPS / GET_STATE on top if you want them queried separately.\n\nLet me know which you prefer.",
       "parentUuid": "25354fc7_2732bd13",
+      "revId": "a03818347f8600b7c6a07b6ec7cf2f126b229bb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f57e826_b6e452a6",
+        "filename": "include/net/apf.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-10-01T01:10:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1d58eda0_6bc9ae2d",
       "revId": "a03818347f8600b7c6a07b6ec7cf2f126b229bb0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
