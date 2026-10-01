@@ -1,0 +1,94 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bb803ac_5bb0bee3",
+        "filename": "net/ipv4/arp.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 807,
+      "author": {
+        "id": 1332974
+      },
+      "writtenOn": "2026-10-01T11:11:59Z",
+      "side": 1,
+      "message": "Nit: arp_process() already declares \u0027bool is_garp \u003d false;\u0027 at function scope (line 716). Redeclaring \u0027bool is_garp\u0027 inside this block shadows the outer variable and triggers a -Wshadow compiler warning under W\u003d1 builds. Consider renaming this local variable (e.g., \u0027is_valid_garp\u0027 or \u0027garp_tha_match\u0027). Also, \u0027in_dev\u0027 on line 806 is already guaranteed non-NULL by line 722.",
+      "isAi": true,
+      "revId": "ab1365c2130d69415aa6a42d151cf2ff6a999cd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da718d74_31e2210d",
+        "filename": "net/ipv4/arp.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 1332974
+      },
+      "writtenOn": "2026-10-01T11:11:59Z",
+      "side": 1,
+      "message": "Nit: net/ipv4/arp.c defines \u0027#define pr_fmt(fmt) KBUILD_MODNAME \": \" fmt\u0027 (\"arp: \") at line 72, so prefixing the format string with \"ARP: \" here and at line 817 produces \"arp: ARP: Drop ...\" in dmesg. Consider dropping the redundant \"ARP: \" prefix (or using net_warn_ratelimited).",
+      "isAi": true,
+      "revId": "ab1365c2130d69415aa6a42d151cf2ff6a999cd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12cac669_e9fb6030",
+        "filename": "net/ipv4/arp.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 823,
+      "author": {
+        "id": 1332974
+      },
+      "writtenOn": "2026-10-01T11:11:59Z",
+      "side": 1,
+      "message": "Nit: Please avoid modifying whitespace on the existing upstream comment block (lines 823-827) to minimize diff noise.",
+      "isAi": true,
+      "revId": "ab1365c2130d69415aa6a42d151cf2ff6a999cd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3db9919_04a6ad11",
+        "filename": "net/ipv4/ip_input.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1332974
+      },
+      "writtenOn": "2026-10-01T11:11:59Z",
+      "side": 1,
+      "message": "net/ipv4/ip_input.c already defines \u0027#define pr_fmt(fmt) \"IPv4: \" fmt\u0027 at line 109, so including \"IPv4: \" in the format string prints a doubled prefix (\"IPv4: IPv4: Drop unicast IP ...\"). Please remove the redundant \"IPv4: \" prefix (and consider net_warn_ratelimited for consistency with line 301).",
+      "isAi": true,
+      "revId": "ab1365c2130d69415aa6a42d151cf2ff6a999cd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "011cb49b_bca5f0ab",
+        "filename": "net/ipv6/ip6_input.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1332974
+      },
+      "writtenOn": "2026-10-01T11:11:59Z",
+      "side": 1,
+      "message": "Nit: This comment duplicates the existing Hole-196 comment right above it (lines 273-276) and can be omitted.",
+      "isAi": true,
+      "revId": "ab1365c2130d69415aa6a42d151cf2ff6a999cd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
