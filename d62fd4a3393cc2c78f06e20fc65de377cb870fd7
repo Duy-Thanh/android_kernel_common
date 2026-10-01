@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f59ab38a_0d9b8654",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2026-10-01T17:18:13Z",
+      "side": 1,
+      "message": "seems wrong that we can hole punch pages that guest owns. is this is a separate bug?",
+      "range": {
+        "startLine": 17,
+        "startChar": 34,
+        "endLine": 18,
+        "endChar": 41
+      },
+      "revId": "d62fd4a3393cc2c78f06e20fc65de377cb870fd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
