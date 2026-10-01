@@ -36,7 +36,6 @@
 #include <linux/net.h>
 #include <linux/socket.h>
 #include <linux/sched/signal.h>
-#include <linux/p3s/mm.h>
 
 #include "internal.h"
 
@@ -1453,8 +1452,6 @@ static ssize_t iter_to_pipe(struct iov_iter *from,
 	};
 	size_t total = 0;
 	ssize_t ret = 0;
-	unsigned long page_size = user_backed_iter(from) ?
-		mm_pte_size(current->mm) : PAGE_SIZE_KERNEL;
 
 	while (iov_iter_count(from)) {
 		struct page *pages[16];
@@ -1468,9 +1465,9 @@ static ssize_t iter_to_pipe(struct iov_iter *from,
 			break;
 		}
 
-		n = DIV_ROUND_UP(left + start, page_size);
+		n = DIV_ROUND_UP(left + start, PAGE_SIZE);
 		for (i = 0; i < n; i++) {
-			int size = min_t(int, left, page_size - start);
+			int size = min_t(int, left, PAGE_SIZE - start);
 
 			buf.page = pages[i];
 			buf.offset = start;

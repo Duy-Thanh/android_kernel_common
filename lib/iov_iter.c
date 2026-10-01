@@ -1049,6 +1049,40 @@ static struct page *first_bvec_segment(const struct iov_iter *i,
 	return page;
 }
 
+/*
+ * A compat PTE may select any 4K slice of a native page.  Fast GUP returns
+ * the native page but not that physical slice, so deriving @start from the
+ * virtual address is not authoritative.  The range GUP interface captures
+ * both under the page-table lock and also bounds this extraction to one
+ * process page.
+ */
+static ssize_t
+iov_iter_extract_compat_page(struct iov_iter *i, struct page ***pages,
+			     unsigned long addr, size_t maxsize,
+			     unsigned int maxpages, unsigned int gup_flags,
+			     size_t *start, bool pin)
+{
+	struct page_span span;
+	long res;
+
+	maxsize = min_t(size_t, maxsize,
+			mm_pte_size(current->mm) -
+			mm_offset_in_page(current->mm, addr));
+	if (!want_user_pages_array(pages, maxsize, 0, maxpages))
+		return -ENOMEM;
+
+	res = pin ? pin_user_pages_range(current->mm, addr, maxsize, 1,
+					 gup_flags, *pages, &span) :
+		    get_user_pages_range(current->mm, addr, maxsize, 1,
+					 gup_flags, *pages, &span);
+	if (res <= 0)
+		return res;
+
+	*start = span.offset;
+	iov_iter_advance(i, span.length);
+	return span.length;
+}
+
 static ssize_t __iov_iter_get_pages_alloc(struct iov_iter *i,
 		   struct page ***pages, size_t maxsize,
 		   unsigned int maxpages, size_t *start)
@@ -1072,6 +1106,10 @@ static ssize_t __iov_iter_get_pages_alloc(struct iov_iter *i,
 			gup_flags |= FOLL_NOFAULT;
 
 		addr = first_iovec_segment(i, &maxsize);
+		if (mm_is_p3s_4k(current->mm))
+			return iov_iter_extract_compat_page(i, pages, addr,
+					maxsize, maxpages, gup_flags, start,
+					false);
 		*start = mm_offset_in_page(current->mm, addr);
 		addr &= mm_pte_mask(current->mm);
 		n = want_user_pages_array(pages, maxsize, *start, maxpages);
@@ -1747,6 +1785,9 @@ static ssize_t iov_iter_extract_user_pages(struct iov_iter *i,
 		gup_flags |= FOLL_NOFAULT;
 
 	addr = first_iovec_segment(i, &maxsize);
+	if (mm_is_p3s_4k(current->mm))
+		return iov_iter_extract_compat_page(i, pages, addr, maxsize,
+					maxpages, gup_flags, offset0, true);
 	*offset0 = offset = mm_offset_in_page(current->mm, addr);
 	addr &= mm_pte_mask(current->mm);
 	maxpages = want_user_pages_array(pages, maxsize, offset, maxpages);
