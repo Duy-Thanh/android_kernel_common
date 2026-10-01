@@ -88,6 +88,30 @@
       },
       "revId": "c1292d54b237b6d5c0c1a16c8be4cd6d298713bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2ff7a77_3dcf5b53",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-01T09:46:29Z",
+      "side": 1,
+      "message": "After more thought, it wouldn\u0027t hurt to add `|| boot_cpu_has(X86_FEATURE_RSB_VMEXIT)` (i.e. allow the more heavyweight mitigation than is actually used by kernel), it seems indeed more consistent and maybe more future-proof.",
+      "parentUuid": "1a7961bf_d5f0a983",
+      "range": {
+        "startLine": 493,
+        "startChar": 21,
+        "endLine": 493,
+        "endChar": 48
+      },
+      "revId": "c1292d54b237b6d5c0c1a16c8be4cd6d298713bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
