@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9054ce92_bb810f72",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 15005,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-10-01T00:53:45Z",
+      "side": 1,
+      "message": "Should we move this KVM_REQ_TRIPLE_FAULT check to the top of if (kvm_request_pending(vcpu)) (or at least before KVM_REQ_EVENT, like in regular KVM\u0027s vcpu_enter_guest())? Since kvm_multiple_exception() also sets KVM_REQ_EVENT, checking KVM_REQ_TRIPLE_FAULT first avoids calling kvm_check_and_inject_events().",
+      "revId": "c26e683f342e877a5eca373a24dfab479f41eed6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
