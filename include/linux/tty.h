@@ -332,6 +332,7 @@ struct tty_file_private {
 	struct tty_struct *tty;
 	struct file *file;
 	struct list_head list;
+	bool pty_opened;
 };
 
 /* tty magic number */
