@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "667bf3b4_cff092cf",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 28
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-10-01T13:27:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dcebb94b_ddcd7464",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 33
+      },
+      "revId": "e0870895e8e1a26e46802f4e2f18817f119918eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f56d04d7_310e9d3d",
@@ -41,6 +65,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ce625e9_5f4e5c8d",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 28
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-10-01T13:27:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f56d04d7_310e9d3d",
+      "revId": "e0870895e8e1a26e46802f4e2f18817f119918eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d6825d36_326b0988",
@@ -54,6 +96,30 @@
       "writtenOn": "2026-10-01T12:26:55Z",
       "side": 1,
       "message": "```suggestion\n    let Some(wrap) \u003d WRAP_FOPS.borrow_private(file) else {\n        return Err(EBADF);\n    };\n\n    f(\u0026wrap)\n```",
+      "range": {
+        "startLine": 735,
+        "startChar": 0,
+        "endLine": 748,
+        "endChar": 12
+      },
+      "revId": "e0870895e8e1a26e46802f4e2f18817f119918eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "442266fb_effd04b3",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 28
+      },
+      "lineNbr": 748,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-10-01T13:27:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6825d36_326b0988",
       "range": {
         "startLine": 735,
         "startChar": 0,
@@ -89,6 +155,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7fcff592_b422f6f9",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 28
+      },
+      "lineNbr": 790,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-10-01T13:27:58Z",
+      "side": 1,
+      "message": "The original code doesn\u0027t. And I guess anything that would free the dma-buf would be a \"modification\" and thus guarded by \"check_modifiable\" which would return false, since we are owned by a device when the guard is released. That said I wonder if we should acquire a referecne on the dmabuf here and release it in \"put_mappable\". @isaacmanjarres@google.com, @surenb@google.com",
+      "parentUuid": "438c5f13_0471c750",
+      "range": {
+        "startLine": 786,
+        "startChar": 0,
+        "endLine": 790,
+        "endChar": 9
+      },
+      "revId": "e0870895e8e1a26e46802f4e2f18817f119918eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3668d65c_8869431c",
         "filename": "drivers/android/wrapfd/wrap.rs",
         "patchSetId": 28
@@ -100,6 +190,30 @@
       "writtenOn": "2026-10-01T12:26:55Z",
       "side": 1,
       "message": "This looks like an unnecessary increment.\n```suggestion\n        // SAFETY: `dev` is verified non-null and points to a valid C `struct device`, and\n        // it\u0027s valid for the duration of this call.\n        let device \u003d unsafe { device::Device::from_raw(dev) };\n```",
+      "range": {
+        "startLine": 822,
+        "startChar": 0,
+        "endLine": 824,
+        "endChar": 64
+      },
+      "revId": "e0870895e8e1a26e46802f4e2f18817f119918eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83abecbf_d0a7e428",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 28
+      },
+      "lineNbr": 824,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-10-01T13:27:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3668d65c_8869431c",
       "range": {
         "startLine": 822,
         "startChar": 0,
