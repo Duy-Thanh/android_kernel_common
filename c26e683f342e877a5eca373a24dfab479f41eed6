@@ -16,6 +16,24 @@
       "message": "Should we move this KVM_REQ_TRIPLE_FAULT check to the top of if (kvm_request_pending(vcpu)) (or at least before KVM_REQ_EVENT, like in regular KVM\u0027s vcpu_enter_guest())? Since kvm_multiple_exception() also sets KVM_REQ_EVENT, checking KVM_REQ_TRIPLE_FAULT first avoids calling kvm_check_and_inject_events().",
       "revId": "c26e683f342e877a5eca373a24dfab479f41eed6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5aa7189_ad14ee59",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 15005,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-01T12:47:32Z",
+      "side": 1,
+      "message": "Good point. We can move it after the TLB flush requests but before KVM_REQ_APICV_UPDATE, like in KVM\u0027s vcpu_enter_guest(). (I\u0027m not sure it\u0027s actually necessary to flush TLB before a triple fault, but shouldn\u0027t hurt.)",
+      "parentUuid": "9054ce92_bb810f72",
+      "revId": "c26e683f342e877a5eca373a24dfab479f41eed6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
