@@ -122,6 +122,30 @@
       },
       "revId": "4aa7b4c748a9351b996770e7887930522ec19da6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d00d379_6eeaab14",
+        "filename": "arch/arm64/include/asm/mmu.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-10-01T18:34:59Z",
+      "side": 1,
+      "message": "You misunderstood my suggestion. I suggest having a helper that simply returns `mm-\u003econtext.pte_shift` and replace all direct accesses to `mm-\u003econtext.pte_shift` with that helper so that we can change the placement of that field later on with minimal changes.",
+      "parentUuid": "5d1745da_0241da14",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 6
+      },
+      "revId": "4aa7b4c748a9351b996770e7887930522ec19da6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
