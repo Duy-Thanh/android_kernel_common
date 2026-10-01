@@ -22,6 +22,30 @@
       },
       "revId": "0bfc07147eba191f813220fc5fd9bfcc40e5ee05",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2697dac2_da2e7b8b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-10-01T18:55:27Z",
+      "side": 1,
+      "message": "They get selected by other configs e.g. [here](https://cs.android.com/android/kernel/superproject/+/common-android16-6.12:common/arch/arm64/Kconfig;l\u003d142;drc\u003df3f51bca75308f3af25f37ffa9a65726ab93bae7), hence the later check (from the common_kernel macro) fails if it\u0027s not the minimised version.\n\nNote: They end up in the final `.config`, so this is no-op.",
+      "parentUuid": "af76cc86_821bb0f9",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 0
+      },
+      "revId": "0bfc07147eba191f813220fc5fd9bfcc40e5ee05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
