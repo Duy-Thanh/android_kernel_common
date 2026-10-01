@@ -24,17 +24,27 @@
 
 #define MAX_VCPU_NAME 20 /* gh-vcpu:strlen(U32::MAX)+NUL */
 
+/* VCPU is sleeping until an interrupt arrives or timeout expires */
+#define GUNYAH_VCPU_STATE_EXPECTS_WAKEUP_OR_TIMEOUT	8
+
+struct gunyah_vcpu_priv {
+	struct gunyah_vcpu vcpu;
+	struct hrtimer wakeup_timer;
+};
+
 static void vcpu_release(struct kref *kref)
 {
 	struct gunyah_vcpu *vcpu = container_of(kref, struct gunyah_vcpu, kref);
+	struct gunyah_vcpu_priv *priv =
+		container_of(vcpu, struct gunyah_vcpu_priv, vcpu);
 
 	free_page((unsigned long)vcpu->vcpu_run);
-	kfree(vcpu);
+	kfree(priv);
 }
 
 /**
  * gunyah_vcpu_wakeup_timer_fn() - hrtimer callback for EXPECTS_WAKEUP_OR_TIMEOUT
- * @timer: Pointer to the hrtimer embedded in the vCPU struct
+ * @timer: Pointer to the hrtimer embedded in the vCPU's private wrapper struct
  *
  * Called when the absolute timeout provided by the hypervisor in
  * GUNYAH_VCPU_STATE_EXPECTS_WAKEUP_OR_TIMEOUT has expired. Signals @vcpu->ready
@@ -46,8 +56,9 @@ static void vcpu_release(struct kref *kref)
  */
 static enum hrtimer_restart gunyah_vcpu_wakeup_timer_fn(struct hrtimer *timer)
 {
-	struct gunyah_vcpu *vcpu =
-		container_of(timer, struct gunyah_vcpu, wakeup_timer);
+	struct gunyah_vcpu_priv *priv =
+		container_of(timer, struct gunyah_vcpu_priv, wakeup_timer);
+	struct gunyah_vcpu *vcpu = &priv->vcpu;
 
 	trace_gh_vcpu_timer_fired(vcpu->ghvm->vmid, vcpu->ticket.label);
 	complete(&vcpu->ready);
@@ -231,6 +242,8 @@ static inline void gh_guest_accounting_exit(void) { }
  */
 static int gunyah_vcpu_run(struct gunyah_vcpu *vcpu)
 {
+	struct gunyah_vcpu_priv *priv =
+		container_of(vcpu, struct gunyah_vcpu_priv, vcpu);
 	struct gunyah_hypercall_vcpu_run_resp vcpu_run_resp;
 	unsigned long resume_data[3] = { 0 };
 	enum gunyah_error gunyah_error;
@@ -300,7 +313,7 @@ static int gunyah_vcpu_run(struct gunyah_vcpu *vcpu)
 
 		if (gunyah_error == GUNYAH_ERROR_OK) {
 			memset(resume_data, 0, sizeof(resume_data));
-			switch (vcpu_run_resp.state) {
+			switch (vcpu_run_resp.sized_state) {
 			case GUNYAH_VCPU_STATE_READY:
 				if (need_resched())
 					schedule();
@@ -364,11 +377,11 @@ static int gunyah_vcpu_run(struct gunyah_vcpu *vcpu)
 					ktime_to_ns(ktime_sub(expires, ktime_get())),
 					ktime_to_ns(expires));
 
-				hrtimer_start(&vcpu->wakeup_timer, expires,
+				hrtimer_start(&priv->wakeup_timer, expires,
 					      HRTIMER_MODE_ABS);
 				ret = wait_for_completion_interruptible(&vcpu->ready);
 				/* no-op if the timer already fired */
-				timer_was_active = hrtimer_cancel(&vcpu->wakeup_timer);
+				timer_was_active = hrtimer_cancel(&priv->wakeup_timer);
 				/*
 				 * Reinitialize before the next hypercall so a VIRQ
 				 * arriving between now and re-entry is not lost
@@ -519,9 +532,11 @@ static void gunyah_vcpu_unpopulate(struct gunyah_vm_resource_ticket *ticket,
 {
 	struct gunyah_vcpu *vcpu =
 		container_of(ticket, struct gunyah_vcpu, ticket);
+	struct gunyah_vcpu_priv *priv =
+		container_of(vcpu, struct gunyah_vcpu_priv, vcpu);
 
 	vcpu->vcpu_run->immediate_exit = true;
-	hrtimer_cancel(&vcpu->wakeup_timer);
+	hrtimer_cancel(&priv->wakeup_timer);
 	complete_all(&vcpu->ready);
 	mutex_lock(&vcpu->run_lock);
 	free_irq(vcpu->rsc->irq, vcpu);
@@ -532,6 +547,7 @@ static void gunyah_vcpu_unpopulate(struct gunyah_vm_resource_ticket *ticket,
 static long gunyah_vcpu_bind(struct gunyah_vm_function_instance *f)
 {
 	struct gunyah_fn_vcpu_arg *arg = f->argp;
+	struct gunyah_vcpu_priv *priv;
 	struct gunyah_vcpu *vcpu;
 	char name[MAX_VCPU_NAME];
 	struct file *file;
@@ -542,17 +558,18 @@ static long gunyah_vcpu_bind(struct gunyah_vm_function_instance *f)
 	if (f->arg_size != sizeof(*arg))
 		return -EINVAL;
 
-	vcpu = kzalloc(sizeof(*vcpu), GFP_KERNEL);
-	if (!vcpu)
+	priv = kzalloc(sizeof(*priv), GFP_KERNEL);
+	if (!priv)
 		return -ENOMEM;
+	vcpu = &priv->vcpu;
 
 	vcpu->f = f;
 	f->data = vcpu;
 	mutex_init(&vcpu->run_lock);
 	kref_init(&vcpu->kref);
 	init_completion(&vcpu->ready);
-	hrtimer_init(&vcpu->wakeup_timer, CLOCK_MONOTONIC, HRTIMER_MODE_ABS);
-	vcpu->wakeup_timer.function = gunyah_vcpu_wakeup_timer_fn;
+	hrtimer_init(&priv->wakeup_timer, CLOCK_MONOTONIC, HRTIMER_MODE_ABS);
+	priv->wakeup_timer.function = gunyah_vcpu_wakeup_timer_fn;
 
 	page = alloc_page(GFP_KERNEL | __GFP_ZERO);
 	if (!page) {
@@ -616,7 +633,7 @@ err_remove_resource_ticket:
 err_destroy_page:
 	free_page((unsigned long)vcpu->vcpu_run);
 err_destroy_vcpu:
-	kfree(vcpu);
+	kfree(priv);
 	return r;
 }
 
