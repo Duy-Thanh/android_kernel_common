@@ -87,6 +87,24 @@
       "message": "I was wondering if there are more events that we don\u0027t check in pKVM and may lead to live lock? If we don\u0027t process it in here, we would return 1 in this function and then live locks in the for loop in `pkvm_vcpu_enter_guest`:\n```\n»       for (;;) {\n»       »       ret \u003d __pkvm_vcpu_enter_guest(vcpu, force_immediate_exit);\n»       »       if (ret \u003c\u003d 0) \n»       »       »       break;\n»       }\n```\n\nIf there might be more events, would it be better to check it here (if any WARN_ON(unexpected events), then handle it accordingly)?",
       "revId": "a944ee0243c8a94907a9dcb8b362f9e279de1731",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aaf56068_9b00ac46",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 14996,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-01T18:03:20Z",
+      "side": 1,
+      "message": "Seems like an interesting idea...\n\nUnfortunately that would look a bit ugly, something like:\n\n```\n--- a/arch/x86/kvm/x86.c\n+++ b/arch/x86/kvm/x86.c\n@@ -14935,6 +14935,8 @@ static int __pkvm_vcpu_enter_guest(struct kvm_vcpu *vcpu, bool force_immediate_e\n        int ret;\n \n        if (kvm_request_pending(vcpu)) {\n+               u64 reqs;\n+\n                if (kvm_check_request(KVM_REQ_TLB_FLUSH, vcpu))\n                        kvm_vcpu_flush_tlb_all(vcpu);\n \n@@ -14952,6 +14954,13 @@ static int __pkvm_vcpu_enter_guest(struct kvm_vcpu *vcpu, bool force_immediate_e\n \n                if (kvm_check_request(KVM_REQ_RECALC_INTERCEPTS, vcpu))\n                        kvm_x86_call(recalc_intercepts)(vcpu);\n+\n+               reqs \u003d READ_ONCE(vcpu-\u003erequests);\n+               if (reqs \u0026 ~(KVM_REQ_TLB_FLUSH | KVM_REQ_TLB_FLUSH_CURRENT |\n+                            KVM_REQ_TLB_FLUSH_GUEST | KVM_REQ_TRIPLE_FAULT |\n+                            KVM_REQ_APICV_UPDATE | KVM_REQ_EVENT |\n+                            KVM_REQ_RECALC_INTERCEPTS))\n+                       return -EIO;\n        }\n \n        kvm_x86_call(prepare_switch_to_guest)(vcpu);\n```",
+      "parentUuid": "490de7da_e38cd9a2",
+      "revId": "a944ee0243c8a94907a9dcb8b362f9e279de1731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
