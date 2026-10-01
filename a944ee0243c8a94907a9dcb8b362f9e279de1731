@@ -105,6 +105,24 @@
       "parentUuid": "490de7da_e38cd9a2",
       "revId": "a944ee0243c8a94907a9dcb8b362f9e279de1731",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b763bae2_df9ea294",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 14996,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-01T18:04:55Z",
+      "side": 1,
+      "message": "\u003e ```\n\u003e +               if (reqs \u0026 ~(KVM_REQ_TLB_FLUSH | KVM_REQ_TLB_FLUSH_CURRENT |\n\u003e ```\n\nI meant `if (WARN_ON(reqs \u0026 ...`",
+      "parentUuid": "aaf56068_9b00ac46",
+      "revId": "a944ee0243c8a94907a9dcb8b362f9e279de1731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
