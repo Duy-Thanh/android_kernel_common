@@ -74,6 +74,30 @@
       },
       "revId": "4aa7b4c748a9351b996770e7887930522ec19da6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b3745ce_02071243",
+        "filename": "arch/arm64/include/asm/mmu.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-10-01T18:11:32Z",
+      "side": 1,
+      "message": "I wasn\u0027t concenrned about pointed dereference. Placing it in the first cacheline might still be beneficial for performance if the fields is accessed very frequently. That also depends on which other fields it\u0027s usually used with. Having them grouped would maximize cache hits.\nI think having a wrapper like I suggested might save yous some grief later on.",
+      "parentUuid": "2064c095_3701fc97",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 6
+      },
+      "revId": "4aa7b4c748a9351b996770e7887930522ec19da6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
