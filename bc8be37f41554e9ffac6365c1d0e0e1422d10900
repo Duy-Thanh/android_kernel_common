@@ -99,6 +99,24 @@
       "parentUuid": "ad2eef96_877d7ce9",
       "revId": "bc8be37f41554e9ffac6365c1d0e0e1422d10900",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "259a4315_ec17bca8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4966542
+      },
+      "writtenOn": "2026-10-01T03:41:56Z",
+      "side": 1,
+      "message": "Thanks, understood.\n\nI filed a separate bug to document the Samsung request and requirements for these dm-verity vendor hooks:\n\nBug: \u003c568107934\u003e\nhttps://partnerissuetracker.corp.google.com/issues/568107934\nI also attached the Samsung-side implementation (dm-verity-debug.c, dm-verity-debug.h, and alta_bigdata.c) there for review.",
+      "parentUuid": "3a4356a9_2791184f",
+      "revId": "bc8be37f41554e9ffac6365c1d0e0e1422d10900",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
