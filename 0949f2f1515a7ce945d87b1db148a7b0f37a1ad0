@@ -34,6 +34,24 @@
       "parentUuid": "2cf351d8_811daf20",
       "revId": "0949f2f1515a7ce945d87b1db148a7b0f37a1ad0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82407612_573cd19d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3386406
+      },
+      "writtenOn": "2026-10-02T22:15:46Z",
+      "side": 1,
+      "message": "I\u0027ve dropped the tegra stuff from the change.\nThe functional change here is actually in the if condition, where\n```\n!of_property_read_string(ep, \"link-name\", \u0026dai_link-\u003ename\n```\nreads a property into this variable, which is then further passed into the vendor specfic audio graph card file where it\u0027s used. The debug print is just dbg info regarding that property of interest\n\nIn the meantime I\u0027ll look into if we can do this using vendor hooks",
+      "parentUuid": "a490224b_045fd8ea",
+      "revId": "0949f2f1515a7ce945d87b1db148a7b0f37a1ad0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
