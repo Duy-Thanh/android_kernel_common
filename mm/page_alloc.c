@@ -2045,13 +2045,25 @@ static inline bool should_skip_init(gfp_t flags)
 inline void post_alloc_hook(struct page *page, unsigned int order,
 				gfp_t gfp_flags)
 {
+<<<<<<< HEAD   (d202b97297c3520cf82bfadcd9141b5360ab69cd Merge 0638bf16b7a7 ("sched/deadline: Fix missing ENQUEUE_REP)
 	int i;
 	bool zero_tags;
+||||||| BASE   (0638bf16b7a73a2fe63624bd0d16d9fd904805c3 sched/deadline: Fix missing ENQUEUE_REPLENISH during PI de-b)
+=======
+	const bool zero_tags = gfp_flags & __GFP_ZEROTAGS;
+>>>>>>> BRANCH (ffb6dbb49c96be82f07c7b112e3ebc3e6fdd8dd5 net: wwan: iosm: fix potential memory leaks in ipc_imem_init)
 	bool init = !want_init_on_free() && want_init_on_alloc(gfp_flags) &&
 			!should_skip_init(gfp_flags);
+<<<<<<< HEAD   (d202b97297c3520cf82bfadcd9141b5360ab69cd Merge 0638bf16b7a7 ("sched/deadline: Fix missing ENQUEUE_REP)
 
 	trace_android_vh_post_alloc_hook(page, order, &init);
 	zero_tags = init && (gfp_flags & __GFP_ZEROTAGS);
+||||||| BASE   (0638bf16b7a73a2fe63624bd0d16d9fd904805c3 sched/deadline: Fix missing ENQUEUE_REPLENISH during PI de-b)
+	bool zero_tags = init && (gfp_flags & __GFP_ZEROTAGS);
+	int i;
+=======
+	int i;
+>>>>>>> BRANCH (ffb6dbb49c96be82f07c7b112e3ebc3e6fdd8dd5 net: wwan: iosm: fix potential memory leaks in ipc_imem_init)
 
 	set_page_private(page, 0);
 
@@ -2072,11 +2084,11 @@ inline void post_alloc_hook(struct page *page, unsigned int order,
 	 */
 
 	/*
-	 * If memory tags should be zeroed
-	 * (which happens only when memory should be initialized as well).
+	 * Clearing tags can efficiently clear the memory for us as well, if
+	 * required.
 	 */
 	if (zero_tags)
-		init = !tag_clear_highpages(page, 1 << order);
+		init = tag_clear_highpages(page, 1 << order, /* clear_pages= */init);
 
 	if (!should_skip_kasan_unpoison(gfp_flags) &&
 	    kasan_unpoison_pages(page, order, init)) {
