@@ -749,6 +749,20 @@ static struct dma_pte *pfn_to_dma_pte(struct dmar_domain *domain,
 		/* Address beyond IOMMU's addressing capabilities. */
 		return ERR_PTR(-EINVAL);
 
+	if (likely(*target_level <= 1 && (pfn >> 15) < 0xfff)) {
+		unsigned int slot = (pfn >> LEVEL_STRIDE) & 63;
+		unsigned long tag = (pfn >> (LEVEL_STRIDE + 6)) + 1;
+		unsigned long entry = READ_ONCE(domain->leaf_cache[slot]);
+
+		if (likely((entry & 0xfffUL) == tag)) {
+			struct dma_pte *leaf = (struct dma_pte *)(entry & ~0xfffUL);
+
+			if (!*target_level)
+				*target_level = 1;
+			return &leaf[pfn & LEVEL_MASK];
+		}
+	}
+
 	parent = domain->pgd;
 
 	while (1) {
@@ -807,6 +821,15 @@ static struct dma_pte *pfn_to_dma_pte(struct dmar_domain *domain,
 
 		parent = phys_to_virt(dma_pte_addr(pte));
 		level--;
+	}
+
+	if (level == 1 && (pfn >> 15) < 0xfff) {
+		unsigned int slot = (pfn >> LEVEL_STRIDE) & 63;
+		unsigned long entry = (unsigned long)parent |
+				      ((pfn >> (LEVEL_STRIDE + 6)) + 1);
+
+		if (READ_ONCE(domain->leaf_cache[slot]) != entry)
+			WRITE_ONCE(domain->leaf_cache[slot], entry);
 	}
 
 	if (!*target_level)
@@ -935,6 +958,7 @@ static void dma_pte_free_pagetable(struct dmar_domain *domain,
 				   unsigned long last_pfn,
 				   int retain_level)
 {
+	dmar_domain_clear_leaf_cache(domain);
 	dma_pte_clear_range(domain, start_pfn, last_pfn);
 
 	/* We don't need lock here; nobody else touches the iova range */
@@ -954,6 +978,8 @@ static void dma_pte_list_pagetables(struct dmar_domain *domain,
 				    struct iommu_pages_list *freelist)
 {
 	struct dma_pte *pte = phys_to_virt(dma_pte_addr(parent_pte));
+
+	dmar_domain_clear_leaf_cache(domain);
 
 	iommu_pages_list_add(freelist, pte);
 
@@ -1906,7 +1932,8 @@ int domain_map(struct dmar_domain *domain, unsigned long iov_pfn,
 	}
 
 #ifndef __PKVM_HYP__
-	domain->has_mappings = true;
+	if (unlikely(!domain->has_mappings))
+		domain->has_mappings = true;
 #endif
 
 	pteval = ((phys_addr_t)phys_pfn << VTD_PAGE_SHIFT) | attr;
@@ -1915,8 +1942,9 @@ int domain_map(struct dmar_domain *domain, unsigned long iov_pfn,
 		uint64_t tmp;
 
 		if (!pte) {
-			largepage_lvl = hardware_largepage_caps(domain, iov_pfn,
-					phys_pfn, nr_pages);
+			largepage_lvl = (nr_pages == 1) ? 1 :
+				hardware_largepage_caps(domain, iov_pfn,
+							phys_pfn, nr_pages);
 
 			pte = pfn_to_dma_pte(domain, iov_pfn, &largepage_lvl,
 					     gfp);

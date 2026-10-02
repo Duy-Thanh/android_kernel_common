@@ -657,6 +657,7 @@ struct qi_batch {
 };
 
 struct dmar_domain {
+	unsigned long	leaf_cache[64];	/* Direct-mapped L1 leaf page table cache */
 #ifndef __PKVM_HYP__
 	int	nid;			/* node id */
 	struct xarray iommu_array;	/* Attached IOMMU array */
@@ -1016,6 +1017,16 @@ static inline void domain_flush_cache(struct dmar_domain *domain,
 		for (; p < vend; p += cl_size)
 			asm volatile("clwb %0" : "+m" (*p));
 		wmb();
+	}
+}
+
+static inline void dmar_domain_clear_leaf_cache(struct dmar_domain *domain)
+{
+	int i;
+
+	for (i = 0; i < ARRAY_SIZE(domain->leaf_cache); i++) {
+		if (READ_ONCE(domain->leaf_cache[i]))
+			WRITE_ONCE(domain->leaf_cache[i], 0);
 	}
 }
 
