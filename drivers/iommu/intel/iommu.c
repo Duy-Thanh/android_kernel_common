@@ -1044,17 +1044,29 @@ static void dma_unuse_pte(struct dmar_domain *domain,
 			  int level, struct dma_pte *pte)
 {
 	void *pte_addr = phys_to_virt(dma_pte_addr(pte));
+	unsigned long unuse_start = 0, unuse_size = 0;
 
 	/* First PTE in the page */
 	pte = (struct dma_pte *)pte_addr;
 	if (level == 1) {
 		do {
 			if (dma_pte_mapped(pte)) {
-				pkvm_host_unuse_dma(dma_pte_addr(pte), VTD_PAGE_SIZE);
+				unsigned long phys = dma_pte_addr(pte);
+
+				if (unuse_size && phys == unuse_start + unuse_size) {
+					unuse_size += VTD_PAGE_SIZE;
+				} else {
+					if (unuse_size)
+						pkvm_host_unuse_dma(unuse_start, unuse_size);
+					unuse_start = phys;
+					unuse_size = VTD_PAGE_SIZE;
+				}
 				dma_clear_pte(pte);
 			}
 			pte++;
 		} while (!first_pte_in_page(pte));
+		if (unuse_size)
+			pkvm_host_unuse_dma(unuse_start, unuse_size);
 	} else {
 		do {
 			if (dma_pte_mapped(pte)) {
@@ -1082,6 +1094,7 @@ static void dma_unuse_range(struct dmar_domain *domain, int level,
 			    unsigned long start_pfn, unsigned long last_pfn)
 {
 	struct dma_pte *first_pte = NULL, *last_pte = NULL;
+	unsigned long unuse_start = 0, unuse_size = 0;
 
 	pfn = max(start_pfn, pfn);
 	pte = &pte[pfn_level_offset(pfn, level)];
@@ -1094,11 +1107,25 @@ static void dma_unuse_range(struct dmar_domain *domain, int level,
 
 		if (start_pfn <= level_pfn &&
 		    last_pfn >= level_pfn + level_size(level) - 1) {
-			if (level > 1 && !dma_pte_superpage(pte))
+			if (level > 1 && !dma_pte_superpage(pte)) {
+				if (unuse_size) {
+					pkvm_host_unuse_dma(unuse_start, unuse_size);
+					unuse_size = 0;
+				}
 				dma_unuse_pte(domain, level - 1, pte);
-			else
-				pkvm_host_unuse_dma(dma_pte_addr(pte),
-						    level_size(level) * VTD_PAGE_SIZE);
+			} else {
+				unsigned long phys = dma_pte_addr(pte);
+				unsigned long sz = level_size(level) * VTD_PAGE_SIZE;
+
+				if (unuse_size && phys == unuse_start + unuse_size) {
+					unuse_size += sz;
+				} else {
+					if (unuse_size)
+						pkvm_host_unuse_dma(unuse_start, unuse_size);
+					unuse_start = phys;
+					unuse_size = sz;
+				}
+			}
 
 			dma_clear_pte(pte);
 			if (!first_pte)
@@ -1108,6 +1135,10 @@ static void dma_unuse_range(struct dmar_domain *domain, int level,
 			if (WARN_ON_ONCE(dma_pte_superpage(pte)))
 				goto next;
 
+			if (unuse_size) {
+				pkvm_host_unuse_dma(unuse_start, unuse_size);
+				unuse_size = 0;
+			}
 			dma_unuse_range(domain, level - 1,
 					phys_to_virt(dma_pte_addr(pte)),
 					level_pfn, start_pfn, last_pfn);
@@ -1115,6 +1146,9 @@ static void dma_unuse_range(struct dmar_domain *domain, int level,
 next:
 		pfn = level_pfn + level_size(level);
 	} while (!first_pte_in_page(++pte) && pfn <= last_pfn);
+
+	if (unuse_size)
+		pkvm_host_unuse_dma(unuse_start, unuse_size);
 
 	if (first_pte)
 		domain_flush_cache(domain, first_pte,
