@@ -70,7 +70,7 @@ void unmap_page_range(struct mmu_gather *tlb,
 			     struct zap_details *details);
 
 void do_page_cache_ra(struct readahead_control *, unsigned long nr_to_read,
-		unsigned long lookahead_size);
+		unsigned long lookahead_size, bool forced);
 void force_page_cache_ra(struct readahead_control *, unsigned long nr);
 static inline void force_page_cache_readahead(struct address_space *mapping,
 		struct file *file, pgoff_t index, unsigned long nr_to_read)
