@@ -16,6 +16,23 @@
       "message": "The ABI change here is unrelated and will make this change un-cherrypickable. Please split this.",
       "revId": "3364008ee7b212dc02ca8bd49a1e556b8a4a778d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf1e4d7a_581003db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-10-02T17:19:33Z",
+      "side": 1,
+      "message": "Also, it should be up to Microdroid whether they want MODVERSIONS. We could use this as an experiment towards CRCless ABIs. I am mostly joking. But it\u0027s worth trying to drop the `module_layout` symbol instead.",
+      "revId": "3364008ee7b212dc02ca8bd49a1e556b8a4a778d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
