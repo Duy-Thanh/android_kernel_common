@@ -19,6 +19,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3155f15e_68f7b9e6",
+        "filename": "net/ipv4/arp.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 807,
+      "author": {
+        "id": 1898675
+      },
+      "writtenOn": "2026-10-02T01:58:17Z",
+      "side": 1,
+      "message": "Thanks Roger! Renamed local variable to is_valid_garp to avoid shadowing the outer variable, and removed the redundant in_dev check since line 722 already guarantees it is non-NULL. Updated.",
+      "parentUuid": "1bb803ac_5bb0bee3",
+      "revId": "ab1365c2130d69415aa6a42d151cf2ff6a999cd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da718d74_31e2210d",
@@ -33,6 +51,24 @@
       "side": 1,
       "message": "Nit: net/ipv4/arp.c defines \u0027#define pr_fmt(fmt) KBUILD_MODNAME \": \" fmt\u0027 (\"arp: \") at line 72, so prefixing the format string with \"ARP: \" here and at line 817 produces \"arp: ARP: Drop ...\" in dmesg. Consider dropping the redundant \"ARP: \" prefix (or using net_warn_ratelimited).",
       "isAi": true,
+      "revId": "ab1365c2130d69415aa6a42d151cf2ff6a999cd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8eb89a4c_81816d39",
+        "filename": "net/ipv4/arp.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 1898675
+      },
+      "writtenOn": "2026-10-02T01:58:17Z",
+      "side": 1,
+      "message": "Switched to net_warn_ratelimited and dropped the redundant \"ARP: \" prefix so it cleanly relies on pr_fmt. Updated.",
+      "parentUuid": "da718d74_31e2210d",
       "revId": "ab1365c2130d69415aa6a42d151cf2ff6a999cd7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -55,6 +91,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2aa808e1_af350f72",
+        "filename": "net/ipv4/arp.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 823,
+      "author": {
+        "id": 1898675
+      },
+      "writtenOn": "2026-10-02T01:58:17Z",
+      "side": 1,
+      "message": "Restored original whitespace on the upstream comment block to minimize diff noise. Done.",
+      "parentUuid": "12cac669_e9fb6030",
+      "revId": "ab1365c2130d69415aa6a42d151cf2ff6a999cd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c3db9919_04a6ad11",
@@ -73,6 +127,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b83f1a8a_eae490d4",
+        "filename": "net/ipv4/ip_input.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1898675
+      },
+      "writtenOn": "2026-10-02T01:58:17Z",
+      "side": 1,
+      "message": "Thanks Roger! Switched to net_warn_ratelimited and removed the redundant \"IPv4: \" prefix. Updated.",
+      "parentUuid": "c3db9919_04a6ad11",
+      "revId": "ab1365c2130d69415aa6a42d151cf2ff6a999cd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "011cb49b_bca5f0ab",
@@ -87,6 +159,24 @@
       "side": 1,
       "message": "Nit: This comment duplicates the existing Hole-196 comment right above it (lines 273-276) and can be omitted.",
       "isAi": true,
+      "revId": "ab1365c2130d69415aa6a42d151cf2ff6a999cd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "300db287_fdc218a0",
+        "filename": "net/ipv6/ip6_input.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1898675
+      },
+      "writtenOn": "2026-10-02T01:58:17Z",
+      "side": 1,
+      "message": "Removed duplicate comment block. Done.",
+      "parentUuid": "011cb49b_bca5f0ab",
       "revId": "ab1365c2130d69415aa6a42d151cf2ff6a999cd7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
