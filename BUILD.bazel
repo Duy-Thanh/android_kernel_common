@@ -531,7 +531,9 @@ common_kernel(
     arch = "arm64",
     build_gki_artifacts = False,
     defconfig = "arch/arm64/configs/microdroid_defconfig",
+    kmi_enforced = True,
     kmi_symbol_list = "microdroid/aarch64/symbols/base",
+    kmi_symbol_list_strict_mode = True,
     make_goals = [
         "Image",
         "modules",
@@ -543,10 +545,6 @@ common_kernel(
     ],
     protected_module_names_list = ":microdroid_aarch64_protected_module_names",
     trim_nonlisted_kmi = True,
-
-    # Usually, for ABI monitoring to be fully turned on, you should set:
-    #   `kmi_symbol_list_strict_mode` to True
-    #   `kmi_enforced` to True
 )
 
 write_file(
