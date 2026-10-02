@@ -1516,22 +1516,26 @@ restart:
 	 */
 	dmar_writel(iommu, DMAR_IQT_REG, qi->free_head << shift);
 
-	while (READ_ONCE(qi->desc_status[wait_index]) != QI_DONE) {
-		/*
-		 * We will leave the interrupts disabled, to prevent interrupt
-		 * context to queue another cmd while a cmd is already submitted
-		 * and waiting for completion on this cpu. This is to avoid
-		 * a deadlock where the interrupt context can wait indefinitely
-		 * for free slots in the queue.
-		 */
-		rc = qi_check_fault(iommu, index, wait_index);
-		if (rc)
-			break;
+	if (READ_ONCE(qi->desc_status[wait_index]) != QI_DONE) {
+		unsigned int spins = 0;
 
 		raw_spin_unlock(&qi->q_lock);
-		cpu_relax();
+		while (READ_ONCE(qi->desc_status[wait_index]) != QI_DONE) {
+			cpu_relax();
+			if (unlikely(++spins == 256)) {
+				spins = 0;
+				raw_spin_lock(&qi->q_lock);
+				if (READ_ONCE(qi->desc_status[wait_index]) == QI_DONE)
+					goto out_reclaim;
+				rc = qi_check_fault(iommu, index, wait_index);
+				if (rc)
+					goto out_reclaim;
+				raw_spin_unlock(&qi->q_lock);
+			}
+		}
 		raw_spin_lock(&qi->q_lock);
 	}
+out_reclaim:
 
 	/*
 	 * The reclaim code can free descriptors from multiple submissions
