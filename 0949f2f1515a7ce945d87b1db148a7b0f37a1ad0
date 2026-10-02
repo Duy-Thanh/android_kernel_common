@@ -16,6 +16,24 @@
       "message": "Hey John, any chance we can get review on this android specific patch that we\u0027d pushed?\nI can remove all the tegra specific logic out of it to our vendor kernel instead. It\u0027s really just the small change to audio-graph-card.c that we\u0027re interested in getting merged.",
       "revId": "0949f2f1515a7ce945d87b1db148a7b0f37a1ad0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a490224b_045fd8ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-10-02T19:51:01Z",
+      "side": 1,
+      "message": "So yeah, please drop the tegra specific logic to keep in your vendor driver.\nHaving extra stuff here is difficult to review and keep track of what is GKI and what is vendor driver.\n\nI might suggest if its just the audio-graph-card.c changes (which isn\u0027t obvious it does much other then print a debug message?) that are important, those look like they can potentially be done via a vendorhook?",
+      "parentUuid": "2cf351d8_811daf20",
+      "revId": "0949f2f1515a7ce945d87b1db148a7b0f37a1ad0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
