@@ -1006,8 +1006,8 @@ static inline void __iommu_flush_cache(
 		clflush_cache_range(addr, size);
 }
 
-static inline void domain_flush_cache(struct dmar_domain *domain,
-			       void *addr, int size)
+static inline void domain_flush_cache_nowmb(struct dmar_domain *domain,
+					    void *addr, int size)
 {
 	if (!domain->iommu_coherency) {
 		const unsigned long cl_size = 64;
@@ -1016,6 +1016,14 @@ static inline void domain_flush_cache(struct dmar_domain *domain,
 
 		for (; p < vend; p += cl_size)
 			asm volatile("clwb %0" : "+m" (*p));
+	}
+}
+
+static inline void domain_flush_cache(struct dmar_domain *domain,
+			       void *addr, int size)
+{
+	if (!domain->iommu_coherency) {
+		domain_flush_cache_nowmb(domain, addr, size);
 		wmb();
 	}
 }
