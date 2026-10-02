@@ -1018,8 +1018,16 @@ static inline void __iommu_flush_cache(
 static inline void domain_flush_cache(struct dmar_domain *domain,
 			       void *addr, int size)
 {
-	if (!domain->iommu_coherency)
-		clflush_cache_range(addr, size);
+	if (!domain->iommu_coherency) {
+		const unsigned long cl_size = 64;
+		char *p = (char *)((unsigned long)addr & ~(cl_size - 1));
+		char *vend = (char *)addr + size;
+
+		for (; p < vend; p += cl_size)
+			clwb(p);
+		/* clwb is weakly ordered: complete write-backs before the IOMMU walks. */
+		wmb();
+	}
 }
 
 #ifndef __PKVM_HYP__
