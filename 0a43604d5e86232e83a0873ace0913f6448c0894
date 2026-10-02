@@ -33,6 +33,24 @@
       "message": "Why is this not submitted upstream first?",
       "revId": "0a43604d5e86232e83a0873ace0913f6448c0894",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f243c35e_b2ad74d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1898675
+      },
+      "writtenOn": "2026-10-02T08:31:43Z",
+      "side": 1,
+      "message": "Hi Greg,\nThis addresses a security issue (b/448878939\n / Hole-196 bypass) for Android devices. We are submitting this upstream to netdev@vger.kernel.org concurrently, and will track the upstream merge. We would like to have this reviewed in ACK in parallel to meet the security release timeline if possible.",
+      "parentUuid": "788182cf_c22f8338",
+      "revId": "0a43604d5e86232e83a0873ace0913f6448c0894",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
