@@ -1017,10 +1017,19 @@ static struct task_struct *dup_task_struct(struct task_struct *orig, int node)
 	tsk->mm_cid.active = 0;
 	INIT_HLIST_NODE(&tsk->mm_cid.node);
 #endif
+<<<<<<< HEAD   (cd23db4eaf0488273c779a9e9cd602a6f6c0b213 Merge 826eec5b5efd ("Merge tag 'vfio-v7.2-rc2' of https://gi)
 	android_init_vendor_data(tsk, 1);
 	android_init_oem_data(tsk, 1);
 
 	trace_android_vh_dup_task_struct(tsk, orig);
+||||||| BASE   (826eec5b5efd785dc87638a54d5ecc9f88e5afce Merge tag 'vfio-v7.2-rc2' of https://github.com/awilliam/lin)
+=======
+
+#ifdef CONFIG_BPF_SYSCALL
+	RCU_INIT_POINTER(tsk->bpf_storage, NULL);
+	tsk->bpf_ctx = NULL;
+#endif
+>>>>>>> BRANCH (51512e22efe813d8223de27f6fd02a8a48ea2323 Merge tag 'bpf-fixes' of git://git.kernel.org/pub/scm/linux/)
 	return tsk;
 
 free_stack:
@@ -2261,10 +2270,6 @@ __latent_entropy struct task_struct *copy_process(
 #ifdef CONFIG_BCACHE
 	p->sequential_io	= 0;
 	p->sequential_io_avg	= 0;
-#endif
-#ifdef CONFIG_BPF_SYSCALL
-	RCU_INIT_POINTER(p->bpf_storage, NULL);
-	p->bpf_ctx = NULL;
 #endif
 
 	unwind_task_init(p);
