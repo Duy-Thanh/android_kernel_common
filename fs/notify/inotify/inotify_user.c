@@ -517,9 +517,16 @@ static int inotify_update_existing_watch(struct fsnotify_group *group,
 {
 	struct fsnotify_mark *fsn_mark;
 	struct inotify_inode_mark *i_mark;
+<<<<<<< HEAD   (8e358c0568943f735a191fb7626451d328fde384 Merge fb10e0e9b220 ("net: skbuff: don't skb_tx_error() the s)
 	__u32 old_mask, new_mask;
 	__u32 mask;
 	int add = (arg & IN_MASK_ADD);
+||||||| BASE   (fb10e0e9b220a2eed08931a60dbaad9a2370c908 net: skbuff: don't skb_tx_error() the source skb in skb_zero)
+	__u32 old_mask, new_mask;
+	int replace = !(arg & IN_MASK_ADD);
+=======
+	int replace = !(arg & IN_MASK_ADD);
+>>>>>>> BRANCH (3ad8ff12fd44b08af9212ac4883a7e29d2ab7348 mtd: afs: validate v2 image info bounds)
 	int create = (arg & IN_MASK_CREATE);
 	int ret;
 
@@ -536,25 +543,33 @@ static int inotify_update_existing_watch(struct fsnotify_group *group,
 	i_mark = container_of(fsn_mark, struct inotify_inode_mark, fsn_mark);
 
 	spin_lock(&fsn_mark->lock);
+<<<<<<< HEAD   (8e358c0568943f735a191fb7626451d328fde384 Merge fb10e0e9b220 ("net: skbuff: don't skb_tx_error() the s)
 	old_mask = fsn_mark->mask;
 	if (add)
 		fsn_mark->mask |= mask;
 	else
 		fsn_mark->mask = mask;
 	new_mask = fsn_mark->mask;
+||||||| BASE   (fb10e0e9b220a2eed08931a60dbaad9a2370c908 net: skbuff: don't skb_tx_error() the source skb in skb_zero)
+	old_mask = fsn_mark->mask;
+	if (replace) {
+		fsn_mark->mask = 0;
+		fsn_mark->flags &= ~INOTIFY_MARK_FLAGS;
+	}
+	fsn_mark->mask |= inotify_arg_to_mask(inode, arg);
+	fsn_mark->flags |= inotify_arg_to_flags(arg);
+	new_mask = fsn_mark->mask;
+=======
+	if (replace) {
+		fsn_mark->mask = 0;
+		fsn_mark->flags &= ~INOTIFY_MARK_FLAGS;
+	}
+	fsn_mark->mask |= inotify_arg_to_mask(inode, arg);
+	fsn_mark->flags |= inotify_arg_to_flags(arg);
+>>>>>>> BRANCH (3ad8ff12fd44b08af9212ac4883a7e29d2ab7348 mtd: afs: validate v2 image info bounds)
 	spin_unlock(&fsn_mark->lock);
 
-	if (old_mask != new_mask) {
-		/* more bits in old than in new? */
-		int dropped = (old_mask & ~new_mask);
-		/* more bits in this fsn_mark than the inode's mask? */
-		int do_inode = (new_mask & ~inode->i_fsnotify_mask);
-
-		/* update the inode with this new fsn_mark */
-		if (dropped || do_inode)
-			fsnotify_recalc_mask(inode->i_fsnotify_marks);
-
-	}
+	fsnotify_recalc_mask(inode->i_fsnotify_marks);
 
 	/* return the wd */
 	ret = i_mark->wd;
