@@ -1,0 +1,79 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6a78c8b_feb669b8",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-10-02T13:11:11Z",
+      "side": 1,
+      "message": "super minor: With this change, unlike other mitigate function, this and `mitigate_rfds` doesn\u0027t take any specific actions towards mitigating the vulnerabilities, but just return whether host might have already applied the mitigation. Would it make sense to rename it to `eibrs_pbrsb_mitigated` and `rfds_mitigated`?",
+      "fixSuggestions": [
+        {
+          "fixId": "c2f15ea8_cbd720df",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm_init.c",
+              "range": {
+                "startLine": 487,
+                "startChar": 0,
+                "endLine": 488,
+                "endChar": 0
+              },
+              "replacement": "static bool eibrs_pbrsb_mitigated(void)\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm_init.c",
+              "range": {
+                "startLine": 510,
+                "startChar": 0,
+                "endLine": 511,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (!eibrs_pbrsb_mitigated())\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm_init.c",
+              "range": {
+                "startLine": 590,
+                "startChar": 0,
+                "endLine": 591,
+                "endChar": 0
+              },
+              "replacement": "static bool rfds_mitigated(void)\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm_init.c",
+              "range": {
+                "startLine": 713,
+                "startChar": 0,
+                "endLine": 714,
+                "endChar": 0
+              },
+              "replacement": "\t\tmitigated \u003d eibrs_pbrsb_mitigated();\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm_init.c",
+              "range": {
+                "startLine": 716,
+                "startChar": 0,
+                "endLine": 717,
+                "endChar": 0
+              },
+              "replacement": "\t\tmitigated \u003d rfds_mitigated();\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6b697d377f26156ca18622e85a1e83ecf6339769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
