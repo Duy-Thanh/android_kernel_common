@@ -64,6 +64,8 @@ static struct dmar_domain *__pkvm_get_iommu_domain(void *pgd)
 	return domain;
 }
 
+static struct dmar_domain *last_noref_domain;
+
 /*
  * Retrieve the domain without incrementing refcount.
  * This is useful when there is a refcount on the domain which is guaranteed
@@ -71,7 +73,11 @@ static struct dmar_domain *__pkvm_get_iommu_domain(void *pgd)
  */
 static struct dmar_domain *__pkvm_get_iommu_domain_noref(void *pgd)
 {
-	struct dmar_domain *domain;
+	struct dmar_domain *domain = READ_ONCE(last_noref_domain);
+
+	if (likely(domain && READ_ONCE(domain->pgd) == pgd &&
+		   atomic_read(&domain->refcount) > 1))
+		return domain;
 
 	pkvm_spin_lock(&iommu_domain_lock);
 	domain = __pkvm_get_iommu_domain_locked(pgd, false);
@@ -80,6 +86,7 @@ static struct dmar_domain *__pkvm_get_iommu_domain_noref(void *pgd)
 	 * Hence it's a pKVM bug if this pgd can't resolve to a domain.
 	 */
 	BUG_ON(!domain || atomic_read(&domain->refcount) <= 1);
+	WRITE_ONCE(last_noref_domain, domain);
 	pkvm_spin_unlock(&iommu_domain_lock);
 
 	return domain;
@@ -216,6 +223,8 @@ int pkvm_free_iommu_domain(u64 pgd_gpa, struct pkvm_memcache *teardown_mc)
 	 * to prevent someone else from getting this domain while freeing it.
 	 */
 	hash_del(&domain->hnode);
+	if (READ_ONCE(last_noref_domain) == domain)
+		WRITE_ONCE(last_noref_domain, NULL);
 
 	pkvm_spin_unlock(&iommu_domain_lock);
 
