@@ -321,6 +321,35 @@ static bool check_same_owner(struct task_struct *p)
 		uid_eq(cred->euid, pcred->uid));
 }
 
+#ifdef CONFIG_RT_MUTEXES
+static inline void __setscheduler_dl_pi(int newprio, int policy,
+			      struct task_struct *p,
+			      struct sched_change_ctx *scope)
+{
+	/*
+	 * In case a DEADLINE task (either proper or boosted) gets
+	 * setscheduled to a lower priority class, check if it neeeds to
+	 * inherit parameters from a potential pi_task. In that case make
+	 * sure replenishment happens with the next enqueue.
+	 */
+
+	if (dl_prio(newprio) && !dl_policy(policy)) {
+		struct task_struct *pi_task = rt_mutex_get_top_task(p);
+
+		if (pi_task) {
+			p->dl.pi_se = pi_task->dl.pi_se;
+			scope->flags |= ENQUEUE_REPLENISH;
+		}
+	}
+}
+#else /* !CONFIG_RT_MUTEXES */
+static inline void __setscheduler_dl_pi(int newprio, int policy,
+			      struct task_struct *p,
+			      struct sched_change_ctx *scope)
+{
+}
+#endif /* !CONFIG_RT_MUTEXES */
+
 #ifdef CONFIG_UCLAMP_TASK
 
 static int uclamp_validate(struct task_struct *p,
@@ -708,7 +737,12 @@ change:
 			__setscheduler_params(p, attr);
 			p->sched_class = next_class;
 			p->prio = newprio;
+<<<<<<< HEAD   (3ae8649a123511a04abdea0d7de097e330691276 Merge 3f0543bdf446 ("sched: Employ sched_change guards") int)
 			trace_android_rvh_setscheduler(p);
+||||||| BASE   (3f0543bdf446a62b7293c445377a1e5741817dfd sched: Employ sched_change guards)
+=======
+			__setscheduler_dl_pi(newprio, policy, p, scope);
+>>>>>>> BRANCH (0638bf16b7a73a2fe63624bd0d16d9fd904805c3 sched/deadline: Fix missing ENQUEUE_REPLENISH during PI de-b)
 		}
 		__setscheduler_uclamp(p, attr);
 		check_class_changing(rq, p, prev_class);
