@@ -1441,6 +1441,8 @@ static inline void qi_desc_piotlb(u16 did, u32 pasid, u64 addr,
 				QI_EIOTLB_IH(ih) |
 				QI_EIOTLB_AM(mask);
 	}
+	desc->qw2 = 0;
+	desc->qw3 = 0;
 }
 
 static inline void qi_desc_dev_iotlb_pasid(u16 sid, u16 pfsid, u32 pasid,
@@ -1483,6 +1485,8 @@ static inline void qi_desc_dev_iotlb_pasid(u16 sid, u16 pfsid, u32 pasid,
 		/* Set the S bit to indicate flushing more than 1 page */
 		desc->qw1 |= QI_DEV_EIOTLB_SIZE;
 	}
+	desc->qw2 = 0;
+	desc->qw3 = 0;
 }
 
 /* Convert value to context PASID directory size field coding. */
