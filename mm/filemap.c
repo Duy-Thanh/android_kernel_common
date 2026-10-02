@@ -3024,7 +3024,7 @@ static struct file *do_sync_mmap_readahead(struct vm_fault *vmf)
 			&ra->start, &ra->size, &ra->async_size);
 	ractl._index = ra->start;
 	trace_android_vh_page_cache_read(file->f_inode, ra->start, ra->size);
-	do_page_cache_ra(&ractl, ra->size, ra->async_size);
+	do_page_cache_ra(&ractl, ra->size, ra->async_size, false);
 	return fpin;
 }
 
