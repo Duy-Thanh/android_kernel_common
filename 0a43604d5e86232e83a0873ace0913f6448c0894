@@ -69,6 +69,24 @@
       "parentUuid": "f243c35e_b2ad74d6",
       "revId": "0a43604d5e86232e83a0873ace0913f6448c0894",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b43f0e1_21273dea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1898675
+      },
+      "writtenOn": "2026-10-02T11:03:10Z",
+      "side": 1,
+      "message": "Understood, thanks for the guidance Greg.\nI have already submitted the patch series to netdev@vger.kernel.org for review. I will focus on getting it reviewed and accepted upstream first. Once it lands in upstream, we will backport it to the relevant LTS / device branches with the upstream commit ID.\nI\u0027ll abandon this CL for now. Thanks again!",
+      "parentUuid": "dcccfaa2_06b48788",
+      "revId": "0a43604d5e86232e83a0873ace0913f6448c0894",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
