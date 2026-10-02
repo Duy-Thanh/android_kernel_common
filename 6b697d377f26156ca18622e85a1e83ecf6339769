@@ -74,6 +74,24 @@
       ],
       "revId": "6b697d377f26156ca18622e85a1e83ecf6339769",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a2bb66b_c468a9c9",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-02T13:17:44Z",
+      "side": 1,
+      "message": "That would make these function names not aligned with other mitigation functions called from `pkvm_mitigate_cpu_bug()` (thus arguably making the code a bit less easy to follow), plus if we add some actual actions to these functions in the future, we would have to rename them back?",
+      "parentUuid": "a6a78c8b_feb669b8",
+      "revId": "6b697d377f26156ca18622e85a1e83ecf6339769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
