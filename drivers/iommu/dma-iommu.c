@@ -818,6 +818,122 @@ static void iommu_dma_free_iova(struct iommu_domain *domain, dma_addr_t iova,
 	trace_android_vh_iommu_iovad_free_iova(iovad, iova, size);
 }
 
+#define IOMMU_DMA_UNMAP_BATCH_MAX 64
+
+struct iommu_dma_unmap_entry {
+	dma_addr_t iova;
+	size_t size;
+};
+
+struct iommu_dma_unmap_batch {
+	bool active;
+	unsigned int count;
+	struct iommu_domain *domain;
+	struct iommu_iotlb_gather gather;
+	struct iommu_dma_unmap_entry entries[IOMMU_DMA_UNMAP_BATCH_MAX];
+};
+
+static DEFINE_PER_CPU(struct iommu_dma_unmap_batch[3], iommu_unmap_batches);
+
+static inline int iommu_dma_unmap_batch_ctx(void)
+{
+	if (in_hardirq())
+		return 2;
+	if (in_serving_softirq())
+		return 1;
+	return 0;
+}
+
+static void iommu_dma_unmap_batch_flush(struct iommu_dma_unmap_batch *b)
+{
+	unsigned int i;
+
+	if (!b->count)
+		return;
+
+	iommu_iotlb_sync(b->domain, &b->gather);
+	for (i = 0; i < b->count; i++)
+		iommu_dma_free_iova(b->domain, b->entries[i].iova,
+				    b->entries[i].size, NULL);
+	b->count = 0;
+	b->domain = NULL;
+}
+
+void iommu_dma_unmap_batch_begin(void)
+{
+	struct iommu_dma_unmap_batch *b;
+
+	preempt_disable();
+	b = &this_cpu_ptr(iommu_unmap_batches)[iommu_dma_unmap_batch_ctx()];
+	if (WARN_ON_ONCE(b->active))
+		return;
+	b->active = true;
+	b->count = 0;
+	b->domain = NULL;
+	iommu_iotlb_gather_init(&b->gather);
+}
+EXPORT_SYMBOL_GPL(iommu_dma_unmap_batch_begin);
+
+void iommu_dma_unmap_batch_sync(void)
+{
+	struct iommu_dma_unmap_batch *b;
+
+	preempt_disable();
+	b = &this_cpu_ptr(iommu_unmap_batches)[iommu_dma_unmap_batch_ctx()];
+	if (b->active)
+		iommu_dma_unmap_batch_flush(b);
+	preempt_enable();
+}
+EXPORT_SYMBOL_GPL(iommu_dma_unmap_batch_sync);
+
+void iommu_dma_unmap_batch_end(void)
+{
+	struct iommu_dma_unmap_batch *b;
+
+	b = &this_cpu_ptr(iommu_unmap_batches)[iommu_dma_unmap_batch_ctx()];
+	if (likely(b->active)) {
+		iommu_dma_unmap_batch_flush(b);
+		b->active = false;
+	}
+	preempt_enable();
+}
+EXPORT_SYMBOL_GPL(iommu_dma_unmap_batch_end);
+
+static bool iommu_dma_try_batch_unmap(struct iommu_domain *domain,
+				      dma_addr_t dma_addr, size_t size)
+{
+	struct iommu_dma_unmap_batch *b;
+	size_t unmapped;
+
+	if (size > SZ_16K)
+		return false;
+
+	b = &raw_cpu_ptr(iommu_unmap_batches)[iommu_dma_unmap_batch_ctx()];
+	if (!b->active)
+		return false;
+
+	if (b->domain) {
+		unsigned long new_start = min_t(unsigned long, b->gather.start,
+						dma_addr);
+		unsigned long new_end = max_t(unsigned long, b->gather.end,
+					      dma_addr + size - 1);
+
+		if (b->domain != domain ||
+		    b->count == IOMMU_DMA_UNMAP_BATCH_MAX ||
+		    (new_end >> 21) - (new_start >> 21) >= 2)
+			iommu_dma_unmap_batch_flush(b);
+	}
+
+	b->domain = domain;
+	unmapped = iommu_unmap_fast(domain, dma_addr, size, &b->gather);
+	WARN_ON(unmapped != size);
+	b->entries[b->count++] = (struct iommu_dma_unmap_entry){
+		.iova = dma_addr,
+		.size = size,
+	};
+	return true;
+}
+
 static void __iommu_dma_unmap(struct device *dev, dma_addr_t dma_addr,
 		size_t size)
 {
@@ -827,11 +943,16 @@ static void __iommu_dma_unmap(struct device *dev, dma_addr_t dma_addr,
 	size_t iova_off = iova_offset(iovad, dma_addr);
 	struct iommu_iotlb_gather iotlb_gather;
 	size_t unmapped;
+	bool queued = READ_ONCE(cookie->fq_domain);
 
 	dma_addr -= iova_off;
 	size = iova_align(iovad, size + iova_off);
+
+	if (!queued && iommu_dma_try_batch_unmap(domain, dma_addr, size))
+		return;
+
 	iommu_iotlb_gather_init(&iotlb_gather);
-	iotlb_gather.queued = READ_ONCE(cookie->fq_domain);
+	iotlb_gather.queued = queued;
 
 	unmapped = iommu_unmap_fast(domain, dma_addr, size, &iotlb_gather);
 	WARN_ON(unmapped != size);
@@ -2065,11 +2186,16 @@ static void __iommu_dma_iova_unlink(struct device *dev,
 	     !(attrs & (DMA_ATTR_SKIP_CPU_SYNC | DMA_ATTR_MMIO))))
 		iommu_dma_iova_unlink_range_slow(dev, addr, size, dir, attrs);
 
+	size = iova_align(iovad, size + iova_start_pad);
+	addr -= iova_start_pad;
+
+	if (free_iova && !READ_ONCE(cookie->fq_domain) &&
+	    iommu_dma_try_batch_unmap(domain, addr, size))
+		return;
+
 	iommu_iotlb_gather_init(&iotlb_gather);
 	iotlb_gather.queued = free_iova && READ_ONCE(cookie->fq_domain);
 
-	size = iova_align(iovad, size + iova_start_pad);
-	addr -= iova_start_pad;
 	unmapped = iommu_unmap_fast(domain, addr, size, &iotlb_gather);
 	WARN_ON(unmapped != size);
 
