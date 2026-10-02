@@ -354,16 +354,40 @@ invalid:
 	goto out;
 }
 
+<<<<<<< HEAD   (909342b1f3f96069c109547abb4736e3f1aeae77 Merge 814326e86e92 ("drm/xe/hdcp: Add NULL check for media_g)
 #if BITS_PER_LONG < 64 || defined(CONFIG_FUSE_BPF)
+||||||| BASE   (814326e86e929b865020ff44f4576dbdfe3f7ff3 drm/xe/hdcp: Add NULL check for media_gt in intel_hdcp_gsc_c)
+#if BITS_PER_LONG < 64
+=======
+>>>>>>> BRANCH (da3d241c5b925f17a9d8051d7a9e0d454d8e01f6 fuse: fix uninit-value in fuse_dentry_revalidate())
 static int fuse_dentry_init(struct dentry *dentry)
 {
+<<<<<<< HEAD   (909342b1f3f96069c109547abb4736e3f1aeae77 Merge 814326e86e92 ("drm/xe/hdcp: Add NULL check for media_g)
 	dentry->d_fsdata = kzalloc(sizeof(struct fuse_dentry),
+||||||| BASE   (814326e86e929b865020ff44f4576dbdfe3f7ff3 drm/xe/hdcp: Add NULL check for media_gt in intel_hdcp_gsc_c)
+	dentry->d_fsdata = kzalloc(sizeof(union fuse_dentry),
+=======
+	int ret = 0;
+
+	/*
+	 * Initialising d_time (epoch) to '0' ensures the dentry is invalid
+	 * if compared to fc->epoch, which is initialized to '1'.
+	 */
+	dentry->d_time = 0;
+
+#if BITS_PER_LONG < 64
+	dentry->d_fsdata = kzalloc(sizeof(union fuse_dentry),
+>>>>>>> BRANCH (da3d241c5b925f17a9d8051d7a9e0d454d8e01f6 fuse: fix uninit-value in fuse_dentry_revalidate())
 				   GFP_KERNEL_ACCOUNT | __GFP_RECLAIMABLE);
 
-	return dentry->d_fsdata ? 0 : -ENOMEM;
+	ret = dentry->d_fsdata ? 0 : -ENOMEM;
+#endif
+
+	return ret;
 }
 static void fuse_dentry_release(struct dentry *dentry)
 {
+<<<<<<< HEAD   (909342b1f3f96069c109547abb4736e3f1aeae77 Merge 814326e86e92 ("drm/xe/hdcp: Add NULL check for media_g)
 	struct fuse_dentry *fd = dentry->d_fsdata;
 
 #ifdef CONFIG_FUSE_BPF
@@ -373,10 +397,16 @@ static void fuse_dentry_release(struct dentry *dentry)
 	if (fd && fd->bpf)
 		bpf_prog_put(fd->bpf);
 #endif
+||||||| BASE   (814326e86e929b865020ff44f4576dbdfe3f7ff3 drm/xe/hdcp: Add NULL check for media_gt in intel_hdcp_gsc_c)
+	union fuse_dentry *fd = dentry->d_fsdata;
+=======
+#if BITS_PER_LONG < 64
+	union fuse_dentry *fd = dentry->d_fsdata;
+>>>>>>> BRANCH (da3d241c5b925f17a9d8051d7a9e0d454d8e01f6 fuse: fix uninit-value in fuse_dentry_revalidate())
 
 	kfree_rcu(fd, rcu);
-}
 #endif
+}
 
 static int fuse_dentry_delete(const struct dentry *dentry)
 {
@@ -471,10 +501,14 @@ out:
 const struct dentry_operations fuse_dentry_operations = {
 	.d_revalidate	= fuse_dentry_revalidate,
 	.d_delete	= fuse_dentry_delete,
+<<<<<<< HEAD   (909342b1f3f96069c109547abb4736e3f1aeae77 Merge 814326e86e92 ("drm/xe/hdcp: Add NULL check for media_g)
 #if BITS_PER_LONG < 64 || defined(CONFIG_FUSE_BPF)
+||||||| BASE   (814326e86e929b865020ff44f4576dbdfe3f7ff3 drm/xe/hdcp: Add NULL check for media_gt in intel_hdcp_gsc_c)
+#if BITS_PER_LONG < 64
+=======
+>>>>>>> BRANCH (da3d241c5b925f17a9d8051d7a9e0d454d8e01f6 fuse: fix uninit-value in fuse_dentry_revalidate())
 	.d_init		= fuse_dentry_init,
 	.d_release	= fuse_dentry_release,
-#endif
 	.d_automount	= fuse_dentry_automount,
 	.d_canonical_path = fuse_dentry_canonical_path,
 };
