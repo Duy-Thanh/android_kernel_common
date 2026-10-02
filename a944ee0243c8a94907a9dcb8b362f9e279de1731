@@ -123,6 +123,24 @@
       "parentUuid": "aaf56068_9b00ac46",
       "revId": "a944ee0243c8a94907a9dcb8b362f9e279de1731",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b67d5042_7e21ae56",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 14996,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-10-02T12:47:27Z",
+      "side": 1,
+      "message": "\u003e if (reqs \u0026 ~(KVM_REQ_TLB_FLUSH | KVM_REQ_TLB_FLUSH_CURRENT |\n                            KVM_REQ_TLB_FLUSH_GUEST | KVM_REQ_TRIPLE_FAULT |\n                            KVM_REQ_APICV_UPDATE | KVM_REQ_EVENT |\n                            KVM_REQ_RECALC_INTERCEPTS))\n\n\nI was thinking if we can define pkvm supported requests as a macro in a header and use it here:\n\n```\n#define PKVM_SUPPORTED_REQ (KVM_REQ_TLB_FLUSH | KVM_REQ_TLB_FLUSH_CURRENT |\n+                            KVM_REQ_TLB_FLUSH_GUEST | KVM_REQ_TRIPLE_FAULT |\n+                            KVM_REQ_APICV_UPDATE | KVM_REQ_EVENT |\n+                            KVM_REQ_RECALC_INTERCEPTS)\n```\n\nand then in the code:\n```\nif (WARN_ON(reqs \u0026 ~PKVM_SUPPORTED_REQ)) {\n...\n}\n```",
+      "parentUuid": "b763bae2_df9ea294",
+      "revId": "a944ee0243c8a94907a9dcb8b362f9e279de1731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
