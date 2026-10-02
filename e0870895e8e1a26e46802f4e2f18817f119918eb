@@ -251,6 +251,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cc1970bd_4736ec44",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 28
+      },
+      "lineNbr": 790,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-10-02T12:40:48Z",
+      "side": 1,
+      "message": "What if the kernel calls this function, and then userspace in parallel on another thread invokes `rewrap()` or `empty()`, changing from `wrapfd refcount: 1 dmabuf refcount: 1` to `wrapfd refcount: 1 dmabuf refcount: 0`",
+      "parentUuid": "2083a9f3_607b6706",
+      "range": {
+        "startLine": 786,
+        "startChar": 0,
+        "endLine": 790,
+        "endChar": 9
+      },
+      "revId": "e0870895e8e1a26e46802f4e2f18817f119918eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3668d65c_8869431c",
         "filename": "drivers/android/wrapfd/wrap.rs",
         "patchSetId": 28
