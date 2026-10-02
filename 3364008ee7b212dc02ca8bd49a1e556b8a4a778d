@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80b6a58c_ceb2b160",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-10-02T17:17:18Z",
+      "side": 1,
+      "message": "The ABI change here is unrelated and will make this change un-cherrypickable. Please split this.",
+      "revId": "3364008ee7b212dc02ca8bd49a1e556b8a4a778d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
