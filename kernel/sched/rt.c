@@ -1647,10 +1647,19 @@ bool cpu_busy_with_softirqs(int cpu)
 
 	return softirqs & LONG_SOFTIRQ_MASK;
 }
+<<<<<<< HEAD   (9ea8d8374e5e5d746011645b845200e53a13dafe ANDROID: GKI: Add symbols to transsion symbol list)
 #else
 bool cpu_busy_with_softirqs(int cpu)
 {
 	return false;
+||||||| BASE   (f683398b7b8044fd43c629ab6c23d4b88a8b8926 ANDROID: mm: mglru: pace and rotate offlined memcgs like onl)
+=======
+EXPORT_SYMBOL_GPL(cpu_busy_with_softirqs);
+
+bool local_rt_runnable(void)
+{
+	return sched_rt_runnable(this_rq());
+>>>>>>> CHANGE (2dc4b9007e578049bb50f23f35644940fe7ed2cb ANDROID: softirq: Ensure we check for enqueued RT tasks in s)
 }
 #endif /* CONFIG_RT_SOFTIRQ_AWARE_SCHED */
 EXPORT_SYMBOL_GPL(cpu_busy_with_softirqs);
