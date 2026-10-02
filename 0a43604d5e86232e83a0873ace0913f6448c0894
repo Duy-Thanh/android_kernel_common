@@ -51,6 +51,24 @@
       "parentUuid": "788182cf_c22f8338",
       "revId": "0a43604d5e86232e83a0873ace0913f6448c0894",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcccfaa2_06b48788",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-10-02T08:51:42Z",
+      "side": 1,
+      "message": "Upstream is the proper place to review this.  the android-mainline branch does not get pulled into any device branch so there\u0027s not much need for this to be submitted here at all.\n\nAnd this must be accepted by upstream first anyway, so please get this accepted there as the first thing to do.  This is a public issue so obviously there\u0027s no need for any smaller lists of reviewers to be involved.",
+      "parentUuid": "f243c35e_b2ad74d6",
+      "revId": "0a43604d5e86232e83a0873ace0913f6448c0894",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
