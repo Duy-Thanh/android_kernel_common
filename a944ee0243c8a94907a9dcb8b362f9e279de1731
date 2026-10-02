@@ -159,6 +159,24 @@
       "parentUuid": "b67d5042_7e21ae56",
       "revId": "a944ee0243c8a94907a9dcb8b362f9e279de1731",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "923e658b_ef50faed",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 14996,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-10-02T13:16:39Z",
+      "side": 1,
+      "message": "\u003e (And if we define this macro in a header, not right here, we are quite likely to forget to keep it in sync?)\n\nyeah I don\u0027t disagree. But I think we may mostly catch this during development as the pVM boot may fail(I assume the action we take inside the if block is to kill the VM) or pKVM crashes because of WARN_ON.\n\nBut no strong preference on my side, was just thinking loud :-)",
+      "parentUuid": "52e53b1b_db03dc3e",
+      "revId": "a944ee0243c8a94907a9dcb8b362f9e279de1731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
