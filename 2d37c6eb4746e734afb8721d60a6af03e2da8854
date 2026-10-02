@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d71f55b1_6de51485",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4116,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-10-02T18:11:41Z",
+      "side": 1,
+      "message": "For pkvm enabled kernel, this patch won\u0027t help, as the prior if condition would hypercall to pkvm and return. For upstream too, the code has moved to Generic page-table implementation, so not sure if it will help there either.",
+      "revId": "2d37c6eb4746e734afb8721d60a6af03e2da8854",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
