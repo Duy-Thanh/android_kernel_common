@@ -40,6 +40,8 @@
 #include "hyp_constants.h"
 #include "hyp_trace.h"
 
+/* CI Test */
+
 #define PKVM_DEVICE_ASSIGN_COMPAT	"pkvm,device-assignment"
 
 /*
