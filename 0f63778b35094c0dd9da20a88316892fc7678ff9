@@ -34,6 +34,24 @@
       "parentUuid": "d5410e84_8f0056b8",
       "revId": "0f63778b35094c0dd9da20a88316892fc7678ff9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "426dfdb3_bc1c6686",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-10-02T13:50:42Z",
+      "side": 1,
+      "message": "Done - Addressed in the parent commit.",
+      "parentUuid": "d15e1347_68efe6fc",
+      "revId": "0f63778b35094c0dd9da20a88316892fc7678ff9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
