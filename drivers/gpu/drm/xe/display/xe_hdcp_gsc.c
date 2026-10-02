@@ -35,11 +35,25 @@ bool intel_hdcp_gsc_check_status(struct drm_device *drm)
 	struct xe_device *xe = to_xe_device(drm);
 	struct xe_tile *tile = xe_device_get_root_tile(xe);
 	struct xe_gt *gt = tile->media_gt;
-	struct xe_gsc *gsc = &gt->uc.gsc;
+	struct xe_gsc *gsc;
 	bool ret = true;
 	unsigned int fw_ref;
 
+<<<<<<< HEAD   (984c69230e7d7f491db0bb165fae4a9de829fda5 Merge 6.18.33 into android17-6.18-lts)
 	if (!gsc || !xe_uc_fw_is_available(&gsc->fw)) {
+||||||| BASE   (83657f4189612e5cbcabc3058acd36c0bd120729 Linux 6.18.33)
+	if (!gsc || !xe_uc_fw_is_enabled(&gsc->fw)) {
+=======
+	if (!gt) {
+		drm_dbg_kms(&xe->drm,
+			    "not checking GSC status for HDCP2.x: media GT not present or disabled\n");
+		return false;
+	}
+
+	gsc = &gt->uc.gsc;
+
+	if (!xe_uc_fw_is_enabled(&gsc->fw)) {
+>>>>>>> BRANCH (814326e86e929b865020ff44f4576dbdfe3f7ff3 drm/xe/hdcp: Add NULL check for media_gt in intel_hdcp_gsc_c)
 		drm_dbg_kms(&xe->drm,
 			    "GSC Components not ready for HDCP2.x\n");
 		return false;
