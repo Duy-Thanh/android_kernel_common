@@ -1539,6 +1539,11 @@ static bool cpu_busy_with_softirqs(int cpu)
 
 	return softirqs & LONG_SOFTIRQ_MASK;
 }
+
+bool local_rt_runnable(void)
+{
+	return sched_rt_runnable(this_rq());
+}
 #else
 static bool cpu_busy_with_softirqs(int cpu)
 {
