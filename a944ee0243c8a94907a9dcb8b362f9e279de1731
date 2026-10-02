@@ -213,6 +213,24 @@
       "parentUuid": "923e658b_ef50faed",
       "revId": "a944ee0243c8a94907a9dcb8b362f9e279de1731",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44c3d5eb_f001ac49",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 14996,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-10-02T17:13:40Z",
+      "side": 1,
+      "message": "I am fine with leaving it as it is. Resolving",
+      "parentUuid": "83e5448d_4990e3e7",
+      "revId": "a944ee0243c8a94907a9dcb8b362f9e279de1731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
