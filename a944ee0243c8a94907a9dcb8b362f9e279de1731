@@ -72,6 +72,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6c83b9d_77138d89",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-02T16:10:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1564f56_e3f3289a",
+      "revId": "a944ee0243c8a94907a9dcb8b362f9e279de1731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "490de7da_e38cd9a2",
@@ -175,6 +193,24 @@
       "side": 1,
       "message": "\u003e (And if we define this macro in a header, not right here, we are quite likely to forget to keep it in sync?)\n\nyeah I don\u0027t disagree. But I think we may mostly catch this during development as the pVM boot may fail(I assume the action we take inside the if block is to kill the VM) or pKVM crashes because of WARN_ON.\n\nBut no strong preference on my side, was just thinking loud :-)",
       "parentUuid": "52e53b1b_db03dc3e",
+      "revId": "a944ee0243c8a94907a9dcb8b362f9e279de1731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83e5448d_4990e3e7",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 14996,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-02T16:10:11Z",
+      "side": 1,
+      "message": "\u003e But I think we may mostly catch this during development\n\nAnd if we don\u0027t, and this occurs in production, it means we only make things worse.\n\n...I\u0027ve looked through the occurrences of kvm_make_request() throughout KVM code that is compiled into pKVM hypervisor, and haven\u0027t found any cases when we make a request that we don\u0027t process here in __pkvm_vcpu_enter_guest().\n\nDo you still think it is worth adding such a WARN_ON, or shall we leave it as is?",
+      "parentUuid": "923e658b_ef50faed",
       "revId": "a944ee0243c8a94907a9dcb8b362f9e279de1731",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
