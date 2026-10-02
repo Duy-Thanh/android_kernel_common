@@ -141,6 +141,24 @@
       "parentUuid": "b763bae2_df9ea294",
       "revId": "a944ee0243c8a94907a9dcb8b362f9e279de1731",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52e53b1b_db03dc3e",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 14996,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-02T13:04:52Z",
+      "side": 1,
+      "message": "That is not much better: we still duplicate the list of requests specified implicitly by this series of `if (kvm_check_request(...))` checks, i.e. need to remember to keep this mask in sync with these checks?\n\n(And if we define this macro in a header, not right here, we are quite likely to forget to keep it in sync?)",
+      "parentUuid": "b67d5042_7e21ae56",
+      "revId": "a944ee0243c8a94907a9dcb8b362f9e279de1731",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
