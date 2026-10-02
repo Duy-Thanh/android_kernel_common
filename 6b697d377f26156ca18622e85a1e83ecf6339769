@@ -92,6 +92,24 @@
       "parentUuid": "a6a78c8b_feb669b8",
       "revId": "6b697d377f26156ca18622e85a1e83ecf6339769",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cb26bf6_6639101b",
+        "filename": "arch/x86/kvm/vmx/pkvm_init.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-10-02T13:20:41Z",
+      "side": 1,
+      "message": "The other functions seem to take some action like clear some bits, set some flags etc, thats why I thought a rename would convey the meaning better, but keeping it open in case future functionality added makes sense, lets keep it as it is.",
+      "parentUuid": "3a2bb66b_c468a9c9",
+      "revId": "6b697d377f26156ca18622e85a1e83ecf6339769",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
