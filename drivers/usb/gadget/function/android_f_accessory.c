@@ -292,8 +292,6 @@ static void __acc_dev_instance_release(struct kref *kref)
 {
 	struct acc_dev *dev = container_of(kref, struct acc_dev, kref);
 
-	acc_dev_instance = NULL;
-
 	/* Cancel any async work */
 	cancel_delayed_work_sync(&dev->start_work);
 	cancel_work_sync(&dev->getprotocol_work);
@@ -307,15 +305,21 @@ static void put_acc_dev(struct acc_dev *dev)
 {
 	unsigned long flags;
 
+	if (!dev)
+		return;
+
 	/*
 	 * This is not best engineering practice, and does cause coupling with
 	 * kref internal structure. It might cause an issue if kref internal
 	 * refcount structure is changed. We will remove this implementation
 	 * in the next kernel version.
 	 */
-	if (refcount_dec_and_lock_irqsave(&acc_dev_instance->kref.refcount,
-		&acc_dev_instance_lock, &flags))
-		__acc_dev_instance_release(&acc_dev_instance->kref);
+	if (refcount_dec_and_lock_irqsave(&dev->kref.refcount,
+		&acc_dev_instance_lock, &flags)) {
+		acc_dev_instance = NULL;
+		spin_unlock_irqrestore(&acc_dev_instance_lock, flags);
+		__acc_dev_instance_release(&dev->kref);
+	}
 }
 
 static inline struct acc_dev *func_to_dev(struct usb_function *f)
