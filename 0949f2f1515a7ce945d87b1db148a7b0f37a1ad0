@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cf351d8_811daf20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3386406
+      },
+      "writtenOn": "2026-10-02T18:26:27Z",
+      "side": 1,
+      "message": "Hey John, any chance we can get review on this android specific patch that we\u0027d pushed?\nI can remove all the tegra specific logic out of it to our vendor kernel instead. It\u0027s really just the small change to audio-graph-card.c that we\u0027re interested in getting merged.",
+      "revId": "0949f2f1515a7ce945d87b1db148a7b0f37a1ad0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
