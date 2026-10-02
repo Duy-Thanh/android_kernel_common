@@ -604,7 +604,7 @@ static __u32 softirq_deferred_for_rt(__u32 *pending)
 {
 	__u32 deferred = 0;
 
-	if (rt_task(current)) {
+	if (rt_task(current) || sched_rt_runnable(this_rq())) {
 		deferred = *pending & LONG_SOFTIRQ_MASK;
 		*pending &= ~LONG_SOFTIRQ_MASK;
 	}
