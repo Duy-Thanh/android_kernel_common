@@ -16,6 +16,24 @@
       "message": "shouldn\u0027t this read happen with the qi-\u003eq_lock taken?",
       "revId": "1f68aa1df6b9e8ec355a1bc228af85194e960bc2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "189489ff_a8ebdb5c",
+        "filename": "drivers/iommu/intel/dmar.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1523,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-10-03T23:33:19Z",
+      "side": 1,
+      "message": "Discussed offline, seems it\u0027s safe to check it without taking the lock :-)",
+      "parentUuid": "1bd4f25a_d67dcf00",
+      "revId": "1f68aa1df6b9e8ec355a1bc228af85194e960bc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
