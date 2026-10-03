@@ -4036,6 +4036,7 @@ static void do_activate_blocked_waiter(struct rq *target_rq, struct task_struct 
 		}
 
 		if (task_cpu(p) != target_cpu) {
+			en_flags |= ENQUEUE_MIGRATED;
 			psi_ttwu_dequeue(p);
 			proxy_set_task_cpu(p, target_cpu);
 		}
@@ -4102,9 +4103,6 @@ static void activate_blocked_waiters(struct rq *target_rq,
 	INIT_LIST_HEAD(&bal_head);
 	list_add_tail(&owner->blocked_activation_node, &bal_head);
 	raw_spin_unlock_irqrestore(&owner->blocked_lock, flags);
-
-	if (wake_flags & WF_MIGRATED)
-		en_flags |= ENQUEUE_MIGRATED;
 
 	while (!list_empty(&bal_head)) {
 		struct list_head tmp_head;
