@@ -4459,6 +4459,14 @@ static bool lru_gen_importance_enabled(void)
 	return static_branch_unlikely(&lru_gen_importance);
 }
 
+/* /sys/kernel/mm/lru_gen/strict_low, off by default */
+static DEFINE_STATIC_KEY_FALSE(lru_gen_strict_low);
+
+static bool lru_gen_strict_low_enabled(void)
+{
+	return static_branch_unlikely(&lru_gen_strict_low);
+}
+
 static int lru_gen_importance_bin(int adj)
 {
 	BUILD_BUG_ON(MEMCG_NR_BINS != 8);
@@ -5298,6 +5306,17 @@ static int shrink_one(struct lruvec *lruvec, struct scan_control *sc)
 		return MEMCG_LRU_YOUNG;
 
 	if (mem_cgroup_below_low(NULL, memcg)) {
+		/*
+		 * With strict_low, skip it like shrink_node_memcgs() does, until
+		 * do_try_to_free_pages() retries with memcg_low_reclaim. Move it
+		 * to the young generation, like for memory.min, so that the old
+		 * generation can still drain.
+		 */
+		if (lru_gen_strict_low_enabled() && !sc->memcg_low_reclaim) {
+			sc->memcg_low_skipped = 1;
+			return MEMCG_LRU_YOUNG;
+		}
+
 		/* see the comment on MEMCG_NR_GENS */
 		if (READ_ONCE(lruvec->lrugen.seg) != MEMCG_LRU_TAIL)
 			return MEMCG_LRU_TAIL;
@@ -5814,10 +5833,34 @@ static ssize_t importance_mode_store(struct kobject *kobj, struct kobj_attribute
 
 static struct kobj_attribute lru_gen_importance_mode_attr = __ATTR_RW(importance_mode);
 
+static ssize_t strict_low_show(struct kobject *kobj, struct kobj_attribute *attr, char *buf)
+{
+	return sysfs_emit(buf, "%d\n", lru_gen_strict_low_enabled());
+}
+
+static ssize_t strict_low_store(struct kobject *kobj, struct kobj_attribute *attr,
+				const char *buf, size_t len)
+{
+	bool enabled;
+
+	if (kstrtobool(buf, &enabled))
+		return -EINVAL;
+
+	if (enabled)
+		static_branch_enable(&lru_gen_strict_low);
+	else
+		static_branch_disable(&lru_gen_strict_low);
+
+	return len;
+}
+
+static struct kobj_attribute lru_gen_strict_low_attr = __ATTR_RW(strict_low);
+
 static struct attribute *lru_gen_attrs[] = {
 	&lru_gen_min_ttl_attr.attr,
 	&lru_gen_enabled_attr.attr,
 	&lru_gen_importance_mode_attr.attr,
+	&lru_gen_strict_low_attr.attr,
 	NULL
 };
 
