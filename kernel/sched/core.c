@@ -4004,6 +4004,7 @@ static void do_activate_blocked_waiter(struct rq *target_rq, struct task_struct 
 		}
 
 		if (task_cpu(p) != target_cpu) {
+			en_flags |= ENQUEUE_MIGRATED;
 			psi_ttwu_dequeue(p);
 			proxy_set_task_cpu(p, target_cpu);
 		}
