@@ -5198,13 +5198,8 @@ static long get_nr_to_scan(struct lruvec *lruvec, struct scan_control *sc, int s
 	if (nr_to_scan && !mem_cgroup_online(memcg))
 		return nr_to_scan;
 
-	/*
-	 * Try to get away with not aging at the default priority. With importance
-	 * tiering, age now if there is nothing to scan, rather than move on to the
-	 * more important memcgs in the next bins.
-	 */
-	if (!success || (sc->priority == DEF_PRIORITY &&
-			 (nr_to_scan || !lru_gen_importance_enabled())))
+	/* try to get away with not aging at the default priority */
+	if (!success || sc->priority == DEF_PRIORITY)
 		return nr_to_scan >> sc->priority;
 
 	trace_android_vh_mglru_aging_bypass(lruvec, max_seq,
@@ -5327,9 +5322,11 @@ static int shrink_one(struct lruvec *lruvec, struct scan_control *sc)
 	/*
 	 * With importance tiering, the top app and the system (adj < 100) can
 	 * still end up in the old generation, e.g., when the generation counter
-	 * moves. Leave them alone until reclaim is struggling.
+	 * moves. Leave them alone at the default priority, so that the cold
+	 * memory of less important memcgs goes first, but not below it, so that
+	 * their cold memory goes before the hot memory of the others.
 	 */
-	if (importance && sc->priority >= DEF_PRIORITY - 2 && mem_cgroup_online(memcg)) {
+	if (importance && sc->priority == DEF_PRIORITY && mem_cgroup_online(memcg)) {
 		int adj = memcg_imp_get_adj(memcg);
 
 		if (adj != MEMCG_IMP_UNSET && adj < 100)
