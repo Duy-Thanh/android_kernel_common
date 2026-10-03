@@ -1189,6 +1189,7 @@ static int __set_oom_adj(struct file *file, int oom_adj, bool legacy)
 	if (!legacy && has_capability_noaudit(current, CAP_SYS_RESOURCE))
 		task->signal->oom_score_adj_min = (short)oom_adj;
 	trace_oom_score_adj_update(task);
+	lru_gen_notify_oom_score_adj(task, oom_adj);
 
 	if (mm) {
 		struct task_struct *p;

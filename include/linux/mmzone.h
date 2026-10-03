@@ -657,6 +657,16 @@ static inline void lru_gen_soft_reclaim(struct mem_cgroup *memcg, int nid)
 
 #endif /* CONFIG_LRU_GEN */
 
+struct task_struct;
+
+#if defined(CONFIG_LRU_GEN) && defined(CONFIG_MEMCG)
+void lru_gen_notify_oom_score_adj(struct task_struct *task, int adj);
+#else
+static inline void lru_gen_notify_oom_score_adj(struct task_struct *task, int adj)
+{
+}
+#endif
+
 struct lruvec {
 	struct list_head		lists[NR_LRU_LISTS];
 	/* per lruvec lru_lock for memcg */

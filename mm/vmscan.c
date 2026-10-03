@@ -4421,14 +4421,169 @@ enum {
 	MEMCG_LRU_TAIL,
 	MEMCG_LRU_OLD,
 	MEMCG_LRU_YOUNG,
+	MEMCG_LRU_OLD_TAIL,	/* importance_mode: the tail of the old generation */
+	MEMCG_LRU_REBIN,	/* importance_mode: the same generation, a new bin */
 };
+
+/*
+ * Importance tiering (/sys/kernel/mm/lru_gen/importance_mode, off by default).
+ *
+ * When off, memcgs are hashed into random bins. When on, the bin of a memcg is
+ * derived from the oom_score_adj most recently written for one of its tasks,
+ * and shrink_many() visits the bins of the old generation in order, so that
+ * less important memcgs are reclaimed first. On Android, where each app process
+ * has its own memcg, this is the process importance assigned by the activity
+ * manager:
+ *
+ *   bin 0: offline memcgs, and 950 <= adj (cached apps, lmkd's first victims)
+ *   bin 1: 900 <= adj < 950 (cached apps)
+ *   bin 2: 800 <= adj < 900 (B services)
+ *   bin 3: 700 <= adj < 800 (the previous app)
+ *   bin 4: 500 <= adj < 700 (home and services)
+ *   bin 5: 100 <= adj < 500 (visible and perceptible apps, foreground services)
+ *   bin 6: 0 <= adj < 100 (the top app)
+ *   bin 7: adj < 0, or no adj recorded (system processes, the root memcg)
+ *
+ * The adj and a few flags are packed into one atomic64_t per memcg.
+ */
+#define MEMCG_IMP_ADJ		GENMASK_ULL(15, 0)
+#define MEMCG_IMP_VALID		BIT_ULL(16)
+#define MEMCG_IMP_OFFLINE	BIT_ULL(17)
+#define MEMCG_IMP_RECLAIMING	BIT_ULL(18)
+#define MEMCG_IMP_UNSET		INT_MIN
+
+static DEFINE_STATIC_KEY_FALSE(lru_gen_importance);
+
+static bool lru_gen_importance_enabled(void)
+{
+	return static_branch_unlikely(&lru_gen_importance);
+}
+
+static int lru_gen_importance_bin(int adj)
+{
+	BUILD_BUG_ON(MEMCG_NR_BINS != 8);
+
+	if (adj == MEMCG_IMP_UNSET || adj < 0)
+		return 7;
+	if (adj >= 950)
+		return 0;
+	if (adj >= 900)
+		return 1;
+	if (adj >= 800)
+		return 2;
+	if (adj >= 700)
+		return 3;
+	if (adj >= 500)
+		return 4;
+	if (adj >= 100)
+		return 5;
+	return 6;
+}
+
+#ifdef CONFIG_MEMCG
+
+static atomic64_t *memcg_imp_state(struct mem_cgroup *memcg)
+{
+	BUILD_BUG_ON(sizeof(memcg->__kabi_reserved_backport1) != sizeof(atomic64_t));
+
+	return (atomic64_t *)&memcg->__kabi_reserved_backport1;
+}
+
+static int memcg_imp_adj(u64 state)
+{
+	if (!(state & MEMCG_IMP_VALID))
+		return MEMCG_IMP_UNSET;
+
+	return (s16)(state & MEMCG_IMP_ADJ);
+}
+
+static int memcg_imp_get_adj(struct mem_cgroup *memcg)
+{
+	if (!memcg || mem_cgroup_is_root(memcg))
+		return MEMCG_IMP_UNSET;
+
+	return memcg_imp_adj(atomic64_read(memcg_imp_state(memcg)));
+}
+
+/* returns the previously recorded adj */
+static int memcg_imp_set_adj(struct mem_cgroup *memcg, int adj)
+{
+	atomic64_t *state = memcg_imp_state(memcg);
+	s64 old = atomic64_read(state);
+	s64 new;
+
+	do {
+		new = old & ~(MEMCG_IMP_ADJ | MEMCG_IMP_VALID);
+		if (adj != MEMCG_IMP_UNSET)
+			new |= (u16)adj | MEMCG_IMP_VALID;
+	} while (!atomic64_try_cmpxchg(state, &old, new));
+
+	return memcg_imp_adj(old);
+}
+
+static int memcg_imp_bin(struct mem_cgroup *memcg)
+{
+	u64 state;
+
+	if (!memcg || mem_cgroup_is_root(memcg))
+		return lru_gen_importance_bin(MEMCG_IMP_UNSET);
+
+	state = atomic64_read(memcg_imp_state(memcg));
+	if (state & MEMCG_IMP_OFFLINE)
+		return 0;
+
+	return lru_gen_importance_bin(memcg_imp_adj(state));
+}
+
+/* lets concurrent reclaimers in shrink_many() spread across memcgs */
+static bool memcg_imp_try_claim(struct mem_cgroup *memcg)
+{
+	return !(atomic64_fetch_or(MEMCG_IMP_RECLAIMING, memcg_imp_state(memcg)) &
+		 MEMCG_IMP_RECLAIMING);
+}
+
+static void memcg_imp_unclaim(struct mem_cgroup *memcg)
+{
+	atomic64_andnot(MEMCG_IMP_RECLAIMING, memcg_imp_state(memcg));
+}
+
+#else /* !CONFIG_MEMCG */
+
+static int memcg_imp_get_adj(struct mem_cgroup *memcg)
+{
+	return MEMCG_IMP_UNSET;
+}
+
+static int memcg_imp_bin(struct mem_cgroup *memcg)
+{
+	return lru_gen_importance_bin(MEMCG_IMP_UNSET);
+}
+
+static bool memcg_imp_try_claim(struct mem_cgroup *memcg)
+{
+	return true;
+}
+
+static void memcg_imp_unclaim(struct mem_cgroup *memcg)
+{
+}
+
+#endif /* CONFIG_MEMCG */
+
+static int lru_gen_memcg_bin(struct mem_cgroup *memcg)
+{
+	if (lru_gen_importance_enabled())
+		return memcg_imp_bin(memcg);
+
+	return get_random_u32_below(MEMCG_NR_BINS);
+}
 
 static void lru_gen_rotate_memcg(struct lruvec *lruvec, int op)
 {
 	int seg;
 	int old, new;
 	unsigned long flags;
-	int bin = get_random_u32_below(MEMCG_NR_BINS);
+	int bin = lru_gen_memcg_bin(lruvec_memcg(lruvec));
 	struct pglist_data *pgdat = lruvec_pgdat(lruvec);
 
 	spin_lock_irqsave(&pgdat->memcg_lru.lock, flags);
@@ -4443,10 +4598,12 @@ static void lru_gen_rotate_memcg(struct lruvec *lruvec, int op)
 		seg = MEMCG_LRU_HEAD;
 	else if (op == MEMCG_LRU_TAIL)
 		seg = MEMCG_LRU_TAIL;
-	else if (op == MEMCG_LRU_OLD)
+	else if (op == MEMCG_LRU_OLD || op == MEMCG_LRU_OLD_TAIL)
 		new = get_memcg_gen(pgdat->memcg_lru.seq);
 	else if (op == MEMCG_LRU_YOUNG)
 		new = get_memcg_gen(pgdat->memcg_lru.seq + 1);
+	else if (op == MEMCG_LRU_REBIN)
+		seg = READ_ONCE(lruvec->lrugen.seg);
 	else
 		VM_WARN_ON_ONCE(true);
 
@@ -4455,7 +4612,7 @@ static void lru_gen_rotate_memcg(struct lruvec *lruvec, int op)
 
 	hlist_nulls_del_rcu(&lruvec->lrugen.list);
 
-	if (op == MEMCG_LRU_HEAD || op == MEMCG_LRU_OLD)
+	if (op == MEMCG_LRU_HEAD || op == MEMCG_LRU_OLD || seg == MEMCG_LRU_HEAD)
 		hlist_nulls_add_head_rcu(&lruvec->lrugen.list, &pgdat->memcg_lru.fifo[new][bin]);
 	else
 		hlist_nulls_add_tail_rcu(&lruvec->lrugen.list, &pgdat->memcg_lru.fifo[new][bin]);
@@ -4475,7 +4632,7 @@ void lru_gen_online_memcg(struct mem_cgroup *memcg)
 {
 	int gen;
 	int nid;
-	int bin = get_random_u32_below(MEMCG_NR_BINS);
+	int bin = lru_gen_memcg_bin(memcg);
 
 	for_each_node(nid) {
 		struct pglist_data *pgdat = NODE_DATA(nid);
@@ -4499,6 +4656,9 @@ void lru_gen_online_memcg(struct mem_cgroup *memcg)
 void lru_gen_offline_memcg(struct mem_cgroup *memcg)
 {
 	int nid;
+
+	/* importance_mode files offline memcgs in bin 0 */
+	atomic64_or(MEMCG_IMP_OFFLINE, memcg_imp_state(memcg));
 
 	for_each_node(nid) {
 		struct lruvec *lruvec = get_lruvec(memcg, nid);
@@ -4540,6 +4700,92 @@ void lru_gen_soft_reclaim(struct mem_cgroup *memcg, int nid)
 	/* see the comment on MEMCG_NR_GENS */
 	if (READ_ONCE(lruvec->lrugen.seg) != MEMCG_LRU_HEAD)
 		lru_gen_rotate_memcg(lruvec, MEMCG_LRU_HEAD);
+}
+
+/*
+ * Moves a memcg after its adj changed from @prev to @adj. The top app and the
+ * system (adj < 100) go to the young generation. A memcg that becomes cached
+ * (adj >= 800) goes to the tail of the old generation. Any other change only
+ * moves the memcg to its new bin and keeps its generation, so that frequent
+ * updates within a tier, e.g., 905 -> 915 for cached apps, do not reset aging.
+ */
+static void lru_gen_importance_apply(struct mem_cgroup *memcg, int prev, int adj, bool force)
+{
+	int nid;
+	int old_bin = lru_gen_importance_bin(prev);
+	int new_bin = lru_gen_importance_bin(adj);
+
+	if (!force && prev == adj)
+		return;
+
+	for_each_node(nid) {
+		int op = MEMCG_LRU_NOP;
+		struct pglist_data *pgdat = NODE_DATA(nid);
+		struct lruvec *lruvec = get_lruvec(memcg, nid);
+
+		if (adj == MEMCG_IMP_UNSET) {
+			op = MEMCG_LRU_REBIN;
+		} else if (adj < 100) {
+			int young = get_memcg_gen(READ_ONCE(pgdat->memcg_lru.seq) + 1);
+
+			if (force || prev == MEMCG_IMP_UNSET || old_bin != new_bin ||
+			    READ_ONCE(lruvec->lrugen.gen) != young)
+				op = MEMCG_LRU_YOUNG;
+		} else if (adj >= 800 && (force || prev < 800)) {
+			op = MEMCG_LRU_OLD_TAIL;
+		} else if (force || old_bin != new_bin) {
+			op = MEMCG_LRU_REBIN;
+		}
+
+		if (op)
+			lru_gen_rotate_memcg(lruvec, op);
+	}
+}
+
+/* called by __set_oom_adj() under oom_adj_mutex */
+void lru_gen_notify_oom_score_adj(struct task_struct *task, int adj)
+{
+	int prev;
+	struct mem_cgroup *memcg;
+
+	if (!lru_gen_importance_enabled())
+		return;
+
+	rcu_read_lock();
+	memcg = mem_cgroup_from_task(task);
+	if (!memcg || mem_cgroup_is_root(memcg) || !mem_cgroup_tryget(memcg)) {
+		rcu_read_unlock();
+		return;
+	}
+	rcu_read_unlock();
+
+	/* with more than one process per memcg, the last writer wins */
+	prev = memcg_imp_set_adj(memcg, adj);
+	if (!(atomic64_read(memcg_imp_state(memcg)) & MEMCG_IMP_OFFLINE))
+		lru_gen_importance_apply(memcg, prev, adj, false);
+
+	mem_cgroup_put(memcg);
+}
+
+/* records the lowest adj of the processes in this memcg, not its descendants */
+static int memcg_imp_resync_adj(struct mem_cgroup *memcg)
+{
+	struct css_task_iter it;
+	struct task_struct *task;
+	int adj = MEMCG_IMP_UNSET;
+
+	css_task_iter_start(&memcg->css, CSS_TASK_ITER_PROCS, &it);
+	while ((task = css_task_iter_next(&it))) {
+		int task_adj = READ_ONCE(task->signal->oom_score_adj);
+
+		if (adj == MEMCG_IMP_UNSET || task_adj < adj)
+			adj = task_adj;
+	}
+	css_task_iter_end(&it);
+
+	memcg_imp_set_adj(memcg, adj);
+
+	return adj;
 }
 
 #endif /* CONFIG_MEMCG */
@@ -4944,8 +5190,13 @@ static long get_nr_to_scan(struct lruvec *lruvec, struct scan_control *sc, int s
 	if (nr_to_scan && !mem_cgroup_online(memcg))
 		return nr_to_scan;
 
-	/* try to get away with not aging at the default priority */
-	if (!success || sc->priority == DEF_PRIORITY)
+	/*
+	 * Try to get away with not aging at the default priority. With importance
+	 * tiering, age now if there is nothing to scan, rather than move on to the
+	 * more important memcgs in the next bins.
+	 */
+	if (!success || (sc->priority == DEF_PRIORITY &&
+			 (nr_to_scan || !lru_gen_importance_enabled())))
 		return nr_to_scan >> sc->priority;
 
 	trace_android_vh_mglru_aging_bypass(lruvec, max_seq,
@@ -5040,6 +5291,7 @@ static int shrink_one(struct lruvec *lruvec, struct scan_control *sc)
 	unsigned long reclaimed = sc->nr_reclaimed;
 	struct mem_cgroup *memcg = lruvec_memcg(lruvec);
 	struct pglist_data *pgdat = lruvec_pgdat(lruvec);
+	bool importance = lru_gen_importance_enabled();
 
 	/* lru_gen_age_node() called mem_cgroup_calculate_protection() */
 	if (mem_cgroup_below_min(NULL, memcg))
@@ -5051,6 +5303,18 @@ static int shrink_one(struct lruvec *lruvec, struct scan_control *sc)
 			return MEMCG_LRU_TAIL;
 
 		memcg_memory_event(memcg, MEMCG_LOW);
+	}
+
+	/*
+	 * With importance tiering, the top app and the system (adj < 100) can
+	 * still end up in the old generation, e.g., when the generation counter
+	 * moves. Leave them alone until reclaim is struggling.
+	 */
+	if (importance && sc->priority >= DEF_PRIORITY - 2 && mem_cgroup_online(memcg)) {
+		int adj = memcg_imp_get_adj(memcg);
+
+		if (adj != MEMCG_IMP_UNSET && adj < 100)
+			return MEMCG_LRU_YOUNG;
 	}
 
 	success = try_to_shrink_lruvec(lruvec, sc);
@@ -5066,8 +5330,18 @@ static int shrink_one(struct lruvec *lruvec, struct scan_control *sc)
 	if (success && mem_cgroup_online(memcg))
 		return MEMCG_LRU_YOUNG;
 
-	if (!success && lruvec_is_sizable(lruvec, sc))
-		return 0;
+	if (!success && lruvec_is_sizable(lruvec, sc)) {
+		if (!importance)
+			return 0;
+
+		/*
+		 * Staying at the head of the bin would hold back the rest of the
+		 * bin, and with it all the more important bins. Move to the tail
+		 * of the bin while making progress, and out of the way otherwise.
+		 */
+		if (sc->nr_reclaimed > reclaimed)
+			return MEMCG_LRU_TAIL;
+	}
 
 	/* one retry if offlined or too small */
 	return READ_ONCE(lruvec->lrugen.seg) != MEMCG_LRU_TAIL ?
@@ -5085,19 +5359,36 @@ static void shrink_many(struct pglist_data *pgdat, struct scan_control *sc)
 	struct mem_cgroup *memcg;
 	struct hlist_nulls_node *pos;
 	bool bypass = false;
+	bool importance = lru_gen_importance_enabled();
+	bool claimed;
+	bool progressed;
+	bool skipped = false;
+	bool contended = false;
+	unsigned long reclaimed;
 
 	gen = get_memcg_gen(READ_ONCE(pgdat->memcg_lru.seq));
-	bin = first_bin = get_random_u32_below(MEMCG_NR_BINS);
+	/* with importance tiering, start from the least important bin */
+	bin = first_bin = importance ? 0 : get_random_u32_below(MEMCG_NR_BINS);
 restart:
 	op = 0;
 	memcg = NULL;
+	claimed = false;
+	progressed = false;
+	reclaimed = sc->nr_reclaimed;
 
 	rcu_read_lock();
 
 	hlist_nulls_for_each_entry_rcu(lrugen, pos, &pgdat->memcg_lru.fifo[gen][bin], list) {
+		int seg;
+
 		if (op) {
 			lru_gen_rotate_memcg(lruvec, op);
 			op = 0;
+		}
+
+		if (claimed) {
+			memcg_imp_unclaim(memcg);
+			claimed = false;
 		}
 
 		mem_cgroup_put(memcg);
@@ -5119,9 +5410,27 @@ restart:
 		if (bypass)
 			continue;
 
+		/*
+		 * With importance tiering, all reclaimers start from the same bin.
+		 * Skip memcgs that other reclaimers are working on, rather than
+		 * wait for their lru_lock, unless nothing else in this bin yields.
+		 */
+		if (importance) {
+			if (memcg_imp_try_claim(memcg)) {
+				claimed = true;
+			} else if (!contended) {
+				skipped = true;
+				continue;
+			}
+		}
+
+		seg = READ_ONCE(lrugen->seg);
+
 		rcu_read_unlock();
 
 		op = shrink_one(lruvec, sc);
+		if (op == MEMCG_LRU_TAIL && seg != MEMCG_LRU_TAIL)
+			progressed = true;
 
 		rcu_read_lock();
 
@@ -5134,6 +5443,9 @@ restart:
 	if (op)
 		lru_gen_rotate_memcg(lruvec, op);
 
+	if (claimed)
+		memcg_imp_unclaim(memcg);
+
 	mem_cgroup_put(memcg);
 
 	if (!is_a_nulls(pos))
@@ -5143,10 +5455,26 @@ restart:
 	if (gen != get_nulls_value(pos))
 		goto restart;
 
+	/* with importance tiering, stay on the current bin while it yields */
+	if (importance && (sc->nr_reclaimed > reclaimed || progressed))
+		goto restart;
+
+	/*
+	 * Then the memcgs of this bin that other reclaimers are working on, so
+	 * that contention does not push reclaim into more important bins.
+	 */
+	if (skipped && !contended) {
+		contended = true;
+		goto restart;
+	}
+
 	/* try the rest of the bins of the current generation */
 	bin = get_memcg_bin(bin + 1);
-	if (bin != first_bin)
+	if (bin != first_bin) {
+		skipped = false;
+		contended = false;
 		goto restart;
+	}
 }
 
 static void lru_gen_shrink_lruvec(struct lruvec *lruvec, struct scan_control *sc)
@@ -5421,9 +5749,75 @@ static ssize_t enabled_store(struct kobject *kobj, struct kobj_attribute *attr,
 
 static struct kobj_attribute lru_gen_enabled_attr = __ATTR_RW(enabled);
 
+static void lru_gen_change_importance(bool enabled)
+{
+	static DEFINE_MUTEX(importance_mutex);
+
+	mutex_lock(&importance_mutex);
+
+	if (enabled == lru_gen_importance_enabled())
+		goto unlock;
+
+	if (enabled)
+		static_branch_enable(&lru_gen_importance);
+	else
+		static_branch_disable(&lru_gen_importance);
+
+#ifdef CONFIG_MEMCG
+	if (!mem_cgroup_disabled()) {
+		struct mem_cgroup *memcg = mem_cgroup_iter(NULL, NULL, NULL);
+
+		do {
+			int nid;
+			bool offline = atomic64_read(memcg_imp_state(memcg)) & MEMCG_IMP_OFFLINE;
+
+			if (!mem_cgroup_online(memcg) && !offline) {
+				/* lru_gen_online_memcg() has not hashed it yet */
+			} else if (enabled && !offline && !mem_cgroup_is_root(memcg)) {
+				int adj = memcg_imp_resync_adj(memcg);
+
+				lru_gen_importance_apply(memcg, MEMCG_IMP_UNSET, adj, true);
+			} else {
+				/* the root to bin 7, offline memcgs to bin 0, or random bins */
+				for_each_node(nid)
+					lru_gen_rotate_memcg(get_lruvec(memcg, nid),
+							     enabled && offline ? MEMCG_LRU_OLD :
+										  MEMCG_LRU_REBIN);
+			}
+
+			cond_resched();
+		} while ((memcg = mem_cgroup_iter(NULL, memcg, NULL)));
+	}
+#endif
+unlock:
+	mutex_unlock(&importance_mutex);
+}
+
+static ssize_t importance_mode_show(struct kobject *kobj, struct kobj_attribute *attr,
+				    char *buf)
+{
+	return sysfs_emit(buf, "%d\n", lru_gen_importance_enabled());
+}
+
+static ssize_t importance_mode_store(struct kobject *kobj, struct kobj_attribute *attr,
+				     const char *buf, size_t len)
+{
+	bool enabled;
+
+	if (kstrtobool(buf, &enabled))
+		return -EINVAL;
+
+	lru_gen_change_importance(enabled);
+
+	return len;
+}
+
+static struct kobj_attribute lru_gen_importance_mode_attr = __ATTR_RW(importance_mode);
+
 static struct attribute *lru_gen_attrs[] = {
 	&lru_gen_min_ttl_attr.attr,
 	&lru_gen_enabled_attr.attr,
+	&lru_gen_importance_mode_attr.attr,
 	NULL
 };
 
