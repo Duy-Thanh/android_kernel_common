@@ -1811,6 +1811,13 @@ skip_prepare:
 }
 
 #ifdef CONFIG_TRANSPARENT_HUGEPAGE
+/* Non-compound pages do not retain their allocation order in struct page. */
+void free_hpage_order(struct page *page, unsigned int order, fpi_t fpi_flags)
+{
+	__free_pages_ok(page, order, fpi_flags);
+}
+EXPORT_SYMBOL_GPL(free_hpage_order);
+
 void free_hpage(struct page *page, fpi_t fpi_flags)
 {
 	__free_pages_ok(page, HPAGE_PMD_ORDER, fpi_flags);
@@ -2122,6 +2129,13 @@ void prep_new_page(struct page *page, unsigned int order, gfp_t gfp_flags,
 EXPORT_SYMBOL_GPL(prep_new_page);
 
 #ifdef CONFIG_TRANSPARENT_HUGEPAGE
+void prep_new_hpage_order(struct page *page, unsigned int order,
+			  gfp_t gfp_flags, unsigned int alloc_flags)
+{
+	prep_new_page(page, order, gfp_flags, alloc_flags);
+}
+EXPORT_SYMBOL_GPL(prep_new_hpage_order);
+
 void prep_new_hpage(struct page *page, gfp_t gfp_flags, unsigned int alloc_flags)
 {
 	return prep_new_page(page, HPAGE_PMD_ORDER, gfp_flags, alloc_flags);

@@ -9098,8 +9098,15 @@ static int add_ext_adv_data(struct sock *sk, struct hci_dev *hdev, void *data,
 
 	BT_DBG("%s", hdev->name);
 
+<<<<<<< HEAD   (b261002c2a5952e7a8807a9233b15d923ef92df1 Merge 8b4c412e001b ("Bluetooth: serialize accept_q access") )
 	expected_len = struct_size(cp, data, cp->adv_data_len + cp->scan_rsp_len);
 	if (expected_len != data_len)
+||||||| BASE   (4f02a973d94c2e1b76391568aaf9d316067b9322 ANDROID: GKI: Update symbol list for Pixel Watch)
+=======
+	expected_len = struct_size(cp, data, cp->adv_data_len +
+				   cp->scan_rsp_len);
+	if (expected_len > data_len)
+>>>>>>> BRANCH (89b3cc162c81c59edf4a48f784725849effed283 ANDROID: sched: Add missing vendor hook for sched_setaffinit)
 		return mgmt_cmd_status(sk, hdev->id, MGMT_OP_ADD_EXT_ADV_DATA,
 				       MGMT_STATUS_INVALID_PARAMS);
 
