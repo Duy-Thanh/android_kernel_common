@@ -699,7 +699,12 @@ __mutex_lock_common(struct mutex *lock, unsigned int state, unsigned int subclas
 				goto err;
 		}
 
+<<<<<<< HEAD   (e57243be434e7faedd9a0085ddd34719cdf2531c Merge d876604b6fd2 ("hv: utils: handle and propagate errors )
 		raw_spin_unlock_irqrestore(&lock->wait_lock, flags);
+||||||| BASE   (d876604b6fd2e4fa7add9d955c709a9eb707b485 hv: utils: handle and propagate errors in kvp_register)
+=======
+		raw_spin_unlock(&lock->wait_lock);
+>>>>>>> BRANCH (4daa7922707f9dde113b27f25852e168c901806b phonet: Pass net and ifindex to phonet_address_notify().)
 		/* Make sure we do wakeups before calling schedule */
 		wake_up_q(&wake_q);
 		wake_q_init(&wake_q);
@@ -777,9 +782,16 @@ skip_wait:
 	if (ww_ctx)
 		ww_mutex_lock_acquired(ww, ww_ctx);
 
+<<<<<<< HEAD   (e57243be434e7faedd9a0085ddd34719cdf2531c Merge d876604b6fd2 ("hv: utils: handle and propagate errors )
 	raw_spin_unlock_irqrestore(&lock->wait_lock, flags);
 	wake_up_q(&wake_q);
 	trace_android_vh_record_mutex_lock_starttime(lock, jiffies);
+||||||| BASE   (d876604b6fd2e4fa7add9d955c709a9eb707b485 hv: utils: handle and propagate errors in kvp_register)
+	raw_spin_unlock(&lock->wait_lock);
+=======
+	raw_spin_unlock(&lock->wait_lock);
+	wake_up_q(&wake_q);
+>>>>>>> BRANCH (4daa7922707f9dde113b27f25852e168c901806b phonet: Pass net and ifindex to phonet_address_notify().)
 	preempt_enable();
 	return 0;
 
@@ -1043,13 +1055,25 @@ static noinline void __sched __mutex_unlock_slowpath(struct mutex *lock, unsigne
 	if (owner & MUTEX_FLAG_HANDOFF)
 		__mutex_handoff(lock, next);
 
+<<<<<<< HEAD   (e57243be434e7faedd9a0085ddd34719cdf2531c Merge d876604b6fd2 ("hv: utils: handle and propagate errors )
 	raw_spin_unlock(&current->blocked_lock);
 	trace_android_vh_mutex_unlock_slowpath_before_wakeq(lock);
 	preempt_disable();
 	raw_spin_unlock_irqrestore(&lock->wait_lock, flags);
+||||||| BASE   (d876604b6fd2e4fa7add9d955c709a9eb707b485 hv: utils: handle and propagate errors in kvp_register)
+	raw_spin_unlock(&lock->wait_lock);
+
+=======
+	preempt_disable();
+	raw_spin_unlock(&lock->wait_lock);
+>>>>>>> BRANCH (4daa7922707f9dde113b27f25852e168c901806b phonet: Pass net and ifindex to phonet_address_notify().)
 	wake_up_q(&wake_q);
 	preempt_enable();
+<<<<<<< HEAD   (e57243be434e7faedd9a0085ddd34719cdf2531c Merge d876604b6fd2 ("hv: utils: handle and propagate errors )
 	trace_android_vh_mutex_unlock_slowpath(lock);
+||||||| BASE   (d876604b6fd2e4fa7add9d955c709a9eb707b485 hv: utils: handle and propagate errors in kvp_register)
+=======
+>>>>>>> BRANCH (4daa7922707f9dde113b27f25852e168c901806b phonet: Pass net and ifindex to phonet_address_notify().)
 }
 
 #ifndef CONFIG_DEBUG_LOCK_ALLOC

@@ -284,12 +284,16 @@ __ww_mutex_die(struct MUTEX *lock, struct MUTEX_WAITER *waiter,
 #ifndef WW_RT
 		debug_mutex_wake_waiter(lock, waiter);
 #endif
+<<<<<<< HEAD   (e57243be434e7faedd9a0085ddd34719cdf2531c Merge d876604b6fd2 ("hv: utils: handle and propagate errors )
 		/*
 		 * When waking up the task to die, be sure to set the
 		 * blocked_on to PROXY_WAKING. Otherwise we can see
 		 * circular blocked_on relationships that can't resolve.
 		 */
 		set_task_blocked_on_waking(waiter->task, lock);
+||||||| BASE   (d876604b6fd2e4fa7add9d955c709a9eb707b485 hv: utils: handle and propagate errors in kvp_register)
+=======
+>>>>>>> BRANCH (4daa7922707f9dde113b27f25852e168c901806b phonet: Pass net and ifindex to phonet_address_notify().)
 		wake_q_add(wake_q, waiter->task);
 	}
 
@@ -337,6 +341,7 @@ static bool __ww_mutex_wound(struct MUTEX *lock,
 		 * it's wounded in __ww_mutex_check_kill() or has a
 		 * wakeup pending to re-read the wounded state.
 		 */
+<<<<<<< HEAD   (e57243be434e7faedd9a0085ddd34719cdf2531c Merge d876604b6fd2 ("hv: utils: handle and propagate errors )
 		if (owner != current) {
 			/*
 			 * When waking up the task to wound, be sure to set the
@@ -350,6 +355,15 @@ static bool __ww_mutex_wound(struct MUTEX *lock,
 			set_task_blocked_on_waking(owner, NULL);
 			wake_q_add(wake_q, owner);
 		}
+||||||| BASE   (d876604b6fd2e4fa7add9d955c709a9eb707b485 hv: utils: handle and propagate errors in kvp_register)
+		if (owner != current)
+			wake_up_process(owner);
+
+=======
+		if (owner != current)
+			wake_q_add(wake_q, owner);
+
+>>>>>>> BRANCH (4daa7922707f9dde113b27f25852e168c901806b phonet: Pass net and ifindex to phonet_address_notify().)
 		return true;
 	}
 
@@ -396,7 +410,11 @@ static __always_inline void
 ww_mutex_set_context_fastpath(struct ww_mutex *lock, struct ww_acquire_ctx *ctx)
 {
 	DEFINE_WAKE_Q(wake_q);
+<<<<<<< HEAD   (e57243be434e7faedd9a0085ddd34719cdf2531c Merge d876604b6fd2 ("hv: utils: handle and propagate errors )
 	unsigned long flags;
+||||||| BASE   (d876604b6fd2e4fa7add9d955c709a9eb707b485 hv: utils: handle and propagate errors in kvp_register)
+=======
+>>>>>>> BRANCH (4daa7922707f9dde113b27f25852e168c901806b phonet: Pass net and ifindex to phonet_address_notify().)
 
 	ww_mutex_lock_acquired(lock, ctx);
 
@@ -425,10 +443,19 @@ ww_mutex_set_context_fastpath(struct ww_mutex *lock, struct ww_acquire_ctx *ctx)
 	 * Uh oh, we raced in fastpath, check if any of the waiters need to
 	 * die or wound us.
 	 */
+<<<<<<< HEAD   (e57243be434e7faedd9a0085ddd34719cdf2531c Merge d876604b6fd2 ("hv: utils: handle and propagate errors )
 	lock_wait_lock(&lock->base, &flags);
 	__ww_mutex_check_waiters(&lock->base, ctx, &wake_q);
 	preempt_disable();
 	unlock_wait_lock(&lock->base, &flags);
+||||||| BASE   (d876604b6fd2e4fa7add9d955c709a9eb707b485 hv: utils: handle and propagate errors in kvp_register)
+	lock_wait_lock(&lock->base);
+=======
+	lock_wait_lock(&lock->base);
+	__ww_mutex_check_waiters(&lock->base, ctx, &wake_q);
+	preempt_disable();
+	unlock_wait_lock(&lock->base);
+>>>>>>> BRANCH (4daa7922707f9dde113b27f25852e168c901806b phonet: Pass net and ifindex to phonet_address_notify().)
 	wake_up_q(&wake_q);
 	preempt_enable();
 }
