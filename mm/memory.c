@@ -5426,8 +5426,6 @@ static vm_fault_t do_anonymous_page(struct vm_fault *vmf)
 	if (!folio)
 		goto oom;
 
-	vma_folio_slice_bounds(vma, vmf->address, &nr_pages, &addr);
-
 	/*
 	 * The memory barrier inside __folio_mark_uptodate makes sure that
 	 * preceding stores to the page contents become visible before
@@ -5441,13 +5439,8 @@ static vm_fault_t do_anonymous_page(struct vm_fault *vmf)
 	if (!vmf->pte)
 		goto release;
 
-	vma_folio_clamp_none_ptes(vma, vmf, &addr, &nr_pages);
-
-	if (nr_pages == 1 && vmf_pte_changed(vmf)) {
+	if (vmf_pte_changed(vmf)) {
 		update_mmu_tlb(vma, addr, vmf->pte);
-		goto release;
-	} else if (nr_pages > 1 && !pte_range_none(vmf->pte, nr_pages)) {
-		update_mmu_tlb_range(vma, addr, vmf->pte, nr_pages);
 		goto release;
 	}
 

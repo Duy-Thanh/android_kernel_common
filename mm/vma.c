@@ -53,8 +53,8 @@ struct mmap_state {
 		.vmi = vmi_,						\
 		.addr = addr_,						\
 		.end = (addr_) + (len_),				\
-		.pgoff = mm_mmap_pgoff(mm_, pgoff_),			\
-		.slice_off = mm_mmap_slice_off(mm_, pgoff_),		\
+		.pgoff = (file_) ? mm_mmap_pgoff(mm_, pgoff_) : (pgoff_), \
+		.slice_off = (file_) ? mm_mmap_slice_off(mm_, pgoff_) : 0, \
 		.pglen = (len_) >> PAGE_SHIFT,				\
 		.vm_flags = vm_flags_,					\
 		.file = file_,						\
