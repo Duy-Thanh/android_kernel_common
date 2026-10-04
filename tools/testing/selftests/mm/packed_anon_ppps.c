@@ -41,6 +41,71 @@ static bool verify_groups(const unsigned char *base, unsigned int groups)
 	return true;
 }
 
+static void lazy_faults_preserve_absent_siblings(bool *single_present,
+					  bool *packed_after_faults)
+{
+	unsigned char *reservation;
+	unsigned char *base;
+	unsigned char vec[PPPS_SLICES] = {};
+	uint64_t pfn[PPPS_SLICES];
+	unsigned int i;
+
+	*single_present = false;
+	*packed_after_faults = false;
+	base = map_aligned(2 * NATIVE_PAGE_SIZE, &reservation);
+	if (base == MAP_FAILED)
+		return;
+
+	base[PROCESS_PAGE_SIZE] = 0x5a;
+	*single_present = only_slice_present(base, 1) &&
+		!mincore(base, NATIVE_PAGE_SIZE, vec) &&
+		!vec[0] && (vec[1] & 1) && !vec[2] && !vec[3];
+
+	for (i = 0; i < PPPS_SLICES; i++)
+		base[i * PROCESS_PAGE_SIZE] = 0x60 + i;
+	*packed_after_faults = read_pfns(base, pfn) && same_pfn(pfn);
+	munmap(reservation, 3 * NATIVE_PAGE_SIZE);
+}
+
+static bool adjacent_anon_mmaps_merge(void)
+{
+	unsigned char *reservation;
+	unsigned char *base;
+	unsigned long start, end, lo, hi;
+	char line[256];
+	FILE *maps;
+	unsigned int i, overlaps = 0;
+
+	base = map_aligned_prot(NATIVE_PAGE_SIZE, PROT_NONE, &reservation);
+	if (base == MAP_FAILED)
+		return false;
+	munmap(reservation, 2 * NATIVE_PAGE_SIZE);
+
+	for (i = 0; i < PPPS_SLICES; i++) {
+		void *mapped = mmap(base + i * PROCESS_PAGE_SIZE,
+				    PROCESS_PAGE_SIZE, PROT_READ | PROT_WRITE,
+				    MAP_PRIVATE | MAP_ANONYMOUS |
+				    MAP_FIXED_NOREPLACE, -1, 0);
+
+		if (mapped == MAP_FAILED)
+			goto out;
+	}
+
+	start = (unsigned long)base;
+	end = start + NATIVE_PAGE_SIZE;
+	maps = fopen("/proc/self/maps", "re");
+	if (!maps)
+		goto out;
+	while (fgets(line, sizeof(line), maps))
+		if (sscanf(line, "%lx-%lx", &lo, &hi) == 2 &&
+		    lo < end && hi > start)
+			overlaps++;
+	fclose(maps);
+out:
+	munmap(base, NATIVE_PAGE_SIZE);
+	return overlaps == 1;
+}
+
 static bool packed_smaps_matches(const unsigned char *base,
 				 unsigned long pss,
 				 unsigned long shared_dirty,
@@ -871,10 +936,22 @@ static int run_test(void)
 	bool swapped;
 	bool process_vm_read_ok;
 	bool process_vm_write_ok;
+	bool single_present;
+	bool packed_after_faults;
 	unsigned char value = 1;
 
 	ksft_print_header();
-	ksft_set_plan(31);
+	ksft_set_plan(34);
+
+	ksft_test_result(adjacent_anon_mmaps_merge(),
+			 "adjacent anonymous mmap calls merge into one VMA\n");
+
+	lazy_faults_preserve_absent_siblings(&single_present,
+					    &packed_after_faults);
+	ksft_test_result(single_present,
+			 "anonymous fault leaves untouched sibling PTEs absent\n");
+	ksft_test_result(packed_after_faults,
+			 "later sibling faults reuse one native folio\n");
 
 	base = map_aligned(2 * NATIVE_PAGE_SIZE, &reservation);
 	ksft_test_result(base != MAP_FAILED, "map anonymous test range\n");

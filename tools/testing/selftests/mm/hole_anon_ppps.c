@@ -357,12 +357,12 @@ static int run_test(void)
 	base = map_aligned(NATIVE_PAGE_SIZE, &reservation);
 	if (base != MAP_FAILED)
 		memset(base + 2 * PROCESS_PAGE_SIZE, 0x52, PROCESS_PAGE_SIZE);
-	passed = base != MAP_FAILED && read_pfns(base, pfn) && same_pfn(pfn) &&
+	passed = base != MAP_FAILED && only_slice_present(base, 2) &&
 		 base[0] == 0 && base[PROCESS_PAGE_SIZE] == 0 &&
 		 base[2 * PROCESS_PAGE_SIZE] == 0x52 &&
 		 base[3 * PROCESS_PAGE_SIZE] == 0;
 	ksft_test_result(passed,
-			 "one middle-slice fault installs the complete tuple\n");
+			 "one middle-slice fault leaves untouched slices absent\n");
 	if (base != MAP_FAILED)
 		munmap(reservation, 2 * NATIVE_PAGE_SIZE);
 

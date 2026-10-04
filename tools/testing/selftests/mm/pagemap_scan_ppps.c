@@ -53,14 +53,19 @@ static int run_test(void)
 		  regions, ARRAY_SIZE(regions));
 	ret = scan(fd, &arg);
 	rounded_end = (uintptr_t)mapping + 4 * PROCESS_PAGE_SIZE;
-	ksft_test_result(ret == 1, "report the packed tuple as one range (%d)\n",
+	/* Anonymous faults populate only the touched process pages. */
+	ksft_test_result(ret == 2, "report the two present pages as separate ranges (%d)\n",
 			 ret);
 	ksft_test_result(arg.walk_end == rounded_end,
 			 "round the scan end in 4K process pages (%#llx)\n",
 			 (unsigned long long)arg.walk_end);
 	ksft_test_result(regions[0].start == (uintptr_t)mapping &&
-			 regions[0].end == rounded_end,
-			 "return one process-page-aligned tuple range\n");
+			 regions[0].end == (uintptr_t)mapping + PROCESS_PAGE_SIZE &&
+			 regions[1].start == (uintptr_t)mapping +
+						2 * PROCESS_PAGE_SIZE &&
+			 regions[1].end == (uintptr_t)mapping +
+						3 * PROCESS_PAGE_SIZE,
+			 "return process-page-aligned present ranges\n");
 
 	init_scan(&arg, mapping + 1, PROCESS_PAGE_SIZE, regions,
 		  ARRAY_SIZE(regions));
