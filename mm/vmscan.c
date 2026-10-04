@@ -4995,13 +4995,15 @@ static long get_nr_to_scan(struct lruvec *lruvec, struct scan_control *sc, int s
 
 	success = should_run_aging(lruvec, max_seq, swappiness, &nr_to_scan);
 
-	/* try to scrape all its memory if this memcg was deleted */
-	if (nr_to_scan && !mem_cgroup_online(memcg))
-		return nr_to_scan;
-
 	/* try to get away with not aging at the default priority */
-	if (!success || sc->priority == DEF_PRIORITY)
-		return nr_to_scan >> sc->priority;
+	if (!success || sc->priority == DEF_PRIORITY) {
+		unsigned long scan = nr_to_scan >> sc->priority;
+
+		/* scrape out the remaining pages of a deleted memcg */
+		if (!scan && !mem_cgroup_online(memcg))
+			scan = min(nr_to_scan, SWAP_CLUSTER_MAX);
+		return scan;
+	}
 
 	trace_android_vh_mglru_aging_bypass(lruvec, max_seq,
 		swappiness, &bypass, &young);
@@ -5130,7 +5132,7 @@ static int shrink_one(struct lruvec *lruvec, struct scan_control *sc)
 	if (success && mem_cgroup_online(memcg))
 		return MEMCG_LRU_YOUNG;
 
-	if (!success && lruvec_is_sizable(lruvec, sc))
+	if (!success && mem_cgroup_online(memcg) && lruvec_is_sizable(lruvec, sc))
 		return 0;
 
 	/* one retry if offlined or too small */
