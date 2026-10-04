@@ -293,14 +293,25 @@ static inline int inet_csk_reqsk_queue_is_full(const struct sock *sk)
 bool inet_csk_reqsk_queue_drop(struct sock *sk, struct request_sock *req);
 void inet_csk_reqsk_queue_drop_and_put(struct sock *sk, struct request_sock *req);
 
+<<<<<<< HEAD   (0ada4d0fe86354daa0c61958529e5e7087a606f7 Merge c8124b28f12d ("xhci: fix lost bounce buffers on TDs sp)
 static inline void inet_csk_prepare_for_destroy_sock(struct sock *sk)
 {
 	/* The below has to be done to allow calling inet_csk_destroy_sock */
 	sock_set_flag(sk, SOCK_DEAD);
 	percpu_counter_inc(sk->sk_prot->orphan_count);
 }
+||||||| BASE   (c8124b28f12dbdd126118e63d0ebf8093a01fb81 xhci: fix lost bounce buffers on TDs spanning several ring s)
+static inline void inet_csk_prepare_for_destroy_sock(struct sock *sk)
+{
+	/* The below has to be done to allow calling inet_csk_destroy_sock */
+	sock_set_flag(sk, SOCK_DEAD);
+	this_cpu_inc(*sk->sk_prot->orphan_count);
+}
+=======
+>>>>>>> BRANCH (b895dbed8ac9e12a5ffa1a2165575a8469f8340d usb: gadget: configfs: fix out-of-bounds read of qw_sign)
 
 void inet_csk_destroy_sock(struct sock *sk);
+void inet_csk_prepare_for_destroy_sock(struct sock *sk);
 void inet_csk_prepare_forced_close(struct sock *sk);
 
 /*
