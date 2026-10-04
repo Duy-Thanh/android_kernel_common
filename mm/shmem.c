@@ -1710,7 +1710,7 @@ unsigned long shmem_allowable_huge_orders(struct inode *inode,
 
 	global_huge = shmem_huge_global_enabled(inode, index, write_end,
 					shmem_huge_force, vma, vm_flags);
-	if (!vma || !vma_is_anon_shmem(vma)) {
+	if ((vma && !vma_is_anon_shmem(vma)) || inode->i_nlink) {
 		/*
 		 * For tmpfs, we now only support PMD sized THP if huge page
 		 * is enabled, otherwise fallback to order 0.
@@ -1736,7 +1736,7 @@ unsigned long shmem_allowable_huge_orders(struct inode *inode,
 	order = highest_order(within_size_orders);
 	while (within_size_orders) {
 		aligned_index = round_up(index + 1, 1 << order);
-		i_size = round_up(i_size_read(inode), PAGE_SIZE);
+		i_size = round_up(max(write_end, i_size_read(inode)), PAGE_SIZE);
 		if (i_size >> PAGE_SHIFT >= aligned_index) {
 			mask |= within_size_orders;
 			break;
@@ -2372,6 +2372,8 @@ repeat:
 
 		huge_gfp = vma_thp_gfp_mask(vma);
 		huge_gfp = limit_gfp_mask(huge_gfp, gfp);
+		if (sgp == SGP_WRITE || sgp == SGP_FALLOC)
+			huge_gfp |= __GFP_SKIP_ZERO;
 		folio = shmem_alloc_and_add_folio(vmf, huge_gfp,
 				inode, index, fault_mm, orders);
 		if (!IS_ERR(folio)) {
@@ -2385,7 +2387,10 @@ repeat:
 	}
 #endif
 
-	folio = shmem_alloc_and_add_folio(vmf, gfp, inode, index, fault_mm, 0);
+	folio = shmem_alloc_and_add_folio(vmf,
+			(sgp == SGP_WRITE || sgp == SGP_FALLOC) ?
+				(gfp | __GFP_SKIP_ZERO) : gfp,
+			inode, index, fault_mm, 0);
 	if (IS_ERR(folio)) {
 		error = PTR_ERR(folio);
 		if (error == -EEXIST)
@@ -2436,8 +2441,11 @@ clear:
 	if (sgp != SGP_WRITE && !folio_test_uptodate(folio)) {
 		long i, n = folio_nr_pages(folio);
 
-		for (i = 0; i < n; i++)
-			clear_highpage(folio_page(folio, i));
+		if (!alloced ||
+		    (!want_init_on_alloc(gfp) && !want_init_on_free())) {
+			for (i = 0; i < n; i++)
+				clear_highpage(folio_page(folio, i));
+		}
 		flush_dcache_folio(folio);
 		folio_mark_uptodate(folio);
 	}
@@ -2655,12 +2663,14 @@ unsigned long shmem_get_unmapped_area(struct file *file,
 			if (IS_ERR(shm_mnt))
 				return addr;
 			sb = shm_mnt->mnt_sb;
+		}
 
-			/*
-			 * Find the highest mTHP order used for anonymous shmem to
-			 * provide a suitable alignment address.
-			 */
+		/*
+		 * Find the highest mTHP order used for anonymous shmem to
+		 * provide a suitable alignment address.
+		 */
 #ifdef CONFIG_TRANSPARENT_HUGEPAGE
+		if (!file || !file_inode(file)->i_nlink) {
 			hpage_orders = READ_ONCE(huge_shmem_orders_always);
 			hpage_orders |= READ_ONCE(huge_shmem_orders_within_size);
 			hpage_orders |= READ_ONCE(huge_shmem_orders_madvise);
@@ -2671,8 +2681,8 @@ unsigned long shmem_get_unmapped_area(struct file *file,
 				order = highest_order(hpage_orders);
 				hpage_size = PAGE_SIZE << order;
 			}
-#endif
 		}
+#endif
 		if (SHMEM_SB(sb)->huge == SHMEM_HUGE_NEVER && !order)
 			return addr;
 	}
