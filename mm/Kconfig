@@ -896,6 +896,7 @@ config ARCH_HAS_HUGEPD
 config MAPPING_DIRTY_HELPERS
         bool
 
+<<<<<<< HEAD   (207de56dd0891224a0b62db1e1bf2bea45bc2883 Merge 6eb2664a2edb ("platform: Provide a remove callback tha)
 # Some architectures want callbacks for all IO mappings in order to
 # track the physical addresses that get used as devices.
 config ARCH_HAS_IOREMAP_PHYS_HOOKS
@@ -942,5 +943,10 @@ config LRU_GEN_STATS
 # }
 
 source "mm/damon/Kconfig"
+||||||| BASE   (6eb2664a2edb935370d7cf3f81097244c756af44 platform: Provide a remove callback that returns no value)
+=======
+config KMAP_LOCAL
+	bool
+>>>>>>> BRANCH (bb74a5ab30963022981381ea6aee176fd0c7957c power: supply: sc2731_charger: cancel work on remove)
 
 endmenu
