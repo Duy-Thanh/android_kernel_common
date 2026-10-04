@@ -1631,27 +1631,11 @@ static int copy_exec_state(u64 clone_flags, struct task_struct *tsk)
 	return task_exec_state_copy(tsk);
 }
 
-static int copy_fs(u64 clone_flags, struct task_struct *tsk, bool umh)
+static int copy_fs(u64 clone_flags, struct task_struct *tsk)
 {
-	struct fs_struct *fs;
+	struct fs_struct *fs = current->fs;
 
-	/*
-	 * Usermodehelper may copy userspace_init_fs filesystem state but
-	 * they don't get to create mount namespaces, share the
-	 * filesystem state, or be started from a non-initial mount
-	 * namespace.
-	 */
-	if (umh) {
-		if (clone_flags & (CLONE_NEWNS | CLONE_FS))
-			return -EINVAL;
-		if (current->nsproxy->mnt_ns != &init_mnt_ns)
-			return -EINVAL;
-		fs = userspace_init_fs;
-	} else {
-		fs = current->fs;
-		VFS_WARN_ON_ONCE(current->fs != current->real_fs);
-	}
-
+	VFS_WARN_ON_ONCE(current->fs != current->real_fs);
 	if (clone_flags & CLONE_FS) {
 		/* tsk->fs is already what we want */
 		read_seqlock_excl(&fs->seq);
@@ -2310,7 +2294,7 @@ __latent_entropy struct task_struct *copy_process(
 	retval = copy_files(clone_flags, p, args->no_files);
 	if (retval)
 		goto bad_fork_cleanup_semundo;
-	retval = copy_fs(clone_flags, p, args->umh);
+	retval = copy_fs(clone_flags, p);
 	if (retval)
 		goto bad_fork_cleanup_files;
 	retval = copy_sighand(clone_flags, p);
@@ -2854,7 +2838,6 @@ pid_t user_mode_thread(int (*fn)(void *), void *arg, unsigned long flags)
 		.exit_signal	= (flags & CSIGNAL),
 		.fn		= fn,
 		.fn_arg		= arg,
-		.umh		= 1,
 	};
 
 	return kernel_clone(&args);
