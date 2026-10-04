@@ -521,6 +521,7 @@ static inline void vma_expand_downwards_range(struct vm_area_struct *vma,
  * copy_vma_set_range - Set range and slice offset for duplicated VMA
  * @new_vma: Duplicated target VMA
  * @vma: Original source VMA
+ * @old_addr: Starting virtual address in the source VMA
  * @addr: Starting virtual address
  * @len: Length of range
  * @pgoff: Page offset
@@ -528,13 +529,21 @@ static inline void vma_expand_downwards_range(struct vm_area_struct *vma,
  */
 static inline void copy_vma_set_range(struct vm_area_struct *new_vma,
 				      const struct vm_area_struct *vma,
+				      unsigned long old_addr,
 				      unsigned long addr, unsigned long len,
 				      pgoff_t pgoff, bool faulted_in_anon_vma)
 {
+	unsigned short slice_off = 0;
+
+	if (vma->vm_file || vma->vm_ops)
+		slice_off = vma_slice_offset(vma, old_addr);
+	else if (faulted_in_anon_vma)
+		slice_off = vma_slice_offset(vma, addr);
+
 	new_vma->vm_start = addr;
 	new_vma->vm_end = addr + len;
 	new_vma->vm_pgoff = pgoff;
-	vma_set_slice_off(new_vma, faulted_in_anon_vma ? vma_slice_offset(vma, addr) : 0);
+	vma_set_slice_off(new_vma, slice_off);
 }
 
 /*

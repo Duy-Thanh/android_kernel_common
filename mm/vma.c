@@ -1873,7 +1873,8 @@ int vma_link(struct mm_struct *mm, struct vm_area_struct *vma)
  * prior to moving page table entries, to effect an mremap move.
  */
 struct vm_area_struct *copy_vma(struct vm_area_struct **vmap,
-	unsigned long addr, unsigned long len, pgoff_t pgoff,
+	unsigned long old_addr, unsigned long addr, unsigned long len,
+	pgoff_t pgoff,
 	bool *need_rmap_locks)
 {
 	struct vm_area_struct *vma = *vmap;
@@ -1942,7 +1943,8 @@ struct vm_area_struct *copy_vma(struct vm_area_struct **vmap,
 			goto out;
 		/* Do not preserve padding flags on the new VMA */
 		vm_flags_clear(new_vma, VM_PAD_MASK);
-		copy_vma_set_range(new_vma, vma, addr, len, pgoff, faulted_in_anon_vma);
+		copy_vma_set_range(new_vma, vma, old_addr, addr, len, pgoff,
+				   faulted_in_anon_vma);
 		if (vma_dup_policy(vma, new_vma))
 			goto out_free_vma;
 		if (anon_vma_clone(new_vma, vma))

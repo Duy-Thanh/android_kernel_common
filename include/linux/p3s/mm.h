@@ -49,6 +49,10 @@ static inline void mm_init_pte_shift(struct mm_struct *mm,
 	const struct task_struct *tsk = p ? p : current;
 	bool use_4kb = false;
 
+	/* dup_mm() copies the parent's geometry before init_new_context(). */
+	if (mm->context.pte_shift)
+		return;
+
 	/*
 	 * In ALTERNATE mode, assign 4KB to odd PIDs and 16KB to even PIDs
 	 * based strictly on PID parity rather than inheriting parent pte_shift,
