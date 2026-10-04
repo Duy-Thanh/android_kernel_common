@@ -1794,11 +1794,11 @@ static inline bool should_skip_kasan_unpoison(gfp_t flags)
 
 static inline bool should_skip_init(gfp_t flags)
 {
-	/* Don't skip, if hardware tag-based KASAN is not enabled. */
-	if (!kasan_hw_tags_enabled())
+	/* Don't skip if a software KASAN mode is enabled. */
+	if (IS_ENABLED(CONFIG_KASAN_GENERIC) ||
+	    IS_ENABLED(CONFIG_KASAN_SW_TAGS))
 		return false;
 
-	/* For hardware tag-based KASAN, skip if requested. */
 	return (flags & __GFP_SKIP_ZERO);
 }
 

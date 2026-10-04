@@ -37,11 +37,11 @@
 	TRACE_GFP_EM(HARDWALL)			\
 	TRACE_GFP_EM(THISNODE)			\
 	TRACE_GFP_EM(ACCOUNT)			\
-	TRACE_GFP_EM(ZEROTAGS)
+	TRACE_GFP_EM(ZEROTAGS)			\
+	TRACE_GFP_EM(SKIP_ZERO)
 
 #ifdef CONFIG_KASAN_HW_TAGS
 # define TRACE_GFP_FLAGS_KASAN			\
-	TRACE_GFP_EM(SKIP_ZERO)			\
 	TRACE_GFP_EM(SKIP_KASAN)
 #else
 # define TRACE_GFP_FLAGS_KASAN
@@ -114,11 +114,11 @@ TRACE_DEFINE_ENUM(___GFP_LAST_BIT);
 	gfpflag_string(__GFP_DIRECT_RECLAIM),	\
 	gfpflag_string(__GFP_KSWAPD_RECLAIM),	\
 	gfpflag_string(__GFP_ZEROTAGS),		\
+	gfpflag_string(__GFP_SKIP_ZERO),	\
 	gfpflag_string(__GFP_CMA)
 
 #ifdef CONFIG_KASAN_HW_TAGS
 #define __def_gfpflag_names_kasan ,			\
-	gfpflag_string(__GFP_SKIP_ZERO),		\
 	gfpflag_string(__GFP_SKIP_KASAN)
 #else
 #define __def_gfpflag_names_kasan
