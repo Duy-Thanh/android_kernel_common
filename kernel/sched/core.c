@@ -3960,7 +3960,8 @@ static inline void proxy_set_task_cpu(struct task_struct *p, int cpu)
 }
 #endif /* CONFIG_SMP */
 
-static void do_activate_blocked_waiter(struct rq *target_rq, struct task_struct *p, int en_flags)
+static void do_activate_blocked_waiter(struct rq *target_rq, struct task_struct *owner,
+				       struct task_struct *p, int en_flags)
 {
 	unsigned int state;
 	struct rq_flags rf;
@@ -3992,6 +3993,22 @@ static void do_activate_blocked_waiter(struct rq *target_rq, struct task_struct 
 			 */
 			return;
 		}
+
+		scoped_guard (raw_spinlock, &p->blocked_lock) {
+			/*
+			 * Again, if activation is delayed, its possible
+			 * the task has been woken and is no longer
+			 * blocked_on or blocked on a different mutex
+			 * so double check we're still blocked on
+			 * the owner who is activating us.
+			 */
+			struct task_struct *curr_owner;
+
+			curr_owner = __mutex_owner(__get_task_blocked_on(p));
+			if (curr_owner != owner)
+				return;
+		}
+
 		/*
 		 * Have to make sure we handle nr_iowait adjustment before
 		 * we call proxy_set_task_cpu() to ensure we are adjusting
@@ -4085,7 +4102,7 @@ static void activate_blocked_waiters(struct rq *target_rq,
 			__proxy_remove_from_sleeping_owner(owner, p);
 			raw_spin_unlock_irqrestore(&owner->blocked_lock, flags);
 
-			do_activate_blocked_waiter(target_rq, p, en_flags);
+			do_activate_blocked_waiter(target_rq, owner, p, en_flags);
 			trace_sched_pe_activate_blocked_entity(owner, p);
 
 			raw_spin_lock_irqsave(&p->blocked_lock, flags);
