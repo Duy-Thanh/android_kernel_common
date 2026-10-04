@@ -49,6 +49,10 @@ static inline void mm_init_pte_shift(struct mm_struct *mm,
 	const struct task_struct *tsk = p ? p : current;
 	bool use_4kb = false;
 
+	/* dup_mm() copies the parent's geometry before init_new_context(). */
+	if (mm->context.pte_shift)
+		return;
+
 	/*
 	 * fork(): @p is the new child and dup_mmap() copies the parent's page
 	 * tables into @mm, so keep the parent's page size from the start. The
