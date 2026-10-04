@@ -4316,8 +4316,10 @@ static bool should_run_aging(struct lruvec *lruvec, unsigned long max_seq, unsig
 		}
 	}
 
-	/* try to scrape all its memory if this memcg was deleted */
-	*nr_to_scan = mem_cgroup_online(memcg) ? (total >> sc->priority) : total;
+	*nr_to_scan = total >> sc->priority;
+	/* scrape out the remaining pages of a deleted memcg */
+	if (!*nr_to_scan && !mem_cgroup_online(memcg))
+		*nr_to_scan = min(total, SWAP_CLUSTER_MAX);
 
 	/*
 	 * The aging tries to be lazy to reduce the overhead, while the eviction
