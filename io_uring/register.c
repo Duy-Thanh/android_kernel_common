@@ -17,6 +17,7 @@
 #include <linux/compat.h>
 #include <linux/io_uring.h>
 #include <linux/io_uring_types.h>
+#include <linux/p3s/mm.h>
 
 #include "filetable.h"
 #include "io_uring.h"
@@ -941,6 +942,9 @@ SYSCALL_DEFINE4(io_uring_register, unsigned int, fd, unsigned int, opcode,
 	long ret = -EBADF;
 	struct file *file;
 	bool use_registered_ring;
+
+	if (mm_is_p3s_4k(current->mm))
+		return -EOPNOTSUPP;
 
 	use_registered_ring = !!(opcode & IORING_REGISTER_USE_REGISTERED_RING);
 	opcode &= ~IORING_REGISTER_USE_REGISTERED_RING;
