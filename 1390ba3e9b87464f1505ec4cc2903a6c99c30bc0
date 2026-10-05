@@ -16,6 +16,24 @@
       "message": "Real fixes would be preferred upstream first instead of hooks.",
       "revId": "1390ba3e9b87464f1505ec4cc2903a6c99c30bc0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa33cf94_66b15c15",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1789397
+      },
+      "writtenOn": "2026-10-05T05:39:58Z",
+      "side": 1,
+      "message": "I understand the concern. However, as mentioned in the Buganizer https://partnerissuetracker.corp.google.com/issues/563212417, we plan to transition to the upstream driver for our upcoming chipsets and address these issues as part of that effort. \nAt this time, however, we are unable to provide the same level of stability confidence for the upstream solution within the timelines of these upcoming releases.\n\nThat said, OEMs are requesting these changes for products scheduled to release in the coming months on the 6.18 branch, and these changes are important to help ensure the expected level of product stability.\n\nWe would greatly appreciate your consideration of our request. Thanks.",
+      "parentUuid": "f076659e_9a3ff862",
+      "revId": "1390ba3e9b87464f1505ec4cc2903a6c99c30bc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
