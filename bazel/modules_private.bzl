@@ -239,6 +239,7 @@ _KUNIT_COMMON_MODULES_LIST = [
     "drivers/rtc/test_rtc_lib.ko",
     "fs/ext4/ext4-test.ko",
     "fs/fat/fat_test.ko",
+    "kernel/irq/refcount_interrupt_test.ko",
     "kernel/time/time_test.ko",
     "lib/crc/tests/crc_kunit.ko",
     "lib/crypto/tests/aes_cbc_macs_kunit.ko",
