@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e21d2226_1017c6db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-10-05T15:50:23Z",
+      "side": 1,
+      "message": "In pKVM, the callers of cache_tag_flush_range() (pkvm_iommu_domain_unmap() -\u003e domain_unmap(), and pkvm_iommu_domain_flush()) already hold domain-\u003elock on the unmap path around the entire cache_tag_flush_range() call, so CPUs sharing a domain will still serialize on those outer locks while waiting for qi_submit_sync().",
+      "revId": "3e828744797f64f65d1f3aa9af1d4abe4264e4d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
