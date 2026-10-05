@@ -75,7 +75,8 @@ unsigned long vm_memory_committed(void);
 
 static inline void vm_acct_memory(long pages)
 {
-	percpu_counter_add_batch(&vm_committed_as, pages, vm_committed_as_batch);
+	percpu_counter_add_batch(&vm_committed_as, vm_commit_native_pages(pages),
+				 vm_committed_as_batch);
 }
 
 static inline void vm_unacct_memory(long pages)
@@ -218,5 +219,7 @@ static inline bool map_deny_write_exec(unsigned long old, unsigned long new)
 
 	return false;
 }
+
+#include <linux/p3s/mman.h>
 
 #endif /* _LINUX_MMAN_H */

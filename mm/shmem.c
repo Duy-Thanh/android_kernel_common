@@ -187,7 +187,8 @@ static inline struct shmem_sb_info *SHMEM_SB(struct super_block *sb)
 static inline int shmem_acct_size(unsigned long flags, loff_t size)
 {
 	return (flags & VM_NORESERVE) ?
-		0 : security_vm_enough_memory_mm(current->mm, VM_ACCT(size));
+		0 : security_vm_enough_memory_mm(current->mm,
+			mm_pages_from_kernel(current->mm, VM_ACCT(size)));
 }
 
 static inline void shmem_unacct_size(unsigned long flags, loff_t size)
@@ -202,7 +203,9 @@ static inline int shmem_reacct_size(unsigned long flags,
 	if (!(flags & VM_NORESERVE)) {
 		if (VM_ACCT(newsize) > VM_ACCT(oldsize))
 			return security_vm_enough_memory_mm(current->mm,
-					VM_ACCT(newsize) - VM_ACCT(oldsize));
+				mm_pages_from_kernel(current->mm,
+						     VM_ACCT(newsize) -
+						     VM_ACCT(oldsize)));
 		else if (VM_ACCT(newsize) < VM_ACCT(oldsize))
 			vm_unacct_memory(VM_ACCT(oldsize) - VM_ACCT(newsize));
 	}
@@ -221,7 +224,8 @@ static inline int shmem_acct_blocks(unsigned long flags, long pages)
 		return 0;
 
 	return security_vm_enough_memory_mm(current->mm,
-			pages * VM_ACCT(PAGE_SIZE));
+			mm_pages_from_kernel(current->mm,
+					     pages * VM_ACCT(PAGE_SIZE)));
 }
 
 static inline void shmem_unacct_blocks(unsigned long flags, long pages)
