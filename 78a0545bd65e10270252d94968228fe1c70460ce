@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5f169ab_d9fa327b",
+        "filename": "include/linux/netdevice.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1691,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-10-05T17:50:39Z",
+      "side": 1,
+      "message": "Please drop the else branch.",
+      "range": {
+        "startLine": 1691,
+        "startChar": 1,
+        "endLine": 1691,
+        "endChar": 5
+      },
+      "revId": "78a0545bd65e10270252d94968228fe1c70460ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0eba9ae2_566c77e3",
+        "filename": "include/net/apf.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-10-05T17:50:39Z",
+      "side": 1,
+      "message": "Are you sure you need these? Is this struct even exposed to the KABI?",
+      "range": {
+        "startLine": 88,
+        "startChar": 1,
+        "endLine": 96,
+        "endChar": 25
+      },
+      "revId": "78a0545bd65e10270252d94968228fe1c70460ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b221271_5b691f03",
+        "filename": "net/apf/Kconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-10-05T17:50:39Z",
+      "side": 1,
+      "message": "Please use gki_defconfig or whatever is appropriate.",
+      "range": {
+        "startLine": 11,
+        "startChar": 1,
+        "endLine": 11,
+        "endChar": 10
+      },
+      "revId": "78a0545bd65e10270252d94968228fe1c70460ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
