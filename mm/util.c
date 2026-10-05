@@ -366,6 +366,12 @@ unsigned long randomize_stack_top(unsigned long stack_top)
 
 #include <linux/p3s_user_pages.h>
 
+#ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
+#define VM_COMMIT_SHIFT PAGE_SHIFT_4KB
+#else
+#define VM_COMMIT_SHIFT PAGE_SHIFT_KERNEL
+#endif
+
 /**
  * randomize_page - Generate a random, page aligned address
  * @start:	The smallest acceptable address the caller will take.
@@ -894,18 +900,25 @@ subsys_initcall(init_vm_util_sysctls);
 /*
  * Committed memory limit enforced when OVERCOMMIT_NEVER policy is used
  */
-unsigned long vm_commit_limit(void)
+static unsigned long vm_commit_limit_units(void)
 {
 	unsigned long allowed;
+	unsigned long native_scale = vm_commit_native_pages(1);
 
 	if (sysctl_overcommit_kbytes)
-		allowed = sysctl_overcommit_kbytes >> (PAGE_SHIFT - 10);
+		allowed = sysctl_overcommit_kbytes >> (VM_COMMIT_SHIFT - 10);
 	else
 		allowed = ((totalram_pages() - hugetlb_total_pages())
-			   * sysctl_overcommit_ratio / 100);
-	allowed += total_swap_pages;
+			   * sysctl_overcommit_ratio / 100) * native_scale;
+	allowed += total_swap_pages * native_scale;
 
 	return allowed;
+}
+
+unsigned long vm_commit_limit(void)
+{
+	return DIV_ROUND_UP(vm_commit_limit_units(),
+			    vm_commit_native_pages(1));
 }
 
 /*
@@ -929,9 +942,34 @@ struct percpu_counter vm_committed_as ____cacheline_aligned_in_smp;
  */
 unsigned long vm_memory_committed(void)
 {
-	return percpu_counter_sum_positive(&vm_committed_as);
+	return DIV_ROUND_UP(percpu_counter_sum_positive(&vm_committed_as),
+			    vm_commit_native_pages(1));
 }
 EXPORT_SYMBOL_GPL(vm_memory_committed);
+
+unsigned long vm_memory_committed_kbytes(void)
+{
+	return percpu_counter_sum_positive(&vm_committed_as) <<
+		(VM_COMMIT_SHIFT - 10);
+}
+
+long vm_commit_native_pages(long pages)
+{
+#ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
+	return pages * (1L << (PAGE_SHIFT_KERNEL - VM_COMMIT_SHIFT));
+#else
+	return pages;
+#endif
+}
+
+long vm_commit_mm_pages(const struct mm_struct *mm, long pages)
+{
+#ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
+	return pages * (1L << (mm_pte_shift(mm) - VM_COMMIT_SHIFT));
+#else
+	return pages;
+#endif
+}
 
 /*
  * Check that a process has enough memory to allocate a new virtual
@@ -954,7 +992,7 @@ int __vm_enough_memory(const struct mm_struct *mm, long pages, int cap_sys_admin
 	long allowed;
 	unsigned long bytes_failed;
 
-	vm_acct_memory(pages);
+	vm_acct_memory_units(pages);
 
 	/*
 	 * Sometimes we want to use more memory than we have
@@ -963,34 +1001,38 @@ int __vm_enough_memory(const struct mm_struct *mm, long pages, int cap_sys_admin
 		return 0;
 
 	if (sysctl_overcommit_memory == OVERCOMMIT_GUESS) {
-		if (pages > totalram_pages() + total_swap_pages)
+		if (pages > vm_commit_native_pages(totalram_pages() +
+						      total_swap_pages))
 			goto error;
 		return 0;
 	}
 
-	allowed = vm_commit_limit();
+	allowed = vm_commit_limit_units();
 	/*
 	 * Reserve some for root
 	 */
 	if (!cap_sys_admin)
-		allowed -= sysctl_admin_reserve_kbytes >> (PAGE_SHIFT - 10);
+		allowed -= sysctl_admin_reserve_kbytes >>
+			   (VM_COMMIT_SHIFT - 10);
 
 	/*
 	 * Don't let a single process grow so big a user can't recover
 	 */
 	if (mm) {
-		long reserve = sysctl_user_reserve_kbytes >> (PAGE_SHIFT - 10);
+		long reserve = sysctl_user_reserve_kbytes >>
+			       (VM_COMMIT_SHIFT - 10);
 
-		allowed -= min_t(long, mm->total_vm / 32, reserve);
+		allowed -= min_t(long, vm_commit_mm_pages(mm, mm->total_vm) / 32,
+				 reserve);
 	}
 
 	if (percpu_counter_read_positive(&vm_committed_as) < allowed)
 		return 0;
 error:
-	bytes_failed = pages << PAGE_SHIFT;
+	bytes_failed = pages << VM_COMMIT_SHIFT;
 	pr_warn_ratelimited("%s: pid: %d, comm: %s, bytes: %lu not enough memory for the allocation\n",
 			    __func__, current->pid, current->comm, bytes_failed);
-	vm_unacct_memory(pages);
+	vm_acct_memory_units(-pages);
 
 	return -ENOMEM;
 }

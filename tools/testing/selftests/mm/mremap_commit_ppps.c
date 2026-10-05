@@ -1,8 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0
 /*
- * Committed_AS charges and uncharges an anonymous mapping and its mremap
- * expansion in 4K process-page units for a compat process, and strict
- * overcommit enforces its byte limit against such mappings.
+ * Committed_AS accounts bytes independently of the process page size and of
+ * VMA fragmentation, and strict overcommit enforces the same byte limit.
  */
 #define _GNU_SOURCE
 
@@ -12,6 +11,8 @@
 #include "kselftest_ppps.h"
 
 #define STRICT_MAP_SIZE (4UL * 1024 * 1024)
+#define ACCOUNT_SIZE (16UL * 1024)
+#define ACCOUNT_SLICES (ACCOUNT_SIZE / PROCESS_PAGE_SIZE)
 /*
  * Strict overcommit is enforced against a per-CPU approximation of
  * Committed_AS, so the limit is set well above the admitted mapping and the
@@ -101,8 +102,13 @@ struct charges {
 	long uncharge;
 };
 
+static long delta_kb(unsigned long after, unsigned long before)
+{
+	return (long)after - (long)before;
+}
+
 /*
- * Map, expand and unmap one process page, recording the Committed_AS
+ * Map, expand and unmap 16K, recording the Committed_AS
  * deltas.  Another process may commit memory in between, so the caller
  * retries when the deltas do not match; the syscalls themselves must never
  * fail.
@@ -113,34 +119,134 @@ static void charge_sequence(struct charges *c)
 	void *expanded;
 
 	c->before = stable_committed_kb();
-	mapping = mmap(NULL, PROCESS_PAGE_SIZE, PROT_READ | PROT_WRITE,
+	mapping = mmap(NULL, ACCOUNT_SIZE, PROT_READ | PROT_WRITE,
 		       MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
 	if (mapping == MAP_FAILED)
 		ksft_exit_fail_msg("mmap failed: %s\n", strerror(errno));
 	c->after_map = stable_committed_kb();
-	expanded = mremap(mapping, PROCESS_PAGE_SIZE, 2 * PROCESS_PAGE_SIZE,
+	expanded = mremap(mapping, ACCOUNT_SIZE, 2 * ACCOUNT_SIZE,
 			  MREMAP_MAYMOVE);
 	if (expanded == MAP_FAILED)
 		ksft_exit_fail_msg("mremap failed: %s\n", strerror(errno));
 	c->after_expand = stable_committed_kb();
-	if (munmap(expanded, 2 * PROCESS_PAGE_SIZE))
+	if (munmap(expanded, 2 * ACCOUNT_SIZE))
 		ksft_exit_fail_msg("munmap failed: %s\n", strerror(errno));
 	c->after_unmap = stable_committed_kb();
-	c->initial = c->after_map - c->before;
-	c->expansion = c->after_expand - c->after_map;
-	c->uncharge = c->after_expand - c->after_unmap;
+	c->initial = delta_kb(c->after_map, c->before);
+	c->expansion = delta_kb(c->after_expand, c->after_map);
+	c->uncharge = delta_kb(c->after_expand, c->after_unmap);
 }
 
 static bool charges_match(const struct charges *c)
 {
-	return c->initial == PROCESS_PAGE_SIZE / 1024 &&
-	       c->expansion == PROCESS_PAGE_SIZE / 1024 &&
-	       c->uncharge == 2 * PROCESS_PAGE_SIZE / 1024;
+	return c->initial == ACCOUNT_SIZE / 1024 &&
+	       c->expansion == ACCOUNT_SIZE / 1024 &&
+	       c->uncharge == 2 * ACCOUNT_SIZE / 1024;
+}
+
+struct split_uncharge {
+	long initial;
+	long slice[ACCOUNT_SLICES];
+	long total;
+};
+
+static void split_uncharge_sequence(struct split_uncharge *s)
+{
+	unsigned long before, after_map, previous, after;
+	char *mapping;
+	int i;
+
+	before = stable_committed_kb();
+	mapping = mmap(NULL, ACCOUNT_SIZE, PROT_READ | PROT_WRITE,
+		       MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+	if (mapping == MAP_FAILED)
+		ksft_exit_fail_msg("split mmap failed: %s\n", strerror(errno));
+	after_map = stable_committed_kb();
+	previous = after_map;
+	for (i = 0; i < ACCOUNT_SLICES; i++) {
+		if (munmap(mapping + i * PROCESS_PAGE_SIZE, PROCESS_PAGE_SIZE))
+			ksft_exit_fail_msg("slice %d munmap failed: %s\n", i,
+					   strerror(errno));
+		after = stable_committed_kb();
+		s->slice[i] = delta_kb(previous, after);
+		previous = after;
+	}
+	s->initial = delta_kb(after_map, before);
+	s->total = delta_kb(after_map, previous);
+}
+
+static bool split_matches(const struct split_uncharge *s)
+{
+	int i;
+
+	if (s->initial != ACCOUNT_SIZE / 1024 ||
+	    s->total != ACCOUNT_SIZE / 1024)
+		return false;
+	for (i = 0; i < ACCOUNT_SLICES; i++)
+		if (s->slice[i] != PROCESS_PAGE_SIZE / 1024)
+			return false;
+	return true;
+}
+
+struct split_protect {
+	long charge[ACCOUNT_SLICES];
+	long uncharge[ACCOUNT_SLICES];
+	long charged_total;
+	long uncharged_total;
+};
+
+static void split_protect_sequence(struct split_protect *s)
+{
+	unsigned long before, previous, after_charges, after;
+	char *mapping;
+	int i;
+
+	mapping = mmap(NULL, ACCOUNT_SIZE, PROT_READ,
+		       MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+	if (mapping == MAP_FAILED)
+		ksft_exit_fail_msg("mprotect mmap failed: %s\n", strerror(errno));
+	before = stable_committed_kb();
+	previous = before;
+	for (i = 0; i < ACCOUNT_SLICES; i++) {
+		if (mprotect(mapping + i * PROCESS_PAGE_SIZE, PROCESS_PAGE_SIZE,
+			     PROT_READ | PROT_WRITE))
+			ksft_exit_fail_msg("slice %d writable mprotect failed: %s\n",
+					   i, strerror(errno));
+		after = stable_committed_kb();
+		s->charge[i] = delta_kb(after, previous);
+		previous = after;
+	}
+	after_charges = previous;
+	for (i = 0; i < ACCOUNT_SLICES; i++) {
+		if (mprotect(mapping + i * PROCESS_PAGE_SIZE, PROCESS_PAGE_SIZE,
+			     PROT_READ))
+			ksft_exit_fail_msg("slice %d readonly mprotect failed: %s\n",
+					   i, strerror(errno));
+		after = stable_committed_kb();
+		s->uncharge[i] = delta_kb(previous, after);
+		previous = after;
+	}
+	s->charged_total = delta_kb(after_charges, before);
+	s->uncharged_total = delta_kb(after_charges, previous);
+	munmap(mapping, ACCOUNT_SIZE);
+}
+
+static bool protect_slices_match(const struct split_protect *s)
+{
+	int i;
+
+	for (i = 0; i < ACCOUNT_SLICES; i++)
+		if (s->charge[i] != PROCESS_PAGE_SIZE / 1024 ||
+		    s->uncharge[i] != PROCESS_PAGE_SIZE / 1024)
+			return false;
+	return true;
 }
 
 static int run_test(void)
 {
 	struct charges c;
+	struct split_protect protect;
+	struct split_uncharge split;
 	unsigned long before;
 	unsigned long swap_kb;
 	unsigned long limit_kb;
@@ -151,7 +257,7 @@ static int run_test(void)
 	int attempt;
 
 	ksft_print_header();
-	ksft_set_plan(6);
+	ksft_set_plan(13);
 
 	/* Warm up: the first /proc/meminfo read grows the heap. */
 	committed_kb();
@@ -166,12 +272,55 @@ static int run_test(void)
 		       "unmapped=%lu kB; initial=%ld expansion=%ld uncharge=%ld kB\n",
 		       c.before, c.after_map, c.after_expand, c.after_unmap,
 		       c.initial, c.expansion, c.uncharge);
-	ksft_test_result(c.initial == PROCESS_PAGE_SIZE / 1024,
-			 "charge exactly one 4K process page\n");
-	ksft_test_result(c.expansion == PROCESS_PAGE_SIZE / 1024,
-			 "charge exactly one 4K mremap expansion page\n");
-	ksft_test_result(c.uncharge == 2 * PROCESS_PAGE_SIZE / 1024,
-			 "uncharge both 4K process pages\n");
+	ksft_test_result(c.initial == ACCOUNT_SIZE / 1024,
+			 "charge a 16K mapping as 16K\n");
+	ksft_test_result(c.expansion == ACCOUNT_SIZE / 1024,
+			 "charge a 16K mremap expansion as 16K\n");
+	ksft_test_result(c.uncharge == 2 * ACCOUNT_SIZE / 1024,
+			 "uncharge the full 32K mapping as 32K\n");
+
+	for (attempt = 1; attempt <= CHARGE_ATTEMPTS; attempt++) {
+		split_uncharge_sequence(&split);
+		if (split_matches(&split))
+			break;
+		ksft_print_msg("split attempt %d did not match byte accounting\n",
+			       attempt);
+	}
+	ksft_print_msg("split charge=%ld uncharge=[%ld,%ld,%ld,%ld] "
+		       "total=%ld kB\n", split.initial, split.slice[0],
+		       split.slice[1], split.slice[2], split.slice[3],
+		       split.total);
+	ksft_test_result(split.initial == ACCOUNT_SIZE / 1024,
+			 "charge a fragmented 16K mapping as 16K\n");
+	ksft_test_result(split.total == ACCOUNT_SIZE / 1024,
+			 "four 4K munmaps uncharge 16K in total\n");
+	ksft_test_result(split_matches(&split),
+			 "each 4K munmap uncharges exactly 4K\n");
+
+	for (attempt = 1; attempt <= CHARGE_ATTEMPTS; attempt++) {
+		split_protect_sequence(&protect);
+		if (protect.charged_total == ACCOUNT_SIZE / 1024 &&
+		    protect.uncharged_total == ACCOUNT_SIZE / 1024 &&
+		    protect_slices_match(&protect))
+			break;
+		ksft_print_msg("mprotect attempt %d did not match byte accounting\n",
+			       attempt);
+	}
+	ksft_print_msg("mprotect charge=[%ld,%ld,%ld,%ld] total=%ld; "
+		       "uncharge=[%ld,%ld,%ld,%ld] total=%ld kB\n",
+		       protect.charge[0], protect.charge[1], protect.charge[2],
+		       protect.charge[3], protect.charged_total,
+		       protect.uncharge[0], protect.uncharge[1],
+		       protect.uncharge[2], protect.uncharge[3],
+		       protect.uncharged_total);
+	ksft_test_result(protect.charged_total == ACCOUNT_SIZE / 1024,
+			 "four 4K writable mprotects charge 16K in total\n");
+	ksft_test_result(protect.uncharged_total == ACCOUNT_SIZE / 1024,
+			 "four 4K readonly mprotects uncharge 16K in total\n");
+	ksft_test_result(protect_slices_match(&protect),
+			 "each 4K mprotect changes Committed_AS by 4K\n");
+	ksft_test_result(protect.charged_total == protect.uncharged_total,
+			 "fragmented mprotect charge and uncharge balance\n");
 
 	write_sysctl("/proc/sys/vm/user_reserve_kbytes", 0);
 	write_sysctl("/proc/sys/vm/admin_reserve_kbytes", 0);

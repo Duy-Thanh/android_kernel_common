@@ -1277,7 +1277,25 @@ int security_vm_enough_memory_mm(struct mm_struct *mm, long pages)
 			break;
 		}
 	}
-	return __vm_enough_memory(mm, pages, cap_sys_admin);
+	return __vm_enough_memory(mm, vm_commit_mm_pages(mm, pages),
+				  cap_sys_admin);
+}
+
+int security_vm_enough_memory_native(struct mm_struct *mm, long pages)
+{
+	struct lsm_static_call *scall;
+	int cap_sys_admin = 1;
+	int rc;
+
+	lsm_for_each_hook(scall, vm_enough_memory) {
+		rc = scall->hl->hook.vm_enough_memory(mm, pages);
+		if (rc < 0) {
+			cap_sys_admin = 0;
+			break;
+		}
+	}
+	return __vm_enough_memory(mm, vm_commit_native_pages(pages),
+				  cap_sys_admin);
 }
 
 /**

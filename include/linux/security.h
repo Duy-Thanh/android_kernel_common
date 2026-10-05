@@ -356,6 +356,7 @@ int security_quota_on(struct dentry *dentry);
 int security_syslog(int type);
 int security_settime64(const struct timespec64 *ts, const struct timezone *tz);
 int security_vm_enough_memory_mm(struct mm_struct *mm, long pages);
+int security_vm_enough_memory_native(struct mm_struct *mm, long pages);
 int security_bprm_creds_for_exec(struct linux_binprm *bprm);
 int security_bprm_creds_from_file(struct linux_binprm *bprm, const struct file *file);
 int security_bprm_check(struct linux_binprm *bprm);
@@ -720,7 +721,15 @@ static inline int security_settime64(const struct timespec64 *ts,
 
 static inline int security_vm_enough_memory_mm(struct mm_struct *mm, long pages)
 {
-	return __vm_enough_memory(mm, pages, !cap_vm_enough_memory(mm, pages));
+	return __vm_enough_memory(mm, vm_commit_mm_pages(mm, pages),
+				  !cap_vm_enough_memory(mm, pages));
+}
+
+static inline int security_vm_enough_memory_native(struct mm_struct *mm,
+						   long pages)
+{
+	return __vm_enough_memory(mm, vm_commit_native_pages(pages),
+				  !cap_vm_enough_memory(mm, pages));
 }
 
 static inline int security_bprm_creds_for_exec(struct linux_binprm *bprm)

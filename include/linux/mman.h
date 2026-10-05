@@ -72,15 +72,34 @@ static inline void mm_compute_batch(int overcommit_policy)
 #endif
 
 unsigned long vm_memory_committed(void);
+unsigned long vm_memory_committed_kbytes(void);
+long vm_commit_mm_pages(const struct mm_struct *mm, long pages);
+long vm_commit_native_pages(long pages);
+
+static inline void vm_acct_memory_units(long units)
+{
+	percpu_counter_add_batch(&vm_committed_as, units,
+				 vm_committed_as_batch);
+}
 
 static inline void vm_acct_memory(long pages)
 {
-	percpu_counter_add_batch(&vm_committed_as, pages, vm_committed_as_batch);
+	vm_acct_memory_units(vm_commit_native_pages(pages));
 }
 
 static inline void vm_unacct_memory(long pages)
 {
 	vm_acct_memory(-pages);
+}
+
+static inline void vm_acct_memory_mm(const struct mm_struct *mm, long pages)
+{
+	vm_acct_memory_units(vm_commit_mm_pages(mm, pages));
+}
+
+static inline void vm_unacct_memory_mm(const struct mm_struct *mm, long pages)
+{
+	vm_acct_memory_mm(mm, -pages);
 }
 
 /*
