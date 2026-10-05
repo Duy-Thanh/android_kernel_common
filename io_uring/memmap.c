@@ -8,6 +8,7 @@
 #include <linux/vmalloc.h>
 #include <linux/io_uring.h>
 #include <linux/io_uring_types.h>
+#include <linux/p3s/mm.h>
 #include <asm/shmparam.h>
 
 #include "memmap.h"
@@ -400,6 +401,8 @@ unsigned long io_uring_get_unmapped_area(struct file *filp, unsigned long addr,
 
 int io_uring_mmap(struct file *file, struct vm_area_struct *vma)
 {
+	if (mm_is_p3s_4k(current->mm))
+		return -EOPNOTSUPP;
 	return is_nommu_shared_mapping(vma->vm_flags) ? 0 : -EINVAL;
 }
 
@@ -414,6 +417,9 @@ unsigned long io_uring_get_unmapped_area(struct file *file, unsigned long addr,
 {
 	struct io_ring_ctx *ctx = file->private_data;
 	void *ptr;
+
+	if (mm_is_p3s_4k(current->mm))
+		return -EOPNOTSUPP;
 
 	guard(mutex)(&ctx->mmap_lock);
 
