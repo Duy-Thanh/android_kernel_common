@@ -33,6 +33,42 @@
       "message": "Also, it should be up to Microdroid whether they want MODVERSIONS. We could use this as an experiment towards CRCless ABIs. I am mostly joking. But it\u0027s worth trying to drop the `module_layout` symbol instead.",
       "revId": "3364008ee7b212dc02ca8bd49a1e556b8a4a778d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19f73246_d7b32914",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-10-05T11:43:57Z",
+      "side": 1,
+      "message": "Sounds good, it will need http://r.android.com/4341993 otherwise running the \"update symbol\" command will bring it back.",
+      "parentUuid": "bf1e4d7a_581003db",
+      "revId": "3364008ee7b212dc02ca8bd49a1e556b8a4a778d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bb4bcf3_f6a25139",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-10-05T11:43:57Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "80b6a58c_ceb2b160",
+      "revId": "3364008ee7b212dc02ca8bd49a1e556b8a4a778d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
