@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed97e4ce_235d5444",
+        "filename": "net/apf/core.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-10-05T08:58:33Z",
+      "side": 1,
+      "message": "if (ret \u003c 0) return ret; -- less indentation",
+      "range": {
+        "startLine": 203,
+        "startChar": 11,
+        "endLine": 203,
+        "endChar": 12
+      },
+      "revId": "1bf770efee59818f8244109bc41fbf6199a76dff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
