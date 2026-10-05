@@ -180,6 +180,7 @@ s32 vm_committed_as_batch = 32;
 void mm_compute_batch(int overcommit_policy)
 {
 	u64 memsized_batch;
+	long committed_batch;
 	s32 nr = num_present_cpus();
 	s32 batch = max_t(s32, nr*2, 32);
 	unsigned long ram_pages = totalram_pages();
@@ -195,7 +196,9 @@ void mm_compute_batch(int overcommit_policy)
 	else
 		memsized_batch = min_t(u64, ram_pages/nr/4, INT_MAX);
 
-	vm_committed_as_batch = max_t(s32, memsized_batch, batch);
+	committed_batch = vm_commit_native_pages(max_t(s32, memsized_batch,
+							     batch));
+	vm_committed_as_batch = min_t(long, committed_batch, INT_MAX);
 }
 
 static int __meminit mm_compute_batch_notifier(struct notifier_block *self,

@@ -839,7 +839,7 @@ mprotect_fixup(struct vma_iterator *vmi, struct mmu_gather *tlb,
 	change_protection(tlb, vma, start, end, mm_cp_flags);
 
 	if ((oldflags & VM_ACCOUNT) && !(newflags & VM_ACCOUNT))
-		vm_unacct_memory(nrpages);
+		vm_unacct_memory_mm(mm, nrpages);
 
 	/*
 	 * Private VM_LOCKED VMA becoming writable: trigger COW to avoid major
@@ -856,7 +856,7 @@ mprotect_fixup(struct vma_iterator *vmi, struct mmu_gather *tlb,
 	return 0;
 
 fail:
-	vm_unacct_memory(charged);
+	vm_unacct_memory_mm(mm, charged);
 	return error;
 }
 
