@@ -38,6 +38,7 @@
 #include <linux/virtio_config.h>
 #include <net/apf.h>
 #if IS_ENABLED(CONFIG_NET_APF)
+#include <uapi/linux/net_apf.h>
 #include "apf_interpreter.h"
 #endif
 #include "mac80211_hwsim.h"
@@ -643,17 +644,6 @@ static int mac80211_hwsim_vendor_cmd_test(struct wiphy *wiphy,
 
 	return cfg80211_vendor_cmd_reply(skb);
 }
-
-static struct wiphy_vendor_command mac80211_hwsim_vendor_commands[] = {
-	{
-		.info = { .vendor_id = OUI_QCA,
-			  .subcmd = QCA_NL80211_SUBCMD_TEST },
-		.flags = WIPHY_VENDOR_CMD_NEED_NETDEV,
-		.doit = mac80211_hwsim_vendor_cmd_test,
-		.policy = hwsim_vendor_test_policy,
-		.maxattr = QCA_WLAN_VENDOR_ATTR_MAX,
-	}
-};
 
 /* Advertise support vendor specific events */
 static const struct nl80211_vendor_cmd_info mac80211_hwsim_vendor_events[] = {
@@ -2277,6 +2267,19 @@ static void mac80211_hwsim_remove_interface(
 }
 
 #if IS_ENABLED(CONFIG_NET_APF)
+#define OUI_GOOGLE 0x001A11
+
+enum google_nl80211_apf_subcmds {
+	GOOGLE_NL80211_SUBCMD_APF_GET_INFO	= 0x1810,
+	GOOGLE_NL80211_SUBCMD_APF_SET_ID	= 0x1811,
+	GOOGLE_NL80211_SUBCMD_APF_ENABLE	= 0x1812,
+	GOOGLE_NL80211_SUBCMD_APF_GET_RAM_SIZE	= 0x1813,
+	GOOGLE_NL80211_SUBCMD_APF_READ		= 0x1814,
+	GOOGLE_NL80211_SUBCMD_APF_WRITE		= 0x1815,
+	GOOGLE_NL80211_SUBCMD_APF_DISABLE	= 0x1816,
+	GOOGLE_NL80211_SUBCMD_APF_SET_FAST_PATH	= 0x1817,
+};
+
 struct hwsim_apf_run_ctx {
 	struct net_device *dev;
 	struct sk_buff_head tx_queue;
@@ -2579,6 +2582,302 @@ static int mac80211_hwsim_apf_fast_path(struct ieee80211_hw *hw,
 	return 0;
 }
 
+static const struct nla_policy hwsim_apf_empty_policy[1] = {
+	[0] = { .type = NLA_UNSPEC },
+};
+
+static const struct nla_policy
+hwsim_apf_set_id_policy[NET_APF_A_INFO_CHIP_ID + 1] = {
+	[NET_APF_A_INFO_CHIP_ID] = { .type = NLA_U32 },
+};
+
+static const struct nla_policy
+hwsim_apf_enable_policy[NET_APF_A_RAM_SIZE + 1] = {
+	[NET_APF_A_RAM_SIZE] = NLA_POLICY_RANGE(NLA_U32, 1, S16_MAX),
+};
+
+static const struct nla_policy
+hwsim_apf_read_policy[NET_APF_A_DATA_LEN + 1] = {
+	[NET_APF_A_OFFSET] = NLA_POLICY_MAX(NLA_U32, S16_MAX),
+	[NET_APF_A_DATA_LEN] = NLA_POLICY_RANGE(NLA_U32, 1, S16_MAX),
+};
+
+static const struct nla_policy
+hwsim_apf_write_policy[NET_APF_A_DATA + 1] = {
+	[NET_APF_A_OFFSET] = NLA_POLICY_MAX(NLA_U32, S16_MAX),
+	[NET_APF_A_DATA] = NLA_POLICY_MIN_LEN(1),
+};
+
+static const struct nla_policy
+hwsim_apf_set_fast_path_policy[NET_APF_A_FP_ENABLE_IPV6 + 1] = {
+	[NET_APF_A_FP_UCAST_MAC] = NLA_POLICY_EXACT_LEN(ETH_ALEN),
+	[NET_APF_A_FP_VLAN_TAG] = NLA_POLICY_MAX(NLA_U16, 4095),
+	[NET_APF_A_FP_UCAST_ADDR4] = { .type = NLA_BE32 },
+	[NET_APF_A_FP_ENABLE_IPV6] = { .type = NLA_FLAG },
+};
+
+static int mac80211_hwsim_vendor_cmd_apf_get_info(struct wiphy *wiphy,
+						  struct wireless_dev *wdev,
+						  const void *data,
+						  int data_len)
+{
+	struct ieee80211_vif *vif = wdev_to_ieee80211_vif(wdev);
+	struct ieee80211_hw *hw = wiphy_to_ieee80211_hw(wiphy);
+	struct apf_info info = {};
+	struct sk_buff *skb;
+	int ret;
+
+	if (!vif)
+		return -ENODEV;
+	if (data_len)
+		return -EINVAL;
+
+	ret = mac80211_hwsim_apf_get_info(hw, vif, NULL, &info);
+	if (ret)
+		return ret;
+
+	skb = cfg80211_vendor_cmd_alloc_reply_skb(wiphy,
+						  6 * nla_total_size(sizeof(u32)));
+	if (!skb)
+		return -ENOMEM;
+
+	if (nla_put_u32(skb, NET_APF_A_INFO_VERSION, info.apf_version) ||
+	    nla_put_u32(skb, NET_APF_A_INFO_CHIP_ID, info.chip_id) ||
+	    nla_put_u32(skb, NET_APF_A_INFO_TOTAL_RAM, info.total_ram) ||
+	    nla_put_u32(skb, NET_APF_A_INFO_USED_RAM, info.used_ram) ||
+	    nla_put_u32(skb, NET_APF_A_INFO_OVERHEAD, info.overhead) ||
+	    nla_put_u32(skb, NET_APF_A_INFO_GRANULARITY, info.granularity)) {
+		kfree_skb(skb);
+		return -EMSGSIZE;
+	}
+
+	return cfg80211_vendor_cmd_reply(skb);
+}
+
+static int mac80211_hwsim_vendor_cmd_apf_set_id(struct wiphy *wiphy,
+						struct wireless_dev *wdev,
+						const void *data,
+						int data_len)
+{
+	struct ieee80211_vif *vif = wdev_to_ieee80211_vif(wdev);
+	struct ieee80211_hw *hw = wiphy_to_ieee80211_hw(wiphy);
+	struct nlattr *tb[NET_APF_A_INFO_CHIP_ID + 1];
+	int err;
+
+	if (!vif)
+		return -ENODEV;
+
+	err = nla_parse(tb, NET_APF_A_INFO_CHIP_ID, data, data_len,
+			hwsim_apf_set_id_policy, NULL);
+	if (err)
+		return err;
+	if (!tb[NET_APF_A_INFO_CHIP_ID])
+		return -EINVAL;
+
+	return mac80211_hwsim_apf_set_id(hw, vif, NULL,
+					 nla_get_u32(tb[NET_APF_A_INFO_CHIP_ID]));
+}
+
+static int mac80211_hwsim_vendor_cmd_apf_enable(struct wiphy *wiphy,
+						struct wireless_dev *wdev,
+						const void *data,
+						int data_len)
+{
+	struct ieee80211_vif *vif = wdev_to_ieee80211_vif(wdev);
+	struct ieee80211_hw *hw = wiphy_to_ieee80211_hw(wiphy);
+	struct nlattr *tb[NET_APF_A_RAM_SIZE + 1];
+	int err;
+
+	if (!vif)
+		return -ENODEV;
+
+	err = nla_parse(tb, NET_APF_A_RAM_SIZE, data, data_len,
+			hwsim_apf_enable_policy, NULL);
+	if (err)
+		return err;
+	if (!tb[NET_APF_A_RAM_SIZE])
+		return -EINVAL;
+
+	return mac80211_hwsim_apf_enable(hw, vif, NULL,
+					 nla_get_u32(tb[NET_APF_A_RAM_SIZE]));
+}
+
+static int mac80211_hwsim_vendor_cmd_apf_get_ram_size(struct wiphy *wiphy,
+						      struct wireless_dev *wdev,
+						      const void *data,
+						      int data_len)
+{
+	struct ieee80211_vif *vif = wdev_to_ieee80211_vif(wdev);
+	struct ieee80211_hw *hw = wiphy_to_ieee80211_hw(wiphy);
+	struct sk_buff *skb;
+	int ret;
+
+	if (!vif)
+		return -ENODEV;
+	if (data_len)
+		return -EINVAL;
+
+	ret = mac80211_hwsim_apf_get_ram_size(hw, vif, NULL);
+	if (ret < 0)
+		return ret;
+
+	skb = cfg80211_vendor_cmd_alloc_reply_skb(wiphy,
+						  nla_total_size(sizeof(u32)));
+	if (!skb)
+		return -ENOMEM;
+
+	if (nla_put_u32(skb, NET_APF_A_RAM_SIZE, ret)) {
+		kfree_skb(skb);
+		return -EMSGSIZE;
+	}
+
+	return cfg80211_vendor_cmd_reply(skb);
+}
+
+static int mac80211_hwsim_vendor_cmd_apf_read(struct wiphy *wiphy,
+					      struct wireless_dev *wdev,
+					      const void *data,
+					      int data_len)
+{
+	struct ieee80211_vif *vif = wdev_to_ieee80211_vif(wdev);
+	struct ieee80211_hw *hw = wiphy_to_ieee80211_hw(wiphy);
+	struct nlattr *tb[NET_APF_A_DATA_LEN + 1];
+	struct sk_buff *skb;
+	u32 offset = 0;
+	u32 len;
+	u8 *buf;
+	int ret;
+
+	if (!vif)
+		return -ENODEV;
+
+	ret = nla_parse(tb, NET_APF_A_DATA_LEN, data, data_len,
+			hwsim_apf_read_policy, NULL);
+	if (ret)
+		return ret;
+
+	if (tb[NET_APF_A_OFFSET])
+		offset = nla_get_u32(tb[NET_APF_A_OFFSET]);
+
+	if (tb[NET_APF_A_DATA_LEN]) {
+		len = nla_get_u32(tb[NET_APF_A_DATA_LEN]);
+	} else {
+		if (offset)
+			return -EINVAL;
+
+		ret = mac80211_hwsim_apf_get_ram_size(hw, vif, NULL);
+		if (ret <= 0)
+			return ret ? ret : -ENODATA;
+
+		len = ret;
+	}
+
+	buf = kmalloc(len, GFP_KERNEL);
+	if (!buf)
+		return -ENOMEM;
+
+	ret = mac80211_hwsim_apf_read(hw, vif, NULL, offset, buf, len);
+	if (ret)
+		goto out_free_buf;
+
+	skb = cfg80211_vendor_cmd_alloc_reply_skb(wiphy, nla_total_size(len));
+	if (!skb) {
+		ret = -ENOMEM;
+		goto out_free_buf;
+	}
+
+	if (nla_put(skb, NET_APF_A_DATA, len, buf)) {
+		kfree_skb(skb);
+		ret = -EMSGSIZE;
+		goto out_free_buf;
+	}
+
+	ret = cfg80211_vendor_cmd_reply(skb);
+
+out_free_buf:
+	kfree(buf);
+	return ret;
+}
+
+static int mac80211_hwsim_vendor_cmd_apf_write(struct wiphy *wiphy,
+					       struct wireless_dev *wdev,
+					       const void *data,
+					       int data_len)
+{
+	struct ieee80211_vif *vif = wdev_to_ieee80211_vif(wdev);
+	struct ieee80211_hw *hw = wiphy_to_ieee80211_hw(wiphy);
+	struct nlattr *tb[NET_APF_A_DATA + 1];
+	s32 offset = -1;
+	int err;
+
+	if (!vif)
+		return -ENODEV;
+
+	err = nla_parse(tb, NET_APF_A_DATA, data, data_len,
+			hwsim_apf_write_policy, NULL);
+	if (err)
+		return err;
+	if (!tb[NET_APF_A_DATA])
+		return -EINVAL;
+
+	if (tb[NET_APF_A_OFFSET])
+		offset = nla_get_u32(tb[NET_APF_A_OFFSET]);
+
+	return mac80211_hwsim_apf_write(hw, vif, NULL, offset,
+					nla_data(tb[NET_APF_A_DATA]),
+					nla_len(tb[NET_APF_A_DATA]));
+}
+
+static int mac80211_hwsim_vendor_cmd_apf_disable(struct wiphy *wiphy,
+						 struct wireless_dev *wdev,
+						 const void *data,
+						 int data_len)
+{
+	struct ieee80211_vif *vif = wdev_to_ieee80211_vif(wdev);
+	struct ieee80211_hw *hw = wiphy_to_ieee80211_hw(wiphy);
+
+	if (!vif)
+		return -ENODEV;
+	if (data_len)
+		return -EINVAL;
+
+	return mac80211_hwsim_apf_disable(hw, vif, NULL);
+}
+
+static int mac80211_hwsim_vendor_cmd_apf_set_fast_path(struct wiphy *wiphy,
+						       struct wireless_dev *wdev,
+						       const void *data,
+						       int data_len)
+{
+	struct ieee80211_vif *vif = wdev_to_ieee80211_vif(wdev);
+	struct ieee80211_hw *hw = wiphy_to_ieee80211_hw(wiphy);
+	struct nlattr *tb[NET_APF_A_FP_ENABLE_IPV6 + 1];
+	__be32 ucast_addr4 = 0;
+	s16 vlan_tag = -1;
+	int err;
+
+	if (!vif)
+		return -ENODEV;
+
+	err = nla_parse(tb, NET_APF_A_FP_ENABLE_IPV6, data, data_len,
+			hwsim_apf_set_fast_path_policy, NULL);
+	if (err)
+		return err;
+	if (!tb[NET_APF_A_FP_UCAST_MAC])
+		return -EINVAL;
+
+	if (tb[NET_APF_A_FP_VLAN_TAG])
+		vlan_tag = nla_get_u16(tb[NET_APF_A_FP_VLAN_TAG]);
+
+	if (tb[NET_APF_A_FP_UCAST_ADDR4])
+		ucast_addr4 = nla_get_be32(tb[NET_APF_A_FP_UCAST_ADDR4]);
+
+	return mac80211_hwsim_apf_fast_path(hw, vif, NULL,
+					    nla_data(tb[NET_APF_A_FP_UCAST_MAC]),
+					    vlan_tag, ucast_addr4,
+					    nla_get_flag(tb[NET_APF_A_FP_ENABLE_IPV6]));
+}
+
 #define HWSIM_APF_OPS \
 	.apf_get_info = mac80211_hwsim_apf_get_info,		\
 	.apf_set_id = mac80211_hwsim_apf_set_id,		\
@@ -2593,6 +2892,83 @@ static int mac80211_hwsim_apf_fast_path(struct ieee80211_hw *hw,
 #else
 #define HWSIM_APF_OPS
 #endif
+
+static const struct wiphy_vendor_command mac80211_hwsim_vendor_commands[] = {
+	{
+		.info = { .vendor_id = OUI_QCA,
+			  .subcmd = QCA_NL80211_SUBCMD_TEST },
+		.flags = WIPHY_VENDOR_CMD_NEED_NETDEV,
+		.doit = mac80211_hwsim_vendor_cmd_test,
+		.policy = hwsim_vendor_test_policy,
+		.maxattr = QCA_WLAN_VENDOR_ATTR_MAX,
+	},
+#if IS_ENABLED(CONFIG_NET_APF)
+	{
+		.info = { .vendor_id = OUI_GOOGLE,
+			  .subcmd = GOOGLE_NL80211_SUBCMD_APF_GET_INFO },
+		.flags = WIPHY_VENDOR_CMD_NEED_NETDEV,
+		.doit = mac80211_hwsim_vendor_cmd_apf_get_info,
+		.policy = hwsim_apf_empty_policy,
+		.maxattr = 0,
+	},
+	{
+		.info = { .vendor_id = OUI_GOOGLE,
+			  .subcmd = GOOGLE_NL80211_SUBCMD_APF_SET_ID },
+		.flags = WIPHY_VENDOR_CMD_NEED_NETDEV,
+		.doit = mac80211_hwsim_vendor_cmd_apf_set_id,
+		.policy = hwsim_apf_set_id_policy,
+		.maxattr = NET_APF_A_INFO_CHIP_ID,
+	},
+	{
+		.info = { .vendor_id = OUI_GOOGLE,
+			  .subcmd = GOOGLE_NL80211_SUBCMD_APF_ENABLE },
+		.flags = WIPHY_VENDOR_CMD_NEED_NETDEV,
+		.doit = mac80211_hwsim_vendor_cmd_apf_enable,
+		.policy = hwsim_apf_enable_policy,
+		.maxattr = NET_APF_A_RAM_SIZE,
+	},
+	{
+		.info = { .vendor_id = OUI_GOOGLE,
+			  .subcmd = GOOGLE_NL80211_SUBCMD_APF_GET_RAM_SIZE },
+		.flags = WIPHY_VENDOR_CMD_NEED_NETDEV,
+		.doit = mac80211_hwsim_vendor_cmd_apf_get_ram_size,
+		.policy = hwsim_apf_empty_policy,
+		.maxattr = 0,
+	},
+	{
+		.info = { .vendor_id = OUI_GOOGLE,
+			  .subcmd = GOOGLE_NL80211_SUBCMD_APF_READ },
+		.flags = WIPHY_VENDOR_CMD_NEED_NETDEV,
+		.doit = mac80211_hwsim_vendor_cmd_apf_read,
+		.policy = hwsim_apf_read_policy,
+		.maxattr = NET_APF_A_DATA_LEN,
+	},
+	{
+		.info = { .vendor_id = OUI_GOOGLE,
+			  .subcmd = GOOGLE_NL80211_SUBCMD_APF_WRITE },
+		.flags = WIPHY_VENDOR_CMD_NEED_NETDEV,
+		.doit = mac80211_hwsim_vendor_cmd_apf_write,
+		.policy = hwsim_apf_write_policy,
+		.maxattr = NET_APF_A_DATA,
+	},
+	{
+		.info = { .vendor_id = OUI_GOOGLE,
+			  .subcmd = GOOGLE_NL80211_SUBCMD_APF_DISABLE },
+		.flags = WIPHY_VENDOR_CMD_NEED_NETDEV,
+		.doit = mac80211_hwsim_vendor_cmd_apf_disable,
+		.policy = hwsim_apf_empty_policy,
+		.maxattr = 0,
+	},
+	{
+		.info = { .vendor_id = OUI_GOOGLE,
+			  .subcmd = GOOGLE_NL80211_SUBCMD_APF_SET_FAST_PATH },
+		.flags = WIPHY_VENDOR_CMD_NEED_NETDEV,
+		.doit = mac80211_hwsim_vendor_cmd_apf_set_fast_path,
+		.policy = hwsim_apf_set_fast_path_policy,
+		.maxattr = NET_APF_A_FP_ENABLE_IPV6,
+	},
+#endif
+};
 
 void mac80211_hwsim_tx_frame(struct ieee80211_hw *hw,
 			     struct sk_buff *skb,
