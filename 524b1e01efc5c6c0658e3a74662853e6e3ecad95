@@ -16,6 +16,24 @@
       "message": "ABI check on this is failing to build:\n\n```\n...d_id\u003dP139376169\" --build_metadata\u003d\"ab_target\u003dkernel_aarch64_16k\" --build_metadata\u003d\"test_definition_name\u003dkernel/kleaf/kernel_aarch64_16k_tests\" //common:kernel_aarch64_16k_tests  || [[ \"$?\" \u003d\u003d \"3\" ]] )\nExtracting Bazel installation...\nStarting local Bazel server (8.7.0) and connecting to it...\nINFO: Analyzed 7 targets (88 packages loaded, 116588 targets configured).\n...n:kernel_aarch64_16k failed: (Exit 1): bash failed: error executing KernelBuildKmiSymbolListStrictMode command (from target //common:kernel_aarch64_16k) /bin/bash -c ... (remaining 1 argument skipped)\n\nUse --sandbox_debug to see verbose messages from the sandbox and retain the sandbox build root for debugging\nSymbols missing from the ksymtab:\n  __traceiter_android_rvh_mapping_shrinkable\n  __traceiter_android_rvh_meminfo_proc_show\n  __traceiter_android_rvh_read_swap_cache_async_timeout\n  __traceiter_android_vh_free_one_page_flag_check\n  __tracepoint_android_rvh_mapping_shrinkable\n  __tracepoint_android_rvh_meminfo_proc_show\n  __tracepoint_android_rvh_read_swap_cache_async_timeout\n  __tracepoint_android_vh_free_one_page_flag_check\n  ````",
       "revId": "524b1e01efc5c6c0658e3a74662853e6e3ecad95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13966438_60556ea4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1447332
+      },
+      "writtenOn": "2026-10-05T23:15:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76d0a78c_203b6694",
+      "revId": "524b1e01efc5c6c0658e3a74662853e6e3ecad95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0b7490a_7a07dc7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1447332
+      },
+      "writtenOn": "2026-10-05T23:15:29Z",
+      "side": 1,
+      "message": "I should have kept only the symbols added to abi.stg, but instead I resolved the conflict by adding the symbols from the conflicting section, which caused this issue.\n\nI have now corrected the conflict resolution so that only the symbols added by patch 4333556 are included.\n\nCould you please help apply the updated patch?",
+      "revId": "be85c0ca983c32d36618c781181d1e82e14951bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
