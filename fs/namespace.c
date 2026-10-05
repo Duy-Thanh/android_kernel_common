@@ -2908,6 +2908,9 @@ static int do_change_type(const struct path *path, int ms_flags)
 	for (m = mnt; m; m = (recurse ? next_mnt(m, mnt) : NULL))
 		change_mnt_propagation(m, type);
 
+	guard(mount_locked_reader)();
+	touch_mnt_namespace(mnt->mnt_ns);
+
 	return 0;
 }
 
@@ -3481,6 +3484,10 @@ static int do_set_group(const struct path *from_path, const struct path *to_path
 		list_add(&to->mnt_share, &from->mnt_share);
 		set_mnt_shared(to);
 	}
+
+	guard(mount_locked_reader)();
+	touch_mnt_namespace(to->mnt_ns);
+
 	return 0;
 }
 
@@ -6263,8 +6270,7 @@ void __init mnt_init(void)
 				HASH_ZERO,
 				&mp_hash_shift, &mp_hash_mask, 0, 0);
 
-	if (!mount_hashtable || !mountpoint_hashtable)
-		panic("Failed to allocate mount hash table\n");
+	super_dev_init();
 
 	kernfs_init();
 
@@ -6288,7 +6294,7 @@ void put_mnt_ns(struct mnt_namespace *ns)
 	guard(namespace_excl)();
 	emptied_ns = ns;
 	guard(mount_writer)();
-	umount_tree(ns->root, 0);
+	umount_tree(ns->root, UMOUNT_CONNECTED);
 }
 
 struct vfsmount *kern_mount(struct file_system_type *type)
