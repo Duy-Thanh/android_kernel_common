@@ -16,6 +16,24 @@
       "message": "This patch is failing with:\n```\n\nINFO: Analyzed 7 targets (88 packages loaded, 116588 targets configured).\n...n:kernel_aarch64_16k failed: (Exit 1): bash failed: error executing KernelBuildKmiSymbolListStrictMode command (from target //common:kernel_aarch64_16k) /bin/bash -c ... (remaining 1 argument skipped)\n\nUse --sandbox_debug to see verbose messages from the sandbox and retain the sandbox build root for debugging\nSymbols missing from the ksymtab:\n  __traceiter_android_rvh_mapping_shrinkable\n  __traceiter_android_rvh_meminfo_proc_show\n  __traceiter_android_rvh_read_swap_cache_async_timeout\n  __traceiter_android_vh_free_one_page_flag_check\n  __tracepoint_android_rvh_mapping_shrinkable\n  __tracepoint_android_rvh_meminfo_proc_show\n  __tracepoint_android_rvh_read_swap_cache_async_timeout\n  __tracepoint_android_vh_free_one_page_flag_check\n  ```\n  as well. Maybe double check the symbols added here?",
       "revId": "da2a06b8e757a74ed5e0d9152d9d5de98f6f5041",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c93180b8_8f632335",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1447332
+      },
+      "writtenOn": "2026-10-05T23:15:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6606f2e2_085cd6fa",
+      "revId": "da2a06b8e757a74ed5e0d9152d9d5de98f6f5041",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
