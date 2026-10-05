@@ -2330,6 +2330,7 @@ cc_library(
         "tools/testing/selftests/mm/vm_util.h",
     ],
     copts = _KSELFTEST_COPTS,
+    features = ["system_include_paths"],
     includes = [
         "include/uapi/",
         "tools/testing/selftests",
@@ -2389,6 +2390,7 @@ cc_library(
         "tools/testing/selftests/mm/uffd-common.h",
     ],
     copts = _KSELFTEST_COPTS,
+    features = ["system_include_paths"],
     includes = [
         "include/uapi/",
         "tools/testing/selftests/mm/",
