@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8a2f611f_e4a63446",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-05T22:13:41Z",
+      "side": 1,
+      "message": "Just curious, what numbers of IOPS are we talking about, and we are observing an actual difference in IOPS or in power consumption caused by this 8.41% difference in CPU cycles?",
+      "revId": "cf20c42c29ca65d1f3635560410234a7efd6760d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7f103c3_ba7de68b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-05T22:13:41Z",
+      "side": 1,
+      "message": "Should we upstream this first? (If this optimization is useful and correct, it should be useful for the original upstream IOMMU driver, i.e. without pKVM, as well?)\n\nI know in the newest kernel this code is entirely refactored and the cache flush is in a completely different place (in drivers/iommu/iommu-pages.h in iommu_pages_flush_incoherent()) but I see it is still CLFLUSH.",
+      "revId": "cf20c42c29ca65d1f3635560410234a7efd6760d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1f04a66b_d3885a70",
         "filename": "drivers/iommu/intel/iommu.h",
         "patchSetId": 2
@@ -14,6 +48,24 @@
       "writtenOn": "2026-10-05T15:33:42Z",
       "side": 1,
       "message": "Can we use the standard `clwb(p)` helper from \u003casm/special_insns.h\u003e here instead of open-coding the inline assembly?\n`clwb(p)` uses ALTERNATIVE_2 (falling back safely to clflushopt/clflush if X86_FEATURE_CLWB isn\u0027t present) and casts p to a 64-byte struct { char x[64]; } * memory operand so the compiler knows the full 64-byte cache line is being accessed rather than just the single byte at *p.",
+      "revId": "cf20c42c29ca65d1f3635560410234a7efd6760d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11d65959_7d0acc04",
+        "filename": "drivers/iommu/intel/iommu.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1017,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-05T22:13:41Z",
+      "side": 1,
+      "message": "+1. Even if CLWB is supported on all CPUs we care about, I think it is much cleaner to use the clwb() helper.",
+      "parentUuid": "1f04a66b_d3885a70",
       "revId": "cf20c42c29ca65d1f3635560410234a7efd6760d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
