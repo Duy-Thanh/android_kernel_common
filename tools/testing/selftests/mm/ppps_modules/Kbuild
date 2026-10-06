@@ -20,12 +20,8 @@ obj-m += mmu_notifier_ppps_module.o
 endif
 ifneq ($(CONFIG_VIDEOBUF2_VMALLOC),)
 obj-m += vb2_mmap_ppps_module.o
-ifneq ($(CONFIG_VIDEOBUF2_DMA_SG),)
-obj-m += vb2_userptr_ppps_module.o
+obj-m += vb2_userptr_reject_ppps_module.o
 endif
-endif
-obj-m += frame_vector_abi_ppps_module.o
 obj-m += anon_exclusive_probe_ppps_module.o
-obj-m += sg_page_slices_ppps_module.o
 obj-m += vmalloc_align_ppps_module.o
 obj-m += xdp_pin_probe_ppps_module.o

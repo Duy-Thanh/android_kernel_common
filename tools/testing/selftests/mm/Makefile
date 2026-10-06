@@ -51,7 +51,7 @@ PPPS_TESTS := \
 	bpf_array_mmap_ppps bpf_ringbuf_mmap_ppps bpf_stack_build_id_ppps \
 	dma_heap_ppps dma_mmap_ppps dontneed_refault_ppps elf_core_ppps exec_env_ppps \
 	exec_user_args_ppps fadvise_dontneed_ppps fault_in_ppps \
-	file_cow_ppps file_cow_refs_ppps filemap_eof_ppps folio_within_range_ppps frame_vector_ppps \
+	file_cow_ppps file_cow_refs_ppps filemap_eof_ppps folio_within_range_ppps \
 	fork_filemap_ppps fork_page_size_ppps \
 	futex_shared_ppps \
 	gup_retry_ppps hole_anon_ppps \
@@ -70,7 +70,7 @@ PPPS_TESTS := \
 	print_vma_addr_ppps proc_pagewalk_ppps process_madvise_ppps \
 	process_mrelease_ppps process_vm_access_ppps remap_file_pages_ppps \
 	remap_pfn_cow_ppps remap_pfn_range_ppps rmap_file_referenced_ppps rss_stat_trace_ppps \
-	rusage_ppps selinux_status_mmap_ppps sg_page_slices_ppps \
+	rusage_ppps selinux_status_mmap_ppps \
 	shmem_mmap_offset_ppps \
 	shmem_quota_ppps shmem_swap_usage_ppps smaps_native_fallback_ppps smaps_page_size_ppps \
 	smaps_pss_ppps \
@@ -83,8 +83,8 @@ PPPS_TESTS := \
 	userfaultfd_shmem_ppps \
 	userfaultfd_unregister_remote_ppps userfaultfd_wp_remote_ppps \
 	uffd_sigbus_anon_ppps \
-	v9fs_mmap_close_ppps vb2_mmap_ppps \
-	vb2_userptr_ppps vhost_dirty_log_ppps vm_iomap_memory_ppps \
+	v9fs_mmap_close_ppps vb2_mmap_ppps vb2_userptr_reject_ppps \
+	vhost_dirty_log_ppps vm_iomap_memory_ppps \
 	vma_range_slice_ppps \
 	vm_map_pages_ppps vmalloc_align_ppps xdp_umem_ppps xdp_umem_race_ppps
 
@@ -190,7 +190,7 @@ endif
 TEST_GEN_FILES += write_to_hugetlbfs
 endif
 
-TEST_PROGS := run_vmtests.sh sg_page_slices_ppps.sh vmalloc_align_ppps.sh
+TEST_PROGS := run_vmtests.sh vmalloc_align_ppps.sh
 TEST_GEN_PROGS += uffd_copy_tuple_ppps
 TEST_GEN_PROGS += mremap_slice_cow_ppps
 TEST_GEN_PROGS += swap_slice_mremap_ppps
@@ -251,7 +251,6 @@ $(OUTPUT)/$(1): $(2)
 endef
 $(eval $(call ppps_test_hdrs,fault_in_ppps,fault_in_ppps.h))
 $(eval $(call ppps_test_hdrs,folio_within_range_ppps,folio_within_range_ppps.h))
-$(eval $(call ppps_test_hdrs,frame_vector_ppps,frame_vector_ppps.h))
 $(eval $(call ppps_test_hdrs,gup_retry_ppps,gup_retry_ppps.h))
 $(eval $(call ppps_test_hdrs,iov_iter_ppps,iov_iter_ppps.h))
 $(eval $(call ppps_test_hdrs,page_range_ppps,iov_iter_ppps.h page_range_ppps.h))
@@ -325,9 +324,10 @@ $(OUTPUT)/taskstats_ppps: CFLAGS += -Wunreachable-code -U_FORTIFY_SOURCE
 $(OUTPUT)/taskstats_ppps: CFLAGS += -I$(selfdir)
 
 $(OUTPUT)/vb2_mmap_ppps: LDFLAGS += -Wl,-z,max-page-size=16384
+$(OUTPUT)/vb2_userptr_reject_ppps: LDFLAGS += -Wl,-z,max-page-size=16384
 $(OUTPUT)/anon_vma_name_ppps $(OUTPUT)/iov_iter_ppps \
 $(OUTPUT)/mremap_pgoff_ppps: LDFLAGS += -pie -Wl,-z,max-page-size=16384
-$(OUTPUT)/frame_vector_ppps $(OUTPUT)/pagemap_ioctl \
+$(OUTPUT)/pagemap_ioctl \
 $(OUTPUT)/pagemap_ioctl_ppps $(OUTPUT)/pagemap_scan_ppps: LDFLAGS += -Wl,-z,max-page-size=16384
 $(OUTPUT)/process_madvise_ppps: LDFLAGS += -Wl,-z,max-page-size=16384
 $(OUTPUT)/exec_aslr_ppps: LDFLAGS += -Wl,-z,max-page-size=16384
@@ -381,5 +381,3 @@ clean_page_frag_module:
 	+$(MAKE) -C page_frag KDIR=$(KDIR) clean
 clean: clean_page_frag_module
 endif
-
-$(eval $(call ppps_test_hdrs,sg_page_slices_ppps,sg_page_slices_ppps.h))

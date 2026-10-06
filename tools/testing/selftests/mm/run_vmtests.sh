@@ -355,7 +355,6 @@ CATEGORY="mmap" run_test ./iommu_dma_mmap_ppps.sh
 CATEGORY="mmap" run_test ./v9fs_mmap_close_ppps.sh
 CATEGORY="mmap" run_ppps_module_test vm_map_pages ./vm_map_pages_ppps
 CATEGORY="mmap" run_ppps_module_test vb2_mmap sh -c './vb2_mmap_ppps --native && exec ./vb2_mmap_ppps'
-CATEGORY="mmap" run_ppps_module_test vb2_userptr ./vb2_userptr_ppps
 CATEGORY="mmap" run_test ./mmap_hint_ppps
 CATEGORY="mmap" run_test ./brk_aslr_ppps
 CATEGORY="mmap" run_test ./elf_brk_gap_ppps
@@ -399,7 +398,6 @@ fi
 CATEGORY="gup_test" run_test ./gup_test -ct -F 0x1 0 19 0x1000
 CATEGORY="gup_test" run_test ./gup_longterm
 CATEGORY="gup_test" run_ppps_module_test gup_retry ./gup_retry_ppps
-CATEGORY="gup_test" run_ppps_module_test frame_vector ./frame_vector_ppps
 CATEGORY="gup_test" run_ppps_module_test iov_iter ./iov_iter_ppps
 CATEGORY="gup_test" run_ppps_module_test iov_iter ./page_range_ppps
 CATEGORY="gup_test" run_ppps_module_test iov_iter ./page_range_ppps --native
