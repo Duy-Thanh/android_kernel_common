@@ -44,6 +44,7 @@
 static struct hlist_head fprobe_table[FPROBE_TABLE_SIZE];
 static struct hlist_head fprobe_ip_table[FPROBE_IP_TABLE_SIZE];
 static DEFINE_MUTEX(fprobe_mutex);
+static struct fgraph_ops fprobe_graph_ops;
 
 /*
  * Find first fprobe in the hlist. It will be iterated twice in the entry
@@ -85,8 +86,7 @@ static void insert_fprobe_node(struct fprobe_hlist_node *node)
 	hlist_add_head_rcu(&node->hlist, head);
 }
 
-/* Return true if there are synonims */
-static bool delete_fprobe_node(struct fprobe_hlist_node *node)
+static void delete_fprobe_node(struct fprobe_hlist_node *node)
 {
 	lockdep_assert_held(&fprobe_mutex);
 
@@ -95,7 +95,18 @@ static bool delete_fprobe_node(struct fprobe_hlist_node *node)
 		WRITE_ONCE(node->fp, NULL);
 		hlist_del_rcu(&node->hlist);
 	}
+<<<<<<< HEAD   (6707584a621c31fe67fe263ed22b44c6006efd44 Merge 52cc572c9565 ("tracing: fprobe: Remove unused local va)
 	return !!find_first_fprobe_node(node->addr);
+||||||| BASE   (52cc572c95655ad71cdde4e494abf770efe9e233 tracing: fprobe: Remove unused local variable)
+
+	rcu_read_lock();
+	ret = !!rhltable_lookup(&fprobe_ip_table, &node->addr,
+				fprobe_rht_params);
+	rcu_read_unlock();
+
+	return ret;
+=======
+>>>>>>> BRANCH (1aed73795392d64193a4d8f30bbe355bca7d92fd tracing/fprobe: Check the same type fprobe on table as the u)
 }
 
 /* Check existence of the fprobe */
@@ -244,10 +255,284 @@ static inline int __fprobe_kprobe_handler(unsigned long ip, unsigned long parent
 	return ret;
 }
 
+<<<<<<< HEAD   (6707584a621c31fe67fe263ed22b44c6006efd44 Merge 52cc572c9565 ("tracing: fprobe: Remove unused local va)
 static int fprobe_entry(struct ftrace_graph_ent *trace, struct fgraph_ops *gops,
 			struct ftrace_regs *fregs)
+||||||| BASE   (52cc572c95655ad71cdde4e494abf770efe9e233 tracing: fprobe: Remove unused local variable)
+#ifdef CONFIG_DYNAMIC_FTRACE_WITH_REGS
+/* ftrace_ops callback, this processes fprobes which have only entry_handler. */
+static void fprobe_ftrace_entry(unsigned long ip, unsigned long parent_ip,
+	struct ftrace_ops *ops, struct ftrace_regs *fregs)
+=======
+#if defined(CONFIG_DYNAMIC_FTRACE_WITH_ARGS) || defined(CONFIG_DYNAMIC_FTRACE_WITH_REGS)
+/* ftrace_ops callback, this processes fprobes which have only entry_handler. */
+static void fprobe_ftrace_entry(unsigned long ip, unsigned long parent_ip,
+	struct ftrace_ops *ops, struct ftrace_regs *fregs)
+>>>>>>> BRANCH (1aed73795392d64193a4d8f30bbe355bca7d92fd tracing/fprobe: Check the same type fprobe on table as the u)
 {
+<<<<<<< HEAD   (6707584a621c31fe67fe263ed22b44c6006efd44 Merge 52cc572c9565 ("tracing: fprobe: Remove unused local va)
 	struct fprobe_hlist_node *node, *first;
+||||||| BASE   (52cc572c95655ad71cdde4e494abf770efe9e233 tracing: fprobe: Remove unused local variable)
+	struct fprobe_hlist_node *node;
+	struct rhlist_head *head, *pos;
+	struct fprobe *fp;
+	int bit;
+
+	bit = ftrace_test_recursion_trylock(ip, parent_ip);
+	if (bit < 0)
+		return;
+
+	/*
+	 * ftrace_test_recursion_trylock() disables preemption, but
+	 * rhltable_lookup() checks whether rcu_read_lcok is held.
+	 * So we take rcu_read_lock() here.
+	 */
+	rcu_read_lock();
+	head = rhltable_lookup(&fprobe_ip_table, &ip, fprobe_rht_params);
+
+	rhl_for_each_entry_rcu(node, pos, head, hlist) {
+		if (node->addr != ip)
+			break;
+		fp = READ_ONCE(node->fp);
+		if (unlikely(!fp || fprobe_disabled(fp) || fp->exit_handler))
+			continue;
+
+		if (fprobe_shared_with_kprobes(fp))
+			__fprobe_kprobe_handler(ip, parent_ip, fp, fregs, NULL);
+		else
+			__fprobe_handler(ip, parent_ip, fp, fregs, NULL);
+	}
+	rcu_read_unlock();
+	ftrace_test_recursion_unlock(bit);
+}
+NOKPROBE_SYMBOL(fprobe_ftrace_entry);
+
+static struct ftrace_ops fprobe_ftrace_ops = {
+	.func	= fprobe_ftrace_entry,
+	.flags	= FTRACE_OPS_FL_SAVE_REGS,
+};
+static int fprobe_ftrace_active;
+
+static int fprobe_ftrace_add_ips(unsigned long *addrs, int num)
+{
+	int ret;
+
+	lockdep_assert_held(&fprobe_mutex);
+
+	ret = ftrace_set_filter_ips(&fprobe_ftrace_ops, addrs, num, 0, 0);
+	if (ret)
+		return ret;
+
+	if (!fprobe_ftrace_active) {
+		ret = register_ftrace_function(&fprobe_ftrace_ops);
+		if (ret) {
+			ftrace_free_filter(&fprobe_ftrace_ops);
+			return ret;
+		}
+	}
+	fprobe_ftrace_active++;
+	return 0;
+}
+
+static void fprobe_ftrace_remove_ips(unsigned long *addrs, int num)
+{
+	lockdep_assert_held(&fprobe_mutex);
+
+	fprobe_ftrace_active--;
+	if (!fprobe_ftrace_active) {
+		unregister_ftrace_function(&fprobe_ftrace_ops);
+		ftrace_free_filter(&fprobe_ftrace_ops);
+	} else if (num)
+		ftrace_set_filter_ips(&fprobe_ftrace_ops, addrs, num, 1, 0);
+}
+
+static bool fprobe_is_ftrace(struct fprobe *fp)
+{
+	return !fp->exit_handler;
+}
+#else
+static int fprobe_ftrace_add_ips(unsigned long *addrs, int num)
+{
+	return -ENOENT;
+}
+
+static void fprobe_ftrace_remove_ips(unsigned long *addrs, int num)
+{
+}
+
+static bool fprobe_is_ftrace(struct fprobe *fp)
+{
+	return false;
+}
+#endif
+
+/* fgraph_ops callback, this processes fprobes which have exit_handler. */
+static int fprobe_fgraph_entry(struct ftrace_graph_ent *trace, struct fgraph_ops *gops,
+			       struct ftrace_regs *fregs)
+{
+=======
+	struct fprobe_hlist_node *node;
+	struct rhlist_head *head, *pos;
+	struct fprobe *fp;
+	int bit;
+
+	bit = ftrace_test_recursion_trylock(ip, parent_ip);
+	if (bit < 0)
+		return;
+
+	/*
+	 * ftrace_test_recursion_trylock() disables preemption, but
+	 * rhltable_lookup() checks whether rcu_read_lcok is held.
+	 * So we take rcu_read_lock() here.
+	 */
+	rcu_read_lock();
+	head = rhltable_lookup(&fprobe_ip_table, &ip, fprobe_rht_params);
+
+	rhl_for_each_entry_rcu(node, pos, head, hlist) {
+		if (node->addr != ip)
+			break;
+		fp = READ_ONCE(node->fp);
+		if (unlikely(!fp || fprobe_disabled(fp) || fp->exit_handler))
+			continue;
+
+		if (fprobe_shared_with_kprobes(fp))
+			__fprobe_kprobe_handler(ip, parent_ip, fp, fregs, NULL);
+		else
+			__fprobe_handler(ip, parent_ip, fp, fregs, NULL);
+	}
+	rcu_read_unlock();
+	ftrace_test_recursion_unlock(bit);
+}
+NOKPROBE_SYMBOL(fprobe_ftrace_entry);
+
+static struct ftrace_ops fprobe_ftrace_ops = {
+	.func	= fprobe_ftrace_entry,
+	.flags	= FTRACE_OPS_FL_SAVE_ARGS,
+};
+static int fprobe_ftrace_active;
+
+static int fprobe_ftrace_add_ips(unsigned long *addrs, int num)
+{
+	int ret;
+
+	lockdep_assert_held(&fprobe_mutex);
+
+	ret = ftrace_set_filter_ips(&fprobe_ftrace_ops, addrs, num, 0, 0);
+	if (ret)
+		return ret;
+
+	if (!fprobe_ftrace_active) {
+		ret = register_ftrace_function(&fprobe_ftrace_ops);
+		if (ret) {
+			ftrace_free_filter(&fprobe_ftrace_ops);
+			return ret;
+		}
+	}
+	fprobe_ftrace_active++;
+	return 0;
+}
+
+static void fprobe_ftrace_remove_ips(unsigned long *addrs, int num)
+{
+	lockdep_assert_held(&fprobe_mutex);
+
+	fprobe_ftrace_active--;
+	if (!fprobe_ftrace_active) {
+		unregister_ftrace_function(&fprobe_ftrace_ops);
+		ftrace_free_filter(&fprobe_ftrace_ops);
+	} else if (num)
+		ftrace_set_filter_ips(&fprobe_ftrace_ops, addrs, num, 1, 0);
+}
+
+static bool fprobe_is_ftrace(struct fprobe *fp)
+{
+	return !fp->exit_handler;
+}
+
+static bool fprobe_exists_on_hash(unsigned long ip, bool ftrace)
+{
+	struct rhlist_head *head, *pos;
+	struct fprobe_hlist_node *node;
+	struct fprobe *fp;
+
+	guard(rcu)();
+	head = rhltable_lookup(&fprobe_ip_table, &ip,
+				fprobe_rht_params);
+	if (!head)
+		return false;
+	/* We have to check the same type on the list. */
+	rhl_for_each_entry_rcu(node, pos, head, hlist) {
+		if (node->addr != ip)
+			break;
+		fp = READ_ONCE(node->fp);
+		if (likely(fp)) {
+			if ((!ftrace && fp->exit_handler) ||
+			    (ftrace && !fp->exit_handler))
+				return true;
+		}
+	}
+
+	return false;
+}
+
+#ifdef CONFIG_MODULES
+static void fprobe_remove_ips(unsigned long *ips, unsigned int cnt)
+{
+	ftrace_set_filter_ips(&fprobe_graph_ops.ops, ips, cnt, 1, 0);
+	ftrace_set_filter_ips(&fprobe_ftrace_ops, ips, cnt, 1, 0);
+}
+#endif
+#else
+static int fprobe_ftrace_add_ips(unsigned long *addrs, int num)
+{
+	return -ENOENT;
+}
+
+static void fprobe_ftrace_remove_ips(unsigned long *addrs, int num)
+{
+}
+
+static bool fprobe_is_ftrace(struct fprobe *fp)
+{
+	return false;
+}
+
+static bool fprobe_exists_on_hash(unsigned long ip, bool ftrace __maybe_unused)
+{
+	struct rhlist_head *head, *pos;
+	struct fprobe_hlist_node *node;
+	struct fprobe *fp;
+
+	guard(rcu)();
+	head = rhltable_lookup(&fprobe_ip_table, &ip,
+				fprobe_rht_params);
+	if (!head)
+		return false;
+	/* We only need to check fp is there. */
+	rhl_for_each_entry_rcu(node, pos, head, hlist) {
+		if (node->addr != ip)
+			break;
+		fp = READ_ONCE(node->fp);
+		if (likely(fp))
+			return true;
+	}
+
+	return false;
+}
+
+#ifdef CONFIG_MODULES
+static void fprobe_remove_ips(unsigned long *ips, unsigned int cnt)
+{
+	ftrace_set_filter_ips(&fprobe_graph_ops.ops, ips, cnt, 1, 0);
+}
+#endif
+#endif /* !CONFIG_DYNAMIC_FTRACE_WITH_ARGS && !CONFIG_DYNAMIC_FTRACE_WITH_REGS */
+
+/* fgraph_ops callback, this processes fprobes which have exit_handler. */
+static int fprobe_fgraph_entry(struct ftrace_graph_ent *trace, struct fgraph_ops *gops,
+			       struct ftrace_regs *fregs)
+{
+>>>>>>> BRANCH (1aed73795392d64193a4d8f30bbe355bca7d92fd tracing/fprobe: Check the same type fprobe on table as the u)
 	unsigned long *fgraph_data = NULL;
 	unsigned long func = trace->func;
 	unsigned long ret_ip;
@@ -414,7 +699,7 @@ static void fprobe_graph_remove_ips(unsigned long *addrs, int num)
 
 #ifdef CONFIG_MODULES
 
-#define FPROBE_IPS_BATCH_INIT 8
+#define FPROBE_IPS_BATCH_INIT 128
 /* instruction pointer address list */
 struct fprobe_addr_list {
 	int index;
@@ -422,6 +707,7 @@ struct fprobe_addr_list {
 	unsigned long *addrs;
 };
 
+<<<<<<< HEAD   (6707584a621c31fe67fe263ed22b44c6006efd44 Merge 52cc572c9565 ("tracing: fprobe: Remove unused local va)
 static int fprobe_addr_list_add(struct fprobe_addr_list *alist, unsigned long addr)
 {
 	unsigned long *addrs;
@@ -449,7 +735,40 @@ static int fprobe_addr_list_add(struct fprobe_addr_list *alist, unsigned long ad
 
 static void fprobe_remove_node_in_module(struct module *mod, struct hlist_head *head,
 					struct fprobe_addr_list *alist)
+||||||| BASE   (52cc572c95655ad71cdde4e494abf770efe9e233 tracing: fprobe: Remove unused local variable)
+static int fprobe_addr_list_add(struct fprobe_addr_list *alist, unsigned long addr)
 {
+	unsigned long *addrs;
+
+	/* Previously we failed to expand the list. */
+	if (alist->index == alist->size)
+		return -ENOSPC;
+
+	alist->addrs[alist->index++] = addr;
+	if (alist->index < alist->size)
+		return 0;
+
+	/* Expand the address list */
+	addrs = kcalloc(alist->size * 2, sizeof(*addrs), GFP_KERNEL);
+	if (!addrs)
+		return -ENOMEM;
+
+	memcpy(addrs, alist->addrs, alist->size * sizeof(*addrs));
+	alist->size *= 2;
+	kfree(alist->addrs);
+	alist->addrs = addrs;
+
+	return 0;
+}
+
+static void fprobe_remove_node_in_module(struct module *mod, struct fprobe_hlist_node *node,
+					 struct fprobe_addr_list *alist)
+=======
+static int fprobe_remove_node_in_module(struct module *mod, struct fprobe_hlist_node *node,
+					 struct fprobe_addr_list *alist)
+>>>>>>> BRANCH (1aed73795392d64193a4d8f30bbe355bca7d92fd tracing/fprobe: Check the same type fprobe on table as the u)
+{
+<<<<<<< HEAD   (6707584a621c31fe67fe263ed22b44c6006efd44 Merge 52cc572c9565 ("tracing: fprobe: Remove unused local va)
 	struct fprobe_hlist_node *node;
 	int ret = 0;
 
@@ -466,6 +785,38 @@ static void fprobe_remove_node_in_module(struct module *mod, struct hlist_head *
 		if (!ret)
 			ret = fprobe_addr_list_add(alist, node->addr);
 	}
+||||||| BASE   (52cc572c95655ad71cdde4e494abf770efe9e233 tracing: fprobe: Remove unused local variable)
+	if (!within_module(node->addr, mod))
+		return;
+	if (delete_fprobe_node(node))
+		return;
+	/*
+	 * If failed to update alist, just continue to update hlist.
+	 * Therefore, at list user handler will not hit anymore.
+	 */
+	fprobe_addr_list_add(alist, node->addr);
+=======
+	lockdep_assert_in_rcu_read_lock();
+
+	if (!within_module(node->addr, mod))
+		return 0;
+
+	delete_fprobe_node(node);
+	/* If no address list is available, we can't track this address. */
+	if (!alist->addrs)
+		return 0;
+	/*
+	 * Don't care the type here, because all fprobes on the same
+	 * address must be removed eventually.
+	 */
+	if (!rhltable_lookup(&fprobe_ip_table, &node->addr, fprobe_rht_params)) {
+		alist->addrs[alist->index++] = node->addr;
+		if (alist->index == alist->size)
+			return -ENOSPC;
+	}
+
+	return 0;
+>>>>>>> BRANCH (1aed73795392d64193a4d8f30bbe355bca7d92fd tracing/fprobe: Check the same type fprobe on table as the u)
 }
 
 /* Handle module unloading to manage fprobe_ip_table. */
@@ -474,23 +825,86 @@ static int fprobe_module_callback(struct notifier_block *nb,
 {
 	struct fprobe_addr_list alist = {.size = FPROBE_IPS_BATCH_INIT};
 	struct module *mod = data;
+<<<<<<< HEAD   (6707584a621c31fe67fe263ed22b44c6006efd44 Merge 52cc572c9565 ("tracing: fprobe: Remove unused local va)
 	int i;
+||||||| BASE   (52cc572c95655ad71cdde4e494abf770efe9e233 tracing: fprobe: Remove unused local variable)
+=======
+	bool retry;
+>>>>>>> BRANCH (1aed73795392d64193a4d8f30bbe355bca7d92fd tracing/fprobe: Check the same type fprobe on table as the u)
 
 	if (val != MODULE_STATE_GOING)
 		return NOTIFY_DONE;
 
 	alist.addrs = kcalloc(alist.size, sizeof(*alist.addrs), GFP_KERNEL);
-	/* If failed to alloc memory, we can not remove ips from hash. */
-	if (!alist.addrs)
-		return NOTIFY_DONE;
+	/*
+	 * If failed to alloc memory, ftrace_ops will not be able to remove ips from
+	 * hash, but we can still remove nodes from fprobe_ip_table, so we can avoid
+	 * the potential wrong callback. So just print a warning here and try to
+	 * continue without address list.
+	 */
+	WARN_ONCE(!alist.addrs,
+		"Failed to allocate memory for fprobe_addr_list, ftrace_ops will not be updated");
 
 	mutex_lock(&fprobe_mutex);
+<<<<<<< HEAD   (6707584a621c31fe67fe263ed22b44c6006efd44 Merge 52cc572c9565 ("tracing: fprobe: Remove unused local va)
 	for (i = 0; i < FPROBE_IP_TABLE_SIZE; i++)
 		fprobe_remove_node_in_module(mod, &fprobe_ip_table[i], &alist);
+||||||| BASE   (52cc572c95655ad71cdde4e494abf770efe9e233 tracing: fprobe: Remove unused local variable)
+	rhltable_walk_enter(&fprobe_ip_table, &iter);
+	do {
+		rhashtable_walk_start(&iter);
+=======
+again:
+	retry = false;
+	alist.index = 0;
+	rhltable_walk_enter(&fprobe_ip_table, &iter);
+	do {
+		rhashtable_walk_start(&iter);
+>>>>>>> BRANCH (1aed73795392d64193a4d8f30bbe355bca7d92fd tracing/fprobe: Check the same type fprobe on table as the u)
 
+<<<<<<< HEAD   (6707584a621c31fe67fe263ed22b44c6006efd44 Merge 52cc572c9565 ("tracing: fprobe: Remove unused local va)
 	if (alist.index > 0)
 		ftrace_set_filter_ips(&fprobe_graph_ops.ops,
 				      alist.addrs, alist.index, 1, 0);
+||||||| BASE   (52cc572c95655ad71cdde4e494abf770efe9e233 tracing: fprobe: Remove unused local variable)
+		while ((node = rhashtable_walk_next(&iter)) && !IS_ERR(node))
+			fprobe_remove_node_in_module(mod, node, &alist);
+
+		rhashtable_walk_stop(&iter);
+	} while (node == ERR_PTR(-EAGAIN));
+	rhashtable_walk_exit(&iter);
+
+	if (alist.index > 0) {
+		ftrace_set_filter_ips(&fprobe_graph_ops.ops,
+				      alist.addrs, alist.index, 1, 0);
+#ifdef CONFIG_DYNAMIC_FTRACE_WITH_REGS
+		ftrace_set_filter_ips(&fprobe_ftrace_ops,
+				      alist.addrs, alist.index, 1, 0);
+#endif
+	}
+=======
+		while ((node = rhashtable_walk_next(&iter)) && !IS_ERR(node))
+			if (fprobe_remove_node_in_module(mod, node, &alist) < 0) {
+				retry = true;
+				break;
+			}
+
+		rhashtable_walk_stop(&iter);
+	} while (node == ERR_PTR(-EAGAIN) && !retry);
+	rhashtable_walk_exit(&iter);
+	/* Remove any ips from hash table(s) */
+	if (alist.index > 0) {
+		fprobe_remove_ips(alist.addrs, alist.index);
+		/*
+		 * If we break rhashtable walk loop except for -EAGAIN, we need
+		 * to restart looping from start for safety. Anyway, this is
+		 * not a hotpath.
+		 */
+		if (retry)
+			goto again;
+	}
+
+>>>>>>> BRANCH (1aed73795392d64193a4d8f30bbe355bca7d92fd tracing/fprobe: Check the same type fprobe on table as the u)
 	mutex_unlock(&fprobe_mutex);
 
 	kfree(alist.addrs);
@@ -777,6 +1191,84 @@ bool fprobe_is_registered(struct fprobe *fp)
 	return true;
 }
 
+<<<<<<< HEAD   (6707584a621c31fe67fe263ed22b44c6006efd44 Merge 52cc572c9565 ("tracing: fprobe: Remove unused local va)
+||||||| BASE   (52cc572c95655ad71cdde4e494abf770efe9e233 tracing: fprobe: Remove unused local variable)
+static int unregister_fprobe_nolock(struct fprobe *fp)
+{
+	struct fprobe_hlist *hlist_array = fp->hlist_array;
+	unsigned long *addrs = NULL;
+	int i, count;
+
+	addrs = kcalloc(hlist_array->size, sizeof(unsigned long), GFP_KERNEL);
+	/*
+	 * This will remove fprobe_hash_node from the hash table even if
+	 * memory allocation fails. However, ftrace_ops will not be updated.
+	 * Anyway, when the last fprobe is unregistered, ftrace_ops is also
+	 * unregistered.
+	 */
+	if (!addrs)
+		pr_warn("Failed to allocate working array. ftrace_ops may not sync.\n");
+
+	/* Remove non-synonim ips from table and hash */
+	count = 0;
+	for (i = 0; i < hlist_array->size; i++) {
+		if (!delete_fprobe_node(&hlist_array->array[i]) && addrs)
+			addrs[count++] = hlist_array->array[i].addr;
+	}
+	del_fprobe_hash(fp);
+
+	if (fprobe_is_ftrace(fp))
+		fprobe_ftrace_remove_ips(addrs, count);
+	else
+		fprobe_graph_remove_ips(addrs, count);
+
+	kfree_rcu(hlist_array, rcu);
+	fp->hlist_array = NULL;
+	kfree(addrs);
+
+	return 0;
+}
+
+=======
+static int unregister_fprobe_nolock(struct fprobe *fp)
+{
+	struct fprobe_hlist *hlist_array = fp->hlist_array;
+	unsigned long *addrs = NULL;
+	int i, count;
+
+	addrs = kcalloc(hlist_array->size, sizeof(unsigned long), GFP_KERNEL);
+	/*
+	 * This will remove fprobe_hash_node from the hash table even if
+	 * memory allocation fails. However, ftrace_ops will not be updated.
+	 * Anyway, when the last fprobe is unregistered, ftrace_ops is also
+	 * unregistered.
+	 */
+	if (!addrs)
+		pr_warn("Failed to allocate working array. ftrace_ops may not sync.\n");
+
+	/* Remove non-synonim ips from table and hash */
+	count = 0;
+	for (i = 0; i < hlist_array->size; i++) {
+		delete_fprobe_node(&hlist_array->array[i]);
+		if (addrs && !fprobe_exists_on_hash(hlist_array->array[i].addr,
+						    fprobe_is_ftrace(fp)))
+			addrs[count++] = hlist_array->array[i].addr;
+	}
+	del_fprobe_hash(fp);
+
+	if (fprobe_is_ftrace(fp))
+		fprobe_ftrace_remove_ips(addrs, count);
+	else
+		fprobe_graph_remove_ips(addrs, count);
+
+	kfree_rcu(hlist_array, rcu);
+	fp->hlist_array = NULL;
+	kfree(addrs);
+
+	return 0;
+}
+
+>>>>>>> BRANCH (1aed73795392d64193a4d8f30bbe355bca7d92fd tracing/fprobe: Check the same type fprobe on table as the u)
 /**
  * unregister_fprobe() - Unregister fprobe.
  * @fp: A fprobe data structure to be unregistered.
