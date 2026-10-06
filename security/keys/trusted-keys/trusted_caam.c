@@ -28,13 +28,10 @@ static const match_table_t key_tokens = {
 	{opt_err, NULL}
 };
 
-#ifdef CONFIG_TRUSTED_KEYS_DEBUG
+#ifdef CAAM_DEBUG
 static inline void dump_options(const struct caam_pkey_info *pkey_info)
 {
-	if (!trusted_debug)
-		return;
-
-	pr_debug("key encryption algo %d\n", pkey_info->key_enc_algo);
+	pr_info("key encryption algo %d\n", pkey_info->key_enc_algo);
 }
 #else
 static inline void dump_options(const struct caam_pkey_info *pkey_info)
