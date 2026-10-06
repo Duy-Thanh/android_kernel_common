@@ -6,7 +6,7 @@ Landlock: system-wide management
 ================================
 
 :Author: Mickaël Salaün
-:Date: June 2026
+:Date: January 2026
 
 Landlock can leverage the audit framework to log events.
 
@@ -19,10 +19,8 @@ Audit
 Denied access requests are logged by default for a sandboxed program if `audit`
 is enabled.  This default behavior can be changed with the
 sys_landlock_restrict_self() flags (cf.
-Documentation/userspace-api/landlock.rst), or suppressed on a per-object
-basis by using ``LANDLOCK_ADD_RULE_QUIET`` (ABI 10+).  Landlock logs can
-also be masked thanks to audit rules.  Landlock can generate 2 audit
-record types.
+Documentation/userspace-api/landlock.rst).  Landlock logs can also be masked
+thanks to audit rules.  Landlock can generate 2 audit record types.
 
 Record types
 ------------
@@ -56,8 +54,6 @@ AUDIT_LANDLOCK_ACCESS
     **net.*** - Network access rights (ABI 4+):
         - net.bind_tcp - TCP port binding was denied
         - net.connect_tcp - TCP connection was denied
-        - net.bind_udp - UDP port binding was denied
-        - net.connect_send_udp - UDP connection and send was denied
 
     **scope.*** - IPC scoping restrictions (ABI 6+):
         - scope.abstract_unix_socket - Abstract UNIX socket connection denied
@@ -176,8 +172,7 @@ If you get spammed with audit logs related to Landlock, this is either an
 attack attempt or a bug in the security policy.  We can put in place some
 filters to limit noise with two complementary ways:
 
-- with sys_landlock_restrict_self()'s flags, or
-  ``LANDLOCK_ADD_RULE_QUIET`` (ABI 10+) if we can fix the sandboxed
+- with sys_landlock_restrict_self()'s flags if we can fix the sandboxed
   programs,
 - or with audit rules (see :manpage:`auditctl(8)`).
 
