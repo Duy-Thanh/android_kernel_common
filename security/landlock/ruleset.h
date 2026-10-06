@@ -29,18 +29,7 @@ struct landlock_layer {
 	/**
 	 * @level: Position of this layer in the layer stack.  Starts from 1.
 	 */
-	u8 level;
-	/**
-	 * @flags: Bitfield for special flags attached to this rule.
-	 */
-	struct {
-		/**
-		 * @quiet: Suppresses denial logs for the object covered by this
-		 * rule in this domain.  For filesystem rules, this inherits
-		 * down the file hierarchy.
-		 */
-		u8 quiet : 1;
-	} flags;
+	u16 level;
 	/**
 	 * @access: Bitfield of allowed actions on the kernel object.  They are
 	 * relative to the object type (e.g. %LANDLOCK_ACTION_FS_READ).
@@ -156,8 +145,8 @@ struct landlock_ruleset {
 		 * @work_free: Enables to free a ruleset within a lockless
 		 * section.  This is only used by
 		 * landlock_put_ruleset_deferred() when @usage reaches zero.
-		 * The fields @lock, @usage, @num_rules, @num_layers,
-		 * @quiet_masks and @access_masks are then unused.
+		 * The fields @lock, @usage, @num_rules, @num_layers and
+		 * @access_masks are then unused.
 		 */
 		struct work_struct work_free;
 		struct {
@@ -183,12 +172,6 @@ struct landlock_ruleset {
 			 * non-merged ruleset (i.e. not a domain).
 			 */
 			u32 num_layers;
-			/**
-			 * @quiet_masks: Stores the quiet flags for an unmerged
-			 * ruleset.  For a merged domain, this is stored in each
-			 * layer's struct landlock_hierarchy instead.
-			 */
-			struct access_masks quiet_masks;
 			/**
 			 * @access_masks: Contains the subset of filesystem and
 			 * network actions that are restricted by a ruleset.
@@ -219,7 +202,7 @@ DEFINE_FREE(landlock_put_ruleset, struct landlock_ruleset *,
 
 int landlock_insert_rule(struct landlock_ruleset *const ruleset,
 			 const struct landlock_id id,
-			 const access_mask_t access, const u32 flags);
+			 const access_mask_t access);
 
 struct landlock_ruleset *
 landlock_merge_ruleset(struct landlock_ruleset *const parent,
@@ -319,12 +302,12 @@ landlock_get_scope_mask(const struct landlock_ruleset *const ruleset,
 }
 
 bool landlock_unmask_layers(const struct landlock_rule *const rule,
-			    struct layer_masks *masks);
+			    struct layer_access_masks *masks);
 
 access_mask_t
 landlock_init_layer_masks(const struct landlock_ruleset *const domain,
 			  const access_mask_t access_request,
-			  struct layer_masks *masks,
+			  struct layer_access_masks *masks,
 			  const enum landlock_key_type key_type);
 
 #endif /* _SECURITY_LANDLOCK_RULESET_H */
