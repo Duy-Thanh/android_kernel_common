@@ -896,6 +896,12 @@ config ARCH_HAS_HUGEPD
 config MAPPING_DIRTY_HELPERS
         bool
 
+<<<<<<< HEAD   (123d22021d5f90d0313d92d9af1af70779604b17 Merge 6eb2664a2edb ("platform: Provide a remove callback tha)
 source "mm/damon/Kconfig"
+||||||| BASE   (6eb2664a2edb935370d7cf3f81097244c756af44 platform: Provide a remove callback that returns no value)
+=======
+config KMAP_LOCAL
+	bool
+>>>>>>> BRANCH (c1824fac30fa27daf9bdc9d47197122320d220ee highmem: Provide generic variant of kmap_atomic*)
 
 endmenu
