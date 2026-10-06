@@ -7912,7 +7912,6 @@ enqueue_task_fair(struct rq *rq, struct task_struct *p, int flags)
 		flags = ENQUEUE_WAKEUP;
 	}
 
-	trace_android_rvh_enqueue_task_fair(rq, p, flags);
 	for_each_sched_entity(se) {
 		cfs_rq = cfs_rq_of(se);
 
@@ -8030,7 +8029,6 @@ static int dequeue_entities(struct rq *rq, struct sched_entity *se, int flags)
 		flags &= ~(DEQUEUE_DELAYED | DEQUEUE_SPECIAL);
 	}
 
-	trace_android_rvh_dequeue_task_fair(rq, p, flags);
 	for_each_sched_entity(se) {
 		cfs_rq = cfs_rq_of(se);
 
