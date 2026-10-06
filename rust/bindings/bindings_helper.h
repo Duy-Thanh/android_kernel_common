@@ -88,7 +88,12 @@
 #include <linux/regulator/consumer.h>
 #include <linux/sched.h>
 #include <linux/security.h>
+<<<<<<< HEAD   (3f222aeafcfe2d12bf7dd5363d88ae78bbfef459 Merge c6cf4441a3a0 ("Merge tag 'devicetree-for-7.3' of git:/)
 #include <linux/shmem_fs.h>
+||||||| BASE   (c6cf4441a3a05bb7273ed022f3e56c4fc591da08 Merge tag 'devicetree-for-7.3' of git://git.kernel.org/pub/s)
+=======
+#include <linux/serdev.h>
+>>>>>>> BRANCH (59e6295fac26b8e85c1ea859cdd89fa1e47519d7 Merge tag 'driver-core-7.3-rc1' of git://git.kernel.org/pub/)
 #include <linux/slab.h>
 #include <linux/sys_soc.h>
 #include <linux/task_work.h>
