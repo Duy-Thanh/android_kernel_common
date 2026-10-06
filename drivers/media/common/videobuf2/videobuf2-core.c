@@ -21,6 +21,7 @@
 #include <linux/module.h>
 #include <linux/mm.h>
 #include <linux/poll.h>
+#include <linux/p3s/mm.h>
 #include <linux/slab.h>
 #include <linux/sched.h>
 #include <linux/freezer.h>
@@ -870,6 +871,12 @@ static void vb2_core_free_buffers_storage(struct vb2_queue *q)
 	q->bufs_bitmap = NULL;
 }
 
+static bool vb2_userptr_unsupported(struct vb2_queue *q)
+{
+	return q->memory == VB2_MEMORY_USERPTR && current->mm &&
+	       mm_is_p3s_4k(current->mm);
+}
+
 int vb2_core_reqbufs(struct vb2_queue *q, enum vb2_memory memory,
 		     unsigned int flags, unsigned int *count)
 {
@@ -879,6 +886,10 @@ int vb2_core_reqbufs(struct vb2_queue *q, enum vb2_memory memory,
 	bool non_coherent_mem = flags & V4L2_MEMORY_FLAG_NON_COHERENT;
 	unsigned int i, first_index;
 	int ret = 0;
+
+	if (*count && memory == VB2_MEMORY_USERPTR && current->mm &&
+	    mm_is_p3s_4k(current->mm))
+		return -EOPNOTSUPP;
 
 	if (q->streaming) {
 		dprintk(q, 1, "streaming active\n");
@@ -1047,6 +1058,10 @@ int vb2_core_create_bufs(struct vb2_queue *q, enum vb2_memory memory,
 	unsigned int q_num_bufs = vb2_get_num_buffers(q);
 	bool no_previous_buffers = !q_num_bufs;
 	int ret = 0;
+
+	if (*count && memory == VB2_MEMORY_USERPTR && current->mm &&
+	    mm_is_p3s_4k(current->mm))
+		return -EOPNOTSUPP;
 
 	if (q_num_bufs == q->max_num_buffers) {
 		dprintk(q, 1, "maximum number of buffers already allocated\n");
@@ -1605,6 +1620,9 @@ static int vb2_req_prepare(struct media_request_object *obj)
 	struct vb2_buffer *vb = container_of(obj, struct vb2_buffer, req_obj);
 	int ret;
 
+	if (vb2_userptr_unsupported(vb->vb2_queue))
+		return -EOPNOTSUPP;
+
 	if (WARN_ON(vb->state != VB2_BUF_STATE_IN_REQUEST))
 		return -EINVAL;
 
@@ -1699,6 +1717,9 @@ EXPORT_SYMBOL_GPL(vb2_request_buffer_cnt);
 int vb2_core_prepare_buf(struct vb2_queue *q, struct vb2_buffer *vb, void *pb)
 {
 	int ret;
+
+	if (vb2_userptr_unsupported(q))
+		return -EOPNOTSUPP;
 
 	if (vb->state != VB2_BUF_STATE_DEQUEUED) {
 		dprintk(q, 1, "invalid buffer state %s\n",
@@ -1833,6 +1854,9 @@ int vb2_core_qbuf(struct vb2_queue *q, struct vb2_buffer *vb, void *pb,
 {
 	enum vb2_buffer_state orig_state;
 	int ret;
+
+	if (vb2_userptr_unsupported(q))
+		return -EOPNOTSUPP;
 
 	if (q->error) {
 		dprintk(q, 1, "fatal error occurred on queue\n");
@@ -2141,6 +2165,9 @@ int vb2_core_dqbuf(struct vb2_queue *q, unsigned int *pindex, void *pb,
 	struct vb2_buffer *vb = NULL;
 	int ret;
 
+	if (vb2_userptr_unsupported(q))
+		return -EOPNOTSUPP;
+
 	ret = __vb2_get_done_vb(q, &vb, pb, nonblocking);
 	if (ret < 0)
 		return ret;
@@ -2314,6 +2341,9 @@ int vb2_core_streamon(struct vb2_queue *q, unsigned int type)
 {
 	unsigned int q_num_bufs = vb2_get_num_buffers(q);
 	int ret;
+
+	if (vb2_userptr_unsupported(q))
+		return -EOPNOTSUPP;
 
 	if (type != q->type) {
 		dprintk(q, 1, "invalid stream type\n");
