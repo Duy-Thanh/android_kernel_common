@@ -45,7 +45,7 @@ static struct uart_port rb532_uart = {
 	.regshift = 2
 };
 
-static int __init setup_serial_port(void)
+int __init setup_serial_port(void)
 {
 	rb532_uart.uartclk = idt_cpu_freq;
 

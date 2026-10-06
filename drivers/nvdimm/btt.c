@@ -919,9 +919,6 @@ static int discover_arenas(struct btt *btt)
 	return ret;
 
  out:
-	kfree(arena->freelist);
-	kfree(arena->rtt);
-	kfree(arena->map_locks);
 	kfree(arena);
 	free_arenas(btt);
 	return ret;
@@ -1592,7 +1589,7 @@ static struct btt *btt_init(struct nd_btt *nd_btt, unsigned long long rawsize,
 	if (btt->init_state != INIT_READY && nd_region->ro) {
 		dev_warn(dev, "%s is read-only, unable to init btt metadata\n",
 				dev_name(&nd_region->dev));
-		goto err;
+		return NULL;
 	} else if (btt->init_state != INIT_READY) {
 		btt->num_arenas = (rawsize / ARENA_MAX_SIZE) +
 			((rawsize % ARENA_MAX_SIZE) ? 1 : 0);
@@ -1602,28 +1599,25 @@ static struct btt *btt_init(struct nd_btt *nd_btt, unsigned long long rawsize,
 		ret = create_arenas(btt);
 		if (ret) {
 			dev_info(dev, "init: create_arenas: %d\n", ret);
-			goto err;
+			return NULL;
 		}
 
 		ret = btt_meta_init(btt);
 		if (ret) {
 			dev_err(dev, "init: error in meta_init: %d\n", ret);
-			goto err;
+			return NULL;
 		}
 	}
 
 	ret = btt_blk_init(btt);
 	if (ret) {
 		dev_err(dev, "init: error in blk_init: %d\n", ret);
-		goto err;
+		return NULL;
 	}
 
 	btt_debugfs_init(btt);
 
 	return btt;
-err:
-	free_arenas(btt);
-	return NULL;
 }
 
 /**

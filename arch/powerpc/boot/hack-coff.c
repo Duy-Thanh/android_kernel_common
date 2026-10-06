@@ -31,7 +31,7 @@ main(int ac, char **av)
     int i, nsect;
     int aoutsz;
     struct external_filehdr fhdr;
-    struct aouthdr aout;
+    AOUTHDR aout;
     struct external_scnhdr shdr;
 
     if (ac != 2) {

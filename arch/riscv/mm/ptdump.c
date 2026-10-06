@@ -7,7 +7,6 @@
 #include <linux/init.h>
 #include <linux/debugfs.h>
 #include <linux/seq_file.h>
-#include <linux/string.h>
 #include <linux/ptdump.h>
 
 #include <linux/pgtable.h>
@@ -214,21 +213,21 @@ static void dump_prot(struct pg_state *st)
 		val = st->current_prot & pte_bits[i].mask;
 		if (val) {
 			if (pte_bits[i].mask == _PAGE_SOFT)
-				snprintf(s, sizeof(s), pte_bits[i].set, val >> 8);
+				sprintf(s, pte_bits[i].set, val >> 8);
 #ifdef CONFIG_64BIT
 			else if (pte_bits[i].mask == _PAGE_MTMASK_SVPBMT) {
 				if (val == _PAGE_NOCACHE_SVPBMT)
-					snprintf(s, sizeof(s), pte_bits[i].set, "NC");
+					sprintf(s, pte_bits[i].set, "NC");
 				else if (val == _PAGE_IO_SVPBMT)
-					snprintf(s, sizeof(s), pte_bits[i].set, "IO");
+					sprintf(s, pte_bits[i].set, "IO");
 				else
-					snprintf(s, sizeof(s), pte_bits[i].set, "??");
+					sprintf(s, pte_bits[i].set, "??");
 			}
 #endif
 			else
-				strscpy(s, pte_bits[i].set);
+				sprintf(s, "%s", pte_bits[i].set);
 		} else {
-			strscpy(s, pte_bits[i].clear);
+			sprintf(s, "%s", pte_bits[i].clear);
 		}
 
 		pt_dump_seq_printf(st->seq, " %s", s);

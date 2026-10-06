@@ -11,7 +11,6 @@
 
 #include <linux/kobject.h>
 #include <linux/string.h>
-#include <linux/sysfs.h>
 #include <linux/errno.h>
 #include <linux/init.h>
 #include <asm/machdep.h>
@@ -23,7 +22,7 @@ unsigned long rtas_poweron_auto; /* default and normal state is 0 */
 static ssize_t auto_poweron_show(struct kobject *kobj,
 				 struct kobj_attribute *attr, char *buf)
 {
-	return sysfs_emit(buf, "%lu\n", rtas_poweron_auto);
+        return sprintf(buf, "%lu\n", rtas_poweron_auto);
 }
 
 static ssize_t auto_poweron_store(struct kobject *kobj,

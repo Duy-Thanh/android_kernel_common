@@ -8,7 +8,6 @@
 #include <linux/kobject.h>
 #include <linux/mm.h>
 #include <linux/slab.h>
-#include <linux/sysfs.h>
 #include <linux/vmalloc.h>
 #include <linux/pagemap.h>
 #include <linux/delay.h>
@@ -41,7 +40,7 @@ static ssize_t dump_id_show(struct dump_obj *dump_obj,
 			    struct dump_attribute *attr,
 			    char *buf)
 {
-	return sysfs_emit(buf, "0x%x\n", dump_obj->id);
+	return sprintf(buf, "0x%x\n", dump_obj->id);
 }
 
 static const char* dump_type_to_string(uint32_t type)
@@ -59,15 +58,15 @@ static ssize_t dump_type_show(struct dump_obj *dump_obj,
 			      char *buf)
 {
 
-	return sysfs_emit(buf, "0x%x %s\n", dump_obj->type,
-			  dump_type_to_string(dump_obj->type));
+	return sprintf(buf, "0x%x %s\n", dump_obj->type,
+		       dump_type_to_string(dump_obj->type));
 }
 
 static ssize_t dump_ack_show(struct dump_obj *dump_obj,
 			     struct dump_attribute *attr,
 			     char *buf)
 {
-	return sysfs_emit(buf, "ack - acknowledge dump\n");
+	return sprintf(buf, "ack - acknowledge dump\n");
 }
 
 /*
@@ -115,7 +114,7 @@ static ssize_t init_dump_show(struct dump_obj *dump_obj,
 			      struct dump_attribute *attr,
 			      char *buf)
 {
-	return sysfs_emit(buf, "1 - initiate Service Processor(FSP) dump\n");
+	return sprintf(buf, "1 - initiate Service Processor(FSP) dump\n");
 }
 
 static int64_t dump_fips_init(uint8_t type)
