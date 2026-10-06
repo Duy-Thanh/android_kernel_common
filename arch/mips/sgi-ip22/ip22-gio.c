@@ -28,7 +28,15 @@ static struct {
 	{ .name = "SGI GR2/GR3", .id = 0x7f },
 };
 
-static struct device *gio_bus;
+static void gio_bus_release(struct device *dev)
+{
+	kfree(dev);
+}
+
+static struct device gio_bus = {
+	.init_name = "gio",
+	.release = &gio_bus_release,
+};
 
 /**
  * gio_match_device - Tell if an of_device structure has a matching
@@ -80,20 +88,19 @@ EXPORT_SYMBOL_GPL(gio_dev_put);
  * Will be called only by the device core when all users of this gio device are
  * done.
  */
-static void gio_release_dev(struct device *dev)
+void gio_release_dev(struct device *dev)
 {
 	struct gio_device *giodev;
 
 	giodev = to_gio_device(dev);
 	kfree(giodev);
 }
+EXPORT_SYMBOL_GPL(gio_release_dev);
 
 int gio_device_register(struct gio_device *giodev)
 {
 	giodev->dev.bus = &gio_bus_type;
-	giodev->dev.parent = gio_bus;
-	giodev->dev.release = gio_release_dev;
-
+	giodev->dev.parent = &gio_bus;
 	return device_register(&giodev->dev);
 }
 EXPORT_SYMBOL_GPL(gio_device_register);
@@ -125,9 +132,13 @@ static int gio_device_probe(struct device *dev)
 	if (!drv->probe)
 		return error;
 
+	gio_dev_get(gio_dev);
+
 	match = gio_match_device(drv->id_table, gio_dev);
 	if (match)
 		error = drv->probe(gio_dev, match);
+	if (error)
+		gio_dev_put(gio_dev);
 
 	return error;
 }
@@ -389,9 +400,11 @@ static int __init ip22_gio_init(void)
 	unsigned int pbdma __maybe_unused;
 	int ret;
 
-	gio_bus = root_device_register("gio");
-	if (IS_ERR(gio_bus))
-		return PTR_ERR(gio_bus);
+	ret = device_register(&gio_bus);
+	if (ret) {
+		put_device(&gio_bus);
+		return ret;
+	}
 
 	ret = bus_register(&gio_bus_type);
 	if (!ret) {
@@ -410,9 +423,8 @@ static int __init ip22_gio_init(void)
 			ip22_check_gio(1, GIO_SLOT_EXP0_BASE, SGI_GIOEXP0_IRQ);
 			ip22_check_gio(2, GIO_SLOT_EXP1_BASE, SGI_GIOEXP1_IRQ);
 		}
-	} else {
-		root_device_unregister(gio_bus);
-	}
+	} else
+		device_unregister(&gio_bus);
 
 	return ret;
 }

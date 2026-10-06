@@ -11,7 +11,6 @@
 
 #include <linux/init.h>
 #include <linux/perf_event.h>
-#include <linux/sysfs.h>
 #include <asm/firmware.h>
 #include <asm/hvcall.h>
 #include <asm/io.h>
@@ -86,7 +85,7 @@ static ssize_t _name##_show(struct device *dev,			\
 	if (hret)						\
 		return -EIO;					\
 								\
-	return sysfs_emit(page, _format, caps._name);		\
+	return sprintf(page, _format, caps._name);		\
 }								\
 static struct device_attribute hv_caps_attr_##_name = __ATTR_RO(_name)
 
@@ -94,7 +93,7 @@ static ssize_t kernel_version_show(struct device *dev,
 				   struct device_attribute *attr,
 				   char *page)
 {
-	return sysfs_emit(page, "0x%x\n", COUNTER_INFO_VERSION_CURRENT);
+	return sprintf(page, "0x%x\n", COUNTER_INFO_VERSION_CURRENT);
 }
 
 static ssize_t cpumask_show(struct device *dev,

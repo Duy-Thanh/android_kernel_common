@@ -123,20 +123,6 @@ static void gstage_tlb_flush(struct kvm_gstage *gstage, u32 level, gpa_t addr)
 					       gstage->vmid);
 }
 
-bool kvm_riscv_gstage_try_update_pte(struct kvm_gstage *gstage, u32 level,
-				     gpa_t addr, pte_t *ptep,
-				     pte_t old_pte, pte_t new_pte)
-{
-	if (cmpxchg(&ptep->pte, pte_val(old_pte), pte_val(new_pte)) !=
-	    pte_val(old_pte))
-		return false;
-
-	if (pte_val(old_pte) != pte_val(new_pte))
-		gstage_tlb_flush(gstage, level, addr);
-
-	return true;
-}
-
 int kvm_riscv_gstage_set_pte(struct kvm_gstage *gstage,
 			     struct kvm_mmu_memory_cache *pcache,
 			     const struct kvm_gstage_mapping *map)
@@ -182,22 +168,17 @@ int kvm_riscv_gstage_set_pte(struct kvm_gstage *gstage,
 static void kvm_riscv_gstage_update_pte_prot(struct kvm_gstage *gstage, u32 level,
 					     gpa_t addr, pte_t *ptep, pgprot_t prot)
 {
-	pte_t old_pte, new_pte;
+	pte_t new_pte;
 
-	for (;;) {
-		old_pte = ptep_get(ptep);
-		if (pgprot_val(pte_pgprot(old_pte)) == pgprot_val(prot))
-			return;
+	if (pgprot_val(pte_pgprot(ptep_get(ptep))) == pgprot_val(prot))
+		return;
 
-		new_pte = pfn_pte(pte_pfn(old_pte), prot);
-		new_pte = pte_mkdirty(new_pte);
+	new_pte = pfn_pte(pte_pfn(ptep_get(ptep)), prot);
+	new_pte = pte_mkdirty(new_pte);
 
-		if (kvm_riscv_gstage_try_update_pte(gstage, level, addr, ptep,
-						    old_pte, new_pte))
-			return;
+	set_pte(ptep, new_pte);
 
-		cpu_relax();
-	}
+	gstage_tlb_flush(gstage, level, addr);
 }
 
 int kvm_riscv_gstage_map_page(struct kvm_gstage *gstage,
@@ -356,36 +337,35 @@ int kvm_riscv_gstage_split_huge(struct kvm_gstage *gstage,
 	return 0;
 }
 
-bool kvm_riscv_gstage_op_pte(struct kvm_gstage *gstage, gpa_t addr,
+void kvm_riscv_gstage_op_pte(struct kvm_gstage *gstage, gpa_t addr,
 			     pte_t *ptep, u32 ptep_level, enum kvm_riscv_gstage_op op)
 {
 	int i, ret;
 	pte_t old_pte, *next_ptep;
 	u32 next_ptep_level;
 	unsigned long next_page_size, page_size;
-	bool flush = false;
 
 	ret = gstage_level_to_page_size(gstage, ptep_level, &page_size);
 	if (ret)
-		return false;
+		return;
 
 	WARN_ON(addr & (page_size - 1));
 
 	if (!pte_val(ptep_get(ptep)))
-		return false;
+		return;
 
 	if (ptep_level && !gstage_pte_leaf(ptep)) {
 		next_ptep = (pte_t *)gstage_pte_page_vaddr(ptep_get(ptep));
 		next_ptep_level = ptep_level - 1;
 		ret = gstage_level_to_page_size(gstage, next_ptep_level, &next_page_size);
 		if (ret)
-			return false;
+			return;
 
 		if (op == GSTAGE_OP_CLEAR)
 			set_pte(ptep, __pte(0));
 		for (i = 0; i < PTRS_PER_PTE; i++)
-			flush |= kvm_riscv_gstage_op_pte(gstage, addr + i * next_page_size,
-							 &next_ptep[i], next_ptep_level, op);
+			kvm_riscv_gstage_op_pte(gstage, addr + i * next_page_size,
+						&next_ptep[i], next_ptep_level, op);
 		if (op == GSTAGE_OP_CLEAR)
 			put_page(virt_to_page(next_ptep));
 	} else {
@@ -395,13 +375,11 @@ bool kvm_riscv_gstage_op_pte(struct kvm_gstage *gstage, gpa_t addr,
 		else if (op == GSTAGE_OP_WP)
 			set_pte(ptep, __pte(pte_val(ptep_get(ptep)) & ~_PAGE_WRITE));
 		if (pte_val(*ptep) != pte_val(old_pte))
-			flush = true;
+			gstage_tlb_flush(gstage, ptep_level, addr);
 	}
-
-	return flush;
 }
 
-bool kvm_riscv_gstage_unmap_range(struct kvm_gstage *gstage,
+void kvm_riscv_gstage_unmap_range(struct kvm_gstage *gstage,
 				  gpa_t start, gpa_t size, bool may_block)
 {
 	int ret;
@@ -410,7 +388,6 @@ bool kvm_riscv_gstage_unmap_range(struct kvm_gstage *gstage,
 	bool found_leaf;
 	unsigned long page_size;
 	gpa_t addr = start, end = start + size;
-	bool flush = false;
 
 	while (addr < end) {
 		found_leaf = kvm_riscv_gstage_get_leaf(gstage, addr, &ptep, &ptep_level);
@@ -418,32 +395,26 @@ bool kvm_riscv_gstage_unmap_range(struct kvm_gstage *gstage,
 		if (ret)
 			break;
 
-		if (!found_leaf) {
-			addr = ALIGN(addr + 1, page_size);
-		} else {
-			if (!(addr & (page_size - 1)) && ((end - addr) >= page_size))
-				flush |= kvm_riscv_gstage_op_pte(gstage, addr, ptep,
-								 ptep_level, GSTAGE_OP_CLEAR);
-			else {
-				WARN_ONCE(1, "Skip unmap range addr: %#llx, end: %#llx, page_size: %#lx\n",
-						addr, end, page_size);
-			}
+		if (!found_leaf)
+			goto next;
 
-			addr += page_size;
-		}
+		if (!(addr & (page_size - 1)) && ((end - addr) >= page_size))
+			kvm_riscv_gstage_op_pte(gstage, addr, ptep,
+						ptep_level, GSTAGE_OP_CLEAR);
+
+next:
+		addr += page_size;
 
 		/*
 		 * If the range is too large, release the kvm->mmu_lock
 		 * to prevent starvation and lockup detector warnings.
 		 */
 		if (!(gstage->flags & KVM_GSTAGE_FLAGS_LOCAL) && may_block && addr < end)
-			cond_resched_rwlock_write(&gstage->kvm->mmu_lock);
+			cond_resched_lock(&gstage->kvm->mmu_lock);
 	}
-
-	return flush;
 }
 
-bool kvm_riscv_gstage_wp_range(struct kvm_gstage *gstage, gpa_t start, gpa_t end)
+void kvm_riscv_gstage_wp_range(struct kvm_gstage *gstage, gpa_t start, gpa_t end)
 {
 	int ret;
 	pte_t *ptep;
@@ -451,7 +422,6 @@ bool kvm_riscv_gstage_wp_range(struct kvm_gstage *gstage, gpa_t start, gpa_t end
 	bool found_leaf;
 	gpa_t addr = start;
 	unsigned long page_size;
-	bool flush = false;
 
 	while (addr < end) {
 		found_leaf = kvm_riscv_gstage_get_leaf(gstage, addr, &ptep, &ptep_level);
@@ -459,17 +429,15 @@ bool kvm_riscv_gstage_wp_range(struct kvm_gstage *gstage, gpa_t start, gpa_t end
 		if (ret)
 			break;
 
-		if (!found_leaf) {
-			addr = ALIGN(addr + 1, page_size);
-		} else {
-			addr = ALIGN_DOWN(addr, page_size);
-			flush |= kvm_riscv_gstage_op_pte(gstage, addr, ptep,
-							 ptep_level, GSTAGE_OP_WP);
-			addr += page_size;
-		}
-	}
+		if (!found_leaf)
+			goto next;
 
-	return flush;
+		addr = ALIGN_DOWN(addr, page_size);
+		kvm_riscv_gstage_op_pte(gstage, addr, ptep,
+					ptep_level, GSTAGE_OP_WP);
+next:
+		addr += page_size;
+	}
 }
 
 void __init kvm_riscv_gstage_mode_detect(void)

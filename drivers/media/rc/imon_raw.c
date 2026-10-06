@@ -105,16 +105,26 @@ static void imon_ir_rx(struct urb *urb)
 static int imon_probe(struct usb_interface *intf,
 		      const struct usb_device_id *id)
 {
-	struct usb_endpoint_descriptor *ir_ep;
+	struct usb_endpoint_descriptor *ir_ep = NULL;
+	struct usb_host_interface *idesc;
 	struct usb_device *udev;
 	struct rc_dev *rcdev;
 	struct imon *imon;
-	int ret;
+	int i, ret;
 
 	udev = interface_to_usbdev(intf);
+	idesc = intf->cur_altsetting;
 
-	ret = usb_find_int_in_endpoint(intf->cur_altsetting, &ir_ep);
-	if (ret) {
+	for (i = 0; i < idesc->desc.bNumEndpoints; i++) {
+		struct usb_endpoint_descriptor *ep = &idesc->endpoint[i].desc;
+
+		if (usb_endpoint_is_int_in(ep)) {
+			ir_ep = ep;
+			break;
+		}
+	}
+
+	if (!ir_ep) {
 		dev_err(&intf->dev, "IR endpoint missing");
 		return -ENODEV;
 	}

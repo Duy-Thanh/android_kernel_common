@@ -245,8 +245,8 @@ static void tua9001_remove(struct i2c_client *client)
 }
 
 static const struct i2c_device_id tua9001_id_table[] = {
-	{ .name = "tua9001" },
-	{ }
+	{ "tua9001" },
+	{}
 };
 MODULE_DEVICE_TABLE(i2c, tua9001_id_table);
 

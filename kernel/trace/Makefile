@@ -48,10 +48,9 @@ ifdef CONFIG_GCOV_PROFILE_FTRACE
 GCOV_PROFILE := y
 endif
 
-# Functions in these files can run from IRQ entry before hardirq context
-# is visible to KCOV, and produce coverage unrelated to syscall inputs.
+# Functions in this file could be invoked from early interrupt
+# code and produce random code coverage.
 KCOV_INSTRUMENT_trace_preemptirq.o := n
-KCOV_INSTRUMENT_trace_irqsoff.o := n
 
 CFLAGS_bpf_trace.o := -I$(src)
 

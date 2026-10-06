@@ -467,13 +467,15 @@ static int ivtv_try_fmt_vid_cap(struct file *file, void *fh, struct v4l2_format 
 	int h = fmt->fmt.pix.height;
 	int min_h = 2;
 
-	w = clamp(w, 2, 720);
+	w = min(w, 720);
+	w = max(w, 2);
 	if (id->type == IVTV_ENC_STREAM_TYPE_YUV) {
 		/* YUV height must be a multiple of 32 */
 		h &= ~0x1f;
 		min_h = 32;
 	}
-	h = clamp(h, min_h, itv->is_50hz ? 576 : 480);
+	h = min(h, itv->is_50hz ? 576 : 480);
+	h = max(h, min_h);
 	ivtv_g_fmt_vid_cap(file, fh, fmt);
 	fmt->fmt.pix.width = w;
 	fmt->fmt.pix.height = h;
@@ -514,7 +516,8 @@ static int ivtv_try_fmt_vid_out(struct file *file, void *fh, struct v4l2_format 
 	int field = fmt->fmt.pix.field;
 	int ret = ivtv_g_fmt_vid_out(file, fh, fmt);
 
-	w = clamp(w, 2, 720);
+	w = min(w, 720);
+	w = max(w, 2);
 	/* Why can the height be 576 even when the output is NTSC?
 
 	   Internally the buffers of the PVR350 are always set to 720x576. The
@@ -530,7 +533,8 @@ static int ivtv_try_fmt_vid_out(struct file *file, void *fh, struct v4l2_format 
 	   resolution is locked to the broadcast standard and not scaled.
 
 	   Thanks to Ian Armstrong for this explanation. */
-	h = clamp(h, 2, 576);
+	h = min(h, 576);
+	h = max(h, 2);
 	if (id->type == IVTV_DEC_STREAM_TYPE_YUV)
 		fmt->fmt.pix.field = field;
 	fmt->fmt.pix.width = w;

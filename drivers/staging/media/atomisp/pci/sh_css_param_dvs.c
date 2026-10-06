@@ -4,7 +4,6 @@
  * Copyright (c) 2015, Intel Corporation.
  */
 
-#include <linux/overflow.h>
 #include "sh_css_param_dvs.h"
 #include <assert_support.h>
 #include <type_support.h>
@@ -49,7 +48,7 @@ alloc_dvs_6axis_table(const struct ia_css_resolution *frame_res,
 		}
 
 		/* Generate Y buffers  */
-		dvs_config->xcoords_y = kvmalloc(array3_size(width_y, height_y, sizeof(uint32_t)),
+		dvs_config->xcoords_y = kvmalloc(width_y * height_y * sizeof(uint32_t),
 						 GFP_KERNEL);
 		if (!dvs_config->xcoords_y) {
 			IA_CSS_ERROR("out of memory");
@@ -57,7 +56,7 @@ alloc_dvs_6axis_table(const struct ia_css_resolution *frame_res,
 			goto exit;
 		}
 
-		dvs_config->ycoords_y = kvmalloc(array3_size(width_y, height_y, sizeof(uint32_t)),
+		dvs_config->ycoords_y = kvmalloc(width_y * height_y * sizeof(uint32_t),
 						 GFP_KERNEL);
 		if (!dvs_config->ycoords_y) {
 			IA_CSS_ERROR("out of memory");
@@ -68,8 +67,7 @@ alloc_dvs_6axis_table(const struct ia_css_resolution *frame_res,
 		/* Generate UV buffers  */
 		IA_CSS_LOG("UV W %d H %d", width_uv, height_uv);
 
-		dvs_config->xcoords_uv = kvmalloc(array3_size(width_uv, height_uv,
-							      sizeof(uint32_t)),
+		dvs_config->xcoords_uv = kvmalloc(width_uv * height_uv * sizeof(uint32_t),
 						  GFP_KERNEL);
 		if (!dvs_config->xcoords_uv) {
 			IA_CSS_ERROR("out of memory");
@@ -77,8 +75,7 @@ alloc_dvs_6axis_table(const struct ia_css_resolution *frame_res,
 			goto exit;
 		}
 
-		dvs_config->ycoords_uv = kvmalloc(array3_size(width_uv, height_uv,
-							      sizeof(uint32_t)),
+		dvs_config->ycoords_uv = kvmalloc(width_uv * height_uv * sizeof(uint32_t),
 						  GFP_KERNEL);
 		if (!dvs_config->ycoords_uv) {
 			IA_CSS_ERROR("out of memory");
@@ -272,4 +269,5 @@ ia_css_dvs_statistics_get(enum dvs_statistics_type type,
 		ia_css_get_dvs2_statistics(host_stats->p_dvs2_statistics_host,
 					   isp_stats->p_dvs_statistics_isp);
 	}
+	return;
 }

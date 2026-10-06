@@ -20,7 +20,6 @@
 #include <linux/mutex.h>
 #include <linux/linux_logo.h>
 #include <linux/syscore_ops.h>
-#include <linux/sysfs.h>
 #include <asm/spu.h>
 #include <asm/spu_priv1.h>
 #include <asm/spu_csa.h>
@@ -639,8 +638,8 @@ static ssize_t spu_stat_show(struct device *dev,
 {
 	struct spu *spu = container_of(dev, struct spu, dev);
 
-	return sysfs_emit(buf,
-		"%s %llu %llu %llu %llu %llu %llu %llu %llu %llu %llu %llu %llu\n",
+	return sprintf(buf, "%s %llu %llu %llu %llu "
+		      "%llu %llu %llu %llu %llu %llu %llu %llu\n",
 		spu_state_names[spu->stats.util_state],
 		spu_acct_time(spu, SPU_UTIL_USER),
 		spu_acct_time(spu, SPU_UTIL_SYSTEM),

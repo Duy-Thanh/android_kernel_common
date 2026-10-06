@@ -197,7 +197,7 @@ static void bt866_remove(struct i2c_client *client)
 }
 
 static const struct i2c_device_id bt866_id[] = {
-	{ .name = "bt866" },
+	{ "bt866" },
 	{ }
 };
 MODULE_DEVICE_TABLE(i2c, bt866_id);

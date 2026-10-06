@@ -792,11 +792,7 @@ static void mxc_isi_video_queue_first_buffers(struct mxc_isi_video *video)
 		struct mxc_isi_buffer *buf;
 		struct list_head *list;
 
-		/*
-		 * Queue buffers: prioritize pending buffers, then discard
-		 * buffers.
-		 */
-		list = (i < 2 - discard) ? &video->out_pending : &video->out_discard;
+		list = i < discard ? &video->out_discard : &video->out_pending;
 		buf = list_first_entry(list, struct mxc_isi_buffer, list);
 
 		mxc_isi_channel_set_outbuf(video->pipe, buf->dma_addrs, buf_id);
