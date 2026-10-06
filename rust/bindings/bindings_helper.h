@@ -88,6 +88,7 @@
 #include <linux/regulator/consumer.h>
 #include <linux/sched.h>
 #include <linux/security.h>
+#include <linux/serdev.h>
 #include <linux/shmem_fs.h>
 #include <linux/slab.h>
 #include <linux/sys_soc.h>
