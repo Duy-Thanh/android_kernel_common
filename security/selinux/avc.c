@@ -502,7 +502,7 @@ static struct avc_node *avc_alloc_node(void)
 
 	node = kmem_cache_zalloc(avc_node_cachep, GFP_NOWAIT);
 	if (!node)
-		goto out;
+		return NULL;
 
 	INIT_HLIST_NODE(&node->list);
 	avc_cache_stats_incr(allocations);
@@ -511,7 +511,6 @@ static struct avc_node *avc_alloc_node(void)
 	    selinux_avc.avc_cache_threshold)
 		avc_reclaim_node();
 
-out:
 	return node;
 }
 
