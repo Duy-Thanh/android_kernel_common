@@ -237,35 +237,6 @@ static void damon_va_update(struct damon_ctx *ctx)
 	}
 }
 
-static void damon_va_walk_page_range(struct mm_struct *mm, unsigned long start,
-		unsigned long end, struct mm_walk_ops *ops, void *private)
-{
-	struct vm_area_struct *vma;
-
-	vma = lock_vma_under_rcu(mm, start);
-	if (!vma)
-		goto lock_mmap;
-
-	if (end > vma->vm_end) {
-		vma_end_read(vma);
-		goto lock_mmap;
-	}
-
-	if (!(vma->vm_flags & VM_PFNMAP)) {
-		ops->walk_lock = PGWALK_VMA_RDLOCK_VERIFY;
-		walk_page_range_vma(vma, start, end, ops, private);
-	}
-
-	vma_end_read(vma);
-	return;
-
-lock_mmap:
-	mmap_read_lock(mm);
-	ops->walk_lock = PGWALK_RDLOCK;
-	walk_page_range(mm, start, end, ops, private);
-	mmap_read_unlock(mm);
-}
-
 static int damon_mkold_pmd_entry(pmd_t *pmd, unsigned long addr,
 		unsigned long next, struct mm_walk *walk)
 {
@@ -344,14 +315,17 @@ out:
 #define damon_mkold_hugetlb_entry NULL
 #endif /* CONFIG_HUGETLB_PAGE */
 
+static const struct mm_walk_ops damon_mkold_ops = {
+	.pmd_entry = damon_mkold_pmd_entry,
+	.hugetlb_entry = damon_mkold_hugetlb_entry,
+	.walk_lock = PGWALK_RDLOCK,
+};
+
 static void damon_va_mkold(struct mm_struct *mm, unsigned long addr)
 {
-	struct mm_walk_ops damon_mkold_ops = {
-		.pmd_entry = damon_mkold_pmd_entry,
-		.hugetlb_entry = damon_mkold_hugetlb_entry,
-	};
-
-	damon_va_walk_page_range(mm, addr, addr + 1, &damon_mkold_ops, NULL);
+	mmap_read_lock(mm);
+	walk_page_range(mm, addr, addr + 1, &damon_mkold_ops, NULL);
+	mmap_read_unlock(mm);
 }
 
 /*
@@ -359,10 +333,9 @@ static void damon_va_mkold(struct mm_struct *mm, unsigned long addr)
  */
 
 static void __damon_va_prepare_access_check(struct mm_struct *mm,
-					struct damon_region *r,
-					struct damon_ctx *ctx)
+					struct damon_region *r)
 {
-	r->sampling_addr = damon_rand(ctx, r->ar.start, r->ar.end);
+	r->sampling_addr = damon_rand(r->ar.start, r->ar.end);
 
 	damon_va_mkold(mm, r->sampling_addr);
 }
@@ -378,7 +351,7 @@ static void damon_va_prepare_access_checks(struct damon_ctx *ctx)
 		if (!mm)
 			continue;
 		damon_for_each_region(r, t)
-			__damon_va_prepare_access_check(mm, r, ctx);
+			__damon_va_prepare_access_check(mm, r);
 		mmput(mm);
 	}
 }
@@ -471,6 +444,12 @@ out:
 #define damon_young_hugetlb_entry NULL
 #endif /* CONFIG_HUGETLB_PAGE */
 
+static const struct mm_walk_ops damon_young_ops = {
+	.pmd_entry = damon_young_pmd_entry,
+	.hugetlb_entry = damon_young_hugetlb_entry,
+	.walk_lock = PGWALK_RDLOCK,
+};
+
 static bool damon_va_young(struct mm_struct *mm, unsigned long addr,
 		unsigned long *folio_sz)
 {
@@ -479,12 +458,9 @@ static bool damon_va_young(struct mm_struct *mm, unsigned long addr,
 		.young = false,
 	};
 
-	struct mm_walk_ops damon_young_ops = {
-		.pmd_entry = damon_young_pmd_entry,
-		.hugetlb_entry = damon_young_hugetlb_entry,
-	};
-
-	damon_va_walk_page_range(mm, addr, addr + 1, &damon_young_ops, &arg);
+	mmap_read_lock(mm);
+	walk_page_range(mm, addr, addr + 1, &damon_young_ops, &arg);
+	mmap_read_unlock(mm);
 	return arg.young;
 }
 
@@ -773,6 +749,7 @@ static unsigned long damos_va_migrate(struct damon_target *target,
 	struct mm_walk_ops walk_ops = {
 		.pmd_entry = damos_va_migrate_pmd_entry,
 		.pte_entry = NULL,
+		.walk_lock = PGWALK_RDLOCK,
 	};
 
 	use_target_nid = dests->nr_dests == 0;
@@ -790,7 +767,9 @@ static unsigned long damos_va_migrate(struct damon_target *target,
 	if (!mm)
 		goto free_lists;
 
-	damon_va_walk_page_range(mm, r->ar.start, r->ar.end, &walk_ops, &priv);
+	mmap_read_lock(mm);
+	walk_page_range(mm, r->ar.start, r->ar.end, &walk_ops, &priv);
+	mmap_read_unlock(mm);
 	mmput(mm);
 
 	for (int i = 0; i < nr_dests; i++) {
@@ -882,6 +861,7 @@ static unsigned long damos_va_stat(struct damon_target *target,
 	struct mm_struct *mm;
 	struct mm_walk_ops walk_ops = {
 		.pmd_entry = damos_va_stat_pmd_entry,
+		.walk_lock = PGWALK_RDLOCK,
 	};
 
 	priv.scheme = s;
@@ -894,7 +874,9 @@ static unsigned long damos_va_stat(struct damon_target *target,
 	if (!mm)
 		return 0;
 
-	damon_va_walk_page_range(mm, r->ar.start, r->ar.end, &walk_ops, &priv);
+	mmap_read_lock(mm);
+	walk_page_range(mm, r->ar.start, r->ar.end, &walk_ops, &priv);
+	mmap_read_unlock(mm);
 	mmput(mm);
 	return 0;
 }
@@ -920,9 +902,6 @@ static unsigned long damon_va_apply_scheme(struct damon_ctx *ctx,
 		break;
 	case DAMOS_NOHUGEPAGE:
 		madv_action = MADV_NOHUGEPAGE;
-		break;
-	case DAMOS_COLLAPSE:
-		madv_action = MADV_COLLAPSE;
 		break;
 	case DAMOS_MIGRATE_HOT:
 	case DAMOS_MIGRATE_COLD:
