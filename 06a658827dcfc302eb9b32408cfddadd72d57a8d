@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a9146b4_31501418",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-10-06T11:37:32Z",
+      "side": 1,
+      "message": "This needs http://r.android.com/4341993 to land again (was reverted as culprit for b/570127990 build break) or some other variation to keep `module_layout` from being added again.",
+      "revId": "06a658827dcfc302eb9b32408cfddadd72d57a8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
