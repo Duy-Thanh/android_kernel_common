@@ -16,6 +16,24 @@
       "message": "Should there be a Fixes: tag? Why is this an android-specific issue?",
       "revId": "9132ad84ea05e0cbd12a59fbc3c22246bc32f5bc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "866d5d4e_3f65bf97",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-10-06T10:16:59Z",
+      "side": 1,
+      "message": "Android specific as the softirq aware rt placement isn\u0027t upstream (though the issue this fix is addressing was introduced during and upstreaming attempt).\n\nI\u0027ll add a fixes tag.",
+      "parentUuid": "b01907ce_10399011",
+      "revId": "9132ad84ea05e0cbd12a59fbc3c22246bc32f5bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
