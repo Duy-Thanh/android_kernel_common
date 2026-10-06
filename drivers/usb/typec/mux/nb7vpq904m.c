@@ -499,7 +499,7 @@ static void nb7vpq904m_remove(struct i2c_client *client)
 }
 
 static const struct i2c_device_id nb7vpq904m_table[] = {
-	{ .name = "nb7vpq904m" },
+	{ "nb7vpq904m" },
 	{ }
 };
 MODULE_DEVICE_TABLE(i2c, nb7vpq904m_table);

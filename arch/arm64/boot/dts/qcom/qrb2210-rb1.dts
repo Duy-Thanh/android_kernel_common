@@ -409,8 +409,6 @@
 		typec-power-opmode = "default";
 		pd-disable;
 
-		vbus-supply = <&pm4125_vbus>;
-
 		ports {
 			#address-cells = <1>;
 			#size-cells = <0>;

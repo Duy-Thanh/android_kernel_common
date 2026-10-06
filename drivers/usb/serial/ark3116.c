@@ -28,6 +28,7 @@
 #include <linux/usb/serial.h>
 #include <linux/serial.h>
 #include <linux/serial_reg.h>
+#include <linux/uaccess.h>
 #include <linux/mutex.h>
 #include <linux/spinlock.h>
 

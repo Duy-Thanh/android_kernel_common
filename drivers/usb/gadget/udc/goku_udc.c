@@ -1616,8 +1616,7 @@ pm_next:
 		if (stat & INT_USBRESET) {		/* hub reset done */
 			ACK(INT_USBRESET);
 			INFO(dev, "USB reset done, gadget %s\n",
-				dev->driver ? dev->driver->driver.name :
-					      "<not bound>");
+				dev->driver->driver.name);
 		}
 		// and INT_ERR on some endpoint's crc/bitstuff/... problem
 	}

@@ -446,8 +446,7 @@ rh_string(int id, struct usb_hcd const *hcd, u8 *data, unsigned len)
 
 
 /* Root hub control transfers execute synchronously */
-static int rh_call_control(struct usb_hcd *hcd,
-		struct urb *urb, gfp_t mem_flags)
+static int rh_call_control (struct usb_hcd *hcd, struct urb *urb)
 {
 	struct usb_ctrlrequest *cmd;
 	u16		typeReq, wValue, wIndex, wLength;
@@ -482,8 +481,8 @@ static int rh_call_control(struct usb_hcd *hcd,
 	 * tbuf should be at least as big as the
 	 * USB hub descriptor.
 	 */
-	tbuf_size = max_t(u16, sizeof(struct usb_hub_descriptor), wLength);
-	tbuf = kzalloc(tbuf_size, mem_flags);
+	tbuf_size =  max_t(u16, sizeof(struct usb_hub_descriptor), wLength);
+	tbuf = kzalloc(tbuf_size, GFP_KERNEL);
 	if (!tbuf) {
 		status = -ENOMEM;
 		goto err_alloc;
@@ -808,13 +807,12 @@ static int rh_queue_status (struct usb_hcd *hcd, struct urb *urb)
 	return retval;
 }
 
-static int rh_urb_enqueue(struct usb_hcd *hcd,
-		struct urb *urb, gfp_t mem_flags)
+static int rh_urb_enqueue (struct usb_hcd *hcd, struct urb *urb)
 {
 	if (usb_endpoint_xfer_int(&urb->ep->desc))
 		return rh_queue_status (hcd, urb);
 	if (usb_endpoint_xfer_control(&urb->ep->desc))
-		return rh_call_control(hcd, urb, mem_flags);
+		return rh_call_control (hcd, urb);
 	return -EINVAL;
 }
 
@@ -1535,7 +1533,7 @@ int usb_hcd_submit_urb (struct urb *urb, gfp_t mem_flags)
 	 */
 
 	if (is_root_hub(urb->dev)) {
-		status = rh_urb_enqueue(hcd, urb, mem_flags);
+		status = rh_urb_enqueue(hcd, urb);
 	} else {
 		status = map_urb_for_dma(hcd, urb, mem_flags);
 		if (likely(status == 0)) {

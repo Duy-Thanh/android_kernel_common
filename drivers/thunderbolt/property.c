@@ -40,7 +40,6 @@ struct tb_property_dir_entry {
 static struct tb_property_dir *__tb_property_parse_dir(const u32 *block,
 	size_t block_len, unsigned int dir_offset, size_t dir_len,
 	bool is_root, unsigned int depth);
-static struct tb_property *tb_property_copy(const struct tb_property *property);
 
 static inline void parse_dwdata(void *dst, const void *src, size_t dwords)
 {
@@ -528,78 +527,6 @@ ssize_t tb_property_format_dir(const struct tb_property_dir *dir, u32 *block,
 	return ret < 0 ? ret : 0;
 }
 
-static struct tb_property_dir *copy_dir(const struct tb_property_dir *dir)
-{
-	struct tb_property *property, *p;
-	struct tb_property_dir *d;
-
-	if (!dir)
-		return NULL;
-
-	d = tb_property_create_dir(dir->uuid);
-	if (!d)
-		return NULL;
-
-	list_for_each_entry(property, &dir->properties, list) {
-		p = tb_property_copy(property);
-		if (!p)
-			goto err_free;
-		list_add_tail(&p->list, &d->properties);
-	}
-
-	return d;
-
-err_free:
-	tb_property_free_dir(d);
-	return NULL;
-}
-
-static struct tb_property *tb_property_copy(const struct tb_property *property)
-{
-	struct tb_property *p;
-
-	p = tb_property_alloc(property->key, property->type);
-	if (!p)
-		return NULL;
-
-	p->length = property->length;
-	switch (property->type) {
-	case TB_PROPERTY_TYPE_DIRECTORY:
-		p->value.dir = copy_dir(property->value.dir);
-		if (!p->value.dir)
-			goto err_free;
-		break;
-
-	case TB_PROPERTY_TYPE_DATA:
-		p->value.data = kmemdup(property->value.data,
-					property->length * 4,
-					GFP_KERNEL);
-		if (!p->value.data)
-			goto err_free;
-		break;
-
-	case TB_PROPERTY_TYPE_TEXT:
-		p->value.text = kzalloc(p->length * 4, GFP_KERNEL);
-		if (!p->value.text)
-			goto err_free;
-		strcpy(p->value.text, property->value.text);
-		break;
-
-	case TB_PROPERTY_TYPE_VALUE:
-		p->value.immediate = property->value.immediate;
-		break;
-
-	default:
-		break;
-	}
-
-	return p;
-
-err_free:
-	kfree(p);
-	return NULL;
-}
-
 /**
  * tb_property_copy_dir() - Take a deep copy of directory
  * @dir: Directory to copy
@@ -610,61 +537,66 @@ err_free:
  */
 struct tb_property_dir *tb_property_copy_dir(const struct tb_property_dir *dir)
 {
-	return copy_dir(dir);
-}
-EXPORT_SYMBOL_GPL(tb_property_copy_dir);
+	struct tb_property *property, *p = NULL;
+	struct tb_property_dir *d;
 
-/**
- * tb_property_merge_dir() - Merges directory into parent
- * @parent: Directory to merge @dir
- * @dir: Directory that is merged
- * @replace: Replace existing entries
- *
- * This will merge @dir into @parent. Both must have same UUID. The
- * properties in @dir will overwrite overlapping properties in @parent
- * if @replace is %true. Contents of @dir is copied (so if it is not
- * needed afterwards it needs to relesed by calling tb_property_free_dir()).
- */
-int tb_property_merge_dir(struct tb_property_dir *parent,
-			  const struct tb_property_dir *dir,
-			  bool replace)
-{
-	const struct tb_property *property;
+	if (!dir)
+		return NULL;
 
-	if (WARN_ON(parent == dir))
-		return -EINVAL;
-
-	if (!uuid_equal(parent->uuid, dir->uuid))
-		return -EINVAL;
+	d = tb_property_create_dir(dir->uuid);
+	if (!d)
+		return NULL;
 
 	list_for_each_entry(property, &dir->properties, list) {
-		struct tb_property *p, *tmp;
+		struct tb_property *p;
 
-		tmp = tb_property_copy(property);
-		if (!tmp)
-			return -ENOMEM;
+		p = tb_property_alloc(property->key, property->type);
+		if (!p)
+			goto err_free;
 
-		p = tb_property_find(parent, property->key, property->type);
-		if (p) {
-			if (replace) {
-				/*
-				 * Found existing property in parent so
-				 * replace with the new one.
-				 */
-				list_replace(&p->list, &tmp->list);
-				tb_property_free(p);
-			} else {
-				tb_property_free(tmp);
-				continue;
-			}
-		} else {
-			list_add_tail(&tmp->list, &parent->properties);
+		p->length = property->length;
+
+		switch (property->type) {
+		case TB_PROPERTY_TYPE_DIRECTORY:
+			p->value.dir = tb_property_copy_dir(property->value.dir);
+			if (!p->value.dir)
+				goto err_free;
+			break;
+
+		case TB_PROPERTY_TYPE_DATA:
+			p->value.data = kmemdup(property->value.data,
+						property->length * 4,
+						GFP_KERNEL);
+			if (!p->value.data)
+				goto err_free;
+			break;
+
+		case TB_PROPERTY_TYPE_TEXT:
+			p->value.text = kzalloc(p->length * 4, GFP_KERNEL);
+			if (!p->value.text)
+				goto err_free;
+			strcpy(p->value.text, property->value.text);
+			break;
+
+		case TB_PROPERTY_TYPE_VALUE:
+			p->value.immediate = property->value.immediate;
+			break;
+
+		default:
+			break;
 		}
+
+		list_add_tail(&p->list, &d->properties);
 	}
 
-	return 0;
+	return d;
+
+err_free:
+	kfree(p);
+	tb_property_free_dir(d);
+
+	return NULL;
 }
-EXPORT_SYMBOL_GPL(tb_property_merge_dir);
 
 /**
  * tb_property_add_immediate() - Add immediate property to directory

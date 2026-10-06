@@ -753,7 +753,7 @@ static void wcd939x_usbss_remove(struct i2c_client *client)
 }
 
 static const struct i2c_device_id wcd939x_usbss_table[] = {
-	{ .name = "wcd9390-usbss" },
+	{ "wcd9390-usbss" },
 	{ }
 };
 MODULE_DEVICE_TABLE(i2c, wcd939x_usbss_table);

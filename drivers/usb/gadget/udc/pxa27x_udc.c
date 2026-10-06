@@ -17,6 +17,7 @@
 #include <linux/proc_fs.h>
 #include <linux/clk.h>
 #include <linux/irq.h>
+#include <linux/gpio.h>
 #include <linux/gpio/consumer.h>
 #include <linux/slab.h>
 #include <linux/string_choices.h>
@@ -1422,7 +1423,14 @@ static const struct usb_ep_ops pxa_ep_ops = {
  */
 static void dplus_pullup(struct pxa_udc *udc, int on)
 {
-	gpiod_set_value(udc->gpiod, on);
+	if (udc->gpiod) {
+		gpiod_set_value(udc->gpiod, on);
+	} else if (udc->udc_command) {
+		if (on)
+			udc->udc_command(PXA2XX_UDC_CMD_CONNECT);
+		else
+			udc->udc_command(PXA2XX_UDC_CMD_DISCONNECT);
+	}
 	udc->pullup_on = on;
 }
 
@@ -1513,7 +1521,7 @@ static int pxa_udc_pullup(struct usb_gadget *_gadget, int is_active)
 	struct pxa_udc *udc = to_gadget_udc(_gadget);
 	int ret;
 
-	if (!udc->gpiod)
+	if (!udc->gpiod && !udc->udc_command)
 		return -EOPNOTSUPP;
 
 	dplus_pullup(udc, is_active);
@@ -2372,11 +2380,26 @@ MODULE_DEVICE_TABLE(of, udc_pxa_dt_ids);
 static int pxa_udc_probe(struct platform_device *pdev)
 {
 	struct pxa_udc *udc = &memory;
-	int retval = 0;
+	int retval = 0, gpio;
+	struct pxa2xx_udc_mach_info *mach = dev_get_platdata(&pdev->dev);
 
-	udc->gpiod = devm_gpiod_get(&pdev->dev, NULL, GPIOD_ASIS);
-	if (IS_ERR(udc->gpiod))
-		return PTR_ERR(udc->gpiod);
+	if (mach) {
+		gpio = mach->gpio_pullup;
+		if (gpio_is_valid(gpio)) {
+			retval = devm_gpio_request_one(&pdev->dev, gpio,
+						       GPIOF_OUT_INIT_LOW,
+						       "USB D+ pullup");
+			if (retval)
+				return retval;
+			udc->gpiod = gpio_to_desc(mach->gpio_pullup);
+
+			if (mach->gpio_pullup_inverted ^ gpiod_is_active_low(udc->gpiod))
+				gpiod_toggle_active_low(udc->gpiod);
+		}
+		udc->udc_command = mach->udc_command;
+	} else {
+		udc->gpiod = devm_gpiod_get(&pdev->dev, NULL, GPIOD_ASIS);
+	}
 
 	udc->regs = devm_platform_ioremap_resource(pdev, 0);
 	if (IS_ERR(udc->regs))

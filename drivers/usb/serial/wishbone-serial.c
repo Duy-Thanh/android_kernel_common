@@ -11,6 +11,7 @@
 #include <linux/module.h>
 #include <linux/usb.h>
 #include <linux/usb/serial.h>
+#include <linux/uaccess.h>
 
 #define GSI_VENDOR_OPENCLOSE 0xB0
 

@@ -32,6 +32,29 @@
 MODULE_FIRMWARE(XHCI_RCAR_FIRMWARE_NAME_V1);
 MODULE_FIRMWARE(XHCI_RCAR_FIRMWARE_NAME_V3);
 
+static void xhci_rcar_start_gen2(struct usb_hcd *hcd)
+{
+	/* LCLK Select */
+	writel(RCAR_USB3_LCLK_ENA_VAL, hcd->regs + RCAR_USB3_LCLK);
+	/* USB3.0 Configuration */
+	writel(RCAR_USB3_CONF1_VAL, hcd->regs + RCAR_USB3_CONF1);
+	writel(RCAR_USB3_CONF2_VAL, hcd->regs + RCAR_USB3_CONF2);
+	writel(RCAR_USB3_CONF3_VAL, hcd->regs + RCAR_USB3_CONF3);
+	/* USB3.0 Polarity */
+	writel(RCAR_USB3_RX_POL_VAL, hcd->regs + RCAR_USB3_RX_POL);
+	writel(RCAR_USB3_TX_POL_VAL, hcd->regs + RCAR_USB3_TX_POL);
+}
+
+static int xhci_rcar_is_gen2(struct device *dev)
+{
+	struct device_node *node = dev->of_node;
+
+	return of_device_is_compatible(node, "renesas,xhci-r8a7790") ||
+		of_device_is_compatible(node, "renesas,xhci-r8a7791") ||
+		of_device_is_compatible(node, "renesas,xhci-r8a7793") ||
+		of_device_is_compatible(node, "renesas,rcar-gen2-xhci");
+}
+
 static void xhci_rcar_start(struct usb_hcd *hcd)
 {
 	u32 temp;
@@ -41,23 +64,8 @@ static void xhci_rcar_start(struct usb_hcd *hcd)
 		temp = readl(hcd->regs + RCAR_USB3_INT_ENA);
 		temp |= RCAR_USB3_INT_ENA_VAL;
 		writel(temp, hcd->regs + RCAR_USB3_INT_ENA);
-	}
-}
-
-static void xhci_rcar_gen2_start(struct usb_hcd *hcd)
-{
-	if (hcd->regs != NULL) {
-		xhci_rcar_start(hcd);
-
-		/* LCLK Select */
-		writel(RCAR_USB3_LCLK_ENA_VAL, hcd->regs + RCAR_USB3_LCLK);
-		/* USB3.0 Configuration */
-		writel(RCAR_USB3_CONF1_VAL, hcd->regs + RCAR_USB3_CONF1);
-		writel(RCAR_USB3_CONF2_VAL, hcd->regs + RCAR_USB3_CONF2);
-		writel(RCAR_USB3_CONF3_VAL, hcd->regs + RCAR_USB3_CONF3);
-		/* USB3.0 Polarity */
-		writel(RCAR_USB3_RX_POL_VAL, hcd->regs + RCAR_USB3_RX_POL);
-		writel(RCAR_USB3_TX_POL_VAL, hcd->regs + RCAR_USB3_TX_POL);
+		if (xhci_rcar_is_gen2(hcd->self.controller))
+			xhci_rcar_start_gen2(hcd);
 	}
 }
 
@@ -184,16 +192,13 @@ static int xhci_rcar_init_quirk(struct usb_hcd *hcd)
 
 static int xhci_rcar_resume_quirk(struct usb_hcd *hcd)
 {
-	struct xhci_plat_priv *priv;
 	int ret;
 
 	ret = xhci_rcar_download_firmware(hcd);
-	if (ret)
-		return ret;
+	if (!ret)
+		xhci_rcar_start(hcd);
 
-	priv = hcd_to_xhci_priv(hcd);
-	priv->plat_start(hcd);
-	return 0;
+	return ret;
 }
 
 /*
@@ -208,20 +213,19 @@ static int xhci_rcar_resume_quirk(struct usb_hcd *hcd)
  * long delay for the handshake of STS_HALT is neeed in xhci_suspend()
  * by using the XHCI_SLOW_SUSPEND quirk.
  */
-static const struct xhci_plat_priv xhci_plat_renesas_rcar_gen2 = {
-	.firmware_name = XHCI_RCAR_FIRMWARE_NAME_V1,
-	.quirks = XHCI_NO_64BIT_SUPPORT |  XHCI_SLOW_SUSPEND,
-	.init_quirk = xhci_rcar_init_quirk,
-	.plat_start = xhci_rcar_gen2_start,
+#define SET_XHCI_PLAT_PRIV_FOR_RCAR(firmware)				\
+	.firmware_name = firmware,					\
+	.quirks = XHCI_NO_64BIT_SUPPORT |  XHCI_SLOW_SUSPEND,		\
+	.init_quirk = xhci_rcar_init_quirk,				\
+	.plat_start = xhci_rcar_start,					\
 	.resume_quirk = xhci_rcar_resume_quirk,
+
+static const struct xhci_plat_priv xhci_plat_renesas_rcar_gen2 = {
+	SET_XHCI_PLAT_PRIV_FOR_RCAR(XHCI_RCAR_FIRMWARE_NAME_V1)
 };
 
 static const struct xhci_plat_priv xhci_plat_renesas_rcar_gen3 = {
-	.firmware_name = XHCI_RCAR_FIRMWARE_NAME_V3,
-	.quirks = XHCI_NO_64BIT_SUPPORT |  XHCI_SLOW_SUSPEND,
-	.init_quirk = xhci_rcar_init_quirk,
-	.plat_start = xhci_rcar_start,
-	.resume_quirk = xhci_rcar_resume_quirk,
+	SET_XHCI_PLAT_PRIV_FOR_RCAR(XHCI_RCAR_FIRMWARE_NAME_V3)
 };
 
 static const struct xhci_plat_priv xhci_plat_renesas_rzv2m = {

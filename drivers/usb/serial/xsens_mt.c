@@ -10,6 +10,7 @@
 #include <linux/module.h>
 #include <linux/usb.h>
 #include <linux/usb/serial.h>
+#include <linux/uaccess.h>
 
 #define XSENS_VID 0x2639
 
