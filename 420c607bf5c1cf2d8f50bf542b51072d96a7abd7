@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df937fc4_0563b768",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-10-06T09:03:54Z",
+      "side": 1,
+      "message": "Let\u0027s wait for this to land in a maintainer tree. When it does, reclassify it as FROMGIT.",
+      "revId": "420c607bf5c1cf2d8f50bf542b51072d96a7abd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
