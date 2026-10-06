@@ -34,6 +34,24 @@
       "parentUuid": "f076659e_9a3ff862",
       "revId": "1390ba3e9b87464f1505ec4cc2903a6c99c30bc0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7c55e95_b38b3bab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-10-06T08:43:54Z",
+      "side": 1,
+      "message": "So, I think you are saying that this is the last time these hooks will be needed since they will be upstream by next year. Please do that so we can drop these hooks for next year.",
+      "parentUuid": "aa33cf94_66b15c15",
+      "revId": "1390ba3e9b87464f1505ec4cc2903a6c99c30bc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
