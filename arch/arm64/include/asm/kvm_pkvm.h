@@ -91,7 +91,8 @@ static inline bool kvm_pkvm_ioctl_allowed(struct kvm *kvm, unsigned int ioctl, v
 	int r;
 
 	r = kvm_get_cap_for_kvm_ioctl(ioctl, &ext);
-	if (r < 0)
+
+	if (WARN_ON_ONCE(r < 0))
 		return false;
 
 	if (kvm_pkvm_ext_allowed(kvm, ext))
