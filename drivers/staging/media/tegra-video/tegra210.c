@@ -362,7 +362,8 @@ dequeue_buf_done(struct tegra_vi_channel *chan)
 
 	buf = list_first_entry(&chan->done,
 			       struct tegra_channel_buffer, queue);
-	list_del_init(&buf->queue);
+	if (buf)
+		list_del_init(&buf->queue);
 	spin_unlock(&chan->done_lock);
 
 	return buf;

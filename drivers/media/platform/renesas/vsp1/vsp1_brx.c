@@ -130,12 +130,15 @@ static int brx_set_format(struct v4l2_subdev *subdev,
 	struct vsp1_brx *brx = to_brx(subdev);
 	struct v4l2_subdev_state *state;
 	struct v4l2_mbus_framefmt *format;
+	int ret = 0;
 
-	guard(mutex)(&brx->entity.lock);
+	mutex_lock(&brx->entity.lock);
 
 	state = vsp1_entity_get_state(&brx->entity, sd_state, fmt->which);
-	if (!state)
-		return -EINVAL;
+	if (!state) {
+		ret = -EINVAL;
+		goto done;
+	}
 
 	brx_try_format(brx, state, fmt->pad, &fmt->format);
 
@@ -163,7 +166,9 @@ static int brx_set_format(struct v4l2_subdev *subdev,
 		}
 	}
 
-	return 0;
+done:
+	mutex_unlock(&brx->entity.lock);
+	return ret;
 }
 
 static int brx_get_selection(struct v4l2_subdev *subdev,
@@ -190,10 +195,9 @@ static int brx_get_selection(struct v4l2_subdev *subdev,
 		if (!state)
 			return -EINVAL;
 
-		scoped_guard(mutex, &brx->entity.lock) {
-			sel->r = *v4l2_subdev_state_get_compose(state, sel->pad);
-		}
-
+		mutex_lock(&brx->entity.lock);
+		sel->r = *v4l2_subdev_state_get_compose(state, sel->pad);
+		mutex_unlock(&brx->entity.lock);
 		return 0;
 
 	default:
@@ -209,6 +213,7 @@ static int brx_set_selection(struct v4l2_subdev *subdev,
 	struct v4l2_subdev_state *state;
 	struct v4l2_mbus_framefmt *format;
 	struct v4l2_rect *compose;
+	int ret = 0;
 
 	if (sel->pad == brx->entity.source_pad)
 		return -EINVAL;
@@ -216,11 +221,13 @@ static int brx_set_selection(struct v4l2_subdev *subdev,
 	if (sel->target != V4L2_SEL_TGT_COMPOSE)
 		return -EINVAL;
 
-	guard(mutex)(&brx->entity.lock);
+	mutex_lock(&brx->entity.lock);
 
 	state = vsp1_entity_get_state(&brx->entity, sd_state, sel->which);
-	if (!state)
-		return -EINVAL;
+	if (!state) {
+		ret = -EINVAL;
+		goto done;
+	}
 
 	/*
 	 * The compose rectangle top left corner must be inside the output
@@ -241,7 +248,9 @@ static int brx_set_selection(struct v4l2_subdev *subdev,
 	compose = v4l2_subdev_state_get_compose(state, sel->pad);
 	*compose = sel->r;
 
-	return 0;
+done:
+	mutex_unlock(&brx->entity.lock);
+	return ret;
 }
 
 static const struct v4l2_subdev_pad_ops brx_pad_ops = {

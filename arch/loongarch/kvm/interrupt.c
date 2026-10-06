@@ -9,16 +9,41 @@
 #include <asm/kvm_vcpu.h>
 #include <asm/kvm_dmsintc.h>
 
-static void kvm_irq_deliver(struct kvm_vcpu *vcpu, unsigned long mask)
+static unsigned int priority_to_irq[EXCCODE_INT_NUM] = {
+	[INT_TI]	= CPU_TIMER,
+	[INT_IPI]	= CPU_IPI,
+	[INT_SWI0]	= CPU_SIP0,
+	[INT_SWI1]	= CPU_SIP1,
+	[INT_HWI0]	= CPU_IP0,
+	[INT_HWI1]	= CPU_IP1,
+	[INT_HWI2]	= CPU_IP2,
+	[INT_HWI3]	= CPU_IP3,
+	[INT_HWI4]	= CPU_IP4,
+	[INT_HWI5]	= CPU_IP5,
+	[INT_HWI6]	= CPU_IP6,
+	[INT_HWI7]	= CPU_IP7,
+	[INT_AVEC]	= CPU_AVEC,
+};
+
+static int kvm_irq_deliver(struct kvm_vcpu *vcpu, unsigned int priority)
 {
-	unsigned long irq;
+	unsigned int irq = 0;
 	unsigned long old, new;
 
-	if (mask & CPU_AVEC)
-		dmsintc_inject_irq(vcpu);
+	clear_bit(priority, &vcpu->arch.irq_pending);
+	if (priority < EXCCODE_INT_NUM)
+		irq = priority_to_irq[priority];
 
-	irq = mask & KVM_ESTAT_INTI_MASK;
-	if (irq) {
+	switch (priority) {
+	case INT_AVEC:
+		if (!kvm_guest_has_msgint(&vcpu->arch))
+			break;
+		dmsintc_inject_irq(vcpu);
+		fallthrough;
+	case INT_TI:
+	case INT_IPI:
+	case INT_SWI0:
+	case INT_SWI1:
 		old = kvm_read_hw_gcsr(LOONGARCH_CSR_TVAL);
 		set_gcsr_estat(irq);
 		new = kvm_read_hw_gcsr(LOONGARCH_CSR_TVAL);
@@ -26,20 +51,37 @@ static void kvm_irq_deliver(struct kvm_vcpu *vcpu, unsigned long mask)
 		/* Inject TI if TVAL inverted */
 		if (new > old)
 			set_gcsr_estat(CPU_TIMER);
+		break;
+
+	case INT_HWI0 ... INT_HWI7:
+		set_csr_gintc(irq);
+		break;
+
+	default:
+		break;
 	}
 
-	irq = (mask >> VIP_DELTA) & KVM_GINTC_IRQ_MASK;
-	if (irq)
-		set_csr_gintc(irq);
+	return 1;
 }
 
-static void kvm_irq_clear(struct kvm_vcpu *vcpu, unsigned long mask)
+static int kvm_irq_clear(struct kvm_vcpu *vcpu, unsigned int priority)
 {
-	unsigned long irq;
+	unsigned int irq = 0;
 	unsigned long old, new;
 
-	irq = mask & KVM_ESTAT_INTI_MASK;
-	if (irq) {
+	clear_bit(priority, &vcpu->arch.irq_clear);
+	if (priority < EXCCODE_INT_NUM)
+		irq = priority_to_irq[priority];
+
+	switch (priority) {
+	case INT_AVEC:
+		if (!kvm_guest_has_msgint(&vcpu->arch))
+			break;
+		fallthrough;
+	case INT_TI:
+	case INT_IPI:
+	case INT_SWI0:
+	case INT_SWI1:
 		old = kvm_read_hw_gcsr(LOONGARCH_CSR_TVAL);
 		clear_gcsr_estat(irq);
 		new = kvm_read_hw_gcsr(LOONGARCH_CSR_TVAL);
@@ -47,28 +89,30 @@ static void kvm_irq_clear(struct kvm_vcpu *vcpu, unsigned long mask)
 		/* Inject TI if TVAL inverted */
 		if (new > old)
 			set_gcsr_estat(CPU_TIMER);
+		break;
+
+	case INT_HWI0 ... INT_HWI7:
+		clear_csr_gintc(irq);
+		break;
+
+	default:
+		break;
 	}
 
-	irq = (mask >> VIP_DELTA) & KVM_GINTC_IRQ_MASK;
-	if (irq)
-		clear_csr_gintc(irq);
+	return 1;
 }
 
 void kvm_deliver_intr(struct kvm_vcpu *vcpu)
 {
-	unsigned long mask;
+	unsigned int priority;
+	unsigned long *pending = &vcpu->arch.irq_pending;
+	unsigned long *pending_clr = &vcpu->arch.irq_clear;
 
-	mask = READ_ONCE(vcpu->arch.irq_clear);
-	if (mask) {
-		mask = xchg_relaxed(&vcpu->arch.irq_clear, 0);
-		kvm_irq_clear(vcpu, mask);
-	}
+	for_each_set_bit(priority, pending_clr, EXCCODE_INT_NUM)
+		kvm_irq_clear(vcpu, priority);
 
-	mask = READ_ONCE(vcpu->arch.irq_pending);
-	if (mask) {
-		mask = xchg_relaxed(&vcpu->arch.irq_pending, 0);
-		kvm_irq_deliver(vcpu, mask);
-	}
+	for_each_set_bit(priority, pending, EXCCODE_INT_NUM)
+		kvm_irq_deliver(vcpu, priority);
 }
 
 int kvm_pending_timer(struct kvm_vcpu *vcpu)

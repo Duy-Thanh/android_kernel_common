@@ -12,7 +12,6 @@
 #include <linux/gfp.h>
 #include <linux/smp.h>
 #include <linux/stop_machine.h>
-#include <linux/sysfs.h>
 
 #include <asm/cputhreads.h>
 #include <asm/cpuidle.h>
@@ -410,7 +409,7 @@ out:
 static ssize_t show_subcores_per_core(struct device *dev,
 		struct device_attribute *attr, char *buf)
 {
-	return sysfs_emit(buf, "%x\n", subcores_per_core);
+	return sprintf(buf, "%x\n", subcores_per_core);
 }
 
 static DEVICE_ATTR(subcores_per_core, 0644,

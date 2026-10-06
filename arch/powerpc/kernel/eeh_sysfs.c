@@ -9,7 +9,6 @@
 #include <linux/of.h>
 #include <linux/pci.h>
 #include <linux/stat.h>
-#include <linux/sysfs.h>
 #include <asm/ppc-pci.h>
 #include <asm/pci-bridge.h>
 
@@ -32,7 +31,7 @@ static ssize_t eeh_show_##_name(struct device *dev,      \
 	if (!edev)                                            \
 		return 0;                                     \
 	                                                      \
-	return sysfs_emit(buf, _format "\n", edev->_memb);    \
+	return sprintf(buf, _format "\n", edev->_memb);       \
 }                                                        \
 static DEVICE_ATTR(_name, 0444, eeh_show_##_name, NULL);
 
@@ -50,7 +49,8 @@ static ssize_t eeh_pe_state_show(struct device *dev,
 		return -ENODEV;
 
 	state = eeh_ops->get_state(edev->pe, NULL);
-	return sysfs_emit(buf, "0x%08x 0x%08x\n", state, edev->pe->state);
+	return sprintf(buf, "0x%08x 0x%08x\n",
+		       state, edev->pe->state);
 }
 
 static ssize_t eeh_pe_state_store(struct device *dev,
@@ -87,7 +87,7 @@ static ssize_t eeh_notify_resume_show(struct device *dev,
 	if (!edev || !edev->pe)
 		return -ENODEV;
 
-	return sysfs_emit(buf, "%d\n", pdn->last_allow_rc);
+	return sprintf(buf, "%d\n", pdn->last_allow_rc);
 }
 
 static ssize_t eeh_notify_resume_store(struct device *dev,
