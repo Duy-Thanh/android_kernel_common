@@ -153,13 +153,24 @@ static void damon_do_test_apply_three_regions(struct kunit *test,
 
 	damon_va_apply_three_regions(t, three_regions);
 
+	KUNIT_EXPECT_EQ(test, damon_nr_regions(t), nr_expected / 2);
+	if (damon_nr_regions(t) != nr_expected / 2)
+		goto out;
+
 	for (i = 0; i < nr_expected / 2; i++) {
 		r = __nth_region_of(t, i);
 		KUNIT_EXPECT_EQ(test, r->ar.start, expected[i * 2]);
 		KUNIT_EXPECT_EQ(test, r->ar.end, expected[i * 2 + 1]);
 	}
 
+<<<<<<< HEAD   (f5eaed2bbe33b10b297b366bb5d02819356b5c13 Merge 9f30ba9aa027 ("tcp: clear sock_ops cb flags before for)
 	damon_destroy_target(t);
+||||||| BASE   (9f30ba9aa0270a18fdd1e6cd426c480c35f7de9d tcp: clear sock_ops cb flags before force-closing a child so)
+	damon_destroy_ctx(ctx);
+=======
+out:
+	damon_destroy_ctx(ctx);
+>>>>>>> BRANCH (722980f27458636714fca65ce5b3f277176df0f1 mm/damon/tests/core-kunit: catch test failure in test_merge_)
 }
 
 /*
