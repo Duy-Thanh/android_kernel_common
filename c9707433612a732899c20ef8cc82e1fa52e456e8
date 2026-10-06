@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9b5afd5_00e74a06",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-10-06T15:45:12Z",
+      "side": 1,
+      "message": "which patch is this?",
+      "range": {
+        "startLine": 9,
+        "startChar": 27,
+        "endLine": 9,
+        "endChar": 36
+      },
+      "revId": "c9707433612a732899c20ef8cc82e1fa52e456e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b83b0a4_25380fcc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-10-06T15:45:12Z",
+      "side": 1,
+      "message": "Not that it matters but what\u0027s with the funky ordering of these tags? I usually see this before the Sob.",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 102
+      },
+      "revId": "c9707433612a732899c20ef8cc82e1fa52e456e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
