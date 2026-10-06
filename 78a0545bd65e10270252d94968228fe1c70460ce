@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a2becb4_02410d64",
+        "filename": "include/linux/netdevice.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1691,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-10-06T10:49:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5f169ab_d9fa327b",
+      "range": {
+        "startLine": 1691,
+        "startChar": 1,
+        "endLine": 1691,
+        "endChar": 5
+      },
+      "revId": "78a0545bd65e10270252d94968228fe1c70460ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0eba9ae2_566c77e3",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3e0ed0b_8178f29b",
+        "filename": "include/net/apf.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-10-06T10:49:05Z",
+      "side": 1,
+      "message": "I think it is needed because it is part of netdev_ops now. If we ever want to backport anything to apf_ops (e.g. add new method based on upstream review feedback), We will need to use kabi_reserved slot for backport.\n\nSee detailed jetski analysis as follows:\n\n```\nit is tracked by STG because it is reachable from `register_netdev` via `dev-\u003enetdev_ops-\u003eapf_ops`, and its full definition is emitted in `gki/aarch64/abi.stg` (currently `bytesize: 128`).\n\nVendor Wi-Fi drivers implement `struct apf_ops`. The reserves allow adding new driver callbacks in future minor/LTS releases via `ANDROID_KABI_USE` without changing the struct size or breaking KMI (similar to `struct tlsdev_ops` in `include/net/tls.h`).\n```",
+      "parentUuid": "0eba9ae2_566c77e3",
+      "range": {
+        "startLine": 88,
+        "startChar": 1,
+        "endLine": 96,
+        "endChar": 25
+      },
+      "revId": "78a0545bd65e10270252d94968228fe1c70460ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0b221271_5b691f03",
@@ -60,6 +108,30 @@
       "writtenOn": "2026-10-05T17:50:39Z",
       "side": 1,
       "message": "Please use gki_defconfig or whatever is appropriate.",
+      "range": {
+        "startLine": 11,
+        "startChar": 1,
+        "endLine": 11,
+        "endChar": 10
+      },
+      "revId": "78a0545bd65e10270252d94968228fe1c70460ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ae04608_3abd6979",
+        "filename": "net/apf/Kconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1758351
+      },
+      "writtenOn": "2026-10-06T10:49:05Z",
+      "side": 1,
+      "message": "I think it is needed because it is part of netdev_ops now. If we ever want to backport anything to apf_ops (e.g. add new method based on upstream review feedback), We will need to use kabi_reserved slot for backport.\n\nSee detailed jetski analysis as follows:\n\n```\nit is tracked by STG because it is reachable from `register_netdev` via `dev-\u003enetdev_ops-\u003eapf_ops`, and its full definition is emitted in `gki/aarch64/abi.stg` (currently `bytesize: 128`).\n\nVendor Wi-Fi drivers implement `struct apf_ops`. The reserves allow adding new driver callbacks in future minor/LTS releases via `ANDROID_KABI_USE` without changing the struct size or breaking KMI (similar to `struct tlsdev_ops` in `include/net/tls.h`).\n```",
+      "parentUuid": "0b221271_5b691f03",
       "range": {
         "startLine": 11,
         "startChar": 1,
