@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b0e32176_6e3e38f4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-10-06T20:57:14Z",
+      "side": 1,
+      "message": "incorrect bug id.",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 14
+      },
+      "revId": "fb184004f492688d89f0cb31065e2da9e2325d92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d741844a_ff9bbd70",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
