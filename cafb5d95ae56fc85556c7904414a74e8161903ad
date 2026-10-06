@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa09a616_ab178930",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-10-06T13:23:55Z",
+      "side": 1,
+      "message": "@gprocida@google.com Mind taking a close review of this to make sure I\u0027m doing the KABI break safely here? We are just adding a new element to a union, so the structure sizes should not be changing. Let me know if this is more problematic then I imaigne.",
+      "revId": "cafb5d95ae56fc85556c7904414a74e8161903ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
