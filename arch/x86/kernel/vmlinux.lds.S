@@ -227,7 +227,7 @@ SECTIONS
 	 * references to such code must be patched out by alternatives, normally
 	 * by using X86_FEATURE_ALWAYS CPU feature bit.
 	 *
-	 * See static_cpu_has() for an example.
+	 * See cpu_feature_enabled() for an example.
 	 */
 	.altinstr_aux : AT(ADDR(.altinstr_aux) - LOAD_OFFSET) {
 		*(.altinstr_aux)
@@ -350,18 +350,6 @@ SECTIONS
 	/* freed after init ends here */
 	.init.end : AT(ADDR(.init.end) - LOAD_OFFSET) {
 		__init_end = .;
-	}
-
-	/*
-	 * smp_locks might be freed after init
-	 * start/end must be page aligned
-	 */
-	. = ALIGN(PAGE_SIZE);
-	.smp_locks : AT(ADDR(.smp_locks) - LOAD_OFFSET) {
-		__smp_locks = .;
-		*(.smp_locks)
-		. = ALIGN(PAGE_SIZE);
-		__smp_locks_end = .;
 	}
 
 #ifdef CONFIG_X86_64
