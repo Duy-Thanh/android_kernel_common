@@ -159,7 +159,9 @@ void xprt_rdma_bc_free_rqst(struct rpc_rqst *rqst)
 	rpcrdma_rep_put(&r_xprt->rx_buf, rep);
 	req->rl_reply = NULL;
 
-	rpcrdma_req_put(req);
+	spin_lock(&xprt->bc_pa_lock);
+	list_add_tail(&rqst->rq_bc_pa_list, &xprt->bc_pa_list);
+	spin_unlock(&xprt->bc_pa_lock);
 	xprt_put(xprt);
 }
 
@@ -201,7 +203,6 @@ create_req:
 	rqst->rq_xprt = xprt;
 	__set_bit(RPC_BC_PA_IN_USE, &rqst->rq_bc_pa_state);
 	xdr_buf_init(&rqst->rq_snd_buf, rdmab_data(req->rl_sendbuf), size);
-	kref_init(&req->rl_kref);
 	return rqst;
 }
 
