@@ -273,6 +273,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b255a9b_13ce4e97",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 28
+      },
+      "lineNbr": 790,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-10-06T12:31:38Z",
+      "side": 1,
+      "message": "The latest patch adds an extra reference for the get_mappable..put_mappable duration, I consider this issue resolved for now.",
+      "parentUuid": "cc1970bd_4736ec44",
+      "range": {
+        "startLine": 786,
+        "startChar": 0,
+        "endLine": 790,
+        "endChar": 9
+      },
+      "revId": "e0870895e8e1a26e46802f4e2f18817f119918eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3668d65c_8869431c",
