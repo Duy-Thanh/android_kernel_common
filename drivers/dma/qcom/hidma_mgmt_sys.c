@@ -102,12 +102,15 @@ static ssize_t show_values(struct device *dev, struct device_attribute *attr,
 	struct hidma_mgmt_dev *mdev = dev_get_drvdata(dev);
 	unsigned int i;
 
+	buf[0] = 0;
+
 	for (i = 0; i < ARRAY_SIZE(hidma_mgmt_files); i++) {
-		if (strcmp(attr->attr.name, hidma_mgmt_files[i].name) == 0)
-			return sysfs_emit(buf, "%d\n",
-					hidma_mgmt_files[i].get(mdev));
+		if (strcmp(attr->attr.name, hidma_mgmt_files[i].name) == 0) {
+			sprintf(buf, "%d\n", hidma_mgmt_files[i].get(mdev));
+			break;
+		}
 	}
-	return 0;
+	return strlen(buf);
 }
 
 static ssize_t set_values(struct device *dev, struct device_attribute *attr,
@@ -140,15 +143,15 @@ static ssize_t show_values_channel(struct kobject *kobj,
 	struct hidma_chan_attr *chattr;
 	struct hidma_mgmt_dev *mdev;
 
+	buf[0] = 0;
 	chattr = container_of(attr, struct hidma_chan_attr, attr);
 	mdev = chattr->mdev;
-
 	if (strcmp(attr->attr.name, "priority") == 0)
-		return sysfs_emit(buf, "%d\n", mdev->priority[chattr->index]);
+		sprintf(buf, "%d\n", mdev->priority[chattr->index]);
 	else if (strcmp(attr->attr.name, "weight") == 0)
-		return sysfs_emit(buf, "%d\n", mdev->weight[chattr->index]);
+		sprintf(buf, "%d\n", mdev->weight[chattr->index]);
 
-	return 0;
+	return strlen(buf);
 }
 
 static ssize_t set_values_channel(struct kobject *kobj,

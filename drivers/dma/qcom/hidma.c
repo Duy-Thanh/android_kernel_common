@@ -624,10 +624,12 @@ static ssize_t hidma_show_values(struct device *dev,
 {
 	struct hidma_dev *mdev = dev_get_drvdata(dev);
 
-	if (strcmp(attr->attr.name, "chid") == 0)
-		return sysfs_emit(buf, "%d\n", mdev->chidx);
+	buf[0] = 0;
 
-	return 0;
+	if (strcmp(attr->attr.name, "chid") == 0)
+		sprintf(buf, "%d\n", mdev->chidx);
+
+	return strlen(buf);
 }
 
 static inline void  hidma_sysfs_uninit(struct hidma_dev *dev)
