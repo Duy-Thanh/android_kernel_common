@@ -450,6 +450,7 @@ static int fprobe_addr_list_add(struct fprobe_addr_list *alist, unsigned long ad
 static void fprobe_remove_node_in_module(struct module *mod, struct hlist_head *head,
 					struct fprobe_addr_list *alist)
 {
+<<<<<<< HEAD   (b7410c4c93ad2ab0a1df3185afa23a09ec821ccc Merge 45c7c4e3db8b ("sched_ext: Avoid UAF in scx_root_enable)
 	struct fprobe_hlist_node *node;
 	int ret = 0;
 
@@ -466,6 +467,30 @@ static void fprobe_remove_node_in_module(struct module *mod, struct hlist_head *
 		if (!ret)
 			ret = fprobe_addr_list_add(alist, node->addr);
 	}
+||||||| BASE   (45c7c4e3db8b700307313c035ea08be829a7f21b sched_ext: Avoid UAF in scx_root_enable_workfn() init failur)
+	int ret = 0;
+
+	if (!within_module(node->addr, mod))
+		return;
+	if (delete_fprobe_node(node))
+		return;
+	/*
+	 * If failed to update alist, just continue to update hlist.
+	 * Therefore, at list user handler will not hit anymore.
+	 */
+	if (!ret)
+		ret = fprobe_addr_list_add(alist, node->addr);
+=======
+	if (!within_module(node->addr, mod))
+		return;
+	if (delete_fprobe_node(node))
+		return;
+	/*
+	 * If failed to update alist, just continue to update hlist.
+	 * Therefore, at list user handler will not hit anymore.
+	 */
+	fprobe_addr_list_add(alist, node->addr);
+>>>>>>> BRANCH (52cc572c95655ad71cdde4e494abf770efe9e233 tracing: fprobe: Remove unused local variable)
 }
 
 /* Handle module unloading to manage fprobe_ip_table. */
