@@ -32,7 +32,6 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_enqueue_task_fair);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_entity_tick);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_find_busiest_queue);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_find_lowest_rq);
-EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_find_new_ilb);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_finish_prio_fork);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_flush_task);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_get_nohz_timer_target);
