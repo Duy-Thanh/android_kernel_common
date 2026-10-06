@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d741844a_ff9bbd70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-10-06T20:56:30Z",
+      "side": 1,
+      "message": "Xen is not supported in GKI kernels at this point in time.",
+      "revId": "fb184004f492688d89f0cb31065e2da9e2325d92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
