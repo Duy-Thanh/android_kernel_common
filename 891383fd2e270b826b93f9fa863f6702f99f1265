@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de4d7c16_5aea749c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-10-06T08:49:50Z",
+      "side": 1,
+      "message": "The ABI is broken with these patches. These CRC issues must be resolved. These are probably caused by changing visibility of some KMI frozen structure. The most common case is `trace_eval_map` becoming fully visible by the addition of the hook definition header. If that is the issue, you can fix it with:\n```\nANDROID_KABI_DECLONLY(trace_eval_map);\n```\nafter the header inclusion. If that doesn\u0027t resolve it, then follow the instructions at https://source.android.com/docs/core/architecture/kernel/abi-monitor#fixing-crc-mismatch\n\n```\nfunction symbol \u0027int usb_autopm_get_interface(struct usb_interface*)\u0027 changed\n  CRC changed from 0x7ff89012 to 0x2be4fa00\n\nfunction symbol \u0027int usb_autopm_get_interface_async(struct usb_interface*)\u0027 changed\n  CRC changed from 0x7ff89012 to 0x2be4fa00\n\nfunction symbol \u0027void usb_autopm_get_interface_no_resume(struct usb_interface*)\u0027 changed\n  CRC changed from 0x587ff1ff to 0xde516a23\n\n```",
+      "revId": "891383fd2e270b826b93f9fa863f6702f99f1265",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
