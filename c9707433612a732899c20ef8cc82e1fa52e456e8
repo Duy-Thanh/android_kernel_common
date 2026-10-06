@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "5b81de4f_e4184e88",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-10-06T20:38:11Z",
+      "side": 1,
+      "message": "Yep. Sorry I could have added that context to the commit message.",
+      "parentUuid": "4d3ee0d3_98b72600",
+      "range": {
+        "startLine": 9,
+        "startChar": 27,
+        "endLine": 9,
+        "endChar": 36
+      },
+      "revId": "c9707433612a732899c20ef8cc82e1fa52e456e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "2b83b0a4_25380fcc",
         "filename": "/COMMIT_MSG",
         "patchSetId": 3
