@@ -16,6 +16,23 @@
       "message": "Respin Bug: b/570236149",
       "revId": "6867ad4ef5cdeede40df256d2c5e53cb6e498b6c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b347d3e_e2c39400",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-06T17:01:56Z",
+      "side": 1,
+      "message": "@fennema@google.com same issue as the previous commit.",
+      "revId": "6867ad4ef5cdeede40df256d2c5e53cb6e498b6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
