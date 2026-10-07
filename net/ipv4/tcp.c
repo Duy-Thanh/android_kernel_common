@@ -250,6 +250,7 @@
 #include <linux/types.h>
 #include <linux/fcntl.h>
 #include <linux/poll.h>
+#include <linux/p3s/mm.h>
 #include <linux/inet_diag.h>
 #include <linux/init.h>
 #include <linux/fs.h>
@@ -4699,6 +4700,9 @@ int do_tcp_getsockopt(struct sock *sk, int level,
 		struct scm_timestamping_internal tss;
 		struct tcp_zerocopy_receive zc = {};
 		int err;
+
+		if (mm_is_p3s_4k(current->mm))
+			return -EOPNOTSUPP;
 
 		if (copy_from_sockptr(&len, optlen, sizeof(int)))
 			return -EFAULT;
