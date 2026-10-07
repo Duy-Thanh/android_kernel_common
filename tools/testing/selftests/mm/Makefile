@@ -49,6 +49,7 @@ CFLAGS += -U_FORTIFY_SOURCE
 PPPS_TESTS := \
 	access_phys_ppps \
 	aio_ring_ppps anon_pageout_ppps anon_vma_name_ppps ashmem_ppps \
+	anon_rmap_split_window_ppps \
 	bpf_array_mmap_ppps bpf_ringbuf_mmap_ppps bpf_stack_build_id_ppps \
 	btf_vmlinux_mmap_ppps \
 	dma_heap_ppps dma_mmap_ppps dontneed_refault_ppps elf_core_ppps exec_env_ppps \
@@ -269,7 +270,7 @@ $(foreach t,mincore_ppps mlock_onfault_ppps, \
 	$(eval $(call ppps_test_hdrs,$(t),../kselftest_ppps.h)))
 $(foreach t,dontneed_refault_ppps file_cow_ppps hole_anon_ppps mte_anon_ppps packed_anon_ppps \
 	    packed_swap_ppps uffd_copy_tuple_ppps uffd_move_retry_ppps \
-	    remote_write_dontneed_ppps, \
+	    remote_write_dontneed_ppps anon_rmap_split_window_ppps, \
 	$(eval $(call ppps_test_hdrs,$(t),ppps_tuple_test.h)))
 
 ifeq ($(ARCH),x86_64)
