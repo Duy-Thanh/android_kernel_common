@@ -39,6 +39,24 @@
       "message": "why does this fix not have a `Fixes:` tag? What commit does it fix? Why isn\u0027t this being pulled into upstream linux-6.6.y?",
       "revId": "ac2fcd925301bda21389977c69f302689536de30",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9fab4fb_d8f4e4a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3832128
+      },
+      "writtenOn": "2026-10-07T23:52:50Z",
+      "side": 1,
+      "message": "I missed to add the Fixes: 9703d69d9d15 (\"f2fs: support file pinning for zoned devices\")",
+      "parentUuid": "72c947cc_18a21c0a",
+      "revId": "ac2fcd925301bda21389977c69f302689536de30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
