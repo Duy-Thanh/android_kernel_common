@@ -16,6 +16,24 @@
       "message": "Add empty line.",
       "revId": "bcf13b43758ef12584773a1b195ecead220a881f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e240e865_97c4d3e6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1943000
+      },
+      "writtenOn": "2026-10-07T05:38:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e76c17a3_61f563d4",
+      "revId": "bcf13b43758ef12584773a1b195ecead220a881f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
