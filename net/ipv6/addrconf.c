@@ -2896,7 +2896,8 @@ void addrconf_prefix_rcv(struct net_device *dev, u8 *opt, int len, bool sllao)
 		if (rt) {
 			/* Autoconf prefix route */
 			if (valid_lft == 0) {
-				ip6_del_rt(net, rt, false);
+				ip6_del_rt_reason(net, rt,
+						  RT_DEL_REASON_RA_WITHDRAWN);
 				rt = NULL;
 			} else {
 				table = rt->fib6_table;
@@ -5286,6 +5287,7 @@ int inet6_fill_ifmcaddr(struct sk_buff *skb,
 
 	put_ifaddrmsg(nlh, 128, IFA_F_PERMANENT, scope, ifindex);
 	if (nla_put_in6_addr(skb, IFA_MULTICAST, &ifmca->mca_addr) < 0 ||
+	    nla_put_u32(skb, IFA_MC_USERS, READ_ONCE(ifmca->mca_users)) < 0 ||
 	    put_cacheinfo(skb, ifmca->mca_cstamp, READ_ONCE(ifmca->mca_tstamp),
 			  INFINITY_LIFE_TIME, INFINITY_LIFE_TIME) < 0) {
 		nlmsg_cancel(skb, nlh);
@@ -6384,10 +6386,9 @@ static void ipv6_ifa_notify(int event, struct inet6_ifaddr *ifp)
 static int addrconf_sysctl_forward(const struct ctl_table *ctl, int write,
 		void *buffer, size_t *lenp, loff_t *ppos)
 {
+	struct ctl_table lctl;
 	int *valp = ctl->data;
 	int val = *valp;
-	loff_t pos = *ppos;
-	struct ctl_table lctl;
 	int ret;
 
 	/*
@@ -6403,8 +6404,6 @@ static int addrconf_sysctl_forward(const struct ctl_table *ctl, int write,
 
 	if (write)
 		ret = addrconf_fixup_forwarding(ctl, valp, val);
-	if (ret)
-		*ppos = pos;
 	return ret;
 }
 
@@ -6483,10 +6482,9 @@ static int addrconf_disable_ipv6(const struct ctl_table *table, int *p, int newf
 static int addrconf_sysctl_disable(const struct ctl_table *ctl, int write,
 		void *buffer, size_t *lenp, loff_t *ppos)
 {
+	struct ctl_table lctl;
 	int *valp = ctl->data;
 	int val = *valp;
-	loff_t pos = *ppos;
-	struct ctl_table lctl;
 	int ret;
 
 	/*
@@ -6502,8 +6500,6 @@ static int addrconf_sysctl_disable(const struct ctl_table *ctl, int write,
 
 	if (write)
 		ret = addrconf_disable_ipv6(ctl, valp, val);
-	if (ret)
-		*ppos = pos;
 	return ret;
 }
 
@@ -6688,10 +6684,9 @@ int addrconf_sysctl_ignore_routes_with_linkdown(const struct ctl_table *ctl,
 						size_t *lenp,
 						loff_t *ppos)
 {
+	struct ctl_table lctl;
 	int *valp = ctl->data;
 	int val = *valp;
-	loff_t pos = *ppos;
-	struct ctl_table lctl;
 	int ret;
 
 	/* ctl->data points to idev->cnf.ignore_routes_when_linkdown
@@ -6706,8 +6701,6 @@ int addrconf_sysctl_ignore_routes_with_linkdown(const struct ctl_table *ctl,
 
 	if (write)
 		ret = addrconf_fixup_linkdown(ctl, valp, val);
-	if (ret)
-		*ppos = pos;
 	return ret;
 }
 
@@ -6788,10 +6781,9 @@ int addrconf_disable_policy(const struct ctl_table *ctl, int *valp, int val)
 static int addrconf_sysctl_disable_policy(const struct ctl_table *ctl, int write,
 				   void *buffer, size_t *lenp, loff_t *ppos)
 {
+	struct ctl_table lctl;
 	int *valp = ctl->data;
 	int val = *valp;
-	loff_t pos = *ppos;
-	struct ctl_table lctl;
 	int ret;
 
 	lctl = *ctl;
@@ -6802,9 +6794,6 @@ static int addrconf_sysctl_disable_policy(const struct ctl_table *ctl, int write
 
 	if (write && (*valp != val))
 		ret = addrconf_disable_policy(ctl, valp, val);
-
-	if (ret)
-		*ppos = pos;
 
 	return ret;
 }
@@ -6837,7 +6826,6 @@ static int addrconf_sysctl_force_forwarding(const struct ctl_table *ctl, int wri
 	int *valp = ctl->data;
 	int new_val = *valp;
 	int old_val = *valp;
-	loff_t pos = *ppos;
 	int ret;
 
 	tmp_ctl.extra1 = SYSCTL_ZERO;
@@ -6873,8 +6861,6 @@ static int addrconf_sysctl_force_forwarding(const struct ctl_table *ctl, int wri
 		rtnl_net_unlock(net);
 	}
 
-	if (ret)
-		*ppos = pos;
 	return ret;
 }
 
