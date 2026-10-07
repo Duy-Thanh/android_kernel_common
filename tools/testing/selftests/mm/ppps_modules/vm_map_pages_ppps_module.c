@@ -3,7 +3,6 @@
 #include <linux/highmem.h>
 #include <linux/mm.h>
 #include <linux/module.h>
-#include <linux/ppps.h>
 
 #include "../vm_map_pages_ppps.h"
 #include "../../ppps/ppps_misc_module.h"
@@ -13,6 +12,19 @@
 
 static struct page *test_pages[TEST_PAGE_COUNT];
 
+/* The 4K page index of the mapping's file offset selects the case. */
+static unsigned long vm_map_pages_ppps_index(struct vm_area_struct *vma)
+{
+	return vma_file_offset(vma) >> PAGE_SHIFT_4KB;
+}
+
+/*
+ * vm_insert_pages() and vm_insert_page_slice() are not in the GKI symbol
+ * list, so a kernel built with CONFIG_TRIM_UNUSED_KSYMS does not export them
+ * and a module using them cannot load.  The edge cases report EOPNOTSUPP
+ * there, which the test turns into skips, so vm_map_pages() stays testable.
+ */
+#ifndef CONFIG_TRIM_UNUSED_KSYMS
 static int expected_error(int error, int expected)
 {
 	if (error == expected)
@@ -22,12 +34,10 @@ static int expected_error(int error, int expected)
 
 static int vm_insert_pages_edge_case(struct vm_area_struct *vma)
 {
-	unsigned long offset = (vma->vm_pgoff << PPPS_SLICE_SHIFT) +
-		vma_slice_off(vma);
 	unsigned long count = 1;
 	int error;
 
-	switch (offset) {
+	switch (vm_map_pages_ppps_index(vma)) {
 	case VM_MAP_PAGES_PPPS_ZERO:
 		count = 0;
 		return vm_insert_pages(vma, vma->vm_start, test_pages, &count);
@@ -64,14 +74,17 @@ static int vm_insert_pages_edge_case(struct vm_area_struct *vma)
 		return -EINVAL;
 	}
 }
+#else
+static int vm_insert_pages_edge_case(struct vm_area_struct *vma)
+{
+	return -EOPNOTSUPP;
+}
+#endif
 
 static int vm_map_pages_ppps_mmap(struct file *file,
 				  struct vm_area_struct *vma)
 {
-	unsigned long offset = (vma->vm_pgoff << PPPS_SLICE_SHIFT) +
-		vma_slice_off(vma);
-
-	if (offset >= VM_MAP_PAGES_PPPS_ZERO)
+	if (vm_map_pages_ppps_index(vma) >= VM_MAP_PAGES_PPPS_ZERO)
 		return vm_insert_pages_edge_case(vma);
 	return vm_map_pages(vma, test_pages, ARRAY_SIZE(test_pages));
 }
