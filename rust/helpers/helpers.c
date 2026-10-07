@@ -77,6 +77,7 @@
 #include "poll.c"
 #include "processor.c"
 #include "property.c"
+#include "ratelimit.c"
 #include "rbtree.c"
 #include "rcu.c"
 #include "refcount.c"
