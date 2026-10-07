@@ -86,7 +86,7 @@ PPPS_TESTS := \
 	statm_cross_geometry_ppps \
 	swap_header_badpages_ppps \
 	sysv_shm_lock_ppps sysv_shm_ppps taskstats_ppps \
-	tcp_zerocopy_align_ppps thp_mmap_offset_ppps \
+	tcp_zerocopy_align_ppps tcp_zerocopy_reject_ppps thp_mmap_offset_ppps \
 	trace_ring_buffer_mmap_ppps truncate_ppps truncate_remote_ppps \
 	userfaultfd_mixed_ppps userfaultfd_poison_remote_ppps uffd_move_retry_ppps \
 	uffd_move_swapcache_lock_ppps \

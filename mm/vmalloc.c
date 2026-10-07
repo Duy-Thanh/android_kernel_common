@@ -4577,13 +4577,14 @@ int remap_vmalloc_range_partial(struct vm_area_struct *vma, unsigned long uaddr,
 				unsigned long size)
 {
 	struct vm_struct *area;
+	unsigned long page_size = mm_pte_size(vma->vm_mm);
 	unsigned long off;
 	unsigned long end_index;
 
-	if (check_shl_overflow(pgoff, PAGE_SHIFT, &off))
+	if (check_shl_overflow(pgoff, PAGE_SHIFT_KERNEL, &off))
 		return -EINVAL;
 
-	size = PAGE_ALIGN(size);
+	size = ALIGN(size, page_size);
 
 	if (!mm_pte_aligned(vma->vm_mm, uaddr) || !PAGE_ALIGNED_KERNEL(kaddr))
 		return -EINVAL;
@@ -4608,9 +4609,9 @@ int remap_vmalloc_range_partial(struct vm_area_struct *vma, unsigned long uaddr,
 		if (ret)
 			return ret;
 
-		uaddr += PAGE_SIZE;
-		kaddr += PAGE_SIZE;
-		size -= PAGE_SIZE;
+		uaddr += page_size;
+		kaddr += page_size;
+		size -= page_size;
 	} while (size > 0);
 
 	vm_flags_set(vma, VM_DONTEXPAND | VM_DONTDUMP);

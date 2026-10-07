@@ -31,7 +31,8 @@ static int fixture_mmap(struct file *file, struct vm_area_struct *vma)
 	default:
 		return -EINVAL;
 	}
-	vma_set_file_offset(vma, 0);
+	vma->vm_pgoff = 0;
+	vma_set_slice_off(vma, 0);
 	return remap_vmalloc_range(vma, buffer + offset, 0);
 }
 
@@ -42,13 +43,18 @@ static const struct file_operations fixture_fops = {
 
 static int fixture_setup(void)
 {
+	unsigned int slice;
+
 	if (PAGE_SIZE != SZ_16K)
 		return -EOPNOTSUPP;
 	buffer = vmalloc_user(2 * PAGE_SIZE);
 	if (!buffer)
 		return -ENOMEM;
-	memset(buffer, 0x41, PAGE_SIZE);
-	memset(buffer + PAGE_SIZE, 0x62, PAGE_SIZE);
+	for (slice = 0; slice < PAGE_SIZE / SZ_4K; slice++) {
+		memset(buffer + slice * SZ_4K, 0x41 + slice, SZ_4K);
+		memset(buffer + PAGE_SIZE + slice * SZ_4K,
+		       0x62 + slice, SZ_4K);
+	}
 	return 0;
 }
 
