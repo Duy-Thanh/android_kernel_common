@@ -93,6 +93,19 @@ static inline pte_t vma_folio_mk_pte(const struct vm_area_struct *vma,
 	return vma_pte_add_slice(vma, addr, pfn_pte(pfn, vma->vm_page_prot));
 }
 
+/* Preserve the actual mapped 4KB slice, which need not match VMA geometry. */
+static inline resource_size_t
+p3s_pfnmap_phys(const struct follow_pfnmap_args *args)
+{
+	resource_size_t phys = (resource_size_t)args->pfn << PAGE_SHIFT_KERNEL;
+
+#ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
+	if (vma_is_p3s_4k(args->vma) && args->ptep)
+		phys |= __pte_to_phys(ptep_get(args->ptep)) & ~PAGE_MASK_KERNEL;
+#endif
+	return phys;
+}
+
 /*
  * vma_remap_frame - First PTE frame for remap_pfn_range() at @addr
  * @vma: VMA being remapped
