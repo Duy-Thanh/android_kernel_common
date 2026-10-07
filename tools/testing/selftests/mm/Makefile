@@ -86,7 +86,8 @@ PPPS_TESTS := \
 	v9fs_mmap_close_ppps vb2_mmap_ppps vb2_userptr_reject_ppps \
 	vhost_dirty_log_ppps vm_iomap_memory_ppps \
 	vma_range_slice_ppps \
-	vm_map_pages_ppps vmalloc_align_ppps xdp_umem_ppps xdp_umem_race_ppps
+	vm_map_pages_ppps vmalloc_align_ppps xdp_umem_ppps xdp_umem_race_ppps \
+	vma_merge_next_pgoff_ppps
 
 PPPS_TESTS_arm64 := \
 	brk_aslr_ppps brk_aslr_ppps_sample elf_brk_gap_ppps exec_aslr_ppps \
