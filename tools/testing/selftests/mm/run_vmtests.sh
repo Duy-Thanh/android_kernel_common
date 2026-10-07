@@ -560,6 +560,7 @@ CATEGORY="process_madv" run_test ./process_madv
 CATEGORY="vma_merge" run_test ./merge
 CATEGORY="process_madv" run_test ./process_madvise_ppps
 CATEGORY="process_madv" run_test ./process_vm_access_ppps
+CATEGORY="process_madv" run_test ./remote_write_dontneed_ppps
 CATEGORY="process_madv" run_test ./mixed_context_switch_ppps
 CATEGORY="process_madv" run_test ./mixed_mm_access_ppps
 
