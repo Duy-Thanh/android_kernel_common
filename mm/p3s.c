@@ -188,3 +188,35 @@ int p3s_vm_iomap_memory(struct vm_area_struct *vma, phys_addr_t start,
 	return p3s_remap_phys_range(vma, vma->vm_start, start + offset, vm_len,
 				    pgprot_decrypted(vma->vm_page_prot));
 }
+
+/*
+ * p3s_vm_map_pages - vm_map_pages() for a 4KB compat VMA
+ * @vma: 4KB compat VMA
+ * @pages: Native pages of the object
+ * @num: Number of pages in @pages
+ * @offset: Byte offset in the object to map at vm_start
+ *
+ * Each 4KB user page maps the matching 4KB slice of the object, as each
+ * native user page maps the matching object page.
+ */
+int p3s_vm_map_pages(struct vm_area_struct *vma, struct page **pages,
+		     unsigned long num, u64 offset)
+{
+	unsigned long len = vma->vm_end - vma->vm_start;
+	u64 size = (u64)num << PAGE_SHIFT_KERNEL;
+	unsigned long off;
+	int err;
+
+	if (offset >= size || len > size - offset)
+		return -ENXIO;
+	for (off = 0; off < len; off += PAGE_SIZE_4KB) {
+		u64 pos = offset + off;
+
+		err = vm_insert_page_slice(vma, vma->vm_start + off,
+					   pages[pos >> PAGE_SHIFT_KERNEL],
+					   (pos >> PAGE_SHIFT_4KB) & P3S_SLICE_MASK);
+		if (err)
+			return err;
+	}
+	return 0;
+}

@@ -2618,6 +2618,8 @@ static int __vm_map_pages(struct vm_area_struct *vma, struct page **pages,
 int vm_map_pages(struct vm_area_struct *vma, struct page **pages,
 				unsigned long num)
 {
+	if (vma_is_p3s_4k(vma))
+		return p3s_vm_map_pages(vma, pages, num, vma_file_offset(vma));
 	return __vm_map_pages(vma, pages, num, vma->vm_pgoff);
 }
 EXPORT_SYMBOL(vm_map_pages);
@@ -2638,6 +2640,8 @@ EXPORT_SYMBOL(vm_map_pages);
 int vm_map_pages_zero(struct vm_area_struct *vma, struct page **pages,
 				unsigned long num)
 {
+	if (vma_is_p3s_4k(vma))
+		return p3s_vm_map_pages(vma, pages, num, 0);
 	return __vm_map_pages(vma, pages, num, 0);
 }
 EXPORT_SYMBOL(vm_map_pages_zero);
