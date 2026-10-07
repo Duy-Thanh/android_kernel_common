@@ -220,3 +220,24 @@ int p3s_vm_map_pages(struct vm_area_struct *vma, struct page **pages,
 	}
 	return 0;
 }
+
+/*
+ * p3s_mmap_phys_object - Map a 4KB compat VMA onto a contiguous object
+ * @vma: 4KB compat VMA, whose file offset selects the start in the object
+ * @phys: Physical start of the object, 4KB aligned
+ * @size: Size of the object in bytes
+ *
+ * Returns -ENXIO if the VMA's file range does not fit in the object.
+ */
+int p3s_mmap_phys_object(struct vm_area_struct *vma, phys_addr_t phys,
+			 size_t size)
+{
+	unsigned long len = vma->vm_end - vma->vm_start;
+	u64 offset = vma_file_offset(vma);
+
+	size = ALIGN(size, PAGE_SIZE_4KB);
+	if (offset >= size || len > size - offset)
+		return -ENXIO;
+	return p3s_remap_phys_range(vma, vma->vm_start, phys + offset, len,
+				    vma->vm_page_prot);
+}

@@ -3776,6 +3776,8 @@ int p3s_vm_iomap_memory(struct vm_area_struct *vma, phys_addr_t start,
 			unsigned long len);
 int p3s_vm_map_pages(struct vm_area_struct *vma, struct page **pages,
 		     unsigned long num, u64 offset);
+int p3s_mmap_phys_object(struct vm_area_struct *vma, phys_addr_t phys,
+			 size_t size);
 #else
 static inline int p3s_remap_pfn_range(struct vm_area_struct *vma,
 				      unsigned long addr, unsigned long pfn,
@@ -3793,6 +3795,12 @@ static inline int p3s_vm_iomap_memory(struct vm_area_struct *vma,
 static inline int p3s_vm_map_pages(struct vm_area_struct *vma,
 				   struct page **pages, unsigned long num,
 				   u64 offset)
+{
+	return -EOPNOTSUPP;
+}
+
+static inline int p3s_mmap_phys_object(struct vm_area_struct *vma,
+				       phys_addr_t phys, size_t size)
 {
 	return -EOPNOTSUPP;
 }

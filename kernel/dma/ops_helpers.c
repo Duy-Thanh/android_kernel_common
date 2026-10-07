@@ -48,6 +48,8 @@ int dma_common_mmap(struct device *dev, struct vm_area_struct *vma,
 	if (dma_mmap_from_dev_coherent(dev, vma, cpu_addr, size, &ret))
 		return ret;
 
+	if (vma_is_p3s_4k(vma))
+		return p3s_mmap_phys_object(vma, page_to_phys(page), size);
 	if (off >= count || user_count > count - off)
 		return -ENXIO;
 
