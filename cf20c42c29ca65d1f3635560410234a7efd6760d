@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d3ba7a9_2147d8e0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1244290
+      },
+      "writtenOn": "2026-10-07T05:39:11Z",
+      "side": 1,
+      "message": "Tested on PTL (lapis) with fio io_uring 4K random O_DIRECT, strict mode:\n- non-nested pKVM: +2.4% QD32 read, +3.9% QD32 write, +5.9% 4-job write;\n- nested series: +3.1% QD32 read, +4.8% QD32 write (baseline ~225K IOPS QD32 read).",
+      "parentUuid": "8a2f611f_e4a63446",
+      "revId": "cf20c42c29ca65d1f3635560410234a7efd6760d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d7f103c3_ba7de68b",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-10-05T22:13:41Z",
       "side": 1,
       "message": "Should we upstream this first? (If this optimization is useful and correct, it should be useful for the original upstream IOMMU driver, i.e. without pKVM, as well?)\n\nI know in the newest kernel this code is entirely refactored and the cache flush is in a completely different place (in drivers/iommu/iommu-pages.h in iommu_pages_flush_incoherent()) but I see it is still CLFLUSH.",
+      "revId": "cf20c42c29ca65d1f3635560410234a7efd6760d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d89f113_ddcb0f48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1244290
+      },
+      "writtenOn": "2026-10-07T05:39:11Z",
+      "side": 1,
+      "message": "Yeah, I wanted to get a sense of how much we can gain with strict mode; so far, with the 4 patch series + Aashish\u0027s port I\u0027m seeing signficant improvements in strict mode.\n```\nWorkload\tnested\tstack\tΔ\nrr4k_qd32\t224.8K\t270.2K\t+20.2%\nrr4k_4j\t        352.5K\t519.6K\t+47.4%\nrw4k_qd32\t221.8K\t265.7K\t+19.8%\nrw4k_4j\t        350.4K\t580.5K\t+65.7%\nmix4k_4j\t342.0K\t464.4K\t+35.8%\n```\n\n(I\u0027ll to port these over to 7.3 to see if we can replicate the same gains.",
+      "parentUuid": "d7f103c3_ba7de68b",
       "revId": "cf20c42c29ca65d1f3635560410234a7efd6760d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -66,6 +102,24 @@
       "side": 1,
       "message": "+1. Even if CLWB is supported on all CPUs we care about, I think it is much cleaner to use the clwb() helper.",
       "parentUuid": "1f04a66b_d3885a70",
+      "revId": "cf20c42c29ca65d1f3635560410234a7efd6760d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3d74445_3c7a1a3e",
+        "filename": "drivers/iommu/intel/iommu.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1017,
+      "author": {
+        "id": 1244290
+      },
+      "writtenOn": "2026-10-07T05:39:11Z",
+      "side": 1,
+      "message": "Done, switched to clwb().",
+      "parentUuid": "11d65959_7d0acc04",
       "revId": "cf20c42c29ca65d1f3635560410234a7efd6760d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
