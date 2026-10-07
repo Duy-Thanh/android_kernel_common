@@ -16,6 +16,24 @@
       "message": "Why not actually store `PKVM_PAGE_NONE` in the PTE\u0027s `pgstate` bits (`bits[53:52]`) inside `pkvm_pgtable_set_owner()` when `owner !\u003d PKVM_ID_HOST`?\n\nSince `EPT_PAGE_STATE_MASK` (`bits[53:52]`) can already represent all 4 states (`0..3`) and non-present PTEs already store `owner_id` annotations in `bits[31:12]`, setting:\n```\n.annotation \u003d pkvm_pte_mk_pgstate(pgt, PKVM_PAGE_NONE) |\n                  pkvm_pte_mk_owner_id(owner),\n```\n\nwould mean every Host MMIO PTE (present or non-present) directly encodes its true `enum pkvm_page_state` in `bits[53:52]`:\n - `host_get_mmio_page_state()` wouldn\u0027t need the special-case `pte_annotated()` check (`pkvm_pte_pgstate()` alone would always return the right state for Host MMIO),\n - `PKVM_PAGE_NONE` wouldn\u0027t need a special-case rule for Host MMIO here in `mem_protect.h`, and\n - `pkvm_pte_pgstate() \u003d\u003d PKVM_PAGE_OWNED` would directly imply `owner \u003d\u003d PKVM_ID_HOST` in `fix_host_mmu_pgstate_walker()` as well.",
       "revId": "5c3ec0d5f85e96753f8762e23ee532b3f6773db4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fc65e7e_b71edc92",
+        "filename": "arch/x86/kvm/pkvm/mem_protect.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-07T10:27:10Z",
+      "side": 1,
+      "message": "We could do that, but it doesn\u0027t seem like that would have an actual advantage. We would only be using that for the host MMIO case. For the guest case, we would still need to assume the state is implicitly PKVM_PAGE_NONE if the guest PTE is zeroed (since PKVM_PAGE_NONE is the _initial_ state of guest pages, unlike in the host MMIO case), thus would still need that custom `check_guest_pgstate()` helper.\n\nSo the only \"advantage\" would be that for host MMIO we could keep using the \"generic\" `check_page_owner_and_state()` (removed by this patch), but it wouldn\u0027t really be used for anything else.\n\nAnd that would mean the design being less aligned with pKVM-ARM which doesn\u0027t store this state in PTEs:\n\n```\n\t/*\n\t * \u0027Meta-states\u0027 are not stored directly in PTE SW bits for guest\n\t * states, but inferred from the context (e.g. invalid PTE entries).\n\t * For the host and hyp, meta-states are stored directly in the\n\t * struct hyp_page.\n\t */\n\tPKVM_NOPAGE\t\t\t\u003d BIT(0) | BIT(1),\n```",
+      "parentUuid": "1e9ced97_d3f8ed7a",
+      "revId": "5c3ec0d5f85e96753f8762e23ee532b3f6773db4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
