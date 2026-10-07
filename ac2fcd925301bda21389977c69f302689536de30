@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e553baf5_3b5f1173",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-10-07T17:54:57Z",
+      "side": 1,
+      "message": "nit: It should just be `BACKPORT:`.",
+      "range": {
+        "startLine": 7,
+        "startChar": 10,
+        "endLine": 7,
+        "endChar": 19
+      },
+      "revId": "ac2fcd925301bda21389977c69f302689536de30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72c947cc_18a21c0a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-10-07T17:54:57Z",
+      "side": 1,
+      "message": "why does this fix not have a `Fixes:` tag? What commit does it fix? Why isn\u0027t this being pulled into upstream linux-6.6.y?",
+      "revId": "ac2fcd925301bda21389977c69f302689536de30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
