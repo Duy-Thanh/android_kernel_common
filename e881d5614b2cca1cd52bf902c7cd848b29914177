@@ -16,6 +16,24 @@
       "message": "In pKVM strict mode, domain_unmap() inside the pKVM hypervisor unconditionally flushes the hardware IOTLB on every single pkvm_domain_unmap() hypercall (called by iommu_unmap_fast()).\n\nAnd intel_iommu_tlb_sync() (called by iommu_iotlb_sync() at iommu_dma_unmap_batch_end()) is a no-op when pkvm_enabled() is true (if (!pkvm_enabled()) cache_tag_flush_range(...)).\n\nSo in pKVM mode, iommu_dma_unmap_batch_* doesn\u0027t save much. If 32 NVMe requests complete, pKVM still does 32 separate hypercalls and 32 separate QI IOTLB flushes.",
       "revId": "e881d5614b2cca1cd52bf902c7cd848b29914177",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6693dd69_e865bed0",
+        "filename": "drivers/iommu/dma-iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 928,
+      "author": {
+        "id": 1244290
+      },
+      "writtenOn": "2026-10-07T05:32:07Z",
+      "side": 1,
+      "message": "Correct for non-nested pKVM. This is now rebased onto the nested series (4017996), where tlb_sync issues a hypercall plus a QI wait per request. With 4337174 folded in, removing either half costs 16-18% on 4-job random reads and about 27% on 4-job writes.",
+      "parentUuid": "aa21afdc_9f8bb7f6",
+      "revId": "e881d5614b2cca1cd52bf902c7cd848b29914177",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
