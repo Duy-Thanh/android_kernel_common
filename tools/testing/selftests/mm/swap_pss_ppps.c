@@ -124,12 +124,26 @@ static int test_exclusive(void)
 static int test_partial_unmap(void)
 {
 	unsigned char *area, *page = alloc_tuple(&area);
+	struct counts counts;
 	int ret;
 
 	printf("partial-unmap\n");
+	/*
+	 * MADV_PAGEOUT skips a compat folio that is only partly mapped (it
+	 * cannot be split), so swap the tuple out whole and then unmap one of
+	 * its swapped slices.
+	 */
+	ret = wait_for_swap(page, NATIVE_PAGE_SIZE, 16);
+	if (ret)
+		return ret;
 	if (munmap(page + 3 * 4096, 4096))
 		die("partial munmap");
-	ret = wait_for_swap(page, 3 * 4096, 12);
+	counts = read_counts(page, NATIVE_PAGE_SIZE);
+	if (counts.swap != 12 || counts.swap_pss != 12) {
+		fprintf(stderr, "partial-unmap: Swap=%lu kB SwapPss=%lu kB, expected 12 kB\n",
+			counts.swap, counts.swap_pss);
+		ret = EXIT_FAILURE;
+	}
 	munmap(area, 4 * NATIVE_PAGE_SIZE);
 	return ret;
 }
