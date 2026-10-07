@@ -428,6 +428,7 @@ CATEGORY="userfaultfd" run_test ./userfaultfd_mixed_ppps
 CATEGORY="userfaultfd" run_test ./userfaultfd_remap_ppps
 CATEGORY="userfaultfd" run_test ./userfaultfd_shmem_ppps
 CATEGORY="userfaultfd" run_test ./uffd_move_swapped_slice_ppps
+CATEGORY="userfaultfd" run_test ./uffd_move_swapcache_lock_ppps
 uffd_stress_bin=./uffd-stress
 CATEGORY="userfaultfd" run_test ${uffd_stress_bin} anon 20 16
 # Hugetlb tests require source and destination huge pages. Pass in almost half
