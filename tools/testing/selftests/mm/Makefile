@@ -87,6 +87,7 @@ PPPS_TESTS := \
 	vhost_dirty_log_ppps vm_iomap_memory_ppps \
 	vma_range_slice_ppps \
 	vm_map_pages_ppps vmalloc_align_ppps xdp_umem_ppps xdp_umem_race_ppps \
+	vma_merge_file_slice_ppps \
 	vma_merge_next_pgoff_ppps
 
 PPPS_TESTS_arm64 := \
