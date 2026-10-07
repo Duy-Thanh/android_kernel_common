@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ddc82341_539ecd6e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 4966377
+      },
+      "writtenOn": "2026-10-07T08:10:17Z",
+      "side": 1,
+      "message": "I\u0027m sorry I did a mistake while telling Andrii the BugID. The correct buganizer ID is: https://partnerissuetracker.corp.google.com/issues/510233757. \nHowever this might be a partner-scoped component, so I don\u0027t know who can access it.",
+      "parentUuid": "b0e32176_6e3e38f4",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 14
+      },
+      "revId": "fb184004f492688d89f0cb31065e2da9e2325d92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d741844a_ff9bbd70",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
