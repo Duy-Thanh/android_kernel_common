@@ -70,6 +70,7 @@ PPPS_TESTS := \
 	print_vma_addr_ppps proc_pagewalk_ppps process_madvise_ppps \
 	process_mrelease_ppps process_vm_access_ppps remap_file_pages_ppps \
 	remap_pfn_cow_ppps remap_pfn_range_ppps rmap_file_referenced_ppps rss_stat_trace_ppps \
+	remote_write_dontneed_ppps \
 	rusage_ppps selinux_status_mmap_ppps \
 	shmem_mmap_offset_ppps \
 	shmem_quota_ppps shmem_swap_usage_ppps smaps_native_fallback_ppps smaps_page_size_ppps \
@@ -264,7 +265,8 @@ $(eval $(call ppps_test_hdrs,vm_map_pages_ppps,vm_map_pages_ppps.h))
 $(foreach t,mincore_ppps mlock_onfault_ppps, \
 	$(eval $(call ppps_test_hdrs,$(t),../kselftest_ppps.h)))
 $(foreach t,dontneed_refault_ppps file_cow_ppps hole_anon_ppps mte_anon_ppps packed_anon_ppps \
-	    packed_swap_ppps uffd_copy_tuple_ppps uffd_move_retry_ppps, \
+	    packed_swap_ppps uffd_copy_tuple_ppps uffd_move_retry_ppps \
+	    remote_write_dontneed_ppps, \
 	$(eval $(call ppps_test_hdrs,$(t),ppps_tuple_test.h)))
 
 ifeq ($(ARCH),x86_64)
