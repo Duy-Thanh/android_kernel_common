@@ -16,6 +16,24 @@
       "message": "In pKVM, the callers of cache_tag_flush_range() (pkvm_iommu_domain_unmap() -\u003e domain_unmap(), and pkvm_iommu_domain_flush()) already hold domain-\u003elock on the unmap path around the entire cache_tag_flush_range() call, so CPUs sharing a domain will still serialize on those outer locks while waiting for qi_submit_sync().",
       "revId": "3e828744797f64f65d1f3aa9af1d4abe4264e4d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c785c9f_9bb684d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1244290
+      },
+      "writtenOn": "2026-10-07T05:33:55Z",
+      "side": 1,
+      "message": "Agreed that the lock drop itself is serialized by the hypervisor domain-\u003elock on non-nested pKVM. The measured +4-5% (4-job) there comes from removing the 520-byte memset. On the nested series (4017996), cache_tag_flush_range() runs on the host without the outer lock, and this gives +6-10%. I retitled the change, updated the message and rebased it onto the nested series.",
+      "parentUuid": "e21d2226_1017c6db",
+      "revId": "3e828744797f64f65d1f3aa9af1d4abe4264e4d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
