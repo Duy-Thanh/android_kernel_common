@@ -157,6 +157,29 @@ static inline phys_addr_t vma_pfnmap_phys(const struct vm_area_struct *vma,
 	return ((phys_addr_t)pfn << PAGE_SHIFT_KERNEL) +
 	       ((phys_addr_t)vma_slice_offset(vma, addr) << PAGE_SHIFT_4KB);
 }
+
+/*
+ * p3s_uffd_swap_pte_movable - Check whether UFFDIO_MOVE may move a swap PTE
+ * @dst_vma: Destination VMA
+ * @dst_addr: Destination virtual address
+ * @src_pte: Source swap PTE
+ *
+ * A swapped compat anonymous PTE records the folio slice it maps, and
+ * swap-in installs that slice.  Moving it to an address with a different
+ * slice phase would break the anonymous slice == address phase layout that
+ * slice reuse relies on, so a later fault next to it could alias its data.
+ *
+ * Returns true if @src_pte may be moved to @dst_addr unchanged.
+ */
+#ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
+static inline bool p3s_uffd_swap_pte_movable(struct vm_area_struct *dst_vma,
+					     unsigned long dst_addr,
+					     pte_t src_pte)
+{
+	return !vma_is_p3s_4k(dst_vma) ||
+	       pte_swp_slice(src_pte) == vma_slice_offset(dst_vma, dst_addr);
+}
+#endif
 #endif
 
 /*
@@ -849,6 +872,13 @@ static inline bool p3s_uffd_install_anon_folio(struct vm_area_struct *dst_vma,
 					       uffd_flags_t flags)
 {
 	return false;
+}
+
+static inline bool p3s_uffd_swap_pte_movable(struct vm_area_struct *dst_vma,
+					     unsigned long dst_addr,
+					     pte_t src_pte)
+{
+	return true;
 }
 #endif
 

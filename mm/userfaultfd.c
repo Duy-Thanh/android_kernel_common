@@ -1815,6 +1815,11 @@ retry:
 			goto out;
 		}
 
+		if (!p3s_uffd_swap_pte_movable(dst_vma, dst_addr, orig_src_pte)) {
+			ret = -EBUSY;
+			goto out;
+		}
+
 		si = get_swap_device(entry);
 		if (unlikely(!si)) {
 			ret = -EAGAIN;
@@ -2181,11 +2186,6 @@ ssize_t move_pages(struct userfaultfd_ctx *ctx, unsigned long dst_start,
 		goto out_unlock;
 	if (dst_start + len > dst_vma->vm_end)
 		goto out_unlock;
-	/* In 4KB tasks the offset within 16KB selects the slice; keep it */
-	if (vma_is_p3s_4k(dst_vma) &&
-	    ((src_start ^ dst_start) & ~PAGE_MASK_KERNEL))
-		goto out_unlock;
-
 	err = validate_move_areas(ctx, src_vma, dst_vma);
 	if (err)
 		goto out_unlock;
