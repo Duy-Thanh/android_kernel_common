@@ -24,6 +24,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d43a3573_812b4e69",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1244290
+      },
+      "writtenOn": "2026-10-07T05:40:14Z",
+      "side": 1,
+      "message": "Correct, the 2.49% is host-side only.",
+      "parentUuid": "cf7cd793_59ba81b9",
+      "revId": "dd246537c612f100dcf26a1f4f8825008ca2cea0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ebded51_e11996a3",
@@ -37,6 +55,24 @@
       "writtenOn": "2026-10-03T23:04:20Z",
       "side": 1,
       "message": "The logic would breaks when pKVM is enabled: the host and pKVM have separate struct dmar_domain instances. intel_iommu_unmap() populates the host\u0027s leaf_cache, while dmar_domain_clear_leaf_cache() only runs inside pKVM, so the host\u0027s leaf_cache is never invalidated when page tables are freed or replaced by superpages.\n\nAlso in upstream 6.19, VT-d map/unmap and pfn_to_dma_pte() have moved to generic_pt, so this legacy page-table code is already going away.",
+      "revId": "dd246537c612f100dcf26a1f4f8825008ca2cea0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f058b3e_c3b2f8d9",
+        "filename": "drivers/iommu/intel/iommu.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1023,
+      "author": {
+        "id": 1244290
+      },
+      "writtenOn": "2026-10-07T05:40:14Z",
+      "side": 1,
+      "message": "Correct, the host cache would go stale on non-nested pKVM. It also shows no gain on either base. Abandoning.",
+      "parentUuid": "1ebded51_e11996a3",
       "revId": "dd246537c612f100dcf26a1f4f8825008ca2cea0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
