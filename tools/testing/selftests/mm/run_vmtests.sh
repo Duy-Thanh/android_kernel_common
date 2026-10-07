@@ -420,6 +420,7 @@ CATEGORY="gup_test" run_ppps_module_test iov_iter ./iov_iter_ppps
 CATEGORY="gup_test" run_ppps_module_test iov_iter ./page_range_ppps
 CATEGORY="gup_test" run_ppps_module_test iov_iter ./page_range_ppps --native
 CATEGORY="gup_test" run_ppps_module_test fault_in ./fault_in_ppps
+CATEGORY="gup_test" run_test ./vmsplice_slice_ppps
 CATEGORY="mmap" run_test ./futex_shared_ppps
 CATEGORY="mmap" run_test ./xdp_umem_ppps
 CATEGORY="mmap" run_ppps_module_test xdp_pin_probe ./xdp_umem_race_ppps

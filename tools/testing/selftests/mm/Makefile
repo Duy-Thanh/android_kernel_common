@@ -99,6 +99,7 @@ PPPS_TESTS := \
 	vhost_dirty_log_ppps vm_iomap_memory_ppps \
 	vma_range_slice_ppps \
 	vm_map_pages_ppps vmalloc_align_ppps xdp_umem_ppps xdp_umem_race_ppps \
+	vmsplice_slice_ppps \
 	vma_merge_file_slice_ppps \
 	vma_merge_next_pgoff_ppps
 
@@ -278,7 +279,7 @@ $(foreach t,dontneed_refault_ppps file_cow_ppps hole_anon_ppps mte_anon_ppps pac
 	    packed_swap_ppps uffd_copy_tuple_ppps uffd_move_retry_ppps \
 	    remote_write_dontneed_ppps anon_rmap_split_window_ppps \
 	    uffd_move_swapped_slice_ppps uffd_move_swapcache_lock_ppps \
-	    swapoff_shared_slice_ppps, \
+	    swapoff_shared_slice_ppps vmsplice_slice_ppps, \
 	$(eval $(call ppps_test_hdrs,$(t),ppps_tuple_test.h)))
 
 ifeq ($(ARCH),x86_64)
