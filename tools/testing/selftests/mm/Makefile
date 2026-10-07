@@ -49,6 +49,7 @@ CFLAGS += -U_FORTIFY_SOURCE
 PPPS_TESTS := \
 	aio_ring_ppps anon_pageout_ppps anon_vma_name_ppps ashmem_ppps \
 	bpf_array_mmap_ppps bpf_ringbuf_mmap_ppps bpf_stack_build_id_ppps \
+	btf_vmlinux_mmap_ppps \
 	dma_heap_ppps dma_mmap_ppps dontneed_refault_ppps elf_core_ppps exec_env_ppps \
 	exec_user_args_ppps fadvise_dontneed_ppps fault_in_ppps \
 	file_cow_ppps file_cow_refs_ppps filemap_eof_ppps folio_within_range_ppps \

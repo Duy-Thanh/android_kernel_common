@@ -617,6 +617,7 @@ CATEGORY="pagemap" run_test ./pagemap_scan_ppps
 
 CATEGORY="pfnmap" run_test ./pfnmap
 CATEGORY="pfnmap" run_test ./remap_pfn_range_ppps
+CATEGORY="pfnmap" run_test ./btf_vmlinux_mmap_ppps
 
 # COW tests
 CATEGORY="cow" run_test ./cow
