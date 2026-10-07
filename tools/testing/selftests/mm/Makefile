@@ -87,6 +87,7 @@ PPPS_TESTS := \
 	tcp_zerocopy_align_ppps thp_mmap_offset_ppps \
 	trace_ring_buffer_mmap_ppps truncate_ppps truncate_remote_ppps \
 	userfaultfd_mixed_ppps userfaultfd_poison_remote_ppps uffd_move_retry_ppps \
+	uffd_move_swapped_slice_ppps \
 	userfaultfd_remap_ppps userfaultfd_remote_ppps \
 	userfaultfd_shmem_ppps \
 	userfaultfd_unregister_remote_ppps userfaultfd_wp_remote_ppps \
@@ -272,7 +273,8 @@ $(foreach t,mincore_ppps mlock_onfault_ppps, \
 	$(eval $(call ppps_test_hdrs,$(t),../kselftest_ppps.h)))
 $(foreach t,dontneed_refault_ppps file_cow_ppps hole_anon_ppps mte_anon_ppps packed_anon_ppps \
 	    packed_swap_ppps uffd_copy_tuple_ppps uffd_move_retry_ppps \
-	    remote_write_dontneed_ppps anon_rmap_split_window_ppps, \
+	    remote_write_dontneed_ppps anon_rmap_split_window_ppps \
+	    uffd_move_swapped_slice_ppps, \
 	$(eval $(call ppps_test_hdrs,$(t),ppps_tuple_test.h)))
 
 ifeq ($(ARCH),x86_64)
