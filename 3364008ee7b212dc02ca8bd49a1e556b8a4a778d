@@ -69,6 +69,24 @@
       "parentUuid": "80b6a58c_ceb2b160",
       "revId": "3364008ee7b212dc02ca8bd49a1e556b8a4a778d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dedd8758_44cfb074",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-10-07T11:10:35Z",
+      "side": 1,
+      "message": "Restoring this change, as http://r.android.com/4341993 might break other builds and MODVERSIONS and CRC\u0027s might be needed after all.",
+      "parentUuid": "19f73246_d7b32914",
+      "revId": "3364008ee7b212dc02ca8bd49a1e556b8a4a778d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
