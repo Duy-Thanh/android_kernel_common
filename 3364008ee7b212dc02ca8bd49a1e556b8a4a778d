@@ -87,6 +87,24 @@
       "parentUuid": "19f73246_d7b32914",
       "revId": "3364008ee7b212dc02ca8bd49a1e556b8a4a778d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8c42182_9c93068d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2026-10-07T11:12:22Z",
+      "side": 1,
+      "message": "Just to confirm, the update is related IIUIC enabling the config bring CRS\u0027s to the party.",
+      "parentUuid": "7bb4bcf3_f6a25139",
+      "revId": "3364008ee7b212dc02ca8bd49a1e556b8a4a778d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
