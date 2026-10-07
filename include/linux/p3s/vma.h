@@ -388,6 +388,33 @@ static inline void vma_folio_slice_bounds(const struct vm_area_struct *vma,
 }
 
 /*
+ * vma_anon_slice_window - Find an anonymous folio's 16KB slice window in a VMA
+ * @vma: Pure anonymous 4KB compat VMA
+ * @index: Anonymous folio index, in 4KB units
+ *
+ * The index of an order-0 anonymous compat folio names only the slice that
+ * first faulted it in.  Its other slices sit in the same 16KB-aligned virtual
+ * window, which mprotect(), munmap(), madvise() and friends may have split
+ * across neighbouring VMAs since.
+ *
+ * Returns the lowest address of that window inside @vma, or -EFAULT when the
+ * window does not overlap @vma.
+ */
+static inline unsigned long vma_anon_slice_window(const struct vm_area_struct *vma,
+						  pgoff_t index)
+{
+	/* Wraps modulo 2^64 when @index lies below vma->vm_pgoff. */
+	unsigned long addr = vma->vm_start +
+			     ((index - vma->vm_pgoff) << PAGE_SHIFT_4KB);
+	unsigned long start = ALIGN_DOWN(addr, PAGE_SIZE_KERNEL);
+	unsigned long end = start + PAGE_SIZE_KERNEL;
+
+	start = max(start, vma->vm_start);
+	end = min(end, vma->vm_end);
+	return start < end ? start : -EFAULT;
+}
+
+/*
  * VMA Merge Struct Geometry Abstractions (vmg)
  */
 #define vmg_is_p3s_4k(vmg)	mm_is_p3s_4k((vmg)->mm)

@@ -2833,6 +2833,42 @@ out:
 }
 
 /*
+ * The VMAs of one anon_vma tree all belong to fork-related mms, which share
+ * one page-table geometry, so any of them tells whether the tree is 4KB compat.
+ */
+static inline bool p3s_anon_vma_is_4k(struct anon_vma *anon_vma)
+{
+	struct rb_node *node;
+
+	if (!IS_ENABLED(CONFIG_ARM64_PER_PROCESS_PAGE_SIZE))
+		return false;
+	node = rb_first_cached(&anon_vma->rb_root);
+	return node &&
+	       vma_is_p3s_4k(rb_entry(node, struct anon_vma_chain, rb)->vma);
+}
+
+/*
+ * First address in a 4KB compat @vma that may map a slice of the order-0
+ * anonymous folio at @index, or -EFAULT.  Pure anonymous VMAs index slices
+ * in 4KB units (see vma_anon_slice_window()); the others index whole host
+ * folios.
+ */
+static unsigned long p3s_anon_rmap_address(struct vm_area_struct *vma,
+					   pgoff_t index)
+{
+	unsigned long address;
+	unsigned int nr_slices;
+
+	if (!vma->vm_file && !vma->vm_ops)
+		return vma_anon_slice_window(vma, index);
+
+	address = vma_address(vma, index, 1);
+	if (address != -EFAULT)
+		vma_folio_slice_bounds(vma, address, &nr_slices, &address);
+	return address;
+}
+
+/*
  * rmap_walk_anon - do something to anonymous page using the object-based
  * rmap method
  * @folio: the folio to be handled
@@ -2848,6 +2884,7 @@ static void rmap_walk_anon(struct folio *folio,
 	struct anon_vma *anon_vma;
 	pgoff_t pgoff_start, pgoff_end;
 	struct anon_vma_chain *avc;
+	bool p3s_window;
 
 	/*
 	 * The folio lock ensures that folio->mapping can't be changed under us
@@ -2867,18 +2904,30 @@ static void rmap_walk_anon(struct folio *folio,
 
 	pgoff_start = folio_pgoff(folio);
 	pgoff_end = pgoff_start + folio_nr_pages(folio) - 1;
+	/*
+	 * The anon index of an order-0 compat folio can name any of its
+	 * slices, and the other slices may since have moved to neighbouring
+	 * VMAs: look up every VMA that can hold a slice of its window.
+	 */
+	p3s_window = folio_nr_pages(folio) == 1 &&
+		     p3s_anon_vma_is_4k(anon_vma);
+	if (p3s_window) {
+		pgoff_start -= min_t(pgoff_t, pgoff_start, P3S_SLICE_MASK);
+		pgoff_end += P3S_SLICE_MASK;
+	}
 	anon_vma_interval_tree_foreach(avc, &anon_vma->rb_root,
 			pgoff_start, pgoff_end) {
 		struct vm_area_struct *vma = avc->vma;
-		unsigned long address = vma_address(vma, pgoff_start,
-				folio_nr_pages(folio));
+		unsigned long address;
 
-		VM_BUG_ON_VMA(address == -EFAULT, vma);
-		if (vma_is_p3s_4k(vma) && folio_nr_pages(folio) == 1) {
-			unsigned int nr_slices;
-
-			/* The anon index can name any slice of this native folio. */
-			vma_folio_slice_bounds(vma, address, &nr_slices, &address);
+		if (p3s_window) {
+			address = p3s_anon_rmap_address(vma, folio_pgoff(folio));
+			if (address == -EFAULT)
+				continue;
+		} else {
+			address = vma_address(vma, pgoff_start,
+					      folio_nr_pages(folio));
+			VM_BUG_ON_VMA(address == -EFAULT, vma);
 		}
 		cond_resched();
 
