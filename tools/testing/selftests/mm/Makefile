@@ -82,6 +82,7 @@ PPPS_TESTS := \
 	shmem_quota_ppps shmem_swap_usage_ppps smaps_native_fallback_ppps smaps_page_size_ppps \
 	smaps_pss_ppps \
 	stack_guard_gap_ppps swap_header_ppps swap_pss_ppps swap_vma_readahead_ppps swapoff_ppps \
+	swapoff_shared_slice_ppps \
 	statm_cross_geometry_ppps \
 	swap_header_badpages_ppps \
 	sysv_shm_lock_ppps sysv_shm_ppps taskstats_ppps \
@@ -276,7 +277,8 @@ $(foreach t,mincore_ppps mlock_onfault_ppps, \
 $(foreach t,dontneed_refault_ppps file_cow_ppps hole_anon_ppps mte_anon_ppps packed_anon_ppps \
 	    packed_swap_ppps uffd_copy_tuple_ppps uffd_move_retry_ppps \
 	    remote_write_dontneed_ppps anon_rmap_split_window_ppps \
-	    uffd_move_swapped_slice_ppps uffd_move_swapcache_lock_ppps, \
+	    uffd_move_swapped_slice_ppps uffd_move_swapcache_lock_ppps \
+	    swapoff_shared_slice_ppps, \
 	$(eval $(call ppps_test_hdrs,$(t),ppps_tuple_test.h)))
 
 ifeq ($(ARCH),x86_64)
