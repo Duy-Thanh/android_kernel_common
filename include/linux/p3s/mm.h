@@ -105,6 +105,30 @@ static inline unsigned long mm_pte_mask(const struct mm_struct *mm)
 }
 
 /*
+ * mm_pages_to_mm - Convert a page count of @from into pages of @to
+ * @from: mm whose page size @nr is counted in
+ * @to: mm whose page size the result is counted in (NULL: native)
+ * @nr: page count
+ *
+ * Per-mm counters such as the RSS counters and total_vm are kept in units of
+ * the owning mm's page size.  Interfaces that report them as bare page
+ * counts, like /proc/<pid>/statm, are read by tasks that multiply them by
+ * their own page size, so they must be converted to the reader's geometry.
+ * Rounds up.
+ */
+static inline unsigned long mm_pages_to_mm(const struct mm_struct *from,
+					   const struct mm_struct *to,
+					   unsigned long nr)
+{
+	unsigned int from_shift = mm_pte_shift(from);
+	unsigned int to_shift = mm_pte_shift(to);
+
+	if (from_shift >= to_shift)
+		return nr << (from_shift - to_shift);
+	return DIV_ROUND_UP(nr, 1UL << (to_shift - from_shift));
+}
+
+/*
  * Check if the address space is operating in 4KB backward-compatibility mode
  * on the 16KB host kernel (i.e. mm_pte_shift(mm) != PAGE_SHIFT_KERNEL).
  */

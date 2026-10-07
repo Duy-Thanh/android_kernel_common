@@ -107,6 +107,8 @@ unsigned long task_statm(struct mm_struct *mm,
 			 unsigned long *shared, unsigned long *text,
 			 unsigned long *data, unsigned long *resident)
 {
+	/* statm has no unit: count in the reader's page size. */
+	const struct mm_struct *reader = current->mm;
 	P3S_CONTEXT_REMOTE_MM(mm);
 
 	*shared = __page_size_count(get_mm_counter_sum(mm, MM_FILEPAGES) +
@@ -116,7 +118,11 @@ unsigned long task_statm(struct mm_struct *mm,
 	*data = __page_size_count(mm->data_vm + mm->stack_vm);
 	*resident = *shared + __page_size_count(get_mm_counter_sum(mm, MM_ANONPAGES));
 
-	return __page_size_count(mm->total_vm);
+	*shared = mm_pages_to_mm(mm, reader, *shared);
+	*text = mm_pages_to_mm(mm, reader, *text);
+	*data = mm_pages_to_mm(mm, reader, *data);
+	*resident = mm_pages_to_mm(mm, reader, *resident);
+	return mm_pages_to_mm(mm, reader, __page_size_count(mm->total_vm));
 }
 
 #ifdef CONFIG_NUMA
