@@ -3027,6 +3027,9 @@ static int remap_pfn_range_internal(struct vm_area_struct *vma, unsigned long ad
 	if (WARN_ON_ONCE(!PAGE_ALIGNED(addr)))
 		return -EINVAL;
 
+	if (vma_is_p3s_4k(vma))
+		return p3s_remap_pfn_range(vma, addr, pfn, size, prot);
+
 	/*
 	 * Physically remapped pages are special. Tell the
 	 * rest of the world about it:
@@ -3258,6 +3261,9 @@ EXPORT_SYMBOL(remap_pfn_range_slice);
 int vm_iomap_memory(struct vm_area_struct *vma, phys_addr_t start, unsigned long len)
 {
 	unsigned long vm_len, pfn, pages;
+
+	if (vma_is_p3s_4k(vma))
+		return p3s_vm_iomap_memory(vma, start, len);
 
 	/* Check that the physical memory area passed in looks valid */
 	if (start + len < start)

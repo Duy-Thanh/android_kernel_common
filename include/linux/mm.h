@@ -3769,6 +3769,26 @@ vm_fault_t vmf_insert_mixed_mkwrite(struct vm_area_struct *vma,
 		unsigned long addr, unsigned long pfn);
 int vm_iomap_memory(struct vm_area_struct *vma, phys_addr_t start, unsigned long len);
 
+#ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
+int p3s_remap_pfn_range(struct vm_area_struct *vma, unsigned long addr,
+			unsigned long pfn, unsigned long size, pgprot_t prot);
+int p3s_vm_iomap_memory(struct vm_area_struct *vma, phys_addr_t start,
+			unsigned long len);
+#else
+static inline int p3s_remap_pfn_range(struct vm_area_struct *vma,
+				      unsigned long addr, unsigned long pfn,
+				      unsigned long size, pgprot_t prot)
+{
+	return -EOPNOTSUPP;
+}
+
+static inline int p3s_vm_iomap_memory(struct vm_area_struct *vma,
+				      phys_addr_t start, unsigned long len)
+{
+	return -EOPNOTSUPP;
+}
+#endif
+
 static inline vm_fault_t vmf_insert_page(struct vm_area_struct *vma,
 				unsigned long addr, struct page *page)
 {
