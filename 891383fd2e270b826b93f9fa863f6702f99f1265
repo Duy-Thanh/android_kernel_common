@@ -16,6 +16,24 @@
       "message": "The ABI is broken with these patches. These CRC issues must be resolved. These are probably caused by changing visibility of some KMI frozen structure. The most common case is `trace_eval_map` becoming fully visible by the addition of the hook definition header. If that is the issue, you can fix it with:\n```\nANDROID_KABI_DECLONLY(trace_eval_map);\n```\nafter the header inclusion. If that doesn\u0027t resolve it, then follow the instructions at https://source.android.com/docs/core/architecture/kernel/abi-monitor#fixing-crc-mismatch\n\n```\nfunction symbol \u0027int usb_autopm_get_interface(struct usb_interface*)\u0027 changed\n  CRC changed from 0x7ff89012 to 0x2be4fa00\n\nfunction symbol \u0027int usb_autopm_get_interface_async(struct usb_interface*)\u0027 changed\n  CRC changed from 0x7ff89012 to 0x2be4fa00\n\nfunction symbol \u0027void usb_autopm_get_interface_no_resume(struct usb_interface*)\u0027 changed\n  CRC changed from 0x587ff1ff to 0xde516a23\n\n```",
       "revId": "891383fd2e270b826b93f9fa863f6702f99f1265",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "559b8053_750714c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1789397
+      },
+      "writtenOn": "2026-10-07T08:15:18Z",
+      "side": 1,
+      "message": "Hi Todd,\njust ran the crc mismatch with ANDROID_KABI_DECONLY\n\n\ndrivers/usb/core/driver.c:\n\n #include \u003ctrace/hooks/usb.h\u003e\n+ANDROID_KABI_DECLONLY(trace_eval_map);\n\ndrivers/usb/host/xhci-plat.c\n\n #include \u003ctrace/hooks/xhci.h\u003e\n+ANDROID_KABI_DECLONLY(trace_eval_map);\n\nRESULTS:\n\n\nINFO: Analyzed target //common:kernel_aarch64_abi_dist (0 packages loaded, 0 targets configured).\nINFO: From [stg] Comparing Kernel ABI //common:kernel_aarch64_abi_diff:\nERROR: ABI DIFFERENCES HAVE BEEN DETECTED!\nERROR: Report summary:\n\n4 function symbol(s) added\n  \u0027int __traceiter_android_rvh_usb_dev_suspend(void*, struct usb_device*, pm_message_t, bool*)\u0027\n  \u0027int __traceiter_android_vh_usb_dev_resume(void*, struct usb_device*, pm_message_t, bool*)\u0027\n  \u0027int __traceiter_android_vh_xhci_resume(void*, struct device*, int*)\u0027\n  \u0027int __traceiter_android_vh_xhci_suspend(void*, struct device*, int*)\u0027\n\n4 variable symbol(s) added\n  \u0027struct tracepoint __tracepoint_android_rvh_usb_dev_suspend\u0027\n  \u0027struct tracepoint __tracepoint_android_vh_usb_dev_resume\u0027\n  \u0027struct tracepoint __tracepoint_android_vh_xhci_resume\u0027\n  \u0027struct tracepoint __tracepoint_android_vh_xhci_suspend\u0027\n\nINFO: Found 1 target...\nTarget //common:kernel_aarch64_abi_dist up-to-date:\n  bazel-bin/common/kernel_aarch64_abi_dist\nINFO: Elapsed time: 443.178s, Critical Path: 442.08s\nINFO: 17 processes: 4 action cache hit, 1 internal, 16 linux-sandbox.\nINFO: Build completed successfully, 17 total actions\nINFO: Running command line: bazel-bin/common/kernel_aarch64_abi_dist\nINFO: Installing to /local/mnt/workspace/ugoswami/android-kernel/out_abi/kernel_aarch64_abi_dist/dist\nERROR: ABI DIFFERENCES HAVE BEEN DETECTED!\nERROR: Report summary:\n\n4 function symbol(s) added\n  \u0027int __traceiter_android_rvh_usb_dev_suspend(void*, struct usb_device*, pm_message_t, bool*)\u0027\n  \u0027int __traceiter_android_vh_usb_dev_resume(void*, struct usb_device*, pm_message_t, bool*)\u0027\n  \u0027int __traceiter_android_vh_xhci_resume(void*, struct device*, int*)\u0027\n  \u0027int __traceiter_android_vh_xhci_suspend(void*, struct device*, int*)\u0027\n\n4 variable symbol(s) added\n  \u0027struct tracepoint __tracepoint_android_rvh_usb_dev_suspend\u0027\n  \u0027struct tracepoint __tracepoint_android_vh_usb_dev_resume\u0027\n  \u0027struct tracepoint __tracepoint_android_vh_xhci_resume\u0027\n  \u0027struct tracepoint __tracepoint_android_vh_xhci_suspend\u0027\n\nI got the below result now. Earlier(without ANDROID_KABI_DECLONLY(trace_eval_map)) I saw the CRC errors you pointed.\n\nCould you please confirm if this is the expected output? i can upload the updated patches.",
+      "parentUuid": "de4d7c16_5aea749c",
+      "revId": "891383fd2e270b826b93f9fa863f6702f99f1265",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
