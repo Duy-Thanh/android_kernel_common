@@ -68,6 +68,7 @@ PPPS_TESTS := \
 	mmap_action_cleanup_ppps mmap_hint_ppps mmap_page_zero_ppps \
 	mmu_notifier_ppps mremap_commit_ppps mremap_file_slice_ppps mremap_hint_ppps mremap_split_ppps \
 	mremap_pgoff_ppps mremap_rlimit_ppps msync_offset_ppps munmap_ppps \
+	mthp_native_anon_ppps \
 	oom_anon_score_ppps oom_score_ppps oom_trace_ppps packed_anon_ppps \
 	packed_swap_ppps page_range_ppps pagemap_exclusive_ppps pagemap_ioctl_ppps pagemap_scan_ppps pagewalk_ppps pci_mmap_ppps \
 	perf_mmap_offset_ppps perf_page_size_ppps perf_phys_addr_ppps \
