@@ -34,6 +34,24 @@
       "parentUuid": "c4edb10b_413a827e",
       "revId": "1647b24cd3d7c9b60e6711faa72d135034880e14",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "925a12d6_c08b89cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-10-07T18:18:31Z",
+      "side": 1,
+      "message": "Its still being submitted in the series here. Please abandon or at least submit the symbols update after the vendorhook addition and not make it dependent on this change.",
+      "parentUuid": "b0bbdbcc_f7dfbdf7",
+      "revId": "1647b24cd3d7c9b60e6711faa72d135034880e14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
