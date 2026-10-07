@@ -68,7 +68,7 @@ config DRM_DISPLAY_DP_TUNNEL_STATE_DEBUG
 
 config DRM_DISPLAY_DSC_HELPER
 	bool
-	depends on DRM_DISPLAY_HELPER
+	depends on DRM_DISPLAY_HELPER || GKI_HIDDEN_DRM_CONFIGS
 	help
 	  DRM display helpers for VESA DSC (used by DSI and DisplayPort).
 
