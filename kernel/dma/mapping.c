@@ -777,6 +777,8 @@ int dma_mmap_pfn(struct vm_area_struct *vma, unsigned long pfn, size_t size)
 {
 	unsigned long count = PAGE_ALIGN(size) >> PAGE_SHIFT;
 
+	if (vma_is_p3s_4k(vma))
+		return p3s_mmap_phys_object(vma, PFN_PHYS(pfn), size);
 	if (vma->vm_pgoff >= count || vma_pages(vma) > count - vma->vm_pgoff)
 		return -ENXIO;
 	return remap_pfn_range(vma, vma->vm_start,

@@ -1700,7 +1700,9 @@ int iommu_dma_mmap(struct device *dev, struct vm_area_struct *vma,
 	if (dma_mmap_from_dev_coherent(dev, vma, cpu_addr, size, &ret))
 		return ret;
 
-	if (off >= nr_pages || vma_pages(vma) > nr_pages - off)
+	/* vm_map_pages() and dma_mmap_pfn() bound 4KB compat VMAs in bytes. */
+	if (!vma_is_p3s_4k(vma) &&
+	    (off >= nr_pages || vma_pages(vma) > nr_pages - off))
 		return -ENXIO;
 
 	if (is_vmalloc_addr(cpu_addr)) {

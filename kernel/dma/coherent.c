@@ -242,7 +242,9 @@ static int __dma_mmap_from_coherent(struct dma_coherent_mem *mem,
 		int count = PAGE_ALIGN(size) >> PAGE_SHIFT;
 
 		*ret = -ENXIO;
-		if (off < count && user_count <= count - off) {
+		/* dma_mmap_pfn() bounds 4KB compat VMAs in bytes. */
+		if (vma_is_p3s_4k(vma) ||
+		    (off < count && user_count <= count - off)) {
 			*ret = dma_mmap_pfn(vma, mem->pfn_base + start, size);
 		}
 		return 1;
