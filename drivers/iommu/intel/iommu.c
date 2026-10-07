@@ -1375,11 +1375,13 @@ static void iommu_disable_pci_pri(struct device_domain_info *info)
 
 static void intel_flush_iotlb_all(struct iommu_domain *domain)
 {
+	struct dmar_domain *dmar_domain = to_dmar_domain(domain);
+
 	if (!pkvm_enabled())
-		cache_tag_flush_all(to_dmar_domain(domain));
-	else if (domain_pkvm_nested(to_dmar_domain(domain)) ||
+		cache_tag_flush_all(dmar_domain);
+	else if (domain_pkvm_nested(dmar_domain) ||
 		 (domain->type & __IOMMU_DOMAIN_DMA_FQ))
-		pkvm_domain_flush(to_dmar_domain(domain), 0, ULONG_MAX, 0);
+		pkvm_domain_flush(dmar_domain, 0, ULONG_MAX, 0);
 }
 
 static void iommu_disable_protect_mem_regions(struct intel_iommu *iommu)
@@ -4090,15 +4092,12 @@ static size_t intel_iommu_unmap(struct iommu_domain *domain,
 
 	domain_unmap(dmar_domain, start_pfn, last_pfn, &gather->freelist);
 
-	if (dmar_domain->max_addr == iova + size)
-		dmar_domain->max_addr = iova;
-
 	/*
 	 * We do not use page-selective IOTLB invalidation in flush queue,
 	 * so there is no need to track page and sync iotlb.
 	 */
 	if (!iommu_iotlb_gather_queued(gather))
-		iommu_iotlb_gather_add_page(domain, gather, iova, size);
+		iommu_iotlb_gather_add_range(gather, iova, size);
 
 	return size;
 }
@@ -4117,17 +4116,19 @@ static size_t intel_iommu_unmap_pages(struct iommu_domain *domain,
 static void intel_iommu_tlb_sync(struct iommu_domain *domain,
 				 struct iommu_iotlb_gather *gather)
 {
+	struct dmar_domain *dmar_domain = to_dmar_domain(domain);
+
 	/*
 	 * If pKVM enabled, perform the flush only for lazy mode. For strict mode,
 	 * pKVM does the flush after unmap and we need not request a flush again.
 	 */
 	if (!pkvm_enabled())
-		cache_tag_flush_range(to_dmar_domain(domain), gather->start,
+		cache_tag_flush_range(dmar_domain, gather->start,
 				      gather->end,
 				      iommu_pages_list_empty(&gather->freelist));
-	else if (domain_pkvm_nested(to_dmar_domain(domain)) ||
+	else if (domain_pkvm_nested(dmar_domain) ||
 		 (domain->type & __IOMMU_DOMAIN_DMA_FQ))
-		pkvm_domain_flush(to_dmar_domain(domain), gather->start, gather->end,
+		pkvm_domain_flush(dmar_domain, gather->start, gather->end,
 				  iommu_pages_list_empty(&gather->freelist));
 	iommu_put_pages_list(&gather->freelist);
 }

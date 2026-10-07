@@ -777,4 +777,14 @@ static inline int dma_mmap_wc(struct device *dev,
 	do { typeof(PTR) __p __maybe_unused = PTR; } while (0)
 #endif
 
+#ifdef CONFIG_IOMMU_DMA
+void iommu_dma_unmap_batch_begin(void);
+void iommu_dma_unmap_batch_sync(void);
+void iommu_dma_unmap_batch_end(void);
+#else
+static inline void iommu_dma_unmap_batch_begin(void) { }
+static inline void iommu_dma_unmap_batch_sync(void) { }
+static inline void iommu_dma_unmap_batch_end(void) { }
+#endif
+
 #endif /* _LINUX_DMA_MAPPING_H */

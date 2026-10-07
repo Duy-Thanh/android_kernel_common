@@ -478,12 +478,51 @@ static bool intel_domain_use_piotlb(struct dmar_domain *domain)
 }
 
 static void cache_tag_flush_iotlb(struct dmar_domain *domain, struct cache_tag *tag,
+				  unsigned long start, unsigned long end,
 				  unsigned long addr, unsigned long pages,
 				  unsigned long mask, int ih,
 				  struct qi_batch *batch)
 {
 	struct intel_iommu *iommu = tag->iommu;
 	u64 type = DMA_TLB_PSI_FLUSH;
+
+	if (!cap_pgsel_inv(iommu->cap)) {
+		pages = -1;
+	} else if (pages != -1 && mask > cap_max_amask_val(iommu->cap)) {
+		unsigned int max_shift = VTD_PAGE_SHIFT + cap_max_amask_val(iommu->cap);
+		unsigned long chunk_mask = (1UL << max_shift) - 1;
+
+		if ((end >> max_shift) - (start >> max_shift) < 8) {
+			unsigned long cur = start;
+
+			for (;;) {
+				unsigned long chunk_end = min(end, cur | chunk_mask);
+				unsigned long c_pages, c_mask, c_addr;
+
+				c_addr = calculate_psi_aligned_address(cur, chunk_end,
+								       &c_pages, &c_mask);
+				if (intel_domain_use_piotlb(domain))
+					qi_batch_add_piotlb(iommu, tag->domain_id,
+							    tag->pasid, c_addr,
+							    c_pages, ih, batch);
+				else if (ecap_qis(iommu->ecap))
+					qi_batch_add_iotlb(iommu, tag->domain_id,
+							   c_addr | ih, c_mask,
+							   type, batch);
+#ifndef __PKVM_HYP__
+				else
+					__iommu_flush_iotlb(iommu, tag->domain_id,
+							    c_addr | ih, c_mask,
+							    type);
+#endif
+				if (chunk_end >= end)
+					break;
+				cur = chunk_end + 1;
+			}
+			return;
+		}
+		pages = -1;
+	}
 
 	if (intel_domain_use_piotlb(domain)) {
 		qi_batch_add_piotlb(iommu, tag->domain_id, tag->pasid, addr,
@@ -495,8 +534,7 @@ static void cache_tag_flush_iotlb(struct dmar_domain *domain, struct cache_tag *
 	 * Fallback to domain selective flush if no PSI support or the size
 	 * is too big.
 	 */
-	if (!cap_pgsel_inv(iommu->cap) ||
-	    mask > cap_max_amask_val(iommu->cap) || pages == -1) {
+	if (pages == -1) {
 		addr = 0;
 		mask = 0;
 		ih = 0;
@@ -584,7 +622,8 @@ void cache_tag_flush_range(struct dmar_domain *domain, unsigned long start,
 		switch (tag->type) {
 		case CACHE_TAG_IOTLB:
 		case CACHE_TAG_NESTING_IOTLB:
-			cache_tag_flush_iotlb(domain, tag, addr, pages, mask, ih, &batch);
+			cache_tag_flush_iotlb(domain, tag, start, end, addr,
+					      pages, mask, ih, &batch);
 			break;
 		case CACHE_TAG_NESTING_DEVTLB:
 			/*
@@ -658,7 +697,8 @@ void cache_tag_flush_range_np(struct dmar_domain *domain, unsigned long start,
 
 		if (tag->type == CACHE_TAG_IOTLB ||
 		    tag->type == CACHE_TAG_NESTING_IOTLB)
-			cache_tag_flush_iotlb(domain, tag, addr, pages, mask, 0, &batch);
+			cache_tag_flush_iotlb(domain, tag, start, end, addr,
+					      pages, mask, 0, &batch);
 
 		trace_cache_tag_flush_range_np(tag, start, end, addr, pages, mask);
 	}

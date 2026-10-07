@@ -1284,12 +1284,21 @@ static __always_inline void nvme_pci_unmap_rq(struct request *req)
 static void nvme_pci_complete_rq(struct request *req)
 {
 	nvme_pci_unmap_rq(req);
+	iommu_dma_unmap_batch_sync();
 	nvme_complete_rq(req);
 }
 
 static void nvme_pci_complete_batch(struct io_comp_batch *iob)
 {
-	nvme_complete_batch(iob, nvme_pci_unmap_rq);
+	struct request *req;
+
+	iommu_dma_unmap_batch_begin();
+	rq_list_for_each(&iob->req_list, req) {
+		nvme_pci_unmap_rq(req);
+		nvme_complete_batch_req(req);
+	}
+	iommu_dma_unmap_batch_end();
+	blk_mq_end_request_batch(iob);
 }
 
 /* We read the CQE phase first to check if the rest of the entry is valid */
@@ -1387,14 +1396,38 @@ static inline bool nvme_poll_cq(struct nvme_queue *nvmeq,
 static irqreturn_t nvme_irq(int irq, void *data)
 {
 	struct nvme_queue *nvmeq = data;
-	DEFINE_IO_COMP_BATCH(iob);
+	irqreturn_t ret = IRQ_NONE;
+	int budget = 8;
 
-	if (nvme_poll_cq(nvmeq, &iob)) {
-		if (!rq_list_empty(&iob.req_list))
-			nvme_pci_complete_batch(&iob);
-		return IRQ_HANDLED;
-	}
-	return IRQ_NONE;
+	do {
+		DEFINE_IO_COMP_BATCH(iob);
+		struct rq_list done_list = { };
+		struct request *req;
+		unsigned int count = 0;
+
+		if (!nvme_poll_cq(nvmeq, &iob))
+			break;
+		ret = IRQ_HANDLED;
+
+		if (rq_list_empty(&iob.req_list))
+			continue;
+
+		iommu_dma_unmap_batch_begin();
+		do {
+			while ((req = rq_list_pop(&iob.req_list)) != NULL) {
+				nvme_pci_unmap_rq(req);
+				nvme_complete_batch_req(req);
+				rq_list_add_tail(&done_list, req);
+				count++;
+			}
+		} while (count < 32 && nvme_poll_cq(nvmeq, &iob));
+		iommu_dma_unmap_batch_end();
+
+		iob.req_list = done_list;
+		blk_mq_end_request_batch(&iob);
+	} while (nvme_cqe_pending(nvmeq) && --budget);
+
+	return ret;
 }
 
 static irqreturn_t nvme_irq_check(int irq, void *data)

@@ -422,12 +422,16 @@ int pkvm_iommu_domain_flush(u64 pgd_gpa, u64 start, u64 last, int ih)
 		return -EINVAL;
 	}
 
-	pkvm_spin_lock(&domain->flush_lock);
-	if (domain->flush_pending)
-		domain_flush_all(domain);
-	else
+	if (unlikely(READ_ONCE(domain->flush_pending))) {
+		pkvm_spin_lock(&domain->flush_lock);
+		if (domain->flush_pending)
+			domain_flush_all(domain);
+		else
+			cache_tag_flush_range(domain, start, last, ih);
+		pkvm_spin_unlock(&domain->flush_lock);
+	} else {
 		cache_tag_flush_range(domain, start, last, ih);
-	pkvm_spin_unlock(&domain->flush_lock);
+	}
 
 	return 0;
 }
