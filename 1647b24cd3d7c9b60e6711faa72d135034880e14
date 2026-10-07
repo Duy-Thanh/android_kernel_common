@@ -16,6 +16,24 @@
       "message": "This looks like the vendorhook implementation? This change likely should be kept in the driver tree and not submitted to GKI",
       "revId": "1647b24cd3d7c9b60e6711faa72d135034880e14",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0bbdbcc_f7dfbdf7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1855125
+      },
+      "writtenOn": "2026-10-07T04:30:17Z",
+      "side": 1,
+      "message": "Yes, this is in tegra code, not rerquired to be in GKI.\nRemoved this from the topic.",
+      "parentUuid": "c4edb10b_413a827e",
+      "revId": "1647b24cd3d7c9b60e6711faa72d135034880e14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
