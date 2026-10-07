@@ -97,6 +97,10 @@ struct vma_merge_struct {
 	unsigned long start;
 	unsigned long end;
 	pgoff_t pgoff;
+#ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
+	/* 4KB slice at @start of a proposed new range, which has no VMA yet. */
+	unsigned short slice_off;
+#endif
 
 	vm_flags_t vm_flags;
 	struct file *file;
@@ -162,7 +166,18 @@ static inline bool vmg_nomem(struct vma_merge_struct *vmg)
 
 #ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
 bool vmg_can_merge_offsets(struct vma_merge_struct *vmg, bool merge_next);
+
+static inline void vmg_set_slice_off(struct vma_merge_struct *vmg,
+				     unsigned short slice_off)
+{
+	vmg->slice_off = slice_off;
+}
 #else
+static inline void vmg_set_slice_off(struct vma_merge_struct *vmg,
+				     unsigned short slice_off)
+{
+}
+
 static inline bool vmg_can_merge_offsets(struct vma_merge_struct *vmg, bool merge_next)
 {
 	if (merge_next)

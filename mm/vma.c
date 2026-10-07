@@ -1777,6 +1777,7 @@ struct vm_area_struct *vma_merge_extend(struct vma_iterator *vmi,
 
 	vmg.next = vma_iter_next_rewind(vmi, NULL);
 	vmg.middle = NULL; /* We use the VMA to populate VMG fields only. */
+	vmg_set_slice_off(&vmg, vma_slice_offset(vma, vma->vm_end));
 
 	return vma_merge_new_range(&vmg);
 }
@@ -1909,6 +1910,8 @@ struct vm_area_struct *copy_vma(struct vm_area_struct **vmap,
 
 	vmg.prev = vma_filter_merge_neighbor(vmg.prev, vma, faulted_in_anon_vma);
 	vmg.pgoff = pgoff;
+	vmg_set_slice_off(&vmg, copy_vma_slice_off(vma, old_addr, addr,
+						   faulted_in_anon_vma));
 	vmg.next = vma_filter_merge_neighbor(vma_iter_next_rewind(&vmi, NULL),
 					     vma, faulted_in_anon_vma);
 	new_vma = vma_merge_copied_range(&vmg);
@@ -2749,6 +2752,7 @@ static unsigned long __mmap_region(struct file *file, unsigned long addr,
 	if (map.prev || map.next) {
 		VMG_MMAP_STATE(vmg, &map, /* vma = */ NULL);
 
+		vmg_set_slice_off(&vmg, map.slice_off);
 		vma = vma_merge_new_range(&vmg);
 	}
 
