@@ -5427,6 +5427,13 @@ static vm_fault_t do_anonymous_page(struct vm_fault *vmf)
 		goto oom;
 
 	/*
+	 * A native VMA may get an mTHP folio here and must map all of it.
+	 * 4KB compat VMAs only get order-0 folios, so this maps one PTE.
+	 */
+	nr_pages = folio_nr_pages(folio);
+	addr = ALIGN_DOWN(vmf->address, nr_pages * PAGE_SIZE);
+
+	/*
 	 * The memory barrier inside __folio_mark_uptodate makes sure that
 	 * preceding stores to the page contents become visible before
 	 * the set_pte_at() write.
@@ -5439,8 +5446,11 @@ static vm_fault_t do_anonymous_page(struct vm_fault *vmf)
 	if (!vmf->pte)
 		goto release;
 
-	if (vmf_pte_changed(vmf)) {
+	if (nr_pages == 1 && vmf_pte_changed(vmf)) {
 		update_mmu_tlb(vma, addr, vmf->pte);
+		goto release;
+	} else if (nr_pages > 1 && !pte_range_none(vmf->pte, nr_pages)) {
+		update_mmu_tlb_range(vma, addr, vmf->pte, nr_pages);
 		goto release;
 	}
 
