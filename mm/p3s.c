@@ -91,3 +91,100 @@ bool vmg_can_merge_offsets(struct vma_merge_struct *vmg, bool merge_next)
 				     vmg_new_range_slice(vmg, vmg->prev),
 				     vmg->start, vmg_is_p3s_4k(vmg), !!vmg->file);
 }
+
+/*
+ * p3s_remap_phys_range - Map physical memory into a 4KB compat VMA
+ * @vma: 4KB compat VMA
+ * @addr: First user address to map, 4KB aligned
+ * @phys: Physical address to map at @addr, 4KB aligned
+ * @size: Number of bytes to map, a multiple of 4KB
+ * @prot: Page protection
+ *
+ * Each 4KB user page maps the next 4KB of physical memory, a slice of a
+ * native page frame.  On failure, the pages mapped so far are zapped.
+ */
+static int p3s_remap_phys_range(struct vm_area_struct *vma, unsigned long addr,
+				phys_addr_t phys, unsigned long size,
+				pgprot_t prot)
+{
+	unsigned long off;
+	int err = 0;
+
+	for (off = 0; off < size; off += PAGE_SIZE_4KB) {
+		phys_addr_t pa = phys + off;
+
+		err = remap_pfn_range_slice(vma, addr + off,
+					    pa >> PAGE_SHIFT_KERNEL,
+					    (pa >> PAGE_SHIFT_4KB) & P3S_SLICE_MASK,
+					    PAGE_SIZE_4KB, prot);
+		if (err)
+			break;
+	}
+	if (err && off)
+		zap_page_range_single(vma, addr, off, NULL);
+	return err;
+}
+
+/*
+ * p3s_remap_pfn_range - remap_pfn_range() for a 4KB compat VMA
+ * @vma: 4KB compat VMA
+ * @addr: First user address to map
+ * @pfn: Native page frame mapped at @addr
+ * @size: Number of bytes to map
+ * @prot: Page protection
+ *
+ * Drivers compute @pfn and @size in native pages, typically from vm_pgoff,
+ * so the range starts at a native page boundary and may extend past vm_end
+ * of a VMA that is not a whole number of native pages.  Map it 4KB at a
+ * time and stop at vm_end.  A file offset that is not native-page aligned
+ * cannot be expressed in native pages, so such a VMA is rejected.
+ */
+int p3s_remap_pfn_range(struct vm_area_struct *vma, unsigned long addr,
+			unsigned long pfn, unsigned long size, pgprot_t prot)
+{
+	unsigned long end;
+
+	if (!IS_ALIGNED(addr, PAGE_SIZE_4KB) || addr < vma->vm_start ||
+	    addr >= vma->vm_end || !size || vma_slice_off(vma))
+		return -EINVAL;
+	size = ALIGN(size, PAGE_SIZE_4KB);
+	end = (!size || size > vma->vm_end - addr) ? vma->vm_end : addr + size;
+
+	if (is_cow_mapping(vma->vm_flags)) {
+		if (addr != vma->vm_start || end != vma->vm_end)
+			return -EINVAL;
+		vma->vm_pgoff = pfn;
+	}
+
+	return p3s_remap_phys_range(vma, addr,
+				    (phys_addr_t)pfn << PAGE_SHIFT_KERNEL,
+				    end - addr, prot);
+}
+
+/*
+ * p3s_vm_iomap_memory - vm_iomap_memory() for a 4KB compat VMA
+ * @vma: 4KB compat VMA
+ * @start: Physical start of the memory area
+ * @len: Size of the memory area in bytes
+ *
+ * As in the native version, an unaligned @start maps from the page that
+ * contains it, here a 4KB page.
+ */
+int p3s_vm_iomap_memory(struct vm_area_struct *vma, phys_addr_t start,
+			unsigned long len)
+{
+	unsigned long vm_len = vma->vm_end - vma->vm_start;
+	u64 offset = vma_file_offset(vma);
+
+	if (start + len < start)
+		return -EINVAL;
+	len += start & ~PAGE_MASK_4KB;
+	start &= PAGE_MASK_4KB;
+	if (len > ULONG_MAX - (PAGE_SIZE_4KB - 1))
+		return -EINVAL;
+	len = ALIGN(len, PAGE_SIZE_4KB);
+	if (offset > len || vm_len > len - offset)
+		return -EINVAL;
+	return p3s_remap_phys_range(vma, vma->vm_start, start + offset, vm_len,
+				    pgprot_decrypted(vma->vm_page_prot));
+}
