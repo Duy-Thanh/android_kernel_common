@@ -74,6 +74,7 @@ PPPS_TESTS := \
 	perf_mmap_offset_ppps perf_page_size_ppps perf_phys_addr_ppps \
 	print_vma_addr_ppps proc_pagewalk_ppps process_madvise_ppps \
 	process_mrelease_ppps process_vm_access_ppps remap_file_pages_ppps \
+	procfs_native_rmap_ppps \
 	remap_pfn_cow_ppps remap_pfn_range_ppps rmap_file_referenced_ppps rss_stat_trace_ppps \
 	remote_write_dontneed_ppps \
 	rusage_ppps selinux_status_mmap_ppps \

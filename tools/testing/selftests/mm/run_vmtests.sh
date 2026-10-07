@@ -618,6 +618,7 @@ fi
 CATEGORY="pagemap" run_test ./pagemap_ioctl
 CATEGORY="pagemap" run_test ./pagemap_ioctl_ppps
 CATEGORY="pagemap" run_test ./pagemap_scan_ppps
+CATEGORY="pagemap" run_test ./procfs_native_rmap_ppps
 
 CATEGORY="pfnmap" run_test ./pfnmap
 CATEGORY="pfnmap" run_test ./remap_pfn_range_ppps
