@@ -16,6 +16,24 @@
       "message": "For pkvm enabled kernel, this patch won\u0027t help, as the prior if condition would hypercall to pkvm and return. For upstream too, the code has moved to Generic page-table implementation, so not sure if it will help there either.",
       "revId": "2d37c6eb4746e734afb8721d60a6af03e2da8854",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "240d84c0_45706f3d",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4116,
+      "author": {
+        "id": 1244290
+      },
+      "writtenOn": "2026-10-07T05:39:35Z",
+      "side": 1,
+      "message": "Agreed. It is dead on non-nested pKVM, and on the nested series it measured +/-1% even together with the PSI-split change. Abandoning.",
+      "parentUuid": "d71f55b1_6de51485",
+      "revId": "2d37c6eb4746e734afb8721d60a6af03e2da8854",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
