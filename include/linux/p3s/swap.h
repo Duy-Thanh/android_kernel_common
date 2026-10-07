@@ -94,6 +94,13 @@ static inline int p3s_convert_swap_header(union swap_header *swap_header)
 	unsigned int header_page_shift = p3s_swap_header_page_shift(swap_header);
 	unsigned int page_shift_delta = PAGE_SHIFT_KERNEL - header_page_shift;
 	unsigned int nr_badpages = swap_header->info.nr_badpages;
+	/*
+	 * union swap_header declares badpages[] with a single element.  Walk
+	 * the list through a pointer, after checking its length against the
+	 * header page, so neither the walk nor the bounds sanitizer goes by
+	 * that declaration.
+	 */
+	__u32 *badpages = swap_header->info.badpages;
 	unsigned int i, nr_unique = 0;
 	u64 nr_pages;
 
@@ -116,16 +123,14 @@ static inline int p3s_convert_swap_header(union swap_header *swap_header)
 
 	swap_header->info.last_page = nr_pages - 1;
 	for (i = 0; i < nr_badpages; i++)
-		swap_header->info.badpages[i] >>= page_shift_delta;
+		badpages[i] >>= page_shift_delta;
 
-	sort(swap_header->info.badpages, nr_badpages,
-	     sizeof(swap_header->info.badpages[0]), p3s_swap_badpage_cmp, NULL);
+	sort(badpages, nr_badpages, sizeof(badpages[0]), p3s_swap_badpage_cmp,
+	     NULL);
 	for (i = 0; i < nr_badpages; i++) {
-		if (nr_unique && swap_header->info.badpages[i] ==
-				 swap_header->info.badpages[nr_unique - 1])
+		if (nr_unique && badpages[i] == badpages[nr_unique - 1])
 			continue;
-		swap_header->info.badpages[nr_unique++] =
-			swap_header->info.badpages[i];
+		badpages[nr_unique++] = badpages[i];
 	}
 	swap_header->info.nr_badpages = nr_unique;
 	return 0;
