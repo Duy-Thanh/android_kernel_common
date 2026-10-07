@@ -1,9 +1,12 @@
 // SPDX-License-Identifier: GPL-2.0
 #define _GNU_SOURCE
 /*
- * Zero/single compat PTEs admit direct accounting; multiple compat PTEs may
- * need a reverse walk. Equal counts need not imply equal per-slice sharing.
- * All mappings use initialized, owned memfd pages and pipe-synchronized peers.
+ * A native 16K process accounts a file page in smaps from its mapcount, as on
+ * a native kernel: every PTE that maps the page, native or 4K compat, counts
+ * as one sharer of the whole page, and the native reader never walks the
+ * reverse map (P3S does that only for compat VMAs).  Compat views still
+ * account each 4K slice.  All mappings use initialized, owned memfd pages and
+ * pipe-synchronized peers.
  */
 #include <poll.h>
 #include <signal.h>
@@ -95,6 +98,24 @@ static bool exclusive(struct view view, unsigned long page_size, bool expected)
 	ok = pread(fd, &entry, sizeof(entry), view.address / page_size * 8) == 8;
 	close(fd);
 	return ok && (entry & PRESENT) && !!(entry & EXCLUSIVE) == expected;
+}
+
+/*
+ * Native Pss of the mapping when its page at TARGET has @mappers mappings and
+ * the other pages are private: smaps sums Pss with 12 fractional bits and
+ * prints kB.
+ */
+static unsigned long native_pss(int mappers)
+{
+	uint64_t pss = (uint64_t)(LENGTH - NATIVE_PAGE_SIZE) << 12;
+
+	pss += ((uint64_t)NATIVE_PAGE_SIZE << 12) / mappers;
+	return pss >> 22;
+}
+
+static unsigned long native_shared(int mappers)
+{
+	return mappers > 1 ? NATIVE_PAGE_SIZE / 1024 : 0;
 }
 
 static void check_native(unsigned char *base, unsigned long pss,
@@ -274,15 +295,12 @@ static void check_compat(struct worker *w, int nr, int pss)
 
 static void check_mixed(unsigned char *base, int native, int compat)
 {
-	/* smaps accumulates each 4K slice in fixed point before printing kB. */
-	uint64_t unit = (uint64_t)PROCESS_PAGE_SIZE << 12;
-	uint64_t pss = 3 * (unit / native) + unit / (native + compat);
 	char label[64];
 
 	snprintf(label, sizeof(label), "%d native, %d compat on one slice",
 		 native, compat);
-	check_native(base, (LENGTH - NATIVE_PAGE_SIZE) / 1024 + (pss >> 22),
-		     native == 1 ? 4 : 16, label);
+	check_native(base, native_pss(native + compat),
+		     native_shared(native + compat), label);
 }
 
 static void single_compat_counts(int fd, unsigned char *base)
@@ -308,7 +326,7 @@ static void single_compat_counts(int fd, unsigned char *base)
 		stop_worker(&two, 'E');
 		check_mixed(base, n, 1);
 		stop_worker(&one, 'E');
-		check_native(base, 112 + 16 / n, n == 1 ? 0 : 16,
+		check_native(base, native_pss(n), native_shared(n),
 			     "S=1 to S=0 with native peers still present");
 		for (int j = 0; j < n - 1; j++)
 			stop_worker(&natives[j], 'E');
@@ -358,14 +376,17 @@ int main(int argc, char **argv)
 	check_native(base, 128, 0, "native only");
 	for (int nr = 1; nr <= 4; nr++) {
 		w[0] = start_worker(fd, 0, nr, false);
-		check_native(base, 128 - 2 * nr, 4 * nr, "one compat peer");
+		check_native(base, native_pss(1 + nr), native_shared(1 + nr),
+			     "one compat peer");
 		check_compat(&w[0], nr, 2 * nr);
 		if (nr == 4) {
 			command_worker(&w[0], 'R');
-			check_native(base, 120, 16, "mremap preserves sharing");
+			check_native(base, native_pss(5), native_shared(5),
+				     "mremap preserves sharing");
 			for (int left = 3; left; left--) {
 				command_worker(&w[0], 'P');
-				check_native(base, 128 - 2 * left, 4 * left,
+				check_native(base, native_pss(1 + left),
+					     native_shared(1 + left),
 					     "partial unmap removes only its slices");
 			}
 		}
@@ -374,30 +395,36 @@ int main(int argc, char **argv)
 	}
 	for (int i = 0; i < 4; i++)
 		w[i] = start_worker(fd, 0, 1, false);
-	check_native(base, 124, 4, "four peers on the same slice, S=4");
+	check_native(base, native_pss(5), native_shared(5),
+		     "four peers on the same slice, S=4");
 	for (int i = 0; i < 4; i++)
 		check_compat(&w[i], 1, 0); /* 4096/5 bytes, truncated to kB by smaps. */
 	for (int left = 3; left >= 0; left--) {
 		stop_worker(&w[left], 'E');
-		check_native(base, 124 + 4 / (left + 1), left ? 4 : 0,
+		check_native(base, native_pss(1 + left), native_shared(1 + left),
 			     "successive peer exits");
 	}
 	for (int i = 0; i < 4; i++)
 		w[i] = start_worker(fd, i, 1, false);
-	check_native(base, 120, 16, "four peers on disjoint slices, also S=4");
+	check_native(base, native_pss(5), native_shared(5),
+		     "four peers on disjoint slices, also S=4");
 	for (int i = 0; i < 4; i++)
 		stop_worker(&w[i], 'E');
 	check_native(base, 128, 0, "all disjoint peers gone");
 	w[0] = start_worker(fd, 0, 4, true);
-	check_native(base, 120, 16, "private file VMA with separate COW page");
+	check_native(base, native_pss(5), native_shared(5),
+		     "private file VMA with separate COW page");
 	command_worker(&w[0], 'F');
-	check_native(base, 120, 16, "forked file PTEs survive original unmap");
+	check_native(base, native_pss(5), native_shared(5),
+		     "forked file PTEs survive original unmap");
 	stop_worker(&w[0], 'Q');
 	check_native(base, 128, 0, "fork descendant exit restores native accounting");
 	w[0] = start_worker(fd, 0, 1, true);
-	check_native(base, 126, 4, "single file PTE with separate COW page");
+	check_native(base, native_pss(2), native_shared(2),
+		     "single file PTE with separate COW page");
 	command_worker(&w[0], 'F');
-	check_native(base, 126, 4, "single forked PTE survives original unmap");
+	check_native(base, native_pss(2), native_shared(2),
+		     "single forked PTE survives original unmap");
 	stop_worker(&w[0], 'Q');
 	check_native(base, 128, 0, "single descendant exit restores native accounting");
 	single_compat_counts(fd, base);
