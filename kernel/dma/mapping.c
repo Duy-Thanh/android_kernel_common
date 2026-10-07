@@ -592,6 +592,9 @@ int dma_mmap_attrs(struct device *dev, struct vm_area_struct *vma,
 {
 	const struct dma_map_ops *ops = get_dma_ops(dev);
 
+	if (vma_exceeds_object(vma, size))
+		return -ENXIO;
+
 	if (dma_alloc_direct(dev, ops))
 		return dma_direct_mmap(dev, vma, cpu_addr, dma_addr, size,
 				attrs);
@@ -770,6 +773,9 @@ int dma_mmap_pages(struct device *dev, struct vm_area_struct *vma,
 {
 	unsigned long count = PAGE_ALIGN(size) >> PAGE_SHIFT;
 
+	if (vma_exceeds_object(vma, size))
+		return -ENXIO;
+
 	if (vma->vm_pgoff >= count ||
 	    vma_kernel_pages(vma) > count - vma->vm_pgoff)
 		return -ENXIO;
@@ -872,6 +878,9 @@ EXPORT_SYMBOL_GPL(dma_vunmap_noncontiguous);
 int dma_mmap_noncontiguous(struct device *dev, struct vm_area_struct *vma,
 		size_t size, struct sg_table *sgt)
 {
+	if (vma_exceeds_object(vma, size))
+		return -ENXIO;
+
 	if (use_dma_iommu(dev))
 		return iommu_dma_mmap_noncontiguous(dev, vma, size, sgt);
 	return dma_mmap_pages(dev, vma, size, sg_page(sgt->sgl));
