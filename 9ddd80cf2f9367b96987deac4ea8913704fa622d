@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dbed502_8e8f3101",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1244290
+      },
+      "writtenOn": "2026-10-07T05:56:14Z",
+      "side": 1,
+      "message": "The nested series (4017996) removed dma_unuse_*. I re-targeted this to dma_pte_clear_level(), but an interleaved A/B on top of the rest of the series shows no measurable gain (+0.5% on 4-job writes, within noise). Abandoning.",
+      "revId": "9ddd80cf2f9367b96987deac4ea8913704fa622d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
