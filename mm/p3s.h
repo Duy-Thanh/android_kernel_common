@@ -114,6 +114,24 @@ static inline pte_t vma_folio_mk_pte(const struct vm_area_struct *vma,
 #ifdef CONFIG_ARM64_PER_PROCESS_PAGE_SIZE
 
 /*
+ * p3s_pfnmap_phys - Physical address of the page found by follow_pfnmap_start()
+ * @args: Arguments of a successful follow_pfnmap_start() not yet ended
+ *
+ * @args->pfn counts native page frames, so it drops the 4KB slice that a
+ * compat PTE maps.  Read the slice back from the PTE, which stays locked
+ * until follow_pfnmap_end().
+ */
+static inline resource_size_t
+p3s_pfnmap_phys(const struct follow_pfnmap_args *args)
+{
+	resource_size_t phys = (resource_size_t)args->pfn << PAGE_SHIFT_KERNEL;
+
+	if (vma_is_p3s_4k(args->vma) && args->ptep)
+		phys |= __pte_to_phys(ptep_get(args->ptep)) & ~PAGE_MASK_KERNEL;
+	return phys;
+}
+
+/*
  * p3s_anon_folio_lookaround_pte - Find adjacent anonymous folio in slice window
  * @vma: Pointer to struct vm_area_struct
  * @pte: Faulting PTE pointer
@@ -545,6 +563,12 @@ p3s_wp_reuse_zero_folio(struct folio **new_foliop, struct vm_fault *vmf)
 }
 
 #else /* !CONFIG_ARM64_PER_PROCESS_PAGE_SIZE */
+
+static inline resource_size_t
+p3s_pfnmap_phys(const struct follow_pfnmap_args *args)
+{
+	return (resource_size_t)args->pfn << PAGE_SHIFT;
+}
 
 static inline void p3s_anon_install_folio(struct vm_area_struct *vma,
 					  struct vm_fault *vmf,
