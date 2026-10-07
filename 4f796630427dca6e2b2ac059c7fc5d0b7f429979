@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ed4d15b_5df89508",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-10-07T20:23:22Z",
+      "side": 1,
+      "message": "This needs to be applied to android16-6.12 before it can be taken in  android16-6.12-2026-06",
+      "revId": "4f796630427dca6e2b2ac059c7fc5d0b7f429979",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
