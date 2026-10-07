@@ -47,6 +47,7 @@ CFLAGS += -U_FORTIFY_SOURCE
 # PPPS (per-process page size) tests.  Those needing a kernel-side fixture get
 # it from the modules in ppps_modules/, loaded by ../ppps/ppps_run_module.sh.
 PPPS_TESTS := \
+	access_phys_ppps \
 	aio_ring_ppps anon_pageout_ppps anon_vma_name_ppps ashmem_ppps \
 	bpf_array_mmap_ppps bpf_ringbuf_mmap_ppps bpf_stack_build_id_ppps \
 	btf_vmlinux_mmap_ppps \
