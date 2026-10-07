@@ -16,6 +16,29 @@
       "message": "can you please review the change.",
       "revId": "4af2b92ca91ac2b512dece9f02dd8b1bc4c18cf5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6164f1f8_0171024a",
+        "filename": "drivers/android/vendor_hooks_sound.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-10-07T18:16:46Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by GKI Guidelines: Please see https://source.android.com/docs/core/architecture/kernel/kernel-code#...\n\nPlease see https://source.android.com/docs/core/architecture/kernel/kernel-code#defining-vendor-hooks for details about the location to export tracepoints.",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 36
+      },
+      "revId": "4af2b92ca91ac2b512dece9f02dd8b1bc4c18cf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
