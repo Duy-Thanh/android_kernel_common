@@ -286,6 +286,15 @@ run_ppps_module_test() {
 		"/dev/${module}_ppps" -- "$@"
 }
 
+# Like run_ppps_module_test, for a test that needs two fixture modules.
+run_ppps_module2_test() {
+	local module=$1 module2=$2
+	shift 2
+	run_ppps_module_test "$module" "$ppps_runner" \
+		"ppps_modules/${module2}_ppps_module.ko" "/dev/${module2}_ppps" \
+		-- "$@"
+}
+
 echo "TAP version 13" | tap_output
 
 CATEGORY="hugetlb" run_test ./hugepage-mmap
@@ -347,7 +356,7 @@ CATEGORY="mmap" run_test ./mincore_ppps
 CATEGORY="mmap" run_test ./mincore_ppps --native
 CATEGORY="mmap" run_ppps_module_test gup_retry ./mmap_action_cleanup_ppps
 CATEGORY="mmap" run_test ./selinux_status_mmap_ppps.sh
-CATEGORY="mmap" run_ppps_module_test vm_iomap_memory ./vm_iomap_memory_ppps
+CATEGORY="mmap" run_ppps_module2_test vm_iomap_memory vm_iomap_unaligned ./vm_iomap_memory_ppps
 CATEGORY="mmap" run_ppps_module_test remap_pfn_cow ./remap_pfn_cow_ppps
 CATEGORY="mmap" run_ppps_module_test dma_mmap_attrs ./dma_mmap_ppps attrs
 CATEGORY="mmap" run_ppps_module_test dma_mmap_pages ./dma_mmap_ppps pages
