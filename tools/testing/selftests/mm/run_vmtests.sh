@@ -395,6 +395,7 @@ CATEGORY="mmap" run_test ./shmem_swap_usage_ppps
 CATEGORY="mmap" run_test ./shmem_quota_ppps
 CATEGORY="mmap" run_test ./swap_header_ppps
 CATEGORY="mmap" run_test ./swap_pss_ppps
+CATEGORY="mmap" run_test ./anon_rmap_split_window_ppps
 CATEGORY="mmap" run_test ./trace_ring_buffer_mmap_ppps
 CATEGORY="mmap" run_test ./truncate_ppps
 
