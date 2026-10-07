@@ -1815,6 +1815,11 @@ retry:
 			goto out;
 		}
 
+		if (!p3s_uffd_swap_pte_movable(dst_vma, dst_addr, orig_src_pte)) {
+			ret = -EBUSY;
+			goto out;
+		}
+
 		si = get_swap_device(entry);
 		if (unlikely(!si)) {
 			ret = -EAGAIN;
