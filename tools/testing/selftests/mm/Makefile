@@ -83,6 +83,7 @@ PPPS_TESTS := \
 	smaps_pss_ppps \
 	stack_guard_gap_ppps swap_header_ppps swap_pss_ppps swap_vma_readahead_ppps swapoff_ppps \
 	statm_cross_geometry_ppps \
+	swap_header_badpages_ppps \
 	sysv_shm_lock_ppps sysv_shm_ppps taskstats_ppps \
 	tcp_zerocopy_align_ppps thp_mmap_offset_ppps \
 	trace_ring_buffer_mmap_ppps truncate_ppps truncate_remote_ppps \
