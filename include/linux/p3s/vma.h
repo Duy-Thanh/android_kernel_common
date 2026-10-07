@@ -288,7 +288,8 @@ static inline loff_t vma_file_offset_at(const struct vm_area_struct *vma,
 /*
  * vma_linear_page_index - Page offset that @addr maps
  * @vma: Pointer to struct vm_area_struct
- * @addr: Virtual address within @vma
+ * @addr: Virtual address within @vma, or below vma->vm_start when a merge
+ *        grows @vma downwards
  *
  * For a 4KB file VMA, this is the file page that backs @addr. vm_start maps
  * slice vm_slice_off of file page vm_pgoff and each following 4KB page maps
@@ -322,8 +323,8 @@ static inline pgoff_t vma_linear_page_index(const struct vm_area_struct *vma,
 	s64 delta = (s64)addr - (s64)vma->vm_start;
 
 	if (!vma_is_p3s_4k(vma) || (vma->vm_ops && !vma->vm_file))
-		return vma->vm_pgoff +
-		       ((addr - vma->vm_start) >> PAGE_SHIFT_KERNEL);
+		return (pgoff_t)((s64)vma->vm_pgoff +
+				 (delta >> PAGE_SHIFT_KERNEL));
 
 	if (!vma->vm_file && !vma->vm_ops)
 		return (pgoff_t)((s64)vma->vm_pgoff +
