@@ -34,6 +34,24 @@
       "parentUuid": "1e9ced97_d3f8ed7a",
       "revId": "5c3ec0d5f85e96753f8762e23ee532b3f6773db4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e36e1c44_0eb1293e",
+        "filename": "arch/x86/kvm/pkvm/mem_protect.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-10-07T22:44:43Z",
+      "side": 1,
+      "message": "My point is about readability / cognitive load rather than line count: conceptually (as modeled in `go/page-custody-battles`), unmapped Guest GPAs don\u0027t really have a `PKVM_PAGE_NONE` state (`!pte_present()` is simply unmapped, and maybe we could check `!pte_present()` directly rather than `PKVM_PAGE_NONE` for guest EPTs), whereas for Host physical pages `PKVM_PAGE_NONE` represents a resource donated to another owner.\n\nEncoding `PKVM_PAGE_NONE` directly in `bits[53:52]` on Host MMIO avoids having one more `[**]` exception to hold in one\u0027s head, and we don\u0027t strictly align with ARM everywhere else anyway.\n\nNot a blocker from my side if you prefer keeping it as-is though.",
+      "parentUuid": "8fc65e7e_b71edc92",
+      "revId": "5c3ec0d5f85e96753f8762e23ee532b3f6773db4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
