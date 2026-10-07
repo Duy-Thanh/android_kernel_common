@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a923fb8_adde7570",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-10-07T04:53:17Z",
+      "side": 1,
+      "message": "Second line in the commit must be a blank line. Please fix the linter.",
+      "revId": "2ca3bb8bb548bcf0eb50d32a9336fa9c3951dbbc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
