@@ -97,7 +97,7 @@ impl Context {
 
     pub(crate) fn register_process(self: &Arc<Self>, proc: ListArc<Process>) {
         if !Arc::ptr_eq(self, &proc.ctx) {
-            pr_err!("Context::register_process called on the wrong context.");
+            pr_err_ratelimited!("Context::register_process called on the wrong context.\n");
             return;
         }
         self.manager.lock().all_procs.push_back(proc);
@@ -105,7 +105,7 @@ impl Context {
 
     pub(crate) fn deregister_process(self: &Arc<Self>, proc: &Process) {
         if !Arc::ptr_eq(self, &proc.ctx) {
-            pr_err!("Context::deregister_process called on the wrong context.");
+            pr_err_ratelimited!("Context::deregister_process called on the wrong context.\n");
             return;
         }
         // SAFETY: We just checked that this is the right list.
@@ -115,7 +115,7 @@ impl Context {
     pub(crate) fn set_manager_node(&self, node_ref: NodeRef) -> Result {
         let mut manager = self.manager.lock();
         if manager.node.is_some() {
-            pr_warn!("BINDER_SET_CONTEXT_MGR already set");
+            pr_warn_ratelimited!("BINDER_SET_CONTEXT_MGR already set\n");
             return Err(EBUSY);
         }
         security::binder_set_context_mgr(&node_ref.node.owner.cred)?;
