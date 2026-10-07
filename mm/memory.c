@@ -3121,6 +3121,9 @@ int vm_iomap_memory(struct vm_area_struct *vma, phys_addr_t start, unsigned long
 {
 	unsigned long vm_len, pfn, pages;
 
+	if (vma_is_p3s_4k(vma))
+		return p3s_vm_iomap_memory(vma, start, len);
+
 	/* Check that the physical memory area passed in looks valid */
 	if (start + len < start)
 		return -EINVAL;
