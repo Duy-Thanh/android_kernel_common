@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7daa635d_56daa90f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-10-08T08:03:24Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Cherry pick does not have same author date as original commit.\n\nOriginal author ...\n\nCherry pick does not have same author date as original commit.\n\nOriginal author date: Mon Oct 20 15:05:09 2025 +0900\nCherry pick author date: Thu Sep 24 10:09:48 2026 +0800\n\nPlease cherry-pick using: `git cherry-pick -s -x 98efc0ffbbd5975f4d1a671270bb7dc25e30c9ab`.\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "8e020d220cf459acc2a27e7e96772236f4752274",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "084da36f_68462dbc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-10-08T08:03:24Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Cherry pick does not have same author as original commit.\n\nOriginal author: \u0027s.s...\n\nCherry pick does not have same author as original commit.\n\nOriginal author: \u0027s.suk@samsung.corp-partner.google.com\nCherry pick author: \u0027liwenxiang1@xiaomi.corp-partner.google.com\n\nPlease cherry-pick using: `git cherry-pick -s -x 98efc0ffbbd5975f4d1a671270bb7dc25e30c9ab`.\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "8e020d220cf459acc2a27e7e96772236f4752274",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
