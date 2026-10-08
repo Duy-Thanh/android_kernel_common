@@ -92,3 +92,5 @@ type 'struct task_struct' changed
   member 'u64 android_kabi_reserved2' was removed
   member 'union { struct { unsigned int user_dumpable; }; struct { u64 android_kabi_reserved2; }; union { }; }' was added
 
+type 'struct usb_udc' changed
+  member 'bool teardown' was added
