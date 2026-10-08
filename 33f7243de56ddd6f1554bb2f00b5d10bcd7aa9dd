@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "131e104e_7cfe0073",
+        "filename": "mm/readahead.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 5227262
+      },
+      "writtenOn": "2026-10-08T23:56:53Z",
+      "side": 1,
+      "message": "[Major] Calling `xa_load` on `mapping-\u003ei_pages` without holding the RCU read lock (`rcu_read_lock()`) can lead to a use-after-free of XArray nodes if the page cache is concurrently modified (e.g., via truncation). Furthermore, because the folios returned by `xa_load` are not pinned or locked, they can be concurrently freed and reused. Calling `set_bit` on a freed/reused folio\u0027s flags can corrupt page states of other active kernel allocations, leading to kernel instability or potential privilege escalation.\n\nNote: You can bypass this security scan by adding \u0027SECURITY_PRESUBMIT_BYPASS_REASON\u003dyour_reason\u0027 in your commit message.\nFor more details or to provide feedback, visit go/warden-presubmit.",
+      "range": {
+        "startLine": 320,
+        "startChar": 0,
+        "endLine": 325,
+        "endChar": 0
+      },
+      "revId": "33f7243de56ddd6f1554bb2f00b5d10bcd7aa9dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
