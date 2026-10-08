@@ -52,6 +52,24 @@
       "parentUuid": "8fc65e7e_b71edc92",
       "revId": "5c3ec0d5f85e96753f8762e23ee532b3f6773db4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9128afe6_28d60746",
+        "filename": "arch/x86/kvm/pkvm/mem_protect.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-08T00:48:30Z",
+      "side": 1,
+      "message": "\u003e we don\u0027t strictly align with ARM everywhere else anyway.\n\nAs I see it, the fact that we currently implement our own implementation of page ownership management instead of using the same code on both ARM and x86 is a temporary situation, and eventually (at least for upstream) we should share this code with ARM instead of reimplementing/duplicating the same (inherently mostly arch-independent) logic. We are not there yet, but in the meantime, it seems a good idea to at least  minimize unnecessary divergences in the _design_ this code implements.",
+      "parentUuid": "e36e1c44_0eb1293e",
+      "revId": "5c3ec0d5f85e96753f8762e23ee532b3f6773db4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
