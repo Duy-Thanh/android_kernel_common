@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27f96b87_5da23913",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-10-08T11:48:46Z",
+      "side": 1,
+      "message": "Apologies if I\u0027m misunderstanding this one, but why can\u0027t the drm_display_helper.ko be built as part of the vendor modules? What is gained by building it into GKI?\n\nFurther, this change seems to cause problems for other devices that build the drm_display_helper.ko separately.",
+      "revId": "73f6d31439c6d5cbe189c61b52eb874fc598d907",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
