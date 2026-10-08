@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bddfe32_9c187ba3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-10-08T11:31:39Z",
+      "side": 1,
+      "message": "Ok, I\u0027ve clearly not done this KABI break/update right for the union change. I\u0027ll have to sync w/ Giuliano after I return from vacation.",
+      "revId": "83b094877ac06bcf1b440d078e375f55603401cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
