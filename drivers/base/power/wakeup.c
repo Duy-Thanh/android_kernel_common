@@ -867,6 +867,8 @@ void pm_get_active_wakeup_sources(char *pending_wakeup_source, size_t max)
 			    ktime_to_ns(last_active_ws->last_time))) {
 			last_active_ws = ws;
 		}
+               if (ws->name && !strcmp(ws->name, "49de08c.pcie"))
+                       mdelay(25);
 	}
 	if (!active && last_active_ws) {
 		scnprintf(pending_wakeup_source, max,
