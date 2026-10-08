@@ -526,6 +526,30 @@
       },
       "revId": "7f24bd9d05e623d2c8ece079f75cda4e8b8ff1ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b0db43f_4c3b86a7",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-08T17:32:39Z",
+      "side": 1,
+      "message": "\u003e One subtle non-blocking observation: since normal pKVM RAM (is_memory_range) is still unmapped via pkvm_pgtable_unmap() (leaving 0 PTEs) and high MMIO above the last RAM memblock (pkvm_memory[pkvm_memblock_nr - 1].base + size) is also left as 0 PTEs, a similar 2M/1G page-table collapse across the end of the last memblock would hit BUG_ON(!is_pvmfw_range(phys, size)) if pKVM memory ever occupied the entire tail [ALIGN_DOWN(memblock_end, 2M/1G), memblock_end) of that last memblock.\n\nYeah, I think you are right. Thanks for noticing this.\n\nThis makes me think that maybe we should, once again, just do more or less what pKVM-ARM does (in its `fix_host_ownership()` which walks _hypervisor\u0027s_ page table in order to unmap in host\u0027s page table whatever is mapped in hypervisor\u0027s one, so it is slower since it means multiple pgtable walks instead of just one, but is not prone to this PTE collapse issue), instead of inventing our own thing which provides exactly the same functionality but in a different way and with different bugs...\n\nOTOH, after the following patch aosp/4232681, this entire fix_host_mmu_pgstate_walker() will actually become not strictly necessary, not doing anything except these BUG_ON checks (per aosp/4232685)... Let me think what to do with this.",
+      "parentUuid": "0e64dfde_8c0e95ae",
+      "range": {
+        "startLine": 357,
+        "startChar": 0,
+        "endLine": 363,
+        "endChar": 3
+      },
+      "revId": "7f24bd9d05e623d2c8ece079f75cda4e8b8ff1ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
