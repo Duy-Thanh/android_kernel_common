@@ -52,6 +52,24 @@
       "parentUuid": "fb21bb1b_b21b7769",
       "revId": "c88513bd242ade7ad3d491d7cd07b57079e10df1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d0f6822_dba77365",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4270060
+      },
+      "writtenOn": "2026-10-08T11:49:31Z",
+      "side": 1,
+      "message": "hi hubert,\n mainline merged, how about question 3 before  resend?",
+      "parentUuid": "59f9131c_1f7ab4f0",
+      "revId": "c88513bd242ade7ad3d491d7cd07b57079e10df1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
