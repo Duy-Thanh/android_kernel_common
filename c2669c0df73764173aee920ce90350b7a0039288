@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bf23e23_d3668c02",
+        "filename": "mm/vma.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 738,
+      "author": {
+        "id": 1964900
+      },
+      "writtenOn": "2026-10-08T07:17:56Z",
+      "side": 1,
+      "message": "```suggestion\n\t\tpgoff \u003d linear_page_index(vmg-\u003emiddle, vmg-\u003eend);\n```\nHi! I was trying out this patchset and this caused a SIGBUS when extending `next` backwards.\n\nI think the cause is because `vmg-\u003eend` is below `next-\u003evm_start`, so the unsigned address subtraction in `linear_page_index()` underflows. If   the new file offset is calculated instead from `vmg-\u003emiddle`, it avoids this.\n\nHere\u0027s a MRE, if it helps. On 16K ACK with P3S it SIGBUS before this change (when it is running as 4K and as 16K), and passes after.\n\n```c\n#define _GNU_SOURCE\n#include \u003cstdio.h\u003e\n#include \u003csys/mman.h\u003e\n#include \u003cunistd.h\u003e\n\n#define CHECK(x) do { if (!(x)) { perror(#x); return 2; } } while (0)\n\nint main(void)\n{\n    enum { H \u003d 16384 };\n    long page \u003d sysconf(_SC_PAGESIZE);\n\n    if (page !\u003d 4096 \u0026\u0026 page !\u003d H) {\n        puts(\"SKIP: requires 4 KB or 16 KB process pages\");\n        return 4;\n    }\n    int fd \u003d memfd_create(\"backwards-offset\", 0);\n    CHECK(fd \u003e\u003d 0);\n    CHECK(ftruncate(fd, 4 * H) \u003d\u003d 0);\n    unsigned char *p \u003d mmap(NULL, 4 * H, PROT_NONE, MAP_PRIVATE, fd, 0);\n    CHECK(p !\u003d MAP_FAILED);\n\n    CHECK(mprotect(p + 2 * H, H, PROT_READ | PROT_WRITE) \u003d\u003d 0);\n    CHECK(mprotect(p + H, H, PROT_READ | PROT_WRITE) \u003d\u003d 0);\n\n    unsigned char value \u003d *(volatile unsigned char *)(p + H);\n    printf(\"byte\u003d%u (expected 0)\\n\", value);\n\n    CHECK(munmap(p, 4 * H) \u003d\u003d 0);\n    CHECK(close(fd) \u003d\u003d 0);\n    return value !\u003d 0;\n}\n```",
+      "revId": "c2669c0df73764173aee920ce90350b7a0039288",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
