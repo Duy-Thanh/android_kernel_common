@@ -81,6 +81,24 @@
       "parentUuid": "72c947cc_18a21c0a",
       "revId": "ac2fcd925301bda21389977c69f302689536de30",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7abc6c97_3799cd4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-10-08T00:22:28Z",
+      "side": 1,
+      "message": "thanks for the info, do you know if these backports (or equivalent ones) be sent to upstream stable too?",
+      "parentUuid": "e9fab4fb_d8f4e4a0",
+      "revId": "ac2fcd925301bda21389977c69f302689536de30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
