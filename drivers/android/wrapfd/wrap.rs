@@ -188,7 +188,16 @@ enum AllowState {
     ProhibitGuests,
 }
 
+enum WrapState {
+    InUse(usize),
+    UsageBlocked,
+    Available,
+}
+
+#[pin_data(PinnedDrop)]
 pub(crate) struct Wrap {
+    #[pin]
+    state: Mutex<WrapState>,
     pub(crate) inner: Arc<Mutex<WrapInfo>>,
 
     // Set once on construction, never modified afterwards, does not need to be guarded by
@@ -196,23 +205,66 @@ pub(crate) struct Wrap {
     pub(crate) close_on_exec: bool,
 }
 
-impl Drop for Wrap {
-    fn drop(&mut self) {
+#[pinned_drop]
+impl PinnedDrop for Wrap {
+    fn drop(self: Pin<&mut Self>) {
         // The driver instance and the associated file are about to go away, let's make sure
         // we don't leave a dangling raw pointer to the file inside the VmaFile enum.
         self.inner.lock().vma_file = VmaFile::None;
     }
 }
 
+struct UseGuard<'a>(&'a Wrap);
+
+impl<'a> Drop for UseGuard<'a> {
+    fn drop(&mut self) {
+        let mut guard = self.0.state.lock();
+        *guard = match *guard {
+            WrapState::Available => panic!(),
+            WrapState::InUse(1) => WrapState::Available,
+            WrapState::InUse(n) => WrapState::InUse(n - 1),
+            WrapState::UsageBlocked => WrapState::Available,
+        };
+    }
+}
+
 impl Wrap {
-    pub(crate) fn new(close_on_exec: bool) -> Result<Self> {
-        Ok(Self {
+    pub(crate) fn new(close_on_exec: bool) -> impl PinInit<Self, Error> {
+        try_pin_init!(Self {
+            state <- new_mutex!(WrapState::Available),
             inner: Arc::pin_init(new_mutex!(WrapInfo::new()), GFP_KERNEL)?,
             close_on_exec,
         })
     }
 
+    fn begin_block_usage(&self) -> Option<UseGuard<'_>> {
+        let mut guard = self.state.lock();
+        *guard = match *guard {
+            WrapState::Available => WrapState::UsageBlocked,
+            _ => {
+                return None;
+            }
+        };
+        Some(UseGuard(self))
+    }
+
+    fn begin_use(&self) -> Option<UseGuard<'_>> {
+        let mut guard = self.state.lock();
+        *guard = match *guard {
+            WrapState::Available => WrapState::InUse(1),
+            WrapState::InUse(n) => WrapState::InUse(n + 1),
+            WrapState::UsageBlocked => {
+                return None;
+            }
+        };
+        Some(UseGuard(self))
+    }
+
     fn file_ioctl(&self, cmd: u32, arg: usize) -> Result<isize> {
+        let Some(_use_guard) = self.begin_use() else {
+            return Err(ENOENT);
+        };
+
         let mut guard = self.inner.lock();
 
         if !(guard.allow_guests || !guard.owner.has_owner() || guard.owner.owned_by_current_task())
@@ -235,19 +287,21 @@ impl Wrap {
             return Err(EINVAL);
         }
 
-        let guard = self.inner.lock();
+        if let Some(_use_guard) = self.begin_use() {
+            let guard = self.inner.lock();
 
-        get_state_args.state = if let Some(ref content) = guard.content {
-            if content.is_writable() {
-                uapi::WRAPFD_CONTENT_RDWR
+            get_state_args.state = if let Some(ref content) = guard.content {
+                if content.is_writable() {
+                    uapi::WRAPFD_CONTENT_RDWR
+                } else {
+                    uapi::WRAPFD_CONTENT_RDONLY
+                }
             } else {
-                uapi::WRAPFD_CONTENT_RDONLY
-            }
+                uapi::WRAPFD_CONTENT_EMPTY
+            };
         } else {
-            uapi::WRAPFD_CONTENT_EMPTY
-        };
-
-        drop(guard);
+            get_state_args.state = uapi::WRAPFD_CONTENT_EMPTY;
+        }
 
         writer.write(&get_state_args)?;
 
@@ -255,6 +309,13 @@ impl Wrap {
     }
 
     fn acquire_ownership(&self) -> Result<isize> {
+        let state_guard = self.state.lock();
+        match *state_guard {
+            WrapState::Available => {}
+            WrapState::UsageBlocked => return Err(ENOENT),
+            WrapState::InUse(_) => return Err(EINVAL),
+        }
+
         let mut guard = self.inner.lock();
 
         if guard.owner.owned_by_current_task() {
@@ -336,17 +397,25 @@ impl Wrap {
             return Err(EINVAL);
         }
 
-        let guard = self.inner.lock();
-
-        let Some(ref content) = guard.content else {
+        let Some(_use_guard) = self.begin_use() else {
             return Err(ENOENT);
         };
 
-        if !content.is_writable() {
-            return Err(EACCES);
-        }
+        let dmabuf = {
+            let guard = self.inner.lock();
 
-        content.load(localfile, file_offset, buf_offset, len)
+            let Some(ref content) = guard.content else {
+                return Err(ENOENT);
+            };
+
+            if !content.is_writable() {
+                return Err(EACCES);
+            }
+
+            content.dmabuf.clone()
+        };
+
+        DmaBufContent::load(&dmabuf, localfile, file_offset, buf_offset, len)
     }
 
     fn rewrap(&self, user_slice: UserSlice) -> Result<u32> {
@@ -360,6 +429,10 @@ impl Wrap {
         if rewrap_args.reserved != 0 || rewrap_args.pad != 0 {
             return Err(EINVAL);
         }
+
+        let Some(_use_guard) = self.begin_block_usage() else {
+            return Err(EINVAL);
+        };
 
         let mut guard = self.inner.lock();
         guard.check_modifiable()?;
@@ -395,6 +468,10 @@ impl Wrap {
     }
 
     fn empty(&self) -> Result<isize> {
+        let Some(_use_guard) = self.begin_block_usage() else {
+            return Err(EINVAL);
+        };
+
         let mut guard = self.inner.lock();
         guard.check_modifiable()?;
 
@@ -424,6 +501,10 @@ impl AnonInodeFileInterface for Wrap {
         offs: Offset,
         whence: ffi::c_int,
     ) -> Result<Offset> {
+        let Some(_use_guard) = wrap.begin_use() else {
+            return Err(ENOENT);
+        };
+
         let mut guard = wrap.inner.lock();
 
         let Some(ref mut content) = guard.content else {
@@ -438,6 +519,10 @@ impl AnonInodeFileInterface for Wrap {
         file: &File,
         vma: &VmaNew,
     ) -> Result {
+        let Some(_use_guard) = wrap.begin_use() else {
+            return Err(ENOENT);
+        };
+
         let mut guard = wrap.inner.lock();
 
         if !guard.allow_guests && guard.owner.has_owner() && !guard.owner.owned_by_current_task() {
@@ -757,6 +842,13 @@ unsafe extern "C" fn wrapfd_get_mappable(
 
         if mappable.is_null() {
             return Err(EINVAL);
+        }
+
+        let state_guard = wrap.state.lock();
+        match *state_guard {
+            WrapState::Available => {}
+            WrapState::UsageBlocked => return Err(ENOENT),
+            WrapState::InUse(_) => return Err(EINVAL),
         }
 
         let mut guard = wrap.inner.lock();

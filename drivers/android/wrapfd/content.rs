@@ -173,7 +173,7 @@ impl DmaBufContent {
     }
 
     fn load_prepare(
-        &self,
+        dmabuf: &DmaBuf,
         file: &LocalFile,
         file_offs: usize,
         buf_offs: usize,
@@ -184,11 +184,11 @@ impl DmaBufContent {
             return Err(EINVAL);
         };
 
-        if buf_end > self.dmabuf.size() {
+        if buf_end > dmabuf.size() {
             return Err(EINVAL);
         }
 
-        let map = self.dmabuf.vmap()?;
+        let map = dmabuf.vmap()?;
 
         let Some(vaddr) = map.vaddr() else {
             return Err(EINVAL);
@@ -203,7 +203,7 @@ impl DmaBufContent {
     }
 
     pub(crate) fn load(
-        &self,
+        dmabuf: &DmaBuf,
         file: ARef<LocalFile>,
         file_offs: Offset,
         buf_offs: Offset,
@@ -215,7 +215,7 @@ impl DmaBufContent {
         let buf_offs: usize = buf_offs.try_into()?;
         let len: usize = len.try_into()?;
 
-        let (map, mut io_context) = self.load_prepare(&file, file_offs, buf_offs, len)?;
+        let (map, mut io_context) = Self::load_prepare(dmabuf, &file, file_offs, buf_offs, len)?;
 
         map.begin_cpu_access_bidirectional_fallible(|access| -> Result<()> {
             io_context.read()?;
