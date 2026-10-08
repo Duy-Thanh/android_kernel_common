@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2a1915d_6a4ed1df",
+        "filename": "mm/readahead.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 5227262
+      },
+      "writtenOn": "2026-10-08T23:50:45Z",
+      "side": 1,
+      "message": "[Major] Retrieving a folio from the page cache using `xa_load` without elevating its reference count (e.g., via `filemap_get_folio`) allows the folio to be concurrently evicted, freed, and reallocated. Modifying its flags via `set_bit` results in a Use-After-Free memory corruption.\n\nNote: You can bypass this security scan by adding \u0027SECURITY_PRESUBMIT_BYPASS_REASON\u003dyour_reason\u0027 in your commit message.\nFor more details or to provide feedback, visit go/warden-presubmit.",
+      "range": {
+        "startLine": 328,
+        "startChar": 0,
+        "endLine": 331,
+        "endChar": 0
+      },
+      "revId": "bc550bd1d52471c670b4717184631dea5ab00cc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
