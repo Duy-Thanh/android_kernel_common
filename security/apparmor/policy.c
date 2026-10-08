@@ -232,13 +232,6 @@ static void __remove_profile(struct aa_profile *profile)
 	aa_label_remove(&profile->label);
 	__aafs_profile_rmdir(profile);
 	__list_remove_profile(profile);
-	/* rawdata is only ever referenced by fs lookup, that is no
-	 * longer possible here, so put the reference to it. This will
-	 * enable the rawdata to be freed if for some reason the profile
-	 * is pinned and going to live for a while.
-	 */
-	aa_put_profile_loaddata(profile->rawdata);
-	profile->rawdata = NULL;
 }
 
 /**
@@ -1230,12 +1223,8 @@ ssize_t aa_replace_profiles(struct aa_ns *policy_ns, struct aa_label *label,
 			if (aa_rawdata_eq(rawdata_ent, udata)) {
 				struct aa_loaddata *tmp;
 
-				/*
-				 * Entries remain on rawdata_list with
-				 * pcount == 0 until do_ploaddata_rmfs()
-				 * runs; only take a live profile ref.
-				 */
-				tmp = aa_get_profile_loaddata_not0(rawdata_ent);
+				tmp = aa_get_profile_loaddata(rawdata_ent);
+				/* check we didn't fail the race */
 				if (tmp) {
 					aa_put_profile_loaddata(udata);
 					udata = tmp;
@@ -1353,16 +1342,6 @@ ssize_t aa_replace_profiles(struct aa_ns *policy_ns, struct aa_label *label,
 			goto skip;
 		}
 
-		if (!aa_g_export_binary) {
-			if (ent->old && ent->old->rawdata &&
-			    ent->old->dents[AAFS_LOADDATA_DIR]) {
-				/* remove rawdata symlinks because the symlink
-				 * target will be removed
-				 */
-				__aa_remove_rawdata_symlink_dents(ent->old);
-			}
-		}
-
 		/*
 		 * TODO: finer dedup based on profile range in data. Load set
 		 * can differ but profile may remain unchanged
@@ -1373,11 +1352,6 @@ ssize_t aa_replace_profiles(struct aa_ns *policy_ns, struct aa_label *label,
 		if (ent->old) {
 			share_name(ent->old, ent->new);
 			__replace_profile(ent->old, ent->new);
-			if (aa_g_export_binary) {
-				/* recreate rawdata symlinks */
-				if (!ent->old->rawdata)
-					__aa_create_rawdata_symlink_dents(ent->new);
-			}
 		} else {
 			struct list_head *lh;
 
@@ -1398,15 +1372,12 @@ ssize_t aa_replace_profiles(struct aa_ns *policy_ns, struct aa_label *label,
 
 out:
 	aa_put_ns(ns);
-
-	ssize_t udata_sz = udata->size;
-
 	aa_put_profile_loaddata(udata);
 	kfree(ns_name);
 
 	if (error)
 		return error;
-	return udata_sz;
+	return udata->size;
 
 fail_lock:
 	mutex_unlock(&ns->lock);
