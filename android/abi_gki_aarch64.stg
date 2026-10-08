@@ -176044,6 +176044,12 @@ member {
   type_id: 0x217dc8c4
 }
 member {
+  id: 0xc10d9ccd
+  name: "teardown"
+  type_id: 0x6d7f5ff6
+  offset: 7632
+}
+member {
   id: 0x93c9c9d9
   name: "temp"
   type_id: 0x18bd6530
@@ -245545,6 +245551,7 @@ struct_union {
     member_id: 0x7c00eb44
     member_id: 0xa8b1af73
     member_id: 0x5367c615
+    member_id: 0xc10d9ccd
   }
 }
 struct_union {
