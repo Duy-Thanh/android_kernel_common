@@ -16,6 +16,24 @@
       "message": "We don\u0027t have this issue on android17?",
       "revId": "78e747b69f3367bf90e39bde265d387b6427debd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "987c7302_ccad40c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2026-10-08T13:23:18Z",
+      "side": 1,
+      "message": "We do I think (by code inspection), cherry picking now.",
+      "parentUuid": "444286c4_69110968",
+      "revId": "78e747b69f3367bf90e39bde265d387b6427debd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
