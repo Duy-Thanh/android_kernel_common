@@ -16,6 +16,24 @@
       "message": "Create a patch on top of this one to add the new symbols to your symbol list",
       "revId": "44154bbc6f2dbce13bed54bb1862d7546c434920",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d16a6264_ebaf77b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4370043
+      },
+      "writtenOn": "2026-10-08T13:57:41Z",
+      "side": 1,
+      "message": "Update symbol list: https://android-review.googlesource.com/c/kernel/common/+/4350987",
+      "parentUuid": "d0b33c79_cb210851",
+      "revId": "44154bbc6f2dbce13bed54bb1862d7546c434920",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
