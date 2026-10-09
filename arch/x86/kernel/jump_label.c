@@ -16,8 +16,9 @@
 #include <asm/alternative.h>
 #include <asm/text-patching.h>
 #include <asm/insn.h>
+#include <asm/pkvm_image.h>
 
-int arch_jump_entry_size(struct jump_entry *entry)
+static int __arch_jump_entry_size(struct jump_entry *entry)
 {
 	struct insn insn = {};
 
@@ -25,6 +26,14 @@ int arch_jump_entry_size(struct jump_entry *entry)
 	BUG_ON(insn.length != 2 && insn.length != 5);
 
 	return insn.length;
+}
+
+int arch_jump_entry_size(struct jump_entry *entry)
+{
+	if (is_pkvm_text((void *)jump_entry_code(entry)))
+		return 0;
+
+	return __arch_jump_entry_size(entry);
 }
 
 struct jump_label_patch {
@@ -42,7 +51,7 @@ __jump_label_patch(struct jump_entry *entry, enum jump_label_type type)
 	addr = (void *)jump_entry_code(entry);
 	dest = (void *)jump_entry_target(entry);
 
-	size = arch_jump_entry_size(entry);
+	size = __arch_jump_entry_size(entry);
 	switch (size) {
 	case JMP8_INSN_SIZE:
 		code = text_gen_insn(JMP8_INSN_OPCODE, addr, dest);
@@ -132,6 +141,10 @@ bool arch_jump_label_transform_queue(struct jump_entry *entry,
 		arch_jump_label_transform(entry, type);
 		return true;
 	}
+
+	if (WARN_ON_ONCE(system_state >= SYSTEM_RUNNING &&
+			 is_pkvm_text((void *)jump_entry_code(entry))))
+		return true;
 
 	mutex_lock(&text_mutex);
 	jlp = __jump_label_patch(entry, type);
