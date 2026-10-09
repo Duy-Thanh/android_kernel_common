@@ -22,6 +22,30 @@
       },
       "revId": "6107178ff76f2a57ec11af605ec28dba885209f7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa1e31a4_f997626a",
+        "filename": "mm/vmstat.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1801,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-10-09T19:47:38Z",
+      "side": 1,
+      "message": "Thanks @rkir@google.com, done.",
+      "parentUuid": "6ab168a1_ca5092ee",
+      "range": {
+        "startLine": 1801,
+        "startChar": 29,
+        "endLine": 1801,
+        "endChar": 42
+      },
+      "revId": "6107178ff76f2a57ec11af605ec28dba885209f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
