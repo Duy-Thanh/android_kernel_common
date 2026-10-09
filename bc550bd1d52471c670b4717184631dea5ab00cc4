@@ -22,6 +22,30 @@
       },
       "revId": "bc550bd1d52471c670b4717184631dea5ab00cc4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d374a80_d1f6bd82",
+        "filename": "mm/readahead.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-10-09T18:38:34Z",
+      "side": 1,
+      "message": "Yeahhhh, this report looks correct. `filemap_get_folio` or a RCU read section here looks like the way.",
+      "parentUuid": "e2a1915d_6a4ed1df",
+      "range": {
+        "startLine": 328,
+        "startChar": 0,
+        "endLine": 331,
+        "endChar": 0
+      },
+      "revId": "bc550bd1d52471c670b4717184631dea5ab00cc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
