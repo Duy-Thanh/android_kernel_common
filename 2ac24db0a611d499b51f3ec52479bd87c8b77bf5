@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b4a36d0_a9923cf7",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-10-09T18:48:30Z",
+      "side": 1,
+      "message": "s/!is_pvmfw_range/is_pvmfw_range",
+      "fixSuggestions": [
+        {
+          "fixId": "0b9a7091_48f23822",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 300,
+                "startChar": 0,
+                "endLine": 301,
+                "endChar": 0
+              },
+              "replacement": "\t\t} else if (is_pvmfw_range(phys, size)) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2ac24db0a611d499b51f3ec52479bd87c8b77bf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
