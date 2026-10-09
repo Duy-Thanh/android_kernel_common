@@ -19,7 +19,6 @@
 #include <linux/memfd.h>
 #include <linux/pid_namespace.h>
 #include <uapi/linux/memfd.h>
-#include "internal.h"
 #include "swap.h"
 
 /*
