@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5bf5d2a_3e597b61",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4011,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-10-09T18:06:48Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 4011,
+        "startChar": 15,
+        "endLine": 4011,
+        "endChar": 21
+      },
+      "revId": "d2f4a4dab754e3def7f1d441f4a87786fbd38431",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
