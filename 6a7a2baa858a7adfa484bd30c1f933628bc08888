@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d445649d_bbec816b",
+        "filename": "arch/arm64/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-09T00:19:10Z",
+      "side": 1,
+      "message": "All of the reasons you mentioned why this is fine are from upstream commits, so why isn\u0027t this also happening upstream?",
+      "range": {
+        "startLine": 124,
+        "startChar": 46,
+        "endLine": 124,
+        "endChar": 64
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e3df5f98_227e4fc1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/Kconfig",
+              "range": {
+                "startLine": 124,
+                "startChar": 0,
+                "endLine": 125,
+                "endChar": 0
+              },
+              "replacement": "\tselect ARCH_WANTS_THP_SWAP if ARM64_4K_PAGES\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6a7a2baa858a7adfa484bd30c1f933628bc08888",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
