@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87a5430b_a5f6ab12",
+        "filename": "drivers/iommu/intel/cache.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-10-09T21:53:30Z",
+      "side": 0,
+      "message": "Since `domain-\u003eqi_batch` is unused now, let\u0027s also remove `struct qi_batch _qi_batch` (and its `domain-\u003eqi_batch` assignments) from pKVM\u0027s `#ifdef __PKVM_HYP__` code. Maybe put a `TODO` for now and fix it in a follow-up CL, or if it\u0027s small enough, we can do it right in this CL too.",
+      "revId": "6e71085637ad27823163465053f5b60385145055",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
