@@ -574,6 +574,30 @@
       },
       "revId": "7f24bd9d05e623d2c8ece079f75cda4e8b8ff1ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17b18baa_039e7f6f",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-09T17:21:34Z",
+      "side": 1,
+      "message": "\u003e OTOH, after the following patch aosp/4232681, this entire fix_host_mmu_pgstate_walker() will actually become not strictly necessary, not doing anything except these BUG_ON checks\n\nSo, indeed, thanks to aosp/4232681, we can prevent this hypothetical issue just by avoiding this BUG_ON in this case. I\u0027ve prepared aosp/4354987 for that, please take a look.",
+      "parentUuid": "ffdd77ee_033b41a4",
+      "range": {
+        "startLine": 357,
+        "startChar": 0,
+        "endLine": 363,
+        "endChar": 3
+      },
+      "revId": "7f24bd9d05e623d2c8ece079f75cda4e8b8ff1ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
