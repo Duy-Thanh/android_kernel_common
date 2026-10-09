@@ -46,6 +46,30 @@
       },
       "revId": "bc550bd1d52471c670b4717184631dea5ab00cc4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2688ed37_919fb7d7",
+        "filename": "mm/readahead.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-09T18:47:05Z",
+      "side": 1,
+      "message": "Cool; I can take that up. I\u0027ll make a CL for 6.12 and 6.18 since the patch is already merged into those branches. I\u0027ll fold that CL into this version of the commit on this branch and 6.1.",
+      "parentUuid": "8d374a80_d1f6bd82",
+      "range": {
+        "startLine": 328,
+        "startChar": 0,
+        "endLine": 331,
+        "endChar": 0
+      },
+      "revId": "bc550bd1d52471c670b4717184631dea5ab00cc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
