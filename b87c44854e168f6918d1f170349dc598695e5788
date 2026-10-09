@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f784918_821efef9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-09T23:17:58Z",
+      "side": 1,
+      "message": "AFAICS this will make jump_label_text_reserved() erroneously return false for a range that starts at a pKVM\u0027s static key (since `jump_entry_code(entry) + jump_entry_size(entry) \u003e (unsigned long)start` in addr_conflict() will be false)?",
+      "revId": "b87c44854e168f6918d1f170349dc598695e5788",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
