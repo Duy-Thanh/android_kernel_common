@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4e70e5c_db6c5f92",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-09T23:48:27Z",
+      "side": 1,
+      "message": "So `get_wrap_state()` can still block here in case of a long load operation. Since rewrap, empty, etc can fail because the wrapState you added, do we still need to hold the lock the entire time? If not, we can drop it so that this can proceed quicker?",
+      "range": {
+        "startLine": 290,
+        "startChar": 8,
+        "endLine": 291,
+        "endChar": 40
+      },
+      "revId": "2062595b0ac4fa4f3ffe9e1165a3560130a03ed8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f92bef8_2d28215c",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-09T23:48:27Z",
+      "side": 1,
+      "message": "Can\u0027t this result in a deadlock with `rewrap()`? If one thread enters `rewrap()`, and acquires the wrap\u0027s `inner.lock`, and then another thread enters `acquire_ownership()`, and acquires the same wrap\u0027s `state.lock`, and the wrap is available, they\u0027ll both be waiting on each other to release locks that they hold.",
+      "range": {
+        "startLine": 312,
+        "startChar": 0,
+        "endLine": 312,
+        "endChar": 44
+      },
+      "revId": "2062595b0ac4fa4f3ffe9e1165a3560130a03ed8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72b39d3a_3f012844",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-09T23:48:27Z",
+      "side": 1,
+      "message": "If `*state_guard` evaluates to `WrapState::UsageBlocked`, that implies that the wrap is being emptied or rewrapped, so shouldn\u0027t this be `ENOENT` in that scenario, and then if it\u0027s any other value except `WrapState::Available`, it should be `EINVAL`?",
+      "range": {
+        "startLine": 313,
+        "startChar": 0,
+        "endLine": 316,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "52832d0f_ec87ad2e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/wrapfd/wrap.rs",
+              "range": {
+                "startLine": 313,
+                "startChar": 0,
+                "endLine": 316,
+                "endChar": 0
+              },
+              "replacement": "        match *state_guard {\n            WrapState::Available \u003d\u003e {}\n            WrapState::UsageBlocked \u003d\u003e return Err(ENOENT),\n            _ \u003d\u003e return Err(EINVAL),\n        }\n"
+            },
+            {
+              "path": "drivers/android/wrapfd/wrap.rs",
+              "range": {
+                "startLine": 842,
+                "startChar": 0,
+                "endLine": 845,
+                "endChar": 0
+              },
+              "replacement": "        match *state_guard {\n            WrapState::Available \u003d\u003e {}\n            WrapState::UsageBlocked \u003d\u003e return Err(ENOENT),\n            _ \u003d\u003e return Err(EINVAL),\n        }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2062595b0ac4fa4f3ffe9e1165a3560130a03ed8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92315ec4_8bb1f070",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-09T23:48:27Z",
+      "side": 1,
+      "message": "This should go before the `self.inner.lock` acquisition to avoid the deadlock I mentioned.",
+      "range": {
+        "startLine": 430,
+        "startChar": 0,
+        "endLine": 432,
+        "endChar": 10
+      },
+      "revId": "2062595b0ac4fa4f3ffe9e1165a3560130a03ed8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
