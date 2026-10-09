@@ -550,6 +550,30 @@
       },
       "revId": "7f24bd9d05e623d2c8ece079f75cda4e8b8ff1ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffdd77ee_033b41a4",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-09T15:20:18Z",
+      "side": 1,
+      "message": "\u003e This makes me think that maybe we should, once again, just do more or less what pKVM-ARM does (in its fix_host_ownership() which walks hypervisor\u0027s page table in order to unmap in host\u0027s page table whatever is mapped in hypervisor\u0027s one [...]\n\nWe can\u0027t do that just yet, since we currently map the entire RAM in the hypervisor\u0027s page table, not just the hypervisor-owned regions (b/541580341).",
+      "parentUuid": "8b0db43f_4c3b86a7",
+      "range": {
+        "startLine": 357,
+        "startChar": 0,
+        "endLine": 363,
+        "endChar": 3
+      },
+      "revId": "7f24bd9d05e623d2c8ece079f75cda4e8b8ff1ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
