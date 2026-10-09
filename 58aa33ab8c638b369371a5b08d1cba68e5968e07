@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d40f2664_3db36f79",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-10-09T18:59:40Z",
+      "side": 1,
+      "message": "Let\u0027s land the 6.12 version then update the cherry pick ID\u0027s as necessary.",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 68
+      },
+      "revId": "58aa33ab8c638b369371a5b08d1cba68e5968e07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
