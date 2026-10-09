@@ -16,6 +16,57 @@
       "message": "Respin Bug: b/571800346",
       "revId": "504f863c9dce9819e63f4298aa7486ecc9d4cef5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68828488_eba45cb6",
+        "filename": "drivers/virt/gunyah/gunyah_vcpu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-10-09T18:35:21Z",
+      "side": 1,
+      "message": "Are you sure you can read this value before taking the `vcpu-\u003erun_lock` mutex?",
+      "range": {
+        "startLine": 241,
+        "startChar": 15,
+        "endLine": 241,
+        "endChar": 34
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "79df10b9_f40a1421",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/virt/gunyah/gunyah_vcpu.c",
+              "range": {
+                "startLine": 241,
+                "startChar": 0,
+                "endLine": 242,
+                "endChar": 0
+              },
+              "replacement": "\tu32 vcpu_id;\n"
+            },
+            {
+              "path": "drivers/virt/gunyah/gunyah_vcpu.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\tvcpu_id \u003d vcpu-\u003eticket.label;\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "504f863c9dce9819e63f4298aa7486ecc9d4cef5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
