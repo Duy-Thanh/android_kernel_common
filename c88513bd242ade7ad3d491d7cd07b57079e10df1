@@ -70,6 +70,24 @@
       "parentUuid": "59f9131c_1f7ab4f0",
       "revId": "c88513bd242ade7ad3d491d7cd07b57079e10df1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f789726_91dfb5a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2055842
+      },
+      "writtenOn": "2026-10-09T07:33:35Z",
+      "side": 1,
+      "message": "I updated the ABI for aarch64 and there are no changes. Unless we see presubmit failures we should be good to go.",
+      "parentUuid": "4d0f6822_dba77365",
+      "revId": "c88513bd242ade7ad3d491d7cd07b57079e10df1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
