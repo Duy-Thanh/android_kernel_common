@@ -878,10 +878,13 @@ static void ip_vs_proc_conn(struct netns_ipvs *ipvs, struct ip_vs_conn_param *pa
 		spin_lock_bh(&cp->lock);
 		if ((cp->flags ^ flags) & IP_VS_CONN_F_INACTIVE &&
 		    !(flags & IP_VS_CONN_F_TEMPLATE) && dest) {
-			if (flags & IP_VS_CONN_F_INACTIVE)
+			if (flags & IP_VS_CONN_F_INACTIVE) {
 				atomic_dec(&dest->activeconns);
-			else
+				atomic_inc(&dest->inactconns);
+			} else {
 				atomic_inc(&dest->activeconns);
+				atomic_dec(&dest->inactconns);
+			}
 		}
 		flags &= IP_VS_CONN_F_BACKUP_UPD_MASK;
 		flags |= cp->flags & ~IP_VS_CONN_F_BACKUP_UPD_MASK;
