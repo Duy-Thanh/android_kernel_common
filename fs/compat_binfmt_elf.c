@@ -151,4 +151,5 @@
 /*
  * We share all the actual code with the native (64-bit) version.
  */
+#define P3S_USER_PAGES_ALLOW_NESTED
 #include "binfmt_elf.c"

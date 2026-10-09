@@ -7,7 +7,8 @@
  * C source files (.c) that opt into dynamic PAGE_SIZE for user address
  * spaces. It must NEVER be included in header files (.h).
  */
-#if defined(__INCLUDE_LEVEL__) && __INCLUDE_LEVEL__ > 1
+#if defined(__INCLUDE_LEVEL__) && __INCLUDE_LEVEL__ > 1 && \
+	!defined(P3S_USER_PAGES_ALLOW_NESTED)
 #error "Must not include <linux/p3s_user_pages.h> from header files"
 #endif
 
