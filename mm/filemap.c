@@ -18,7 +18,6 @@
 #include <linux/uaccess.h>
 #include <linux/capability.h>
 #include <linux/kernel_stat.h>
-#include <linux/ktime.h>
 #include <linux/gfp.h>
 #include <linux/mm.h>
 #include <linux/swap.h>
@@ -60,7 +59,6 @@
 #include <linux/buffer_head.h> /* for try_to_free_buffers */
 
 #include <asm/mman.h>
-#include <trace/hooks/sched.h>
 
 void _trace_android_rvh_mapping_shrinkable(bool *shrinkable)
 {
@@ -1346,17 +1344,7 @@ repeat:
 			if (signal_pending_state(state, current))
 				break;
 
-			if (trace_android_vh_folio_wait_bit_profile_enabled()) {
-				u64 ts = ktime_get_ns();
-				unsigned int saved_flags = current->flags;
-
-				io_schedule();
-				trace_android_vh_folio_wait_bit_profile(
-					_RET_IP_, ktime_get_ns() - ts,
-					bit_nr, saved_flags);
-			} else {
-				io_schedule();
-			}
+			io_schedule();
 			continue;
 		}
 
