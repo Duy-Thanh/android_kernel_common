@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c80c2ffa_bd760df6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-10-09T17:30:26Z",
+      "side": 1,
+      "message": "There are numerous problems with this backport, primarily from not backporting `mm/mglru: rework aging feedback` and `mm/mglru: rework type selection` including:\n\n- Incorrect assignment to `can_swap` (wrong type)\n- Incorrect `VM_WARN_ON_ONCE` in `inc_max_seq`\n- Wrong min_seq / swappiness check in `isolate_folios`\n\n- Missing upstream fixes to `swappiness\u003dmax` reclaim such as `mm/mglru: fix anon-only reclaim evicting file pages when swappiness\u003dmax` and `mm/vmscan: fix anon-only reclaim evicting file pages when swappiness\u003dmax`.\n\nThis code is too complicated to backport and maintain on 6.6 in my opinion. The original report is not using this proactive reclaim path anyway, so I don\u0027t think we should attempt this.",
+      "revId": "4c2258e3fdefe4f52a80e5bbfc78a1ffab90a983",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
