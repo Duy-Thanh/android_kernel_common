@@ -50,6 +50,23 @@
       "message": "Please help merge this gerrit, thanks!",
       "revId": "910c28429dd10bfdf9ef8b3b83df286887185d1c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "056d935e_170f56d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3486811
+      },
+      "writtenOn": "2026-10-09T04:16:25Z",
+      "side": 1,
+      "message": "@willmcvicker@google.com \nplease help to trigger presubmit-verified, thanks！",
+      "revId": "910c28429dd10bfdf9ef8b3b83df286887185d1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
