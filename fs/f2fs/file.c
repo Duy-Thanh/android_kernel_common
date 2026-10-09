@@ -24,6 +24,7 @@
 #include <linux/fileattr.h>
 #include <linux/fadvise.h>
 #include <linux/iomap.h>
+#include <linux/dma-buf.h>
 
 #include "f2fs.h"
 #include "node.h"
@@ -4643,6 +4644,8 @@ out:
 	return ret;
 }
 
+static int f2fs_ioc_load_dmabuf(struct file *filp, unsigned long arg);
+
 static long __f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 {
 	switch (cmd) {
@@ -4733,6 +4736,8 @@ static long __f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		return f2fs_ioc_get_dev_alias_file(filp, arg);
 	case F2FS_IOC_IO_PRIO:
 		return f2fs_ioc_io_prio(filp, arg);
+	case F2FS_IOC_LOAD_DMABUF:
+		return f2fs_ioc_load_dmabuf(filp, arg);
 	default:
 		return -ENOTTY;
 	}
@@ -4859,6 +4864,234 @@ static ssize_t f2fs_dio_read_iter(struct kiocb *iocb, struct iov_iter *to)
 out:
 	trace_f2fs_direct_IO_exit(inode, pos, count, READ, ret);
 	return ret;
+}
+
+static ssize_t f2fs_file_read_iter(struct kiocb *iocb, struct iov_iter *to);
+
+/*
+ * The range is read in chunks with up to F2FS_DMABUF_DEPTH async direct I/Os
+ * in flight. Chunks keep bios small: a kvec of physically contiguous pages
+ * makes huge bios, and every split of a bio makes blk-crypto check every page
+ * of the rest again. The CPU moves a finished chunk while the next ones are
+ * read.
+ */
+#define F2FS_DMABUF_CHUNK	SZ_4M
+#define F2FS_DMABUF_DEPTH	4
+
+struct f2fs_dmabuf_chunk {
+	struct kiocb iocb;
+	struct iov_iter iter;
+	struct completion done;
+	ssize_t ret;
+	u64 off;		/* offset in the read range */
+	u64 len;
+};
+
+static void f2fs_dmabuf_chunk_done(struct kiocb *iocb, long ret)
+{
+	struct f2fs_dmabuf_chunk *c =
+		container_of(iocb, struct f2fs_dmabuf_chunk, iocb);
+
+	c->ret = ret;
+	complete(&c->done);
+}
+
+/* reads the next len bytes of iter at pos asynchronously */
+static void f2fs_dmabuf_chunk_issue(struct f2fs_dmabuf_chunk *c,
+				    struct file *filp, struct iov_iter *iter,
+				    loff_t pos, u64 off, u64 len)
+{
+	ssize_t ret;
+
+	c->off = off;
+	c->len = len;
+	c->iter = *iter;
+	iov_iter_truncate(&c->iter, len);
+	iov_iter_advance(iter, len);
+	init_completion(&c->done);
+	init_sync_kiocb(&c->iocb, filp);
+	c->iocb.ki_pos = pos;
+	c->iocb.ki_flags |= IOCB_DIRECT;
+	c->iocb.ki_complete = f2fs_dmabuf_chunk_done;
+
+	ret = f2fs_file_read_iter(&c->iocb, &c->iter);
+	if (ret != -EIOCBQUEUED)
+		f2fs_dmabuf_chunk_done(&c->iocb, ret);
+}
+
+/*
+ * F2FS_IOC_LOAD_DMABUF: direct read of a file range into a dma_buf.
+ *
+ * Like wrapfd, the dma_buf is vmapped inside dma_buf_begin/end_cpu_access()
+ * and read with f2fs_file_read_iter() and IOCB_DIRECT, so the storage DMA
+ * writes the buffer. What the CPU has to write, like zeroes for holes or a
+ * buffered fallback, goes through the same mapping, except
+ * blk-crypto-fallback, which decrypts through the linear map and so needs a
+ * cached buffer.
+ *
+ * Direct I/O needs block alignment, so when file_offset, dmabuf_offset or len
+ * is not block aligned:
+ *  - the partial first and last blocks are read into a bounce buffer, and
+ *  - if file_offset and dmabuf_offset are at different offsets in a block, the
+ *    middle is read to the next block aligned place in the dma_buf and then
+ *    moved back to where it belongs.
+ * The read never writes the dma_buf outside the requested range. It is done in
+ * F2FS_DMABUF_CHUNK chunks, and each chunk is moved while the next are read.
+ */
+static int f2fs_ioc_load_dmabuf(struct file *filp, unsigned long arg)
+{
+	struct inode *inode = file_inode(filp);
+	u64 blksize = i_blocksize(inode);
+	struct f2fs_load_dmabuf req;
+	struct dma_buf *dmabuf;
+	struct iosys_map map;
+	struct page *bounce = NULL;
+	struct f2fs_dmabuf_chunk *chunks = NULL;
+	struct kvec iov[3];
+	struct iov_iter iter;
+	unsigned int nr = 0, issued = 0, finished = 0;
+	u64 total, hb, off = 0;
+	u64 head, start, end, mid, dst, land, nmid, ntail, tboff, nbounce;
+	u64 need;
+	u8 *va, *b = NULL;
+	int err, err2;
+
+	if (copy_from_user(&req, (void __user *)arg, sizeof(req)))
+		return -EFAULT;
+	if (req.flags || !req.len || req.len > MAX_RW_COUNT)
+		return -EINVAL;
+	if (!(filp->f_mode & FMODE_READ))
+		return -EBADF;
+	if (!S_ISREG(inode->i_mode))
+		return -EINVAL;
+	if (req.file_offset >= inode->i_sb->s_maxbytes)
+		return -EINVAL;
+
+	dmabuf = dma_buf_get(req.dmabuf_fd);
+	if (IS_ERR(dmabuf))
+		return PTR_ERR(dmabuf);
+
+	err = -EBADF;
+	if (!(dmabuf->file->f_mode & FMODE_WRITE))
+		goto out_put;
+	err = -EINVAL;
+	if (req.dmabuf_offset > dmabuf->size ||
+	    req.len > dmabuf->size - req.dmabuf_offset)
+		goto out_put;
+	if (req.file_offset + req.len > i_size_read(inode))
+		goto out_put;
+
+	/*
+	 * File range [start, end) is read: [start, mid) into the bounce buffer
+	 * if file_offset is not block aligned, then nmid bytes to land in the
+	 * dma_buf, then ntail bytes into the bounce buffer. The data read to
+	 * land belongs at dst.
+	 */
+	head = req.file_offset & (blksize - 1);
+	start = req.file_offset - head;
+	end = round_up(req.file_offset + req.len, blksize);
+	mid = start + (head ? blksize : 0);
+	dst = req.dmabuf_offset + (mid - req.file_offset);
+	land = round_up(dst, blksize);
+	nmid = 0;
+	if (req.dmabuf_offset + req.len > land)
+		nmid = min(end - mid, round_down(req.dmabuf_offset + req.len -
+						 land, blksize));
+	ntail = end - mid - nmid;
+	tboff = head ? blksize : 0;	/* the tail follows the head block */
+	nbounce = tboff + ntail;
+
+	if (nbounce) {
+		err = -ENOMEM;
+		bounce = alloc_pages(GFP_KERNEL, get_order(nbounce));
+		if (!bounce)
+			goto out_put;
+		b = page_address(bounce);
+	}
+
+	err = dma_buf_begin_cpu_access(dmabuf, DMA_BIDIRECTIONAL);
+	if (err)
+		goto out_free;
+	/* a dma_buf that the kernel cannot map is not supported */
+	err = -EOPNOTSUPP;
+	if (dma_buf_vmap_unlocked(dmabuf, &map))
+		goto out_end;
+	if (map.is_iomem)
+		goto out_vunmap;
+	va = map.vaddr;
+
+	if (head)
+		iov[nr++] = (struct kvec){ b, blksize };
+	if (nmid)
+		iov[nr++] = (struct kvec){ va + land, nmid };
+	if (ntail)
+		iov[nr++] = (struct kvec){ b + tboff, ntail };
+	iov_iter_kvec(&iter, ITER_DEST, iov, nr, end - start);
+
+	total = end - start;
+	chunks = kcalloc(F2FS_DMABUF_DEPTH, sizeof(*chunks), GFP_KERNEL);
+	err = -ENOMEM;
+	if (!chunks)
+		goto out_vunmap;
+	err = 0;
+	hb = head ? blksize : 0;	/* the middle starts after the head */
+	need = req.file_offset + req.len - start;
+
+	/* chunks finish in order of issue, the moves must also be in order */
+	while (finished < issued || (off < total && !err)) {
+		struct f2fs_dmabuf_chunk *c;
+		u64 a, z;
+
+		while (off < total && !err &&
+		       issued - finished < F2FS_DMABUF_DEPTH) {
+			u64 n = min_t(u64, total - off, F2FS_DMABUF_CHUNK);
+
+			c = &chunks[issued % F2FS_DMABUF_DEPTH];
+			f2fs_dmabuf_chunk_issue(c, filp, &iter, start + off,
+						off, n);
+			issued++;
+			off += n;
+		}
+		c = &chunks[finished % F2FS_DMABUF_DEPTH];
+		wait_for_completion(&c->done);
+		finished++;
+		if (c->ret < 0 || (c->ret < c->len && c->off + c->ret < need)) {
+			/* error, or the file was truncated */
+			if (!err)
+				err = c->ret < 0 ? c->ret : -EINVAL;
+			continue;
+		}
+		if (err || land == dst)
+			continue;
+		/* move the middle of this chunk, later chunks land behind it */
+		a = max(c->off, hb);
+		z = min(c->off + c->len, hb + nmid);
+		if (a < z)
+			memmove(va + dst + (a - hb), va + land + (a - hb),
+				z - a);
+	}
+
+	if (!err) {
+		if (head)
+			memcpy(va + req.dmabuf_offset, b + head,
+			       min(blksize - head, req.len));
+		if (ntail)
+			memcpy(va + dst + nmid, b + tboff,
+			       req.file_offset + req.len - mid - nmid);
+	}
+	kfree(chunks);
+out_vunmap:
+	dma_buf_vunmap_unlocked(dmabuf, &map);
+out_end:
+	err2 = dma_buf_end_cpu_access(dmabuf, DMA_BIDIRECTIONAL);
+	if (!err)
+		err = err2;
+out_free:
+	if (bounce)
+		__free_pages(bounce, get_order(nbounce));
+out_put:
+	dma_buf_put(dmabuf);
+	return err;
 }
 
 static void f2fs_trace_rw_file_path(struct file *file, loff_t pos, size_t count,
@@ -5479,6 +5712,7 @@ long f2fs_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 	case F2FS_IOC_COMPRESS_FILE:
 	case F2FS_IOC_GET_DEV_ALIAS_FILE:
 	case F2FS_IOC_IO_PRIO:
+	case F2FS_IOC_LOAD_DMABUF:
 		break;
 	default:
 		return -ENOIOCTLCMD;
