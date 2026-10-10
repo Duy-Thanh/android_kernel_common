@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b9f7b84_1a1a6cfb",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-10-10T18:17:24Z",
+      "side": 1,
+      "message": "Hi Isaac, why build bug? Do we expect memcg is always enabled now?",
+      "range": {
+        "startLine": 293,
+        "startChar": 1,
+        "endLine": 293,
+        "endChar": 10
+      },
+      "revId": "00f81ec605557d34ff9a33b7d890f2c707260d86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
