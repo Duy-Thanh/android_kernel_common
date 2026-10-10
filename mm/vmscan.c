@@ -5259,6 +5259,18 @@ static void lru_gen_shrink_lruvec(struct lruvec *lruvec, struct scan_control *sc
 	blk_finish_plug(&plug);
 }
 
+#ifdef CONFIG_MEMCG
+static unsigned long shrink_root_memcg_slab(gfp_t gfp_mask, int nid, int priority)
+{
+	return shrink_slab(gfp_mask, nid, root_mem_cgroup, priority);
+}
+#else
+static unsigned long shrink_root_memcg_slab(gfp_t gfp_mask, int nid, int priority)
+{
+	return 0;
+}
+#endif
+
 static void lru_gen_shrink_node(struct pglist_data *pgdat, struct scan_control *sc)
 {
 	struct blk_plug plug;
@@ -5288,8 +5300,7 @@ static void lru_gen_shrink_node(struct pglist_data *pgdat, struct scan_control *
 	if (mem_cgroup_disabled()) {
 		shrink_one(&pgdat->__lruvec, sc);
 	} else {
-		shrink_slab(sc->gfp_mask, pgdat->node_id, root_mem_cgroup,
-			    sc->priority);
+		shrink_root_memcg_slab(sc->gfp_mask, pgdat->node_id, sc->priority);
 		if (sc->nr_reclaimed < sc->nr_to_reclaim)
 			shrink_many(pgdat, sc);
 	}
