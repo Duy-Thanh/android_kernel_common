@@ -96,6 +96,8 @@
   bit_wait
   bit_wait_timeout
   __blk_alloc_disk
+  blk_crypto_profile_destroy
+  blk_crypto_profile_init
   blk_execute_rq
   blk_execute_rq_nowait
   blk_get_queue
