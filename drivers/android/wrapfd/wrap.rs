@@ -574,6 +574,9 @@ impl AnonInodeFileInterface for Wrap {
          */
         vma.set_no_remap_file_pages();
 
+        // We want clients to create these mappings explicitly, rather than implicitly via fork().
+        vma.set_dontcopy();
+
         // SAFETY: `vma` is a valid reference to `struct vm_area_struct`.
         let vma_file_raw = unsafe { (*vma.as_ptr()).vm_file };
 
