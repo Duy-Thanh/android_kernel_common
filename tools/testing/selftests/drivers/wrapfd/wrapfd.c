@@ -682,18 +682,40 @@ static void test_wrap_fork(struct __test_metadata *_metadata,
 	/* Check content of the buffer before modification */
 	ASSERT_EQ(cmp_content(_metadata, self, wrapfd, 0, 0, self->size), 0);
 
-	/* Modify buffer content */
 	ptr = mmap(NULL, self->size, PROT_READ | PROT_WRITE, MAP_SHARED,
 		   wrapfd, 0);
 	ASSERT_NE(ptr, MAP_FAILED);
 
+	/* Ensure that the mapping is not copied */
 	pid = fork();
 	ASSERT_FALSE(pid < 0);
 	if (pid == 0) {
+		/*
+		 * The mapping should not be inherited, so this should trigger a segfault and
+		 * terminate the process, so control should not get to the exit statement.
+		 *
+		 * Use volatile to ensure this isn't optimized out.
+		 */
+		(void)*(volatile char *)ptr;
+		exit(EXIT_SUCCESS);
+	} else {
+		ASSERT_NE(wait(&status), -1);
+		ASSERT_TRUE(WIFSIGNALED(status));
+		ASSERT_EQ(WTERMSIG(status), SIGSEGV);
+	}
+
+	pid = fork();
+	ASSERT_FALSE(pid < 0);
+	if (pid == 0) {
+		ptr = mmap(NULL, self->size, PROT_READ | PROT_WRITE, MAP_SHARED, wrapfd, 0);
+		ASSERT_NE(ptr, MAP_FAILED);
+
 		/* Check the content from the child */
 		ASSERT_EQ(dmabuf_sync_start(wrapfd, DMA_BUF_SYNC_READ), 0);
 		ASSERT_EQ(memcmp(self->content, ptr, self->size), 0);
 		ASSERT_EQ(dmabuf_sync_end(wrapfd, DMA_BUF_SYNC_READ), 0);
+		ASSERT_EQ(munmap(ptr, self->size), 0);
+		close(wrapfd);
 		exit(EXIT_SUCCESS);
 	} else {
 		ASSERT_NE(wait(&status), -1);
