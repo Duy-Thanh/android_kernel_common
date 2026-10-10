@@ -116,8 +116,6 @@ impl DmaBufContent {
     }
 
     pub(crate) fn ioctl(&self, cmd: u32, arg: usize) -> Result<isize> {
-        // pr_info!("DmaBufContent::ioctl\n");
-
         let file = self.dmabuf.file();
         let file_ptr = file.as_ptr();
 
@@ -209,8 +207,6 @@ impl DmaBufContent {
         buf_offs: Offset,
         len: Offset,
     ) -> Result<isize> {
-        // pr_info!("DmaBufContent::load\n");
-
         let file_offs: usize = file_offs.try_into()?;
         let buf_offs: usize = buf_offs.try_into()?;
         let len: usize = len.try_into()?;
