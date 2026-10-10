@@ -262,6 +262,11 @@ static int sc_swappiness(struct scan_control *sc, struct mem_cgroup *memcg)
 		return *sc->proactive_swappiness;
 	return mem_cgroup_swappiness(memcg);
 }
+
+static unsigned long shrink_root_memcg_slab(gfp_t gfp_mask, int nid, int priority)
+{
+	return shrink_slab(gfp_mask, nid, root_mem_cgroup, priority);
+}
 #else
 static bool cgroup_reclaim(struct scan_control *sc)
 {
@@ -281,6 +286,12 @@ static bool writeback_throttling_sane(struct scan_control *sc)
 static int sc_swappiness(struct scan_control *sc, struct mem_cgroup *memcg)
 {
 	return READ_ONCE(vm_swappiness);
+}
+
+static unsigned long shrink_root_memcg_slab(gfp_t gfp_mask, int nid, int priority)
+{
+	BUILD_BUG();
+	return 0;
 }
 #endif
 
@@ -5288,8 +5299,7 @@ static void lru_gen_shrink_node(struct pglist_data *pgdat, struct scan_control *
 	if (mem_cgroup_disabled()) {
 		shrink_one(&pgdat->__lruvec, sc);
 	} else {
-		shrink_slab(sc->gfp_mask, pgdat->node_id, root_mem_cgroup,
-			    sc->priority);
+		shrink_root_memcg_slab(sc->gfp_mask, pgdat->node_id, sc->priority);
 		if (sc->nr_reclaimed < sc->nr_to_reclaim)
 			shrink_many(pgdat, sc);
 	}
