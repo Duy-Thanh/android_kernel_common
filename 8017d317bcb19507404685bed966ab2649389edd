@@ -16,6 +16,23 @@
       "message": "hi hubert\nplease cc someone others to finish review and merge, thanks",
       "revId": "8017d317bcb19507404685bed966ab2649389edd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fae1b99_ae05f50c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4270060
+      },
+      "writtenOn": "2026-10-11T09:17:48Z",
+      "side": 1,
+      "message": "hi Todd, \nplease help review, it\u0027s merged in mainline",
+      "revId": "8017d317bcb19507404685bed966ab2649389edd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
