@@ -34,6 +34,24 @@
       "parentUuid": "4f784918_821efef9",
       "revId": "b87c44854e168f6918d1f170349dc598695e5788",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03604da0_061eae25",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-11T21:17:46Z",
+      "side": 1,
+      "message": "\u003e And I think it should be safe since it has impact only on addr_conflict(), which is only used for __jump_label_text_reserved (which itself is used only for kprobes case anyway, and probing .pkvm.text itself is blocked by the kprobe blacklist in the next patch).\n\nThis is still pretty hacky and fragile, right?\n\nAnd I see there is at least one more caller of `jump_label_text_reserved()`, in `copy_optimized_instructions()` in arch/x86/kernel/kprobes/opt.c, where it is *not* gated by the blacklist?",
+      "parentUuid": "a0cee47a_1082b0f7",
+      "revId": "b87c44854e168f6918d1f170349dc598695e5788",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
