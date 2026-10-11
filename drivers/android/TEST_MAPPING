@@ -331,14 +331,5 @@
         }
       ]
     }
-  ],
-"avf-postsubmit": [
-    {
-      "imports": [
-        {
-          "path": "packages/modules/Virtualization"
-        }
-      ]
-    }
   ]
 }
