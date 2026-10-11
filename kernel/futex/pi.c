@@ -33,7 +33,7 @@ int refill_pi_state_cache(void)
 	return 0;
 }
 
-static struct futex_pi_state *alloc_pi_state(void)
+struct futex_pi_state *alloc_pi_state(void)
 {
 	struct futex_pi_state *pi_state = current->pi_state_cache;
 
@@ -51,18 +51,18 @@ static void pi_state_update_owner(struct futex_pi_state *pi_state,
 	lockdep_assert_held(&pi_state->pi_mutex.wait_lock);
 
 	if (old_owner) {
-		raw_spin_lock(&old_owner->pi_lock);
+		raw_spin_lock(&old_owner->pi_futex_lock);
 		WARN_ON(list_empty(&pi_state->list));
 		list_del_init(&pi_state->list);
-		raw_spin_unlock(&old_owner->pi_lock);
+		raw_spin_unlock(&old_owner->pi_futex_lock);
 	}
 
 	if (new_owner) {
-		raw_spin_lock(&new_owner->pi_lock);
+		raw_spin_lock(&new_owner->pi_futex_lock);
 		WARN_ON(!list_empty(&pi_state->list));
 		list_add(&pi_state->list, &new_owner->pi_state_list);
 		pi_state->owner = new_owner;
-		raw_spin_unlock(&new_owner->pi_lock);
+		raw_spin_unlock(&new_owner->pi_futex_lock);
 	}
 }
 
@@ -177,7 +177,7 @@ void put_pi_state(struct futex_pi_state *pi_state)
  *
  *	(and pi_mutex 'obviously')
  *
- * p->pi_lock:
+ * p->pi_futex_lock:
  *
  *	p->pi_state_list -> pi_state->list, relation
  *	pi_mutex->owner -> pi_state->owner, relation
@@ -191,7 +191,7 @@ void put_pi_state(struct futex_pi_state *pi_state)
  *
  *   hb->lock
  *     pi_mutex->wait_lock
- *       p->pi_lock
+ *       p->pi_futex_lock
  *
  */
 
@@ -200,9 +200,10 @@ void put_pi_state(struct futex_pi_state *pi_state)
  * the pi_state against the user space value. If correct, attach to
  * it.
  */
-static int attach_to_pi_state(u32 __user *uaddr, u32 uval,
-			      struct futex_pi_state *pi_state,
-			      struct futex_pi_state **ps)
+int attach_to_pi_state(u32 __user *uaddr, u32 uval,
+		       struct futex_pi_state *pi_state,
+		       struct futex_pi_state **ps,
+		       bool ping)
 {
 	pid_t pid = uval & FUTEX_TID_MASK;
 	u32 uval2;
@@ -232,7 +233,10 @@ static int attach_to_pi_state(u32 __user *uaddr, u32 uval,
 	 * Now that we have a pi_state, we can acquire wait_lock
 	 * and do the state validation.
 	 */
-	raw_spin_lock_irq(&pi_state->pi_mutex.wait_lock);
+	if (!ping)
+		raw_spin_lock_irq(&pi_state->pi_mutex.wait_lock);
+	else
+		raw_spin_lock_irq(&pi_state->ping_mutex.wait_lock);
 
 	/*
 	 * Since {uval, pi_state} is serialized by wait_lock, and our current
@@ -292,12 +296,25 @@ static int attach_to_pi_state(u32 __user *uaddr, u32 uval,
 	 * state exists then the owner TID must be the same as the
 	 * user space TID. [9/10]
 	 */
-	if (pid != task_pid_vnr(pi_state->owner))
-		goto out_einval;
+	if (pid != task_pid_vnr(pi_state->owner)) {
+		if (!ping) {
+			goto out_einval;
+		} else {
+			ret = fixup_ping_owner_after_user_steal(pi_state,
+								uaddr, uval);
+			if (ret)
+				goto out_error;
+		}
+	}
 
 out_attach:
-	get_pi_state(pi_state);
-	raw_spin_unlock_irq(&pi_state->pi_mutex.wait_lock);
+	if (!ping) {
+		get_pi_state(pi_state);
+		raw_spin_unlock_irq(&pi_state->pi_mutex.wait_lock);
+	} else {
+		get_ping_state(pi_state);
+		raw_spin_unlock_irq(&pi_state->ping_mutex.wait_lock);
+	}
 	*ps = pi_state;
 	return 0;
 
@@ -318,8 +335,8 @@ out_error:
 	return ret;
 }
 
-static int handle_exit_race(u32 __user *uaddr, u32 uval,
-			    struct task_struct *tsk)
+int pi_handle_exit_race(u32 __user *uaddr, u32 uval,
+			struct task_struct *tsk)
 {
 	u32 uval2;
 
@@ -375,7 +392,8 @@ static int handle_exit_race(u32 __user *uaddr, u32 uval,
 }
 
 static void __attach_to_pi_owner(struct task_struct *p, union futex_key *key,
-				 struct futex_pi_state **ps)
+				 struct futex_pi_state **ps,
+				 bool ping)
 {
 	/*
 	 * No existing pi state. First waiter. [2]
@@ -385,17 +403,29 @@ static void __attach_to_pi_owner(struct task_struct *p, union futex_key *key,
 	 */
 	struct futex_pi_state *pi_state = alloc_pi_state();
 
-	/*
-	 * Initialize the pi_mutex in locked state and make @p
-	 * the owner of it:
-	 */
-	rt_mutex_init_proxy_locked(&pi_state->pi_mutex, p);
+	if (!ping) {
+		/*
+		 * Initialize the pi_mutex in locked state and make @p
+		 * the owner of it:
+		 */
+		rt_mutex_init_proxy_locked(&pi_state->pi_mutex, p);
+		WARN_ON(!list_empty(&pi_state->list));
+		list_add(&pi_state->list, &p->pi_state_list);
+	} else {
+		/*
+		 * Initialize the pi_mutex in locked state and make @p
+		 * the owner of it:
+		 */
+		pi_state->ping_mutex.owner = p;
+		raw_spin_lock_init(&pi_state->ping_mutex.wait_lock);
+
+		WARN_ON(!list_empty(&pi_state->list));
+		list_add(&pi_state->list, &p->ping_state_list);
+	}
 
 	/* Store the key for possible exit cleanups: */
 	pi_state->key = *key;
 
-	WARN_ON(!list_empty(&pi_state->list));
-	list_add(&pi_state->list, &p->pi_state_list);
 	/*
 	 * Assignment without holding pi_state->pi_mutex.wait_lock is safe
 	 * because there is no concurrency as the object is not published yet.
@@ -408,9 +438,10 @@ static void __attach_to_pi_owner(struct task_struct *p, union futex_key *key,
  * Lookup the task for the TID provided from user space and attach to
  * it after doing proper sanity checks.
  */
-static int attach_to_pi_owner(u32 __user *uaddr, u32 uval, union futex_key *key,
-			      struct futex_pi_state **ps,
-			      struct task_struct **exiting)
+int attach_to_pi_owner(u32 __user *uaddr, u32 uval, union futex_key *key,
+		       struct futex_pi_state **ps,
+		       struct task_struct **exiting,
+		       bool ping)
 {
 	pid_t pid = uval & FUTEX_TID_MASK;
 	struct task_struct *p;
@@ -426,7 +457,7 @@ static int attach_to_pi_owner(u32 __user *uaddr, u32 uval, union futex_key *key,
 		return -EAGAIN;
 	p = find_get_task_by_vpid(pid);
 	if (!p)
-		return handle_exit_race(uaddr, uval, NULL);
+		return pi_handle_exit_race(uaddr, uval, NULL);
 
 	if (unlikely(p->flags & PF_KTHREAD)) {
 		put_task_struct(p);
@@ -436,18 +467,18 @@ static int attach_to_pi_owner(u32 __user *uaddr, u32 uval, union futex_key *key,
 	/*
 	 * We need to look at the task state to figure out, whether the
 	 * task is exiting. To protect against the change of the task state
-	 * in futex_exit_release(), we do this protected by p->pi_lock:
+	 * in futex_exit_release(), we do this protected by p->pi_futex_lock:
 	 */
-	raw_spin_lock_irq(&p->pi_lock);
+	raw_spin_lock_irq(&p->pi_futex_lock);
 	if (unlikely(p->futex_state != FUTEX_STATE_OK)) {
 		/*
 		 * The task is on the way out. When the futex state is
 		 * FUTEX_STATE_DEAD, we know that the task has finished
 		 * the cleanup:
 		 */
-		int ret = handle_exit_race(uaddr, uval, p);
+		int ret = pi_handle_exit_race(uaddr, uval, p);
 
-		raw_spin_unlock_irq(&p->pi_lock);
+		raw_spin_unlock_irq(&p->pi_futex_lock);
 		/*
 		 * If the owner task is between FUTEX_STATE_EXITING and
 		 * FUTEX_STATE_DEAD then store the task pointer and keep
@@ -464,8 +495,8 @@ static int attach_to_pi_owner(u32 __user *uaddr, u32 uval, union futex_key *key,
 		return ret;
 	}
 
-	__attach_to_pi_owner(p, key, ps);
-	raw_spin_unlock_irq(&p->pi_lock);
+	__attach_to_pi_owner(p, key, ps, ping);
+	raw_spin_unlock_irq(&p->pi_futex_lock);
 
 	put_task_struct(p);
 
@@ -548,7 +579,8 @@ int futex_lock_pi_atomic(u32 __user *uaddr, struct futex_hash_bucket *hb,
 	 */
 	top_waiter = futex_top_waiter(hb, key);
 	if (top_waiter)
-		return attach_to_pi_state(uaddr, uval, top_waiter->pi_state, ps);
+		return attach_to_pi_state(uaddr, uval, top_waiter->pi_state,
+		    ps, false);
 
 	/*
 	 * No waiter and user TID is 0. We are here because the
@@ -584,9 +616,9 @@ int futex_lock_pi_atomic(u32 __user *uaddr, struct futex_hash_bucket *hb,
 		 * because @task is known and valid.
 		 */
 		if (set_waiters) {
-			raw_spin_lock_irq(&task->pi_lock);
-			__attach_to_pi_owner(task, key, ps);
-			raw_spin_unlock_irq(&task->pi_lock);
+			raw_spin_lock_irq(&task->pi_futex_lock);
+			__attach_to_pi_owner(task, key, ps, false);
+			raw_spin_unlock_irq(&task->pi_futex_lock);
 		}
 		return 1;
 	}
@@ -605,7 +637,7 @@ int futex_lock_pi_atomic(u32 __user *uaddr, struct futex_hash_bucket *hb,
 	 * attach to the owner. If that fails, no harm done, we only
 	 * set the FUTEX_WAITERS bit in the user space variable.
 	 */
-	return attach_to_pi_owner(uaddr, newval, key, ps, exiting);
+	return attach_to_pi_owner(uaddr, newval, key, ps, exiting, false);
 }
 
 /*

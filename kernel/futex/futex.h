@@ -131,10 +131,15 @@ struct futex_pi_state {
 	/*
 	 * The PI object:
 	 */
-	struct rt_mutex_base pi_mutex;
+	union {
+		struct rt_mutex_base pi_mutex;
+		struct ping_mutex ping_mutex;
+	};
 
 	struct task_struct *owner;
 	refcount_t refcount;
+	bool handoff;
+	bool pickup;
 
 	union futex_key key;
 } __randomize_layout;
@@ -177,6 +182,7 @@ struct futex_q {
 	void *wake_data;
 	union futex_key key;
 	struct futex_pi_state *pi_state;
+	struct futex_pi_state *ping_state;
 	struct rt_mutex_waiter *rt_waiter;
 	union futex_key *requeue_pi_key;
 	u32 bitset;
@@ -314,6 +320,21 @@ extern int refill_pi_state_cache(void);
 extern void get_pi_state(struct futex_pi_state *pi_state);
 extern void put_pi_state(struct futex_pi_state *pi_state);
 extern int fixup_pi_owner(u32 __user *uaddr, struct futex_q *q, int locked);
+extern int pi_handle_exit_race(u32 __user *uaddr, u32 uval,
+			       struct task_struct *tsk);
+extern struct futex_pi_state *alloc_pi_state(void);
+extern int attach_to_pi_state(u32 __user *uaddr, u32 uval,
+			      struct futex_pi_state *pi_state,
+			      struct futex_pi_state **ps,
+			      bool ping);
+extern int attach_to_pi_owner(u32 __user *uaddr, u32 uval, union futex_key *key,
+			      struct futex_pi_state **ps,
+			      struct task_struct **exiting,
+			      bool ping);
+extern void get_ping_state(struct futex_pi_state *ping_state);
+extern void put_ping_state(struct futex_pi_state *ping_state);
+extern int fixup_ping_owner_after_user_steal(struct futex_pi_state *ping_state,
+				      u32 __user *uaddr, u32 uval);
 
 /*
  * Express the locking dependencies for lockdep:
@@ -387,5 +408,10 @@ extern int futex_wake_op(u32 __user *uaddr1, unsigned int flags,
 extern int futex_unlock_pi(u32 __user *uaddr, unsigned int flags);
 
 extern int futex_lock_pi(u32 __user *uaddr, unsigned int flags, ktime_t *time, int trylock);
+
+extern int futex_unlock_ping(u32 __user *uaddr, unsigned int flags);
+
+extern int futex_lock_ping(u32 __user *uaddr, unsigned int flags, ktime_t *time,
+			   int trylock);
 
 #endif /* _FUTEX_H */

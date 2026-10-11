@@ -991,7 +991,7 @@ static void exit_pi_state_list(struct task_struct *curr)
 	 * pi_state_list anymore, but we have to be careful
 	 * versus waiters unqueueing themselves:
 	 */
-	raw_spin_lock_irq(&curr->pi_lock);
+	raw_spin_lock_irq(&curr->pi_futex_lock);
 	while (!list_empty(head)) {
 		next = head->next;
 		pi_state = list_entry(next, struct futex_pi_state, list);
@@ -1009,16 +1009,16 @@ static void exit_pi_state_list(struct task_struct *curr)
 		 * progress and retry the loop.
 		 */
 		if (!refcount_inc_not_zero(&pi_state->refcount)) {
-			raw_spin_unlock_irq(&curr->pi_lock);
+			raw_spin_unlock_irq(&curr->pi_futex_lock);
 			cpu_relax();
-			raw_spin_lock_irq(&curr->pi_lock);
+			raw_spin_lock_irq(&curr->pi_futex_lock);
 			continue;
 		}
-		raw_spin_unlock_irq(&curr->pi_lock);
+		raw_spin_unlock_irq(&curr->pi_futex_lock);
 
 		spin_lock(&hb->lock);
 		raw_spin_lock_irq(&pi_state->pi_mutex.wait_lock);
-		raw_spin_lock(&curr->pi_lock);
+		raw_spin_lock(&curr->pi_futex_lock);
 		/*
 		 * We dropped the pi-lock, so re-check whether this
 		 * task still owns the PI-state:
@@ -1036,20 +1036,68 @@ static void exit_pi_state_list(struct task_struct *curr)
 		list_del_init(&pi_state->list);
 		pi_state->owner = NULL;
 
-		raw_spin_unlock(&curr->pi_lock);
+		raw_spin_unlock(&curr->pi_futex_lock);
 		raw_spin_unlock_irq(&pi_state->pi_mutex.wait_lock);
 		spin_unlock(&hb->lock);
 
 		rt_mutex_futex_unlock(&pi_state->pi_mutex);
 		put_pi_state(pi_state);
 
-		raw_spin_lock_irq(&curr->pi_lock);
+		raw_spin_lock_irq(&curr->pi_futex_lock);
 	}
-	raw_spin_unlock_irq(&curr->pi_lock);
+	raw_spin_unlock_irq(&curr->pi_futex_lock);
 }
 #else
 static inline void exit_pi_state_list(struct task_struct *curr) { }
 #endif
+
+/* Similar to exit_pi_state_list() */
+static void exit_ping_state_list(struct task_struct *curr)
+{
+	struct list_head *next, *head = &curr->ping_state_list;
+	struct futex_pi_state *ping_state;
+	struct futex_hash_bucket *hb;
+	union futex_key key = FUTEX_KEY_INIT;
+
+	raw_spin_lock_irq(&curr->pi_futex_lock);
+	while (!list_empty(head)) {
+		next = head->next;
+		ping_state = list_entry(next, struct futex_pi_state, list);
+		key = ping_state->key;
+		hb = futex_hash(&key);
+
+		if (!refcount_inc_not_zero(&ping_state->refcount)) {
+			raw_spin_unlock_irq(&curr->pi_futex_lock);
+			cpu_relax();
+			raw_spin_lock_irq(&curr->pi_futex_lock);
+			continue;
+		}
+		raw_spin_unlock_irq(&curr->pi_futex_lock);
+
+		spin_lock(&hb->lock);
+		raw_spin_lock_irq(&ping_state->ping_mutex.wait_lock);
+		raw_spin_lock(&curr->pi_futex_lock);
+		if (head->next != next) {
+			raw_spin_unlock(&ping_state->ping_mutex.wait_lock);
+			spin_unlock(&hb->lock);
+			put_ping_state(ping_state);
+			continue;
+		}
+
+		WARN_ON(ping_state->owner != curr);
+		WARN_ON(list_empty(&ping_state->list));
+		list_del_init(&ping_state->list);
+		ping_state->owner = NULL;
+		raw_spin_unlock(&curr->pi_futex_lock);
+		raw_spin_unlock_irq(&ping_state->ping_mutex.wait_lock);
+		spin_unlock(&hb->lock);
+
+		put_ping_state(ping_state);
+
+		raw_spin_lock_irq(&curr->pi_futex_lock);
+	}
+	raw_spin_unlock_irq(&curr->pi_futex_lock);
+}
 
 static void futex_cleanup(struct task_struct *tsk)
 {
@@ -1067,6 +1115,9 @@ static void futex_cleanup(struct task_struct *tsk)
 
 	if (unlikely(!list_empty(&tsk->pi_state_list)))
 		exit_pi_state_list(tsk);
+
+	if (unlikely(!list_empty(&tsk->ping_state_list)))
+		exit_ping_state_list(tsk);
 }
 
 /**
@@ -1105,19 +1156,19 @@ static void futex_cleanup_begin(struct task_struct *tsk)
 	mutex_lock(&tsk->futex_exit_mutex);
 
 	/*
-	 * Switch the state to FUTEX_STATE_EXITING under tsk->pi_lock.
+	 * Switch the state to FUTEX_STATE_EXITING under tsk->pi_futex_lock.
 	 *
 	 * This ensures that all subsequent checks of tsk->futex_state in
 	 * attach_to_pi_owner() must observe FUTEX_STATE_EXITING with
-	 * tsk->pi_lock held.
+	 * tsk->pi_futex_lock held.
 	 *
 	 * It guarantees also that a pi_state which was queued right before
-	 * the state change under tsk->pi_lock by a concurrent waiter must
+	 * the state change under tsk->pi_futex_lock by a concurrent waiter must
 	 * be observed in exit_pi_state_list().
 	 */
-	raw_spin_lock_irq(&tsk->pi_lock);
+	raw_spin_lock_irq(&tsk->pi_futex_lock);
 	tsk->futex_state = FUTEX_STATE_EXITING;
-	raw_spin_unlock_irq(&tsk->pi_lock);
+	raw_spin_unlock_irq(&tsk->pi_futex_lock);
 }
 
 static void futex_cleanup_end(struct task_struct *tsk, int state)
