@@ -57,6 +57,30 @@
       },
       "revId": "c02ca6953ba0cb28f72f43d39e8a6f677ee039f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af25a184_baebf41d",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1692,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-10-12T11:32:38Z",
+      "side": 1,
+      "message": "Actually it would be better to rebase this patchset over aosp/4324512. I\u0027ll refactor these patches that way.",
+      "parentUuid": "f9d5002c_8339ce36",
+      "range": {
+        "startLine": 1692,
+        "startChar": 1,
+        "endLine": 1692,
+        "endChar": 63
+      },
+      "revId": "c02ca6953ba0cb28f72f43d39e8a6f677ee039f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
