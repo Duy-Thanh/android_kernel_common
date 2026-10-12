@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e727300_9d3358a0",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-10-12T16:34:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d4e70e5c_db6c5f92",
+      "range": {
+        "startLine": 290,
+        "startChar": 8,
+        "endLine": 291,
+        "endChar": 40
+      },
+      "revId": "2062595b0ac4fa4f3ffe9e1165a3560130a03ed8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f92bef8_2d28215c",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-10-09T23:48:27Z",
       "side": 1,
       "message": "Can\u0027t this result in a deadlock with `rewrap()`? If one thread enters `rewrap()`, and acquires the wrap\u0027s `inner.lock`, and then another thread enters `acquire_ownership()`, and acquires the same wrap\u0027s `state.lock`, and the wrap is available, they\u0027ll both be waiting on each other to release locks that they hold.",
+      "range": {
+        "startLine": 312,
+        "startChar": 0,
+        "endLine": 312,
+        "endChar": 44
+      },
+      "revId": "2062595b0ac4fa4f3ffe9e1165a3560130a03ed8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37cf3eae_dcf1c7ca",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-10-12T16:34:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f92bef8_2d28215c",
       "range": {
         "startLine": 312,
         "startChar": 0,
@@ -98,6 +146,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e502de9_34aa5c70",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-10-12T16:34:48Z",
+      "side": 1,
+      "message": "The original driver doesn\u0027t return an error on the equivalent of UsageBlocked at all in this case (and in get_mappable\u0027s case). (as block_usage in the original driver does not bump up \"use_cnt\"), but your suggestion makes more sense to me.",
+      "parentUuid": "72b39d3a_3f012844",
+      "range": {
+        "startLine": 313,
+        "startChar": 0,
+        "endLine": 316,
+        "endChar": 0
+      },
+      "revId": "2062595b0ac4fa4f3ffe9e1165a3560130a03ed8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "92315ec4_8bb1f070",
@@ -111,6 +183,30 @@
       "writtenOn": "2026-10-09T23:48:27Z",
       "side": 1,
       "message": "This should go before the `self.inner.lock` acquisition to avoid the deadlock I mentioned.",
+      "range": {
+        "startLine": 430,
+        "startChar": 0,
+        "endLine": 432,
+        "endChar": 10
+      },
+      "revId": "2062595b0ac4fa4f3ffe9e1165a3560130a03ed8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68b1b9b1_68816d5f",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-10-12T16:34:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92315ec4_8bb1f070",
       "range": {
         "startLine": 430,
         "startChar": 0,
