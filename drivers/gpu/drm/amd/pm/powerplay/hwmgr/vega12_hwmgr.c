@@ -1419,7 +1419,7 @@ static int vega12_get_gpu_power(struct pp_hwmgr *hwmgr, uint32_t *query)
 	if (ret)
 		return ret;
 
-	*query = metrics_table.CurrSocketPower * MILLIWATT_PER_WATT;
+	*query = metrics_table.CurrSocketPower << 8;
 
 	return ret;
 }

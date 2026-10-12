@@ -411,8 +411,7 @@ static int smu_v15_0_8_get_smu_metrics_data(struct smu_context *smu,
 		*value = SMUQ10_ROUND(metrics->DramBandwidthUtilization);
 		break;
 	case METRICS_CURR_SOCKETPOWER:
-		*value = SMUQ10_ROUND(metrics->SocketPower) *
-			 MILLIWATT_PER_WATT;
+		*value = SMUQ10_ROUND(metrics->SocketPower) << 8;
 		break;
 	case METRICS_TEMPERATURE_HOTSPOT:
 		*value = SMUQ10_ROUND(metrics->MaxSocketTemperature) *

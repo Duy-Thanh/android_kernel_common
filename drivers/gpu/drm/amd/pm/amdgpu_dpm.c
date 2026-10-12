@@ -1183,36 +1183,20 @@ int amdgpu_dpm_dispatch_task(struct amdgpu_device *adev,
 	return ret;
 }
 
-static bool amdgpu_dpm_is_pp_table_allowed(struct amdgpu_device *adev)
-{
-	return !amdgpu_sriov_vf(adev) &&
-	       !(adev->flags & AMD_IS_APU) &&
-	       !adev->scpm_enabled;
-}
-
-int amdgpu_dpm_get_pp_table(struct amdgpu_device *adev, char *table,
-			    size_t size)
+int amdgpu_dpm_get_pp_table(struct amdgpu_device *adev, char **table)
 {
 	const struct amd_pm_funcs *pp_funcs = adev->powerplay.pp_funcs;
-	char *pptable = NULL;
 	int ret = 0;
 
-	if ((!table && size) || (table && !size))
+	if (!table)
 		return -EINVAL;
 
-	if (!amdgpu_dpm_is_pp_table_allowed(adev) ||
-	    !pp_funcs->get_pp_table)
+	if (amdgpu_sriov_vf(adev) || !pp_funcs->get_pp_table || adev->scpm_enabled)
 		return -EOPNOTSUPP;
 
 	mutex_lock(&adev->pm.mutex);
 	ret = pp_funcs->get_pp_table(adev->powerplay.pp_handle,
-				     &pptable);
-	if (ret > 0 && !pptable) {
-		ret = -EINVAL;
-	} else if (ret > 0 && table) {
-		ret = min_t(size_t, ret, size);
-		memcpy(table, pptable, ret);
-	}
+				     table);
 	mutex_unlock(&adev->pm.mutex);
 
 	return ret;
@@ -1442,23 +1426,17 @@ int amdgpu_dpm_set_power_profile_mode(struct amdgpu_device *adev,
 	return ret;
 }
 
-ssize_t amdgpu_dpm_get_gpu_metrics(struct amdgpu_device *adev, void *buf,
-				   size_t size)
+int amdgpu_dpm_get_gpu_metrics(struct amdgpu_device *adev, void **table)
 {
 	const struct amd_pm_funcs *pp_funcs = adev->powerplay.pp_funcs;
-	void *table;
-	ssize_t ret;
+	int ret = 0;
 
 	if (!pp_funcs->get_gpu_metrics)
 		return 0;
 
 	mutex_lock(&adev->pm.mutex);
 	ret = pp_funcs->get_gpu_metrics(adev->powerplay.pp_handle,
-					&table);
-	if (ret > 0) {
-		ret = min_t(ssize_t, ret, size);
-		memcpy(buf, table, ret);
-	}
+					table);
 	mutex_unlock(&adev->pm.mutex);
 
 	return ret;
@@ -1725,8 +1703,7 @@ int amdgpu_dpm_set_pp_table(struct amdgpu_device *adev,
 	if (!buf || !size)
 		return -EINVAL;
 
-	if (!amdgpu_dpm_is_pp_table_allowed(adev) ||
-	    !pp_funcs->set_pp_table)
+	if (amdgpu_sriov_vf(adev) || !pp_funcs->set_pp_table || adev->scpm_enabled)
 		return -EOPNOTSUPP;
 
 	mutex_lock(&adev->pm.mutex);

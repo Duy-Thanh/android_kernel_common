@@ -158,10 +158,12 @@ cyan_skillfish_get_smu_metrics_data(struct smu_context *smu,
 		*value = metrics->Current.MemclkFrequency;
 		break;
 	case METRICS_CURR_SOCKETPOWER:
-		*value = metrics->Current.CurrentSocketPower;
+		*value = (metrics->Current.CurrentSocketPower << 8) /
+				1000;
 		break;
 	case METRICS_AVERAGE_SOCKETPOWER:
-		*value = metrics->Average.CurrentSocketPower;
+		*value = (metrics->Average.CurrentSocketPower << 8) /
+				1000;
 		break;
 	case METRICS_TEMPERATURE_EDGE:
 		*value = metrics->Current.GfxTemperature / 100 *

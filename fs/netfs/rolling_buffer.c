@@ -6,7 +6,6 @@
  */
 
 #include <linux/bitops.h>
-#include <linux/mempool.h>
 #include <linux/pagemap.h>
 #include <linux/rolling_buffer.h>
 #include <linux/slab.h>
@@ -28,10 +27,7 @@ struct folio_queue *netfs_folioq_alloc(unsigned int rreq_id, gfp_t gfp,
 {
 	struct folio_queue *fq;
 
-	if (gfp == GFP_KERNEL)
-		fq = netfs_folioq_pool.alloc(gfp, netfs_folioq_pool.pool_data);
-	else
-		fq = mempool_alloc(&netfs_folioq_pool, gfp);
+	fq = kmalloc_obj(*fq, gfp);
 	if (fq) {
 		netfs_stat(&netfs_n_folioq);
 		folioq_init(fq, rreq_id);
@@ -54,7 +50,7 @@ void netfs_folioq_free(struct folio_queue *folioq,
 {
 	trace_netfs_folioq(folioq, trace);
 	netfs_stat_d(&netfs_n_folioq);
-	mempool_free(folioq, &netfs_folioq_pool);
+	kfree(folioq);
 }
 EXPORT_SYMBOL(netfs_folioq_free);
 
@@ -64,11 +60,11 @@ EXPORT_SYMBOL(netfs_folioq_free);
  * consumer.
  */
 int rolling_buffer_init(struct rolling_buffer *roll, unsigned int rreq_id,
-			unsigned int direction, gfp_t gfp)
+			unsigned int direction)
 {
 	struct folio_queue *fq;
 
-	fq = netfs_folioq_alloc(rreq_id, gfp, netfs_trace_folioq_rollbuf_init);
+	fq = netfs_folioq_alloc(rreq_id, GFP_NOFS, netfs_trace_folioq_rollbuf_init);
 	if (!fq)
 		return -ENOMEM;
 
@@ -81,14 +77,14 @@ int rolling_buffer_init(struct rolling_buffer *roll, unsigned int rreq_id,
 /*
  * Add another folio_queue to a rolling buffer if there's no space left.
  */
-int rolling_buffer_make_space(struct rolling_buffer *roll, gfp_t gfp)
+int rolling_buffer_make_space(struct rolling_buffer *roll)
 {
 	struct folio_queue *fq, *head = roll->head;
 
 	if (!folioq_full(head))
 		return 0;
 
-	fq = netfs_folioq_alloc(head->rreq_id, gfp, netfs_trace_folioq_make_space);
+	fq = netfs_folioq_alloc(head->rreq_id, GFP_NOFS, netfs_trace_folioq_make_space);
 	if (!fq)
 		return -ENOMEM;
 	fq->prev = head;
@@ -126,7 +122,7 @@ ssize_t rolling_buffer_load_from_ra(struct rolling_buffer *roll,
 	int nr, ix, to;
 	ssize_t size = 0;
 
-	if (rolling_buffer_make_space(roll, GFP_KERNEL) < 0)
+	if (rolling_buffer_make_space(roll) < 0)
 		return -ENOMEM;
 
 	fq = roll->head;
@@ -157,12 +153,12 @@ ssize_t rolling_buffer_load_from_ra(struct rolling_buffer *roll,
  * Append a folio to the rolling buffer.
  */
 ssize_t rolling_buffer_append(struct rolling_buffer *roll, struct folio *folio,
-			      unsigned int flags, gfp_t gfp)
+			      unsigned int flags)
 {
 	ssize_t size = folio_size(folio);
 	int slot;
 
-	if (rolling_buffer_make_space(roll, gfp) < 0)
+	if (rolling_buffer_make_space(roll) < 0)
 		return -ENOMEM;
 
 	slot = folioq_append(roll->head, folio);

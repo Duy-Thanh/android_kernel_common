@@ -51,7 +51,7 @@ int mshv_update_routing_table(struct mshv_partition *partition,
 		/*
 		 * Allow only one to one mapping between GSI and MSI routing.
 		 */
-		if (girq->girq_entry_valid) {
+		if (girq->guest_irq_num != 0) {
 			r = -EINVAL;
 			goto out;
 		}

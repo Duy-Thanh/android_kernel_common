@@ -278,25 +278,25 @@ static int k1_spi_dma_one(struct spi_controller *host, struct spi_device *spi,
 			  struct spi_transfer *transfer)
 {
 	struct k1_spi_driver_data *drv_data = spi_controller_get_devdata(host);
-	struct dma_async_tx_descriptor *txdesc, *rxdesc;
+	struct dma_async_tx_descriptor *desc;
 	u32 val;
 
-	/* Prepare the TX descriptor */
-	txdesc = k1_spi_dma_prep(drv_data, transfer, true);
-	if (!txdesc)
+	/* Prepare the TX descriptor and submit it */
+	desc = k1_spi_dma_prep(drv_data, transfer, true);
+	if (!desc)
 		goto fallback;
+	dmaengine_submit(desc);
 
-	/* Prepare the RX descriptor */
-	rxdesc = k1_spi_dma_prep(drv_data, transfer, false);
-	if (!rxdesc)
+	/* Prepare the RX descriptor and submit it */
+	desc = k1_spi_dma_prep(drv_data, transfer, false);
+	if (!desc)
 		goto fallback;
 
 	/* When RX is complete we also know TX has completed */
-	rxdesc->callback = k1_spi_dma_callback;
-	rxdesc->callback_param = drv_data;
+	desc->callback = k1_spi_dma_callback;
+	desc->callback_param = drv_data;
 
-	dmaengine_submit(txdesc);
-	dmaengine_submit(rxdesc);
+	dmaengine_submit(desc);
 
 	val = readl(drv_data->base + SSP_TOP_CTRL);
 	val |= TOP_TRAIL;		/* Trailing bytes handled by DMA */

@@ -918,7 +918,7 @@ invalid_datalen:
 		}
 
 		senselen = get_unaligned_be16(data);
-		if (datalen < senselen + 2)
+		if (datalen < senselen)
 			goto invalid_datalen;
 
 		memcpy(sc->sense_buffer, data + 2,

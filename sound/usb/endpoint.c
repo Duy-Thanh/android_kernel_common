@@ -1168,12 +1168,10 @@ static int data_ep_set_params(struct snd_usb_endpoint *ep)
 				<< (16 - ep->datainterval);
 	}
 
-	if (ep->fill_max) {
+	if (ep->fill_max)
 		ep->curpacksize = ep->maxpacksize;
-		maxsize = ep->curpacksize;
-	} else {
+	else
 		ep->curpacksize = maxsize;
-	}
 
 	if (snd_usb_get_speed(chip->dev) != USB_SPEED_FULL) {
 		packs_per_ms = 8 >> ep->datainterval;
@@ -1819,13 +1817,11 @@ static void snd_usb_handle_sync_urb(struct snd_usb_endpoint *ep,
 
 		out_packet->packets = in_ctx->packets;
 		for (i = 0; i < in_ctx->packets; i++) {
-			if (urb->iso_frame_desc[i].status == 0) {
-				unsigned int frames =
+			if (urb->iso_frame_desc[i].status == 0)
+				out_packet->packet_size[i] =
 					urb->iso_frame_desc[i].actual_length / sender->stride;
-				out_packet->packet_size[i] = min(frames, ep->maxframesize);
-			} else {
+			else
 				out_packet->packet_size[i] = 0;
-			}
 		}
 
 		spin_unlock_irqrestore(&ep->lock, flags);

@@ -1875,8 +1875,8 @@ struct phylink *phylink_create(struct phylink_config *config,
 	} else if (config->type == PHYLINK_DEV) {
 		pl->dev = config->dev;
 	} else {
-		ret = -EINVAL;
-		goto free_pl;
+		kfree(pl);
+		return ERR_PTR(-EINVAL);
 	}
 
 	pl->mac_supports_eee_ops = phylink_mac_implements_lpi(mac_ops);
@@ -1909,29 +1909,28 @@ struct phylink *phylink_create(struct phylink_config *config,
 	phylink_validate(pl, pl->supported, &pl->link_config);
 
 	ret = phylink_parse_mode(pl, fwnode);
-	if (ret < 0)
-		goto free_pl;
+	if (ret < 0) {
+		kfree(pl);
+		return ERR_PTR(ret);
+	}
 
 	if (pl->cfg_link_an_mode == MLO_AN_FIXED) {
 		ret = phylink_parse_fixedlink(pl, fwnode);
-		if (ret < 0)
-			goto release_link_gpio;
+		if (ret < 0) {
+			kfree(pl);
+			return ERR_PTR(ret);
+		}
 	}
 
 	pl->req_link_an_mode = pl->cfg_link_an_mode;
 
 	ret = phylink_register_sfp(pl, fwnode);
-	if (ret < 0)
-		goto release_link_gpio;
+	if (ret < 0) {
+		kfree(pl);
+		return ERR_PTR(ret);
+	}
 
 	return pl;
-
-release_link_gpio:
-	if (pl->link_gpio)
-		gpiod_put(pl->link_gpio);
-free_pl:
-	kfree(pl);
-	return ERR_PTR(ret);
 }
 EXPORT_SYMBOL_GPL(phylink_create);
 

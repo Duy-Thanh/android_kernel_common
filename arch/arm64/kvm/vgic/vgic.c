@@ -146,7 +146,11 @@ static __must_check bool __vgic_put_irq(struct kvm *kvm, struct vgic_irq *irq)
 
 static __must_check bool vgic_put_irq_norelease(struct kvm *kvm, struct vgic_irq *irq)
 {
-	return __vgic_put_irq(kvm, irq);
+	if (!__vgic_put_irq(kvm, irq))
+		return false;
+
+	irq->pending_release = true;
+	return true;
 }
 
 void vgic_put_irq(struct kvm *kvm, struct vgic_irq *irq)
@@ -163,14 +167,12 @@ void vgic_put_irq(struct kvm *kvm, struct vgic_irq *irq)
 		guard(spinlock_irqsave)(&dist->lpi_xa.xa_lock);
 	}
 
-	if (!irq_is_lpi(kvm, irq->intid))
+	if (!__vgic_put_irq(kvm, irq))
 		return;
 
-	if (refcount_dec_and_lock_irqsave(&irq->refcount,
-					  &dist->lpi_xa.xa_lock, &flags)) {
-		vgic_release_lpi_locked(dist, irq);
-		xa_unlock_irqrestore(&dist->lpi_xa, flags);
-	}
+	xa_lock_irqsave(&dist->lpi_xa, flags);
+	vgic_release_lpi_locked(dist, irq);
+	xa_unlock_irqrestore(&dist->lpi_xa, flags);
 }
 
 static void vgic_release_deleted_lpis(struct kvm *kvm)
@@ -182,7 +184,7 @@ static void vgic_release_deleted_lpis(struct kvm *kvm)
 	xa_lock_irqsave(&dist->lpi_xa, flags);
 
 	xa_for_each(&dist->lpi_xa, intid, irq) {
-		if (!refcount_read(&irq->refcount))
+		if (irq->pending_release)
 			vgic_release_lpi_locked(dist, irq);
 	}
 

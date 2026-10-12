@@ -170,7 +170,7 @@ extern u64 cppc_get_dmi_max_khz(void);
 extern unsigned int cppc_perf_to_khz(struct cppc_perf_caps *caps, unsigned int perf);
 extern unsigned int cppc_khz_to_perf(struct cppc_perf_caps *caps, unsigned int freq);
 extern bool acpi_cpc_valid(void);
-bool cppc_allow_fast_switch(const struct cpumask *cpus);
+extern bool cppc_allow_fast_switch(void);
 extern int acpi_get_psd_map(unsigned int cpu, struct cppc_cpudata *cpu_data);
 extern int cppc_get_transition_latency(int cpu);
 extern bool cpc_ffh_supported(void);
@@ -234,8 +234,7 @@ static inline bool acpi_cpc_valid(void)
 {
 	return false;
 }
-
-static inline bool cppc_allow_fast_switch(const struct cpumask *cpus)
+static inline bool cppc_allow_fast_switch(void)
 {
 	return false;
 }
