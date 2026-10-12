@@ -769,10 +769,8 @@ static int rt5682_dev_resume(struct device *dev)
 	}
 
 	ret = sdw_slave_wait_for_init(slave, RT5682_PROBE_TIMEOUT);
-	if (ret) {
-		sdw_show_ping_status(slave->bus, true);
+	if (ret)
 		return ret;
-	}
 
 	regcache_cache_only(rt5682->sdw_regmap, false);
 	regcache_cache_only(rt5682->regmap, false);

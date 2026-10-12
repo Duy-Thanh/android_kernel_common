@@ -388,8 +388,8 @@ static void cros_ec_rtc_remove(struct platform_device *pdev)
 }
 
 static const struct platform_device_id cros_ec_rtc_id[] = {
-	{ .name = DRV_NAME },
-	{ }
+	{ DRV_NAME, 0 },
+	{}
 };
 MODULE_DEVICE_TABLE(platform, cros_ec_rtc_id);
 

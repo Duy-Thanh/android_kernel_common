@@ -138,12 +138,10 @@ static int goldfish_fb_pan_display(struct fb_var_screeninfo *var,
 	writel(fb->fb.fix.smem_start + fb->fb.var.xres * 2 * var->yoffset,
 						fb->reg_base + FB_SET_BASE);
 	spin_unlock_irqrestore(&fb->lock, irq_flags);
-	if (!wait_event_timeout(fb->wait,
-				fb->base_update_count != base_update_count,
-				HZ / 15)) {
+	wait_event_timeout(fb->wait,
+			fb->base_update_count != base_update_count, HZ / 15);
+	if (fb->base_update_count == base_update_count)
 		pr_err("%s: timeout waiting for base update\n", __func__);
-		return -ETIMEDOUT;
-	}
 	return 0;
 }
 
@@ -253,9 +251,7 @@ static int goldfish_fb_probe(struct platform_device *pdev)
 		goto err_request_irq_failed;
 
 	writel(FB_INT_BASE_UPDATE_DONE, fb->reg_base + FB_INT_ENABLE);
-	ret = goldfish_fb_pan_display(&fb->fb.var, &fb->fb); /* updates base */
-	if (ret)
-		goto err_pan_display_failed;
+	goldfish_fb_pan_display(&fb->fb.var, &fb->fb); /* updates base */
 
 	ret = register_framebuffer(&fb->fb);
 	if (ret)
@@ -263,7 +259,6 @@ static int goldfish_fb_probe(struct platform_device *pdev)
 	return 0;
 
 err_register_framebuffer_failed:
-err_pan_display_failed:
 	free_irq(fb->irq, fb);
 err_request_irq_failed:
 err_fb_set_var_failed:

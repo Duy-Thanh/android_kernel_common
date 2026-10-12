@@ -485,8 +485,8 @@ static const struct of_device_id isl12026_dt_match[] = {
 MODULE_DEVICE_TABLE(of, isl12026_dt_match);
 
 static const struct i2c_device_id isl12026_id[] = {
-	{ .name = "isl12026" },
-	{ }
+	{ "isl12026" },
+	{ },
 };
 MODULE_DEVICE_TABLE(i2c, isl12026_id);
 
