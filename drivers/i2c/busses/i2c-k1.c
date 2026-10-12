@@ -596,7 +596,7 @@ static irqreturn_t spacemit_i2c_irq_handler(int irq, void *devid)
 
 	status = readl(i2c->base + SPACEMIT_ISR);
 	if (!status)
-		return IRQ_NONE;
+		return IRQ_HANDLED;
 
 	i2c->status = status;
 

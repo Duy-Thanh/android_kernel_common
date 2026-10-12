@@ -5641,14 +5641,12 @@ static void ieee80211_rx_mgmt_deauth(struct ieee80211_sub_if_data *sdata,
 				     struct ieee80211_mgmt *mgmt, size_t len)
 {
 	struct ieee80211_if_managed *ifmgd = &sdata->u.mgd;
-	u16 reason_code;
+	u16 reason_code = le16_to_cpu(mgmt->u.deauth.reason_code);
 
 	lockdep_assert_wiphy(sdata->local->hw.wiphy);
 
-	if (len < offsetofend(struct ieee80211_mgmt, u.deauth.reason_code))
+	if (len < 24 + 2)
 		return;
-
-	reason_code = le16_to_cpu(mgmt->u.deauth.reason_code);
 
 	if (!ether_addr_equal(mgmt->bssid, mgmt->sa)) {
 		ieee80211_tdls_handle_disconnect(sdata, mgmt->sa, reason_code);
@@ -7140,7 +7138,7 @@ static void ieee80211_rx_mgmt_assoc_resp(struct ieee80211_sub_if_data *sdata,
 {
 	struct ieee80211_if_managed *ifmgd = &sdata->u.mgd;
 	struct ieee80211_mgd_assoc_data *assoc_data = ifmgd->assoc_data;
-	u16 capab_info, status_code, aid = 0;
+	u16 capab_info, status_code, aid;
 	struct ieee80211_elems_parse_params parse_params = {
 		.bss = NULL,
 		.link_id = -1,
@@ -7219,10 +7217,8 @@ static void ieee80211_rx_mgmt_assoc_resp(struct ieee80211_sub_if_data *sdata,
 
 	if (elems->aid_resp)
 		aid = le16_to_cpu(elems->aid_resp->aid);
-	else if (!assoc_data->s1g)
+	else
 		aid = le16_to_cpu(mgmt->u.assoc_resp.aid);
-	else if (status_code == WLAN_STATUS_SUCCESS)
-		goto abandon_assoc;
 
 	/*
 	 * The 5 MSB of the AID field are reserved for a non-S1G STA. For

@@ -1547,7 +1547,6 @@ found:
 			xso->type = XFRM_DEV_OFFLOAD_PACKET;
 			xso->dir = xdo->dir;
 			xso->dev = dev;
-			xso->ifindex = dev->ifindex;
 			xso->flags = XFRM_DEV_OFFLOAD_FLAG_ACQ;
 			netdev_hold(dev, &xso->dev_tracker, GFP_ATOMIC);
 			error = dev->xfrmdev_ops->xdo_dev_state_add(dev, x,
@@ -2072,11 +2071,8 @@ static struct xfrm_state *xfrm_state_clone_and_setup(struct xfrm_state *orig,
 
 	x->mode_cbs = orig->mode_cbs;
 	if (x->mode_cbs && x->mode_cbs->clone_state) {
-		if (x->mode_cbs->clone_state(x, orig)) {
-			if (!x->mode_data)
-				x->mode_cbs = NULL;
+		if (x->mode_cbs->clone_state(x, orig))
 			goto error;
-		}
 	}
 
 	x->props.reqid = m->new_reqid;
@@ -3014,7 +3010,7 @@ int xfrm_user_policy(struct sock *sk, int optname, sockptr_t optval, int optlen)
 	if (sockptr_is_null(optval) && !optlen) {
 		xfrm_sk_policy_insert(sk, XFRM_POLICY_IN, NULL);
 		xfrm_sk_policy_insert(sk, XFRM_POLICY_OUT, NULL);
-		sk_dst_reset(sk);
+		__sk_dst_reset(sk);
 		return 0;
 	}
 
@@ -3054,7 +3050,7 @@ int xfrm_user_policy(struct sock *sk, int optname, sockptr_t optval, int optlen)
 	if (err >= 0) {
 		xfrm_sk_policy_insert(sk, err, pol);
 		xfrm_pol_put(pol);
-		sk_dst_reset(sk);
+		__sk_dst_reset(sk);
 		err = 0;
 	}
 
@@ -3295,8 +3291,6 @@ int __xfrm_init_state(struct xfrm_state *x, struct netlink_ext_ack *extack)
 		if (x->mode_cbs->init_state)
 			err = x->mode_cbs->init_state(x);
 		module_put(x->mode_cbs->owner);
-		if (err && !x->mode_data)
-			x->mode_cbs = NULL;
 	}
 error:
 	return err;

@@ -6157,8 +6157,6 @@ static int ipw2100_pci_init_one(struct pci_dev *pci_dev,
 	if (err) {
 		printk(KERN_WARNING DRV_NAME
 		       "Error calling pci_enable_device.\n");
-		free_libipw(dev, 0);
-		pci_iounmap(pci_dev, ioaddr);
 		return err;
 	}
 
@@ -6171,14 +6169,16 @@ static int ipw2100_pci_init_one(struct pci_dev *pci_dev,
 	if (err) {
 		printk(KERN_WARNING DRV_NAME
 		       "Error calling pci_set_dma_mask.\n");
-		goto fail;
+		pci_disable_device(pci_dev);
+		return err;
 	}
 
 	err = pci_request_regions(pci_dev, DRV_NAME);
 	if (err) {
 		printk(KERN_WARNING DRV_NAME
 		       "Error calling pci_request_regions.\n");
-		goto fail;
+		pci_disable_device(pci_dev);
+		return err;
 	}
 
 	/* We disable the RETRY_TIMEOUT register (0x41) to keep
