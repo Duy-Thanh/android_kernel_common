@@ -33,6 +33,24 @@
       "message": "Please rebase this change so its not on top of the tegra change that should stay in the vendor tree and not in the GKI.",
       "revId": "1b1c0e0eb7f6af0fa486fc76b4528da2d2f777de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8edad5ef_c29ca04c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1855125
+      },
+      "writtenOn": "2026-10-12T12:47:34Z",
+      "side": 1,
+      "message": "Resiolved this in Patchset#5. can you please review the change. thanks.",
+      "parentUuid": "a3289e3a_c1da176a",
+      "revId": "1b1c0e0eb7f6af0fa486fc76b4528da2d2f777de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
