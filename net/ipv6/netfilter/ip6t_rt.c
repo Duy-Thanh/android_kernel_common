@@ -56,8 +56,7 @@ static bool rt_mt6(const struct sk_buff *skb, struct xt_action_param *par)
 
 	hdrlen = ipv6_optlen(rh);
 	if (skb->len - ptr < hdrlen) {
-		/* Packet smaller than its length field */
-		par->hotdrop = true;
+		/* Pcket smaller than its length field */
 		return false;
 	}
 

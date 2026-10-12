@@ -410,9 +410,9 @@ static int vcap_debugfs_show(struct seq_file *m, void *unused)
 	};
 	int ret;
 
-	vcap_lock(info->admin);
+	mutex_lock(&info->admin->lock);
 	ret = vcap_show_admin(info->vctrl, info->admin, &out);
-	vcap_unlock(info->admin);
+	mutex_unlock(&info->admin->lock);
 	return ret;
 }
 DEFINE_SHOW_ATTRIBUTE(vcap_debugfs);
@@ -427,9 +427,9 @@ static int vcap_raw_debugfs_show(struct seq_file *m, void *unused)
 	};
 	int ret;
 
-	vcap_lock(info->admin);
+	mutex_lock(&info->admin->lock);
 	ret = vcap_show_admin_raw(info->vctrl, info->admin, &out);
-	vcap_unlock(info->admin);
+	mutex_unlock(&info->admin->lock);
 	return ret;
 }
 DEFINE_SHOW_ATTRIBUTE(vcap_raw_debugfs);

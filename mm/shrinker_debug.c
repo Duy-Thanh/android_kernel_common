@@ -183,12 +183,10 @@ int shrinker_debugfs_add(struct shrinker *shrinker)
 	}
 	shrinker->debugfs_entry = entry;
 
-	if (shrinker->count_objects)
-		debugfs_create_file("count", 0440, entry, shrinker,
-				    &shrinker_debugfs_count_fops);
-	if (shrinker->scan_objects)
-		debugfs_create_file("scan", 0220, entry, shrinker,
-				    &shrinker_debugfs_scan_fops);
+	debugfs_create_file("count", 0440, entry, shrinker,
+			    &shrinker_debugfs_count_fops);
+	debugfs_create_file("scan", 0220, entry, shrinker,
+			    &shrinker_debugfs_scan_fops);
 	return 0;
 }
 

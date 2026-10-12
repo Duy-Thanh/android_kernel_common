@@ -1499,17 +1499,6 @@ multicast_write_done:
 	return;
 }
 
-static void lan78xx_update_vlan_filter(struct lan78xx_priv *pdata,
-				       struct net_device *netdev,
-				       netdev_features_t features)
-{
-	if ((features & NETIF_F_HW_VLAN_CTAG_FILTER) &&
-	    !(netdev->flags & IFF_PROMISC))
-		pdata->rfe_ctl |= RFE_CTL_VLAN_FILTER_;
-	else
-		pdata->rfe_ctl &= ~RFE_CTL_VLAN_FILTER_;
-}
-
 static void lan78xx_set_multicast(struct net_device *netdev)
 {
 	struct lan78xx_net *dev = netdev_priv(netdev);
@@ -1543,8 +1532,6 @@ static void lan78xx_set_multicast(struct net_device *netdev)
 			pdata->rfe_ctl |= RFE_CTL_MCAST_EN_;
 		}
 	}
-
-	lan78xx_update_vlan_filter(pdata, dev->net, dev->net->features);
 
 	if (netdev_mc_count(dev->net)) {
 		struct netdev_hw_addr *ha;
@@ -3087,7 +3074,10 @@ static int lan78xx_set_features(struct net_device *netdev,
 	else
 		pdata->rfe_ctl &= ~RFE_CTL_VLAN_STRIP_;
 
-	lan78xx_update_vlan_filter(pdata, netdev, features);
+	if (features & NETIF_F_HW_VLAN_CTAG_FILTER)
+		pdata->rfe_ctl |= RFE_CTL_VLAN_FILTER_;
+	else
+		pdata->rfe_ctl &= ~RFE_CTL_VLAN_FILTER_;
 
 	spin_unlock_irqrestore(&pdata->rfe_ctl_lock, flags);
 
