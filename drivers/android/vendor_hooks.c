@@ -9,6 +9,11 @@
 #include <linux/pm_qos.h>
 #include <linux/futex.h>
 
+#ifndef __GENKSYMS__
+#include <sound/hda_codec.h>
+#include <sound/pcm.h>
+#endif
+
 #define CREATE_TRACE_POINTS
 #include <trace/hooks/vendor_hooks.h>
 #include <linux/tracepoint.h>
@@ -87,11 +92,14 @@
 #include <trace/hooks/typec.h>
 #include <trace/hooks/cdc_ether.h>
 #include <trace/hooks/sound.h>
+#include <trace/hooks/hda.h>
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
  * associated with them) to allow external modules to probe them.
  */
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_refrigerator);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_hda_add_controls);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_hda_pcm_fill_silence);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_send_sig_info);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_killed_process);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_reaper_delay_bypass);

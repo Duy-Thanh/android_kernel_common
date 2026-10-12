@@ -25,6 +25,7 @@
 #include <sound/core.h>
 #include <sound/initval.h>
 #include <sound/pcm_params.h>
+#include <trace/hooks/hda.h>
 #include "hda_controller.h"
 #include "hda_local.h"
 
@@ -675,6 +676,23 @@ static int azx_pcm_open(struct snd_pcm_substream *substream)
 	return err;
 }
 
+static int azx_pcm_silence(struct snd_pcm_substream *substream,
+			    int channel, unsigned long pos,
+			    unsigned long bytes)
+{
+	struct snd_pcm_runtime *runtime = substream->runtime;
+	bool handled = false;
+
+	trace_android_vh_hda_pcm_fill_silence(substream, channel, pos, bytes,
+					     &handled);
+	if (!handled)
+		snd_pcm_format_set_silence(runtime->format,
+					   (char *)runtime->dma_area + pos,
+					   bytes_to_samples(runtime, bytes));
+
+	return 0;
+}
+
 static const struct snd_pcm_ops azx_pcm_ops = {
 	.open = azx_pcm_open,
 	.close = azx_pcm_close,
@@ -683,6 +701,7 @@ static const struct snd_pcm_ops azx_pcm_ops = {
 	.prepare = azx_pcm_prepare,
 	.trigger = azx_pcm_trigger,
 	.pointer = azx_pcm_pointer,
+	.fill_silence = azx_pcm_silence,
 	.get_time_info =  azx_get_time_info,
 };
 
