@@ -1546,6 +1546,102 @@ out:
 	sockopt_free_buf(&ctx);
 	return ret;
 }
+<<<<<<< HEAD   (437aef3f57e8a97b59b9ba58778b4e4bc6751670 Revert "Bluetooth: btusb: Fix BD_ADDR byte order in btusb_se)
+||||||| BASE   (753e5cdcca5474d230d62bb3489e5168ab27c272 lwt_bpf: Restore reserved headroom after xmit program)
+
+int __cgroup_bpf_run_filter_getsockopt_kern(struct sock *sk, int level,
+					    int optname, void *optval,
+					    int *optlen, int retval)
+{
+	struct cgroup *cgrp = sock_cgroup_ptr(&sk->sk_cgrp_data);
+	struct bpf_sockopt_kern ctx = {
+		.sk = sk,
+		.level = level,
+		.optname = optname,
+		.retval = retval,
+		.optlen = *optlen,
+		.optval = optval,
+		.optval_end = optval + *optlen,
+	};
+	int ret;
+
+	/* Note that __cgroup_bpf_run_filter_getsockopt doesn't copy
+	 * user data back into BPF buffer when reval != 0. This is
+	 * done as an optimization to avoid extra copy, assuming
+	 * kernel won't populate the data in case of an error.
+	 * Here we always pass the data and memset() should
+	 * be called if that data shouldn't be "exported".
+	 */
+
+	ret = BPF_PROG_RUN_ARRAY(cgrp->bpf.effective[BPF_CGROUP_GETSOCKOPT],
+				 &ctx, BPF_PROG_RUN);
+	if (!ret)
+		return -EPERM;
+
+	if (ctx.optlen > *optlen)
+		return -EFAULT;
+
+	/* BPF programs only allowed to set retval to 0, not some
+	 * arbitrary value.
+	 */
+	if (ctx.retval != 0 && ctx.retval != retval)
+		return -EFAULT;
+
+	/* BPF programs can shrink the buffer, export the modifications.
+	 */
+	if (ctx.optlen != 0)
+		*optlen = ctx.optlen;
+
+	return ctx.retval;
+}
+=======
+
+int __cgroup_bpf_run_filter_getsockopt_kern(struct sock *sk, int level,
+					    int optname, void *optval,
+					    int *optlen, int retval)
+{
+	struct cgroup *cgrp = sock_cgroup_ptr(&sk->sk_cgrp_data);
+	struct bpf_sockopt_kern ctx = {
+		.sk = sk,
+		.level = level,
+		.optname = optname,
+		.retval = retval,
+		.optlen = *optlen,
+		.optval = optval,
+		.optval_end = optval + *optlen,
+	};
+	int ret;
+
+	/* Note that __cgroup_bpf_run_filter_getsockopt doesn't copy
+	 * user data back into BPF buffer when reval != 0. This is
+	 * done as an optimization to avoid extra copy, assuming
+	 * kernel won't populate the data in case of an error.
+	 * Here we always pass the data and memset() should
+	 * be called if that data shouldn't be "exported".
+	 */
+
+	ret = BPF_PROG_RUN_ARRAY(cgrp->bpf.effective[BPF_CGROUP_GETSOCKOPT],
+				 &ctx, BPF_PROG_RUN);
+	if (!ret)
+		return -EPERM;
+
+	if (ctx.optlen > *optlen || ctx.optlen < 0)
+		return -EFAULT;
+
+	/* BPF programs only allowed to set retval to 0, not some
+	 * arbitrary value.
+	 */
+	if (ctx.retval != 0 && ctx.retval != retval)
+		return -EFAULT;
+
+	/* BPF programs can shrink the buffer, export the modifications.
+	 */
+	if (ctx.optlen != 0)
+		*optlen = ctx.optlen;
+
+	return ctx.retval;
+}
+>>>>>>> BRANCH (5b09d984b38b018b123c3a9e02a96bbc6468dbe5 bpf: Reject negative optlen in cgroup getsockopt hook)
 #endif
 
 static ssize_t sysctl_cpy_dir(const struct ctl_dir *dir, char **bufp,
