@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2199f4f9_bf1aeeb0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-10-12T14:57:23Z",
+      "side": 1,
+      "message": "The Linux source says \"Calls to video_device_pipeline_alloc_start() must be matched with video_device_pipeline_stop()\". Are you sure you don\u0027t need another symbol?",
+      "revId": "9922b1836af2b5378f5b062f0e8ca3b31d678f12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
