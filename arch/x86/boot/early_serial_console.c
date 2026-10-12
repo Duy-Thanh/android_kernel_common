@@ -117,7 +117,7 @@ static unsigned int probe_baud(int port)
 static void parse_console_uart8250(void)
 {
 	char optstr[64], *options;
-	int baud;
+	int baud = DEFAULT_BAUD;
 	int port = 0;
 
 	/*
@@ -136,13 +136,10 @@ static void parse_console_uart8250(void)
 	else
 		return;
 
-	if (options && (options[0] == ',')) {
-		baud = simple_strtoull(options + 1, NULL, 0);
-		if (!baud)
-			baud = DEFAULT_BAUD;
-	} else {
+	if (options && (options[0] == ','))
+		baud = simple_strtoull(options + 1, &options, 0);
+	else
 		baud = probe_baud(port);
-	}
 
 	if (port)
 		early_serial_init(port, baud);
