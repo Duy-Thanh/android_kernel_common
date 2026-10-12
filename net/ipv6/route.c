@@ -988,13 +988,13 @@ int rt6_route_rcv(struct net_device *dev, u8 *opt, int len,
 	} else if (rinfo->prefix_len > 128) {
 		return -EINVAL;
 	} else if (rinfo->prefix_len > 64) {
-		/* RFC 4191: Length MUST be 3 when Prefix Length > 64 */
-		if (rinfo->length < 3)
+		if (rinfo->length < 2) {
 			return -EINVAL;
+		}
 	} else if (rinfo->prefix_len > 0) {
-		/* RFC 4191: Length MUST be 2 or 3 when Prefix Length > 0 */
-		if (rinfo->length < 2)
+		if (rinfo->length < 1) {
 			return -EINVAL;
+		}
 	}
 
 	pref = rinfo->route_pref;

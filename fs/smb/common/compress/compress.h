@@ -20,8 +20,7 @@ static __always_inline bool smb_compress_alg_valid(__le16 alg, bool valid_none)
 }
 
 int smb_compression_decompress(__le16 alg, bool allow_chained,
-			       bool allow_pattern, const void *src, u32 slen,
-			       void *dst, u32 dlen);
+			       const void *src, u32 slen, void *dst, u32 dlen);
 int smb_compression_compress_chained(__le16 alg, bool allow_pattern,
 				     const void *src, u32 slen,
 				     void *dst, u32 *dlen);

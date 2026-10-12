@@ -36,45 +36,45 @@ void x25_init_timers(struct sock *sk)
 
 void x25_start_heartbeat(struct sock *sk)
 {
-	sk_reset_timer(sk, &sk->sk_timer, jiffies + 5 * HZ);
+	mod_timer(&sk->sk_timer, jiffies + 5 * HZ);
 }
 
 void x25_stop_heartbeat(struct sock *sk)
 {
-	sk_stop_timer(sk, &sk->sk_timer);
+	timer_delete(&sk->sk_timer);
 }
 
 void x25_start_t2timer(struct sock *sk)
 {
 	struct x25_sock *x25 = x25_sk(sk);
 
-	sk_reset_timer(sk, &x25->timer, jiffies + x25->t2);
+	mod_timer(&x25->timer, jiffies + x25->t2);
 }
 
 void x25_start_t21timer(struct sock *sk)
 {
 	struct x25_sock *x25 = x25_sk(sk);
 
-	sk_reset_timer(sk, &x25->timer, jiffies + x25->t21);
+	mod_timer(&x25->timer, jiffies + x25->t21);
 }
 
 void x25_start_t22timer(struct sock *sk)
 {
 	struct x25_sock *x25 = x25_sk(sk);
 
-	sk_reset_timer(sk, &x25->timer, jiffies + x25->t22);
+	mod_timer(&x25->timer, jiffies + x25->t22);
 }
 
 void x25_start_t23timer(struct sock *sk)
 {
 	struct x25_sock *x25 = x25_sk(sk);
 
-	sk_reset_timer(sk, &x25->timer, jiffies + x25->t23);
+	mod_timer(&x25->timer, jiffies + x25->t23);
 }
 
 void x25_stop_timer(struct sock *sk)
 {
-	sk_stop_timer(sk, &x25_sk(sk)->timer);
+	timer_delete(&x25_sk(sk)->timer);
 }
 
 unsigned long x25_display_timer(struct sock *sk)
@@ -108,7 +108,7 @@ static void x25_heartbeat_expiry(struct timer_list *t)
 			     sock_flag(sk, SOCK_DEAD))) {
 				bh_unlock_sock(sk);
 				x25_destroy_socket_from_timer(sk);
-				goto out;
+				return;
 			}
 			break;
 
@@ -120,14 +120,8 @@ static void x25_heartbeat_expiry(struct timer_list *t)
 			break;
 	}
 restart_heartbeat:
-	/* Do not rearm once __x25_destroy_socket() has unlinked the socket:
-	 * it is past its cancel point and owns the teardown from there on.
-	 */
-	if (sk_hashed(sk))
-		x25_start_heartbeat(sk);
+	x25_start_heartbeat(sk);
 	bh_unlock_sock(sk);
-out:
-	sock_put(sk);
 }
 
 /*
@@ -172,5 +166,4 @@ static void x25_timer_expiry(struct timer_list *t)
 	} else
 		x25_do_timer_expiry(sk);
 	bh_unlock_sock(sk);
-	sock_put(sk);
 }

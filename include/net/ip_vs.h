@@ -25,7 +25,9 @@
 #include <linux/netfilter.h>		/* for union nf_inet_addr */
 #include <linux/ip.h>
 #include <linux/ipv6.h>			/* for struct ipv6hdr */
+#include <net/route.h>
 #include <net/ipv6.h>
+#include <net/ip6_fib.h>
 #if IS_ENABLED(CONFIG_NF_CONNTRACK)
 #include <net/netfilter/nf_conntrack.h>
 #endif
@@ -2060,7 +2062,7 @@ static inline bool ip_vs_conn_use_hash2(struct ip_vs_conn *cp)
 
 void ip_vs_nat_icmp(struct sk_buff *skb, struct ip_vs_protocol *pp,
 		    struct ip_vs_conn *cp, int dir, unsigned int toff,
-		    bool has_ports, struct ip_vs_iphdr *ciph);
+		    bool has_ports);
 
 #ifdef CONFIG_IP_VS_IPV6
 void ip_vs_nat_icmp_v6(struct sk_buff *skb, struct ip_vs_protocol *pp,
@@ -2093,23 +2095,30 @@ static inline __wsum ip_vs_check_diff2(__be16 old, __be16 new, __wsum oldsum)
 	return csum_partial(diff, sizeof(diff), oldsum);
 }
 
-static inline bool ip_vs_checksum_needed(struct sk_buff *skb)
+static inline bool ip_vs_checksum_needed(struct sk_buff *skb, int af)
 {
 	/* Checksum unnecessary or already validated? */
 	if (skb_csum_unnecessary(skb))
 		return false;
-	/* Locally generated ? */
-	if (!skb->dev)
+	/* LOCAL_OUT ? */
+	if (!skb->dev || skb->dev->flags & IFF_LOOPBACK)
 		return false;
+	/* !LOCAL_IN (FORWARD) ? */
+	if (af == AF_INET6) {
+		if (!(dst_rt6_info(skb_dst(skb))->rt6i_flags & RTF_LOCAL))
+			return false;
+	} else {
+		if (!(skb_rtable(skb)->rt_flags & RTCF_LOCAL))
+			return false;
+	}
 	return true;
 }
 
 static inline bool ip_vs_checksum_common_check(struct sk_buff *skb,
 					       int offset, int proto, int af)
 {
-	if (!ip_vs_checksum_needed(skb))
+	if (!ip_vs_checksum_needed(skb, af))
 		return true;
-	/* Validate csum even for FORWARD */
 	return !nf_checksum(skb, NF_INET_LOCAL_IN, offset, proto, af);
 }
 
