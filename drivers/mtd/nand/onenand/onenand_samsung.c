@@ -554,9 +554,6 @@ static int s5pc110_dma_poll(dma_addr_t dst, dma_addr_t src, size_t count, int di
 	} while (!(status & S5PC110_DMA_TRANS_STATUS_TD) &&
 		time_before(jiffies, timeout));
 
-	if (!(status & S5PC110_DMA_TRANS_STATUS_TD))
-		return -ETIMEDOUT;
-
 	writel(S5PC110_DMA_TRANS_CMD_TDC, base + S5PC110_DMA_TRANS_CMD);
 
 	return 0;
@@ -611,9 +608,7 @@ static int s5pc110_dma_irq(dma_addr_t dst, dma_addr_t src, size_t count, int dir
 
 	writel(S5PC110_DMA_TRANS_CMD_TR, base + S5PC110_DMA_TRANS_CMD);
 
-	if (!wait_for_completion_timeout(&onenand->complete,
-					 msecs_to_jiffies(20)))
-		return -ETIMEDOUT;
+	wait_for_completion_timeout(&onenand->complete, msecs_to_jiffies(20));
 
 	return 0;
 }
