@@ -112,7 +112,6 @@ static int __process_request(struct ksmbd_work *work, struct ksmbd_conn *conn,
 {
 	struct smb_version_cmds *cmds;
 	u16 command;
-	bool signed_req;
 	int ret;
 
 	if (check_conn_state(work))
@@ -139,14 +138,7 @@ andx_again:
 		return SERVER_HANDLER_ABORT;
 	}
 
-	signed_req = conn->ops->is_sign_req && conn->ops->is_sign_req(work, command);
-	if (work->sess && work->sess->sign && !work->encrypted &&
-	    !signed_req) {
-		conn->ops->set_rsp_status(work, STATUS_ACCESS_DENIED);
-		return SERVER_HANDLER_ABORT;
-	}
-
-	if (work->sess && signed_req) {
+	if (work->sess && conn->ops->is_sign_req(work, command)) {
 		ret = conn->ops->check_sign_req(work);
 		if (!ret) {
 			conn->ops->set_rsp_status(work, STATUS_ACCESS_DENIED);
