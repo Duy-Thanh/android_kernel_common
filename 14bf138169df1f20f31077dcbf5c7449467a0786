@@ -51,6 +51,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "8dea5afa_0fb0419d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-12T18:32:22Z",
+      "side": 1,
+      "message": "Thanks; that\u0027s what I get for blindly copying the bug from the CL that introduced the error.",
+      "parentUuid": "70384353_f15fb840",
+      "range": {
+        "startLine": 26,
+        "startChar": 5,
+        "endLine": 26,
+        "endChar": 14
+      },
+      "revId": "14bf138169df1f20f31077dcbf5c7449467a0786",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "262812a1_45756f0b",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
