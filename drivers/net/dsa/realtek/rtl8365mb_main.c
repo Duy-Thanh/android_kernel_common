@@ -1988,19 +1988,16 @@ static void rtl8365mb_get_stats64(struct dsa_switch *ds, int port,
 	spin_unlock(&p->stats_lock);
 }
 
-static int rtl8365mb_stats_setup(struct realtek_priv *priv)
+static void rtl8365mb_stats_setup(struct realtek_priv *priv)
 {
 	struct rtl8365mb *mb = priv->chip_data;
 	struct dsa_switch *ds = &priv->ds;
 	struct dsa_port *dp;
-	int ret;
 
 	/* Per-chip global mutex to protect MIB counter access, since doing
 	 * so requires accessing a series of registers in a particular order.
 	 */
-	ret = devm_mutex_init(priv->dev, &mb->mib_lock);
-	if (ret)
-		return ret;
+	mutex_init(&mb->mib_lock);
 
 	dsa_switch_for_each_available_port(dp, ds) {
 		struct rtl8365mb_port *p = &mb->ports[dp->index];
@@ -2013,8 +2010,6 @@ static int rtl8365mb_stats_setup(struct realtek_priv *priv)
 		 */
 		INIT_DELAYED_WORK(&p->mib_work, rtl8365mb_stats_poll);
 	}
-
-	return 0;
 }
 
 static void rtl8365mb_stats_teardown(struct realtek_priv *priv)
@@ -2572,12 +2567,7 @@ static int rtl8365mb_setup(struct dsa_switch *ds)
 	}
 
 	/* Start statistics counter polling */
-	ret = rtl8365mb_stats_setup(priv);
-	if (ret) {
-		dev_err(priv->dev, "failed to setup stats: %pe\n",
-			ERR_PTR(ret));
-		goto out_teardown_irq;
-	}
+	rtl8365mb_stats_setup(priv);
 
 	return 0;
 

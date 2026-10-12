@@ -234,7 +234,11 @@ int __init smb1_init_maperror(void)
 	if (rc)
 		return rc;
 
-	return mapping_table_ERRSRV_is_sorted();
+	rc = mapping_table_ERRSRV_is_sorted();
+	if (rc)
+		return rc;
+
+	return rc;
 }
 
 #if IS_ENABLED(CONFIG_SMB1_KUNIT_TESTS)

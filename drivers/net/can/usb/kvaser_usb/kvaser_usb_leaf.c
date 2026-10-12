@@ -691,22 +691,13 @@ static int kvaser_usb_leaf_wait_cmd(const struct kvaser_usb *dev, u8 id,
 				continue;
 			}
 
-			if (tmp->len < CMD_HEADER_LEN ||
-			    tmp->len > actual_len - pos) {
+			if (pos + tmp->len > actual_len) {
 				dev_err_ratelimited(&dev->intf->dev,
 						    "Format error\n");
 				break;
 			}
 
 			if (tmp->id == id) {
-				if (tmp->len > sizeof(*cmd)) {
-					dev_err_ratelimited(&dev->intf->dev,
-							    "Received command %u too large (%u)\n",
-							    tmp->id, tmp->len);
-					err = -EIO;
-					goto end;
-				}
-
 				memcpy(cmd, tmp, tmp->len);
 				goto end;
 			}
@@ -1746,7 +1737,7 @@ static void kvaser_usb_leaf_read_bulk_callback(struct kvaser_usb *dev,
 			continue;
 		}
 
-		if (cmd->len < CMD_HEADER_LEN || cmd->len > len - pos) {
+		if (pos + cmd->len > len) {
 			dev_err_ratelimited(&dev->intf->dev, "Format error\n");
 			break;
 		}

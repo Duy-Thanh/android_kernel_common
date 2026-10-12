@@ -793,7 +793,7 @@ err:
 				   ret,
 				   libie_aq_str(pf->hw.adminq.sq_last_status),
 				   pin_type_name[pin_type], pin->idx);
-	else if (pf->hw.adminq.sq_last_status != LIBIE_AQ_RC_EBUSY)
+	else
 		dev_err_ratelimited(ice_pf_to_dev(pf),
 				    "err:%d %s failed to update %s pin:%u\n",
 				    ret,
@@ -3024,8 +3024,7 @@ static int ice_dpll_pps_update_phase_offsets(struct ice_pf *pf,
 	*phase_offset_pins_updated = 0;
 	ret = ice_aq_get_cgu_input_pin_measure(&pf->hw, DPLL_TYPE_PPS, meas,
 					       ARRAY_SIZE(meas));
-	if (ret && (pf->hw.adminq.sq_last_status == LIBIE_AQ_RC_EAGAIN ||
-		    pf->hw.adminq.sq_last_status == LIBIE_AQ_RC_EBUSY)) {
+	if (ret && pf->hw.adminq.sq_last_status == LIBIE_AQ_RC_EAGAIN) {
 		return 0;
 	} else if (ret) {
 		dev_err(ice_pf_to_dev(pf),
@@ -3087,12 +3086,10 @@ ice_dpll_update_state(struct ice_pf *pf, struct ice_dpll *d, bool init)
 		d->dpll_idx, d->prev_input_idx, d->input_idx,
 		d->dpll_state, d->prev_dpll_state, d->mode);
 	if (ret) {
-		/* EBUSY is expected during reset recovery, don't log error */
-		if (pf->hw.adminq.sq_last_status != LIBIE_AQ_RC_EBUSY)
-			dev_err(ice_pf_to_dev(pf),
-				"update dpll=%d state failed, ret=%d %s\n",
-				d->dpll_idx, ret,
-				libie_aq_str(pf->hw.adminq.sq_last_status));
+		dev_err(ice_pf_to_dev(pf),
+			"update dpll=%d state failed, ret=%d %s\n",
+			d->dpll_idx, ret,
+			libie_aq_str(pf->hw.adminq.sq_last_status));
 		return ret;
 	}
 	if (init) {
@@ -3161,9 +3158,7 @@ static void ice_dpll_periodic_work(struct kthread_work *work)
 	    d->periodic_counter % dp->phase_offset_monitor_period == 0)
 		ret = ice_dpll_pps_update_phase_offsets(pf, &phase_offset_ntf);
 	if (ret) {
-		/* EBUSY is expected during reset recovery */
-		if (pf->hw.adminq.sq_last_status != LIBIE_AQ_RC_EBUSY)
-			d->cgu_state_acq_err_num++;
+		d->cgu_state_acq_err_num++;
 		/* stop rescheduling this worker */
 		if (d->cgu_state_acq_err_num >
 		    ICE_CGU_STATE_ACQ_ERR_THRESHOLD) {

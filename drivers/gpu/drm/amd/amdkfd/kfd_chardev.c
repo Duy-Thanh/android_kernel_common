@@ -3109,14 +3109,10 @@ static int kfd_ioctl_set_debug_trap(struct file *filep, struct kfd_process *p, v
 		goto out;
 	}
 
-	/*
-	 * Verify debugger has permission to debug target process.
-	 * For cross-process debugging, require active ptrace relationship.
-	 * This applies to ALL operations to prevent unauthorized interference.
-	 */
+	/* Check if target is still PTRACED. */
 	rcu_read_lock();
-	if (target != p && ptrace_parent(target->lead_thread) != current
-			&& target->debugger_process != p) {
+	if (target != p && args->op != KFD_IOC_DBG_TRAP_DISABLE
+				&& ptrace_parent(target->lead_thread) != current) {
 		pr_err("PID %i is not PTRACED and cannot be debugged\n", args->pid);
 		r = -EPERM;
 	}

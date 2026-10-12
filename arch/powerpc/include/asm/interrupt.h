@@ -246,7 +246,6 @@ interrupt_handler void func(struct pt_regs *regs)			\
 	instrumentation_begin();					\
 	irq_enter_rcu();						\
 	____##func (regs);						\
-	nap_adjust_return(regs);					\
 	irq_exit_rcu();							\
 	instrumentation_end();						\
 	arch_interrupt_async_exit_prepare(regs);			\

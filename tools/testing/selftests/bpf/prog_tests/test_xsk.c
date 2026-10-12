@@ -427,14 +427,14 @@ static u32 pkt_nb_frags(u32 frame_size, struct pkt_stream *pkt_stream, struct pk
 	}
 
 	/* Search for the end of the packet in verbatim mode */
-	if (!pkt_continues(pkt->options))
+	if (!pkt_continues(pkt->options) || !pkt->valid)
 		return nb_frags;
 
 	next_frag = pkt_stream->current_pkt_nb;
 	pkt++;
 	while (next_frag++ < pkt_stream->nb_pkts) {
 		nb_frags++;
-		if (!pkt_continues(pkt->options))
+		if (!pkt_continues(pkt->options) || !pkt->valid)
 			break;
 		pkt++;
 	}
@@ -665,11 +665,11 @@ static struct pkt_stream *__pkt_stream_generate_custom(struct ifobject *ifobj, s
 			if (!frame->valid || !pkt_continues(frame->options))
 				payload++;
 		} else {
-			if (frame->valid) {
+			if (frame->valid)
 				len += frame->len;
-				if (pkt_continues(frame->options))
-					continue;
-			}
+			if (frame->valid && pkt_continues(frame->options))
+				continue;
+
 			pkt->pkt_nb = pkt_nb;
 			pkt->len = len;
 			pkt->valid = frame->valid;
@@ -1250,9 +1250,10 @@ static int __send_pkts(struct ifobject *ifobject, struct xsk_socket_info *xsk,
 			}
 		}
 
-		if (pkt && pkt->valid)
+		if (pkt && pkt->valid) {
 			valid_pkts++;
-		valid_frags += nb_frags;
+			valid_frags += nb_frags;
+		}
 	}
 
 	pthread_mutex_lock(&pacing_mutex);
@@ -2098,16 +2099,13 @@ int testapp_invalid_desc_mb(struct test_spec *test)
 		{0, 0, 0, false, 0},
 		/* Invalid address in the second frame */
 		{0, XSK_UMEM__LARGE_FRAME_SIZE, 0, false, XDP_PKT_CONTD},
-		{umem_sz * 2, XSK_UMEM__LARGE_FRAME_SIZE, 0, false, XDP_PKT_CONTD},
-		{0, MIN_PKT_SIZE, 0, false, 0},
+		{umem_sz, XSK_UMEM__LARGE_FRAME_SIZE, 0, false, XDP_PKT_CONTD},
 		/* Invalid len in the middle */
 		{0, XSK_UMEM__LARGE_FRAME_SIZE, 0, false, XDP_PKT_CONTD},
 		{0, XSK_UMEM__INVALID_FRAME_SIZE, 0, false, XDP_PKT_CONTD},
-		{0, MIN_PKT_SIZE, 0, false, 0},
 		/* Invalid options in the middle */
 		{0, XSK_UMEM__LARGE_FRAME_SIZE, 0, false, XDP_PKT_CONTD},
 		{0, XSK_UMEM__LARGE_FRAME_SIZE, 0, false, XSK_DESC__INVALID_OPTION},
-		{0, MIN_PKT_SIZE, 0, false, 0},
 		/* Transmit 2 frags, receive 3 */
 		{0, XSK_UMEM__MAX_FRAME_SIZE, 0, true, XDP_PKT_CONTD},
 		{0, XSK_UMEM__MAX_FRAME_SIZE, 0, true, 0},
@@ -2119,8 +2117,8 @@ int testapp_invalid_desc_mb(struct test_spec *test)
 
 	if (umem->unaligned_mode) {
 		/* Crossing a chunk boundary allowed */
-		pkts[15].valid = true;
-		pkts[16].valid = true;
+		pkts[12].valid = true;
+		pkts[13].valid = true;
 	}
 
 	test->mtu = MAX_ETH_JUMBO_SIZE;
@@ -2272,7 +2270,7 @@ int testapp_too_many_frags(struct test_spec *test)
 		max_frags += 1;
 	}
 
-	pkts = calloc(2 * max_frags + 3, sizeof(struct pkt));
+	pkts = calloc(2 * max_frags + 2, sizeof(struct pkt));
 	if (!pkts)
 		return TEST_FAILURE;
 
@@ -2290,29 +2288,23 @@ int testapp_too_many_frags(struct test_spec *test)
 	}
 	pkts[max_frags].options = 0;
 
-	/* An invalid packet with the max + 1 amount of frags */
-	for (i = max_frags + 1; i < 2 * max_frags + 2; i++) {
+	/* An invalid packet with the max amount of frags but signals packet
+	 * continues on the last frag
+	 */
+	for (i = max_frags + 1; i < 2 * max_frags + 1; i++) {
 		pkts[i].len = MIN_PKT_SIZE;
 		pkts[i].options = XDP_PKT_CONTD;
-		pkts[i].valid = true;
+		pkts[i].valid = false;
 	}
-	pkts[2 * max_frags + 1].options = 0;
 
 	/* Valid packet for synch */
-	pkts[2 * max_frags + 2].len = MIN_PKT_SIZE;
-	pkts[2 * max_frags + 2].valid = true;
+	pkts[2 * max_frags + 1].len = MIN_PKT_SIZE;
+	pkts[2 * max_frags + 1].valid = true;
 
-	if (pkt_stream_generate_custom(test, pkts, 2 * max_frags + 3)) {
+	if (pkt_stream_generate_custom(test, pkts, 2 * max_frags + 2)) {
 		free(pkts);
 		return TEST_FAILURE;
 	}
-
-	/* The generated Tx stream must keep the too-big packet valid so that
-	 * __send_pkts() accounts its descriptors in outstanding_tx. The Rx
-	 * stream, however, must not expect this packet on the wire.
-	 */
-	test->ifobj_rx->xsk->pkt_stream->pkts[2].valid = false;
-	test->ifobj_rx->xsk->pkt_stream->nb_valid_entries--;
 
 	ret = testapp_validate_traffic(test);
 	free(pkts);

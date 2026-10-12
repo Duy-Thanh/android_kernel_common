@@ -72,8 +72,7 @@ module_param(max_version, uint, S_IRUGO);
 MODULE_PARM_DESC(max_version,
 		 "Maximal VMBus protocol version which can be negotiated");
 
-static int vmbus_try_connection_id(struct vmbus_channel_msginfo *msginfo,
-				   u32 version, u32 connection_id)
+int vmbus_negotiate_version(struct vmbus_channel_msginfo *msginfo, u32 version)
 {
 	int ret = 0;
 	struct vmbus_channel_initiate_contact *msg;
@@ -88,20 +87,20 @@ static int vmbus_try_connection_id(struct vmbus_channel_msginfo *msginfo,
 	msg->vmbus_version_requested = version;
 
 	/*
-	 * For VMBus protocol 5.0 (VERSION_WIN10_V5) and higher, use the
-	 * caller-supplied connection_id for the Initiate Contact message so
-	 * the caller can implement the required retry scheme. For subsequent
-	 * messages, use the Message Connection ID field in the host-returned
-	 * Version Response message. With VERSION_WIN10_V5 and higher, we don't
-	 * use msg->interrupt_page, but tell the host explicitly that we still
-	 * use VMBUS_MESSAGE_SINT(2) for compatibility.
+	 * VMBus protocol 5.0 (VERSION_WIN10_V5) and higher require that we must
+	 * use VMBUS_MESSAGE_CONNECTION_ID_4 for the Initiate Contact Message,
+	 * and for subsequent messages, we must use the Message Connection ID
+	 * field in the host-returned Version Response Message. And, with
+	 * VERSION_WIN10_V5 and higher, we don't use msg->interrupt_page, but we
+	 * tell the host explicitly that we still use VMBUS_MESSAGE_SINT(2) for
+	 * compatibility.
 	 *
 	 * On old hosts, we should always use VMBUS_MESSAGE_CONNECTION_ID (1).
 	 */
 	if (version >= VERSION_WIN10_V5) {
 		msg->msg_sint = VMBUS_MESSAGE_SINT;
 		msg->msg_vtl = ms_hyperv.vtl;
-		vmbus_connection.msg_conn_id = connection_id;
+		vmbus_connection.msg_conn_id = VMBUS_MESSAGE_CONNECTION_ID_4;
 	} else {
 		msg->interrupt_page = virt_to_phys(vmbus_connection.int_page);
 		vmbus_connection.msg_conn_id = VMBUS_MESSAGE_CONNECTION_ID;
@@ -164,22 +163,6 @@ static int vmbus_try_connection_id(struct vmbus_channel_msginfo *msginfo,
 	}
 
 	return ret;
-}
-
-int vmbus_negotiate_version(struct vmbus_channel_msginfo *msginfo, u32 version)
-{
-	int ret;
-
-	/* Try the redirect ID first for VTL2 with VMBus protocol 5.0+. */
-	if (version >= VERSION_WIN10_V5 && ms_hyperv.vtl == 2) {
-		ret = vmbus_try_connection_id(msginfo, version,
-					      VMBUS_MESSAGE_CONNECTION_ID_REDIRECT);
-		if (ret != -ENXIO)
-			return ret;
-	}
-
-	return vmbus_try_connection_id(msginfo, version,
-				       VMBUS_MESSAGE_CONNECTION_ID_4);
 }
 
 /*
@@ -474,10 +457,18 @@ int vmbus_post_msg(void *buffer, size_t buflen, bool can_sleep)
 
 		switch (ret) {
 		case HV_STATUS_INVALID_CONNECTION_ID:
-			/* Allow INITIATE_CONTACT to try another connection ID. */
+			/*
+			 * See vmbus_negotiate_version(): VMBus protocol 5.0
+			 * and higher require that we must use
+			 * VMBUS_MESSAGE_CONNECTION_ID_4 for the Initiate
+			 * Contact message, but on old hosts that only
+			 * support VMBus protocol 4.0 or lower, here we get
+			 * HV_STATUS_INVALID_CONNECTION_ID and we should
+			 * return an error immediately without retrying.
+			 */
 			hdr = buffer;
 			if (hdr->msgtype == CHANNELMSG_INITIATE_CONTACT)
-				return -ENXIO;
+				return -EINVAL;
 			/*
 			 * We could get this if we send messages too
 			 * frequently.

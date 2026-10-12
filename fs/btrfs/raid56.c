@@ -1679,10 +1679,8 @@ static void verify_bio_data_sectors(struct btrfs_raid_bio *rbio,
 			continue;
 
 		/* No csum for this sector, skip to the next sector. */
-		if (!test_bit(total_sector_nr, rbio->csum_bitmap)) {
-			total_sector_nr++;
+		if (!test_bit(total_sector_nr, rbio->csum_bitmap))
 			continue;
-		}
 
 		expected_csum = rbio->csum_buf + total_sector_nr * fs_info->csum_size;
 		btrfs_calculate_block_csum_pages(fs_info, paddrs, csum_buf);
@@ -2911,12 +2909,13 @@ static int scrub_assemble_read_bios(struct btrfs_raid_bio *rbio)
 			continue;
 
 		/*
-		 * A parity-scrub rbio carries no data in its bio list: the
-		 * only bio there is the empty completion bio added by
-		 * raid56_parity_alloc_scrub_rbio().  Every sector is read
-		 * from the stripe, so only assert that invariant here.
+		 * We want to find all the sectors missing from the rbio and
+		 * read them from the disk. If sector_paddr_in_rbio() finds a sector
+		 * in the bio list we don't need to read it off the stripe.
 		 */
-		ASSERT(!sector_paddrs_in_rbio(rbio, stripe, sectornr, 1));
+		paddrs = sector_paddrs_in_rbio(rbio, stripe, sectornr, 1);
+		if (paddrs == NULL)
+			continue;
 
 		paddrs = rbio_stripe_paddrs(rbio, stripe, sectornr);
 		/*

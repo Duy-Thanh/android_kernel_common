@@ -2269,7 +2269,7 @@ static int fsl_easrc_probe(struct platform_device *pdev)
 	ret = fsl_asrc_m2m_init(easrc);
 	if (ret) {
 		dev_err(&pdev->dev, "failed to init m2m device %d\n", ret);
-		goto err_pm_disable;
+		return ret;
 	}
 
 	return 0;

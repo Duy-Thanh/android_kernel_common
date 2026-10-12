@@ -475,29 +475,17 @@ bool acpi_cpc_valid(void)
 }
 EXPORT_SYMBOL_GPL(acpi_cpc_valid);
 
-bool cppc_allow_fast_switch(const struct cpumask *cpus)
+bool cppc_allow_fast_switch(void)
 {
-	struct cpc_register_resource *desired_reg, *min_reg, *max_reg;
+	struct cpc_register_resource *desired_reg;
 	struct cpc_desc *cpc_ptr;
 	int cpu;
 
-	for_each_cpu(cpu, cpus) {
+	for_each_online_cpu(cpu) {
 		cpc_ptr = per_cpu(cpc_desc_ptr, cpu);
-		if (!cpc_ptr)
-			return false;
 		desired_reg = &cpc_ptr->cpc_regs[DESIRED_PERF];
-		min_reg = &cpc_ptr->cpc_regs[MIN_PERF];
-		max_reg = &cpc_ptr->cpc_regs[MAX_PERF];
-
-		if (!CPC_SUPPORTED(desired_reg) ||
-		    (!CPC_IN_SYSTEM_MEMORY(desired_reg) &&
-		     !CPC_IN_SYSTEM_IO(desired_reg)) ||
-		    (CPC_SUPPORTED(min_reg) &&
-		     !CPC_IN_SYSTEM_MEMORY(min_reg) &&
-		     !CPC_IN_SYSTEM_IO(min_reg)) ||
-		    (CPC_SUPPORTED(max_reg) &&
-		     !CPC_IN_SYSTEM_MEMORY(max_reg) &&
-		     !CPC_IN_SYSTEM_IO(max_reg)))
+		if (!CPC_IN_SYSTEM_MEMORY(desired_reg) &&
+				!CPC_IN_SYSTEM_IO(desired_reg))
 			return false;
 	}
 
@@ -1963,17 +1951,16 @@ int cppc_set_perf(int cpu, struct cppc_perf_ctrls *perf_ctrls)
 		cpc_desc->write_cmd_status = 0;
 	}
 
-	if (CPC_SUPPORTED(desired_reg))
-		cpc_write(cpu, desired_reg, perf_ctrls->desired_perf);
+	cpc_write(cpu, desired_reg, perf_ctrls->desired_perf);
 
 	/*
 	 * Only write if min_perf and max_perf not zero. Some drivers pass zero
 	 * value to min and max perf, but they don't mean to set the zero value,
 	 * they just don't want to write to those registers.
 	 */
-	if (perf_ctrls->min_perf && CPC_SUPPORTED(min_perf_reg))
+	if (perf_ctrls->min_perf)
 		cpc_write(cpu, min_perf_reg, perf_ctrls->min_perf);
-	if (perf_ctrls->max_perf && CPC_SUPPORTED(max_perf_reg))
+	if (perf_ctrls->max_perf)
 		cpc_write(cpu, max_perf_reg, perf_ctrls->max_perf);
 
 	if (CPC_IN_PCC(desired_reg) || CPC_IN_PCC(min_perf_reg) || CPC_IN_PCC(max_perf_reg))

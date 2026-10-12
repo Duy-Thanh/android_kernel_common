@@ -1,4 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0-or-later */
+/*
+ */
 #ifndef _ASM_POWERPC_SERIAL_H
 #define _ASM_POWERPC_SERIAL_H
 
@@ -16,4 +18,4 @@ extern void find_legacy_serial_ports(void);
 #define find_legacy_serial_ports()	do { } while (0)
 #endif
 
-#endif /* _ASM_POWERPC_SERIAL_H */
+#endif /* _PPC64_SERIAL_H */
