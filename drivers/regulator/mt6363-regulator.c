@@ -927,7 +927,6 @@ static const struct of_device_id mt6363_regulator_match[] = {
 	{ .compatible = "mediatek,mt6363-regulator" },
 	{ /* sentinel */ }
 };
-MODULE_DEVICE_TABLE(of, mt6363_regulator_match);
 
 static struct platform_driver mt6363_regulator_driver = {
 	.driver = {
