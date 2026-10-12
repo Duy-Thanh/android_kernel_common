@@ -340,14 +340,5 @@
         }
       ]
     }
-  ],
-  "avf-presubmit": [
-    {
-      "imports": [
-        {
-          "path": "packages/modules/Virtualization"
-        }
-      ]
-    }
   ]
 }
