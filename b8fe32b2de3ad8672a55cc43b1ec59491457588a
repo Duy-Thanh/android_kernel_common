@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c4af4a2_2a12cad2",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1245,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-10-12T15:02:22Z",
+      "side": 1,
+      "message": "`__pkvm_va` doesn\u0027t check the bounds for phys and we will have a problem if phys doesn\u0027t fit in the direct map window. If phys is greater than or equal to MAXMEM, __pkvm_va() returns a value greater than VMALLOC_START and pkvm_hyp_mmu_map() can collide with vmemmap or hypervisor .text/.data in hyp_mmu.\n\nWould it make sense to have a check to see if it fits in the direct map window before we acquire the mmu lock - something like:\n\n```\nif (phys + size \u003e MAXMEM)\n    return -EINVAL;\n```\n\nThis was an issue in iommu_init as well, but we trusted the host during initialization to not pass in a bad range for [iommu-\u003ereg, iommu-\u003ereg + size). Now that we are exposing this as an api, it would be safer to have the above check I guess.",
+      "fixSuggestions": [
+        {
+          "fixId": "a3f3cdde_7cb0cd67",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\tif (phys + size \u003e MAXMEM)\n\t\treturn -EINVAL;\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b8fe32b2de3ad8672a55cc43b1ec59491457588a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99c3cea4_f04652b0",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1245,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-10-12T15:02:22Z",
+      "side": 1,
+      "message": "minor: I was looking at the mmio range considered by hypervisor and noticed that `pkvm_ramoops_console_pa` would also be considered mmio range as its reserved in E820. If my understanding is correct, its currently `PKVM_PAGE_OWNED` and mapped as `PAGE_KERNEL`, but shared with pKVM(in `create_hyp_mmu`). With this change, `pkvm_host_donate_hyp_mmio` if invoked for ramoops range will re-map it as `PAGE_KERNEL_IO_NOCACHE` as it is considered mmio range. Not sure if its a big problem. And `pkvm_hyp_mmu_map` ultimately calls `hyp_mmu_flush_tlb` which BUG()s. \n\nWe could probably mark `pkvm_ramoops_console_pa` as `PKVM_PAGE_SHARED_OWNED` so that `pkvm_host_donate_hyp_mmio` will reject the donation?",
+      "fixSuggestions": [
+        {
+          "fixId": "c9a0ff4a_398c7d7c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\tu64 prot \u003d (u64)pgprot_val(PAGE_KERNEL_IO_NOCACHE);\n\n\tif (phys \u003d\u003d pkvm_ramoops_console_pa)\n\t\tprot \u003d (u64)pgprot_val(PAGE_KERNEL);\n\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 1246,
+                "startChar": 0,
+                "endLine": 1247,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t       prot);\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b8fe32b2de3ad8672a55cc43b1ec59491457588a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
