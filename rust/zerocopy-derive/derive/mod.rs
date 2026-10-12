@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: (BSD-2-Clause OR Apache-2.0) OR MIT
-//
+
 pub mod from_bytes;
 pub mod into_bytes;
 pub mod known_layout;
@@ -15,8 +15,8 @@ use crate::{
     util::{Ctx, DataExt, FieldBounds, ImplBlockBuilder, Trait},
 };
 
-pub(crate) fn derive_immutable(ctx: &Ctx, _top_level: Trait) -> Result<TokenStream, Error> {
-    Ok(match &ctx.ast.data {
+pub(crate) fn derive_immutable(ctx: &Ctx, _top_level: Trait) -> TokenStream {
+    match &ctx.ast.data {
         Data::Struct(strct) => {
             ImplBlockBuilder::new(ctx, strct, Trait::Immutable, FieldBounds::ALL_SELF).build()
         }
@@ -26,7 +26,7 @@ pub(crate) fn derive_immutable(ctx: &Ctx, _top_level: Trait) -> Result<TokenStre
         Data::Union(unn) => {
             ImplBlockBuilder::new(ctx, unn, Trait::Immutable, FieldBounds::ALL_SELF).build()
         }
-    })
+    }
 }
 
 pub(crate) fn derive_hash(ctx: &Ctx, _top_level: Trait) -> Result<TokenStream, Error> {
@@ -97,20 +97,16 @@ pub(crate) fn derive_split_at(ctx: &Ctx, _top_level: Trait) -> Result<TokenStrea
     match &ctx.ast.data {
         Data::Struct(_) => {}
         Data::Enum(_) | Data::Union(_) => {
-            return ctx
-                .error_or_skip(Error::new(Span::call_site(), "can only be applied to structs"));
+            return Err(Error::new(Span::call_site(), "can only be applied to structs"));
         }
     };
 
     if repr.get_packed().is_some() {
-        return ctx.error_or_skip(Error::new(
-            Span::call_site(),
-            "must not have #[repr(packed)] attribute",
-        ));
+        return Err(Error::new(Span::call_site(), "must not have #[repr(packed)] attribute"));
     }
 
     if !(repr.is_c() || repr.is_transparent()) {
-        return ctx.error_or_skip(Error::new(
+        return Err(Error::new(
             Span::call_site(),
             "must have #[repr(C)] or #[repr(transparent)] in order to guarantee this type's layout is splitable",
         ));
@@ -120,7 +116,7 @@ pub(crate) fn derive_split_at(ctx: &Ctx, _top_level: Trait) -> Result<TokenStrea
     let trailing_field = if let Some(((_, _, trailing_field), _)) = fields.split_last() {
         trailing_field
     } else {
-        return ctx.error_or_skip(Error::new(Span::call_site(), "must at least one field"));
+        return Err(Error::new(Span::call_site(), "must at least one field"));
     };
 
     let zerocopy_crate = &ctx.zerocopy_crate;
