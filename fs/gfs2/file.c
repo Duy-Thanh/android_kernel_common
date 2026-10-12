@@ -1057,10 +1057,6 @@ retry:
 			goto out_unlock;
 	}
 
-	ret = gfs2_clear_beyond_eof(inode, iocb->ki_pos);
-	if (ret)
-		goto out_unlock;
-
 	pagefault_disable();
 	ret = iomap_file_buffered_write(iocb, from, &gfs2_iomap_ops,
 			&gfs2_iomap_write_ops, NULL);
@@ -1177,7 +1173,8 @@ out_unlock:
 	return ret;
 }
 
-static int fallocate_chunk(struct inode *inode, loff_t offset, loff_t len)
+static int fallocate_chunk(struct inode *inode, loff_t offset, loff_t len,
+			   int mode)
 {
 	struct super_block *sb = inode->i_sb;
 	struct gfs2_inode *ip = GFS2_I(inode);
@@ -1269,12 +1266,6 @@ static long __gfs2_fallocate(struct file *file, int mode, loff_t offset, loff_t 
 
 	next = (next + 1) << sdp->sd_sb.sb_bsize_shift;
 
-	if (!(mode & FALLOC_FL_KEEP_SIZE)) {
-		error = gfs2_clear_beyond_eof(inode, offset + len);
-		if (error)
-			return error;
-	}
-
 	offset &= bsize_mask;
 
 	len = next - offset;
@@ -1345,7 +1336,7 @@ static long __gfs2_fallocate(struct file *file, int mode, loff_t offset, loff_t 
 		if (error)
 			goto out_trans_fail;
 
-		error = fallocate_chunk(inode, offset, max_bytes);
+		error = fallocate_chunk(inode, offset, max_bytes, mode);
 		gfs2_trans_end(sdp);
 
 		if (error)

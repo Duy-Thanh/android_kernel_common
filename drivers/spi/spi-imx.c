@@ -2152,8 +2152,7 @@ static int spi_imx_transfer_one(struct spi_controller *controller,
 	if (spi_imx->usedma) {
 		ret = spi_imx_dma_transfer(spi_imx, transfer);
 		if (transfer->error & SPI_TRANS_FAIL_NO_START) {
-			controller->fallback = true;
-			spi_imx_setupxfer(spi, transfer);
+			spi_imx->usedma = false;
 			if (spi_imx->target_mode)
 				return spi_imx_pio_transfer_target(spi, transfer);
 			else
