@@ -1941,7 +1941,6 @@ struct event_trigger_data {
 	struct list_head		named_list;
 	struct event_trigger_data	*named_data;
 	struct llist_node		llist;
-	void				(*private_data_free)(struct event_trigger_data *data);
 };
 
 /* Avoid typos */

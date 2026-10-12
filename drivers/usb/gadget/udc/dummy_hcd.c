@@ -278,7 +278,6 @@ struct dummy {
 	unsigned			ints_enabled:1;
 	unsigned			udc_suspended:1;
 	unsigned			pullup:1;
-	unsigned			fifo_req_busy:1;
 
 	/*
 	 * HOST side support
@@ -330,26 +329,6 @@ static inline struct dummy *gadget_dev_to_dummy(struct device *dev)
 
 /* DEVICE/GADGET SIDE UTILITY ROUTINES */
 
-/*
- * Give back a gadget request with dum->lock dropped around the callback.
- * If @req is the shared fifo_req, clear fifo_req_busy afterward: the flag
- * was set in dummy_queue() when the shared request was taken and must stay
- * set until its completion callback has returned; list_del_init() alone
- * makes the request look idle while the callback is still running.
- * Caller holds dum->lock and has already done list_del_init() + status.
- */
-static void dummy_giveback(struct dummy *dum, struct usb_ep *_ep,
-			   struct dummy_request *req)
-{
-	bool fifo = req == &dum->fifo_req;
-
-	spin_unlock(&dum->lock);
-	usb_gadget_giveback_request(_ep, &req->req);
-	spin_lock(&dum->lock);
-	if (fifo)
-		dum->fifo_req_busy = 0;
-}
-
 /* called with spinlock held */
 static void nuke(struct dummy *dum, struct dummy_ep *ep)
 {
@@ -360,7 +339,9 @@ static void nuke(struct dummy *dum, struct dummy_ep *ep)
 		list_del_init(&req->queue);
 		req->req.status = -ESHUTDOWN;
 
-		dummy_giveback(dum, &ep->ep, req);
+		spin_unlock(&dum->lock);
+		usb_gadget_giveback_request(&ep->ep, &req->req);
+		spin_lock(&dum->lock);
 	}
 }
 
@@ -747,11 +728,10 @@ static int dummy_queue(struct usb_ep *_ep, struct usb_request *_req,
 
 	/* implement an emulated single-request FIFO */
 	if (ep->desc && (ep->desc->bEndpointAddress & USB_DIR_IN) &&
-			!dum->fifo_req_busy &&
+			list_empty(&dum->fifo_req.queue) &&
 			list_empty(&ep->queue) &&
 			_req->length <= FIFO_SIZE) {
 		req = &dum->fifo_req;
-		dum->fifo_req_busy = 1;
 		req->req = *_req;
 		req->req.buf = dum->fifo_buf;
 		memcpy(dum->fifo_buf, _req->buf, _req->length);
@@ -805,7 +785,9 @@ static int dummy_dequeue(struct usb_ep *_ep, struct usb_request *_req)
 		dev_dbg(udc_dev(dum),
 				"dequeued req %p from %s, len %d buf %p\n",
 				req, _ep->name, _req->length, _req->buf);
-		dummy_giveback(dum, _ep, req);
+		spin_unlock(&dum->lock);
+		usb_gadget_giveback_request(_ep, _req);
+		spin_lock(&dum->lock);
 	}
 	spin_unlock_irqrestore(&dum->lock, flags);
 	return retval;
@@ -1541,7 +1523,9 @@ top:
 		if (req->req.status != -EINPROGRESS) {
 			list_del_init(&req->queue);
 
-			dummy_giveback(dum, &ep->ep, req);
+			spin_unlock(&dum->lock);
+			usb_gadget_giveback_request(&ep->ep, &req->req);
+			spin_lock(&dum->lock);
 
 			/* requests might have been unlinked... */
 			rescan = 1;
@@ -1926,7 +1910,9 @@ restart:
 				dev_dbg(udc_dev(dum), "stale req = %p\n",
 						req);
 
-				dummy_giveback(dum, &ep->ep, req);
+				spin_unlock(&dum->lock);
+				usb_gadget_giveback_request(&ep->ep, &req->req);
+				spin_lock(&dum->lock);
 				ep->already_seen = 0;
 				goto restart;
 			}
