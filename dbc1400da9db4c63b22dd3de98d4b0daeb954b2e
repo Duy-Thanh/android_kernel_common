@@ -39,6 +39,30 @@
       },
       "revId": "dbc1400da9db4c63b22dd3de98d4b0daeb954b2e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f545ee7_be48e080",
+        "filename": "security/security.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 3199,
+      "author": {
+        "id": 4585724
+      },
+      "writtenOn": "2026-10-12T21:58:55Z",
+      "side": 1,
+      "message": "Blank line added",
+      "parentUuid": "91ed0680_5675980d",
+      "range": {
+        "startLine": 3198,
+        "startChar": 0,
+        "endLine": 3199,
+        "endChar": 0
+      },
+      "revId": "dbc1400da9db4c63b22dd3de98d4b0daeb954b2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
