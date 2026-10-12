@@ -552,10 +552,8 @@ static int rt722_sdca_dev_resume(struct device *dev)
 	}
 
 	ret = sdw_slave_wait_for_init(slave, RT722_PROBE_TIMEOUT);
-	if (ret) {
-		sdw_show_ping_status(slave->bus, true);
+	if (ret)
 		return ret;
-	}
 
 	regcache_cache_only(rt722->regmap, false);
 	regcache_sync(rt722->regmap);

@@ -1445,10 +1445,8 @@ static s32 tac5xx2_sdca_dev_resume(struct device *dev)
 	}
 
 	ret = sdw_slave_wait_for_init(slave, TAC5XX2_PROBE_TIMEOUT_MS);
-	if (ret) {
-		sdw_show_ping_status(slave->bus, true);
+	if (ret)
 		return ret;
-	}
 
 	regcache_cache_only(tac_dev->regmap, false);
 	regcache_mark_dirty(tac_dev->regmap);
