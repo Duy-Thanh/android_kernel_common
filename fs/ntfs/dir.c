@@ -23,13 +23,6 @@
 __le16 I30[5] = { cpu_to_le16('$'), cpu_to_le16('I'),
 		cpu_to_le16('3'),	cpu_to_le16('0'), 0 };
 
-static inline u64 ntfs_check_mref(u64 mref)
-{
-	if (IS_ERR_MREF(mref))
-		return ERR_MREF(-EIO);
-	return mref;
-}
-
 /*
  * ntfs_lookup_inode_by_name - find an inode in a directory given its name
  * @dir_ni:	ntfs inode of the directory in which to search for the name
@@ -185,7 +178,7 @@ found_it:
 			mref = le64_to_cpu(ie->data.dir.indexed_file);
 			ntfs_attr_put_search_ctx(ctx);
 			unmap_mft_record(dir_ni);
-			return ntfs_check_mref(mref);
+			return mref;
 		}
 		/*
 		 * For a case insensitive mount, we also perform a case
@@ -280,7 +273,7 @@ found_it:
 		if (name) {
 			ntfs_attr_put_search_ctx(ctx);
 			unmap_mft_record(dir_ni);
-			return ntfs_check_mref(name->mref);
+			return name->mref;
 		}
 		ntfs_debug("Entry not found.");
 		err = -ENOENT;
@@ -420,7 +413,7 @@ found_it2:
 			mref = le64_to_cpu(ie->data.dir.indexed_file);
 			kfree(kaddr);
 			iput(ia_vi);
-			return ntfs_check_mref(mref);
+			return mref;
 		}
 		/*
 		 * For a case insensitive mount, we also perform a case
@@ -545,7 +538,7 @@ found_it2:
 	if (name) {
 		kfree(kaddr);
 		iput(ia_vi);
-		return ntfs_check_mref(name->mref);
+		return name->mref;
 	}
 	ntfs_debug("Entry not found.");
 	err = -ENOENT;
