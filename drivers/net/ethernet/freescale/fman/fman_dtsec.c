@@ -900,28 +900,22 @@ static void dtsec_mac_config(struct phylink_config *config, unsigned int mode,
 {
 	struct mac_device *mac_dev = fman_config_to_mac(config);
 	struct dtsec_regs __iomem *regs = mac_dev->fman_mac->regs;
-	u32 ecntrl, maccfg2;
-
-	maccfg2 = ioread32be(&regs->maccfg2);
-	maccfg2 &= ~(MACCFG2_NIBBLE_MODE | MACCFG2_BYTE_MODE);
+	u32 tmp;
 
 	switch (state->interface) {
 	case PHY_INTERFACE_MODE_RMII:
-		ecntrl = DTSEC_ECNTRL_RMM;
-		maccfg2 |= MACCFG2_NIBBLE_MODE;
+		tmp = DTSEC_ECNTRL_RMM;
 		break;
 	case PHY_INTERFACE_MODE_RGMII:
 	case PHY_INTERFACE_MODE_RGMII_ID:
 	case PHY_INTERFACE_MODE_RGMII_RXID:
 	case PHY_INTERFACE_MODE_RGMII_TXID:
-		ecntrl = DTSEC_ECNTRL_GMIIM | DTSEC_ECNTRL_RPM;
-		maccfg2 |= MACCFG2_BYTE_MODE;
+		tmp = DTSEC_ECNTRL_GMIIM | DTSEC_ECNTRL_RPM;
 		break;
 	case PHY_INTERFACE_MODE_SGMII:
 	case PHY_INTERFACE_MODE_1000BASEX:
 	case PHY_INTERFACE_MODE_2500BASEX:
-		ecntrl = DTSEC_ECNTRL_TBIM | DTSEC_ECNTRL_SGMIIM;
-		maccfg2 |= MACCFG2_BYTE_MODE;
+		tmp = DTSEC_ECNTRL_TBIM | DTSEC_ECNTRL_SGMIIM;
 		break;
 	default:
 		dev_warn(mac_dev->dev, "cannot configure dTSEC for %s\n",
@@ -929,8 +923,7 @@ static void dtsec_mac_config(struct phylink_config *config, unsigned int mode,
 		return;
 	}
 
-	iowrite32be(ecntrl, &regs->ecntrl);
-	iowrite32be(maccfg2, &regs->maccfg2);
+	iowrite32be(tmp, &regs->ecntrl);
 }
 
 static void dtsec_link_up(struct phylink_config *config, struct phy_device *phy,

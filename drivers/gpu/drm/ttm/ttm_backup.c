@@ -6,9 +6,8 @@
 #include <drm/ttm/ttm_backup.h>
 
 #include <linux/export.h>
+#include <linux/page-flags.h>
 #include <linux/swap.h>
-
-#include "ttm_pool_internal.h"
 
 /*
  * Need to map shmem indices to handle since a handle value
@@ -69,23 +68,17 @@ int ttm_backup_copy_page(struct file *backup, struct page *dst,
 }
 
 /**
- * ttm_backup_backup_folio() - Backup a folio
+ * ttm_backup_backup_page() - Backup a page
  * @backup: The struct backup pointer to use.
- * @folio: The folio to back up.
- * @order: The allocation order of @folio.  Since TTM allocates higher-order
- *         pages without __GFP_COMP, folio_nr_pages(@folio) would always
- *         return 1; the caller must pass the true order explicitly.
- * @writeback: Whether to perform immediate writeback of the folio's pages.
+ * @page: The page to back up.
+ * @writeback: Whether to perform immediate writeback of the page.
  * This may have performance implications.
- * @idx: A unique integer for the first page of the folio and each struct backup.
+ * @idx: A unique integer for each page and each struct backup.
  * This allows the backup implementation to avoid managing
  * its address space separately.
- * @folio_gfp: The gfp value used when the folio was allocated.
- * Currently unused.
+ * @page_gfp: The gfp value used when the page was allocated.
+ * This is used for accounting purposes.
  * @alloc_gfp: The gfp to be used when allocating memory.
- * @nr_pages_backed: Output. On a successful return, set to the number of
- * pages actually backed up, which may be less than (1 << @order)
- * if an -ENOMEM was encountered mid-folio.
  *
  * Context: If called from reclaim context, the caller needs to
  * assert that the shrinker gfp has __GFP_FS set, to avoid
@@ -94,87 +87,53 @@ int ttm_backup_copy_page(struct file *backup, struct page *dst,
  * that the shrinker gfp has __GFP_IO set, since without it,
  * we're not allowed to start backup IO.
  *
- * Return: A handle for the first backed-up page on success (handles for
- * subsequent pages follow sequentially). -ENOMEM if no pages could be backed
- * up. Any other negative error code if a non-ENOMEM failure occurred; in that
- * case any pages backed up so far are truncated before returning.
+ * Return: A handle on success. Negative error code on failure.
+ *
+ * Note: This function could be extended to back up a folio and
+ * implementations would then split the folio internally if needed.
+ * Drawback is that the caller would then have to keep track of
+ * the folio size- and usage.
  */
 s64
-ttm_backup_backup_folio(struct file *backup, struct folio *folio,
-			unsigned int order, bool writeback, pgoff_t idx,
-			gfp_t folio_gfp, gfp_t alloc_gfp,
-			pgoff_t *nr_pages_backed)
+ttm_backup_backup_page(struct file *backup, struct page *page,
+		       bool writeback, pgoff_t idx, gfp_t page_gfp,
+		       gfp_t alloc_gfp)
 {
 	struct address_space *mapping = backup->f_mapping;
-	int nr_pages = 1 << order;
+	unsigned long handle = 0;
 	struct folio *to_folio;
-	int ret, i;
+	int ret;
 
-	*nr_pages_backed = 0;
+	to_folio = shmem_read_folio_gfp(mapping, idx, alloc_gfp);
+	if (IS_ERR(to_folio))
+		return PTR_ERR(to_folio);
 
-	for (i = 0; i < nr_pages; ) {
-		int to_nr, j;
+	folio_mark_accessed(to_folio);
+	folio_lock(to_folio);
+	folio_mark_dirty(to_folio);
+	copy_highpage(folio_file_page(to_folio, idx), page);
+	handle = ttm_backup_shmem_idx_to_handle(idx);
 
+	if (writeback && !folio_mapped(to_folio) &&
+	    folio_clear_dirty_for_io(to_folio)) {
+		folio_set_reclaim(to_folio);
+		ret = shmem_writeout(to_folio, NULL, NULL);
+		if (!folio_test_writeback(to_folio))
+			folio_clear_reclaim(to_folio);
 		/*
-		 * Only inject past the first subpage so *nr_pages_backed is
-		 * always > 0 here, matching a genuine mid-compound -ENOMEM
-		 * and driving the caller's reactive split fallback instead
-		 * of an early, no-progress failure.
+		 * If writeout succeeds, it unlocks the folio.	errors
+		 * are otherwise dropped, since writeout is only best
+		 * effort here.
 		 */
-		if (IS_ENABLED(CONFIG_FAULT_INJECTION) && i &&
-		    ttm_backup_fault_inject_folio())
-			to_folio = ERR_PTR(-ENOMEM);
-		else
-			to_folio = shmem_read_folio_gfp(mapping, idx + i, alloc_gfp);
-		if (IS_ERR(to_folio)) {
-			int err = PTR_ERR(to_folio);
-
-			if (err == -ENOMEM && *nr_pages_backed)
-				return ttm_backup_shmem_idx_to_handle(idx);
-
-			if (*nr_pages_backed) {
-				shmem_truncate_range(file_inode(backup),
-						     (loff_t)idx << PAGE_SHIFT,
-						     ((loff_t)(idx + i) << PAGE_SHIFT) - 1);
-				/*
-				 * The pages just truncated are no longer
-				 * backed up; don't let the caller mistake
-				 * them for valid handles.
-				 */
-				*nr_pages_backed = 0;
-			}
-			return err;
-		}
-
-		to_nr = min_t(int, nr_pages - i,
-			      folio_next_index(to_folio) - (idx + i));
-
-		folio_mark_accessed(to_folio);
-		folio_lock(to_folio);
-		folio_mark_dirty(to_folio);
-
-		for (j = 0; j < to_nr; j++)
-			copy_highpage(folio_file_page(to_folio, idx + i + j),
-				      folio_page(folio, i + j));
-
-		if (writeback && !folio_mapped(to_folio) &&
-		    folio_clear_dirty_for_io(to_folio)) {
-			folio_set_reclaim(to_folio);
-			ret = shmem_writeout(to_folio, NULL, NULL);
-			if (!folio_test_writeback(to_folio))
-				folio_clear_reclaim(to_folio);
-			if (ret == AOP_WRITEPAGE_ACTIVATE)
-				folio_unlock(to_folio);
-		} else {
+		if (ret)
 			folio_unlock(to_folio);
-		}
-
-		folio_put(to_folio);
-		i += to_nr;
-		*nr_pages_backed = i;
+	} else {
+		folio_unlock(to_folio);
 	}
 
-	return ttm_backup_shmem_idx_to_handle(idx);
+	folio_put(to_folio);
+
+	return handle;
 }
 
 /**

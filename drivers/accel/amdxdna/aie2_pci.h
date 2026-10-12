@@ -143,6 +143,11 @@ struct aie2_exec_msg_ops {
 	u32 (*get_chain_msg_op)(u32 cmd_op);
 };
 
+enum aie2_tdr_status {
+	AIE2_TDR_WAIT,
+	AIE2_TDR_SIGNALED,
+};
+
 struct amdxdna_dev_hdl {
 	struct aie_device		aie;
 	const struct amdxdna_dev_priv	*priv;
@@ -174,7 +179,7 @@ struct amdxdna_dev_hdl {
 	u32				hwctx_num;
 
 	struct amdxdna_async_error	last_async_err;
-	unsigned long			last_signal_ts;
+	enum aie2_tdr_status		tdr_status;
 };
 
 struct aie2_hw_ops {
