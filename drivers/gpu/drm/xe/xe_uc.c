@@ -15,7 +15,6 @@
 #include "xe_guc_pc.h"
 #include "xe_guc_rc.h"
 #include "xe_guc_engine_activity.h"
-#include "xe_guc_submit.h"
 #include "xe_huc.h"
 #include "xe_sriov.h"
 #include "xe_wopcm.h"
@@ -160,11 +159,9 @@ static int vf_uc_load_hw(struct xe_uc *uc)
 	if (err)
 		return err;
 
-	err = xe_guc_opt_in_features_enable(&uc->guc);
-	if (err)
-		return err;
+	uc->guc.submission_state.enabled = true;
 
-	err = xe_guc_submit_enable(&uc->guc);
+	err = xe_guc_opt_in_features_enable(&uc->guc);
 	if (err)
 		return err;
 

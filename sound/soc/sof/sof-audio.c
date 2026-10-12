@@ -146,6 +146,7 @@ static int sof_widget_setup_unlocked(struct snd_sof_dev *sdev,
 {
 	const struct sof_ipc_tplg_ops *tplg_ops = sof_ipc_get_ops(sdev, tplg);
 	struct snd_sof_pipeline *spipe = swidget->spipe;
+	bool use_count_decremented = false;
 	int ret;
 	int i;
 
@@ -224,10 +225,9 @@ static int sof_widget_setup_unlocked(struct snd_sof_dev *sdev,
 	return 0;
 
 widget_free:
-	/* widget use_count and core_put handled by sof_widget_free() */
+	/* widget use_count will be decremented by sof_widget_free() */
 	sof_widget_free_unlocked(sdev, swidget);
-	return ret;
-
+	use_count_decremented = true;
 pipe_widget_free:
 	if (swidget->id != snd_soc_dapm_scheduler) {
 		sof_widget_free_unlocked(sdev, swidget->spipe->pipe_widget);
@@ -242,7 +242,8 @@ pipe_widget_free:
 		}
 	}
 use_count_dec:
-	swidget->use_count--;
+	if (!use_count_decremented)
+		swidget->use_count--;
 
 	return ret;
 }
