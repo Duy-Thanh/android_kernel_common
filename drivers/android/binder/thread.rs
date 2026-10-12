@@ -495,16 +495,9 @@ impl Thread {
         Ok(())
     }
 
-    pub(crate) fn clear_extended_error(&self, debug_id: usize) {
-        self.inner.lock().extended_error = ExtendedError::new(debug_id as u32, BR_OK, 0);
-    }
-
     pub(crate) fn get_extended_error(&self, data: UserSlice) -> Result {
         let mut writer = data.writer();
-        let mut inner = self.inner.lock();
-        let ee = inner.extended_error;
-        inner.extended_error = ExtendedError::new(0, BR_OK, 0);
-        drop(inner);
+        let ee = self.inner.lock().extended_error;
         writer.write(&ee)?;
         Ok(())
     }
@@ -1116,10 +1109,7 @@ impl Thread {
             inner.pop_transaction_to_reply(thread.as_ref())
         } {
             let reply = Err(BR_DEAD_REPLY);
-            if !transaction
-                .from
-                .deliver_single_reply(reply, &transaction, None)
-            {
+            if !transaction.from.deliver_single_reply(reply, &transaction) {
                 break;
             }
 
@@ -1131,9 +1121,8 @@ impl Thread {
         &self,
         reply: Result<DLArc<Transaction>, u32>,
         transaction: &DArc<Transaction>,
-        extended_error: Option<ExtendedError>,
     ) {
-        if self.deliver_single_reply(reply, transaction, extended_error) {
+        if self.deliver_single_reply(reply, transaction) {
             transaction.from.unwind_transaction_stack();
         }
     }
@@ -1147,7 +1136,6 @@ impl Thread {
         &self,
         reply: Result<DLArc<Transaction>, u32>,
         transaction: &DArc<Transaction>,
-        extended_error: Option<ExtendedError>,
     ) -> bool {
         if let Ok(transaction) = &reply {
             crate::trace::trace_transaction(true, transaction, Some(&self.task));
@@ -1162,12 +1150,6 @@ impl Thread {
 
             if inner.is_dead {
                 return true;
-            }
-
-            if let Some(ee) = extended_error {
-                if inner.extended_error.command == BR_OK {
-                    inner.extended_error = ee;
-                }
             }
 
             match reply {
@@ -1240,9 +1222,6 @@ impl Thread {
         info.buffers_size = td.buffers_size as usize;
         // SAFETY: Above `read` call initializes all bytes, so this union read is ok.
         info.target_handle = unsafe { td.transaction_data.target.handle };
-
-        info.debug_id = super::next_debug_id();
-
         Ok(())
     }
 
@@ -1250,8 +1229,6 @@ impl Thread {
     fn transaction(self: &Arc<Self>, cmd: u32, reader: &mut UserSliceReader) -> Result<()> {
         let mut info = TransactionInfo::zeroed();
         self.read_transaction_info(cmd, reader, &mut info)?;
-
-        self.clear_extended_error(info.debug_id);
 
         let ret = if info.is_reply {
             self.reply_inner(&mut info)
@@ -1262,21 +1239,23 @@ impl Thread {
         };
 
         if let Err(err) = ret {
-            self.push_return_work(err.reply);
             if err.reply != BR_TRANSACTION_COMPLETE {
                 info.reply = err.reply;
-                if let Some(source) = &err.source {
-                    info.errno = source.to_errno();
+            }
 
-                    {
-                        let mut inner = self.inner.lock();
-                        inner.extended_error =
-                            ExtendedError::new(info.debug_id as u32, err.reply, source.to_errno());
-                    }
+            self.push_return_work(err.reply);
+            if let Some(source) = &err.source {
+                info.errno = source.to_errno();
+                info.reply = err.reply;
+
+                {
+                    let mut ee = self.inner.lock().extended_error;
+                    ee.command = err.reply;
+                    ee.param = source.to_errno();
                 }
 
                 pr_warn!(
-                    "{}:{} transaction to {} failed: {err:?}",
+                    "{}:{} transaction to {} failed: {source:?}",
                     info.from_pid,
                     info.from_tid,
                     info.to_pid
@@ -1341,24 +1320,18 @@ impl Thread {
             let allow_fds = orig.flags & TF_ACCEPT_FDS != 0;
             let reply = Transaction::new_reply(self, process, info, allow_fds)?;
             self.inner.lock().push_work(completion);
-            orig.from.deliver_reply(Ok(reply), &orig, None);
+            orig.from.deliver_reply(Ok(reply), &orig);
             Ok(())
         })()
         .map_err(|mut err| {
             // At this point we only return `BR_TRANSACTION_COMPLETE` to the caller, and we must let
             // the sender know that the transaction has completed (with an error in this case).
-
             pr_warn!(
-                "{}:{} reply to {} failed: {err:?}",
-                info.from_pid,
-                info.from_tid,
-                info.to_pid
+                "Failure {:?} during reply - delivering BR_FAILED_REPLY to sender.",
+                err
             );
-
-            let param = err.source.as_ref().map_or(0, |e| e.to_errno());
-            let ee = ExtendedError::new(info.debug_id as u32, err.reply, param);
-            orig.from
-                .deliver_reply(Err(BR_FAILED_REPLY), &orig, Some(ee));
+            let reply = Err(BR_FAILED_REPLY);
+            orig.from.deliver_reply(reply, &orig);
             err.reply = BR_TRANSACTION_COMPLETE;
             err
         });

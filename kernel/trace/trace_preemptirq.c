@@ -30,7 +30,7 @@
 #else
 #define trace(point, args)					\
 	do {							\
-		if (__trace_##point##_enabled()) {		\
+		if (trace_##point##_enabled()) {		\
 			bool exit_rcu = false;			\
 			if (in_nmi())				\
 				break;				\

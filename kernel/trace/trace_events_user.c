@@ -109,9 +109,6 @@ struct user_event_enabler {
 
 	/* Track enable bit, flags, etc. Aligned for bitops. */
 	unsigned long		values;
-
-	/* Defer the event put and enabler free past an RCU grace period. */
-	struct rcu_work		put_rwork;
 };
 
 /* Bits 0-5 are for the bit to update upon enable/disable (0-63 allowed) */
@@ -399,37 +396,15 @@ error:
 	return NULL;
 };
 
-static void delayed_user_event_enabler_put(struct work_struct *work)
-{
-	struct user_event_enabler *enabler = container_of(to_rcu_work(work),
-			struct user_event_enabler, put_rwork);
-
-	/* No longer tracking the event via the enabler */
-	user_event_put(enabler->event, false);
-
-	/* Run from queue_rcu_work(), the RCU grace period has elapsed */
-	kfree(enabler);
-}
-
-static void user_event_enabler_destroy(struct user_event_enabler *enabler)
+static void user_event_enabler_destroy(struct user_event_enabler *enabler,
+				       bool locked)
 {
 	list_del_rcu(&enabler->mm_enablers_link);
 
-	/*
-	 * The enabler is removed from an RCU-traversed list
-	 * (user_event_mm_dup() walks mm->enablers under rcu_read_lock() only),
-	 * and readers there dereference enabler->event and take a new ref on
-	 * it. Both the put of that event reference and the free of the enabler
-	 * therefore have to wait for a grace period so no reader can be looking
-	 * at the enabler or racing the last put of its event.
-	 *
-	 * The put itself must not run in RCU context: when it drops the last
-	 * reference user_event_put() takes event_mutex, which cannot be taken
-	 * from a softirq/RCU callback. Defer both to a work item scheduled
-	 * after a grace period via queue_rcu_work().
-	 */
-	INIT_RCU_WORK(&enabler->put_rwork, delayed_user_event_enabler_put);
-	queue_rcu_work(system_percpu_wq, &enabler->put_rwork);
+	/* No longer tracking the event via the enabler */
+	user_event_put(enabler->event, locked);
+
+	kfree(enabler);
 }
 
 static int user_event_mm_fault_in(struct user_event_mm *mm, unsigned long uaddr,
@@ -489,7 +464,7 @@ static void user_event_enabler_fault_fixup(struct work_struct *work)
 
 	/* User asked for enabler to be removed during fault */
 	if (test_bit(ENABLE_VAL_FREEING_BIT, ENABLE_BITOPS(enabler))) {
-		user_event_enabler_destroy(enabler);
+		user_event_enabler_destroy(enabler, true);
 		goto out;
 	}
 
@@ -789,7 +764,7 @@ static void user_event_mm_destroy(struct user_event_mm *mm)
 	struct user_event_enabler *enabler, *next;
 
 	list_for_each_entry_safe(enabler, next, &mm->enablers, mm_enablers_link)
-		user_event_enabler_destroy(enabler);
+		user_event_enabler_destroy(enabler, false);
 
 	mmdrop(mm->mm);
 	kfree(mm);
@@ -2670,7 +2645,7 @@ static long user_events_ioctl_unreg(unsigned long uarg)
 			flags |= enabler->values & ENABLE_VAL_COMPAT_MASK;
 
 			if (!test_bit(ENABLE_VAL_FAULTING_BIT, ENABLE_BITOPS(enabler)))
-				user_event_enabler_destroy(enabler);
+				user_event_enabler_destroy(enabler, true);
 
 			/* Removed at least one */
 			ret = 0;

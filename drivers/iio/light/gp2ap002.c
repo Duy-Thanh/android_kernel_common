@@ -258,7 +258,7 @@ static int gp2ap002_read_raw(struct iio_dev *indio_dev,
 		case IIO_LIGHT:
 			ret = gp2ap002_get_lux(gp2ap002);
 			if (ret < 0)
-				goto out;
+				return ret;
 			*val = ret;
 			ret = IIO_VAL_INT;
 			goto out;

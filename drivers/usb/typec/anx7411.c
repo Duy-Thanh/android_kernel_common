@@ -1537,9 +1537,7 @@ static int anx7411_i2c_probe(struct i2c_client *client)
 	if (anx7411_typec_check_connection(plat))
 		dev_err(dev, "check status\n");
 
-	ret = devm_pm_runtime_enable(dev);
-	if (ret)
-		goto free_wq;
+	pm_runtime_enable(dev);
 
 	return 0;
 

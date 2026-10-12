@@ -72,7 +72,6 @@ static struct usb_driver iowarrior_driver;
 
 /* Structure to hold all of our device specific stuff */
 struct iowarrior {
-	struct kref kref;
 	struct mutex mutex;			/* locks this structure */
 	struct usb_device *udev;		/* save off the usb device pointer */
 	struct usb_interface *interface;	/* the interface for this device */
@@ -241,10 +240,8 @@ static void iowarrior_write_callback(struct urb *urb)
 /*
  *	iowarrior_delete
  */
-static inline void iowarrior_delete(struct kref *kref)
+static inline void iowarrior_delete(struct iowarrior *dev)
 {
-	struct iowarrior *dev = container_of(kref, struct iowarrior, kref);
-
 	kfree(dev->int_in_buffer);
 	usb_free_urb(dev->int_in_urb);
 	kfree(dev->read_queue);
@@ -640,9 +637,6 @@ static int iowarrior_open(struct inode *inode, struct file *file)
 	}
 	/* increment our usage count for the driver */
 	++dev->opened;
-
-	kref_get(&dev->kref);
-
 	/* save our object in the file's private structure */
 	file->private_data = dev;
 	retval = 0;
@@ -658,6 +652,7 @@ out:
 static int iowarrior_release(struct inode *inode, struct file *file)
 {
 	struct iowarrior *dev;
+	int retval = 0;
 
 	dev = file->private_data;
 	if (!dev)
@@ -665,18 +660,29 @@ static int iowarrior_release(struct inode *inode, struct file *file)
 
 	/* lock our device */
 	mutex_lock(&dev->mutex);
-	dev->opened = 0;	/* we're closing now */
 
-	if (dev->present) {
-		usb_kill_urb(dev->int_in_urb);
-		wake_up_interruptible(&dev->read_wait);
-		wake_up_interruptible(&dev->write_wait);
+	if (dev->opened <= 0) {
+		retval = -ENODEV;	/* close called more than once */
+		mutex_unlock(&dev->mutex);
+	} else {
+		dev->opened = 0;	/* we're closing now */
+		retval = 0;
+		if (dev->present) {
+			/*
+			   The device is still connected so we only shutdown
+			   pending read-/write-ops.
+			 */
+			usb_kill_urb(dev->int_in_urb);
+			wake_up_interruptible(&dev->read_wait);
+			wake_up_interruptible(&dev->write_wait);
+			mutex_unlock(&dev->mutex);
+		} else {
+			/* The device was unplugged, cleanup resources */
+			mutex_unlock(&dev->mutex);
+			iowarrior_delete(dev);
+		}
 	}
-	mutex_unlock(&dev->mutex);
-
-	kref_put(&dev->kref, iowarrior_delete);
-
-	return 0;
+	return retval;
 }
 
 static __poll_t iowarrior_poll(struct file *file, poll_table * wait)
@@ -761,7 +767,6 @@ static int iowarrior_probe(struct usb_interface *interface,
 	if (!dev)
 		return retval;
 
-	kref_init(&dev->kref);
 	mutex_init(&dev->mutex);
 
 	atomic_set(&dev->intr_idx, 0);
@@ -880,8 +885,7 @@ static int iowarrior_probe(struct usb_interface *interface,
 	return retval;
 
 error:
-	kref_put(&dev->kref, iowarrior_delete);
-
+	iowarrior_delete(dev);
 	return retval;
 }
 
@@ -901,18 +905,21 @@ static void iowarrior_disconnect(struct usb_interface *interface)
 	/* prevent device read, write and ioctl */
 	dev->present = 0;
 
-	/* write urbs are not stopped on close() so kill unconditionally */
-	usb_kill_anchored_urbs(&dev->submitted);
-
 	if (dev->opened) {
+		/* There is a process that holds a filedescriptor to the device ,
+		   so we only shutdown read-/write-ops going on.
+		   Deleting the device is postponed until close() was called.
+		 */
 		usb_kill_urb(dev->int_in_urb);
+		usb_kill_anchored_urbs(&dev->submitted);
 		wake_up_interruptible(&dev->read_wait);
 		wake_up_interruptible(&dev->write_wait);
+		mutex_unlock(&dev->mutex);
+	} else {
+		/* no process is using the device, cleanup now */
+		mutex_unlock(&dev->mutex);
+		iowarrior_delete(dev);
 	}
-
-	mutex_unlock(&dev->mutex);
-
-	kref_put(&dev->kref, iowarrior_delete);
 }
 
 /* usb specific object needed to register this driver with the usb subsystem */
