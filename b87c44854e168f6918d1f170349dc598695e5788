@@ -70,6 +70,24 @@
       "parentUuid": "03604da0_061eae25",
       "revId": "b87c44854e168f6918d1f170349dc598695e5788",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ad95fc6_697cfc0b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-12T23:28:36Z",
+      "side": 1,
+      "message": "My point was that by fixing one issue we might be introducing some other, due to possible false negatives of `addr_conflict()`/`jump_label_text_reserved()` caused by the fake 0 value of size. And that in particular, even though the `within_kprobe_blacklist()` check in `check_kprobe_address_safe()` seems to prevent such false negatives for `jump_label_text_reserved()` called from `check_kprobe_address_safe()`, I\u0027m not sure it prevents them for  `jump_label_text_reserved()` called from `copy_optimized_instructions()`.\n\n\u003e copy_optimized_instructions() is called by arch_prepare_optimized_kprobe() \u003c- __register_kprobe(), which only runs after check_kprobe_address_safe() (which checks within_kprobe_blacklist()).\n\nBut `check_kprobe_address_safe()`/`within_kprobe_blacklist()` only checks a single address, while `jump_label_text_reserved()` in `copy_optimized_instructions()` is called for some _range_ of addresses, AFAICS?\n\n\u003e Do you think that: [...] would be better?\n\nNo, I think that wouldn\u0027t even pass presubmit, since `is_pkvm_text()` is defined on x86 only.\n\nAlso I guess we might have the same issue with `static_call_text_reserved()` as well, while that would limit the fix to `jump_label_text_reserved()` only.",
+      "parentUuid": "62061320_e3ca2785",
+      "revId": "b87c44854e168f6918d1f170349dc598695e5788",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
