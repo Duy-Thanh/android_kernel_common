@@ -178,7 +178,7 @@ static void rxrpc_close_tx_phase(struct rxrpc_call *call)
 
 	switch (__rxrpc_call_state(call)) {
 	case RXRPC_CALL_CLIENT_SEND_REQUEST:
-		rxrpc_set_call_state(call, RXRPC_CALL_CLIENT_AWAIT_ACK);
+		rxrpc_set_call_state(call, RXRPC_CALL_CLIENT_AWAIT_REPLY);
 		break;
 	case RXRPC_CALL_SERVER_SEND_REPLY:
 		rxrpc_set_call_state(call, RXRPC_CALL_SERVER_AWAIT_ACK);
@@ -244,8 +244,6 @@ static void rxrpc_transmit_fresh_data(struct rxrpc_call *call, unsigned int limi
 				break;
 		} while (req.n < limit && before(seq, send_top));
 
-		if (__rxrpc_call_state(call) == RXRPC_CALL_CLIENT_PRE_SEND)
-			rxrpc_set_call_state(call, RXRPC_CALL_CLIENT_SEND_REQUEST);
 		if (txb->flags & RXRPC_LAST_PACKET) {
 			rxrpc_close_tx_phase(call);
 			tq = NULL;
@@ -269,7 +267,6 @@ void rxrpc_transmit_some_data(struct rxrpc_call *call, unsigned int limit,
 		fallthrough;
 
 	case RXRPC_CALL_SERVER_SEND_REPLY:
-	case RXRPC_CALL_CLIENT_PRE_SEND:
 	case RXRPC_CALL_CLIENT_SEND_REQUEST:
 		if (!rxrpc_tx_window_space(call))
 			return;

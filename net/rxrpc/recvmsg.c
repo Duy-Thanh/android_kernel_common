@@ -27,6 +27,8 @@ void rxrpc_notify_socket(struct rxrpc_call *call)
 
 	_enter("%d", call->debug_id);
 
+	if (!list_empty(&call->recvmsg_link))
+		return;
 	if (test_bit(RXRPC_CALL_RELEASED, &call->flags)) {
 		rxrpc_see_call(call, rxrpc_call_see_notify_released);
 		return;
@@ -436,8 +438,7 @@ try_again:
 		return -EAGAIN;
 	}
 
-	if (list_empty(&rx->recvmsg_q) &&
-	    skb_queue_empty_lockless(&rx->recvmsg_oobq)) {
+	if (list_empty(&rx->recvmsg_q)) {
 		ret = -EWOULDBLOCK;
 		if (timeo == 0) {
 			call = NULL;
@@ -470,7 +471,7 @@ try_again:
 		release_sock(&rx->sk);
 		if (ret == -EAGAIN)
 			goto try_again;
-		goto error_trace;
+		goto error_no_call;
 	}
 
 	/* Find the next call and dequeue it if we're not just peeking.  If we
@@ -529,7 +530,8 @@ try_again:
 	if (test_bit(RXRPC_CALL_RELEASED, &call->flags)) {
 		rxrpc_see_call(call, rxrpc_call_see_already_released);
 		mutex_unlock(&call->user_mutex);
-		rxrpc_put_call(call, rxrpc_call_put_recvmsg);
+		if (!(flags & MSG_PEEK))
+			rxrpc_put_call(call, rxrpc_call_put_recvmsg);
 		goto try_again;
 	}
 

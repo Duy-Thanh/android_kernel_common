@@ -24,7 +24,7 @@ properties:
     const: 1
 
   clocks:
-    minItems: 15
+    minItems: 14
     items:
       - description: input oscillator
       - description: input sys clk
@@ -40,13 +40,12 @@ properties:
       - description: input gp1 pll
       - description: input mpll1
       - description: input mpll2
-      - description: input mpll3
       - description: external input rmii oscillator (optional)
       - description: input video pll0 (optional)
       - description: external pad input for rtc (optional)
 
   clock-names:
-    minItems: 15
+    minItems: 14
     items:
       - const: xtal
       - const: sys
@@ -62,7 +61,6 @@ properties:
       - const: gp1
       - const: mpll1
       - const: mpll2
-      - const: mpll3
       - const: ext_rmii
       - const: vid_pll0
       - const: ext_rtc
@@ -99,8 +97,7 @@ examples:
                      <&gp0 1>,
                      <&gp1 1>,
                      <&mpll 4>,
-                     <&mpll 6>,
-                     <&mpll 8>;
+                     <&mpll 6>;
             clock-names = "xtal",
                           "sys",
                           "fix",
@@ -114,7 +111,6 @@ examples:
                           "gp0",
                           "gp1",
                           "mpll1",
-                          "mpll2",
-                          "mpll3";
+                          "mpll2";
         };
     };
