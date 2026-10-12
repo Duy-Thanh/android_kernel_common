@@ -503,7 +503,6 @@ for t in $TEST_CASES; do
 done
 
 # Test on instance loop
-(cd $TRACING_DIR; initialize_system)
 INSTANCE=" (instance) "
 for t in $TEST_CASES; do
   test_on_instance $t || continue
