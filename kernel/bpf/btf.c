@@ -28,7 +28,6 @@
 #include <linux/string.h>
 #include <linux/sysfs.h>
 #include <linux/overflow.h>
-#include <linux/bitops.h>
 
 #include <net/netfilter/nf_bpf_link.h>
 
@@ -3473,69 +3472,12 @@ static int btf_find_struct(const struct btf *btf, const struct btf_type *t,
 	return BTF_FIELD_FOUND;
 }
 
-struct btf_type_tag_match {
-	const char *name;
-	u32 flag;
-};
-
-struct btf_type_tag_walk_ctx {
-	const struct btf_type *t;	/* Input/Output */
-	u32 id;				/* Output */
-	u32 res;			/* Output */
-};
-
-static int btf_type_tag_walk(const struct btf *btf,
-			     struct btf_type_tag_walk_ctx *ctx,
-			     const struct btf_type_tag_match *matches,
-			     u32 match_cnt)
-{
-	const struct btf_type *t = ctx->t;
-	u32 res = 0;
-	const char *tag;
-	u32 id, i;
-
-	do {
-		id = t->type;
-		t = btf_type_by_id(btf, id);
-
-		if (!btf_type_is_modifier(t))
-			break;
-
-		if (!btf_type_is_type_tag(t) || btf_type_kflag(t))
-			continue;
-
-		tag = __btf_name_by_offset(btf, t->name_off);
-		for (i = 0; i < match_cnt; i++) {
-			if (strcmp(tag, matches[i].name))
-				continue;
-			res |= matches[i].flag;
-			break;
-		}
-	} while (true);
-
-	/* We only support a single tag. */
-	if (hweight32(res) > 1)
-		return -EINVAL;
-
-	ctx->t = t;
-	ctx->id = id;
-	ctx->res = res;
-
-	return 0;
-}
-
 static int btf_find_kptr(const struct btf *btf, const struct btf_type *t,
 			 u32 off, int sz, struct btf_field_info *info, u32 field_mask)
 {
-	static const struct btf_type_tag_match kptr_type_tags[] = {
-		{ "kptr_untrusted", BPF_KPTR_UNREF },
-		{ "kptr", BPF_KPTR_REF },
-		{ "percpu_kptr", BPF_KPTR_PERCPU },
-		{ "uptr", BPF_UPTR },
-	};
-	struct btf_type_tag_walk_ctx ctx;
-	enum btf_field_type type = 0;
-	int err;
+	enum btf_field_type type;
+	const char *tag_value;
+	bool is_type_tag;
 	u32 res_id;
 
 	/* Permit modifiers on the pointer itself */
@@ -3544,20 +3486,30 @@ static int btf_find_kptr(const struct btf *btf, const struct btf_type *t,
 	/* For PTR, sz is always == 8 */
 	if (!btf_type_is_ptr(t))
 		return BTF_FIELD_IGNORE;
-
-	ctx.t = t;
-	err = btf_type_tag_walk(btf, &ctx, kptr_type_tags,
-				ARRAY_SIZE(kptr_type_tags));
-	if (err)
-		return err;
-
-	t = ctx.t;
-	res_id = ctx.id;
-	type = ctx.res;
+	t = btf_type_by_id(btf, t->type);
+	is_type_tag = btf_type_is_type_tag(t) && !btf_type_kflag(t);
+	if (!is_type_tag)
+		return BTF_FIELD_IGNORE;
+	/* Reject extra tags */
+	if (btf_type_is_type_tag(btf_type_by_id(btf, t->type)))
+		return -EINVAL;
+	tag_value = __btf_name_by_offset(btf, t->name_off);
+	if (!strcmp("kptr_untrusted", tag_value))
+		type = BPF_KPTR_UNREF;
+	else if (!strcmp("kptr", tag_value))
+		type = BPF_KPTR_REF;
+	else if (!strcmp("percpu_kptr", tag_value))
+		type = BPF_KPTR_PERCPU;
+	else if (!strcmp("uptr", tag_value))
+		type = BPF_UPTR;
+	else
+		return -EINVAL;
 
 	if (!(type & field_mask))
 		return BTF_FIELD_IGNORE;
 
+	/* Get the base type */
+	t = btf_type_skip_modifiers(btf, t->type, &res_id);
 	/* Only pointer to struct is allowed */
 	if (!__btf_type_is_struct(t))
 		return -EINVAL;
@@ -5907,10 +5859,11 @@ struct btf_struct_meta *btf_find_struct_meta(const struct btf *btf, u32 btf_id)
 	return bsearch(&btf_id, tab->types, tab->cnt, sizeof(tab->types[0]), btf_id_cmp_func);
 }
 
-static int btf_check_modifier_chain_length(struct btf_verifier_env *env,
-					   struct btf *btf, int start_id)
+static int btf_check_type_tags(struct btf_verifier_env *env,
+			       struct btf *btf, int start_id)
 {
 	int i, n, good_id = start_id - 1;
+	bool in_tags;
 
 	n = btf_nr_types(btf);
 	for (i = start_id; i < n; i++) {
@@ -5926,12 +5879,20 @@ static int btf_check_modifier_chain_length(struct btf_verifier_env *env,
 
 		cond_resched();
 
+		in_tags = btf_type_is_type_tag(t);
 		while (btf_type_is_modifier(t)) {
 			if (!chain_limit--) {
 				btf_verifier_log(env, "Max chain length or cycle detected");
 				return -ELOOP;
 			}
-
+			if (btf_type_is_type_tag(t)) {
+				if (!in_tags) {
+					btf_verifier_log(env, "Type tags don't precede modifiers");
+					return -EINVAL;
+				}
+			} else if (in_tags) {
+				in_tags = false;
+			}
 			if (cur_id <= good_id)
 				break;
 			/* Move to next type */
@@ -6009,7 +5970,7 @@ static struct btf *btf_parse(const union bpf_attr *attr, bpfptr_t uattr,
 	if (err)
 		goto errout;
 
-	err = btf_check_modifier_chain_length(env, btf, 1);
+	err = btf_check_type_tags(env, btf, 1);
 	if (err)
 		goto errout;
 
@@ -6417,7 +6378,7 @@ static struct btf *btf_parse_base(struct btf_verifier_env *env, const char *name
 	if (err)
 		goto errout;
 
-	err = btf_check_modifier_chain_length(env, btf, 1);
+	err = btf_check_type_tags(env, btf, 1);
 	if (err)
 		goto errout;
 
@@ -6543,7 +6504,7 @@ static struct btf *btf_parse_module(const char *module_name, const void *data,
 	if (err)
 		goto errout;
 
-	err = btf_check_modifier_chain_length(env, btf, btf_nr_types(base_btf));
+	err = btf_check_type_tags(env, btf, btf_nr_types(base_btf));
 	if (err)
 		goto errout;
 
@@ -6849,18 +6810,14 @@ bool btf_ctx_access(int off, int size, enum bpf_access_type type,
 		    const struct bpf_prog *prog,
 		    struct bpf_insn_access_aux *info)
 {
-	static const struct btf_type_tag_match ctx_type_tags[] = {
-		{ "user", MEM_USER },
-		{ "percpu", MEM_PERCPU },
-	};
 	const struct btf_type *t = prog->aux->attach_func_proto;
 	struct bpf_prog *tgt_prog = prog->aux->dst_prog;
 	struct btf *btf = bpf_prog_get_target_btf(prog);
 	const char *tname = prog->aux->attach_func_name;
 	struct bpf_verifier_log *log = info->log;
-	struct btf_type_tag_walk_ctx ctx;
 	const struct btf_param *args;
 	bool ptr_err_raw_tp = false;
+	const char *tag_value;
 	u32 nr_args, arg;
 	int i, ret;
 
@@ -7063,18 +7020,22 @@ bool btf_ctx_access(int off, int size, enum bpf_access_type type,
 	}
 
 	info->btf = btf;
-	ctx.t = t;
-	ret = btf_type_tag_walk(btf, &ctx, ctx_type_tags,
-				ARRAY_SIZE(ctx_type_tags));
-	if (ret) {
-		bpf_log(log, "func '%s' arg%d type %s has multiple type tags\n",
-			tname, arg, btf_type_str(t));
-		return false;
-	}
-	info->reg_type |= ctx.res;
-	info->btf_id = ctx.id;
-	t = ctx.t;
+	info->btf_id = t->type;
+	t = btf_type_by_id(btf, t->type);
 
+	if (btf_type_is_type_tag(t) && !btf_type_kflag(t)) {
+		tag_value = __btf_name_by_offset(btf, t->name_off);
+		if (strcmp(tag_value, "user") == 0)
+			info->reg_type |= MEM_USER;
+		if (strcmp(tag_value, "percpu") == 0)
+			info->reg_type |= MEM_PERCPU;
+	}
+
+	/* skip modifiers */
+	while (btf_type_is_modifier(t)) {
+		info->btf_id = t->type;
+		t = btf_type_by_id(btf, t->type);
+	}
 	if (!btf_type_is_struct(t)) {
 		bpf_log(log,
 			"func '%s' arg%d type %s is not a struct\n",
@@ -7113,7 +7074,7 @@ static int btf_struct_walk(struct bpf_verifier_log *log, const struct btf *btf,
 	u32 i, moff, mtrue_end, msize = 0, total_nelems = 0;
 	const struct btf_type *mtype, *elem_type = NULL;
 	const struct btf_member *member;
-	const char *tname, *mname;
+	const char *tname, *mname, *tag_value;
 	u32 vlen, elem_id, mid;
 
 again:
@@ -7309,15 +7270,8 @@ error:
 		}
 
 		if (btf_type_is_ptr(mtype)) {
-			static const struct btf_type_tag_match walk_type_tags[] = {
-				{ "user", MEM_USER },
-				{ "percpu", MEM_PERCPU },
-				{ "rcu", MEM_RCU },
-			};
+			const struct btf_type *stype, *t;
 			enum bpf_type_flag tmp_flag = 0;
-			struct btf_type_tag_walk_ctx ctx = { .t = mtype };
-			const struct btf_type *stype;
-			int err;
 			u32 id;
 
 			if (msize != size || off != moff) {
@@ -7327,17 +7281,22 @@ error:
 				return -EACCES;
 			}
 
-			err = btf_type_tag_walk(btf, &ctx, walk_type_tags,
-						ARRAY_SIZE(walk_type_tags));
-			if (err) {
-				bpf_log(log, "type '%s' has multiple type tags\n",
-					btf_type_str(mtype));
-				return err;
+			/* check type tag */
+			t = btf_type_by_id(btf, mtype->type);
+			if (btf_type_is_type_tag(t) && !btf_type_kflag(t)) {
+				tag_value = __btf_name_by_offset(btf, t->name_off);
+				/* check __user tag */
+				if (strcmp(tag_value, "user") == 0)
+					tmp_flag = MEM_USER;
+				/* check __percpu tag */
+				if (strcmp(tag_value, "percpu") == 0)
+					tmp_flag = MEM_PERCPU;
+				/* check __rcu tag */
+				if (strcmp(tag_value, "rcu") == 0)
+					tmp_flag = MEM_RCU;
 			}
-			tmp_flag = ctx.res;
-			id = ctx.id;
-			stype = ctx.t;
 
+			stype = btf_type_skip_modifiers(btf, mtype->type, &id);
 			if (btf_type_is_struct(stype)) {
 				*next_btf_id = id;
 				*flag |= tmp_flag;
@@ -7908,12 +7867,7 @@ static int btf_scan_type_tags(struct bpf_verifier_env *env,
 			      const struct btf *btf, u32 type_id,
 			      u32 *tags)
 {
-	static const struct btf_type_tag_match func_type_tags[] = {
-		{ "arena", ARG_TAG_ARENA },
-	};
-	struct btf_type_tag_walk_ctx ctx;
 	const struct btf_type *t;
-	int err;
 
 	/* Find the first pointer type in the chain. */
 	t = btf_type_skip_modifiers(btf, type_id, NULL);
@@ -7925,15 +7879,24 @@ static int btf_scan_type_tags(struct bpf_verifier_env *env,
 	if (!t || !btf_type_is_ptr(t))
 		return 0;
 
-	ctx.t = t;
-	err = btf_type_tag_walk(btf, &ctx, func_type_tags,
-				ARRAY_SIZE(func_type_tags));
-	if (err) {
-		bpf_log(&env->log,
-			"function signature member has multiple type tags\n");
-		return err;
+	/* We got a pointer, get all associated type tags. */
+	for (t = btf_type_by_id(btf, t->type); t && btf_type_is_modifier(t);
+		t = btf_type_by_id(btf, t->type)) {
+
+		/* Skip non-type tag modifiers. */
+		if (!btf_type_is_type_tag(t))
+			continue;
+
+		const char *tag = __btf_name_by_offset(btf, t->name_off);
+
+		if (strcmp(tag, "arena") == 0) {
+			*tags |= ARG_TAG_ARENA;
+		} else {
+			bpf_log(&env->log, "function signature member has unsupported type tag '%s'\n",
+				tag);
+			return -EOPNOTSUPP;
+		}
 	}
-	*tags |= ctx.res;
 
 	return 0;
 }

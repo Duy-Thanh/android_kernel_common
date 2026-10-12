@@ -313,7 +313,7 @@ unsigned long __init relocate_kernel(void)
 		reloc_offset += random_offset;
 
 		/* The current thread is now within the relocated kernel */
-		current_thread_pointer = RELOCATED_KASLR(current_thread_pointer);
+		__current_thread_info = RELOCATED_KASLR(__current_thread_info);
 
 		update_reloc_offset(&reloc_offset, random_offset);
 	}
