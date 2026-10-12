@@ -52,6 +52,24 @@
       "parentUuid": "a0cee47a_1082b0f7",
       "revId": "b87c44854e168f6918d1f170349dc598695e5788",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62061320_e3ca2785",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-10-12T08:21:15Z",
+      "side": 1,
+      "message": "\u003e This is still pretty hacky and fragile, right?\n\nIMO yes, it is a bit hacky, but only because we rely on current kernel code state where `jump_entry_size()` is only used for `addr_conflict()`/`__jump_label_text_reserved()` (and it is v. unlikely that will change in 6.18). We can solve it outside of x86 in `kernel/jump_label.c` and make it more generic but it is a tradeoff of modifying generic kernel code vs keeping it in arch/x86. Do you think that:\n```\n@@ -388,7 +393,8 @@ static int __jump_label_text_reserved(struct jump_entry *iter_start,\n \n        iter \u003d iter_start;\n        while (iter \u003c iter_stop) {\n-               if (init || !jump_entry_is_init(iter)) {\n+               if (!is_pkvm_text((void *)jump_entry_code(iter)) \u0026\u0026\n+                   (init || !jump_entry_is_init(iter))) {\n```\nwould be better?\n\n\u003e And I see there is at least one more caller of jump_label_text_reserved(), in copy_optimized_instructions() in arch/x86/kernel/kprobes/opt.c, where it is not gated by the blacklist?\n\nSorry I do not get your point here.\nThere are two different things:\n1) the next, blacklist patch, which prevents installing kprobes directly on pkvm.text itself\n2) because of the above, in this patch we are sure that any other kprobe will not overlap with a `pkvm.text` `jump_table` patch address (`pkvm.text` related static branch) because it is gated earlier by blacklist. Therefore we know that there are no `addr_conflict()` with pkvm.text, so we can safely skip checking this overlap with `pkvm.text` (which otherwise would try to decode a pkvm.text instruction to get its size).\n\nSo yes, `copy_optimized_instructions()` uses `jump_label_text_reserved()` and thanks to this patch it would be safe: decoding pkvm.text instruction will be skipped as we know that kprobe can\u0027t overlap with pkvm.text, since `copy_optimized_instructions()` is called by `arch_prepare_optimized_kprobe()` \u003c-` __register_kprobe()`, which only runs after `check_kprobe_address_safe()` (which checks `within_kprobe_blacklist()`).",
+      "parentUuid": "03604da0_061eae25",
+      "revId": "b87c44854e168f6918d1f170349dc598695e5788",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
