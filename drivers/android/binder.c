@@ -1841,6 +1841,22 @@ static void binder_free_transaction(struct binder_transaction *t)
 {
 	struct binder_thread *target_thread;
 	struct binder_proc *target_proc;
+<<<<<<< HEAD   (481cb348bee88a316a5942bfde10b9b71c65b03d Revert "lsm: add backing_file LSM hooks")
+||||||| BASE   (296aabce459470a4c1b68ffd0c0c0920e563aaad Linux 6.12.95)
+=======
+
+	spin_lock(&t->lock);
+	target_proc = t->to_proc;
+	target_thread = t->to_thread;
+	/*
+	 * Pin target_thread to keep target_proc alive. Undelivered
+	 * transactions with !target_thread are safe, as target_proc
+	 * can only be the current context there.
+	 */
+	if (target_thread)
+		atomic_inc(&target_thread->tmp_ref);
+	spin_unlock(&t->lock);
+>>>>>>> BRANCH (6d15a1029d425b15c59463910ebdccc4afe760d6 Linux 6.12.96)
 
 	spin_lock(&t->lock);
 	target_proc = t->to_proc;

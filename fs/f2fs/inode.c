@@ -319,9 +319,16 @@ static bool sanity_check_inode(struct inode *inode, struct page *node_page)
 	}
 
 	if (f2fs_sb_has_flexible_inline_xattr(sbi) &&
+<<<<<<< HEAD   (481cb348bee88a316a5942bfde10b9b71c65b03d Revert "lsm: add backing_file LSM hooks")
 		f2fs_has_inline_xattr(inode) &&
 		(fi->i_inline_xattr_size < MIN_INLINE_XATTR_SIZE ||
 		fi->i_inline_xattr_size > MAX_INLINE_XATTR_SIZE)) {
+||||||| BASE   (296aabce459470a4c1b68ffd0c0c0920e563aaad Linux 6.12.95)
+=======
+		(fi->i_inline_xattr_size > MAX_INLINE_XATTR_SIZE ||
+		(f2fs_has_inline_xattr(inode) &&
+		fi->i_inline_xattr_size < MIN_INLINE_XATTR_SIZE))) {
+>>>>>>> BRANCH (6d15a1029d425b15c59463910ebdccc4afe760d6 Linux 6.12.96)
 		f2fs_warn(sbi, "%s: inode (ino=%lx) has corrupted i_inline_xattr_size: %d, min: %zu, max: %lu",
 			  __func__, inode->i_ino, fi->i_inline_xattr_size,
 			  MIN_INLINE_XATTR_SIZE, MAX_INLINE_XATTR_SIZE);
