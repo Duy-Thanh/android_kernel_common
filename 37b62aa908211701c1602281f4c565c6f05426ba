@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8ddae28_de78fcbf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-10-12T21:07:16Z",
+      "side": 1,
+      "message": "Avoid the churn from https://android-review.git.corp.google.com/q/I83fce47ed12fb0ee550c2eb3f561471fcb733aee or add it to this stack?",
+      "revId": "37b62aa908211701c1602281f4c565c6f05426ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
