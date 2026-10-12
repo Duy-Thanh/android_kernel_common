@@ -26,6 +26,31 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "70384353_f15fb840",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1059977
+      },
+      "writtenOn": "2026-10-12T18:21:44Z",
+      "side": 1,
+      "message": "Thanks for catching",
+      "parentUuid": "4fd5087e_0a9c577b",
+      "range": {
+        "startLine": 26,
+        "startChar": 5,
+        "endLine": 26,
+        "endChar": 14
+      },
+      "isAi": true,
+      "revId": "14bf138169df1f20f31077dcbf5c7449467a0786",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "262812a1_45756f0b",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
