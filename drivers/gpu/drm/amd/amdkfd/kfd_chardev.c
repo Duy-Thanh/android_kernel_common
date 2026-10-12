@@ -1299,11 +1299,18 @@ static int kfd_ioctl_map_memory_to_gpu(struct file *filep,
 		return -EINVAL;
 	}
 
-	devices_arr = memdup_array_user((void *)args->device_ids_array_ptr,
-				       args->n_devices, sizeof(*devices_arr));
+	devices_arr = kmalloc_array(args->n_devices, sizeof(*devices_arr),
+				    GFP_KERNEL);
+	if (!devices_arr)
+		return -ENOMEM;
 
-	if (IS_ERR(devices_arr))
-		return PTR_ERR(devices_arr);
+	err = copy_from_user(devices_arr,
+			     (void __user *)args->device_ids_array_ptr,
+			     args->n_devices * sizeof(*devices_arr));
+	if (err != 0) {
+		err = -EFAULT;
+		goto copy_from_user_failed;
+	}
 
 	mutex_lock(&p->mutex);
 	pdd = kfd_process_device_data_by_id(p, GET_GPU_ID(args->handle));
@@ -1384,6 +1391,7 @@ get_mem_obj_from_handle_failed:
 map_memory_to_gpu_failed:
 sync_memory_failed:
 	mutex_unlock(&p->mutex);
+copy_from_user_failed:
 	kfree(devices_arr);
 
 	return err;
@@ -1408,11 +1416,18 @@ static int kfd_ioctl_unmap_memory_from_gpu(struct file *filep,
 		return -EINVAL;
 	}
 
-	devices_arr = memdup_array_user((void *)args->device_ids_array_ptr,
-				       args->n_devices, sizeof(*devices_arr));
+	devices_arr = kmalloc_array(args->n_devices, sizeof(*devices_arr),
+				    GFP_KERNEL);
+	if (!devices_arr)
+		return -ENOMEM;
 
-	if (IS_ERR(devices_arr))
-		return PTR_ERR(devices_arr);
+	err = copy_from_user(devices_arr,
+			     (void __user *)args->device_ids_array_ptr,
+			     args->n_devices * sizeof(*devices_arr));
+	if (err != 0) {
+		err = -EFAULT;
+		goto copy_from_user_failed;
+	}
 
 	mutex_lock(&p->mutex);
 	pdd = kfd_process_device_data_by_id(p, GET_GPU_ID(args->handle));
@@ -1478,6 +1493,7 @@ get_mem_obj_from_handle_failed:
 unmap_memory_from_gpu_failed:
 sync_memory_failed:
 	mutex_unlock(&p->mutex);
+copy_from_user_failed:
 	kfree(devices_arr);
 	return err;
 }
@@ -1546,10 +1562,16 @@ static int kfd_ioctl_get_dmabuf_info(struct file *filep,
 	if (!dev)
 		return -EINVAL;
 
+	if (args->metadata_ptr) {
+		metadata_buffer = kzalloc(args->metadata_size, GFP_KERNEL);
+		if (!metadata_buffer)
+			return -ENOMEM;
+	}
+
 	/* Get dmabuf info from KGD */
 	r = amdgpu_amdkfd_get_dmabuf_info(dev->adev, args->dmabuf_fd,
 					  &dmabuf_adev, &args->size,
-					  &metadata_buffer, args->metadata_size,
+					  metadata_buffer, args->metadata_size,
 					  &args->metadata_size, &flags, &xcp_id);
 	if (r)
 		goto exit;
@@ -1561,7 +1583,7 @@ static int kfd_ioctl_get_dmabuf_info(struct file *filep,
 	args->flags = flags;
 
 	/* Copy metadata buffer to user mode */
-	if (metadata_buffer && args->metadata_ptr) {
+	if (metadata_buffer) {
 		r = copy_to_user((void __user *)args->metadata_ptr,
 				 metadata_buffer, args->metadata_size);
 		if (r != 0)
@@ -2337,11 +2359,17 @@ static int criu_restore_devices(struct kfd_process *p,
 	if (*priv_offset + (args->num_devices * sizeof(*device_privs)) > max_priv_data_size)
 		return -EINVAL;
 
-	device_buckets = memdup_array_user((void *)args->devices,
-					args->num_devices, sizeof(*device_buckets));
+	device_buckets = kmalloc_objs(*device_buckets, args->num_devices);
+	if (!device_buckets)
+		return -ENOMEM;
 
-	if (IS_ERR(device_buckets))
-		return PTR_ERR(device_buckets);
+	ret = copy_from_user(device_buckets, (void __user *)args->devices,
+				args->num_devices * sizeof(*device_buckets));
+	if (ret) {
+		pr_err("Failed to copy devices buckets from user\n");
+		ret = -EFAULT;
+		goto exit;
+	}
 
 	for (i = 0; i < args->num_devices; i++) {
 		struct kfd_node *dev;
