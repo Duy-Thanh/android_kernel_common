@@ -150,7 +150,6 @@ MODULE_PARM_DESC(min_interrupt_out_interval, "Minimum interrupt out interval in 
 
 /* Structure to hold all of our device specific stuff */
 struct ld_usb {
-	struct kref		kref;
 	struct mutex		mutex;		/* locks this structure */
 	struct usb_interface	*intf;		/* save off the usb interface pointer */
 	unsigned long		disconnected:1;
@@ -202,10 +201,8 @@ static void ld_usb_abort_transfers(struct ld_usb *dev)
 /*
  *	ld_usb_delete
  */
-static void ld_usb_delete(struct kref *kref)
+static void ld_usb_delete(struct ld_usb *dev)
 {
-	struct ld_usb *dev = container_of(kref, struct ld_usb, kref);
-
 	/* free data structures */
 	usb_free_urb(dev->interrupt_in_urb);
 	usb_free_urb(dev->interrupt_out_urb);
@@ -358,8 +355,6 @@ static int ld_usb_open(struct inode *inode, struct file *file)
 		goto unlock_exit;
 	}
 
-	kref_get(&dev->kref);
-
 	/* save device in the file's private structure */
 	file->private_data = dev;
 
@@ -386,8 +381,17 @@ static int ld_usb_release(struct inode *inode, struct file *file)
 
 	mutex_lock(&dev->mutex);
 
-	if (dev->disconnected)
+	if (dev->open_count != 1) {
+		retval = -ENODEV;
 		goto unlock_exit;
+	}
+	if (dev->disconnected) {
+		/* the device was unplugged before the file was released */
+		mutex_unlock(&dev->mutex);
+		/* unlock here as ld_usb_delete frees dev */
+		ld_usb_delete(dev);
+		goto exit;
+	}
 
 	/* wait until write transfer is finished */
 	if (dev->interrupt_out_busy)
@@ -397,7 +401,7 @@ static int ld_usb_release(struct inode *inode, struct file *file)
 
 unlock_exit:
 	mutex_unlock(&dev->mutex);
-	kref_put(&dev->kref, ld_usb_delete);
+
 exit:
 	return retval;
 }
@@ -655,8 +659,6 @@ static int ld_usb_probe(struct usb_interface *intf, const struct usb_device_id *
 	dev = kzalloc_obj(*dev);
 	if (!dev)
 		goto exit;
-
-	kref_init(&dev->kref);
 	mutex_init(&dev->mutex);
 	spin_lock_init(&dev->rbsl);
 	dev->intf = intf;
@@ -738,7 +740,7 @@ exit:
 	return retval;
 
 error:
-	kref_put(&dev->kref, ld_usb_delete);
+	ld_usb_delete(dev);
 
 	return retval;
 }
@@ -766,17 +768,17 @@ static void ld_usb_disconnect(struct usb_interface *intf)
 
 	mutex_lock(&dev->mutex);
 
-	dev->disconnected = 1;
-
-	if (dev->open_count) {
+	/* if the device is not opened, then we clean up right now */
+	if (!dev->open_count) {
+		mutex_unlock(&dev->mutex);
+		ld_usb_delete(dev);
+	} else {
+		dev->disconnected = 1;
 		/* wake up pollers */
 		wake_up_interruptible_all(&dev->read_wait);
 		wake_up_interruptible_all(&dev->write_wait);
+		mutex_unlock(&dev->mutex);
 	}
-
-	mutex_unlock(&dev->mutex);
-
-	kref_put(&dev->kref, ld_usb_delete);
 
 	dev_info(&intf->dev, "LD USB Device #%d now disconnected\n",
 		 (minor - USB_LD_MINOR_BASE));

@@ -682,13 +682,12 @@ impl Node {
         }
     }
 
-    pub(crate) fn remove_freeze_listener(&self, p: &Process) -> KVVec<Arc<Process>> {
+    pub(crate) fn remove_freeze_listener(&self, p: &Arc<Process>) {
+        let _unused_capacity;
         let mut guard = self.owner.inner.lock();
         let inner = self.inner.access_mut(&mut guard);
         let len = inner.freeze_list.len();
-        inner
-            .freeze_list
-            .retain(|proc| !core::ptr::eq::<Process>(&**proc, p));
+        inner.freeze_list.retain(|proc| !Arc::ptr_eq(proc, p));
         if len == inner.freeze_list.len() {
             pr_warn!(
                 "Could not remove freeze listener for {}\n",
@@ -696,9 +695,8 @@ impl Node {
             );
         }
         if inner.freeze_list.is_empty() {
-            return mem::take(&mut inner.freeze_list);
+            _unused_capacity = mem::take(&mut inner.freeze_list);
         }
-        KVVec::new()
     }
 
     pub(crate) fn freeze_list<'a>(&'a self, guard: &'a ProcessInner) -> &'a [Arc<Process>] {

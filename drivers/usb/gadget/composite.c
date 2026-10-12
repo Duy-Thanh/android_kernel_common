@@ -1867,10 +1867,9 @@ composite_setup(struct usb_gadget *gadget, const struct usb_ctrlrequest *ctrl)
 				if (cdev->config)
 					config = cdev->config;
 				else
-					config = list_first_entry_or_null(
+					config = list_first_entry(
 							&cdev->configs,
-							struct usb_configuration,
-							list);
+						struct usb_configuration, list);
 				if (!config)
 					goto done;
 
