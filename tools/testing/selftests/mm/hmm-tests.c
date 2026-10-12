@@ -23,7 +23,6 @@
 #include <time.h>
 #include <pthread.h>
 #include <limits.h>
-#include <linux/mman.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/mman.h>

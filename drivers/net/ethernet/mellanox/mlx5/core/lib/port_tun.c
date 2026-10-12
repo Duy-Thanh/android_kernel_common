@@ -176,8 +176,7 @@ void mlx5_tun_entropy_refcount_dec(struct mlx5_tun_entropy *tun_entropy,
 				   int reformat_type)
 {
 	mutex_lock(&tun_entropy->lock);
-	if (reformat_type == MLX5_REFORMAT_TYPE_L2_TO_VXLAN ||
-	    reformat_type == MLX5_REFORMAT_TYPE_L2_TO_L3_TUNNEL)
+	if (reformat_type == MLX5_REFORMAT_TYPE_L2_TO_VXLAN)
 		tun_entropy->num_enabling_entries--;
 	else if (reformat_type == MLX5_REFORMAT_TYPE_L2_TO_NVGRE &&
 		 --tun_entropy->num_disabling_entries == 0)

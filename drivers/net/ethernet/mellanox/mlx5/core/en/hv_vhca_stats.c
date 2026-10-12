@@ -33,10 +33,9 @@ mlx5e_hv_vhca_fill_ring_stats(struct mlx5e_priv *priv, int ch,
 static void mlx5e_hv_vhca_fill_stats(struct mlx5e_priv *priv, void *data,
 				     int buf_len)
 {
-	u16 nch = mlx5e_stats_nch_read(priv);
 	int ch, i = 0;
 
-	for (ch = 0; ch < nch; ch++) {
+	for (ch = 0; ch < priv->stats_nch; ch++) {
 		void *buf = data + i;
 
 		if (WARN_ON_ONCE(buf +
@@ -51,15 +50,8 @@ static void mlx5e_hv_vhca_fill_stats(struct mlx5e_priv *priv, void *data,
 
 static int mlx5e_hv_vhca_stats_buf_size(struct mlx5e_priv *priv)
 {
-	u16 nch = mlx5e_stats_nch_read(priv);
-
-	return sizeof(struct mlx5e_hv_vhca_per_ring_stats) * nch;
-}
-
-static int mlx5e_hv_vhca_stats_buf_max_size(struct mlx5e_priv *priv)
-{
 	return (sizeof(struct mlx5e_hv_vhca_per_ring_stats) *
-		max(priv->max_nch, priv->stats_nch));
+		priv->stats_nch);
 }
 
 static void mlx5e_hv_vhca_stats_work(struct work_struct *work)
@@ -75,7 +67,7 @@ static void mlx5e_hv_vhca_stats_work(struct work_struct *work)
 	sagent = container_of(dwork, struct mlx5e_hv_vhca_stats_agent, work);
 	priv = container_of(sagent, struct mlx5e_priv, stats_agent);
 	buf_len = mlx5e_hv_vhca_stats_buf_size(priv);
-	agent = READ_ONCE(sagent->agent);
+	agent = sagent->agent;
 	buf = sagent->buf;
 
 	memset(buf, 0, buf_len);
@@ -108,7 +100,7 @@ static void mlx5e_hv_vhca_stats_control(struct mlx5_hv_vhca_agent *agent,
 	sagent = &priv->stats_agent;
 
 	block->version = MLX5_HV_VHCA_STATS_VERSION;
-	block->rings   = mlx5e_stats_nch_read(priv);
+	block->rings   = priv->stats_nch;
 
 	if (!block->command) {
 		cancel_delayed_work_sync(&priv->stats_agent.work);
@@ -130,21 +122,18 @@ static void mlx5e_hv_vhca_stats_cleanup(struct mlx5_hv_vhca_agent *agent)
 
 void mlx5e_hv_vhca_stats_create(struct mlx5e_priv *priv)
 {
-	int buf_len = mlx5e_hv_vhca_stats_buf_max_size(priv);
+	int buf_len = mlx5e_hv_vhca_stats_buf_size(priv);
 	struct mlx5_hv_vhca_agent *agent;
 
 	priv->stats_agent.buf = kvzalloc(buf_len, GFP_KERNEL);
 	if (!priv->stats_agent.buf)
 		return;
 
-	INIT_DELAYED_WORK(&priv->stats_agent.work, mlx5e_hv_vhca_stats_work);
-
 	agent = mlx5_hv_vhca_agent_create(priv->mdev->hv_vhca,
 					  MLX5_HV_VHCA_AGENT_STATS,
 					  mlx5e_hv_vhca_stats_control, NULL,
 					  mlx5e_hv_vhca_stats_cleanup,
-					  priv,
-					  &priv->stats_agent.agent);
+					  priv);
 
 	if (IS_ERR_OR_NULL(agent)) {
 		if (IS_ERR(agent))
@@ -153,20 +142,18 @@ void mlx5e_hv_vhca_stats_create(struct mlx5e_priv *priv)
 				    agent);
 
 		kvfree(priv->stats_agent.buf);
-		priv->stats_agent.buf = NULL;
+		return;
 	}
+
+	priv->stats_agent.agent = agent;
+	INIT_DELAYED_WORK(&priv->stats_agent.work, mlx5e_hv_vhca_stats_work);
 }
 
 void mlx5e_hv_vhca_stats_destroy(struct mlx5e_priv *priv)
 {
-	struct mlx5_hv_vhca_agent *agent;
-
-	agent = READ_ONCE(priv->stats_agent.agent);
-	if (IS_ERR_OR_NULL(agent))
+	if (IS_ERR_OR_NULL(priv->stats_agent.agent))
 		return;
 
-	mlx5_hv_vhca_agent_destroy(agent);
-	WRITE_ONCE(priv->stats_agent.agent, NULL);
+	mlx5_hv_vhca_agent_destroy(priv->stats_agent.agent);
 	kvfree(priv->stats_agent.buf);
-	priv->stats_agent.buf = NULL;
 }

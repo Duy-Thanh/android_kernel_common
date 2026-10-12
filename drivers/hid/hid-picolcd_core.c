@@ -72,8 +72,7 @@ struct picolcd_pending *picolcd_send_and_wait(struct hid_device *hdev,
 	struct picolcd_pending *work;
 	struct hid_report *report = picolcd_out_report(report_id, hdev);
 	unsigned long flags;
-	int i, j;
-	unsigned int k;
+	int i, j, k;
 
 	if (!report || !data)
 		return NULL;

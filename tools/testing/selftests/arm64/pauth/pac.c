@@ -292,7 +292,7 @@ TEST(single_thread_different_keys)
 
 /*
  * fork() does not change keys. Only exec() does so call a worker program.
- * Its only job is to sign a value and report back the results
+ * Its only job is to sign a value and report back the resutls
  */
 TEST(exec_changed_keys)
 {

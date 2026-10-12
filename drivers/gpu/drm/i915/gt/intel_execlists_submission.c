@@ -3932,11 +3932,11 @@ execlists_create_virtual(struct intel_engine_cs **siblings, unsigned int count,
 	struct drm_i915_private *i915 = siblings[0]->i915;
 	struct virtual_engine *ve;
 	unsigned int n;
-	int err = -ENOMEM;
+	int err;
 
 	ve = kzalloc_flex(*ve, siblings, count);
 	if (!ve)
-		goto err;
+		return ERR_PTR(-ENOMEM);
 
 	ve->base.i915 = i915;
 	ve->base.gt = siblings[0]->gt;
@@ -3968,8 +3968,10 @@ execlists_create_virtual(struct intel_engine_cs **siblings, unsigned int count,
 	intel_engine_init_execlists(&ve->base);
 
 	ve->base.sched_engine = i915_sched_engine_create(ENGINE_VIRTUAL);
-	if (!ve->base.sched_engine)
-		goto err_noput;
+	if (!ve->base.sched_engine) {
+		err = -ENOMEM;
+		goto err_put;
+	}
 	ve->base.sched_engine->private_data = &ve->base;
 
 	ve->base.cops = &virtual_context_ops;
@@ -3985,8 +3987,10 @@ execlists_create_virtual(struct intel_engine_cs **siblings, unsigned int count,
 	intel_context_init(&ve->context, &ve->base);
 
 	ve->base.breadcrumbs = intel_breadcrumbs_create(NULL);
-	if (!ve->base.breadcrumbs)
+	if (!ve->base.breadcrumbs) {
+		err = -ENOMEM;
 		goto err_put;
+	}
 
 	for (n = 0; n < count; n++) {
 		struct intel_engine_cs *sibling = siblings[n];
@@ -4061,13 +4065,8 @@ execlists_create_virtual(struct intel_engine_cs **siblings, unsigned int count,
 	virtual_engine_initial_hint(ve);
 	return &ve->context;
 
-err_noput:
-	kfree(ve);
-	goto err;
-
 err_put:
 	intel_context_put(&ve->context);
-err:
 	return ERR_PTR(err);
 }
 

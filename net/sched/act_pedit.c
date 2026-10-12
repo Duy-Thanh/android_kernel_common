@@ -567,18 +567,9 @@ static int tcf_pedit_offload_act_setup(struct tc_action *act, void *entry_data,
 {
 	if (bind) {
 		struct flow_action_entry *entry = entry_data;
-		int nkeys = tcf_pedit_nkeys_locked(act);
 		int k;
 
-		/* If the required keys exceed the remaining capacity return
-		 * -ENOSPC to abort the offload and fallback to software.
-		 */
-		if (nkeys > *index_inc) {
-			NL_SET_ERR_MSG_MOD(extack, "Not enough space to offload all pedit keys");
-			return -ENOSPC;
-		}
-
-		for (k = 0; k < nkeys; k++) {
+		for (k = 0; k < tcf_pedit_nkeys(act); k++) {
 			switch (tcf_pedit_cmd(act, k)) {
 			case TCA_PEDIT_KEY_EX_CMD_SET:
 				entry->id = FLOW_ACTION_MANGLE;
@@ -615,7 +606,7 @@ static int tcf_pedit_offload_act_setup(struct tc_action *act, void *entry_data,
 			return -EOPNOTSUPP;
 		}
 
-		for (k = 1; k < tcf_pedit_nkeys_locked(act); k++) {
+		for (k = 1; k < tcf_pedit_nkeys(act); k++) {
 			if (cmd != tcf_pedit_cmd(act, k)) {
 				NL_SET_ERR_MSG_MOD(extack, "Unsupported pedit command offload");
 				return -EOPNOTSUPP;

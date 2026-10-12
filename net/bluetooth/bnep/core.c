@@ -559,18 +559,14 @@ static int bnep_session(void *arg)
 	return 0;
 }
 
-static struct l2cap_conn *bnep_get_conn(struct bnep_session *session)
+static struct device *bnep_get_device(struct bnep_session *session)
 {
-	struct l2cap_chan *chan = l2cap_pi(session->sock->sk)->chan;
-	struct l2cap_conn *conn;
+	struct l2cap_conn *conn = l2cap_pi(session->sock->sk)->chan->conn;
 
-	l2cap_chan_lock(chan);
-	conn = chan->conn;
-	if (conn)
-		l2cap_conn_get(conn);
-	l2cap_chan_unlock(chan);
+	if (!conn || !conn->hcon)
+		return NULL;
 
-	return conn;
+	return &conn->hcon->dev;
 }
 
 static const struct device_type bnep_type = {
@@ -582,7 +578,6 @@ int bnep_add_connection(struct bnep_connadd_req *req, struct socket *sock)
 	u32 valid_flags = BIT(BNEP_SETUP_RESPONSE);
 	struct net_device *dev;
 	struct bnep_session *s, *ss;
-	struct l2cap_conn *conn = NULL;
 	u8 dst[ETH_ALEN], src[ETH_ALEN];
 	int err;
 
@@ -642,18 +637,10 @@ int bnep_add_connection(struct bnep_connadd_req *req, struct socket *sock)
 	bnep_set_default_proto_filter(s);
 #endif
 
-	conn = bnep_get_conn(s);
-	if (!conn) {
-		err = -ENOTCONN;
-		goto failed;
-	}
-
-	SET_NETDEV_DEV(dev, &conn->hcon->dev);
+	SET_NETDEV_DEV(dev, bnep_get_device(s));
 	SET_NETDEV_DEVTYPE(dev, &bnep_type);
 
 	err = register_netdev(dev);
-	l2cap_conn_put(conn);
-	conn = NULL;
 	if (err)
 		goto failed;
 
@@ -675,8 +662,6 @@ int bnep_add_connection(struct bnep_connadd_req *req, struct socket *sock)
 	return 0;
 
 failed:
-	if (conn)
-		l2cap_conn_put(conn);
 	up_write(&bnep_session_sem);
 	free_netdev(dev);
 	return err;
