@@ -400,9 +400,8 @@ void loongson_boot_secondary(int cpu, struct task_struct *idle)
 	pr_info("Booting CPU#%d...\n", cpu);
 
 	entry = __pa_symbol((unsigned long)&smpboot_entry);
-	cpuboot_data.task = (unsigned long)idle;
-	cpuboot_data.stack = (unsigned long)task_pt_regs(idle);
-	cpuboot_data.offset = per_cpu_offset(cpu);
+	cpuboot_data.stack = (unsigned long)__KSTK_TOS(idle);
+	cpuboot_data.thread_info = (unsigned long)task_thread_info(idle);
 
 	csr_mail_send(entry, cpu_logical_map(cpu), 0);
 
@@ -664,7 +663,6 @@ asmlinkage void start_secondary(void)
 	set_my_cpu_offset(per_cpu_offset(cpu));
 
 	cpu_probe();
-	set_current(current);
 	constant_clockevent_init();
 	loongson_init_secondary();
 
@@ -707,7 +705,6 @@ static void stop_this_cpu(void *dummy)
 	set_cpu_online(smp_processor_id(), false);
 	calculate_cpu_foreign_map();
 	local_irq_disable();
-	rcutree_report_cpu_dead();
 	while (true);
 }
 
