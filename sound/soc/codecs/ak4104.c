@@ -5,6 +5,7 @@
  * Copyright (c) 2009 Daniel Mack <daniel@caiaq.de>
  */
 
+#include <linux/mod_devicetable.h>
 #include <linux/module.h>
 #include <linux/slab.h>
 #include <linux/spi/spi.h>

@@ -10,6 +10,7 @@
 #include <linux/module.h>
 #include <linux/pinctrl/pinmux.h>
 #include <linux/platform_device.h>
+#include <linux/mod_devicetable.h>
 
 #include <linux/mfd/tps6594.h>
 

@@ -96,8 +96,7 @@
 
 #define SE_COMMON_REG_LIST(id)\
 	SE_COMMON_REG_LIST_DCE_BASE(id), \
-	SRI(AFMT_CNTL, DIG, id), \
-	SRI(DP_MSA_MISC, DP, id)
+	SRI(AFMT_CNTL, DIG, id)
 
 #define SE_DCN_REG_LIST(id)\
 	SE_COMMON_REG_LIST_BASE(id),\

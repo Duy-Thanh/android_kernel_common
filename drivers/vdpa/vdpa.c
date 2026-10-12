@@ -13,6 +13,7 @@
 #include <linux/vdpa.h>
 #include <uapi/linux/vdpa.h>
 #include <net/genetlink.h>
+#include <linux/mod_devicetable.h>
 #include <linux/virtio_ids.h>
 
 static LIST_HEAD(mdev_head);

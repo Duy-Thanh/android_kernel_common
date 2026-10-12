@@ -10,6 +10,7 @@
 
 #include <linux/dmi.h>
 #include <linux/init.h>
+#include <linux/mod_devicetable.h>
 #include <linux/module.h>
 
 #include "x86-android-tablets.h"

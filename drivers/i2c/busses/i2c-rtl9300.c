@@ -4,6 +4,7 @@
 #include <linux/clk.h>
 #include <linux/i2c.h>
 #include <linux/i2c-mux.h>
+#include <linux/mod_devicetable.h>
 #include <linux/mfd/syscon.h>
 #include <linux/mutex.h>
 #include <linux/platform_device.h>

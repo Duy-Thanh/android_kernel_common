@@ -1439,12 +1439,11 @@ void pvr_queue_kill(struct pvr_queue *queue)
 /**
  * pvr_queue_destroy() - Destroy a queue.
  * @queue: The queue to destroy.
- * @cleanup_queue_entity: Whether to cleanup the queue entity.
  *
  * Cleanup the queue and free the resources attached to it. Should be
  * called from the context release function.
  */
-void pvr_queue_destroy(struct pvr_queue *queue, bool cleanup_queue_entity)
+void pvr_queue_destroy(struct pvr_queue *queue)
 {
 	if (!queue)
 		return;
@@ -1454,8 +1453,7 @@ void pvr_queue_destroy(struct pvr_queue *queue, bool cleanup_queue_entity)
 	mutex_unlock(&queue->ctx->pvr_dev->queues.lock);
 
 	drm_sched_fini(&queue->scheduler);
-	if (cleanup_queue_entity)
-		drm_sched_entity_fini(&queue->entity);
+	drm_sched_entity_fini(&queue->entity);
 
 	if (WARN_ON(queue->last_queued_job_scheduled_fence))
 		dma_fence_put(queue->last_queued_job_scheduled_fence);

@@ -360,23 +360,18 @@ __bpf_kfunc int bpf_cgroup_read_xattr(struct cgroup *cgroup, const char *name__s
 #endif /* CONFIG_CGROUPS */
 
 /**
- * bpf_real_data_inode - get the real inode hosting a file's data
- * @file: file to resolve
+ * bpf_real_inode - get the real inode backing a dentry
+ * @dentry: dentry to resolve
  *
- * Resolve @file to the inode that hosts its data. For a regular file on a
- * union/overlay filesystem this is the underlying (upper or lower) inode that
- * stores the data, not the overlay inode.
+ * If the dentry is on a union/overlay filesystem, return the underlying, real
+ * inode that hosts the data.  Otherwise return the inode attached to the
+ * dentry itself.
  *
- * Data resolution only applies to regular files. For a non-regular file (e.g.
- * a device node, fifo or socket) on a union/overlay filesystem the overlay
- * inode itself is returned; for any file on a non-union filesystem the inode
- * attached to @file is returned.
- *
- * Return: The inode hosting @file's data, or NULL.
+ * Return: The real inode backing the dentry, or NULL for a negative dentry.
  */
-__bpf_kfunc struct inode *bpf_real_data_inode(struct file *file)
+__bpf_kfunc struct inode *bpf_real_inode(struct dentry *dentry)
 {
-	return d_real_inode(file_dentry(file));
+	return d_real_inode(dentry);
 }
 
 __bpf_kfunc_end_defs();
@@ -389,7 +384,7 @@ BTF_ID_FLAGS(func, bpf_get_dentry_xattr, KF_SLEEPABLE)
 BTF_ID_FLAGS(func, bpf_get_file_xattr, KF_SLEEPABLE)
 BTF_ID_FLAGS(func, bpf_set_dentry_xattr, KF_SLEEPABLE)
 BTF_ID_FLAGS(func, bpf_remove_dentry_xattr, KF_SLEEPABLE)
-BTF_ID_FLAGS(func, bpf_real_data_inode, KF_SLEEPABLE | KF_RET_NULL)
+BTF_ID_FLAGS(func, bpf_real_inode, KF_SLEEPABLE | KF_RET_NULL)
 BTF_KFUNCS_END(bpf_fs_kfunc_set_ids)
 
 static int bpf_fs_kfuncs_filter(const struct bpf_prog *prog, u32 kfunc_id)

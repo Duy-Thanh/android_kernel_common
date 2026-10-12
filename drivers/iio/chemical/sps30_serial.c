@@ -9,6 +9,7 @@
 #include <linux/errno.h>
 #include <linux/iio/iio.h>
 #include <linux/minmax.h>
+#include <linux/mod_devicetable.h>
 #include <linux/module.h>
 #include <linux/serdev.h>
 #include <linux/types.h>

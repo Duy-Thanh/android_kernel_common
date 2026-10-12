@@ -9,7 +9,6 @@
 
 #include <linux/acpi.h>
 #include <linux/acpi_rimt.h>
-#include <linux/device/driver.h>
 #include <linux/iommu.h>
 #include <linux/list.h>
 #include <linux/pci.h>
@@ -258,11 +257,11 @@ static int rimt_iommu_xlate(struct device *dev, struct acpi_rimt_node *node, u32
 	rimt_fwnode = rimt_get_fwnode(node);
 
 	/*
-	 * The IOMMU drivers may not be probed yet. Defer the IOMMU
-	 * configuration if it's still in initialization stage.
+	 * The IOMMU drivers may not be probed yet.
+	 * Defer the IOMMU configuration
 	 */
 	if (!rimt_fwnode)
-		return driver_deferred_probe_check_state(dev);
+		return -EPROBE_DEFER;
 
 	/*
 	 * EPROBE_DEFER ensures IOMMU is probed before the devices that

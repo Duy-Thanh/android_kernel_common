@@ -17,6 +17,7 @@
 #include <linux/interrupt.h>
 #include <linux/ctype.h>
 #include <linux/io.h>
+#include <linux/mod_devicetable.h>
 #include <linux/edac.h>
 #include <linux/smp.h>
 #include <linux/gfp.h>

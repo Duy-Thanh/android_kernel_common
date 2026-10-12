@@ -12,6 +12,7 @@
 #include <linux/irqdomain.h>
 #include <linux/clocksource.h>
 #include <linux/clockchips.h>
+#include <linux/mod_devicetable.h>
 
 #include <asm/setup.h>
 #include <asm/mach/arch.h>

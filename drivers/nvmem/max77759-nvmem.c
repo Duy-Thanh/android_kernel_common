@@ -10,6 +10,7 @@
 #include <linux/device/driver.h>
 #include <linux/err.h>
 #include <linux/mfd/max77759.h>
+#include <linux/mod_devicetable.h>
 #include <linux/module.h>
 #include <linux/nvmem-provider.h>
 #include <linux/overflow.h>

@@ -12,6 +12,7 @@
 #include <linux/errno.h>
 #include <linux/gpio/consumer.h>
 #include <linux/kernel.h>
+#include <linux/mod_devicetable.h>
 #include <linux/of.h>
 #include <linux/pm_runtime.h>
 #include <linux/serdev.h>

@@ -353,7 +353,7 @@ static int gemini_sata_probe(struct platform_device *pdev)
 	if (sg->ide_pins) {
 		ret = gemini_setup_ide_pins(dev);
 		if (ret)
-			goto out_unprep_clk;
+			return ret;
 	}
 
 	dev_info(dev, "set up the Gemini IDE/SATA nexus\n");

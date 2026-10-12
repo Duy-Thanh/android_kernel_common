@@ -22,6 +22,7 @@
 #include <linux/math64.h>
 #include <linux/mfd/syscon.h>
 #include <linux/module.h>
+#include <linux/mod_devicetable.h>
 #include <linux/platform_device.h>
 #include <linux/pwm.h>
 #include <linux/regmap.h>

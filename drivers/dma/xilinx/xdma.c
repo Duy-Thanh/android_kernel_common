@@ -20,6 +20,7 @@
  * user interrupt wires that generate interrupts to the host.
  */
 
+#include <linux/mod_devicetable.h>
 #include <linux/bitfield.h>
 #include <linux/dmapool.h>
 #include <linux/regmap.h>

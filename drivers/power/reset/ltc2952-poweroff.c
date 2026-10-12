@@ -53,6 +53,7 @@
 #include <linux/kmod.h>
 #include <linux/module.h>
 #include <linux/panic_notifier.h>
+#include <linux/mod_devicetable.h>
 #include <linux/gpio/consumer.h>
 #include <linux/reboot.h>
 #include <linux/property.h>

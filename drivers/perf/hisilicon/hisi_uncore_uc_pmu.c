@@ -10,6 +10,7 @@
 #include <linux/interrupt.h>
 #include <linux/irq.h>
 #include <linux/list.h>
+#include <linux/mod_devicetable.h>
 
 #include "hisi_uncore_pmu.h"
 

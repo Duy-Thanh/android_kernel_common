@@ -6,6 +6,7 @@
  */
 
 #include <linux/kernel.h>
+#include <linux/mod_devicetable.h>
 #include <linux/module.h>
 #include <linux/i3c/device.h>
 #include <linux/slab.h>

@@ -134,7 +134,6 @@ static inline void acpi_os_terminate_debugger(void)
 /*
  * OSL interfaces added by Linux
  */
-#define acpi_ut_safe_strncpy	strscpy_pad
 
 #endif				/* __KERNEL__ */
 

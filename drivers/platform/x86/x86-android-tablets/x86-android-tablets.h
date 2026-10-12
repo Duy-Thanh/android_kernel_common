@@ -13,7 +13,6 @@
 #include <linux/gpio/consumer.h>
 #include <linux/i2c.h>
 #include <linux/irqdomain_defs.h>
-#include <linux/device-id/dmi.h>
 #include <linux/spi/spi.h>
 
 struct gpio_desc;

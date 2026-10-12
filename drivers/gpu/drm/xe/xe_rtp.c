@@ -326,7 +326,8 @@ static void rtp_mark_active(struct xe_device *xe,
  * xe_rtp_process_to_sr - Process all rtp @entries, adding the matching ones to
  *                        the save-restore argument.
  * @ctx: The context for processing the table, with one of device, gt or hwe
- * @table: Table with RTP definitions
+ * @entries: Table with RTP definitions
+ * @n_entries: Number of entries to process, usually ARRAY_SIZE(entries)
  * @sr: Save-restore struct where matching rules execute the action. This can be
  *      viewed as the "coalesced view" of multiple the tables. The bits for each
  *      register set are expected not to collide with previously added entries
@@ -338,10 +339,12 @@ static void rtp_mark_active(struct xe_device *xe,
  * used to calculate the right register offset
  */
 void xe_rtp_process_to_sr(struct xe_rtp_process_ctx *ctx,
-			  const struct xe_rtp_table_sr *table,
+			  const struct xe_rtp_entry_sr *entries,
+			  size_t n_entries,
 			  struct xe_reg_sr *sr,
 			  bool process_in_vf)
 {
+	const struct xe_rtp_entry_sr *entry;
 	struct xe_hw_engine *hwe = NULL;
 	struct xe_gt *gt = NULL;
 	struct xe_device *xe = NULL;
@@ -351,10 +354,9 @@ void xe_rtp_process_to_sr(struct xe_rtp_process_ctx *ctx,
 	if (!process_in_vf && IS_SRIOV_VF(xe))
 		return;
 
-	xe_assert(xe, table->entries);
+	xe_assert(xe, entries);
 
-	for (size_t i = 0; i < table->n_entries; i++) {
-		const struct xe_rtp_entry_sr *entry = &table->entries[i];
+	for (entry = entries; entry - entries < n_entries; entry++) {
 		bool match = false;
 
 		if (entry->flags & XE_RTP_ENTRY_FLAG_FOREACH_ENGINE) {
@@ -369,40 +371,37 @@ void xe_rtp_process_to_sr(struct xe_rtp_process_ctx *ctx,
 		}
 
 		if (match)
-			rtp_mark_active(xe, ctx, i);
+			rtp_mark_active(xe, ctx, entry - entries);
 	}
 }
 EXPORT_SYMBOL_IF_KUNIT(xe_rtp_process_to_sr);
 
 /**
- * xe_rtp_process - Process all entries in rtp @table, without running any action
+ * xe_rtp_process - Process all rtp @entries, without running any action
  * @ctx: The context for processing the table, with one of device, gt or hwe
- * @table: Table with RTP definitions
+ * @entries: Table with RTP definitions
  *
- * Walk the table pointed by @table, executing the
+ * Walk the table pointed by @entries (with an empty sentinel), executing the
  * rules. One difference from xe_rtp_process_to_sr(): there is no action
  * associated with each entry since this uses struct xe_rtp_entry. Its main use
  * is for marking active workarounds via
  * xe_rtp_process_ctx_enable_active_tracking().
  */
 void xe_rtp_process(struct xe_rtp_process_ctx *ctx,
-		    const struct xe_rtp_table *table)
+		    const struct xe_rtp_entry *entries)
 {
+	const struct xe_rtp_entry *entry;
 	struct xe_hw_engine *hwe;
 	struct xe_gt *gt;
 	struct xe_device *xe;
 
 	rtp_get_context(ctx, &hwe, &gt, &xe);
 
-	xe_assert(xe, table->entries);
-
-	for (size_t i = 0; i < table->n_entries; i++) {
-		const struct xe_rtp_entry *entry = &table->entries[i];
-
+	for (entry = entries; entry && entry->rules; entry++) {
 		if (!rule_matches(xe, gt, hwe, entry->rules, entry->n_rules))
 			continue;
 
-		rtp_mark_active(xe, ctx, i);
+		rtp_mark_active(xe, ctx, entry - entries);
 	}
 }
 EXPORT_SYMBOL_IF_KUNIT(xe_rtp_process);

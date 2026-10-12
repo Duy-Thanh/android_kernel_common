@@ -8,7 +8,7 @@
 #include <linux/device.h>
 #include <linux/module.h>
 #include <linux/completion.h>
-#include <linux/device-id/slim.h>
+#include <linux/mod_devicetable.h>
 
 extern const struct bus_type slimbus_bus;
 

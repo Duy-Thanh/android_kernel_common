@@ -13,7 +13,7 @@
 #include <linux/spinlock.h>
 #include <linux/mutex.h>
 #include <linux/device.h>
-#include <linux/device-id/serio.h>
+#include <linux/mod_devicetable.h>
 #include <uapi/linux/serio.h>
 
 extern const struct bus_type serio_bus;

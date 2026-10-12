@@ -19,8 +19,6 @@
 #include <linux/pm.h>
 #include <linux/device/bus.h>
 #include <linux/module.h>
-#include <linux/device-id/acpi.h>
-#include <linux/device-id/of.h>
 
 /**
  * enum probe_type - device driver probe type to try

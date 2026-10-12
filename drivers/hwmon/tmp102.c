@@ -15,6 +15,7 @@
 #include <linux/jiffies.h>
 #include <linux/regmap.h>
 #include <linux/regulator/consumer.h>
+#include <linux/mod_devicetable.h>
 #include <linux/property.h>
 
 #define	DRIVER_NAME "tmp102"

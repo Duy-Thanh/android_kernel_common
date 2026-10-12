@@ -4,6 +4,7 @@
 //
 // Based on WM8523 ALSA SoC Audio driver written by Mark Brown
 
+#include <linux/mod_devicetable.h>
 #include <linux/module.h>
 #include <linux/moduleparam.h>
 #include <linux/init.h>

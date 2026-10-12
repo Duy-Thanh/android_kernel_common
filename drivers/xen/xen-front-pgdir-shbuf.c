@@ -445,10 +445,8 @@ static int grant_references(struct xen_front_pgdir_shbuf *buf)
 		unsigned long frame;
 
 		cur_ref = gnttab_claim_grant_reference(&priv_gref_head);
-		if (cur_ref < 0) {
-			ret = cur_ref;
-			goto out_free_refs;
-		}
+		if (cur_ref < 0)
+			return cur_ref;
 
 		frame = xen_page_to_gfn(virt_to_page(buf->directory +
 						     PAGE_SIZE * i));
@@ -459,13 +457,11 @@ static int grant_references(struct xen_front_pgdir_shbuf *buf)
 	if (buf->ops->grant_refs_for_buffer) {
 		ret = buf->ops->grant_refs_for_buffer(buf, &priv_gref_head, j);
 		if (ret)
-			goto out_free_refs;
+			return ret;
 	}
 
-	ret = 0;
-out_free_refs:
 	gnttab_free_grant_references(priv_gref_head);
-	return ret;
+	return 0;
 }
 
 /*

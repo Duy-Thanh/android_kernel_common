@@ -13,7 +13,6 @@
 #include <linux/mutex.h>
 #include <linux/serial.h>
 #include <linux/kfifo.h>
-#include <linux/usb.h>
 
 /* The maximum number of ports one device can grab at once */
 #define MAX_NUM_PORTS		16

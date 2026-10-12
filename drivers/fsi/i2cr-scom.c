@@ -6,6 +6,7 @@
 #include <linux/fs.h>
 #include <linux/fsi.h>
 #include <linux/module.h>
+#include <linux/mod_devicetable.h>
 
 #include "fsi-master-i2cr.h"
 #include "fsi-slave.h"

@@ -2,7 +2,7 @@
 #ifndef _PARISC_HARDWARE_H
 #define _PARISC_HARDWARE_H
 
-#include <linux/device-id/parisc.h>
+#include <linux/mod_devicetable.h>
 
 #define HWTYPE_ANY_ID		PA_HWTYPE_ANY_ID
 #define HVERSION_ANY_ID		PA_HVERSION_ANY_ID
@@ -94,6 +94,8 @@ struct bc_module {
 #define HPHW_FABRIC    14
 #define HPHW_MC	       15
 #define HPHW_FAULTY    31
+
+struct parisc_device_id;
 
 /* hardware.c: */
 extern const char *parisc_hardware_description(struct parisc_device_id *id);

@@ -28,7 +28,7 @@
  */
 
 #ifdef __KERNEL__
-#include <linux/device-id/isapnp.h>
+#include <linux/mod_devicetable.h>
 
 #define DEVICE_COUNT_COMPATIBLE 4
 
