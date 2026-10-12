@@ -79,6 +79,42 @@
       ],
       "revId": "b8fe32b2de3ad8672a55cc43b1ec59491457588a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2044e70_673b48aa",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1245,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-12T22:06:18Z",
+      "side": 1,
+      "message": "Yeah, I think you are right. @jaszczyk@google.com FYI\n\n\u003e And pkvm_hyp_mmu_map ultimately calls hyp_mmu_flush_tlb which BUG()s.\n\nAt first I thought \"wut?\" :) but now I think I get you: in this case it will modify PTEs for already mapped pages, thus triggering flush_tlb. (So we are kind of safe that it\u0027s guaranteed to be only a DoS, but still it is a bug.)",
+      "parentUuid": "99c3cea4_f04652b0",
+      "revId": "b8fe32b2de3ad8672a55cc43b1ec59491457588a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7df17a60_231ddafa",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1245,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-12T22:06:18Z",
+      "side": 1,
+      "message": "Yeah, good point. More precisely: although the above pkvm_pgtable_set_owner() implicitly validates if `phys` doesn\u0027t exceed the max VA addr e.g. 2^48 (since aosp/4151700), __pkvm_va(phys) \u003d\u003d phys + PAGE_OFFSET may overflow and then it may collide with pKVM\u0027s vmemmap (which is mapped at 64K close to the beginning of the address space), or it may not overflow but still exceed __START_KERNEL_map and then it may collide with pKVM\u0027s text/data/bss.",
+      "parentUuid": "6c4af4a2_2a12cad2",
+      "revId": "b8fe32b2de3ad8672a55cc43b1ec59491457588a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
