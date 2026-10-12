@@ -650,20 +650,20 @@ void __noreturn __cold nvhe_hyp_panic_handler(u64 esr, u64 spsr,
 		kvm_err("Invalid host exception to nVHE hyp!\n");
 	} else if (ESR_ELx_EC(esr) == ESR_ELx_EC_BRK64 &&
 		   esr_brk_comment(esr) == BUG_BRK_IMM) {
+		struct bug_entry *bug = find_bug(panic_addr + kaslr_off);
 		const char *file = NULL;
 		unsigned int line = 0;
 
 		/* All hyp bugs, including warnings, are treated as fatal. */
-		if (!is_protected_kvm_enabled() ||
-		    IS_ENABLED(CONFIG_PKVM_DISABLE_STAGE2_ON_PANIC)) {
-			struct bug_entry *bug = find_bug(panic_addr + kaslr_off);
+		if (bug)
+			bug_get_file_line(bug, &file, &line);
 
-			if (bug)
-				bug_get_file_line(bug, &file, &line);
-		}
-
-		if (file)
+		if (file && (!is_protected_kvm_enabled() ||
+			     IS_ENABLED(CONFIG_PKVM_DISABLE_STAGE2_ON_PANIC)))
 			kvm_err("nVHE hyp BUG at: %s:%u!\n", file, line);
+		else if (line)
+			kvm_err("nVHE hyp BUG at: [<%016llx>] %pB:%u!\n",
+				panic_addr, (void *)(panic_addr + kaslr_off), line);
 		else
 			print_nvhe_hyp_panic("BUG", panic_addr, kaslr_off);
 	} else if (IS_ENABLED(CONFIG_CFI) && esr_is_cfi_brk(esr)) {
