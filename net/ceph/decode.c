@@ -87,9 +87,8 @@ bad:
 EXPORT_SYMBOL(ceph_decode_entity_addr);
 
 /*
- * Return addr of desired type (MSGR2 or LEGACY) or error.  In case of
- * multiple matches, use the first one for compatibility with userspace
- * messenger.
+ * Return addr of desired type (MSGR2 or LEGACY) or error.
+ * Make sure there is only one match.
  *
  * Assume encoding with MSG_ADDR2.
  */
@@ -122,13 +121,14 @@ int ceph_decode_entity_addrvec(void **p, void *end, bool msgr2,
 
 		dout("%s i %d addr %s\n", __func__, i, ceph_pr_addr(&tmp_addr));
 		if (tmp_addr.type == my_type) {
-			if (!found) {
-				memcpy(addr, &tmp_addr, sizeof(*addr));
-				found = true;
-			} else {
-				dout("%s skipping extra match of type %d in addrvec\n",
-				     __func__, le32_to_cpu(my_type));
+			if (found) {
+				pr_err("another match of type %d in addrvec\n",
+				       le32_to_cpu(my_type));
+				return -EINVAL;
 			}
+
+			memcpy(addr, &tmp_addr, sizeof(*addr));
+			found = true;
 		}
 	}
 

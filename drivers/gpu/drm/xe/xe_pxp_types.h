@@ -85,20 +85,17 @@ struct xe_pxp {
 	/** @gsc_res: kernel-owned objects for PXP submissions to the GSCCS */
 	struct xe_pxp_gsc_client_resources gsc_res;
 
-	/** @events: wrapper for the worker and queue used for PXP event handling */
+	/** @irq: wrapper for the worker and queue used for PXP irq support */
 	struct {
-		/** @events.work: worker that manages termination events. */
+		/** @irq.work: worker that manages irq events. */
 		struct work_struct work;
-		/** @events.wq: workqueue on which to queue the work. */
+		/** @irq.wq: workqueue on which to queue the irq work. */
 		struct workqueue_struct *wq;
-		/** @events.pending: pending events */
-		atomic_t pending;
-#define PXP_TERMINATION_REQUEST_IRQ		BIT(0)
-#define PXP_TERMINATION_REQUEST_ON_RESUME	BIT(1)
-#define PXP_TERMINATION_REQUEST	(PXP_TERMINATION_REQUEST_IRQ | \
-				 PXP_TERMINATION_REQUEST_ON_RESUME)
-#define PXP_TERMINATION_COMPLETE_IRQ		BIT(2)
-	} events;
+		/** @irq.events: pending events, protected with xe->irq.lock. */
+		u32 events;
+#define PXP_TERMINATION_REQUEST  BIT(0)
+#define PXP_TERMINATION_COMPLETE BIT(1)
+	} irq;
 
 	/** @mutex: protects the pxp status and the queue list */
 	struct mutex mutex;
@@ -133,14 +130,6 @@ struct xe_pxp {
 	 * suspend cycles.
 	 */
 	u32 last_suspend_key_instance;
-	/**
-	 * @needs_termination_on_resume: indicates if PXP termination is needed
-	 * on resume. This is set if PXP was active when we suspend and it is
-	 * cleared when we queue the termination on resume. Since the suspend
-	 * and resume calls cannot execute at the same time, this variable does
-	 * not need to be protected by the PXP lock.
-	 */
-	bool needs_termination_on_resume;
 };
 
 #endif /* _XE_PXP_TYPES_H_ */

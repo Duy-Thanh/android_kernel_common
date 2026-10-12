@@ -1544,8 +1544,7 @@ int ovl_fill_super(struct super_block *sb, struct fs_context *fc)
 	int err;
 
 	err = -EIO;
-	/* The fscontext fd may have been passed to another user namespace. */
-	if (fc->user_ns != current_user_ns())
+	if (WARN_ON(fc->user_ns != current_user_ns()))
 		goto out_err;
 
 	ovl_set_d_op(sb);
