@@ -16,6 +16,47 @@
       "message": "We nned to change the semantics of wrapfd_get_mappable() which will affect this CL too, so blocking for now.",
       "revId": "c02ca6953ba0cb28f72f43d39e8a6f677ee039f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e33fab10_72e8c36d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-10-12T09:10:24Z",
+      "side": 1,
+      "message": "We will change wrapfd_get_mappable() not to take ownership and not to require that the buffer is not mapped by anyone else. But this functionality can be merged now I think.",
+      "parentUuid": "04ecd01d_8308a089",
+      "revId": "c02ca6953ba0cb28f72f43d39e8a6f677ee039f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9d5002c_8339ce36",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1692,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-10-12T09:10:24Z",
+      "side": 1,
+      "message": "Once we stop taking ownership during this operation this will not be true anymore, so we will have to keep ctx-\u003elock locked while adding to ctx-\u003econtent-\u003elisteners.",
+      "range": {
+        "startLine": 1692,
+        "startChar": 1,
+        "endLine": 1692,
+        "endChar": 63
+      },
+      "revId": "c02ca6953ba0cb28f72f43d39e8a6f677ee039f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
