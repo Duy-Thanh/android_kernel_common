@@ -25,7 +25,6 @@
 static LIST_HEAD(ip_set_type_list);		/* all registered set types */
 static DEFINE_MUTEX(ip_set_type_mutex);		/* protects ip_set_type_list */
 static DEFINE_RWLOCK(ip_set_ref_lock);		/* protects the set refs */
-static struct workqueue_struct *ipset_destroy_wq;
 
 struct ip_set_net {
 	struct ip_set * __rcu *ip_set_list;	/* all individual sets */
@@ -351,7 +350,7 @@ ip_set_init_comment(struct ip_set *set, struct ip_set_comment *comment,
 	size_t len = ext->comment ? strlen(ext->comment) : 0;
 
 	if (unlikely(c)) {
-		atomic64_sub(sizeof(*c) + strlen(c->str) + 1, &set->ext_size);
+		set->ext_size -= sizeof(*c) + strlen(c->str) + 1;
 		rcu_assign_pointer(comment->c, NULL);
 		kfree_rcu(c, rcu);
 	}
@@ -363,7 +362,7 @@ ip_set_init_comment(struct ip_set *set, struct ip_set_comment *comment,
 	if (unlikely(!c))
 		return;
 	strscpy(c->str, ext->comment, len + 1);
-	atomic64_add(sizeof(*c) + strlen(c->str) + 1, &set->ext_size);
+	set->ext_size += sizeof(*c) + strlen(c->str) + 1;
 	rcu_assign_pointer(comment->c, c);
 }
 EXPORT_SYMBOL_GPL(ip_set_init_comment);
@@ -393,7 +392,7 @@ ip_set_comment_free(struct ip_set *set, void *ptr)
 	c = rcu_dereference_protected(comment->c, 1);
 	if (unlikely(!c))
 		return;
-	atomic64_sub(sizeof(*c) + strlen(c->str) + 1, &set->ext_size);
+	set->ext_size -= sizeof(*c) + strlen(c->str) + 1;
 	rcu_assign_pointer(comment->c, NULL);
 	kfree_rcu(c, rcu);
 }
@@ -1179,24 +1178,20 @@ ip_set_setname_policy[IPSET_ATTR_CMD_MAX + 1] = {
 				    .len = IPSET_MAXNAMELEN - 1 },
 };
 
+/* In order to return quickly when destroying a single set, it is split
+ * into two stages:
+ * - Cancel garbage collector
+ * - Destroy the set itself via call_rcu()
+ */
+
 static void
-destroy_and_free_set(struct ip_set *set)
+ip_set_destroy_set_rcu(struct rcu_head *head)
 {
+	struct ip_set *set = container_of(head, struct ip_set, rcu);
+
 	set->variant->destroy(set);
 	module_put(set->type->me);
 	kfree(set);
-}
-
-/* In order to return quickly when destroying a single set,
- * destruction is done asynchronously via work queues.
- */
-static void
-ip_set_destroy_set_work(struct work_struct *work)
-{
-	struct ip_set *set = container_of(to_rcu_work(work),
-					  struct ip_set, rwork);
-
-	destroy_and_free_set(set);
 }
 
 static void
@@ -1288,8 +1283,7 @@ static int ip_set_destroy(struct sk_buff *skb, const struct nfnl_info *info,
 			/* Must wait for flush to be really finished  */
 			rcu_barrier();
 		}
-		INIT_RCU_WORK(&s->rwork, ip_set_destroy_set_work);
-		queue_rcu_work(ipset_destroy_wq, &s->rwork);
+		call_rcu(&s->rcu, ip_set_destroy_set_rcu);
 	}
 	return 0;
 out:
@@ -2427,23 +2421,18 @@ static struct pernet_operations ip_set_net_ops = {
 static int __init
 ip_set_init(void)
 {
-	int ret;
+	int ret = register_pernet_subsys(&ip_set_net_ops);
 
-	ipset_destroy_wq = alloc_ordered_workqueue("ipset_destroy_wq", 0);
-	if (!ipset_destroy_wq)
-		return -ENOMEM;
-
-	ret = register_pernet_subsys(&ip_set_net_ops);
 	if (ret) {
 		pr_err("ip_set: cannot register pernet_subsys.\n");
-		goto out_wq;
+		return ret;
 	}
 
 	ret = nfnetlink_subsys_register(&ip_set_netlink_subsys);
 	if (ret != 0) {
 		pr_err("ip_set: cannot register with nfnetlink.\n");
 		unregister_pernet_subsys(&ip_set_net_ops);
-		goto out_wq;
+		return ret;
 	}
 
 	ret = nf_register_sockopt(&so_set);
@@ -2451,13 +2440,10 @@ ip_set_init(void)
 		pr_err("SO_SET registry failed: %d\n", ret);
 		nfnetlink_subsys_unregister(&ip_set_netlink_subsys);
 		unregister_pernet_subsys(&ip_set_net_ops);
-		goto out_wq;
+		return ret;
 	}
 
 	return 0;
-out_wq:
-	destroy_workqueue(ipset_destroy_wq);
-	return ret;
 }
 
 static void __exit
@@ -2467,7 +2453,9 @@ ip_set_fini(void)
 	nfnetlink_subsys_unregister(&ip_set_netlink_subsys);
 	unregister_pernet_subsys(&ip_set_net_ops);
 
-	destroy_workqueue(ipset_destroy_wq);
+	/* Wait for call_rcu() in destroy */
+	rcu_barrier();
+
 	pr_debug("these are the famous last words\n");
 }
 
