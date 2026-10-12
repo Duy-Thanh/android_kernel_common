@@ -2510,7 +2510,6 @@ rb_allocate_cpu_buffer(struct trace_buffer *buffer, long nr_pages, int cpu)
 	bpage = alloc_cpu_page(cpu);
 	if (!bpage)
 		return NULL;
-	bpage->order = cpu_buffer->buffer->subbuf_order;
 
 	rb_check_bpage(cpu_buffer, bpage);
 
@@ -2529,8 +2528,6 @@ rb_allocate_cpu_buffer(struct trace_buffer *buffer, long nr_pages, int cpu)
 		if (cpu_buffer->ring_meta->head_buffer)
 			rb_meta_buffer_update(cpu_buffer, bpage);
 		bpage->range = 1;
-
-		atomic_inc(&cpu_buffer->resize_disabled);
 	} else if (buffer->remote) {
 		struct ring_buffer_desc *desc = ring_buffer_desc(buffer->remote->desc, cpu);
 
@@ -6855,7 +6852,7 @@ int ring_buffer_swap_cpu(struct trace_buffer *buffer_a,
 {
 	struct ring_buffer_per_cpu *cpu_buffer_a;
 	struct ring_buffer_per_cpu *cpu_buffer_b;
-	int ret = -EBUSY;
+	int ret = -EINVAL;
 
 	if (!cpumask_test_cpu(cpu, buffer_a->cpumask) ||
 	    !cpumask_test_cpu(cpu, buffer_b->cpumask))
@@ -6896,10 +6893,10 @@ int ring_buffer_swap_cpu(struct trace_buffer *buffer_a,
 	atomic_inc(&cpu_buffer_a->record_disabled);
 	atomic_inc(&cpu_buffer_b->record_disabled);
 
-	/* Do not swap if either buffer is in the process of writing */
-	if (cpu_buffer_a->current_context)
+	ret = -EBUSY;
+	if (local_read(&cpu_buffer_a->committing))
 		goto out_dec;
-	if (cpu_buffer_b->current_context)
+	if (local_read(&cpu_buffer_b->committing))
 		goto out_dec;
 
 	/*
@@ -7361,7 +7358,7 @@ int ring_buffer_subbuf_order_set(struct trace_buffer *buffer, int order)
 
 		cpu_buffer = buffer->buffers[cpu];
 
-		if (atomic_read(&cpu_buffer->resize_disabled)) {
+		if (cpu_buffer->mapped) {
 			err = -EBUSY;
 			goto error;
 		}
@@ -8217,7 +8214,7 @@ static __init int test_ringbuffer(void)
 
  out_free:
 	for_each_online_cpu(cpu) {
-		if (IS_ERR_OR_NULL(rb_threads[cpu]))
+		if (!rb_threads[cpu])
 			break;
 		kthread_stop(rb_threads[cpu]);
 	}

@@ -14,7 +14,6 @@
 #include <linux/module.h>
 #include <linux/random.h>
 #include <linux/slab.h>
-#include <linux/align.h>
 #include <asm/zcrypt.h>
 #include <asm/pkey.h>
 #include <crypto/aes.h>
@@ -356,24 +355,21 @@ EXPORT_SYMBOL(ep11_check_aes_key);
 
 /*
  * Allocate and prepare ep11 cprb plus additional payload.
- * It is guaranteed that the memory is aligned to a 4 byte boundary.
- * Furthermore the memory allocation is rounded up to the next
- * multiple of 4 bytes (with taking the payload_len into account).
  */
 static void *alloc_cprbmem(size_t payload_len, u32 xflags)
 {
-	size_t memlen = ALIGN(sizeof(struct ep11_cprb) + payload_len, 4);
+	size_t len = sizeof(struct ep11_cprb) + payload_len;
 	struct ep11_cprb *cprb = NULL;
 
 	if (xflags & ZCRYPT_XFLAG_NOMEMALLOC) {
-		if (memlen <= CPRB_MEMPOOL_ITEM_SIZE)
+		if (len <= CPRB_MEMPOOL_ITEM_SIZE)
 			cprb = mempool_alloc_preallocated(cprb_mempool);
 	} else {
-		cprb = kmalloc(memlen, GFP_KERNEL);
+		cprb = kmalloc(len, GFP_KERNEL);
 	}
 	if (!cprb)
 		return NULL;
-	memset(cprb, 0, memlen);
+	memset(cprb, 0, len);
 
 	cprb->cprb_len = sizeof(struct ep11_cprb);
 	cprb->cprb_ver_id = 0x04;
@@ -389,10 +385,8 @@ static void *alloc_cprbmem(size_t payload_len, u32 xflags)
  */
 static void free_cprbmem(void *mem, size_t payload_len, bool scrub, u32 xflags)
 {
-	size_t memlen = ALIGN(sizeof(struct ep11_cprb) + payload_len, 4);
-
 	if (mem && scrub)
-		memzero_explicit(mem, memlen);
+		memzero_explicit(mem, sizeof(struct ep11_cprb) + payload_len);
 
 	if (xflags & ZCRYPT_XFLAG_NOMEMALLOC)
 		mempool_free(mem, cprb_mempool);
