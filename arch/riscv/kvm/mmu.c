@@ -41,7 +41,6 @@ int kvm_riscv_mmu_ioremap(struct kvm *kvm, gpa_t gpa, phys_addr_t hpa,
 	pgprot_t prot;
 	unsigned long pfn;
 	phys_addr_t addr, end;
-	unsigned long pgd_levels = kvm->arch.pgd_levels;
 	struct kvm_mmu_memory_cache pcache = {
 		.gfp_custom = (in_atomic) ? GFP_ATOMIC | __GFP_ACCOUNT : 0,
 		.gfp_zero = __GFP_ZERO,
@@ -64,7 +63,7 @@ int kvm_riscv_mmu_ioremap(struct kvm *kvm, gpa_t gpa, phys_addr_t hpa,
 		if (!writable)
 			map.pte = pte_wrprotect(map.pte);
 
-		ret = __kvm_mmu_topup_memory_cache(&pcache, pgd_levels, pgd_levels);
+		ret = kvm_mmu_topup_memory_cache(&pcache, kvm->arch.pgd_levels);
 		if (ret)
 			goto out;
 

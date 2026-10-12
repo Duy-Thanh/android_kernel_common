@@ -56,7 +56,8 @@ MODULE_PARM_DESC(early_enable,
 
 static const struct watchdog_info s32g_wdt_info = {
 	.identity = "s32g watchdog",
-	.options = WDIOF_KEEPALIVEPING | WDIOF_SETTIMEOUT | WDIOF_MAGICCLOSE,
+	.options = WDIOF_KEEPALIVEPING | WDIOF_SETTIMEOUT | WDIOF_MAGICCLOSE |
+	WDIOC_GETTIMEOUT | WDIOC_GETTIMELEFT,
 };
 
 static struct s32g_wdt_device *wdd_to_s32g_wdt(struct watchdog_device *wdd)

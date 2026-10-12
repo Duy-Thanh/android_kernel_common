@@ -1009,7 +1009,7 @@ struct ec_sensors_data {
 	/* sorted list of unique register banks */
 	u8 banks[ASUS_EC_MAX_BANK + 1];
 	/* in jiffies */
-	u64 next_update;
+	unsigned long last_updated;
 	struct lock_data lock_data;
 	/* number of board EC sensors */
 	u8 nr_sensors;
@@ -1189,7 +1189,7 @@ static int asus_ec_block_read(const struct device *dev,
 		}
 		for (ireg = 0; ireg < ec->nr_registers; ireg++) {
 			reg_bank = register_bank(ec->registers[ireg]);
-			if (reg_bank != bank) {
+			if (reg_bank < bank) {
 				continue;
 			}
 			ec_read(register_index(ec->registers[ireg]),
@@ -1278,12 +1278,13 @@ static int get_cached_value_or_update(const struct device *dev,
 				      int sensor_index,
 				      struct ec_sensors_data *state, s32 *value)
 {
-	if (time_after64(get_jiffies_64(), state->next_update)) {
+	if (time_after(jiffies, state->last_updated + HZ)) {
 		if (update_ec_sensors(dev, state)) {
 			dev_err(dev, "update_ec_sensors() failure\n");
 			return -EIO;
 		}
-		state->next_update = get_jiffies_64() + HZ;
+
+		state->last_updated = jiffies;
 	}
 
 	*value = state->sensors[sensor_index].cached_value;
@@ -1401,7 +1402,6 @@ static int asus_ec_probe(struct platform_device *pdev)
 	if (!ec_data)
 		return -ENOMEM;
 
-	ec_data->next_update = INITIAL_JIFFIES;
 	dev_set_drvdata(dev, ec_data);
 	ec_data->board_info = pboard_info;
 
@@ -1495,11 +1495,9 @@ static int asus_ec_probe(struct platform_device *pdev)
 		if (!nr_count[type])
 			continue;
 
-		status = asus_ec_hwmon_add_chan_info(asus_ec_hwmon_chan, dev,
-						     nr_count[type], type,
-						     hwmon_attributes[type]);
-		if (status)
-			return status;
+		asus_ec_hwmon_add_chan_info(asus_ec_hwmon_chan, dev,
+					     nr_count[type], type,
+					     hwmon_attributes[type]);
 		*ptr_asus_ec_ci++ = asus_ec_hwmon_chan++;
 	}
 
