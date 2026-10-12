@@ -16,6 +16,29 @@
       "message": "Hello @tkjos@google.com, please let me know the next steps required for submission.",
       "revId": "dbc1400da9db4c63b22dd3de98d4b0daeb954b2e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91ed0680_5675980d",
+        "filename": "security/security.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 3199,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-10-12T21:14:02Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCheckPatch: WARNING:LINE_SPACING: Missing a blank line after declarations",
+      "range": {
+        "startLine": 3198,
+        "startChar": 0,
+        "endLine": 3199,
+        "endChar": 0
+      },
+      "revId": "dbc1400da9db4c63b22dd3de98d4b0daeb954b2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
