@@ -755,14 +755,12 @@ int dat_cond_set_storage_key(struct kvm_s390_mmu_cache *mmc, union asce asce, gf
 	return rc;
 }
 
-int dat_reset_reference_bit(union asce asce, gfn_t gfn, union skey *skey)
+int dat_reset_reference_bit(union asce asce, gfn_t gfn)
 {
 	union pgste pgste, old;
 	union crste *crstep;
 	union pte *ptep;
 	int rc;
-
-	skey->skey = 0;
 
 	rc = dat_entry_walk(NULL, gfn, asce, DAT_WALK_ANY, TABLE_TYPE_PAGE_TABLE, &crstep, &ptep);
 	if (rc)
@@ -773,23 +771,21 @@ int dat_reset_reference_bit(union asce asce, gfn_t gfn, union skey *skey)
 
 		if (!crste.h.fc || !crste.s.fc1.pr)
 			return 0;
-		skey->skey = page_reset_referenced(large_crste_to_phys(*crstep, gfn)) << 1;
-		return 0;
+		return page_reset_referenced(large_crste_to_phys(*crstep, gfn));
 	}
 	old = pgste_get_lock(ptep);
 	pgste = old;
 
 	if (!ptep->h.i) {
-		skey->skey = page_reset_referenced(pte_origin(*ptep)) << 1;
-		pgste.hr = skey->r;
+		rc = page_reset_referenced(pte_origin(*ptep));
+		pgste.hr = rc >> 1;
 	}
-	skey->r |= pgste.gr;
-	skey->c |= pgste.gc;
+	rc |= (pgste.gr << 1) | pgste.gc;
 	pgste.gr = 0;
 
 	dat_update_ptep_sd(old, pgste, ptep);
 	pgste_set_unlock(ptep, pgste);
-	return 0;
+	return rc;
 }
 
 static long dat_reset_skeys_pte(union pte *ptep, gfn_t gfn, gfn_t next, struct dat_walk *walk)
@@ -850,7 +846,6 @@ static long _dat_slot_pte(union pte *ptep, gfn_t gfn, gfn_t next, struct dat_wal
 	struct slot_priv *p = walk->priv;
 	union crste dummy = { .val = p->token };
 	union pte new_pte, pte = READ_ONCE(*ptep);
-	union pgste pgste;
 
 	new_pte = _PTE_TOK(dummy.tok.type, dummy.tok.par);
 
@@ -858,11 +853,7 @@ static long _dat_slot_pte(union pte *ptep, gfn_t gfn, gfn_t next, struct dat_wal
 	if (pte.val == new_pte.val)
 		return 0;
 
-	pgste = pgste_get_lock(ptep);
-	pgste = __dat_ptep_xchg(ptep, pgste, new_pte, gfn, walk->asce, false);
-	pgste.cmma_d = 0;
-	pgste_set_unlock(ptep, pgste);
-
+	dat_ptep_xchg(ptep, new_pte, gfn, walk->asce, false);
 	return 0;
 }
 

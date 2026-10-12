@@ -572,10 +572,9 @@ queue:
 
 	/* Disable queue destruction when we detect deadlocks. */
 	if (ret == -EDEADLK) {
-		if (!try_cmpxchg_tail(lock, tail, 0)) {
+		if (!next)
 			next = smp_cond_load_relaxed(&node->next, (VAL));
-			arch_mcs_spin_unlock_contended(&next->locked);
-		}
+		arch_mcs_spin_unlock_contended(&next->locked);
 		goto err_release_node;
 	}
 

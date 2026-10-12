@@ -169,6 +169,7 @@ static int bd96801_set_wdt_mode(struct wdtbd96801 *w, unsigned int hw_margin,
 	int fastng, slowng, type, ret, reg, mask;
 	struct device *dev = w->dev;
 
+
 	if (hw_margin_min * 1000 > FASTNG_MAX_US) {
 		dev_err(dev, "Unsupported fast timeout %u uS [max %u]\n",
 			hw_margin_min * 1000, FASTNG_MAX_US);
@@ -257,10 +258,10 @@ static int bd96801_set_heartbeat_from_hw(struct wdtbd96801 *w,
 	fast = FASTNG_MIN << sel;
 
 	sel = (val & BD96801_WD_RATIO_MASK) + 1;
-	w->wdt.max_hw_heartbeat_ms = (fast << sel) / 10;
+	w->wdt.max_hw_heartbeat_ms = (fast << sel) / USEC_PER_MSEC;
 
 	if ((conf_reg & BD96801_WD_TYPE_MASK) == BD96801_WD_TYPE_WIN)
-		w->wdt.min_hw_heartbeat_ms = fast / 10;
+		w->wdt.min_hw_heartbeat_ms = fast / USEC_PER_MSEC;
 
 	return 0;
 }
