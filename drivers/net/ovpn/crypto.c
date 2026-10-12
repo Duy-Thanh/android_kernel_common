@@ -18,12 +18,20 @@
 #include "crypto_aead.h"
 #include "crypto.h"
 
+static void ovpn_ks_destroy_rcu(struct rcu_head *head)
+{
+	struct ovpn_crypto_key_slot *ks;
+
+	ks = container_of(head, struct ovpn_crypto_key_slot, rcu);
+	ovpn_aead_crypto_key_slot_destroy(ks);
+}
+
 void ovpn_crypto_key_slot_release(struct kref *kref)
 {
 	struct ovpn_crypto_key_slot *ks;
 
 	ks = container_of(kref, struct ovpn_crypto_key_slot, refcount);
-	queue_rcu_work(ovpn_wq, &ks->free_work);
+	call_rcu(&ks->rcu, ovpn_ks_destroy_rcu);
 }
 
 /* can only be invoked when all peer references have been dropped (i.e. RCU
@@ -50,19 +58,15 @@ void ovpn_crypto_state_release(struct ovpn_crypto_state *cs)
 bool ovpn_crypto_kill_key(struct ovpn_crypto_state *cs, u8 key_id)
 {
 	struct ovpn_crypto_key_slot *ks = NULL;
-	struct ovpn_crypto_key_slot *tmp;
-	int slot = 0;
 
 	spin_lock_bh(&cs->lock);
-	tmp = rcu_access_pointer(cs->slots[slot]);
-	if (!tmp || tmp->key_id != key_id) {
-		slot = 1;
-		tmp = rcu_access_pointer(cs->slots[slot]);
-	}
-
-	if (tmp && tmp->key_id == key_id)
-		ks = rcu_replace_pointer(cs->slots[slot], NULL,
+	if (rcu_access_pointer(cs->slots[0])->key_id == key_id) {
+		ks = rcu_replace_pointer(cs->slots[0], NULL,
 					 lockdep_is_held(&cs->lock));
+	} else if (rcu_access_pointer(cs->slots[1])->key_id == key_id) {
+		ks = rcu_replace_pointer(cs->slots[1], NULL,
+					 lockdep_is_held(&cs->lock));
+	}
 	spin_unlock_bh(&cs->lock);
 
 	if (ks)
