@@ -4,9 +4,8 @@
 Crypto library
 ==============
 
-The Linux kernel's crypto library (``lib/crypto/``) provides kernel-internal
-users of cryptographic algorithms with faster and easier access to those
-algorithms than the traditional kernel crypto API.
+``lib/crypto/`` provides faster and easier access to cryptographic algorithms
+than the traditional crypto API.
 
 Each cryptographic algorithm is supported via a set of dedicated functions.
 "Crypto agility", where needed, is left to calling code.

@@ -3892,16 +3892,13 @@ static void si_notify_hw_of_powersource(void *handle)
 {
 	struct amdgpu_device *adev = (struct amdgpu_device *)handle;
 
-	/*
-	 * Check if the platform already manages the AC/DC switch via dedicated GPIO.
-	 * Otherwise SMU automatically notices DC, but needs to be notified of AC.
-	 */
-	if (adev->pm.ac_power &&
-	    (adev->pm.dpm.platform_caps & ATOM_PP_PLATFORM_CAP_HARDWAREDC))
-		amdgpu_si_send_msg_to_smc(adev, PPSMC_MSG_RunningOnAC);
+	/* Check if the platform already manages the AC/DC switch via dedicated GPIO. */
+	if (adev->pm.dpm.platform_caps & ATOM_PP_PLATFORM_CAP_HARDWAREDC)
+		return;
 
-	/* Recompute clocks with updated max_limits. */
-	amdgpu_legacy_dpm_compute_clocks(adev);
+	/* The SMU automatically notices DC, but needs to be notified when switching to AC. */
+	if (adev->pm.ac_power)
+		amdgpu_si_send_msg_to_smc(adev, PPSMC_MSG_RunningOnAC);
 }
 
 static PPSMC_Result si_send_msg_to_smc_with_parameter(struct amdgpu_device *adev,
@@ -7692,7 +7689,7 @@ static int si_dpm_process_interrupt(struct amdgpu_device *adev,
 		break;
 	}
 
-	if (queue_thermal && amdgpu_dpm)
+	if (queue_thermal)
 		schedule_work(&adev->pm.dpm.thermal.work);
 
 	return 0;

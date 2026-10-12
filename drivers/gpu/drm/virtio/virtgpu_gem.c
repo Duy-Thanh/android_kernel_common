@@ -139,15 +139,13 @@ void virtio_gpu_gem_object_close(struct drm_gem_object *obj,
 	if (!vgdev->has_virgl_3d)
 		return;
 
-	if (vfpriv->context_created) {
-		objs = virtio_gpu_array_alloc(1);
-		if (!objs)
-			return;
-		virtio_gpu_array_add_obj(objs, obj);
+	objs = virtio_gpu_array_alloc(1);
+	if (!objs)
+		return;
+	virtio_gpu_array_add_obj(objs, obj);
 
-		virtio_gpu_cmd_context_detach_resource(vgdev, vfpriv->ctx_id,
-						       objs);
-	}
+	virtio_gpu_cmd_context_detach_resource(vgdev, vfpriv->ctx_id,
+					       objs);
 	virtio_gpu_notify(vgdev);
 }
 

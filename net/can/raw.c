@@ -562,8 +562,8 @@ static int raw_getname(struct socket *sock, struct sockaddr *uaddr,
 	return RAW_MIN_NAMELEN;
 }
 
-static int raw_setsockopt_locked(struct socket *sock, int optname,
-				 sockptr_t optval, unsigned int optlen)
+static int raw_setsockopt(struct socket *sock, int level, int optname,
+			  sockptr_t optval, unsigned int optlen)
 {
 	struct sock *sk = sock->sk;
 	struct raw_sock *ro = raw_sk(sk);
@@ -574,6 +574,9 @@ static int raw_setsockopt_locked(struct socket *sock, int optname,
 	int count = 0;
 	int flag;
 	int err = 0;
+
+	if (level != SOL_CAN_RAW)
+		return -EINVAL;
 
 	switch (optname) {
 	case CAN_RAW_FILTER:
@@ -595,11 +598,17 @@ static int raw_setsockopt_locked(struct socket *sock, int optname,
 				return -EFAULT;
 		}
 
+		rtnl_lock();
+		lock_sock(sk);
+
 		dev = ro->dev;
-		if (ro->bound && dev && dev->reg_state != NETREG_REGISTERED) {
-			if (count > 1)
-				kfree(filter);
-			return -ENODEV;
+		if (ro->bound && dev) {
+			if (dev->reg_state != NETREG_REGISTERED) {
+				if (count > 1)
+					kfree(filter);
+				err = -ENODEV;
+				goto out_fil;
+			}
 		}
 
 		if (ro->bound) {
@@ -613,7 +622,7 @@ static int raw_setsockopt_locked(struct socket *sock, int optname,
 			if (err) {
 				if (count > 1)
 					kfree(filter);
-				return err;
+				goto out_fil;
 			}
 
 			/* remove old filter registrations */
@@ -633,6 +642,11 @@ static int raw_setsockopt_locked(struct socket *sock, int optname,
 		}
 		ro->filter = filter;
 		ro->count  = count;
+
+ out_fil:
+		release_sock(sk);
+		rtnl_unlock();
+
 		break;
 
 	case CAN_RAW_ERR_FILTER:
@@ -644,9 +658,16 @@ static int raw_setsockopt_locked(struct socket *sock, int optname,
 
 		err_mask &= CAN_ERR_MASK;
 
+		rtnl_lock();
+		lock_sock(sk);
+
 		dev = ro->dev;
-		if (ro->bound && dev && dev->reg_state != NETREG_REGISTERED)
-			return -ENODEV;
+		if (ro->bound && dev) {
+			if (dev->reg_state != NETREG_REGISTERED) {
+				err = -ENODEV;
+				goto out_err;
+			}
+		}
 
 		/* remove current error mask */
 		if (ro->bound) {
@@ -655,7 +676,7 @@ static int raw_setsockopt_locked(struct socket *sock, int optname,
 						   err_mask);
 
 			if (err)
-				return err;
+				goto out_err;
 
 			/* remove old err_mask registration */
 			raw_disable_errfilter(sock_net(sk), dev, sk,
@@ -664,6 +685,11 @@ static int raw_setsockopt_locked(struct socket *sock, int optname,
 
 		/* link new err_mask to the socket */
 		ro->err_mask = err_mask;
+
+ out_err:
+		release_sock(sk);
+		rtnl_unlock();
+
 		break;
 
 	case CAN_RAW_LOOPBACK:
@@ -740,26 +766,6 @@ static int raw_setsockopt_locked(struct socket *sock, int optname,
 	default:
 		return -ENOPROTOOPT;
 	}
-	return err;
-}
-
-static int raw_setsockopt(struct socket *sock, int level, int optname,
-			  sockptr_t optval, unsigned int optlen)
-{
-	struct sock *sk = sock->sk;
-	int err;
-
-	if (level != SOL_CAN_RAW)
-		return -EINVAL;
-
-	rtnl_lock();
-	lock_sock(sk);
-
-	err = raw_setsockopt_locked(sock, optname, optval, optlen);
-
-	release_sock(sk);
-	rtnl_unlock();
-
 	return err;
 }
 
