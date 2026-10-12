@@ -11,7 +11,7 @@
 #include <linux/err.h>
 #include <linux/atomic.h>
 #include <linux/uaccess.h>
-#include <linux/device-id/ap.h>
+#include <linux/mod_devicetable.h>
 
 #include "ap_bus.h"
 #include "zcrypt_api.h"

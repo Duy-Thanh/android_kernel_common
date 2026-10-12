@@ -44,6 +44,7 @@
 #include <linux/delay.h>
 #include <linux/dmaengine.h>
 #include <linux/ktime.h>
+#include <linux/mod_devicetable.h>
 
 #include <linux/soc/cirrus/ep93xx.h>
 

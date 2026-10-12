@@ -14,6 +14,7 @@
 #include <linux/crc32.h>
 #include <linux/efi.h>
 #include <linux/firmware.h>
+#include <linux/mod_devicetable.h>
 #include <linux/module.h>
 #include <linux/mutex.h>
 #include <linux/pm_runtime.h>

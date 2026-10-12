@@ -28,11 +28,9 @@ static int afs_d_revalidate(struct inode *dir, const struct qstr *name,
 static int afs_d_delete(const struct dentry *dentry);
 static void afs_d_iput(struct dentry *dentry, struct inode *inode);
 static bool afs_lookup_one_filldir(struct dir_context *ctx, const char *name, int nlen,
-				   u64 ino, u32 uniquifier);
-#define AFS_LOOKUP_ONE ((filldir_t)0x123UL)
+				  loff_t fpos, u64 ino, unsigned dtype);
 static bool afs_lookup_filldir(struct dir_context *ctx, const char *name, int nlen,
-			       u64 ino, u32 uniquifier);
-#define AFS_LOOKUP ((filldir_t)0x137UL)
+			      loff_t fpos, u64 ino, unsigned dtype);
 static int afs_create(struct mnt_idmap *idmap, struct inode *dir,
 		      struct dentry *dentry, umode_t mode, bool excl);
 static struct dentry *afs_mkdir(struct mnt_idmap *idmap, struct inode *dir,
@@ -423,18 +421,11 @@ static int afs_dir_iterate_block(struct afs_vnode *dvnode,
 		}
 
 		/* found the next entry */
-		if (ctx->actor == AFS_LOOKUP) {
-			if (!afs_lookup_filldir(ctx, dire->u.name, nlen,
-						ntohl(dire->u.vnode),
-						ntohl(dire->u.unique)))
-				return 0;
-		} else if (ctx->actor == AFS_LOOKUP_ONE) {
-			if (!afs_lookup_one_filldir(ctx, dire->u.name, nlen,
-						    ntohl(dire->u.vnode),
-						    ntohl(dire->u.unique)))
-				return 0;
-		} else if (!dir_emit(ctx, dire->u.name, nlen,
-				     ntohl(dire->u.vnode), DT_UNKNOWN)) {
+		if (!dir_emit(ctx, dire->u.name, nlen,
+			      ntohl(dire->u.vnode),
+			      (ctx->actor == afs_lookup_filldir ||
+			       ctx->actor == afs_lookup_one_filldir)?
+			      ntohl(dire->u.unique) : DT_UNKNOWN)) {
 			_leave(" = 0 [full]");
 			return 0;
 		}
@@ -554,7 +545,6 @@ static int afs_readdir(struct file *file, struct dir_context *ctx)
 {
 	afs_dataversion_t dir_version;
 
-	ctx->dt_flags_mask = UINT_MAX;
 	return afs_dir_iterate(file_inode(file), ctx, file, &dir_version);
 }
 
@@ -564,14 +554,14 @@ static int afs_readdir(struct file *file, struct dir_context *ctx)
  *   uniquifier through dtype
  */
 static bool afs_lookup_one_filldir(struct dir_context *ctx, const char *name,
-				  int nlen, u64 ino, u32 uniquifier)
+				  int nlen, loff_t fpos, u64 ino, unsigned dtype)
 {
 	struct afs_lookup_one_cookie *cookie =
 		container_of(ctx, struct afs_lookup_one_cookie, ctx);
 
 	_enter("{%s,%u},%s,%u,,%llu,%u",
 	       cookie->name.name, cookie->name.len, name, nlen,
-	       (unsigned long long) ino, uniquifier);
+	       (unsigned long long) ino, dtype);
 
 	/* insanity checks first */
 	BUILD_BUG_ON(sizeof(union afs_xdr_dir_block) != 2048);
@@ -584,7 +574,7 @@ static bool afs_lookup_one_filldir(struct dir_context *ctx, const char *name,
 	}
 
 	cookie->fid.vnode = ino;
-	cookie->fid.unique = uniquifier;
+	cookie->fid.unique = dtype;
 	cookie->found = 1;
 
 	_leave(" = false [found]");
@@ -601,7 +591,7 @@ static int afs_do_lookup_one(struct inode *dir, const struct qstr *name,
 {
 	struct afs_super_info *as = dir->i_sb->s_fs_info;
 	struct afs_lookup_one_cookie cookie = {
-		.ctx.actor = AFS_LOOKUP_ONE,
+		.ctx.actor = afs_lookup_one_filldir,
 		.name = *name,
 		.fid.vid = as->volume->vid
 	};
@@ -632,14 +622,14 @@ static int afs_do_lookup_one(struct inode *dir, const struct qstr *name,
  *   uniquifier through dtype
  */
 static bool afs_lookup_filldir(struct dir_context *ctx, const char *name,
-			      int nlen, u64 ino, u32 uniquifier)
+			      int nlen, loff_t fpos, u64 ino, unsigned dtype)
 {
 	struct afs_lookup_cookie *cookie =
 		container_of(ctx, struct afs_lookup_cookie, ctx);
 
 	_enter("{%s,%u},%s,%u,,%llu,%u",
 	       cookie->name.name, cookie->name.len, name, nlen,
-	       (unsigned long long) ino, uniquifier);
+	       (unsigned long long) ino, dtype);
 
 	/* insanity checks first */
 	BUILD_BUG_ON(sizeof(union afs_xdr_dir_block) != 2048);
@@ -647,7 +637,7 @@ static bool afs_lookup_filldir(struct dir_context *ctx, const char *name,
 
 	if (cookie->nr_fids < 50) {
 		cookie->fids[cookie->nr_fids].vnode	= ino;
-		cookie->fids[cookie->nr_fids].unique	= uniquifier;
+		cookie->fids[cookie->nr_fids].unique	= dtype;
 		cookie->nr_fids++;
 	}
 
@@ -788,7 +778,7 @@ static struct inode *afs_do_lookup(struct inode *dir, struct dentry *dentry)
 
 	for (i = 0; i < ARRAY_SIZE(cookie->fids); i++)
 		cookie->fids[i].vid = dvnode->fid.vid;
-	cookie->ctx.actor = AFS_LOOKUP;
+	cookie->ctx.actor = afs_lookup_filldir;
 	cookie->name = dentry->d_name;
 	cookie->nr_fids = 2; /* slot 1 is saved for the fid we actually want
 			      * and slot 0 for the directory */

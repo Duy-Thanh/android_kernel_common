@@ -2,6 +2,7 @@
 /*
  * Copyright (c) 2025 Robert Bosch GmbH.
  */
+#include <linux/mod_devicetable.h>
 #include <linux/module.h>
 #include <linux/regmap.h>
 #include <linux/spi/spi.h>

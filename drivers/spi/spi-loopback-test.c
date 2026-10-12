@@ -14,6 +14,7 @@
 #include <linux/ktime.h>
 #include <linux/list.h>
 #include <linux/list_sort.h>
+#include <linux/mod_devicetable.h>
 #include <linux/module.h>
 #include <linux/printk.h>
 #include <linux/vmalloc.h>

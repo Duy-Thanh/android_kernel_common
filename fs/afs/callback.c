@@ -113,12 +113,16 @@ static struct afs_volume *afs_lookup_volume_rcu(struct afs_cell *cell,
 {
 	struct afs_volume *volume = NULL;
 	struct rb_node *p;
+	int seq = 1;
 
-	scoped_seqlock_read(&cell->volume_lock, ss_lock) {
+	for (;;) {
 		/* Unfortunately, rbtree walking doesn't give reliable results
 		 * under just the RCU read lock, so we have to check for
 		 * changes.
 		 */
+		seq++; /* 2 on the 1st/lockless path, otherwise odd */
+		read_seqbegin_or_lock(&cell->volume_lock, &seq);
+
 		p = rcu_dereference_raw(cell->volumes.rb_node);
 		while (p) {
 			volume = rb_entry(p, struct afs_volume, cell_node);
@@ -134,9 +138,12 @@ static struct afs_volume *afs_lookup_volume_rcu(struct afs_cell *cell,
 
 		if (volume && afs_try_get_volume(volume, afs_volume_trace_get_callback))
 			break;
-		volume = NULL;
+		if (!need_seqretry(&cell->volume_lock, seq))
+			break;
+		seq |= 1; /* Want a lock next time */
 	}
 
+	done_seqretry(&cell->volume_lock, seq);
 	return volume;
 }
 
@@ -214,11 +221,7 @@ static void afs_break_some_callbacks(struct afs_server *server,
 
 	rcu_read_lock();
 	volume = afs_lookup_volume_rcu(server->cell, vid);
-	if (!volume) {
-		/* Ignore breaks on unknown volumes. */
-		rcu_read_unlock();
-		*_count = 0;
-	} else if (cbb->fid.vnode == 0 && cbb->fid.unique == 0) {
+	if (cbb->fid.vnode == 0 && cbb->fid.unique == 0) {
 		afs_break_volume_callback(server, volume);
 		*_count -= 1;
 		if (*_count)

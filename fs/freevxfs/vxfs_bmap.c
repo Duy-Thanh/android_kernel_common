@@ -227,8 +227,7 @@ vxfs_bmap_typed(struct inode *ip, long iblock)
 			return 0;
 		}
 		default:
-			WARN_ON_ONCE(1);
-			return 0;
+			BUG();
 		}
 	}
 

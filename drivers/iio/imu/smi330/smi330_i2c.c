@@ -3,6 +3,7 @@
  * Copyright (c) 2025 Robert Bosch GmbH.
  */
 #include <linux/i2c.h>
+#include <linux/mod_devicetable.h>
 #include <linux/module.h>
 #include <linux/regmap.h>
 

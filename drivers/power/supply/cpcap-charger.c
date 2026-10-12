@@ -18,6 +18,7 @@
 #include <linux/err.h>
 #include <linux/interrupt.h>
 #include <linux/notifier.h>
+#include <linux/mod_devicetable.h>
 #include <linux/platform_device.h>
 #include <linux/power_supply.h>
 #include <linux/property.h>

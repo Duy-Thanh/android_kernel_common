@@ -23,6 +23,7 @@
 #include <linux/init.h>
 #include <linux/iopoll.h>
 #include <linux/math64.h>
+#include <linux/mod_devicetable.h>
 #include <linux/module.h>
 #include <linux/of.h>
 #include <linux/platform_device.h>

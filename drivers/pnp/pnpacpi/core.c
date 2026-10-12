@@ -10,6 +10,7 @@
 #include <linux/acpi.h>
 #include <linux/pnp.h>
 #include <linux/slab.h>
+#include <linux/mod_devicetable.h>
 
 #include "../base.h"
 #include "pnpacpi.h"

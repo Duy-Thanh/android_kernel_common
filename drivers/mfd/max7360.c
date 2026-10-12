@@ -19,6 +19,7 @@
 #include <linux/interrupt.h>
 #include <linux/mfd/core.h>
 #include <linux/mfd/max7360.h>
+#include <linux/mod_devicetable.h>
 #include <linux/module.h>
 #include <linux/regmap.h>
 #include <linux/types.h>

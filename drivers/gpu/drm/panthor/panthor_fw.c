@@ -1279,7 +1279,9 @@ void panthor_fw_unplug(struct panthor_device *ptdev)
 
 	if (!IS_ENABLED(CONFIG_PM) || pm_runtime_active(ptdev->base.dev)) {
 		/* Make sure the IRQ handler cannot be called after that point. */
-		panthor_job_irq_suspend(&ptdev->fw->irq);
+		if (ptdev->fw->irq.irq)
+			panthor_job_irq_suspend(&ptdev->fw->irq);
+
 		panthor_fw_stop(ptdev);
 	}
 
@@ -1474,7 +1476,7 @@ int panthor_fw_init(struct panthor_device *ptdev)
 	if (irq <= 0)
 		return -ENODEV;
 
-	ret = panthor_request_job_irq(ptdev, &fw->irq, irq,
+	ret = panthor_request_job_irq(ptdev, &fw->irq, irq, 0,
 				      ptdev->iomem + JOB_INT_BASE);
 	if (ret) {
 		drm_err(&ptdev->base, "failed to request job irq");

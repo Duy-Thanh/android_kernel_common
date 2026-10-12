@@ -10,6 +10,7 @@
 #include <linux/bitmap.h>
 #include <linux/err.h>
 #include <linux/gpio/consumer.h>
+#include <linux/mod_devicetable.h>
 #include <linux/module.h>
 #include <linux/mux/driver.h>
 #include <linux/platform_device.h>

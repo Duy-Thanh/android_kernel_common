@@ -764,7 +764,8 @@ xfs_bio_submit_read(
 
 	/* defer read completions to the ioend workqueue */
 	iomap_init_ioend(iter->inode, bio, ctx->read_ctx_file_offset, 0);
-	iomap_bio_submit_read_endio(iter, ctx, xfs_end_bio);
+	bio->bi_end_io = xfs_end_bio;
+	submit_bio(bio);
 }
 
 static const struct iomap_read_ops xfs_iomap_read_ops = {

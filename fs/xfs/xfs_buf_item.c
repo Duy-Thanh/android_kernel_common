@@ -549,7 +549,8 @@ xfs_buf_item_unpin(
 		 * wait for the lock and then run the IO failure completion.
 		 */
 		xfs_buf_lock(bp);
-		xfs_buf_fail(bp);
+		bp->b_flags |= XBF_ASYNC;
+		xfs_buf_ioend_fail(bp);
 		return;
 	}
 

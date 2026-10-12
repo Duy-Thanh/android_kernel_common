@@ -9,6 +9,7 @@
 
 #include <linux/types.h>
 #include <linux/dmi.h>
+#include <linux/mod_devicetable.h>
 #include <linux/hid.h>
 
 #include "i2c-hid.h"

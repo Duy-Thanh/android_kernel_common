@@ -9,7 +9,7 @@
 #define __LINUX_DFL_H
 
 #include <linux/device.h>
-#include <linux/device-id/dfl.h>
+#include <linux/mod_devicetable.h>
 
 /**
  * enum dfl_id_type - define the DFL FIU types

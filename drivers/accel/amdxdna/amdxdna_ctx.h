@@ -132,7 +132,6 @@ enum amdxdna_job_opcode {
 struct amdxdna_drv_cmd {
 	enum amdxdna_job_opcode	opcode;
 	u32			result;
-	struct kref		refcnt;
 };
 
 struct app_health_report;

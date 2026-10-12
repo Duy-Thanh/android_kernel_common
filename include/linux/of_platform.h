@@ -6,9 +6,7 @@
  *			 <benh@kernel.crashing.org>
  */
 
-#include <linux/types.h>
-#include <linux/err.h>
-#include <linux/device-id/of.h>
+#include <linux/mod_devicetable.h>
 
 struct device;
 struct device_node;

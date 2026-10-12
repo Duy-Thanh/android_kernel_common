@@ -189,12 +189,13 @@ int arch_cpuhp_kick_ap_alive(unsigned int cpu, struct task_struct *tidle)
 #else
 int __cpu_up(unsigned int cpu, struct task_struct *tidle)
 {
-	int ret;
+	int ret = 0;
 	tidle->thread_info.cpu = cpu;
 
 	ret = start_secondary_cpu(cpu, tidle);
 	if (!ret) {
-		wait_for_completion_timeout(&cpu_running, secs_to_jiffies(1));
+		wait_for_completion_timeout(&cpu_running,
+					    msecs_to_jiffies(1000));
 
 		if (!cpu_online(cpu)) {
 			pr_crit("CPU%u: failed to come online\n", cpu);

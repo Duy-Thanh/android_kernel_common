@@ -453,8 +453,7 @@ void panthor_pwr_unplug(struct panthor_device *ptdev)
 		return;
 
 	/* Make sure the IRQ handler is not running after that point. */
-	if (!IS_ENABLED(CONFIG_PM) || pm_runtime_active(ptdev->base.dev))
-		panthor_pwr_irq_suspend(&ptdev->pwr->irq);
+	panthor_pwr_irq_suspend(&ptdev->pwr->irq);
 
 	/* Wake-up all waiters. */
 	spin_lock_irqsave(&ptdev->pwr->reqs_lock, flags);
@@ -484,13 +483,12 @@ int panthor_pwr_init(struct panthor_device *ptdev)
 	if (irq < 0)
 		return irq;
 
-	err = panthor_request_pwr_irq(ptdev, &pwr->irq, irq,
-				      pwr->iomem + PWR_INT_BASE);
+	err = panthor_request_pwr_irq(
+		ptdev, &pwr->irq, irq, PWR_INTERRUPTS_MASK,
+		pwr->iomem + PWR_INT_BASE);
 	if (err)
 		return err;
 
-	panthor_pwr_irq_enable_events(&pwr->irq, PWR_INTERRUPTS_MASK);
-	panthor_pwr_irq_resume(&pwr->irq);
 	return 0;
 }
 

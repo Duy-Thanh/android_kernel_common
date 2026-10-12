@@ -11,6 +11,7 @@
 #include <linux/errno.h>
 #include <linux/mfd/syscon.h>
 #include <linux/module.h>
+#include <linux/mod_devicetable.h>
 #include <linux/notifier.h>
 #include <linux/reboot.h>
 #include <linux/slab.h>

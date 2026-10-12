@@ -1057,8 +1057,7 @@ group_unbind_locked(struct panthor_group *group)
 
 	/* Tiler OOM events will be re-issued next time the group is scheduled. */
 	atomic_set(&group->tiler_oom, 0);
-	if (cancel_work(&group->tiler_oom_work))
-		group_put(group);
+	cancel_work(&group->tiler_oom_work);
 
 	for (u32 i = 0; i < group->queue_count; i++)
 		group->queues[i]->doorbell_id = -1;
@@ -1152,14 +1151,15 @@ queue_suspend_timeout_locked(struct panthor_queue *queue)
 static void
 queue_suspend_timeout(struct panthor_queue *queue)
 {
-	guard(spinlock_irqsave)(&queue->fence_ctx.lock);
+	spin_lock(&queue->fence_ctx.lock);
 	queue_suspend_timeout_locked(queue);
+	spin_unlock(&queue->fence_ctx.lock);
 }
 
 static void
 queue_resume_timeout(struct panthor_queue *queue)
 {
-	guard(spinlock_irqsave)(&queue->fence_ctx.lock);
+	spin_lock(&queue->fence_ctx.lock);
 
 	if (queue_timeout_is_suspended(queue)) {
 		mod_delayed_work(queue->scheduler.timeout_wq,
@@ -1168,6 +1168,8 @@ queue_resume_timeout(struct panthor_queue *queue)
 
 		queue->timeout.remaining = MAX_SCHEDULE_TIMEOUT;
 	}
+
+	spin_unlock(&queue->fence_ctx.lock);
 }
 
 /**
@@ -1540,7 +1542,7 @@ cs_slot_process_fault_event_locked(struct panthor_device *ptdev,
 		u64 cs_extract = queue->iface.output->extract;
 		struct panthor_job *job;
 
-		guard(spinlock_irqsave)(&queue->fence_ctx.lock);
+		spin_lock(&queue->fence_ctx.lock);
 		list_for_each_entry(job, &queue->fence_ctx.in_flight_jobs, node) {
 			if (cs_extract >= job->ringbuf.end)
 				continue;
@@ -1550,6 +1552,7 @@ cs_slot_process_fault_event_locked(struct panthor_device *ptdev,
 
 			dma_fence_set_error(job->done_fence, -EINVAL);
 		}
+		spin_unlock(&queue->fence_ctx.lock);
 	}
 
 	if (group) {
@@ -1601,10 +1604,7 @@ static int group_process_tiler_oom(struct panthor_group *group, u32 cs_id)
 	if (unlikely(csg_id < 0))
 		return 0;
 
-	if (IS_ERR(heaps)) {
-		ret = -EINVAL;
-		heaps = NULL;
-	} else if (frag_end > vt_end || vt_end >= vt_start) {
+	if (IS_ERR(heaps) || frag_end > vt_end || vt_end >= vt_start) {
 		ret = -EINVAL;
 	} else {
 		/* We do the allocation without holding the scheduler lock to avoid
@@ -2183,13 +2183,13 @@ group_term_post_processing(struct panthor_group *group)
 		if (!queue)
 			continue;
 
-		scoped_guard(spinlock_irqsave, &queue->fence_ctx.lock) {
-			list_for_each_entry_safe(job, tmp, &queue->fence_ctx.in_flight_jobs, node) {
-				list_move_tail(&job->node, &faulty_jobs);
-				dma_fence_set_error(job->done_fence, err);
-				dma_fence_signal_locked(job->done_fence);
-			}
+		spin_lock(&queue->fence_ctx.lock);
+		list_for_each_entry_safe(job, tmp, &queue->fence_ctx.in_flight_jobs, node) {
+			list_move_tail(&job->node, &faulty_jobs);
+			dma_fence_set_error(job->done_fence, err);
+			dma_fence_signal_locked(job->done_fence);
 		}
+		spin_unlock(&queue->fence_ctx.lock);
 
 		/* Manually update the syncobj seqno to unblock waiters. */
 		syncobj = group->syncobjs->kmap + (i * sizeof(*syncobj));
@@ -2368,13 +2368,7 @@ tick_ctx_apply(struct panthor_scheduler *sched, struct panthor_sched_tick_ctx *c
 
 			csg_iface = panthor_fw_get_csg_iface(ptdev, csg_id);
 			csg_slot = &sched->csg_slots[csg_id];
-			ret = group_bind_locked(group, csg_id);
-			if (ret) {
-				panthor_device_schedule_reset(ptdev);
-				ctx->csg_upd_failed_mask |= BIT(csg_id);
-				return;
-			}
-
+			group_bind_locked(group, csg_id);
 			csg_slot_prog_locked(ptdev, csg_id, new_csg_prio--);
 			csgs_upd_ctx_queue_reqs(ptdev, &upd_ctx, csg_id,
 						group->state == PANTHOR_CS_GROUP_SUSPENDED ?
@@ -2674,14 +2668,7 @@ static void sched_resume_tick(struct panthor_device *ptdev)
 	else
 		delay_jiffies = 0;
 
-	/* We schedule immediate ticks when we need to process events on CSGs,
-	 * but those don't change the resched_target because we want the other
-	 * groups to stay scheduled for the remaining of the GPU timeslot they
-	 * were given. Make sure those immediate ticks don't get overruled by
-	 * a sched_queue_delayed_work() that would delay the tick execution.
-	 */
-	if (!delayed_work_pending(&sched->tick_work))
-		sched_queue_delayed_work(sched, tick, delay_jiffies);
+	sched_queue_delayed_work(sched, tick, delay_jiffies);
 }
 
 static void group_schedule_locked(struct panthor_group *group, u32 queue_mask)
@@ -3062,39 +3049,39 @@ static bool queue_check_job_completion(struct panthor_queue *queue)
 	LIST_HEAD(done_jobs);
 
 	cookie = dma_fence_begin_signalling();
-	scoped_guard(spinlock_irqsave, &queue->fence_ctx.lock) {
-		list_for_each_entry_safe(job, job_tmp, &queue->fence_ctx.in_flight_jobs, node) {
-			if (!syncobj) {
-				struct panthor_group *group = job->group;
+	spin_lock(&queue->fence_ctx.lock);
+	list_for_each_entry_safe(job, job_tmp, &queue->fence_ctx.in_flight_jobs, node) {
+		if (!syncobj) {
+			struct panthor_group *group = job->group;
 
-				syncobj = group->syncobjs->kmap +
-					  (job->queue_idx * sizeof(*syncobj));
-			}
-
-			if (syncobj->seqno < job->done_fence->seqno)
-				break;
-
-			list_move_tail(&job->node, &done_jobs);
-			dma_fence_signal_locked(job->done_fence);
+			syncobj = group->syncobjs->kmap +
+				  (job->queue_idx * sizeof(*syncobj));
 		}
 
-		if (list_empty(&queue->fence_ctx.in_flight_jobs)) {
-			/* If we have no job left, we cancel the timer, and reset remaining
-			 * time to its default so it can be restarted next time
-			 * queue_resume_timeout() is called.
-			 */
-			queue_suspend_timeout_locked(queue);
+		if (syncobj->seqno < job->done_fence->seqno)
+			break;
 
-			/* If there's no job pending, we consider it progress to avoid a
-			 * spurious timeout if the timeout handler and the sync update
-			 * handler raced.
-			 */
-			progress = true;
-		} else if (!list_empty(&done_jobs)) {
-			queue_reset_timeout_locked(queue);
-			progress = true;
-		}
+		list_move_tail(&job->node, &done_jobs);
+		dma_fence_signal_locked(job->done_fence);
 	}
+
+	if (list_empty(&queue->fence_ctx.in_flight_jobs)) {
+		/* If we have no job left, we cancel the timer, and reset remaining
+		 * time to its default so it can be restarted next time
+		 * queue_resume_timeout() is called.
+		 */
+		queue_suspend_timeout_locked(queue);
+
+		/* If there's no job pending, we consider it progress to avoid a
+		 * spurious timeout if the timeout handler and the sync update
+		 * handler raced.
+		 */
+		progress = true;
+	} else if (!list_empty(&done_jobs)) {
+		queue_reset_timeout_locked(queue);
+		progress = true;
+	}
+	spin_unlock(&queue->fence_ctx.lock);
 	dma_fence_end_signalling(cookie);
 
 	list_for_each_entry_safe(job, job_tmp, &done_jobs, node) {
@@ -3359,8 +3346,9 @@ queue_run_job(struct drm_sched_job *sched_job)
 	job->ringbuf.end = job->ringbuf.start + (instrs.count * sizeof(u64));
 
 	panthor_job_get(&job->base);
-	scoped_guard(spinlock_irqsave, &queue->fence_ctx.lock)
-		list_add_tail(&job->node, &queue->fence_ctx.in_flight_jobs);
+	spin_lock(&queue->fence_ctx.lock);
+	list_add_tail(&job->node, &queue->fence_ctx.in_flight_jobs);
+	spin_unlock(&queue->fence_ctx.lock);
 
 	/* Make sure the ring buffer is updated before the INSERT
 	 * register.

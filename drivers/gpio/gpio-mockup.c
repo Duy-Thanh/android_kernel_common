@@ -18,6 +18,7 @@
 #include <linux/irq_sim.h>
 #include <linux/irqdomain.h>
 #include <linux/limits.h>
+#include <linux/mod_devicetable.h>
 #include <linux/module.h>
 #include <linux/platform_device.h>
 #include <linux/property.h>

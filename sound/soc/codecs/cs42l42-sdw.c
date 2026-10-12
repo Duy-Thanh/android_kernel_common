@@ -9,6 +9,7 @@
 #include <linux/gpio/consumer.h>
 #include <linux/iopoll.h>
 #include <linux/module.h>
+#include <linux/mod_devicetable.h>
 #include <linux/of_irq.h>
 #include <linux/pm_runtime.h>
 #include <linux/soundwire/sdw.h>
