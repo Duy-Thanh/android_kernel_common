@@ -2111,10 +2111,7 @@ static bool vma_can_userfault(struct vm_area_struct *vma, vm_flags_t vm_flags,
 {
 	const struct vm_uffd_ops *ops = vma_uffd_ops(vma);
 
-	if (vma->vm_flags & (VM_DROPPABLE | VM_SHADOW_STACK))
-		return false;
-
-	if (!is_vm_hugetlb_page(vma) && (vma->vm_flags & VM_SPECIAL))
+	if (vma->vm_flags & VM_DROPPABLE)
 		return false;
 
 	vm_flags &= __VM_UFFD_FLAGS;

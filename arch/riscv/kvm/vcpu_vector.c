@@ -10,7 +10,6 @@
 #include <linux/errno.h>
 #include <linux/err.h>
 #include <linux/kvm_host.h>
-#include <linux/nospec.h>
 #include <linux/uaccess.h>
 #include <asm/cpufeature.h>
 #include <asm/kvm_isa.h>
@@ -130,20 +129,11 @@ static int kvm_riscv_vcpu_vreg_addr(struct kvm_vcpu *vcpu,
 			return -ENOENT;
 		}
 	} else if (reg_num <= KVM_REG_RISCV_VECTOR_REG(31)) {
-		unsigned long reg_offset;
-
 		if (reg_size != vlenb)
 			return -EINVAL;
 		WARN_ON(!cntx->vector.datap);
-		/*
-		 * The reg_num is derived from the userspace-provided ONE_REG
-		 * id. Sanitize it with array_index_nospec() to prevent
-		 * speculative out-of-bounds access to the vector register
-		 * buffer (32 vector registers: v0..v31).
-		 */
-		reg_offset = array_index_nospec(
-				reg_num - KVM_REG_RISCV_VECTOR_REG(0), 32);
-		*reg_addr = cntx->vector.datap + reg_offset * vlenb;
+		*reg_addr = cntx->vector.datap +
+			    (reg_num - KVM_REG_RISCV_VECTOR_REG(0)) * vlenb;
 	} else {
 		return -ENOENT;
 	}
