@@ -212,12 +212,7 @@ static void __exit_signal(struct release_task_post *post, struct task_struct *ts
 	__unhash_process(post, tsk, group_dead);
 	write_sequnlock(&sig->stats_lock);
 
-	/*
-	 * Ensure that all preceeding state is visible. Pairs with
-	 * the smp_acquire__after_ctrl_dep() in the sighand == NULL
-	 * path of lock_task_sighand().
-	 */
-	smp_store_release(&tsk->sighand, NULL);
+	tsk->sighand = NULL;
 	spin_unlock(&sighand->siglock);
 
 	__cleanup_sighand(sighand);
