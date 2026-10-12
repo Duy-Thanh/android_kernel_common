@@ -1831,15 +1831,12 @@ static void tipc_node_mcast_rcv(struct tipc_node *n)
 }
 
 static void tipc_node_bc_sync_rcv(struct tipc_node *n, struct tipc_msg *hdr,
-				  int bearer_id, struct sk_buff_head *xmitq,
-				  bool *valid)
+				  int bearer_id, struct sk_buff_head *xmitq)
 {
 	struct tipc_link *ucl;
 	int rc;
 
-	rc = tipc_bcast_sync_rcv(n->net, n->bc_entry.link, hdr, xmitq, valid);
-	if (!*valid)
-		return;
+	rc = tipc_bcast_sync_rcv(n->net, n->bc_entry.link, hdr, xmitq);
 
 	if (rc & TIPC_LINK_DOWN_EVT) {
 		tipc_node_reset_links(n);
@@ -2143,18 +2140,12 @@ rcv:
 
 	/* Ensure broadcast reception is in synch with peer's send state */
 	if (unlikely(usr == LINK_PROTOCOL)) {
-		bool valid = true;
-
 		if (unlikely(skb_linearize(skb))) {
 			tipc_node_put(n);
 			goto discard;
 		}
 		hdr = buf_msg(skb);
-		tipc_node_bc_sync_rcv(n, hdr, bearer_id, &xmitq, &valid);
-		if (!valid) {
-			tipc_node_put(n);
-			goto discard;
-		}
+		tipc_node_bc_sync_rcv(n, hdr, bearer_id, &xmitq);
 	} else if (unlikely(tipc_link_acked(n->bc_entry.link) != bc_ack)) {
 		tipc_bcast_ack_rcv(net, n->bc_entry.link, hdr);
 	}

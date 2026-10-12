@@ -224,7 +224,6 @@ static struct sk_buff *dsa_rcv_ll(struct sk_buff *skb, struct net_device *dev,
 			/* Remote management is not implemented yet,
 			 * drop.
 			 */
-			kfree_skb(skb);
 			return NULL;
 		case DSA_CODE_ARP_MIRROR:
 		case DSA_CODE_POLICY_MIRROR:
@@ -245,14 +244,12 @@ static struct sk_buff *dsa_rcv_ll(struct sk_buff *skb, struct net_device *dev,
 			/* Reserved code, this could be anything. Drop
 			 * seems like the safest option.
 			 */
-			kfree_skb(skb);
 			return NULL;
 		}
 
 		break;
 
 	default:
-		kfree_skb(skb);
 		return NULL;
 	}
 
@@ -274,10 +271,8 @@ static struct sk_buff *dsa_rcv_ll(struct sk_buff *skb, struct net_device *dev,
 						 source_port);
 	}
 
-	if (!skb->dev) {
-		kfree_skb(skb);
+	if (!skb->dev)
 		return NULL;
-	}
 
 	/* When using LAG offload, skb->dev is not a DSA user interface,
 	 * so we cannot call dsa_default_offload_fwd_mark and we need to
@@ -340,10 +335,8 @@ static struct sk_buff *dsa_xmit(struct sk_buff *skb, struct net_device *dev)
 
 static struct sk_buff *dsa_rcv(struct sk_buff *skb, struct net_device *dev)
 {
-	if (unlikely(!pskb_may_pull(skb, DSA_HLEN))) {
-		kfree_skb(skb);
+	if (unlikely(!pskb_may_pull(skb, DSA_HLEN)))
 		return NULL;
-	}
 
 	return dsa_rcv_ll(skb, dev, 0);
 }
@@ -382,10 +375,8 @@ static struct sk_buff *edsa_xmit(struct sk_buff *skb, struct net_device *dev)
 
 static struct sk_buff *edsa_rcv(struct sk_buff *skb, struct net_device *dev)
 {
-	if (unlikely(!pskb_may_pull(skb, EDSA_HLEN))) {
-		kfree_skb(skb);
+	if (unlikely(!pskb_may_pull(skb, EDSA_HLEN)))
 		return NULL;
-	}
 
 	skb_pull_rcsum(skb, EDSA_HLEN - DSA_HLEN);
 

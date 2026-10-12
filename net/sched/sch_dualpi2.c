@@ -346,8 +346,6 @@ static int dualpi2_skb_classify(struct dualpi2_sched_data *q,
 	struct tcf_proto *fl;
 	int result;
 
-	cb->classified = DUALPI2_C_CLASSIC;
-
 	dualpi2_read_ect(skb);
 	if (cb->ect & q->ecn_mask) {
 		cb->classified = DUALPI2_C_L4S;
@@ -361,8 +359,10 @@ static int dualpi2_skb_classify(struct dualpi2_sched_data *q,
 	}
 
 	fl = rcu_dereference_bh(q->tcf_filters);
-	if (!fl)
+	if (!fl) {
+		cb->classified = DUALPI2_C_CLASSIC;
 		return NET_XMIT_SUCCESS;
+	}
 
 	result = tcf_classify(skb, NULL, fl, &res, false);
 	if (result >= 0) {
