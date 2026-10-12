@@ -191,11 +191,8 @@ static int ip_vs_estimation_kthread(void *data)
 		}
 
 		/* kthread 0 will handle the calc phase */
-		if (ipvs->est_calc_phase) {
+		if (ipvs->est_calc_phase)
 			ip_vs_est_calc_phase(ipvs);
-			if (kthread_should_stop() || !READ_ONCE(ipvs->enable))
-				return 0;
-		}
 	}
 
 	while (1) {
@@ -273,7 +270,6 @@ int ip_vs_est_kthread_start(struct netns_ipvs *ipvs,
 		kd->task = NULL;
 		goto out;
 	}
-	get_task_struct(kd->task);
 
 	set_user_nice(kd->task, sysctl_est_nice(ipvs));
 	if (sysctl_est_preferred_cpulist(ipvs))
@@ -290,7 +286,7 @@ void ip_vs_est_kthread_stop(struct ip_vs_est_kt_data *kd)
 {
 	if (kd->task) {
 		pr_info("stopping estimator thread %d...\n", kd->id);
-		kthread_stop_put(kd->task);
+		kthread_stop(kd->task);
 		kd->task = NULL;
 	}
 }
@@ -530,7 +526,7 @@ static void ip_vs_est_kthread_destroy(struct ip_vs_est_kt_data *kd)
 	if (kd) {
 		if (kd->task) {
 			pr_info("stop unused estimator thread %d...\n", kd->id);
-			kthread_stop_put(kd->task);
+			kthread_stop(kd->task);
 		}
 		ip_vs_stats_free(kd->calc_stats);
 		kfree(kd);

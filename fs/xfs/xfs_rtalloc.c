@@ -737,7 +737,7 @@ xfs_rtginode_ensure(
 	xfs_trans_cancel(tp);
 
 	if (error != -ENOENT)
-		return error;
+		return 0;
 	return xfs_rtginode_create(rtg, type, true);
 }
 
