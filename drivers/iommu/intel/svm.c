@@ -27,7 +27,7 @@
 
 void intel_svm_check(struct intel_iommu *iommu)
 {
-	if (!pasid_supported(iommu) || !ecap_smpwc(iommu->ecap))
+	if (!pasid_supported(iommu))
 		return;
 
 	if (cpu_feature_enabled(X86_FEATURE_GBPAGES) &&

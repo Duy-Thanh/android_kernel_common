@@ -150,8 +150,7 @@ static void carl9170_cmd_callback(struct ar9170 *ar, u32 len, void *buffer)
 	spin_lock(&ar->cmd_lock);
 	if (ar->readbuf) {
 		if (len >= 4)
-			memcpy(ar->readbuf, buffer + 4,
-			       min_t(u32, len - 4, ar->readlen));
+			memcpy(ar->readbuf, buffer + 4, len - 4);
 
 		ar->readbuf = NULL;
 	}
@@ -918,9 +917,7 @@ static void carl9170_rx_stream(struct ar9170 *ar, void *buf, unsigned int len)
 				}
 			}
 
-			skb_put_data(ar->rx_failover, tbuf,
-				     min_t(unsigned int, tlen,
-					   ar->rx_failover_missing));
+			skb_put_data(ar->rx_failover, tbuf, tlen);
 			ar->rx_failover_missing -= tlen;
 
 			if (ar->rx_failover_missing <= 0) {

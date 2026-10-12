@@ -3749,27 +3749,24 @@ static bool f2fs_has_stable_inodes(struct super_block *sb)
 	return true;
 }
 
-static unsigned int
-f2fs_get_devices(struct super_block *sb,
-		 struct block_device *devs[FSCRYPT_MAX_DEVICES])
+static struct block_device **f2fs_get_devices(struct super_block *sb,
+					      unsigned int *num_devs)
 {
 	struct f2fs_sb_info *sbi = F2FS_SB(sb);
-	int ndevs;
+	struct block_device **devs;
 	int i;
 
-	static_assert(MAX_DEVICES <= FSCRYPT_MAX_DEVICES);
+	if (!f2fs_is_multi_device(sbi))
+		return NULL;
 
-	if (!f2fs_is_multi_device(sbi)) {
-		devs[0] = sb->s_bdev;
-		return 1;
-	}
-	ndevs = sbi->s_ndevs;
-	if (WARN_ON_ONCE(ndevs > FSCRYPT_MAX_DEVICES))
-		ndevs = FSCRYPT_MAX_DEVICES;
+	devs = kmalloc_objs(*devs, sbi->s_ndevs);
+	if (!devs)
+		return ERR_PTR(-ENOMEM);
 
-	for (i = 0; i < ndevs; i++)
+	for (i = 0; i < sbi->s_ndevs; i++)
 		devs[i] = FDEV(i).bdev;
-	return ndevs;
+	*num_devs = sbi->s_ndevs;
+	return devs;
 }
 
 static const struct fscrypt_operations f2fs_cryptops = {

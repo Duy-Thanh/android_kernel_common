@@ -192,17 +192,9 @@ static u64 dma_length(struct ethosu_validated_cmdstream_info *info,
 	return len;
 }
 
-static bool feat_matrix_chained(struct ethosu_device *edev, struct feat_matrix *fm)
-{
-	u32 storage = fm->precision >> 14;
-
-	return !ethosu_is_u65(edev) && storage == 2;
-}
-
-static u64 feat_matrix_length(struct ethosu_device *edev,
-			      struct ethosu_validated_cmdstream_info *info,
+static u64 feat_matrix_length(struct ethosu_validated_cmdstream_info *info,
 			      struct feat_matrix *fm,
-			      u32 x, u32 y, u32 c, bool ofm)
+			      u32 x, u32 y, u32 c)
 {
 	u32 element_size, storage = fm->precision >> 14;
 	int tile = 0;
@@ -210,9 +202,6 @@ static u64 feat_matrix_length(struct ethosu_device *edev,
 
 	if (fm->region < 0)
 		return U64_MAX;
-
-	if (feat_matrix_chained(edev, fm))
-		return 0;
 
 	switch (storage) {
 	case 0:
@@ -234,8 +223,6 @@ static u64 feat_matrix_length(struct ethosu_device *edev,
 			tile = 1;
 		}
 		break;
-	default:
-		return U64_MAX;
 	}
 	if (fm->base[tile] == U64_MAX)
 		return U64_MAX;
@@ -244,11 +231,10 @@ static u64 feat_matrix_length(struct ethosu_device *edev,
 
 	switch ((fm->precision >> 6) & 0x3) { // format
 	case 0: //nhwc:
-		element_size = BIT((fm->precision >> (ofm ? 1 : 2)) & 0x3);
-		addr += x * fm->stride_x + c * element_size;
+		addr += x * fm->stride_x + c;
 		break;
 	case 1: //nhcwb16:
-		element_size = BIT((fm->precision >> (ofm ? 1 : 2)) & 0x3);
+		element_size = BIT((fm->precision >> 1) & 0x3);
 
 		addr += (c / 16) * fm->stride_c + (16 * x + (c & 0xf)) * element_size;
 		break;
@@ -264,7 +250,6 @@ static int calc_sizes(struct drm_device *ddev,
 		      u16 op, struct cmd_state *st,
 		      bool ifm, bool ifm2, bool weight, bool scale)
 {
-	struct ethosu_device *edev = to_ethosu_device(ddev);
 	u64 len;
 
 	if (ifm) {
@@ -282,8 +267,8 @@ static int calc_sizes(struct drm_device *ddev,
 		if (ifm_height < 0 || ifm_width < 0)
 			return -EINVAL;
 
-		len = feat_matrix_length(edev, info, &st->ifm, ifm_width,
-					 ifm_height, st->ifm.depth, false);
+		len = feat_matrix_length(info, &st->ifm, ifm_width,
+					 ifm_height, st->ifm.depth);
 		dev_dbg(ddev->dev, "op %d: IFM:%d:0x%llx-0x%llx\n",
 			op, st->ifm.region, st->ifm.base[0], len);
 		if (len == U64_MAX)
@@ -291,8 +276,8 @@ static int calc_sizes(struct drm_device *ddev,
 	}
 
 	if (ifm2) {
-		len = feat_matrix_length(edev, info, &st->ifm2, st->ifm.depth,
-					 0, st->ofm.depth, false);
+		len = feat_matrix_length(info, &st->ifm2, st->ifm.depth,
+					 0, st->ofm.depth);
 		dev_dbg(ddev->dev, "op %d: IFM2:%d:0x%llx-0x%llx\n",
 			op, st->ifm2.region, st->ifm2.base[0], len);
 		if (len == U64_MAX)
@@ -323,14 +308,13 @@ static int calc_sizes(struct drm_device *ddev,
 			    st->scale[0].base + st->scale[0].length);
 	}
 
-	len = feat_matrix_length(edev, info, &st->ofm, st->ofm.width,
-				 st->ofm.height[2], st->ofm.depth, true);
+	len = feat_matrix_length(info, &st->ofm, st->ofm.width,
+				 st->ofm.height[2], st->ofm.depth);
 	dev_dbg(ddev->dev, "op %d: OFM:%d:0x%llx-0x%llx\n",
 		op, st->ofm.region, st->ofm.base[0], len);
 	if (len == U64_MAX)
 		return -EINVAL;
-	if (!feat_matrix_chained(edev, &st->ofm))
-		info->output_region[st->ofm.region] = true;
+	info->output_region[st->ofm.region] = true;
 
 	return 0;
 }
@@ -340,7 +324,6 @@ static int calc_sizes_elemwise(struct drm_device *ddev,
 			       u16 op, struct cmd_state *st,
 			       bool ifm, bool ifm2)
 {
-	struct ethosu_device *edev = to_ethosu_device(ddev);
 	u32 height, width, depth;
 	u64 len;
 
@@ -349,8 +332,8 @@ static int calc_sizes_elemwise(struct drm_device *ddev,
 		width = st->ifm.broadcast & 0x2 ? 0 : st->ofm.width;
 		depth = st->ifm.broadcast & 0x4 ? 0 : st->ofm.depth;
 
-		len = feat_matrix_length(edev, info, &st->ifm, width,
-					 height, depth, false);
+		len = feat_matrix_length(info, &st->ifm, width,
+					 height, depth);
 		dev_dbg(ddev->dev, "op %d: IFM:%d:0x%llx-0x%llx\n",
 			op, st->ifm.region, st->ifm.base[0], len);
 		if (len == U64_MAX)
@@ -362,22 +345,21 @@ static int calc_sizes_elemwise(struct drm_device *ddev,
 		width = st->ifm2.broadcast & 0x2 ? 0 : st->ofm.width;
 		depth = st->ifm2.broadcast & 0x4 ? 0 : st->ofm.depth;
 
-		len = feat_matrix_length(edev, info, &st->ifm2, width,
-					 height, depth, false);
+		len = feat_matrix_length(info, &st->ifm2, width,
+					 height, depth);
 		dev_dbg(ddev->dev, "op %d: IFM2:%d:0x%llx-0x%llx\n",
 			op, st->ifm2.region, st->ifm2.base[0], len);
 		if (len == U64_MAX)
 			return -EINVAL;
 	}
 
-	len = feat_matrix_length(edev, info, &st->ofm, st->ofm.width,
-				 st->ofm.height[2], st->ofm.depth, true);
+	len = feat_matrix_length(info, &st->ofm, st->ofm.width,
+				 st->ofm.height[2], st->ofm.depth);
 	dev_dbg(ddev->dev, "op %d: OFM:%d:0x%llx-0x%llx\n",
 		op, st->ofm.region, st->ofm.base[0], len);
 	if (len == U64_MAX)
 		return -EINVAL;
-	if (!feat_matrix_chained(edev, &st->ofm))
-		info->output_region[st->ofm.region] = true;
+	info->output_region[st->ofm.region] = true;
 
 	return 0;
 }

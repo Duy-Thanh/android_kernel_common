@@ -731,12 +731,10 @@ static int vhost_net_build_xdp(struct vhost_net_virtqueue *nvq,
 		goto err;
 	}
 
-	if (!sock_hlen) {
+	gso = buf + pad - sock_hlen;
+
+	if (!sock_hlen)
 		memset(buf, 0, pad);
-		gso = buf;
-	} else {
-		gso = buf + pad - sock_hlen;
-	}
 
 	if ((gso->flags & VIRTIO_NET_HDR_F_NEEDS_CSUM) &&
 	    vhost16_to_cpu(vq, gso->csum_start) +

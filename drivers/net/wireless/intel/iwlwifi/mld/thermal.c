@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause
 /*
- * Copyright (C) 2024-2026 Intel Corporation
+ * Copyright (C) 2024-2025 Intel Corporation
  */
 #ifdef CONFIG_THERMAL
 #include <linux/sort.h>
@@ -272,7 +272,6 @@ static void iwl_mld_thermal_zone_register(struct iwl_mld *mld)
 	if (ret) {
 		IWL_DEBUG_TEMP(mld, "Failed to enable thermal zone\n");
 		thermal_zone_device_unregister(mld->tzone);
-		mld->tzone = NULL;
 	}
 }
 
@@ -386,8 +385,10 @@ static void iwl_mld_thermal_zone_unregister(struct iwl_mld *mld)
 		return;
 
 	IWL_DEBUG_TEMP(mld, "Thermal zone device unregister\n");
-	thermal_zone_device_unregister(mld->tzone);
-	mld->tzone = NULL;
+	if (mld->tzone) {
+		thermal_zone_device_unregister(mld->tzone);
+		mld->tzone = NULL;
+	}
 }
 
 static void iwl_mld_cooling_device_unregister(struct iwl_mld *mld)
