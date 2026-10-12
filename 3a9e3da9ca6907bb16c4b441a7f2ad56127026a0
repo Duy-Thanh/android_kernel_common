@@ -51,6 +51,24 @@
       "message": "Why does this ACK commit have an OGKI tag?",
       "revId": "3a9e3da9ca6907bb16c4b441a7f2ad56127026a0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c7a014a_389e7a85",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2026-10-12T15:27:39Z",
+      "side": 1,
+      "message": "Unresolved.",
+      "parentUuid": "6068ca40_822d9d4f",
+      "revId": "3a9e3da9ca6907bb16c4b441a7f2ad56127026a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
