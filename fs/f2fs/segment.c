@@ -444,6 +444,13 @@ void f2fs_balance_fs(struct f2fs_sb_info *sbi, bool need)
 	if (has_enough_free_secs(sbi, 0, 0))
 		return;
 
+	/*
+	 * Submit all cached OPU/IPU DATA bios before triggering
+	 * foreground GC to avoid potential deadlocks.
+	 */
+	f2fs_submit_merged_write(sbi, DATA);
+	f2fs_submit_all_merged_ipu_writes(sbi);
+
 	if (test_opt(sbi, GC_MERGE) && sbi->gc_thread &&
 				sbi->gc_thread->f2fs_gc_task) {
 		DEFINE_WAIT(wait);
@@ -462,7 +469,14 @@ void f2fs_balance_fs(struct f2fs_sb_info *sbi, bool need)
 			.should_migrate_blocks = false,
 			.err_gc_skipped = false,
 			.nr_free_secs = 1 };
+<<<<<<< HEAD   (481cb348bee88a316a5942bfde10b9b71c65b03d Revert "lsm: add backing_file LSM hooks")
 		f2fs_down_write_trace(&sbi->gc_lock, &gc_control.lc);
+||||||| BASE   (296aabce459470a4c1b68ffd0c0c0920e563aaad Linux 6.12.95)
+		f2fs_down_write(&sbi->gc_lock);
+=======
+
+		f2fs_down_write(&sbi->gc_lock);
+>>>>>>> BRANCH (6d15a1029d425b15c59463910ebdccc4afe760d6 Linux 6.12.96)
 		stat_inc_gc_call_count(sbi, FOREGROUND);
 		f2fs_gc(sbi, &gc_control);
 	}
