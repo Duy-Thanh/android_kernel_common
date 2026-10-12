@@ -3,13 +3,7 @@
 
 #include <linux/iova.h>
 #include <linux/mlx5/driver.h>
-#include <linux/moduleparam.h>
 #include "mlx5_vdpa.h"
-
-int mlx5_vdpa_max_iotlb_entries = 2048;
-module_param_named(max_iotlb_entries, mlx5_vdpa_max_iotlb_entries, int, 0444);
-MODULE_PARM_DESC(max_iotlb_entries,
-		 "Maximum number of iotlb entries. (default: 2048)");
 
 static int alloc_pd(struct mlx5_vdpa_dev *dev, u32 *pdn, u16 uid)
 {
@@ -235,10 +229,7 @@ int mlx5_vdpa_destroy_mkey(struct mlx5_vdpa_dev *mvdev, u32 mkey)
 
 static int init_ctrl_vq(struct mlx5_vdpa_dev *mvdev)
 {
-	if (mlx5_vdpa_max_iotlb_entries < 2)
-		return -EINVAL;
-
-	mvdev->cvq.iotlb = vhost_iotlb_alloc(mlx5_vdpa_max_iotlb_entries, 0);
+	mvdev->cvq.iotlb = vhost_iotlb_alloc(0, 0);
 	if (!mvdev->cvq.iotlb)
 		return -ENOMEM;
 

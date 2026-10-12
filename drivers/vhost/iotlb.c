@@ -20,14 +20,6 @@ INTERVAL_TREE_DEFINE(struct vhost_iotlb_map,
 		     rb, __u64, __subtree_last,
 		     START, LAST, static inline, vhost_iotlb_itree);
 
-static void vhost_iotlb_map_unlink(struct vhost_iotlb *iotlb,
-				   struct vhost_iotlb_map *map)
-{
-	vhost_iotlb_itree_remove(map, &iotlb->root);
-	list_del(&map->link);
-	iotlb->nmaps--;
-}
-
 /**
  * vhost_iotlb_map_free - remove a map node and free it
  * @iotlb: the IOTLB
@@ -36,8 +28,10 @@ static void vhost_iotlb_map_unlink(struct vhost_iotlb *iotlb,
 void vhost_iotlb_map_free(struct vhost_iotlb *iotlb,
 			  struct vhost_iotlb_map *map)
 {
-	vhost_iotlb_map_unlink(iotlb, map);
+	vhost_iotlb_itree_remove(map, &iotlb->root);
+	list_del(&map->link);
 	kfree(map);
+	iotlb->nmaps--;
 }
 EXPORT_SYMBOL_GPL(vhost_iotlb_map_free);
 
@@ -63,25 +57,14 @@ int vhost_iotlb_add_range_ctx(struct vhost_iotlb *iotlb,
 	if (last < start)
 		return -EFAULT;
 
-	if (!iotlb->limit)
-		return -EINVAL;
-
 	/* If the range being mapped is [0, ULONG_MAX], split it into two entries
 	 * otherwise its size would overflow u64.
 	 */
 	if (start == 0 && last == ULONG_MAX) {
 		u64 mid = last / 2;
-		int err;
+		int err = vhost_iotlb_add_range_ctx(iotlb, start, mid, addr,
+				perm, opaque);
 
-		if (iotlb->limit < 2)
-			return -ENOSPC;
-
-		if (!(iotlb->flags & VHOST_IOTLB_FLAG_RETIRE) &&
-		    iotlb->nmaps > iotlb->limit - 2)
-			return -ENOSPC;
-
-		err = vhost_iotlb_add_range_ctx(iotlb, start, mid, addr,
-						perm, opaque);
 		if (err)
 			return err;
 
@@ -89,18 +72,16 @@ int vhost_iotlb_add_range_ctx(struct vhost_iotlb *iotlb,
 		start = mid + 1;
 	}
 
-	if (iotlb->nmaps >= iotlb->limit) {
-		if (iotlb->flags & VHOST_IOTLB_FLAG_RETIRE) {
-			map = list_first_entry(&iotlb->list, typeof(*map), link);
-			vhost_iotlb_map_unlink(iotlb, map);
-		} else {
-			return -ENOSPC;
-		}
-	} else {
-		map = kmalloc_obj(*map, GFP_ATOMIC);
-		if (!map)
-			return -ENOMEM;
+	if (iotlb->limit &&
+	    iotlb->nmaps == iotlb->limit &&
+	    iotlb->flags & VHOST_IOTLB_FLAG_RETIRE) {
+		map = list_first_entry(&iotlb->list, typeof(*map), link);
+		vhost_iotlb_map_free(iotlb, map);
 	}
+
+	map = kmalloc_obj(*map, GFP_ATOMIC);
+	if (!map)
+		return -ENOMEM;
 
 	map->start = start;
 	map->size = last - start + 1;
