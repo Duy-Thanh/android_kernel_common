@@ -110,8 +110,7 @@ int io_unlinkat_prep(struct io_kiocb *req, const struct io_uring_sqe *sqe)
 	const char __user *fname;
 	int err;
 
-	if (sqe->off || sqe->len || sqe->buf_index || sqe->splice_fd_in ||
-	    sqe->addr3 || sqe->__pad2[0])
+	if (sqe->off || sqe->len || sqe->buf_index || sqe->splice_fd_in)
 		return -EINVAL;
 	if (unlikely(req->flags & REQ_F_FIXED_FILE))
 		return -EBADF;
