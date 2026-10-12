@@ -441,22 +441,15 @@ impl Delta {
     /// to the value in the [`Delta`].
     #[inline]
     pub fn as_micros_ceil(self) -> i64 {
-        let n = self.as_nanos();
-        let n = if n >= 0 {
-            n.saturating_add(NSEC_PER_USEC - 1)
-        } else {
-            n
-        };
-
         #[cfg(CONFIG_64BIT)]
         {
-            n / NSEC_PER_USEC
+            self.as_nanos().saturating_add(NSEC_PER_USEC - 1) / NSEC_PER_USEC
         }
 
         #[cfg(not(CONFIG_64BIT))]
         // SAFETY: It is always safe to call `ktime_to_us()` with any value.
         unsafe {
-            bindings::ktime_to_us(n)
+            bindings::ktime_to_us(self.as_nanos().saturating_add(NSEC_PER_USEC - 1))
         }
     }
 
