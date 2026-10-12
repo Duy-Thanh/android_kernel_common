@@ -4121,6 +4121,8 @@ static struct btf_raw_test raw_tests[] = {
 	.key_type_id = 1,
 	.value_type_id = 1,
 	.max_entries = 1,
+	.btf_load_err = true,
+	.err_str = "Type tags don't precede modifiers",
 },
 {
 	.descr = "type_tag test #3, type tag order",
@@ -4139,6 +4141,8 @@ static struct btf_raw_test raw_tests[] = {
 	.key_type_id = 1,
 	.value_type_id = 1,
 	.max_entries = 1,
+	.btf_load_err = true,
+	.err_str = "Type tags don't precede modifiers",
 },
 {
 	.descr = "type_tag test #4, type tag order",
@@ -4157,6 +4161,8 @@ static struct btf_raw_test raw_tests[] = {
 	.key_type_id = 1,
 	.value_type_id = 1,
 	.max_entries = 1,
+	.btf_load_err = true,
+	.err_str = "Type tags don't precede modifiers",
 },
 {
 	.descr = "type_tag test #5, type tag order",
@@ -4192,9 +4198,11 @@ static struct btf_raw_test raw_tests[] = {
 	.map_name = "tag_type_check_btf",
 	.key_size = sizeof(int),
 	.value_size = 4,
-	.key_type_id = 4,
-	.value_type_id = 4,
+	.key_type_id = 1,
+	.value_type_id = 1,
 	.max_entries = 1,
+	.btf_load_err = true,
+	.err_str = "Type tags don't precede modifiers",
 },
 {
 	.descr = "type_tag test #7, tag with kflag",

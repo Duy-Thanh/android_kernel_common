@@ -81,9 +81,8 @@ extern int __cpu_logical_map[NR_CPUS];
 struct seq_file;
 
 struct secondary_data {
-	unsigned long task;
 	unsigned long stack;
-	unsigned long offset;
+	unsigned long thread_info;
 };
 extern struct secondary_data cpuboot_data;
 
