@@ -459,11 +459,7 @@ static int ads1119_triggered_buffer_preenable(struct iio_dev *indio_dev)
 	if (ret)
 		return ret;
 
-	ret = i2c_smbus_write_byte(st->client, ADS1119_CMD_START_SYNC);
-	if (ret)
-		pm_runtime_put_autosuspend(dev);
-
-	return ret;
+	return i2c_smbus_write_byte(st->client, ADS1119_CMD_START_SYNC);
 }
 
 static int ads1119_triggered_buffer_postdisable(struct iio_dev *indio_dev)

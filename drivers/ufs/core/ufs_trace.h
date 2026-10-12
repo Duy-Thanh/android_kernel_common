@@ -89,18 +89,16 @@ TRACE_EVENT(ufshcd_clk_gating,
 
 	TP_STRUCT__entry(
 		__field(struct ufs_hba *, hba)
-		__string(dev_name, dev_name(hba->dev))
 		__field(int, state)
 	),
 
 	TP_fast_assign(
-		__assign_str(dev_name);
 		__entry->hba = hba;
 		__entry->state = state;
 	),
 
 	TP_printk("%s: gating state changed to %s",
-		__get_str(dev_name),
+		dev_name(__entry->hba->dev),
 		__print_symbolic(__entry->state, UFSCHD_CLK_GATING_STATES))
 );
 
@@ -113,7 +111,6 @@ TRACE_EVENT(ufshcd_clk_scaling,
 
 	TP_STRUCT__entry(
 		__field(struct ufs_hba *, hba)
-		__string(dev_name, dev_name(hba->dev))
 		__string(state, state)
 		__string(clk, clk)
 		__field(u32, prev_state)
@@ -122,7 +119,6 @@ TRACE_EVENT(ufshcd_clk_scaling,
 
 	TP_fast_assign(
 		__entry->hba = hba;
-		__assign_str(dev_name);
 		__assign_str(state);
 		__assign_str(clk);
 		__entry->prev_state = prev_state;
@@ -130,7 +126,7 @@ TRACE_EVENT(ufshcd_clk_scaling,
 	),
 
 	TP_printk("%s: %s %s from %u to %u Hz",
-		__get_str(dev_name), __get_str(state), __get_str(clk),
+		dev_name(__entry->hba->dev), __get_str(state), __get_str(clk),
 		__entry->prev_state, __entry->curr_state)
 );
 
@@ -142,18 +138,16 @@ TRACE_EVENT(ufshcd_auto_bkops_state,
 
 	TP_STRUCT__entry(
 		__field(struct ufs_hba *, hba)
-		__string(dev_name, dev_name(hba->dev))
 		__string(state, state)
 	),
 
 	TP_fast_assign(
 		__entry->hba = hba;
-		__assign_str(dev_name);
 		__assign_str(state);
 	),
 
 	TP_printk("%s: auto bkops - %s",
-		__get_str(dev_name), __get_str(state))
+		dev_name(__entry->hba->dev), __get_str(state))
 );
 
 DECLARE_EVENT_CLASS(ufshcd_profiling_template,
@@ -164,7 +158,6 @@ DECLARE_EVENT_CLASS(ufshcd_profiling_template,
 
 	TP_STRUCT__entry(
 		__field(struct ufs_hba *, hba)
-		__string(dev_name, dev_name(hba->dev))
 		__string(profile_info, profile_info)
 		__field(s64, time_us)
 		__field(int, err)
@@ -172,14 +165,13 @@ DECLARE_EVENT_CLASS(ufshcd_profiling_template,
 
 	TP_fast_assign(
 		__entry->hba = hba;
-		__assign_str(dev_name);
 		__assign_str(profile_info);
 		__entry->time_us = time_us;
 		__entry->err = err;
 	),
 
 	TP_printk("%s: %s: took %lld usecs, err %d",
-		__get_str(dev_name), __get_str(profile_info),
+		dev_name(__entry->hba->dev), __get_str(profile_info),
 		__entry->time_us, __entry->err)
 );
 
@@ -208,7 +200,6 @@ DECLARE_EVENT_CLASS(ufshcd_template,
 		__field(s64, usecs)
 		__field(int, err)
 		__field(struct ufs_hba *, hba)
-		__string(dev_name, dev_name(hba->dev))
 		__field(int, dev_state)
 		__field(int, link_state)
 	),
@@ -217,14 +208,13 @@ DECLARE_EVENT_CLASS(ufshcd_template,
 		__entry->usecs = usecs;
 		__entry->err = err;
 		__entry->hba = hba;
-		__assign_str(dev_name);
 		__entry->dev_state = dev_state;
 		__entry->link_state = link_state;
 	),
 
 	TP_printk(
 		"%s: took %lld usecs, dev_state: %s, link_state: %s, err %d",
-		__get_str(dev_name),
+		dev_name(__entry->hba->dev),
 		__entry->usecs,
 		__print_symbolic(__entry->dev_state, UFS_PWR_MODES),
 		__print_symbolic(__entry->link_state, UFS_LINK_STATES),
@@ -289,7 +279,6 @@ TRACE_EVENT(ufshcd_command,
 	TP_STRUCT__entry(
 		__field(struct scsi_device *, sdev)
 		__field(struct ufs_hba *, hba)
-		__string(dev_name, dev_name(&sdev->sdev_dev))
 		__field(enum ufs_trace_str_t, str_t)
 		__field(unsigned int, tag)
 		__field(u32, doorbell)
@@ -302,7 +291,6 @@ TRACE_EVENT(ufshcd_command,
 	),
 
 	TP_fast_assign(
-		__assign_str(dev_name);
 		__entry->sdev = sdev;
 		__entry->hba = hba;
 		__entry->str_t = str_t;
@@ -319,7 +307,7 @@ TRACE_EVENT(ufshcd_command,
 	TP_printk(
 		"%s: %s: tag: %u, DB: 0x%x, size: %d, IS: %u, LBA: %llu, opcode: 0x%x (%s), group_id: 0x%x, hwq_id: %d",
 		show_ufs_cmd_trace_str(__entry->str_t),
-		__get_str(dev_name), __entry->tag,
+		dev_name(&__entry->sdev->sdev_dev), __entry->tag,
 		__entry->doorbell, __entry->transfer_len, __entry->intr,
 		__entry->lba, (u32)__entry->opcode, str_opcode(__entry->opcode),
 		(u32)__entry->group_id, __entry->hwq_id
@@ -334,7 +322,6 @@ TRACE_EVENT(ufshcd_uic_command,
 
 	TP_STRUCT__entry(
 		__field(struct ufs_hba *, hba)
-		__string(dev_name, dev_name(hba->dev))
 		__field(enum ufs_trace_str_t, str_t)
 		__field(u32, cmd)
 		__field(u32, arg1)
@@ -344,7 +331,6 @@ TRACE_EVENT(ufshcd_uic_command,
 
 	TP_fast_assign(
 		__entry->hba = hba;
-		__assign_str(dev_name);
 		__entry->str_t = str_t;
 		__entry->cmd = cmd;
 		__entry->arg1 = arg1;
@@ -354,7 +340,7 @@ TRACE_EVENT(ufshcd_uic_command,
 
 	TP_printk(
 		"%s: %s: cmd: 0x%x, arg1: 0x%x, arg2: 0x%x, arg3: 0x%x",
-		show_ufs_cmd_trace_str(__entry->str_t), __get_str(dev_name),
+		show_ufs_cmd_trace_str(__entry->str_t), dev_name(__entry->hba->dev),
 		__entry->cmd, __entry->arg1, __entry->arg2, __entry->arg3
 	)
 );
@@ -367,7 +353,6 @@ TRACE_EVENT(ufshcd_upiu,
 
 	TP_STRUCT__entry(
 		__field(struct ufs_hba *, hba)
-		__string(dev_name, dev_name(hba->dev))
 		__field(enum ufs_trace_str_t, str_t)
 		__array(unsigned char, hdr, 12)
 		__array(unsigned char, tsf, 16)
@@ -376,7 +361,6 @@ TRACE_EVENT(ufshcd_upiu,
 
 	TP_fast_assign(
 		__entry->hba = hba;
-		__assign_str(dev_name);
 		__entry->str_t = str_t;
 		memcpy(__entry->hdr, hdr, sizeof(__entry->hdr));
 		memcpy(__entry->tsf, tsf, sizeof(__entry->tsf));
@@ -385,7 +369,7 @@ TRACE_EVENT(ufshcd_upiu,
 
 	TP_printk(
 		"%s: %s: HDR:%s, %s:%s",
-		show_ufs_cmd_trace_str(__entry->str_t), __get_str(dev_name),
+		show_ufs_cmd_trace_str(__entry->str_t), dev_name(__entry->hba->dev),
 		__print_hex(__entry->hdr, sizeof(__entry->hdr)),
 		show_ufs_cmd_trace_tsf(__entry->tsf_t),
 		__print_hex(__entry->tsf, sizeof(__entry->tsf))
@@ -400,18 +384,16 @@ TRACE_EVENT(ufshcd_exception_event,
 
 	TP_STRUCT__entry(
 		__field(struct ufs_hba *, hba)
-		__string(dev_name, dev_name(hba->dev))
 		__field(u16, status)
 	),
 
 	TP_fast_assign(
 		__entry->hba = hba;
-		__assign_str(dev_name);
 		__entry->status = status;
 	),
 
 	TP_printk("%s: status 0x%x",
-		__get_str(dev_name), __entry->status
+		dev_name(__entry->hba->dev), __entry->status
 	)
 );
 

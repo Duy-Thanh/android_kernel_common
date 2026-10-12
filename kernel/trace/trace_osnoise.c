@@ -179,9 +179,7 @@ static void osnoise_unregister_instance(struct trace_array *tr)
 	if (!found)
 		return;
 
-	/* Do a full sync to ensure that tr remains valid, not just inst */
-	synchronize_rcu();
-	kvfree(inst);
+	kvfree_rcu_mightsleep(inst);
 }
 
 /*
