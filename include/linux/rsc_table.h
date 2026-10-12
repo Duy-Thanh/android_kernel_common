@@ -337,21 +337,16 @@ static inline int rsc_table_for_each_entry(struct resource_table *table,
 	int i, ret;
 
 	for (i = 0; i < table->num; i++) {
-		u32 offset = table->offset[i];
-		struct fw_rsc_hdr *hdr;
-		int avail, rsc_offset;
-		void *rsc;
+		int offset = table->offset[i];
+		struct fw_rsc_hdr *hdr = (void *)table + offset;
+		int avail = table_sz - offset - sizeof(*hdr);
+		int rsc_offset = offset + sizeof(*hdr);
+		void *rsc = (void *)hdr + sizeof(*hdr);
 
-		if (offset < sizeof(*table) || offset >= table_sz ||
-		    table_sz - offset < sizeof(*hdr)) {
+		if (avail < 0) {
 			dev_err(dev, "rsc table is truncated\n");
 			return -EINVAL;
 		}
-
-		hdr = (void *)table + offset;
-		avail = table_sz - offset - sizeof(*hdr);
-		rsc_offset = offset + sizeof(*hdr);
-		rsc = (void *)hdr + sizeof(*hdr);
 
 		ret = cb(hdr->type, rsc, rsc_offset, avail, data);
 		if (ret)
