@@ -22,7 +22,6 @@
 #include <linux/irqdomain.h>
 #include <linux/export.h>
 #include <linux/of_fdt.h>
-#include <linux/string.h>
 
 #include <asm/mach_desc.h>
 #include <asm/setup.h>
@@ -44,10 +43,9 @@ static int __init arc_get_cpu_map(const char *name, struct cpumask *cpumask)
 {
 	unsigned long dt_root = of_get_flat_dt_root();
 	const char *buf;
-	int len;
 
-	buf = of_get_flat_dt_prop(dt_root, name, &len);
-	if (!buf || !memchr(buf, '\0', len))
+	buf = of_get_flat_dt_prop(dt_root, name, NULL);
+	if (!buf)
 		return -EINVAL;
 
 	if (cpulist_parse(buf, cpumask))

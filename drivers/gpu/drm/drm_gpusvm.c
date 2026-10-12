@@ -1146,35 +1146,20 @@ static void __drm_gpusvm_unmap_pages(struct drm_gpusvm *gpusvm,
 		};
 		bool use_iova = dma_use_iova(&svm_pages->state);
 
-		/*
-		 * IOVA is reserved for the whole range but only the linked
-		 * system pages (state_offset bytes) need unlinking; free the
-		 * entire reservation to avoid leaking the device-page part.
-		 * On the error path state_offset is 0, so just free it.
-		 */
-		if (use_iova) {
-			if (svm_pages->state_offset)
-				dma_iova_unlink(dev, &svm_pages->state, 0,
-						svm_pages->state_offset,
-						svm_pages->dma_addr[0].dir, 0);
-			dma_iova_free(dev, &svm_pages->state);
-		}
+		if (use_iova)
+			dma_iova_destroy(dev, &svm_pages->state,
+					 svm_pages->state_offset,
+					 svm_pages->dma_addr[0].dir, 0);
 
 		for (i = 0, j = 0; i < npages; j++) {
 			struct drm_pagemap_addr *addr = &svm_pages->dma_addr[j];
 
-			if (addr->proto == DRM_INTERCONNECT_SYSTEM) {
-				/*
-				 * Linked IOVA pages were already torn down by
-				 * the dma_iova_unlink()/dma_iova_free() above;
-				 * only the non-IOVA mappings need unmap here.
-				 */
-				if (!use_iova)
-					dma_unmap_page(dev,
-						       addr->addr,
-						       PAGE_SIZE << addr->order,
-						       addr->dir);
-			} else if (dpagemap && dpagemap->ops->device_unmap)
+			if (!use_iova && addr->proto == DRM_INTERCONNECT_SYSTEM)
+				dma_unmap_page(dev,
+					       addr->addr,
+					       PAGE_SIZE << addr->order,
+					       addr->dir);
+			else if (dpagemap && dpagemap->ops->device_unmap)
 				dpagemap->ops->device_unmap(dpagemap,
 							    dev, addr);
 			i += 1 << addr->order;
@@ -1501,7 +1486,7 @@ map_pages:
 		/* Unlock and restart mapping to allocate memory. */
 		drm_gpusvm_notifier_unlock(gpusvm);
 		svm_pages->dma_addr =
-			kvzalloc_objs(*svm_pages->dma_addr, npages);
+			kvmalloc_objs(*svm_pages->dma_addr, npages);
 		if (!svm_pages->dma_addr) {
 			err = -ENOMEM;
 			goto err_free;
@@ -1544,16 +1529,6 @@ map_pages:
 					err = -EAGAIN;
 					goto err_unmap;
 				}
-
-				/*
-				 * Set the dpagemap as soon as the first
-				 * device page is mapped so the err_unmap path
-				 * can device_unmap() the device mappings that
-				 * have already been created.
-				 */
-				drm_pagemap_get(dpagemap);
-				drm_pagemap_put(svm_pages->dpagemap);
-				svm_pages->dpagemap = dpagemap;
 			}
 			svm_pages->dma_addr[j] =
 				dpagemap->ops->device_map(dpagemap,
@@ -1621,8 +1596,12 @@ map_pages:
 			goto err_unmap;
 	}
 
-	if (pagemap)
+	if (pagemap) {
 		flags.has_devmem_pages = true;
+		drm_pagemap_get(dpagemap);
+		drm_pagemap_put(svm_pages->dpagemap);
+		svm_pages->dpagemap = dpagemap;
+	}
 
 	/* WRITE_ONCE pairs with READ_ONCE for opportunistic checks */
 	WRITE_ONCE(svm_pages->flags.__flags, flags.__flags);

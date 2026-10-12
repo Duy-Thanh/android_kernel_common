@@ -1977,10 +1977,8 @@ do_time_wait:
 		}
 
 		drop_reason = psp_twsk_rx_policy_check(inet_twsk(sk), skb);
-		if (drop_reason) {
-			inet_twsk_put(inet_twsk(sk));
-			goto discard_it;
-		}
+		if (drop_reason)
+			break;
 	}
 		/* to ACK */
 		fallthrough;

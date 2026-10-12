@@ -8,7 +8,8 @@ config CRYPTO_LIB_UTILS
 
 config CRYPTO_LIB_AES
 	tristate
-	select CRYPTO_LIB_UTILS
+	# Select dependencies of modes that are part of libaes.
+	select CRYPTO_LIB_UTILS if CRYPTO_LIB_AES_CBC_MACS
 
 config CRYPTO_LIB_AES_ARCH
 	bool
