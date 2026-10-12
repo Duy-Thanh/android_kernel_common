@@ -237,8 +237,7 @@ static int mana_xdp_set(struct net_device *ndev, struct bpf_prog *prog,
 		bpf_prog_put(old_prog);
 
 	if (prog)
-		ndev->max_mtu = min_t(unsigned int, MANA_XDP_MTU_MAX,
-				      gc->adapter_mtu - ETH_HLEN);
+		ndev->max_mtu = MANA_XDP_MTU_MAX;
 	else
 		ndev->max_mtu = gc->adapter_mtu - ETH_HLEN;
 

@@ -42,6 +42,12 @@ properties:
       - const: cfg_ahb_clk
       - const: gcc_disp_gpll0_div_clk_src
 
+  '#clock-cells':
+    const: 1
+
+  '#power-domain-cells':
+    const: 1
+
   power-domains:
     description:
       A phandle and PM domain specifier for the CX power domain.
@@ -52,16 +58,18 @@ properties:
       A phandle to an OPP node describing the power domain's performance point.
     maxItems: 1
 
+  reg:
+    maxItems: 1
+
 required:
   - compatible
+  - reg
   - clocks
   - clock-names
+  - '#clock-cells'
   - '#power-domain-cells'
 
-allOf:
-  - $ref: qcom,gcc.yaml#
-
-unevaluatedProperties: false
+additionalProperties: false
 
 examples:
   - |
@@ -93,7 +101,6 @@ examples:
       power-domains = <&rpmpd SM6125_VDDCX>;
 
       #clock-cells = <1>;
-      #reset-cells = <1>;
       #power-domain-cells = <1>;
     };
 ...

@@ -15,7 +15,7 @@ all: ynl.a
 
 ynl.a: $(OBJS)
 	@echo -e "\tAR $@"
-	@$(AR) rcs $@ $(OBJS)
+	@ar rcs $@ $(OBJS)
 
 clean:
 	rm -f *.o *.d *~

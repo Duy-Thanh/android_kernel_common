@@ -5369,39 +5369,24 @@ struct sctp_transport *sctp_transport_get_idx(struct net *net,
 }
 
 int sctp_for_each_endpoint(int (*cb)(struct sctp_endpoint *, void *),
-			   struct net *net, int *pos, void *p) {
-	int err, hash = 0, idx = 0, start;
-	struct sctp_hashbucket *head;
+			   void *p) {
+	int err = 0;
+	int hash = 0;
 	struct sctp_endpoint *ep;
+	struct sctp_hashbucket *head;
 
 	for (head = sctp_ep_hashtable; hash < sctp_ep_hashsize;
 	     hash++, head++) {
-		start = idx;
-again:
 		read_lock_bh(&head->lock);
 		sctp_for_each_hentry(ep, &head->chain) {
-			if (sock_net(ep->base.sk) != net)
-				continue;
-			if (idx++ >= *pos) {
-				sctp_endpoint_hold(ep);
+			err = cb(ep, p);
+			if (err)
 				break;
-			}
 		}
 		read_unlock_bh(&head->lock);
-
-		if (ep) {
-			err = cb(ep, p);
-			sctp_endpoint_put(ep);
-			if (err)
-				return err;
-			(*pos)++;
-
-			idx = start;
-			goto again;
-		}
 	}
 
-	return 0;
+	return err;
 }
 EXPORT_SYMBOL_GPL(sctp_for_each_endpoint);
 

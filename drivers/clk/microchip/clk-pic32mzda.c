@@ -14,7 +14,7 @@
 #include <linux/platform_device.h>
 #include <asm/traps.h>
 
-#include "clk-pic32.h"
+#include "clk-core.h"
 
 /* FRC Postscaler */
 #define OSC_FRCDIV_MASK		0x07
