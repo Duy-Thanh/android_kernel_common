@@ -121,22 +121,6 @@ xfs_buf_free(
 }
 
 static int
-xfs_buf_alloc_folio(
-	struct xfs_buf		*bp,
-	size_t			size,
-	gfp_t			gfp_mask)
-{
-	struct folio		*folio;
-
-	folio = folio_alloc(gfp_mask, get_order(size));
-	if (!folio)
-		return -ENOMEM;
-	bp->b_addr = folio_address(folio);
-	trace_xfs_buf_backing_folio(bp, _RET_IP_);
-	return 0;
-}
-
-static int
 xfs_buf_alloc_kmem(
 	struct xfs_buf		*bp,
 	size_t			size,
@@ -145,7 +129,7 @@ xfs_buf_alloc_kmem(
 	ASSERT(is_power_of_2(size));
 	ASSERT(size < PAGE_SIZE);
 
-	bp->b_addr = kmalloc(size, gfp_mask);
+	bp->b_addr = kmalloc(size, gfp_mask | __GFP_NOFAIL);
 	if (!bp->b_addr)
 		return -ENOMEM;
 
@@ -161,26 +145,6 @@ xfs_buf_alloc_kmem(
 	}
 	bp->b_flags |= _XBF_KMEM;
 	trace_xfs_buf_backing_kmem(bp, _RET_IP_);
-	return 0;
-}
-
-static int
-xfs_buf_alloc_vmalloc(
-	struct xfs_buf		*bp,
-	size_t			size,
-	gfp_t			gfp_mask)
-{
-	for (;;) {
-		bp->b_addr = __vmalloc(size, gfp_mask);
-		if (bp->b_addr)
-			break;
-		if (gfp_mask & __GFP_NORETRY)
-			return -ENOMEM;
-		XFS_STATS_INC(bp->b_mount, xb_page_retries);
-		memalloc_retry_wait(gfp_mask);
-	}
-
-	trace_xfs_buf_backing_vmalloc(bp, _RET_IP_);
 	return 0;
 }
 
@@ -211,6 +175,7 @@ xfs_buf_alloc_backing_mem(
 {
 	size_t		size = BBTOB(bp->b_length);
 	gfp_t		gfp_mask = GFP_KERNEL | __GFP_NOLOCKDEP | __GFP_NOWARN;
+	struct folio	*folio;
 
 	if (xfs_buftarg_is_mem(bp->b_target))
 		return xmbuf_map_backing_mem(bp);
@@ -221,6 +186,22 @@ xfs_buf_alloc_backing_mem(
 
 	if (flags & XBF_READ_AHEAD)
 		gfp_mask |= __GFP_NORETRY;
+
+	/*
+	 * For buffers smaller than PAGE_SIZE use a kmalloc allocation if that
+	 * is properly aligned.  The slab allocator now guarantees an aligned
+	 * allocation for all power of two sizes, which matches most of the
+	 * smaller than PAGE_SIZE buffers used by XFS.
+	 */
+	if (size < PAGE_SIZE && is_power_of_2(size))
+		return xfs_buf_alloc_kmem(bp, size, gfp_mask);
+
+	/*
+	 * Don't bother with the retry loop for single PAGE allocations: vmalloc
+	 * won't do any better.
+	 */
+	if (size <= PAGE_SIZE)
+		gfp_mask |= __GFP_NOFAIL;
 
 	/*
 	 * Optimistically attempt a single high order folio allocation for
@@ -234,31 +215,35 @@ xfs_buf_alloc_backing_mem(
 	 * path for them instead of wasting memory here.
 	 */
 	if (size > PAGE_SIZE) {
-		if (is_power_of_2(size)) {
-			gfp_t folio_gfp = gfp_mask;
+		if (!is_power_of_2(size))
+			goto fallback;
+		gfp_mask &= ~__GFP_DIRECT_RECLAIM;
+		gfp_mask |= __GFP_NORETRY;
+	}
+	folio = folio_alloc(gfp_mask, get_order(size));
+	if (!folio) {
+		if (size <= PAGE_SIZE)
+			return -ENOMEM;
+		trace_xfs_buf_backing_fallback(bp, _RET_IP_);
+		goto fallback;
+	}
+	bp->b_addr = folio_address(folio);
+	trace_xfs_buf_backing_folio(bp, _RET_IP_);
+	return 0;
 
-			folio_gfp &= ~__GFP_DIRECT_RECLAIM;
-			folio_gfp |= __GFP_NORETRY;
-			if (xfs_buf_alloc_folio(bp, size, folio_gfp) == 0)
-				return 0;
-			trace_xfs_buf_backing_fallback(bp, _RET_IP_);
-		}
-		return xfs_buf_alloc_vmalloc(bp, size, gfp_mask);
+fallback:
+	for (;;) {
+		bp->b_addr = __vmalloc(size, gfp_mask);
+		if (bp->b_addr)
+			break;
+		if (flags & XBF_READ_AHEAD)
+			return -ENOMEM;
+		XFS_STATS_INC(bp->b_mount, xb_page_retries);
+		memalloc_retry_wait(gfp_mask);
 	}
 
-	/*
-	 * The slab allocator now guarantees aligned allocations for all power
-	 * of two sizes.  This covers most smaller XFS buffers, so just use
-	 * kmalloc in this case.
-	 *
-	 * Don't bother with the vmalloc fallback for allocations of page size
-	 * or less: vmalloc won't do any better.
-	 */
-	if (!(gfp_mask & __GFP_NORETRY))
-		gfp_mask |= __GFP_NOFAIL;
-	if (size < PAGE_SIZE && is_power_of_2(size))
-		return xfs_buf_alloc_kmem(bp, size, gfp_mask);
-	return xfs_buf_alloc_folio(bp, size, gfp_mask);
+	trace_xfs_buf_backing_vmalloc(bp, _RET_IP_);
+	return 0;
 }
 
 static int
@@ -1098,17 +1083,11 @@ out_stale:
 	return false;
 }
 
-/*
- * Complete a buffer read or write.
- *
- * Releases the buffer if the I/O was asynchronous.
- */
-static void
-xfs_buf_ioend(
+/* returns false if the caller needs to resubmit the I/O, else true */
+static bool
+__xfs_buf_ioend(
 	struct xfs_buf	*bp)
 {
-	bool		async = bp->b_flags & XBF_ASYNC;
-
 	trace_xfs_buf_iodone(bp, _RET_IP_);
 
 	if (bp->b_flags & XBF_READ) {
@@ -1122,15 +1101,13 @@ xfs_buf_ioend(
 		if (bp->b_flags & XBF_READ_AHEAD)
 			percpu_counter_dec(&bp->b_target->bt_readahead_count);
 	} else {
-		if (unlikely(bp->b_error)) {
-			if (xfs_buf_ioend_handle_error(bp)) {
-				ASSERT(async);
-				return;
-			}
-		} else {
+		if (!bp->b_error) {
 			bp->b_flags &= ~XBF_WRITE_FAIL;
 			bp->b_flags |= XBF_DONE;
 		}
+
+		if (unlikely(bp->b_error) && xfs_buf_ioend_handle_error(bp))
+			return false;
 
 		/* clear the retry state */
 		bp->b_last_error = 0;
@@ -1151,15 +1128,30 @@ xfs_buf_ioend(
 
 	bp->b_flags &= ~(XBF_READ | XBF_WRITE | XBF_READ_AHEAD |
 			 _XBF_LOGRECOVERY);
-	if (async)
+	return true;
+}
+
+static void
+xfs_buf_ioend(
+	struct xfs_buf	*bp)
+{
+	if (!__xfs_buf_ioend(bp))
+		return;
+	if (bp->b_flags & XBF_ASYNC)
 		xfs_buf_relse(bp);
+	else
+		complete(&bp->b_iowait);
 }
 
 static void
 xfs_buf_ioend_work(
 	struct work_struct	*work)
 {
-	xfs_buf_ioend(container_of(work, struct xfs_buf, b_ioend_work));
+	struct xfs_buf		*bp =
+		container_of(work, struct xfs_buf, b_ioend_work);
+
+	if (__xfs_buf_ioend(bp))
+		xfs_buf_relse(bp);
 }
 
 void
@@ -1185,18 +1177,17 @@ xfs_buf_ioerror_alert(
 }
 
 /*
- * Fail a locked and referenced buffer outside the I/O path.
+ * To simulate an I/O failure, the buffer must be locked and held with at least
+ * two references.
  *
- * The caller transfers a reference which will be released after processing the
- * error.
+ * The buf item reference is dropped via ioend processing. The second reference
+ * is owned by the caller and is dropped on I/O completion if the buffer is
+ * XBF_ASYNC.
  */
 void
-xfs_buf_fail(
+xfs_buf_ioend_fail(
 	struct xfs_buf	*bp)
 {
-	ASSERT(xfs_buf_islocked(bp));
-
-	bp->b_flags |= XBF_ASYNC;
 	bp->b_flags &= ~XBF_DONE;
 	xfs_buf_stale(bp);
 	xfs_buf_ioerror(bp, -EIO);
@@ -1309,11 +1300,12 @@ xfs_buf_iowait(
 {
 	ASSERT(!(bp->b_flags & XBF_ASYNC));
 
-	trace_xfs_buf_iowait(bp, _RET_IP_);
-	wait_for_completion(&bp->b_iowait);
-	trace_xfs_buf_iowait_done(bp, _RET_IP_);
+	do {
+		trace_xfs_buf_iowait(bp, _RET_IP_);
+		wait_for_completion(&bp->b_iowait);
+		trace_xfs_buf_iowait_done(bp, _RET_IP_);
+	} while (!__xfs_buf_ioend(bp));
 
-	xfs_buf_ioend(bp);
 	return bp->b_error;
 }
 
@@ -1377,8 +1369,8 @@ xfs_buf_submit(
 	 * on shutdown.
 	 */
 	if (bp->b_mount->m_log && xlog_is_shutdown(bp->b_mount->m_log)) {
-		xfs_buf_ioerror(bp, -EIO);
-		goto ioerror;
+		xfs_buf_ioend_fail(bp);
+		return;
 	}
 
 	if (bp->b_flags & XBF_WRITE)
@@ -1391,26 +1383,18 @@ xfs_buf_submit(
 	bp->b_error = 0;
 
 	if ((bp->b_flags & XBF_WRITE) && !xfs_buf_verify_write(bp)) {
-		/* ->verify_write should have set b_error already */
 		xfs_force_shutdown(bp->b_mount, SHUTDOWN_CORRUPT_INCORE);
-		goto ioerror;
+		xfs_buf_ioend(bp);
+		return;
 	}
 
 	/* In-memory targets are directly mapped, no I/O required. */
-	if (xfs_buftarg_is_mem(bp->b_target))
-		goto end_io;
+	if (xfs_buftarg_is_mem(bp->b_target)) {
+		xfs_buf_ioend(bp);
+		return;
+	}
 
 	xfs_buf_submit_bio(bp);
-	return;
-
-ioerror:
-	bp->b_flags &= ~XBF_DONE;
-	xfs_buf_stale(bp);
-end_io:
-	if (bp->b_flags & XBF_ASYNC)
-		xfs_buf_ioend(bp);
-	else
-		complete(&bp->b_iowait);
 }
 
 /*

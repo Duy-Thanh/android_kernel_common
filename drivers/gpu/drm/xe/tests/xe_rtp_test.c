@@ -54,13 +54,13 @@ struct rtp_to_sr_test_case {
 	unsigned long expected_count_sr_entries;
 	unsigned int expected_sr_errors;
 	unsigned long expected_active;
-	const struct xe_rtp_table_sr table;
+	const struct xe_rtp_entry_sr *entries;
 };
 
 struct rtp_test_case {
 	const char *name;
 	unsigned long expected_active;
-	const struct xe_rtp_table table;
+	const struct xe_rtp_entry *entries;
 };
 
 static bool fake_xe_gt_mcr_check_reg(struct xe_gt *gt, struct xe_reg reg)
@@ -289,7 +289,7 @@ static const struct rtp_to_sr_test_case rtp_to_sr_cases[] = {
 		.expected_active = BIT(0) | BIT(1),
 		.expected_count_sr_entries = 1,
 		/* Different bits on the same register: create a single entry */
-		.table = XE_RTP_TABLE_SR(
+		.entries = (const struct xe_rtp_entry_sr[]) {
 			{ XE_RTP_NAME("basic-1"),
 			  XE_RTP_RULES(FUNC(match_yes)),
 			  XE_RTP_ACTIONS(SET(REGULAR_REG1, REG_BIT(0)))
@@ -298,7 +298,8 @@ static const struct rtp_to_sr_test_case rtp_to_sr_cases[] = {
 			  XE_RTP_RULES(FUNC(match_yes)),
 			  XE_RTP_ACTIONS(SET(REGULAR_REG1, REG_BIT(1)))
 			},
-		),
+			{}
+		},
 	},
 	{
 		.name = "no-match-no-add",
@@ -308,7 +309,7 @@ static const struct rtp_to_sr_test_case rtp_to_sr_cases[] = {
 		.expected_active = BIT(0),
 		.expected_count_sr_entries = 1,
 		/* Don't coalesce second entry since rules don't match */
-		.table = XE_RTP_TABLE_SR(
+		.entries = (const struct xe_rtp_entry_sr[]) {
 			{ XE_RTP_NAME("basic-1"),
 			  XE_RTP_RULES(FUNC(match_yes)),
 			  XE_RTP_ACTIONS(SET(REGULAR_REG1, REG_BIT(0)))
@@ -317,7 +318,8 @@ static const struct rtp_to_sr_test_case rtp_to_sr_cases[] = {
 			  XE_RTP_RULES(FUNC(match_no)),
 			  XE_RTP_ACTIONS(SET(REGULAR_REG1, REG_BIT(1)))
 			},
-		),
+			{}
+		},
 	},
 	{
 		.name = "two-regs-two-entries",
@@ -327,7 +329,7 @@ static const struct rtp_to_sr_test_case rtp_to_sr_cases[] = {
 		.expected_active = BIT(0) | BIT(1),
 		.expected_count_sr_entries = 2,
 		/* Same bits on different registers are not coalesced */
-		.table = XE_RTP_TABLE_SR(
+		.entries = (const struct xe_rtp_entry_sr[]) {
 			{ XE_RTP_NAME("basic-1"),
 			  XE_RTP_RULES(FUNC(match_yes)),
 			  XE_RTP_ACTIONS(SET(REGULAR_REG1, REG_BIT(0)))
@@ -336,7 +338,8 @@ static const struct rtp_to_sr_test_case rtp_to_sr_cases[] = {
 			  XE_RTP_RULES(FUNC(match_yes)),
 			  XE_RTP_ACTIONS(SET(REGULAR_REG2, REG_BIT(0)))
 			},
-		),
+			{}
+		},
 	},
 	{
 		.name = "clr-one-set-other",
@@ -346,7 +349,7 @@ static const struct rtp_to_sr_test_case rtp_to_sr_cases[] = {
 		.expected_active = BIT(0) | BIT(1),
 		.expected_count_sr_entries = 1,
 		/* Check clr vs set actions on different bits */
-		.table = XE_RTP_TABLE_SR(
+		.entries = (const struct xe_rtp_entry_sr[]) {
 			{ XE_RTP_NAME("basic-1"),
 			  XE_RTP_RULES(FUNC(match_yes)),
 			  XE_RTP_ACTIONS(SET(REGULAR_REG1, REG_BIT(0)))
@@ -355,7 +358,8 @@ static const struct rtp_to_sr_test_case rtp_to_sr_cases[] = {
 			  XE_RTP_RULES(FUNC(match_yes)),
 			  XE_RTP_ACTIONS(CLR(REGULAR_REG1, REG_BIT(1)))
 			},
-		),
+			{}
+		},
 	},
 	{
 #define TEMP_MASK	REG_GENMASK(10, 8)
@@ -367,13 +371,14 @@ static const struct rtp_to_sr_test_case rtp_to_sr_cases[] = {
 		.expected_active = BIT(0),
 		.expected_count_sr_entries = 1,
 		/* Check FIELD_SET works */
-		.table = XE_RTP_TABLE_SR(
+		.entries = (const struct xe_rtp_entry_sr[]) {
 			{ XE_RTP_NAME("basic-1"),
 			  XE_RTP_RULES(FUNC(match_yes)),
 			  XE_RTP_ACTIONS(FIELD_SET(REGULAR_REG1,
 						   TEMP_MASK, TEMP_FIELD))
 			},
-		),
+			{}
+		},
 #undef TEMP_MASK
 #undef TEMP_FIELD
 	},
@@ -385,7 +390,7 @@ static const struct rtp_to_sr_test_case rtp_to_sr_cases[] = {
 		.expected_active = BIT(0) | BIT(1),
 		.expected_count_sr_entries = 1,
 		.expected_sr_errors = 1,
-		.table = XE_RTP_TABLE_SR(
+		.entries = (const struct xe_rtp_entry_sr[]) {
 			{ XE_RTP_NAME("basic-1"),
 			  XE_RTP_RULES(FUNC(match_yes)),
 			  XE_RTP_ACTIONS(SET(REGULAR_REG1, REG_BIT(0)))
@@ -395,7 +400,8 @@ static const struct rtp_to_sr_test_case rtp_to_sr_cases[] = {
 			  XE_RTP_RULES(FUNC(match_yes)),
 			  XE_RTP_ACTIONS(SET(REGULAR_REG1, REG_BIT(0)))
 			},
-		),
+			{}
+		},
 	},
 	{
 		.name = "conflict-not-disjoint",
@@ -405,7 +411,7 @@ static const struct rtp_to_sr_test_case rtp_to_sr_cases[] = {
 		.expected_active = BIT(0) | BIT(1),
 		.expected_count_sr_entries = 1,
 		.expected_sr_errors = 1,
-		.table = XE_RTP_TABLE_SR(
+		.entries = (const struct xe_rtp_entry_sr[]) {
 			{ XE_RTP_NAME("basic-1"),
 			  XE_RTP_RULES(FUNC(match_yes)),
 			  XE_RTP_ACTIONS(SET(REGULAR_REG1, REG_BIT(0)))
@@ -415,7 +421,8 @@ static const struct rtp_to_sr_test_case rtp_to_sr_cases[] = {
 			  XE_RTP_RULES(FUNC(match_yes)),
 			  XE_RTP_ACTIONS(CLR(REGULAR_REG1, REG_GENMASK(1, 0)))
 			},
-		),
+			{}
+		},
 	},
 	{
 		.name = "conflict-reg-type",
@@ -425,7 +432,7 @@ static const struct rtp_to_sr_test_case rtp_to_sr_cases[] = {
 		.expected_active = BIT(0) | BIT(1) | BIT(2),
 		.expected_count_sr_entries = 1,
 		.expected_sr_errors = 2,
-		.table = XE_RTP_TABLE_SR(
+		.entries = (const struct xe_rtp_entry_sr[]) {
 			{ XE_RTP_NAME("basic-1"),
 			  XE_RTP_RULES(FUNC(match_yes)),
 			  XE_RTP_ACTIONS(SET(REGULAR_REG1, REG_BIT(0)))
@@ -440,7 +447,8 @@ static const struct rtp_to_sr_test_case rtp_to_sr_cases[] = {
 			  XE_RTP_RULES(FUNC(match_yes)),
 			  XE_RTP_ACTIONS(SET(MASKED_REG1, REG_BIT(0)))
 			},
-		),
+			{}
+		},
 	},
 	{
 		.name = "bad-mcr-reg-forced-to-regular",
@@ -450,12 +458,13 @@ static const struct rtp_to_sr_test_case rtp_to_sr_cases[] = {
 		.expected_active = BIT(0),
 		.expected_count_sr_entries = 1,
 		.expected_sr_errors = 1,
-		.table = XE_RTP_TABLE_SR(
+		.entries = (const struct xe_rtp_entry_sr[]) {
 			{ XE_RTP_NAME("bad-mcr-regular-reg"),
 			  XE_RTP_RULES(FUNC(match_yes)),
 			  XE_RTP_ACTIONS(SET(BAD_MCR_REG4, REG_BIT(0)))
 			},
-		),
+			{}
+		},
 	},
 	{
 		.name = "bad-regular-reg-forced-to-mcr",
@@ -465,12 +474,13 @@ static const struct rtp_to_sr_test_case rtp_to_sr_cases[] = {
 		.expected_active = BIT(0),
 		.expected_count_sr_entries = 1,
 		.expected_sr_errors = 1,
-		.table = XE_RTP_TABLE_SR(
+		.entries = (const struct xe_rtp_entry_sr[]) {
 			{ XE_RTP_NAME("bad-regular-reg"),
 			  XE_RTP_RULES(FUNC(match_yes)),
 			  XE_RTP_ACTIONS(SET(BAD_REGULAR_REG5, REG_BIT(0)))
 			},
-		),
+			{}
+		},
 	},
 };
 
@@ -482,12 +492,16 @@ static void xe_rtp_process_to_sr_tests(struct kunit *test)
 	struct xe_reg_sr *reg_sr = &gt->reg_sr;
 	const struct xe_reg_sr_entry *sre, *sr_entry = NULL;
 	struct xe_rtp_process_ctx ctx = XE_RTP_PROCESS_CTX_INITIALIZER(gt);
-	unsigned long idx, count_sr_entries = 0, active = 0;
+	unsigned long idx, count_sr_entries = 0, count_rtp_entries = 0, active = 0;
 
 	xe_reg_sr_init(reg_sr, "xe_rtp_to_sr_tests", xe);
 
-	xe_rtp_process_ctx_enable_active_tracking(&ctx, &active, param->table.n_entries);
-	xe_rtp_process_to_sr(&ctx, &param->table, reg_sr, false);
+	while (param->entries[count_rtp_entries].rules)
+		count_rtp_entries++;
+
+	xe_rtp_process_ctx_enable_active_tracking(&ctx, &active, count_rtp_entries);
+	xe_rtp_process_to_sr(&ctx, param->entries, count_rtp_entries,
+			     reg_sr, false);
 
 	xa_for_each(&reg_sr->xa, idx, sre) {
 		if (idx == param->expected_reg.addr)
@@ -520,52 +534,56 @@ static const struct rtp_test_case rtp_cases[] = {
 	{
 		.name = "active1",
 		.expected_active = BIT(0),
-		.table = XE_RTP_TABLE(
+		.entries = (const struct xe_rtp_entry[]) {
 			{ XE_RTP_NAME("r1"),
 			  XE_RTP_RULES(FUNC(match_yes)),
 			},
-		),
+			{}
+		},
 	},
 	{
 		.name = "active2",
 		.expected_active = BIT(0) | BIT(1),
-		.table = XE_RTP_TABLE(
+		.entries = (const struct xe_rtp_entry[]) {
 			{ XE_RTP_NAME("r1"),
 			  XE_RTP_RULES(FUNC(match_yes)),
 			},
 			{ XE_RTP_NAME("r2"),
 			  XE_RTP_RULES(FUNC(match_yes)),
 			},
-		),
+			{}
+		},
 	},
 	{
 		.name = "active-inactive",
 		.expected_active = BIT(0),
-		.table = XE_RTP_TABLE(
+		.entries = (const struct xe_rtp_entry[]) {
 			{ XE_RTP_NAME("r1"),
 			  XE_RTP_RULES(FUNC(match_yes)),
 			},
 			{ XE_RTP_NAME("r2"),
 			  XE_RTP_RULES(FUNC(match_no)),
 			},
-		),
+			{}
+		},
 	},
 	{
 		.name = "inactive-active",
 		.expected_active = BIT(1),
-		.table = XE_RTP_TABLE(
+		.entries = (const struct xe_rtp_entry[]) {
 			{ XE_RTP_NAME("r1"),
 			  XE_RTP_RULES(FUNC(match_no)),
 			},
 			{ XE_RTP_NAME("r2"),
 			  XE_RTP_RULES(FUNC(match_yes)),
 			},
-		),
+			{}
+		},
 	},
 	{
 		.name = "inactive-active-inactive",
 		.expected_active = BIT(1),
-		.table = XE_RTP_TABLE(
+		.entries = (const struct xe_rtp_entry[]) {
 			{ XE_RTP_NAME("r1"),
 			  XE_RTP_RULES(FUNC(match_no)),
 			},
@@ -575,12 +593,13 @@ static const struct rtp_test_case rtp_cases[] = {
 			{ XE_RTP_NAME("r3"),
 			  XE_RTP_RULES(FUNC(match_no)),
 			},
-		),
+			{}
+		},
 	},
 	{
 		.name = "inactive-inactive-inactive",
 		.expected_active = 0,
-		.table = XE_RTP_TABLE(
+		.entries = (const struct xe_rtp_entry[]) {
 			{ XE_RTP_NAME("r1"),
 			  XE_RTP_RULES(FUNC(match_no)),
 			},
@@ -590,7 +609,8 @@ static const struct rtp_test_case rtp_cases[] = {
 			{ XE_RTP_NAME("r3"),
 			  XE_RTP_RULES(FUNC(match_no)),
 			},
-		),
+			{}
+		},
 	},
 };
 
@@ -600,10 +620,13 @@ static void xe_rtp_process_tests(struct kunit *test)
 	struct xe_device *xe = test->priv;
 	struct xe_gt *gt = xe_device_get_root_tile(xe)->primary_gt;
 	struct xe_rtp_process_ctx ctx = XE_RTP_PROCESS_CTX_INITIALIZER(gt);
-	unsigned long active = 0;
+	unsigned long count_rtp_entries = 0, active = 0;
 
-	xe_rtp_process_ctx_enable_active_tracking(&ctx, &active, param->table.n_entries);
-	xe_rtp_process(&ctx, &param->table);
+	while (param->entries[count_rtp_entries].rules)
+		count_rtp_entries++;
+
+	xe_rtp_process_ctx_enable_active_tracking(&ctx, &active, count_rtp_entries);
+	xe_rtp_process(&ctx, param->entries);
 
 	KUNIT_EXPECT_EQ(test, active, param->expected_active);
 }

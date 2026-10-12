@@ -3,6 +3,7 @@
  * Copyright (C) 2022 Rafał Miłecki <rafal@milecki.pl>
  */
 
+#include <linux/mod_devicetable.h>
 #include <linux/module.h>
 #include <linux/mtd/mtd.h>
 #include <linux/nvmem-provider.h>

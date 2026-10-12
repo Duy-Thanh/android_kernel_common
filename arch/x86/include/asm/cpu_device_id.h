@@ -38,8 +38,11 @@
 /*
  * Declare drivers belonging to specific x86 CPUs
  * Similar in spirit to pci_device_id and related PCI functions
+ *
+ * The wildcard initializers are in mod_devicetable.h because
+ * file2alias needs them. Sigh.
  */
-#include <linux/device-id/x86_cpu.h>
+#include <linux/mod_devicetable.h>
 /* Get the INTEL_FAM* model defines */
 #include <asm/intel-family.h>
 /* And the X86_VENDOR_* ones */

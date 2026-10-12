@@ -6,6 +6,7 @@
  */
 
 #include <linux/module.h>
+#include <linux/mod_devicetable.h>
 #include <linux/nfc.h>
 #include <net/nfc/hci.h>
 #include <net/nfc/llc.h>

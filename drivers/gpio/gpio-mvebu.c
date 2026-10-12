@@ -1221,10 +1221,7 @@ static int mvebu_gpio_probe(struct platform_device *pdev)
 		BUG();
 	}
 
-	err = devm_gpiochip_add_data(&pdev->dev, &mvchip->chip, mvchip);
-	if (err)
-		return dev_err_probe(&pdev->dev, err,
-				     "failed to register gpiochip\n");
+	devm_gpiochip_add_data(&pdev->dev, &mvchip->chip, mvchip);
 
 	/* Some MVEBU SoCs have simple PWM support for GPIO lines */
 	if (IS_REACHABLE(CONFIG_PWM)) {

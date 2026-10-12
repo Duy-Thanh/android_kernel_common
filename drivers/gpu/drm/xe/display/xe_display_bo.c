@@ -48,8 +48,7 @@ static int xe_display_bo_framebuffer_init(struct drm_gem_object *obj,
 	if (ret)
 		goto err;
 
-	if (!(bo->flags & XE_BO_FLAG_FORCE_WC) &&
-	    bo->ttm.type != ttm_bo_type_sg) {
+	if (!(bo->flags & XE_BO_FLAG_FORCE_WC)) {
 		/*
 		 * XE_BO_FLAG_FORCE_WC should ideally be set at creation, or is
 		 * automatically set when creating FB. We cannot change caching

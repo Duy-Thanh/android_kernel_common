@@ -7,6 +7,7 @@
 
 #include <linux/kernel.h>
 #include <linux/err.h>
+#include <linux/mod_devicetable.h>
 #include <linux/module.h>
 #include <linux/spi/spi.h>
 #include <linux/i2c.h>

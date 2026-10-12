@@ -8,6 +8,7 @@
 #include <linux/clk.h>
 #include <linux/module.h>
 #include <linux/property.h>
+#include <linux/mod_devicetable.h>
 #include <linux/platform_device.h>
 
 #include "stmmac_platform.h"

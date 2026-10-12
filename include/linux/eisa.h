@@ -4,7 +4,7 @@
 
 #include <linux/ioport.h>
 #include <linux/device.h>
-#include <linux/device-id/eisa.h>
+#include <linux/mod_devicetable.h>
 
 #define EISA_MAX_SLOTS 8
 

@@ -13,6 +13,7 @@
 #include <linux/io.h>
 #include <linux/property.h>
 #include <linux/math.h>
+#include <linux/mod_devicetable.h>
 #include <linux/pm.h>
 #include <linux/reset.h>
 

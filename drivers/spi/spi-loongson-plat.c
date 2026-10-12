@@ -3,6 +3,7 @@
 // Copyright (C) 2023 Loongson Technology Corporation Limited
 
 #include <linux/err.h>
+#include <linux/mod_devicetable.h>
 #include <linux/platform_device.h>
 
 #include "spi-loongson.h"

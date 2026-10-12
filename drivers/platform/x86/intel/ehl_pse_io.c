@@ -12,6 +12,7 @@
 #include <linux/errno.h>
 #include <linux/gfp_types.h>
 #include <linux/ioport.h>
+#include <linux/mod_devicetable.h>
 #include <linux/module.h>
 #include <linux/pci.h>
 #include <linux/sizes.h>

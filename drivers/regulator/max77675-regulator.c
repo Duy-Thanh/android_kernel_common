@@ -5,6 +5,7 @@
  */
 
 #include <linux/module.h>
+#include <linux/mod_devicetable.h>
 #include <linux/cleanup.h>
 #include <linux/slab.h>
 #include <linux/of.h>

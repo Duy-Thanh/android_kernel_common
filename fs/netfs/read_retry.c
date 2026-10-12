@@ -98,12 +98,7 @@ static void netfs_retry_read_subrequests(struct netfs_io_request *rreq)
 			goto abandon;
 		}
 
-		for (;;) {
-			/* Read pointer to subreq before reading subreq state. */
-			next = smp_load_acquire(&next->next);
-			if (next == &stream->subrequests)
-				break;
-
+		list_for_each_continue(next, &stream->subrequests) {
 			subreq = list_entry(next, struct netfs_io_subrequest, rreq_link);
 			if (subreq->start + subreq->transferred != start + len ||
 			    test_bit(NETFS_SREQ_BOUNDARY, &subreq->flags) ||

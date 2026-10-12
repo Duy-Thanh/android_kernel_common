@@ -10,6 +10,7 @@
 #include <linux/module.h>
 #include <linux/regmap.h>
 #include <linux/spi/spi.h>
+#include <linux/mod_devicetable.h>
 #include "zpa2326.h"
 
 /*

@@ -6,6 +6,7 @@
  * Copyright (C) 2025 Chen Wang <unicorn_wang@outlook.com>
  */
 
+#include <linux/mod_devicetable.h>
 #include <linux/pci.h>
 #include <linux/platform_device.h>
 #include <linux/pm_runtime.h>

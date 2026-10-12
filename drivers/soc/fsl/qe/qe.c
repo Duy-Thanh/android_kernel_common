@@ -24,6 +24,7 @@
 #include <linux/ioport.h>
 #include <linux/iopoll.h>
 #include <linux/crc32.h>
+#include <linux/mod_devicetable.h>
 #include <linux/of.h>
 #include <linux/platform_device.h>
 #include <soc/fsl/qe/immap_qe.h>

@@ -17,6 +17,7 @@
 #include <linux/jiffies.h>
 #include <linux/kstrtox.h>
 #include <linux/minmax.h>
+#include <linux/mod_devicetable.h>
 #include <linux/module.h>
 #include <linux/regulator/consumer.h>
 #include <linux/serdev.h>

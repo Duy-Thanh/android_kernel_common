@@ -19,6 +19,7 @@
 #include <linux/smp.h>
 #include <linux/bitmap.h>
 #include <linux/math64.h>
+#include <linux/mod_devicetable.h>
 #include <asm/cpu_device_id.h>
 #include <asm/intel-family.h>
 #include <asm/processor.h>

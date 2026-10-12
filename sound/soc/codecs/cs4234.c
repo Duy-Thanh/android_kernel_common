@@ -11,6 +11,7 @@
 #include <linux/gpio/consumer.h>
 #include <linux/i2c.h>
 #include <linux/jiffies.h>
+#include <linux/mod_devicetable.h>
 #include <linux/module.h>
 #include <sound/pcm.h>
 #include <sound/pcm_params.h>

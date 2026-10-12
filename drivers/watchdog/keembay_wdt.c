@@ -12,6 +12,7 @@
 #include <linux/io.h>
 #include <linux/limits.h>
 #include <linux/module.h>
+#include <linux/mod_devicetable.h>
 #include <linux/platform_device.h>
 #include <linux/reboot.h>
 #include <linux/watchdog.h>

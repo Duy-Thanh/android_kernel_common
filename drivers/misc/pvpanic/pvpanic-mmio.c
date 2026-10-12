@@ -12,6 +12,7 @@
 #include <linux/io.h>
 #include <linux/ioport.h>
 #include <linux/kexec.h>
+#include <linux/mod_devicetable.h>
 #include <linux/module.h>
 #include <linux/platform_device.h>
 #include <linux/types.h>

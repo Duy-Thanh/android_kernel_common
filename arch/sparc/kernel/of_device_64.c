@@ -4,6 +4,7 @@
 #include <linux/dma-mapping.h>
 #include <linux/init.h>
 #include <linux/export.h>
+#include <linux/mod_devicetable.h>
 #include <linux/slab.h>
 #include <linux/errno.h>
 #include <linux/irq.h>
