@@ -16,6 +16,24 @@
       "message": "Avoid the churn from https://android-review.git.corp.google.com/q/I83fce47ed12fb0ee550c2eb3f561471fcb733aee or add it to this stack?",
       "revId": "37b62aa908211701c1602281f4c565c6f05426ba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a3c2b2a_b7f3005e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-12T21:09:01Z",
+      "side": 1,
+      "message": "I folded that patch into this one, as noted in the commit message.",
+      "parentUuid": "d8ddae28_de78fcbf",
+      "revId": "37b62aa908211701c1602281f4c565c6f05426ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
