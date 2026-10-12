@@ -72,10 +72,8 @@ static struct sk_buff *mtk_tag_rcv(struct sk_buff *skb, struct net_device *dev)
 	int port;
 	__be16 *phdr;
 
-	if (unlikely(!pskb_may_pull(skb, MTK_HDR_LEN))) {
-		kfree_skb(skb);
+	if (unlikely(!pskb_may_pull(skb, MTK_HDR_LEN)))
 		return NULL;
-	}
 
 	phdr = dsa_etype_header_pos_rx(skb);
 	hdr = ntohs(*phdr);
@@ -89,10 +87,8 @@ static struct sk_buff *mtk_tag_rcv(struct sk_buff *skb, struct net_device *dev)
 	port = (hdr & MTK_HDR_RECV_SOURCE_PORT_MASK);
 
 	skb->dev = dsa_conduit_find_user(dev, 0, port);
-	if (!skb->dev) {
-		kfree_skb(skb);
+	if (!skb->dev)
 		return NULL;
-	}
 
 	dsa_default_offload_fwd_mark(skb);
 
