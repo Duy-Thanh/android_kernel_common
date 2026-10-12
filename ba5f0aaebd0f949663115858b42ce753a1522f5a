@@ -238,6 +238,30 @@
       },
       "revId": "ba5f0aaebd0f949663115858b42ce753a1522f5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4eeb8e7b_3c1d9033",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1779,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-10-12T13:37:43Z",
+      "side": 1,
+      "message": "\u003e Makes sense. Which means this will not happen in practice, since no one uses RMRRs for hotpluggable devices (that wouldn\u0027t make a lot of sense)?\n\nYeah true. And RMRR memory remaining non-donatable permanently seems to be fine.\n\nA quick check on requirement of MMIO space to be mapped for DMA has some valid use cases like peer-to-peer dma etc. I don\u0027t think we would have a usecase for that and need not worry about it immediately.\n\nResolving this comment.",
+      "parentUuid": "cf4cf4b0_877b7a0c",
+      "range": {
+        "startLine": 1779,
+        "startChar": 25,
+        "endLine": 1779,
+        "endChar": 51
+      },
+      "revId": "ba5f0aaebd0f949663115858b42ce753a1522f5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
