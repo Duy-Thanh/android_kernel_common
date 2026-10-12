@@ -1374,13 +1374,8 @@ struct gmap *gmap_create_shadow(struct kvm_s390_mmu_cache *mc, struct gmap *pare
 			/* Only allow one real-space gmap shadow. */
 			list_for_each_entry(sg, &parent->children, list) {
 				if (sg->guest_asce.r) {
-					if (write_trylock(&parent->kvm->mmu_lock)) {
+					scoped_guard(write_lock, &parent->kvm->mmu_lock)
 						gmap_unshadow(sg);
-						write_unlock(&parent->kvm->mmu_lock);
-					} else {
-						gmap_put(new);
-						return ERR_PTR(-EAGAIN);
-					}
 					break;
 				}
 			}
