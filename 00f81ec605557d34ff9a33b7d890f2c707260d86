@@ -22,6 +22,30 @@
       },
       "revId": "00f81ec605557d34ff9a33b7d890f2c707260d86",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7155c983_be5dfb7e",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-12T19:19:46Z",
+      "side": 1,
+      "message": "No, my thought was that the MGLRU code should be the only code calling that, and if someone tries to call it elsewhere, with memcg disabled, they should hit this build time failure. However, I think this call only makes sense in the context of MGLRU, so I\u0027ll move it to be under the `CONFIG_LRU_GEN` guard, and remove the `BUILD_BUG` since now only MGLRU code can call this.",
+      "parentUuid": "4b9f7b84_1a1a6cfb",
+      "range": {
+        "startLine": 293,
+        "startChar": 1,
+        "endLine": 293,
+        "endChar": 10
+      },
+      "revId": "00f81ec605557d34ff9a33b7d890f2c707260d86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
