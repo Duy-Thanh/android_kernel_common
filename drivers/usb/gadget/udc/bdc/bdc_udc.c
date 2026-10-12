@@ -530,8 +530,8 @@ int bdc_udc_init(struct bdc *bdc)
 
 
 	bdc->gadget.name = BRCM_BDC_NAME;
-	ret = request_irq(bdc->irq, bdc_udc_interrupt, IRQF_SHARED,
-			  BRCM_BDC_NAME, bdc);
+	ret = devm_request_irq(bdc->dev, bdc->irq, bdc_udc_interrupt,
+				IRQF_SHARED, BRCM_BDC_NAME, bdc);
 	if (ret) {
 		dev_err(bdc->dev,
 			"failed to request irq #%d %d\n",
@@ -542,7 +542,7 @@ int bdc_udc_init(struct bdc *bdc)
 	ret = bdc_init_ep(bdc);
 	if (ret) {
 		dev_err(bdc->dev, "bdc init ep fail: %d\n", ret);
-		goto err0;
+		return ret;
 	}
 
 	ret = usb_add_gadget_udc(bdc->dev, &bdc->gadget);
@@ -571,7 +571,6 @@ int bdc_udc_init(struct bdc *bdc)
 err1:
 	usb_del_gadget_udc(&bdc->gadget);
 err0:
-	free_irq(bdc->irq, bdc);
 	bdc_free_ep(bdc);
 
 	return ret;

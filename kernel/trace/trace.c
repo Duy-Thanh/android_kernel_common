@@ -6185,7 +6185,7 @@ char *trace_user_fault_read(struct trace_user_buf_info *tinfo,
 {
 	int cpu = smp_processor_id();
 	char *buffer = per_cpu_ptr(tinfo->tbuf, cpu)->buf;
-	unsigned long long cnt;
+	unsigned int cnt;
 	int trys = 0;
 	int ret;
 

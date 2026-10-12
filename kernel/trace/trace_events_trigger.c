@@ -38,13 +38,6 @@ static void trigger_create_kthread_locked(void)
 	}
 }
 
-static void trigger_data_free_one(struct event_trigger_data *data)
-{
-	if (data->private_data_free)
-		data->private_data_free(data);
-	kfree(data);
-}
-
 static void trigger_data_free_queued_locked(void)
 {
 	struct event_trigger_data *data, *tmp;
@@ -59,7 +52,7 @@ static void trigger_data_free_queued_locked(void)
 	tracepoint_synchronize_unregister();
 
 	llist_for_each_entry_safe(data, tmp, llnodes, llist)
-		trigger_data_free_one(data);
+		kfree(data);
 }
 
 /* Bulk garbage collection of event_trigger_data elements */
@@ -82,7 +75,7 @@ static int trigger_kthread_fn(void *ignore)
 		tracepoint_synchronize_unregister();
 
 		llist_for_each_entry_safe(data, tmp, llnodes, llist)
-			trigger_data_free_one(data);
+			kfree(data);
 	}
 
 	return 0;
@@ -1724,14 +1717,6 @@ int event_enable_trigger_print(struct seq_file *m,
 	return 0;
 }
 
-static void enable_trigger_private_data_free(struct event_trigger_data *data)
-{
-	struct enable_trigger_data *enable_data = data->private_data;
-
-	trace_event_put_ref(enable_data->file->event_call);
-	kfree(enable_data);
-}
-
 void event_enable_trigger_free(struct event_trigger_data *data)
 {
 	struct enable_trigger_data *enable_data = data->private_data;
@@ -1743,8 +1728,9 @@ void event_enable_trigger_free(struct event_trigger_data *data)
 	if (!data->ref) {
 		/* Remove the SOFT_MODE flag */
 		trace_event_enable_disable(enable_data->file, 0, 1);
-		data->private_data_free = enable_trigger_private_data_free;
+		trace_event_put_ref(enable_data->file->event_call);
 		trigger_data_free(data);
+		kfree(enable_data);
 	}
 }
 
