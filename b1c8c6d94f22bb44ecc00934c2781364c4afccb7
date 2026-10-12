@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc00fe02_4d97968d",
+        "filename": "gki/aarch64/symbols/lenovo",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2026-10-12T22:11:19Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: File is missing final newline",
+      "revId": "b1c8c6d94f22bb44ecc00934c2781364c4afccb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
