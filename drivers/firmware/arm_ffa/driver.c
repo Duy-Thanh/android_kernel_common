@@ -2093,6 +2093,7 @@ static int __init ffa_init(void)
 	}
 
 	rxtx_bufsz = min_not_zero(PAGE_ALIGN(rxtx_min_bufsz), rxtx_max_bufsz);
+	rxtx_bufsz = PAGE_ALIGN(rxtx_bufsz);
 	drv_info->rx_buffer = alloc_pages_exact(rxtx_bufsz, GFP_KERNEL);
 	if (!drv_info->rx_buffer) {
 		ret = -ENOMEM;
