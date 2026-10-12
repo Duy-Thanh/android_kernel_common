@@ -2092,7 +2092,14 @@ static int __init ffa_init(void)
 			rxtx_max_bufsz = rxtx_min_bufsz;
 	}
 
+<<<<<<< HEAD   (cc35a23d0e9ccb4cdcd77966bb33907e8f1c6187 Merge 3c51d99449dc ("firmware: arm_ffa: Validate framework n)
 	rxtx_bufsz = min_not_zero(PAGE_ALIGN(rxtx_min_bufsz), rxtx_max_bufsz);
+||||||| BASE   (3c51d99449dc5a01c08a7fce6071d6721f5aac83 firmware: arm_ffa: Validate framework notification message l)
+	drv_info->rxtx_bufsz = rxtx_bufsz;
+=======
+	rxtx_bufsz = PAGE_ALIGN(rxtx_bufsz);
+	drv_info->rxtx_bufsz = rxtx_bufsz;
+>>>>>>> BRANCH (419cef661ae86a591c6c5d8534b2909706399824 firmware: arm_ffa: Align RxTx buffer size before mapping)
 	drv_info->rx_buffer = alloc_pages_exact(rxtx_bufsz, GFP_KERNEL);
 	if (!drv_info->rx_buffer) {
 		ret = -ENOMEM;
@@ -2108,12 +2115,16 @@ static int __init ffa_init(void)
 	ret = ffa_rxtx_map(virt_to_phys(drv_info->tx_buffer),
 			   virt_to_phys(drv_info->rx_buffer),
 			   rxtx_bufsz / FFA_PAGE_SIZE);
+<<<<<<< HEAD   (cc35a23d0e9ccb4cdcd77966bb33907e8f1c6187 Merge 3c51d99449dc ("firmware: arm_ffa: Validate framework n)
 	if (ret == -EINVAL && !rxtx_max_bufsz && rxtx_min_bufsz < rxtx_bufsz) {
 		rxtx_bufsz = rxtx_min_bufsz;
 		ret = ffa_rxtx_map(virt_to_phys(drv_info->tx_buffer),
 				   virt_to_phys(drv_info->rx_buffer),
 				   rxtx_bufsz / FFA_PAGE_SIZE);
 	}
+||||||| BASE   (3c51d99449dc5a01c08a7fce6071d6721f5aac83 firmware: arm_ffa: Validate framework notification message l)
+=======
+>>>>>>> BRANCH (419cef661ae86a591c6c5d8534b2909706399824 firmware: arm_ffa: Align RxTx buffer size before mapping)
 	if (ret) {
 		pr_err("failed to register FFA RxTx buffers\n");
 		goto free_pages;
