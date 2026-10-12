@@ -536,9 +536,7 @@ int __init mctp_device_init(void)
 {
 	int err;
 
-	err = register_netdevice_notifier(&mctp_dev_nb);
-	if (err)
-		return err;
+	register_netdevice_notifier(&mctp_dev_nb);
 
 	err = rtnl_af_register(&mctp_af_ops);
 	if (err)

@@ -1285,11 +1285,9 @@ int rxrpc_io_thread(void *data);
 void rxrpc_post_response(struct rxrpc_connection *conn, struct sk_buff *skb);
 static inline void rxrpc_wake_up_io_thread(struct rxrpc_local *local)
 {
-	struct task_struct *io_thread = READ_ONCE(local->io_thread);
-
-	if (!io_thread)
+	if (!local->io_thread)
 		return;
-	wake_up_process(io_thread);
+	wake_up_process(READ_ONCE(local->io_thread));
 }
 
 static inline bool rxrpc_protocol_error(struct sk_buff *skb, enum rxrpc_abort_reason why)

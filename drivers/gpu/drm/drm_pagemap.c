@@ -727,10 +727,8 @@ int drm_pagemap_migrate_to_devmem(struct drm_pagemap_devmem *devmem_allocation,
 	}
 
 	err = ops->populate_devmem_pfn(devmem_allocation, npages, migrate.dst);
-	if (err) {
-		npages = 0;
-		goto err_finalize;
-	}
+	if (err)
+		goto err_aborted_migration;
 
 	own_pages = 0;
 
@@ -809,11 +807,8 @@ next:
 		msecs_to_jiffies(mdetails->timeslice_ms);
 
 err_finalize:
-	if (err) {
+	if (err)
 		drm_pagemap_migration_unlock_put_pages(npages, migrate.dst);
-		for (i = npages; i < npages_in_range(start, end); ++i)
-			migrate.dst[i] = 0;
-	}
 err_aborted_migration:
 	migrate_vma_pages(&migrate);
 

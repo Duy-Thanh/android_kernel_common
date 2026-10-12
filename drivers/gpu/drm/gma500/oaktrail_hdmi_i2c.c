@@ -98,7 +98,6 @@ static int xfer_read(struct i2c_adapter *adap, struct i2c_msg *pmsg)
 	struct oaktrail_hdmi_dev *hdmi_dev = i2c_get_adapdata(adap);
 	struct hdmi_i2c_dev *i2c_dev = hdmi_dev->i2c_dev;
 	u32 temp;
-	int ret;
 
 	i2c_dev->status = I2C_STAT_INIT;
 	i2c_dev->msg = pmsg;
@@ -110,14 +109,9 @@ static int xfer_read(struct i2c_adapter *adap, struct i2c_msg *pmsg)
 	HDMI_WRITE(HDMI_HI2CHCR, temp);
 	HDMI_READ(HDMI_HI2CHCR);
 
-	while (i2c_dev->status != I2C_TRANSACTION_DONE) {
-		ret = wait_for_completion_interruptible_timeout(&i2c_dev->complete,
+	while (i2c_dev->status != I2C_TRANSACTION_DONE)
+		wait_for_completion_interruptible_timeout(&i2c_dev->complete,
 								10 * HZ);
-		if (ret < 0)
-			return ret;
-		if (!ret)
-			return -ETIMEDOUT;
-	}
 
 	return 0;
 }
@@ -136,7 +130,7 @@ static int oaktrail_hdmi_i2c_access(struct i2c_adapter *adap,
 {
 	struct oaktrail_hdmi_dev *hdmi_dev = i2c_get_adapdata(adap);
 	struct hdmi_i2c_dev *i2c_dev = hdmi_dev->i2c_dev;
-	int i, ret = 0;
+	int i;
 
 	mutex_lock(&i2c_dev->i2c_lock);
 
@@ -148,11 +142,9 @@ static int oaktrail_hdmi_i2c_access(struct i2c_adapter *adap,
 	for (i = 0; i < num; i++) {
 		if (pmsg->len && pmsg->buf) {
 			if (pmsg->flags & I2C_M_RD)
-				ret = xfer_read(adap, pmsg);
+				xfer_read(adap, pmsg);
 			else
-				ret = xfer_write(adap, pmsg);
-			if (ret)
-				break;
+				xfer_write(adap, pmsg);
 		}
 		pmsg++;         /* next message */
 	}
@@ -161,9 +153,6 @@ static int oaktrail_hdmi_i2c_access(struct i2c_adapter *adap,
 	hdmi_i2c_irq_disable(hdmi_dev);
 
 	mutex_unlock(&i2c_dev->i2c_lock);
-
-	if (ret)
-		return ret;
 
 	return i;
 }

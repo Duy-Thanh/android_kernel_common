@@ -26,12 +26,11 @@ static void unlock_ovpn(struct ovpn_priv *ovpn,
 			 struct llist_head *release_list)
 	__releases(&ovpn->lock)
 {
-	struct ovpn_peer *peer, *next;
+	struct ovpn_peer *peer;
 
 	spin_unlock_bh(&ovpn->lock);
 
-	llist_for_each_entry_safe(peer, next, release_list->first,
-				  release_entry) {
+	llist_for_each_entry(peer, release_list->first, release_entry) {
 		ovpn_socket_release(peer);
 		ovpn_peer_put(peer);
 	}
@@ -45,7 +44,7 @@ static void unlock_ovpn(struct ovpn_priv *ovpn,
  */
 void ovpn_peer_keepalive_set(struct ovpn_peer *peer, u32 interval, u32 timeout)
 {
-	time64_t now = ktime_get_boottime_seconds();
+	time64_t now = ktime_get_real_seconds();
 
 	netdev_dbg(peer->ovpn->dev,
 		   "scheduling keepalive for peer %u: interval=%u timeout=%u\n",
@@ -1168,6 +1167,7 @@ static void ovpn_peer_release_p2p(struct ovpn_priv *ovpn, struct sock *sk,
 		ovpn_sock = rcu_access_pointer(peer->sock);
 		if (!ovpn_sock || ovpn_sock->sk != sk) {
 			spin_unlock_bh(&ovpn->lock);
+			ovpn_peer_put(peer);
 			return;
 		}
 	}
@@ -1285,10 +1285,8 @@ static time64_t ovpn_peer_keepalive_work_single(struct ovpn_peer *peer,
 		netdev_dbg(peer->ovpn->dev,
 			   "sending keepalive to peer %u\n",
 			   peer->id);
-		if (WARN_ON(!ovpn_peer_hold(peer)))
-			return 0;
-		if (!schedule_work(&peer->keepalive_work))
-			ovpn_peer_put(peer);
+		if (schedule_work(&peer->keepalive_work))
+			ovpn_peer_hold(peer);
 	}
 
 	if (next_run1 < next_run2)
@@ -1359,7 +1357,7 @@ void ovpn_peer_keepalive_work(struct work_struct *work)
 {
 	struct ovpn_priv *ovpn = container_of(work, struct ovpn_priv,
 					      keepalive_work.work);
-	time64_t next_run = 0, now = ktime_get_boottime_seconds();
+	time64_t next_run = 0, now = ktime_get_real_seconds();
 	LLIST_HEAD(release_list);
 
 	spin_lock_bh(&ovpn->lock);

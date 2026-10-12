@@ -229,9 +229,7 @@ done:
 
 int skb_gro_receive_list(struct sk_buff *p, struct sk_buff *skb)
 {
-	/* make sure to check flush flag and to not merge */
-	if (unlikely(p->len + skb->len >= 65536 ||
-		     NAPI_GRO_CB(skb)->flush))
+	if (unlikely(p->len + skb->len >= 65536))
 		return -E2BIG;
 
 	if (!pskb_may_pull(skb, skb_gro_offset(skb))) {
