@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "47617782_a877bd39",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-10-12T22:33:40Z",
+      "side": 1,
+      "message": "Please use the same Change-id: I5bc0cbfef1d0c4f4322a8ae820cf608b63cba2bb as the patch https://r.android.com/4288308 which was merged in 6.18. Same is true for the 6.1 kernel patch and both respin patch request. This helps us track the changes across the branches easily.",
+      "revId": "d6784f235d2e8bd5b46161b9a26a3a0b2d7560b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "62830a4d_e2d877e6",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 5
