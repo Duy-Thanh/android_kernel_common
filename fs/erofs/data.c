@@ -38,7 +38,8 @@ void *erofs_bread(struct erofs_buf *buf, erofs_off_t offset, bool need_kmap)
 	}
 	if (!folio || !folio_contains(folio, index)) {
 		erofs_put_metabuf(buf);
-		folio = read_mapping_folio(buf->mapping, index, buf->file);
+		folio = read_cache_folio(buf->mapping, index,
+				buf->mc ? erofs_read_meta_folio : NULL, NULL);
 		if (IS_ERR(folio))
 			return folio;
 	}
@@ -55,19 +56,20 @@ int erofs_init_metabuf(struct erofs_buf *buf, struct super_block *sb,
 {
 	struct erofs_sb_info *sbi = EROFS_SB(sb);
 
-	buf->file = NULL;
+	buf->mc = false;
 	if (in_metabox) {
 		if (unlikely(!sbi->metabox_inode))
 			return -EFSCORRUPTED;
 		buf->mapping = sbi->metabox_inode->i_mapping;
 		return 0;
 	}
-	buf->off = sbi->dif0.fsoff;
 	if (erofs_is_fileio_mode(sbi)) {
-		buf->file = sbi->dif0.file;	/* some fs like FUSE needs it */
-		buf->mapping = buf->file->f_mapping;
-	} else
+		buf->mapping = sbi->managed_cache->i_mapping;
+		buf->mc = true;
+	} else {
+		buf->off = sbi->dif0.fsoff;
 		buf->mapping = sb->s_bdev->bd_mapping;
+	}
 	return 0;
 }
 
