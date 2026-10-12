@@ -51,8 +51,7 @@ static int __init z_erofs_lzma_init(void)
 
 	/* by default, use # of possible CPUs instead */
 	if (!z_erofs_lzma_nstrms)
-		z_erofs_lzma_nstrms = min_t(unsigned int, num_possible_cpus(),
-				CONFIG_EROFS_FS_ZIP_LZMA_DEFAULT_MAX_STREAMS);
+		z_erofs_lzma_nstrms = num_possible_cpus();
 
 	for (i = 0; i < z_erofs_lzma_nstrms; ++i) {
 		struct z_erofs_lzma *strm = kzalloc_obj(*strm);

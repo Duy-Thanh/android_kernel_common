@@ -2,7 +2,7 @@
 VERSION = 7
 PATCHLEVEL = 2
 SUBLEVEL = 0
-EXTRAVERSION = -rc6
+EXTRAVERSION = -rc5
 NAME = Baby Opossum Posse
 
 # *DOCUMENTATION*
@@ -713,11 +713,13 @@ filechk_makefile = { \
 	echo "include $(abs_srctree)/Makefile"; \
 	}
 
-PHONY += $(CURDIR)/Makefile
-$(CURDIR)/Makefile: FORCE
+$(objtree)/Makefile: FORCE
 	$(call filechk,makefile)
 
-outputmakefile: $(CURDIR)/Makefile
+# Prevent $(srcroot)/Makefile from inhibiting the rule to run.
+PHONY += $(objtree)/Makefile
+
+outputmakefile: $(objtree)/Makefile
 ifeq ($(KBUILD_EXTMOD),)
 	@if [ -f $(srctree)/.config -o \
 		 -d $(srctree)/include/config -o \

@@ -128,12 +128,7 @@ static void smp_setup_cpu(int cpu)
 	else if (cpu != boot_cpuid)
 		xics_setup_cpu();
 
-	/*
-	 * Initialize VPA on non-boot cpus since boot-cpu vpa was
-	 * already initialized in pSeries_setup_arch()
-	 */
-	if (firmware_has_feature(FW_FEATURE_SPLPAR) &&
-	    cpu != boot_cpuid)
+	if (firmware_has_feature(FW_FEATURE_SPLPAR))
 		vpa_init(cpu);
 
 	cpumask_clear_cpu(cpu, of_spin_mask);

@@ -271,7 +271,6 @@ static unsigned long keyring_get_key_chunk(const void *data, int level)
 	unsigned long chunk = 0;
 	const u8 *d;
 	int desc_len = index_key->desc_len, n = sizeof(chunk);
-	unsigned int offset;
 
 	level /= ASSOC_ARRAY_KEY_CHUNK_SIZE;
 	switch (level) {
@@ -285,18 +284,17 @@ static unsigned long keyring_get_key_chunk(const void *data, int level)
 		return (unsigned long)index_key->domain_tag;
 	default:
 		level -= 4;
-		offset = sizeof(index_key->desc) + level * sizeof(long);
-		if (desc_len <= offset)
+		if (desc_len <= sizeof(index_key->desc))
 			return 0;
 
-		d = index_key->description + offset;
-		desc_len -= offset;
+		d = index_key->description + sizeof(index_key->desc);
+		d += level * sizeof(long);
+		desc_len -= sizeof(index_key->desc);
 		if (desc_len > n)
 			desc_len = n;
-		d += desc_len;
 		do {
 			chunk <<= 8;
-			chunk |= *--d;
+			chunk |= *d++;
 		} while (--desc_len > 0);
 		return chunk;
 	}
@@ -377,7 +375,7 @@ same:
 	return -1;
 
 differ_plus_i:
-	level += i - (int)sizeof(a->desc);
+	level += i;
 differ:
 	i = level * 8 + __ffs(seg_a ^ seg_b);
 	return i;

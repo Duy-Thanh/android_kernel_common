@@ -1481,21 +1481,11 @@ static int enable_trace_fprobe(struct trace_event_call *call,
 		list_for_each_entry(tf, trace_probe_probe_list(tp), tp.list) {
 			ret = __register_trace_fprobe(tf);
 			if (ret < 0)
-				goto err;
+				return ret;
 		}
 	}
 
 	return 0;
-
-err:
-	/* Failed to enable one of them. Roll back all */
-	list_for_each_entry(tf, trace_probe_probe_list(tp), tp.list)
-		__unregister_trace_fprobe(tf);
-	if (file)
-		trace_probe_remove_file(tp, file);
-	else
-		trace_probe_clear_flag(tp, TP_FLAG_PROFILE);
-	return ret;
 }
 
 /*

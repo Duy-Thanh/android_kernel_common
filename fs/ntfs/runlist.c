@@ -71,44 +71,27 @@ static inline void ntfs_rl_mc(struct runlist_element *dstbase, int dst,
  * On success, return a pointer to the newly allocated, or recycled, memory.
  * On error, return -errno.
  */
-static inline struct runlist_element *ntfs_rl_realloc_gfp(struct runlist_element *rl,
-		int old_size, int new_size, gfp_t gfp)
+struct runlist_element *ntfs_rl_realloc(struct runlist_element *rl,
+		int old_size, int new_size)
 {
 	struct runlist_element *new_rl;
-	size_t new_bytes;
 
-	if (old_size < 0 || new_size < 0)
-		return ERR_PTR(-EINVAL);
-
+	old_size = old_size * sizeof(*rl);
+	new_size = new_size * sizeof(*rl);
 	if (old_size == new_size)
 		return rl;
 
-	if (check_mul_overflow(new_size, sizeof(*rl), &new_bytes))
-		return ERR_PTR(-EINVAL);
-
-	new_rl = kvzalloc(new_bytes, gfp);
+	new_rl = kvzalloc(new_size, GFP_NOFS);
 	if (unlikely(!new_rl))
 		return ERR_PTR(-ENOMEM);
 
 	if (likely(rl != NULL)) {
-		size_t old_bytes;
-
-		if (check_mul_overflow(old_size, sizeof(*rl), &old_bytes)) {
-			kvfree(new_rl);
-			return ERR_PTR(-EINVAL);
-		}
-		if (unlikely(old_bytes > new_bytes))
-			old_bytes = new_bytes;
-		memcpy(new_rl, rl, old_bytes);
+		if (unlikely(old_size > new_size))
+			old_size = new_size;
+		memcpy(new_rl, rl, old_size);
 		kvfree(rl);
 	}
 	return new_rl;
-}
-
-struct runlist_element *ntfs_rl_realloc(struct runlist_element *rl,
-		int old_size, int new_size)
-{
-	return ntfs_rl_realloc_gfp(rl, old_size, new_size, GFP_NOFS);
 }
 
 /*
@@ -135,8 +118,21 @@ struct runlist_element *ntfs_rl_realloc(struct runlist_element *rl,
 static inline struct runlist_element *ntfs_rl_realloc_nofail(struct runlist_element *rl,
 		int old_size, int new_size)
 {
-	return ntfs_rl_realloc_gfp(rl, old_size, new_size,
-			GFP_NOFS | __GFP_NOFAIL);
+	struct runlist_element *new_rl;
+
+	old_size = old_size * sizeof(*rl);
+	new_size = new_size * sizeof(*rl);
+	if (old_size == new_size)
+		return rl;
+
+	new_rl = kvmalloc(new_size, GFP_NOFS | __GFP_NOFAIL);
+	if (likely(rl != NULL)) {
+		if (unlikely(old_size > new_size))
+			old_size = new_size;
+		memcpy(new_rl, rl, old_size);
+		kvfree(rl);
+	}
+	return new_rl;
 }
 
 /*

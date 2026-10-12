@@ -383,7 +383,7 @@ int pqm_create_queue(struct process_queue_manager *pqm,
 						     false);
 		if (retval) {
 			dev_err(dev->adev->dev, "failed to allocate process context bo\n");
-			goto err_allocate_pqn;
+			return retval;
 		}
 		memset(pdd->proc_ctx_cpu_ptr, 0, AMDGPU_MES_PROC_CTX_SIZE);
 	}

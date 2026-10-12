@@ -405,11 +405,7 @@ static int max17040_get_property(struct power_supply *psy,
 		val->intval = chip->low_soc_alert;
 		break;
 	case POWER_SUPPLY_PROP_STATUS:
-		ret = power_supply_get_property_from_supplier(psy, psp, val);
-		if (ret == -ENODEV)
-			val->intval = POWER_SUPPLY_STATUS_UNKNOWN;
-		else if (ret)
-			return ret;
+		power_supply_get_property_from_supplier(psy, psp, val);
 		break;
 	case POWER_SUPPLY_PROP_TEMP:
 		if (!chip->channel_temp)

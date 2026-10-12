@@ -40,14 +40,12 @@ mshv_port_table_fini(void)
 int
 mshv_portid_alloc(struct port_table_info *info)
 {
-	int ret;
+	int ret = 0;
 
-	idr_preload(GFP_KERNEL);
 	idr_lock(&port_table_idr);
 	ret = idr_alloc(&port_table_idr, info, PORTID_MIN,
-			PORTID_MAX, GFP_NOWAIT);
+			PORTID_MAX, GFP_KERNEL);
 	idr_unlock(&port_table_idr);
-	idr_preload_end();
 
 	return ret;
 }
@@ -62,7 +60,8 @@ mshv_portid_free(int port_id)
 	WARN_ON(!info);
 	idr_unlock(&port_table_idr);
 
-	kfree_rcu(info, portbl_rcu);
+	synchronize_rcu();
+	kfree(info);
 }
 
 int

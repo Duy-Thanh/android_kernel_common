@@ -255,10 +255,8 @@ static int bpf_lwt_xmit_reroute(struct sk_buff *skb)
 	 * if there is enough header space in skb.
 	 */
 	err = skb_cow_head(skb, LL_RESERVED_SPACE(dst->dev));
-	if (unlikely(err)) {
-		dst_release(dst);
+	if (unlikely(err))
 		goto err;
-	}
 
 	skb_dst_drop(skb);
 	skb_dst_set(skb, dst);

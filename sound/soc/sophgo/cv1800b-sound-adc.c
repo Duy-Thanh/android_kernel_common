@@ -251,22 +251,16 @@ static int cv1800b_adc_volume_set(struct snd_kcontrol *kcontrol,
 
 	u32 v_left = clamp_t(u32, ucontrol->value.integer.value[0], 0, 24);
 	u32 v_right = clamp_t(u32, ucontrol->value.integer.value[1], 0, 24);
-	u32 val, old_val;
+	u32 val;
 
 	val = readl(priv->regs + CV1800B_RXADC_ANA0);
-	old_val = val;
-
 	val = u32_replace_bits(val, cv1800b_gains[v_left],
 			       REG_COMB_LEFT_VOLUME);
 	val = u32_replace_bits(val, cv1800b_gains[v_right],
 			       REG_COMB_RIGHT_VOLUME);
-
-	if (val == old_val)
-		return 0;
-
 	writel(val, priv->regs + CV1800B_RXADC_ANA0);
 
-	return 1;
+	return 0;
 }
 
 static DECLARE_TLV_DB_SCALE(cv1800b_volume_tlv, 0, 200, 0);
