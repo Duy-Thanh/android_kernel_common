@@ -4789,14 +4789,16 @@ static void ice_init_wakeup(struct ice_pf *pf)
 	device_set_wakeup_enable(ice_pf_to_dev(pf), false);
 }
 
-static void ice_init_link(struct ice_pf *pf)
+static int ice_init_link(struct ice_pf *pf)
 {
 	struct device *dev = ice_pf_to_dev(pf);
 	int err;
 
 	err = ice_init_link_events(pf->hw.port_info);
-	if (err)
+	if (err) {
 		dev_err(dev, "ice_init_link_events failed: %d\n", err);
+		return err;
+	}
 
 	/* not a fatal error if this fails */
 	err = ice_init_nvm_phy_type(pf->hw.port_info);
@@ -4836,6 +4838,8 @@ static void ice_init_link(struct ice_pf *pf)
 	} else {
 		set_bit(ICE_FLAG_NO_MEDIA, pf->flags);
 	}
+
+	return err;
 }
 
 static int ice_init_pf_sw(struct ice_pf *pf)
@@ -4978,11 +4982,13 @@ static int ice_init(struct ice_pf *pf)
 
 	ice_init_wakeup(pf);
 
-	ice_init_link(pf);
+	err = ice_init_link(pf);
+	if (err)
+		goto err_init_link;
 
 	err = ice_send_version(pf);
 	if (err)
-		goto err_deinit_pf_sw;
+		goto err_init_link;
 
 	ice_verify_cacheline_size(pf);
 
@@ -5001,7 +5007,7 @@ static int ice_init(struct ice_pf *pf)
 
 	return 0;
 
-err_deinit_pf_sw:
+err_init_link:
 	ice_deinit_pf_sw(pf);
 err_init_pf_sw:
 	ice_dealloc_vsis(pf);

@@ -1,9 +1,14 @@
 # SPDX-License-Identifier: GPL-2.0-only
-/rtla
-/rtla-static
-/unit_tests
+rtla
+rtla-static
+unit_tests
 fixdep
 feature
 FEATURE-DUMP
 *.skel.h
-/libsubcmd/
+custom_filename.txt
+osnoise_irq_noise_hist.txt
+osnoise_trace.txt
+timerlat_trace.txt
+libsubcmd/
+lib/

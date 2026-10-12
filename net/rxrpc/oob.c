@@ -32,12 +32,11 @@ struct rxrpc_oob_params {
  * Post an out-of-band message for attention by the socket or kernel service
  * associated with a reference call.
  */
-bool rxrpc_notify_socket_oob(struct rxrpc_call *call, struct sk_buff *skb)
+void rxrpc_notify_socket_oob(struct rxrpc_call *call, struct sk_buff *skb)
 {
 	struct rxrpc_skb_priv *sp = rxrpc_skb(skb);
 	struct rxrpc_sock *rx;
 	struct sock *sk;
-	bool queued = false;
 
 	rcu_read_lock();
 
@@ -50,7 +49,6 @@ bool rxrpc_notify_socket_oob(struct rxrpc_call *call, struct sk_buff *skb)
 			skb->skb_mstamp_ns = rx->oob_id_counter++;
 			rxrpc_get_skb(skb, rxrpc_skb_get_post_oob);
 			skb_queue_tail(&rx->recvmsg_oobq, skb);
-			queued = true;
 
 			trace_rxrpc_notify_socket(call->debug_id, sp->hdr.serial);
 			if (rx->app_ops)
@@ -58,12 +56,11 @@ bool rxrpc_notify_socket_oob(struct rxrpc_call *call, struct sk_buff *skb)
 		}
 
 		spin_unlock_irq(&rx->recvmsg_lock);
-		if (queued && !rx->app_ops && !sock_flag(sk, SOCK_DEAD))
+		if (!rx->app_ops && !sock_flag(sk, SOCK_DEAD))
 			sk->sk_data_ready(sk);
 	}
 
 	rcu_read_unlock();
-	return queued;
 }
 
 /*
@@ -213,11 +210,6 @@ static int rxrpc_respond_to_oob(struct rxrpc_sock *rx,
 		break;
 	}
 
-	switch (skb->mark) {
-	case RXRPC_OOB_CHALLENGE:
-		rxrpc_put_connection(sp->chall.conn, rxrpc_conn_put_oob);
-		break;
-	}
 	rxrpc_free_skb(skb, rxrpc_skb_put_oob);
 	return ret;
 }

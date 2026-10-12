@@ -53,10 +53,8 @@ static int nft_dev_fill_forward_path(const struct nf_flow_route *route,
 	struct neighbour *n;
 	u8 nud_state;
 
-	if (!nft_is_valid_ether_device(dev)) {
-		eth_zero_addr(ha);
+	if (!nft_is_valid_ether_device(dev))
 		goto out;
-	}
 
 	n = dst_neigh_lookup(dst_cache, daddr);
 	if (!n)

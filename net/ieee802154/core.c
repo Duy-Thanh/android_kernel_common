@@ -228,43 +228,36 @@ int cfg802154_switch_netns(struct cfg802154_registered_device *rdev,
 			continue;
 		wpan_dev->netdev->netns_immutable = false;
 		err = dev_change_net_namespace(wpan_dev->netdev, net, "wpan%d");
-		if (err) {
-			WARN_ON(err && err != -ENOMEM);
+		if (err)
 			break;
-		}
 		wpan_dev->netdev->netns_immutable = true;
 	}
 
-	if (err)
-		goto errout;
+	if (err) {
+		/* failed -- clean up to old netns */
+		net = wpan_phy_net(&rdev->wpan_phy);
 
-	err = device_rename(&rdev->wpan_phy.dev, dev_name(&rdev->wpan_phy.dev));
-	WARN_ON(err && err != -ENOMEM);
+		list_for_each_entry_continue_reverse(wpan_dev,
+						     &rdev->wpan_dev_list,
+						     list) {
+			if (!wpan_dev->netdev)
+				continue;
+			wpan_dev->netdev->netns_immutable = false;
+			err = dev_change_net_namespace(wpan_dev->netdev, net,
+						       "wpan%d");
+			WARN_ON(err);
+			wpan_dev->netdev->netns_immutable = true;
+		}
 
-	if (err)
-		goto errout;
+		return err;
+	}
 
 	wpan_phy_net_set(&rdev->wpan_phy, net);
 
+	err = device_rename(&rdev->wpan_phy.dev, dev_name(&rdev->wpan_phy.dev));
+	WARN_ON(err);
+
 	return 0;
-
-errout:
-	/* failed -- clean up to old netns */
-	net = wpan_phy_net(&rdev->wpan_phy);
-
-	list_for_each_entry_continue_reverse(wpan_dev,
-					     &rdev->wpan_dev_list,
-					     list) {
-		if (!wpan_dev->netdev)
-			continue;
-		wpan_dev->netdev->netns_immutable = false;
-		err = dev_change_net_namespace(wpan_dev->netdev, net,
-					       "wpan%d");
-		WARN_ON(err && err != -ENOMEM);
-		wpan_dev->netdev->netns_immutable = true;
-	}
-
-	return err;
 }
 
 void cfg802154_dev_free(struct cfg802154_registered_device *rdev)
@@ -358,7 +351,7 @@ static void __net_exit cfg802154_pernet_exit(struct net *net)
 	rtnl_lock();
 	list_for_each_entry(rdev, &cfg802154_rdev_list, list) {
 		if (net_eq(wpan_phy_net(&rdev->wpan_phy), net))
-			cfg802154_switch_netns(rdev, &init_net);
+			WARN_ON(cfg802154_switch_netns(rdev, &init_net));
 	}
 	rtnl_unlock();
 }

@@ -37,9 +37,6 @@ properties:
   '#power-domain-cells':
     const: 1
 
-  '#reset-cells':
-    const: 1
-
 required:
   - compatible
   - reg
@@ -47,27 +44,16 @@ required:
 
 additionalProperties: false
 
-allOf:
-  - if:
-      not:
-        properties:
-          compatible:
-            contains:
-              const: marvell,pxa1908-apmu
-    then:
-      properties:
-        '#power-domain-cells': false
-  - if:
-      not:
-        properties:
-          compatible:
-            contains:
-              enum:
-                - marvell,pxa1908-apbc
-                - marvell,pxa1908-apbcp
-    then:
-      properties:
-        '#reset-cells': false
+if:
+  not:
+    properties:
+      compatible:
+        contains:
+          const: marvell,pxa1908-apmu
+
+then:
+  properties:
+    '#power-domain-cells': false
 
 examples:
   # APMU block:

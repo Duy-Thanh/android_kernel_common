@@ -433,8 +433,6 @@ exceptions) notifiers run under the instance lock. Please extend this
 documentation whenever you make explicit assumption about lock being held
 from a notifier.
 
-Drivers **must not** generate nested notifications of the ops-locked types.
-
 NETDEV_INTERNAL symbol namespace
 ================================
 

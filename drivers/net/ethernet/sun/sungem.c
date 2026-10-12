@@ -2978,10 +2978,10 @@ static int gem_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 	dev->max_mtu = GEM_MAX_MTU;
 
 	/* Register with kernel */
-	err = register_netdev(dev);
-	if (err) {
+	if (register_netdev(dev)) {
 		pr_err("Cannot register net device, aborting\n");
-		goto err_out_clear_drvdata;
+		err = -ENOMEM;
+		goto err_out_free_consistent;
 	}
 
 	/* Undo the get_cell with appropriate locking (we could use
@@ -2995,13 +2995,8 @@ static int gem_init_one(struct pci_dev *pdev, const struct pci_device_id *ent)
 		    dev->dev_addr);
 	return 0;
 
-err_out_clear_drvdata:
-	pci_set_drvdata(pdev, NULL);
-	netif_napi_del(&gp->napi);
-
 err_out_free_consistent:
-	dma_free_coherent(&pdev->dev, sizeof(struct gem_init_block),
-			  gp->init_block, gp->gblock_dvma);
+	gem_remove_one(pdev);
 err_out_iounmap:
 	gem_put_cell(gp);
 	iounmap(gp->regs);

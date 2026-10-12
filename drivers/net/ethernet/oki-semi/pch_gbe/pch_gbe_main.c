@@ -1420,25 +1420,13 @@ pch_gbe_alloc_rx_buffers_pool(struct pch_gbe_adapter *adapter,
 	return 0;
 }
 
-static void pch_gbe_free_rx_buffers_pool(struct pch_gbe_adapter *adapter,
-					 struct pch_gbe_rx_ring *rx_ring)
-{
-	dma_free_coherent(&adapter->pdev->dev, rx_ring->rx_buff_pool_size,
-			  rx_ring->rx_buff_pool, rx_ring->rx_buff_pool_logic);
-	rx_ring->rx_buff_pool_logic = 0;
-	rx_ring->rx_buff_pool_size = 0;
-	rx_ring->rx_buff_pool = NULL;
-}
-
 /**
  * pch_gbe_alloc_tx_buffers - Allocate transmit buffers
  * @adapter:   Board private structure
  * @tx_ring:   Tx descriptor ring
- *
- * Return: 0 on success, -ENOMEM if a TX skb allocation fails.
  */
-static int pch_gbe_alloc_tx_buffers(struct pch_gbe_adapter *adapter,
-				    struct pch_gbe_tx_ring *tx_ring)
+static void pch_gbe_alloc_tx_buffers(struct pch_gbe_adapter *adapter,
+					struct pch_gbe_tx_ring *tx_ring)
 {
 	struct pch_gbe_buffer *buffer_info;
 	struct sk_buff *skb;
@@ -1452,17 +1440,12 @@ static int pch_gbe_alloc_tx_buffers(struct pch_gbe_adapter *adapter,
 	for (i = 0; i < tx_ring->count; i++) {
 		buffer_info = &tx_ring->buffer_info[i];
 		skb = netdev_alloc_skb(adapter->netdev, bufsz);
-		if (!skb) {
-			pch_gbe_clean_tx_ring(adapter, tx_ring);
-			return -ENOMEM;
-		}
 		skb_reserve(skb, PCH_GBE_DMA_ALIGN);
 		buffer_info->skb = skb;
 		tx_desc = PCH_GBE_TX_DESC(*tx_ring, i);
 		tx_desc->gbec_status = (DSC_INIT16);
 	}
-
-	return 0;
+	return;
 }
 
 /**
@@ -1904,12 +1887,7 @@ int pch_gbe_up(struct pch_gbe_adapter *adapter)
 			   "Error: can't bring device up - alloc rx buffers pool failed\n");
 		goto freeirq;
 	}
-	err = pch_gbe_alloc_tx_buffers(adapter, tx_ring);
-	if (err) {
-		netdev_err(netdev,
-			   "Error: can't bring device up - alloc tx buffers failed\n");
-		goto freebuf;
-	}
+	pch_gbe_alloc_tx_buffers(adapter, tx_ring);
 	pch_gbe_alloc_rx_buffers(adapter, rx_ring, rx_ring->count);
 	adapter->tx_queue_len = netdev->tx_queue_len;
 	pch_gbe_enable_dma_rx(&adapter->hw);
@@ -1923,8 +1901,6 @@ int pch_gbe_up(struct pch_gbe_adapter *adapter)
 
 	return 0;
 
-freebuf:
-	pch_gbe_free_rx_buffers_pool(adapter, rx_ring);
 freeirq:
 	pch_gbe_free_irq(adapter);
 out:
@@ -1960,7 +1936,11 @@ void pch_gbe_down(struct pch_gbe_adapter *adapter)
 	pch_gbe_clean_tx_ring(adapter, adapter->tx_ring);
 	pch_gbe_clean_rx_ring(adapter, adapter->rx_ring);
 
-	pch_gbe_free_rx_buffers_pool(adapter, rx_ring);
+	dma_free_coherent(&adapter->pdev->dev, rx_ring->rx_buff_pool_size,
+			  rx_ring->rx_buff_pool, rx_ring->rx_buff_pool_logic);
+	rx_ring->rx_buff_pool_logic = 0;
+	rx_ring->rx_buff_pool_size = 0;
+	rx_ring->rx_buff_pool = NULL;
 }
 
 /**

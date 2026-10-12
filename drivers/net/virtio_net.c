@@ -1999,18 +1999,15 @@ static struct sk_buff *receive_big(struct net_device *dev,
 				   struct virtnet_rq_stats *stats)
 {
 	struct page *page = buf;
-	unsigned long max_len;
 	struct sk_buff *skb;
-
-	max_len = (vi->big_packets_num_skbfrags + 1) * PAGE_SIZE -
-		  sizeof(struct padded_vnet_hdr) + vi->hdr_len;
 
 	/* Make sure that len does not exceed the size allocated in
 	 * add_recvbuf_big.
 	 */
-	if (unlikely(len > max_len)) {
+	if (unlikely(len > (vi->big_packets_num_skbfrags + 1) * PAGE_SIZE)) {
 		pr_debug("%s: rx error: len %u exceeds allocated size %lu\n",
-			 dev->name, len, max_len);
+			 dev->name, len,
+			 (vi->big_packets_num_skbfrags + 1) * PAGE_SIZE);
 		goto err;
 	}
 
