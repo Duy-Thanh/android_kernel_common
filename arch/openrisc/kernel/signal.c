@@ -74,7 +74,6 @@ static long save_fp_state(struct sigcontext __user *sc)
 static int restore_sigcontext(struct pt_regs *regs,
 			      struct sigcontext __user *sc)
 {
-	unsigned long old_sr = regs->sr;
 	int err = 0;
 
 	/* Always make any pending restarted system calls return -EINTR */
@@ -90,8 +89,8 @@ static int restore_sigcontext(struct pt_regs *regs,
 	err |= __copy_from_user(&regs->sr, &sc->regs.sr, sizeof(unsigned long));
 	err |= restore_fp_state(sc);
 
-	/* keep the privileged SR bits kernel owned, restore only user flags */
-	regs->sr = (old_sr & ~SPR_SR_USER_MASK) | (regs->sr & SPR_SR_USER_MASK);
+	/* make sure the SM-bit is cleared so user-mode cannot fool us */
+	regs->sr &= ~SPR_SR_SM;
 
 	regs->orig_gpr11 = -1;	/* Avoid syscall restart checks */
 
