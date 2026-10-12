@@ -41,18 +41,17 @@ int ksmbd_crypt_message(struct ksmbd_work *work, struct kvec *iov,
 void ksmbd_copy_gss_neg_header(void *buf);
 int ksmbd_auth_ntlmv2(struct ksmbd_conn *conn, struct ksmbd_session *sess,
 		      struct ntlmv2_resp *ntlmv2, int blen, char *domain_name,
-		      char *cryptkey, char *sess_key);
+		      char *cryptkey);
 int ksmbd_decode_ntlmssp_auth_blob(struct authenticate_message *authblob,
 				   int blob_len, struct ksmbd_conn *conn,
-				   struct ksmbd_session *sess, char *sess_key);
+				   struct ksmbd_session *sess);
 int ksmbd_decode_ntlmssp_neg_blob(struct negotiate_message *negblob,
 				  int blob_len, struct ksmbd_conn *conn);
 unsigned int
 ksmbd_build_ntlmssp_challenge_blob(struct challenge_message *chgblob,
 				   struct ksmbd_conn *conn);
 int ksmbd_krb5_authenticate(struct ksmbd_session *sess, char *in_blob,
-			    int in_len, char *out_blob, int *out_len,
-			    char *sess_key);
+			    int in_len,	char *out_blob, int *out_len);
 void ksmbd_sign_smb2_pdu(struct ksmbd_conn *conn, char *key, struct kvec *iov,
 			 int n_vec, char *sig);
 void ksmbd_sign_smb3_pdu(struct ksmbd_conn *conn, char *key, struct kvec *iov,

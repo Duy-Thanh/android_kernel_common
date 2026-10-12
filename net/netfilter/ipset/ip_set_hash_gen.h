@@ -75,17 +75,15 @@ struct hbucket {
 struct htable_gc {
 	struct delayed_work dwork;
 	struct ip_set *set;	/* Set the gc belongs to */
-	spinlock_t lock;	/* Lock to exclude gc and resize */
 	u32 region;		/* Last gc run position */
 };
 
 /* The hash table: the table size stored here in order to make resizing easy */
 struct htable {
-	bool resizing;		/* Mark ongoing resize */
+	atomic_t ref;		/* References for resizing */
 	atomic_t uref;		/* References for dumping and gc */
 	u8 htable_bits;		/* size of hash table == 2^htable_bits */
 	u32 maxelem;		/* Maxelem per region */
-	struct list_head ad;	/* Resize add|del backlist */
 	struct ip_set_region *hregion;	/* Region locks and ext sizes */
 	struct hbucket __rcu *bucket[]; /* hashtable buckets */
 };
@@ -303,13 +301,11 @@ struct htype {
 	u8 netmask;		/* netmask value for subnets to store */
 	union nf_inet_addr bitmask;	/* stores bitmask */
 #endif
+	struct list_head ad;	/* Resize add|del backlist */
+	struct mtype_elem next; /* temporary storage for uadd */
 #ifdef IP_SET_HASH_WITH_NETS
 	struct net_prefixes nets[NLEN]; /* book-keeping of prefixes */
 #endif
-	/* Because 'next' is IPv4/IPv6 dependent, no elements of this
-	 * structure and referred in create() may come after 'next'.
-	 */
-	struct mtype_elem next; /* temporary storage for uadd */
 };
 
 /* ADD|DEL entries saved during resize */
@@ -455,14 +451,13 @@ static void
 mtype_destroy(struct ip_set *set)
 {
 	struct htype *h = set->data;
-	struct htable *t = (__force struct htable *)h->table;
 	struct list_head *l, *lt;
 
-	list_for_each_safe(l, lt, &t->ad) {
+	mtype_ahash_destroy(set, (__force struct htable *)h->table, true);
+	list_for_each_safe(l, lt, &h->ad) {
 		list_del(l);
 		kfree(l);
 	}
-	mtype_ahash_destroy(set, t, true);
 	kfree(h);
 
 	set->data = NULL;
@@ -574,10 +569,9 @@ mtype_gc(struct work_struct *work)
 	set = gc->set;
 	h = set->data;
 
-	rcu_read_lock_bh();
-	t = rcu_dereference_bh(h->table);
+	spin_lock_bh(&set->lock);
+	t = ipset_dereference_set(h->table, set);
 	atomic_inc(&t->uref);
-	rcu_read_unlock_bh();
 	numof_locks = ahash_numof_locks(t->htable_bits);
 	r = gc->region++;
 	if (r >= numof_locks) {
@@ -586,13 +580,11 @@ mtype_gc(struct work_struct *work)
 	next_run = (IPSET_GC_PERIOD(set->timeout) * HZ) / numof_locks;
 	if (next_run < HZ/10)
 		next_run = HZ/10;
+	spin_unlock_bh(&set->lock);
 
-	spin_lock_bh(&gc->lock);
-	if (!t->resizing)
-		mtype_gc_do(set, h, t, r);
-	spin_unlock_bh(&gc->lock);
+	mtype_gc_do(set, h, t, r);
 
-	if (atomic_dec_and_test(&t->uref) && t->resizing) {
+	if (atomic_dec_and_test(&t->uref) && atomic_read(&t->ref)) {
 		pr_debug("Table destroy after resize by expire: %p\n", t);
 		mtype_ahash_destroy(set, t, false);
 	}
@@ -676,18 +668,15 @@ retry:
 	}
 	t->htable_bits = htable_bits;
 	t->maxelem = h->maxelem / ahash_numof_locks(htable_bits);
-	INIT_LIST_HEAD(&t->ad);
 	for (i = 0; i < ahash_numof_locks(htable_bits); i++)
 		spin_lock_init(&t->hregion[i].lock);
 
 	/* There can't be another parallel resizing,
-	 * but dumping and kernel side add/del are possible
+	 * but dumping, gc, kernel side add/del are possible
 	 */
 	orig = ipset_dereference_bh_nfnl(h->table);
+	atomic_set(&orig->ref, 1);
 	atomic_inc(&orig->uref);
-	spin_lock_bh(&h->gc.lock);
-	orig->resizing = true;
-	spin_unlock_bh(&h->gc.lock);
 	pr_debug("attempt to resize set %s from %u to %u, t %p\n",
 		 set->name, orig->htable_bits, htable_bits, orig);
 	for (r = 0; r < ahash_numof_locks(orig->htable_bits); r++) {
@@ -779,7 +768,7 @@ retry:
 	 * Kernel-side add cannot trigger a resize and userspace actions
 	 * are serialized by the mutex.
 	 */
-	list_for_each_safe(l, lt, &orig->ad) {
+	list_for_each_safe(l, lt, &h->ad) {
 		x = list_entry(l, struct mtype_resize_ad, list);
 		if (x->ad == IPSET_ADD) {
 			mtype_add(set, &x->d, &x->ext, &x->mext, x->flags);
@@ -803,24 +792,11 @@ out:
 
 cleanup:
 	rcu_read_unlock_bh();
-	spin_lock_bh(&h->gc.lock);
-	orig->resizing = false;
-	spin_unlock_bh(&h->gc.lock);
-	/* Make sure parallel readers see that orig->resizing is false
-	 * before we decrement uref */
-	synchronize_rcu();
+	atomic_set(&orig->ref, 0);
 	atomic_dec(&orig->uref);
 	mtype_ahash_destroy(set, t, false);
 	if (ret == -EAGAIN)
 		goto retry;
-
-	/* Cleanup the backlog of ADD/DEL elements */
-	spin_lock_bh(&set->lock);
-	list_for_each_safe(l, lt, &orig->ad) {
-		list_del(l);
-		kfree(l);
-	}
-	spin_unlock_bh(&set->lock);
 	goto out;
 
 hbwarn:
@@ -884,13 +860,15 @@ mtype_add(struct ip_set *set, void *value, const struct ip_set_ext *ext,
 	key = HKEY(value, h->initval, t->htable_bits);
 	r = ahash_region(key);
 	atomic_inc(&t->uref);
-	rcu_read_unlock_bh();
 	elements = t->hregion[r].elements;
 	maxelem = t->maxelem;
 	if (elements >= maxelem) {
 		u32 e;
-		if (SET_WITH_TIMEOUT(set))
+		if (SET_WITH_TIMEOUT(set)) {
+			rcu_read_unlock_bh();
 			mtype_gc_do(set, h, t, r);
+			rcu_read_lock_bh();
+		}
 		maxelem = h->maxelem;
 		elements = 0;
 		for (e = 0; e < ahash_numof_locks(t->htable_bits); e++)
@@ -898,6 +876,7 @@ mtype_add(struct ip_set *set, void *value, const struct ip_set_ext *ext,
 		if (elements >= maxelem && SET_WITH_FORCEADD(set))
 			forceadd = true;
 	}
+	rcu_read_unlock_bh();
 
 	spin_lock_bh(&t->hregion[r].lock);
 	n = rcu_dereference_bh(hbucket(t, key));
@@ -1024,7 +1003,7 @@ overwrite_extensions:
 	ret = 0;
 resize:
 	spin_unlock_bh(&t->hregion[r].lock);
-	if (t->resizing && ext && ext->target) {
+	if (atomic_read(&t->ref) && ext->target) {
 		/* Resize is in process and kernel side add, save values */
 		struct mtype_resize_ad *x;
 
@@ -1038,7 +1017,7 @@ resize:
 		memcpy(&x->mext, mext, sizeof(struct ip_set_ext));
 		x->flags = flags;
 		spin_lock_bh(&set->lock);
-		list_add_tail(&x->list, &t->ad);
+		list_add_tail(&x->list, &h->ad);
 		spin_unlock_bh(&set->lock);
 	}
 	goto out;
@@ -1051,7 +1030,7 @@ set_full:
 unlock:
 	spin_unlock_bh(&t->hregion[r].lock);
 out:
-	if (atomic_dec_and_test(&t->uref) && t->resizing) {
+	if (atomic_dec_and_test(&t->uref) && atomic_read(&t->ref)) {
 		pr_debug("Table destroy after resize by add: %p\n", t);
 		mtype_ahash_destroy(set, t, false);
 	}
@@ -1114,7 +1093,7 @@ mtype_del(struct ip_set *set, void *value, const struct ip_set_ext *ext,
 #endif
 		ip_set_ext_destroy(set, data);
 
-		if (t->resizing && ext && ext->target) {
+		if (atomic_read(&t->ref) && ext->target) {
 			/* Resize is in process and kernel side del,
 			 * save values
 			 */
@@ -1162,10 +1141,10 @@ out:
 	spin_unlock_bh(&t->hregion[r].lock);
 	if (x) {
 		spin_lock_bh(&set->lock);
-		list_add(&x->list, &t->ad);
+		list_add(&x->list, &h->ad);
 		spin_unlock_bh(&set->lock);
 	}
-	if (atomic_dec_and_test(&t->uref) && t->resizing) {
+	if (atomic_dec_and_test(&t->uref) && atomic_read(&t->ref)) {
 		pr_debug("Table destroy after resize by del: %p\n", t);
 		mtype_ahash_destroy(set, t, false);
 	}
@@ -1374,7 +1353,7 @@ mtype_uref(struct ip_set *set, struct netlink_callback *cb, bool start)
 		rcu_read_unlock_bh();
 	} else if (cb->args[IPSET_CB_PRIVATE]) {
 		t = (struct htable *)cb->args[IPSET_CB_PRIVATE];
-		if (atomic_dec_and_test(&t->uref) && t->resizing) {
+		if (atomic_dec_and_test(&t->uref) && atomic_read(&t->ref)) {
 			pr_debug("Table destroy after resize "
 				 " by dump: %p\n", t);
 			mtype_ahash_destroy(set, t, false);
@@ -1587,13 +1566,7 @@ IPSET_TOKEN(HTYPE, _create)(struct net *net, struct ip_set *set,
 	if (tb[IPSET_ATTR_MAXELEM])
 		maxelem = ip_set_get_h32(tb[IPSET_ATTR_MAXELEM]);
 
-#ifdef IP_SET_PROTO_UNDEF
-	hsize = sizeof(struct htype);
-#else
-	hsize = set->family == NFPROTO_IPV6 ?
-		sizeof(struct IPSET_TOKEN(HTYPE, 6)) :
-		sizeof(struct IPSET_TOKEN(HTYPE, 4));
-#endif
+	hsize = sizeof(*h);
 	h = kzalloc(hsize, GFP_KERNEL);
 	if (!h)
 		return -ENOMEM;
@@ -1620,7 +1593,6 @@ IPSET_TOKEN(HTYPE, _create)(struct net *net, struct ip_set *set,
 		return -ENOMEM;
 	}
 	h->gc.set = set;
-	spin_lock_init(&h->gc.lock);
 	for (i = 0; i < ahash_numof_locks(hbits); i++)
 		spin_lock_init(&t->hregion[i].lock);
 	h->maxelem = maxelem;
@@ -1647,8 +1619,9 @@ IPSET_TOKEN(HTYPE, _create)(struct net *net, struct ip_set *set,
 	}
 	t->htable_bits = hbits;
 	t->maxelem = h->maxelem / ahash_numof_locks(hbits);
-	INIT_LIST_HEAD(&t->ad);
 	RCU_INIT_POINTER(h->table, t);
+
+	INIT_LIST_HEAD(&h->ad);
 	set->data = h;
 #ifndef IP_SET_PROTO_UNDEF
 	if (set->family == NFPROTO_IPV4) {

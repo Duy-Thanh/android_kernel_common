@@ -372,15 +372,20 @@ static const char *sctp_state_name(int state)
 
 static inline void
 set_sctp_state(struct ip_vs_proto_data *pd, struct ip_vs_conn *cp,
-		int direction, const struct sk_buff *skb,
-		unsigned int iph_len)
+		int direction, const struct sk_buff *skb)
 {
 	struct sctp_chunkhdr _sctpch, *sch;
 	unsigned char chunk_type;
 	int event, next_state;
-	int cofs;
+	int ihl, cofs;
 
-	cofs = iph_len + sizeof(struct sctphdr);
+#ifdef CONFIG_IP_VS_IPV6
+	ihl = cp->af == AF_INET ? ip_hdrlen(skb) : sizeof(struct ipv6hdr);
+#else
+	ihl = ip_hdrlen(skb);
+#endif
+
+	cofs = ihl + sizeof(struct sctphdr);
 	sch = skb_header_pointer(skb, cofs, sizeof(_sctpch), &_sctpch);
 	if (sch == NULL)
 		return;
@@ -463,11 +468,10 @@ set_sctp_state(struct ip_vs_proto_data *pd, struct ip_vs_conn *cp,
 
 static void
 sctp_state_transition(struct ip_vs_conn *cp, int direction,
-		const struct sk_buff *skb, struct ip_vs_proto_data *pd,
-		unsigned int iph_len)
+		const struct sk_buff *skb, struct ip_vs_proto_data *pd)
 {
 	spin_lock_bh(&cp->lock);
-	set_sctp_state(pd, cp, direction, skb, iph_len);
+	set_sctp_state(pd, cp, direction, skb);
 	spin_unlock_bh(&cp->lock);
 }
 

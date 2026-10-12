@@ -233,11 +233,10 @@ static void vcap_test_api_init(struct vcap_admin *admin)
 {
 	/* Initialize the shared objects */
 	INIT_LIST_HEAD(&test_vctrl.list);
-	mutex_init(&test_vctrl.lock);
 	INIT_LIST_HEAD(&admin->list);
 	INIT_LIST_HEAD(&admin->rules);
 	INIT_LIST_HEAD(&admin->enabled);
-	admin->vctrl = &test_vctrl;
+	mutex_init(&admin->lock);
 	list_add_tail(&admin->list, &test_vctrl.list);
 	memset(test_updateaddr, 0, sizeof(test_updateaddr));
 	test_updateaddridx = 0;
