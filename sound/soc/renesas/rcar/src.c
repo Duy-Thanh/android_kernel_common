@@ -850,7 +850,6 @@ void rsnd_src_suspend(struct rsnd_priv *priv)
 
 	clk_disable_unprepare(src_ctrl->scu_x2);
 	clk_disable_unprepare(src_ctrl->scu);
-	clk_disable_unprepare(src_ctrl->scu_supply);
 }
 
 void rsnd_src_resume(struct rsnd_priv *priv)
@@ -862,7 +861,6 @@ void rsnd_src_resume(struct rsnd_priv *priv)
 	if (!src_ctrl)
 		return;
 
-	clk_prepare_enable(src_ctrl->scu_supply);
 	clk_prepare_enable(src_ctrl->scu);
 	clk_prepare_enable(src_ctrl->scu_x2);
 
