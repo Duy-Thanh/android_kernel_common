@@ -30,7 +30,7 @@ ip_vs_lc_schedule(struct ip_vs_service *svc, const struct sk_buff *skb,
 
 	/*
 	 * Simply select the server with the least number of
-	 *        (activeconns*256) + totalconns
+	 *        (activeconns<<5) + inactconns
 	 * Except whose weight is equal to zero.
 	 * If the weight is equal to zero, it means that the server is
 	 * quiesced, the existing connections to the server still get
@@ -56,7 +56,7 @@ ip_vs_lc_schedule(struct ip_vs_service *svc, const struct sk_buff *skb,
 			      IP_VS_DBG_ADDR(least->af, &least->addr),
 			      ntohs(least->port),
 			      atomic_read(&least->activeconns),
-			      ip_vs_dest_inactconns(least));
+			      atomic_read(&least->inactconns));
 
 	return least;
 }
