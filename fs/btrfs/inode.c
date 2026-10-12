@@ -8068,8 +8068,7 @@ static int btrfs_getattr(struct mnt_idmap *idmap,
 	stat->result_mask |= STATX_SUBVOL;
 
 	spin_lock(&BTRFS_I(inode)->lock);
-	delalloc_bytes = S_ISREG(inode->i_mode) ?
-			 BTRFS_I(inode)->new_delalloc_bytes : 0;
+	delalloc_bytes = BTRFS_I(inode)->new_delalloc_bytes;
 	inode_bytes = inode_get_bytes(inode);
 	spin_unlock(&BTRFS_I(inode)->lock);
 	stat->blocks = (ALIGN(inode_bytes, blocksize) +
