@@ -13,6 +13,7 @@
 #include <linux/idr.h>
 #include <linux/list.h>
 #include <linux/thermal.h>
+#include <linux/workqueue.h>
 
 #include "thermal_testing.h"
 
@@ -206,7 +207,7 @@ int tt_add_tz(void)
 
 	INIT_WORK(&tt_work->work, tt_add_tz_work_fn);
 	tt_work->tt_zone = no_free_ptr(tt_zone);
-	tt_queue_work(&(no_free_ptr(tt_work)->work));
+	schedule_work(&(no_free_ptr(tt_work)->work));
 
 	return 0;
 }
@@ -268,7 +269,7 @@ int tt_del_tz(const char *arg)
 
 	INIT_WORK(&tt_work->work, tt_del_tz_work_fn);
 	tt_work->tt_zone = tt_zone;
-	tt_queue_work(&(no_free_ptr(tt_work)->work));
+	schedule_work(&(no_free_ptr(tt_work)->work));
 
 	return 0;
 }
@@ -357,7 +358,7 @@ int tt_zone_add_trip(const char *arg)
 	INIT_WORK(&tt_work->work, tt_zone_add_trip_work_fn);
 	tt_work->tt_zone = no_free_ptr(tt_zone);
 	tt_work->tt_trip = no_free_ptr(tt_trip);
-	tt_queue_work(&(no_free_ptr(tt_work)->work));
+	schedule_work(&(no_free_ptr(tt_work)->work));
 
 	return 0;
 }
