@@ -72,9 +72,11 @@
 #include <trace/hooks/traps.h>
 #include <trace/hooks/ttm_pool.h>
 #include <trace/hooks/ufshcd.h>
+#include <trace/hooks/usb.h>
 #include <trace/hooks/user.h>
 #include <trace/hooks/vmscan.h>
 #include <trace/hooks/wqlockup.h>
+#include <trace/hooks/xhci.h>
 /* keep-sorted end */
 
 /*
@@ -203,6 +205,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_udpv6_recvmsg);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_udpv6_sendmsg);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ufs_complete_init);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ufs_reprogram_all_keys);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_usb_dev_suspend);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_vfree_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_vmalloc_node_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_vmscan_kswapd_done);
@@ -743,6 +746,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_update_percpu_swap_cluster_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_update_uid_stats);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_uplink_send_msg);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_uprobes_uprobe_write);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_usb_dev_resume);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_use_amu_fie);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_vfs_fsync_range);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_vmalloc_node_range_end);
@@ -758,6 +762,8 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wbt_wait);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_workingset_active);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wp_page_reuse);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wq_lockup_pool);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_xhci_resume);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_xhci_suspend);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_zs_shrinker_adjust);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_zs_shrinker_bypass);
 /* keep-sorted end */
