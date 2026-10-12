@@ -487,7 +487,8 @@ xfarray_sortinfo_alloc(
 	xfarray_sortinfo_lo(si)[0] = 0;
 	xfarray_sortinfo_hi(si)[0] = array->nr - 1;
 	si->relax = INIT_XCHK_RELAX;
-	si->relax.killable = !!(flags & XFARRAY_SORT_KILLABLE);
+	if (flags & XFARRAY_SORT_KILLABLE)
+		si->relax.interruptible = false;
 
 	trace_xfarray_sort(si, nr_bytes);
 	*infop = si;

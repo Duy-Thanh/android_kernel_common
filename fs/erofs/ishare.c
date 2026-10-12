@@ -12,6 +12,12 @@
 
 static struct vfsmount *erofs_ishare_mnt;
 
+static inline bool erofs_is_ishare_inode(struct inode *inode)
+{
+	/* assumed FS_ONDEMAND is excluded with FS_PAGE_CACHE_SHARE feature */
+	return inode->i_sb->s_type == &erofs_anon_fs_type;
+}
+
 static int erofs_ishare_iget5_eq(struct inode *inode, void *data)
 {
 	struct erofs_inode_fingerprint *fp1 = &EROFS_I(inode)->fingerprint;
@@ -173,7 +179,7 @@ struct inode *erofs_real_inode(struct inode *inode, bool *need_iput)
 	struct inode *realinode;
 
 	*need_iput = false;
-	if (inode->i_sb != erofs_ishare_mnt->mnt_sb)
+	if (!erofs_is_ishare_inode(inode))
 		return inode;
 
 	vi_share = EROFS_I(inode);

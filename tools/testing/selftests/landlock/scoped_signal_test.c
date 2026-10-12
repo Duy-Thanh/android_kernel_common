@@ -249,12 +249,12 @@ TEST_F(scoped_domains, check_access_signal)
 		_metadata->exit_code = KSFT_FAIL;
 }
 
-/* clang-format off */
-#define THREAD_INVALID		((void *)0)
-#define THREAD_SUCCESS		((void *)1)
-#define THREAD_ERROR		((void *)2)
-#define THREAD_TEST_FAILED	((void *)3)
-/* clang-format on */
+enum thread_return {
+	THREAD_INVALID = 0,
+	THREAD_SUCCESS = 1,
+	THREAD_ERROR = 2,
+	THREAD_TEST_FAILED = 3,
+};
 
 static void *thread_sync(void *arg)
 {
@@ -262,15 +262,15 @@ static void *thread_sync(void *arg)
 	char buf;
 
 	if (read(pipe_read, &buf, 1) != 1)
-		return THREAD_ERROR;
+		return (void *)THREAD_ERROR;
 
-	return THREAD_SUCCESS;
+	return (void *)THREAD_SUCCESS;
 }
 
 TEST(signal_scoping_thread_before)
 {
 	pthread_t no_sandbox_thread;
-	void *ret = THREAD_INVALID;
+	enum thread_return ret = THREAD_INVALID;
 	int thread_pipe[2];
 
 	drop_caps(_metadata);
@@ -285,7 +285,7 @@ TEST(signal_scoping_thread_before)
 	EXPECT_EQ(0, pthread_kill(no_sandbox_thread, 0));
 	EXPECT_EQ(1, write(thread_pipe[1], ".", 1));
 
-	EXPECT_EQ(0, pthread_join(no_sandbox_thread, &ret));
+	EXPECT_EQ(0, pthread_join(no_sandbox_thread, (void **)&ret));
 	EXPECT_EQ(THREAD_SUCCESS, ret);
 
 	EXPECT_EQ(0, close(thread_pipe[0]));
@@ -295,7 +295,7 @@ TEST(signal_scoping_thread_before)
 TEST(signal_scoping_thread_after)
 {
 	pthread_t scoped_thread;
-	void *ret = THREAD_INVALID;
+	enum thread_return ret = THREAD_INVALID;
 	int thread_pipe[2];
 
 	drop_caps(_metadata);
@@ -310,7 +310,7 @@ TEST(signal_scoping_thread_after)
 	EXPECT_EQ(0, pthread_kill(scoped_thread, 0));
 	EXPECT_EQ(1, write(thread_pipe[1], ".", 1));
 
-	EXPECT_EQ(0, pthread_join(scoped_thread, &ret));
+	EXPECT_EQ(0, pthread_join(scoped_thread, (void **)&ret));
 	EXPECT_EQ(THREAD_SUCCESS, ret);
 
 	EXPECT_EQ(0, close(thread_pipe[0]));
@@ -327,20 +327,20 @@ void *thread_setuid(void *ptr)
 	char buf;
 
 	if (read(arg->pipe_read, &buf, 1) != 1)
-		return THREAD_ERROR;
+		return (void *)THREAD_ERROR;
 
 	/* libc's setuid() should update all thread's credentials. */
 	if (getuid() != arg->new_uid)
-		return THREAD_TEST_FAILED;
+		return (void *)THREAD_TEST_FAILED;
 
-	return THREAD_SUCCESS;
+	return (void *)THREAD_SUCCESS;
 }
 
 TEST(signal_scoping_thread_setuid)
 {
 	struct thread_setuid_args arg;
 	pthread_t no_sandbox_thread;
-	void *ret = THREAD_INVALID;
+	enum thread_return ret = THREAD_INVALID;
 	int pipe_parent[2];
 	int prev_uid;
 
@@ -367,7 +367,7 @@ TEST(signal_scoping_thread_setuid)
 	EXPECT_EQ(arg.new_uid, getuid());
 	EXPECT_EQ(1, write(pipe_parent[1], ".", 1));
 
-	EXPECT_EQ(0, pthread_join(no_sandbox_thread, &ret));
+	EXPECT_EQ(0, pthread_join(no_sandbox_thread, (void **)&ret));
 	EXPECT_EQ(THREAD_SUCCESS, ret);
 
 	clear_cap(_metadata, CAP_SETUID);
@@ -398,24 +398,6 @@ static int setup_signal_handler(int signal)
 
 	sa.sa_flags = SA_SIGINFO | SA_RESTART;
 	return sigaction(SIGURG, &sa, NULL);
-}
-
-/*
- * MSG_OOB might be disabled in the kernel via the CONFIG_AF_UNIX_OOB
- * switch, so this function can be used for probing for its availability.
- */
-static bool has_af_unix_oob(void)
-{
-	bool available = false;
-	int sp[2];
-
-	if (socketpair(AF_UNIX, SOCK_STREAM, 0, sp) == 0) {
-		available = (send(sp[0], ".", 1, MSG_OOB) == 1);
-		close(sp[0]);
-		close(sp[1]);
-	}
-
-	return available;
 }
 
 /* clang-format off */
@@ -479,9 +461,6 @@ TEST_F(fown, sigurg_socket)
 	int status;
 	int pipe_parent[2], pipe_child[2];
 	pid_t child;
-
-	if (!has_af_unix_oob())
-		SKIP(return, "CONFIG_AF_UNIX_OOB / MSG_OOB not available");
 
 	memset(&server_address, 0, sizeof(server_address));
 	set_unix_address(&server_address, 0);
@@ -688,20 +667,20 @@ static void *thread_setown_scoped(void *arg)
 	ruleset_fd =
 		landlock_create_ruleset(&ruleset_attr, sizeof(ruleset_attr), 0);
 	if (ruleset_fd < 0)
-		return THREAD_ERROR;
+		return (void *)THREAD_ERROR;
 	if (prctl(PR_SET_NO_NEW_PRIVS, 1, 0, 0, 0) ||
 	    landlock_restrict_self(ruleset_fd, 0)) {
 		close(ruleset_fd);
-		return THREAD_ERROR;
+		return (void *)THREAD_ERROR;
 	}
 	close(ruleset_fd);
 
 	/* Makes this process group own the SIGIO source. */
 	if (fcntl(fd, F_SETSIG, SIGURG) || fcntl(fd, F_SETOWN, -getpgrp()) ||
 	    fcntl(fd, F_SETFL, O_ASYNC))
-		return THREAD_ERROR;
+		return (void *)THREAD_ERROR;
 
-	return THREAD_SUCCESS;
+	return (void *)THREAD_SUCCESS;
 }
 
 /*
@@ -723,7 +702,7 @@ TEST(sigio_to_pgid_self)
 {
 	int trigger[2];
 	pthread_t thread;
-	void *ret = THREAD_INVALID;
+	enum thread_return ret = THREAD_INVALID;
 	int i;
 
 	drop_caps(_metadata);
@@ -743,7 +722,7 @@ TEST(sigio_to_pgid_self)
 	 */
 	ASSERT_EQ(0, pthread_create(&thread, NULL, thread_setown_scoped,
 				    &trigger[0]));
-	ASSERT_EQ(0, pthread_join(thread, &ret));
+	ASSERT_EQ(0, pthread_join(thread, (void **)&ret));
 	ASSERT_EQ(THREAD_SUCCESS, ret);
 
 	/* Fans SIGURG out to the process group. */
