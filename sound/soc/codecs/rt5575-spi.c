@@ -17,7 +17,7 @@
 
 struct rt5575_spi_burst_write {
 	u8 cmd;
-	__le32 addr;
+	u32 addr;
 	u8 data[RT5575_SPI_BUF_LEN];
 	u8 dummy;
 } __packed;

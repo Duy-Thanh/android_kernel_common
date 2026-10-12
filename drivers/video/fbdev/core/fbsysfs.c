@@ -10,7 +10,6 @@
 #include <linux/major.h>
 
 #include "fb_internal.h"
-#include "fbcon.h"
 
 static int activate(struct fb_info *fb_info, struct fb_var_screeninfo *var)
 {
@@ -109,15 +108,8 @@ static ssize_t store_modes(struct device *device,
 	if (fb_new_modelist(fb_info)) {
 		fb_destroy_modelist(&fb_info->modelist);
 		list_splice(&old_list, &fb_info->modelist);
-	} else {
-		/*
-		 * fb_display[i].mode and fb_info->mode both point into the old
-		 * list. Clear them before it is freed.
-		 */
-		fbcon_delete_modelist(&old_list);
-		fb_info->mode = NULL;
+	} else
 		fb_destroy_modelist(&old_list);
-	}
 
 	unlock_fb_info(fb_info);
 	console_unlock();
