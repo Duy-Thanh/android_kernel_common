@@ -956,6 +956,7 @@ static int set_expected_rtp_rtcp(struct sk_buff *skb, unsigned int protoff,
 			return NF_ACCEPT;
 		saddr = &ct->tuplehash[!dir].tuple.src.u3;
 	} else if (sip_external_media) {
+		struct net_device *dev = skb_dst(skb)->dev;
 		struct dst_entry *dst = NULL;
 		struct flowi fl;
 
@@ -977,11 +978,7 @@ static int set_expected_rtp_rtcp(struct sk_buff *skb, unsigned int protoff,
 		 * through the same interface as the signalling peer.
 		 */
 		if (dst) {
-			const struct dst_entry *this_dst = skb_dst(skb);
-			bool external_media = false;
-
-			if (this_dst && dst->dev == this_dst->dev)
-				external_media = true;
+			bool external_media = (dst->dev == dev);
 
 			dst_release(dst);
 			if (external_media)

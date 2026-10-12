@@ -30,21 +30,15 @@ static struct sk_buff *xrs700x_rcv(struct sk_buff *skb, struct net_device *dev)
 
 	source_port = ffs((int)trailer[0]) - 1;
 
-	if (source_port < 0) {
-		kfree_skb(skb);
+	if (source_port < 0)
 		return NULL;
-	}
 
 	skb->dev = dsa_conduit_find_user(dev, 0, source_port);
-	if (!skb->dev) {
-		kfree_skb(skb);
+	if (!skb->dev)
 		return NULL;
-	}
 
-	if (pskb_trim_rcsum(skb, skb->len - 1)) {
-		kfree_skb(skb);
+	if (pskb_trim_rcsum(skb, skb->len - 1))
 		return NULL;
-	}
 
 	/* Frame is forwarded by hardware, don't forward in software. */
 	dsa_default_offload_fwd_mark(skb);

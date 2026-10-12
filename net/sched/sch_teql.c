@@ -52,8 +52,7 @@
 struct teql_master {
 	struct Qdisc_ops qops;
 	struct net_device *dev;
-	struct Qdisc __rcu	*slaves;
-	spinlock_t		slaves_lock; /* serializes writes to ->slaves */
+	struct Qdisc *slaves;
 	struct list_head master_list;
 	unsigned long	tx_bytes;
 	unsigned long	tx_packets;
@@ -62,7 +61,7 @@ struct teql_master {
 };
 
 struct teql_sched_data {
-	struct Qdisc __rcu	*next;
+	struct Qdisc *next;
 	struct teql_master *m;
 	struct sk_buff_head q;
 };
@@ -102,9 +101,7 @@ teql_dequeue(struct Qdisc *sch)
 	if (skb == NULL) {
 		struct net_device *m = qdisc_dev(q);
 		if (m) {
-			spin_lock_bh(&dat->m->slaves_lock);
-			rcu_assign_pointer(dat->m->slaves, sch);
-			spin_unlock_bh(&dat->m->slaves_lock);
+			dat->m->slaves = sch;
 			netif_wake_queue(m);
 		}
 	} else {
@@ -135,49 +132,34 @@ teql_destroy(struct Qdisc *sch)
 	struct Qdisc *q, *prev;
 	struct teql_sched_data *dat = qdisc_priv(sch);
 	struct teql_master *master = dat->m;
-	struct netdev_queue *txq = NULL;
-	bool reset_master_queue = false;
 
 	if (!master)
 		return;
 
-	spin_lock_bh(&master->slaves_lock);
-	prev = rcu_dereference_protected(master->slaves,
-					 lockdep_is_held(&master->slaves_lock));
+	prev = master->slaves;
 	if (prev) {
 		do {
-			struct Qdisc *head, *next;
+			q = NEXT_SLAVE(prev);
+			if (q == sch) {
+				NEXT_SLAVE(prev) = NEXT_SLAVE(q);
+				if (q == master->slaves) {
+					master->slaves = NEXT_SLAVE(q);
+					if (q == master->slaves) {
+						struct netdev_queue *txq;
 
-			q = rcu_dereference_protected(NEXT_SLAVE(prev),
-						      lockdep_is_held(&master->slaves_lock));
-			if (q != sch) {
-				prev = q;
-				continue;
-			}
+						txq = netdev_get_tx_queue(master->dev, 0);
+						master->slaves = NULL;
 
-			next = rcu_dereference_protected(NEXT_SLAVE(q),
-							 lockdep_is_held(&master->slaves_lock));
-			rcu_assign_pointer(NEXT_SLAVE(prev), next);
-
-			head = rcu_dereference_protected(master->slaves,
-							 lockdep_is_held(&master->slaves_lock));
-			if (q == head) {
-				rcu_assign_pointer(master->slaves, next);
-				if (q == next) {
-					txq = netdev_get_tx_queue(master->dev, 0);
-					rcu_assign_pointer(master->slaves, NULL);
-					reset_master_queue = true;
+						dev_reset_queue(master->dev,
+								txq, NULL);
+					}
 				}
+				skb_queue_purge(&dat->q);
+				break;
 			}
-			skb_queue_purge(&dat->q);
-			break;
-		} while (prev != rcu_dereference_protected(master->slaves,
-							   lockdep_is_held(&master->slaves_lock)));
-	}
-	spin_unlock_bh(&master->slaves_lock);
 
-	if (reset_master_queue)
-		dev_reset_queue(master->dev, txq, NULL);
+		} while ((prev = q) != master->slaves);
+	}
 }
 
 static int teql_qdisc_init(struct Qdisc *sch, struct nlattr *opt,
@@ -186,7 +168,6 @@ static int teql_qdisc_init(struct Qdisc *sch, struct nlattr *opt,
 	struct net_device *dev = qdisc_dev(sch);
 	struct teql_master *m = (struct teql_master *)sch->ops;
 	struct teql_sched_data *q = qdisc_priv(sch);
-	struct Qdisc *first;
 
 	if (dev->hard_header_len > m->dev->hard_header_len)
 		return -EINVAL;
@@ -203,9 +184,7 @@ static int teql_qdisc_init(struct Qdisc *sch, struct nlattr *opt,
 
 	skb_queue_head_init(&q->q);
 
-	spin_lock_bh(&m->slaves_lock);
-	first = rcu_dereference_protected(m->slaves, lockdep_is_held(&m->slaves_lock));
-	if (first) {
+	if (m->slaves) {
 		if (m->dev->flags & IFF_UP) {
 			if ((m->dev->flags & IFF_POINTOPOINT &&
 			     !(dev->flags & IFF_POINTOPOINT)) ||
@@ -213,10 +192,8 @@ static int teql_qdisc_init(struct Qdisc *sch, struct nlattr *opt,
 			     !(dev->flags & IFF_BROADCAST)) ||
 			    (m->dev->flags & IFF_MULTICAST &&
 			     !(dev->flags & IFF_MULTICAST)) ||
-			    dev->mtu < m->dev->mtu) {
-				spin_unlock_bh(&m->slaves_lock);
+			    dev->mtu < m->dev->mtu)
 				return -EINVAL;
-			}
 		} else {
 			if (!(dev->flags&IFF_POINTOPOINT))
 				m->dev->flags &= ~IFF_POINTOPOINT;
@@ -227,17 +204,14 @@ static int teql_qdisc_init(struct Qdisc *sch, struct nlattr *opt,
 			if (dev->mtu < m->dev->mtu)
 				m->dev->mtu = dev->mtu;
 		}
-		rcu_assign_pointer(q->next,
-				   rcu_dereference_protected(NEXT_SLAVE(first),
-							     lockdep_is_held(&m->slaves_lock)));
-		rcu_assign_pointer(NEXT_SLAVE(first), sch);
+		q->next = NEXT_SLAVE(m->slaves);
+		NEXT_SLAVE(m->slaves) = sch;
 	} else {
-		rcu_assign_pointer(q->next, sch);
-		rcu_assign_pointer(m->slaves, sch);
+		q->next = sch;
+		m->slaves = sch;
 		m->dev->mtu = dev->mtu;
 		m->dev->flags = (m->dev->flags&~FMASK)|(dev->flags&FMASK);
 	}
-	spin_unlock_bh(&m->slaves_lock);
 	return 0;
 }
 
@@ -311,9 +285,7 @@ static netdev_tx_t teql_master_xmit(struct sk_buff *skb, struct net_device *dev)
 	int subq = skb_get_queue_mapping(skb);
 	struct sk_buff *skb_res = NULL;
 
-	rcu_read_lock_bh();
-
-	start = rcu_dereference_bh(master->slaves);
+	start = master->slaves;
 
 restart:
 	nores = 0;
@@ -345,17 +317,10 @@ restart:
 				    netdev_start_xmit(skb, slave, slave_txq, false) ==
 				    NETDEV_TX_OK) {
 					__netif_tx_unlock(slave_txq);
-					spin_lock_bh(&master->slaves_lock);
-					if (rcu_dereference_protected(master->slaves,
-								      lockdep_is_held(&master->slaves_lock)) == q)
-						rcu_assign_pointer(master->slaves,
-								   rcu_dereference_protected(NEXT_SLAVE(q),
-											     lockdep_is_held(&master->slaves_lock)));
-					spin_unlock_bh(&master->slaves_lock);
+					master->slaves = NEXT_SLAVE(q);
 					netif_wake_queue(dev);
 					master->tx_packets++;
 					master->tx_bytes += length;
-					rcu_read_unlock_bh();
 					return NETDEV_TX_OK;
 				}
 				__netif_tx_unlock(slave_txq);
@@ -364,21 +329,14 @@ restart:
 				busy = 1;
 			break;
 		case 1:
-			spin_lock_bh(&master->slaves_lock);
-			if (rcu_dereference_protected(master->slaves,
-						      lockdep_is_held(&master->slaves_lock)) == q)
-				rcu_assign_pointer(master->slaves,
-						   rcu_dereference_protected(NEXT_SLAVE(q),
-									     lockdep_is_held(&master->slaves_lock)));
-			spin_unlock_bh(&master->slaves_lock);
-			rcu_read_unlock_bh();
+			master->slaves = NEXT_SLAVE(q);
 			return NETDEV_TX_OK;
 		default:
 			nores = 1;
 			break;
 		}
 		__skb_pull(skb, skb_network_offset(skb));
-	} while ((q = rcu_dereference_bh(NEXT_SLAVE(q))) != start);
+	} while ((q = NEXT_SLAVE(q)) != start);
 
 	if (nores && skb_res == NULL) {
 		skb_res = skb;
@@ -387,32 +345,29 @@ restart:
 
 	if (busy) {
 		netif_stop_queue(dev);
-		rcu_read_unlock_bh();
 		return NETDEV_TX_BUSY;
 	}
 	master->tx_errors++;
 
 drop:
 	master->tx_dropped++;
-	rcu_read_unlock_bh();
 	dev_kfree_skb(skb);
 	return NETDEV_TX_OK;
 }
 
 static int teql_master_open(struct net_device *dev)
 {
-	struct Qdisc *q, *first;
+	struct Qdisc *q;
 	struct teql_master *m = netdev_priv(dev);
 	int mtu = 0xFFFE;
 	unsigned int flags = IFF_NOARP | IFF_MULTICAST;
 
-	first = rtnl_dereference(m->slaves);
-	if (!first)
+	if (m->slaves == NULL)
 		return -EUNATCH;
 
 	flags = FMASK;
 
-	q = first;
+	q = m->slaves;
 	do {
 		struct net_device *slave = qdisc_dev(q);
 
@@ -434,7 +389,7 @@ static int teql_master_open(struct net_device *dev)
 			flags &= ~IFF_BROADCAST;
 		if (!(slave->flags&IFF_MULTICAST))
 			flags &= ~IFF_MULTICAST;
-	} while ((q = rtnl_dereference(NEXT_SLAVE(q))) != first);
+	} while ((q = NEXT_SLAVE(q)) != m->slaves);
 
 	m->dev->mtu = mtu;
 	m->dev->flags = (m->dev->flags&~FMASK) | flags;
@@ -462,15 +417,14 @@ static void teql_master_stats64(struct net_device *dev,
 static int teql_master_mtu(struct net_device *dev, int new_mtu)
 {
 	struct teql_master *m = netdev_priv(dev);
-	struct Qdisc *q, *first;
+	struct Qdisc *q;
 
-	first = rtnl_dereference(m->slaves);
-	q = first;
+	q = m->slaves;
 	if (q) {
 		do {
 			if (new_mtu > qdisc_dev(q)->mtu)
 				return -EINVAL;
-		} while ((q = rtnl_dereference(NEXT_SLAVE(q))) != first);
+		} while ((q = NEXT_SLAVE(q)) != m->slaves);
 	}
 
 	WRITE_ONCE(dev->mtu, new_mtu);
@@ -490,7 +444,6 @@ static __init void teql_master_setup(struct net_device *dev)
 	struct teql_master *master = netdev_priv(dev);
 	struct Qdisc_ops *ops = &master->qops;
 
-	spin_lock_init(&master->slaves_lock);
 	master->dev	= dev;
 	ops->priv_size  = sizeof(struct teql_sched_data);
 

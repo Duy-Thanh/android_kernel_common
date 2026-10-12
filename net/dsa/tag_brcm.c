@@ -102,9 +102,9 @@ static struct sk_buff *brcm_tag_xmit_ll(struct sk_buff *skb,
 	 * (including FCS and tag) because the length verification is done after
 	 * the Broadcom tag is stripped off the ingress packet.
 	 *
-	 * Free the SKB on error.
+	 * Let dsa_user_xmit() free the SKB
 	 */
-	if (skb_put_padto(skb, ETH_ZLEN + BRCM_TAG_LEN))
+	if (__skb_put_padto(skb, ETH_ZLEN + BRCM_TAG_LEN, false))
 		return NULL;
 
 	skb_push(skb, BRCM_TAG_LEN);
@@ -151,35 +151,27 @@ static struct sk_buff *brcm_tag_rcv_ll(struct sk_buff *skb,
 	int source_port;
 	u8 *brcm_tag;
 
-	if (unlikely(!pskb_may_pull(skb, BRCM_TAG_LEN))) {
-		kfree_skb(skb);
+	if (unlikely(!pskb_may_pull(skb, BRCM_TAG_LEN)))
 		return NULL;
-	}
 
 	brcm_tag = skb->data - offset;
 
 	/* The opcode should never be different than 0b000 */
-	if (unlikely((brcm_tag[0] >> BRCM_OPCODE_SHIFT) & BRCM_OPCODE_MASK)) {
-		kfree_skb(skb);
+	if (unlikely((brcm_tag[0] >> BRCM_OPCODE_SHIFT) & BRCM_OPCODE_MASK))
 		return NULL;
-	}
 
 	/* We should never see a reserved reason code without knowing how to
 	 * handle it
 	 */
-	if (unlikely(brcm_tag[2] & BRCM_EG_RC_RSVD)) {
-		kfree_skb(skb);
+	if (unlikely(brcm_tag[2] & BRCM_EG_RC_RSVD))
 		return NULL;
-	}
 
 	/* Locate which port this is coming from */
 	source_port = brcm_tag[3] & BRCM_EG_PID_MASK;
 
 	skb->dev = dsa_conduit_find_user(dev, 0, source_port);
-	if (!skb->dev) {
-		kfree_skb(skb);
+	if (!skb->dev)
 		return NULL;
-	}
 
 	/* Remove Broadcom tag and update checksum */
 	skb_pull_rcsum(skb, BRCM_TAG_LEN);
@@ -236,10 +228,8 @@ static struct sk_buff *brcm_leg_tag_rcv(struct sk_buff *skb,
 	__be16 *proto;
 	u8 *brcm_tag;
 
-	if (unlikely(!pskb_may_pull(skb, BRCM_LEG_TAG_LEN + VLAN_HLEN))) {
-		kfree_skb(skb);
+	if (unlikely(!pskb_may_pull(skb, BRCM_LEG_TAG_LEN + VLAN_HLEN)))
 		return NULL;
-	}
 
 	brcm_tag = dsa_etype_header_pos_rx(skb);
 	proto = (__be16 *)(brcm_tag + BRCM_LEG_TAG_LEN);
@@ -247,10 +237,8 @@ static struct sk_buff *brcm_leg_tag_rcv(struct sk_buff *skb,
 	source_port = brcm_tag[5] & BRCM_LEG_PORT_ID;
 
 	skb->dev = dsa_conduit_find_user(dev, 0, source_port);
-	if (!skb->dev) {
-		kfree_skb(skb);
+	if (!skb->dev)
 		return NULL;
-	}
 
 	/* The internal switch in BCM63XX SoCs always tags on egress on the CPU
 	 * port. We use VID 0 internally for untagged traffic, so strip the tag
@@ -285,8 +273,10 @@ static struct sk_buff *brcm_leg_tag_xmit(struct sk_buff *skb,
 	 * need to make sure that packets are at least 70 bytes
 	 * (including FCS and tag) because the length verification is done after
 	 * the Broadcom tag is stripped off the ingress packet.
+	 *
+	 * Let dsa_user_xmit() free the SKB
 	 */
-	if (skb_put_padto(skb, ETH_ZLEN + BRCM_LEG_TAG_LEN))
+	if (__skb_put_padto(skb, ETH_ZLEN + BRCM_LEG_TAG_LEN, false))
 		return NULL;
 
 	skb_push(skb, BRCM_LEG_TAG_LEN);
@@ -335,8 +325,10 @@ static struct sk_buff *brcm_leg_fcs_tag_xmit(struct sk_buff *skb,
 	 * need to make sure that packets are at least 70 bytes (including FCS
 	 * and tag) because the length verification is done after the Broadcom
 	 * tag is stripped off the ingress packet.
+	 *
+	 * Let dsa_user_xmit() free the SKB.
 	 */
-	if (skb_put_padto(skb, ETH_ZLEN + BRCM_LEG_TAG_LEN))
+	if (__skb_put_padto(skb, ETH_ZLEN + BRCM_LEG_TAG_LEN, false))
 		return NULL;
 
 	fcs_len = skb->len;
@@ -359,9 +351,8 @@ static struct sk_buff *brcm_leg_fcs_tag_xmit(struct sk_buff *skb,
 	brcm_tag[5] = dp->index & BRCM_LEG_PORT_ID;
 
 	/* Original FCS value */
-	if (skb_pad(skb, ETH_FCS_LEN))
+	if (__skb_pad(skb, ETH_FCS_LEN, false))
 		return NULL;
-
 	skb_put_data(skb, &fcs_val, ETH_FCS_LEN);
 
 	return skb;
