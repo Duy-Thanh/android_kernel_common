@@ -14,6 +14,7 @@
   aes_encrypt
   aes_expandkey
   alloc_anon_inode
+  alloc_buffer_head
   alloc_chrdev_region
   alloc_etherdev_mqs
   alloc_io_pgtable_ops
@@ -81,6 +82,8 @@
   balloon_page_enqueue
   bcmp
   bdev_file_open_by_path
+  bdev_freeze
+  bdev_thaw
   bdi_alloc
   bdi_put
   bdi_register
@@ -279,6 +282,7 @@
   component_master_add_with_match
   component_master_del
   component_unbind_all
+  __cond_resched_lock
   config_ep_by_speed
   configfs_register_subsystem
   configfs_unregister_subsystem
@@ -344,6 +348,7 @@
   crypto_alloc_shash
   crypto_alloc_skcipher
   crypto_alloc_sync_skcipher
+  crypto_cipher_decrypt_one
   crypto_cipher_encrypt_one
   crypto_cipher_setkey
   crypto_default_rng
@@ -1214,6 +1219,7 @@
   filp_open_block
   _find_first_bit
   _find_first_zero_bit
+  __find_get_block
   find_get_pid
   _find_last_bit
   _find_next_bit
@@ -1270,6 +1276,7 @@
   fqdir_exit
   fqdir_init
   free_anon_bdev
+  free_buffer_head
   free_io_pgtable_ops
   __free_iova
   free_iova
@@ -1291,6 +1298,7 @@
   fs_param_is_bool
   fs_param_is_enum
   fs_param_is_gid
+  fs_param_is_s32
   fs_param_is_string
   fs_param_is_u32
   fs_param_is_u64
@@ -1326,6 +1334,7 @@
   generic_hwtstamp_get_lower
   generic_hwtstamp_set_lower
   generic_key_instantiate
+  generic_parse_monolithic
   generic_permission
   generic_read_dir
   generic_setlease
@@ -1936,6 +1945,7 @@
   mac_pton
   make_vfsgid
   make_vfsuid
+  mark_buffer_async_write
   __mark_inode_dirty
   mark_mounts_for_expiry
   mas_find
@@ -2651,7 +2661,9 @@
   pm_system_wakeup
   pm_wakeup_dev_event
   posix_acl_chmod
+  __posix_acl_create
   posix_acl_create
+  posix_acl_equiv_mode
   posix_clock_register
   posix_clock_unregister
   posix_lock_file
@@ -3495,6 +3507,7 @@
   synchronize_net
   synchronize_rcu
   synchronize_srcu
+  sync_inodes_sb
   syscon_node_to_regmap
   syscon_regmap_lookup_by_compatible
   syscon_regmap_lookup_by_phandle
@@ -4219,6 +4232,7 @@
   work_busy
   work_on_cpu_key
   writeback_iter
+  write_dirty_buffer
   ww_mutex_lock
   ww_mutex_lock_interruptible
   ww_mutex_unlock
