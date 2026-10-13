@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1b07224_de8dc03d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 4893047
+      },
+      "writtenOn": "2026-10-13T02:10:32Z",
+      "side": 1,
+      "message": "Done. All patches have been updated to use the same Change-Id, I5bc0cbfef1d0c4f4322a8ae820cf608b63cba2bb.\n\nThey are listed here: android-review.googlesource.com/q/I5bc0cbfef1d0…20cf608b63cba2bb",
+      "parentUuid": "47617782_a877bd39",
+      "revId": "d6784f235d2e8bd5b46161b9a26a3a0b2d7560b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "62830a4d_e2d877e6",
