@@ -16,6 +16,24 @@
       "message": "Is this needed for android17-6.18? android15-6.6? android14-6.1?",
       "revId": "a2b9b99c75002e453409cfa619b6655eede39c3e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a426db8a_d3a1247e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4507784
+      },
+      "writtenOn": "2026-10-13T15:36:37Z",
+      "side": 1,
+      "message": "I think linux6.x , it should use SRCU based API. So pick to linux-6.18/6.6/6.1 is needed.",
+      "parentUuid": "b585e5ff_ebbb9b5b",
+      "revId": "a2b9b99c75002e453409cfa619b6655eede39c3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
