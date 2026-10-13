@@ -35,7 +35,6 @@
 
 #include "hci_request.h"
 #include "smp.h"
-#include "a2mp_compat.h"
 #include "eir.h"
 
 struct sco_param {
