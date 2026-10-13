@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "700b93c4_de2721c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-10-13T10:20:38Z",
+      "side": 1,
+      "message": "You need aosp/4359432 as well to sort out the CRC issues.",
+      "revId": "500249938f0017b46a7b7ac29c8335a608e672e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
