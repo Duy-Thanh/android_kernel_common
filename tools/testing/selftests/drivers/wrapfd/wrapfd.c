@@ -1073,6 +1073,99 @@ static void test_lseek(struct __test_metadata *_metadata,
 }
 
 
+static long get_map_count(int wrapfd)
+{
+	char str[FDINFO_BUF_SIZE];
+	char fdinfo_name[64];
+	int fdinfo_fd;
+	char *maps_str;
+	unsigned long map_count;
+
+	sprintf(fdinfo_name, "/proc/%d/fdinfo/%d", getpid(), wrapfd);
+	fdinfo_fd = open(fdinfo_name, O_RDONLY);
+	if (fdinfo_fd < 0)
+		return -1;
+
+	if (read(fdinfo_fd, str, FDINFO_BUF_SIZE) < 0) {
+		close(fdinfo_fd);
+		return -1;
+	}
+
+	close(fdinfo_fd);
+
+	maps_str = strstr(str, "maps");
+	if (!maps_str)
+		return -1;
+
+	if (sscanf(maps_str, "maps:\t%lu\n", &map_count) != 1)
+		return -1;
+
+	return map_count;
+}
+
+static void test_map_count(struct __test_metadata *_metadata, FIXTURE_DATA(wrapfd_tests) *self,
+			   int fd)
+{
+	const int nr_mappings = 4;
+	int i, status;
+	int wrapfd;
+	void *mappings[nr_mappings];
+	pid_t pid;
+
+	wrapfd = wrapfd_wrap(self->dev_fd, fd, PROT_READ | PROT_WRITE);
+	ASSERT_TRUE(wrapfd >= 0);
+
+	ASSERT_EQ(get_map_count(wrapfd), 0);
+
+	for (i = 0; i < nr_mappings; i++) {
+		mappings[i] = mmap(NULL, self->size, PROT_READ | PROT_WRITE, MAP_SHARED, wrapfd, 0);
+		ASSERT_NE(mappings[i], MAP_FAILED);
+	}
+
+	/* Ensure mappings are accounted correctly within a process. */
+	ASSERT_EQ(get_map_count(wrapfd), nr_mappings);
+
+	/* And across processes. */
+	pid = fork();
+	if (pid == 0) {
+		/*
+		 * Note: none of the addresses in buf are mapped in the child process, because
+		 * wrapfd mappings are not inherited across fork().
+		 */
+		for (i = 0; i < nr_mappings; i++) {
+			mappings[i] = mmap(NULL, self->size, PROT_READ | PROT_WRITE, MAP_SHARED,
+					   wrapfd, 0);
+			if (mappings[i] == MAP_FAILED)
+				break;
+		}
+
+		if (i == nr_mappings && get_map_count(wrapfd) == 2 * nr_mappings)
+			status = EXIT_SUCCESS;
+		else
+			status = EXIT_FAILURE;
+
+		for (i -= 1; i >= 0; i--)
+			munmap(mappings[i], self->size);
+
+		close(wrapfd);
+		exit(status);
+	} else {
+		ASSERT_NE(wait(&status), -1);
+		ASSERT_TRUE(WIFEXITED(status));
+		ASSERT_EQ(WEXITSTATUS(status), EXIT_SUCCESS);
+	}
+
+	/* Child process is gone, so we should be back to the amount of mappings we started with. */
+	ASSERT_EQ(get_map_count(wrapfd), nr_mappings);
+
+	for (i -= 1; i >= 0; i--)
+		ASSERT_EQ(munmap(mappings[i], self->size), 0);
+
+	ASSERT_EQ(get_map_count(wrapfd), 0);
+	close(wrapfd);
+}
+
+
 static void run_tests(struct __test_metadata *_metadata,
 		      FIXTURE_DATA(wrapfd_tests) *self, int fd, int rdonly_fd)
 {
@@ -1095,6 +1188,7 @@ static void run_tests(struct __test_metadata *_metadata,
 	test_guests(_metadata, self, fd);
 	test_ioctl(_metadata, self, fd);
 	test_lseek(_metadata, self, fd);
+	test_map_count(_metadata, self, fd);
 }
 
 TEST_F(wrapfd_tests, wrapfd_test_dmabuf_system_heap)
