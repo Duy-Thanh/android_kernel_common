@@ -19,7 +19,6 @@
 #include <linux/f2fs_fs.h>
 #include <linux/security.h>
 #include <linux/posix_acl_xattr.h>
-#include <linux/fserror.h>
 #include "f2fs.h"
 #include "xattr.h"
 #include "segment.h"
@@ -372,7 +371,6 @@ static int lookup_all_xattrs(struct inode *inode, struct folio *ifolio,
 		err = -ENODATA;
 		f2fs_handle_error(F2FS_I_SB(inode),
 					ERROR_CORRUPTED_XATTR);
-		fserror_report_file_metadata(inode, err, GFP_NOFS);
 		goto out;
 	}
 check:
@@ -583,6 +581,8 @@ ssize_t f2fs_listxattr(struct dentry *dentry, char *buffer, size_t buffer_size)
 		size_t prefix_len;
 		size_t size;
 
+		prefix = f2fs_xattr_prefix(entry->e_name_index, dentry);
+
 		if ((void *)(entry) + sizeof(__u32) > last_base_addr ||
 			(void *)XATTR_NEXT_ENTRY(entry) > last_base_addr) {
 			f2fs_err(F2FS_I_SB(inode), "list inode (%llu) has corrupted xattr",
@@ -590,13 +590,9 @@ ssize_t f2fs_listxattr(struct dentry *dentry, char *buffer, size_t buffer_size)
 			set_sbi_flag(F2FS_I_SB(inode), SBI_NEED_FSCK);
 			f2fs_handle_error(F2FS_I_SB(inode),
 						ERROR_CORRUPTED_XATTR);
-			fserror_report_file_metadata(inode,
-						-EFSCORRUPTED, GFP_NOFS);
-			error = -EFSCORRUPTED;
-			goto cleanup;
+			break;
 		}
 
-		prefix = f2fs_xattr_prefix(entry->e_name_index, dentry);
 		if (!prefix)
 			continue;
 
@@ -681,7 +677,6 @@ retry:
 		error = -EFSCORRUPTED;
 		f2fs_handle_error(F2FS_I_SB(inode),
 					ERROR_CORRUPTED_XATTR);
-		fserror_report_file_metadata(inode, error, GFP_NOFS);
 		goto exit;
 	}
 
@@ -710,7 +705,6 @@ retry:
 			error = -EFSCORRUPTED;
 			f2fs_handle_error(F2FS_I_SB(inode),
 						ERROR_CORRUPTED_XATTR);
-			fserror_report_file_metadata(inode, error, GFP_NOFS);
 			goto exit;
 		}
 		last = XATTR_NEXT_ENTRY(last);

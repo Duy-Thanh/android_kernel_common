@@ -128,7 +128,7 @@ static int dir685_tk_probe(struct i2c_client *client)
 }
 
 static const struct i2c_device_id dir685_tk_id[] = {
-	{ .name = "dir685tk" },
+	{ "dir685tk" },
 	{ }
 };
 MODULE_DEVICE_TABLE(i2c, dir685_tk_id);

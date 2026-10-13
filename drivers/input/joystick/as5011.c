@@ -337,7 +337,7 @@ static void as5011_remove(struct i2c_client *client)
 }
 
 static const struct i2c_device_id as5011_id[] = {
-	{ .name = MODULE_DEVICE_ALIAS },
+	{ MODULE_DEVICE_ALIAS },
 	{ }
 };
 MODULE_DEVICE_TABLE(i2c, as5011_id);

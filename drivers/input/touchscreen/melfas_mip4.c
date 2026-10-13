@@ -1536,7 +1536,7 @@ MODULE_DEVICE_TABLE(acpi, mip4_acpi_match);
 #endif
 
 static const struct i2c_device_id mip4_i2c_ids[] = {
-	{ .name = MIP4_DEVICE_NAME },
+	{ MIP4_DEVICE_NAME },
 	{ }
 };
 MODULE_DEVICE_TABLE(i2c, mip4_i2c_ids);
