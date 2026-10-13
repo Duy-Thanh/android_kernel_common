@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3b60afa_f14b5ab8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-10-13T15:51:42Z",
+      "side": 1,
+      "message": "Can you justify the use of internal helpers instead of using (for example) `regulator_set_voltage`?\n\nSeveral of these functions assume they are called with a mutex held.",
+      "revId": "6cd66b580436fbaed2e175b92058b898632c7ddc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
