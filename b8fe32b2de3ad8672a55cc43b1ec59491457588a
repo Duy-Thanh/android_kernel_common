@@ -115,6 +115,24 @@
       "parentUuid": "6c4af4a2_2a12cad2",
       "revId": "b8fe32b2de3ad8672a55cc43b1ec59491457588a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5791e59_c48f3c64",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1245,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-10-13T12:52:54Z",
+      "side": 1,
+      "message": "\u003e\u003e And pkvm_hyp_mmu_map ultimately calls hyp_mmu_flush_tlb which BUG()s.\n\n\u003e At first I thought \"wut?\" :)\n\nSorry my bad, I should have explained it more clearly :-)\n\n\u003e So we are kind of safe that it\u0027s guaranteed to be only a DoS, but still it is a bug.\n\nYeah true, its minor - not a security issue and just a DoS.",
+      "parentUuid": "f2044e70_673b48aa",
+      "revId": "b8fe32b2de3ad8672a55cc43b1ec59491457588a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
