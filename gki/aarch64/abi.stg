@@ -361887,6 +361887,11 @@ function {
   parameter_id: 0x4585663f
 }
 function {
+  id: 0x971e9f96
+  return_type_id: 0x6720d32f
+  parameter_id: 0x2a79f2e5
+}
+function {
   id: 0x971eb5f1
   return_type_id: 0x6720d32f
   parameter_id: 0x25782362
@@ -374405,6 +374410,13 @@ function {
   parameter_id: 0x064d6086
 }
 function {
+  id: 0x9cacfc39
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0f78474f
+  parameter_id: 0xba5444a6
+  parameter_id: 0x6d7f5ff6
+}
+function {
   id: 0x9cae8e59
   return_type_id: 0x6720d32f
   parameter_id: 0x074f1a14
@@ -377512,12 +377524,27 @@ function {
   parameter_id: 0xc9082b19
 }
 function {
+  id: 0x9e15ad9b
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0f78474f
+  parameter_id: 0x13580d6c
+  parameter_id: 0x13580d6c
+  parameter_id: 0xba5444a6
+}
+function {
   id: 0x9e15f25c
   return_type_id: 0x6720d32f
   parameter_id: 0x0f4dcd61
   parameter_id: 0x18bd6530
   parameter_id: 0x92233392
   parameter_id: 0x07dcdbe1
+}
+function {
+  id: 0x9e1744ca
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0f78474f
+  parameter_id: 0x13580d6c
+  parameter_id: 0x13580d6c
 }
 function {
   id: 0x9e1757cd
@@ -380210,6 +380237,14 @@ function {
   parameter_id: 0x0b3a3706
   parameter_id: 0x26795a38
   parameter_id: 0x3cfc8982
+}
+function {
+  id: 0x9fd950d5
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0f78474f
+  parameter_id: 0x6720d32f
+  parameter_id: 0x6720d32f
+  parameter_id: 0xba5444a6
 }
 function {
   id: 0x9fd9ef3d
@@ -451725,6 +451760,24 @@ elf_symbol {
   full_name: "regulator_bulk_get"
 }
 elf_symbol {
+  id: 0xe0f7617e
+  name: "regulator_check_consumers"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xfeb34a59
+  type_id: 0x9e15ad9b
+  full_name: "regulator_check_consumers"
+}
+elf_symbol {
+  id: 0xb3e3ec17
+  name: "regulator_check_voltage"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xf0942f05
+  type_id: 0x9e1744ca
+  full_name: "regulator_check_voltage"
+}
+elf_symbol {
   id: 0xabbc8603
   name: "regulator_count_voltages"
   is_defined: true
@@ -451732,6 +451785,15 @@ elf_symbol {
   crc: 0xeb2bfea8
   type_id: 0x9deb64a3
   full_name: "regulator_count_voltages"
+}
+elf_symbol {
+  id: 0x6522938a
+  name: "regulator_coupler_register"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd6af19d0
+  type_id: 0x971e9f96
+  full_name: "regulator_coupler_register"
 }
 elf_symbol {
   id: 0x1e484088
@@ -451768,6 +451830,15 @@ elf_symbol {
   crc: 0x020ca925
   type_id: 0x9e5ef2fc
   full_name: "regulator_disable_regmap"
+}
+elf_symbol {
+  id: 0xe5c37627
+  name: "regulator_do_balance_voltage"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x57c6e3d3
+  type_id: 0x9cacfc39
+  full_name: "regulator_do_balance_voltage"
 }
 elf_symbol {
   id: 0x32908e47
@@ -452119,6 +452190,15 @@ elf_symbol {
   crc: 0x76975b15
   type_id: 0x9c6e2fdb
   full_name: "regulator_set_voltage"
+}
+elf_symbol {
+  id: 0x0f993393
+  name: "regulator_set_voltage_rdev"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8d14c6e1
+  type_id: 0x9fd950d5
+  full_name: "regulator_set_voltage_rdev"
 }
 elf_symbol {
   id: 0x8af977a8
@@ -480467,11 +480547,15 @@ interface {
   symbol_id: 0x77274abe
   symbol_id: 0xf2357f9f
   symbol_id: 0xc16e78d8
+  symbol_id: 0xe0f7617e
+  symbol_id: 0xb3e3ec17
   symbol_id: 0xabbc8603
+  symbol_id: 0x6522938a
   symbol_id: 0x1e484088
   symbol_id: 0x4cf1070c
   symbol_id: 0x9e48588d
   symbol_id: 0x3945d02a
+  symbol_id: 0xe5c37627
   symbol_id: 0x32908e47
   symbol_id: 0xc91eefc6
   symbol_id: 0x7511baca
@@ -480511,6 +480595,7 @@ interface {
   symbol_id: 0x5a67d15f
   symbol_id: 0xfb766d3e
   symbol_id: 0xc20a2c2c
+  symbol_id: 0x0f993393
   symbol_id: 0x8af977a8
   symbol_id: 0x0b03a904
   symbol_id: 0x2bce772d
