@@ -246,6 +246,20 @@ void __kvm_tlb_flush_vmid(struct kvm_s2_mmu *mmu)
 	exit_vmid_context(&cxt);
 }
 
+void __kvm_tlb_flush_vmid_s1(struct kvm_s2_mmu *mmu)
+{
+	struct tlb_inv_context cxt;
+
+	/* Switch to requested VMID */
+	enter_vmid_context(mmu, &cxt, false);
+
+	__tlbi(vmalle1is);
+	__tlbi_sync_s1ish_hyp();
+	isb();
+
+	exit_vmid_context(&cxt);
+}
+
 void __kvm_flush_cpu_context(struct kvm_s2_mmu *mmu)
 {
 	struct tlb_inv_context cxt;

@@ -443,12 +443,20 @@ again:
 #endif
 }
 
+#define PKVM_HANDLE_OFFSET 0x1000
+static void *pkvm_cached_pgd[KVM_MAX_PVMS];
+static void *pkvm_inuse_pgd[KVM_MAX_PVMS];
+
 static void __pkvm_finalize_destroy_hyp_vm(struct kvm *kvm)
 {
+	unsigned int vm_idx = kvm->arch.pkvm.handle - PKVM_HANDLE_OFFSET;
+	void *pgd = NULL;
 	struct kvm_vcpu *vcpu;
 	unsigned long idx;
 
 	if (pkvm_hyp_vm_is_created(kvm)) {
+		if (vm_idx < KVM_MAX_PVMS)
+			pgd = xchg(&pkvm_inuse_pgd[vm_idx], NULL);
 		WARN_ON(kvm_call_hyp_nvhe(__pkvm_finalize_teardown_vm,
 					  kvm->arch.pkvm.handle));
 	} else if (kvm->arch.pkvm.handle) {
@@ -464,6 +472,8 @@ static void __pkvm_finalize_destroy_hyp_vm(struct kvm *kvm)
 	atomic64_sub(kvm->arch.pkvm.stage2_teardown_mc.nr_pages << PAGE_SHIFT,
 		     &kvm->stat.protected_hyp_mem);
 	free_hyp_memcache(&kvm->arch.pkvm.stage2_teardown_mc);
+	if (pgd && cmpxchg(&pkvm_cached_pgd[vm_idx], NULL, pgd) != NULL)
+		free_pages_exact(pgd, PAGE_SIZE);
 	kvm_iommu_guest_free_mc(&kvm->arch.pkvm.teardown_iommu_mc);
 
 	kvm_for_each_vcpu(idx, vcpu, kvm) {
@@ -575,8 +585,9 @@ static int __pkvm_notify_guest_vm_avail_retry(struct kvm *kvm, u32 availability_
  */
 static int __pkvm_create_hyp_vm(struct kvm *kvm)
 {
+	unsigned int vm_idx = kvm->arch.pkvm.handle - PKVM_HANDLE_OFFSET;
 	size_t pgd_sz;
-	void *pgd;
+	void *pgd = NULL;
 	int ret;
 
 	if (kvm->created_vcpus < 1)
@@ -585,13 +596,32 @@ static int __pkvm_create_hyp_vm(struct kvm *kvm)
 	pgd_sz = kvm_pgtable_stage2_pgd_size(kvm->arch.mmu.vtcr);
 
 	/*
+	 * Reuse the per-slot PGD page when possible so sequential VMs assigned
+	 * the same VMID (vm_idx + 1) also preserve VTTBR_EL2.BADDR, avoiding
+	 * shadow Stage-2 MMU slot thrashing under nested virtualization (NV2).
+	 */
+	if (pgd_sz == PAGE_SIZE && vm_idx < KVM_MAX_PVMS) {
+		pgd = xchg(&pkvm_cached_pgd[vm_idx], NULL);
+		if (pgd)
+			clear_page(pgd);
+	}
+
+	/*
 	 * The PGD pages will be reclaimed using a hyp_memcache which implies
 	 * page granularity. So, use alloc_pages_exact() to get individual
 	 * refcounts.
 	 */
-	pgd = alloc_pages_exact(pgd_sz, GFP_KERNEL_ACCOUNT);
-	if (!pgd)
-		return -ENOMEM;
+	if (!pgd) {
+		pgd = alloc_pages_exact(pgd_sz,
+					(pgd_sz == PAGE_SIZE && vm_idx < KVM_MAX_PVMS) ?
+					GFP_KERNEL : GFP_KERNEL_ACCOUNT);
+		if (!pgd)
+			return -ENOMEM;
+	}
+	if (pgd_sz == PAGE_SIZE && vm_idx < KVM_MAX_PVMS) {
+		get_page(virt_to_page(pgd));
+		WRITE_ONCE(pkvm_inuse_pgd[vm_idx], pgd);
+	}
 	atomic64_add(pgd_sz, &kvm->stat.protected_hyp_mem);
 
 	init_hyp_stage2_memcache(&kvm->arch.pkvm.stage2_teardown_mc);
@@ -606,7 +636,14 @@ static int __pkvm_create_hyp_vm(struct kvm *kvm)
 
 	return __pkvm_notify_guest_vm_avail_retry(kvm, FFA_VM_CREATION_MSG);
 free_pgd:
-	free_pages_exact(pgd, pgd_sz);
+	if (pgd_sz == PAGE_SIZE && vm_idx < KVM_MAX_PVMS) {
+		WRITE_ONCE(pkvm_inuse_pgd[vm_idx], NULL);
+		put_page(virt_to_page(pgd));
+		if (cmpxchg(&pkvm_cached_pgd[vm_idx], NULL, pgd) == NULL)
+			pgd = NULL;
+	}
+	if (pgd)
+		free_pages_exact(pgd, pgd_sz);
 	atomic64_sub(pgd_sz, &kvm->stat.protected_hyp_mem);
 	return ret;
 }
