@@ -153,13 +153,24 @@ static void damon_do_test_apply_three_regions(struct kunit *test,
 
 	damon_va_apply_three_regions(t, three_regions);
 
+	KUNIT_EXPECT_EQ(test, damon_nr_regions(t), nr_expected / 2);
+	if (damon_nr_regions(t) != nr_expected / 2)
+		goto out;
+
 	for (i = 0; i < nr_expected / 2; i++) {
 		r = __nth_region_of(t, i);
 		KUNIT_EXPECT_EQ(test, r->ar.start, expected[i * 2]);
 		KUNIT_EXPECT_EQ(test, r->ar.end, expected[i * 2 + 1]);
 	}
 
+<<<<<<< HEAD   (a9c07a46a19c56fb91af0621d30d93802c3faf11 Revert "espintcp: remove encap socket caching to avoid refer)
 	damon_destroy_target(t);
+||||||| BASE   (3ad8ff12fd44b08af9212ac4883a7e29d2ab7348 mtd: afs: validate v2 image info bounds)
+	damon_destroy_ctx(ctx);
+=======
+out:
+	damon_destroy_ctx(ctx);
+>>>>>>> BRANCH (8b2f7a411e7ceaef268355c2150c22ee3f509c3b clk: meson: align gxbb_32k_clk_sel number of parents with ac)
 }
 
 /*
