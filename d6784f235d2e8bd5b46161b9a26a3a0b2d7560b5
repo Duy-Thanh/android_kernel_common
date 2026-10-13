@@ -86,6 +86,23 @@
       "message": "Please review this backport change as soon as possible. Thanks.",
       "revId": "d6784f235d2e8bd5b46161b9a26a3a0b2d7560b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "351afb40_3d45368b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1651802
+      },
+      "writtenOn": "2026-10-13T18:52:31Z",
+      "side": 1,
+      "message": "Please do not merge this. Backporting this commit alone is not enough for this branch: it depends on the zoned file pinning / range GC infrastructure and several follow-up fixes that are missing here, so pinned allocation can fail without triggering range GC once the pinned area is full. I\u0027ve uploaded the complete series instead: topic f2fs-resizable-tail-6.12 (aosp/4360910..4360915) / f2fs-resizable-tail-6.1 (aosp/4361527..4361553). Please abandon this CL.",
+      "revId": "d6784f235d2e8bd5b46161b9a26a3a0b2d7560b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
