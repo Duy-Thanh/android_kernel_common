@@ -22,6 +22,30 @@
       },
       "revId": "5838160efa8865192efac7c332b4ec8a4e707e85",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d67a39cc_109ab2c2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-10-13T15:37:16Z",
+      "side": 1,
+      "message": "You could treat this as ABI prehistory (unstable phase) and just Lint+2.",
+      "parentUuid": "2eedc7ff_7c72599c",
+      "range": {
+        "startLine": 11,
+        "startChar": 55,
+        "endLine": 11,
+        "endChar": 67
+      },
+      "revId": "5838160efa8865192efac7c332b4ec8a4e707e85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
