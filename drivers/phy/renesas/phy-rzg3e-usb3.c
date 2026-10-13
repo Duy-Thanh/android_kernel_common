@@ -78,11 +78,13 @@ static void rzg3e_phy_usb2test_phy_init(void __iomem *base)
 	writel(val, base + USB3_TEST_UTMICTRL2);
 
 	val = readl(base + USB3_TEST_PRMCTRL5_R);
-	FIELD_MODIFY(USB3_TEST_PRMCTRL5_R_TXPREEMPAMPTUNE0_MASK, &val, 2);
+	val &= ~USB3_TEST_PRMCTRL5_R_TXPREEMPAMPTUNE0_MASK;
+	val |= FIELD_PREP(USB3_TEST_PRMCTRL5_R_TXPREEMPAMPTUNE0_MASK, 2);
 	writel(val, base + USB3_TEST_PRMCTRL5_R);
 
 	val = readl(base + USB3_TEST_PRMCTRL6_R);
-	FIELD_MODIFY(USB3_TEST_PRMCTRL6_R_OTGTUNE0_MASK, &val, 7);
+	val &= ~USB3_TEST_PRMCTRL6_R_OTGTUNE0_MASK;
+	val |= FIELD_PREP(USB3_TEST_PRMCTRL6_R_OTGTUNE0_MASK, 7);
 	writel(val, base + USB3_TEST_PRMCTRL6_R);
 
 	val = readl(base + USB3_TEST_RESET);
@@ -254,4 +256,4 @@ module_platform_driver(rzg3e_phy_usb3_driver);
 
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("Renesas RZ/G3E USB3.0 PHY Driver");
-MODULE_AUTHOR("Biju Das <biju.das.jz@bp.renesas.com>");
+MODULE_AUTHOR("biju.das.jz@bp.renesas.com>");

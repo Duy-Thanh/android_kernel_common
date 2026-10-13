@@ -14,16 +14,17 @@ description: |
 maintainers:
   - Jon Hunter <jonathanh@nvidia.com>
   - Rajesh Gumasta <rgumasta@nvidia.com>
-  - Akhil R <akhilrajeev@nvidia.com>
+
+allOf:
+  - $ref: dma-controller.yaml#
 
 properties:
   compatible:
     oneOf:
-      - enum:
-          - nvidia,tegra264-gpcdma
-          - nvidia,tegra186-gpcdma
+      - const: nvidia,tegra186-gpcdma
       - items:
           - enum:
+              - nvidia,tegra264-gpcdma
               - nvidia,tegra234-gpcdma
               - nvidia,tegra194-gpcdma
           - const: nvidia,tegra186-gpcdma
@@ -50,14 +51,6 @@ properties:
   iommus:
     maxItems: 1
 
-  iommu-map:
-    description:
-      Maps DMA channel numbers to IOMMU stream IDs. A single entry can map all
-      channels when stream IDs are contiguous. In systems where the channels or
-      stream IDs are not contiguous, multiple entries may be needed.
-    minItems: 1
-    maxItems: 32
-
   dma-coherent: true
 
   dma-channel-mask:
@@ -67,22 +60,11 @@ required:
   - compatible
   - reg
   - interrupts
+  - resets
+  - reset-names
   - "#dma-cells"
   - iommus
   - dma-channel-mask
-
-allOf:
-  - $ref: dma-controller.yaml#
-  - if:
-      properties:
-        compatible:
-          contains:
-            enum:
-              - nvidia,tegra186-gpcdma
-    then:
-      required:
-        - resets
-        - reset-names
 
 additionalProperties: false
 

@@ -14,9 +14,7 @@ allOf:
 
 properties:
   compatible:
-    enum:
-      - spacemit,k1-pdma
-      - spacemit,k3-pdma
+    const: spacemit,k1-pdma
 
   reg:
     maxItems: 1
