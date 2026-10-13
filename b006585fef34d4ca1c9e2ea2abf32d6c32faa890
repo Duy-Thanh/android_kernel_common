@@ -1,6 +1,40 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d743fde4_1716104c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-10-13T16:49:25Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCommit: The cherry pick line does not point to the correct original commit on the base b...\n\nThe cherry pick line does not point to the correct original commit on the base branch.\n\nExpected commit: c9d3e2fd9c49f6a045c3faad2a09fc95a70eb47a\nFound commit: 7e18efdec2902c12cade8a0dbf40901b74deb236\n\nPlease cherry-pick using: `git cherry-pick -s -x c9d3e2fd9c49f6a045c3faad2a09fc95a70eb47a`.\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "b006585fef34d4ca1c9e2ea2abf32d6c32faa890",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6d9c11c_910a9d18",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-10-13T16:49:25Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Please **add an open respin request bug** to the commit message. Do not remove e...\n\nPlease **add an open respin request bug** to the commit message. Do not remove existing bug references.\nRefer to the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "b006585fef34d4ca1c9e2ea2abf32d6c32faa890",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6819bc4e_f169e054",
