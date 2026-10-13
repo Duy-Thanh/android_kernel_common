@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2913cda_40ee052d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-10-13T18:26:07Z",
+      "side": 1,
+      "message": "KMI break:\n```\ntype \u0027struct ufs_hba\u0027 changed\n  byte size changed from 5368 to 5424\n  member \u0027struct mutex ahit_mutex\u0027 was added\n  member \u0027int ahit_disable_depth\u0027 was added\n  103 members (\u0027struct ufshcd_lrb* lrb\u0027 .. \u0027u64 android_oem_data1\u0027) changed\n    offset changed by 448\n```\nPlease refactor to avoid breaking the KMI",
+      "revId": "050893c87470b802577e6ff7b24b3ca04965c36a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
