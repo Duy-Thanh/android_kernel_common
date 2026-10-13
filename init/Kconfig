@@ -2027,10 +2027,19 @@ config RUST
 	depends on !CFI_CLANG || HAVE_CFI_ICALL_NORMALIZE_INTEGERS_RUSTC
 	select CFI_ICALL_NORMALIZE_INTEGERS if CFI_CLANG
 	depends on !CALL_PADDING || RUSTC_VERSION >= 108100
+<<<<<<< HEAD   (040e2f3fdb1cc136d7f1005d136bf5bcc2453f38 Revert "fs: constify file ptr in backing_file accessor helpe)
 	# ANDROID: This version number has been changed due to backports in Android's compiler.
 	depends on !KASAN_SW_TAGS || RUSTC_VERSION >= 108200
 	# ANDROID: This version number has been changed due to backports in Android's compiler.
 	depends on !(MITIGATION_RETHUNK && KASAN) || RUSTC_VERSION >= 108200
+||||||| BASE   (296aabce459470a4c1b68ffd0c0c0920e563aaad Linux 6.12.95)
+	depends on !KASAN_SW_TAGS
+	depends on !(MITIGATION_RETHUNK && KASAN) || RUSTC_VERSION >= 108300
+=======
+	depends on !KASAN || CC_IS_CLANG
+	depends on !KASAN_SW_TAGS
+	depends on !(MITIGATION_RETHUNK && KASAN) || RUSTC_VERSION >= 108300
+>>>>>>> BRANCH (6d15a1029d425b15c59463910ebdccc4afe760d6 Linux 6.12.96)
 	help
 	  Enables Rust support in the kernel.
 

@@ -614,12 +614,19 @@ static void inode_switch_wbs(struct inode *inode, int new_wb_id)
 
 	atomic_inc(&isw_nr_in_flight);
 
-	/* find and pin the new wb */
+	/*
+	 * Paired with synchronize_rcu() in cgroup_writeback_umount():
+	 * holding rcu_read_lock across inode_prepare_wbs_switch()
+	 * (covering the SB_ACTIVE check and the inode grab) and
+	 * wb_queue_isw() ensures synchronize_rcu() cannot return until
+	 * the work is queued, so the subsequent flush_workqueue() will
+	 * wait for the switch.
+	 */
 	rcu_read_lock();
+	/* find and pin the new wb */
 	memcg_css = css_from_id(new_wb_id, &memory_cgrp_subsys);
 	if (memcg_css && !css_tryget(memcg_css))
 		memcg_css = NULL;
-	rcu_read_unlock();
 	if (!memcg_css)
 		goto out_free;
 
@@ -633,6 +640,7 @@ static void inode_switch_wbs(struct inode *inode, int new_wb_id)
 
 	isw->inodes[0] = inode;
 
+<<<<<<< HEAD   (040e2f3fdb1cc136d7f1005d136bf5bcc2453f38 Revert "fs: constify file ptr in backing_file accessor helpe)
 	/*
 	 * In addition to synchronizing among switchers, I_WB_SWITCH tells
 	 * the RCU protected stat update paths to grab the i_page
@@ -641,9 +649,16 @@ static void inode_switch_wbs(struct inode *inode, int new_wb_id)
 	 */
 	INIT_RCU_WORK(&isw->work, inode_switch_wbs_work_fn);
 	queue_rcu_work(isw_wq, &isw->work);
+||||||| BASE   (296aabce459470a4c1b68ffd0c0c0920e563aaad Linux 6.12.95)
+	wb_queue_isw(new_wb, isw);
+=======
+	wb_queue_isw(new_wb, isw);
+	rcu_read_unlock();
+>>>>>>> BRANCH (6d15a1029d425b15c59463910ebdccc4afe760d6 Linux 6.12.96)
 	return;
 
 out_free:
+	rcu_read_unlock();
 	atomic_dec(&isw_nr_in_flight);
 	if (isw->new_wb)
 		wb_put(isw->new_wb);
@@ -700,6 +715,14 @@ bool cleanup_offline_cgwb(struct bdi_writeback *wb)
 		isw->new_wb = &wb->bdi->wb; /* wb_get() is noop for bdi's wb */
 
 	nr = 0;
+	/*
+	 * Paired with synchronize_rcu() in cgroup_writeback_umount().
+	 * Holding rcu_read_lock across the SB_ACTIVE check, the inode grab
+	 * and wb_queue_isw() ensures synchronize_rcu() cannot return until
+	 * the work is queued, so the subsequent flush_workqueue() will wait
+	 * for the switch.
+	 */
+	rcu_read_lock();
 	spin_lock(&wb->list_lock);
 	/*
 	 * In addition to the inodes that have completed writeback, also switch
@@ -716,12 +739,14 @@ bool cleanup_offline_cgwb(struct bdi_writeback *wb)
 
 	/* no attached inodes? bail out */
 	if (nr == 0) {
+		rcu_read_unlock();
 		atomic_dec(&isw_nr_in_flight);
 		wb_put(isw->new_wb);
 		kfree(isw);
 		return restart;
 	}
 
+<<<<<<< HEAD   (040e2f3fdb1cc136d7f1005d136bf5bcc2453f38 Revert "fs: constify file ptr in backing_file accessor helpe)
 	/*
 	 * In addition to synchronizing among switchers, I_WB_SWITCH tells
 	 * the RCU protected stat update paths to grab the i_page
@@ -730,6 +755,12 @@ bool cleanup_offline_cgwb(struct bdi_writeback *wb)
 	 */
 	INIT_RCU_WORK(&isw->work, inode_switch_wbs_work_fn);
 	queue_rcu_work(isw_wq, &isw->work);
+||||||| BASE   (296aabce459470a4c1b68ffd0c0c0920e563aaad Linux 6.12.95)
+	wb_queue_isw(new_wb, isw);
+=======
+	wb_queue_isw(new_wb, isw);
+	rcu_read_unlock();
+>>>>>>> BRANCH (6d15a1029d425b15c59463910ebdccc4afe760d6 Linux 6.12.96)
 
 	return restart;
 }
@@ -1165,6 +1196,14 @@ void cgroup_writeback_umount(struct super_block *sb)
 	smp_mb();
 
 	if (atomic_read(&isw_nr_in_flight)) {
+		/*
+		 * Paired with rcu_read_lock() in inode_switch_wbs() and
+		 * cleanup_offline_cgwb().  synchronize_rcu() waits for any
+		 * in-flight switcher that already passed the SB_ACTIVE check
+		 * to finish queueing its work, so flush_workqueue() below
+		 * will then drain it.
+		 */
+		synchronize_rcu();
 		/*
 		 * Use rcu_barrier() to wait for all pending callbacks to
 		 * ensure that all in-flight wb switches are in the workqueue.
