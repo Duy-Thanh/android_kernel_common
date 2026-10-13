@@ -16,6 +16,24 @@
       "message": "The Linux source says \"Calls to video_device_pipeline_alloc_start() must be matched with video_device_pipeline_stop()\". Are you sure you don\u0027t need another symbol?",
       "revId": "9922b1836af2b5378f5b062f0e8ca3b31d678f12",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac983564_92626b9f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1406171
+      },
+      "writtenOn": "2026-10-13T01:14:32Z",
+      "side": 1,
+      "message": "@gprocida@google.com, video_device_pipeline_stop is already included in the effective KMI via abi_gki_aarch64_imx, so only video_device_pipeline_alloc_start needs to be added here.",
+      "parentUuid": "2199f4f9_bf1aeeb0",
+      "revId": "9922b1836af2b5378f5b062f0e8ca3b31d678f12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
