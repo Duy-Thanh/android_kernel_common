@@ -10,7 +10,7 @@ use crate::{
         ShrinkerRegistration,
     },
     shmem::ShmemFile,
-    AshmemModule,
+    AshmemGlobals, AshmemModule,
 };
 use core::{
     mem::MaybeUninit,
@@ -446,16 +446,10 @@ impl Shrinker for super::AshmemModule {
 }
 
 /// Make line below shorter.
-type AshmemShrinkerType = Option<ShrinkerRegistration<AshmemModule>>;
+pub(crate) type AshmemShrinkerType = Option<ShrinkerRegistration<AshmemModule>>;
 
-kernel::sync::global_lock! {
-    // SAFETY: We call `init` as the very first thing in the initialization of this module, so
-    // there are no calls to `lock` before `init` is called.
-    pub(crate) unsafe(uninit) static ASHMEM_SHRINKER: Mutex<AshmemShrinkerType> = None;
-}
-
-pub(crate) fn set_shrinker_enabled(enabled: bool) -> Result<()> {
-    let mut shrinker = ASHMEM_SHRINKER.lock();
+pub(crate) fn set_shrinker_enabled(globals: &AshmemGlobals, enabled: bool) -> Result<()> {
+    let mut shrinker = globals.ashmem_shrinker.lock();
     if enabled {
         if shrinker.is_none() {
             let mut builder = ShrinkerBuilder::new(c_str!("android-ashmem"))?;
@@ -468,8 +462,8 @@ pub(crate) fn set_shrinker_enabled(enabled: bool) -> Result<()> {
     Ok(())
 }
 
-pub(crate) fn get_shrinker_enabled() -> bool {
-    ASHMEM_SHRINKER.lock().is_some()
+pub(crate) fn get_shrinker_enabled(globals: &AshmemGlobals) -> bool {
+    globals.ashmem_shrinker.lock().is_some()
 }
 
 #[cfg(test)]
