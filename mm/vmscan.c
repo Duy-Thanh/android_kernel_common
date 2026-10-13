@@ -2108,11 +2108,19 @@ free_it:
 		 * Is there need to periodically free_folio_list? It would
 		 * appear not as the counts should be low
 		 */
+<<<<<<< HEAD   (4056c236e4c84d5fdc5c80409a8fa37ef82f53b9 Merge 1febb174815b ("i2c: core: fix adapter registration rac)
 		trace_android_vh_folio_trylock_clear(folio);
 		if (unlikely(folio_test_large(folio)))
+||||||| BASE   (1febb174815bcae56d73587e99e8f87e02f0784d i2c: core: fix adapter registration race)
+		if (unlikely(folio_test_large(folio)))
+=======
+		if (unlikely(folio_test_large(folio))) {
+			try_to_unmap_flush();
+>>>>>>> BRANCH (48958478cb8dbc429a5b19f36e866b63d6297d1d usb: dwc3: run gadget disconnect from sleepable suspend cont)
 			destroy_large_folio(folio);
-		else
+		} else {
 			list_add(&folio->lru, &free_folios);
+		}
 		continue;
 
 activate_locked_split:
