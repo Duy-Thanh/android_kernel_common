@@ -16,6 +16,24 @@
       "message": "FWIW the size differences are:\n```\n      text       data        bss      total filename\n  21916424   23396108   11717352   57029884 vmlinux.new\n  22040408   23564707   11718120   57323235 vmlinux.old\n```",
       "revId": "3ee7e09f29a10942c25e2849aefd9d3b28eb2d76",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5efe7e8e_95159a00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-10-13T18:40:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96b68464_fcf5af38",
+      "revId": "3ee7e09f29a10942c25e2849aefd9d3b28eb2d76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
