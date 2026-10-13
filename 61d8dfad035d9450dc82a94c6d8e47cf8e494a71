@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6f254ed_7b61936e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-10-13T15:48:27Z",
+      "side": 1,
+      "message": "Let\u0027s wait for this to land in maintainer tree so we can take it as FROMGIT",
+      "revId": "61d8dfad035d9450dc82a94c6d8e47cf8e494a71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5234eef9_1161a464",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-10-13T15:48:27Z",
+      "side": 1,
+      "message": "there should be an annotation describing what needed to be changed in the Backports. See https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "61d8dfad035d9450dc82a94c6d8e47cf8e494a71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
