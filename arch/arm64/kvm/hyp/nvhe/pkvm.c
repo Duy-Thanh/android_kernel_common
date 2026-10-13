@@ -1194,12 +1194,33 @@ unlock:
 	return ret;
 }
 
+static int hyp_vm_has_valid_pte_cb(const struct kvm_pgtable_visit_ctx *ctx,
+				   enum kvm_pgtable_walk_flags visit)
+{
+	return kvm_pte_valid(*ctx->ptep) ? -EBUSY : 0;
+}
+
+static bool hyp_vm_has_valid_stage2_pte(struct pkvm_hyp_vm *hyp_vm)
+{
+	struct kvm_pgtable_walker walker = {
+		.cb	= hyp_vm_has_valid_pte_cb,
+		.flags	= KVM_PGTABLE_WALK_LEAF,
+	};
+
+	if (!hyp_vm->pgt.pgd)
+		return false;
+
+	return kvm_pgtable_walk(&hyp_vm->pgt, 0, BIT(hyp_vm->pgt.ia_bits),
+				&walker) == -EBUSY;
+}
+
 int __pkvm_finalize_teardown_vm(pkvm_handle_t handle)
 {
 	struct kvm_hyp_memcache *stage2_mc;
 	struct pkvm_hyp_vm *hyp_vm;
 	struct kvm *host_kvm;
 	unsigned int idx;
+	bool leak_vmid;
 	int err;
 
 	hyp_write_lock(&vm_table_lock);
@@ -1211,9 +1232,13 @@ int __pkvm_finalize_teardown_vm(pkvm_handle_t handle)
 
 	host_kvm = hyp_vm->host_kvm;
 
-	/* Ensure the VMID is clean before it can be reallocated */
-	__kvm_tlb_flush_vmid(&hyp_vm->kvm.arch.mmu);
-	remove_vm_table_entry(handle);
+	/*
+	 * Unpublish the VM from vm_table while keeping its slot reserved so no
+	 * other VM can reallocate this VMID until TLB invalidation and pool
+	 * teardown complete, without holding vm_table_lock across TLBI traps.
+	 */
+	vm_table[vm_handle_to_idx(handle)] = RESERVED_ENTRY;
+	list_del(&hyp_vm->vm_list);
 	hyp_write_unlock(&vm_table_lock);
 
 	/* A well-behaved host will have reclaimed all FF-A resources already */
@@ -1221,6 +1246,19 @@ int __pkvm_finalize_teardown_vm(pkvm_handle_t handle)
 		err = kvm_dying_guest_reclaim_ffa_resources(hyp_vm);
 	} while (err == -EAGAIN);
 	WARN_ON(err);
+
+	/*
+	 * Ensure the VMID is clean before it can be reallocated. If all valid
+	 * Stage-2 leaf mappings have already been unmapped and flushed via
+	 * __kvm_tlb_flush_vmid_ipa() during __pkvm_pgtable_stage2_unmap()
+	 * (leaving at most invalid software MMIO-guard annotations), only
+	 * Stage-1 TLBs for the VMID need to be invalidated, avoiding a
+	 * redundant full-IPA-space vmalls12e1is walk under nested virt.
+	 */
+	if (!hyp_vm_has_valid_stage2_pte(hyp_vm))
+		__kvm_tlb_flush_vmid_s1(&hyp_vm->kvm.arch.mmu);
+	else
+		__kvm_tlb_flush_vmid(&hyp_vm->kvm.arch.mmu);
 
 	/*
 	 * At this point all page tables are destroyed and should be pushed to the pool
@@ -1238,6 +1276,13 @@ int __pkvm_finalize_teardown_vm(pkvm_handle_t handle)
 	stage2_mc = &host_kvm->arch.pkvm.stage2_teardown_mc;
 	destroy_hyp_vm_pgt(hyp_vm);
 	drain_hyp_pool(&hyp_vm->pool, stage2_mc);
+
+	leak_vmid = hyp_vm->kvm.arch.pkvm.ffa_support &&
+		    hyp_vm->ffa_buf.vm_avail_bitmap;
+
+	hyp_write_lock(&vm_table_lock);
+	vm_table[vm_handle_to_idx(handle)] = leak_vmid ? LEAKED_ENTRY : NULL;
+	hyp_write_unlock(&vm_table_lock);
 	unpin_host_vcpus(hyp_vm->vcpus, hyp_vm->kvm.created_vcpus);
 
 	/* Push the metadata pages to the teardown memcache */
