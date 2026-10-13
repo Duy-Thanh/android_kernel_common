@@ -29,7 +29,7 @@ use kernel::{
     page_size_compat::__page_align,
     prelude::*,
     seq_file::{seq_print, SeqFile},
-    sync::{new_mutex, Mutex, UniqueArc},
+    sync::{new_mutex, Arc, Mutex, UniqueArc},
     task::Task,
     types::ForeignOwnable,
     uaccess::{UserSlice, UserSliceReader, UserSliceWriter},
@@ -50,7 +50,7 @@ const PROT_MASK: usize = PROT_EXEC | PROT_READ | PROT_WRITE;
 mod ashmem_shrinker;
 
 mod ashmem_range;
-use ashmem_range::{Area, AshmemGuard, NewRange, ASHMEM_MUTEX, LRU_COUNT};
+use ashmem_range::{Area, AshmemGuard, AshmemShrinkerType, NewRange, ASHMEM_MUTEX, LRU_COUNT};
 
 mod shmem;
 use shmem::ShmemFile;
@@ -72,9 +72,28 @@ fn has_cap_sys_admin() -> bool {
 }
 
 static NUM_PIN_IOCTLS_WAITING: AtomicUsize = AtomicUsize::new(0);
-static IGNORE_UNSET_PROT_READ: AtomicBool = AtomicBool::new(false);
-static IGNORE_UNSET_PROT_EXEC: AtomicBool = AtomicBool::new(false);
 static ASHMEM_FOPS_PTR: AtomicPtr<bindings::file_operations> = AtomicPtr::new(null_mut());
+
+#[pin_data]
+pub(crate) struct AshmemGlobals {
+    pub(crate) ignore_unset_prot_read: AtomicBool,
+    pub(crate) ignore_unset_prot_exec: AtomicBool,
+    #[pin]
+    pub(crate) ashmem_shrinker: Mutex<AshmemShrinkerType>,
+}
+
+impl AshmemGlobals {
+    fn new() -> Result<Arc<Self>> {
+        Arc::pin_init(
+            pin_init!(Self {
+                ignore_unset_prot_read: AtomicBool::new(false),
+                ignore_unset_prot_exec: AtomicBool::new(false),
+                ashmem_shrinker <- new_mutex!(None),
+            }),
+            GFP_KERNEL,
+        )
+    }
+}
 
 fn shrinker_should_stop() -> bool {
     NUM_PIN_IOCTLS_WAITING.load(Ordering::Relaxed) > 0
@@ -108,19 +127,19 @@ impl kernel::Module for AshmemModule {
         unsafe { shmem::SHMEM_FOPS_ONCE.init() };
         // SAFETY: Called once since this is the module initializer.
         unsafe { ASHMEM_MUTEX.init() };
-        // SAFETY: Called once since this is the module initializer.
-        unsafe { ashmem_range::ASHMEM_SHRINKER.init() };
+
+        let globals = AshmemGlobals::new()?;
 
         pr_info!("Using Rust implementation.");
 
-        ashmem_range::set_shrinker_enabled(true)?;
+        ashmem_range::set_shrinker_enabled(&globals, true)?;
 
         let ashmem_miscdevice_registration = KBox::pin_init(
             MiscDeviceRegistration::register(
                 MiscDeviceOptions {
                     name: c_str!("ashmem"),
                 },
-                AshmemMisc,
+                AshmemMisc(globals.clone()),
             ),
             GFP_KERNEL,
         )?;
@@ -132,9 +151,9 @@ impl kernel::Module for AshmemModule {
 
         Ok(Self {
             _misc: ashmem_miscdevice_registration,
-            _toggle_unpin: AshmemToggleMisc::<AshmemToggleShrinker>::new()?,
-            _toggle_read: AshmemToggleMisc::<AshmemToggleRead>::new()?,
-            _toggle_exec: AshmemToggleMisc::<AshmemToggleExec>::new()?,
+            _toggle_unpin: AshmemToggleMisc::<AshmemToggleShrinker>::new(globals.clone())?,
+            _toggle_read: AshmemToggleMisc::<AshmemToggleRead>::new(globals.clone())?,
+            _toggle_exec: AshmemToggleMisc::<AshmemToggleExec>::new(globals)?,
         })
     }
 }
@@ -144,6 +163,7 @@ impl kernel::Module for AshmemModule {
 struct Ashmem {
     #[pin]
     inner: Mutex<AshmemInner>,
+    globals: Arc<AshmemGlobals>,
 }
 
 struct AshmemInner {
@@ -155,13 +175,13 @@ struct AshmemInner {
     area: Area,
 }
 
-struct AshmemMisc;
+struct AshmemMisc(Arc<AshmemGlobals>);
 
 #[vtable]
 impl MiscDevice for AshmemMisc {
     type File = Pin<KBox<Ashmem>>;
 
-    fn open(_: &File, _: &MiscDeviceRegistration<Self>) -> Result<Self::File> {
+    fn open(_: &File, misc: &MiscDeviceRegistration<Self>) -> Result<Self::File> {
         KBox::try_pin_init(
             try_pin_init! {
                 Ashmem {
@@ -172,6 +192,7 @@ impl MiscDevice for AshmemMisc {
                         file: None,
                         area: Area::new(),
                     }),
+                    globals: misc.0.clone(),
                 }
             },
             GFP_KERNEL,
@@ -367,12 +388,12 @@ impl Ashmem {
             prot |= PROT_EXEC;
         }
 
-        if IGNORE_UNSET_PROT_READ.load(Ordering::Relaxed) {
+        if self.globals.ignore_unset_prot_read.load(Ordering::Relaxed) {
             // Add back PROT_READ if asma.prot_mask has it.
             prot |= asma.prot_mask & PROT_READ;
         }
 
-        if IGNORE_UNSET_PROT_EXEC.load(Ordering::Relaxed) {
+        if self.globals.ignore_unset_prot_exec.load(Ordering::Relaxed) {
             // Add back PROT_EXEC if asma.prot_mask has it.
             prot |= asma.prot_mask & PROT_EXEC;
         }
