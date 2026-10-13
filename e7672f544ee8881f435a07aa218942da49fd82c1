@@ -16,6 +16,24 @@
       "message": "This commit has been sent upstream for review. Hold for now.",
       "revId": "e7672f544ee8881f435a07aa218942da49fd82c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c29ec7e2_a1099da9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-10-13T16:23:43Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ae41d9aa_9f605215",
+      "revId": "e7672f544ee8881f435a07aa218942da49fd82c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
