@@ -123,6 +123,58 @@ impl WrapInfo {
         }
     }
 
+    fn with_mmap_rbtree_read_locked<T>(
+        mapping: *mut bindings::address_space,
+        f: impl Fn(*const bindings::rb_root) -> T,
+    ) -> T {
+        // SAFETY: `mapping` points to the `struct address_space` of `vma_file`, which is kept
+        // alive by our `ARef<File>` reference.
+        unsafe { bindings::i_mmap_lock_read(mapping) };
+
+        // SAFETY: Reading `i_mmap.rb_root` is synchronized under the `i_mmap_lock_read` lock.
+        let rb_root_ref = unsafe { &(*mapping).i_mmap.rb_root };
+
+        let result = f(rb_root_ref);
+
+        // SAFETY: `mapping` is valid and matches the lock acquired above.
+        unsafe { bindings::i_mmap_unlock_read(mapping) };
+
+        result
+    }
+
+    fn map_count(&mut self) -> usize {
+        let vma_file_ptr = match self.vma_file {
+            VmaFile::None => return 0,
+            VmaFile::Internal(file_ptr) => file_ptr,
+            VmaFile::External(ref file) => file.as_ptr(),
+        };
+
+        // SAFETY: `vma_file` is a valid `ARef<File>`, so `vma_file.as_ptr()` is non-null and
+        // valid for reads.
+        let mapping = unsafe { (*vma_file_ptr).f_mapping };
+
+        let map_count = Self::with_mmap_rbtree_read_locked(mapping, |rb_root_ref| {
+            // SAFETY: `rb_root_ref` is a valid reference to `rb_root` wihin `struct address_space`.
+            let mut node = unsafe { bindings::rb_first(rb_root_ref) };
+            let mut map_count = 0;
+
+            while !node.is_null() {
+                map_count += 1;
+                // SAFETY: the rbtree lock is held throughout this function, so the entire tree is
+                // valid.
+                node = unsafe { bindings::rb_next(node) };
+            }
+
+            map_count
+        });
+
+        if map_count == 0 && self.num_pending_mmaps == 0 {
+            self.vma_file = VmaFile::None;
+        }
+
+        map_count
+    }
+
     fn is_mapped(&mut self) -> bool {
         let vma_file_ptr = match self.vma_file {
             VmaFile::None => return false,
@@ -140,18 +192,10 @@ impl WrapInfo {
         // valid for reads.
         let mapping = unsafe { (*vma_file_ptr).f_mapping };
 
-        // SAFETY: `mapping` points to the `struct address_space` of `vma_file`, which is kept
-        // alive by our `ARef<File>` reference.
-        unsafe { bindings::i_mmap_lock_read(mapping) };
-
-        // SAFETY: Reading `i_mmap.rb_root` is synchronized under the `i_mmap_lock_read` lock.
-        let rb_root_ref = unsafe { &(*mapping).i_mmap.rb_root };
-
         // SAFETY: `rb_root_ref` is a valid reference to `rb_root` within `struct address_space`.
-        let is_mapped = !unsafe { bindings::RB_EMPTY_ROOT(rb_root_ref) };
-
-        // SAFETY: `mapping` is valid and matches the lock acquired above.
-        unsafe { bindings::i_mmap_unlock_read(mapping) };
+        let is_mapped = Self::with_mmap_rbtree_read_locked(mapping, |rb_root| !unsafe {
+            bindings::RB_EMPTY_ROOT(rb_root)
+        });
 
         if !is_mapped {
             self.vma_file = VmaFile::None;
@@ -679,11 +723,7 @@ impl AnonInodeFileInterface for Wrap {
             "guests:\t{}\n",
             if guard.allow_guests { "yes" } else { "no" }
         );
-        seq_print!(
-            m,
-            "maps:\t{}\n",
-            if guard.is_mapped() { "yes" } else { "no" }
-        );
+        seq_print!(m, "maps:\t{}\n", guard.map_count());
 
         if let Some(ref content) = guard.content {
             seq_print!(
