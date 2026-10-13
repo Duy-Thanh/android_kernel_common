@@ -88,6 +88,24 @@
       "parentUuid": "62061320_e3ca2785",
       "revId": "b87c44854e168f6918d1f170349dc598695e5788",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45ce7f93_fee4fb17",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-10-13T10:12:35Z",
+      "side": 1,
+      "message": "\u003e But check_kprobe_address_safe()/within_kprobe_blacklist() only checks a single address, while jump_label_text_reserved() in copy_optimized_instructions() is called for some range of addresses, AFAICS?\n\nIt is called for a range of addresses but it is limited to single function and it is looking for a 5 byte (JMP32_INSN_SIZE) range where it can install JMP32_INSN_OPCODE. So if it is about kprobing pKVM related function from pkvm.text it would be gated by second kprobe_blacklist related patch.\n\n\u003e No, I think that wouldn\u0027t even pass presubmit, since is_pkvm_text() is defined on x86 only.\n\nIt will pass the presubmit if we:\n```\n+#ifdef CONFIG_PKVM_X86\n+#include \u003casm/pkvm_image.h\u003e\n+#else\n+static inline bool is_pkvm_text(void *addr) { return false; }\n+#endif\n```\nin previous comment I\u0027ve pasted only snippets just to show idea not the whole WIP patch.\n\n\u003e Also I guess we might have the same issue with static_call_text_reserved() as well, while that would limit the fix to jump_label_text_reserved() only.\n\nNo we don\u0027t, please note that `static_call_text_reserved()` uses its own static version of `addr_conflict` (defined in kernel/static_call_inline.c), which uses `CALL_INSN_SIZE` and doesn\u0027t rely on `jump_entry_size(entry)` as `kernel/jump_label.c``s `kernel/jump_label.c`.",
+      "parentUuid": "1ad95fc6_697cfc0b",
+      "revId": "b87c44854e168f6918d1f170349dc598695e5788",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
