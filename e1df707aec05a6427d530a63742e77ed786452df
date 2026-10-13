@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8bfc4f5_d13e35e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-13T13:40:11Z",
+      "side": 1,
+      "message": "This patch should rather go before aosp/4354333, not after it (since aosp/4354333 implicitly depends on it, as we discussed in aosp/4354333)?",
+      "revId": "e1df707aec05a6427d530a63742e77ed786452df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
