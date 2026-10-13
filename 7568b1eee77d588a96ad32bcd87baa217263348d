@@ -16,6 +16,24 @@
       "message": "This change has been sent upstream for review. Hold for now.",
       "revId": "7568b1eee77d588a96ad32bcd87baa217263348d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a779e83_0bd413cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-10-13T16:23:36Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "87025d6e_a898f4ab",
+      "revId": "7568b1eee77d588a96ad32bcd87baa217263348d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
