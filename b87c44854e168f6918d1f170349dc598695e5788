@@ -106,6 +106,58 @@
       "parentUuid": "1ad95fc6_697cfc0b",
       "revId": "b87c44854e168f6918d1f170349dc598695e5788",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8c01ef2_0333535c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-13T13:37:39Z",
+      "side": 1,
+      "message": "Ok, thanks for explaining this offline, now I see that `can_optimize()` prevents calling `copy_optimized_instructions()` etc if the range [addr; addr + JMP32_INSN_SIZE) is not within a function (and that prior `within_kprobe_blacklist()` check + your next patch ensures that if it is within a function, it is not a pKVM\u0027s function).\n\nRegarding checking `is_pkvm_text()` in `__jump_label_text_reserved()`: as we discussed offline, it seems to me that would be still hacky, as it would mean relying on some assumptions about how exactly `jump_label_text_reserved()` is used.\n\nSo perhaps this hack with returning 0 size in x86 code is still the better option short-term (until we figure out the right way to solve this)... I\u0027d just suggest to add a comment in the code to explain why we are returning 0 and why we assume it is safe to do (albeit hacky).\n\n...But I just got another idea: what if we simply give the host _read-only_ access to pKVM\u0027s text (like pKVM-ARM already does: https://lore.kernel.org/all/20250909133631.3844423-3-smostafa@google.com/)?",
+      "parentUuid": "45ce7f93_fee4fb17",
+      "revId": "b87c44854e168f6918d1f170349dc598695e5788",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6e88a76_898ad561",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-13T13:37:39Z",
+      "side": 1,
+      "message": "`Bug: 518896774`?",
+      "revId": "b87c44854e168f6918d1f170349dc598695e5788",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9f89748_1a41ee18",
+        "filename": "arch/x86/kernel/jump_label.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-13T13:37:39Z",
+      "side": 1,
+      "message": "As I understand, this check is optional (hence the WARN_ON_ONCE, as this is not supposed to happen with a correctly working kernel), and not directly related to the issue fixed by this patch? So it\u0027s better to add it in a separate patch (if need to add it at all)?",
+      "revId": "b87c44854e168f6918d1f170349dc598695e5788",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
