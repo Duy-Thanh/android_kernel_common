@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb785057_673440a5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2026-10-13T18:33:07Z",
+      "side": 1,
+      "message": "Replace with `Bug: 565132685` to attach this change to your respin bug.",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 14
+      },
+      "revId": "e8f18f801be5a3c7f97e38b157fad7dd7c533836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
