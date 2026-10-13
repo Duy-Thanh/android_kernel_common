@@ -35,6 +35,7 @@
 #include "usb.h"
 
 #include <trace/hooks/usb.h>
+ANDROID_KABI_DECLONLY(static_call_mod);
 ANDROID_KABI_DECLONLY(trace_eval_map);
 
 /*
