@@ -1166,6 +1166,62 @@ static void test_map_count(struct __test_metadata *_metadata, FIXTURE_DATA(wrapf
 	close(wrapfd);
 }
 
+static void test_prohibit_guests_on_owner_death(struct __test_metadata *_metadata,
+					       FIXTURE_DATA(wrapfd_tests) *self, int fd)
+{
+	int wrapfd = wrapfd_wrap(self->dev_fd, fd, PROT_READ | PROT_WRITE);
+	int status;
+	void *buf;
+	pid_t pid;
+
+	ASSERT_TRUE(wrapfd >= 0);
+
+	pid = fork();
+	ASSERT_FALSE(pid < 0);
+	if (pid == 0) {
+		if ((wrapfd_acquire_ownership(wrapfd) < 0) || (wrapfd_allow_guests(wrapfd) < 0))
+			status = EXIT_FAILURE;
+		else
+			status = EXIT_SUCCESS;
+
+		close(wrapfd);
+		exit(status);
+	} else {
+		ASSERT_NE(wait(&status), -1);
+		ASSERT_TRUE(WIFEXITED(status));
+		ASSERT_EQ(WEXITSTATUS(status), EXIT_SUCCESS);
+	}
+
+	/*
+	 * Now, we can acquire ownership, and if another process tries to perform an operation that
+	 * requires guest access, it should fail, because the ability to allow guests should not
+	 * carry over across changes in ownership due to the original owner's death.
+	 */
+	ASSERT_EQ(wrapfd_acquire_ownership(wrapfd), 0);
+
+	pid = fork();
+	ASSERT_FALSE(pid < 0);
+	if (pid == 0) {
+		buf = mmap(NULL, self->size, PROT_READ | PROT_WRITE, MAP_SHARED, wrapfd, 0);
+		if (buf == MAP_FAILED) {
+			status = errno == EBUSY ? EXIT_SUCCESS : EXIT_FAILURE;
+		} else {
+			munmap(buf, self->size);
+			status = EXIT_FAILURE;
+		}
+
+		close(wrapfd);
+		exit(status);
+	} else {
+		ASSERT_NE(wait(&status), -1);
+		ASSERT_TRUE(WIFEXITED(status));
+		ASSERT_EQ(WEXITSTATUS(status), EXIT_SUCCESS);
+	}
+
+	ASSERT_EQ(wrapfd_release_ownership(wrapfd), 0);
+	close(wrapfd);
+}
+
 static void run_tests(struct __test_metadata *_metadata,
 		      FIXTURE_DATA(wrapfd_tests) *self, int fd, int rdonly_fd)
 {
@@ -1189,6 +1245,7 @@ static void run_tests(struct __test_metadata *_metadata,
 	test_ioctl(_metadata, self, fd);
 	test_lseek(_metadata, self, fd);
 	test_map_count(_metadata, self, fd);
+	test_prohibit_guests_on_owner_death(_metadata, self, fd);
 }
 
 TEST_F(wrapfd_tests, wrapfd_test_dmabuf_system_heap)

@@ -42,46 +42,6 @@ enum WrapOwner {
     None,
 }
 
-impl WrapOwner {
-    fn get_valid_owner(&mut self) -> Option<&Task> {
-        if let Self::Task(task) = self {
-            // SAFETY: `task.as_ptr()` returns a raw pointer to an initialized `task_struct`.
-            if unsafe { (*task.as_ptr()).mm }.is_null() {
-                *self = WrapOwner::None;
-            }
-        };
-
-        match self {
-            Self::Task(task) => Some(task),
-            _ => None,
-        }
-    }
-
-    fn has_owner(&mut self) -> bool {
-        match self {
-            Self::None => false,
-            Self::Task(_task) => self.get_valid_owner().is_some(),
-            Self::Device(_dev) => true,
-        }
-    }
-
-    fn owned_by_current_task(&mut self) -> bool {
-        match self {
-            Self::Task(_task) => {
-                let Some(task) = self.get_valid_owner() else {
-                    return false;
-                };
-                task == current!().group_leader()
-            }
-            _ => false,
-        }
-    }
-
-    fn owned_by_device(&self, dev: &device::Device) -> bool {
-        matches!(self, Self::Device(owning_dev) if *dev == **owning_dev)
-    }
-}
-
 enum VmaFile {
     /// This is the case where the `vma_file` matches the file our driver is bound to, in this
     /// case we can be sure that the raw pointer stays valid as long as our driver is. We don't
@@ -121,6 +81,45 @@ impl WrapInfo {
             vma_file: VmaFile::None,
             num_pending_mmaps: 0,
         }
+    }
+
+    fn get_valid_owner(&mut self) -> Option<&Task> {
+        if let WrapOwner::Task(task) = &self.owner {
+            // SAFETY: `task.as_ptr()` returns a raw pointer to an initialized `task_struct`.
+            if unsafe { (*task.as_ptr()).mm }.is_null() {
+                self.owner = WrapOwner::None;
+                self.allow_guests = false;
+            }
+        };
+
+        match &self.owner {
+            WrapOwner::Task(task) => Some(task),
+            _ => None,
+        }
+    }
+
+    fn has_owner(&mut self) -> bool {
+        match &self.owner {
+            WrapOwner::None => false,
+            WrapOwner::Task(_task) => self.get_valid_owner().is_some(),
+            WrapOwner::Device(_dev) => true,
+        }
+    }
+
+    fn owned_by_current_task(&mut self) -> bool {
+        match &self.owner {
+            WrapOwner::Task(_task) => {
+                let Some(task) = self.get_valid_owner() else {
+                    return false;
+                };
+                task == current!().group_leader()
+            }
+            _ => false,
+        }
+    }
+
+    fn owned_by_device(&self, dev: &device::Device) -> bool {
+        matches!(&self.owner, WrapOwner::Device(owning_dev) if *dev == **owning_dev)
     }
 
     fn with_mmap_rbtree_read_locked<T>(
@@ -205,7 +204,7 @@ impl WrapInfo {
     }
 
     fn check_modifiable(&mut self) -> Result<()> {
-        if !self.owner.owned_by_current_task() {
+        if !self.owned_by_current_task() {
             return Err(EBUSY);
         }
 
@@ -311,8 +310,7 @@ impl Wrap {
 
         let mut guard = self.inner.lock();
 
-        if !(guard.allow_guests || !guard.owner.has_owner() || guard.owner.owned_by_current_task())
-        {
+        if !(guard.allow_guests || !guard.has_owner() || guard.owned_by_current_task()) {
             return Err(EBUSY);
         }
 
@@ -362,11 +360,11 @@ impl Wrap {
 
         let mut guard = self.inner.lock();
 
-        if guard.owner.owned_by_current_task() {
+        if guard.owned_by_current_task() {
             return Ok(0);
         }
 
-        if guard.owner.has_owner() {
+        if guard.has_owner() {
             return Err(EBUSY);
         }
 
@@ -569,7 +567,7 @@ impl AnonInodeFileInterface for Wrap {
 
         let mut guard = wrap.inner.lock();
 
-        if !guard.allow_guests && guard.owner.has_owner() && !guard.owner.owned_by_current_task() {
+        if !guard.allow_guests && guard.has_owner() && !guard.owned_by_current_task() {
             return Err(EBUSY);
         }
 
@@ -712,7 +710,7 @@ impl AnonInodeFileInterface for Wrap {
         let mut guard = wrap.inner.lock();
         if matches!(&guard.owner, WrapOwner::Device(_dev)) {
             seq_print!(m, "owner:\t<device>\n");
-        } else if let Some(task) = guard.owner.get_valid_owner() {
+        } else if let Some(task) = guard.get_valid_owner() {
             seq_print!(m, "owner:\t{}\n", task.pid());
         } else {
             seq_print!(m, "owner:\t<none>\n");
@@ -900,7 +898,7 @@ unsafe extern "C" fn wrapfd_get_mappable(
         // safely increments its reference count.
         let device = unsafe { device::Device::get_device(dev) };
 
-        if guard.owner.has_owner() && !guard.owner.owned_by_device(&device) {
+        if guard.has_owner() && !guard.owned_by_device(&device) {
             return Err(EBUSY);
         }
 
@@ -962,7 +960,7 @@ unsafe extern "C" fn wrapfd_put_mappable(
         // It's valid for the duration of this call.
         let device = unsafe { device::Device::from_raw(dev) };
 
-        if !guard.owner.owned_by_device(&device) {
+        if !guard.owned_by_device(&device) {
             return Err(EBUSY);
         }
 
@@ -983,6 +981,7 @@ unsafe extern "C" fn wrapfd_put_mappable(
         }
 
         guard.owner = WrapOwner::None;
+        guard.allow_guests = false;
         Ok(())
     });
 
