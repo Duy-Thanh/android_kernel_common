@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d87b565_4385c346",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-10-13T17:03:20Z",
+      "side": 1,
+      "message": "Build break:\n```\nERROR: /mnt/disks/build-disk/src/android/common-android14-6.1/common/BUILD.bazel:198:13: Building kernel (lto\u003ddefault;notrim) @//common:kernel_aarch64_microdroid failed: (Exit 2): bash failed: error executing KernelBuild command (from target //common:kernel_aarch64_microdroid) /bin/bash -c ... (remaining 1 argument skipped)\n\nUse --sandbox_debug to see verbose messages from the sandbox and retain the sandbox build root for debugging\n/mnt/disks/build-disk/src/android/common-android14-6.1/out/bazel/output_user_root/27ef06e50cb42a9d447d7f2f757478b6/sandbox/linux-sandbox/10/execroot/__main__/common/lib/sbitmap.c:309:40: error: too few arguments to function call, expected 6, have 4\n                                              alloc_hint, !sb-\u003eround_robin)\n                                                                          ^\n/mnt/disks/build-disk/src/android/common-android14-6.1/out/bazel/output_user_root/27ef06e50cb42a9d447d7f2f757478b6/sandbox/linux-sandbox/10/execroot/__main__/common/lib/sbitmap.c:268:12: note: \u0027sbitmap_find_bit_in_word\u0027 declared here\nstatic int sbitmap_find_bit_in_word(struct sbitmap_word *map,\n           ^\n/mnt/disks/build-disk/src/android/common-android14-6.1/out/bazel/output_user_root/27ef06e50cb42a9d447d7f2f757478b6/sandbox/linux-sandbox/10/execroot/__main__/common/lib/sbitmap.c:309:41: error: expected \u0027;\u0027 after expression\n                                              alloc_hint, !sb-\u003eround_robin)\n                                                                           ^\n                                                                           ;\n/mnt/disks/build-disk/src/android/common-android14-6.1/out/bazel/output_user_root/27ef06e50cb42a9d447d7f2f757478b6/sandbox/linux-sandbox/10/execroot/__main__/common/lib/sbitmap.c:310:29: error: extraneous \u0027)\u0027 before \u0027;\u0027\n                                              sb-\u003emap_nr, index);\n                                                               ^\n/mnt/disks/build-disk/src/android/common-android14-6.1/out/bazel/output_user_root/27ef06e50cb42a9d447d7f2f757478b6/sandbox/linux-sandbox/10/execroot/__main__/common/lib/sbitmap.c:310:16: error: left operand of comma operator has no effect [-Werror,-Wunused-value]\n                                              sb-\u003emap_nr, index);\n                                              ~~  ^~~~~~\n/mnt/disks/build-disk/src/android/common-android14-6.1/out/bazel/output_user_root/27ef06e50cb42a9d447d7f2f757478b6/sandbox/linux-sandbox/10/execroot/__main__/common/lib/sbitmap.c:310:24: error: expression result unused [-Werror,-Wunused-value]\n                                              sb-\u003emap_nr, index);\n                                                          ^~~~~\n5 errors generated.\n```",
+      "revId": "3f2e1b29f9181d31c643d2de05e49029f41a121e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
