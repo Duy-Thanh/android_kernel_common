@@ -46,6 +46,30 @@
       },
       "revId": "e8081e186a299ed39a77f0294f6405fd7811a599",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69ef09e4_7a6f418c",
+        "filename": "kernel/sched/stats.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1060234
+      },
+      "writtenOn": "2026-10-14T17:49:15Z",
+      "side": 1,
+      "message": "The new patches have resolved these errors.",
+      "parentUuid": "2f13f454_7e63b9e8",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 195,
+        "endChar": 10
+      },
+      "revId": "e8081e186a299ed39a77f0294f6405fd7811a599",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
