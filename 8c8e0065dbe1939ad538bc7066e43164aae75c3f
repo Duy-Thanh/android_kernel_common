@@ -34,6 +34,24 @@
       "parentUuid": "f36a8c75_528c71eb",
       "revId": "8c8e0065dbe1939ad538bc7066e43164aae75c3f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db3ad902_f36487da",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 939,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-14T23:58:04Z",
+      "side": 1,
+      "message": "\u003e So I\u0027m not sure it\u0027s worth complicating the logic in pkvm_host_use_dma() for such a corner case.\n\nOr maybe not necessarily complicating it but making it less performant. I see e.g. the RMRR on our PTL platform is 136MB in size, so if we called pkvm_pgtable_map() for each OWNED page in the loop in pkvm_host_use_dma() instead of calling it once at the end, we would be calling it 34K times, and we would be mapping it with 4K pages instead of 2M pages...",
+      "parentUuid": "8ba352d2_539fb8d7",
+      "revId": "8c8e0065dbe1939ad538bc7066e43164aae75c3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
