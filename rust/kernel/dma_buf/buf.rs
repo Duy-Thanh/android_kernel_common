@@ -11,11 +11,13 @@ use crate::{
     error::{from_err_ptr, to_result},
     fs::File,
     prelude::*,
+    scatterlist::SGTable,
     sync::SpinLock,
     types::{ARef, AlwaysRefCounted, Opaque},
 };
 use core::{
     marker::PhantomData,
+    ops::Deref,
     ops::{Bound, RangeBounds},
     ptr::{self, NonNull},
 };
@@ -235,6 +237,16 @@ impl Drop for DmaBufMapping {
                 self.dir.into(),
             )
         };
+    }
+}
+
+impl Deref for DmaBufMapping {
+    type Target = SGTable;
+
+    #[inline]
+    fn deref(&self) -> &Self::Target {
+        // SAFETY: `self.sgt` is valid for the lifetime of `Self`.
+        unsafe { SGTable::from_raw(self.sgt.as_ptr()) }
     }
 }
 
