@@ -1,0 +1,103 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1de6c5cd_96fd2bb0",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 950,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-10-14T17:13:26Z",
+      "side": 1,
+      "message": "minor nit: s/initialize/initialized/. Or may be s/when initialize/during initialization/ ?",
+      "range": {
+        "startLine": 950,
+        "startChar": 8,
+        "endLine": 950,
+        "endChar": 24
+      },
+      "revId": "537b8aece7feb6189c79fa2b9001bc37210b31a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2290dd0c_015abd52",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 967,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-10-14T17:13:26Z",
+      "side": 1,
+      "message": "minor: may be return 0 here so that we need not explicitly check for EAGAIN in pkvm_handle_host_ept_violation?",
+      "fixSuggestions": [
+        {
+          "fixId": "0f4ef1e5_d28b6354",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 967,
+                "startChar": 0,
+                "endLine": 968,
+                "endChar": 0
+              },
+              "replacement": "\t\treturn 0;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "537b8aece7feb6189c79fa2b9001bc37210b31a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dc31858_91ca0beb",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1002,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-10-14T17:13:26Z",
+      "side": 1,
+      "message": "minor: maybe use host_mmu_map?",
+      "range": {
+        "startLine": 1002,
+        "startChar": 9,
+        "endLine": 1002,
+        "endChar": 25
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4fc4f54f_e4b9bcd7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 1002,
+                "startChar": 0,
+                "endLine": 1004,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tret \u003d host_mmu_map(cur.start, size, true);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "537b8aece7feb6189c79fa2b9001bc37210b31a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
