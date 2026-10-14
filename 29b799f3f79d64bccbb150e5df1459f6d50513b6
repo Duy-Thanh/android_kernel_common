@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "290bf012_6033f7e8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-10-14T16:06:43Z",
+      "side": 1,
+      "message": "Incorrect format. Should be \"Bug: 573373479\".\n\nNeed to cite an open respin bug. See https://source.android.com/docs/core/architecture/kernel/gki-respin",
+      "revId": "29b799f3f79d64bccbb150e5df1459f6d50513b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
