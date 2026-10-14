@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e79d472_019f9052",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-10-14T22:44:26Z",
+      "side": 1,
+      "message": "Given this is fixing an upstream issue, shouldn\u0027t this fix be sent upstream?",
+      "revId": "e6f50c26fea1d20733dac239003f3ca9d0216246",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
