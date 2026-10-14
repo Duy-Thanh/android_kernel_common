@@ -2893,7 +2893,7 @@ static int kvm_try_get_pfn(kvm_pfn_t pfn)
 	if (!page)
 		return 1;
 
-	return folio_try_get(page_folio(page));
+	return get_page_unless_zero(page);
 }
 
 static int hva_to_pfn_remapped(struct vm_area_struct *vma,

@@ -32,8 +32,6 @@ mod allocation;
 mod context;
 mod deferred_close;
 mod defs;
-#[macro_use]
-mod debug;
 mod error;
 mod netlink;
 mod node;
@@ -239,7 +237,6 @@ impl<T: ListArcSafe> DTRWrap<T> {
 struct DeliverCode {
     code: u32,
     skip: AtomicBool,
-    pid: i32,
 }
 
 kernel::list::impl_list_arc_safe! {
@@ -247,11 +244,10 @@ kernel::list::impl_list_arc_safe! {
 }
 
 impl DeliverCode {
-    fn new(code: u32, pid: i32) -> Self {
+    fn new(code: u32) -> Self {
         Self {
             code,
             skip: AtomicBool::new(false),
-            pid,
         }
     }
 
@@ -276,15 +272,7 @@ impl DeliverToRead for DeliverCode {
         Ok(true)
     }
 
-    fn cancel(self: DArc<Self>) {
-        if !self.skip.load(Ordering::Relaxed) {
-            binder_debug!(
-                pid = self.pid,
-                DeadTransaction,
-                "undelivered TRANSACTION_COMPLETE"
-            );
-        }
-    }
+    fn cancel(self: DArc<Self>) {}
     fn on_thread_selected(&self, _thread: &Thread) {}
 
     fn should_sync_wakeup(&self) -> bool {

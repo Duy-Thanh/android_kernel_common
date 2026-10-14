@@ -2138,7 +2138,6 @@ void mem_cgroup_handle_over_high(gfp_t gfp_mask)
 	int nr_retries = MAX_RECLAIM_RETRIES;
 	struct mem_cgroup *memcg;
 	bool in_retry = false;
-	bool record_psi = true;
 
 	if (likely(!nr_pages))
 		return;
@@ -2215,12 +2214,9 @@ retry_reclaim:
 	 * schedule_timeout_killable sets TASK_KILLABLE). This means we don't
 	 * need to account for any ill-begotten jiffies to pay them off later.
 	 */
-	trace_android_vh_mem_cgroup_handle_over_high(&record_psi);
-	if (record_psi)
-		psi_memstall_enter(&pflags);
+	psi_memstall_enter(&pflags);
 	schedule_timeout_killable(penalty_jiffies);
-	if (record_psi)
-		psi_memstall_leave(&pflags);
+	psi_memstall_leave(&pflags);
 
 out:
 	css_put(&memcg->css);
@@ -4405,15 +4401,8 @@ static ssize_t memory_reclaim(struct kernfs_open_file *of, char *buf,
 		unsigned long batch_size = (nr_to_reclaim - nr_reclaimed) / 4;
 		unsigned long reclaimed;
 
-		/*
-		 * Return -ERESTARTSYS to allow the freezer to interrupt the
-		 * task. The syscall will be transparently restarted upon
-		 * resume. For real signals, it either restarts the syscall
-		 * (if SA_RESTART is set) or is converted to -EINTR by the
-		 * signal layer.
-		 */
 		if (signal_pending(current))
-			return -ERESTARTSYS;
+			return -EINTR;
 
 		/*
 		 * This is the final attempt, drain percpu lru caches in the
