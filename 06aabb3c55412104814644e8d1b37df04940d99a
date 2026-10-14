@@ -88,6 +88,24 @@
       "parentUuid": "f66276a3_99be2301",
       "revId": "06aabb3c55412104814644e8d1b37df04940d99a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55812926_0142e4be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-10-14T21:58:38Z",
+      "side": 1,
+      "message": "I guess, that means it is needed...\n\nThat leaves me wondering why this wasn\u0027t an issue (AFAICR) with any pre-6.12 pixel devices/kernels...",
+      "parentUuid": "72e90225_c3abaecc",
+      "revId": "06aabb3c55412104814644e8d1b37df04940d99a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
