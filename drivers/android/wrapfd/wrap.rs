@@ -194,7 +194,7 @@ enum WrapState {
     Available,
 }
 
-#[pin_data(PinnedDrop)]
+#[pin_data]
 pub(crate) struct Wrap {
     #[pin]
     state: Mutex<WrapState>,
@@ -203,15 +203,6 @@ pub(crate) struct Wrap {
     // Set once on construction, never modified afterwards, does not need to be guarded by
     // the lock.
     pub(crate) close_on_exec: bool,
-}
-
-#[pinned_drop]
-impl PinnedDrop for Wrap {
-    fn drop(self: Pin<&mut Self>) {
-        // The driver instance and the associated file are about to go away, let's make sure
-        // we don't leave a dangling raw pointer to the file inside the VmaFile enum.
-        self.inner.lock().vma_file = VmaFile::None;
-    }
 }
 
 struct UseGuard<'a>(&'a Wrap);
@@ -495,6 +486,14 @@ impl Wrap {
 #[vtable]
 impl AnonInodeFileInterface for Wrap {
     type Ptr = Pin<KBox<Self>>;
+
+    fn release(wrap: Self::Ptr, _file: &File) {
+        // The driver instance and the associated file are about to go away, let's make sure
+        // we don't leave a dangling raw pointer to the file inside the VmaFile enum.
+        wrap.inner.lock().vma_file = VmaFile::None;
+
+        drop(wrap);
+    }
 
     fn llseek(
         wrap: <Self::Ptr as ForeignOwnable>::Borrowed<'_>,
