@@ -16,6 +16,7 @@ use crate::{
 };
 use core::{
     marker::PhantomData,
+    ops::{Bound, RangeBounds},
     ptr::{self, NonNull},
 };
 
@@ -423,5 +424,75 @@ impl<'a, const WRITE: bool> CpuAccess<'a, true, WRITE> {
         unsafe {
             bindings::iosys_map_memcpy_from(dst.as_mut_ptr().cast(), self.map, offset, dst.len())
         };
+    }
+}
+
+impl<'a> CpuAccess<'a, true, true> {
+    /// Copies bytes from one part of the buffer to another part of itself, using `memmove`.
+    ///
+    /// `src` is the range within the buffer to copy from. `dst` is the starting index of the
+    /// range within the buffer to copy to, which will have the same length as `src`. The two
+    /// ranges may overlap.
+    ///
+    /// Fails with [`EINVAL`] if the mapping is in I/O memory (`is_iomem`).
+    ///
+    /// # Panics
+    ///
+    /// This function will panic if either the source or destination range exceeds the end of
+    /// the buffer, or if the start of `src` is after the end.
+    #[inline]
+    #[track_caller]
+    pub fn copy_within<R: RangeBounds<usize>>(&mut self, src: R, dst: usize) -> Result {
+        let src_start = match src.start_bound() {
+            Bound::Included(&start) => start,
+            Bound::Excluded(&start) => start
+                .checked_add(1)
+                .expect("attempted to index dma-buf from after maximum usize"),
+            Bound::Unbounded => 0,
+        };
+        let src_end = match src.end_bound() {
+            Bound::Included(&end) => end
+                .checked_add(1)
+                .expect("attempted to index dma-buf up to maximum usize"),
+            Bound::Excluded(&end) => end,
+            Bound::Unbounded => self.size,
+        };
+        if src_start > src_end {
+            panic!("copy_within start {src_start} > end {src_end}");
+        }
+        if src_end > self.size {
+            panic!(
+                "copy_within source end {src_end} in dma-buf of {} bytes out of bounds",
+                self.size
+            );
+        }
+        let len = src_end - src_start;
+        let (dst_end, dst_overflow) = dst.overflowing_add(len);
+        if dst_overflow || dst_end > self.size {
+            panic!(
+                "copy_within of {len} bytes to {dst} in dma-buf of {} bytes out of bounds",
+                self.size
+            );
+        }
+
+        // SAFETY: `self.map` is a valid pointer to `struct iosys_map`.
+        let map = unsafe { &*self.map };
+        if map.is_iomem {
+            return Err(EINVAL);
+        }
+
+        // SAFETY: `map.__bindgen_anon_1.vaddr` is valid if `is_iomem` is false.
+        let vaddr = unsafe { map.__bindgen_anon_1.vaddr }.cast::<u8>();
+        if vaddr.is_null() {
+            return Err(EINVAL);
+        }
+
+        // SAFETY: The bounds checks above ensure that both `src_start..src_start + len` and
+        // `dst..dst + len` are within `[0, self.size)`. The guard has both READ and WRITE
+        // enabled.
+        unsafe {
+            ptr::copy(vaddr.add(src_start), vaddr.add(dst), len);
+        }
+        Ok(())
     }
 }

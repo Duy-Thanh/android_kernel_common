@@ -194,8 +194,8 @@ impl DmaBufContent {
             return Err(EINVAL);
         };
 
-        // SAFETY: We've verified that the `dmabuf` has the required dimensions and we're making
-        // sure to pass that same map to `complete` later.
+        // SAFETY: We've verified that the `dmabuf` has the required dimensions and `map` keeps
+        // the buffer mapped across `read()`.
         let mut io_context = unsafe { IoContext::new(file_offs, vaddr, buf_offs, len)? };
         io_context.prepare(file)?;
 
@@ -219,7 +219,7 @@ impl DmaBufContent {
 
         map.begin_cpu_access_bidirectional_fallible(|access| -> Result<()> {
             io_context.read()?;
-            io_context.complete(&map, access)?;
+            io_context.complete(access)?;
 
             Ok(())
         })?;
