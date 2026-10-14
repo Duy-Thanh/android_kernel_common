@@ -9,7 +9,7 @@ use crate::module_parameters;
 use kernel::{
     alloc::{AllocError, Flags},
     bindings,
-    dma_buf::{CpuAccess, DmaBufVmap},
+    dma_buf::CpuAccess,
     ffi,
     fs::LocalFile,
     new_spinlock_irq,
@@ -253,8 +253,7 @@ impl IoContext {
     /// # Safety
     ///
     /// The caller must guarantee that `vaddr` points to a valid, writable buffer of at least
-    /// `buf_offs + len` bytes that remains allocated and valid across the call to `read()`, and
-    /// matches `map.vaddr()` passed to `complete()`.
+    /// `buf_offs + len` bytes that remains allocated and valid across the call to `read()`.
     pub(crate) unsafe fn new(
         file_offs: usize,
         vaddr: NonNull<ffi::c_void>,
@@ -585,11 +584,7 @@ impl IoContext {
         Ok(())
     }
 
-    pub(crate) fn complete<'access, const READ: bool>(
-        &mut self,
-        map: &DmaBufVmap,
-        mut access: CpuAccess<'access, READ, true>,
-    ) -> Result<()> {
+    pub(crate) fn complete(&mut self, mut access: CpuAccess<'_, true, true>) -> Result<()> {
         let State::ReadDone(bytes_read) = self.state else {
             return Err(EINVAL);
         };
@@ -629,17 +624,7 @@ impl IoContext {
              * it's in the right place. Shift it back if it's not.
              */
             if dio_start != dst_offset {
-                // This should never fail as we verified that the map is valid and gives us
-                // a valid vaddr earlier in "load_prepare".
-                let vaddr = map.vaddr().ok_or(EINVAL)?.as_ptr();
-
-                // SAFETY: By the safety contract of `IoContext::new`, `vaddr` backs the buffer
-                // region `[0, self.buf_offs + self.file_seg.len)`. Both `dst_offset + len` and
-                // `dio_start + len` lie within this mapped allocation, so `byte_add` is in bounds
-                // and `memmove` safely copies potentially overlapping regions within the buffer.
-                unsafe {
-                    bindings::memmove(vaddr.byte_add(dst_offset), vaddr.byte_add(dio_start), len)
-                };
+                access.copy_within(dio_start..dio_start + len, dst_offset)?;
             }
 
             dst_offset += len;
