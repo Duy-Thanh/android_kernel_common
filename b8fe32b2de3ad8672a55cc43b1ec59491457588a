@@ -133,6 +133,42 @@
       "parentUuid": "f2044e70_673b48aa",
       "revId": "b8fe32b2de3ad8672a55cc43b1ec59491457588a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7583e1a3_968e974e",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1245,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-14T18:32:12Z",
+      "side": 1,
+      "message": "Done in aosp/4361406",
+      "parentUuid": "7df17a60_231ddafa",
+      "revId": "b8fe32b2de3ad8672a55cc43b1ec59491457588a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce2ee8ce_f5332735",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1245,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-14T18:32:12Z",
+      "side": 1,
+      "message": "Done in aosp/4364234",
+      "parentUuid": "d5791e59_c48f3c64",
+      "revId": "b8fe32b2de3ad8672a55cc43b1ec59491457588a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
