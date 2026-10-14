@@ -34,6 +34,24 @@
       "parentUuid": "0e79d472_019f9052",
       "revId": "e6f50c26fea1d20733dac239003f3ca9d0216246",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0afeb89d_0daa25de",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-10-14T22:52:54Z",
+      "side": 1,
+      "message": "But the patch cited in Fixes is upstream so sending the fix upstream helps the community... unless there is something that makes this fix Android-specific. If so, it should be called out in the commit message. BTW- you get a tux-the-penguin moma badge for landing a patch upstream ;-)",
+      "parentUuid": "ece67175_50493653",
+      "revId": "e6f50c26fea1d20733dac239003f3ca9d0216246",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
