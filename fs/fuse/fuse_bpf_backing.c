@@ -856,8 +856,7 @@ int fuse_file_read_iter_backing(struct fuse_bpf_args *fa,
 		return 0;
 
 	if ((iocb->ki_flags & IOCB_DIRECT) &&
-	    (!ff->backing_file->f_mapping->a_ops ||
-	     !ff->backing_file->f_mapping->a_ops->direct_IO))
+	    !(ff->backing_file->f_mode & FMODE_CAN_ODIRECT))
 		return -EINVAL;
 
 	/* TODO This just plain ignores any change to fuse_read_in */
