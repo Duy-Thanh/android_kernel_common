@@ -34,6 +34,15 @@
 #endif
 #include <asm/unaligned.h>
 
+static struct sock *xfrm_net_nlsk(const struct net *net, const struct sk_buff *skb)
+{
+	/* get the source of this request, see netlink_unicast_kernel */
+	const struct sock *sk = NETLINK_CB(skb).sk;
+
+	/* sk is refcounted, the netns stays alive and nlsk with it */
+	return rcu_dereference_protected(net->xfrm.nlsk, sk->sk_net_refcnt);
+}
+
 static int verify_one_alg(struct nlattr **attrs, enum xfrm_attr_type_t type,
 			  struct netlink_ext_ack *extack)
 {
@@ -1310,7 +1319,7 @@ static int xfrm_get_spdinfo(struct sk_buff *skb, struct nlmsghdr *nlh,
 	err = build_spdinfo(r_skb, net, sportid, seq, *flags);
 	BUG_ON(err < 0);
 
-	return nlmsg_unicast(net->xfrm.nlsk, r_skb, sportid);
+	return nlmsg_unicast(xfrm_net_nlsk(net, skb), r_skb, sportid);
 }
 
 static inline unsigned int xfrm_sadinfo_msgsize(void)
@@ -1370,7 +1379,7 @@ static int xfrm_get_sadinfo(struct sk_buff *skb, struct nlmsghdr *nlh,
 	err = build_sadinfo(r_skb, net, sportid, seq, *flags);
 	BUG_ON(err < 0);
 
-	return nlmsg_unicast(net->xfrm.nlsk, r_skb, sportid);
+	return nlmsg_unicast(xfrm_net_nlsk(net, skb), r_skb, sportid);
 }
 
 static int xfrm_get_sa(struct sk_buff *skb, struct nlmsghdr *nlh,
@@ -1390,7 +1399,7 @@ static int xfrm_get_sa(struct sk_buff *skb, struct nlmsghdr *nlh,
 	if (IS_ERR(resp_skb)) {
 		err = PTR_ERR(resp_skb);
 	} else {
-		err = nlmsg_unicast(net->xfrm.nlsk, resp_skb, NETLINK_CB(skb).portid);
+		err = nlmsg_unicast(xfrm_net_nlsk(net, skb), resp_skb, NETLINK_CB(skb).portid);
 	}
 	xfrm_state_put(x);
 out_noput:
@@ -1466,7 +1475,7 @@ static int xfrm_alloc_userspi(struct sk_buff *skb, struct nlmsghdr *nlh,
 		}
 	}
 
-	err = nlmsg_unicast(net->xfrm.nlsk, resp_skb, NETLINK_CB(skb).portid);
+	err = nlmsg_unicast(xfrm_net_nlsk(net, skb), resp_skb, NETLINK_CB(skb).portid);
 
 out:
 	xfrm_state_put(x);
@@ -1977,6 +1986,188 @@ static struct sk_buff *xfrm_policy_netlink(struct sk_buff *in_skb,
 	return skb;
 }
 
+<<<<<<< HEAD   (4af18aec11f4488522e9e7ecdc91c9fff8920fef Merge 7f9a05c930d3 ("xfrm: add extack to verify_one_alg, ver)
+||||||| BASE   (7f9a05c930d3f7a69b20a00acb34a1a1a7b0ab28 xfrm: add extack to verify_one_alg, verify_auth_trunc, verif)
+static int xfrm_notify_userpolicy(struct net *net)
+{
+	struct xfrm_userpolicy_default *up;
+	int len = NLMSG_ALIGN(sizeof(*up));
+	struct nlmsghdr *nlh;
+	struct sk_buff *skb;
+	int err;
+
+	skb = nlmsg_new(len, GFP_ATOMIC);
+	if (skb == NULL)
+		return -ENOMEM;
+
+	nlh = nlmsg_put(skb, 0, 0, XFRM_MSG_GETDEFAULT, sizeof(*up), 0);
+	if (nlh == NULL) {
+		kfree_skb(skb);
+		return -EMSGSIZE;
+	}
+
+	up = nlmsg_data(nlh);
+	up->in = net->xfrm.policy_default[XFRM_POLICY_IN];
+	up->fwd = net->xfrm.policy_default[XFRM_POLICY_FWD];
+	up->out = net->xfrm.policy_default[XFRM_POLICY_OUT];
+
+	nlmsg_end(skb, nlh);
+
+	rcu_read_lock();
+	err = xfrm_nlmsg_multicast(net, skb, 0, XFRMNLGRP_POLICY);
+	rcu_read_unlock();
+
+	return err;
+}
+
+static bool xfrm_userpolicy_is_valid(__u8 policy)
+{
+	return policy == XFRM_USERPOLICY_BLOCK ||
+	       policy == XFRM_USERPOLICY_ACCEPT;
+}
+
+static int xfrm_set_default(struct sk_buff *skb, struct nlmsghdr *nlh,
+			    struct nlattr **attrs, struct netlink_ext_ack *extack)
+{
+	struct net *net = sock_net(skb->sk);
+	struct xfrm_userpolicy_default *up = nlmsg_data(nlh);
+
+	if (xfrm_userpolicy_is_valid(up->in))
+		net->xfrm.policy_default[XFRM_POLICY_IN] = up->in;
+
+	if (xfrm_userpolicy_is_valid(up->fwd))
+		net->xfrm.policy_default[XFRM_POLICY_FWD] = up->fwd;
+
+	if (xfrm_userpolicy_is_valid(up->out))
+		net->xfrm.policy_default[XFRM_POLICY_OUT] = up->out;
+
+	rt_genid_bump_all(net);
+
+	xfrm_notify_userpolicy(net);
+	return 0;
+}
+
+static int xfrm_get_default(struct sk_buff *skb, struct nlmsghdr *nlh,
+			    struct nlattr **attrs, struct netlink_ext_ack *extack)
+{
+	struct sk_buff *r_skb;
+	struct nlmsghdr *r_nlh;
+	struct net *net = sock_net(skb->sk);
+	struct xfrm_userpolicy_default *r_up;
+	int len = NLMSG_ALIGN(sizeof(struct xfrm_userpolicy_default));
+	u32 portid = NETLINK_CB(skb).portid;
+	u32 seq = nlh->nlmsg_seq;
+
+	r_skb = nlmsg_new(len, GFP_ATOMIC);
+	if (!r_skb)
+		return -ENOMEM;
+
+	r_nlh = nlmsg_put(r_skb, portid, seq, XFRM_MSG_GETDEFAULT, sizeof(*r_up), 0);
+	if (!r_nlh) {
+		kfree_skb(r_skb);
+		return -EMSGSIZE;
+	}
+
+	r_up = nlmsg_data(r_nlh);
+	r_up->in = net->xfrm.policy_default[XFRM_POLICY_IN];
+	r_up->fwd = net->xfrm.policy_default[XFRM_POLICY_FWD];
+	r_up->out = net->xfrm.policy_default[XFRM_POLICY_OUT];
+	nlmsg_end(r_skb, r_nlh);
+
+	return nlmsg_unicast(net->xfrm.nlsk, r_skb, portid);
+}
+
+=======
+static int xfrm_notify_userpolicy(struct net *net)
+{
+	struct xfrm_userpolicy_default *up;
+	int len = NLMSG_ALIGN(sizeof(*up));
+	struct nlmsghdr *nlh;
+	struct sk_buff *skb;
+	int err;
+
+	skb = nlmsg_new(len, GFP_ATOMIC);
+	if (skb == NULL)
+		return -ENOMEM;
+
+	nlh = nlmsg_put(skb, 0, 0, XFRM_MSG_GETDEFAULT, sizeof(*up), 0);
+	if (nlh == NULL) {
+		kfree_skb(skb);
+		return -EMSGSIZE;
+	}
+
+	up = nlmsg_data(nlh);
+	up->in = net->xfrm.policy_default[XFRM_POLICY_IN];
+	up->fwd = net->xfrm.policy_default[XFRM_POLICY_FWD];
+	up->out = net->xfrm.policy_default[XFRM_POLICY_OUT];
+
+	nlmsg_end(skb, nlh);
+
+	rcu_read_lock();
+	err = xfrm_nlmsg_multicast(net, skb, 0, XFRMNLGRP_POLICY);
+	rcu_read_unlock();
+
+	return err;
+}
+
+static bool xfrm_userpolicy_is_valid(__u8 policy)
+{
+	return policy == XFRM_USERPOLICY_BLOCK ||
+	       policy == XFRM_USERPOLICY_ACCEPT;
+}
+
+static int xfrm_set_default(struct sk_buff *skb, struct nlmsghdr *nlh,
+			    struct nlattr **attrs, struct netlink_ext_ack *extack)
+{
+	struct net *net = sock_net(skb->sk);
+	struct xfrm_userpolicy_default *up = nlmsg_data(nlh);
+
+	if (xfrm_userpolicy_is_valid(up->in))
+		net->xfrm.policy_default[XFRM_POLICY_IN] = up->in;
+
+	if (xfrm_userpolicy_is_valid(up->fwd))
+		net->xfrm.policy_default[XFRM_POLICY_FWD] = up->fwd;
+
+	if (xfrm_userpolicy_is_valid(up->out))
+		net->xfrm.policy_default[XFRM_POLICY_OUT] = up->out;
+
+	rt_genid_bump_all(net);
+
+	xfrm_notify_userpolicy(net);
+	return 0;
+}
+
+static int xfrm_get_default(struct sk_buff *skb, struct nlmsghdr *nlh,
+			    struct nlattr **attrs, struct netlink_ext_ack *extack)
+{
+	struct sk_buff *r_skb;
+	struct nlmsghdr *r_nlh;
+	struct net *net = sock_net(skb->sk);
+	struct xfrm_userpolicy_default *r_up;
+	int len = NLMSG_ALIGN(sizeof(struct xfrm_userpolicy_default));
+	u32 portid = NETLINK_CB(skb).portid;
+	u32 seq = nlh->nlmsg_seq;
+
+	r_skb = nlmsg_new(len, GFP_ATOMIC);
+	if (!r_skb)
+		return -ENOMEM;
+
+	r_nlh = nlmsg_put(r_skb, portid, seq, XFRM_MSG_GETDEFAULT, sizeof(*r_up), 0);
+	if (!r_nlh) {
+		kfree_skb(r_skb);
+		return -EMSGSIZE;
+	}
+
+	r_up = nlmsg_data(r_nlh);
+	r_up->in = net->xfrm.policy_default[XFRM_POLICY_IN];
+	r_up->fwd = net->xfrm.policy_default[XFRM_POLICY_FWD];
+	r_up->out = net->xfrm.policy_default[XFRM_POLICY_OUT];
+	nlmsg_end(r_skb, r_nlh);
+
+	return nlmsg_unicast(xfrm_net_nlsk(net, skb), r_skb, portid);
+}
+
+>>>>>>> BRANCH (c48308ad35514c150a88be5c77b02d2c29a1e968 xfrm: avoid RCU warnings around the per-netns netlink socket)
 static int xfrm_get_policy(struct sk_buff *skb, struct nlmsghdr *nlh,
 			   struct nlattr **attrs,
 			   struct netlink_ext_ack *extack)
@@ -2040,7 +2231,7 @@ static int xfrm_get_policy(struct sk_buff *skb, struct nlmsghdr *nlh,
 		if (IS_ERR(resp_skb)) {
 			err = PTR_ERR(resp_skb);
 		} else {
-			err = nlmsg_unicast(net->xfrm.nlsk, resp_skb,
+			err = nlmsg_unicast(xfrm_net_nlsk(net, skb), resp_skb,
 					    NETLINK_CB(skb).portid);
 		}
 	} else {
@@ -2200,7 +2391,7 @@ static int xfrm_get_ae(struct sk_buff *skb, struct nlmsghdr *nlh,
 	err = build_aevent(r_skb, x, &c);
 	BUG_ON(err < 0);
 
-	err = nlmsg_unicast(net->xfrm.nlsk, r_skb, NETLINK_CB(skb).portid);
+	err = nlmsg_unicast(xfrm_net_nlsk(net, skb), r_skb, NETLINK_CB(skb).portid);
 	spin_unlock_bh(&x->lock);
 	xfrm_state_put(x);
 	return err;
@@ -2824,7 +3015,7 @@ static int xfrm_user_rcv_msg(struct sk_buff *skb, struct nlmsghdr *nlh,
 			goto err;
 		}
 
-		err = netlink_dump_start(net->xfrm.nlsk, skb, nlh, &c);
+		err = netlink_dump_start(xfrm_net_nlsk(net, skb), skb, nlh, &c);
 		goto err;
 	}
 
