@@ -16,6 +16,24 @@
       "message": "In aosp/4232683 (`pkvm_host_use_dma()`), we use `PKVM_PAGE_SHARED_BORROWED` in `host_mmu` PTEs to mark MMIO/reserved pages that cannot be donated, whereas here we use `PKVM_PAGE_SHARED_OWNED` for `ramoops`.\n\nHaving two different states for this increases the total canonical MMIO meta-states from `4` to `5` (in go/page-custody-battles), even though both represent the exact same invariant in the MMIO state machine (a host-accessible `is_mmio_range()` page that is permanently non-exclusive / non-donatable).\n\nCould we use the same page state for both (`PKVM_PAGE_SHARED_OWNED` or `PKVM_PAGE_SHARED_BORROWED`) so we keep the MMIO state space at `4` states? (`PKVM_PAGE_SHARED_OWNED` arguably fits both better since `PKVM_ID_HOST` is the owner sharing the range, though either works as long as both patches use the same state, just noting that in `pkvm_host_use_dma()` we should avoid overwriting `ramoops`\u0027s `WB` memtype with `host_mmu_pte_prot(true, true)` (`UC`) if an already-shared page is skipped in the check loop.)",
       "revId": "8c8e0065dbe1939ad538bc7066e43164aae75c3f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ba352d2_539fb8d7",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 939,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-14T23:25:17Z",
+      "side": 1,
+      "message": "Makes sense, let\u0027s unify them. Though I\u0027m inclined towards SHARED_BORROWED rather than SHARED_OWNED, since pkvm_host_use_dma() already happens to use it, on ARM as well. And conceptually I think SHARED_OWNED would be as much a trick as SHARED_BORROWED is, since in pkvm_host_use_dma() the host doesn\u0027t actually share MMIO pages with the hypervisor or anyone else, i.e. they don\u0027t get mapped in the hypervisor\u0027s or anyone else\u0027s page tables.\n\n\u003e in pkvm_host_use_dma() we should avoid overwriting ramoops\u0027s WB memtype with host_mmu_pte_prot(true, true) (UC) if an already-shared page is skipped in the check loop.\n\nHmm... in such case it would be the host that hurts itself by requesting use_dma for a region that overlaps with ramoops? So I\u0027m not sure it\u0027s worth complicating the logic in pkvm_host_use_dma() for such a corner case.\n\nIn fact, perhaps a bigger potential problem is that we blindly map _any_ host\u0027s MMIO/reserved memory as UC, regardless of what memory type the host wants to use for it...",
+      "parentUuid": "f36a8c75_528c71eb",
+      "revId": "8c8e0065dbe1939ad538bc7066e43164aae75c3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
