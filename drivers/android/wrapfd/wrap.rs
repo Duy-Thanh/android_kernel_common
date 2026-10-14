@@ -391,9 +391,7 @@ impl Wrap {
             return Err(EINVAL);
         };
 
-        // SAFETY: `file_inode` returns a valid `struct inode` for a live `struct file`, and
-        // `i_size_read` safely reads its size under kernel RCU / lock rules.
-        if end > unsafe { bindings::i_size_read(bindings::file_inode(localfile.as_ptr())) } {
+        if end > localfile.i_size_read() {
             return Err(EINVAL);
         }
 
