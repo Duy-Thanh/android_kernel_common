@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af5c1e91_6d5e08fc",
+        "filename": "mm/mincore.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-10-14T22:33:57Z",
+      "side": 1,
+      "message": "This looks wrong? If the process is 4KB and the kernel is 16KB, we have 4 subpages. The mincore_page argument should be in units of 16k though.",
+      "range": {
+        "startLine": 134,
+        "startChar": 11,
+        "endLine": 134,
+        "endChar": 16
+      },
+      "revId": "be63daa262d1257447ed649d9024ba16cdfca132",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
