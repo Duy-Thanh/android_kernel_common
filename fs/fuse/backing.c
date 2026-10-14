@@ -2009,16 +2009,13 @@ void *fuse_getattr_finalize(struct fuse_bpf_args *fa,
 	struct fuse_attr_out *outarg = fa->out_args[0].value;
 	struct inode *inode = entry->d_inode;
 	u64 attr_version = fuse_get_attr_version(get_fuse_mount(inode)->fc);
+	int err = 0;
 
-	/*
-	 * If backing getattr returned an error (such as a transient -ENOENT or
-	 * -ESTALE), do not pass uninitialized/zeroed attributes to finalize_attr,
-	 * as fuse_invalid_attr() will permanently mark the inode bad (FUSE_I_BAD).
+	/* TODO: Ensure this doesn't happen if we had an error getting attrs in
+	 * backing.
 	 */
-	if (fa->error_in)
-		return ERR_PTR(fa->error_in);
-
-	return ERR_PTR(finalize_attr(inode, outarg, attr_version, stat));
+	err = finalize_attr(inode, outarg, attr_version, stat);
+	return ERR_PTR(err);
 }
 
 static void fattr_to_iattr(struct fuse_conn *fc,
