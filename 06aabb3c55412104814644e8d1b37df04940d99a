@@ -106,6 +106,24 @@
       "parentUuid": "72e90225_c3abaecc",
       "revId": "06aabb3c55412104814644e8d1b37df04940d99a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b41fad6_3a1b026e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-10-14T22:00:15Z",
+      "side": 1,
+      "message": "(or wasn\u0027t as much of an issue...\n\nWe suddenly seem to have started hitting this all the time now...\n\nMaybe there\u0027s also a bug elsewhere that\u0027s triggering it now...)",
+      "parentUuid": "55812926_0142e4be",
+      "revId": "06aabb3c55412104814644e8d1b37df04940d99a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
