@@ -52,6 +52,24 @@
       "parentUuid": "ece67175_50493653",
       "revId": "e6f50c26fea1d20733dac239003f3ca9d0216246",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5242150_2289867c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 4906351
+      },
+      "writtenOn": "2026-10-14T23:05:05Z",
+      "side": 1,
+      "message": "Alright.  withdrawing reviewers here.",
+      "parentUuid": "0afeb89d_0daa25de",
+      "revId": "e6f50c26fea1d20733dac239003f3ca9d0216246",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
