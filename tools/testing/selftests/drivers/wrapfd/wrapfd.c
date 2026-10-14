@@ -772,12 +772,16 @@ static void test_owner(struct __test_metadata *_metadata,
 		   wrapfd, 0);
 	ASSERT_NE(ptr, MAP_FAILED);
 
-	/* Try releasing ownership while still mapped */
-	ASSERT_TRUE(wrapfd_release_ownership(wrapfd) && errno == EINVAL);
+	/*
+	 * Try releasing ownership while still mapped. This should work, as the content being used
+	 * does not mean that we cannot release our ownership of it. If we do, the buffer is unowned
+	 * and in-use, which is a legal state for a wrapped buffer to be in.
+	 */
+	ASSERT_EQ(wrapfd_release_ownership(wrapfd), 0);
 	ASSERT_EQ(munmap(ptr, self->size), 0);
 
-	/* Release ownership of an unmapped wrapfd */
-	ASSERT_EQ(wrapfd_release_ownership(wrapfd), 0);
+	/* We should not be able to release ownership of a wrap we do not own. */
+	ASSERT_TRUE(wrapfd_release_ownership(wrapfd) && errno == EBUSY);
 	close(wrapfd);
 }
 
