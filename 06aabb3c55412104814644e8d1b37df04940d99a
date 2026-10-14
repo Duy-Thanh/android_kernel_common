@@ -34,6 +34,24 @@
       "parentUuid": "fb043eb5_d43338b4",
       "revId": "06aabb3c55412104814644e8d1b37df04940d99a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12961d18_3f0ce927",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-10-14T21:20:59Z",
+      "side": 1,
+      "message": "oh, I did not test whether the Fixes: commit was mis-attributed, I just cherry-picked from linux-6.1.y. This would have landed here anyways. Do you think it is worth double checking the presence of the bug here? Or just take the fix from stable and move on?",
+      "parentUuid": "1cb0b239_46e637a8",
+      "revId": "06aabb3c55412104814644e8d1b37df04940d99a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
