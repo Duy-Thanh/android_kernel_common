@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08fa90f7_f137086d",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-10-14T16:39:42Z",
+      "side": 1,
+      "message": "super minor: Since we are paranoid checking all states above, would it make sense to check if this pte is infact zeroed and the memory range pointed by this pte is HYP mem + rest MMIO? Something like this:\n\n```\n} else {\n\tstruct range range;\n\tunsigned long pkvm_mem_size;\n\n\tBUG_ON(pgt_ops-\u003epte_get(ctx-\u003eptep));\n\tBUG_ON(!pkvm_find_addr_range(phys, \u0026range));\n\tpkvm_mem_size \u003d range.end - phys + 1;\n\tBUG_ON(check_host_mem_pgstate(phys, pkvm_mem_size, PKVM_PAGE_NONE,\n\t\t\t\t      PKVM_ID_HYP, false));\n\tBUG_ON(!is_mmio_range(phys + pkvm_mem_size, size - pkvm_mem_size));\n}\n```",
+      "range": {
+        "startLine": 312,
+        "startChar": 36,
+        "endLine": 313,
+        "endChar": 16
+      },
+      "revId": "955ea0ce2f2c0e94614988fe821fbdaf32fa7d54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
