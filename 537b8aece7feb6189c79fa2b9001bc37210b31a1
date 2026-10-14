@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d133f33_34ec53bf",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 950,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-14T18:33:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "811941f3_799b7591",
+      "range": {
+        "startLine": 950,
+        "startChar": 8,
+        "endLine": 950,
+        "endChar": 24
+      },
+      "revId": "537b8aece7feb6189c79fa2b9001bc37210b31a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2290dd0c_015abd52",
@@ -119,6 +143,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "052881fd_ba56d3f0",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 967,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-14T18:33:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42bc79b3_262bd358",
+      "revId": "537b8aece7feb6189c79fa2b9001bc37210b31a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9dc31858_91ca0beb",
@@ -174,6 +216,30 @@
       "side": 1,
       "message": "Indeed, not sure why I didn\u0027t use it.",
       "parentUuid": "9dc31858_91ca0beb",
+      "range": {
+        "startLine": 1002,
+        "startChar": 9,
+        "endLine": 1002,
+        "endChar": 25
+      },
+      "revId": "537b8aece7feb6189c79fa2b9001bc37210b31a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e52a36c_cb27f3e3",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1002,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-14T18:33:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b04281d1_faf0137d",
       "range": {
         "startLine": 1002,
         "startChar": 9,
