@@ -22,6 +22,30 @@
       },
       "revId": "c6a62a342758df149af2ea181aceeaa9bd7da69e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "256f6df5_185c811d",
+        "filename": "arch/x86/kvm/pkvm/mmu.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-14T17:37:22Z",
+      "side": 1,
+      "message": "Yeah, right.",
+      "parentUuid": "2ba4a51c_3975a1d0",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 30
+      },
+      "revId": "c6a62a342758df149af2ea181aceeaa9bd7da69e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
