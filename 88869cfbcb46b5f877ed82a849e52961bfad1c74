@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2867084c_ac63ed78",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-10-14T21:37:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7b0d37d_468750fe",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 9
+      },
+      "revId": "88869cfbcb46b5f877ed82a849e52961bfad1c74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85c99485_7de6bce8",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-10-14T21:23:48Z",
       "side": 1,
       "message": "the branch is missing, it needs to be a \"stable-sha\" branch",
+      "range": {
+        "startLine": 27,
+        "startChar": 128,
+        "endLine": 27,
+        "endChar": 129
+      },
+      "revId": "88869cfbcb46b5f877ed82a849e52961bfad1c74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b69b5759_fd2ff0a1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-10-14T21:37:59Z",
+      "side": 1,
+      "message": "Updated but I am not sure if that is stable-sha branch. In past, we have accepted FROMGIT patches from definitely non stable-sha branch as long as commit message has `Link` so we can trace the origin. Hope that is fine here.",
+      "parentUuid": "85c99485_7de6bce8",
       "range": {
         "startLine": 27,
         "startChar": 128,
