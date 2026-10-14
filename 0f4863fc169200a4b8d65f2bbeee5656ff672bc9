@@ -16,6 +16,29 @@
       "message": "Respin Bug; b/572848878",
       "revId": "0f4863fc169200a4b8d65f2bbeee5656ff672bc9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b480e6cf_53b94bec",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-10-14T08:54:25Z",
+      "side": 1,
+      "message": "Why are you adding an include of `rcu.h` here?",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 28
+      },
+      "revId": "0f4863fc169200a4b8d65f2bbeee5656ff672bc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
