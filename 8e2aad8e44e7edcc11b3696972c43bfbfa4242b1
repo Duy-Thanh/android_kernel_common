@@ -105,6 +105,24 @@
       "parentUuid": "fe74da60_037d2413",
       "revId": "8e2aad8e44e7edcc11b3696972c43bfbfa4242b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51868f51_f5bcbbd1",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1786,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-14T18:34:42Z",
+      "side": 1,
+      "message": "Resolving",
+      "parentUuid": "7db2b6ad_fcb3177a",
+      "revId": "8e2aad8e44e7edcc11b3696972c43bfbfa4242b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
