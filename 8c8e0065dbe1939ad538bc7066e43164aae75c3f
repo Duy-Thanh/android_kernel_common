@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f36a8c75_528c71eb",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 939,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-10-14T20:19:44Z",
+      "side": 1,
+      "message": "In aosp/4232683 (`pkvm_host_use_dma()`), we use `PKVM_PAGE_SHARED_BORROWED` in `host_mmu` PTEs to mark MMIO/reserved pages that cannot be donated, whereas here we use `PKVM_PAGE_SHARED_OWNED` for `ramoops`.\n\nHaving two different states for this increases the total canonical MMIO meta-states from `4` to `5` (in go/page-custody-battles), even though both represent the exact same invariant in the MMIO state machine (a host-accessible `is_mmio_range()` page that is permanently non-exclusive / non-donatable).\n\nCould we use the same page state for both (`PKVM_PAGE_SHARED_OWNED` or `PKVM_PAGE_SHARED_BORROWED`) so we keep the MMIO state space at `4` states? (`PKVM_PAGE_SHARED_OWNED` arguably fits both better since `PKVM_ID_HOST` is the owner sharing the range, though either works as long as both patches use the same state, just noting that in `pkvm_host_use_dma()` we should avoid overwriting `ramoops`\u0027s `WB` memtype with `host_mmu_pte_prot(true, true)` (`UC`) if an already-shared page is skipped in the check loop.)",
+      "revId": "8c8e0065dbe1939ad538bc7066e43164aae75c3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
