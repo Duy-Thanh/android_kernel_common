@@ -16,6 +16,24 @@
       "message": "Please file a bug explaining why all of these patches are needed in android17-6.18",
       "revId": "16d543a756af0ed57f59606626c2d44be06ed5b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95bbc909_fc797533",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2026-10-14T14:35:36Z",
+      "side": 1,
+      "message": "b/573237645 Has been filed.",
+      "parentUuid": "3d5e1661_6715888b",
+      "revId": "16d543a756af0ed57f59606626c2d44be06ed5b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
