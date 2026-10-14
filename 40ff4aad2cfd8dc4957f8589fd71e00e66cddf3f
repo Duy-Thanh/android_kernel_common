@@ -16,6 +16,24 @@
       "message": "Internal early review suggests that this patch by itself may not be sufficient on 6.1 kernel and it needs many preceding patches. Original author @daeho is analyzing which patches exactly, until then this patch on 6.1 kernel cannot proceed.",
       "revId": "40ff4aad2cfd8dc4957f8589fd71e00e66cddf3f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a505e47_dff03846",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-10-14T22:43:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6059418a_2a600dff",
+      "revId": "40ff4aad2cfd8dc4957f8589fd71e00e66cddf3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
