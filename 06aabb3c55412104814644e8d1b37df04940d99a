@@ -70,6 +70,24 @@
       "parentUuid": "12961d18_3f0ce927",
       "revId": "06aabb3c55412104814644e8d1b37df04940d99a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72e90225_c3abaecc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2026-10-14T21:56:26Z",
+      "side": 1,
+      "message": "\u003e is this needed even on the *latest* 6.1/6.6/6.12/6.18 LTS or has it been fixed already (if so, which ones)\n\nIt has already been backported and merged into all four of those LTS trees (linux-6.1.y, linux-6.6.y, linux-     \n  6.12.y, and linux-6.18.y):                                                                                       \n                                                                                                                   \n   LTS Branch         │ Backport Commit    │ First Included In  │ Latest Release on Branch  │ Status on Latest LTS\n  ────────────────────┼────────────────────┼────────────────────┼───────────────────────────┼──────────────────────\n   6.1.y              │ 97e032e5733e4      │ v6.1.183           │ v6.1.189 (a500ba24937a9)  │ Already fixed\n   6.6.y              │ df6856c2dda91      │ v6.6.148           │ v6.6.158 (a91a6aa9253c6)  │ Already fixed\n   6.12.y             │ 43de8a49335e6      │ v6.12.101          │ v6.12.112 (7aba70ab2e8d8) │ Already fixed\n   6.18.y             │ ff636d7b7cba6      │ v6.18.42           │ v6.18.56 (17ad2612c11a7)  │ Already fixed\n                                                                                                                   \n  (For completeness, it was also backported to 7.1.y in e078da1b4e113 / v7.1.6, and landed mainline in v7.2-rc4 via\n  389704eb516b0.)                                                                                                  \n                                                                                                                   \n  So if you are on the latest point release of 6.1, 6.6, 6.12, or 6.18, the fix in xfrm6_policy.c:88-93 is already \n  present and no further backport is needed.",
+      "parentUuid": "f66276a3_99be2301",
+      "revId": "06aabb3c55412104814644e8d1b37df04940d99a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
