@@ -4517,6 +4517,7 @@ static const struct tegra_wake_event tegra238_wake_events[] = {
 	TEGRA_WAKE_GPIO("wake_on_wifi", 69, 1, TEGRA238_AON_GPIO(FF, 4)),
 	TEGRA_WAKE_GPIO("hot_word_det", 64, 0, TEGRA238_MAIN_GPIO(P, 2)),
 	TEGRA_WAKE_GPIO("wake_on_lan", 34, 0, TEGRA238_MAIN_GPIO(F, 2)),
+	TEGRA_WAKE_GPIO("bluetooth", 11, 0, TEGRA238_MAIN_GPIO(R, 0)),
 	TEGRA_WAKE_GPIO("eth_wol", 19, 0, TEGRA238_MAIN_GPIO(R, 6)),
 	TEGRA_WAKE_GPIO("hdmi_out_hpd", 51, 0, TEGRA238_MAIN_GPIO(X, 1)),
 };
