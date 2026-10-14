@@ -33,6 +33,23 @@
       "message": "there should be an annotation describing what needed to be changed in the Backports. See https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
       "revId": "61d8dfad035d9450dc82a94c6d8e47cf8e494a71",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90e87606_167ada75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-10-14T16:44:36Z",
+      "side": 1,
+      "message": "There are some errors reported on the mailing list.",
+      "revId": "61d8dfad035d9450dc82a94c6d8e47cf8e494a71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
