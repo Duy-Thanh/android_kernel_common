@@ -103,6 +103,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "42bc79b3_262bd358",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 967,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-14T17:52:52Z",
+      "side": 1,
+      "message": "Ok, ARM\u0027s `host_stage2_fault()` does that because it factors out a part of its logic into its internal helper `host_stage2_adjust_range()`, which we don\u0027t do here. Yeah, I\u0027ll just return 0.",
+      "parentUuid": "64333a65_f7dd4593",
+      "revId": "537b8aece7feb6189c79fa2b9001bc37210b31a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9dc31858_91ca0beb",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 9
