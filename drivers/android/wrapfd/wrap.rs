@@ -371,7 +371,9 @@ impl Wrap {
     fn release_ownership(&self) -> Result<isize> {
         let mut guard = self.inner.lock();
 
-        guard.check_modifiable()?;
+        if !guard.owned_by_current_task() {
+            return Err(EBUSY);
+        }
 
         guard.owner = WrapOwner::None;
         guard.allow_guests = false;
