@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e1dffc5_1769b23c",
+        "filename": "arch/arm64/mm/mmu.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2181,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-10-14T21:10:43Z",
+      "side": 1,
+      "message": "Note: I think there is an unrelated upstream bug here where we are passing the size to __flush_tlb_range() instead of the end.\n\nSo we likely end up doing a full flush instead. We will fix this upstream later.\n\n```\n\tif ((end - start) \u003e MAX_TLB_RANGE) {\n\t\tflush_tlb_mm(vma-\u003evm_mm);\n\t\treturn;\n\t}\n```",
+      "range": {
+        "startLine": 2179,
+        "startChar": 0,
+        "endLine": 2181,
+        "endChar": 36
+      },
+      "revId": "a3c5225fb0a926f129fd0231d48d698ebddc5003",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
