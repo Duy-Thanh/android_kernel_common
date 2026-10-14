@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7b0d37d_468750fe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-10-14T21:23:48Z",
+      "side": 1,
+      "message": "I believe this needs to be `BACKPORT: FROMGIT:` no?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 9
+      },
+      "revId": "88869cfbcb46b5f877ed82a849e52961bfad1c74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85c99485_7de6bce8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-10-14T21:23:48Z",
+      "side": 1,
+      "message": "the branch is missing, it needs to be a \"stable-sha\" branch",
+      "range": {
+        "startLine": 27,
+        "startChar": 128,
+        "endLine": 27,
+        "endChar": 129
+      },
+      "revId": "88869cfbcb46b5f877ed82a849e52961bfad1c74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
