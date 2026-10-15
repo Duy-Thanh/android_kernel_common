@@ -66,6 +66,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5660bb2_0316d7da",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5593,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-10-15T21:09:34Z",
+      "side": 1,
+      "message": "Ack, I missed that in your backport notes",
+      "parentUuid": "022d0810_f7121fb1",
+      "range": {
+        "startLine": 5593,
+        "startChar": 0,
+        "endLine": 5593,
+        "endChar": 36
+      },
+      "revId": "dba0c8d6c2d0ad6e71115c70e3ca9308e38a3e23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e783111_3f013ee6",
