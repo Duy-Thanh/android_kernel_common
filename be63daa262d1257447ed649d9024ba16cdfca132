@@ -22,6 +22,30 @@
       },
       "revId": "be63daa262d1257447ed649d9024ba16cdfca132",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a20beced_2512a663",
+        "filename": "mm/mincore.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-10-15T00:07:48Z",
+      "side": 1,
+      "message": "Hi TJ, \n\nYou are right, the fallback to looking up the page cache folio, if no ptes, needs to use a 16KB unit pgoff.\n\nThe loop steps through 4KB increments but `linear_page_index()` maps each address to a pagecache index in 16KB units, so the four 4KB subpages within one 16KB page all resolve to the same index and report the same residency.\n\nIOW the `PAGE_SHIFT` in linear_page_index() (and functions defined in headers) is always the kernel `PAGE_SHIFT` the dynamic page-shift (redefinition) is only every applied to .c files (translation units).",
+      "parentUuid": "af5c1e91_6d5e08fc",
+      "range": {
+        "startLine": 134,
+        "startChar": 11,
+        "endLine": 134,
+        "endChar": 16
+      },
+      "revId": "be63daa262d1257447ed649d9024ba16cdfca132",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
