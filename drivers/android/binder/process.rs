@@ -1218,10 +1218,10 @@ impl Process {
         let ptr = reader.read::<BinderNodeDebugInfo>()?.ptr;
         let mut out = BinderNodeDebugInfo::default();
 
-        {
+        if let Some(start_ptr) = ptr.checked_add(1) {
             let mut inner = self.inner.lock();
             // cursor_lower_bound retrieves the "key" passed or the next existing larger key
-            if let Some(cursor) = inner.nodes.cursor_lower_bound(&(ptr + 1)) {
+            if let Some(cursor) = inner.nodes.cursor_lower_bound(&start_ptr) {
                 let (_, node) = cursor.current();
                 let node = node.clone();
                 node.populate_debug_info(&mut out, &inner);
