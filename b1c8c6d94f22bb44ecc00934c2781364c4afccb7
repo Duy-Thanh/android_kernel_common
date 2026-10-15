@@ -34,6 +34,24 @@
       "parentUuid": "cc00fe02_4d97968d",
       "revId": "b1c8c6d94f22bb44ecc00934c2781364c4afccb7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab94fc58_07eb0797",
+        "filename": "gki/aarch64/symbols/lenovo",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3824108
+      },
+      "writtenOn": "2026-10-15T02:12:10Z",
+      "side": 1,
+      "message": "Marked as resolved.",
+      "parentUuid": "5748c968_810c36c6",
+      "revId": "b1c8c6d94f22bb44ecc00934c2781364c4afccb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
