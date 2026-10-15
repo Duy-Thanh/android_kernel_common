@@ -90,6 +90,7 @@
 
 #include "pgalloc-track.h"
 #include "internal.h"
+#include "p3s/anon.h"
 #include "p3s/memory.h"
 #include "swap.h"
 #include <linux/p3s_user_pages.h>
@@ -5251,6 +5252,8 @@ static vm_fault_t do_anonymous_page(struct vm_fault *vmf)
 	ret = vmf_anon_prepare(vmf);
 	if (ret)
 		return ret;
+	if (p3s_anon_reuse_sibling_slice(vmf, &ret))
+		return ret;
 	/* Returns NULL on OOM or ERR_PTR(-EAGAIN) if we must retry the fault */
 	folio = alloc_anon_folio(vmf);
 	if (IS_ERR(folio))
@@ -5297,6 +5300,8 @@ static vm_fault_t do_anonymous_page(struct vm_fault *vmf)
 		return handle_userfault(vmf, VM_UFFD_MISSING);
 	}
 
+	if (p3s_anon_reuse_racing_sibling(vmf, &folio, &entry))
+		goto setpte;
 	folio_ref_add(folio, nr_pages - 1);
 	add_mm_counter(vma->vm_mm, MM_ANONPAGES, nr_pages);
 	count_mthp_stat(folio_order(folio), MTHP_STAT_ANON_FAULT_ALLOC);
