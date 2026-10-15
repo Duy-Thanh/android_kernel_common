@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f3d4328_62ca62c6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-15T22:44:41Z",
+      "side": 1,
+      "message": "s/kernel text/pKVM text/ ?",
+      "revId": "651d8890f177e183a9727fdc9abd3607ef45f8ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4553947d_d41be15b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-15T22:44:41Z",
+      "side": 1,
+      "message": "Probably also worth mentioning what you mentioned in aosp/4354333: \"since module text sits above .pkvm.text on x86_64\"?",
+      "revId": "651d8890f177e183a9727fdc9abd3607ef45f8ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8032dde_1765819c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-15T22:44:41Z",
+      "side": 1,
+      "message": "Maybe \"e.g. for jump_label/kprobe instruction decoding in the case described above\"?",
+      "revId": "651d8890f177e183a9727fdc9abd3607ef45f8ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "022ba8ab_62705d62",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-15T22:44:41Z",
+      "side": 1,
+      "message": "pkvm_sym() is useless in the hypervisor code?",
+      "fixSuggestions": [
+        {
+          "fixId": "e8e6f71f_48cf4363",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 304,
+                "startChar": 0,
+                "endLine": 306,
+                "endChar": 0
+              },
+              "replacement": "\tunsigned long start \u003d __pa_symbol(text_start);\n\tunsigned long end \u003d __pa_symbol(text_end);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "651d8890f177e183a9727fdc9abd3607ef45f8ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db2562a1_d99e377c",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-15T22:44:41Z",
+      "side": 1,
+      "message": "I\u0027m not sure this BUG_ON is a very good idea. It assumes `is_pkvm_text_range()` will only ever be used by `fix_host_mmu_pgstate_walker()`?",
+      "revId": "651d8890f177e183a9727fdc9abd3607ef45f8ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ff27709_368af31b",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 888,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-15T22:44:41Z",
+      "side": 1,
+      "message": "We do panic dumps in a different way?\n\nAlso \"for jump_label/kprobe instruction decoding\" might sound puzzling, since it doesn\u0027t make it clear that this is not about kprobes for pKVM code itself (for which the host kernel is not expected to be able to install kprobes).\n\nMaybe e.g. \"Keep .pkvm.text mapped read-only, since it contains no secrets, while the host kernel may need to inspect pKVM text in some cases, e.g. for instruction decoding in arch_jump_entry_size() for getting size of a pKVM\u0027s static branch.\" ?",
+      "fixSuggestions": [
+        {
+          "fixId": "6a2a45fa_12dd152d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 886,
+                "startChar": 0,
+                "endLine": 890,
+                "endChar": 0
+              },
+              "replacement": "\t * host VM. Keep .pkvm.text mapped read-only, since it contains no secrets,\n\t * while the host kernel may need to inspect pKVM text in some cases,\n\t * e.g. for instruction decoding in arch_jump_entry_size() for getting size\n\t * of a pKVM\u0027s static branch.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "651d8890f177e183a9727fdc9abd3607ef45f8ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03843729_428e2d2d",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 905,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-15T22:44:41Z",
+      "side": 1,
+      "message": "Maybe it\u0027s better to check the whole range via `is_pkvm_text_range()` for extra paranoid safety?",
+      "revId": "651d8890f177e183a9727fdc9abd3607ef45f8ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
