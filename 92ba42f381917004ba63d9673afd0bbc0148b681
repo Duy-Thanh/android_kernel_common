@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "78cf32e5_af4d3267",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-10-15T20:35:32Z",
+      "side": 1,
+      "message": "\u003e Should this be an FnOnce?\nJust to be more clear, taking an impl FnOnce instead of Fn would make this more generally applicable, i.e. you can pass a callback/function that mutates the closure\u0027s state for example, which you couldn\u0027t if you declared it \"Fn\". You\u0027re not currently relying on that in calling code, but there\u0027s no harm in being prepared.",
+      "parentUuid": "8734b25a_784639db",
+      "revId": "92ba42f381917004ba63d9673afd0bbc0148b681",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7355b74d_71da1c36",
         "filename": "drivers/android/wrapfd/wrap.rs",
         "patchSetId": 3
