@@ -1,6 +1,40 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "99552724_cf888efa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-10-15T17:38:08Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCommit: Commit is missing a cherry pick line pointing to the original commit on the base...\n\nCommit is missing a cherry pick line pointing to the original commit on the base branch.\n\nExpected a cherry pick line like `(cherry picked from commit 3b086f3cd0deb3afa206ac9da4763b8a03caad31)`.\n\nPlease cherry-pick using: `git cherry-pick -s -x 3b086f3cd0deb3afa206ac9da4763b8a03caad31`.\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "dc4cdaef03eb272e20053b91faf5e98395c5598e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8dc341a_909dfd41",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-10-15T17:38:08Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCommit: As of 2026-10-01, this release branch is only eligible for respin requests for c...\n\nAs of 2026-10-01, this release branch is only eligible for respin requests for critical bug fixes. It will be deprecated from 2027-07-01.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "dc4cdaef03eb272e20053b91faf5e98395c5598e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "38461f0e_a8f6988e",
