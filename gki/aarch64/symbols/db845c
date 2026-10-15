@@ -1187,6 +1187,7 @@
   __mmap_lock_do_trace_acquire_returned
   __mmap_lock_do_trace_released
   __mmap_lock_do_trace_start_locking
+  mtree_load
   __traceiter_mmap_lock_acquire_returned
   __traceiter_mmap_lock_released
   __traceiter_mmap_lock_start_locking
@@ -2085,6 +2086,7 @@
   driver_set_override
   platform_device_add
   platform_device_alloc
+  platform_device_del
   wait_for_completion_interruptible_timeout
 
 # required by slimbus.ko
