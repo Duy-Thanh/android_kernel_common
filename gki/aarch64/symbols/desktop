@@ -583,6 +583,7 @@
   drm_atomic_helper_damage_iter_init
   drm_atomic_helper_damage_iter_next
   drm_atomic_helper_disable_plane
+  drm_atomic_helper_fake_vblank
   drm_atomic_helper_page_flip
   __drm_atomic_helper_plane_destroy_state
   __drm_atomic_helper_plane_duplicate_state
@@ -591,6 +592,7 @@
   drm_atomic_helper_set_config
   drm_atomic_helper_shutdown
   drm_atomic_helper_update_plane
+  drm_atomic_helper_wait_for_flip_done
   drm_atomic_helper_wait_for_vblanks
   drm_atomic_private_obj_fini
   drm_atomic_private_obj_init
@@ -642,6 +644,7 @@
   __drm_dev_dbg
   drm_dev_enter
   drm_dev_exit
+  drm_dev_get
   drm_dev_printk
   drm_dev_put
   drm_dev_register
@@ -766,6 +769,7 @@
   drm_mode_crtc_set_gamma_size
   drm_mode_duplicate
   drm_mode_match
+  drm_mode_object_get
   drm_mode_object_put
   drm_mode_probed_add
   drm_modeset_lock
@@ -819,6 +823,7 @@
   drm_sysfs_connector_property_event
   drm_universal_plane_init
   drm_vblank_init
+  drm_vblank_work_cancel_sync
   drm_vblank_work_init
   drm_vblank_work_schedule
   drop_reasons_register_subsys
@@ -1150,6 +1155,7 @@
   irq_set_chip_data
   irq_set_irq_wake
   irq_set_parent
+  irq_wake_thread
   irq_work_queue
   irq_work_sync
   is_vmalloc_addr
@@ -2226,6 +2232,8 @@
   ucsi_sync_control_common
   ucsi_unregister
   __udelay
+  ufshcd_ahit_disable
+  ufshcd_ahit_enable
   ufshcd_delay_us
   ufshcd_dme_configure_adapt
   ufshcd_dme_get_attr
