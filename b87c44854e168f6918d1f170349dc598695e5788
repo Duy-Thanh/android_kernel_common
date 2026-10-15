@@ -128,6 +128,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cf2a84fe_5e01e13d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-10-15T18:52:33Z",
+      "side": 1,
+      "message": "\u003e ...But I just got another idea: what if we simply give the host read-only access to pKVM\u0027s text (like pKVM-ARM already does: https://lore.kernel.org/all/20250909133631.3844423-3-smostafa@google.com/)?\n\nYeah, agree. As we discussed and agreed offline, this seems to be the best and easiest approach for upstreaming. I\u0027ve prepared aosp/4367474 which implements it and am going to drop this one.",
+      "parentUuid": "e8c01ef2_0333535c",
+      "revId": "b87c44854e168f6918d1f170349dc598695e5788",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c6e88a76_898ad561",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
