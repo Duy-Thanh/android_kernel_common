@@ -2846,11 +2846,11 @@ static int remap_pte_range(struct mm_struct *mm, pmd_t *pmd,
 	arch_enter_lazy_mmu_mode();
 	do {
 		BUG_ON(!pte_none(ptep_get(pte)));
-		if (!pfn_modify_allowed(pfn, prot)) {
+		if (!pfn_modify_allowed(mm_frame_pfn(mm, pfn), prot)) {
 			err = -EACCES;
 			break;
 		}
-		set_pte_at(mm, addr, pte, pte_mkspecial(pfn_pte(pfn, prot)));
+		set_pte_at(mm, addr, pte, pte_mkspecial(mm_frame_pte(mm, pfn, prot)));
 		pfn++;
 	} while (pte++, addr += PAGE_SIZE, addr != end);
 	arch_leave_lazy_mmu_mode();
@@ -2965,6 +2965,7 @@ static int remap_pfn_range_internal(struct vm_area_struct *vma, unsigned long ad
 	vm_flags_set(vma, VM_IO | VM_PFNMAP | VM_DONTEXPAND | VM_DONTDUMP);
 
 	BUG_ON(addr >= end);
+	pfn = vma_remap_frame(vma, addr, pfn);
 	pfn -= addr >> PAGE_SHIFT;
 	pgd = pgd_offset(mm, addr);
 	flush_cache_range(vma, addr, end);
@@ -3116,9 +3117,9 @@ int vm_iomap_memory(struct vm_area_struct *vma, phys_addr_t start, unsigned long
 	 * but we've historically allowed it because IO memory might
 	 * just have smaller alignment.
 	 */
-	len += start & ~PAGE_MASK;
-	pfn = start >> PAGE_SHIFT;
-	pages = (len + ~PAGE_MASK) >> PAGE_SHIFT;
+	len += start & ~PAGE_MASK_KERNEL;
+	pfn = start >> PAGE_SHIFT_KERNEL;
+	pages = (len + ~PAGE_MASK_KERNEL) >> PAGE_SHIFT_KERNEL;
 	if (pfn + pages < pfn)
 		return -EINVAL;
 
@@ -3130,7 +3131,7 @@ int vm_iomap_memory(struct vm_area_struct *vma, phys_addr_t start, unsigned long
 
 	/* Can we fit all of the mapping? */
 	vm_len = vma->vm_end - vma->vm_start;
-	if (vm_len >> PAGE_SHIFT > pages)
+	if (vma_kernel_pages(vma) > pages)
 		return -EINVAL;
 
 	/* Ok, let it rip */
