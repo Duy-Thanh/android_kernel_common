@@ -2552,7 +2552,7 @@ bool scx_prio_less(const struct task_struct *a, const struct task_struct *b,
 	if (SCX_HAS_OP(sch, core_sched_before) &&
 	    !scx_rq_bypassing(task_rq(a)))
 		return SCX_CALL_OP_2TASKS_RET(sch, SCX_KF_REST, core_sched_before,
-					      NULL,
+					      task_rq(a),
 					      (struct task_struct *)a,
 					      (struct task_struct *)b);
 	else
@@ -2836,7 +2836,8 @@ static void scx_set_task_state(struct task_struct *p, enum scx_task_state state)
 		warn = prev_state != SCX_TASK_READY;
 		break;
 	default:
-		warn = true;
+		WARN_ONCE(1, "sched_ext: Invalid task state %d -> %d for %s[%d]",
+			  prev_state, state, p->comm, p->pid);
 		return;
 	}
 
@@ -3891,11 +3892,10 @@ static void scx_bypass(bool bypass)
 		 */
 		list_for_each_entry_safe_reverse(p, n, &rq->scx.runnable_list,
 						 scx.runnable_node) {
-			struct sched_enq_and_set_ctx ctx;
-
 			/* cycling deq/enq is enough, see the function comment */
-			sched_deq_and_put_task(p, DEQUEUE_SAVE | DEQUEUE_MOVE, &ctx);
-			sched_enq_and_set_task(&ctx);
+			scoped_guard (sched_change, p, DEQUEUE_SAVE | DEQUEUE_MOVE) {
+				/* nothing */ ;
+			}
 		}
 
 		/* resched to restore ticks and idle state */
@@ -4049,7 +4049,6 @@ repeat_iter:
 	while ((p = scx_task_iter_next_locked(&sti))) {
 		const struct sched_class *old_class = p->sched_class;
 		const struct sched_class *new_class = scx_setscheduler_class(p);
-		struct sched_enq_and_set_ctx ctx;
 		bool skip = false;
 
 		trace_android_vh_scx_switch_repeat_skip(p, &skip, &repeat);
@@ -4057,16 +4056,16 @@ repeat_iter:
 			continue;
 
 		trace_android_vh_setscheduler_class(&new_class, NULL, p, p->policy, p->prio);
+		update_rq_clock(task_rq(p));
+
 		if (old_class != new_class && p->se.sched_delayed)
-			dequeue_task(task_rq(p), p, DEQUEUE_SLEEP | DEQUEUE_DELAYED);
-
-		sched_deq_and_put_task(p, DEQUEUE_SAVE | DEQUEUE_MOVE, &ctx);
-
-		p->sched_class = new_class;
-		check_class_changing(task_rq(p), p, old_class);
+			dequeue_task(task_rq(p), p, DEQUEUE_SLEEP | DEQUEUE_DELAYED | DEQUEUE_NOCLOCK);
 		trace_android_vh_scx_task_switch_finish(p, 0);
 
-		sched_enq_and_set_task(&ctx);
+		scoped_guard (sched_change, p, DEQUEUE_SAVE | DEQUEUE_MOVE | DEQUEUE_NOCLOCK) {
+			p->sched_class = new_class;
+			check_class_changing(task_rq(p), p, old_class);
+		}
 
 		check_class_changed(task_rq(p), p, old_class, p->prio);
 		scx_exit_task(p);
@@ -4860,10 +4859,10 @@ static void scx_enable_workfn(struct kthread_work *work)
 
 		ret = scx_init_task(p, task_group(p), false);
 		if (ret) {
-			put_task_struct(p);
 			scx_task_iter_stop(&sti);
 			scx_error(sch, "ops.init_task() failed (%d) for %s[%d]",
 				  ret, p->comm, p->pid);
+			put_task_struct(p);
 			goto err_disable_unlock_all;
 		}
 
@@ -4895,7 +4894,6 @@ repeat_iter:
 	while ((p = scx_task_iter_next_locked(&sti))) {
 		const struct sched_class *old_class = p->sched_class;
 		const struct sched_class *new_class = scx_setscheduler_class(p);
-		struct sched_enq_and_set_ctx ctx;
 		bool skip = false;
 
 		trace_android_vh_setscheduler_class(&new_class, NULL, p, p->policy, p->prio);
@@ -4905,17 +4903,18 @@ repeat_iter:
 		trace_android_vh_scx_switch_repeat_skip(p, &skip, &repeat);
 		if (skip)
 			continue;
+
+		update_rq_clock(task_rq(p));
+
 		if (old_class != new_class && p->se.sched_delayed)
-			dequeue_task(task_rq(p), p, DEQUEUE_SLEEP | DEQUEUE_DELAYED);
+			dequeue_task(task_rq(p), p, DEQUEUE_SLEEP | DEQUEUE_DELAYED | DEQUEUE_NOCLOCK);
 
-		sched_deq_and_put_task(p, DEQUEUE_SAVE | DEQUEUE_MOVE, &ctx);
-
-		p->scx.slice = SCX_SLICE_DFL;
-		p->sched_class = new_class;
-		check_class_changing(task_rq(p), p, old_class);
+		scoped_guard (sched_change, p, DEQUEUE_SAVE | DEQUEUE_MOVE | DEQUEUE_NOCLOCK) {
+			p->scx.slice = SCX_SLICE_DFL;
+			p->sched_class = new_class;
+			check_class_changing(task_rq(p), p, old_class);
+		}
 		trace_android_vh_scx_task_switch_finish(p, 1);
-
-		sched_enq_and_set_task(&ctx);
 
 		check_class_changed(task_rq(p), p, old_class, p->prio);
 	}
@@ -5707,6 +5706,14 @@ static bool scx_dsq_move(struct bpf_iter_scx_dsq_kern *kit,
 	bool dispatched = false;
 	bool in_balance;
 	unsigned long flags;
+
+	/*
+	 * The verifier considers an iterator slot initialized on any
+	 * KF_ITER_NEW return, so a BPF program may legally reach here after
+	 * bpf_iter_scx_dsq_new() failed and left @kit->dsq NULL.
+	 */
+	if (unlikely(!src_dsq))
+		return false;
 
 	if (!scx_kf_allowed_if_unlocked() &&
 	    !scx_kf_allowed(sch, SCX_KF_DISPATCH))
