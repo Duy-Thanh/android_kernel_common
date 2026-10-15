@@ -5501,6 +5501,10 @@ static int kvm_dev_ioctl_create_vm(unsigned long type)
 	struct kvm *kvm;
 	struct file *file;
 
+	/* Guest memory is resolved in kernel pages */
+	if (p3s_4k_unsupported(current->mm))
+		return -EPERM;
+
 	fd = get_unused_fd_flags(O_CLOEXEC);
 	if (fd < 0)
 		return fd;
