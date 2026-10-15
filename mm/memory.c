@@ -1139,7 +1139,8 @@ copy_present_ptes(struct vm_area_struct *dst_vma, struct vm_area_struct *src_vma
 	 * sure that the common "small folio" case is as fast as possible
 	 * by keeping the batching logic separate.
 	 */
-	if (unlikely(!*prealloc && folio_test_large(folio) && max_nr != 1)) {
+	if (unlikely(!vma_is_p3s_4k(src_vma) && !*prealloc &&
+		     folio_test_large(folio) && max_nr != 1)) {
 		if (!(src_vma->vm_flags & VM_SHARED))
 			flags |= FPB_RESPECT_DIRTY;
 		if (vma_soft_dirty_enabled(src_vma))
@@ -5463,7 +5464,7 @@ void set_pte_range(struct vm_fault *vmf, struct folio *folio,
 	pte_t entry;
 
 	flush_icache_pages(vma, page, nr);
-	entry = mk_pte(page, vma->vm_page_prot);
+	entry = vma_folio_mk_pte(vma, folio, addr);
 
 	if (prefault && arch_wants_old_prefaulted_pte())
 		entry = pte_mkold(entry);
@@ -5578,7 +5579,8 @@ fallback:
 	nr_pages = folio_nr_pages(folio);
 
 	/* Using per-page fault to maintain the uffd semantics */
-	if (unlikely(userfaultfd_armed(vma)) || unlikely(needs_fallback)) {
+	if (unlikely(userfaultfd_armed(vma)) || unlikely(needs_fallback) ||
+	    vma_is_p3s_4k(vma)) {
 		nr_pages = 1;
 	} else if (nr_pages > 1) {
 		pgoff_t idx = folio_page_idx(folio, page);
@@ -5736,6 +5738,10 @@ static vm_fault_t do_fault_around(struct vm_fault *vmf)
 static inline bool should_fault_around(struct vm_fault *vmf)
 {
 	bool should_around = true;
+
+	if (vma_is_p3s_4k(vmf->vma))
+		return false;
+
 	/* No ->map_pages?  No way to fault around... */
 	if (!vmf->vma->vm_ops->map_pages)
 		return false;
