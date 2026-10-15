@@ -22,6 +22,30 @@
       },
       "revId": "5142c2754fa962d0f64c6d125f86163dd92f854f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e3bac7f_d7cc6066",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-15T17:45:30Z",
+      "side": 1,
+      "message": "I kind of intentionally left it as is, since couldn\u0027t come up with a non-cumbersome wording... What would use suggest? Just add a sentence like \"Ramoops pages have been explicitly set to PKVM_PAGE_SHARED_BORROWED.\"?",
+      "parentUuid": "75fc66bc_f97a93cd",
+      "range": {
+        "startLine": 259,
+        "startChar": 27,
+        "endLine": 259,
+        "endChar": 42
+      },
+      "revId": "5142c2754fa962d0f64c6d125f86163dd92f854f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
