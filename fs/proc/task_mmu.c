@@ -105,14 +105,14 @@ unsigned long task_statm(struct mm_struct *mm,
 {
 	P3S_CONTEXT_REMOTE_MM(mm);
 
-	*shared = __page_size_count(get_mm_counter_sum(mm, MM_FILEPAGES) +
+	*shared = __page_size_count(mm, get_mm_counter_sum(mm, MM_FILEPAGES) +
 			get_mm_counter_sum(mm, MM_SHMEMPAGES));
-	*text = (__PAGE_ALIGN(mm->end_code) - (mm->start_code & __PAGE_MASK))
-								>> __PAGE_SHIFT;
-	*data = __page_size_count(mm->data_vm + mm->stack_vm);
-	*resident = *shared + __page_size_count(get_mm_counter_sum(mm, MM_ANONPAGES));
+	*text = mm_reader_pages(mm, (__PAGE_ALIGN(mm->end_code) -
+			(mm->start_code & __PAGE_MASK)) >> __PAGE_SHIFT);
+	*data = __page_size_count(mm, mm->data_vm + mm->stack_vm);
+	*resident = *shared + __page_size_count(mm, get_mm_counter_sum(mm, MM_ANONPAGES));
 
-	return __page_size_count(mm->total_vm);
+	return __page_size_count(mm, mm->total_vm);
 }
 
 #ifdef CONFIG_NUMA
