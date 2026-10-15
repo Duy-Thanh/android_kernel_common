@@ -1669,6 +1669,8 @@
   ucsi_set_drvdata
   ucsi_sync_control_common
   ucsi_unregister
+  ufshcd_ahit_disable
+  ufshcd_ahit_enable
   ufshcd_delay_us
   ufshcd_dme_configure_adapt
   ufshcd_dme_get_attr
