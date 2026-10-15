@@ -4179,13 +4179,13 @@ static inline void unmap_mapping_range_tree(struct rb_root_cached *root,
 
 	vma_interval_tree_foreach(vma, root, first_index, last_index) {
 		vba = vma->vm_pgoff;
-		vea = vba + vma_pages(vma) - 1;
+		vea = vba + vma_native_pages(vma) - 1;
 		zba = max(first_index, vba);
 		zea = min(last_index, vea);
 
 		unmap_mapping_range_vma(vma,
-			((zba - vba) << PAGE_SHIFT) + vma->vm_start,
-			((zea - vba + 1) << PAGE_SHIFT) + vma->vm_start,
+			vma_pgoff_to_address(vma, zba),
+			vma_pgoff_to_address(vma, zea + 1),
 				details);
 	}
 }
