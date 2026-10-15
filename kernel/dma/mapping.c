@@ -770,11 +770,12 @@ int dma_mmap_pages(struct device *dev, struct vm_area_struct *vma,
 {
 	unsigned long count = PAGE_ALIGN(size) >> PAGE_SHIFT;
 
-	if (vma->vm_pgoff >= count || vma_pages(vma) > count - vma->vm_pgoff)
+	if (vma->vm_pgoff >= count ||
+	    vma_kernel_pages(vma) > count - vma->vm_pgoff)
 		return -ENXIO;
 	return remap_pfn_range(vma, vma->vm_start,
 			       page_to_pfn(page) + vma->vm_pgoff,
-			       vma_pages(vma) << PAGE_SHIFT, vma->vm_page_prot);
+			       vma_size(vma), vma->vm_page_prot);
 }
 EXPORT_SYMBOL_GPL(dma_mmap_pages);
 
