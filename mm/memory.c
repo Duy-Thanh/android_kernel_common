@@ -3772,7 +3772,9 @@ static vm_fault_t wp_page_copy(struct vm_fault *vmf)
 	if (!pfn_is_zero) {
 		int err;
 
-		err = __wp_page_copy_user(&new_folio->page, vmf->page, vmf);
+		err = p3s_wp_copy_folio_slices(new_folio, old_folio, vmf);
+		if (err)
+			err = __wp_page_copy_user(&new_folio->page, vmf->page, vmf);
 		if (err) {
 			/*
 			 * COW failed, if the fault was solved by other,
@@ -3824,6 +3826,9 @@ static vm_fault_t wp_page_copy(struct vm_fault *vmf)
 			entry = maybe_mkwrite(pte_mkdirty(entry), vma);
 		}
 
+		if (p3s_wp_install_folio_slices(new_folio, old_folio, vmf))
+			goto pte_installed;
+
 		/*
 		 * Clear the pte entry and flush it first, before updating the
 		 * pte with the new entry, to keep TLBs on different CPUs in
@@ -3863,6 +3868,7 @@ static vm_fault_t wp_page_copy(struct vm_fault *vmf)
 			folio_remove_rmap_pte(old_folio, vmf->page, vma);
 		}
 
+pte_installed:
 		/* Free the old page.. */
 		new_folio = old_folio;
 		page_copied = 1;
@@ -4072,10 +4078,14 @@ static bool __wp_can_reuse_large_anon_folio(struct folio *folio,
 #endif /* CONFIG_TRANSPARENT_HUGEPAGE */
 
 static bool wp_can_reuse_anon_folio(struct folio *folio,
-				    struct vm_area_struct *vma)
+				    struct vm_area_struct *vma,
+				    struct vm_fault *vmf)
 {
 	if (IS_ENABLED(CONFIG_TRANSPARENT_HUGEPAGE) && folio_test_large(folio))
 		return __wp_can_reuse_large_anon_folio(folio, vma);
+
+	if (vma_is_p3s_4k(vma))
+		return p3s_wp_can_reuse_anon_folio(folio, vma, vmf->address, vmf->pte);
 
 	/*
 	 * We have to verify under folio lock: these early checks are
@@ -4207,7 +4217,7 @@ static vm_fault_t do_wp_page(struct vm_fault *vmf)
 	 * the page without further checks.
 	 */
 	if (folio && folio_test_anon(folio) &&
-	    (PageAnonExclusive(vmf->page) || wp_can_reuse_anon_folio(folio, vma))) {
+	    (PageAnonExclusive(vmf->page) || wp_can_reuse_anon_folio(folio, vma, vmf))) {
 		if (!PageAnonExclusive(vmf->page))
 			SetPageAnonExclusive(vmf->page);
 		if (unlikely(unshare)) {
