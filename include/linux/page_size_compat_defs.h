@@ -56,14 +56,12 @@ static __always_inline unsigned int __page_shift(void)
 #define __offset_in_page(p)		((unsigned long)(p) & ~__PAGE_MASK)
 
 /*
- * Adjusts PAGE_SIZE counts to __PAGE_SIZE counts for x86 page size emulation.
+ * Adjusts PAGE_SIZE counts of @mm to __PAGE_SIZE counts for x86 page size
+ * emulation, and to the reading task's page size for per-process page
+ * sizes (see mm_reader_pages()).
  */
-static inline unsigned long __page_size_count(unsigned long val)
-{
-	unsigned int nr_subpages = __PAGE_SIZE / PAGE_SIZE;
-
-	return DIV_ROUND_UP(val, nr_subpages);
-}
+#define __page_size_count(mm, val)					\
+	DIV_ROUND_UP(mm_reader_pages(mm, val), __PAGE_SIZE / PAGE_SIZE)
 
 #endif /* !__ASSEMBLY__ */
 

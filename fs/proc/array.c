@@ -610,7 +610,7 @@ static int do_task_stat(struct seq_file *m, struct pid_namespace *ns,
 	seq_put_decimal_ull(m, " ", 0);
 	seq_put_decimal_ull(m, " ", start_time);
 	seq_put_decimal_ull(m, " ", vsize);
-	seq_put_decimal_ull(m, " ", mm ? __page_size_count(get_mm_rss(mm)) : 0);
+	seq_put_decimal_ull(m, " ", mm ? __page_size_count(mm, get_mm_rss(mm)) : 0);
 	seq_put_decimal_ull(m, " ", rsslim);
 	seq_put_decimal_ull(m, " ", mm ? (permitted ? mm->start_code : 1) : 0);
 	seq_put_decimal_ull(m, " ", mm ? (permitted ? mm->end_code : 1) : 0);
