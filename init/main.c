@@ -8,6 +8,7 @@
  *  Added initrd & change_root: Werner Almesberger & Hans Lermen, Feb '96
  *  Moan early if gcc is old, avoiding bogus kernels - Paul Gortmaker, May '96
  *  Simplified starting of init:  Michael A. Griffith <grif@acm.org>
+ *  Canary test comment for presubmit verification.
  */
 
 #define DEBUG		/* Enable initcall_debug */
