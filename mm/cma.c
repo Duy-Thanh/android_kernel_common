@@ -235,6 +235,16 @@ int __init cma_init_reserved_mem(phys_addr_t base, phys_addr_t size,
 	return 0;
 }
 
+static bool cma_guarantee_cmdline __initdata;
+
+#ifdef CONFIG_GCMA
+static int __init early_cma_guarantee(char *buf)
+{
+	return kstrtobool(buf, &cma_guarantee_cmdline);
+}
+early_param("cma_guarantee", early_cma_guarantee);
+#endif
+
 /**
  * cma_declare_contiguous_nid() - reserve custom contiguous area
  * @base: Base address of the reserved area optional, use 0 for any
@@ -391,7 +401,7 @@ int __init cma_declare_contiguous_nid(phys_addr_t base,
 	}
 
 	ret = cma_init_reserved_mem(base, size, order_per_bit, name, res_cma,
-				    false);
+				    cma_guarantee_cmdline);
 	if (ret)
 		goto free_mem;
 
