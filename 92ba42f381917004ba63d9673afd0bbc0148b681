@@ -1,0 +1,66 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8734b25a_784639db",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-10-15T19:20:59Z",
+      "side": 1,
+      "message": "Should this be an FnOnce?",
+      "revId": "92ba42f381917004ba63d9673afd0bbc0148b681",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7355b74d_71da1c36",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-10-15T19:20:59Z",
+      "side": 1,
+      "message": "I guess this comment hasn\u0027t aged well after the generalization of vma_file changes...",
+      "fixSuggestions": [
+        {
+          "fixId": "44c09c31_efe1a3fe",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/wrapfd/wrap.rs",
+              "range": {
+                "startLine": 152,
+                "startChar": 0,
+                "endLine": 154,
+                "endChar": 0
+              },
+              "replacement": "        // SAFETY: `vma_file_ptr` is non-null and points to a valid `struct file` (either kept\n        // alive by `ARef\u003cFile\u003e` or guaranteed to be valid during the driver\u0027s lifetime).\n"
+            },
+            {
+              "path": "drivers/android/wrapfd/wrap.rs",
+              "range": {
+                "startLine": 191,
+                "startChar": 0,
+                "endLine": 193,
+                "endChar": 0
+              },
+              "replacement": "        // SAFETY: `vma_file_ptr` is non-null and points to a valid `struct file` (either kept\n        // alive by `ARef\u003cFile\u003e` or guaranteed to be valid during the driver\u0027s lifetime).\n"
+            }
+          ]
+        }
+      ],
+      "revId": "92ba42f381917004ba63d9673afd0bbc0148b681",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
