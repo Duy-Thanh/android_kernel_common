@@ -195,6 +195,17 @@ static inline loff_t vma_file_offset_at(const struct vm_area_struct *vma,
 }
 
 /*
+ * vma_kernel_pages - Number of kernel pages that @vma maps slices of
+ * @vma: Pointer to struct vm_area_struct
+ *
+ * A 4KB compatibility VMA can start at any slice of a kernel page, so
+ * count its pages from slice 0 of the first kernel page. A macro, as
+ * vma_pages() is defined after this header is included.
+ */
+#define vma_kernel_pages(vma)						\
+	mm_kernel_pages((vma)->vm_mm, vma_slice_off(vma) + vma_pages(vma))
+
+/*
  * p3s_filemap_fault_check_eof - Check fault index and subpage bounds against EOF
  * @vma: Pointer to struct vm_area_struct
  * @addr: Faulting virtual address
