@@ -327,6 +327,9 @@ __cold int io_uring_mmap(struct file *file, struct vm_area_struct *vma)
 	struct io_mapped_region *region;
 	void *ptr;
 
+	if (p3s_4k_unsupported(vma->vm_mm))
+		return -EOPNOTSUPP;
+
 	guard(mutex)(&ctx->mmap_lock);
 
 	ptr = io_uring_validate_mmap_request(file, vma->vm_pgoff, sz);

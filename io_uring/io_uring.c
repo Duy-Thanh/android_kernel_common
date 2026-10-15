@@ -4002,6 +4002,10 @@ static inline int io_uring_allowed(void)
 	if (disabled == 2)
 		return -EPERM;
 
+	/* Rings and buffers are laid out in kernel pages */
+	if (p3s_4k_unsupported(current->mm))
+		return -EPERM;
+
 	if (disabled == 0 || capable(CAP_SYS_ADMIN))
 		goto allowed_lsm;
 
