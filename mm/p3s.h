@@ -568,6 +568,179 @@ static inline bool p3s_uffd_install_anon_folio(struct vm_area_struct *dst_vma,
 }
 #endif /* CONFIG_USERFAULTFD */
 
+/*
+ * p3s_wp_can_reuse_anon_folio - Verify if anonymous folio can be reused on COW
+ * @folio: Source anonymous folio
+ * @vma: Pointer to struct vm_area_struct
+ * @addr: Faulting virtual address
+ * @pte: Faulting PTE pointer
+ */
+static inline bool p3s_wp_can_reuse_anon_folio(struct folio *folio,
+					       struct vm_area_struct *vma,
+					       unsigned long addr,
+					       pte_t *pte)
+{
+	unsigned int nr_slices, local_slice_count;
+	unsigned long start_addr;
+	pte_t *pte_base;
+
+	if (folio_test_large(folio) || folio_test_ksm(folio))
+		return false;
+
+	vma_folio_slice_bounds(vma, addr, &nr_slices, &start_addr);
+	if (!nr_slices)
+		return false;
+
+	/*
+	 * Early check: local slices cannot exceed total folio refcount.
+	 * Max expected transient refcount is nr_slices + 1 (swapcache) + 1 (LRU).
+	 */
+	if (folio_ref_count(folio) > nr_slices + 2)
+		return false;
+
+	if (!folio_test_lru(folio))
+		lru_add_drain();
+
+	if (folio_ref_count(folio) > nr_slices + folio_test_swapcache(folio))
+		return false;
+
+	if (!folio_trylock(folio))
+		return false;
+
+	if (folio_test_swapcache(folio))
+		folio_free_swap(folio);
+
+	if (folio_test_ksm(folio)) {
+		folio_unlock(folio);
+		return false;
+	}
+
+	pte_base = pte - ((addr - start_addr) >> PAGE_SHIFT_4KB);
+	local_slice_count = p3s_count_folio_slices(vma, pte_base, start_addr,
+						   nr_slices, folio);
+
+	if (local_slice_count == 0 ||
+	    local_slice_count != folio_mapcount(folio) ||
+	    local_slice_count != folio_ref_count(folio)) {
+		folio_unlock(folio);
+		return false;
+	}
+
+	SetPageAnonExclusive(&folio->page);
+	folio_move_anon_rmap(folio, vma);
+	folio_unlock(folio);
+	return true;
+}
+
+/*
+ * p3s_wp_slice_bounds - Check COW slice eligibility and compute slice bounds
+ * @old_folio: Source shared folio
+ * @vmf: Fault information
+ * @nr_slices: Output number of slices
+ * @start_addr: Output starting virtual address
+ */
+static inline bool p3s_wp_slice_bounds(struct folio *old_folio,
+				       struct vm_fault *vmf,
+				       unsigned int *nr_slices,
+				       unsigned long *start_addr)
+{
+	struct vm_area_struct *vma = vmf->vma;
+
+	if (!vma_is_p3s_4k(vma) || !old_folio ||
+	    !folio_test_anon(old_folio) || folio_test_large(old_folio) ||
+	    unlikely(userfaultfd_armed(vma)) || (vmf->flags & FAULT_FLAG_UNSHARE))
+		return false;
+
+	vma_folio_slice_bounds(vma, vmf->address, nr_slices, start_addr);
+	return *nr_slices > 1;
+}
+
+/*
+ * p3s_wp_copy_folio_slices - Copy multi-slice span to new folio during COW
+ * @new_folio: Target freshly allocated folio
+ * @old_folio: Source shared folio
+ * @vmf: Fault information
+ */
+static inline int p3s_wp_copy_folio_slices(struct folio *new_folio,
+					   struct folio *old_folio,
+					   struct vm_fault *vmf)
+{
+	unsigned int nr_slices;
+	unsigned long start_addr;
+
+	if (!p3s_wp_slice_bounds(old_folio, vmf, &nr_slices, &start_addr))
+		return -EINVAL;
+
+	if (copy_mc_user_highpage(&new_folio->page, &old_folio->page, start_addr,
+				  vmf->vma))
+		return -EHWPOISON;
+
+	return 0;
+}
+
+/*
+ * p3s_wp_install_folio_slices - Install newly copied folio across slice span
+ * @new_folio: Target freshly allocated folio
+ * @old_folio: Source shared folio being replaced
+ * @vmf: Fault information
+ */
+static inline bool p3s_wp_install_folio_slices(struct folio *new_folio,
+					       struct folio *old_folio,
+					       struct vm_fault *vmf)
+{
+	struct vm_area_struct *vma = vmf->vma;
+	struct mm_struct *mm = vma->vm_mm;
+	unsigned int nr_slices, i;
+	unsigned long start_addr;
+	int mapped_slices;
+	pte_t *pte_base;
+
+	if (!p3s_wp_slice_bounds(old_folio, vmf, &nr_slices, &start_addr))
+		return false;
+
+	pte_base = vmf->pte - ((vmf->address - start_addr) >> PAGE_SHIFT_4KB);
+	mapped_slices = p3s_count_folio_slices(vma, pte_base, start_addr,
+					       nr_slices, old_folio);
+	if (mapped_slices == 0)
+		return false;
+
+	folio_add_new_anon_rmap(new_folio, vma, start_addr, RMAP_EXCLUSIVE);
+	if (mapped_slices > 1) {
+		atomic_add(mapped_slices - 1, &new_folio->_mapcount);
+		folio_ref_add(new_folio, mapped_slices - 1);
+		folio_put_refs(old_folio, mapped_slices - 1);
+	}
+	folio_add_lru_vma(new_folio, vma);
+
+	for (i = 0; i < nr_slices; i++) {
+		unsigned long slice_addr = start_addr + (i << PAGE_SHIFT_4KB);
+		pte_t *ptep = pte_base + i;
+		pte_t ptent = ptep_get(ptep);
+		pte_t entry;
+
+		if (!p3s_pte_maps_folio(vma, slice_addr, ptent, old_folio))
+			continue;
+
+		flush_cache_page(vma, slice_addr, pte_pfn(ptent));
+		ptep_clear_flush(vma, slice_addr, ptep);
+
+		entry = vma_folio_mk_pte(vma, new_folio, slice_addr);
+		entry = pte_sw_mkyoung(entry);
+		if (pte_soft_dirty(ptent))
+			entry = pte_mksoft_dirty(entry);
+		if (pte_uffd_wp(ptent))
+			entry = pte_mkuffd_wp(entry);
+		entry = maybe_mkwrite(pte_mkdirty(entry), vma);
+
+		set_pte_at(mm, slice_addr, ptep, entry);
+		update_mmu_cache_range(vmf, vma, slice_addr, ptep, 1);
+
+		folio_remove_rmap_pte(old_folio, &old_folio->page, vma);
+	}
+
+	return true;
+}
+
 #else /* !CONFIG_ARM64_PER_PROCESS_PAGE_SIZE */
 
 static inline bool p3s_anon_reuse_sibling_slice(struct vm_fault *vmf,
@@ -609,6 +782,28 @@ static inline bool p3s_uffd_install_anon_folio(struct vm_area_struct *dst_vma,
 	return false;
 }
 #endif
+
+static inline bool p3s_wp_can_reuse_anon_folio(struct folio *folio,
+					       struct vm_area_struct *vma,
+					       unsigned long addr,
+					       pte_t *pte)
+{
+	return false;
+}
+
+static inline int p3s_wp_copy_folio_slices(struct folio *new_folio,
+					   struct folio *old_folio,
+					   struct vm_fault *vmf)
+{
+	return -EINVAL;
+}
+
+static inline bool p3s_wp_install_folio_slices(struct folio *new_folio,
+					       struct folio *old_folio,
+					       struct vm_fault *vmf)
+{
+	return false;
+}
 
 #endif /* CONFIG_ARM64_PER_PROCESS_PAGE_SIZE */
 
