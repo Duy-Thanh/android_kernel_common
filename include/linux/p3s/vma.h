@@ -448,6 +448,22 @@ static inline void vma_unmap_mapping_range_bounds(const struct vm_area_struct *v
 	*end = vma_pgoff_to_address(vma, end_idx);
 }
 
+/*
+ * vma_remote_access_chunk - Compute folio offset and clamped length for remote access
+ * @vma: Pointer to struct vm_area_struct
+ * @addr: Virtual address being accessed
+ * @len: Maximum bytes to transfer
+ * @offset: Pointer to output byte offset within host folio
+ * @bytes: Pointer to output transferable byte count within virtual page
+ */
+static inline void vma_remote_access_chunk(const struct vm_area_struct *vma,
+					   unsigned long addr, int len,
+					   int *offset, int *bytes)
+{
+	*offset = vma_folio_offset(vma, addr);
+	*bytes = min_t(int, len, vma_page_size(vma) - vma_offset_in_page(vma, addr));
+}
+
 /* Forward declarations for VMA lifecycle operations */
 int anon_vma_clone(struct vm_area_struct *, struct vm_area_struct *);
 
