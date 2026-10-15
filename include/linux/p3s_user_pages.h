@@ -6,8 +6,14 @@
  * <linux/p3s_user_pages.h> must ONLY be included as the last header in
  * C source files (.c) that opt into dynamic PAGE_SIZE for user address
  * spaces. It must NEVER be included in header files (.h).
+ *
+ * Only check this when per-process page sizes are enabled.
+ * fs/compat_binfmt_elf.c includes fs/binfmt_elf.c, which raises the
+ * include level. CONFIG_ARM64_PER_PROCESS_PAGE_SIZE depends on !COMPAT,
+ * so that build never uses the redefinitions below.
  */
-#if defined(__INCLUDE_LEVEL__) && __INCLUDE_LEVEL__ > 1
+#if defined(CONFIG_ARM64_PER_PROCESS_PAGE_SIZE) && \
+	defined(__INCLUDE_LEVEL__) && __INCLUDE_LEVEL__ > 1
 #error "Must not include <linux/p3s_user_pages.h> from header files"
 #endif
 
