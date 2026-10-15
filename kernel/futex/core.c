@@ -44,6 +44,7 @@
 #include <linux/prctl.h>
 #include <linux/mempolicy.h>
 #include <linux/mmap_lock.h>
+#include <linux/p3s/futex.h>
 
 #include "futex.h"
 #include "../locking/rtmutex_common.h"
@@ -636,13 +637,13 @@ again:
 	if (unlikely(should_fail_futex(true)))
 		return -EFAULT;
 
-	err = get_user_pages_fast(address, 1, FOLL_WRITE, &page);
+	err = get_user_pages_fast((unsigned long)uaddr, 1, FOLL_WRITE, &page);
 	/*
 	 * If write access is not required (eg. FUTEX_WAIT), try
 	 * and get read-only access.
 	 */
 	if (err == -EFAULT && rw == FUTEX_READ) {
-		err = get_user_pages_fast(address, 1, 0, &page);
+		err = get_user_pages_fast((unsigned long)uaddr, 1, 0, &page);
 		ro = 1;
 	}
 	if (err < 0)
@@ -730,6 +731,9 @@ again:
 
 	} else {
 		struct inode *inode;
+
+		key->both.offset = futex_page_offset(mm, (unsigned long)uaddr,
+						     key->both.offset);
 
 		/*
 		 * The associated futex object in this case is the inode and
