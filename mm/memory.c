@@ -1083,7 +1083,7 @@ copy_present_page(struct vm_area_struct *dst_vma, struct vm_area_struct *src_vma
 	rss[MM_ANONPAGES]++;
 
 	/* All done, just insert the new page copy in the child */
-	pte = folio_mk_pte(new_folio, dst_vma->vm_page_prot);
+	pte = vma_folio_mk_pte(dst_vma, new_folio, addr);
 	pte = maybe_mkwrite(pte_mkdirty(pte), dst_vma);
 	if (userfaultfd_pte_wp(dst_vma, ptep_get(src_pte)))
 		/* Uffd-wp needs to be delivered to dest pte as well */
@@ -3445,6 +3445,7 @@ static inline int __wp_page_copy_user(struct page *dst, struct page *src,
 {
 	int ret;
 	void *kaddr;
+	void *dst_addr;
 	void __user *uaddr;
 	struct vm_area_struct *vma = vmf->vma;
 	struct mm_struct *mm = vma->vm_mm;
@@ -3462,7 +3463,10 @@ static inline int __wp_page_copy_user(struct page *dst, struct page *src,
 	 * just copying from the original user address. If that
 	 * fails, we just zero-fill it. Live with it.
 	 */
+	if (vma_is_p3s_4k(vma))
+		clear_user_highpage(dst, addr);
 	kaddr = kmap_local_page(dst);
+	dst_addr = kaddr + vma_slice_offset(vma, addr) * PAGE_SIZE;
 	pagefault_disable();
 	uaddr = (void __user *)(addr & PAGE_MASK);
 
@@ -3497,7 +3501,7 @@ static inline int __wp_page_copy_user(struct page *dst, struct page *src,
 	 * in which case we just give up and fill the result with
 	 * zeroes.
 	 */
-	if (__copy_from_user_inatomic(kaddr, uaddr, PAGE_SIZE)) {
+	if (__copy_from_user_inatomic(dst_addr, uaddr, PAGE_SIZE)) {
 		if (vmf->pte)
 			goto warn;
 
@@ -3515,7 +3519,7 @@ static inline int __wp_page_copy_user(struct page *dst, struct page *src,
 		 * The same page can be mapped back since last copy attempt.
 		 * Try to copy again under PTL.
 		 */
-		if (__copy_from_user_inatomic(kaddr, uaddr, PAGE_SIZE)) {
+		if (__copy_from_user_inatomic(dst_addr, uaddr, PAGE_SIZE)) {
 			/*
 			 * Give a warn in case there can be some obscure
 			 * use-case
@@ -3809,7 +3813,7 @@ static vm_fault_t wp_page_copy(struct vm_fault *vmf)
 			inc_mm_counter(mm, MM_ANONPAGES);
 		}
 		flush_cache_page(vma, vmf->address, pte_pfn(vmf->orig_pte));
-		entry = folio_mk_pte(new_folio, vma->vm_page_prot);
+		entry = vma_folio_mk_pte(vma, new_folio, vmf->address);
 		entry = pte_sw_mkyoung(entry);
 		if (unlikely(unshare)) {
 			if (pte_soft_dirty(vmf->orig_pte))
@@ -5290,6 +5294,8 @@ static vm_fault_t do_anonymous_page(struct vm_fault *vmf)
 	ret = vmf_anon_prepare(vmf);
 	if (ret)
 		return ret;
+	if (p3s_anon_reuse_sibling_slice(vmf, &ret))
+		return ret;
 	/* Returns NULL on OOM or ERR_PTR(-EAGAIN) if we must retry the fault */
 	folio = alloc_anon_folio(vmf);
 	if (IS_ERR(folio))
@@ -5308,10 +5314,6 @@ static vm_fault_t do_anonymous_page(struct vm_fault *vmf)
 	__folio_mark_uptodate(folio);
 
 	trace_android_vh_do_anonymous_page(vma, folio);
-	entry = folio_mk_pte(folio, vma->vm_page_prot);
-	entry = pte_sw_mkyoung(entry);
-	if (vma->vm_flags & VM_WRITE)
-		entry = pte_mkwrite(pte_mkdirty(entry), vma);
 
 	vmf->pte = pte_offset_map_lock(vma->vm_mm, vmf->pmd, addr, &vmf->ptl);
 	if (!vmf->pte)
@@ -5335,11 +5337,7 @@ static vm_fault_t do_anonymous_page(struct vm_fault *vmf)
 		return handle_userfault(vmf, VM_UFFD_MISSING);
 	}
 
-	folio_ref_add(folio, nr_pages - 1);
-	add_mm_counter(vma->vm_mm, MM_ANONPAGES, nr_pages);
-	count_mthp_stat(folio_order(folio), MTHP_STAT_ANON_FAULT_ALLOC);
-	folio_add_new_anon_rmap(folio, vma, addr, RMAP_EXCLUSIVE);
-	folio_add_lru_vma(folio, vma);
+	p3s_anon_install_folio(vma, vmf, &folio, addr, nr_pages, &entry);
 setpte:
 	if (vmf_orig_pte_uffd_wp(vmf))
 		entry = pte_mkuffd_wp(entry);
