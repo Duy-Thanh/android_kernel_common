@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac74c2ee_bfb1ff08",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 700,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-10-15T19:15:33Z",
+      "side": 1,
+      "message": "By the logic of the comment above, shouldn\u0027t this return a failure code?",
+      "revId": "7b98d2426f413527f1e047c20ae462ebe20fdf4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5370cf09_df7d414e",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 709,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-10-15T19:15:33Z",
+      "side": 1,
+      "message": "I know it doesn\u0027t matter since we\u0027re exiting below, but do you want to munmap the \"old\" ptr here?",
+      "revId": "7b98d2426f413527f1e047c20ae462ebe20fdf4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
