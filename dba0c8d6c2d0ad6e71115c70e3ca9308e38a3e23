@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "022d0810_f7121fb1",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5593,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-10-15T20:56:06Z",
+      "side": 1,
+      "message": "We can\u0027t apply the shrink_many() hunks without MEMCG_NR_GENS \u003d 3 (which breaks KMI).\n\nIf we did so, when `memcg_lru.seq` increments during `shrink_many()`, `gen` would be stale and point to the `YOUNG` generation!",
+      "parentUuid": "9663c6dc_24749f68",
+      "range": {
+        "startLine": 5593,
+        "startChar": 0,
+        "endLine": 5593,
+        "endChar": 36
+      },
+      "revId": "dba0c8d6c2d0ad6e71115c70e3ca9308e38a3e23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e783111_3f013ee6",
@@ -65,6 +89,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d70ead01_8b1ac33d",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5601,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-10-15T20:56:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e783111_3f013ee6",
+      "range": {
+        "startLine": 5601,
+        "startChar": 0,
+        "endLine": 5601,
+        "endChar": 54
+      },
+      "revId": "dba0c8d6c2d0ad6e71115c70e3ca9308e38a3e23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f4d660e_8d7d5af9",
@@ -78,6 +126,30 @@
       "writtenOn": "2026-10-15T16:34:10Z",
       "side": 1,
       "message": "```diff\n+\t\tmemcg \u003d NULL;\n+\n+\t\tif (gen !\u003d READ_ONCE(lrugen-\u003egen))\n+\t\t\tcontinue;\n```",
+      "range": {
+        "startLine": 5611,
+        "startChar": 0,
+        "endLine": 5611,
+        "endChar": 24
+      },
+      "revId": "dba0c8d6c2d0ad6e71115c70e3ca9308e38a3e23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "670f7dcf_8a754045",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5611,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-10-15T20:56:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f4d660e_8d7d5af9",
       "range": {
         "startLine": 5611,
         "startChar": 0,
