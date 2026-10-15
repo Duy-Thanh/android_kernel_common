@@ -1377,9 +1377,6 @@ static int __submit_discard_cmd(struct f2fs_sb_info *sbi,
 		unsigned long flags;
 		bool last = true;
 
-		if (f2fs_is_suspending(sbi))
-			break;
-
 		if (len > max_discard_blocks) {
 			len = max_discard_blocks;
 			last = false;
