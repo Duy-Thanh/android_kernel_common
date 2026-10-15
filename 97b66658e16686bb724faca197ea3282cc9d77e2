@@ -52,6 +52,24 @@
       "parentUuid": "fab2e1ea_e059e3fa",
       "revId": "97b66658e16686bb724faca197ea3282cc9d77e2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c8dd95e_1110ee16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2027158
+      },
+      "writtenOn": "2026-10-15T10:34:51Z",
+      "side": 1,
+      "message": "Sorry, you\u0027re right. I used `git log` in a wrong way. Jarried could you follow up?",
+      "parentUuid": "59b78663_2eaded0f",
+      "revId": "97b66658e16686bb724faca197ea3282cc9d77e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
