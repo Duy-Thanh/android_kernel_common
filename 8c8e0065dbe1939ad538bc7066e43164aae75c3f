@@ -52,6 +52,24 @@
       "parentUuid": "8ba352d2_539fb8d7",
       "revId": "8c8e0065dbe1939ad538bc7066e43164aae75c3f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a0f3e95_6705ab0d",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 939,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-15T12:24:58Z",
+      "side": 1,
+      "message": "Done - changed to SHARED_BORROWED.",
+      "parentUuid": "db3ad902_f36487da",
+      "revId": "8c8e0065dbe1939ad538bc7066e43164aae75c3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
