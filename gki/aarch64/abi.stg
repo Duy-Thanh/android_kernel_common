@@ -534793,6 +534793,24 @@ elf_symbol {
   full_name: "udp_tunnel_xmit_skb"
 }
 elf_symbol {
+  id: 0x3644b6e9
+  name: "ufshcd_ahit_disable"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x6ae3db14
+  type_id: 0x1178942c
+  full_name: "ufshcd_ahit_disable"
+}
+elf_symbol {
+  id: 0x9392dd62
+  name: "ufshcd_ahit_enable"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x6ae3db14
+  type_id: 0x1178942c
+  full_name: "ufshcd_ahit_enable"
+}
+elf_symbol {
   id: 0x3fa12248
   name: "ufshcd_alloc_host"
   is_defined: true
@@ -553718,6 +553736,8 @@ interface {
   symbol_id: 0x83627eaa
   symbol_id: 0x7f7d27b4
   symbol_id: 0x674efb6f
+  symbol_id: 0x3644b6e9
+  symbol_id: 0x9392dd62
   symbol_id: 0x3fa12248
   symbol_id: 0x5ba31e17
   symbol_id: 0x3b41d1e4
