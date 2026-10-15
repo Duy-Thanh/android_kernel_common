@@ -34,6 +34,24 @@
       "parentUuid": "47b9db42_39d46b40",
       "revId": "97b66658e16686bb724faca197ea3282cc9d77e2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59b78663_2eaded0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1898165
+      },
+      "writtenOn": "2026-10-15T10:27:50Z",
+      "side": 1,
+      "message": "hmm I see the opposite actually and I always send them together. Up to you and the  aosp maintainer.",
+      "parentUuid": "fab2e1ea_e059e3fa",
+      "revId": "97b66658e16686bb724faca197ea3282cc9d77e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
