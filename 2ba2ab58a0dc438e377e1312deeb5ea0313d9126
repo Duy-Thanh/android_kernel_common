@@ -16,6 +16,23 @@
       "message": "Please add your sign off on patches in both series. \n\nAlso add bug 571612679 to commit message (keep current as well) for recording so we understand the origin.",
       "revId": "2ba2ab58a0dc438e377e1312deeb5ea0313d9126",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7dd3918_b0b08f5a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3600567
+      },
+      "writtenOn": "2026-10-15T01:28:00Z",
+      "side": 1,
+      "message": "Please review this and the relation chain gerrit, thanks!",
+      "revId": "2ba2ab58a0dc438e377e1312deeb5ea0313d9126",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
