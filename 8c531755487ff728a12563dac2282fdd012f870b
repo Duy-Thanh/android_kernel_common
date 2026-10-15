@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c664c489_0b69334b",
+        "filename": "mm/khugepaged.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-15T07:19:59Z",
+      "side": 1,
+      "message": "Should we return an error in this mode, or should we just ignore it (i.e. return 0)? I\u0027m concerned about failing this, when it would normally work in 4k mode. Is the app supposed to be unaware of its usage of P3S?",
+      "range": {
+        "startLine": 344,
+        "startChar": 9,
+        "endLine": 344,
+        "endChar": 17
+      },
+      "revId": "8c531755487ff728a12563dac2282fdd012f870b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
