@@ -106,6 +106,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "da94a740_3da967b1",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-15T23:07:59Z",
+      "side": 1,
+      "message": "BTW maybe it\u0027s a good idea to move `is_pkvm_text_range()` as a generic helper to `memory.h` where we have `is_memory_range()`, `is_pvmfw_range()` etc?",
+      "parentUuid": "db2562a1_d99e377c",
+      "revId": "651d8890f177e183a9727fdc9abd3607ef45f8ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4ff27709_368af31b",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 1
