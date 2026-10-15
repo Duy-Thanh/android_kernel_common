@@ -22,6 +22,30 @@
       },
       "revId": "8c531755487ff728a12563dac2282fdd012f870b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff5f213a_c0721afa",
+        "filename": "mm/khugepaged.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-15T07:22:12Z",
+      "side": 1,
+      "message": "Nvm; I suppose it just appears as a lack of support for hugepage support, in that case, which is fine; it\u0027s not a functional failure.",
+      "parentUuid": "c664c489_0b69334b",
+      "range": {
+        "startLine": 344,
+        "startChar": 9,
+        "endLine": 344,
+        "endChar": 17
+      },
+      "revId": "8c531755487ff728a12563dac2282fdd012f870b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
