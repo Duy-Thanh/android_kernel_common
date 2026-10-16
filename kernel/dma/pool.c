@@ -71,7 +71,7 @@ static bool cma_in_zone(gfp_t gfp)
 	end = cma_get_base(cma) + size - 1;
 	if (IS_ENABLED(CONFIG_ZONE_DMA) && (gfp & GFP_DMA))
 		return end <= zone_dma_limit;
-	if (IS_ENABLED(CONFIG_ZONE_DMA32) && (gfp & GFP_DMA32) && !zone_dma32_are_empty())
+	if (IS_ENABLED(CONFIG_ZONE_DMA32) && (gfp & GFP_DMA32))
 		return end <= max(DMA_BIT_MASK(32), zone_dma_limit);
 	return true;
 }
@@ -153,7 +153,7 @@ static void atomic_pool_work_fn(struct work_struct *work)
 	if (IS_ENABLED(CONFIG_ZONE_DMA))
 		atomic_pool_resize(atomic_pool_dma,
 				   GFP_KERNEL | GFP_DMA);
-	if (IS_ENABLED(CONFIG_ZONE_DMA32) && !zone_dma32_are_empty())
+	if (IS_ENABLED(CONFIG_ZONE_DMA32))
 		atomic_pool_resize(atomic_pool_dma32,
 				   GFP_KERNEL | GFP_DMA32);
 	atomic_pool_resize(atomic_pool_kernel, GFP_KERNEL);
@@ -218,7 +218,7 @@ static int __init dma_atomic_pool_init(void)
 		if (!atomic_pool_dma)
 			ret = -ENOMEM;
 	}
-	if (has_managed_dma32 && !zone_dma32_are_empty()) {
+	if (has_managed_dma32) {
 		atomic_pool_dma32 = __dma_atomic_pool_init(atomic_pool_size,
 						GFP_KERNEL | GFP_DMA32);
 		if (!atomic_pool_dma32)
@@ -235,7 +235,7 @@ static inline struct gen_pool *dma_guess_pool(struct gen_pool *prev, gfp_t gfp)
 	if (prev == NULL) {
 		if (gfp & GFP_DMA)
 			return atomic_pool_dma ?: atomic_pool_dma32 ?: atomic_pool_kernel;
-		if ((gfp & GFP_DMA32) && !zone_dma32_are_empty())
+		if (gfp & GFP_DMA32)
 			return atomic_pool_dma32 ?: atomic_pool_dma ?: atomic_pool_kernel;
 		return atomic_pool_kernel ?: atomic_pool_dma32 ?: atomic_pool_dma;
 	}
