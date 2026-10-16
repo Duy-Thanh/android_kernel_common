@@ -16,6 +16,24 @@
       "message": "I think this may be missing a `BUILD.bazel` update. Also KST has not triggered.",
       "revId": "bb80b6e4abfeb3f98f959c263190f0b11a8141e0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7babfde6_c7c83b9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2026-10-16T17:25:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "824ddc62_fdab6899",
+      "revId": "bb80b6e4abfeb3f98f959c263190f0b11a8141e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
