@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb9189ab_418c180b",
+        "filename": "include/linux/p3s_user_pages.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-10-16T17:46:03Z",
+      "side": 1,
+      "message": "Are you sure you want to allow this header to be included for non P3S builds from header files? I think you should keep this generic to avoid issues where this header is incorrectly included when P3S is not enabled.",
+      "range": {
+        "startLine": 15,
+        "startChar": 4,
+        "endLine": 15,
+        "endChar": 49
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "99734ce4_00da7582",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/p3s_user_pages.h",
+              "range": {
+                "startLine": 9,
+                "startChar": 0,
+                "endLine": 14,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "include/linux/p3s_user_pages.h",
+              "range": {
+                "startLine": 15,
+                "startChar": 0,
+                "endLine": 17,
+                "endChar": 0
+              },
+              "replacement": "#if defined(__INCLUDE_LEVEL__) \u0026\u0026 __INCLUDE_LEVEL__ \u003e 1\n"
+            }
+          ]
+        }
+      ],
+      "revId": "292ff3d097ccf85993cdafce7f506f12d47a41b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
