@@ -1506,7 +1506,13 @@ static int i2c_register_adapter(struct i2c_adapter *adap)
 	res = device_add(&adap->dev);
 	if (res) {
 		pr_err("adapter '%s': can't register device (%d)\n", adap->name, res);
+<<<<<<< HEAD   (5abe09f02b51f5609c72380b8d0024c79c077a75 Revert "HID: letsketch: fix UAF on inrange_timer at driver u)
 		goto err_put_adap;
+||||||| BASE   (f3df4a783bce399fb2641e2cd6f3ea74151be975 udmabuf: fix DMA direction mismatch in release_udmabuf())
+		goto err_remove_debugfs;
+=======
+		goto err_replace_id;
+>>>>>>> BRANCH (11dfa37bf544cc806f21742ca2fd2d841bd7032e i2c: core: fix adapter deregistration race)
 	}
 
 	res = i2c_setup_smbus_alert(adap);
@@ -1550,7 +1556,18 @@ static int i2c_register_adapter(struct i2c_adapter *adap)
 out_reg:
 	i2c_deregister_clients(adap);
 	device_del(&adap->dev);
+<<<<<<< HEAD   (5abe09f02b51f5609c72380b8d0024c79c077a75 Revert "HID: letsketch: fix UAF on inrange_timer at driver u)
 err_put_adap:
+||||||| BASE   (f3df4a783bce399fb2641e2cd6f3ea74151be975 udmabuf: fix DMA direction mismatch in release_udmabuf())
+err_remove_debugfs:
+	debugfs_remove_recursive(adap->debugfs);
+=======
+err_replace_id:
+	mutex_lock(&core_lock);
+	idr_replace(&i2c_adapter_idr, NULL, adap->nr);
+	mutex_unlock(&core_lock);
+	debugfs_remove_recursive(adap->debugfs);
+>>>>>>> BRANCH (11dfa37bf544cc806f21742ca2fd2d841bd7032e i2c: core: fix adapter deregistration race)
 	init_completion(&adap->dev_released);
 	put_device(&adap->dev);
 	wait_for_completion(&adap->dev_released);
@@ -1739,6 +1756,8 @@ void i2c_del_adapter(struct i2c_adapter *adap)
 	/* First make sure that this adapter was ever added */
 	mutex_lock(&core_lock);
 	found = idr_find(&i2c_adapter_idr, adap->nr);
+	if (found == adap)
+		idr_replace(&i2c_adapter_idr, NULL, adap->nr);
 	mutex_unlock(&core_lock);
 	if (found != adap) {
 		pr_debug("attempting to delete unregistered adapter [%s]\n", adap->name);
