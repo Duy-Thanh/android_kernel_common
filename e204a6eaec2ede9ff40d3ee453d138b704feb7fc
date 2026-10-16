@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae2890bb_a0656c2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-10-16T17:36:33Z",
+      "side": 1,
+      "message": "This doesn\u0027t match aosp/4262002 though. So should we revert aosp/4262002 and reapply as FROMGIT before this cherrypick?",
+      "revId": "e204a6eaec2ede9ff40d3ee453d138b704feb7fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
