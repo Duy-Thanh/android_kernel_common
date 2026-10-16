@@ -34,6 +34,24 @@
       ],
       "revId": "247586b1befaaf1183d3b09365d5672e84e00627",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c875c69_f17ab23e",
+        "filename": "virt/kvm/kvm_main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-10-16T20:27:14Z",
+      "side": 1,
+      "message": "Thanks, Will. Added check for for both vcpu and guest_memfd mmaps.",
+      "parentUuid": "21e12b19_a86b1d39",
+      "revId": "247586b1befaaf1183d3b09365d5672e84e00627",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
