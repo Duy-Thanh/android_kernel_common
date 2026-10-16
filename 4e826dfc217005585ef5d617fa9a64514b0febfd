@@ -16,6 +16,23 @@
       "message": "It still needs a code owner review.",
       "revId": "4e826dfc217005585ef5d617fa9a64514b0febfd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f12a4d41_b1c189ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1898165
+      },
+      "writtenOn": "2026-10-16T19:37:20Z",
+      "side": 1,
+      "message": "Gentle ping for owner review. It\u0027s blocking desktop build.",
+      "revId": "4e826dfc217005585ef5d617fa9a64514b0febfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
