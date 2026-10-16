@@ -115,8 +115,8 @@ impl DmaBufContent {
         Ok(fd)
     }
 
-    pub(crate) fn ioctl(&self, cmd: u32, arg: usize) -> Result<isize> {
-        let file = self.dmabuf.file();
+    pub(crate) fn ioctl(dmabuf: &DmaBuf, cmd: u32, arg: usize) -> Result<isize> {
+        let file = dmabuf.file();
         let file_ptr = file.as_ptr();
 
         // SAFETY: "file" is valid as "dmabuf" holds a reference to it.
@@ -147,8 +147,8 @@ impl DmaBufContent {
         }
     }
 
-    pub(crate) fn llseek(&mut self, offs: Offset, whence: ffi::c_int) -> Result<Offset> {
-        let file = self.dmabuf.file();
+    pub(crate) fn llseek(dmabuf: &DmaBuf, offs: Offset, whence: ffi::c_int) -> Result<Offset> {
+        let file = dmabuf.file();
         let file_ptr = file.as_ptr();
 
         // SAFETY: "file" is valid as "dmabuf" holds a reference to it.
