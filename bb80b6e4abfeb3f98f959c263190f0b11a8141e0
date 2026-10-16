@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "824ddc62_fdab6899",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-10-16T15:33:45Z",
+      "side": 1,
+      "message": "I think this may be missing a `BUILD.bazel` update. Also KST has not triggered.",
+      "revId": "bb80b6e4abfeb3f98f959c263190f0b11a8141e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
