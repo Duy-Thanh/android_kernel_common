@@ -33,6 +33,42 @@
       "message": "Please fix this WARNING reported by KernelCommit: As of 2026-10-01, this release branch is only eligible for respin requests for c...\n\nAs of 2026-10-01, this release branch is only eligible for respin requests for critical bug fixes. It will be deprecated from 2027-07-01.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
       "revId": "b99dd97c26ecae8b73ebe4d8d3e59b92b2c412f4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8e0c309_adde478e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-10-16T14:53:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8dc6e09f_809f5f44",
+      "revId": "b99dd97c26ecae8b73ebe4d8d3e59b92b2c412f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c04fc4d_163463d2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-10-16T14:53:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78d730b8_46671753",
+      "revId": "b99dd97c26ecae8b73ebe4d8d3e59b92b2c412f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
