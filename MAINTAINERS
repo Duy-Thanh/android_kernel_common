@@ -951,10 +951,10 @@ S:	Maintained
 F:	drivers/mailbox/mailbox-altera.c
 
 ALTERA MSGDMA IP CORE DRIVER
-M:	Olivier Dautricourt <olivierdautricourt@gmail.com>
+M:	Adrian Ng Ho Yin <adrian.ho.yin.ng@altera.com>
 R:	Stefan Roese <sr@denx.de>
 L:	dmaengine@vger.kernel.org
-S:	Odd Fixes
+S:	Maintained
 F:	Documentation/devicetree/bindings/dma/altr,msgdma.yaml
 F:	drivers/dma/altera-msgdma.c
 
@@ -9898,6 +9898,7 @@ F:	fs/proc/bootconfig.c
 F:	include/linux/bootconfig.h
 F:	lib/bootconfig-data.S
 F:	lib/bootconfig.c
+F:	lib/embedded-cmdline.S
 F:	tools/bootconfig/*
 F:	tools/bootconfig/scripts/*
 
@@ -10979,6 +10980,7 @@ F:	include/uapi/asm-generic/
 GENERIC PHY FRAMEWORK
 M:	Vinod Koul <vkoul@kernel.org>
 R:	Neil Armstrong <neil.armstrong@linaro.org>
+R:	Manivannan Sadhasivam <mani@kernel.org>
 L:	linux-phy@lists.infradead.org
 S:	Supported
 Q:	https://patchwork.kernel.org/project/linux-phy/list/
@@ -19420,7 +19422,7 @@ F:	drivers/ntb/hw/intel/
 NTFS FILESYSTEM
 M:	Namjae Jeon <linkinjeon@kernel.org>
 M:	Hyunchul Lee <hyc.lee@gmail.com>
-L:	linux-fsdevel@vger.kernel.org
+L:	ntfs@lists.linux.dev
 S:	Maintained
 T:	git git://git.kernel.org/pub/scm/linux/kernel/git/linkinjeon/ntfs.git
 F:	Documentation/filesystems/ntfs.rst
@@ -29881,6 +29883,7 @@ F:	drivers/edac/zynqmp_edac.c
 
 XILINX ZYNQMP PSGTR PHY DRIVER
 M:	Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
+M:	Radhey Shyam Pandey <radhey.shyam.pandey@amd.com>
 L:	linux-kernel@vger.kernel.org
 S:	Supported
 T:	git https://github.com/Xilinx/linux-xlnx.git
