@@ -16,6 +16,24 @@
       "message": "was this a clean cherry-pick? The reports says no.",
       "revId": "49a414d895c623c73305b394cc9742fa81243712",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9ca4ef8_dd908148",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-10-16T18:41:01Z",
+      "side": 1,
+      "message": "The report says the conflict regions were swapped from the (arbitrary, deterministic) order chosen by Git.\n\nIt is the correct order, matching android17-6.18.",
+      "parentUuid": "e15c6cba_39741395",
+      "revId": "49a414d895c623c73305b394cc9742fa81243712",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
