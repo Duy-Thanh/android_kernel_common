@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c1e5a4e_3f6d44c4",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1855,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-10-16T23:18:35Z",
+      "side": 1,
+      "message": "note: This will be skipped when ported to Android16-6.12",
+      "revId": "d56a0cb24e09d87d15b9d1d54824f8139cb1d662",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
