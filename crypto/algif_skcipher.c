@@ -32,7 +32,6 @@
 #include <linux/mm.h>
 #include <linux/module.h>
 #include <linux/net.h>
-#include <linux/string.h>
 #include <net/sock.h>
 
 static int skcipher_sendmsg(struct socket *sock, struct msghdr *msg,
@@ -310,12 +309,7 @@ static struct proto_ops algif_skcipher_ops_nokey = {
 
 static void *skcipher_bind(const char *name)
 {
-	u32 mask = AF_ALG_CRYPTOAPI_MASK;
-
-	if (strcmp(name, "cbc(paes)") == 0)
-		mask = 0;
-
-	return crypto_alloc_skcipher(name, 0, mask);
+	return crypto_alloc_skcipher(name, 0, AF_ALG_CRYPTOAPI_MASK);
 }
 
 static void skcipher_release(void *private)
