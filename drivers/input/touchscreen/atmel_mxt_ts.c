@@ -1397,8 +1397,7 @@ static int mxt_prepare_cfg_mem(struct mxt_data *data, struct mxt_cfg *cfg)
 {
 	struct device *dev = &data->client->dev;
 	struct mxt_object *object;
-	unsigned int type, instance, size;
-	int byte_offset;
+	unsigned int type, instance, size, byte_offset;
 	int offset;
 	int ret;
 	int i;
@@ -2841,12 +2840,14 @@ static ssize_t mxt_object_show(struct device *dev,
 	int count = 0;
 	int i, j;
 	int error;
+	u8 *obuf;
 
 	/* Pre-allocate buffer large enough to hold max sized object. */
-	u8 *obuf __free(kfree) = kmalloc(256, GFP_KERNEL);
+	obuf = kmalloc(256, GFP_KERNEL);
 	if (!obuf)
 		return -ENOMEM;
 
+	error = 0;
 	for (i = 0; i < data->info->object_num; i++) {
 		object = data->object_table + i;
 
@@ -2861,13 +2862,15 @@ static ssize_t mxt_object_show(struct device *dev,
 
 			error = __mxt_read_reg(data->client, addr, size, obuf);
 			if (error)
-				return error;
+				goto done;
 
 			count = mxt_show_instance(buf, count, object, j, obuf);
 		}
 	}
 
-	return count;
+done:
+	kfree(obuf);
+	return error ?: count;
 }
 
 static int mxt_check_firmware_format(struct device *dev,
@@ -3417,11 +3420,11 @@ MODULE_DEVICE_TABLE(acpi, mxt_acpi_id);
 #endif
 
 static const struct i2c_device_id mxt_id[] = {
-	{ .name = "qt602240_ts" },
-	{ .name = "atmel_mxt_ts" },
-	{ .name = "atmel_mxt_tp" },
-	{ .name = "maxtouch" },
-	{ .name = "mXT224" },
+	{ "qt602240_ts" },
+	{ "atmel_mxt_ts" },
+	{ "atmel_mxt_tp" },
+	{ "maxtouch" },
+	{ "mXT224" },
 	{ }
 };
 MODULE_DEVICE_TABLE(i2c, mxt_id);

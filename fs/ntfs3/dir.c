@@ -305,9 +305,7 @@ static inline bool ntfs_dir_emit(struct ntfs_sb_info *sbi,
 	if (sbi->options->nohidden && (fname->dup.fa & FILE_ATTRIBUTE_HIDDEN))
 		return true;
 
-	if (sizeof(struct NTFS_DE) +
-	    offsetof(struct ATTR_FILE_NAME, name) +
-	    fname->name_len * sizeof(short) > le16_to_cpu(e->size))
+	if (fname->name_len + sizeof(struct NTFS_DE) > le16_to_cpu(e->size))
 		return true;
 
 	name_len = ntfs_utf16_to_nls(sbi, fname->name, fname->name_len, name,
@@ -491,17 +489,10 @@ static int ntfs_readdir(struct file *file, struct dir_context *ctx)
 			goto out;
 	}
 
-	/*
-	 * Keep directory metadata stable for the whole walk. Loading subrecords
-	 * once is not enough if concurrent writeback can still compact ATTR_LIST
-	 * entries and free the record that ntfs_read_hdr() is currently walking.
-	 */
-	ni_lock(ni);
-
 	root = indx_get_root(&ni->dir, ni, NULL, NULL);
 	if (!root) {
 		err = -EINVAL;
-		goto out_unlock;
+		goto out;
 	}
 
 	if (pos >= sbi->record_size) {
@@ -512,7 +503,7 @@ static int ntfs_readdir(struct file *file, struct dir_context *ctx)
 		 */
 		err = ntfs_read_hdr(sbi, ni, &root->ihdr, 0, pos, name, ctx);
 		if (err)
-			goto out_unlock;
+			goto out;
 		bit = 0;
 	}
 
@@ -523,7 +514,7 @@ static int ntfs_readdir(struct file *file, struct dir_context *ctx)
 		/* Get the next used index. */
 		err = indx_used_bit(&ni->dir, ni, &bit);
 		if (err)
-			goto out_unlock;
+			goto out;
 
 		if (bit == MINUS_ONE_T) {
 			/* no more used indexes. end of dir. */
@@ -533,13 +524,13 @@ static int ntfs_readdir(struct file *file, struct dir_context *ctx)
 		if (bit >= max_bit) {
 			/* Corrupted directory. */
 			err = -EINVAL;
-			goto out_unlock;
+			goto out;
 		}
 
 		err = indx_read_ra(&ni->dir, ni, bit << ni->dir.idx2vbn_bits,
 				   &node, &file->f_ra);
 		if (err)
-			goto out_unlock;
+			goto out;
 
 		/*
 		 * Add each name from index in 'ctx'.
@@ -548,11 +539,8 @@ static int ntfs_readdir(struct file *file, struct dir_context *ctx)
 				    ((u64)bit << index_bits) + sbi->record_size,
 				    pos, name, ctx);
 		if (err)
-			goto out_unlock;
+			goto out;
 	}
-
-out_unlock:
-	ni_unlock(ni);
 
 out:
 	kfree(name);
