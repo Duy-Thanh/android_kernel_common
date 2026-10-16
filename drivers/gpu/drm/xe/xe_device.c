@@ -1102,11 +1102,7 @@ int xe_device_probe(struct xe_device *xe)
 	if (err)
 		goto err_unregister_display;
 
-	err = devm_add_action_or_reset(xe->drm.dev, xe_device_sanitize, xe);
-	if (err)
-		goto err_unregister_display;
-
-	return 0;
+	return devm_add_action_or_reset(xe->drm.dev, xe_device_sanitize, xe);
 
 err_unregister_display:
 	xe_display_unregister(xe);

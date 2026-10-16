@@ -1653,12 +1653,8 @@ int io_import_reg_vec(int ddir, struct iov_iter *iter,
 	if (sizeof(struct bio_vec) > sizeof(struct iovec)) {
 		size_t bvec_bytes;
 
-		if (check_mul_overflow((size_t)nr_segs, sizeof(struct bio_vec),
-				       &bvec_bytes) ||
-		    check_add_overflow(bvec_bytes, sizeof(*iov) - 1,
-				       &bvec_bytes))
-			return -EOVERFLOW;
-		nr_segs = bvec_bytes / sizeof(*iov);
+		bvec_bytes = nr_segs * sizeof(struct bio_vec);
+		nr_segs = (bvec_bytes + sizeof(*iov) - 1) / sizeof(*iov);
 		nr_segs += nr_iovs;
 	}
 
