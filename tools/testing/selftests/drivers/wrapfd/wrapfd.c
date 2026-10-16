@@ -532,6 +532,132 @@ static void test_load_unmapped(struct __test_metadata *_metadata,
 	close(wrapfd);
 }
 
+static int __test_not_owned_usage(int wrapfd, int fd, size_t size, bool has_other_owner)
+{
+	void *buf;
+	int ret, wrapfd2;
+
+	/*
+	 * If another process owns a buffer, then the current process cannot use it, so it
+	 * cannot use load, lseek, map, or use a passthrough ioctl() on it.
+	 */
+	ret = wrapfd_load(wrapfd, fd, 0, 0, size);
+	if (has_other_owner && (ret != -1 || errno != EBUSY))
+		return EXIT_FAILURE;
+
+	if (!has_other_owner && ret)
+		return EXIT_FAILURE;
+
+	ret = lseek(wrapfd, 0, SEEK_END);
+	if (has_other_owner && (ret != -1 || errno != EBUSY))
+		return EXIT_FAILURE;
+
+	if (!has_other_owner && (ret != ALIGN(size, getpagesize())))
+		return EXIT_FAILURE;
+
+	ret = lseek(wrapfd, 0, SEEK_SET);
+	if (has_other_owner && (ret != -1 || errno != EBUSY))
+		return EXIT_FAILURE;
+
+	if (!has_other_owner && ret)
+		return EXIT_FAILURE;
+
+	ret = ioctl(wrapfd, DMA_BUF_SET_NAME, "test_dmabuf");
+	if (has_other_owner && (ret != -1 || errno != EBUSY))
+		return EXIT_FAILURE;
+
+	if (!has_other_owner && ret)
+		return EXIT_FAILURE;
+
+	buf = mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_SHARED, wrapfd, 0);
+	if (has_other_owner) {
+		if (buf != MAP_FAILED) {
+			munmap(buf, size);
+			return EXIT_FAILURE;
+		}
+
+		if (errno != EBUSY)
+			return EXIT_FAILURE;
+	} else {
+		if (buf == MAP_FAILED)
+			return EXIT_FAILURE;
+
+		munmap(buf, size);
+	}
+
+	ret = wrapfd_acquire_ownership(wrapfd);
+	if (has_other_owner && (ret != -1 || errno != EBUSY))
+	    return EXIT_FAILURE;
+
+	if (has_other_owner) {
+		if (wrapfd_release_ownership(wrapfd) != -1 || errno != EBUSY)
+			return EXIT_FAILURE;
+
+		if (wrapfd_allow_guests(wrapfd) != -1 || errno != EBUSY)
+			return EXIT_FAILURE;
+
+		if (wrapfd_prohibit_guests(wrapfd) != -1 || errno != EBUSY)
+			return EXIT_FAILURE;
+
+		wrapfd2 = wrapfd_rewrap(wrapfd, PROT_READ | PROT_WRITE);
+
+		if (wrapfd2 != -1) {
+			close(wrapfd2);
+			return EXIT_FAILURE;
+		}
+
+		if (errno != EBUSY)
+			return EXIT_FAILURE;
+
+		if (wrapfd_empty(wrapfd) != -1 || errno != EBUSY)
+			return EXIT_FAILURE;
+	}
+
+	return EXIT_SUCCESS;
+}
+
+static void test_not_owned_usage(struct __test_metadata *_metadata,
+				 FIXTURE_DATA(wrapfd_tests) *self, int fd)
+{
+	int wrapfd, status;
+	pid_t pid;
+
+	wrapfd = wrapfd_wrap(self->dev_fd, fd, PROT_READ | PROT_WRITE);
+	ASSERT_TRUE(wrapfd >= 0);
+	ASSERT_EQ(wrapfd_acquire_ownership(wrapfd), 0);
+
+	/*
+	 * load, lseek, etc should not work in the context of the child process, since it is owned
+	 * by another process (the parent).
+	 */
+	pid = fork();
+	ASSERT_FALSE(pid < 0);
+	if (pid == 0) {
+		status = __test_not_owned_usage(wrapfd, self->fd, self->size, true);
+		close(wrapfd);
+		exit(status);
+	} else {
+		ASSERT_NE(wait(&status), -1);
+		ASSERT_TRUE(WIFEXITED(status));
+		ASSERT_EQ(WEXITSTATUS(status), 0);
+	}
+	ASSERT_EQ(wrapfd_release_ownership(wrapfd), 0);
+
+	/* Now run the tests while the buffer is unowned; load, lseek, etc should all work. */
+	pid = fork();
+	ASSERT_FALSE(pid < 0);
+	if (pid == 0) {
+		status = __test_not_owned_usage(wrapfd, self->fd, self->size, false);
+		close(wrapfd);
+		exit(status);
+	} else {
+		ASSERT_NE(wait(&status), -1);
+		ASSERT_TRUE(WIFEXITED(status));
+		ASSERT_EQ(WEXITSTATUS(status), 0);
+	}
+	close(wrapfd);
+}
+
 static void test_load_rdonly_file(struct __test_metadata *_metadata,
 				  FIXTURE_DATA(wrapfd_tests) *self, int fd)
 {
@@ -1250,6 +1376,7 @@ static void run_tests(struct __test_metadata *_metadata,
 	test_lseek(_metadata, self, fd);
 	test_map_count(_metadata, self, fd);
 	test_prohibit_guests_on_owner_death(_metadata, self, fd);
+	test_not_owned_usage(_metadata, self, fd);
 }
 
 TEST_F(wrapfd_tests, wrapfd_test_dmabuf_system_heap)
