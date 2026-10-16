@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7391176b_de7befb4",
+        "filename": "arch/x86/kvm/pkvm/vmx/ept.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-10-16T15:52:03Z",
+      "side": 0,
+      "message": "nit: now `overlaps_iommu_mmio()` and `is_iommu_mmio()` are unused and can be removed as well?",
+      "range": {
+        "startLine": 510,
+        "startChar": 7,
+        "endLine": 510,
+        "endChar": 26
+      },
+      "revId": "d404f895e99ffb16991a6a978deacbaa29db1bb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
