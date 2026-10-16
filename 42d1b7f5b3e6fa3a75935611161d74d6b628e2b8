@@ -88,6 +88,30 @@
       },
       "revId": "42d1b7f5b3e6fa3a75935611161d74d6b628e2b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "555eade0_9e588281",
+        "filename": "arch/x86/kvm/pkvm/pgtable.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 857,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-16T21:39:25Z",
+      "side": 1,
+      "message": "\u003e pkvm_host_ept_init() already enables 5-level EPT when cpu_has_vmx_ept_5levels() \u0026\u0026 iommu_supports_5levels()\n\nYep, I know. I meant: we don\u0027t properly support machines (or more precisely, CPUs) that have MAXPHYADDR above 48 while don\u0027t have 5-level EPT \u0026 IOMMU.\n\n\u003e host_mmu_map() in pkvm_host_mmu_init() would already fail during init, since pkvm_pgtable_walk() checks data.end \u003e pkvm_pgtable_max_size(pgt) which in such case would be \u003e 48 and fail.\n\nYeah, if there is RAM above 2^48, we kind of implicitly ensure that we will fail at pKVM initialization rather than crash at runtime. But not if there is no RAM but there is MMIO above 2^48. In this case, the host will crash at runtime, even after we replace this BUG_ON with error return, since we\u0027re gonna inject #PF or #GP into the host. Well, that\u0027s the best we can do anyway...",
+      "parentUuid": "bf94f98f_3a684169",
+      "range": {
+        "startLine": 857,
+        "startChar": 1,
+        "endLine": 857,
+        "endChar": 7
+      },
+      "revId": "42d1b7f5b3e6fa3a75935611161d74d6b628e2b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
