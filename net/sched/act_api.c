@@ -41,9 +41,11 @@ int tcf_dev_queue_xmit(struct sk_buff *skb, int (*xmit)(struct sk_buff *skb))
 }
 EXPORT_SYMBOL_GPL(tcf_dev_queue_xmit);
 
-static void tcf_action_goto_chain_exec(const struct tcf_chain *chain,
+static void tcf_action_goto_chain_exec(const struct tc_action *a,
 				       struct tcf_result *res)
 {
+	const struct tcf_chain *chain = rcu_dereference_bh(a->goto_chain);
+
 	res->goto_tp = rcu_dereference_bh(chain->filter_chain);
 }
 
@@ -1168,14 +1170,12 @@ repeat:
 					return TC_ACT_OK;
 			}
 		} else if (TC_ACT_EXT_CMP(ret, TC_ACT_GOTO_CHAIN)) {
-			struct tcf_chain *chain = rcu_dereference_bh(a->goto_chain);
-
-			if (unlikely(!chain)) {
+			if (unlikely(!rcu_access_pointer(a->goto_chain))) {
 				tcf_set_drop_reason(skb,
 						    SKB_DROP_REASON_TC_CHAIN_NOTFOUND);
 				return TC_ACT_SHOT;
 			}
-			tcf_action_goto_chain_exec(chain, res);
+			tcf_action_goto_chain_exec(a, res);
 		}
 
 		if (ret != TC_ACT_PIPE)
