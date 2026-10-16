@@ -22,7 +22,10 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <getopt.h>
+#include <pthread.h>
+#include <signal.h>
 #include <stdbool.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -30,6 +33,7 @@
 #include <unistd.h>
 #include <sys/ioctl.h>
 #include <sys/mman.h>
+#include <sys/resource.h>
 #include <sys/stat.h>
 #include <sys/syscall.h>
 #include <sys/types.h>
@@ -39,6 +43,7 @@
 #include <linux/dma-heap.h>
 #include <linux/wrapfd.h>
 #include "../../kselftest_harness.h"
+#include "load_gate.h"
 
 #define offset_in_page(addr, page_size) ((addr) & (page_size - 1))
 
@@ -263,6 +268,127 @@ static void clear_content(struct __test_metadata *_metadata,
 	memset(ptr, 0, self->size);
 	ASSERT_EQ(dmabuf_sync_end(wrapfd, DMA_BUF_SYNC_WRITE), 0);
 	ASSERT_EQ(munmap(ptr, self->size), 0);
+}
+
+/* Returns @ret, or -errno if @ret is negative. @ret may be of any signed integer type. */
+#define ret_or_errno(ret) ({ \
+	__typeof__(ret) __ret = (ret); \
+	__ret < 0 ? (__typeof__(ret))-errno : __ret; \
+})
+
+/* Returns the WRAPFD_CONTENT_* state of @wrapfd, or -errno. */
+static int state_of(int wrapfd)
+{
+	unsigned int state;
+
+	return wrapfd_get_state(wrapfd, &state) ? -errno : (int)state;
+}
+
+/* Maps @fd read-only and unmaps it again. Returns 0, or the -errno of mmap(). */
+static int try_map(int fd, size_t len)
+{
+	void *ptr = mmap(NULL, len, PROT_READ, MAP_SHARED, fd, 0);
+
+	if (ptr == MAP_FAILED)
+		return -errno;
+	munmap(ptr, len);
+	return 0;
+}
+
+/*
+ * A forked worker process. worker_start() returns 0 in the worker and the worker's pid in the
+ * test process, like fork().
+ *
+ * The two pipes form a lockstep handshake: the worker announces a state with worker_ready() and
+ * waits in worker_wait_go(); the test process waits for it with worker_wait_ready() and lets it
+ * continue with worker_go(). Workers report failures through EXPECT_*() only, which records them
+ * in the shared test metadata: an ASSERT_*() in a worker would run the fixture teardown there.
+ * While a worker waits in worker_wait_go(), the test process checks with EXPECT_*() too, so that
+ * a failed check still lets the worker go and be joined.
+ */
+struct worker {
+	pid_t pid;
+	int ready_fd;	/* worker: write end; test process: read end */
+	int go_fd;	/* worker: read end; test process: write end */
+};
+
+static pid_t worker_start(struct __test_metadata *_metadata, struct worker *wk)
+{
+	int ready[2], go[2];
+
+	/* A write to a dead worker's pipe should fail the check, not kill the test. */
+	signal(SIGPIPE, SIG_IGN);
+	ASSERT_EQ(0, pipe2(ready, O_CLOEXEC));
+	ASSERT_EQ(0, pipe2(go, O_CLOEXEC));
+	fflush(NULL);
+	wk->pid = fork();
+	ASSERT_LE(0, wk->pid);
+	if (!wk->pid) {
+		close(ready[0]);
+		close(go[1]);
+		wk->ready_fd = ready[1];
+		wk->go_fd = go[0];
+		return 0;
+	}
+	close(ready[1]);
+	close(go[0]);
+	wk->ready_fd = ready[0];
+	wk->go_fd = go[1];
+	return wk->pid;
+}
+
+static void worker_ready(struct worker *wk)
+{
+	char c = 0;
+
+	if (write(wk->ready_fd, &c, 1) != 1)
+		_exit(1);
+}
+
+static void worker_wait_go(struct worker *wk)
+{
+	char c;
+
+	if (read(wk->go_fd, &c, 1) != 1)
+		_exit(1);
+}
+
+/*
+ * Ends the worker. Called from the handler of a failed EXPECT_*(), it must clear the shared
+ * trigger that the handler loop would otherwise reset, or the test process's next ASSERT_*()
+ * would abort.
+ */
+static void __attribute__((noreturn)) worker_exit(struct __test_metadata *_metadata)
+{
+	_metadata->trigger = 0;
+	_exit(0);
+}
+
+static void worker_wait_ready(struct __test_metadata *_metadata, struct worker *wk)
+{
+	char c;
+
+	ASSERT_EQ(1, read(wk->ready_fd, &c, 1))
+		TH_LOG("worker %d exited before it was ready", wk->pid);
+}
+
+static void worker_go(struct __test_metadata *_metadata, struct worker *wk)
+{
+	char c = 0;
+
+	ASSERT_EQ(1, write(wk->go_fd, &c, 1));
+}
+
+/* Reaps the worker and checks that it exited normally. */
+static void worker_join(struct __test_metadata *_metadata, struct worker *wk)
+{
+	int status;
+
+	close(wk->ready_fd);
+	close(wk->go_fd);
+	ASSERT_EQ(wk->pid, waitpid(wk->pid, &status, 0));
+	ASSERT_TRUE(WIFEXITED(status) && !WEXITSTATUS(status))
+		TH_LOG("worker %d ended with status 0x%x", wk->pid, status);
 }
 
 static void test_wrap(struct __test_metadata *_metadata,
@@ -877,11 +1003,31 @@ static void test_dup(struct __test_metadata *_metadata,
 static void test_owner(struct __test_metadata *_metadata,
 		       FIXTURE_DATA(wrapfd_tests) *self, int fd)
 {
+	struct worker wk;
 	int wrapfd;
 	char *ptr;
 
 	wrapfd = wrapfd_wrap(self->dev_fd, fd, PROT_READ);
 	ASSERT_TRUE(wrapfd >= 0);
+
+	/* Try taking ownership while another process maps the wrapfd */
+	if (!worker_start(_metadata, &wk)) {
+		ptr = mmap(NULL, self->size, PROT_READ, MAP_SHARED, wrapfd, 0);
+		EXPECT_NE(ptr, MAP_FAILED)
+			worker_exit(_metadata);
+		worker_ready(&wk);
+		worker_wait_go(&wk);
+		munmap(ptr, self->size);
+		worker_exit(_metadata);
+	}
+	worker_wait_ready(_metadata, &wk);
+	EXPECT_TRUE(wrapfd_acquire_ownership(wrapfd) && errno == EINVAL);
+	worker_go(_metadata, &wk);
+	worker_join(_metadata, &wk);
+
+	/* The EINVAL came from the other process's mapping */
+	ASSERT_EQ(wrapfd_acquire_ownership(wrapfd), 0);
+	ASSERT_EQ(wrapfd_release_ownership(wrapfd), 0);
 
 	/* Try taking ownership of a mapped wrapfd */
 	ptr = mmap(NULL, self->size, PROT_READ, MAP_SHARED | MAP_POPULATE,
@@ -949,8 +1095,8 @@ static void test_rewrap(struct __test_metadata *_metadata,
 	ASSERT_TRUE(wrapfd_get_state(wrapfd, &state) == 0 &&
 		    state == WRAPFD_CONTENT_EMPTY);
 
-	/* Check rewrapped content */
-	ASSERT_EQ(cmp_content(_metadata, self, wrapfd2, 0, 0, self->size), 0);
+	/* The rewrapped buffer keeps its size */
+	ASSERT_EQ(lseek(wrapfd2, 0, SEEK_END), lseek(fd, 0, SEEK_END));
 
 	/* Take ownership of the rewrapped buffer */
 	ASSERT_EQ(wrapfd_acquire_ownership(wrapfd2), 0);
@@ -967,9 +1113,6 @@ static void test_rewrap(struct __test_metadata *_metadata,
 	ptr = mmap(NULL, self->size, PROT_READ | PROT_WRITE, MAP_SHARED,
 		   wrapfd3, 0);
 	ASSERT_TRUE(ptr == MAP_FAILED && errno == EACCES);
-
-	/* Check rewrapped content */
-	ASSERT_EQ(cmp_content(_metadata, self, wrapfd3, 0, 0, self->size), 0);
 
 	/* Try mapping the original empty wrap file */
 	ptr = mmap(NULL, self->size, PROT_READ, MAP_SHARED,
@@ -1041,6 +1184,12 @@ static void test_empty(struct __test_metadata *_metadata,
 	ASSERT_TRUE(wrapfd_get_state(wrapfd, &state) == 0 &&
 		    state == WRAPFD_CONTENT_EMPTY);
 
+	/* The wrap file stays open as a handle to the empty wrap */
+	ASSERT_NE(fcntl(wrapfd, F_GETFD), -1);
+
+	/* Try emptying the empty buffer */
+	ASSERT_TRUE(wrapfd_empty(wrapfd) < 0 && errno == ENOENT);
+
 	/* Try mapping the empty wrap file */
 	ptr = mmap(NULL, self->size, PROT_READ | PROT_WRITE, MAP_SHARED,
 		   wrapfd, 0);
@@ -1051,6 +1200,14 @@ static void test_empty(struct __test_metadata *_metadata,
 
 	/* Release buffer ownership */
 	ASSERT_EQ(wrapfd_release_ownership(wrapfd), 0);
+
+	/* Ownership survived EMPTY, and is gone now */
+	ASSERT_TRUE(wrapfd_release_ownership(wrapfd) < 0 && errno == EBUSY);
+
+	/* Once unowned, the empty wrap file refuses ACQUIRE, LOAD and mmap */
+	ASSERT_TRUE(wrapfd_acquire_ownership(wrapfd) < 0 && errno == ENOENT);
+	ASSERT_TRUE(wrapfd_load(wrapfd, self->fd, 0, 0, self->size) < 0 && errno == ENOENT);
+	ASSERT_EQ(try_map(wrapfd, self->size), -ENOENT);
 
 	close(wrapfd);
 }
@@ -1123,6 +1280,7 @@ static void test_close_on_exec(struct __test_metadata *_metadata,
 static void test_guests(struct __test_metadata *_metadata,
 			FIXTURE_DATA(wrapfd_tests) *self, int fd)
 {
+	struct worker wk;
 	int wrapfd;
 	char *ptr;
 
@@ -1147,7 +1305,23 @@ static void test_guests(struct __test_metadata *_metadata,
 	ASSERT_EQ(wrapfd_prohibit_guests(wrapfd), 0);
 	ASSERT_EQ(wrapfd_allow_guests(wrapfd), 0);
 
+	/* Another process may map the owned buffer now */
+	if (!worker_start(_metadata, &wk)) {
+		EXPECT_EQ(try_map(wrapfd, self->size), 0);
+		worker_exit(_metadata);
+	}
+	worker_join(_metadata, &wk);
+
 	/* Release buffer ownership */
+	ASSERT_EQ(wrapfd_release_ownership(wrapfd), 0);
+
+	/* RELEASE prohibited guests again, so the next owner starts with guests prohibited */
+	ASSERT_EQ(wrapfd_acquire_ownership(wrapfd), 0);
+	if (!worker_start(_metadata, &wk)) {
+		EXPECT_EQ(try_map(wrapfd, self->size), -EBUSY);
+		worker_exit(_metadata);
+	}
+	worker_join(_metadata, &wk);
 	ASSERT_EQ(wrapfd_release_ownership(wrapfd), 0);
 
 	close(wrapfd);
@@ -1415,6 +1589,645 @@ TEST_F(wrapfd_tests, wrapfd_test_dmabuf_cma_heap)
 	run_tests(_metadata, self, dmabuf_fd, rdonly_dmabuf_fd);
 	close(rdonly_dmabuf_fd);
 	close(dmabuf_fd);
+}
+
+/*
+ * Behaviour tests. Each pins one behaviour of the wrapfd uapi that userspace buffer management
+ * relies on: ownership across processes and threads, mappings held by other processes, dead
+ * owners, and the state transitions of EMPTY, REWRAP and LOAD. Each runs on a wrap and a dma-buf
+ * of its own, so that every behaviour has a result of its own.
+ */
+
+/*
+ * Wraps a new system-heap dma-buf read-write and returns the wrap. The dma-buf's own fd is
+ * closed, so the wrap is the only way to the dma-buf.
+ */
+static int new_wrap(struct __test_metadata *_metadata, FIXTURE_DATA(wrapfd_tests) *self)
+{
+	int heap_fd, dmabuf_fd, wrapfd;
+
+	heap_fd = open("/dev/dma_heap/system", O_RDONLY | O_CLOEXEC);
+	ASSERT_LE(0, heap_fd);
+	dmabuf_fd = dmabuf_heap_alloc(heap_fd, self->size, O_RDWR);
+	close(heap_fd);
+	ASSERT_LE(0, dmabuf_fd);
+	wrapfd = wrapfd_wrap(self->dev_fd, dmabuf_fd, PROT_READ | PROT_WRITE);
+	ASSERT_LE(0, wrapfd);
+	close(dmabuf_fd);
+	return wrapfd;
+}
+
+/* Loads the whole content file into @wrapfd. Returns 0, or -errno. */
+static int load_all(FIXTURE_DATA(wrapfd_tests) *self, int wrapfd)
+{
+	return ret_or_errno(wrapfd_load(wrapfd, self->fd, 0, 0, self->size));
+}
+
+/*
+ * Threads hand their results back to the test thread, which checks them: the harness is not
+ * thread-safe. A thread function returns its int result as its exit value. The probes of the
+ * LOAD-gate tests run the same functions.
+ */
+#define THREAD_RET(ret) ((void *)(intptr_t)(ret))
+
+/* Runs @fn(@arg) on another thread of this process and returns its result. */
+static int run_on_thread(struct __test_metadata *_metadata, void *(*fn)(void *), void *arg)
+{
+	pthread_t thread;
+	void *ret;
+
+	ASSERT_EQ(0, pthread_create(&thread, NULL, fn, arg));
+	ASSERT_EQ(0, pthread_join(thread, &ret));
+	return (int)(intptr_t)ret;
+}
+
+static void *thread_acquire(void *wrapfd)
+{
+	return THREAD_RET(ret_or_errno(wrapfd_acquire_ownership(*(int *)wrapfd)));
+}
+
+static void *thread_release(void *wrapfd)
+{
+	return THREAD_RET(ret_or_errno(wrapfd_release_ownership(*(int *)wrapfd)));
+}
+
+static void *thread_empty(void *wrapfd)
+{
+	return THREAD_RET(ret_or_errno(wrapfd_empty(*(int *)wrapfd)));
+}
+
+static void *thread_get_state(void *wrapfd)
+{
+	return THREAD_RET(state_of(*(int *)wrapfd));
+}
+
+/* A LOAD of @len bytes of @fd at @offs into @wrapfd, at the same offset in the buffer. */
+struct load_args {
+	int wrapfd;
+	int fd;
+	size_t offs;
+	size_t len;
+};
+
+static void *thread_load(void *p)
+{
+	struct load_args *args = p;
+
+	return THREAD_RET(ret_or_errno(wrapfd_load(args->wrapfd, args->fd, args->offs, args->offs,
+						   args->len)));
+}
+
+struct rewrap_args {
+	int wrapfd;
+	int new_fd;	/* out: the result of REWRAP */
+	int new_state;	/* out: the state of the new wrap */
+};
+
+static void *thread_rewrap(void *p)
+{
+	struct rewrap_args *args = p;
+
+	args->new_fd = ret_or_errno(wrapfd_rewrap(args->wrapfd, PROT_READ));
+	if (args->new_fd < 0)
+		return THREAD_RET(args->new_fd);
+	args->new_state = state_of(args->new_fd);
+	return THREAD_RET(0);
+}
+
+/*
+ * The wrap that REWRAP returns starts unowned, so another process can acquire it while the old
+ * wrap is still owned. Closing the old wrap leaves the new wrap's state intact, and the new wrap
+ * can still be acquired.
+ */
+TEST_F(wrapfd_tests, rewrapped_wrap_is_independent_of_old_wrap)
+{
+	struct worker wk;
+	int wrapfd, wrapfd2;
+
+	wrapfd = new_wrap(_metadata, self);
+	ASSERT_EQ(0, load_all(self, wrapfd));
+	ASSERT_EQ(0, ret_or_errno(wrapfd_acquire_ownership(wrapfd)));
+	wrapfd2 = ret_or_errno(wrapfd_rewrap(wrapfd, PROT_READ));
+	ASSERT_LE(0, wrapfd2);
+
+	if (!worker_start(_metadata, &wk)) {
+		EXPECT_EQ(0, ret_or_errno(wrapfd_acquire_ownership(wrapfd2)));
+		EXPECT_EQ(0, ret_or_errno(wrapfd_release_ownership(wrapfd2)));
+		worker_exit(_metadata);
+	}
+	worker_join(_metadata, &wk);
+
+	ASSERT_EQ(0, close(wrapfd));
+	ASSERT_EQ(WRAPFD_CONTENT_RDONLY, state_of(wrapfd2));
+	ASSERT_EQ(0, ret_or_errno(wrapfd_acquire_ownership(wrapfd2)));
+	ASSERT_EQ(0, ret_or_errno(wrapfd_release_ownership(wrapfd2)));
+	close(wrapfd2);
+}
+
+/*
+ * Ownership belongs to the process: another thread of the owner can LOAD into and EMPTY the
+ * wrap.
+ */
+TEST_F(wrapfd_tests, other_thread_of_owner_can_load_and_empty)
+{
+	struct load_args load;
+	int wrapfd;
+
+	wrapfd = new_wrap(_metadata, self);
+	ASSERT_EQ(0, ret_or_errno(wrapfd_acquire_ownership(wrapfd)));
+
+	load = (struct load_args){ .wrapfd = wrapfd, .fd = self->fd, .len = self->size };
+	ASSERT_EQ(0, run_on_thread(_metadata, thread_load, &load));
+	ASSERT_EQ(0, cmp_content(_metadata, self, wrapfd, 0, 0, self->size));
+
+	ASSERT_EQ(0, run_on_thread(_metadata, thread_empty, &wrapfd));
+	ASSERT_EQ(WRAPFD_CONTENT_EMPTY, state_of(wrapfd));
+	ASSERT_EQ(0, ret_or_errno(wrapfd_release_ownership(wrapfd)));
+	close(wrapfd);
+}
+
+/*
+ * RELEASE from another thread of the owner ends the process's ownership: EMPTY from the acquiring
+ * thread then fails with EBUSY, and another process can acquire the wrap.
+ */
+TEST_F(wrapfd_tests, release_by_other_thread_of_owner_ends_ownership)
+{
+	struct worker wk;
+	int wrapfd;
+
+	wrapfd = new_wrap(_metadata, self);
+	ASSERT_EQ(0, load_all(self, wrapfd));
+	ASSERT_EQ(0, ret_or_errno(wrapfd_acquire_ownership(wrapfd)));
+
+	ASSERT_EQ(0, run_on_thread(_metadata, thread_release, &wrapfd));
+	ASSERT_EQ(-EBUSY, ret_or_errno(wrapfd_empty(wrapfd)));
+
+	if (!worker_start(_metadata, &wk)) {
+		EXPECT_EQ(0, ret_or_errno(wrapfd_acquire_ownership(wrapfd)));
+		EXPECT_EQ(0, ret_or_errno(wrapfd_release_ownership(wrapfd)));
+		worker_exit(_metadata);
+	}
+	worker_join(_metadata, &wk);
+
+	/* The EBUSY came from the lost ownership. */
+	ASSERT_EQ(0, ret_or_errno(wrapfd_acquire_ownership(wrapfd)));
+	ASSERT_EQ(0, ret_or_errno(wrapfd_empty(wrapfd)));
+	ASSERT_EQ(0, ret_or_errno(wrapfd_release_ownership(wrapfd)));
+	close(wrapfd);
+}
+
+/*
+ * While another process owns the wrap, ACQUIRE fails with EBUSY, also after the owner emptied it:
+ * the owner check comes before the content check. ENOENT appears only once the owner released the
+ * empty wrap.
+ */
+TEST_F(wrapfd_tests, acquire_fails_ebusy_while_other_process_owns)
+{
+	struct worker wk;
+	int wrapfd;
+
+	wrapfd = new_wrap(_metadata, self);
+	ASSERT_EQ(0, load_all(self, wrapfd));
+
+	if (!worker_start(_metadata, &wk)) {
+		EXPECT_EQ(0, ret_or_errno(wrapfd_acquire_ownership(wrapfd)));
+		worker_ready(&wk);
+		worker_wait_go(&wk);
+		EXPECT_EQ(0, ret_or_errno(wrapfd_empty(wrapfd)));
+		worker_ready(&wk);
+		worker_wait_go(&wk);
+		EXPECT_EQ(0, ret_or_errno(wrapfd_release_ownership(wrapfd)));
+		worker_exit(_metadata);
+	}
+	worker_wait_ready(_metadata, &wk);
+	/* owned, with content */
+	EXPECT_EQ(-EBUSY, ret_or_errno(wrapfd_acquire_ownership(wrapfd)));
+	worker_go(_metadata, &wk);
+	worker_wait_ready(_metadata, &wk);
+	/* owned, empty */
+	EXPECT_EQ(-EBUSY, ret_or_errno(wrapfd_acquire_ownership(wrapfd)));
+	worker_go(_metadata, &wk);
+	worker_join(_metadata, &wk);
+	/* unowned, empty */
+	ASSERT_EQ(-ENOENT, ret_or_errno(wrapfd_acquire_ownership(wrapfd)));
+	close(wrapfd);
+}
+
+/* A second ACQUIRE by the owner succeeds, and ownership is not counted: one RELEASE ends it. */
+TEST_F(wrapfd_tests, owner_reacquire_succeeds_and_one_release_ends_ownership)
+{
+	struct worker wk;
+	int wrapfd;
+
+	wrapfd = new_wrap(_metadata, self);
+	ASSERT_EQ(0, load_all(self, wrapfd));
+	ASSERT_EQ(0, ret_or_errno(wrapfd_acquire_ownership(wrapfd)));
+	ASSERT_EQ(0, ret_or_errno(wrapfd_acquire_ownership(wrapfd)));
+	ASSERT_EQ(0, ret_or_errno(wrapfd_release_ownership(wrapfd)));
+
+	if (!worker_start(_metadata, &wk)) {
+		EXPECT_EQ(0, ret_or_errno(wrapfd_acquire_ownership(wrapfd)));
+		EXPECT_EQ(0, ret_or_errno(wrapfd_release_ownership(wrapfd)));
+		worker_exit(_metadata);
+	}
+	worker_join(_metadata, &wk);
+	close(wrapfd);
+}
+
+/*
+ * The owner can RELEASE while a guest process maps the wrap; ownership ends and the mapping stays
+ * valid.
+ */
+TEST_F(wrapfd_tests, release_succeeds_while_mapped)
+{
+	struct worker wk;
+	void *ptr;
+	int wrapfd;
+
+	wrapfd = new_wrap(_metadata, self);
+	ASSERT_EQ(0, load_all(self, wrapfd));
+	ASSERT_EQ(0, ret_or_errno(wrapfd_acquire_ownership(wrapfd)));
+	ASSERT_EQ(0, ret_or_errno(wrapfd_allow_guests(wrapfd)));
+
+	if (!worker_start(_metadata, &wk)) {
+		ptr = mmap(NULL, self->size, PROT_READ, MAP_SHARED, wrapfd, 0);
+		EXPECT_NE(MAP_FAILED, ptr)
+			worker_exit(_metadata);
+		worker_ready(&wk);
+		worker_wait_go(&wk);
+		munmap(ptr, self->size);
+		worker_exit(_metadata);
+	}
+	worker_wait_ready(_metadata, &wk);
+	EXPECT_EQ(0, ret_or_errno(wrapfd_release_ownership(wrapfd)));
+	worker_go(_metadata, &wk);
+	worker_join(_metadata, &wk);
+
+	ASSERT_EQ(0, ret_or_errno(wrapfd_acquire_ownership(wrapfd)));
+	ASSERT_EQ(0, ret_or_errno(wrapfd_release_ownership(wrapfd)));
+	close(wrapfd);
+}
+
+/*
+ * While a guest process maps the wrap, the owner's EMPTY and REWRAP fail with EINVAL and leave the
+ * content in place. Once the guest has unmapped, EMPTY succeeds.
+ */
+TEST_F(wrapfd_tests, empty_and_rewrap_fail_einval_when_mapped_by_other_process)
+{
+	struct worker wk;
+	void *ptr;
+	int wrapfd;
+
+	wrapfd = new_wrap(_metadata, self);
+	ASSERT_EQ(0, load_all(self, wrapfd));
+	ASSERT_EQ(0, ret_or_errno(wrapfd_acquire_ownership(wrapfd)));
+	ASSERT_EQ(0, ret_or_errno(wrapfd_allow_guests(wrapfd)));
+
+	if (!worker_start(_metadata, &wk)) {
+		ptr = mmap(NULL, self->size, PROT_READ, MAP_SHARED, wrapfd, 0);
+		EXPECT_NE(MAP_FAILED, ptr)
+			worker_exit(_metadata);
+		worker_ready(&wk);
+		worker_wait_go(&wk);
+		munmap(ptr, self->size);
+		worker_exit(_metadata);
+	}
+	worker_wait_ready(_metadata, &wk);
+	EXPECT_EQ(-EINVAL, ret_or_errno(wrapfd_empty(wrapfd)));
+	EXPECT_EQ(-EINVAL, ret_or_errno(wrapfd_rewrap(wrapfd, PROT_READ)));
+	EXPECT_EQ(WRAPFD_CONTENT_RDWR, state_of(wrapfd));
+	worker_go(_metadata, &wk);
+	worker_join(_metadata, &wk);
+
+	/* The EINVALs came from the mapping. */
+	ASSERT_EQ(0, ret_or_errno(wrapfd_empty(wrapfd)));
+	ASSERT_EQ(0, ret_or_errno(wrapfd_release_ownership(wrapfd)));
+	close(wrapfd);
+}
+
+/*
+ * After another thread of the owner moved the content out with REWRAP, EMPTY on the old wrap fails
+ * with ENOENT: REWRAP is atomic, so EMPTY never sees a half-moved wrap.
+ */
+TEST_F(wrapfd_tests, empty_after_rewrap_by_other_thread_fails_enoent)
+{
+	struct rewrap_args rewrap;
+	int wrapfd;
+
+	wrapfd = new_wrap(_metadata, self);
+	ASSERT_EQ(0, load_all(self, wrapfd));
+	ASSERT_EQ(0, ret_or_errno(wrapfd_acquire_ownership(wrapfd)));
+
+	rewrap = (struct rewrap_args){ .wrapfd = wrapfd };
+	ASSERT_EQ(0, run_on_thread(_metadata, thread_rewrap, &rewrap));
+	ASSERT_EQ(WRAPFD_CONTENT_RDONLY, rewrap.new_state);
+
+	ASSERT_EQ(-ENOENT, ret_or_errno(wrapfd_empty(wrapfd)));
+	close(rewrap.new_fd);
+	close(wrapfd);
+}
+
+/*
+ * A REWRAP that fails after its checks passed (here no fd can be allocated, EMFILE) leaves the
+ * content in the old wrap with its state unchanged.
+ */
+TEST_F(wrapfd_tests, rewrap_failure_leaves_content_in_place)
+{
+	const struct rlimit no_files = { 0, 0 };
+	struct worker wk;
+	int wrapfd;
+
+	wrapfd = new_wrap(_metadata, self);
+	ASSERT_EQ(0, load_all(self, wrapfd));
+
+	if (!worker_start(_metadata, &wk)) {
+		EXPECT_EQ(0, ret_or_errno(wrapfd_acquire_ownership(wrapfd)));
+		EXPECT_EQ(0, setrlimit(RLIMIT_NOFILE, &no_files));
+		EXPECT_EQ(-EMFILE, ret_or_errno(wrapfd_rewrap(wrapfd, PROT_READ | PROT_WRITE)));
+		EXPECT_EQ(0, ret_or_errno(wrapfd_release_ownership(wrapfd)));
+		worker_exit(_metadata);
+	}
+	worker_join(_metadata, &wk);
+
+	ASSERT_EQ(WRAPFD_CONTENT_RDWR, state_of(wrapfd));
+	ASSERT_EQ(0, ret_or_errno(wrapfd_acquire_ownership(wrapfd)));
+	ASSERT_EQ(0, ret_or_errno(wrapfd_release_ownership(wrapfd)));
+	close(wrapfd);
+}
+
+/*
+ * LOAD fails with EINVAL when the range runs past the end of the source file or of the buffer,
+ * and the wrap stays usable.
+ */
+TEST_F(wrapfd_tests, load_rejects_out_of_range_einval)
+{
+	off_t bufsize;
+	int wrapfd;
+
+	wrapfd = new_wrap(_metadata, self);
+	/* The buffer is page-rounded, so it ends after the content file. */
+	bufsize = ret_or_errno(lseek(wrapfd, 0, SEEK_END));
+	ASSERT_EQ((off_t)ALIGN(self->size, self->page_size), bufsize);
+	ASSERT_EQ(-EINVAL, ret_or_errno(wrapfd_load(wrapfd, self->fd, 1, 0, self->size)));
+	ASSERT_EQ(-EINVAL, ret_or_errno(wrapfd_load(wrapfd, self->fd, 0, bufsize, 1)));
+	ASSERT_EQ(0, load_all(self, wrapfd));
+	close(wrapfd);
+}
+
+/* GET_STATE has no owner check: it works from a process that does not own the wrap. */
+TEST_F(wrapfd_tests, get_state_by_non_owner_process_succeeds_while_owned)
+{
+	struct worker wk;
+	int wrapfd;
+
+	wrapfd = new_wrap(_metadata, self);
+	ASSERT_EQ(0, load_all(self, wrapfd));
+	ASSERT_EQ(0, ret_or_errno(wrapfd_acquire_ownership(wrapfd)));
+
+	if (!worker_start(_metadata, &wk)) {
+		EXPECT_EQ(WRAPFD_CONTENT_RDWR, state_of(wrapfd));
+		worker_exit(_metadata);
+	}
+	worker_join(_metadata, &wk);
+
+	ASSERT_EQ(0, ret_or_errno(wrapfd_release_ownership(wrapfd)));
+	close(wrapfd);
+}
+
+/*
+ * A failed lseek on an empty wrap has no side effect: ACQUIRE afterwards still fails with ENOENT
+ * (empty), not EINVAL. The C driver (android16-6.12) returns EINVAL here, b/567187927.
+ */
+TEST_F(wrapfd_tests, wrap_lseek_end_on_empty_wrap_has_no_side_effect)
+{
+	int wrapfd;
+
+	wrapfd = new_wrap(_metadata, self);
+	ASSERT_EQ(0, ret_or_errno(wrapfd_acquire_ownership(wrapfd)));
+	ASSERT_EQ(0, ret_or_errno(wrapfd_empty(wrapfd)));
+	ASSERT_EQ(0, ret_or_errno(wrapfd_release_ownership(wrapfd)));
+
+	ASSERT_EQ(-ENOENT, ret_or_errno(lseek(wrapfd, 0, SEEK_END)));
+	ASSERT_EQ(-ENOENT, ret_or_errno(wrapfd_acquire_ownership(wrapfd)));
+	close(wrapfd);
+}
+
+/*
+ * LOAD succeeds while another process maps the unowned wrap, and that existing mapping shows the
+ * loaded bytes once LOAD has returned.
+ */
+TEST_F(wrapfd_tests, mapping_held_across_load_shows_loaded_bytes)
+{
+	struct worker wk;
+	void *ptr;
+	int wrapfd;
+
+	wrapfd = new_wrap(_metadata, self);
+
+	if (!worker_start(_metadata, &wk)) {
+		ptr = mmap(NULL, self->size, PROT_READ, MAP_SHARED, wrapfd, 0);
+		EXPECT_NE(MAP_FAILED, ptr)
+			worker_exit(_metadata);
+		worker_ready(&wk);
+		worker_wait_go(&wk);
+		EXPECT_EQ(0, memcmp(ptr, self->content, self->size));
+		munmap(ptr, self->size);
+		worker_exit(_metadata);
+	}
+	worker_wait_ready(_metadata, &wk);
+	EXPECT_EQ(0, load_all(self, wrapfd));
+	worker_go(_metadata, &wk);
+	worker_join(_metadata, &wk);
+	close(wrapfd);
+}
+
+/*
+ * Behaviour while a LOAD is in flight. The LOAD is held inside the driver (load_gate.h), and the
+ * call under test runs on another thread as a probe, which either returns while the LOAD is held
+ * or waits for it.
+ */
+
+/*
+ * Holds a LOAD of @len bytes at offset @offs of the content file into @wrapfd, at the same offset
+ * in the buffer. Returns false if the test was skipped because the kernel cannot hold a LOAD.
+ */
+static bool hold_load(struct __test_metadata *_metadata, FIXTURE_DATA(wrapfd_tests) *self,
+		      struct load_gate *gate, int wrapfd, size_t offs, size_t len)
+{
+	int ret = load_gate_hold(gate, wrapfd, self->fd, offs, offs, len);
+
+	if (ret == -ENODEV)
+		SKIP(return false, "cannot hold a LOAD: the kernel lacks sw_sync");
+	ASSERT_EQ(0, ret);
+	ASSERT_EQ(0, load_gate_wait_held(gate));
+	return true;
+}
+
+/*
+ * While a LOAD is in flight on an unowned wrap, ACQUIRE fails with EINVAL at once instead of
+ * waiting for the LOAD.
+ */
+TEST_F(wrapfd_tests, acquire_fails_einval_during_load)
+{
+	enum probe_outcome outcome;
+	struct load_gate gate;
+	struct probe probe;
+	int wrapfd, ret;
+
+	wrapfd = new_wrap(_metadata, self);
+	if (!hold_load(_metadata, self, &gate, wrapfd, 0, self->size))
+		return;
+	ASSERT_EQ(0, probe_start(&probe, thread_acquire, wrapfd, &wrapfd));
+	outcome = probe_settle(&probe);
+	ASSERT_EQ(0, load_gate_release(&gate));
+	ret = probe_join(&probe);
+	/* Undo an ACQUIRE that waited for the LOAD and succeeded. */
+	if (!ret)
+		wrapfd_release_ownership(wrapfd);
+
+	ASSERT_EQ(PROBE_RETURNED, outcome);
+	ASSERT_EQ(-EINVAL, ret);
+	close(wrapfd);
+}
+
+/*
+ * While a LOAD is in flight, the owner's EMPTY and REWRAP fail with EINVAL at once, and the loaded
+ * content stays.
+ */
+TEST_F(wrapfd_tests, empty_and_rewrap_fail_einval_during_load)
+{
+	enum probe_outcome empty_outcome, rewrap_outcome;
+	int wrapfd, empty_ret, rewrap_ret;
+	struct rewrap_args rewrap_args;
+	struct probe empty, rewrap;
+	struct load_gate gate;
+
+	wrapfd = new_wrap(_metadata, self);
+	ASSERT_EQ(0, ret_or_errno(wrapfd_acquire_ownership(wrapfd)));
+	/* The loader is another thread of the owner. */
+	if (!hold_load(_metadata, self, &gate, wrapfd, 0, self->size))
+		return;
+	ASSERT_EQ(0, probe_start(&empty, thread_empty, wrapfd, &wrapfd));
+	rewrap_args = (struct rewrap_args){ .wrapfd = wrapfd };
+	ASSERT_EQ(0, probe_start(&rewrap, thread_rewrap, wrapfd, &rewrap_args));
+	empty_outcome = probe_settle(&empty);
+	rewrap_outcome = probe_settle(&rewrap);
+	ASSERT_EQ(0, load_gate_release(&gate));
+	empty_ret = probe_join(&empty);
+	rewrap_ret = probe_join(&rewrap);
+	if (!rewrap_ret)
+		close(rewrap_args.new_fd);
+
+	ASSERT_EQ(PROBE_RETURNED, empty_outcome);
+	ASSERT_EQ(PROBE_RETURNED, rewrap_outcome);
+	ASSERT_EQ(-EINVAL, empty_ret);
+	ASSERT_EQ(-EINVAL, rewrap_ret);
+	ASSERT_EQ(WRAPFD_CONTENT_RDWR, state_of(wrapfd));
+	ASSERT_EQ(0, ret_or_errno(wrapfd_release_ownership(wrapfd)));
+	close(wrapfd);
+}
+
+/*
+ * While a LOAD is in flight, the owner's RELEASE succeeds. Whether it waits for the LOAD is
+ * release_returns_without_waiting_during_load.
+ */
+TEST_F(wrapfd_tests, release_succeeds_during_load)
+{
+	enum probe_outcome outcome;
+	struct load_gate gate;
+	struct probe probe;
+	int wrapfd, ret;
+
+	wrapfd = new_wrap(_metadata, self);
+	ASSERT_EQ(0, ret_or_errno(wrapfd_acquire_ownership(wrapfd)));
+	if (!hold_load(_metadata, self, &gate, wrapfd, 0, self->size))
+		return;
+	ASSERT_EQ(0, probe_start(&probe, thread_release, wrapfd, &wrapfd));
+	outcome = probe_settle(&probe);
+	ASSERT_EQ(0, load_gate_release(&gate));
+	ret = probe_join(&probe);
+	/* Undo a RELEASE that failed. */
+	if (ret)
+		wrapfd_release_ownership(wrapfd);
+
+	ASSERT_NE(PROBE_RUNNING, outcome);
+	ASSERT_EQ(0, ret);
+	close(wrapfd);
+}
+
+/* While a LOAD is in flight, the owner's RELEASE returns without waiting for the LOAD. */
+TEST_F(wrapfd_tests, release_returns_without_waiting_during_load)
+{
+	enum probe_outcome outcome;
+	struct load_gate gate;
+	struct probe probe;
+	int wrapfd;
+
+	wrapfd = new_wrap(_metadata, self);
+	ASSERT_EQ(0, ret_or_errno(wrapfd_acquire_ownership(wrapfd)));
+	if (!hold_load(_metadata, self, &gate, wrapfd, 0, self->size))
+		return;
+	ASSERT_EQ(0, probe_start(&probe, thread_release, wrapfd, &wrapfd));
+	outcome = probe_settle(&probe);
+	ASSERT_EQ(0, load_gate_release(&gate));
+	/* Undo a RELEASE that failed. */
+	if (probe_join(&probe))
+		wrapfd_release_ownership(wrapfd);
+
+	ASSERT_EQ(PROBE_RETURNED, outcome);
+	close(wrapfd);
+}
+
+/* GET_STATE returns the current state at once while a LOAD is in flight. */
+TEST_F(wrapfd_tests, get_state_returns_without_waiting_during_load)
+{
+	enum probe_outcome outcome;
+	struct load_gate gate;
+	struct probe probe;
+	int wrapfd;
+
+	wrapfd = new_wrap(_metadata, self);
+	if (!hold_load(_metadata, self, &gate, wrapfd, 0, self->size))
+		return;
+	ASSERT_EQ(0, probe_start(&probe, thread_get_state, wrapfd, &wrapfd));
+	outcome = probe_settle(&probe);
+	ASSERT_EQ(0, load_gate_release(&gate));
+	ASSERT_EQ(WRAPFD_CONTENT_RDWR, probe_join(&probe));
+
+	ASSERT_EQ(PROBE_RETURNED, outcome);
+	close(wrapfd);
+}
+
+/*
+ * Two LOADs into disjoint halves of one unowned wrap, the second started while the first is held
+ * in flight, both succeed, and the buffer then holds both halves.
+ */
+TEST_F(wrapfd_tests, concurrent_loads_into_same_wrap_succeed)
+{
+	size_t half = self->size / 2;
+	enum probe_outcome outcome;
+	struct load_args second;
+	struct load_gate gate;
+	struct probe probe;
+	int wrapfd;
+
+	wrapfd = new_wrap(_metadata, self);
+	if (!hold_load(_metadata, self, &gate, wrapfd, 0, half))
+		return;
+	second = (struct load_args){ .wrapfd = wrapfd, .fd = self->fd, .offs = half,
+				     .len = self->size - half };
+	ASSERT_EQ(0, probe_start(&probe, thread_load, wrapfd, &second));
+	/*
+	 * The second LOAD blocks inside the driver: on the same fence or, with a driver that holds
+	 * the wrap's lock across a LOAD, on that lock. Which of the two is not asserted.
+	 */
+	outcome = probe_settle(&probe);
+	ASSERT_EQ(0, load_gate_release(&gate));
+	ASSERT_EQ(0, probe_join(&probe));
+
+	ASSERT_NE(PROBE_RUNNING, outcome);
+	ASSERT_EQ(0, cmp_content(_metadata, self, wrapfd, 0, 0, self->size));
+	close(wrapfd);
 }
 
 TEST_HARNESS_MAIN
