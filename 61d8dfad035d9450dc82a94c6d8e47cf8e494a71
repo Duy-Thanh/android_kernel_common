@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1a21f8ab_ed57a6db",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5201498
+      },
+      "writtenOn": "2026-10-16T04:41:08Z",
+      "side": 1,
+      "message": "Thanks! Would it be possible to consider taking this series as FROMLIST?\n\nThe series extends the virtio_blk_config structure in the UAPI virtio_blk.h, and this change is required for vendors to integrate the complete series in their downstream repositories while the upstream work is still under review.",
+      "parentUuid": "e6f254ed_7b61936e",
+      "revId": "61d8dfad035d9450dc82a94c6d8e47cf8e494a71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5234eef9_1161a464",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "95aaf783_c36f8370",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5201498
+      },
+      "writtenOn": "2026-10-16T04:41:08Z",
+      "side": 1,
+      "message": "ACK\n\nCompared with the Linux upstream patch, key generate/import/prepare related interfaces are removed. I\u0027ll mentioned it in the commit message",
+      "parentUuid": "5234eef9_1161a464",
+      "revId": "61d8dfad035d9450dc82a94c6d8e47cf8e494a71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "90e87606_167ada75",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -48,6 +84,24 @@
       "writtenOn": "2026-10-14T16:44:36Z",
       "side": 1,
       "message": "There are some errors reported on the mailing list.",
+      "revId": "61d8dfad035d9450dc82a94c6d8e47cf8e494a71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39f1fbe4_48cb2d55",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5201498
+      },
+      "writtenOn": "2026-10-16T04:41:08Z",
+      "side": 1,
+      "message": "ACK.\nErrors from the base mismatch. I\u0027ll fix them.",
+      "parentUuid": "90e87606_167ada75",
       "revId": "61d8dfad035d9450dc82a94c6d8e47cf8e494a71",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
