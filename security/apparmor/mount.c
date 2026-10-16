@@ -735,11 +735,17 @@ int aa_pivotroot(const struct cred *subj_cred, struct aa_label *label,
 			build_pivotroot(subj_cred, profile, new_path,
 					new_buffer,
 					old_path, old_buffer));
-	AA_BUG(!target);
-	if (!IS_ERR(target)) {
+	if (!target) {
+		info = "label build failed";
+		error = -ENOMEM;
+		goto fail;
+	} else if (!IS_ERR(target)) {
 		error = aa_replace_current_label(target);
-		if (error)
-			goto fail;
+		if (error) {
+			/* TODO: audit target */
+			aa_put_label(target);
+			goto out;
+		}
 		aa_put_label(target);
 	} else
 		/* already audited error */
@@ -757,8 +763,7 @@ fail:
 				    NULL /*new_name */,
 				    NULL /* old_name */,
 				    NULL, NULL,
-				    0, target->hname, AA_MAY_PIVOTROOT, &nullperms, info,
+				    0, NULL, AA_MAY_PIVOTROOT, &nullperms, info,
 				    error));
-	aa_put_label(target);
 	goto out;
 }

@@ -1987,7 +1987,6 @@ F:	include/uapi/linux/apm_bios.h
 APPARMOR SECURITY MODULE
 M:	John Johansen <john.johansen@canonical.com>
 M:	John Johansen <john@apparmor.net>
-M:	Georgia Garcia <georgia.garcia@canonical.com>
 L:	apparmor@lists.ubuntu.com (moderated for non-subscribers)
 S:	Supported
 W:	apparmor.net
@@ -28740,7 +28739,7 @@ F:	sound/drivers/pcmtest.c
 F:	tools/testing/selftests/alsa/test-pcmtest-driver.c
 
 VIRTUAL SERIO DEVICE DRIVER
-M:	Lyude Paul <thatslyude@gmail.com>
+M:	Stephen Chandler Paul <thatslyude@gmail.com>
 S:	Maintained
 F:	drivers/input/serio/userio.c
 F:	include/uapi/linux/userio.h
