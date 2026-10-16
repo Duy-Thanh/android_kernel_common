@@ -64,6 +64,30 @@
       },
       "revId": "42d1b7f5b3e6fa3a75935611161d74d6b628e2b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf94f98f_3a684169",
+        "filename": "arch/x86/kvm/pkvm/pgtable.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 857,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-10-16T21:12:54Z",
+      "side": 1,
+      "message": "\u003e Hmm, it\u0027s probably cleaner to let pkvm_pgtable_lookup() itself return the error?\n\nYeah, so not BUG_ON here but return and propagate the error up\n\n\u003e This makes me think: this means we don\u0027t support hosts with MAXPHYADDR above 48-bit (since we can\u0027t map such addresses in the EPT with 4-level paging)? While we don\u0027t check that during pKVM initialization.\n\n`pkvm_host_ept_init()` already enables 5-level EPT when `cpu_has_vmx_ept_5levels()` \u0026\u0026 `iommu_supports_5levels()`\n\nif e.g. `iommu_supports_5levels()` is not met then `cap.level` will be 4 and for any RAM above 48 bits (if MAXPHYADDR is even 52), `host_mmu_map()` in `pkvm_host_mmu_init()` would already fail during init, since `pkvm_pgtable_walk()` checks `data.end \u003e pkvm_pgtable_max_size(pgt)` which in such case would be \u003e 48 and fail. So this should kind of protect and check that during pKVM initialization.",
+      "parentUuid": "ba58c09b_9fdfc9a3",
+      "range": {
+        "startLine": 857,
+        "startChar": 1,
+        "endLine": 857,
+        "endChar": 7
+      },
+      "revId": "42d1b7f5b3e6fa3a75935611161d74d6b628e2b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
