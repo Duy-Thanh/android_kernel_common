@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "754fdc63_8a557e2c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2026-10-16T15:42:16Z",
+      "side": 1,
+      "message": "That\u0027s quite a significant change from what was posted upstream!  Doesn\u0027t that mean this feature needs a newer kernel version to work?",
+      "parentUuid": "95aaf783_c36f8370",
+      "revId": "61d8dfad035d9450dc82a94c6d8e47cf8e494a71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "90e87606_167ada75",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
