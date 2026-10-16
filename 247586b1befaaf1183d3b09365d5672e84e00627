@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21e12b19_a86b1d39",
+        "filename": "virt/kvm/kvm_main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-10-16T18:15:39Z",
+      "side": 1,
+      "message": "kvm_vcpu_mmap() does not check `vcpu-\u003ekvm-\u003emm !\u003d vma-\u003evm_mm or p3s_4k_unsupported(vma-\u003evm_mm)`. If a 16KB process passes a vCPU fd to a 4KB process and the 4KB process mmap()s and faults it in, kvm_vcpu_fault() returns an order-0 16KB kernel page (vcpu-\u003erun) into finish_fault(). Adding `if (p3s_4k_unsupported(vma-\u003evm_mm)) return -EOPNOTSUPP;` in kvm_vcpu_mmap() (or checking `p3s_4k_unsupported(current-\u003emm)` here in kvm_no_compat_open() would close that gap.",
+      "fixSuggestions": [
+        {
+          "fixId": "ad8d1e1b_32ac2363",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "virt/kvm/kvm_main.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\tif (p3s_4k_unsupported(vma-\u003evm_mm))\n\t\treturn -EOPNOTSUPP;\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "247586b1befaaf1183d3b09365d5672e84e00627",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
