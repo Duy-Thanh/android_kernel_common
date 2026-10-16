@@ -532,6 +532,42 @@ static void test_load_unmapped(struct __test_metadata *_metadata,
 	close(wrapfd);
 }
 
+static void test_unowned_usage(struct __test_metadata *_metadata,
+			       FIXTURE_DATA(wrapfd_tests) *self, int fd)
+{
+	int wrapfd, status;
+	pid_t pid;
+
+	wrapfd = wrapfd_wrap(self->dev_fd, fd, PROT_READ | PROT_WRITE);
+	ASSERT_TRUE(wrapfd >= 0);
+	ASSERT_EQ(wrapfd_acquire_ownership(wrapfd), 0);
+
+	pid = fork();
+	ASSERT_FALSE(pid < 0);
+	if (pid == 0) {
+		status = EXIT_SUCCESS;
+		/* A process that does not own the buffer should not be able to load into it. */
+		if (__test_loads(_metadata, self, wrapfd) != -1 || errno != EBUSY)
+			status = EXIT_FAILURE;
+
+		if (status == EXIT_SUCCESS && (lseek(wrapfd, 0, SEEK_END) != -1 || errno != EBUSY))
+			status = EXIT_FAILURE;
+
+		if (status == EXIT_SUCCESS && (lseek(wrapfd, 0, SEEK_SET) != -1 || errno != EBUSY))
+			status = EXIT_FAILURE;
+
+		close(wrapfd);
+		exit(status);
+	} else {
+		ASSERT_NE(wait(&status), -1);
+		ASSERT_TRUE(WIFEXITED(status));
+		ASSERT_EQ(WEXITSTATUS(status), 0);
+	}
+
+	ASSERT_EQ(wrapfd_release_ownership(wrapfd), 0);
+	close(wrapfd);
+}
+
 static void test_load_rdonly_file(struct __test_metadata *_metadata,
 				  FIXTURE_DATA(wrapfd_tests) *self, int fd)
 {
