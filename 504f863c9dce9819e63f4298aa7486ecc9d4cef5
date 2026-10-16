@@ -91,6 +91,30 @@
       },
       "revId": "504f863c9dce9819e63f4298aa7486ecc9d4cef5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b345b31_32ace06c",
+        "filename": "drivers/virt/gunyah/gunyah_vcpu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-10-16T16:08:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "aafc6419_27cdf0b4",
+      "range": {
+        "startLine": 241,
+        "startChar": 15,
+        "endLine": 241,
+        "endChar": 34
+      },
+      "revId": "504f863c9dce9819e63f4298aa7486ecc9d4cef5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
