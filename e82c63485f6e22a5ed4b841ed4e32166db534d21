@@ -16,6 +16,24 @@
       "message": "Have you seen the cherry-pick diff? This doesn\u0027t seem like a clean cherry-pick?",
       "revId": "e82c63485f6e22a5ed4b841ed4e32166db534d21",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dd54fec_d3546f47",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-10-16T18:39:29Z",
+      "side": 1,
+      "message": "Yes. It is, as far as I can tell. I have compared that part of the flie with 17-6.18.\n\nI think the original was straightforward but then the changes went into merge conflict status as other changes landed.\n\nAfter a mess in Gerrit, I redid the rebase and resolution myself from earlier patchsets and repushed.",
+      "parentUuid": "adb30dc4_0bf20176",
+      "revId": "e82c63485f6e22a5ed4b841ed4e32166db534d21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
