@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b277489e_b9a305e4",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 700,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-16T23:58:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fff3ca48_181f47f6",
+      "revId": "7b98d2426f413527f1e047c20ae462ebe20fdf4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5370cf09_df7d414e",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Good point, I\u0027ll do that.",
       "parentUuid": "5370cf09_df7d414e",
+      "revId": "7b98d2426f413527f1e047c20ae462ebe20fdf4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f93d0a41_fb574cf5",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 709,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-16T23:58:19Z",
+      "side": 1,
+      "message": "Oh, actually, we shouldn\u0027t `munmap()` that pointer. Since the VMA wasn\u0027t copied, that pointer is invalid, so `munmap()` doesn\u0027t make sense.",
+      "parentUuid": "0c3acdf2_fd1ba80d",
       "revId": "7b98d2426f413527f1e047c20ae462ebe20fdf4a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
