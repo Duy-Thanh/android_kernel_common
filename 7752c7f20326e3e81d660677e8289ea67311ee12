@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "966349a4_1fb47d03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-10-16T15:41:18Z",
+      "side": 1,
+      "message": "If these patches are not urgent for the -kminext branches then I would suggest waiting for the merges from the main branch to land as this branch is now technically closed for new patches.",
+      "revId": "7752c7f20326e3e81d660677e8289ea67311ee12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
