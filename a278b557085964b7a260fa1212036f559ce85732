@@ -188,6 +188,149 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce65b4e1_a636885d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4016253
+      },
+      "writtenOn": "2026-10-16T06:01:23Z",
+      "side": 1,
+      "message": "\u003e Please fix this ERROR reported by KernelCommit: Commit does not have a valid tag, such as ANDROID:\n\u003e \n\u003e ANDROID: Patch only relevant...\n\u003e \n\u003e Commit does not have a valid tag, such as ANDROID:\n\u003e \n\u003e ANDROID: Patch only relevant for Android, unlikely to be upstreamed\n\u003e UPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\n\u003e BACKPORT: Modified patch from upstream, needs reference to upstream sha\n\u003e FROMGIT: Patch from an upstream git repository, needs reference to upstream sha\n\u003e FROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "parentUuid": "3eb7fdb5_332420f5",
+      "revId": "a278b557085964b7a260fa1212036f559ce85732",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc8d66a9_2fa1bb38",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4016253
+      },
+      "writtenOn": "2026-10-16T06:01:23Z",
+      "side": 1,
+      "message": "\u003e Please fix this ERROR reported by KernelCommit: Commit does not have a valid tag, such as ANDROID:\n\u003e \n\u003e ANDROID: Patch only relevant...\n\u003e \n\u003e Commit does not have a valid tag, such as ANDROID:\n\u003e \n\u003e ANDROID: Patch only relevant for Android, unlikely to be upstreamed\n\u003e UPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\n\u003e BACKPORT: Modified patch from upstream, needs reference to upstream sha\n\u003e FROMGIT: Patch from an upstream git repository, needs reference to upstream sha\n\u003e FROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "parentUuid": "9f6b8c7c_a6e9a1ea",
+      "revId": "a278b557085964b7a260fa1212036f559ce85732",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c3df948_22b35972",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4016253
+      },
+      "writtenOn": "2026-10-16T06:01:23Z",
+      "side": 1,
+      "message": "\u003e Please fix this ERROR reported by KernelCommit: Commit does not have a valid tag, such as ANDROID:\n\u003e \n\u003e ANDROID: Patch only relevant...\n\u003e \n\u003e Commit does not have a valid tag, such as ANDROID:\n\u003e \n\u003e ANDROID: Patch only relevant for Android, unlikely to be upstreamed\n\u003e UPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\n\u003e BACKPORT: Modified patch from upstream, needs reference to upstream sha\n\u003e FROMGIT: Patch from an upstream git repository, needs reference to upstream sha\n\u003e FROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "parentUuid": "84d055ea_2bbaf240",
+      "revId": "a278b557085964b7a260fa1212036f559ce85732",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f74e983_9abfeacb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4016253
+      },
+      "writtenOn": "2026-10-16T06:01:23Z",
+      "side": 1,
+      "message": "\u003e Please fix this ERROR reported by KernelCommit: Commit does not have a valid tag, such as ANDROID:\n\u003e \n\u003e ANDROID: Patch only relevant...\n\u003e \n\u003e Commit does not have a valid tag, such as ANDROID:\n\u003e \n\u003e ANDROID: Patch only relevant for Android, unlikely to be upstreamed\n\u003e UPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\n\u003e BACKPORT: Modified patch from upstream, needs reference to upstream sha\n\u003e FROMGIT: Patch from an upstream git repository, needs reference to upstream sha\n\u003e FROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "parentUuid": "22bbe725_f5fde35c",
+      "revId": "a278b557085964b7a260fa1212036f559ce85732",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e158cbcb_1d41c9a5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4016253
+      },
+      "writtenOn": "2026-10-16T06:01:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "de21df28_93b98639",
+      "revId": "a278b557085964b7a260fa1212036f559ce85732",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b152e87_d3aea628",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4016253
+      },
+      "writtenOn": "2026-10-16T06:01:23Z",
+      "side": 1,
+      "message": "\u003e Please fix this ERROR reported by KernelCommit: Commit does not have a valid tag, such as ANDROID:\n\u003e \n\u003e ANDROID: Patch only relevant...\n\u003e \n\u003e Commit does not have a valid tag, such as ANDROID:\n\u003e \n\u003e ANDROID: Patch only relevant for Android, unlikely to be upstreamed\n\u003e UPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\n\u003e BACKPORT: Modified patch from upstream, needs reference to upstream sha\n\u003e FROMGIT: Patch from an upstream git repository, needs reference to upstream sha\n\u003e FROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "parentUuid": "5c8c5b4f_d0554102",
+      "revId": "a278b557085964b7a260fa1212036f559ce85732",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f47512fa_098eb2f0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4016253
+      },
+      "writtenOn": "2026-10-16T06:01:23Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Commit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant...\n\nCommit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "a278b557085964b7a260fa1212036f559ce85732",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddee013b_3d19ad69",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4016253
+      },
+      "writtenOn": "2026-10-16T06:01:23Z",
+      "side": 1,
+      "message": "\u003e Please fix this ERROR reported by KernelCommit: Commit does not have a valid tag, such as ANDROID:\n\u003e \n\u003e ANDROID: Patch only relevant...\n\u003e \n\u003e Commit does not have a valid tag, such as ANDROID:\n\u003e \n\u003e ANDROID: Patch only relevant for Android, unlikely to be upstreamed\n\u003e UPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\n\u003e BACKPORT: Modified patch from upstream, needs reference to upstream sha\n\u003e FROMGIT: Patch from an upstream git repository, needs reference to upstream sha\n\u003e FROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "parentUuid": "2f02d04f_598d6532",
+      "revId": "a278b557085964b7a260fa1212036f559ce85732",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2ea48298_17631dce",
