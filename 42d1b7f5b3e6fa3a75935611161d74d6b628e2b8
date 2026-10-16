@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a509249_71f09e8d",
+        "filename": "arch/x86/kvm/pkvm/pgtable.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 857,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2026-10-16T15:42:19Z",
+      "side": 1,
+      "message": "I think this allows the host VM to crash pKVM in its current form:\n1) comment says \"@vaddr is aligned down to the PAGE_SIZE, and the lookup size is PAGE_SIZE.\"\n2) pkvm_pgtable_lookup is called by pkvm_host_mmu_handle_fault() which gets gpa from `gpa \u003d vmcs_read64(GUEST_PHYSICAL_ADDRESS);` and this gpa dosn\u0027t have to be page aligned\n3) in normal case it would not be a problem although due to `.end   \u003d ALIGN(vaddr + size, PAGE_SIZE)` the walker will walk two pages instead of one and since lookup_walker() returns PGTABLE_WALK_DONE on the first leaf no issue will be triggered.\n4) but if host faults on big address `data.end \u003e pkvm_pgtable_max_size(pgt))` check could fail and crash pKVM, so it is probably better to `BUG_ON(pkvm_pgtable_walk(pgt, ALIGN_DOWN(vaddr, PAGE_SIZE)...`\n\nand also probably in `pkvm_host_mmu_handle_fault()` reject `gpa \u003e\u003d pkvm_pgtable_max_size` or it is somehow already prevented?",
+      "range": {
+        "startLine": 857,
+        "startChar": 1,
+        "endLine": 857,
+        "endChar": 7
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3c7bad11_4b2b4b34",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/pgtable.c",
+              "range": {
+                "startLine": 857,
+                "startChar": 0,
+                "endLine": 858,
+                "endChar": 0
+              },
+              "replacement": "\tBUG_ON(pkvm_pgtable_walk(pgt, ALIGN_DOWN(vaddr, PAGE_SIZE), PAGE_SIZE, \u0026walker) !\u003d PGTABLE_WALK_DONE);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "42d1b7f5b3e6fa3a75935611161d74d6b628e2b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
