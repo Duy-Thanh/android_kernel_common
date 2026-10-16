@@ -16,6 +16,24 @@
       "message": "If these patches are not urgent for the -kminext branches then I would suggest waiting for the merges from the main branch to land as this branch is now technically closed for new patches.",
       "revId": "7752c7f20326e3e81d660677e8289ea67311ee12",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1eda3a38_bc687270",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-10-16T16:28:44Z",
+      "side": 1,
+      "message": "Hi Carlos it was to fix the build failures on this branch so I went ahead and merged them. Thanks",
+      "parentUuid": "966349a4_1fb47d03",
+      "revId": "7752c7f20326e3e81d660677e8289ea67311ee12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
