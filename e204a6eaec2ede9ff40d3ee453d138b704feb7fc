@@ -16,6 +16,24 @@
       "message": "This doesn\u0027t match aosp/4262002 though. So should we revert aosp/4262002 and reapply as FROMGIT before this cherrypick?",
       "revId": "e204a6eaec2ede9ff40d3ee453d138b704feb7fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "803751d7_0ec9468d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1059977
+      },
+      "writtenOn": "2026-10-16T18:21:53Z",
+      "side": 1,
+      "message": "Uploaded the revert + BACKPORT: FROMGIT: stack on android16-6.12 (aosp/4370706 and aosp/4370707). Once aosp/4370707 merges on android16-6.12, I will cherry-pick that commit onto android16-6.12-2026-06.",
+      "parentUuid": "ae2890bb_a0656c2a",
+      "revId": "e204a6eaec2ede9ff40d3ee453d138b704feb7fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
