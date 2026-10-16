@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d867f451_dfd477bd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5176396
+      },
+      "writtenOn": "2026-10-16T06:44:38Z",
+      "side": 1,
+      "message": "Hi Todd,\n\nThanks for the review and for flagging the respin window.\n\nI understand this branch is now limited to critical fixes. I\u0027d like to respectfully ask you to still consider this one. This hook is used on Xiaomi\u0027s existing OS4 device fleet for our classic-LRU reclaim protection, and the android_vendor_data1 argument is needed to track kept memory per reclaim\ncycle — it has to be bound to scan_control, so no global/per-CPU/per-task alternative works.\n\nWithout it, these shipping devices hit real user-visible classic-LRU reclaim and lock-contention issues, and moving them to a newer baseline isn\u0027t practical for us.\n\nGiven the impact on a large existing fleet, we\u0027d really appreciate it if this could be accepted. If it doesn\u0027t meet the critical bar as-is, we\u0027re happy to follow whatever KMI exception process you\u0027d recommend.\n\nThanks again,\nBo",
+      "parentUuid": "d8dc341a_909dfd41",
+      "revId": "dc4cdaef03eb272e20053b91faf5e98395c5598e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "38461f0e_a8f6988e",
