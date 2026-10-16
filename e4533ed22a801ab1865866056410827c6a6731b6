@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e4de0cf_fb1b6381",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4585724
+      },
+      "writtenOn": "2026-10-16T06:53:12Z",
+      "side": 1,
+      "message": "Cherrypicking https://android-review.googlesource.com/c/kernel/common/+/4291891 for respin",
+      "revId": "e4533ed22a801ab1865866056410827c6a6731b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
