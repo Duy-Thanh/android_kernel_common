@@ -50,6 +50,30 @@
       ],
       "revId": "292ff3d097ccf85993cdafce7f506f12d47a41b7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28ca6b18_fc0d6a15",
+        "filename": "include/linux/p3s_user_pages.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-10-16T17:53:28Z",
+      "side": 1,
+      "message": "To address the compat issue and continue to enforce this check on all builds, what about `#if !defined(ELF_COMPAT) \u0026\u0026 defined(__INCLUDE_LEVEL__) \u0026\u0026 __INCLUDE_LEVEL__ \u003e 1`.",
+      "parentUuid": "bb9189ab_418c180b",
+      "range": {
+        "startLine": 15,
+        "startChar": 4,
+        "endLine": 15,
+        "endChar": 49
+      },
+      "revId": "292ff3d097ccf85993cdafce7f506f12d47a41b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
