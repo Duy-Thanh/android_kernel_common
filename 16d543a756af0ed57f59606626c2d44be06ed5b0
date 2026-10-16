@@ -34,6 +34,24 @@
       "parentUuid": "3d5e1661_6715888b",
       "revId": "16d543a756af0ed57f59606626c2d44be06ed5b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff6a55b6_3067a7ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-10-16T23:46:18Z",
+      "side": 1,
+      "message": "A clean backported version has now landed in the same branch.",
+      "parentUuid": "95bbc909_fc797533",
+      "revId": "16d543a756af0ed57f59606626c2d44be06ed5b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
