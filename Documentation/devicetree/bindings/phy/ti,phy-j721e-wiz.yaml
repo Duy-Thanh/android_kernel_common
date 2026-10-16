@@ -12,18 +12,13 @@ maintainers:
 
 properties:
   compatible:
-    oneOf:
-      - enum:
-          - ti,j721e-wiz-16g
-          - ti,j721e-wiz-10g
-          - ti,j721s2-wiz-10g
-          - ti,am64-wiz-10g
-          - ti,j7200-wiz-10g
-          - ti,j784s4-wiz-10g
-      - items:
-          - enum:
-              - ti,j722s-wiz-10g
-          - const: ti,am64-wiz-10g
+    enum:
+      - ti,j721e-wiz-16g
+      - ti,j721e-wiz-10g
+      - ti,j721s2-wiz-10g
+      - ti,am64-wiz-10g
+      - ti,j7200-wiz-10g
+      - ti,j784s4-wiz-10g
 
   power-domains:
     maxItems: 1
