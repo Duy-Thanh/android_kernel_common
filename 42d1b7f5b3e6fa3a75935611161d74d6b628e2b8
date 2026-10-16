@@ -40,6 +40,30 @@
       ],
       "revId": "42d1b7f5b3e6fa3a75935611161d74d6b628e2b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba58c09b_9fdfc9a3",
+        "filename": "arch/x86/kvm/pkvm/pgtable.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 857,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-16T17:44:06Z",
+      "side": 1,
+      "message": "\u003e but if host faults on big address data.end \u003e pkvm_pgtable_max_size(pgt)) check could fail and crash pKVM, so it is probably better to BUG_ON(pkvm_pgtable_walk(pgt, ALIGN_DOWN(vaddr, PAGE_SIZE)...\n\nYeah, agree. And I see ARM\u0027s `kvm_pgtable_get_leaf()` already does that.\n\n\u003e and also probably in pkvm_host_mmu_handle_fault() reject gpa \u003e\u003d pkvm_pgtable_max_size\n\nHmm, it\u0027s probably cleaner to let `pkvm_pgtable_lookup()` itself return the error?\n\nBTW wondering if pKVM-ARM doesn\u0027t have a similar issue, as it has `BUG_ON(ret \u0026\u0026 ret !\u003d -EAGAIN)` in `handle_host_mem_abort()`.\n\n\u003e or it is somehow already prevented?\n\nHmm, it is probably not prevented in the general case (on an arbitrary machine), since MAXPHYADDR may be up to 52-bit (and there are 52 bits for the physical address in 1st-stage MMU PTEs).\n\nThis makes me think: this means we don\u0027t support hosts with MAXPHYADDR above 48-bit (since we can\u0027t map such addresses in the EPT with 4-level paging)? While we don\u0027t check that during pKVM initialization.",
+      "parentUuid": "3a509249_71f09e8d",
+      "range": {
+        "startLine": 857,
+        "startChar": 1,
+        "endLine": 857,
+        "endChar": 7
+      },
+      "revId": "42d1b7f5b3e6fa3a75935611161d74d6b628e2b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
