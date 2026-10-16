@@ -124,6 +124,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1daba37d_d0e12dff",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-10-16T03:43:24Z",
+      "side": 1,
+      "message": "Should we use `PKVM_PAGE_SHARED_BORROWED` (with `PKVM_ID_HYP`) here instead of `PKVM_PAGE_NONE`?\n\nI understand the commit message notes parity with ARM (where `.hyp.text` uses `PKVM_NOPAGE`), but ARM\u0027s `struct hyp_page` model is different here:\n1. On ARM64, `struct hyp_page` has no `page-\u003eowner` field (it only stores `hyp_state` and `host_state`), and ARM64 does not have `pkvm_host_donate_hyp_share_ro()`. In ARM, `host_state \u003d\u003d PKVM_PAGE_SHARED_BORROWED` is only used for guest pages shared with the host (`__pkvm_guest_share_host()`).\n\n2. On pKVM-x86, `struct pkvm_page` explicitly tracks `page-\u003eowner \u003d PKVM_ID_HYP` alongside `page-\u003ehost_state`, and we already have a dedicated canonical state for a `PKVM_ID_HYP` RAM page mapped Read-Only in `host_mmu`: `(PKVM_PAGE_SHARED_BORROWED,\n  PKVM_ID_HYP)` (used by `pkvm_host_donate_hyp_share_ro()`, State `S5: HYP_SHARED_RO` in go/page-custody-battles), whereas `(PKVM_PAGE_NONE, PKVM_ID_HYP)` (`S4: HYP_EXCLUSIVE`) strictly means unmapped in `host_mmu`.\n\nUsing `(PKVM_PAGE_SHARED_BORROWED, PKVM_ID_HYP)` keeps the `PKVM_PAGE_NONE \u003c\u003d\u003e unmapped in host_mmu` invariant intact and avoids introducing an 8th RAM meta-state on x86.",
+      "revId": "651d8890f177e183a9727fdc9abd3607ef45f8ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4ff27709_368af31b",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 1
@@ -170,6 +187,23 @@
       "writtenOn": "2026-10-15T22:44:41Z",
       "side": 1,
       "message": "Maybe it\u0027s better to check the whole range via `is_pkvm_text_range()` for extra paranoid safety?",
+      "revId": "651d8890f177e183a9727fdc9abd3607ef45f8ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60eecb22_8019a407",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 906,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2026-10-16T03:43:24Z",
+      "side": 1,
+      "message": "Following up on the `PKVM_PAGE_SHARED_BORROWED` comment above: instead of introducing `host_mmu_map_ro()` and special-casing `.pkvm.text` in `fix_host_mmu_pgstate_walker()`, could we simply skip `.pkvm.text` in the `host_mmu_unmap()` loop and call `pkvm_host_donate_hyp_share_ro(infos[i].pa, infos[i].size, false)` right after `fix_host_mmu_pgstate()` in `pkvm_host_mmu_init()`?",
       "revId": "651d8890f177e183a9727fdc9abd3607ef45f8ff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
