@@ -137,7 +137,7 @@ struct dmatest_params {
  * @did_init:		module has been initialized completely
  * @last_error:		test has faced configuration issues
  */
-struct dmatest_info {
+static struct dmatest_info {
 	/* Test parameters */
 	struct dmatest_params	params;
 
@@ -147,9 +147,7 @@ struct dmatest_info {
 	int			last_error;
 	struct mutex		lock;
 	bool			did_init;
-};
-
-static struct dmatest_info test_info = {
+} test_info = {
 	.channels = LIST_HEAD_INIT(test_info.channels),
 	.lock = __MUTEX_INITIALIZER(test_info.lock),
 };
