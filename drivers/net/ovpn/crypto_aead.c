@@ -9,7 +9,6 @@
 
 #include <crypto/aead.h>
 #include <linux/skbuff.h>
-#include <linux/workqueue.h>
 #include <net/ip.h>
 #include <net/ipv6.h>
 #include <net/udp.h>
@@ -381,19 +380,13 @@ error:
 	return ERR_PTR(ret);
 }
 
-static void ovpn_aead_crypto_key_slot_free(struct ovpn_crypto_key_slot *ks)
+void ovpn_aead_crypto_key_slot_destroy(struct ovpn_crypto_key_slot *ks)
 {
+	if (!ks)
+		return;
+
 	crypto_free_aead(ks->encrypt);
 	crypto_free_aead(ks->decrypt);
-}
-
-static void ovpn_aead_crypto_key_slot_free_work(struct work_struct *work)
-{
-	struct ovpn_crypto_key_slot *ks;
-
-	ks = container_of(to_rcu_work(work), struct ovpn_crypto_key_slot,
-			  free_work);
-	ovpn_aead_crypto_key_slot_free(ks);
 	kfree(ks);
 }
 
@@ -427,7 +420,6 @@ ovpn_aead_crypto_key_slot_new(const struct ovpn_key_config *kc)
 
 	ks->encrypt = NULL;
 	ks->decrypt = NULL;
-	INIT_RCU_WORK(&ks->free_work, ovpn_aead_crypto_key_slot_free_work);
 	kref_init(&ks->refcount);
 	ks->key_id = kc->key_id;
 
@@ -461,8 +453,7 @@ ovpn_aead_crypto_key_slot_new(const struct ovpn_key_config *kc)
 	return ks;
 
 destroy_ks:
-	ovpn_aead_crypto_key_slot_free(ks);
-	kfree(ks);
+	ovpn_aead_crypto_key_slot_destroy(ks);
 	return ERR_PTR(ret);
 }
 
