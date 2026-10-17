@@ -599,7 +599,6 @@ _DB845C_MODULE_OUTS = [
     "drivers/firmware/qcom/qcom_tzmem.ko",
     "drivers/gpio/gpio-wcd934x.ko",
     "drivers/gpu/drm/bridge/aux-bridge.ko",
-    "drivers/gpu/drm/bridge/aux-hpd-bridge.ko",
     "drivers/gpu/drm/bridge/display-connector.ko",
     "drivers/gpu/drm/bridge/lontium-lt9611.ko",
     "drivers/gpu/drm/bridge/lontium-lt9611uxc.ko",
