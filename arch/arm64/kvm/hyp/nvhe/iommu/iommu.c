@@ -368,11 +368,9 @@ __handle_to_domain(pkvm_handle_t domain_id, bool alloc)
 		if (!domains)
 			return NULL;
 		/*
-		 * handle_to_domain() does not have to be called under a lock,
-		 * but even though we allocate a leaf in all cases, it's only
-		 * really a valid thing to do under alloc_domain(), which uses a
-		 * lock. Races are therefore a host bug and we don't need to be
-		 * delicate about it.
+		 * Only alloc_domain() allocates a leaf, and guests' calls to it
+		 * are serialised by pviommu_guest_domain_lock, so a race here
+		 * needs a concurrent host allocation.
 		 */
 		if (WARN_ON(cmpxchg64_relaxed(&kvm_hyp_iommu_domains[idx], 0,
 					      (void *)domains) != 0)) {
@@ -386,7 +384,7 @@ __handle_to_domain(pkvm_handle_t domain_id, bool alloc)
 static struct kvm_hyp_iommu_domain *
 handle_to_domain(pkvm_handle_t domain_id)
 {
-	return __handle_to_domain(domain_id, true);
+	return __handle_to_domain(domain_id, false);
 }
 
 static int domain_get(struct kvm_hyp_iommu_domain *domain)
@@ -494,7 +492,7 @@ int kvm_iommu_alloc_domain(pkvm_handle_t domain_id, int type)
 	if (!hyp_vcpu && (domain_id >= (KVM_IOMMU_MAX_DOMAINS >> 1)))
 		return -EINVAL;
 
-	domain = handle_to_domain(domain_id);
+	domain = __handle_to_domain(domain_id, true);
 	if (!domain)
 		return -ENOMEM;
 
