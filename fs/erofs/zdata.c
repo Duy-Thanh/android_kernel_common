@@ -7,6 +7,7 @@
 #include "compress.h"
 #include <linux/psi.h>
 #include <linux/cpuhotplug.h>
+#include <linux/cleancache.h>
 #include <trace/events/erofs.h>
 
 #define Z_EROFS_PCLUSTER_MAX_PAGES	(Z_EROFS_PCLUSTER_MAX_SIZE / PAGE_SIZE)
@@ -1039,6 +1040,16 @@ static int z_erofs_scan_folio(struct z_erofs_decompress_frontend *f,
 	bool tight, excl;
 	int err = 0;
 
+	if (!folio_test_large(folio)) {
+		folio_set_mappedtodisk(folio);
+		if (!folio_test_uptodate(folio) &&
+		    cleancache_get_page(&folio->page) == 0) {
+			folio->private = NULL;
+			folio_end_read(folio, true);
+			return 0;
+		}
+	}
+
 	tight = (bs == PAGE_SIZE);
 	erofs_onlinefolio_init(folio);
 	do {
@@ -1903,6 +1914,14 @@ static int z_erofs_read_folio(struct file *file, struct folio *folio)
 	int err;
 
 	trace_erofs_read_folio(folio, false);
+	if (!folio_test_large(folio)) {
+		folio_set_mappedtodisk(folio);
+		if (!folio_test_uptodate(folio) &&
+		    cleancache_get_page(&folio->page) == 0) {
+			folio_end_read(folio, true);
+			return 0;
+		}
+	}
 	f.headoffset = (erofs_off_t)folio->index << PAGE_SHIFT;
 
 	z_erofs_pcluster_readmore(&f, NULL, true);

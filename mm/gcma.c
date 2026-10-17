@@ -765,7 +765,7 @@ static void gcma_cc_store_page(int hash_id, struct cleancache_filekey key,
 	bool is_new = false;
 	bool workingset = PageWorkingset(page);
 	bool bypass = false;
-	bool allow_nonworkingset = false;
+	bool allow_nonworkingset = true;
 
 	trace_android_vh_gcma_cc_store_page_bypass(&bypass);
 	if (bypass)

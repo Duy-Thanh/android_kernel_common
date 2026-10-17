@@ -17,6 +17,7 @@
 #include <linux/bio.h>
 #include <linux/sched/signal.h>
 #include <linux/migrate.h>
+#include <linux/cleancache.h>
 #include "trace.h"
 
 #include "../internal.h"
@@ -391,6 +392,16 @@ static loff_t iomap_readpage_iter(const struct iomap_iter *iter,
 		folio_zero_range(folio, poff, plen);
 		iomap_set_range_uptodate(folio, poff, plen);
 		goto done;
+	}
+
+	if (!ifs && poff == 0 && plen == folio_size(folio) &&
+	    !folio_test_large(folio)) {
+		folio_set_mappedtodisk(folio);
+		if (!folio_test_uptodate(folio) &&
+		    cleancache_get_page(&folio->page) == 0) {
+			iomap_set_range_uptodate(folio, poff, plen);
+			goto done;
+		}
 	}
 
 	ctx->cur_folio_in_bio = true;
