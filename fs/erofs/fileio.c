@@ -3,6 +3,7 @@
  * Copyright (C) 2024, Alibaba Cloud
  */
 #include "internal.h"
+#include <linux/cleancache.h>
 #include <trace/events/erofs.h>
 
 struct erofs_fileio_rq {
@@ -98,6 +99,16 @@ static int erofs_fileio_scan_folio(struct erofs_fileio *io, struct folio *folio)
 	struct iov_iter iter;
 	struct bio_vec bv;
 	int err = 0;
+
+	if (!folio_test_large(folio)) {
+		folio_set_mappedtodisk(folio);
+		if (!folio_test_uptodate(folio) &&
+		    cleancache_get_page(&folio->page) == 0) {
+			folio->private = NULL;
+			folio_end_read(folio, true);
+			return 0;
+		}
+	}
 
 	erofs_onlinefolio_init(folio);
 	while (cur < end) {
