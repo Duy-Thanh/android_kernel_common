@@ -391,11 +391,14 @@ handle_to_domain(pkvm_handle_t domain_id)
 
 static int domain_get(struct kvm_hyp_iommu_domain *domain)
 {
-	int old = atomic_fetch_inc_acquire(&domain->refs);
+	int old = atomic_fetch_add_unless(&domain->refs, 1, 0);
 	struct pkvm_hyp_vcpu *hyp_vcpu = __get_vcpu();
 	int ret = 0;
 
-	BUG_ON(!old || (old + 1 < 0));
+	if (!old)
+		return -ENOENT;
+
+	BUG_ON(old + 1 < 0);
 
 	/* check done after refcount is elevated to avoid race with alloc_domain */
 	if (!hyp_vcpu && domain->vm)
