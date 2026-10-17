@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6272401f_77cb4a26",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5201498
+      },
+      "writtenOn": "2026-10-17T11:11:30Z",
+      "side": 1,
+      "message": "I agree that it\u0027s a big change. But I don\u0027t think the removal of key generate/import/prepare related interfaces affects the inline encryption implementation in virtio block as we can use the hardware-wrapped key generated via keymaster/keymint. Thus, this change can work on both android16-6.12 and the newer kernel version.",
+      "parentUuid": "754fdc63_8a557e2c",
+      "revId": "61d8dfad035d9450dc82a94c6d8e47cf8e494a71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "90e87606_167ada75",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
