@@ -22,6 +22,30 @@
       },
       "revId": "cad0d3a04f11d334616d4d47ed8d9e22af4682ce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de0006d0_31fad3a8",
+        "filename": "arch/x86/kvm/pkvm/pgtable.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 843,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-18T21:31:22Z",
+      "side": 0,
+      "message": "Yep, thanks. Fixed.",
+      "parentUuid": "1684d0c3_b672381e",
+      "range": {
+        "startLine": 843,
+        "startChar": 0,
+        "endLine": 843,
+        "endChar": 51
+      },
+      "revId": "cad0d3a04f11d334616d4d47ed8d9e22af4682ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
