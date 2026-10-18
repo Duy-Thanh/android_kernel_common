@@ -16,6 +16,24 @@
       "message": "We\u0027re not using anything from here in this patch?",
       "revId": "e77369a963a50a47e056eabf1510da73bea5142a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "260e5da0_c550da39",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-10-18T07:14:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f34f2df_6e9e5933",
+      "revId": "e77369a963a50a47e056eabf1510da73bea5142a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
