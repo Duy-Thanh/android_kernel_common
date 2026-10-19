@@ -25,6 +25,7 @@
 #include <linux/minmax.h>
 #include <linux/overflow.h>
 #include <linux/buildid.h>
+#include <linux/ptshare.h>
 #include <trace/hooks/mm.h>
 
 #include <asm/elf.h>
@@ -420,6 +421,7 @@ static int proc_maps_open(struct inode *inode, struct file *file,
 		return -ENOMEM;
 
 	priv->inode = inode;
+	priv->cred = file->f_cred;
 	priv->lock_ctx.mm = proc_mem_open(inode, PTRACE_MODE_READ);
 	if (IS_ERR(priv->lock_ctx.mm)) {
 		int err = PTR_ERR(priv->lock_ctx.mm);
@@ -1445,6 +1447,10 @@ static void smap_gather_stats_range(struct proc_maps_private *priv,
 	/* Might sleep. Drop RCU read lock but keep the VMA locked. */
 	drop_rcu(priv);
 
+	/* Count no pages through page tables shared with other processes */
+	if (ptshare_hide_pt(vma, priv->cred))
+		goto out;
+
 	if (vma->vm_file && shmem_mapping(vma->vm_file->f_mapping)) {
 		/*
 		 * CoW mappings might map anon folios that do not belong to
@@ -1472,7 +1478,7 @@ static void smap_gather_stats_range(struct proc_maps_private *priv,
 	}
 
 	walk_page_range_vma(vma, start, end, ops, mss);
-
+out:
 	reacquire_rcu(priv);
 }
 
@@ -1697,6 +1703,7 @@ static int smaps_rollup_open(struct inode *inode, struct file *file)
 		goto out_free;
 
 	priv->inode = inode;
+	priv->cred = file->f_cred;
 	priv->lock_ctx.mm = proc_mem_open(inode, PTRACE_MODE_READ);
 	if (IS_ERR_OR_NULL(priv->lock_ctx.mm)) {
 		ret = priv->lock_ctx.mm ? PTR_ERR(priv->lock_ctx.mm) : -ESRCH;
@@ -1901,6 +1908,13 @@ static int clear_refs_test_walk(unsigned long start, unsigned long end,
 		return 1;
 
 	/*
+	 * The PTE tables of a ptshare client VMA belong to the shadow MM and
+	 * are shared with other processes: never write to them, whoever asks.
+	 */
+	if (vma->vm_flags & VM_PT_SHARED)
+		return 1;
+
+	/*
 	 * Writing 1 to /proc/pid/clear_refs affects all pages.
 	 * Writing 2 to /proc/pid/clear_refs only affects anonymous pages.
 	 * Writing 3 to /proc/pid/clear_refs only affects file mapped pages.
@@ -2007,6 +2021,7 @@ struct pagemapread {
 	int pos, len;		/* units: PM_ENTRY_BYTES, not bytes */
 	pagemap_entry_t *buffer;
 	bool show_pfn;
+	const struct cred *cred;
 };
 
 #define PAGEMAP_WALK_SIZE	(PMD_SIZE)
@@ -2152,6 +2167,11 @@ static int pagemap_pmd_range(pmd_t *pmdp, unsigned long addr, unsigned long end,
 	spinlock_t *ptl;
 	pte_t *pte, *orig_pte;
 	int err = 0;
+
+	/* Report page tables shared with other processes as unpopulated */
+	if (ptshare_hide_pt(vma, pm->cred))
+		return pagemap_pte_hole(addr, end, -1, walk);
+
 #ifdef CONFIG_TRANSPARENT_HUGEPAGE
 
 	ptl = pmd_trans_huge_lock(pmdp, vma);
@@ -2397,6 +2417,7 @@ static ssize_t pagemap_read(struct file *file, char __user *buf,
 
 	/* do not disclose physical addresses: attack vector */
 	pm.show_pfn = file_ns_capable(file, &init_user_ns, CAP_SYS_ADMIN);
+	pm.cred = file->f_cred;
 
 	pm.len = (PAGEMAP_WALK_SIZE >> PAGE_SHIFT);
 	pm.buffer = kmalloc_array(pm.len, PM_ENTRY_BYTES, GFP_KERNEL);
@@ -2528,6 +2549,7 @@ struct pagemap_scan_private {
 	struct page_region *vec_buf;
 	unsigned long vec_buf_len, vec_buf_index, found_pages;
 	struct page_region __user *vec_out;
+	const struct cred *cred;
 };
 
 static unsigned long pagemap_page_category(struct pagemap_scan_private *p,
@@ -2749,6 +2771,9 @@ static bool pagemap_scan_is_interesting_vma(unsigned long categories,
 	return true;
 }
 
+static int pagemap_scan_pte_hole(unsigned long addr, unsigned long end,
+				 int depth, struct mm_walk *walk);
+
 static int pagemap_scan_test_walk(unsigned long start, unsigned long end,
 				  struct mm_walk *walk)
 {
@@ -2787,6 +2812,19 @@ static int pagemap_scan_test_walk(unsigned long start, unsigned long end,
 		return 1;
 
 	p->cur_vma_category = vma_category;
+
+	/*
+	 * Report page tables shared with other processes as unpopulated. Never
+	 * write-protect them: ptshare client VMAs don't support uffd, so
+	 * PM_SCAN_WP_MATCHING has already skipped them above.
+	 */
+	if (ptshare_hide_pt(vma, p->cred)) {
+		int err = 0;
+
+		if (!(p->arg.flags & PM_SCAN_WP_MATCHING))
+			err = pagemap_scan_pte_hole(start, end, -1, walk);
+		return err ? err : 1;
+	}
 
 	return 0;
 }
@@ -3194,7 +3232,8 @@ static long pagemap_scan_flush_buffer(struct pagemap_scan_private *p)
 	return n;
 }
 
-static long do_pagemap_scan(struct mm_struct *mm, unsigned long uarg)
+static long do_pagemap_scan(struct mm_struct *mm, const struct cred *cred,
+			    unsigned long uarg)
 {
 	struct pagemap_scan_private p = {0};
 	unsigned long walk_start;
@@ -3207,6 +3246,7 @@ static long do_pagemap_scan(struct mm_struct *mm, unsigned long uarg)
 
 	p.masks_of_interest = p.arg.category_mask | p.arg.category_anyof_mask |
 			      p.arg.return_mask;
+	p.cred = cred;
 	ret = pagemap_scan_init_bounce_buffer(&p);
 	if (ret)
 		return ret;
@@ -3274,7 +3314,7 @@ static long do_pagemap_cmd(struct file *file, unsigned int cmd,
 
 	switch (cmd) {
 	case PAGEMAP_SCAN:
-		return do_pagemap_scan(mm, arg);
+		return do_pagemap_scan(mm, file->f_cred, arg);
 
 	default:
 		return -EINVAL;
@@ -3564,7 +3604,9 @@ static int show_numa_map(struct seq_file *m, void *v)
 	if (vma != get_gate_vma(proc_priv->lock_ctx.mm)) {
 		/* Might sleep. Drop RCU read lock but keep the VMA locked. */
 		drop_rcu(proc_priv);
-		walk_page_vma(vma, get_show_numa_ops(proc_priv), md);
+		/* Count no pages through page tables shared with others */
+		if (!ptshare_hide_pt(vma, proc_priv->cred))
+			walk_page_vma(vma, get_show_numa_ops(proc_priv), md);
 		reacquire_rcu(proc_priv);
 	}
 

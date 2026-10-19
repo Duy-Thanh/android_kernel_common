@@ -600,6 +600,13 @@ be vanished or the reverse -- new added. Interpretation of their meaning
 might change in future as well. So each consumer of these flags has to
 follow each specific kernel version for the exact semantic.
 
+The page tables of a page table sharing area ("sp") are shared with other
+processes, so their entries also reflect the accesses of those processes.
+Unless the reader has CAP_SYS_ADMIN, owns the mapped file or could open it for
+writing, smaps, smaps_rollup, numa_maps and pagemap (including PAGEMAP_SCAN)
+report no resident pages for such an area, and move_pages(2) reports its pages
+as not present. clear_refs leaves such an area alone.
+
 This file is only present if the CONFIG_MMU kernel configuration option is
 enabled.
 
