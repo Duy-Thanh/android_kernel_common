@@ -14,9 +14,11 @@
 #include <linux/ptshare.h>
 #include <linux/export.h>
 #include <linux/mm_types.h>
+#include <linux/cred.h>
 #include <linux/file.h>
 #include <linux/mmap_lock.h>
 #include <linux/mempolicy.h>
+#include <linux/security.h>
 #include <linux/slab.h>
 #include <linux/sched/mm.h>
 #include <linux/mmu_notifier.h>
@@ -1218,6 +1220,64 @@ bool ptshare_free_pte_range(struct mmu_gather *tlb, pgtable_t ptdesc,
 	}
 
 	return false;
+}
+
+/*
+ * Mirrors can_do_mincore(): reveal the state of a file mapping only to a
+ * reader that owns the file or could open it for writing.
+ */
+static bool ptshare_may_see_file_state(struct file *file)
+{
+	return inode_owner_or_capable(&nop_mnt_idmap, file_inode(file)) ||
+	       file_permission(file, MAY_WRITE) == 0;
+}
+
+/**
+ * ptshare_hide_pt - Check whether to hide a VMA's page tables from a reader
+ * @vma: The VMA about to be walked.
+ * @cred: The reader's credentials: the opener's (file->f_cred) for procfs
+ *        files, so that a privileged reader can't be used as a confused
+ *        deputy, or current_cred() for syscalls.
+ *
+ * The PMDs of a client VMA point to PTE tables owned by the shadow MM, which
+ * hold the faults of every member of the domain. Their present, swap and
+ * young bits therefore reveal the accesses of other, possibly differently
+ * privileged, processes. Only readers with CAP_SYS_ADMIN, or who could see
+ * the file's state anyway (see can_do_mincore()), may walk them; others must
+ * get a fixed answer that doesn't depend on the shared PTEs.
+ *
+ * Every member can still tell whether its own access takes a fault, which
+ * depends on what other members have touched. That is inherent to sharing
+ * page tables.
+ *
+ * Context: Process context, may sleep. The caller holds the mmap lock or the
+ * VMA lock.
+ * Return: true if the page tables of @vma must not be walked for @cred.
+ */
+bool ptshare_hide_pt(struct vm_area_struct *vma, const struct cred *cred)
+{
+	const struct cred *old_cred;
+	bool hide;
+
+	/* Flag only (no desc check), so that this fails closed. */
+	if (!(vma->vm_flags & VM_PT_SHARED))
+		return false;
+
+	/* No audit: a denial only means that the reader gets the fixed answer */
+	if (security_capable(cred, &init_user_ns, CAP_SYS_ADMIN,
+			     CAP_OPT_NOAUDIT) == 0)
+		return false;
+
+	/* Client VMAs are always file-backed */
+	if (unlikely(!vma->vm_file))
+		return true;
+
+	/* The file permission helpers check the current credentials */
+	old_cred = override_creds(cred);
+	hide = !ptshare_may_see_file_state(vma->vm_file);
+	revert_creds(old_cred);
+
+	return hide;
 }
 unsigned long ptshare_get_mm_counter(struct mm_struct *mm, int member)
 {

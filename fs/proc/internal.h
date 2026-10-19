@@ -390,6 +390,7 @@ struct proc_maps_locking_ctx {
 struct proc_maps_private {
 	struct inode *inode;
 	struct task_struct *task;
+	const struct cred *cred;	/* opener's, pinned by the file */
 	struct vma_iterator iter;
 	loff_t last_pos;
 	struct proc_maps_locking_ctx lock_ctx;

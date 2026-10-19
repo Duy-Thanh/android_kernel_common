@@ -12,6 +12,7 @@
 
 struct mm_struct;
 struct mem_cgroup;
+struct cred;
 
 struct ptshare_desc {
 	/* The headless shadow MM for this domain */
@@ -317,6 +318,8 @@ bool ptshare_vma_skip_zap_pte_range(struct vm_area_struct *vma,
 bool ptshare_free_pte_range(struct mmu_gather *tlb, pgtable_t ptdesc,
 			   unsigned long addr);
 
+bool ptshare_hide_pt(struct vm_area_struct *vma, const struct cred *cred);
+
 /*
  * madvise() behaviors that zap the PTEs of a range and must therefore
  * unshare a client VMA first. MADV_FREE is not listed: it only supports
@@ -494,6 +497,12 @@ static inline bool ptshare_vma_skip_zap_pte_range(struct vm_area_struct *vma,
 
 static inline bool ptshare_free_pte_range(struct mmu_gather *tlb,
 					  pgtable_t ptdesc, unsigned long addr)
+{
+	return false;
+}
+
+static inline bool ptshare_hide_pt(struct vm_area_struct *vma,
+				   const struct cred *cred)
 {
 	return false;
 }

@@ -2340,7 +2340,10 @@ static int add_folio_for_migration(struct mm_struct *mm, const void __user *p,
 	addr = (unsigned long)untagged_addr_remote(mm, p);
 
 	vma = vma_lookup(mm, addr);
-	if (vma && vma_migratable(vma)) {
+	if (vma && ptshare_hide_pt(vma, current_cred())) {
+		/* Neither reveal nor move pages through shared page tables */
+		err = -ENOENT;
+	} else if (vma && vma_migratable(vma)) {
 		folio = folio_walk_start(&fw, vma, addr, FW_ZEROPAGE);
 		if (folio) {
 			err = __add_folio_for_migration(folio, node, pagelist,
@@ -2500,6 +2503,12 @@ static void do_pages_stat_array(struct mm_struct *mm, unsigned long nr_pages,
 		vma = vma_lookup(mm, addr);
 		if (!vma)
 			goto set_status;
+
+		/* Report pages behind shared page tables as not present */
+		if (ptshare_hide_pt(vma, current_cred())) {
+			err = -ENOENT;
+			goto set_status;
+		}
 
 		folio = folio_walk_start(&fw, vma, addr, FW_ZEROPAGE);
 		if (folio) {
