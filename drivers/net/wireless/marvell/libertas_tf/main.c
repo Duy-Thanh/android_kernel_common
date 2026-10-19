@@ -173,8 +173,16 @@ static int lbtf_init_adapter(struct lbtf_private *priv)
 static void lbtf_free_adapter(struct lbtf_private *priv)
 {
 	lbtf_deb_enter(LBTF_DEB_MAIN);
+<<<<<<< HEAD   (87c8d4674f774fbdb096049766110437c24c622f Merge c48308ad3551 ("xfrm: avoid RCU warnings around the per)
 	lbtf_free_cmd_buffer(priv);
 	del_timer(&priv->command_timer);
+||||||| BASE   (c48308ad35514c150a88be5c77b02d2c29a1e968 xfrm: avoid RCU warnings around the per-netns netlink socket)
+	lbtf_free_cmd_buffer(priv);
+	timer_delete_sync(&priv->command_timer);
+=======
+	timer_delete_sync(&priv->command_timer);
+	lbtf_free_cmd_buffer(priv);
+>>>>>>> BRANCH (587461ddf5d522bfcb50ebd55078c0dac37be496 Linux 5.10.271)
 	lbtf_deb_leave(LBTF_DEB_MAIN);
 }
 
