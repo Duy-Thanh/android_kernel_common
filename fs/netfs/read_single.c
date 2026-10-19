@@ -89,7 +89,6 @@ static void netfs_single_read_cache(struct netfs_io_request *rreq,
  */
 static int netfs_single_dispatch_read(struct netfs_io_request *rreq)
 {
-	struct netfs_io_stream *stream = &rreq->io_streams[0];
 	struct netfs_io_subrequest *subreq;
 	int ret = 0;
 
@@ -102,6 +101,7 @@ static int netfs_single_dispatch_read(struct netfs_io_request *rreq)
 	subreq->len	= rreq->len;
 	subreq->io_iter	= rreq->buffer.iter;
 
+<<<<<<< HEAD   (d60f3c1decbcb89e257280555fa4b0de2640502f Merge 9c6f23cf3a07 ("powerpc: fix dead default for GUEST_STA)
 	__set_bit(NETFS_SREQ_IN_PROGRESS, &subreq->flags);
 
 	spin_lock(&rreq->lock);
@@ -111,6 +111,18 @@ static int netfs_single_dispatch_read(struct netfs_io_request *rreq)
 	/* Store list pointers before active flag */
 	smp_store_release(&stream->active, true);
 	spin_unlock(&rreq->lock);
+||||||| BASE   (9c6f23cf3a07483ae180a382cea8cf33b45df1f9 powerpc: fix dead default for GUEST_STATE_BUFFER_TEST)
+	__set_bit(NETFS_SREQ_IN_PROGRESS, &subreq->flags);
+
+	spin_lock(&rreq->lock);
+	list_add_tail(&subreq->rreq_link, &stream->subrequests);
+	trace_netfs_sreq(subreq, netfs_sreq_trace_added);
+	/* Store list pointers before active flag */
+	smp_store_release(&stream->active, true);
+	spin_unlock(&rreq->lock);
+=======
+	netfs_queue_read(rreq, subreq);
+>>>>>>> BRANCH (5366199be46fb53de62861721d34ba816e7e440e netfs: Fix cancellation of a DIO and single read subrequests)
 
 	netfs_single_cache_prepare_read(rreq, subreq);
 	switch (subreq->source) {
@@ -122,10 +134,14 @@ static int netfs_single_dispatch_read(struct netfs_io_request *rreq)
 				goto cancel;
 		}
 
+		smp_wmb(); /* Write lists before ALL_QUEUED. */
+		set_bit(NETFS_RREQ_ALL_QUEUED, &rreq->flags);
 		rreq->netfs_ops->issue_read(subreq);
 		rreq->submitted += subreq->len;
 		break;
 	case NETFS_READ_FROM_CACHE:
+		smp_wmb(); /* Write lists before ALL_QUEUED. */
+		set_bit(NETFS_RREQ_ALL_QUEUED, &rreq->flags);
 		trace_netfs_sreq(subreq, netfs_sreq_trace_submit);
 		netfs_single_read_cache(rreq, subreq);
 		rreq->submitted += subreq->len;
@@ -135,14 +151,15 @@ static int netfs_single_dispatch_read(struct netfs_io_request *rreq)
 		pr_warn("Unexpected single-read source %u\n", subreq->source);
 		WARN_ON_ONCE(true);
 		ret = -EIO;
-		break;
+		goto cancel;
 	}
 
-	smp_wmb(); /* Write lists before ALL_QUEUED. */
-	set_bit(NETFS_RREQ_ALL_QUEUED, &rreq->flags);
 	return ret;
 cancel:
-	netfs_put_subrequest(subreq, netfs_sreq_trace_put_cancel);
+	netfs_cancel_read(subreq, ret);
+	smp_wmb(); /* Write lists before ALL_QUEUED. */
+	set_bit(NETFS_RREQ_ALL_QUEUED, &rreq->flags);
+	netfs_wake_collector(rreq);
 	return ret;
 }
 
