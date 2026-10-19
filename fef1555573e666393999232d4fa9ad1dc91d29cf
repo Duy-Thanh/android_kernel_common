@@ -16,6 +16,24 @@
       "message": "Please fix the warning on the patches. This is because it looks like cherry-pick was not done properly\n\n```\nThe cherry pick line does not point to the correct original commit on the base branch.\n\nExpected commit: 49a414d895c623c73305b394cc9742fa81243712\nFound commit: 3de6b80941152a384ee1b9cf88ac1c9dd4eec6dd\n\nPlease cherry-pick using: git cherry-pick -s -x 49a414d895c623c73305b394cc9742fa81243712.\n```\n\nPlease check all the patches in the series.",
       "revId": "fef1555573e666393999232d4fa9ad1dc91d29cf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18b5dcf3_abc88650",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3600567
+      },
+      "writtenOn": "2026-10-19T02:13:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1440fbc_f0d63ef4",
+      "revId": "fef1555573e666393999232d4fa9ad1dc91d29cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
