@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94b9f077_3c9f4f55",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2026-10-19T10:41:11Z",
+      "side": 1,
+      "message": "Please abandon this and pull the fix directly from Stable as UPSTREAM:\n\n(dba60d26e9dd \"futex: Avoid private hash use-after-free on final put\") [6.18.47]",
+      "revId": "51b35ed9be855a6233800438abbd338ac0cb2e34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
