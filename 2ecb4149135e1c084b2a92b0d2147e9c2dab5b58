@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b7c8929_058786a3",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-10-19T11:05:53Z",
+      "side": 1,
+      "message": "We could add an `has_mm() -\u003e bool` method on the `Task` type to avoid this. Also it should probably use an atomic read (corresponding to `READ_ONCE` since this pointer is mutable)",
+      "fixSuggestions": [
+        {
+          "fixId": "ad8c18e9_db6a5951",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/wrapfd/wrap.rs",
+              "range": {
+                "startLine": 89,
+                "startChar": 0,
+                "endLine": 90,
+                "endChar": 0
+              },
+              "replacement": "            if unsafe { core::ptr::read_volatile(\u0026raw const (*task.as_ptr()).mm) }.is_null() {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2ecb4149135e1c084b2a92b0d2147e9c2dab5b58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
