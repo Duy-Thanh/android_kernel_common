@@ -16,6 +16,24 @@
       "message": "why are these needed in android-mainline if they weren\u0027t needed in 5.15, 6.1, 6.6, 6.12 or 6.18 kernels?",
       "revId": "8e59c104eef1815326e93aa4c4a7a652db2dacbb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c11cf6e_4eb80a16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1873335
+      },
+      "writtenOn": "2026-10-19T21:14:54Z",
+      "side": 1,
+      "message": "@avtanshpandey@google.com can corroborate, but these are needed on newer kernels too; the current kernels have a bug where xbox/xinput gamepads connected via usb (as opposed to bluetooth) don\u0027t have rumble support due to the omission of those flags, which has regressed since android13-5.10 (the last version to have them). I believe the omission wasn\u0027t intentional; when aosp/1710319 and aosp/1710612 patched them directly to the 5.10 branches (which were the latest at the time in 2021/05), they just never got cherry-picked to android-mainline.",
+      "parentUuid": "5211a00e_75cec434",
+      "revId": "8e59c104eef1815326e93aa4c4a7a652db2dacbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
