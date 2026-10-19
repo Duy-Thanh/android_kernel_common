@@ -16,6 +16,24 @@
       "message": "tkjos@google.com",
       "revId": "280d2018fa82a2c43c710fd4f6b9f0e32398e42e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "967b9b4c_23f3098b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4327646
+      },
+      "writtenOn": "2026-10-19T03:36:26Z",
+      "side": 1,
+      "message": "The original change is:https://android.googlesource.com/kernel/common/+/633ab680c405ac390e6bec5b74aaf46197c837b6, but I can not find it on gerrit, so I only can cherry-pick it to android16-6.12-2026-06 with git",
+      "parentUuid": "34f87bc8_c9b58916",
+      "revId": "280d2018fa82a2c43c710fd4f6b9f0e32398e42e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
