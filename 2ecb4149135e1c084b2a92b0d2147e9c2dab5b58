@@ -34,6 +34,24 @@
       ],
       "revId": "2ecb4149135e1c084b2a92b0d2147e9c2dab5b58",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5ac0926_37961a5a",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-19T18:56:26Z",
+      "side": 1,
+      "message": "I added the method in https://android-review.git.corp.google.com/c/kernel/common/+/4359130/4/rust/kernel/task.rs. Can you please take a look?",
+      "parentUuid": "5b7c8929_058786a3",
+      "revId": "2ecb4149135e1c084b2a92b0d2147e9c2dab5b58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
