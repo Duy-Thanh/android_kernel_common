@@ -34,6 +34,24 @@
       "parentUuid": "d2f6052d_a598fb99",
       "revId": "a41e7e4e815e763edea570152ce4ae7404c1b1ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49b2e186_8dd8c90e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-10-19T22:17:20Z",
+      "side": 1,
+      "message": "I\u0027ll close this for now since there is nothing new here. However Amit, please feel free to add / remove the db845c drivers as needed in a follow up patch. Or let me know if you need me to do this. Thanks!",
+      "parentUuid": "3aded82f_06583352",
+      "revId": "a41e7e4e815e763edea570152ce4ae7404c1b1ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
