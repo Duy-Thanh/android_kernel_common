@@ -207,19 +207,18 @@ impl IoRequest {
         // disappear in the process of executing `complete()` below.
         let shared_context = Arc::clone(shared_context);
 
-        shared_context.inner.lock_irq(|mut guard| {
-            if ret < 0 && guard.io_ret == 0 {
-                guard.io_ret = ret;
-            } else if ret > 0 {
-                guard.bytes_read += ret as usize;
-            }
+        let mut guard = shared_context.inner.lock();
+        if ret < 0 && guard.io_ret == 0 {
+            guard.io_ret = ret;
+        } else if ret > 0 {
+            guard.bytes_read += ret as usize;
+        }
 
-            guard.nr_reqs -= 1;
+        guard.nr_reqs -= 1;
 
-            if guard.nr_reqs == 0 {
-                shared_context.io_done.complete_all();
-            }
-        });
+        if guard.nr_reqs == 0 {
+            shared_context.io_done.complete_all();
+        }
     }
 }
 
@@ -566,7 +565,8 @@ impl IoContext {
         // approach would be to get rid of the SpinLock altogether and use atomic operations
         // to manage the shared state, which would be possible in the current implementation but
         // not necessarily generalize to future additions.
-        let bytes_read = shared_context.inner.lock_irq(|guard| {
+        let bytes_read = {
+            let guard = shared_context.inner.lock();
             let ret = guard.io_ret;
             if ret != 0 {
                 return Err(Error::from_errno(ret as i32));
@@ -576,8 +576,8 @@ impl IoContext {
                 return Err(EINVAL);
             }
 
-            Ok(guard.bytes_read)
-        })?;
+            guard.bytes_read
+        };
 
         self.state = State::ReadDone(bytes_read);
 
