@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2f6052d_a598fb99",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-10-19T20:00:58Z",
+      "side": 1,
+      "message": "So the db845c fragment is used more generically for other QC boards, so might be good for Amit to confirm on this one. Otherwise may want to keep them. What would be the harm (this is used just for db845c module build, not GKI, right?)",
+      "revId": "a41e7e4e815e763edea570152ce4ae7404c1b1ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
