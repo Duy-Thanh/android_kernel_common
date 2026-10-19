@@ -1,0 +1,74 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f93da7df_e5332048",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-10-19T20:31:56Z",
+      "side": 1,
+      "message": "Not accurate. \"If Process A owns the buffer, Process B should not be able to load into it.\"\n\nThe current statement specifies that the failure is due to the current process not being the owner, but the real issue is that there is another owner.",
+      "fixSuggestions": [
+        {
+          "fixId": "becb2fb0_9284af0a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+              "range": {
+                "startLine": 549,
+                "startChar": 0,
+                "endLine": 550,
+                "endChar": 0
+              },
+              "replacement": "\t\t/* If Process A owns the buffer, Process B should not be able to load into it. */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "368a070628d4b64b536f96fd75603b8dc73c053b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d9db345_e0b06a01",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-10-19T20:31:56Z",
+      "side": 1,
+      "message": "Do we already have a check that wrapfd_load / lseek works when it has no owners?",
+      "fixSuggestions": [
+        {
+          "fixId": "f20a231e_9a8a9a73",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\ttest_unowned_usage(_metadata, self, fd);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "368a070628d4b64b536f96fd75603b8dc73c053b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
