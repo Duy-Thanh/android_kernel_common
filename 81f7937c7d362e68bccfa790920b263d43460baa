@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "180ed771_60f702e6",
+        "filename": "drivers/android/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-10-19T10:48:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f91e4715_734498fe",
+      "revId": "81f7937c7d362e68bccfa790920b263d43460baa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb959f0d_b3f6543e",
@@ -53,6 +71,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d7c1b8e_c565dc2b",
+        "filename": "drivers/android/tests/wrapfd_kunit.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-10-19T10:48:38Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "eb959f0d_b3f6543e",
+      "revId": "81f7937c7d362e68bccfa790920b263d43460baa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c31cc5d_27726e3c",
@@ -66,6 +102,24 @@
       "writtenOn": "2026-09-30T23:46:14Z",
       "side": 1,
       "message": "Doesn\u0027t `close_fd()` `fput()` the dmabuf file, so wouldn\u0027t this lead to a use after free since you follow it up with `dma_buf_put()`?",
+      "revId": "81f7937c7d362e68bccfa790920b263d43460baa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99391545_340e173e",
+        "filename": "drivers/android/tests/wrapfd_kunit.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-10-19T10:48:38Z",
+      "side": 1,
+      "message": "Yes, you are correct. dma_buf_fd() does not increment file\u0027s refcount. Will fix.",
+      "parentUuid": "6c31cc5d_27726e3c",
       "revId": "81f7937c7d362e68bccfa790920b263d43460baa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -87,6 +141,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89812112_7b2a81c3",
+        "filename": "drivers/android/tests/wrapfd_kunit.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-10-19T10:48:38Z",
+      "side": 1,
+      "message": "No. test_data.wrapfd was holding the last reference to dmabuf after we ran `close_fd(dmabuf_fd)`, so closing it will free the dmabuf.",
+      "parentUuid": "41215264_374fa3ef",
+      "revId": "81f7937c7d362e68bccfa790920b263d43460baa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dba54130_0f2ce548",
@@ -100,6 +172,24 @@
       "writtenOn": "2026-09-30T23:46:14Z",
       "side": 1,
       "message": "You can also ditch the `IS_ENABLED()` guard and write this as:\n\n\n```\nVISIBLE_IF_KUNIT int create_wrapfd(...)\n{\n        ...\n}\nEXPORT_SYMBOL_IF_KUNIT(create_wrapfd);\n```\n\nSo that it is only visible to external compilation units when Kunit is enabled, and so that you export the symbol only into the Kunit namespace.\n\nDitto with `empty_wrapfd()`.",
+      "revId": "81f7937c7d362e68bccfa790920b263d43460baa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20e9763c_b9e8c92d",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1791,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-10-19T10:48:38Z",
+      "side": 1,
+      "message": "I considered that but VISIBLE_IF_KUNIT only changes the visibility of the function (static vs non-static). In this case I want the function itself to be compiled out.",
+      "parentUuid": "dba54130_0f2ce548",
       "revId": "81f7937c7d362e68bccfa790920b263d43460baa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -141,6 +231,30 @@
           ]
         }
       ],
+      "revId": "81f7937c7d362e68bccfa790920b263d43460baa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7e14dfe_0876a41e",
+        "filename": "include/linux/wrapfd.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-10-19T10:48:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "885fd094_6b1c22a6",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 6
+      },
       "revId": "81f7937c7d362e68bccfa790920b263d43460baa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
