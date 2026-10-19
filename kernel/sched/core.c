@@ -1856,15 +1856,6 @@ static inline void uclamp_rq_dec(struct rq *rq, struct task_struct *p)
 {
 	enum uclamp_id clamp_id;
 
-	/*
-	 * Avoid any overhead until uclamp is actually used by the userspace.
-	 *
-	 * The condition is constructed such that a NOP is generated when
-	 * sched_uclamp_used is disabled.
-	 */
-	if (!uclamp_is_used())
-		return;
-
 	if (unlikely(!p->sched_class->uclamp_enabled))
 		return;
 
