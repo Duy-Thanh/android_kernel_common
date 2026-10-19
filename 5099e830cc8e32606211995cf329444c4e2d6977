@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08f2e73a_acd6a8f8",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-10-19T19:01:45Z",
+      "side": 1,
+      "message": "I don\u0027t think you need this match. You can just only have the body of the `Task` case.",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 9
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "dbe6b3df_163a7e30",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/wrapfd/wrap.rs",
+              "range": {
+                "startLine": 109,
+                "startChar": 0,
+                "endLine": 118,
+                "endChar": 0
+              },
+              "replacement": "        let Some(task) \u003d self.get_valid_owner() else {\n            return false;\n        };\n        task \u003d\u003d current!().group_leader()\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5099e830cc8e32606211995cf329444c4e2d6977",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
