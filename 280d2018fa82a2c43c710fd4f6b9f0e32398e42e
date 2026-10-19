@@ -34,6 +34,23 @@
       "parentUuid": "34f87bc8_c9b58916",
       "revId": "280d2018fa82a2c43c710fd4f6b9f0e32398e42e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c450c874_1e382f30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1967875
+      },
+      "writtenOn": "2026-10-19T04:18:37Z",
+      "side": 1,
+      "message": "Respin Bug: b/575218373",
+      "revId": "280d2018fa82a2c43c710fd4f6b9f0e32398e42e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
