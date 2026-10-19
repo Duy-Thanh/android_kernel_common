@@ -16,6 +16,24 @@
       "message": "So the db845c fragment is used more generically for other QC boards, so might be good for Amit to confirm on this one. Otherwise may want to keep them. What would be the harm (this is used just for db845c module build, not GKI, right?)",
       "revId": "a41e7e4e815e763edea570152ce4ae7404c1b1ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3aded82f_06583352",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-10-19T21:00:16Z",
+      "side": 1,
+      "message": "Right, we would have to list each and one of the new modules on the MODULES_OUT for the db845c target. Either option is fine with me but I took the conservative approach of not adding anything _new_. Honestly this QCOM trend has been a bit annoying (see b/574511710). But by all means if there is something new that db845c wants enabled, let\u0027s do that. I\u0027m just carrying the same state forward here.",
+      "parentUuid": "d2f6052d_a598fb99",
+      "revId": "a41e7e4e815e763edea570152ce4ae7404c1b1ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
