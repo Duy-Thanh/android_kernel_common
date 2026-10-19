@@ -11,6 +11,7 @@
 #include <linux/slab.h>
 #include <linux/bpf.h>
 #include <linux/mm.h>
+#include <linux/p3s/vma.h>
 #include <linux/netdevice.h>
 #include <linux/rtnetlink.h>
 #include <linux/idr.h>
@@ -93,18 +94,35 @@ void xdp_put_umem(struct xdp_umem *umem, bool defer_cleanup)
 
 static int xdp_umem_pin_pages(struct xdp_umem *umem, unsigned long address)
 {
+	struct mm_struct *mm = current->mm;
 	unsigned int gup_flags = FOLL_WRITE;
 	long npgs;
 	int err;
+
+	address = untagged_addr(address);
 
 	umem->pgs = kvcalloc(umem->npgs, sizeof(*umem->pgs), GFP_KERNEL | __GFP_NOWARN);
 	if (!umem->pgs)
 		return -ENOMEM;
 
-	mmap_read_lock(current->mm);
+	mmap_read_lock(mm);
+	if (mm_is_p3s_4k(mm)) {
+		struct vm_area_struct *vma = vma_lookup(mm, address);
+
+		/* vmap() cannot represent a subpage backing offset.  Keep the
+		 * check and the pin under one mmap lock so a concurrent mmap()
+		 * cannot replace a slice-zero VMA with a different file slice.
+		 */
+		if (umem->npgs != 1 || umem->size > mm_pte_size(mm) ||
+		    !vma || vma_slice_offset(vma, address)) {
+			npgs = -EOPNOTSUPP;
+			goto unlock;
+		}
+	}
 	npgs = pin_user_pages(address, umem->npgs,
 			      gup_flags | FOLL_LONGTERM, &umem->pgs[0]);
-	mmap_read_unlock(current->mm);
+unlock:
+	mmap_read_unlock(mm);
 
 	if (npgs != umem->npgs) {
 		if (npgs >= 0) {
