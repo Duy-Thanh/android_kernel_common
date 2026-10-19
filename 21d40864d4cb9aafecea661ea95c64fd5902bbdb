@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07cd811b_b7cc0879",
+        "filename": "fs/f2fs/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4879,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2026-10-19T21:00:28Z",
+      "side": 1,
+      "message": "Having this part of IOCTL would help size the queue depth dynamically in the I/O path instead of hard coding it to 4.",
+      "revId": "21d40864d4cb9aafecea661ea95c64fd5902bbdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
