@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "01620528_6e6bddb3",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-19T20:47:18Z",
+      "side": 1,
+      "message": "Understood; I\u0027ll clarify this/add another test that demonstrates that `load, map, lseek()` into an unowned buffer should work. Yes, the rules are the if a buffer is owned by another process, you cannot load into it. However, if it is unowned, then you can.",
+      "parentUuid": "f93da7df_e5332048",
+      "revId": "368a070628d4b64b536f96fd75603b8dc73c053b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8d9db345_e0b06a01",
         "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
         "patchSetId": 6
@@ -67,6 +85,24 @@
           ]
         }
       ],
+      "revId": "368a070628d4b64b536f96fd75603b8dc73c053b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0c56da6_3ebf7992",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-19T20:47:18Z",
+      "side": 1,
+      "message": "`test_lseek()` doesn\u0027t rely on ownership. However, there\u0027s no tests for loading or mapping when the buffer is unowned, which I think would be a good idea to add.",
+      "parentUuid": "8d9db345_e0b06a01",
       "revId": "368a070628d4b64b536f96fd75603b8dc73c053b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
