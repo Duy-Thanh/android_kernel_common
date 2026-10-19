@@ -51,6 +51,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e726b43e_b840998a",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-10-19T21:15:36Z",
+      "side": 1,
+      "message": "The current approach (the macro) is a GNU extension though: -std\u003dgnu99. \n\nBut it is already used in places: https://source.corp.google.com/h/android/kernel/common/+/android17-6.18:include/linux/minmax.h;l\u003d85-86;drc\u003d2b97aaf74ed534fb838d09867d09a3ca5d795208 . So I guess it should be fine...",
+      "parentUuid": "1c29af99_bc4a8034",
+      "range": {
+        "startLine": 292,
+        "startChar": 8,
+        "endLine": 292,
+        "endChar": 11
+      },
+      "revId": "d56a0cb24e09d87d15b9d1d54824f8139cb1d662",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cc922ad9_46952b40",
         "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
         "patchSetId": 1
