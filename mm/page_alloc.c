@@ -6762,16 +6762,11 @@ int __alloc_contig_migrate_range(struct compact_control *cc,
 	unsigned long total_mapped = 0;
 	unsigned long total_migrated = 0;
 	unsigned long total_reclaimed = 0;
-	bool skip_lru_cache = false;
 
 	if (cc->gfp_mask & __GFP_NORETRY)
 		max_tries = 1;
 
-	trace_android_vh_alloc_contig_range_skip_lru(
-		start, end, migratetype, cc->gfp_mask, &skip_lru_cache);
-
-	if (!skip_lru_cache)
-		lru_cache_disable();
+	lru_cache_disable();
 
 	while (pfn < end || !list_empty(&cc->migratepages)) {
 		if (fatal_signal_pending(current)) {
@@ -6815,8 +6810,7 @@ int __alloc_contig_migrate_range(struct compact_control *cc,
 			break;
 	}
 
-	if (!skip_lru_cache)
-		lru_cache_enable();
+	lru_cache_enable();
 	if (ret < 0) {
 		if (!(cc->gfp_mask & __GFP_NOWARN) && ret == -EBUSY) {
 			struct page *page;
