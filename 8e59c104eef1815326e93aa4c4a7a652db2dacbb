@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5211a00e_75cec434",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-10-19T20:34:09Z",
+      "side": 1,
+      "message": "why are these needed in android-mainline if they weren\u0027t needed in 5.15, 6.1, 6.6, 6.12 or 6.18 kernels?",
+      "revId": "8e59c104eef1815326e93aa4c4a7a652db2dacbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
