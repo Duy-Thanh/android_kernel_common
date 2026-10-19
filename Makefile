@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: GPL-2.0
 VERSION = 7
-PATCHLEVEL = 2
+PATCHLEVEL = 3
 SUBLEVEL = 0
-EXTRAVERSION =
+EXTRAVERSION = -rc1
 NAME = Baby Opossum Posse
 
 # TODO(b/575473148): temporarily report a fake v7.2-rc9 kernel version
