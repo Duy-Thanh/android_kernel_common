@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e246a6b6_8aad5e52",
+        "filename": "include/linux/wrapfd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-20T17:48:05Z",
+      "side": 1,
+      "message": "wrap file to take ownership of.",
+      "revId": "38765298a66735c63e7795b58f8c0ad6a69f5354",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "487eba46_b739027c",
+        "filename": "include/linux/wrapfd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-20T17:48:05Z",
+      "side": 1,
+      "message": "wrap file to release ownership of.",
+      "revId": "38765298a66735c63e7795b58f8c0ad6a69f5354",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
