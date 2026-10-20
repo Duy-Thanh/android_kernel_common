@@ -621,6 +621,12 @@ config BUILTIN_MODULE_RANGES
 
 config WARN_CONTEXT_ANALYSIS
 	bool "Compiler context-analysis warnings"
+	# TODO(b/571940671, b/573304683): Context Analysis / Thread Safety
+	# Analysis in clang r614150 is missing lots of recent work to enable
+	# CA/TSA for C code for the Linux kernel.  Mark as BROKEN until the
+	# next compiler release roll (r639965), where upstream TSA fixes will
+	# be included.
+	depends on BROKEN
 	depends on CC_IS_CLANG && CLANG_VERSION >= 230000
 	# Branch profiling re-defines "if", which messes with the compiler's
 	# ability to analyze __cond_acquires(..), resulting in false positives.
