@@ -34,6 +34,24 @@
       "parentUuid": "fdf4b3fc_a8023f9b",
       "revId": "4ec643ecd1b602d08e2fc892807061e46e5d228d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e586a20_3a540f82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-10-20T19:02:34Z",
+      "side": 1,
+      "message": "Started a thread upstream on this: https://lore.kernel.org/lkml/CANDhNCqyXsZ6G77z+9s\u003drTO6BZifRG9+hVxMTah+tAv6pB6h3w@mail.gmail.com/",
+      "parentUuid": "89daa768_78d871aa",
+      "revId": "4ec643ecd1b602d08e2fc892807061e46e5d228d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
