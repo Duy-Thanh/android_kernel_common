@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5343ba7_dd9345d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3386406
+      },
+      "writtenOn": "2026-10-20T17:31:51Z",
+      "side": 1,
+      "message": "vmlinux size delta from addition of simpledrm and its required aperture helper:\n\ntext     data    bss      dec     hex  filename\n  32245487 10381245 683096 43309828 294db04  baseline/vmlinux\n  32256912 10385349 683096 43325357 29517ad  simpledrm/vmlinux\n\n  • Text: +11,425 bytes\n  • Data: +4,104 bytes\n  • BSS: unchanged\n  • Total: +15,529 bytes (15.17 KiB)\n\n Component                 Size increase\n  ━━━━━━━━━━━━━━━━━━━━━━━━  ━━━━━━━━━━━━━━━\n   Text                            0.0354%\n  ────────────────────────  ───────────────\n   Data                            0.0395%\n  ────────────────────────  ───────────────\n   BSS                                  0%\n  ────────────────────────  ───────────────\n   Total reported by size          0.0359%\n  ────────────────────────  ───────────────\n   Complete vmlinux file           0.0324%",
+      "revId": "364402fd1f6f290c6f0f1c53ad54ebcc681ccf5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
