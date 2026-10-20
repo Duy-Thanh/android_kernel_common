@@ -163,6 +163,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b9949f96_e2b2bbec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2026-10-20T19:25:17Z",
+      "side": 1,
+      "message": "Again, the Keymint based implementation of generate/import/prepare is deprecated in favor of the blk-crypto ioctls.  In this backport, you\u0027ve dropped the support for the ioctls, which implies that you\u0027re implementing it in the deprecated way instead.  It\u0027s a little late for that.  Could you target this feature to 6.18 and later instead, so that the implementation will match what is being submitted upstream and won\u0027t have to be immediately reworked?",
+      "parentUuid": "d212083d_b5bf57cc",
+      "revId": "61d8dfad035d9450dc82a94c6d8e47cf8e494a71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "90e87606_167ada75",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
