@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0d81788_2fe622d7",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-20T19:55:13Z",
+      "side": 1,
+      "message": "Since this assumes this is a memory range, makes sense to add `BUG_ON(!is_memory_range(phys, size))` like in `host_mmu_unmap()` below?",
+      "revId": "a992381e32b100b20cc4fdcc7baf0114a2db31ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
