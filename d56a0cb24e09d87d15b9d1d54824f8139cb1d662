@@ -73,6 +73,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "55bfa2b8_1da4ad5f",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-10-20T11:57:36Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e726b43e_b840998a",
+      "range": {
+        "startLine": 292,
+        "startChar": 8,
+        "endLine": 292,
+        "endChar": 11
+      },
+      "revId": "d56a0cb24e09d87d15b9d1d54824f8139cb1d662",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cc922ad9_46952b40",
@@ -105,6 +129,24 @@
       "message": "Please see PS2 right now. I don\u0027t quite like this approach personally because there is a cast from `void* -\u003e int -\u003e void*`. But it is used elsewhere too: \n\nhttps://source.corp.google.com/h/android/kernel/common/+/android17-6.18:tools/testing/selftests/pidfd/pidfd_test.c;l\u003d72-134;drc\u003d2bbf47f2d396ee32068042a99ecf4da955ce88ec\n\nAlso, theoretically PTHREAD_CANCELED -1 collides with -EPERM. Nothing cancel these threads right now, so it is fine for now, but could cause mysterious issues in the future.\n\n---- AI generated text ---\nDone. Removed struct thread_call and thread_call_main(); the thread functions now have pthread\u0027s void *(*)(void *) signature and run_on_thread() passes them to pthread_create() directly, returning the result through pthread_join().",
       "parentUuid": "cc922ad9_46952b40",
       "isAi": true,
+      "revId": "d56a0cb24e09d87d15b9d1d54824f8139cb1d662",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "212e3c16_fb3cbe74",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1419,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-10-20T11:57:36Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0c77c89c_7a62d922",
       "revId": "d56a0cb24e09d87d15b9d1d54824f8139cb1d662",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
