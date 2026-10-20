@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "51ca004a_ef473f68",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-10-20T04:15:58Z",
+      "side": 1,
+      "message": "annotations like this should go above your Signed-off-by: line, using the format:\n[yangshiyou: Backported to android16-6.12, \u003cdetails on changes made to original patch to resolve collisions\u003e]\n\nAlso, you don\u0027t need to annotate adding of the bug # or change-id, but those lines should also be down with your Signed-of-by: line, under the annotation.",
+      "revId": "e5830699b791f5ce99130f2b94cce95606f0421b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "17d9a780_a2b5478f",
