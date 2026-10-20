@@ -16,6 +16,23 @@
       "message": "Hi Reviewers,\n\nThis fix resolves the ongoing production blocking issue (ticket:564216582). We would appreciate it if Google could help merge it as soon as possible.",
       "revId": "74afecc0b13fdd77af736521d45cc1f0de0f4b1b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e5fe954_a5782df9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3566351
+      },
+      "writtenOn": "2026-10-20T16:09:03Z",
+      "side": 1,
+      "message": "This module is not built. Can you land the CL under private/desktop-google/drivers/net/wireless/mediatek/mt76 as ARSP CL as DDK module?",
+      "revId": "74afecc0b13fdd77af736521d45cc1f0de0f4b1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
