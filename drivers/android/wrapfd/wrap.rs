@@ -435,6 +435,7 @@ impl Wrap {
             return Err(ENOENT);
         };
 
+        let was_writable = content.is_writable();
         match content.make_writable((rewrap_args.prot & bindings::PROT_WRITE) != 0) {
             Ok(()) => {}
             Err(err) => {
@@ -451,8 +452,9 @@ impl Wrap {
         };
 
         match result {
-            Err((err, content)) => {
-                // Restore original wrap. XXX hasn't writeability potentially changed?
+            Err((err, mut content)) => {
+                // Restore original wrap.
+                _ = content.make_writable(was_writable);
                 guard.content = Some(content);
 
                 Err(err)
