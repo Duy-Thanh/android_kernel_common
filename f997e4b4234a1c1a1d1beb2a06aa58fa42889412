@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d651c82_fe005ee4",
+        "filename": "drivers/android/bpf/bpf_fd_loader.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2026-10-20T23:33:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40aa290a_9e81bca7",
+      "revId": "f997e4b4234a1c1a1d1beb2a06aa58fa42889412",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a59f88b9_0b1ea37b",
@@ -49,6 +67,24 @@
       "writtenOn": "2026-09-16T06:55:59Z",
       "side": 1,
       "message": "You must not use `KVec` with a user-defined size because it can trigger a `WARN_ON` inside `kmalloc`. Use `KVVec` instead.",
+      "revId": "f997e4b4234a1c1a1d1beb2a06aa58fa42889412",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f232c808_e1578274",
+        "filename": "drivers/android/bpf/bpf_fd_loader.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2026-10-20T23:33:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a59f88b9_0b1ea37b",
       "revId": "f997e4b4234a1c1a1d1beb2a06aa58fa42889412",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

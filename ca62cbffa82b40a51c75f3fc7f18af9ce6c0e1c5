@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb9de3c2_f0e3f1ae",
+        "filename": "drivers/android/bpf/bpf_fd_loader.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2026-10-20T23:33:14Z",
+      "side": 1,
+      "message": "Alright, I split the logic to avoid exposing any fd in a preceding commit. Thanks again for catching this!",
+      "parentUuid": "fb9290dc_9adfc2ed",
+      "revId": "ca62cbffa82b40a51c75f3fc7f18af9ce6c0e1c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "475446f9_3da77001",
