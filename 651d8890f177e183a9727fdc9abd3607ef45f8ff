@@ -159,6 +159,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e69baa3e_395a7d5e",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-10-20T19:50:34Z",
+      "side": 1,
+      "message": "Actually `memory.h` and other headers inside `arch/x86/kvm/pkvm/` are not supposed to be included by non-hyp code?",
+      "parentUuid": "a4499dc8_2dc03a6d",
+      "revId": "651d8890f177e183a9727fdc9abd3607ef45f8ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db2562a1_d99e377c",
