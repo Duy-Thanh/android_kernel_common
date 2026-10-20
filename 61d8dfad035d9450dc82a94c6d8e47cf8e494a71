@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e6f95bca_d6b1ee92",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-10-20T17:30:12Z",
+      "side": 1,
+      "message": "Definitely not while there are outstanding issues with the patch upstream. We need to wait until that settles and a maintainer accepts it. Please work to resolve all of the issues with the upstream patch.",
+      "parentUuid": "1a21f8ab_ed57a6db",
+      "revId": "61d8dfad035d9450dc82a94c6d8e47cf8e494a71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5234eef9_1161a464",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
