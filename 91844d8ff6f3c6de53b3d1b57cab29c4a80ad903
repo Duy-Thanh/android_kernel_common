@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e10b337f_061c8a4c",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1671,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-20T18:05:33Z",
+      "side": 1,
+      "message": "Should we be keeping better track of mappables? There\u0027s nothing stopping a driver from calling put_mappable() repeatedly and zeroing out `map_count` or causing underflow.",
+      "range": {
+        "startLine": 1669,
+        "startChar": 0,
+        "endLine": 1671,
+        "endChar": 0
+      },
+      "revId": "91844d8ff6f3c6de53b3d1b57cab29c4a80ad903",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
