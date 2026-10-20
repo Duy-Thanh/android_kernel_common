@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "129ff2dd_1e36d3a3",
+        "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-10-20T08:47:52Z",
+      "side": 0,
+      "message": "Should that return an error instead?",
+      "range": {
+        "startLine": 356,
+        "startChar": 1,
+        "endLine": 356,
+        "endChar": 42
+      },
+      "revId": "43d988a9a8470fd5b80b4cb5867f391bb814b9f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
