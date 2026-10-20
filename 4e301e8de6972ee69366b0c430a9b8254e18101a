@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79077e81_a8be5fbb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5175784
+      },
+      "writtenOn": "2026-10-20T12:28:09Z",
+      "side": 1,
+      "message": "Tested on QEMU x86_64 with the 6.12 backport (cgroup v1, lru_gen disabled,\nTHP always, 1G swapfile, 2 processes over the memcg limit):\n\nWithout patch:   \n  Swap: 1.0Gi  609Mi used  414Mi free   (/proc/swaps Used: 623924 KB)\nWith patch:\n  Swap: 1.0Gi  251Mi used  772Mi free   (/proc/swaps Used: 257768 KB)\n\nMemory pressure was the same in both runs (Mem used 1.8Gi, free 73Mi).\nSwap usage drops by ~59%, consistent with the upstream results.",
+      "revId": "4e301e8de6972ee69366b0c430a9b8254e18101a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
