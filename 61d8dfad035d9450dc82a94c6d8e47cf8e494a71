@@ -127,6 +127,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d212083d_b5bf57cc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5201498
+      },
+      "writtenOn": "2026-10-20T09:18:33Z",
+      "side": 1,
+      "message": "Thanks. I think there may be two separate aspects here: key generation/preparation and the virtio-blk inline encryption interface.\n\nThe KeyMint-based implementation is involved in wrapped-key generation/import and preparation. However, the proposed virtio-blk interface is not limited to those operations. It also defines how a prepared key is programmed into or evicted from a keyslot, as well as how encrypted I/O is submitted. These operations are independent of whether the key was generated/prepared through KeyMint or through the Linux kernel ioctl interface.\n\nTaking the raw-key case as a simple example, although raw keys are generally not used in our deployment, the same virtio-blk keyslot-management commands and encrypted I/O path would still apply without involving KeyMint-based key generation/preparation.\n\nCould you clarify whether your concern is specifically about the key provisioning mechanism, or whether you see a dependency on KeyMint in the proposed virtio-blk interface itself?",
+      "parentUuid": "040fb5ea_fa2c3f4a",
+      "revId": "61d8dfad035d9450dc82a94c6d8e47cf8e494a71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "90e87606_167ada75",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
