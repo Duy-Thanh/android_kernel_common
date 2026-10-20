@@ -748,6 +748,16 @@ static int queue_folios_pte_range(pmd_t *pmd, unsigned long addr,
 				continue;
 			qp->large = folio;
 		}
+		/*
+		 * A folio mapped through shared page tables is mapped once, by
+		 * the shadow MM, however many processes use it, so
+		 * migrate_folio_add() would take it for an exclusive folio.
+		 * Treat it as shared: move it only for MPOL_MF_MOVE_ALL, and do
+		 * not count it as a failure.
+		 */
+		if (vma_is_ptshare_client(vma) &&
+		    (flags & (MPOL_MF_MOVE | MPOL_MF_MOVE_ALL)) == MPOL_MF_MOVE)
+			continue;
 		if (!(flags & (MPOL_MF_MOVE | MPOL_MF_MOVE_ALL)) ||
 		    !vma_migratable(vma) ||
 		    !migrate_folio_add(folio, qp->pagelist, flags)) {
