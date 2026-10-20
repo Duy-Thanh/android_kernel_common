@@ -200,6 +200,14 @@ struct ptshare_desc *ptshare_alloc_desc(void)
 	/* Shadow MM is also marked as shadow by pointing its desc back to itself */
 	rcu_assign_pointer(desc->ptshare_mm->ptshare_desc, desc);
 
+	/*
+	 * Let MGLRU walk the shared page tables once, through the mm that owns
+	 * them; its walks skip client VMAs. The shadow goes on the list of the
+	 * creator's memcg (see ptshare_shadow_memcg()), which also pins that
+	 * memcg until __mmput() removes the shadow again.
+	 */
+	lru_gen_add_mm(desc->ptshare_mm);
+
 	return desc;
 
 free_mm:
