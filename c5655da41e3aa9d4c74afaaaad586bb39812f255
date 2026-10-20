@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd294af1_88877622",
+        "filename": "include/linux/wrapfd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-20T00:29:09Z",
+      "side": 1,
+      "message": "These functions should also use `-EOPNOTSUPP`?",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 1
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2fcf7680_f9a7df7d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/wrapfd.h",
+              "range": {
+                "startLine": 128,
+                "startChar": 0,
+                "endLine": 129,
+                "endChar": 0
+              },
+              "replacement": "\treturn -EOPNOTSUPP;\n"
+            },
+            {
+              "path": "include/linux/wrapfd.h",
+              "range": {
+                "startLine": 133,
+                "startChar": 0,
+                "endLine": 134,
+                "endChar": 0
+              },
+              "replacement": "\treturn -EOPNOTSUPP;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c5655da41e3aa9d4c74afaaaad586bb39812f255",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
