@@ -632,6 +632,16 @@ static long madvise_cold(struct madvise_behavior *madv_behavior)
 	if (!can_madv_lru_vma(vma))
 		return -EINVAL;
 
+	/*
+	 * A folio mapped through shared page tables is mapped once, by the
+	 * shadow MM, however many processes use it. The page table walk
+	 * would take it for a folio that only this mm maps, and age, split
+	 * or reclaim it for every process in the domain. Leave such folios
+	 * alone, as the walk leaves folios mapped by other processes.
+	 */
+	if (vma_is_ptshare_client(vma))
+		return 0;
+
 	lru_add_drain();
 	tlb_gather_mmu(&tlb, madv_behavior->mm);
 	madvise_cold_page_range(&tlb, madv_behavior);
@@ -674,6 +684,10 @@ static long madvise_pageout(struct madvise_behavior *madv_behavior)
 
 	if (!can_madv_lru_vma(vma))
 		return -EINVAL;
+
+	/* See madvise_cold(). */
+	if (vma_is_ptshare_client(vma))
+		return 0;
 
 	/*
 	 * If the VMA belongs to a private file mapping, there can be private
