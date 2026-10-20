@@ -39,6 +39,30 @@
       },
       "revId": "0f4863fc169200a4b8d65f2bbeee5656ff672bc9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da914ff7_5e1b966d",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-10-20T16:16:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b480e6cf_53b94bec",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 28
+      },
+      "revId": "0f4863fc169200a4b8d65f2bbeee5656ff672bc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
