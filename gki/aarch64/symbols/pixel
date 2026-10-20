@@ -1080,6 +1080,9 @@
   fwnode_typec_mux_get
   fwnode_typec_switch_get
   gcd
+  gcma_alloc_range
+  gcma_free_range
+  gcma_stat_get
   generic_device_group
   generic_file_llseek
   generic_handle_domain_irq
@@ -2100,6 +2103,7 @@
   register_chrdev_region
   register_console
   register_die_notifier
+  register_gcma_area
   register_inet6addr_notifier
   register_inetaddr_notifier
   register_kretprobe
