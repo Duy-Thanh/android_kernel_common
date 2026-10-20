@@ -1,0 +1,102 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0a04b0f_bebe6d19",
+        "filename": "drivers/android/tests/wrapfd_kunit.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-20T19:08:06Z",
+      "side": 1,
+      "message": "s/Cleancache/wrapfd driver.",
+      "revId": "d1f2f9895aa8c07603e76d419683138a4afa587e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b42c0767_d164d17d",
+        "filename": "drivers/android/tests/wrapfd_kunit.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-20T19:08:06Z",
+      "side": 1,
+      "message": "nit: remove extra space between return and err",
+      "fixSuggestions": [
+        {
+          "fixId": "688c4db4_bb33bc0c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/tests/wrapfd_kunit.c",
+              "range": {
+                "startLine": 138,
+                "startChar": 0,
+                "endLine": 139,
+                "endChar": 0
+              },
+              "replacement": "\t\treturn err;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d1f2f9895aa8c07603e76d419683138a4afa587e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ba3ff1d_e24286f0",
+        "filename": "drivers/android/tests/wrapfd_kunit.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-20T19:08:06Z",
+      "side": 1,
+      "message": "This is run before each test case, but it feels like it should be part of the suite initialization since it doesn\u0027t change across tests?",
+      "range": {
+        "startLine": 200,
+        "startChar": 0,
+        "endLine": 207,
+        "endChar": 0
+      },
+      "revId": "d1f2f9895aa8c07603e76d419683138a4afa587e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0be624d_5c9af385",
+        "filename": "drivers/android/tests/wrapfd_kunit.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-20T19:08:06Z",
+      "side": 1,
+      "message": "Should this just be its own test case?",
+      "range": {
+        "startLine": 209,
+        "startChar": 0,
+        "endLine": 212,
+        "endChar": 27
+      },
+      "revId": "d1f2f9895aa8c07603e76d419683138a4afa587e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
