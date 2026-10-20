@@ -16,6 +16,24 @@
       "message": "is this used in this commit?",
       "revId": "3cece1d4c2a5be525a4d6c5165a3ab6104f1169a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9a0a468_f657565f",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-10-20T18:01:41Z",
+      "side": 1,
+      "message": "Hi @zhangkelvin@google.com,\n\nIt\u0027s used by `__oom_kill_process()` `oom_reap_task_mm()` below.",
+      "parentUuid": "eb0ba691_470a178e",
+      "revId": "3cece1d4c2a5be525a4d6c5165a3ab6104f1169a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
