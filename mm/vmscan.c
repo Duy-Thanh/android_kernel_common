@@ -50,6 +50,7 @@
 #include <linux/dax.h>
 #include <linux/psi.h>
 #include <linux/pagewalk.h>
+#include <linux/ptshare.h>
 #include <linux/shmem_fs.h>
 #include <linux/ctype.h>
 #include <linux/debugfs.h>
@@ -3091,7 +3092,13 @@ static struct mm_struct *get_next_mm(struct lru_gen_mm_walk *walk)
 	mm = list_entry(mm_state->head, struct mm_struct, lru_gen.list);
 	key = pgdat->node_id % BITS_PER_TYPE(mm->lru_gen.bitmap);
 
-	if (!walk->force_scan && !test_bit(key, &mm->lru_gen.bitmap))
+	/*
+	 * A ptshare shadow mm never runs, so its bit is never set when it is
+	 * switched in. It stands in for every member of its domain, whose own
+	 * walks skip the shared VMAs, so always walk it.
+	 */
+	if (!walk->force_scan && !mm_is_ptshare_shadow(mm) &&
+	    !test_bit(key, &mm->lru_gen.bitmap))
 		return NULL;
 
 	clear_bit(key, &mm->lru_gen.bitmap);
@@ -3534,6 +3541,13 @@ static int should_skip_vma(unsigned long start, unsigned long end, struct mm_wal
 	struct lru_gen_mm_walk *walk = args->private;
 
 	if (!vma_is_accessible(vma))
+		return true;
+
+	/*
+	 * The PTE tables of a ptshare client VMA belong to the domain's shadow
+	 * mm, which is walked once on behalf of all members.
+	 */
+	if (vma_is_ptshare_client(vma))
 		return true;
 
 	if (is_vm_hugetlb_page(vma))
