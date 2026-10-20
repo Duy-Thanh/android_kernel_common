@@ -34,6 +34,47 @@
       "parentUuid": "eb0ba691_470a178e",
       "revId": "3cece1d4c2a5be525a4d6c5165a3ab6104f1169a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21330512_9a54f7bf",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2026-10-20T20:33:02Z",
+      "side": 1,
+      "message": "could we add a comment about how DIV_ROUND_UP prevents overcounting in 4kb process?",
+      "range": {
+        "startLine": 251,
+        "startChar": 10,
+        "endLine": 253,
+        "endChar": 35
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e4da82a6_d1a76455",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/oom_kill.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\t * DIV_ROUND_UP helps to account for 4kb processes.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3cece1d4c2a5be525a4d6c5165a3ab6104f1169a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
