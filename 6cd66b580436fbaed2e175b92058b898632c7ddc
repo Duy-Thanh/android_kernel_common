@@ -34,6 +34,24 @@
       "parentUuid": "e3b60afa_f14b5ab8",
       "revId": "6cd66b580436fbaed2e175b92058b898632c7ddc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a22cd1bc_a0201faf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1898165
+      },
+      "writtenOn": "2026-10-20T08:22:20Z",
+      "side": 1,
+      "message": "Can we merge this patch or more info is needed?",
+      "parentUuid": "a423c1b8_b231ace3",
+      "revId": "6cd66b580436fbaed2e175b92058b898632c7ddc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
