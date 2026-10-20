@@ -16,6 +16,24 @@
       "message": "fwiw, gemini said this:\n```\nIts .balign 8 sits before __module_cert_end, so the zero padding lands inside the certificate list that x509_load_certificate_list() walks. After the module cert, the loader finds either fewer than 4 bytes left or a first byte that isn\u0027t 0x30, and bails out (dodgy_cert):\n\n  • On GKI (SYSTEM_TRUSTED_KEYS\u003d\"\"): every boot logs \"Problem parsing in-kernel X.509 certificate list\".\n  • On configs with SYSTEM_TRUSTED_KEYS or a cert added by insert-sys-cert: the certificates after the module cert are silently never loaded.\n\n  Its commit message says trailing zeros don\u0027t upset OpenSSL, but this is the kernel\u0027s own parser, which does reject them. Worth raising on that change.\n```\n\nNot sure if it\u0027s worth looking into though.",
       "revId": "6c7499c36f5bf84826ae732543bc18e7eaf9f4e3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98ddcff6_8962c378",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-10-20T21:15:44Z",
+      "side": 1,
+      "message": "so I guess is not worth looking into.",
+      "parentUuid": "1431dc29_20b73364",
+      "revId": "6c7499c36f5bf84826ae732543bc18e7eaf9f4e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
