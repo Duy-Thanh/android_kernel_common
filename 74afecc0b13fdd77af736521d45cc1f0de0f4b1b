@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "150f657e_f2157eb7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2001325
+      },
+      "writtenOn": "2026-10-20T07:26:46Z",
+      "side": 1,
+      "message": "Hi Reviewers,\n\nThis fix resolves the ongoing production blocking issue (ticket:564216582). We would appreciate it if Google could help merge it as soon as possible.",
+      "revId": "74afecc0b13fdd77af736521d45cc1f0de0f4b1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
