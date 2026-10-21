@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd91f6e1_59e09880",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-21T17:09:14Z",
+      "side": 1,
+      "message": "Please address the following issue:\n\nKernelCommit\nCommit does not refer to the upstream commit. Please add a line like \u0027(cherry pi... \n🌐 Public\n File a bug\n /COMMIT_MSG\nCommit does not refer to the upstream commit.\nPlease add a line like \u0027(cherry picked from commit \u003cfull-sha1\u003e \u003crepo\u003e \u003cbranch\u003e)\u0027.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\nI guess you\u0027re missing the full-sha?",
+      "revId": "cc7cb885d8892e592faf723ae1768a3741c42e25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
