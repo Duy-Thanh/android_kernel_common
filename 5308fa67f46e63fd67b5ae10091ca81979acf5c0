@@ -152,6 +152,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "79fb64f5_60e743a0",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-10-21T20:25:35Z",
+      "side": 1,
+      "message": "marking as unresolved in case you have further questions.",
+      "parentUuid": "bb7a1c0f_29297b49",
+      "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8bc50cf4_f057c110",
         "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
         "patchSetId": 2
@@ -218,6 +236,30 @@
         "endChar": 64
       },
       "isAi": true,
+      "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a528a1e5_216f14a1",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 994,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-10-21T20:25:35Z",
+      "side": 1,
+      "message": "Marked as unresolved.",
+      "parentUuid": "3731b317_f385fc77",
+      "range": {
+        "startLine": 984,
+        "startChar": 1,
+        "endLine": 994,
+        "endChar": 64
+      },
       "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
