@@ -1,4 +1,5 @@
 [abi_symbol_list]
+  abort_creds
   add_device_randomness
   add_memory_driver_managed
   addrconf_add_linklocal
@@ -1264,6 +1265,7 @@
   folio_wait_private_2_killable
   folio_wait_writeback
   folio_wait_writeback_killable
+  follow_down
   follow_pfnmap_end
   follow_pfnmap_start
   __fortify_panic
@@ -1373,6 +1375,7 @@
   gether_disconnect
   gether_get_dev_addr
   gether_get_host_addr
+  gether_get_host_addr_cdc
   gether_get_host_addr_u8
   gether_get_ifname
   gether_get_qmult
@@ -1384,6 +1387,8 @@
   gether_set_qmult
   gether_setup_name_default
   get_inode_acl
+  get_max_files
+  getname_kernel
   get_net_ns_by_fd
   get_net_ns_by_pid
   get_pid_task
@@ -1445,6 +1450,9 @@
   gro_cells_destroy
   gro_cells_init
   gro_cells_receive
+  groups_alloc
+  groups_free
+  groups_sort
   guid_gen
   guid_null
   handle_bad_irq
@@ -1626,6 +1634,7 @@
   inode_set_bytes
   inode_set_ctime_current
   inode_set_flags
+  inode_to_bdi
   input_alloc_absinfo
   input_allocate_device
   input_close_device
@@ -1766,6 +1775,7 @@
   kernel_accept
   kernel_bind
   kernel_connect
+  kernel_getpeername
   kernel_kobj
   kernel_listen
   kernel_neon_begin
@@ -1912,6 +1922,11 @@
   load_nls_default
   __local_bh_enable_ip
   lockref_get
+  lock_rename_child
+  locks_alloc_lock
+  locks_delete_block
+  locks_free_lock
+  locks_init_lock
   locks_lock_inode_wait
   lock_sock_nested
   lock_two_nondirectories
@@ -1924,6 +1939,7 @@
   look_up_OID
   lookup_one
   lookup_one_len
+  lookup_one_qstr_excl
   lookup_positive_unlocked
   lookup_user_key
   LZ4_compress_fast
@@ -1945,6 +1961,7 @@
   match_strdup
   match_string
   match_token
+  match_wildcard
   mbox_chan_received_data
   mbox_client_txdone
   mbox_controller_register
@@ -2652,6 +2669,7 @@
   pm_suspend_target_state
   pm_system_wakeup
   pm_wakeup_dev_event
+  posix_acl_alloc
   posix_acl_chmod
   posix_acl_create
   posix_clock_register
@@ -2709,6 +2727,7 @@
   put_disk
   put_fs_context
   put_iova_domain
+  putname
   __put_net
   put_pid
   __put_task_struct
@@ -3084,11 +3103,13 @@
   set_direct_map_invalid_noflush
   set_disk_ro
   set_freezable
+  set_groups
   set_memory_encrypted
   set_nlink
   set_normalized_timespec64
   set_page_dirty
   __SetPageMovable
+  set_posix_acl
   setup_udp_tunnel_sock
   set_user_nice
   sg_alloc_table
@@ -3417,6 +3438,8 @@
   sock_release
   sock_rfree
   sock_sendmsg
+  sock_set_reuseaddr
+  sock_set_sndtimeo
   sock_setsockopt
   __sock_tx_timestamp
   sock_unregister
@@ -3854,6 +3877,7 @@
   usb_check_bulk_endpoints
   usb_check_int_endpoints
   usb_clear_halt
+  usb_composite_overwrite_options
   usb_composite_probe
   usb_composite_unregister
   usb_control_msg
@@ -3933,6 +3957,8 @@
   usb_mon_deregister
   usb_mon_register
   usb_os_desc_prepare_interf_dir
+  usb_otg_descriptor_alloc
+  usb_otg_descriptor_init
   usb_phy_set_charger_current
   usb_phy_set_event
   usb_poison_urb
@@ -3988,6 +4014,7 @@
   usb_stor_suspend
   usb_stor_transparent_scsi_command
   usb_string
+  usb_string_ids_tab
   usb_submit_urb
   usb_unanchor_urb
   usb_unlink_urb
@@ -4001,8 +4028,12 @@
   usleep_range_state
   utf16s_to_utf8s
   utf32_to_utf8
+  utf8_casefold
+  utf8_load
   utf8s_to_utf16s
+  utf8_strncasecmp
   utf8_to_utf32
+  utf8_unload
   uuid_gen
   uuid_null
   uuid_parse
@@ -4092,9 +4123,11 @@
   vfs_link
   vfs_listxattr
   vfs_llseek
+  vfs_lock_file
   vfs_mkdir
   vfs_parse_fs_string
   vfs_path_lookup
+  vfs_path_parent_lookup
   vfs_remove_acl
   vfs_removexattr
   vfs_rename
