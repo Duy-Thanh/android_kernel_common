@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39e28212_1aaa4405",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 804,
+      "author": {
+        "id": 1014088
+      },
+      "writtenOn": "2026-10-21T19:41:35Z",
+      "side": 1,
+      "message": "I know this is just a test, but do you want to free this memory regardless of the test outcome below?",
+      "revId": "12d8c94ae3e2c9af1bd521c0115151e8d48bb609",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
