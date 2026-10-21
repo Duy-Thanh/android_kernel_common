@@ -1,0 +1,296 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "543f6da8_67210361",
+        "filename": "tools/testing/selftests/drivers/wrapfd/load_gate.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-21T17:58:52Z",
+      "side": 1,
+      "message": "Why not use the wrapfd?",
+      "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5681887f_43e1c06f",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-21T17:58:52Z",
+      "side": 1,
+      "message": "How would this happen?",
+      "range": {
+        "startLine": 366,
+        "startChar": 0,
+        "endLine": 367,
+        "endChar": 12
+      },
+      "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "901834e9_d7ee6147",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 866,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-21T17:58:52Z",
+      "side": 1,
+      "message": "This isn\u0027t valid after aosp/4356148, since mappings are not inherited across fork.",
+      "range": {
+        "startLine": 866,
+        "startChar": 2,
+        "endLine": 866,
+        "endChar": 55
+      },
+      "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb7a1c0f_29297b49",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-21T17:58:52Z",
+      "side": 1,
+      "message": "`worker_exit()` uncondtionally exits with status code 0, so how can the parent tell that this is different from success? Actually, it seems like the parent would just get stuck waiting forever, no?",
+      "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bc50cf4_f057c110",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 994,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-21T17:58:52Z",
+      "side": 1,
+      "message": "It would probably be a good idea to ensure that the memory after being rewrapped is indeed cleared as is the case here: aosp/4349070",
+      "range": {
+        "startLine": 984,
+        "startChar": 1,
+        "endLine": 994,
+        "endChar": 64
+      },
+      "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82f57b07_15373987",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1370,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-21T17:58:52Z",
+      "side": 1,
+      "message": "dmabuf_fd?",
+      "range": {
+        "startLine": 1370,
+        "startChar": 6,
+        "endLine": 1370,
+        "endChar": 14
+      },
+      "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07fcc195_140789b2",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1459,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-21T17:58:52Z",
+      "side": 1,
+      "message": "All these tests should be skipped if there is no system heap.",
+      "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fee76473_bd2cfc46",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1476,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-21T17:58:52Z",
+      "side": 1,
+      "message": "Shouldn\u0027t these threads also `close(w);`? I\u0027m also not a big fan of single letter names when the rest of the file alludes to wrapfds as `wrapfd`.",
+      "fixSuggestions": [
+        {
+          "fixId": "21b6c15f_e834917f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\tASSERT_EQ(0, close(n));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d43bb5a_73566abf",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1726,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-21T17:58:52Z",
+      "side": 1,
+      "message": "I don\u0027t think this is needed after aosp/4371411",
+      "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a2e26f9_05a29298",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1746,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-21T17:58:52Z",
+      "side": 1,
+      "message": "Same as above",
+      "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5375725_7e611c4c",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1789,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-21T17:58:52Z",
+      "side": 1,
+      "message": "Already implemented with aosp/4371411",
+      "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33d6f5a1_edcb98a4",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1880,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-21T17:58:52Z",
+      "side": 1,
+      "message": "aosp/4359130?",
+      "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c92bb2d8_6cfd6089",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1983,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-21T17:58:52Z",
+      "side": 1,
+      "message": "This seems identical to some of the other functions that were added earlier, but they just take in the probe structure. This feels like unnecessary bloat; why not just use the functions that were defined before?",
+      "range": {
+        "startLine": 1958,
+        "startChar": 0,
+        "endLine": 1983,
+        "endChar": 1
+      },
+      "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a31f2e28_0b880c4e",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2022,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-21T17:58:52Z",
+      "side": 1,
+      "message": "Do we need this and subsequent log statements? If this fails, the whole test fails rather loudly?",
+      "range": {
+        "startLine": 2022,
+        "startChar": 0,
+        "endLine": 2022,
+        "endChar": 40
+      },
+      "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
