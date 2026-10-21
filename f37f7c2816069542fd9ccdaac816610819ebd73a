@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48ea0e4f_d0f46a6e",
+        "filename": "drivers/android/wrapfd/content.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-21T23:02:05Z",
+      "side": 1,
+      "message": "I think this is too early/it also affects the initial wrapping path. I believe this should happen once we\u0027re sure we can\u0027t fail in the `rewrap()` path.",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 22
+      },
+      "revId": "f37f7c2816069542fd9ccdaac816610819ebd73a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
