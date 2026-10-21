@@ -795,6 +795,34 @@ static void test_wrap_remap(struct __test_metadata *_metadata,
 	close(wrapfd);
 }
 
+static int proc_find_mapping(unsigned long start, size_t size, bool *mapping_found)
+{
+	const size_t page_size = getpagesize();
+	const unsigned long aligned_start = ALIGN_DOWN(start, page_size);
+	const unsigned long aligned_end = ALIGN(start + size, page_size);
+	const size_t aligned_len = aligned_end - aligned_start;
+	unsigned char *vec = malloc((aligned_len / page_size) * sizeof(*vec));
+	int ret;
+
+	if (!vec)
+		return -1;
+
+	ret = mincore((void *)aligned_start, aligned_len, vec);
+	if (!ret) {
+		*mapping_found = true;
+		return 0;
+	}
+
+	/* mincore() fails with ENOMEM given an unmapped address range. */
+	if (errno == ENOMEM) {
+		*mapping_found = false;
+		return 0;
+	}
+
+	free(vec);
+	return -1;
+}
+
 static void test_wrap_fork(struct __test_metadata *_metadata,
 			   FIXTURE_DATA(wrapfd_tests) *self, int fd)
 {
@@ -812,22 +840,23 @@ static void test_wrap_fork(struct __test_metadata *_metadata,
 		   wrapfd, 0);
 	ASSERT_NE(ptr, MAP_FAILED);
 
-	/* Ensure that the mapping is not copied */
+	/* Ensure that the mapping is not inherited */
 	pid = fork();
 	ASSERT_FALSE(pid < 0);
 	if (pid == 0) {
-		/*
-		 * The mapping should not be inherited, so this should trigger a segfault and
-		 * terminate the process, so control should not get to the exit statement.
-		 *
-		 * Use volatile to ensure this isn't optimized out.
-		 */
-		(void)*(volatile char *)ptr;
-		exit(EXIT_FAILURE);
+		bool mapping_found;
+
+		if (proc_find_mapping((unsigned long)ptr, self->size, &mapping_found) < 0)
+			status = EXIT_FAILURE;
+		else
+			status = mapping_found ? EXIT_FAILURE : EXIT_SUCCESS;
+
+		close(wrapfd);
+		exit(status);
 	} else {
 		ASSERT_NE(wait(&status), -1);
-		ASSERT_TRUE(WIFSIGNALED(status));
-		ASSERT_EQ(WTERMSIG(status), SIGSEGV);
+		ASSERT_TRUE(WIFEXITED(status));
+		ASSERT_EQ(WEXITSTATUS(status), 0);
 	}
 
 	pid = fork();
