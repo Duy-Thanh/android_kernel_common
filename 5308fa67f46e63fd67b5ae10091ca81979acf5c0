@@ -18,6 +18,25 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66941ed4_206c3c37",
+        "filename": "tools/testing/selftests/drivers/wrapfd/load_gate.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-10-21T20:43:14Z",
+      "side": 1,
+      "message": "Done: the fence is now imported through the wrap fd, which forwards the ioctl to its dma-buf, so load_gate_hold() and hold_load() no longer take the dma-buf fd.",
+      "parentUuid": "543f6da8_67210361",
+      "isAi": true,
+      "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5681887f_43e1c06f",
@@ -283,6 +302,31 @@
         "endLine": 1370,
         "endChar": 14
       },
+      "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc92672a_80b5d27f",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1370,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-10-21T20:43:14Z",
+      "side": 1,
+      "message": "Gone: new_wrap() no longer hands back the dma-buf fd. Only the LOAD gate used it, and the gate now imports its fence through the wrap (load_gate.h).",
+      "parentUuid": "82f57b07_15373987",
+      "range": {
+        "startLine": 1370,
+        "startChar": 6,
+        "endLine": 1370,
+        "endChar": 14
+      },
+      "isAi": true,
       "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
