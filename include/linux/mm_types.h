@@ -924,15 +924,17 @@ struct vm_area_struct {
 #ifdef __HAVE_PFNMAP_TRACKING
 	struct pfnmap_track_ctx *pfnmap_track_ctx;
 #endif
+
 #ifdef CONFIG_PTSHARE
-	union {
+	ANDROID_KABI_USE(1, union {
 		/* For client VMAs: pointer to domain */
 		struct ptshare_desc *__vm_ptshare_desc;
-		refcount_t __vm_ptshare_refcount;  /* For shadow VMAs: number of clients */
-	};
-#endif
-
+		/* For shadow VMAs: number of clients */
+		refcount_t __vm_ptshare_refcount;
+	});
+#else
 	ANDROID_KABI_RESERVE(1);
+#endif
 	ANDROID_KABI_RESERVE(2);
 	ANDROID_KABI_RESERVE(3);
 	ANDROID_KABI_RESERVE(4);
@@ -1174,10 +1176,6 @@ struct mm_struct {
 #ifdef CONFIG_MMU_NOTIFIER
 		struct mmu_notifier_subscriptions *notifier_subscriptions;
 #endif
-#ifdef CONFIG_PTSHARE
-		struct ptshare_desc __rcu *ptshare_desc;
-		atomic_t ptshare_vmas;
-#endif
 #if defined(CONFIG_TRANSPARENT_HUGEPAGE) && !defined(CONFIG_SPLIT_PMD_PTLOCKS)
 		pgtable_t pmd_huge_pte; /* protected by page_table_lock */
 #endif
@@ -1256,8 +1254,13 @@ struct mm_struct {
 
 		struct task_dma_buf_info *dmabuf_info;
 
+#ifdef CONFIG_PTSHARE
+		ANDROID_KABI_USE(1, atomic_t ptshare_vmas);
+		ANDROID_BACKPORT_USE(1, struct ptshare_desc __rcu *ptshare_desc);
+#else
 		ANDROID_KABI_RESERVE(1);
 		ANDROID_BACKPORT_RESERVE(1);
+#endif
 		ANDROID_VENDOR_DATA(1);
 	} __randomize_layout;
 
