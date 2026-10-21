@@ -42,6 +42,7 @@
 #include <linux/completion.h>
 #include <linux/suspend.h>
 #include <linux/zswap.h>
+#include <linux/hmb_pagefile.h>
 #include <linux/page_size_compat.h>
 
 #include <asm/tlbflush.h>
@@ -1015,6 +1016,9 @@ static void swap_range_free(struct swap_info_struct *si, unsigned long offset,
 	while (offset <= end) {
 		arch_swap_invalidate_page(si->type, offset);
 		zswap_invalidate(si->type, offset);
+#ifdef CONFIG_HMB_PAGEFILE
+		hmb_pagefile_free(swp_entry(si->type, offset));
+#endif
 		if (swap_slot_free_notify)
 			swap_slot_free_notify(si->bdev, offset);
 		offset++;
