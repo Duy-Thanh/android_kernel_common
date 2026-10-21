@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f929d400_8804b108",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-10-21T16:20:54Z",
+      "side": 1,
+      "message": "You need your own signed-off-by with a comment on what you changed to backport this change. Something like:\n\n[minhuachen: blah blah...}",
+      "revId": "e3c7a9b50b7e5f90b1540e15af991b9c4e44b617",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
