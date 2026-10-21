@@ -1,6 +1,46 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "93d4a9bb_a9fc879f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-10-21T16:11:21Z",
+      "side": 1,
+      "message": "Duplicate, just the one below is needed. Pls remove.",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 63
+      },
+      "revId": "ccda806aaa6b1363aca7159ebd01fee907e97817",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be24da8d_22adb9f2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-10-21T16:11:21Z",
+      "side": 1,
+      "message": "Pls remove this one.",
+      "revId": "ccda806aaa6b1363aca7159ebd01fee907e97817",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e27efc53_9e3cf300",
