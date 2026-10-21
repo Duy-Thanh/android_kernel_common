@@ -1356,4 +1356,17 @@ config LOCK_MM_AND_FIND_VMA
 
 source "mm/damon/Kconfig"
 
+
+config HMB_PAGEFILE
+	bool "Haven Memory Bus (HMB) Native Android Paging Engine"
+	depends on SWAP
+	default y
+	help
+	  Enables native arithmetic-first virtual memory paging and Tier 2
+	  z-Pack in-RAM deduplication based on HMB Spec 2.0 for Android.
+	  Bypasses the generic block layer and elevator queueing for swap
+	  operations, eliminating PSI memory stall latency and background
+	  app kills by lmkd.
+	  If unsure, say Y.
+
 endmenu

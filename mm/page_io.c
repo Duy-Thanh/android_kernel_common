@@ -25,6 +25,7 @@
 #include <linux/sched/task.h>
 #include <linux/delayacct.h>
 #include <linux/zswap.h>
+#include <linux/hmb_pagefile.h>
 #include "swap.h"
 
 #undef CREATE_TRACE_POINTS
@@ -198,6 +199,14 @@ int swap_writepage(struct page *page, struct writeback_control *wbc)
 		folio_unlock(folio);
 		return ret;
 	}
+#ifdef CONFIG_HMB_PAGEFILE
+	if (hmb_pagefile_store(folio)) {
+		folio_start_writeback(folio);
+		folio_unlock(folio);
+		folio_end_writeback(folio);
+		return 0;
+	}
+#endif
 	if (zswap_store(folio)) {
 		folio_start_writeback(folio);
 		folio_unlock(folio);
@@ -550,6 +559,14 @@ void swap_readpage(struct page *page, bool synchronous, struct swap_iocb **plug)
 	}
 	delayacct_swapin_start();
 
+#ifdef CONFIG_HMB_PAGEFILE
+	if (hmb_pagefile_load(folio)) {
+		folio_mark_uptodate(folio);
+		folio_unlock(folio);
+		goto finish_read;
+	}
+#endif
+
 	if (zswap_load(folio)) {
 		folio_mark_uptodate(folio);
 		folio_unlock(folio);
@@ -561,6 +578,7 @@ void swap_readpage(struct page *page, bool synchronous, struct swap_iocb **plug)
 		swap_readpage_bdev_async(folio, sis);
 	}
 
+finish_read:
 	if (workingset) {
 		delayacct_thrashing_end(&in_thrashing);
 		psi_memstall_leave(&pflags);
