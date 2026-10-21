@@ -131,6 +131,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6de680ac_9b346def",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 994,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-10-21T19:47:35Z",
+      "side": 1,
+      "message": "but I can\u0027t do that until aosp/4349070 is merged",
+      "parentUuid": "8bc50cf4_f057c110",
+      "range": {
+        "startLine": 984,
+        "startChar": 1,
+        "endLine": 994,
+        "endChar": 64
+      },
+      "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "82f57b07_15373987",
         "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
         "patchSetId": 2
@@ -236,6 +260,24 @@
       "message": "Done, dropped. One gap: this test also checked that the bytes a non-owner LOAD writes into an unowned wrap are visible afterwards; test_not_owned_usage only checks that that LOAD returns 0. Once the owner check passes, LOAD takes the same path for every caller, so I did not keep the test.",
       "parentUuid": "7d43bb5a_73566abf",
       "isAi": true,
+      "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b711fc6_5a1362b1",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1726,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-10-21T19:47:35Z",
+      "side": 1,
+      "message": "Marked as unresolved in case you want to read this gap that the agent finds",
+      "parentUuid": "b40947a0_7c1ce6bf",
       "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
