@@ -16,6 +16,24 @@
       "message": "Please address the following issue:\n\nKernelCommit\nCommit does not refer to the upstream commit. Please add a line like \u0027(cherry pi... \n🌐 Public\n File a bug\n /COMMIT_MSG\nCommit does not refer to the upstream commit.\nPlease add a line like \u0027(cherry picked from commit \u003cfull-sha1\u003e \u003crepo\u003e \u003cbranch\u003e)\u0027.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\nI guess you\u0027re missing the full-sha?",
       "revId": "cc7cb885d8892e592faf723ae1768a3741c42e25",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c45ae61_1f687fe9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-10-21T18:12:41Z",
+      "side": 1,
+      "message": "It looks like the maintainer sent email that it has been queued but hasn\u0027t pushed the branch to their public git tree. I suspect that will happen later today.",
+      "parentUuid": "dd91f6e1_59e09880",
+      "revId": "cc7cb885d8892e592faf723ae1768a3741c42e25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
