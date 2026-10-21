@@ -16,6 +16,24 @@
       "message": "nit: what is this empty line in between tags for?",
       "revId": "d8d05799e2be8e4f9e2fb5204ea1395160d7ab2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7737785b_be3a0c70",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 2021570
+      },
+      "writtenOn": "2026-10-21T08:28:39Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "7643e790_19bc5045",
+      "revId": "d8d05799e2be8e4f9e2fb5204ea1395160d7ab2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
