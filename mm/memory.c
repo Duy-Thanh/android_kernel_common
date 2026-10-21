@@ -91,6 +91,7 @@
 #include "pgalloc-track.h"
 #include "internal.h"
 #include "swap.h"
+#include <linux/p3s/swap.h>
 #include <linux/p3s_user_pages.h>
 
 #if defined(LAST_CPUPID_NOT_IN_PAGE_FLAGS) && !defined(CONFIG_COMPILE_TEST)
@@ -4679,6 +4680,8 @@ vm_fault_t do_swap_page(struct vm_fault *vmf)
 	rmap_t rmap_flags = RMAP_NONE;
 	bool need_clear_cache = false;
 	bool exclusive = false;
+	unsigned long sibling_slices = 0;
+	bool sibling_exclusive = false;
 	swp_entry_t entry;
 	pte_t pte;
 	vm_fault_t ret = 0;
@@ -4965,12 +4968,16 @@ check_folio:
 	BUG_ON(!folio_test_anon(folio) && folio_test_mappedtodisk(folio));
 	BUG_ON(folio_test_anon(folio) && PageAnonExclusive(page));
 
+	/* 4KB compatibility VMAs: restore the slices swapped out with the folio */
+	sibling_slices = p3s_swapin_sibling_slices(vmf, folio, entry,
+						   &sibling_exclusive);
+
 	/*
 	 * Check under PT lock (to protect against concurrent fork() sharing
 	 * the swap entry concurrently) for certainly exclusive pages.
 	 */
 	if (!folio_test_ksm(folio)) {
-		exclusive = pte_swp_exclusive(vmf->orig_pte);
+		exclusive = pte_swp_exclusive(vmf->orig_pte) || sibling_exclusive;
 		if (folio != swapcache) {
 			/*
 			 * We have a fresh page that is not exposed to the
@@ -5014,6 +5021,7 @@ check_folio:
 	 * yet.
 	 */
 	swap_free_nr(entry, nr_pages);
+	p3s_swapin_free_sibling_slices(entry, sibling_slices);
 	if (should_try_to_free_swap(folio, vma, vmf->flags))
 		folio_free_swap(folio);
 
@@ -5076,6 +5084,7 @@ check_folio:
 	set_ptes(vma->vm_mm, address, ptep, pte, nr_pages);
 	arch_do_swap_page_nr(vma->vm_mm, vma, address,
 			pte, pte, nr_pages);
+	p3s_swapin_map_sibling_slices(vmf, folio, sibling_slices, rmap_flags);
 
 	folio_unlock(folio);
 	if (folio != swapcache && swapcache) {

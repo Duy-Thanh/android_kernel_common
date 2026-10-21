@@ -3,8 +3,12 @@
 #define _LINUX_P3S_SWAP_H
 
 #include <linux/types.h>
+#include <linux/mm.h>
+#include <linux/rmap.h>
 #include <linux/swap.h>
+#include <linux/swapops.h>
 #include <linux/sort.h>
+#include <linux/p3s.h>
 #include <linux/p3s/const.h>
 #include <linux/p3s/mm.h>
 
@@ -127,6 +131,123 @@ static inline int p3s_convert_swap_header(union swap_header *swap_header)
 	return 0;
 }
 
+/*
+ * p3s_swapin_sibling_slices - Find the slices swapped out with a folio
+ * @vmf: Fault information, with the page table lock held
+ * @folio: Folio that do_swap_page() is about to map
+ * @entry: Swap entry of the faulting PTE
+ * @exclusive: Set if the folio may be mapped exclusive
+ *
+ * Reclaim unmaps all the slice PTEs that map a small anonymous folio of a
+ * 4KB compatibility VMA in one walk, replacing each with a swap PTE for the
+ * folio's swap entry. If a fault restored only its own slice, the swap PTEs
+ * of the siblings would keep the folio in the swap cache and shared, and a
+ * write to a restored slice would copy it into a folio of its own: each
+ * swap cycle would split the slices of a 16KB folio into up to four folios,
+ * multiplying the memory and swap used.
+ *
+ * Returns the mask of the other slices of the window at the faulting
+ * address whose PTE is a swap PTE for @entry, for do_swap_page() to restore
+ * with the faulting slice. An exclusive marker on one of them is honoured
+ * only if these swap PTEs are all the references to @entry.
+ */
+static inline unsigned long p3s_swapin_sibling_slices(struct vm_fault *vmf,
+						      struct folio *folio,
+						      swp_entry_t entry,
+						      bool *exclusive)
+{
+	struct vm_area_struct *vma = vmf->vma;
+	unsigned long start, mask = 0;
+	bool sibling_exclusive = false;
+	unsigned int nr_slices, i;
+	pte_t *pte_base;
+
+	if (!vma_is_p3s_4k(vma) || folio_test_large(folio) ||
+	    folio_test_ksm(folio) || !folio_test_swapcache(folio))
+		return 0;
+
+	vma_folio_slice_bounds(vma, vmf->address, &nr_slices, &start);
+	pte_base = vmf->pte - ((vmf->address - start) >> PAGE_SHIFT_4KB);
+	for (i = 0; i < nr_slices; i++) {
+		pte_t ptent = ptep_get(pte_base + i);
+
+		if (pte_base + i == vmf->pte || !is_swap_pte(ptent) ||
+		    pte_to_swp_entry(ptent).val != entry.val)
+			continue;
+		if (pte_swp_exclusive(ptent))
+			sibling_exclusive = true;
+		mask |= BIT(i);
+	}
+
+	if (sibling_exclusive && __swap_count(entry) == hweight_long(mask) + 1)
+		*exclusive = true;
+	return mask;
+}
+
+/*
+ * p3s_swapin_free_sibling_slices - Drop the swap references of the siblings
+ * @entry: Swap entry of the faulting PTE
+ * @mask: Slices found by p3s_swapin_sibling_slices()
+ */
+static inline void p3s_swapin_free_sibling_slices(swp_entry_t entry,
+						  unsigned long mask)
+{
+	unsigned int nr = hweight_long(mask);
+
+	while (nr--)
+		swap_free(entry);
+}
+
+/*
+ * p3s_swapin_map_sibling_slices - Restore the slices swapped out with a folio
+ * @vmf: Fault information, with the page table lock held
+ * @folio: Folio that do_swap_page() mapped at the faulting address
+ * @mask: Slices found by p3s_swapin_sibling_slices()
+ * @rmap_flags: RMAP_EXCLUSIVE if do_swap_page() mapped the folio exclusive
+ *
+ * Map each slice in @mask to its slice of @folio, keeping the soft-dirty
+ * and uffd-wp bits of its swap PTE. The slices are mapped read-only: if the
+ * folio is exclusive, the first write to one of them reuses it without a
+ * copy.
+ */
+static inline void p3s_swapin_map_sibling_slices(struct vm_fault *vmf,
+						 struct folio *folio,
+						 unsigned long mask,
+						 rmap_t rmap_flags)
+{
+	struct vm_area_struct *vma = vmf->vma;
+	struct page *page = folio_page(folio, 0);
+	unsigned int nr_slices, i;
+	unsigned long start;
+	pte_t *pte_base;
+
+	if (!mask)
+		return;
+
+	vma_folio_slice_bounds(vma, vmf->address, &nr_slices, &start);
+	pte_base = vmf->pte - ((vmf->address - start) >> PAGE_SHIFT_4KB);
+	for_each_set_bit(i, &mask, nr_slices) {
+		unsigned long addr = start + ((unsigned long)i << PAGE_SHIFT_4KB);
+		pte_t orig_pte = ptep_get(pte_base + i);
+		pte_t pte = mk_pte(page, vma->vm_page_prot);
+
+		pte = pte_advance_phys(pte, (unsigned long)vma_slice_offset(vma, addr) <<
+					    PAGE_SHIFT_4KB);
+		if (pte_swp_soft_dirty(orig_pte))
+			pte = pte_mksoft_dirty(pte);
+		if (pte_swp_uffd_wp(orig_pte))
+			pte = pte_mkuffd_wp(pte);
+
+		folio_get(folio);
+		folio_add_anon_rmap_ptes(folio, page, 1, vma, addr, rmap_flags);
+		add_mm_counter(vma->vm_mm, MM_ANONPAGES, 1);
+		add_mm_counter(vma->vm_mm, MM_SWAPENTS, -1);
+		set_pte_at(vma->vm_mm, addr, pte_base + i, pte);
+		arch_do_swap_page_nr(vma->vm_mm, vma, addr, pte, pte, 1);
+		update_mmu_cache_range(vmf, vma, addr, pte_base + i, 1);
+	}
+}
+
 #else /* !(CONFIG_ARM64_PER_PROCESS_PAGE_SIZE && CONFIG_SWAP) */
 
 static inline unsigned long p3s_swap_header_max_badpages(const union swap_header *swap_header)
@@ -142,6 +263,26 @@ static inline char *p3s_swap_header_magic(const union swap_header *swap_header)
 static inline int p3s_convert_swap_header(union swap_header *swap_header)
 {
 	return 0;
+}
+
+static inline unsigned long p3s_swapin_sibling_slices(struct vm_fault *vmf,
+						      struct folio *folio,
+						      swp_entry_t entry,
+						      bool *exclusive)
+{
+	return 0;
+}
+
+static inline void p3s_swapin_free_sibling_slices(swp_entry_t entry,
+						  unsigned long mask)
+{
+}
+
+static inline void p3s_swapin_map_sibling_slices(struct vm_fault *vmf,
+						 struct folio *folio,
+						 unsigned long mask,
+						 rmap_t rmap_flags)
+{
 }
 
 #endif /* CONFIG_ARM64_PER_PROCESS_PAGE_SIZE && CONFIG_SWAP */
