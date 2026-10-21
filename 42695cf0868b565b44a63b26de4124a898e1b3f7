@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8fb63ea_2498e6a2",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2161,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-10-21T22:37:48Z",
+      "side": 1,
+      "message": "This P3S alignment logic (check_add_overflow + mm_pte_size mask) is ugly, and it\u0027s duplicated here in dma-buf.c. Other patches in the series each write their own slightly different version: VMA page-size alignment plus bounds checking in arraymap.c (aosp/4367949) and mm/p3s.c (aosp/4368009, aosp/4368011), and just the alignment in mm/vmalloc.c (aosp/4368031). Some use ALIGN(..., mm_pte_size(vma-\u003evm_mm)) or ALIGN(..., PAGE_SIZE_4KB) without an overflow check. One checks ULONG_MAX - (PAGE_SIZE_4KB - 1) first.\n\nIn aosp/4367960 (ashmem), you added mm.page_align() / mm.uapi_page_align(). Instead of open-coding this in C differently across subsystems, can a common helper in include/linux/mm.h or include/linux/p3s/vma.h (e.g., vma_aligned_size(vma, size)) be added and used throughout the P3S patch series?",
+      "range": {
+        "startLine": 2161,
+        "startChar": 0,
+        "endLine": 2161,
+        "endChar": 0
+      },
+      "revId": "42695cf0868b565b44a63b26de4124a898e1b3f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
