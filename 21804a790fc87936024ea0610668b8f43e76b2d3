@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d600f81e_b685ad9e",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1010,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-21T23:06:48Z",
+      "side": 1,
+      "message": "`wrapfd_acquire_ownership`",
+      "revId": "21804a790fc87936024ea0610668b8f43e76b2d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0046f49_4584cf3b",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1039,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-21T23:06:48Z",
+      "side": 1,
+      "message": "Maybe add this before the `is_mapped()` check so that it\u0027s consisten with the userspace implementation?",
+      "range": {
+        "startLine": 1037,
+        "startChar": 0,
+        "endLine": 1039,
+        "endChar": 9
+      },
+      "revId": "21804a790fc87936024ea0610668b8f43e76b2d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f84aaa63_ed27f849",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 1053,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-21T23:06:48Z",
+      "side": 1,
+      "message": "`wrapfd_release_ownership()` and please update the header accordingly.",
+      "revId": "21804a790fc87936024ea0610668b8f43e76b2d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
