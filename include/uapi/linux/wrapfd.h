@@ -20,6 +20,18 @@ struct wrapfd_wrap {
 #define WRAPFD_CONTENT_RDONLY	1
 #define WRAPFD_CONTENT_RDWR	2
 
+/* wrapfd_monitor.events bit values */
+#define WRAPFD_EVENT_MAP	(1 << 0)
+#define WRAPFD_EVENT_UNMAP	(1 << 1)
+#define WRAPFD_EVENT_OWN	(1 << 2)
+#define WRAPFD_EVENT_UNOWN	(1 << 3)
+#define WRAPFD_EVENT_LOAD	(1 << 4)
+#define WRAPFD_EVENT_LOAD_DONE	(1 << 5)
+
+#define WRAPFD_EVENTS_MASK	(WRAPFD_EVENT_MAP | WRAPFD_EVENT_UNMAP | \
+			WRAPFD_EVENT_OWN | WRAPFD_EVENT_UNOWN | \
+			WRAPFD_EVENT_LOAD | WRAPFD_EVENT_LOAD_DONE)
+
 struct wrapfd_get_state {
 	__u32 state;		/* [out] wrapfd content state */
 	__u32 pad;
@@ -41,10 +53,45 @@ struct wrapfd_rewrap {
 	__u64 reserved;
 };
 
+struct wrapfd_monitor {
+	__u32 fd;
+	__u32 events;
+};
+
+struct wrapfd_monitors {
+	__u64 len;
+	struct wrapfd_monitor *arr;
+	__u64 *results;
+};
+
+struct wrapfd_add_monitors {
+	struct wrapfd_monitors monitors;
+	__u64 reserved;
+};
+
+struct wrapfd_del_monitors {
+	struct wrapfd_monitors monitors;
+	__u64 reserved;
+};
+
+struct wrapfd_event {
+	__u32 fd;
+	__u32 events;
+	__u64 timestamp;
+};
+
+struct wrapfd_events {
+	__u64 len;
+	struct wrapfd_event *arr;
+	__u64 count;
+};
+
 /* ioctls for /dev/wrapfd */
 #define WRAPFD_DEV_IOC 0xBC
 #define WRAPFD_DEV_IOC_WRAP	_IOW(WRAPFD_DEV_IOC, 0, struct wrapfd_wrap)
-
+#define WRAPFD_DEV_IOC_ADD_MONITOR	_IOWR(WRAPFD_DEV_IOC, 100, struct wrapfd_add_monitors)
+#define WRAPFD_DEV_IOC_DEL_MONITOR	_IOWR(WRAPFD_DEV_IOC, 101, struct wrapfd_del_monitors)
+#define WRAPFD_DEV_IOC_QUERY_EVENTS	_IOWR(WRAPFD_DEV_IOC, 102, struct wrapfd_events)
 /* ioctl for wrapfd */
 #define WRAPFD_DEV_IOC_GET_STATE	_IOWR(WRAPFD_DEV_IOC, 1, \
 					      struct wrapfd_get_state)
