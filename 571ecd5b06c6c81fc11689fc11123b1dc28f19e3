@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4153a5a3_cc0c7c90",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 19
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-10-21T08:21:31Z",
+      "side": 1,
+      "message": "Updated to be more concise, thanks",
+      "parentUuid": "fb2d6a9e_3f3980d6",
+      "revId": "571ecd5b06c6c81fc11689fc11123b1dc28f19e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e0798b00_4a48b1b5",
@@ -31,6 +49,30 @@
       "writtenOn": "2026-10-20T22:19:57Z",
       "side": 1,
       "message": "Add a comment why 10?",
+      "range": {
+        "startLine": 42,
+        "startChar": 36,
+        "endLine": 42,
+        "endChar": 42
+      },
+      "revId": "571ecd5b06c6c81fc11689fc11123b1dc28f19e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92708e2c_0dcd3390",
+        "filename": "include/linux/p3s/swap.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-10-21T08:21:31Z",
+      "side": 1,
+      "message": "Moved this into a #define",
+      "parentUuid": "e0798b00_4a48b1b5",
       "range": {
         "startLine": 42,
         "startChar": 36,
@@ -92,6 +134,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc45c51d_8ca2f639",
+        "filename": "include/linux/p3s/swap.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-10-21T08:21:31Z",
+      "side": 1,
+      "message": "Added comment to explain the header conversion.",
+      "parentUuid": "0ec76a5b_58ec1a20",
+      "range": {
+        "startLine": 61,
+        "startChar": 18,
+        "endLine": 61,
+        "endChar": 41
+      },
+      "revId": "571ecd5b06c6c81fc11689fc11123b1dc28f19e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8d656d5d_a93f9c77",
@@ -129,6 +195,30 @@
           ]
         }
       ],
+      "revId": "571ecd5b06c6c81fc11689fc11123b1dc28f19e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f54e17b4_b502b2a9",
+        "filename": "mm/swap_state.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-10-21T08:21:31Z",
+      "side": 1,
+      "message": "Added comment they the 4KB mask is sufficient and used to simplify (not depend on context).",
+      "parentUuid": "8d656d5d_a93f9c77",
+      "range": {
+        "startLine": 50,
+        "startChar": 27,
+        "endLine": 50,
+        "endChar": 41
+      },
       "revId": "571ecd5b06c6c81fc11689fc11123b1dc28f19e3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
