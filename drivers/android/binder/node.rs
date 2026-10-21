@@ -3,6 +3,7 @@
 // Copyright (C) 2025 Google LLC.
 
 use kernel::{
+    fmt,
     list::{AtomicTracker, List, ListArc, ListLinks, TryNewListArc},
     prelude::*,
     seq_file::SeqFile,
@@ -216,6 +217,34 @@ kernel::list::impl_list_item! {
     }
 }
 
+/// Formats the userspace `ptr` or `cookie` of a [`Node`] in full, or hashed like `%p` if the
+/// flag is set, as done for the `*_hashed` binder_logs files.
+struct MaybeHashed(u64, bool);
+
+impl fmt::Display for MaybeHashed {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let Self(value, hashed) = *self;
+        if hashed {
+            let mut buf = [0u8; 32];
+            let p = (value as usize) as *const kernel::ffi::c_void;
+            // SAFETY: `buf` is valid for writes of `buf.len()` bytes, `kernel::c_str!("%p")` is
+            // NUL-terminated, and `p` matches the `%p` format specifier.
+            let len = unsafe {
+                kernel::bindings::scnprintf(
+                    buf.as_mut_ptr().cast(),
+                    buf.len(),
+                    kernel::c_str!("%p").as_char_ptr(),
+                    p,
+                )
+            };
+            let s = core::str::from_utf8(&buf[..len as usize]).map_err(|_| fmt::Error)?;
+            f.write_str(s)
+        } else {
+            write!(f, "{value:016x}")
+        }
+    }
+}
+
 impl Node {
     pub(crate) fn new(
         ptr: u64,
@@ -262,14 +291,15 @@ impl Node {
         &self,
         m: &SeqFile,
         owner_inner: &mut ProcessInner,
-    ) -> Result<()> {
+        hashed: bool,
+    ) -> Result {
         let inner = self.inner.access_mut(owner_inner);
         seq_print!(
             m,
-            "  node {}: u{:016x} c{:016x} hs {} hw {} cs {} cw {}",
+            "  node {}: u{} c{} hs {} hw {} cs {} cw {}",
             self.debug_id,
-            self.ptr,
-            self.cookie,
+            MaybeHashed(self.ptr, hashed),
+            MaybeHashed(self.cookie, hashed),
             inner.strong.has_count,
             inner.weak.has_count,
             inner.strong.count,
@@ -774,14 +804,14 @@ impl DeliverToRead for Node {
     }
 
     #[inline(never)]
-    fn debug_print(&self, m: &SeqFile, prefix: &str, _tprefix: &str) -> Result<()> {
+    fn debug_print(&self, m: &SeqFile, prefix: &str, _tprefix: &str, hashed: bool) -> Result {
         seq_print!(
             m,
-            "{}node work {}: u{:016x} c{:016x}\n",
+            "{}node work {}: u{} c{}\n",
             prefix,
             self.debug_id,
-            self.ptr,
-            self.cookie,
+            MaybeHashed(self.ptr, hashed),
+            MaybeHashed(self.cookie, hashed),
         );
         Ok(())
     }
@@ -1169,7 +1199,7 @@ impl DeliverToRead for NodeDeath {
     }
 
     #[inline(never)]
-    fn debug_print(&self, m: &SeqFile, prefix: &str, _tprefix: &str) -> Result<()> {
+    fn debug_print(&self, m: &SeqFile, prefix: &str, _tprefix: &str, _hashed: bool) -> Result {
         let inner = self.inner.lock();
 
         let dead_binder = inner.dead && !inner.notification_done;
