@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "834077f3_fc86d596",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-10-21T16:59:53Z",
+      "side": 1,
+      "message": "This symbol addition patch must be rebased on top of the patch that adds the symbols",
+      "revId": "176c7b3405c52d6982570a23eceb8f536067c207",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
