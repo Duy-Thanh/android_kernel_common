@@ -16,6 +16,24 @@
       "message": "Backports may still have the tag?",
       "revId": "f0813c15fbcd331cf342cff7cdcaedd0f5921505",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd3db0ed_34579dd3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-10-21T22:01:12Z",
+      "side": 1,
+      "message": "Good point. I think it\u0027s fine though we\u0027ll override Linter and move on. We already have to do this for a number of backport things e.g. double signatures.",
+      "parentUuid": "c42d48d9_589495c3",
+      "revId": "f0813c15fbcd331cf342cff7cdcaedd0f5921505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
