@@ -606,6 +606,31 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddf06ff6_f9d46643",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1983,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-10-21T21:07:33Z",
+      "side": 1,
+      "message": "Done: removed the probe_* functions. probe_start() now takes the same thread functions as run_on_thread() (thread_acquire/release/empty/get_state/load/rewrap).",
+      "parentUuid": "c92bb2d8_6cfd6089",
+      "range": {
+        "startLine": 1958,
+        "startChar": 0,
+        "endLine": 1983,
+        "endChar": 1
+      },
+      "isAi": true,
+      "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a31f2e28_0b880c4e",
