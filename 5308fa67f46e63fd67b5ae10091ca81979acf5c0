@@ -41,6 +41,31 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60d98bdf_d63d8855",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-10-21T20:23:22Z",
+      "side": 1,
+      "message": "It can\u0027t in practice: only if the test process died between fork() and prctl(). PR_SET_PDEATHSIG was redundant too: the harness kills the test\u0027s whole process group on a timeout, and a worker waiting at the handshake reads EOF once the test process is gone. Removed both.",
+      "parentUuid": "5681887f_43e1c06f",
+      "range": {
+        "startLine": 366,
+        "startChar": 0,
+        "endLine": 367,
+        "endChar": 12
+      },
+      "isAi": true,
+      "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "901834e9_d7ee6147",
@@ -106,6 +131,25 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92d4d965_71a40f1a",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-10-21T20:23:22Z",
+      "side": 1,
+      "message": "The exit status isn\u0027t how the failure is reported: a failed EXPECT_*() in the worker writes KSFT_FAIL into the test metadata, which is shared (MAP_SHARED), so the test fails whatever the worker\u0027s exit status. worker_exit() clears the trigger so that the test process\u0027s next ASSERT_*() doesn\u0027t fire. The test process can\u0027t hang either: it holds no write end of the ready pipe, so when a worker exits early, worker_wait_ready() reads EOF and fails with \"worker N exited before it was ready\".",
+      "parentUuid": "bb7a1c0f_29297b49",
+      "isAi": true,
+      "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8bc50cf4_f057c110",
@@ -153,6 +197,31 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3731b317_f385fc77",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 994,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-10-21T20:23:22Z",
+      "side": 1,
+      "message": "No test in this change checks the content after a REWRAP, successful or failed, so the tests pass whether or not REWRAP clears; aosp/4349070 adds that check. Heads-up: aosp/4349070 edits the same two cmp_content lines in test_rewrap that this change removes, so whichever lands second needs a small rebase.",
+      "parentUuid": "8bc50cf4_f057c110",
+      "range": {
+        "startLine": 984,
+        "startChar": 1,
+        "endLine": 994,
+        "endChar": 64
+      },
+      "isAi": true,
+      "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "82f57b07_15373987",
@@ -195,6 +264,25 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fb27d997_781f0914",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1459,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-10-21T20:23:22Z",
+      "side": 1,
+      "message": "This change adds CONFIG_DMABUF_HEAPS_SYSTEM (with CONFIG_DMABUF_HEAPS) to tools/testing/selftests/drivers/wrapfd/config, so the system heap is a stated requirement of these tests, as it already is for wrapfd_test_dmabuf_system_heap.",
+      "parentUuid": "07fcc195_140789b2",
+      "isAi": true,
+      "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fee76473_bd2cfc46",
         "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
         "patchSetId": 2
@@ -224,6 +312,25 @@
           ]
         }
       ],
+      "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "130538bc_e30e9d71",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1476,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-10-21T20:23:22Z",
+      "side": 1,
+      "message": "Done: each test closes the fds it opened, and w/n are now wrapfd/wrapfd2.",
+      "parentUuid": "fee76473_bd2cfc46",
+      "isAi": true,
       "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -432,6 +539,31 @@
         "endLine": 2022,
         "endChar": 40
       },
+      "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0041c1c6_bb34316c",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2022,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-10-21T20:23:22Z",
+      "side": 1,
+      "message": "Done: dropped the TH_LOG()s in the LOAD-gate tests; the failing assertion names the outcome. Kept the two in worker_wait_ready() and worker_join(): they print the worker\u0027s pid and exit status, which the assertion doesn\u0027t show.",
+      "parentUuid": "a31f2e28_0b880c4e",
+      "range": {
+        "startLine": 2022,
+        "startChar": 0,
+        "endLine": 2022,
+        "endChar": 40
+      },
+      "isAi": true,
       "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
