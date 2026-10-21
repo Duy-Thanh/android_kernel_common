@@ -64,6 +64,31 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe2e048f_631343fb",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 866,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-10-21T19:42:58Z",
+      "side": 1,
+      "message": "Done. Dropped the extension; test_wrap_fork is upstream\u0027s version again.",
+      "parentUuid": "901834e9_d7ee6147",
+      "range": {
+        "startLine": 866,
+        "startChar": 2,
+        "endLine": 866,
+        "endChar": 55
+      },
+      "isAi": true,
+      "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb7a1c0f_29297b49",
@@ -196,6 +221,25 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b40947a0_7c1ce6bf",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1726,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-10-21T19:42:58Z",
+      "side": 1,
+      "message": "Done, dropped. One gap: this test also checked that the bytes a non-owner LOAD writes into an unowned wrap are visible afterwards; test_not_owned_usage only checks that that LOAD returns 0. Once the owner check passes, LOAD takes the same path for every caller, so I did not keep the test.",
+      "parentUuid": "7d43bb5a_73566abf",
+      "isAi": true,
+      "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a2e26f9_05a29298",
@@ -209,6 +253,25 @@
       "writtenOn": "2026-10-21T17:58:52Z",
       "side": 1,
       "message": "Same as above",
+      "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "863cdde0_b787f4dc",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1746,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-10-21T19:42:58Z",
+      "side": 1,
+      "message": "Done, dropped.",
+      "parentUuid": "7a2e26f9_05a29298",
+      "isAi": true,
       "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -230,6 +293,25 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4bf8a2b_ed21a7ff",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1789,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-10-21T19:42:58Z",
+      "side": 1,
+      "message": "Done, dropped.",
+      "parentUuid": "b5375725_7e611c4c",
+      "isAi": true,
+      "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "33d6f5a1_edcb98a4",
@@ -243,6 +325,25 @@
       "writtenOn": "2026-10-21T17:58:52Z",
       "side": 1,
       "message": "aosp/4359130?",
+      "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29e0c732_e52c9b30",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1880,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-10-21T19:42:58Z",
+      "side": 1,
+      "message": "Done, dropped: test_prohibit_guests_on_owner_death from aosp/4359130 covers it.",
+      "parentUuid": "33d6f5a1_edcb98a4",
+      "isAi": true,
       "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
