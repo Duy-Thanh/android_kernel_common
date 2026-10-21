@@ -450,15 +450,15 @@ static __always_inline void *memblock_alloc_from(phys_addr_t size,
 				      MEMBLOCK_ALLOC_ACCESSIBLE, NUMA_NO_NODE);
 }
 
-static inline void *memblock_alloc_low(phys_addr_t size,
-					       phys_addr_t align)
+static __always_inline void *memblock_alloc_low(phys_addr_t size,
+						phys_addr_t align)
 {
 	return memblock_alloc_try_nid(size, align, MEMBLOCK_LOW_LIMIT,
 				      ARCH_LOW_ADDRESS_LIMIT, NUMA_NO_NODE);
 }
 
-static inline void *memblock_alloc_node(phys_addr_t size,
-						phys_addr_t align, int nid)
+static __always_inline void *memblock_alloc_node(phys_addr_t size,
+						 phys_addr_t align, int nid)
 {
 	return memblock_alloc_try_nid(size, align, MEMBLOCK_LOW_LIMIT,
 				      MEMBLOCK_ALLOC_ACCESSIBLE, nid);

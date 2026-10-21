@@ -976,7 +976,7 @@ static inline int of_numa_init(void)
 }
 #endif
 
-static inline struct device_node *of_find_matching_node(
+static __always_inline struct device_node *of_find_matching_node(
 	struct device_node *from,
 	const struct of_device_id *matches)
 {
