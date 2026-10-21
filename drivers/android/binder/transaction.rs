@@ -302,9 +302,13 @@ pub(crate) const TRANSACTION_LAYOUT: rb_transaction_layout = rb_transaction_layo
     from_thread: offset_of!(Transaction, from),
     to_proc: offset_of!(Transaction, to),
     target_node: offset_of!(Transaction, target_node),
+    #[cfg(CONFIG_ANDROID_KABI_RESERVE)]
     __kabi_reserved_backport0: 0,
+    #[cfg(CONFIG_ANDROID_KABI_RESERVE)]
     __kabi_reserved_backport1: 0,
+    #[cfg(CONFIG_ANDROID_KABI_RESERVE)]
     __kabi_reserved_backport2: 0,
+    #[cfg(CONFIG_ANDROID_KABI_RESERVE)]
     __kabi_reserved_backport3: 0,
 };
 

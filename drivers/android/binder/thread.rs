@@ -438,9 +438,13 @@ pub(crate) const THREAD_LAYOUT: rb_thread_layout = rb_thread_layout {
     process: offset_of!(Thread, process),
     id: offset_of!(Thread, id),
     task: offset_of!(Thread, task),
+    #[cfg(CONFIG_ANDROID_KABI_RESERVE)]
     __kabi_reserved_backport0: 0,
+    #[cfg(CONFIG_ANDROID_KABI_RESERVE)]
     __kabi_reserved_backport1: 0,
+    #[cfg(CONFIG_ANDROID_KABI_RESERVE)]
     __kabi_reserved_backport2: 0,
+    #[cfg(CONFIG_ANDROID_KABI_RESERVE)]
     __kabi_reserved_backport3: 0,
 };
 

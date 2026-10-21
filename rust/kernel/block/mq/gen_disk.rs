@@ -148,7 +148,9 @@ impl GenDiskBuilder {
             pr_ops: core::ptr::null_mut(),
             free_disk: None,
             poll_bio: None,
+            #[cfg(CONFIG_ANDROID_KABI_RESERVE)]
             __kabi_reserved1: 0,
+            #[cfg(CONFIG_ANDROID_KABI_RESERVE)]
             __kabi_reserved2: 0,
         };
 

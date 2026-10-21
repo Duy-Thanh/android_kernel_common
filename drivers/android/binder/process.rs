@@ -428,9 +428,13 @@ use kernel::bindings::rb_process_layout;
 pub(crate) const PROCESS_LAYOUT: rb_process_layout = rb_process_layout {
     arc_offset: Arc::<Process>::DATA_OFFSET,
     task: offset_of!(Process, task),
+    #[cfg(CONFIG_ANDROID_KABI_RESERVE)]
     __kabi_reserved_backport0: 0,
+    #[cfg(CONFIG_ANDROID_KABI_RESERVE)]
     __kabi_reserved_backport1: 0,
+    #[cfg(CONFIG_ANDROID_KABI_RESERVE)]
     __kabi_reserved_backport2: 0,
+    #[cfg(CONFIG_ANDROID_KABI_RESERVE)]
     __kabi_reserved_backport3: 0,
 };
 
