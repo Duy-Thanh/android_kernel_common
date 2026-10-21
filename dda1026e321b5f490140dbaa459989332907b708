@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb9d2b4c_1c0ba5c7",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1370,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-21T22:57:35Z",
+      "side": 1,
+      "message": "I think we should call and remove the listeners even if the content structure is the same? Wrapped dmabufs don\u0027t allocate a new content structure. Yet, if they\u0027re being rewrapped successfully, the drivers that have any DMA mapping to them should let those go.",
+      "range": {
+        "startLine": 1369,
+        "startChar": 1,
+        "endLine": 1370,
+        "endChar": 29
+      },
+      "revId": "dda1026e321b5f490140dbaa459989332907b708",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
