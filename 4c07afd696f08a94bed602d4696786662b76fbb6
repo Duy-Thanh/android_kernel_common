@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fedab13a_b8a7c0da",
+        "filename": "tools/testing/selftests/drivers/wrapfd/load_gate.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-10-21T21:22:43Z",
+      "side": 1,
+      "message": "struct load_gate repeats the probe\u0027s thread, tid, done and ret fields, and load_gate_loader() repeats probe_main(). Fixed in PS7: the held LOAD runs as a probe (struct probe loader), and load_gate_wait_held() and load_gate_release() use the probe\u0027s state and probe_join(). Leaving this unresolved for Isaac to review.",
+      "isAi": true,
+      "revId": "4c07afd696f08a94bed602d4696786662b76fbb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7597849_0f601764",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-10-21T21:22:43Z",
+      "side": 1,
+      "message": "seek_end() has two callers. Fixed in PS7: both call ret_or_errno(lseek(wrapfd, 0, SEEK_END)) directly. Leaving this unresolved for Isaac to review.",
+      "isAi": true,
+      "revId": "4c07afd696f08a94bed602d4696786662b76fbb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a658bea_f94d27ad",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-10-21T21:22:43Z",
+      "side": 1,
+      "message": "map_and_compare() does what the existing cmp_content() does, and both of its remaining callers run in the test process. Fixed in PS7: they call cmp_content() and the helper is gone. Leaving this unresolved for Isaac to review.",
+      "isAi": true,
+      "revId": "4c07afd696f08a94bed602d4696786662b76fbb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2eb11b4d_9d6e7357",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1124,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-10-21T21:22:43Z",
+      "side": 1,
+      "message": "This worker check repeats a check test_rewrap already makes: it ends with RELEASE(wrapfd) -\u003e 0, which only succeeds while this process still owns the old wrap. Fixed in PS7: the worker check is removed; the size check stays. Leaving this unresolved for Isaac to review.",
+      "isAi": true,
+      "revId": "4c07afd696f08a94bed602d4696786662b76fbb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ac6eca7_fa809ec1",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1238,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-10-21T21:22:43Z",
+      "side": 1,
+      "message": "The worker below repeats the three checks the test process has just made: on an unowned wrap every process passes the owner check and then fails the content check, so the worker exercises the same path. Fixed in PS7: the worker checks are removed. Leaving this unresolved for Isaac to review.",
+      "isAi": true,
+      "revId": "4c07afd696f08a94bed602d4696786662b76fbb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1333d915_b8879acd",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2173,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-10-21T21:22:43Z",
+      "side": 1,
+      "message": "Open question: this test and release_returns_without_waiting_during_load have the same setup and probe, and could merge into one test: assert that RELEASE returned while the LOAD was held, then assert that it returned 0. The android16-6.12 copy would skip between the two checks (SKIP_UNTIL_FIXED(\"b/568458393\")), because the C driver returns EINVAL at once; a failure before the skip still reports FAIL. Costs: on the C driver the merged test reports SKIP instead of a separate pass for \"returns without waiting\", and on a driver whose RELEASE waits for the LOAD and then succeeds, the merged test fails at the first check. Not changed.",
+      "isAi": true,
+      "revId": "4c07afd696f08a94bed602d4696786662b76fbb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
