@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bf7f574_e1725de3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-10-21T15:20:48Z",
+      "side": 1,
+      "message": "On this branch, kvm_iommu_detach_dev() takes its reference with domain_get() (since \"ANDROID: KVM: arm64: iommu: Hold domain reference during detach\"), and domain_get() already returns -EPERM when domain-\u003evm isn\u0027t the caller\u0027s VM. So this check can\u0027t fire here, and if it did it would return without dropping that reference. Not blocking on it, but could it call domain_put() before the goto, in case domain_get() changes?",
+      "revId": "c7b2deb4ff18c7402057e728bafb212c08ac7972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46c5f26e_e932c284",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2026-10-21T15:20:48Z",
+      "side": 1,
+      "message": "On this branch, kvm_iommu_detach_dev() takes its reference with domain_get(), and domain_get() already returns -EPERM when domain-\u003evm isn\u0027t the caller\u0027s VM. So this check can\u0027t fire here, and if it did it would return without dropping that reference. Not blocking on it, but could it call domain_put() before the goto, in case domain_get() changes?",
+      "revId": "c7b2deb4ff18c7402057e728bafb212c08ac7972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
