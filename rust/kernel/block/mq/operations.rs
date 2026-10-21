@@ -278,6 +278,7 @@ impl<T: Operations> OperationsVTable<T> {
         map_queues: None,
         #[cfg(CONFIG_BLK_DEBUG_FS)]
         show_rq: None,
+        #[cfg(CONFIG_ANDROID_KABI_RESERVE)]
         __kabi_reserved1: 0,
     };
 
