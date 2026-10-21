@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdf8009c_f709589b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-10-21T04:38:42Z",
+      "side": 1,
+      "message": "Bypassing Lint as the change came into android16-6.12 via -stable",
+      "revId": "67c9e7963a5c2a025c700f004fee642accbe263e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
