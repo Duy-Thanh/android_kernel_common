@@ -74,3 +74,13 @@
   sysctl_hung_task_timeout_secs
   ufshcd_opp_config_clks
   io_cgrp_subsys
+
+# required for failure diagnostics
+  __traceiter_android_vh_mmc_blk_reset
+  __traceiter_android_vh_mmc_attach_sd
+  __traceiter_android_vh_sdhci_get_cd
+  __traceiter_android_vh_mmc_gpio_cd_irqt
+  __tracepoint_android_vh_mmc_blk_reset
+  __tracepoint_android_vh_mmc_attach_sd
+  __tracepoint_android_vh_sdhci_get_cd
+  __tracepoint_android_vh_mmc_gpio_cd_irqt
