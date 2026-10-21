@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba6412f1_a24dba1a",
+        "filename": "drivers/android/wrapfd/content.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-21T22:58:59Z",
+      "side": 1,
+      "message": "Could we make this match the C version which gives back a handle, so that when we unregister a listener, instead of unregistering all listeners matching param? Also, we should check to ensure that on_release is actually implemented?",
+      "revId": "ce071c247a4a0a16df79c7c0866086a63b3c76a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22241540_0620ff33",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-21T22:58:59Z",
+      "side": 1,
+      "message": "I think this suffers from the same issue as the C implementation with regards to not invoking the listener on rewrap; please see my comment in aosp/4265682",
+      "range": {
+        "startLine": 434,
+        "startChar": 7,
+        "endLine": 437,
+        "endChar": 0
+      },
+      "revId": "ce071c247a4a0a16df79c7c0866086a63b3c76a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0345670b_d86c95ff",
+        "filename": "drivers/android/wrapfd/wrap.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 974,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-21T22:58:59Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be checking for errors from `content.add_listener`? So, `content.add_listener()?`",
+      "revId": "ce071c247a4a0a16df79c7c0866086a63b3c76a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "643bbdc2_44b7ed71",
+        "filename": "include/linux/wrapfd.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-21T22:58:59Z",
+      "side": 1,
+      "message": "Please use updated description in: https://android-review.git.corp.google.com/c/kernel/common/+/4265682/7/include/linux/wrapfd.h",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 69
+      },
+      "revId": "ce071c247a4a0a16df79c7c0866086a63b3c76a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
