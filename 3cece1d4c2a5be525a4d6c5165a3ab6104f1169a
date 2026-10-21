@@ -75,6 +75,30 @@
       ],
       "revId": "3cece1d4c2a5be525a4d6c5165a3ab6104f1169a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df2500a8_cec7080c",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-10-21T08:15:52Z",
+      "side": 1,
+      "message": "Thanks Juan, added comment to explain this. \n\nWe want to express all metrics in kernel of kernel page size 16KB).\n\nDIV_ROUND_UP() only makes sure a task is never undercounted.",
+      "parentUuid": "21330512_9a54f7bf",
+      "range": {
+        "startLine": 251,
+        "startChar": 10,
+        "endLine": 253,
+        "endChar": 35
+      },
+      "revId": "3cece1d4c2a5be525a4d6c5165a3ab6104f1169a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
