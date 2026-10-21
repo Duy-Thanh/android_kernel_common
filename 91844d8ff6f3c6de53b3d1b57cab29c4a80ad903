@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a4ef891c_b0be90c6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-21T19:37:55Z",
+      "side": 1,
+      "message": "Please add `Bug: 568874187`",
+      "revId": "91844d8ff6f3c6de53b3d1b57cab29c4a80ad903",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e10b337f_061c8a4c",
         "filename": "drivers/android/wrapfd.c",
         "patchSetId": 2
