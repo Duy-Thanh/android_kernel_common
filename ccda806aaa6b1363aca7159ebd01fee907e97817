@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdbc4cad_6b2a8b5e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-10-21T16:12:04Z",
+      "side": 1,
+      "message": "Ah, this is also in the original AOSP patch. Nevermind.",
+      "parentUuid": "93d4a9bb_a9fc879f",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 63
+      },
+      "revId": "ccda806aaa6b1363aca7159ebd01fee907e97817",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be24da8d_22adb9f2",
