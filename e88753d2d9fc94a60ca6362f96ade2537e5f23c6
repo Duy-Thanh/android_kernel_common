@@ -16,6 +16,24 @@
       "message": "Please add `Bug: 568883995`",
       "revId": "e88753d2d9fc94a60ca6362f96ade2537e5f23c6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c385755a_98bd854d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-10-21T20:54:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dfd8d777_8e66e45f",
+      "revId": "e88753d2d9fc94a60ca6362f96ade2537e5f23c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
