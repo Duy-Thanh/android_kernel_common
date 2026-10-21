@@ -33,6 +33,24 @@
       "message": "Please address the following warning:\n\nCommit is missing a cherry pick line pointing to the original commit on the base branch.\n\nExpected a cherry pick line like (cherry picked from commit ede3424db523d5d1c0139d578a3553f11a469dc4).\n\nPlease cherry-pick using: git cherry-pick -s -x ede3424db523d5d1c0139d578a3553f11a469dc4.",
       "revId": "21ff02df1e5066cd96cf38916db34a096dde2390",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f48b755_891bc7f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-21T19:26:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a7b40e6_46d012f4",
+      "revId": "21ff02df1e5066cd96cf38916db34a096dde2390",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
