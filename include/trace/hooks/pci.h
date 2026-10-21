@@ -9,6 +9,7 @@
 #include <trace/hooks/vendor_hooks.h>
 
 struct pci_dev;
+struct dw_pcie_rp;
 typedef int __bitwise pci_power_t;
 
 DECLARE_HOOK(android_vh_platform_pci_power_manageable,
@@ -26,6 +27,9 @@ DECLARE_HOOK(android_vh_platform_pci_choose_state,
 DECLARE_HOOK(android_vh_pci_pm_verify_state,
 		TP_PROTO(int *state_ret, pci_power_t *state),
 		TP_ARGS(state_ret, state));
+DECLARE_HOOK(android_vh_dw_pcie_keep_rp_msi_en,
+		TP_PROTO(struct dw_pcie_rp *pp, bool *keep_rp_msi_en),
+		TP_ARGS(pp, keep_rp_msi_en));
 
 #endif /* _TRACE_HOOK_PCI_VH_H */
 /* This part must be outside protection */

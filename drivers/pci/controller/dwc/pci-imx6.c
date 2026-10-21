@@ -32,6 +32,7 @@
 #include <linux/phy/phy.h>
 #include <linux/pm_domain.h>
 #include <linux/pm_runtime.h>
+#include <trace/hooks/pci.h>
 
 #include "pcie-designware.h"
 
@@ -1518,8 +1519,6 @@ static int imx_pcie_probe(struct platform_device *pdev)
 		if (ret < 0)
 			return ret;
 	} else {
-		if (imx_check_flag(imx_pcie, IMX_PCIE_FLAG_KEEP_MSI_CAP))
-			pci->pp.keep_rp_msi_en = true;
 		ret = dw_pcie_host_init(&pci->pp);
 		if (ret < 0)
 			return ret;
@@ -1802,6 +1801,21 @@ static void imx_pcie_quirk(struct pci_dev *dev)
 DECLARE_PCI_FIXUP_CLASS_HEADER(PCI_VENDOR_ID_SYNOPSYS, 0xabcd,
 			PCI_CLASS_BRIDGE_PCI, 8, imx_pcie_quirk);
 
+static void imx_pcie_keep_rp_msi_en(void *unused, struct dw_pcie_rp *pp,
+				    bool *keep_rp_msi_en)
+{
+	struct dw_pcie *pci;
+	struct imx_pcie *imx_pcie;
+
+	if (pp->ops != &imx_pcie_host_ops)
+		return;
+
+	pci = to_dw_pcie_from_pp(pp);
+	imx_pcie = to_imx_pcie(pci);
+	if (imx_check_flag(imx_pcie, IMX_PCIE_FLAG_KEEP_MSI_CAP))
+		*keep_rp_msi_en = true;
+}
+
 static int __init imx_pcie_init(void)
 {
 #ifdef CONFIG_ARM
@@ -1822,6 +1836,9 @@ static int __init imx_pcie_init(void)
 	hook_fault_code(8, imx6q_pcie_abort_handler, SIGBUS, 0,
 			"external abort on non-linefetch");
 #endif
+
+	register_trace_android_vh_dw_pcie_keep_rp_msi_en(
+		imx_pcie_keep_rp_msi_en, NULL);
 
 	return platform_driver_register(&imx_pcie_driver);
 }

@@ -823,3 +823,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_io_schedule_prepare);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_rq_qos_wait);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wbt_track);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wbt_wait);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dw_pcie_keep_rp_msi_en);

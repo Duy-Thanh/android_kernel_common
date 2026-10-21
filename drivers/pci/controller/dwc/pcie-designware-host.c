@@ -20,6 +20,10 @@
 #include "../../pci.h"
 #include "pcie-designware.h"
 
+#include <trace/hooks/pci.h>
+#include <linux/android_kabi.h>
+ANDROID_KABI_DECLONLY(trace_eval_map);
+
 static struct pci_ops dw_pcie_ops;
 static struct pci_ops dw_child_pcie_ops;
 
@@ -894,9 +898,14 @@ int dw_pcie_setup_rc(struct dw_pcie_rp *pp)
 	 * the MSI and MSI-X capabilities of the Root Port to allow the drivers
 	 * to fall back to INTx instead.
 	 */
-	if (pp->has_msi_ctrl && !pp->keep_rp_msi_en) {
-		dw_pcie_remove_capability(pci, PCI_CAP_ID_MSI);
-		dw_pcie_remove_capability(pci, PCI_CAP_ID_MSIX);
+	if (pp->has_msi_ctrl) {
+		bool keep_rp_msi_en = false;
+
+		trace_android_vh_dw_pcie_keep_rp_msi_en(pp, &keep_rp_msi_en);
+		if (!keep_rp_msi_en) {
+			dw_pcie_remove_capability(pci, PCI_CAP_ID_MSI);
+			dw_pcie_remove_capability(pci, PCI_CAP_ID_MSIX);
+		}
 	}
 
 	return 0;
