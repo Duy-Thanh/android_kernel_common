@@ -982,7 +982,7 @@ int power_supply_get_battery_info(struct power_supply *psy,
 			goto out_put_node;
 		}
 
-		u32 *propdata __free(kfree) = kcalloc(proplen, sizeof(*propdata), GFP_KERNEL);
+		u32 *propdata __free(kfree) = kzalloc_objs(*propdata, proplen);
 		if (!propdata) {
 			power_supply_put_battery_info(psy, info);
 			err = -EINVAL;
@@ -1022,7 +1022,7 @@ int power_supply_get_battery_info(struct power_supply *psy,
 		goto out_put_node;
 	}
 
-	propdata = kcalloc(proplen, sizeof(*propdata), GFP_KERNEL);
+	propdata = kzalloc_objs(*propdata, proplen);
 	if (!propdata) {
 		power_supply_put_battery_info(psy, info);
 		err = -ENOMEM;
@@ -1804,7 +1804,7 @@ __power_supply_register(struct device *parent,
 		pr_warn("%s: Expected proper parent device for '%s'\n",
 			__func__, desc->name);
 
-	psy = kzalloc(sizeof(*psy), GFP_KERNEL);
+	psy = kzalloc_obj(*psy);
 	if (!psy)
 		return ERR_PTR(-ENOMEM);
 
