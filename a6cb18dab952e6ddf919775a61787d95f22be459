@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "068059ed_c5546514",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5256783
+      },
+      "writtenOn": "2026-10-22T06:58:17Z",
+      "side": 1,
+      "message": "4219666: Revert \"Update android-latest-release to android17-release\" | https://android-review.googlesource.com/c/platform/manifest/+/4219666",
+      "revId": "a6cb18dab952e6ddf919775a61787d95f22be459",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
