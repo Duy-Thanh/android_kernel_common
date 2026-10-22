@@ -67,6 +67,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f86b80e8_b953d47c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 4118957
+      },
+      "writtenOn": "2026-10-22T02:23:11Z",
+      "side": 1,
+      "message": "Marked as resolved.",
+      "parentUuid": "be24da8d_22adb9f2",
+      "revId": "ccda806aaa6b1363aca7159ebd01fee907e97817",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "e27efc53_9e3cf300",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
