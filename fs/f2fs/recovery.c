@@ -9,7 +9,6 @@
 #include <linux/fs.h>
 #include <linux/f2fs_fs.h>
 #include <linux/sched/mm.h>
-#include <linux/fserror.h>
 #include "f2fs.h"
 #include "node.h"
 #include "segment.h"
@@ -680,7 +679,6 @@ retry_dn:
 			  ofs_of_node(folio));
 		err = -EFSCORRUPTED;
 		f2fs_handle_error(sbi, ERROR_INCONSISTENT_FOOTER);
-		fserror_report_file_metadata(dn.inode, err, GFP_NOFS);
 		goto err;
 	}
 

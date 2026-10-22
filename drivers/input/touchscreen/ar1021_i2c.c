@@ -164,7 +164,7 @@ static DEFINE_SIMPLE_DEV_PM_OPS(ar1021_i2c_pm,
 				ar1021_i2c_suspend, ar1021_i2c_resume);
 
 static const struct i2c_device_id ar1021_i2c_id[] = {
-	{ .name = "ar1021" },
+	{ "ar1021" },
 	{ }
 };
 MODULE_DEVICE_TABLE(i2c, ar1021_i2c_id);

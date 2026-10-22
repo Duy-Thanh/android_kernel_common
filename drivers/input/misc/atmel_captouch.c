@@ -257,7 +257,7 @@ static const struct of_device_id atmel_captouch_of_id[] = {
 MODULE_DEVICE_TABLE(of, atmel_captouch_of_id);
 
 static const struct i2c_device_id atmel_captouch_id[] = {
-	{ .name = "atmel_captouch" },
+	{ "atmel_captouch" },
 	{ }
 };
 MODULE_DEVICE_TABLE(i2c, atmel_captouch_id);
