@@ -187,6 +187,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0bcc9fa_bc9fdccd",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-22T00:11:09Z",
+      "side": 1,
+      "message": "Acknowledged; thanks for the explanation.",
+      "parentUuid": "79fb64f5_60e743a0",
+      "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8bc50cf4_f057c110",
@@ -285,6 +303,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5bb838d0_0988e287",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 994,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-22T00:11:09Z",
+      "side": 1,
+      "message": "I think aosp/4349070 can land soon, so lets just wait for that?",
+      "parentUuid": "a528a1e5_216f14a1",
+      "range": {
+        "startLine": 984,
+        "startChar": 1,
+        "endLine": 994,
+        "endChar": 64
+      },
+      "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "82f57b07_15373987",
         "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
         "patchSetId": 2
@@ -363,6 +405,24 @@
       "message": "This change adds CONFIG_DMABUF_HEAPS_SYSTEM (with CONFIG_DMABUF_HEAPS) to tools/testing/selftests/drivers/wrapfd/config, so the system heap is a stated requirement of these tests, as it already is for wrapfd_test_dmabuf_system_heap.",
       "parentUuid": "07fcc195_140789b2",
       "isAi": true,
+      "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5469a67_a39bd4c7",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1459,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-22T00:11:09Z",
+      "side": 1,
+      "message": "That relies on the test being built at the same time as the kernel; what if you compile the test separately from a kernel (and that kernel doesn\u0027t have system heap support), it should still behave reasonably, correct?",
+      "parentUuid": "fb27d997_781f0914",
       "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -471,6 +531,24 @@
       "side": 1,
       "message": "Marked as unresolved in case you want to read this gap that the agent finds",
       "parentUuid": "b40947a0_7c1ce6bf",
+      "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "135b3bb8_0600c055",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1726,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-22T00:11:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5b711fc6_5a1362b1",
       "revId": "5308fa67f46e63fd67b5ae10091ca81979acf5c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },

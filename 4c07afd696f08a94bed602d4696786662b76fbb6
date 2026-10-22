@@ -19,6 +19,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae43c01c_82dadda3",
+        "filename": "tools/testing/selftests/drivers/wrapfd/load_gate.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-22T00:11:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "fedab13a_b8a7c0da",
+      "revId": "4c07afd696f08a94bed602d4696786662b76fbb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f7597849_0f601764",
@@ -33,6 +51,24 @@
       "side": 1,
       "message": "seek_end() has two callers. Fixed in PS7: both call ret_or_errno(lseek(wrapfd, 0, SEEK_END)) directly. Leaving this unresolved for Isaac to review.",
       "isAi": true,
+      "revId": "4c07afd696f08a94bed602d4696786662b76fbb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b26d60ca_739f4285",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-22T00:11:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f7597849_0f601764",
       "revId": "4c07afd696f08a94bed602d4696786662b76fbb6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -55,6 +91,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d03d4c6_53a17bbe",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-22T00:11:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2a658bea_f94d27ad",
+      "revId": "4c07afd696f08a94bed602d4696786662b76fbb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2eb11b4d_9d6e7357",
@@ -69,6 +123,24 @@
       "side": 1,
       "message": "This worker check repeats a check test_rewrap already makes: it ends with RELEASE(wrapfd) -\u003e 0, which only succeeds while this process still owns the old wrap. Fixed in PS7: the worker check is removed; the size check stays. Leaving this unresolved for Isaac to review.",
       "isAi": true,
+      "revId": "4c07afd696f08a94bed602d4696786662b76fbb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25ecb28e_adbb654e",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1124,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-22T00:11:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2eb11b4d_9d6e7357",
       "revId": "4c07afd696f08a94bed602d4696786662b76fbb6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -91,6 +163,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df16d0d7_5c7f46ca",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1238,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-22T00:11:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2ac6eca7_fa809ec1",
+      "revId": "4c07afd696f08a94bed602d4696786662b76fbb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1333d915_b8879acd",
@@ -105,6 +195,24 @@
       "side": 1,
       "message": "Open question: this test and release_returns_without_waiting_during_load have the same setup and probe, and could merge into one test: assert that RELEASE returned while the LOAD was held, then assert that it returned 0. The android16-6.12 copy would skip between the two checks (SKIP_UNTIL_FIXED(\"b/568458393\")), because the C driver returns EINVAL at once; a failure before the skip still reports FAIL. Costs: on the C driver the merged test reports SKIP instead of a separate pass for \"returns without waiting\", and on a driver whose RELEASE waits for the LOAD and then succeeds, the merged test fails at the first check. Not changed.",
       "isAi": true,
+      "revId": "4c07afd696f08a94bed602d4696786662b76fbb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f93789f0_f8d5a3d2",
+        "filename": "tools/testing/selftests/drivers/wrapfd/wrapfd.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2173,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-10-22T00:11:09Z",
+      "side": 1,
+      "message": "We can just combine the tests now, and then wait to merge this on 6.12 until after we switch to the Rust version?",
+      "parentUuid": "1333d915_b8879acd",
       "revId": "4c07afd696f08a94bed602d4696786662b76fbb6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
