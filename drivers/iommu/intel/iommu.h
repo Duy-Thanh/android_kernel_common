@@ -57,29 +57,6 @@
 #define DMA_SL_PTE_DIRTY_BIT	9
 #define DMA_SL_PTE_DIRTY	BIT_ULL(DMA_SL_PTE_DIRTY_BIT)
 
-#ifdef CONFIG_PKVM_INTEL
-/*
- * pKVM hypervisor does unmap in two pass:
- * 1. Walk the page table, unpresent the leaf PTE for all mappings in
- *    the range to be unmapped and flush caches(iotlb/devtlb).
- * 2. Walk the page table again, determine the physical pages in the
- *    unmapped region and unpin them.
- *
- * This is to guarantee that the host would not be able to donate the
- * pages until the caches are flushed. And cache flushing is done after
- * all pages in the range are unmapped for efficiency and performance.
- *
- * So we need a reliable way to determine if a leaf PTE points to a
- * valid mapping even after unpresented. FL/SL address can be used
- * for this, but only under the assumption that address 0 is not used
- * for mapping. Rather, lets use an unused bit in the PTE to denote
- * that the PTE has a valid mapping.
- * Bit 63 is ignored by hardware in both FL and SL mode, Use that to
- * denote that the leaf PTE is mapped.
- */
-#define DMA_PTE_MAPPED		BIT_ULL(63)
-#endif /* CONFIG_PKVM_INTEL */
-
 #define ADDR_WIDTH_5LEVEL	(57)
 #define ADDR_WIDTH_4LEVEL	(48)
 
@@ -710,6 +687,13 @@ struct dmar_domain {
 			int		agaw;
 			/* maximum mapped address */
 			u64		max_addr;
+#ifdef CONFIG_PKVM_INTEL
+			/*
+			 * pkVM hypervisor uses nested
+			 * translation for this domain.
+			 */
+			bool		pkvm_nested;
+#endif
 			/* Protect the s1_domains list */
 			spinlock_t	s1_lock;
 			/* Track s1_domains nested on this domain */
@@ -731,10 +715,11 @@ struct dmar_domain {
 			struct mmu_notifier notifier;
 		};
 	};
+#endif
 
 	struct iommu_domain domain;	/* generic domain data structure for
 					   iommu core */
-#else
+#ifdef __PKVM_HYP__
 	/* virtual address */
 	struct dma_pte	*pgd;
 	/* max guest address width */
@@ -753,6 +738,17 @@ struct dmar_domain {
 	atomic_t refcount;
 	unsigned int index;
 	struct pkvm_memcache mc;
+
+	/* parent page table which the user domain is nested on */
+	struct dmar_domain *s2_domain;
+
+	/* Domain uses flush queue(lazy mode) */
+	bool dma_fq;
+
+	/* A pending IOMMU cache flush that should be done before any page donation */
+	bool flush_pending;
+	pkvm_spinlock_t flush_lock;
+
 	/*
 	 * Lock to protect the mapping operations
 	 * on this domain.
@@ -762,8 +758,22 @@ struct dmar_domain {
 	struct qi_batch _qi_batch;		/* domain->qi_batch = &domain->_qi_batch */
 
 	struct hlist_node hnode;
-#endif /* !__PKVM_HYP__ */
+#endif /* __PKVM_HYP__ */
 };
+
+#ifndef __PKVM_HYP__
+#ifdef CONFIG_PKVM_INTEL
+static inline bool domain_pkvm_nested(struct dmar_domain *domain)
+{
+	return domain->pkvm_nested;
+}
+#else
+static inline bool domain_pkvm_nested(struct dmar_domain *domain)
+{
+	return false;
+}
+#endif
+#endif
 
 /*
  * In theory, the VT-d 4.0 spec can support up to 2 ^ 16 counters.
@@ -1008,8 +1018,16 @@ static inline void __iommu_flush_cache(
 static inline void domain_flush_cache(struct dmar_domain *domain,
 			       void *addr, int size)
 {
-	if (!domain->iommu_coherency)
-		clflush_cache_range(addr, size);
+	if (!domain->iommu_coherency) {
+		const unsigned long cl_size = 64;
+		char *p = (char *)((unsigned long)addr & ~(cl_size - 1));
+		char *vend = (char *)addr + size;
+
+		for (; p < vend; p += cl_size)
+			clwb(p);
+		/* clwb is weakly ordered: complete write-backs before the IOMMU walks. */
+		wmb();
+	}
 }
 
 #ifndef __PKVM_HYP__
@@ -1083,7 +1101,7 @@ static inline void dma_clear_pte(struct dma_pte *pte)
 	pte->val = 0;
 }
 
-static inline u64 __dma_pte_addr(struct dma_pte *pte)
+static inline u64 dma_pte_addr(struct dma_pte *pte)
 {
 #ifdef CONFIG_64BIT
 	return pte->val & VTD_PAGE_MASK;
@@ -1092,23 +1110,6 @@ static inline u64 __dma_pte_addr(struct dma_pte *pte)
 	return  __cmpxchg64(&pte->val, 0ULL, 0ULL) & VTD_PAGE_MASK;
 #endif
 }
-
-#ifdef CONFIG_PKVM_INTEL
-static inline u64 dma_pte_addr(struct dma_pte *pte)
-{
-	return __dma_pte_addr(pte) & ~DMA_PTE_MAPPED;
-}
-
-static inline bool dma_pte_mapped(struct dma_pte *pte)
-{
-	return pte->val & DMA_PTE_MAPPED;
-}
-#else
-static inline u64 dma_pte_addr(struct dma_pte *pte)
-{
-	return __dma_pte_addr(pte);
-}
-#endif /* CONFIG_PKVM_INTEL */
 
 static inline bool dma_pte_present(struct dma_pte *pte)
 {
@@ -1440,48 +1441,16 @@ static inline void qi_desc_piotlb(u16 did, u32 pasid, u64 addr,
 				QI_EIOTLB_IH(ih) |
 				QI_EIOTLB_AM(mask);
 	}
+	desc->qw2 = 0;
+	desc->qw3 = 0;
 }
 
 static inline void qi_desc_dev_iotlb_pasid(u16 sid, u16 pfsid, u32 pasid,
-					   u16 qdep, u64 addr,
-					   unsigned int size_order,
-					   struct qi_desc *desc)
-{
-	unsigned long mask = 1UL << (VTD_PAGE_SHIFT + size_order - 1);
-
-	desc->qw0 = QI_DEV_EIOTLB_PASID(pasid) | QI_DEV_EIOTLB_SID(sid) |
-		QI_DEV_EIOTLB_QDEP(qdep) | QI_DEIOTLB_TYPE |
-		QI_DEV_IOTLB_PFSID(pfsid);
-
-	/*
-	 * If S bit is 0, we only flush a single page. If S bit is set,
-	 * The least significant zero bit indicates the invalidation address
-	 * range. VT-d spec 6.5.2.6.
-	 * e.g. address bit 12[0] indicates 8KB, 13[0] indicates 16KB.
-	 * size order = 0 is PAGE_SIZE 4KB
-	 * Max Invs Pending (MIP) is set to 0 for now until we have DIT in
-	 * ECAP.
-	 */
-	if (!IS_ALIGNED(addr, VTD_PAGE_SIZE << size_order))
-		pr_warn_ratelimited("Invalidate non-aligned address %llx, order %d\n",
-				    addr, size_order);
-
-	/* Take page address */
-	desc->qw1 = QI_DEV_EIOTLB_ADDR(addr);
-
-	if (size_order) {
-		/*
-		 * Existing 0s in address below size_order may be the least
-		 * significant bit, we must set them to 1s to avoid having
-		 * smaller size than desired.
-		 */
-		desc->qw1 |= GENMASK_ULL(size_order + VTD_PAGE_SHIFT - 1,
-					VTD_PAGE_SHIFT);
-		/* Clear size_order bit to indicate size */
-		desc->qw1 &= ~mask;
 		/* Set the S bit to indicate flushing more than 1 page */
 		desc->qw1 |= QI_DEV_EIOTLB_SIZE;
 	}
+	desc->qw2 = 0;
+	desc->qw3 = 0;
 }
 
 /* Convert value to context PASID directory size field coding. */
@@ -1700,6 +1669,10 @@ static inline bool intel_domain_is_ss_paging(struct dmar_domain *domain)
 	return domain->domain.ops == &intel_ss_paging_domain_ops;
 }
 #endif /* !__PKVM_HYP__ */
+
+#ifdef CONFIG_PKVM_INTEL
+extern bool intel_iommu_pkvm_use_nested;
+#endif
 
 #ifdef CONFIG_INTEL_IOMMU
 extern int intel_iommu_sm;
