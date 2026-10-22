@@ -94,6 +94,9 @@ static int pwm_backlight_update_status(struct backlight_device *bl)
 	int brightness = backlight_get_brightness(bl);
 	struct pwm_state state;
 
+	pr_info("[PWRSEQ] pwm_bl update_status brightness=%d blank=%d\n",
+		brightness, backlight_is_blank(bl));
+
 	if (pb->notify)
 		brightness = pb->notify(pb->dev, brightness);
 

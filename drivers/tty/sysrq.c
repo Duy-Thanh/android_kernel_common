@@ -376,6 +376,7 @@ static void send_sig_all(int sig)
 
 static void sysrq_handle_term(u8 key)
 {
+	pr_info("[PWRSEQ] Terminate All Tasks (userspace dies now)\n");
 	send_sig_all(SIGTERM);
 	console_loglevel = CONSOLE_LOGLEVEL_DEBUG;
 }
