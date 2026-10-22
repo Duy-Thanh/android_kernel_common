@@ -464,14 +464,12 @@ impl Wrap {
     }
 
     fn empty(&self) -> Result<isize> {
-        let mut guard = self.inner.lock();
-        guard.check_modifiable()?;
-
-        if let Some(_content) = guard.content.take() {
-            Ok(0)
-        } else {
-            Err(ENOENT)
-        }
+        let _content = {
+            let mut guard = self.inner.lock();
+            guard.check_modifiable_and_has_content()?;
+            guard.content.take()
+        };
+        Ok(0)
     }
 
     fn allow_guests(&self, allow: AllowState) -> Result<isize> {
