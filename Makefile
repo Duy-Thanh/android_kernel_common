@@ -2,7 +2,7 @@
 VERSION = 7
 PATCHLEVEL = 3
 SUBLEVEL = 0
-EXTRAVERSION = -rc1
+EXTRAVERSION = -rc2
 NAME = Baby Opossum Posse
 
 # TODO(b/575473148): temporarily report a fake v7.2-rc9 kernel version
