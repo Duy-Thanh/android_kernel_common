@@ -16,6 +16,24 @@
       "message": "This looks right for the loop_configure() and loop_set_block_size() paths: loop_update_limits() sets lim-\u003elogical_block_size before calling loop_set_dma_limit(), so the check here uses the new block size and matches what loop_update_dio() decides right after the limits are committed.\n\nThere are still two paths where LO_FLAGS_DIRECT_IO can flip without dma_alignment being re-evaluated:\n- loop_set_status(): loop_update_dio() can clear the flag when lo_offset becomes unaligned, but loop_set_dma_limit() is not called there, so the stricter backing alignment stays.\n- loop_change_fd(): the backing file (and thus lo_dio_mem_align / lo_min_dio_size) changes, but the DMA limit is not recomputed.\n\nNeither affects the apexd boot path, so this isn\u0027t blocking for the temporary fix, but it would be good to cover them in the upstream fix (e.g. recompute dma_alignment wherever loop_update_dio() can change the flag).",
       "revId": "b7e7083ed3e4f52d53734cd46ecd3ef92928891e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6748133_0450f466",
+        "filename": "drivers/block/loop.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 969,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-10-22T04:58:48Z",
+      "side": 1,
+      "message": "Right I\u0027ll be sending a more complete patch upstream. One problem I found is that LOOP_CHANGE_FD also needs fixing but it has been dropped from the next block branch. So I believe this will need a stable-specific patch too. I\u0027ll cc you on the patch.",
+      "parentUuid": "88a1a390_f371e38a",
+      "revId": "b7e7083ed3e4f52d53734cd46ecd3ef92928891e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
