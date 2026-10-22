@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1bd1d84_8792284c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1746945
+      },
+      "writtenOn": "2026-10-22T04:59:34Z",
+      "side": 1,
+      "message": "Part of the cherry-pick chain starting at 4381610.\nCherry-pick of 4208948 chain from android17-6.18",
+      "revId": "8c1f7913c01ecbed18371f6c8cd806ff0c0814ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
