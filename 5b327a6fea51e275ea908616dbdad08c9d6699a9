@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b63d331a_0b295700",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1746945
+      },
+      "writtenOn": "2026-10-22T04:57:48Z",
+      "side": 1,
+      "message": "We need this changes on 2026-06 branch too.\nPlease review this commit.\n\nCherry-pick of the 3-commit chain from android17-6.18\nOriginal: 4208948\n\nChain (bottom to top):\n  1. ANDROID: net: add vendor hook for reassembly timer adjustment (this commit)\n  2. ANDROID: net: Fixup for symbol CRC stability. (4381611)\n  3. ANDROID: GKI: update symbol list for galaxy (4381612)",
+      "revId": "5b327a6fea51e275ea908616dbdad08c9d6699a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
