@@ -179,15 +179,20 @@ static loff_t lo_calculate_size(struct loop_device *lo, struct file *file)
  * of backing device, and the logical block size of loop is bigger than that of
  * the backing device.
  */
-static bool lo_can_use_dio(struct loop_device *lo)
+static bool __lo_can_use_dio(struct loop_device *lo, unsigned int bsize)
 {
 	if (!(lo->lo_backing_file->f_mode & FMODE_CAN_ODIRECT))
 		return false;
-	if (queue_logical_block_size(lo->lo_queue) < lo->lo_min_dio_size)
+	if (bsize < lo->lo_min_dio_size)
 		return false;
 	if (lo->lo_offset & (lo->lo_min_dio_size - 1))
 		return false;
 	return true;
+}
+
+static bool lo_can_use_dio(struct loop_device *lo)
+{
+	return __lo_can_use_dio(lo, queue_logical_block_size(lo->lo_queue));
 }
 
 /*
@@ -960,7 +965,8 @@ static void loop_set_dma_limit(struct loop_device *lo, struct queue_limits *lim)
 	 * Direct I/O forwards the user pages to the backing file unchanged, so
 	 * track the backing's DMA alignment requirement as the mode is toggled.
 	 */
-	if (lo->lo_flags & LO_FLAGS_DIRECT_IO)
+	if ((lo->lo_flags & LO_FLAGS_DIRECT_IO) &&
+	    __lo_can_use_dio(lo, lim->logical_block_size))
 		lim->dma_alignment = max_t(unsigned int, lo->lo_dio_mem_align,
 					   SECTOR_SIZE - 1);
 	else
