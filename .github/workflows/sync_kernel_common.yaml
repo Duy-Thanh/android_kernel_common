@@ -1,0 +1,62 @@
+name: Sync Kernel Forks from Google
+
+on:
+  workflow_dispatch:
+    inputs:
+      repos:
+        description: "Comma-separated repos to sync (e.g., kernel/common,kernel/manifest)"
+        type: string
+        default: "kernel/common,kernel/manifest"
+      upstream_owner:
+        description: "Upstream owner on googlesource"
+        type: string
+        default: "android.googlesource.com"
+  schedule:
+    - cron: '0 3 * * 0'  # Weekly Sunday 3am UTC
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    name: Sync ${{ matrix.repo }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        repo: ${{ fromJson(format('["{0}"]', replace(github.event.inputs.repos || 'kernel/common,kernel/manifest', ',', '","'))) }}
+    steps:
+      - name: Clone fork (bare)
+        run: |
+          git clone --bare "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository_owner }}/${{ matrix.repo }}.git" repo
+          cd repo
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Add upstream and fetch all refs
+        run: |
+          cd repo
+          UPSTREAM="https://${{ github.event.inputs.upstream_owner }}/${{ matrix.repo }}"
+          git remote add upstream "$UPSTREAM"
+          # Fetch all branches and tags
+          git fetch upstream --prune --tags --force
+
+      - name: Push all branches and tags to fork
+        run: |
+          cd repo
+          # Push all branches
+          git push origin "refs/remotes/upstream/*:refs/heads/*" --force
+          # Push all tags
+          git push origin "refs/tags/*:refs/tags/*" --force
+          # Clean up any deleted refs
+          git push origin --prune
+
+      - name: Verify sync
+        run: |
+          cd repo
+          echo "=== Branches ==="
+          git branch -r | head -20
+          echo ""
+          echo "=== Tags (latest 10) ==="
+          git tag -l | sort -V | tail -10
