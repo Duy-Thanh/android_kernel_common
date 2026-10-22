@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c74e3be_cd74437c",
+        "filename": "drivers/android/tests/wrapfd_kunit.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-10-22T00:50:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0a04b0f_bebe6d19",
+      "revId": "d1f2f9895aa8c07603e76d419683138a4afa587e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b42c0767_d164d17d",
@@ -53,6 +71,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "724bd2e1_2a3f1647",
+        "filename": "drivers/android/tests/wrapfd_kunit.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-10-22T00:50:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b42c0767_d164d17d",
+      "revId": "d1f2f9895aa8c07603e76d419683138a4afa587e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2ba3ff1d_e24286f0",
@@ -78,6 +114,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b779cb6f_ac0d658b",
+        "filename": "drivers/android/tests/wrapfd_kunit.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-10-22T00:50:43Z",
+      "side": 1,
+      "message": "Right. Unfortunately kunit_device_register() requires `struct kunit` pointer as its first parameter which is not available in the `wrapfd_suite_init()` and I could not find a similar API for the entire suite. I guess we could add such APIs but that would require bigger changes.",
+      "parentUuid": "2ba3ff1d_e24286f0",
+      "range": {
+        "startLine": 200,
+        "startChar": 0,
+        "endLine": 207,
+        "endChar": 0
+      },
+      "revId": "d1f2f9895aa8c07603e76d419683138a4afa587e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a0be624d_5c9af385",
         "filename": "drivers/android/tests/wrapfd_kunit.c",
         "patchSetId": 2
@@ -89,6 +149,30 @@
       "writtenOn": "2026-10-20T19:08:06Z",
       "side": 1,
       "message": "Should this just be its own test case?",
+      "range": {
+        "startLine": 209,
+        "startChar": 0,
+        "endLine": 212,
+        "endChar": 27
+      },
+      "revId": "d1f2f9895aa8c07603e76d419683138a4afa587e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cee610b_3670c20a",
+        "filename": "drivers/android/tests/wrapfd_kunit.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-10-22T00:50:43Z",
+      "side": 1,
+      "message": "No, this is not to test empty_wrapfd() API. It\u0027s to actually to create an empty `test_data.empty_file`.",
+      "parentUuid": "a0be624d_5c9af385",
       "range": {
         "startLine": 209,
         "startChar": 0,
