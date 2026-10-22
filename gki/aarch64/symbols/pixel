@@ -3436,6 +3436,8 @@
   vendor_data_pad
   verify_pkcs7_signature
   vfree
+  __vfio_platform_register_reset
+  vfio_platform_unregister_reset
   video_devdata
   video_device_alloc
   video_device_release
