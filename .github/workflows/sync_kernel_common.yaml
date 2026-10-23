@@ -4,13 +4,17 @@ on:
   workflow_dispatch:
     inputs:
       repos:
-        description: "Comma-separated repos to sync (e.g., kernel/common,kernel/manifest)"
+        description: "Comma-separated GitHub repo names to sync (e.g., android_kernel_common,android_kernel_manifest)"
         type: string
-        default: "kernel/common,kernel/manifest"
+        default: "android_kernel_common,android_kernel_manifest"
       upstream_owner:
         description: "Upstream owner on googlesource"
         type: string
         default: "android.googlesource.com"
+      upstream_repos:
+        description: "Comma-separated upstream paths matching repos order (e.g., kernel/common,kernel/manifest)"
+        type: string
+        default: "kernel/common,kernel/manifest"
   schedule:
     - cron: '0 3 * * 0'  # Weekly Sunday 3am UTC
 
@@ -23,16 +27,24 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
-      - name: Parse repo list
+      - name: Parse repo lists
         id: parse
         run: |
-          REPOS="${{ github.event.inputs.repos || 'kernel/common,kernel/manifest' }}"
+          REPOS="${{ github.event.inputs.repos || 'android_kernel_common,android_kernel_manifest' }}"
+          UPSTREAM_REPOS="${{ github.event.inputs.upstream_repos || 'kernel/common,kernel/manifest' }}"
           echo "repos=$(echo "$REPOS" | sed 's/,/ /g')" >> "$GITHUB_OUTPUT"
+          echo "upstream_repos=$(echo "$UPSTREAM_REPOS" | sed 's/,/ /g')" >> "$GITHUB_OUTPUT"
 
       - name: Sync each repo
         run: |
-          for REPO in ${{ steps.parse.outputs.repos }}; do
-            echo "=== Syncing $REPO ==="
+          REPOS=(${{ steps.parse.outputs.repos }})
+          UPSTREAM_REPOS=(${{ steps.parse.outputs.upstream_repos }})
+          
+          for i in "${!REPOS[@]}"; do
+            REPO="${REPOS[i]}"
+            UPSTREAM_REPO="${UPSTREAM_REPOS[i]}"
+            
+            echo "=== Syncing $REPO -> $UPSTREAM_REPO ==="
             cd /tmp
             rm -rf "sync_$REPO"
             git clone --bare "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository_owner }}/$REPO.git" "sync_$REPO"
@@ -40,7 +52,7 @@ jobs:
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
             
-            UPSTREAM="https://${{ github.event.inputs.upstream_owner }}/$REPO"
+            UPSTREAM="https://${{ github.event.inputs.upstream_owner }}/$UPSTREAM_REPO"
             git remote add upstream "$UPSTREAM"
             git fetch upstream --prune --tags --force
             
