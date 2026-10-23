@@ -6,7 +6,7 @@ on:
       repos:
         description: "Comma-separated GitHub repo names to sync (e.g., android_kernel_common,android_kernel_manifest)"
         type: string
-        default: "android_kernel_common"
+        default: "android_kernel_common,android_kernel_manifest"
       upstream_owner:
         description: "Upstream owner on googlesource"
         type: string
@@ -14,7 +14,7 @@ on:
       upstream_repos:
         description: "Comma-separated upstream paths matching repos order (e.g., kernel/common,kernel/manifest)"
         type: string
-        default: "kernel/common"
+        default: "kernel/common,kernel/manifest"
       branch_filter:
         description: "Regex to filter branches to sync (default: GKI branches only)"
         type: string
@@ -62,26 +62,62 @@ jobs:
             echo "=== Syncing $REPO -> $UPSTREAM_REPO ==="
             cd /tmp
             rm -rf "sync_$REPO"
-            git clone --bare "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository_owner }}/$REPO.git" "sync_$REPO"
+            # Shallow clone fork first (fast)
+            git clone --bare --depth=1 "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository_owner }}/$REPO.git" "sync_$REPO"
             cd "sync_$REPO"
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
             
             UPSTREAM="https://${{ github.event.inputs.upstream_owner }}/$UPSTREAM_REPO"
             git remote add upstream "$UPSTREAM"
-            git fetch upstream --prune --tags --force
             
-            # Filter branches
-            echo "Filtering branches with: $BRANCH_FILTER"
-            BRANCHES_TO_PUSH=$(git branch -r | grep -E "upstream/" | sed 's|upstream/||' | grep -E "$BRANCH_FILTER" || true)
-            if [ -z "$BRANCHES_TO_PUSH" ]; then
-              echo "No matching branches found"
-            else
-              echo "Branches to push:"
-              echo "$BRANCHES_TO_PUSH"
-              for BR in $BRANCHES_TO_PUSH; do
+            # 1. List matching branches from upstream (fast, no download)
+            echo "Finding matching branches..."
+            BRANCHES=$(git ls-remote --heads upstream | awk '{print $2}' | sed 's|refs/heads/||' | grep -E "$BRANCH_FILTER" || true)
+            
+            if [ -n "$BRANCHES" ]; then
+              echo "Branches to fetch:"
+              echo "$BRANCHES"
+              # Fetch only matching branches
+              for BR in $BRANCHES; do
+                echo "Fetching branch: $BR"
+                git fetch upstream "refs/heads/$BR:refs/remotes/upstream/$BR" --depth=100
+              done
+              # Push to fork
+              for BR in $BRANCHES; do
                 git push origin "refs/remotes/upstream/$BR:refs/heads/$BR" --force
               done
+            else
+              echo "No matching branches"
+            fi
+            
+            # 2. List matching tags from upstream
+            echo "Finding matching tags..."
+            TAGS=$(git ls-remote --tags upstream | awk '{print $2}' | sed 's|refs/tags/||' | grep -v '\^{}$' | grep -E "$TAG_FILTER" || true)
+            
+            if [ -n "$TAGS" ]; then
+              echo "Tags to fetch:"
+              echo "$TAGS"
+              for TG in $TAGS; do
+                echo "Fetching tag: $TG"
+                git fetch upstream "refs/tags/$TG:refs/tags/$TG"
+              done
+              # Push to fork
+              for TG in $TAGS; do
+                git push origin "refs/tags/$TG:refs/tags/$TG" --force
+              done
+            else
+              echo "No matching tags"
+            fi
+            
+            # Prune deleted refs
+            git push origin --prune
+            
+            echo "=== $REPO synced ==="
+            git branch -r | head -10
+            git tag -l | sort -V | tail -5
+            echo ""
+          done
             fi
             
             # Filter tags
