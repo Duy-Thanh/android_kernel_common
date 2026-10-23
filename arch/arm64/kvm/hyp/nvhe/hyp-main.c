@@ -1343,11 +1343,43 @@ static const hcall_t host_hcall[] = {
 #endif
 };
 
+// Add code HERE!
+#define ARM_SMCCC_KVM_FUNC_CUSTOM_PING          0x1337
+#define ARM_SMCCC_VENDOR_HYP_KVM_CUSTOM_PING_FUNC_ID        \
+        ARM_SMCCC_CALL_VAL(ARM_SMCCC_FAST_CALL,             \
+                           ARM_SMCCC_SMC_64,                \
+                           ARM_SMCCC_OWNER_VENDOR_HYP,      \
+                           ARM_SMCCC_KVM_FUNC_CUSTOM_PING)
+
+static bool handle_my_custom_ping_hcall(struct kvm_cpu_context *host_ctxt)
+{
+    DECLARE_REG(unsigned long, id, host_ctxt, 0);
+
+    if (unlikely(id == ARM_SMCCC_VENDOR_HYP_KVM_CUSTOM_PING_FUNC_ID))
+    {
+        DECLARE_REG(unsigned long, arg1, host_ctxt, 1);
+
+        cpu_reg(host_ctxt, 0) = SMCCC_RET_SUCCESS;
+        cpu_reg(host_ctxt, 1) = arg1 ^ 0xDEADBEEF;
+
+        return true;
+    }
+
+    return false;
+}
+
+// END added code
+
 static void handle_host_hcall(struct kvm_cpu_context *host_ctxt)
 {
 	DECLARE_REG(unsigned long, id, host_ctxt, 0);
 	unsigned long hcall_min = 0;
 	hcall_t hfn;
+
+	// ADD code here
+	if (handle_my_custom_ping_hcall(host_ctxt))
+	    return;
+	// END added code
 
 	if (handle_host_dynamic_hcall(host_ctxt) == HCALL_HANDLED)
 		goto end;
