@@ -62,8 +62,8 @@ jobs:
             echo "=== Syncing $REPO -> $UPSTREAM_REPO ==="
             cd /tmp
             rm -rf "sync_$REPO"
-            # Shallow clone fork first (fast)
-            git clone --bare --depth=1 "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository_owner }}/$REPO.git" "sync_$REPO"
+            # Full bare clone (no shallow - avoids conflicts)
+            git clone --bare "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository_owner }}/$REPO.git" "sync_$REPO"
             cd "sync_$REPO"
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -78,10 +78,10 @@ jobs:
             if [ -n "$BRANCHES" ]; then
               echo "Branches to fetch:"
               echo "$BRANCHES"
-              # Fetch only matching branches
+              # Fetch only matching branches, NO TAGS
               for BR in $BRANCHES; do
                 echo "Fetching branch: $BR"
-                git fetch upstream "refs/heads/$BR:refs/remotes/upstream/$BR" --depth=100
+                git fetch upstream --no-tags "refs/heads/$BR:refs/remotes/upstream/$BR"
               done
               # Push to fork
               for BR in $BRANCHES; do
