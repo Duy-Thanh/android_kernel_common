@@ -19,44 +19,37 @@ permissions:
 
 jobs:
   sync:
-    name: Sync ${{ matrix.repo }}
+    name: Sync repos
     runs-on: ubuntu-latest
     timeout-minutes: 60
-    strategy:
-      fail-fast: false
-      matrix:
-        repo: ${{ fromJson(format('["{0}"]', replace(github.event.inputs.repos || 'kernel/common,kernel/manifest', ',', '","'))) }}
     steps:
-      - name: Clone fork (bare)
+      - name: Parse repo list
+        id: parse
         run: |
-          git clone --bare "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository_owner }}/${{ matrix.repo }}.git" repo
-          cd repo
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          REPOS="${{ github.event.inputs.repos || 'kernel/common,kernel/manifest' }}"
+          echo "repos=$(echo "$REPOS" | sed 's/,/ /g')" >> "$GITHUB_OUTPUT"
 
-      - name: Add upstream and fetch all refs
+      - name: Sync each repo
         run: |
-          cd repo
-          UPSTREAM="https://${{ github.event.inputs.upstream_owner }}/${{ matrix.repo }}"
-          git remote add upstream "$UPSTREAM"
-          # Fetch all branches and tags
-          git fetch upstream --prune --tags --force
-
-      - name: Push all branches and tags to fork
-        run: |
-          cd repo
-          # Push all branches
-          git push origin "refs/remotes/upstream/*:refs/heads/*" --force
-          # Push all tags
-          git push origin "refs/tags/*:refs/tags/*" --force
-          # Clean up any deleted refs
-          git push origin --prune
-
-      - name: Verify sync
-        run: |
-          cd repo
-          echo "=== Branches ==="
-          git branch -r | head -20
-          echo ""
-          echo "=== Tags (latest 10) ==="
-          git tag -l | sort -V | tail -10
+          for REPO in ${{ steps.parse.outputs.repos }}; do
+            echo "=== Syncing $REPO ==="
+            cd /tmp
+            rm -rf "sync_$REPO"
+            git clone --bare "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository_owner }}/$REPO.git" "sync_$REPO"
+            cd "sync_$REPO"
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            
+            UPSTREAM="https://${{ github.event.inputs.upstream_owner }}/$REPO"
+            git remote add upstream "$UPSTREAM"
+            git fetch upstream --prune --tags --force
+            
+            git push origin "refs/remotes/upstream/*:refs/heads/*" --force
+            git push origin "refs/tags/*:refs/tags/*" --force
+            git push origin --prune
+            
+            echo "=== $REPO synced ==="
+            git branch -r | head -10
+            git tag -l | sort -V | tail -5
+            echo ""
+          done
