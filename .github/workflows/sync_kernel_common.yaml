@@ -23,6 +23,14 @@ on:
         description: "Regex to filter tags to sync (default: android GKI tags)"
         type: string
         default: "^android[0-9]+-[0-9]+\\.[0-9]+-[0-9]{4}-[0-9]{2}(_r[0-9]+)?$"
+      specific_branches:
+        description: "Specific branches to sync (comma-separated). If empty, uses branch_filter."
+        type: string
+        default: ""
+      specific_tags:
+        description: "Specific tags to sync (comma-separated). If empty, uses tag_filter."
+        type: string
+        default: ""
   schedule:
     - cron: '0 3 * * 0'  # Weekly Sunday 3am UTC
 
@@ -33,7 +41,7 @@ jobs:
   sync:
     name: Sync repos
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 180
     steps:
       - name: Parse repo lists
         id: parse
@@ -42,15 +50,21 @@ jobs:
           UPSTREAM_REPOS="${{ github.event.inputs.upstream_repos || 'kernel/common,kernel/manifest' }}"
           BRANCH_FILTER="${{ github.event.inputs.branch_filter || '^(common-android|android[0-9]+-[0-9]+\\.[0-9]+|main-kernel)' }}"
           TAG_FILTER="${{ github.event.inputs.tag_filter || '^android[0-9]+-[0-9]+\\.[0-9]+-[0-9]{4}-[0-9]{2}(_r[0-9]+)?$' }}"
+          SPECIFIC_BRANCHES="${{ github.event.inputs.specific_branches }}"
+          SPECIFIC_TAGS="${{ github.event.inputs.specific_tags }}"
           echo "repos=$(echo "$REPOS" | sed 's/,/ /g')" >> "$GITHUB_OUTPUT"
           echo "upstream_repos=$(echo "$UPSTREAM_REPOS" | sed 's/,/ /g')" >> "$GITHUB_OUTPUT"
           echo "branch_filter=$BRANCH_FILTER" >> "$GITHUB_OUTPUT"
           echo "tag_filter=$TAG_FILTER" >> "$GITHUB_OUTPUT"
+          echo "specific_branches=$SPECIFIC_BRANCHES" >> "$GITHUB_OUTPUT"
+          echo "specific_tags=$SPECIFIC_TAGS" >> "$GITHUB_OUTPUT"
 
       - name: Sync each repo
         env:
           BRANCH_FILTER: ${{ steps.parse.outputs.branch_filter }}
           TAG_FILTER: ${{ steps.parse.outputs.tag_filter }}
+          SPECIFIC_BRANCHES: ${{ steps.parse.outputs.specific_branches }}
+          SPECIFIC_TAGS: ${{ steps.parse.outputs.specific_tags }}
         run: |
           REPOS=(${{ steps.parse.outputs.repos }})
           UPSTREAM_REPOS=(${{ steps.parse.outputs.upstream_repos }})
@@ -62,7 +76,6 @@ jobs:
             echo "=== Syncing $REPO -> $UPSTREAM_REPO ==="
             cd /tmp
             rm -rf "sync_$REPO"
-            # Full bare clone (no shallow - avoids conflicts)
             git clone --bare "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository_owner }}/$REPO.git" "sync_$REPO"
             cd "sync_$REPO"
             git config user.name "github-actions[bot]"
@@ -71,68 +84,63 @@ jobs:
             UPSTREAM="https://${{ github.event.inputs.upstream_owner }}/$UPSTREAM_REPO"
             git remote add upstream "$UPSTREAM"
             
-            # 1. List matching branches from upstream (fast, no download)
-            echo "Finding matching branches..."
-            BRANCHES=$(git ls-remote --heads upstream | awk '{print $2}' | sed 's|refs/heads/||' | grep -E "$BRANCH_FILTER" || true)
-            
-            if [ -n "$BRANCHES" ]; then
-              echo "Branches to fetch:"
-              echo "$BRANCHES"
-              # Fetch only matching branches, NO TAGS
-              for BR in $BRANCHES; do
-                echo "Fetching branch: $BR"
-                git fetch upstream --no-tags "refs/heads/$BR:refs/remotes/upstream/$BR"
-              done
-              # Push to fork
-              for BR in $BRANCHES; do
-                git push origin "refs/remotes/upstream/$BR:refs/heads/$BR" --force
-              done
+            # Determine branches to sync
+            if [ -n "$SPECIFIC_BRANCHES" ]; then
+              # Use specific branches
+              BRANCHES=$(echo "$SPECIFIC_BRANCHES" | sed 's/,/ /g')
+              echo "Using specific branches: $BRANCHES"
             else
-              echo "No matching branches"
+              # Use filter
+              echo "Finding matching branches with filter: $BRANCH_FILTER"
+              BRANCHES=$(git ls-remote --heads upstream | awk '{print $2}' | sed 's|refs/heads/||' | grep -E "$BRANCH_FILTER" || true)
+              if [ -z "$BRANCHES" ]; then
+                echo "Warning: No branches matched filter"
+              fi
             fi
             
-            # 2. List matching tags from upstream
-            echo "Finding matching tags..."
-            TAGS=$(git ls-remote --tags upstream | awk '{print $2}' | sed 's|refs/tags/||' | grep -v '\^{}$' | grep -E "$TAG_FILTER" || true)
+            # Fetch and push branches
+            if [ -n "$BRANCHES" ]; then
+              echo "Branches to sync:"
+              echo "$BRANCHES"
+              for BR in $BRANCHES; do
+                echo "Fetching branch: $BR"
+                git fetch upstream --no-tags "refs/heads/$BR:refs/remotes/upstream/$BR" || echo "Warning: Failed to fetch $BR"
+              done
+              for BR in $BRANCHES; do
+                git push origin "refs/remotes/upstream/$BR:refs/heads/$BR" --force || echo "Warning: Failed to push $BR"
+              done
+            else
+              echo "No branches to sync"
+            fi
             
+            # Determine tags to sync
+            if [ -n "$SPECIFIC_TAGS" ]; then
+              TAGS=$(echo "$SPECIFIC_TAGS" | sed 's/,/ /g')
+              echo "Using specific tags: $TAGS"
+            else
+              echo "Finding matching tags with filter: $TAG_FILTER"
+              TAGS=$(git ls-remote --tags upstream | awk '{print $2}' | sed 's|refs/tags/||' | grep -v '\^{}$' | grep -E "$TAG_FILTER" || true)
+              if [ -z "$TAGS" ]; then
+                echo "Warning: No tags matched filter"
+              fi
+            fi
+            
+            # Fetch and push tags
             if [ -n "$TAGS" ]; then
-              echo "Tags to fetch:"
+              echo "Tags to sync:"
               echo "$TAGS"
               for TG in $TAGS; do
                 echo "Fetching tag: $TG"
-                git fetch upstream "refs/tags/$TG:refs/tags/$TG"
+                git fetch upstream "refs/tags/$TG:refs/tags/$TG" || echo "Warning: Failed to fetch $TG"
               done
-              # Push to fork
               for TG in $TAGS; do
-                git push origin "refs/tags/$TG:refs/tags/$TG" --force
+                git push origin "refs/tags/$TG:refs/tags/$TG" --force || echo "Warning: Failed to push $TG"
               done
             else
-              echo "No matching tags"
+              echo "No tags to sync"
             fi
             
             # Prune deleted refs
-            git push origin --prune
-            
-            echo "=== $REPO synced ==="
-            git branch -r | head -10
-            git tag -l | sort -V | tail -5
-            echo ""
-          done
-            fi
-            
-            # Filter tags
-            echo "Filtering tags with: $TAG_FILTER"
-            TAGS_TO_PUSH=$(git tag -l | grep -E "$TAG_FILTER" || true)
-            if [ -z "$TAGS_TO_PUSH" ]; then
-              echo "No matching tags found"
-            else
-              echo "Tags to push:"
-              echo "$TAGS_TO_PUSH"
-              for TG in $TAGS_TO_PUSH; do
-                git push origin "refs/tags/$TG:refs/tags/$TG" --force
-              done
-            fi
-            
             git push origin --prune
             
             echo "=== $REPO synced ==="
