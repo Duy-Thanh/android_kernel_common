@@ -80,17 +80,16 @@ jobs:
             cd "sync_$REPO"
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
+            git config push.autoSetupRemote true
             
             UPSTREAM="https://${{ github.event.inputs.upstream_owner }}/$UPSTREAM_REPO"
             git remote add upstream "$UPSTREAM"
             
             # Determine branches to sync
             if [ -n "$SPECIFIC_BRANCHES" ]; then
-              # Use specific branches
               BRANCHES=$(echo "$SPECIFIC_BRANCHES" | sed 's/,/ /g')
               echo "Using specific branches: $BRANCHES"
             else
-              # Use filter
               echo "Finding matching branches with filter: $BRANCH_FILTER"
               BRANCHES=$(git ls-remote --heads upstream | awk '{print $2}' | sed 's|refs/heads/||' | grep -E "$BRANCH_FILTER" || true)
               if [ -z "$BRANCHES" ]; then
@@ -140,8 +139,8 @@ jobs:
               echo "No tags to sync"
             fi
             
-            # Prune deleted refs
-            git push origin --prune
+            # Prune deleted refs (only for refs we manage, not current branch)
+            git push origin --prune --force || echo "Warning: Prune failed"
             
             echo "=== $REPO synced ==="
             git branch -r | head -10
