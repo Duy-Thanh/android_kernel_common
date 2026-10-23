@@ -10989,6 +10989,11 @@ S:	Maintained
 F:	arch/x86/include/asm/jailhouse_para.h
 F:	arch/x86/kernel/jailhouse.c
 
+HYPERVISOR HYPERCALL (HVC) DEVELOPMENT
+M:	Nguyen Duy Thanh <nekkochan0x0007@proton.me>
+S:	Maintained
+F:	arch/arm64/kvm/hyp/nvhe/hyp-main.c
+
 JC42.4 TEMPERATURE SENSOR DRIVER
 M:	Guenter Roeck <linux@roeck-us.net>
 L:	linux-hwmon@vger.kernel.org
