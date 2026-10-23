@@ -2,6 +2,8 @@
 /*
  * Copyright (C) 2020 - Google Inc
  * Author: Andrew Scull <ascull@google.com>
+ *
+ * Copyright (C) 2026 Nguyen Duy Thanh <nekkochan0x0007@proton.me>
  */
 
 #include <kvm/arm_hypercalls.h>
