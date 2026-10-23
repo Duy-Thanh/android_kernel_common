@@ -171,6 +171,9 @@ DECLARE_HOOK(android_vh_mm_customize_pgdat_balanced,
 DECLARE_HOOK(android_vh_mm_customize_reclaim_idx,
 	TP_PROTO(int order, gfp_t gfp, s8 *reclaim_idx, enum zone_type *highest_zoneidx),
 	TP_ARGS(order, gfp, reclaim_idx, highest_zoneidx));
+DECLARE_HOOK(android_vh_customize_may_deactivate,
+	TP_PROTO(struct lruvec *target_lruvec, struct scan_control *sc),
+	TP_ARGS(target_lruvec, sc));
 DECLARE_HOOK(android_vh_can_reclaim_anon_pages,
 	TP_PROTO(struct mem_cgroup *memcg, int nid, gfp_t gfp_mask, bool *skip),
 	TP_ARGS(memcg, nid, gfp_mask, skip));
