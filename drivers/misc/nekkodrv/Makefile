@@ -5,4 +5,3 @@
 #
 
 obj-$(CONFIG_NEKKODRV_MODULE) += nekkodrv.o
-nekkodrv-y := nekkodrv_module.o
