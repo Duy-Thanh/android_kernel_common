@@ -30,8 +30,11 @@ static uint64_t my_session_token = 0;
 static struct chacha20_pure_ctx chacha_ctx;
 
 static void init_chacha_prng(void) {
-    register uint64_t sp_reg __asm__("sp");
-    register uint64_t x30_reg __asm__("x30");
+    uint64_t sp_reg;
+    uint64_t x30_reg;
+
+    asm volatile("mov %0, sp" : "=r" (sp_reg));
+    asm volatile("mov %0, x30" : "=r" (x30_reg));
 
     uint32_t seed_key[8] =
         {
