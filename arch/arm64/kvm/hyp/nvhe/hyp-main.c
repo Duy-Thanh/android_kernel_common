@@ -6,7 +6,7 @@
  * Copyright (C) 2026 - Nguyen Duy Thanh <nekkochan0x0007@proton.me>
  */
 
-#include <cstdint>
+#include <linux/types.h>
 #include <kvm/arm_hypercalls.h>
 
 #include <hyp/adjust_pc.h>
