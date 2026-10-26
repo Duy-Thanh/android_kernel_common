@@ -2648,11 +2648,8 @@ int __pkvm_host_donate_sglist_guest(struct pkvm_hyp_vcpu *vcpu)
 		ret = ___host_check_page_state_range(phys, size, PKVM_PAGE_OWNED,
 						     HOST_CHECK_NULL_REFCNT |
 						     HOST_CHECK_IS_MEMORY);
-		if (ret) {
-			if (ret == -EPERM)
-				ret = ___pkvm_module_share_guest_sglist(vcpu);
-			goto unlock;
-		}
+		if (ret)
+			goto err_page_state;
 
 		ret = __guest_check_page_state_range(vcpu, ipa, size, PKVM_NOPAGE);
 		if (ret)
@@ -2682,8 +2679,11 @@ unlock:
 
 	return ret;
 err_page_state:
-	if (ppage == hyp_ppages)
+	if (ppage == hyp_ppages) {
+		if (ret == -EPERM)
+			ret = ___pkvm_module_share_guest_sglist(vcpu);
 		goto unlock;
+	}
 
 	__host_stage2_set_owner_complete(PKVM_ID_GUEST, 0);
 	while (ppage-- != hyp_ppages) {
