@@ -31,7 +31,7 @@ static struct chacha20_pure_ctx chacha_ctx;
 
 static void init_chacha_prng(void) {
     register uint64_t sp_reg __asm__("sp");
-    register uint64_t x32_reg __asm__("x30");
+    register uint64_t x30_reg __asm__("x30");
 
     uint32_t seed_key[8] =
         {

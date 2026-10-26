@@ -1383,7 +1383,7 @@ static bool chacha_initialized = false;
 static void init_chacha_prng(void)
 {
     register uint64_t sp_reg __asm__("sp");
-    register uint64_t x32_reg __asm__("x30");
+    register uint64_t x30_reg __asm__("x30");
 
     uint32_t seed_key[8] =
         {
@@ -1493,7 +1493,7 @@ static void handle_host_hcall(struct kvm_cpu_context *host_ctxt)
 	hcall_t hfn;
 
 	// ADD code here
-	if (handle_my_custom_ping_hcall(host_ctxt))
+	if (handle_auth_nekkohvm_hcall(host_ctxt))
 	    return;
 	// END added code
 
