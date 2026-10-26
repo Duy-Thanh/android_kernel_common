@@ -10993,6 +10993,8 @@ HYPERVISOR HYPERCALL (HVC) DEVELOPMENT
 M:	Nguyen Duy Thanh <nekkochan0x0007@proton.me>
 S:	Maintained
 F:	arch/arm64/kvm/hyp/nvhe/hyp-main.c
+F:  arch/arm64/kvm/hyp/nvhe/prng.h
+F:  arch/arm64/kvm/hyp/nvhe/siphash-lite.h
 
 JC42.4 TEMPERATURE SENSOR DRIVER
 M:	Guenter Roeck <linux@roeck-us.net>
