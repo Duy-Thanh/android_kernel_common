@@ -44,7 +44,7 @@ static void init_chacha_prng(void) {
         };
     uint32_t nonce[3] = {0x01020304, 0x05060708, 0x090A0B0C};
 
-    chacha20_init(&hyp_chacha_ctx, seed_key, nonce, 1);
+    chacha20_init(&chacha_ctx, seed_key, nonce, 1);
 }
 
 static void derive_keys(void) {
