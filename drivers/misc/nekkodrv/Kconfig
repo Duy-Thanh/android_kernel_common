@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: GPL-2.0-only
+#
+# Copyright (C) 2026
+# Author: Nguyen Duy Thanh <nekkochan0x0007@proton.me>
+#
+
+config NEKKODRV_MODULE
+	tristate "Custom module for new hypervisor"
+	default m
+	help
+	  Custom module for new hypervisor
