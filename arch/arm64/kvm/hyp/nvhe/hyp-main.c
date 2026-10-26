@@ -3,9 +3,10 @@
  * Copyright (C) 2020 - Google Inc
  * Author: Andrew Scull <ascull@google.com>
  *
- * Copyright (C) 2026 Nguyen Duy Thanh <nekkochan0x0007@proton.me>
+ * Copyright (C) 2026 - Nguyen Duy Thanh <nekkochan0x0007@proton.me>
  */
 
+#include <cstdint>
 #include <kvm/arm_hypercalls.h>
 
 #include <hyp/adjust_pc.h>
@@ -32,6 +33,9 @@
 #include <uapi/linux/psci.h>
 
 #include "../../sys_regs.h"
+
+#include "siphash-lite.h"
+#include "prng.h"
 
 DEFINE_PER_CPU(struct kvm_nvhe_init_params, kvm_init_params);
 
@@ -1346,23 +1350,133 @@ static const hcall_t host_hcall[] = {
 };
 
 // Add code HERE!
-#define ARM_SMCCC_KVM_FUNC_CUSTOM_PING          0x1337
-#define ARM_SMCCC_VENDOR_HYP_KVM_CUSTOM_PING_FUNC_ID        \
+#define ARM_SMCCC_VENDOR_HYP_KVM_AUTH         0x1337
+#define ARM_SMCCC_VENDOR_HYP_KVM_AUTH_FUNC_ID               \
         ARM_SMCCC_CALL_VAL(ARM_SMCCC_FAST_CALL,             \
                            ARM_SMCCC_SMC_64,                \
                            ARM_SMCCC_OWNER_VENDOR_HYP,      \
-                           ARM_SMCCC_KVM_FUNC_CUSTOM_PING)
+                           ARM_SMCCC_VENDOR_HYP_KVM_AUTH)
 
-static bool handle_my_custom_ping_hcall(struct kvm_cpu_context *host_ctxt)
+// Opcode for HCALL sub-commands
+#define CMD_GET_CHALLENGE       1338
+#define CMD_VERIFY_RESP         1339
+#define CMD_PROTECTED_OP        1340
+
+// State machine for auth
+enum auth_state {
+    STATE_IDLE = 0,
+    STATE_CHALLENGE_ISSUED,
+    STATE_AUTHENTICATED
+};
+
+// EL2 data static (inside .hyp.data)
+static enum auth_state current_state = STATE_IDLE;
+static uint64_t current_nonce = 0;
+static uint64_t active_session_token = 0;
+
+static uint64_t dynamic_shared_key_0 = 0;
+static uint64_t dynamic_shared_key_1 = 0;
+
+static struct chacha20_pure_ctx hyp_chacha_ctx;
+static bool chacha_initialized = false;
+
+static void init_chacha_prng(void)
 {
-    DECLARE_REG(unsigned long, id, host_ctxt, 0);
+    register uint64_t sp_reg __asm__("sp");
+    register uint64_t x32_reg __asm__("x30");
 
-    if (unlikely(id == ARM_SMCCC_VENDOR_HYP_KVM_CUSTOM_PING_FUNC_ID))
+    uint32_t seed_key[8] =
+        {
+            (uint32_t)sp_reg, (uint32_t)(sp_reg >> 32),
+            (uint32_t)x30_reg, (uint32_t)(x30_reg >> 32),
+            0xDEADBEEF, 0xCAFEBABE, 0x13371337, 0x90909090
+        };
+    uint32_t nonce[3] = {0x01020304, 0x05060708, 0x090A0B0C};
+
+    chacha20_init(&hyp_chacha_ctx, seed_key, nonce, 1);
+    chacha_initialized = true;
+}
+
+static void generate_dynamic_key(uint64_t *k0, uint64_t *k1, uint64_t *nonce_out)
+{
+    if (!chacha_initialized) {
+        init_chacha_prng();
+    }
+
+    uint32_t block[16];
+    chacha20_block(&hyp_chacha_ctx, block);
+
+    *k0 = ((uint64_t)block[0] << 32) | block[1];
+    *k1 = ((uint64_t)block[2] << 32) | block[3];
+    *nonce_out = ((uint64_t)block[4] << 32) | block[5];
+}
+
+static bool handle_auth_nekkohvm_hcall(struct kvm_cpu_context *host_ctxt)
+{
+    uint64_t id = cpu_reg(host_ctxt, 0);
+
+    if (id == ARM_SMCCC_VENDOR_HYP_KVM_AUTH_FUNC_ID)
     {
-        DECLARE_REG(unsigned long, arg1, host_ctxt, 1);
+        uint64_t cmd = cpu_reg(host_ctxt, 1);
 
-        cpu_reg(host_ctxt, 0) = SMCCC_RET_SUCCESS;
-        cpu_reg(host_ctxt, 1) = arg1 ^ 0xDEADBEEF;
+        switch (cmd) {
+            case CMD_GET_CHALLENGE: {
+                // Generate random key and nonce using ChaCha20
+                generate_dynamic_key(&dynamic_shared_key_0, &dynamic_shared_key_1, &current_nonce);
+                current_state = STATE_CHALLENGE_ISSUED;
+
+                cpu_reg(host_ctxt, 0) = SMCCC_RET_SUCCESS;
+                cpu_reg(host_ctxt, 1) = current_nonce;
+
+                break;
+            }
+
+            case CMD_VERIFY_RESP: {
+                if (current_state != STATE_CHALLENGE_ISSUED) {
+                    cpu_reg(host_ctxt, 0) = SMCCC_RET_NOT_SUPPORTED;
+                    return true;
+                }
+
+                uint64_t client_response = cpu_reg(host_ctxt, 2);
+
+                // Use dynamic key to calculate expected response
+                uint64_t expected_response = siphash24_single_u64(current_nonce, dynamic_shared_key_0, dynamic_shared_key_1);
+
+                if (constant_time_compare_u64(client_response, expected_response)) {
+                    active_session_token = current_nonce ^ dynamic_shared_key_0;
+                    current_state = STATE_AUTHENTICATED;
+
+                    cpu_reg(host_ctxt, 0) = SMCCC_RET_SUCCESS;
+                    cpu_reg(host_ctxt, 1) = active_session_token;
+                } else {
+                    current_state = STATE_IDLE;
+                    dynamic_shared_key_0 = 0;
+                    dynamic_shared_key_1 = 0;
+                    cpu_reg(host_ctxt, 0) = SMCCC_RET_NOT_SUPPORTED;
+                }
+
+                break;
+            }
+
+            case CMD_PROTECTED_OP: {
+                uint64_t token = cpu_reg(host_ctxt, 2);
+
+                if (current_state == STATE_AUTHENTICATED && constant_time_compare_u64(token, active_session_token)) {
+                    uint64_t payload = cpu_reg(host_ctxt, 3);
+                    cpu_reg(host_ctxt, 0) = SMCCC_RET_SUCCESS;
+                    cpu_reg(host_ctxt, 1) = payload ^ 0xDEADBEEFCAFEBABEULL;
+                } else {
+                    cpu_reg(host_ctxt, 0) = SMCCC_RET_NOT_SUPPORTED;
+                }
+
+                break;
+            }
+
+            default: {
+                cpu_reg(host_ctxt, 0) = SMCCC_RET_NOT_SUPPORTED;
+                break;
+            }
+        }
 
         return true;
     }
