@@ -34,8 +34,9 @@
 
 #include "../../sys_regs.h"
 
-#include "siphash-lite.h"
 #include "prng.h"
+#include "siphash-lite.h"
+#include "curve25519-lite.h"
 
 DEFINE_PER_CPU(struct kvm_nvhe_init_params, kvm_init_params);
 
@@ -1358,60 +1359,75 @@ static const hcall_t host_hcall[] = {
                            ARM_SMCCC_VENDOR_HYP_KVM_AUTH)
 
 // Opcode for HCALL sub-commands
-#define CMD_GET_CHALLENGE       1338
+#define CMD_ECDH_EXCHANGE       1338
 #define CMD_VERIFY_RESP         1339
 #define CMD_PROTECTED_OP        1340
 
-// State machine for auth
 enum auth_state {
     STATE_IDLE = 0,
     STATE_CHALLENGE_ISSUED,
     STATE_AUTHENTICATED
 };
 
-// EL2 data static (inside .hyp.data)
 static enum auth_state current_state = STATE_IDLE;
-static uint64_t current_nonce = 0;
+
+// EL2 data static (inside .hyp.data)
+static uint64_t active_nonce = 0;
 static uint64_t active_session_token = 0;
 
-static uint64_t dynamic_shared_key_0 = 0;
-static uint64_t dynamic_shared_key_1 = 0;
+static uint64_t derived_session_key_0 = 0;
+static uint64_t derived_session_key_1 = 0;
 
-static struct chacha20_pure_ctx hyp_chacha_ctx;
-static bool chacha_initialized = false;
-
-static void init_chacha_prng(void)
+static inline uint64_t get_hardware_entropy_u64(void)
 {
-    uint64_t sp_reg;
-    uint64_t x30_reg;
+    uint64_t cntpct, cntvct, sp_val, far_val;
 
-    asm volatile("mov %0, sp" : "=r" (sp_reg));
-    asm volatile("mov %0, x30" : "=r" (x30_reg));
+    asm volatile("mrs %0, cntpct_el0" : "=r" (cntpct));
+    asm volatile("mrs %0, cntvct_el0" : "=r" (cntvct));
 
-    uint32_t seed_key[8] =
-        {
-            (uint32_t)sp_reg, (uint32_t)(sp_reg >> 32),
-            (uint32_t)x30_reg, (uint32_t)(x30_reg >> 32),
-            0xDEADBEEF, 0xCAFEBABE, 0x13371337, 0x90909090
-        };
-    uint32_t nonce[3] = {0x01020304, 0x05060708, 0x090A0B0C};
+    asm volatile("mov %0, sp" : "=r" (sp_val));
+    asm volatile("mrs %0, far_el2" : "=r" (far_val));
 
-    chacha20_init(&hyp_chacha_ctx, seed_key, nonce, 1);
-    chacha_initialized = true;
+    uint64_t entropy = cntpct;
+    entropy ^= ROTL64(cntvct, 17);
+    entropy ^= ROTL64(sp_val, 31);
+    entropy ^= ROTL64(far_val, 43);
+
+    return entropy;
 }
 
-static void generate_dynamic_key(uint64_t *k0, uint64_t *k1, uint64_t *nonce_out)
+static void generate_el2_ephemeral_privkey(uint8_t privkey[32])
 {
-    if (!chacha_initialized) {
-        init_chacha_prng();
+    struct chacha20_pure_ctx ctx;
+
+    uint32_t seed_key[8];
+    for (int i = 0; i < 8; i += 2) {
+        uint64_t ent = get_hardware_entropy_u64();
+        seed_key[i]   = (uint32_t)ent;
+        seed_key[i+1] = (uint32_t)(ent >> 32);
+
+        for (volatile int d = 0; d < 50; d++);
     }
 
-    uint32_t block[16];
-    chacha20_block(&hyp_chacha_ctx, block);
+    uint32_t nonce[3] = {
+        (uint32_t)get_hardware_entropy_u64(),
+        (uint32_t)get_hardware_entropy_u64(),
+        (uint32_t)get_hardware_entropy_u64()
+    };
 
-    *k0 = ((uint64_t)block[0] << 32) | block[1];
-    *k1 = ((uint64_t)block[2] << 32) | block[3];
-    *nonce_out = ((uint64_t)block[4] << 32) | block[5];
+    chacha20_init(&ctx, seed_key, nonce, 1);
+
+    uint32_t block[16];
+    chacha20_block(&ctx, block);
+
+    uint32_t *p32 = (uint32_t *)privkey;
+    for (int i = 0; i < 8; i++) {
+        p32[i] = block[i];
+    }
+
+    privkey[0] &= 248;
+    privkey[31] &= 127;
+    privkey[31] |= 64;
 }
 
 static bool handle_auth_nekkohvm_hcall(struct kvm_cpu_context *host_ctxt)
@@ -1423,13 +1439,50 @@ static bool handle_auth_nekkohvm_hcall(struct kvm_cpu_context *host_ctxt)
         uint64_t cmd = cpu_reg(host_ctxt, 1);
 
         switch (cmd) {
-            case CMD_GET_CHALLENGE: {
-                // Generate random key and nonce using ChaCha20
-                generate_dynamic_key(&dynamic_shared_key_0, &dynamic_shared_key_1, &current_nonce);
+            case CMD_ECDH_EXCHANGE: {
+                uint8_t el2_privkey[32];
+                uint8_t el2_pubkey[32];
+
+                // Generate random private key using hardware
+                // Compatible with ARMv8.0-A and newer
+                generate_el2_ephemeral_privkey(el2_privkey);
+
+                // Receive public key B from EL1 (x2, x3, x4, x5)
+                uint8_t el1_pubkey[32];
+                uint64_t *p_el1 = (uint64_t *)el1_pubkey;
+
+                p_el1[0] = cpu_reg(host_ctxt, 2);
+                p_el1[1] = cpu_reg(host_ctxt, 3);
+                p_el1[2] = cpu_reg(host_ctxt, 4);
+                p_el1[3] = cpu_reg(host_ctxt, 5);
+
+                // Calculate public key A = el2_privkey * G
+                x25519_scalarmult(el2_pubkey, el2_privkey, NULL);
+
+                // Calculate shared key S = el2_privkey * el1_pubkey
+                uint8_t shared_secret[32];
+                x25519_scalarmult(shared_secret, el2_privkey, el1_pubkey);
+
+                // Derive session key
+                uint64_t *s64 = (uint64_t *)shared_secret;
+                derived_session_key_0 = s64[0] ^ s64[1];
+                derived_session_key_1 = s64[2] ^ s64[3];
+
+                // Get random nonce
+                active_nonce = get_hardware_entropy_u64();
                 current_state = STATE_CHALLENGE_ISSUED;
 
+                // Delete el2_privkey out of EL2 stack
+                for (int i = 0; i < 32; i++) el2_privkey[i] = 0;
+
+                // Return nonce and public key A to EL1
+                uint64_t *p_el2 = (uint64_t *)el2_pubkey;
                 cpu_reg(host_ctxt, 0) = SMCCC_RET_SUCCESS;
-                cpu_reg(host_ctxt, 1) = current_nonce;
+                cpu_reg(host_ctxt, 1) = active_nonce;
+                cpu_reg(host_ctxt, 2) = p_el2[0];
+                cpu_reg(host_ctxt, 3) = p_el2[1];
+                cpu_reg(host_ctxt, 4) = p_el2[2];
+                cpu_reg(host_ctxt, 5) = p_el2[3];
 
                 break;
             }
@@ -1442,19 +1495,25 @@ static bool handle_auth_nekkohvm_hcall(struct kvm_cpu_context *host_ctxt)
 
                 uint64_t client_response = cpu_reg(host_ctxt, 2);
 
-                // Use dynamic key to calculate expected response
-                uint64_t expected_response = siphash24_single_u64(current_nonce, dynamic_shared_key_0, dynamic_shared_key_1);
+                // Calculate response with siphash with dynamic key
+                // had in ECDH
+                uint64_t expected_response = siphash24_single_u64(
+                    active_nonce, derived_session_key_0,
+                    derived_session_key_1
+                );
 
                 if (constant_time_compare_u64(client_response, expected_response)) {
-                    active_session_token = current_nonce ^ dynamic_shared_key_0;
+                    active_session_token = active_nonce ^ derived_session_key_0;
                     current_state = STATE_AUTHENTICATED;
 
                     cpu_reg(host_ctxt, 0) = SMCCC_RET_SUCCESS;
                     cpu_reg(host_ctxt, 1) = active_session_token;
                 } else {
+                    // Authenticate failed
                     current_state = STATE_IDLE;
-                    dynamic_shared_key_0 = 0;
-                    dynamic_shared_key_1 = 0;
+                    derived_session_key_0 = 0;
+                    derived_session_key_1 = 0;
+                    active_session_token = 0;
                     cpu_reg(host_ctxt, 0) = SMCCC_RET_NOT_SUPPORTED;
                 }
 
@@ -1464,19 +1523,27 @@ static bool handle_auth_nekkohvm_hcall(struct kvm_cpu_context *host_ctxt)
             case CMD_PROTECTED_OP: {
                 uint64_t token = cpu_reg(host_ctxt, 2);
 
-                if (current_state == STATE_AUTHENTICATED && constant_time_compare_u64(token, active_session_token)) {
-                    uint64_t payload = cpu_reg(host_ctxt, 3);
-                    cpu_reg(host_ctxt, 0) = SMCCC_RET_SUCCESS;
-                    cpu_reg(host_ctxt, 1) = payload ^ 0xDEADBEEFCAFEBABEULL;
-                } else {
-                    cpu_reg(host_ctxt, 0) = SMCCC_RET_NOT_SUPPORTED;
-                }
+                if (current_state == STATE_AUTHENTICATED &&
+                    constant_time_compare_u64(token, active_session_token)) {
+                        uint64_t payload = cpu_reg(host_ctxt, 3);
+
+                        // Run task
+                        cpu_reg(host_ctxt, 0) = SMCCC_RET_SUCCESS;
+                        cpu_reg(host_ctxt, 1) = payload ^ 0xDEADBEEFCAFEBABEULL;
+                    } else {
+                        cpu_reg(host_ctxt, 0) = SMCCC_RET_NOT_SUPPORTED;
+                    }
 
                 break;
             }
 
             default: {
+                current_state = STATE_IDLE;
+                derived_session_key_0 = 0;
+                derived_session_key_1 = 0;
+                active_session_token = 0;
                 cpu_reg(host_ctxt, 0) = SMCCC_RET_NOT_SUPPORTED;
+
                 break;
             }
         }
