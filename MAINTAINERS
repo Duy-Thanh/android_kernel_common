@@ -10989,12 +10989,23 @@ S:	Maintained
 F:	arch/x86/include/asm/jailhouse_para.h
 F:	arch/x86/kernel/jailhouse.c
 
-HYPERVISOR HYPERCALL (HVC) DEVELOPMENT
+HYPERVISOR DEVELOPMENT
 M:	Nguyen Duy Thanh <nekkochan0x0007@proton.me>
 S:	Maintained
 F:	arch/arm64/kvm/hyp/nvhe/hyp-main.c
 F:  arch/arm64/kvm/hyp/nvhe/prng.h
 F:  arch/arm64/kvm/hyp/nvhe/siphash-lite.h
+F:  arch/arm64/kvm/hyp/nvhe/curve25519-lite.h
+
+KERNEL MODULE FOR HYPERVISOR
+M:	Nguyen Duy Thanh <nekkochan0x0007@proton.me>
+S:	Maintained
+F:	drivers/misc/nekkodrv/nekkodrv.c
+F:  drivers/misc/nekkodrv/Kconfig
+F:  drivers/misc/nekkodrv/Makefile
+F:  drivers/misc/nekkodrv/prng.h
+F:  drivers/misc/nekkodrv/siphash-lite.h
+F:  drivers/misc/nekkodrv/curve25519-lite.h
 
 JC42.4 TEMPERATURE SENSOR DRIVER
 M:	Guenter Roeck <linux@roeck-us.net>
