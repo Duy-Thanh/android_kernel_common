@@ -439781,6 +439781,14 @@ function {
   parameter_id: 0x00286241
 }
 function {
+  id: 0x9db61f76
+  return_type_id: 0x6720d32f
+  parameter_id: 0x04c27a37
+  parameter_id: 0x4585663f
+  parameter_id: 0x4585663f
+  parameter_id: 0x4585663f
+}
+function {
   id: 0x9db62354
   return_type_id: 0x6720d32f
   parameter_id: 0x060cf413
@@ -529047,6 +529055,15 @@ elf_symbol {
   full_name: "snd_pcm_hw_constraint_minmax"
 }
 elf_symbol {
+  id: 0x38059716
+  name: "snd_pcm_hw_constraint_msbits"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd7946934
+  type_id: 0x9db61f76
+  full_name: "snd_pcm_hw_constraint_msbits"
+}
+elf_symbol {
   id: 0xb501156e
   name: "snd_pcm_hw_constraint_pow2"
   is_defined: true
@@ -555030,6 +555047,7 @@ interface {
   symbol_id: 0x0e8fdef9
   symbol_id: 0x9dc5f190
   symbol_id: 0x4436f3b6
+  symbol_id: 0x38059716
   symbol_id: 0xb501156e
   symbol_id: 0x39aa3d60
   symbol_id: 0xc6fd5d28
