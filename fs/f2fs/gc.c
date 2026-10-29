@@ -1231,6 +1231,7 @@ static int ra_data_block(struct inode *inode, pgoff_t index)
 		.encrypted_page = NULL,
 		.in_list = 0,
 		.is_cache = 1,
+		.inode = inode,
 	};
 	int err = 0;
 
@@ -1341,6 +1342,7 @@ static int move_data_block(struct inode *inode, block_t bidx,
 		.encrypted_page = NULL,
 		.in_list = 0,
 		.is_cache = 1,
+		.inode = inode,
 	};
 	struct dnode_of_data dn;
 	struct f2fs_summary sum;
