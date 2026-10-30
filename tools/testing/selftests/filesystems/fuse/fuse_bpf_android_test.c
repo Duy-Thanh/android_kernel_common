@@ -568,4 +568,181 @@ TEST_F(fuse_bpf, backed_file_rw_mmap)
 	EXPECT_EQ(1U, __atomic_load_n(&self->rw_cnt, __ATOMIC_SEQ_CST));
 }
 
+TEST_F(fuse_bpf, bpf_prefilter_policy_deny)
+{
+	const struct bpf_insn deny_unlink_prog[] = {
+		FUSE_BPF_LDX_MEM(BPF_W, BPF_REG_2, BPF_REG_1,
+				 offsetof(struct fuse_bpf_args, opcode)),
+		FUSE_BPF_JMP_IMM(BPF_JEQ, BPF_REG_2,
+				 FUSE_UNLINK | FUSE_PREFILTER, 2),
+		FUSE_BPF_MOV64_IMM(BPF_REG_0, FUSE_BPF_BACKING),
+		FUSE_BPF_EXIT_INSN(),
+		FUSE_BPF_MOV64_IMM(BPF_REG_0, -EPERM),
+		FUSE_BPF_EXIT_INSN(),
+	};
+	char fuse_file[PATH_MAX], back_file[PATH_MAX];
+	char buf[16] = { 0 };
+	int bfd, fd, prog_fd;
+	struct stat st;
+
+	snprintf(back_file, sizeof(back_file), "%s/protected.txt",
+		 self->backing_dir);
+	snprintf(fuse_file, sizeof(fuse_file), "%s/backed/protected.txt",
+		 self->mnt_dir);
+
+	bfd = open(back_file, O_CREAT | O_WRONLY | O_TRUNC | O_CLOEXEC, 0644);
+	ASSERT_GE(bfd, 0);
+	ASSERT_EQ((ssize_t)8, write(bfd, "keep-me\n", 8));
+	close_fd(&bfd);
+
+	prog_fd = load_fuse_bpf_prog(deny_unlink_prog,
+				     ARRAY_SIZE(deny_unlink_prog));
+	ASSERT_GE(prog_fd, 0);
+	__atomic_store_n(&self->bpf_fd, prog_fd, __ATOMIC_SEQ_CST);
+
+	errno = 0;
+	ASSERT_EQ(-1, unlink(fuse_file));
+	EXPECT_EQ(EPERM, errno);
+	EXPECT_EQ(0U, __atomic_load_n(&self->unlink_cnt, __ATOMIC_SEQ_CST));
+
+	fd = open(fuse_file, O_RDONLY | O_CLOEXEC);
+	ASSERT_GE(fd, 0);
+	ASSERT_EQ((ssize_t)8, read(fd, buf, sizeof(buf) - 1));
+	EXPECT_STREQ("keep-me\n", buf);
+	close_fd(&fd);
+	EXPECT_EQ(0U, __atomic_load_n(&self->rw_cnt, __ATOMIC_SEQ_CST));
+	EXPECT_EQ(0, stat(back_file, &st));
+}
+
+TEST_F(fuse_bpf, no_daemon_mount)
+{
+	const char *tail = "rootmode=040755,user_id=0,group_id=0";
+	char nd_back[256], nd_mnt[256];
+	char mnt_file[PATH_MAX], back_file[PATH_MAX];
+	char buf[32] = { 0 }, opts[160];
+	int dir_fd = -1, fd = -1, null_fd = -1, prog_fd = -1, ret;
+	struct stat st;
+
+	snprintf(nd_back, sizeof(nd_back), "%s/nd_back", self->tmp_dir);
+	snprintf(nd_mnt, sizeof(nd_mnt), "%s/nd_mnt", self->tmp_dir);
+	ASSERT_EQ(0, mkdir(nd_back, 0755));
+	ASSERT_EQ(0, mkdir(nd_mnt, 0755));
+
+	dir_fd = open(nd_back, O_RDONLY | O_DIRECTORY | O_CLOEXEC);
+	ASSERT_GE(dir_fd, 0);
+	prog_fd = load_default_backing_prog();
+	ASSERT_GE(prog_fd, 0);
+	if (fcntl(STDIN_FILENO, F_GETFD) < 0)
+		null_fd = open("/dev/null", O_RDONLY);
+
+	snprintf(opts, sizeof(opts), "no_daemon,root_dir=%d,root_bpf=-1,%s",
+		 dir_fd, tail);
+	errno = 0;
+	EXPECT_EQ(-1, mount("fuse", nd_mnt, "fuse", MS_NOSUID | MS_NODEV,
+			    opts));
+	EXPECT_EQ(EINVAL, errno);
+
+	snprintf(opts, sizeof(opts), "no_daemon,root_dir=%d,root_bpf=%d,%s",
+		 dir_fd, dir_fd, tail);
+	errno = 0;
+	EXPECT_EQ(-1, mount("fuse", nd_mnt, "fuse", MS_NOSUID | MS_NODEV,
+			    opts));
+	EXPECT_EQ(EINVAL, errno);
+
+	snprintf(opts, sizeof(opts), "no_daemon,root_dir=%d,root_bpf=%d,%s",
+		 dir_fd, prog_fd, tail);
+	ret = mount("fuse", nd_mnt, "fuse", MS_NOSUID | MS_NODEV, opts);
+	close_fd(&dir_fd);
+	close_fd(&prog_fd);
+	close_fd(&null_fd);
+	ASSERT_EQ(0, ret);
+
+	snprintf(mnt_file, sizeof(mnt_file), "%s/nodm.txt", nd_mnt);
+	snprintf(back_file, sizeof(back_file), "%s/nodm.txt", nd_back);
+
+	fd = open(mnt_file, O_CREAT | O_RDWR | O_TRUNC | O_CLOEXEC, 0644);
+	ASSERT_GE(fd, 0);
+	ASSERT_EQ((ssize_t)12, write(fd, "no-daemon-ok", 12));
+	ASSERT_EQ((ssize_t)12, pread(fd, buf, sizeof(buf) - 1, 0));
+	EXPECT_STREQ("no-daemon-ok", buf);
+	close_fd(&fd);
+
+	ASSERT_EQ(0, stat(mnt_file, &st));
+	EXPECT_EQ((off_t)12, st.st_size);
+	ASSERT_EQ(0, stat(back_file, &st));
+	EXPECT_EQ((off_t)12, st.st_size);
+	EXPECT_EQ(0, umount2(nd_mnt, MNT_DETACH));
+}
+
+TEST_F(fuse_bpf, canonical_path_inotify)
+{
+	char fuse_file[PATH_MAX], back_file[PATH_MAX];
+	uint64_t ev_buf[64];
+	uint32_t mask = 0;
+	struct pollfd pfd;
+	int fd, ifd, prog_fd, wd;
+	ssize_t len, off;
+
+	prog_fd = load_default_backing_prog();
+	ASSERT_GE(prog_fd, 0);
+	__atomic_store_n(&self->bpf_fd, prog_fd, __ATOMIC_SEQ_CST);
+
+	snprintf(fuse_file, sizeof(fuse_file), "%s/backed/watch.txt",
+		 self->mnt_dir);
+	snprintf(back_file, sizeof(back_file), "%s/watch.txt",
+		 self->backing_dir);
+
+	fd = open(fuse_file, O_CREAT | O_RDWR | O_TRUNC | O_CLOEXEC, 0644);
+	ASSERT_GE(fd, 0);
+	close_fd(&fd);
+
+	ifd = inotify_init1(IN_NONBLOCK | IN_CLOEXEC);
+	ASSERT_GE(ifd, 0);
+	wd = inotify_add_watch(ifd, fuse_file, IN_MODIFY | IN_CLOSE_WRITE);
+	ASSERT_GE(wd, 0);
+
+	fd = open(fuse_file, O_WRONLY | O_CLOEXEC);
+	ASSERT_GE(fd, 0);
+	ASSERT_EQ((ssize_t)10, write(fd, "watch-data", 10));
+	close_fd(&fd);
+
+	pfd.fd = ifd;
+	pfd.events = POLLIN;
+	ASSERT_GT(poll(&pfd, 1, 2000), 0);
+	len = read(ifd, ev_buf, sizeof(ev_buf));
+	ASSERT_GE(len, (ssize_t)sizeof(struct inotify_event));
+
+	for (off = 0; off < len; ) {
+		const struct inotify_event *ev =
+			(const void *)((const char *)ev_buf + off);
+
+		if (ev->wd == wd)
+			mask |= ev->mask;
+		off += (ssize_t)sizeof(*ev) + (ssize_t)ev->len;
+	}
+	EXPECT_NE(0U, mask & IN_MODIFY);
+	EXPECT_NE(0U, mask & IN_CLOSE_WRITE);
+
+	mask = 0;
+	fd = open(back_file, O_WRONLY | O_APPEND | O_CLOEXEC);
+	ASSERT_GE(fd, 0);
+	ASSERT_EQ((ssize_t)6, write(fd, "-lower", 6));
+	close_fd(&fd);
+
+	ASSERT_GT(poll(&pfd, 1, 2000), 0);
+	len = read(ifd, ev_buf, sizeof(ev_buf));
+	ASSERT_GE(len, (ssize_t)sizeof(struct inotify_event));
+	for (off = 0; off < len; ) {
+		const struct inotify_event *ev =
+			(const void *)((const char *)ev_buf + off);
+
+		if (ev->wd == wd)
+			mask |= ev->mask;
+		off += (ssize_t)sizeof(*ev) + (ssize_t)ev->len;
+	}
+	EXPECT_NE(0U, mask & IN_MODIFY);
+	EXPECT_NE(0U, mask & IN_CLOSE_WRITE);
+	close_fd(&ifd);
+}
+
 TEST_HARNESS_MAIN
