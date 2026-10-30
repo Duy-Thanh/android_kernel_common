@@ -15,6 +15,7 @@
 #include <poll.h>
 #include <pthread.h>
 #include <sched.h>
+#include <signal.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
@@ -23,6 +24,7 @@
 #include <string.h>
 #include <sys/file.h>
 #include <sys/inotify.h>
+#include <sys/ioctl.h>
 #include <sys/mman.h>
 #include <sys/mount.h>
 #include <sys/stat.h>
@@ -30,7 +32,9 @@
 #include <sys/uio.h>
 #include <sys/utsname.h>
 #include <sys/vfs.h>
+#include <sys/wait.h>
 #include <sys/xattr.h>
+#include <time.h>
 #include <unistd.h>
 
 #include <linux/android_fuse.h>
@@ -59,6 +63,18 @@
 #endif
 #ifndef SEEK_HOLE
 #define SEEK_HOLE		4
+#endif
+#ifndef FUSE_NOTIFY_INC_EPOCH
+#define FUSE_NOTIFY_INC_EPOCH	8
+#endif
+#ifndef FS_IOC_GETFLAGS
+#define FS_IOC_GETFLAGS		_IOR('f', 1, long)
+#endif
+#ifndef FS_IOC_SETFLAGS
+#define FS_IOC_SETFLAGS		_IOW('f', 2, long)
+#endif
+#ifndef FS_CASEFOLD_FL
+#define FS_CASEFOLD_FL		0x40000000L
 #endif
 
 #define FUSE_BPF_FEAT_PATH	"/sys/fs/fuse/features/fuse_bpf"
@@ -188,32 +204,196 @@ static int load_default_backing_prog(void)
 	return load_fuse_bpf_prog(prog, ARRAY_SIZE(prog));
 }
 
+struct fuse_ksft_dirent64 {
+	uint64_t d_ino;
+	int64_t d_off;
+	uint16_t d_reclen;
+	uint8_t d_type;
+	char d_name[];
+};
+
+struct fuse_ksft_shared {
+	pid_t active_pgid;
+	int stopping;
+};
+
+static pid_t harness_parent_pid;
+static struct fuse_ksft_shared *ksft_shm;
+
+static int rm_rf_at(int parent_fd, const char *name)
+{
+	uint64_t buf[128];
+	int dfd;
+
+	if (unlinkat(parent_fd, name, 0) == 0 || errno == ENOENT ||
+	    unlinkat(parent_fd, name, AT_REMOVEDIR) == 0 || errno == ENOENT)
+		return 0;
+	dfd = openat(parent_fd, name,
+		     O_RDONLY | O_DIRECTORY | O_NOFOLLOW | O_CLOEXEC);
+	if (dfd < 0)
+		return errno == ENOENT ? 0 : -1;
+	for (;;) {
+		bool progress = false;
+		long bpos, nread;
+
+		while ((nread = syscall(__NR_getdents64, dfd, buf,
+					sizeof(buf))) > 0) {
+			for (bpos = 0; bpos < nread;) {
+				const struct fuse_ksft_dirent64 *de =
+					(const void *)((const char *)buf +
+						       bpos);
+
+				bpos += de->d_reclen;
+				if (!strcmp(de->d_name, ".") ||
+				    !strcmp(de->d_name, ".."))
+					continue;
+				if (rm_rf_at(dfd, de->d_name) == 0)
+					progress = true;
+			}
+		}
+		if (!progress || lseek(dfd, 0, SEEK_SET) < 0)
+			break;
+	}
+	close(dfd);
+	return unlinkat(parent_fd, name, AT_REMOVEDIR) == 0 ||
+	       errno == ENOENT ? 0 : -1;
+}
+
 static void rm_rf(const char *path)
 {
-	DIR *dir = opendir(path);
-	struct dirent *de;
-	char child[PATH_MAX];
-	struct stat st;
+	rm_rf_at(AT_FDCWD, path);
+}
 
-	if (!dir) {
-		unlink(path);
+static void sweep_dir_tmpdirs(const char *base)
+{
+	uint64_t buf[128];
+	int bfd;
+
+	bfd = open(base, O_RDONLY | O_DIRECTORY | O_CLOEXEC);
+	if (bfd < 0)
 		return;
-	}
-	while ((de = readdir(dir)) != NULL) {
-		int n;
+	for (;;) {
+		bool progress = false;
+		long bpos, nread;
 
-		if (!strcmp(de->d_name, ".") || !strcmp(de->d_name, ".."))
-			continue;
-		n = snprintf(child, sizeof(child), "%s/%s", path, de->d_name);
-		if (n > 0 && (size_t)n < sizeof(child)) {
-			if (lstat(child, &st) == 0 && S_ISDIR(st.st_mode))
-				rm_rf(child);
-			else
-				unlink(child);
+		while ((nread = syscall(__NR_getdents64, bfd, buf,
+					sizeof(buf))) > 0) {
+			for (bpos = 0; bpos < nread;) {
+				const struct fuse_ksft_dirent64 *de =
+					(const void *)((const char *)buf +
+						       bpos);
+				bool stale = false;
+				int dfd, lfd;
+
+				bpos += de->d_reclen;
+				if (strncmp(de->d_name, "fuse_bpf_ksft.", 14))
+					continue;
+				dfd = openat(bfd, de->d_name,
+					     O_RDONLY | O_DIRECTORY |
+					     O_NOFOLLOW | O_CLOEXEC);
+				if (dfd < 0)
+					continue;
+				lfd = openat(dfd, ".lock",
+					     O_RDONLY | O_NOFOLLOW | O_CLOEXEC);
+				if (lfd < 0) {
+					stale = (errno == ENOENT);
+				} else {
+					stale = (flock(lfd,
+						       LOCK_EX | LOCK_NB) == 0);
+					close(lfd);
+				}
+				close(dfd);
+				if (stale && rm_rf_at(bfd, de->d_name) == 0)
+					progress = true;
+			}
 		}
+		if (!progress || lseek(bfd, 0, SEEK_SET) < 0)
+			break;
 	}
-	closedir(dir);
-	rmdir(path);
+	close(bfd);
+}
+
+static void sweep_stale_tmpdirs(void)
+{
+	if (access("/data/local/tmp", W_OK) == 0)
+		sweep_dir_tmpdirs("/data/local/tmp");
+	if (access("/tmp", W_OK) == 0)
+		sweep_dir_tmpdirs("/tmp");
+}
+
+static void wait_child_pgrp_dead(void)
+{
+	struct timespec req = { .tv_sec = 0, .tv_nsec = 2000000L };
+	pid_t pgid;
+	int i;
+
+	if (!ksft_shm)
+		return;
+	__atomic_store_n(&ksft_shm->stopping, 1, __ATOMIC_SEQ_CST);
+	pgid = __atomic_load_n(&ksft_shm->active_pgid, __ATOMIC_SEQ_CST);
+	if (pgid <= 0 || pgid == harness_parent_pid)
+		return;
+	kill(-pgid, SIGKILL);
+	for (i = 0; i < 100; i++) {
+		while (waitpid(-1, NULL, WNOHANG) > 0)
+			continue;
+		if (kill(-pgid, 0) != 0 && errno == ESRCH)
+			break;
+		nanosleep(&req, NULL);
+	}
+}
+
+static void fuse_bpf_sig_handler(int sig)
+{
+	int saved_errno = errno;
+	struct sigaction sa;
+	sigset_t set;
+
+	if (getpid() == harness_parent_pid) {
+		wait_child_pgrp_dead();
+		sweep_stale_tmpdirs();
+	}
+	memset(&sa, 0, sizeof(sa));
+	sa.sa_handler = SIG_DFL;
+	sigemptyset(&sa.sa_mask);
+	sigaction(sig, &sa, NULL);
+	sigemptyset(&set);
+	sigaddset(&set, sig);
+	sigprocmask(SIG_UNBLOCK, &set, NULL);
+	errno = saved_errno;
+	raise(sig);
+	_exit(128 + sig);
+}
+
+static __attribute__((constructor)) void fuse_bpf_parent_init(void)
+{
+	struct sigaction sa;
+	void *map;
+
+	harness_parent_pid = getpid();
+	map = mmap(NULL, sizeof(*ksft_shm), PROT_READ | PROT_WRITE,
+		   MAP_SHARED | MAP_ANONYMOUS, -1, 0);
+	if (map != MAP_FAILED)
+		ksft_shm = map;
+	memset(&sa, 0, sizeof(sa));
+	sa.sa_handler = fuse_bpf_sig_handler;
+	sigemptyset(&sa.sa_mask);
+	sigaddset(&sa.sa_mask, SIGINT);
+	sigaddset(&sa.sa_mask, SIGTERM);
+	sigaction(SIGINT, &sa, NULL);
+	sigaction(SIGTERM, &sa, NULL);
+}
+
+static __attribute__((destructor)) void fuse_bpf_parent_cleanup(void)
+{
+	if (getpid() != harness_parent_pid)
+		return;
+	wait_child_pgrp_dead();
+	sweep_stale_tmpdirs();
+	if (ksft_shm) {
+		munmap(ksft_shm, sizeof(*ksft_shm));
+		ksft_shm = NULL;
+	}
 }
 
 static int fuse_reply(int dev_fd, uint64_t unique, int32_t err,
@@ -242,7 +422,7 @@ static int fuse_reply(int dev_fd, uint64_t unique, int32_t err,
 FIXTURE(fuse_bpf)
 {
 	char tmp_dir[128], backing_dir[256], mnt_dir[256];
-	int fuse_dev_fd, stop_pipe[2], bpf_fd;
+	int fuse_dev_fd, stop_pipe[2], bpf_fd, lock_fd;
 	bool mounted, thread_started;
 	pthread_t daemon_tid;
 	uint32_t lookup_cnt, rw_cnt, unlink_cnt, canonical_cnt;
@@ -459,15 +639,18 @@ static void fuse_bpf_cleanup_fixture(struct _test_data_fuse_bpf *self)
 	close_fd(&self->fuse_dev_fd);
 	prog_fd = __atomic_exchange_n(&self->bpf_fd, -1, __ATOMIC_SEQ_CST);
 	close_fd(&prog_fd);
+	close_fd(&self->lock_fd);
 	if (self->tmp_dir[0] != '\0') {
 		rm_rf(self->tmp_dir);
 		self->tmp_dir[0] = '\0';
 	}
+	if (ksft_shm)
+		__atomic_store_n(&ksft_shm->active_pgid, 0, __ATOMIC_SEQ_CST);
 }
 
 FIXTURE_SETUP(fuse_bpf)
 {
-	char feat[32] = { 0 }, opts[128];
+	char feat[32] = { 0 }, lock_path[256], opts[128];
 	const char *base_tmp;
 	int err, ret;
 
@@ -476,6 +659,7 @@ FIXTURE_SETUP(fuse_bpf)
 	self->stop_pipe[0] = -1;
 	self->stop_pipe[1] = -1;
 	self->bpf_fd = -1;
+	self->lock_fd = -1;
 
 	ret = read_sysfs_str(FUSE_BPF_FEAT_PATH, feat, sizeof(feat));
 	if (ret == -ENOENT || ret == -EACCES)
@@ -491,11 +675,32 @@ FIXTURE_SETUP(fuse_bpf)
 		ASSERT_EQ(0, -errno);
 	}
 
+	if (ksft_shm) {
+		__atomic_store_n(&ksft_shm->active_pgid, getpgrp(),
+				 __ATOMIC_SEQ_CST);
+		if (__atomic_load_n(&ksft_shm->stopping, __ATOMIC_SEQ_CST))
+			_exit(1);
+	}
+	if (harness_parent_pid > 0 && kill(harness_parent_pid, 0) != 0 &&
+	    errno == ESRCH)
+		_exit(1);
+	sweep_stale_tmpdirs();
+
 	base_tmp = access("/data/local/tmp", W_OK) == 0 ?
 		   "/data/local/tmp" : "/tmp";
 	snprintf(self->tmp_dir, sizeof(self->tmp_dir),
 		 "%s/fuse_bpf_ksft.XXXXXX", base_tmp);
-	ASSERT_TRUE(mkdtemp(self->tmp_dir) != NULL);
+	if (!mkdtemp(self->tmp_dir)) {
+		self->tmp_dir[0] = '\0';
+		err = -errno;
+		goto err_cleanup;
+	}
+	snprintf(lock_path, sizeof(lock_path), "%s/.lock", self->tmp_dir);
+	self->lock_fd = open(lock_path, O_CREAT | O_RDWR | O_CLOEXEC, 0600);
+	if (self->lock_fd < 0 || flock(self->lock_fd, LOCK_EX | LOCK_NB) != 0) {
+		err = -errno;
+		goto err_cleanup;
+	}
 
 	snprintf(self->backing_dir, sizeof(self->backing_dir), "%s/backing",
 		 self->tmp_dir);
@@ -536,6 +741,7 @@ FIXTURE_SETUP(fuse_bpf)
 
 err_cleanup:
 	fuse_bpf_cleanup_fixture(self);
+	TH_LOG("Fixture setup failed: %s (errno=%d)", strerror(-err), -err);
 	ASSERT_EQ(0, err);
 }
 
@@ -1301,6 +1507,118 @@ TEST_F(fuse_bpf, file_ops_lseek_flock_fallocate)
 	EXPECT_EQ(0, flock(fd2, LOCK_UN));
 	close_fd(&fd2);
 	close_fd(&fd1);
+}
+
+TEST_F(fuse_bpf, epoch_invalidation)
+{
+	struct fuse_out_header oh = {
+		.len = (uint32_t)sizeof(oh),
+		.error = FUSE_NOTIFY_INC_EPOCH,
+		.unique = 0,
+	};
+	char after_file[PATH_MAX], link_buf[PATH_MAX] = { 0 };
+	char backed_dir[384], proc_fd_path[64];
+	uint32_t cnt_before, cnt_cached;
+	int fd = -1, prog_fd;
+	struct stat st;
+	ssize_t n;
+
+	prog_fd = load_default_backing_prog();
+	ASSERT_GE(prog_fd, 0);
+	__atomic_store_n(&self->bpf_fd, prog_fd, __ATOMIC_SEQ_CST);
+
+	snprintf(backed_dir, sizeof(backed_dir), "%s/backed", self->mnt_dir);
+	ASSERT_EQ(0, stat(backed_dir, &st));
+	cnt_before = __atomic_load_n(&self->lookup_cnt, __ATOMIC_SEQ_CST);
+	ASSERT_GE(cnt_before, 1U);
+
+	ASSERT_EQ(0, stat(backed_dir, &st));
+	cnt_cached = __atomic_load_n(&self->lookup_cnt, __ATOMIC_SEQ_CST);
+	EXPECT_EQ(cnt_before, cnt_cached);
+
+	n = write(self->fuse_dev_fd, &oh, sizeof(oh));
+	if (n < 0 && errno == EINVAL)
+		SKIP(return, "FUSE_NOTIFY_INC_EPOCH unsupported");
+	ASSERT_EQ((ssize_t)sizeof(oh), n);
+
+	ASSERT_EQ(0, stat(backed_dir, &st));
+	EXPECT_GT(__atomic_load_n(&self->lookup_cnt, __ATOMIC_SEQ_CST),
+		  cnt_cached);
+
+	snprintf(after_file, sizeof(after_file), "%s/epoch_after.txt",
+		 backed_dir);
+	fd = open(after_file, O_CREAT | O_RDWR | O_TRUNC | O_CLOEXEC, 0644);
+	ASSERT_GE(fd, 0);
+	ASSERT_EQ((ssize_t)6, write(fd, "epoch\n", 6));
+	ASSERT_EQ(0, stat(after_file, &st));
+
+	snprintf(proc_fd_path, sizeof(proc_fd_path), "/proc/self/fd/%d", fd);
+	n = readlink(proc_fd_path, link_buf, sizeof(link_buf) - 1);
+	ASSERT_GT(n, (ssize_t)0);
+	link_buf[n] = '\0';
+	EXPECT_TRUE(strstr(link_buf, " (deleted)") == NULL);
+	close_fd(&fd);
+}
+
+TEST_F(fuse_bpf, android_f2fs_casefold)
+{
+	char f_mixed[PATH_MAX], f_lower[PATH_MAX], f_upper[PATH_MAX];
+	char back_cf[384], fuse_cf[384], buf[16] = { 0 };
+	int dfd = -1, fd = -1, prog_fd;
+	long flags = 0;
+	struct stat st;
+
+	prog_fd = load_default_backing_prog();
+	ASSERT_GE(prog_fd, 0);
+	__atomic_store_n(&self->bpf_fd, prog_fd, __ATOMIC_SEQ_CST);
+
+	snprintf(back_cf, sizeof(back_cf), "%s/cfdir", self->backing_dir);
+	snprintf(fuse_cf, sizeof(fuse_cf), "%s/backed/cfdir", self->mnt_dir);
+	ASSERT_EQ(0, mkdir(back_cf, 0755));
+
+	dfd = open(back_cf, O_RDONLY | O_DIRECTORY | O_CLOEXEC);
+	ASSERT_GE(dfd, 0);
+	if (ioctl(dfd, FS_IOC_GETFLAGS, &flags) < 0) {
+		int err = errno;
+
+		close_fd(&dfd);
+		if (err == ENOTTY || err == EOPNOTSUPP || err == EINVAL)
+			SKIP(return, "FS_CASEFOLD_FL unsupported");
+		ASSERT_EQ(0, -err);
+	}
+	flags |= FS_CASEFOLD_FL;
+	if (ioctl(dfd, FS_IOC_SETFLAGS, &flags) < 0) {
+		int err = errno;
+
+		close_fd(&dfd);
+		if (err == ENOTTY || err == EOPNOTSUPP || err == EINVAL)
+			SKIP(return, "FS_CASEFOLD_FL unsupported");
+		ASSERT_EQ(0, -err);
+	}
+	close_fd(&dfd);
+
+	snprintf(f_mixed, sizeof(f_mixed), "%s/MixedCase.File", fuse_cf);
+	snprintf(f_lower, sizeof(f_lower), "%s/mixedcase.file", fuse_cf);
+	snprintf(f_upper, sizeof(f_upper), "%s/MIXEDCASE.FILE", fuse_cf);
+
+	fd = open(f_mixed, O_CREAT | O_RDWR | O_TRUNC | O_CLOEXEC, 0644);
+	ASSERT_GE(fd, 0);
+	ASSERT_EQ((ssize_t)9, write(fd, "casefold!", 9));
+	close_fd(&fd);
+
+	ASSERT_EQ(0, stat(f_lower, &st));
+	EXPECT_EQ((off_t)9, st.st_size);
+
+	fd = open(f_upper, O_RDONLY | O_CLOEXEC);
+	ASSERT_GE(fd, 0);
+	ASSERT_EQ((ssize_t)9, read(fd, buf, sizeof(buf) - 1));
+	EXPECT_STREQ("casefold!", buf);
+	close_fd(&fd);
+
+	ASSERT_EQ(0, unlink(f_lower));
+	errno = 0;
+	EXPECT_EQ(-1, stat(f_mixed, &st));
+	EXPECT_EQ(ENOENT, errno);
 }
 
 TEST_HARNESS_MAIN
