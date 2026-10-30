@@ -126,7 +126,7 @@ static int __init nekkodrv_module_init(void)
 
 	// FIX 4: Sửa format specifier từ %llx thành %lx để khớp kiểu unsigned long
 	pr_emerg(
-		"[+] NEKKODRV: Received Nonce=0x%lx & EL2 Public Key successfully\n",
+		"[+] NEKKODRV: Received Nonce=0x%llx & EL2 Public Key successfully\n",
 		active_nonce);
 
 	x25519_scalarmult(shared_secret, el1_privkey, el2_pubkey);
@@ -158,7 +158,7 @@ static int __init nekkodrv_module_init(void)
 
 	uint64_t session_token = res.a1;
 	pr_emerg(
-		"[+] NEKKODRV: AUTHENTICATED SUCCESS! Granted Session Token: 0x%lx\n",
+		"[+] NEKKODRV: AUTHENTICATED SUCCESS! Granted Session Token: 0x%llx\n",
 		session_token);
 
 	uint64_t test_payload = 0x1122334455667788ULL;
@@ -172,7 +172,7 @@ static int __init nekkodrv_module_init(void)
 
 	if (res.a0 == SMCCC_RET_SUCCESS) {
 		pr_emerg(
-			"[+] NEKKODRV: PROTECTED OP SUCCESS! Input Payload: 0x%llx -> EL2 Output: 0x%lx\n",
+			"[+] NEKKODRV: PROTECTED OP SUCCESS! Input Payload: 0x%llx -> EL2 Output: 0x%llx\n",
 			test_payload, res.a1);
 	} else {
 		pr_emerg("[-] NEKKODRV: PROTECTED OP REJECTED BY EL2!\n");
