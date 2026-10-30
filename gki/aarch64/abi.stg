@@ -17004,6 +17004,11 @@ pointer_reference {
   pointee_type_id: 0xba52707a
 }
 pointer_reference {
+  id: 0x2412e3dd
+  kind: POINTER
+  pointee_type_id: 0xba0b69e9
+}
+pointer_reference {
   id: 0x24159bc9
   kind: POINTER
   pointee_type_id: 0xba1689b9
@@ -51014,6 +51019,10 @@ member {
   type_id: 0x3893701c
 }
 member {
+  id: 0x2df13677
+  type_id: 0x38eaa9ce
+}
+member {
   id: 0x2e080f29
   type_id: 0x370e4cb6
 }
@@ -52411,6 +52420,11 @@ member {
   id: 0x3bc43df2
   type_id: 0x603e99d0
   offset: 2048
+}
+member {
+  id: 0x3bcaea1b
+  type_id: 0x6005c3ab
+  offset: 4352
 }
 member {
   id: 0x3bd41dcd
@@ -59861,10 +59875,9 @@ member {
   offset: 27840
 }
 member {
-  id: 0x821bb2a0
+  id: 0x821bb455
   name: "__kabi_reserved6"
   type_id: 0x92233392
-  offset: 4352
 }
 member {
   id: 0x821bb6a6
@@ -134540,6 +134553,11 @@ member {
   name: "host_data"
   type_id: 0x18bd6530
   offset: 448
+}
+member {
+  id: 0xdbd1beeb
+  name: "host_device_manage_context"
+  type_id: 0x2412e3dd
 }
 member {
   id: 0x93f7cd86
@@ -280485,6 +280503,14 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x38eaa9ce
+  kind: STRUCT
+  definition {
+    bytesize: 8
+    member_id: 0x821bb455
+  }
+}
+struct_union {
   id: 0x390911ef
   kind: STRUCT
   definition {
@@ -283500,6 +283526,16 @@ struct_union {
     member_id: 0x24c02d11
     member_id: 0xc087b526
     member_id: 0x2db0ae55
+  }
+}
+struct_union {
+  id: 0x6005c3ab
+  kind: UNION
+  definition {
+    bytesize: 8
+    member_id: 0xdbd1beeb
+    member_id: 0x2df13677
+    member_id: 0x36752b74
   }
 }
 struct_union {
@@ -340571,7 +340607,7 @@ struct_union {
     member_id: 0x39de7059
     member_id: 0x342a4a8d
     member_id: 0x3efbe466
-    member_id: 0x821bb2a0
+    member_id: 0x3bcaea1b
     member_id: 0xc3d4138f
     member_id: 0x35905540
     member_id: 0x7750276c
@@ -380449,6 +380485,20 @@ enumeration {
     enumerator {
       name: "PIN_MAP_TYPE_CONFIGS_GROUP"
       value: 4
+    }
+  }
+}
+enumeration {
+  id: 0x9d9a380f
+  name: "pkvm_device_context_op"
+  definition {
+    underlying_type_id: 0x4585663f
+    enumerator {
+      name: "PKVM_DEVICE_CONTEXT_GET"
+    }
+    enumerator {
+      name: "PKVM_DEVICE_CONTEXT_PUT"
+      value: 1
     }
   }
 }
@@ -445075,6 +445125,13 @@ function {
   parameter_id: 0x33756485
   parameter_id: 0x33756485
   parameter_id: 0x6720d32f
+}
+function {
+  id: 0xba0b69e9
+  return_type_id: 0x6720d32f
+  parameter_id: 0x92233392
+  parameter_id: 0xc9082b19
+  parameter_id: 0x9d9a380f
 }
 function {
   id: 0xba0eb204
