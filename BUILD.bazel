@@ -2031,6 +2031,34 @@ cc_binary_with_abi(
 )
 
 cc_binary_with_abi(
+    name = "kselftest_fuse_bpf_test",
+    srcs = [
+        "include/uapi/linux/android_fuse.h",
+        "include/uapi/linux/bpf.h",
+        "include/uapi/linux/bpf_common.h",
+        "include/uapi/linux/fuse.h",
+        "tools/testing/selftests/filesystems/fuse/fuse_bpf_android_test.c",
+    ],
+    copts = _KSELFTEST_COPTS + [
+        "-I",
+        paths.join(
+            package_relative_label(":x").workspace_root,
+            package_relative_label(":x").package,
+            "include/uapi",
+        ),
+    ],
+    defines = ["__EXPORTED_HEADERS__"],
+    includes = [
+        "include/uapi",
+        "tools/testing/selftests",
+    ],
+    path_prefix = _KSELFTEST_DIR,
+    target_compatible_with = ["@platforms//os:android"],
+    visibility = ["//visibility:private"],
+    deps = [":kselftest_headers_lib"],
+)
+
+cc_binary_with_abi(
     name = "kselftest_breakpoints_breakpoint_test",
     srcs = select({
         "//build/kernel/kleaf/platforms/config_settings:android_x86_64": ["tools/testing/selftests/breakpoints/breakpoint_test.c"],
@@ -3050,6 +3078,7 @@ pkg_filegroup(
         ":kselftest_breakpoints_breakpoint_test_x86_64",
         ":kselftest_capabilities_test_execve_x86_64",
         ":kselftest_capabilities_validate_cap_x86_64",
+        ":kselftest_fuse_bpf_test_x86_64",
         ":kselftest_futex_futex_requeue_pi_mismatched_ops_x86_64",
         ":kselftest_futex_futex_requeue_pi_signal_restart_x86_64",
         ":kselftest_futex_futex_requeue_pi_x86_64",
@@ -3121,6 +3150,7 @@ pkg_filegroup(
         ":kselftest_breakpoints_breakpoint_test_x86",
         ":kselftest_capabilities_test_execve_x86",
         ":kselftest_capabilities_validate_cap_x86",
+        ":kselftest_fuse_bpf_test_x86",
         ":kselftest_futex_futex_requeue_pi_mismatched_ops_x86",
         ":kselftest_futex_futex_requeue_pi_signal_restart_x86",
         ":kselftest_futex_futex_requeue_pi_x86",
@@ -3189,6 +3219,7 @@ pkg_filegroup(
         ":kselftest_binderfs_binderfs_test_arm",
         ":kselftest_capabilities_test_execve_arm",
         ":kselftest_capabilities_validate_cap_arm",
+        ":kselftest_fuse_bpf_test_arm",
         ":kselftest_futex_futex_requeue_arm",
         ":kselftest_futex_futex_requeue_pi_arm",
         ":kselftest_futex_futex_requeue_pi_mismatched_ops_arm",
@@ -3252,6 +3283,7 @@ pkg_filegroup(
         ":kselftest_breakpoints_breakpoint_test_arm64",
         ":kselftest_capabilities_test_execve_arm64",
         ":kselftest_capabilities_validate_cap_arm64",
+        ":kselftest_fuse_bpf_test_arm64",
         ":kselftest_futex_futex_requeue_arm64",
         ":kselftest_futex_futex_requeue_pi_arm64",
         ":kselftest_futex_futex_requeue_pi_mismatched_ops_arm64",
