@@ -21,12 +21,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/file.h>
 #include <sys/inotify.h>
 #include <sys/mman.h>
 #include <sys/mount.h>
 #include <sys/stat.h>
 #include <sys/syscall.h>
 #include <sys/uio.h>
+#include <sys/utsname.h>
 #include <sys/vfs.h>
 #include <sys/xattr.h>
 #include <unistd.h>
@@ -46,11 +48,25 @@
 #ifndef FUSE_SUPER_MAGIC
 #define FUSE_SUPER_MAGIC	0x65735546
 #endif
+#ifndef FALLOC_FL_KEEP_SIZE
+#define FALLOC_FL_KEEP_SIZE	0x01
+#endif
+#ifndef FALLOC_FL_PUNCH_HOLE
+#define FALLOC_FL_PUNCH_HOLE	0x02
+#endif
+#ifndef SEEK_DATA
+#define SEEK_DATA		3
+#endif
+#ifndef SEEK_HOLE
+#define SEEK_HOLE		4
+#endif
 
 #define FUSE_BPF_FEAT_PATH	"/sys/fs/fuse/features/fuse_bpf"
 #define FUSE_BPF_TYPE_PATH	"/sys/fs/fuse/bpf_prog_type_fuse"
 #define FUSE_BACKED_NODEID	2ULL
 #define FUSE_UNBACKED_NODEID	3ULL
+#define FUSE_REDACTED_NODEID	4ULL
+#define FUSE_ELOOP_NODEID	5ULL
 
 #define FUSE_BPF_MOV64_IMM(DST, IMM) \
 	((struct bpf_insn){ .code = BPF_ALU64 | BPF_MOV | BPF_K, \
@@ -63,6 +79,9 @@
 			    .dst_reg = (DST), .src_reg = (SRC), .off = (OFF) })
 #define FUSE_BPF_JMP_IMM(OP, DST, IMM, OFF) \
 	((struct bpf_insn){ .code = BPF_JMP | (OP) | BPF_K, \
+			    .dst_reg = (DST), .off = (OFF), .imm = (IMM) })
+#define FUSE_BPF_JMP32_IMM(OP, DST, IMM, OFF) \
+	((struct bpf_insn){ .code = BPF_JMP32 | (OP) | BPF_K, \
 			    .dst_reg = (DST), .off = (OFF), .imm = (IMM) })
 #define FUSE_BPF_EXIT_INSN() \
 	((struct bpf_insn){ .code = BPF_JMP | BPF_EXIT })
@@ -232,20 +251,19 @@ FIXTURE(fuse_bpf)
 static void daemon_lookup(struct _test_data_fuse_bpf *self,
 			  const struct fuse_in_header *ih, const char *name)
 {
+	int prog_fd = __atomic_load_n(&self->bpf_fd, __ATOMIC_SEQ_CST);
 	struct fuse_entry_out eo = { .entry_valid = 3600, .attr_valid = 3600 };
+	struct fuse_entry_bpf_out bo = {
+		.backing_action = FUSE_ACTION_REPLACE,
+		.bpf_action = prog_fd >= 0 ?
+			      FUSE_ACTION_REPLACE : FUSE_ACTION_KEEP,
+		.bpf_fd = prog_fd >= 0 ? (uint64_t)(uint32_t)prog_fd : 0,
+	};
 
 	__atomic_add_fetch(&self->lookup_cnt, 1, __ATOMIC_SEQ_CST);
 	if (ih->nodeid == FUSE_ROOT_ID && !strcmp(name, "backed")) {
-		int prog_fd = __atomic_load_n(&self->bpf_fd, __ATOMIC_SEQ_CST);
 		int dir_fd = open(self->backing_dir,
 				  O_RDONLY | O_DIRECTORY | O_CLOEXEC);
-		struct fuse_entry_bpf_out bo = {
-			.backing_action = FUSE_ACTION_REPLACE,
-			.bpf_action = prog_fd >= 0 ?
-				      FUSE_ACTION_REPLACE : FUSE_ACTION_KEEP,
-			.bpf_fd = prog_fd >= 0 ?
-				  (uint64_t)(uint32_t)prog_fd : 0,
-		};
 
 		if (dir_fd < 0) {
 			fuse_reply(self->fuse_dev_fd, ih->unique, -errno,
@@ -260,6 +278,47 @@ static void daemon_lookup(struct _test_data_fuse_bpf *self,
 		fuse_reply(self->fuse_dev_fd, ih->unique, 0,
 			   &eo, sizeof(eo), &bo, sizeof(bo));
 		close(dir_fd);
+	} else if (ih->nodeid == FUSE_ROOT_ID && !strcmp(name, "redacted")) {
+		char rpath[PATH_MAX];
+		struct stat st;
+		int ffd;
+
+		snprintf(rpath, sizeof(rpath), "%s/redacted",
+			 self->backing_dir);
+		ffd = open(rpath, O_RDWR | O_CLOEXEC);
+		if (ffd < 0 || fstat(ffd, &st) != 0) {
+			int err = -errno;
+
+			close_fd(&ffd);
+			fuse_reply(self->fuse_dev_fd, ih->unique, err,
+				   NULL, 0, NULL, 0);
+			return;
+		}
+		bo.backing_fd = (uint64_t)(uint32_t)ffd;
+		eo.nodeid = FUSE_REDACTED_NODEID;
+		eo.attr.ino = FUSE_REDACTED_NODEID;
+		eo.attr.mode = S_IFREG | 0644;
+		eo.attr.nlink = 1;
+		eo.attr.size = (uint64_t)st.st_size;
+		fuse_reply(self->fuse_dev_fd, ih->unique, 0,
+			   &eo, sizeof(eo), &bo, sizeof(bo));
+		close(ffd);
+	} else if (ih->nodeid == FUSE_ROOT_ID && !strcmp(name, "eloop_node")) {
+		int pfd = open("/proc/self/mounts", O_RDONLY | O_CLOEXEC);
+
+		if (pfd < 0) {
+			fuse_reply(self->fuse_dev_fd, ih->unique, -errno,
+				   NULL, 0, NULL, 0);
+			return;
+		}
+		bo.backing_fd = (uint64_t)(uint32_t)pfd;
+		eo.nodeid = FUSE_ELOOP_NODEID;
+		eo.attr.ino = FUSE_ELOOP_NODEID;
+		eo.attr.mode = S_IFREG | 0444;
+		eo.attr.nlink = 1;
+		fuse_reply(self->fuse_dev_fd, ih->unique, 0,
+			   &eo, sizeof(eo), &bo, sizeof(bo));
+		close(pfd);
 	} else if (ih->nodeid == FUSE_ROOT_ID && !strcmp(name, "unbacked")) {
 		eo.nodeid = FUSE_UNBACKED_NODEID;
 		eo.attr.ino = FUSE_UNBACKED_NODEID;
@@ -327,7 +386,8 @@ static void *fuse_mini_daemon(void *arg)
 				   &out, sizeof(out), NULL, 0);
 		} else if (op == FUSE_GETATTR &&
 			   (ih->nodeid == FUSE_ROOT_ID ||
-			    ih->nodeid == FUSE_UNBACKED_NODEID)) {
+			    ih->nodeid == FUSE_UNBACKED_NODEID ||
+			    ih->nodeid == FUSE_REDACTED_NODEID)) {
 			bool root = ih->nodeid == FUSE_ROOT_ID;
 			struct fuse_attr_out ao = {
 				.attr_valid = 3600, .attr.ino = ih->nodeid,
@@ -352,12 +412,19 @@ static void *fuse_mini_daemon(void *arg)
 
 			fuse_reply(self->fuse_dev_fd, ih->unique, 0,
 				   &oo, sizeof(oo), NULL, 0);
+		} else if (op == FUSE_READ && (ih->opcode & FUSE_PREFILTER)) {
+			fuse_reply(self->fuse_dev_fd, ih->unique, 0,
+				   body, sizeof(struct fuse_read_in), NULL, 0);
 		} else if (op == FUSE_READ || op == FUSE_WRITE) {
+			const char *data = ih->nodeid == FUSE_REDACTED_NODEID ?
+					   "redacted\n" : "fallback\n";
+			bool ok = op == FUSE_READ &&
+				  (ih->nodeid == FUSE_UNBACKED_NODEID ||
+				   ih->nodeid == FUSE_REDACTED_NODEID);
+
 			__atomic_add_fetch(&self->rw_cnt, 1, __ATOMIC_SEQ_CST);
 			fuse_reply(self->fuse_dev_fd, ih->unique,
-				   (op == FUSE_READ &&
-				    ih->nodeid == FUSE_UNBACKED_NODEID) ?
-				   0 : -EIO, "fallback\n", 9, NULL, 0);
+				   ok ? 0 : -EIO, data, 9, NULL, 0);
 		} else if (op == FUSE_UNLINK) {
 			__atomic_add_fetch(&self->unlink_cnt, 1,
 					   __ATOMIC_SEQ_CST);
@@ -1011,6 +1078,229 @@ TEST_F(fuse_bpf, readdir_and_excl_race)
 	EXPECT_EQ(1U, ctx.wins);
 	EXPECT_EQ(7U, ctx.exists);
 	EXPECT_EQ(0U, ctx.errs);
+}
+
+TEST_F(fuse_bpf, bpf_postfilter_attr_and_err_rewrite)
+{
+	const struct bpf_insn postfilter_prog[] = {
+		/* 0..4: dispatch GETATTR/UNLINK prefilter & postfilter */
+		FUSE_BPF_LDX_MEM(BPF_W, BPF_REG_2, BPF_REG_1,
+				 offsetof(struct fuse_bpf_args, opcode)),
+		FUSE_BPF_JMP_IMM(BPF_JEQ, BPF_REG_2,
+				 FUSE_GETATTR | FUSE_PREFILTER, 5),
+		FUSE_BPF_JMP_IMM(BPF_JEQ, BPF_REG_2,
+				 FUSE_UNLINK | FUSE_PREFILTER, 4),
+		FUSE_BPF_JMP_IMM(BPF_JEQ, BPF_REG_2,
+				 FUSE_GETATTR | FUSE_POSTFILTER, 5),
+		FUSE_BPF_JMP_IMM(BPF_JEQ, BPF_REG_2,
+				 FUSE_UNLINK | FUSE_POSTFILTER, 9),
+		/* 5..6: default -> FUSE_BPF_BACKING */
+		FUSE_BPF_MOV64_IMM(BPF_REG_0, FUSE_BPF_BACKING),
+		FUSE_BPF_EXIT_INSN(),
+		/* 7..8: GETATTR/UNLINK prefilter -> BACKING | POST_FILTER */
+		FUSE_BPF_MOV64_IMM(BPF_REG_0,
+				   FUSE_BPF_BACKING | FUSE_BPF_POST_FILTER),
+		FUSE_BPF_EXIT_INSN(),
+		/* 9..13: GETATTR postfilter -> rewrite attr.size = 77777 */
+		FUSE_BPF_LDX_MEM(BPF_DW, BPF_REG_3, BPF_REG_1,
+				 offsetof(struct fuse_bpf_args,
+					  out_args[0].value)),
+		FUSE_BPF_MOV64_IMM(BPF_REG_4, 77777),
+		FUSE_BPF_STX_MEM(BPF_DW, BPF_REG_3, BPF_REG_4,
+				 offsetof(struct fuse_attr_out, attr.size)),
+		FUSE_BPF_MOV64_IMM(BPF_REG_0, 0),
+		FUSE_BPF_EXIT_INSN(),
+		/* 14..19: UNLINK postfilter -> rewrite -ENOENT to -EXDEV */
+		FUSE_BPF_LDX_MEM(BPF_W, BPF_REG_3, BPF_REG_1,
+				 offsetof(struct fuse_bpf_args, error_in)),
+		FUSE_BPF_JMP32_IMM(BPF_JEQ, BPF_REG_3, -ENOENT, 2),
+		FUSE_BPF_MOV64_IMM(BPF_REG_0, 0),
+		FUSE_BPF_EXIT_INSN(),
+		FUSE_BPF_MOV64_IMM(BPF_REG_0, -EXDEV),
+		FUSE_BPF_EXIT_INSN(),
+	};
+	char fuse_file[PATH_MAX], fuse_moved[PATH_MAX];
+	char back_file[PATH_MAX], back_moved[PATH_MAX];
+	int bfd, fd = -1, prog_fd;
+	struct stat st;
+
+	snprintf(back_file, sizeof(back_file), "%s/post.txt",
+		 self->backing_dir);
+	snprintf(back_moved, sizeof(back_moved), "%s/moved.txt",
+		 self->backing_dir);
+	snprintf(fuse_file, sizeof(fuse_file), "%s/backed/post.txt",
+		 self->mnt_dir);
+	snprintf(fuse_moved, sizeof(fuse_moved), "%s/backed/moved.txt",
+		 self->mnt_dir);
+
+	bfd = open(back_file, O_CREAT | O_WRONLY | O_TRUNC | O_CLOEXEC, 0644);
+	ASSERT_GE(bfd, 0);
+	ASSERT_EQ((ssize_t)11, write(bfd, "eleven-byte", 11));
+	close_fd(&bfd);
+
+	prog_fd = load_fuse_bpf_prog(postfilter_prog,
+				     ARRAY_SIZE(postfilter_prog));
+	ASSERT_GE(prog_fd, 0);
+	__atomic_store_n(&self->bpf_fd, prog_fd, __ATOMIC_SEQ_CST);
+
+	/*
+	 * Pin the FUSE dentry with an open fd so fuse_dentry_delete() does
+	 * not evict it before unlink() reaches fuse_unlink_backing().
+	 */
+	fd = open(fuse_file, O_RDONLY | O_CLOEXEC);
+	ASSERT_GE(fd, 0);
+
+	ASSERT_EQ(0, stat(fuse_file, &st));
+	EXPECT_EQ((off_t)77777, st.st_size);
+	ASSERT_EQ(0, stat(back_file, &st));
+	EXPECT_EQ((off_t)11, st.st_size);
+
+	ASSERT_EQ(0, rename(back_file, back_moved));
+	errno = 0;
+	ASSERT_EQ(-1, unlink(fuse_file));
+	EXPECT_EQ(EXDEV, errno);
+	close_fd(&fd);
+	ASSERT_EQ(0, unlink(fuse_moved));
+}
+
+TEST_F(fuse_bpf, bpf_user_filter_daemon_fallback)
+{
+	const struct bpf_insn redact_prog[] = {
+		FUSE_BPF_LDX_MEM(BPF_W, BPF_REG_2, BPF_REG_1,
+				 offsetof(struct fuse_bpf_args, opcode)),
+		FUSE_BPF_JMP_IMM(BPF_JEQ, BPF_REG_2,
+				 FUSE_READ | FUSE_PREFILTER, 2),
+		FUSE_BPF_MOV64_IMM(BPF_REG_0, FUSE_BPF_BACKING),
+		FUSE_BPF_EXIT_INSN(),
+		FUSE_BPF_MOV64_IMM(BPF_REG_0, FUSE_BPF_USER_FILTER),
+		FUSE_BPF_EXIT_INSN(),
+	};
+	char fuse_file[PATH_MAX], back_file[PATH_MAX];
+	char buf[16] = { 0 };
+	int bfd, fd, prog_fd;
+	struct stat st;
+
+	snprintf(back_file, sizeof(back_file), "%s/redacted",
+		 self->backing_dir);
+	snprintf(fuse_file, sizeof(fuse_file), "%s/redacted", self->mnt_dir);
+
+	bfd = open(back_file, O_CREAT | O_RDWR | O_TRUNC | O_CLOEXEC, 0644);
+	ASSERT_GE(bfd, 0);
+	close_fd(&bfd);
+
+	prog_fd = load_fuse_bpf_prog(redact_prog, ARRAY_SIZE(redact_prog));
+	ASSERT_GE(prog_fd, 0);
+	__atomic_store_n(&self->bpf_fd, prog_fd, __ATOMIC_SEQ_CST);
+
+	fd = open(fuse_file, O_RDWR | O_CLOEXEC);
+	ASSERT_GE(fd, 0);
+	ASSERT_EQ((ssize_t)9, write(fd, "secret-9\n", 9));
+	EXPECT_EQ(0U, __atomic_load_n(&self->rw_cnt, __ATOMIC_SEQ_CST));
+	ASSERT_EQ(0, stat(fuse_file, &st));
+	EXPECT_EQ((off_t)9, st.st_size);
+
+	ASSERT_EQ((ssize_t)9, pread(fd, buf, sizeof(buf) - 1, 0));
+	EXPECT_STREQ("redacted\n", buf);
+	EXPECT_GE(__atomic_load_n(&self->rw_cnt, __ATOMIC_SEQ_CST), 1U);
+	close_fd(&fd);
+
+	memset(buf, 0, sizeof(buf));
+	bfd = open(back_file, O_RDONLY | O_CLOEXEC);
+	ASSERT_GE(bfd, 0);
+	ASSERT_EQ((ssize_t)9, read(bfd, buf, sizeof(buf) - 1));
+	EXPECT_STREQ("secret-9\n", buf);
+	close_fd(&bfd);
+}
+
+TEST_F(fuse_bpf, stacking_depth_eloop)
+{
+	const char *tail = "rootmode=040755,user_id=0,group_id=0";
+	int fuse_dir_fd = -1, null_fd = -1, proc_fd = -1, prog_fd;
+	char eloop_path[PATH_MAX], st_mnt[256], opts[160];
+	struct utsname uts;
+	struct stat st;
+
+	snprintf(st_mnt, sizeof(st_mnt), "%s/st_mnt", self->tmp_dir);
+	ASSERT_EQ(0, mkdir(st_mnt, 0755));
+
+	prog_fd = load_default_backing_prog();
+	ASSERT_GE(prog_fd, 0);
+	if (fcntl(STDIN_FILENO, F_GETFD) < 0)
+		null_fd = open("/dev/null", O_RDONLY);
+
+	proc_fd = open("/proc", O_RDONLY | O_DIRECTORY | O_CLOEXEC);
+	ASSERT_GE(proc_fd, 0);
+	snprintf(opts, sizeof(opts), "no_daemon,root_dir=%d,root_bpf=%d,%s",
+		 proc_fd, prog_fd, tail);
+	errno = 0;
+	EXPECT_EQ(-1, mount("fuse", st_mnt, "fuse", MS_NOSUID | MS_NODEV,
+			    opts));
+	EXPECT_EQ(EINVAL, errno);
+	close_fd(&proc_fd);
+
+	fuse_dir_fd = open(self->mnt_dir, O_RDONLY | O_DIRECTORY | O_CLOEXEC);
+	ASSERT_GE(fuse_dir_fd, 0);
+	snprintf(opts, sizeof(opts), "no_daemon,root_dir=%d,root_bpf=%d,%s",
+		 fuse_dir_fd, prog_fd, tail);
+	errno = 0;
+	EXPECT_EQ(-1, mount("fuse", st_mnt, "fuse", MS_NOSUID | MS_NODEV,
+			    opts));
+	EXPECT_EQ(EINVAL, errno);
+	close_fd(&fuse_dir_fd);
+	close_fd(&null_fd);
+
+	__atomic_store_n(&self->bpf_fd, prog_fd, __ATOMIC_SEQ_CST);
+	ASSERT_EQ(0, uname(&uts));
+	if ((strncmp(uts.release, "6.18.", 5) != 0 &&
+	     strncmp(uts.release, "6.12.", 5) != 0) ||
+	    getenv("FUSE_BPF_TEST_LOOKUP_ELOOP") != NULL) {
+		snprintf(eloop_path, sizeof(eloop_path), "%s/eloop_node",
+			 self->mnt_dir);
+		errno = 0;
+		EXPECT_EQ(-1, stat(eloop_path, &st));
+		EXPECT_EQ(ELOOP, errno);
+	}
+}
+
+TEST_F(fuse_bpf, file_ops_lseek_flock_fallocate)
+{
+	char fuse_file[PATH_MAX];
+	int fd1 = -1, fd2 = -1, prog_fd;
+	long psize;
+
+	prog_fd = load_default_backing_prog();
+	ASSERT_GE(prog_fd, 0);
+	__atomic_store_n(&self->bpf_fd, prog_fd, __ATOMIC_SEQ_CST);
+
+	psize = sysconf(_SC_PAGESIZE);
+	if (psize <= 0)
+		psize = 4096;
+
+	snprintf(fuse_file, sizeof(fuse_file), "%s/backed/fops.bin",
+		 self->mnt_dir);
+	fd1 = open(fuse_file, O_CREAT | O_RDWR | O_TRUNC | O_CLOEXEC, 0644);
+	ASSERT_GE(fd1, 0);
+
+	ASSERT_EQ(0, fallocate(fd1, 0, 0, (off_t)(psize * 2)));
+	ASSERT_EQ((ssize_t)9, pwrite(fd1, "data-blk!", 9, (off_t)psize));
+	ASSERT_EQ(0, fallocate(fd1, FALLOC_FL_PUNCH_HOLE | FALLOC_FL_KEEP_SIZE,
+			       0, (off_t)psize));
+
+	EXPECT_EQ((off_t)0, lseek(fd1, 0, SEEK_HOLE));
+	EXPECT_EQ((off_t)psize, lseek(fd1, 0, SEEK_DATA));
+	EXPECT_EQ((off_t)(psize * 2), lseek(fd1, 0, SEEK_END));
+
+	fd2 = open(fuse_file, O_RDWR | O_CLOEXEC);
+	ASSERT_GE(fd2, 0);
+	ASSERT_EQ(0, flock(fd1, LOCK_EX | LOCK_NB));
+	errno = 0;
+	EXPECT_EQ(-1, flock(fd2, LOCK_EX | LOCK_NB));
+	EXPECT_EQ(EWOULDBLOCK, errno);
+	EXPECT_EQ(0, flock(fd1, LOCK_UN));
+	EXPECT_EQ(0, flock(fd2, LOCK_EX | LOCK_NB));
+	EXPECT_EQ(0, flock(fd2, LOCK_UN));
+	close_fd(&fd2);
+	close_fd(&fd1);
 }
 
 TEST_HARNESS_MAIN
