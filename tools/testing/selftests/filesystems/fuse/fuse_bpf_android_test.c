@@ -27,6 +27,8 @@
 #include <sys/stat.h>
 #include <sys/syscall.h>
 #include <sys/uio.h>
+#include <sys/vfs.h>
+#include <sys/xattr.h>
 #include <unistd.h>
 
 #include <linux/android_fuse.h>
@@ -34,6 +36,16 @@
 #include <linux/fuse.h>
 
 #include "../../kselftest_harness.h"
+
+#ifndef RENAME_NOREPLACE
+#define RENAME_NOREPLACE	(1U << 0)
+#endif
+#ifndef RENAME_EXCHANGE
+#define RENAME_EXCHANGE		(1U << 1)
+#endif
+#ifndef FUSE_SUPER_MAGIC
+#define FUSE_SUPER_MAGIC	0x65735546
+#endif
 
 #define FUSE_BPF_FEAT_PATH	"/sys/fs/fuse/features/fuse_bpf"
 #define FUSE_BPF_TYPE_PATH	"/sys/fs/fuse/bpf_prog_type_fuse"
@@ -743,6 +755,262 @@ TEST_F(fuse_bpf, canonical_path_inotify)
 	EXPECT_NE(0U, mask & IN_MODIFY);
 	EXPECT_NE(0U, mask & IN_CLOSE_WRITE);
 	close_fd(&ifd);
+}
+
+static int sys_renameat2(const char *oldp, const char *newp, unsigned int flags)
+{
+	return (int)syscall(__NR_renameat2, AT_FDCWD, oldp, AT_FDCWD, newp,
+			    flags);
+}
+
+TEST_F(fuse_bpf, namespace_dir_and_rename)
+{
+	char f_a[PATH_MAX], f_b[PATH_MAX], f_c[PATH_MAX], back_b[PATH_MAX];
+	char sub_dir[384], back_sub[384], buf[16] = { 0 };
+	int fd, prog_fd;
+	struct stat st;
+
+	prog_fd = load_default_backing_prog();
+	ASSERT_GE(prog_fd, 0);
+	__atomic_store_n(&self->bpf_fd, prog_fd, __ATOMIC_SEQ_CST);
+
+	snprintf(sub_dir, sizeof(sub_dir), "%s/backed/sub", self->mnt_dir);
+	snprintf(back_sub, sizeof(back_sub), "%s/sub", self->backing_dir);
+	snprintf(f_a, sizeof(f_a), "%s/a.txt", sub_dir);
+	snprintf(f_b, sizeof(f_b), "%s/b.txt", sub_dir);
+	snprintf(f_c, sizeof(f_c), "%s/c.txt", sub_dir);
+	snprintf(back_b, sizeof(back_b), "%s/b.txt", back_sub);
+
+	ASSERT_EQ(0, mkdir(sub_dir, 0755));
+	ASSERT_EQ(0, stat(back_sub, &st));
+	EXPECT_TRUE(S_ISDIR(st.st_mode));
+
+	fd = open(f_a, O_CREAT | O_RDWR | O_TRUNC | O_CLOEXEC, 0644);
+	ASSERT_GE(fd, 0);
+	ASSERT_EQ((ssize_t)5, write(fd, "alpha", 5));
+	close_fd(&fd);
+
+	fd = open(f_c, O_CREAT | O_RDWR | O_TRUNC | O_CLOEXEC, 0644);
+	ASSERT_GE(fd, 0);
+	ASSERT_EQ((ssize_t)5, write(fd, "gamma", 5));
+	close_fd(&fd);
+
+	errno = 0;
+	ASSERT_EQ(-1, rmdir(sub_dir));
+	EXPECT_EQ(ENOTEMPTY, errno);
+
+	ASSERT_EQ(0, rename(f_a, f_b));
+	errno = 0;
+	EXPECT_EQ(-1, stat(f_a, &st));
+	EXPECT_EQ(ENOENT, errno);
+	EXPECT_EQ(0, stat(back_b, &st));
+
+	errno = 0;
+	ASSERT_EQ(-1, sys_renameat2(f_b, f_c, RENAME_NOREPLACE));
+	EXPECT_EQ(EEXIST, errno);
+
+	ASSERT_EQ(0, sys_renameat2(f_b, f_c, RENAME_EXCHANGE));
+	fd = open(f_b, O_RDONLY | O_CLOEXEC);
+	ASSERT_GE(fd, 0);
+	ASSERT_EQ((ssize_t)5, read(fd, buf, sizeof(buf) - 1));
+	EXPECT_STREQ("gamma", buf);
+	close_fd(&fd);
+
+	memset(buf, 0, sizeof(buf));
+	fd = open(f_c, O_RDONLY | O_CLOEXEC);
+	ASSERT_GE(fd, 0);
+	ASSERT_EQ((ssize_t)5, read(fd, buf, sizeof(buf) - 1));
+	EXPECT_STREQ("alpha", buf);
+	close_fd(&fd);
+
+	ASSERT_EQ(0, unlink(f_b));
+	ASSERT_EQ(0, unlink(f_c));
+	ASSERT_EQ(0, rmdir(sub_dir));
+	errno = 0;
+	EXPECT_EQ(-1, stat(back_sub, &st));
+	EXPECT_EQ(ENOENT, errno);
+	EXPECT_EQ(0U, __atomic_load_n(&self->rw_cnt, __ATOMIC_SEQ_CST));
+}
+
+TEST_F(fuse_bpf, links_symlinks_setattr_statfs)
+{
+	struct timespec ts[2] = {
+		{ .tv_sec = 1700000100, .tv_nsec = 0 },
+		{ .tv_sec = 1700000200, .tv_nsec = 0 },
+	};
+	char src[PATH_MAX], hlink[PATH_MAX], slink[PATH_MAX];
+	char lbuf[64] = { 0 };
+	struct statfs sfs;
+	int fd, prog_fd;
+	struct stat st;
+
+	prog_fd = load_default_backing_prog();
+	ASSERT_GE(prog_fd, 0);
+	__atomic_store_n(&self->bpf_fd, prog_fd, __ATOMIC_SEQ_CST);
+
+	snprintf(src, sizeof(src), "%s/backed/orig.txt", self->mnt_dir);
+	snprintf(hlink, sizeof(hlink), "%s/backed/hard.txt", self->mnt_dir);
+	snprintf(slink, sizeof(slink), "%s/backed/sym.lnk", self->mnt_dir);
+
+	fd = open(src, O_CREAT | O_RDWR | O_TRUNC | O_CLOEXEC, 0644);
+	ASSERT_GE(fd, 0);
+	ASSERT_EQ((ssize_t)9, write(fd, "link-data", 9));
+	close_fd(&fd);
+
+	ASSERT_EQ(0, link(src, hlink));
+	ASSERT_EQ(0, stat(src, &st));
+	EXPECT_EQ(2UL, (unsigned long)st.st_nlink);
+
+	ASSERT_EQ(0, symlink("orig.txt", slink));
+	ASSERT_EQ((ssize_t)8, readlink(slink, lbuf, sizeof(lbuf) - 1));
+	EXPECT_STREQ("orig.txt", lbuf);
+	ASSERT_EQ(0, lstat(slink, &st));
+	EXPECT_TRUE(S_ISLNK(st.st_mode));
+
+	ASSERT_EQ(0, chmod(src, 0600));
+	ASSERT_EQ(0, truncate(src, 4));
+	ASSERT_EQ(0, utimensat(AT_FDCWD, src, ts, 0));
+
+	ASSERT_EQ(0, stat(hlink, &st));
+	EXPECT_EQ(0600U, (unsigned int)(st.st_mode & 0777));
+	EXPECT_EQ((off_t)4, st.st_size);
+	EXPECT_EQ(1700000200L, (long)st.st_mtime);
+
+	ASSERT_EQ(0, statfs(src, &sfs));
+	EXPECT_EQ((unsigned long)FUSE_SUPER_MAGIC, (unsigned long)sfs.f_type);
+}
+
+TEST_F(fuse_bpf, xattr_operations)
+{
+	const char *xname = "user.fusebpf_test";
+	char fuse_file[PATH_MAX], back_file[PATH_MAX];
+	char val[32] = { 0 }, list[256] = { 0 };
+	int fd, prog_fd, ret;
+	bool found = false;
+	ssize_t len, off;
+
+	prog_fd = load_default_backing_prog();
+	ASSERT_GE(prog_fd, 0);
+	__atomic_store_n(&self->bpf_fd, prog_fd, __ATOMIC_SEQ_CST);
+
+	snprintf(fuse_file, sizeof(fuse_file), "%s/backed/xattr.txt",
+		 self->mnt_dir);
+	snprintf(back_file, sizeof(back_file), "%s/xattr.txt",
+		 self->backing_dir);
+
+	fd = open(fuse_file, O_CREAT | O_RDWR | O_TRUNC | O_CLOEXEC, 0644);
+	ASSERT_GE(fd, 0);
+	close_fd(&fd);
+
+	ret = setxattr(fuse_file, xname, "xattr-val", 9, 0);
+	if (ret < 0 && (errno == EOPNOTSUPP || errno == ENOTSUP))
+		SKIP(return, "user xattr unsupported on backing fs");
+	ASSERT_EQ(0, ret);
+
+	ASSERT_EQ((ssize_t)9, getxattr(fuse_file, xname, val, sizeof(val) - 1));
+	EXPECT_STREQ("xattr-val", val);
+
+	memset(val, 0, sizeof(val));
+	ASSERT_EQ((ssize_t)9, getxattr(back_file, xname, val, sizeof(val) - 1));
+	EXPECT_STREQ("xattr-val", val);
+
+	len = listxattr(fuse_file, list, sizeof(list));
+	ASSERT_GT(len, (ssize_t)0);
+	for (off = 0; off < len;
+	     off += (ssize_t)strlen(list + off) + 1) {
+		if (!strcmp(list + off, xname))
+			found = true;
+	}
+	EXPECT_TRUE(found);
+
+	ASSERT_EQ(0, removexattr(fuse_file, xname));
+	errno = 0;
+	EXPECT_EQ((ssize_t)-1, getxattr(fuse_file, xname, val, sizeof(val)));
+	EXPECT_EQ(ENODATA, errno);
+}
+
+struct excl_race_ctx {
+	const char *path;
+	uint32_t ready;
+	uint32_t go;
+	uint32_t wins;
+	uint32_t exists;
+	uint32_t errs;
+};
+
+static void *excl_race_worker(void *arg)
+{
+	struct excl_race_ctx *ctx = arg;
+	int fd;
+
+	__atomic_add_fetch(&ctx->ready, 1, __ATOMIC_SEQ_CST);
+	while (!__atomic_load_n(&ctx->go, __ATOMIC_ACQUIRE))
+		sched_yield();
+
+	fd = open(ctx->path, O_CREAT | O_EXCL | O_RDWR | O_CLOEXEC, 0644);
+	if (fd >= 0) {
+		__atomic_add_fetch(&ctx->wins, 1, __ATOMIC_SEQ_CST);
+		close(fd);
+	} else if (errno == EEXIST) {
+		__atomic_add_fetch(&ctx->exists, 1, __ATOMIC_SEQ_CST);
+	} else {
+		__atomic_add_fetch(&ctx->errs, 1, __ATOMIC_SEQ_CST);
+	}
+	return NULL;
+}
+
+TEST_F(fuse_bpf, readdir_and_excl_race)
+{
+	char f1[PATH_MAX], f2[PATH_MAX], race_f[PATH_MAX];
+	bool saw_one = false, saw_two = false;
+	struct excl_race_ctx ctx = { 0 };
+	char backed_dir[384];
+	int fd, i, prog_fd;
+	struct dirent *de;
+	pthread_t tids[8];
+	DIR *dir;
+
+	prog_fd = load_default_backing_prog();
+	ASSERT_GE(prog_fd, 0);
+	__atomic_store_n(&self->bpf_fd, prog_fd, __ATOMIC_SEQ_CST);
+
+	snprintf(backed_dir, sizeof(backed_dir), "%s/backed", self->mnt_dir);
+	snprintf(f1, sizeof(f1), "%s/d_one", backed_dir);
+	snprintf(f2, sizeof(f2), "%s/d_two", backed_dir);
+	snprintf(race_f, sizeof(race_f), "%s/excl_race", backed_dir);
+
+	fd = open(f1, O_CREAT | O_RDWR | O_TRUNC | O_CLOEXEC, 0644);
+	ASSERT_GE(fd, 0);
+	close_fd(&fd);
+	fd = open(f2, O_CREAT | O_RDWR | O_TRUNC | O_CLOEXEC, 0644);
+	ASSERT_GE(fd, 0);
+	close_fd(&fd);
+
+	dir = opendir(backed_dir);
+	ASSERT_TRUE(dir != NULL);
+	while ((de = readdir(dir)) != NULL) {
+		if (!strcmp(de->d_name, "d_one"))
+			saw_one = true;
+		else if (!strcmp(de->d_name, "d_two"))
+			saw_two = true;
+	}
+	closedir(dir);
+	EXPECT_TRUE(saw_one);
+	EXPECT_TRUE(saw_two);
+
+	ctx.path = race_f;
+	for (i = 0; i < 8; i++)
+		ASSERT_EQ(0, pthread_create(&tids[i], NULL, excl_race_worker,
+					    &ctx));
+	while (__atomic_load_n(&ctx.ready, __ATOMIC_SEQ_CST) < 8U)
+		sched_yield();
+	__atomic_store_n(&ctx.go, 1, __ATOMIC_RELEASE);
+	for (i = 0; i < 8; i++)
+		ASSERT_EQ(0, pthread_join(tids[i], NULL));
+
+	EXPECT_EQ(1U, ctx.wins);
+	EXPECT_EQ(7U, ctx.exists);
+	EXPECT_EQ(0U, ctx.errs);
 }
 
 TEST_HARNESS_MAIN
