@@ -1591,6 +1591,106 @@ unlock:
 	return ret;
 }
 
+static struct wrap_content *create_content_for(int fd, unsigned long prot)
+{
+	bool is_file_writable, writable;
+	struct wrap_content *content;
+	struct dma_buf *dmabuf;
+
+	dmabuf = dma_buf_get(fd);
+	if (IS_ERR(dmabuf))
+		return ERR_PTR(PTR_ERR(dmabuf));
+
+	writable = !!(prot & PROT_WRITE);
+	is_file_writable = !!(dmabuf->file->f_mode & FMODE_WRITE);
+	if (writable && !is_file_writable)
+		content = ERR_PTR(-EACCES);
+	else
+		content = alloc_dmabuf_content(dmabuf, writable);
+	dma_buf_put(dmabuf);
+
+	return content;
+}
+
+static int wrap_file_repopulate(struct wrapfd_repopulate *wrapfd_repopulate)
+{
+	struct wrap_content *content;
+	struct content_attribs attrs;
+	struct wrap_ctx *ctx;
+	struct file *file;
+	struct fd f;
+	__u32 prot = 0;
+	int ret = 0;
+
+	if (wrapfd_repopulate->wrapfd > INT_MAX)
+		return -EBADF;
+
+	f = fdget(wrapfd_repopulate->wrapfd);
+	file = fd_file(f);
+	if (!file || file->f_op != &wrap_fops) {
+		ret = -EBADF;
+		goto put_file;
+	}
+
+	if (file->f_mode & FMODE_READ)
+		prot |= PROT_READ;
+	if (file->f_mode & FMODE_WRITE)
+		prot |= PROT_WRITE;
+	if (!prot) {
+		ret = -EINVAL;
+		goto put_file;
+	}
+
+	ctx = file->private_data;
+	spin_lock(&ctx->lock);
+
+	if (has_owner(ctx) && !is_owner_task(ctx, current)) {
+		ret = -EBUSY;
+		goto unlock;
+	}
+
+	if (ctx->content || ctx->map_count > 0 || ctx->use_count > 0) {
+		ret = -EINVAL;
+		goto unlock;
+	}
+
+	/* Concurrent repopulate request should retry. */
+	if (ctx->unusable) {
+		ret = -EAGAIN;
+		goto unlock;
+	}
+
+	ctx->unusable = true;
+unlock:
+	spin_unlock(&ctx->lock);
+	if (ret)
+		goto put_file;
+
+	content = create_content_for(wrapfd_repopulate->fd, prot);
+	if (IS_ERR(content)) {
+		ret = PTR_ERR(content);
+		goto unblock;
+	}
+
+	INIT_LIST_HEAD(&content->listeners);
+	content->close_on_exec = get_close_on_exec(wrapfd_repopulate->fd);
+	content->ops->get_content_attribs(content, &attrs);
+	set_close_on_exec(wrapfd_repopulate->wrapfd,
+			  content->close_on_exec ? 1 : 0);
+unblock:
+	spin_lock(&ctx->lock);
+	if (!ret) {
+		i_size_write(file_inode(file), attrs.size);
+		ctx->content = content;
+	}
+	unblock_usage(ctx);
+	spin_unlock(&ctx->lock);
+put_file:
+	fdput(f);
+
+	return ret;
+}
+
 static int wrap_file_ioctl(struct wrap_ctx *ctx,
 			   unsigned int cmd, unsigned long arg)
 {
@@ -1993,27 +2093,6 @@ static const struct file_operations wrap_fops = {
 #endif
 };
 
-static struct wrap_content *create_content_for(int fd, unsigned long prot)
-{
-	bool is_file_writable, writable;
-	struct wrap_content *content;
-	struct dma_buf *dmabuf;
-
-	dmabuf = dma_buf_get(fd);
-	if (IS_ERR(dmabuf))
-		return ERR_PTR(PTR_ERR(dmabuf));
-
-	writable = !!(prot & PROT_WRITE);
-	is_file_writable = !!(dmabuf->file->f_mode & FMODE_WRITE);
-	if (writable && !is_file_writable)
-		content = ERR_PTR(-EACCES);
-	else
-		content = alloc_dmabuf_content(dmabuf, writable);
-	dma_buf_put(dmabuf);
-
-	return content;
-}
-
 static int wrap_file(struct wrap_ctx *ctx, __u32 fd, __u32 prot)
 {
 	struct wrap_content *content;
@@ -2302,6 +2381,7 @@ static int wrapfd_dev_release(struct inode *ignored, struct file *file)
 static long wrapfd_dev_ioctl(struct file *file, unsigned int cmd,
 			     unsigned long arg)
 {
+	struct wrapfd_repopulate wrapfd_repopulate;
 	struct wrapfd_wrap wrapfd_wrap;
 	int ret;
 
@@ -2326,6 +2406,16 @@ static long wrapfd_dev_ioctl(struct file *file, unsigned int cmd,
 		break;
 	case WRAPFD_DEV_IOC_QUERY_EVENTS:
 		ret = wrapfd_dev_query_events(file, arg);
+		break;
+	case WRAPFD_DEV_IOC_REPOPULATE:
+		if (copy_from_user(&wrapfd_repopulate, (struct wrapfd_repopulate __user *)arg,
+				   sizeof(wrapfd_repopulate)))
+			return -EFAULT;
+
+		if (wrapfd_repopulate.reserved)
+			return -EINVAL;
+
+		ret = wrap_file_repopulate(&wrapfd_repopulate);
 		break;
 	default:
 		return -ENOIOCTLCMD;
