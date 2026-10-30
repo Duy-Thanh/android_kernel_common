@@ -11,6 +11,7 @@
 #include <dirent.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <grp.h>
 #include <limits.h>
 #include <poll.h>
 #include <pthread.h>
@@ -83,6 +84,10 @@
 #define FUSE_UNBACKED_NODEID	3ULL
 #define FUSE_REDACTED_NODEID	4ULL
 #define FUSE_ELOOP_NODEID	5ULL
+#define FUSE_SECRET_NODEID	6ULL
+#define KSFT_AID_MP		((uid_t)1023)
+#define KSFT_AID_APP		((uid_t)10150)
+#define KSFT_CAP_VER_3		0x20080522U
 
 #define FUSE_BPF_MOV64_IMM(DST, IMM) \
 	((struct bpf_insn){ .code = BPF_ALU64 | BPF_MOV | BPF_K, \
@@ -422,8 +427,8 @@ static int fuse_reply(int dev_fd, uint64_t unique, int32_t err,
 FIXTURE(fuse_bpf)
 {
 	char tmp_dir[128], backing_dir[256], mnt_dir[256];
-	int fuse_dev_fd, stop_pipe[2], bpf_fd, lock_fd;
-	bool mounted, thread_started;
+	int fuse_dev_fd, stop_pipe[2], bpf_fd, lock_fd, daemon_err;
+	bool mounted, thread_started, unpriv_mp;
 	pthread_t daemon_tid;
 	uint32_t lookup_cnt, rw_cnt, unlink_cnt, canonical_cnt;
 };
@@ -444,6 +449,7 @@ static void daemon_lookup(struct _test_data_fuse_bpf *self,
 	if (ih->nodeid == FUSE_ROOT_ID && !strcmp(name, "backed")) {
 		int dir_fd = open(self->backing_dir,
 				  O_RDONLY | O_DIRECTORY | O_CLOEXEC);
+		int ret;
 
 		if (dir_fd < 0) {
 			fuse_reply(self->fuse_dev_fd, ih->unique, -errno,
@@ -453,11 +459,44 @@ static void daemon_lookup(struct _test_data_fuse_bpf *self,
 		bo.backing_fd = (uint64_t)(uint32_t)dir_fd;
 		eo.nodeid = FUSE_BACKED_NODEID;
 		eo.attr.ino = FUSE_BACKED_NODEID;
-		eo.attr.mode = S_IFDIR | 0755;
+		eo.attr.mode = S_IFDIR | (self->unpriv_mp ? 0775 : 0755);
+		eo.attr.uid = self->unpriv_mp ? KSFT_AID_APP : 0;
+		eo.attr.gid = self->unpriv_mp ? KSFT_AID_MP : 0;
 		eo.attr.nlink = 2;
-		fuse_reply(self->fuse_dev_fd, ih->unique, 0,
-			   &eo, sizeof(eo), &bo, sizeof(bo));
+		ret = fuse_reply(self->fuse_dev_fd, ih->unique, 0,
+				 &eo, sizeof(eo), &bo, sizeof(bo));
 		close(dir_fd);
+		if (ret < 0) {
+			__atomic_store_n(&self->daemon_err, ret,
+					 __ATOMIC_SEQ_CST);
+			fuse_reply(self->fuse_dev_fd, ih->unique, ret,
+				   NULL, 0, NULL, 0);
+		}
+	} else if (ih->nodeid == FUSE_ROOT_ID && !strcmp(name, "secret")) {
+		char spath[PATH_MAX];
+		int ret, sfd;
+
+		snprintf(spath, sizeof(spath), "%s/secret_1023.txt",
+			 self->backing_dir);
+		sfd = open(spath, O_RDONLY | O_CLOEXEC);
+		bo.backing_fd = (uint64_t)(uint32_t)sfd;
+		eo.nodeid = FUSE_SECRET_NODEID;
+		eo.attr.ino = FUSE_SECRET_NODEID;
+		eo.attr.mode = S_IFREG | 0666;
+		eo.attr.uid = KSFT_AID_MP;
+		eo.attr.gid = KSFT_AID_MP;
+		eo.attr.nlink = 1;
+		eo.attr.size = 7;
+		ret = sfd < 0 ? -errno :
+		      fuse_reply(self->fuse_dev_fd, ih->unique, 0,
+				 &eo, sizeof(eo), &bo, sizeof(bo));
+		close_fd(&sfd);
+		if (ret < 0) {
+			__atomic_store_n(&self->daemon_err, ret,
+					 __ATOMIC_SEQ_CST);
+			fuse_reply(self->fuse_dev_fd, ih->unique, ret,
+				   NULL, 0, NULL, 0);
+		}
 	} else if (ih->nodeid == FUSE_ROOT_ID && !strcmp(name, "redacted")) {
 		char rpath[PATH_MAX];
 		struct stat st;
@@ -1619,6 +1658,205 @@ TEST_F(fuse_bpf, android_f2fs_casefold)
 	errno = 0;
 	EXPECT_EQ(-1, stat(f_mixed, &st));
 	EXPECT_EQ(ENOENT, errno);
+}
+
+struct fuse_ksft_cap_hdr {
+	uint32_t version;
+	int pid;
+};
+struct fuse_ksft_cap_data {
+	uint32_t effective, permitted, inheritable;
+};
+
+static int drop_to_unpriv_uid(uid_t uid, gid_t gid)
+{
+	struct fuse_ksft_cap_hdr hdr = { .version = KSFT_CAP_VER_3, .pid = 0 };
+	struct fuse_ksft_cap_data zero[2] = { { 0 }, { 0 } }, cur[2];
+
+	if (setgroups(0, NULL) || setresgid(gid, gid, gid) ||
+	    setresuid(uid, uid, uid) || syscall(__NR_capset, &hdr, zero))
+		return -errno;
+	memset(cur, 0xff, sizeof(cur));
+	hdr.version = KSFT_CAP_VER_3;
+	hdr.pid = 0;
+	if (syscall(__NR_capget, &hdr, cur))
+		return -errno;
+	return (geteuid() == uid && getegid() == gid && !cur[0].effective &&
+		!cur[1].effective && !cur[0].permitted && !cur[1].permitted) ?
+	       0 : -EPERM;
+}
+
+static void kill_and_reap(pid_t pid, int *status)
+{
+	if (pid <= 0)
+		return;
+	kill(pid, SIGKILL);
+	while (waitpid(pid, status, 0) < 0 && errno == EINTR)
+		continue;
+}
+
+static void run_unpriv_consumer_app(const char *umnt)
+{
+	char app_f[PATH_MAX], sec_f[PATH_MAX], buf[24] = { 0 };
+	int err = -drop_to_unpriv_uid(KSFT_AID_APP, KSFT_AID_APP), fd = -1;
+	const char *step = "drop_to_unpriv_uid";
+	void *map;
+
+	if (err)
+		goto fail_err;
+	snprintf(app_f, sizeof(app_f), "%s/backed/app_io.bin", umnt);
+	snprintf(sec_f, sizeof(sec_f), "%s/secret", umnt);
+	step = "open(backed/app_io.bin)";
+	fd = open(app_f, O_CREAT | O_RDWR | O_TRUNC | O_CLOEXEC, 0600);
+	if (fd < 0)
+		goto fail;
+	step = "write/pread(backed/app_io.bin)";
+	errno = EIO;
+	if (write(fd, "mediaprovider-io", 16) != 16 ||
+	    pread(fd, buf, 16, 0) != 16 || strcmp(buf, "mediaprovider-io"))
+		goto fail;
+	step = "mmap(backed/app_io.bin)";
+	map = mmap(NULL, 16, PROT_READ, MAP_SHARED, fd, 0);
+	if (map == MAP_FAILED)
+		goto fail;
+	err = memcmp(map, "mediaprovider-io", 16) ? EIO : 0;
+	munmap(map, 16);
+	close_fd(&fd);
+	if (err)
+		goto fail_err;
+	step = "unlink(backed/app_io.bin) EPERM";
+	errno = 0;
+	if (unlink(app_f) != -1 || errno != EPERM)
+		goto fail;
+	step = "open(secret) EACCES";
+	errno = 0;
+	fd = open(sec_f, O_RDONLY | O_CLOEXEC);
+	if (fd != -1 || errno != EACCES)
+		goto fail;
+	_exit(0);
+fail:
+	err = errno ? errno : EIO;
+fail_err:
+	close_fd(&fd);
+	fprintf(stderr, "# %s: step failed (%s): %s (errno=%d)\n",
+		"vold_mediaprovider_unpriv_model", step, strerror(err), err);
+	fflush(stderr);
+	_exit(1);
+}
+
+TEST_F(fuse_bpf, vold_mediaprovider_unpriv_model)
+{
+	const struct bpf_insn deny_unlink_prog[] = {
+		FUSE_BPF_LDX_MEM(BPF_W, BPF_REG_2, BPF_REG_1,
+				 offsetof(struct fuse_bpf_args, opcode)),
+		FUSE_BPF_JMP_IMM(BPF_JEQ, BPF_REG_2,
+				 FUSE_UNLINK | FUSE_PREFILTER, 2),
+		FUSE_BPF_MOV64_IMM(BPF_REG_0, FUSE_BPF_BACKING),
+		FUSE_BPF_EXIT_INSN(),
+		FUSE_BPF_MOV64_IMM(BPF_REG_0, -EPERM),
+		FUSE_BPF_EXIT_INSN(),
+	};
+	int cstatus = -1, dev_fd = -1, prog_fd = -1, setup_err = 0, sfd = -1;
+	char bdir[256], umnt[256], spath[384], opts[128];
+	struct _test_data_fuse_bpf *mp, snap = { 0 };
+	pid_t client_pid = -1, daemon_pid = -1;
+	int stop_p[2] = { -1, -1 };
+	bool mounted = false;
+
+	if (geteuid() != 0)
+		SKIP(return, "root UID required");
+	ASSERT_EQ(0, chmod(self->tmp_dir, 0755));
+	snprintf(bdir, sizeof(bdir), "%s/unpriv_backing", self->tmp_dir);
+	snprintf(umnt, sizeof(umnt), "%s/unpriv_mnt", self->tmp_dir);
+	snprintf(spath, sizeof(spath), "%s/secret_1023.txt", bdir);
+	ASSERT_EQ(0, mkdir(bdir, 0770));
+	ASSERT_EQ(0, chmod(bdir, 0770));
+	ASSERT_EQ(0, chown(bdir, KSFT_AID_APP, KSFT_AID_MP));
+	ASSERT_EQ(0, mkdir(umnt, 0755));
+	sfd = open(spath, O_CREAT | O_WRONLY | O_TRUNC | O_CLOEXEC, 0600);
+	ASSERT_GE(sfd, 0);
+	ASSERT_EQ((ssize_t)7, write(sfd, "secret\n", 7));
+	ASSERT_EQ(0, fchown(sfd, KSFT_AID_MP, KSFT_AID_MP));
+	close_fd(&sfd);
+
+	mp = mmap(NULL, sizeof(*mp), PROT_READ | PROT_WRITE,
+		  MAP_SHARED | MAP_ANONYMOUS, -1, 0);
+	ASSERT_TRUE(mp != MAP_FAILED);
+	prog_fd = load_fuse_bpf_prog(deny_unlink_prog,
+				     ARRAY_SIZE(deny_unlink_prog));
+	dev_fd = open("/dev/fuse", O_RDWR | O_CLOEXEC);
+	if (prog_fd < 0 || dev_fd < 0 || pipe2(stop_p, O_CLOEXEC)) {
+		setup_err = errno ? -errno : -EIO;
+		goto cleanup;
+	}
+	snprintf(opts, sizeof(opts),
+		 "fd=%d,rootmode=040775,user_id=%u,group_id=%u,allow_other",
+		 dev_fd, (unsigned int)KSFT_AID_MP, (unsigned int)KSFT_AID_MP);
+	if (mount("fuse", umnt, "fuse", MS_NOSUID | MS_NODEV, opts)) {
+		setup_err = -errno;
+		goto cleanup;
+	}
+	mounted = true;
+	snprintf(mp->backing_dir, sizeof(mp->backing_dir), "unpriv_backing");
+	mp->fuse_dev_fd = dev_fd;
+	mp->stop_pipe[0] = stop_p[0];
+	mp->bpf_fd = prog_fd;
+	mp->unpriv_mp = true;
+
+	daemon_pid = fork();
+	if (daemon_pid < 0) {
+		setup_err = -errno;
+		goto cleanup;
+	}
+	if (daemon_pid == 0) {
+		int err = chdir(self->tmp_dir) ? -errno :
+			  drop_to_unpriv_uid(KSFT_AID_MP, KSFT_AID_MP);
+
+		close_fd(&stop_p[1]);
+		close_fd(&self->fuse_dev_fd);
+		__atomic_store_n(&mp->daemon_err, err, __ATOMIC_SEQ_CST);
+		if (!err)
+			fuse_mini_daemon(mp);
+		_exit(err ? 1 : 0);
+	}
+	close_fd(&dev_fd);
+	close_fd(&prog_fd);
+	close_fd(&stop_p[0]);
+	client_pid = fork();
+	if (client_pid == 0) {
+		close_fd(&stop_p[1]);
+		close_fd(&self->fuse_dev_fd);
+		if (chdir(self->tmp_dir))
+			_exit(1);
+		run_unpriv_consumer_app("unpriv_mnt");
+	}
+	if (client_pid < 0) {
+		setup_err = -errno;
+		goto cleanup;
+	}
+	while (waitpid(client_pid, &cstatus, 0) < 0 && errno == EINTR)
+		continue;
+	if (cstatus != -1)
+		client_pid = -1;
+
+cleanup:
+	close_fd(&stop_p[0]);
+	close_fd(&stop_p[1]);
+	close_fd(&dev_fd);
+	close_fd(&prog_fd);
+	if (mounted)
+		umount2(umnt, MNT_DETACH);
+	kill_and_reap(client_pid, &cstatus);
+	kill_and_reap(daemon_pid, NULL);
+	snap = *mp;
+	munmap(mp, sizeof(*mp));
+	ASSERT_EQ(0, snap.daemon_err);
+	ASSERT_EQ(0, setup_err);
+	ASSERT_TRUE(cstatus != -1 && WIFEXITED(cstatus));
+	ASSERT_EQ(0, WEXITSTATUS(cstatus));
+	EXPECT_GE(snap.lookup_cnt, 2U);
+	EXPECT_EQ(0U, snap.rw_cnt);
+	EXPECT_EQ(0U, snap.unlink_cnt);
 }
 
 TEST_HARNESS_MAIN
