@@ -3542,6 +3542,19 @@ void relax_compatible_cpus_allowed_ptr(struct task_struct *p)
 
 #ifdef CONFIG_SMP
 
+static void __do_migrate_task_rq(struct task_struct *p, unsigned int new_cpu)
+{
+	if (task_cpu(p) != new_cpu) {
+		if (p->sched_class->migrate_task_rq)
+			p->sched_class->migrate_task_rq(p, new_cpu);
+		p->se.nr_migrations++;
+		rseq_migrate(p);
+		sched_mm_cid_migrate_from(p);
+		perf_event_task_migrate(p);
+		trace_android_rvh_set_task_cpu(p, new_cpu);
+	}
+}
+
 void set_task_cpu(struct task_struct *p, unsigned int new_cpu)
 {
 	unsigned int state = READ_ONCE(p->__state);
@@ -3584,16 +3597,7 @@ void set_task_cpu(struct task_struct *p, unsigned int new_cpu)
 
 	trace_sched_migrate_task(p, new_cpu);
 
-	if (task_cpu(p) != new_cpu) {
-		if (p->sched_class->migrate_task_rq)
-			p->sched_class->migrate_task_rq(p, new_cpu);
-		p->se.nr_migrations++;
-		rseq_migrate(p);
-		sched_mm_cid_migrate_from(p);
-		perf_event_task_migrate(p);
-		trace_android_rvh_set_task_cpu(p, new_cpu);
-	}
-
+	__do_migrate_task_rq(p, new_cpu);
 	__set_task_cpu(p, new_cpu);
 }
 EXPORT_SYMBOL_GPL(set_task_cpu);
@@ -3974,6 +3978,7 @@ static inline void proxy_set_task_cpu(struct task_struct *p, int cpu)
 	 * was previously runnable.
 	 */
 	wake_cpu = p->wake_cpu;
+	__do_migrate_task_rq(p, cpu);
 	__set_task_cpu(p, cpu);
 	p->wake_cpu = wake_cpu;
 }
