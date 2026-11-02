@@ -4057,9 +4057,6 @@ static void activate_blocked_waiters(struct rq *target_rq,
 
 	INIT_LIST_HEAD(&bal_head);
 
-	if (wake_flags & WF_MIGRATED)
-		en_flags |= ENQUEUE_MIGRATED;
-
 	/*
 	 * A whole bunch of waiting donor tasks back this blocked
 	 * lock owner task, wake them all up to give this task its

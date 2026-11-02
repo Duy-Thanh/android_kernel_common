@@ -105,7 +105,7 @@ config ANDROID_VENDOR_OEM_DATA
 
 	  If even slightly unsure, say Y.
 
-config ANDROID_WRAPFD
+config ANDROID_WRAPFD_LEGACY
 	bool "WrapFD Driver"
 	depends on MMU
 	help
@@ -123,5 +123,7 @@ config GUEST_DMA_PROXY
 	  hypervisor-injected physical address ranges (e.g., from host shared memory)
 	  into standard dma-buf file descriptors.
 	  Say Y or M here if building a kernel for Microdroid or guest pVMs.
+
+source "drivers/android/wrapfd/Kconfig"
 
 endmenu

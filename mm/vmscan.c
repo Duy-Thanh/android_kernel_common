@@ -2542,6 +2542,8 @@ static void prepare_scan_control(pg_data_t *pgdat, struct scan_control *sc)
 			sc->may_deactivate |= DEACTIVATE_FILE;
 		else
 			sc->may_deactivate &= ~DEACTIVATE_FILE;
+
+		trace_android_vh_customize_may_deactivate(target_lruvec, sc);
 	} else
 		sc->may_deactivate = DEACTIVATE_ANON | DEACTIVATE_FILE;
 
@@ -6073,6 +6075,7 @@ static void shrink_lruvec(struct lruvec *lruvec, struct scan_control *sc)
 	bool bypass = false;
 	bool shrink_bypass = false;
 	bool reclaim_target_exit = false;
+	unsigned int orig_may_deactivate = sc->may_deactivate;
 
 	if (lru_gen_enabled() && !root_reclaim(sc)) {
 		lru_gen_shrink_lruvec(lruvec, sc);
@@ -6080,6 +6083,8 @@ static void shrink_lruvec(struct lruvec *lruvec, struct scan_control *sc)
 	}
 
 	get_scan_count(lruvec, sc, nr);
+
+	trace_android_vh_customize_lruvec_may_deactivate(lruvec, sc);
 
 	/* Record the original scan target for proportional adjustments later */
 	memcpy(targets, nr, sizeof(nr));
@@ -6186,6 +6191,7 @@ static void shrink_lruvec(struct lruvec *lruvec, struct scan_control *sc)
 	}
 
 out:
+	trace_android_vh_restore_may_deactivate(orig_may_deactivate, sc);
 	blk_finish_plug(&plug);
 	sc->nr_reclaimed += nr_reclaimed;
 	trace_android_vh_rebalance_anon_lru_bypass(&bypass);
@@ -6672,6 +6678,8 @@ static void snapshot_refaults(struct mem_cgroup *target_memcg, pg_data_t *pgdat)
 	target_lruvec->refaults[WORKINGSET_ANON] = refaults;
 	refaults = lruvec_page_state(target_lruvec, WORKINGSET_ACTIVATE_FILE);
 	target_lruvec->refaults[WORKINGSET_FILE] = refaults;
+
+	trace_android_vh_snapshot_refaults(target_memcg, pgdat);
 }
 
 static void modify_scan_control(struct scan_control *sc)

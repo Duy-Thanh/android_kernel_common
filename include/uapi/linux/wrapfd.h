@@ -8,6 +8,7 @@
 #ifndef _UAPI_WRAPFD_H
 #define _UAPI_WRAPFD_H
 
+#include <linux/ioctl.h>
 #include <linux/types.h>
 
 struct wrapfd_wrap {
@@ -43,17 +44,18 @@ struct wrapfd_rewrap {
 
 /* ioctls for /dev/wrapfd */
 #define WRAPFD_DEV_IOC 0xBC
-#define WRAPFD_DEV_IOC_WRAP	_IOW(WRAPFD_DEV_IOC, 0, struct wrapfd_wrap)
 
 /* ioctl for wrapfd */
-#define WRAPFD_DEV_IOC_GET_STATE	_IOWR(WRAPFD_DEV_IOC, 1, \
-					      struct wrapfd_get_state)
-#define WRAPFD_DEV_IOC_ACQUIRE_OWNERSHIP	_IO(WRAPFD_DEV_IOC, 2)
-#define WRAPFD_DEV_IOC_RELEASE_OWNERSHIP	_IO(WRAPFD_DEV_IOC, 3)
-#define WRAPFD_DEV_IOC_LOAD	_IOW(WRAPFD_DEV_IOC, 4, struct wrapfd_load)
-#define WRAPFD_DEV_IOC_REWRAP	_IOW(WRAPFD_DEV_IOC, 5, struct wrapfd_rewrap)
-#define WRAPFD_DEV_IOC_EMPTY	_IO(WRAPFD_DEV_IOC, 6)
-#define WRAPFD_DEV_IOC_ALLOW_GUESTS	_IO(WRAPFD_DEV_IOC, 7)
-#define WRAPFD_DEV_IOC_PROHIBIT_GUESTS	_IO(WRAPFD_DEV_IOC, 8)
+enum {
+	WRAPFD_DEV_IOC_WRAP	= _IOW(WRAPFD_DEV_IOC, 0, struct wrapfd_wrap),
+	WRAPFD_DEV_IOC_GET_STATE	= _IOWR(WRAPFD_DEV_IOC, 1, struct wrapfd_get_state),
+	WRAPFD_DEV_IOC_ACQUIRE_OWNERSHIP	= _IO(WRAPFD_DEV_IOC, 2),
+	WRAPFD_DEV_IOC_RELEASE_OWNERSHIP	= _IO(WRAPFD_DEV_IOC, 3),
+	WRAPFD_DEV_IOC_LOAD	= _IOW(WRAPFD_DEV_IOC, 4, struct wrapfd_load),
+	WRAPFD_DEV_IOC_REWRAP	= _IOW(WRAPFD_DEV_IOC, 5, struct wrapfd_rewrap),
+	WRAPFD_DEV_IOC_EMPTY	= _IO(WRAPFD_DEV_IOC, 6),
+	WRAPFD_DEV_IOC_ALLOW_GUESTS	= _IO(WRAPFD_DEV_IOC, 7),
+	WRAPFD_DEV_IOC_PROHIBIT_GUESTS	= _IO(WRAPFD_DEV_IOC, 8),
+};
 
 #endif /* _UAPI_WRAPFD_H */
