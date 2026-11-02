@@ -836,16 +836,8 @@ unsafe extern "C" fn wrapfd_get_mappable(
         // safely increments its reference count.
         let device = unsafe { device::Device::get_device(dev) };
 
-        if guard.has_owner() && !guard.owned_by_device(&device) {
+        if guard.has_owner() && !guard.owned_by_device(&device) && !guard.owned_by_current_task() {
             return Err(EBUSY);
-        }
-
-        if guard.content.is_none() {
-            return Err(ENOENT);
-        }
-
-        if matches!(guard.state, WrapState::InUse(_)) || guard.is_mapped() {
-            return Err(EINVAL);
         }
 
         let Some(ref content) = guard.content else {
@@ -861,8 +853,6 @@ unsafe extern "C" fn wrapfd_get_mappable(
         unsafe {
             (*mappable).dmabuf = content.dmabuf.as_ptr();
         }
-
-        guard.owner = WrapOwner::Device(device);
 
         Ok(())
     });
@@ -896,15 +886,7 @@ unsafe extern "C" fn wrapfd_put_mappable(
             return Err(EINVAL);
         }
 
-        let mut guard = wrap.inner.lock();
-
-        // SAFETY: `dev` is verified non-null and points to a valid C `struct device`.
-        // It's valid for the duration of this call.
-        let device = unsafe { device::Device::from_raw(dev) };
-
-        if !guard.owned_by_device(&device) {
-            return Err(EBUSY);
-        }
+        let guard = wrap.inner.lock();
 
         let Some(ref content) = guard.content else {
             // This really should not happen as `wrapfd_get_mappable` would've failed.
@@ -922,8 +904,6 @@ unsafe extern "C" fn wrapfd_put_mappable(
             <DmaBuf as AlwaysRefCounted>::dec_ref(NonNull::from(&*content.dmabuf));
         }
 
-        guard.owner = WrapOwner::None;
-        guard.allow_guests = false;
         Ok(())
     });
 
