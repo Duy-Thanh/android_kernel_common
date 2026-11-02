@@ -18,6 +18,7 @@
 #include <linux/err.h>
 #include <linux/highmem.h>
 #include <linux/iommu.h>
+#include <linux/iommu-dma.h>
 #include <linux/mem_encrypt.h>
 #include <linux/mm.h>
 #include <linux/set_memory.h>
@@ -165,22 +166,33 @@ static void system_heap_detach(struct dma_buf *dmabuf,
 
 static bool needs_swiotlb_bounce(struct device *dev, struct sg_table *table)
 {
-	struct iommu_domain *domain = iommu_get_domain_for_dev(dev);
+	struct iommu_domain *domain = NULL;
 	struct scatterlist *sg;
 	int i;
 
+	/*
+	 * dma-iommu returns IOVAs, which translate through the IOMMU domain.
+	 * Any other device is assumed to use dma-direct, whose DMA addresses
+	 * translate via dma_to_phys(). Devices with their own dma_map_ops
+	 * are not supported.
+	 */
+	if (use_dma_iommu(dev)) {
+		/*
+		 * dma-iommu only bounces on its SWIOTLB path, which marks the
+		 * table. If it's unmarked, nothing was bounced.
+		 */
+		if (!sg_dma_is_swiotlb(table->sgl))
+			return false;
+		domain = iommu_get_domain_for_dev(dev);
+	}
+
 	for_each_sgtable_dma_sg(table, sg, i) {
-		// SG_DMA_SWIOTLB is set only for dma-iommu, not for dma-direct
-		if (domain && IS_ENABLED(CONFIG_NEED_SG_DMA_FLAGS)) {
-			if (sg_dma_is_swiotlb(table->sgl))
-				return true;
-		} else {
-			phys_addr_t paddr = domain ?
-					    iommu_iova_to_phys(domain, sg_dma_address(sg)) :
-					    dma_to_phys(dev, sg_dma_address(sg));
-			if (swiotlb_find_pool(dev, paddr))
-				return true;
-		}
+		phys_addr_t paddr = domain ?
+				    iommu_iova_to_phys(domain, sg_dma_address(sg)) :
+				    dma_to_phys(dev, sg_dma_address(sg));
+
+		if (swiotlb_find_pool(dev, paddr))
+			return true;
 	}
 	return false;
 }
