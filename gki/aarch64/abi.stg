@@ -2499,6 +2499,11 @@ pointer_reference {
   pointee_type_id: 0x3100f3b8
 }
 pointer_reference {
+  id: 0x06d389a0
+  kind: POINTER
+  pointee_type_id: 0x310ec01d
+}
+pointer_reference {
   id: 0x06dcdc5a
   kind: POINTER
   pointee_type_id: 0x313397f7
@@ -413606,6 +413611,16 @@ function {
   parameter_id: 0x18bd6530
 }
 function {
+  id: 0x8f893cb9
+  return_type_id: 0x6720d32f
+  parameter_id: 0x4585663f
+  parameter_id: 0xd92b1d75
+  parameter_id: 0x33756485
+  parameter_id: 0x3e10b518
+  parameter_id: 0x3c540ff9
+  parameter_id: 0x18bd6530
+}
+function {
   id: 0x8fb39e21
   return_type_id: 0x6720d32f
   parameter_id: 0x4585663f
@@ -419549,6 +419564,13 @@ function {
   parameter_id: 0x7b64642a
   parameter_id: 0xf1a6dfed
   parameter_id: 0x0292b875
+}
+function {
+  id: 0x935ab420
+  return_type_id: 0x6720d32f
+  parameter_id: 0x3f37d9d5
+  parameter_id: 0x4585663f
+  parameter_id: 0x06d389a0
 }
 function {
   id: 0x935b00c2
@@ -453576,6 +453598,15 @@ elf_symbol {
   crc: 0xf212e77a
   type_id: 0x8f8935e1
   full_name: "__request_percpu_irq"
+}
+elf_symbol {
+  id: 0x88420086
+  name: "__request_percpu_irq_NEW"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa8bea37a
+  type_id: 0x8f893cb9
+  full_name: "__request_percpu_irq_NEW"
 }
 elf_symbol {
   id: 0xf263b97f
@@ -517617,6 +517648,15 @@ elf_symbol {
   full_name: "platform_get_irq"
 }
 elf_symbol {
+  id: 0xa43f7f43
+  name: "platform_get_irq_affinity"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xed142515
+  type_id: 0x935ab420
+  full_name: "platform_get_irq_affinity"
+}
+elf_symbol {
   id: 0xaa322a74
   name: "platform_get_irq_byname"
   is_defined: true
@@ -545840,6 +545880,7 @@ interface {
   symbol_id: 0x9d948fe1
   symbol_id: 0xf7c2da07
   symbol_id: 0x1141e9bb
+  symbol_id: 0x88420086
   symbol_id: 0xf263b97f
   symbol_id: 0xa2452368
   symbol_id: 0x2b453adc
@@ -552951,6 +552992,7 @@ interface {
   symbol_id: 0xf8b12136
   symbol_id: 0x072cf683
   symbol_id: 0xb11c92aa
+  symbol_id: 0xa43f7f43
   symbol_id: 0xaa322a74
   symbol_id: 0x0d9f5d07
   symbol_id: 0x864eb34f
