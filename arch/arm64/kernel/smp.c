@@ -1093,7 +1093,7 @@ void __init set_smp_ipi_range(int ipi_base, int n)
 
 		if (ipi_should_be_nmi(i)) {
 			err = request_percpu_nmi(ipi_base + i, ipi_handler,
-						 "IPI", &irq_stat);
+						 "IPI", NULL, &irq_stat);
 			WARN(err, "Could not request IPI %d as NMI, err=%d\n",
 			     i, err);
 		} else {

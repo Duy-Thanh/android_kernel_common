@@ -1768,8 +1768,8 @@
   kernel_connect
   kernel_kobj
   kernel_listen
-  kernel_neon_begin
-  kernel_neon_end
+  __kernel_neon_begin
+  __kernel_neon_end
   kernel_param_lock
   kernel_param_unlock
   kernel_recvmsg

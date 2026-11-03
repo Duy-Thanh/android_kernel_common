@@ -815,8 +815,15 @@ struct vm_area_struct {
 
 	ANDROID_KABI_RESERVE(1);
 	ANDROID_KABI_RESERVE(2);
-	ANDROID_KABI_RESERVE(3);
-	ANDROID_KABI_RESERVE(4);
+
+	/*
+	 * For:
+	 * union {
+	 *         struct ptshare_desc* __vm_ptshare_desc;
+	 *         refcount_t __vm_ptshare_refcount;
+	 * }
+	 */
+	ANDROID_BACKPORT_RESERVE(1);
 } __randomize_layout;
 
 #ifdef CONFIG_NUMA
@@ -1083,6 +1090,13 @@ struct mm_struct {
 #endif /* CONFIG_LRU_GEN_WALKS_MMU */
 
 		ANDROID_KABI_USE(1, struct task_dma_buf_info *dmabuf_info);
+		ANDROID_KABI_RESERVE(2);
+
+		/* For 'struct ptshare_desc* ptshare_desc' */
+		ANDROID_BACKPORT_RESERVE(1);
+
+		/* For 'atomic_t ptshare_vmas' */
+		ANDROID_BACKPORT_RESERVE(2);
 	} __randomize_layout;
 
 	/*
