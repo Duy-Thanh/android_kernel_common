@@ -1790,10 +1790,12 @@ err_free_pages:
 }
 
 static int __pkvm_mem_abort_dmabuf(struct kvm_vcpu *vcpu, struct kvm_memory_slot *memslot,
-				   gfn_t gfn, u64 nr_pages, struct list_head *ppages)
+				   gfn_t gfn, long *__nr_pages, struct list_head *ppages)
 {
 	unsigned long hva = gfn_to_hva_memslot_prot(memslot, gfn, NULL);
+	long nr_ppages = 0, nr_pages = *__nr_pages;
 	struct kvm_pinned_page *ppage;
+	struct kvm *kvm = vcpu->kvm;
 	struct file *file;
 	struct page *page;
 	bool writable;
@@ -1802,7 +1804,16 @@ static int __pkvm_mem_abort_dmabuf(struct kvm_vcpu *vcpu, struct kvm_memory_slot
 	if (kvm_is_error_hva(hva))
 		return -EFAULT;
 
-	while (nr_pages--) {
+	while (nr_pages) {
+		read_lock(&kvm->mmu_lock);
+		while (nr_pages && find_ppage(kvm, gfn << PAGE_SHIFT)) {
+			gfn++;
+			nr_pages--;
+		}
+		read_unlock(&kvm->mmu_lock);
+		if (!nr_pages)
+			break;
+
 		pfn = ___kvm_faultin_pfn(memslot, gfn, FOLL_WRITE, &writable, &page, &file);
 		if (is_error_pfn(pfn))
 			return -EFAULT;
@@ -1829,9 +1840,12 @@ static int __pkvm_mem_abort_dmabuf(struct kvm_vcpu *vcpu, struct kvm_memory_slot
 		ppage->slot = memslot;
 		list_add_tail(&ppage->list_node, ppages);
 
+		nr_ppages++;
 		gfn++;
-		hva += PAGE_SIZE;
+		nr_pages--;
 	}
+
+	*__nr_pages = nr_ppages;
 
 	return 0;
 }
@@ -2171,10 +2185,10 @@ static int pkvm_mem_abort(struct kvm_vcpu *vcpu, phys_addr_t fault_ipa, size_t s
 		if (!ret)
 			return ret;
 
-		ret = __pkvm_mem_abort_dmabuf(vcpu, memslot, gfn, nr_pages, &ppages);
+		ret = __pkvm_mem_abort_dmabuf(vcpu, memslot, gfn, &nr_pages, &ppages);
 		if (ret)
 			goto free_ppages;
-		goto topup;
+		goto donation;
 	} else if (ret) {
 		mmap_read_unlock(mm);
 		return ret;
@@ -2186,12 +2200,14 @@ static int pkvm_mem_abort(struct kvm_vcpu *vcpu, phys_addr_t fault_ipa, size_t s
 	if (ret) {
 		unpin_user_pages(pages, nr_pages);
 		goto free_pages;
-	} else if (list_empty(&ppages)) {
+	}
+
+donation:
+	if (list_empty(&ppages)) {
 		ret = 0;
 		goto free_pages;
 	}
 
-topup:
 	ret = __pkvm_topup_stage2_memcache(vcpu, &ppages);
 	if (ret)
 		goto free_ppages;
