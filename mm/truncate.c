@@ -23,6 +23,7 @@
 #include <linux/cleancache.h>
 #include <linux/rmap.h>
 #include "internal.h"
+#include "p3s/truncate.h"
 
 #undef CREATE_TRACE_POINTS
 #include <trace/hooks/vmscan.h>
@@ -816,8 +817,10 @@ void truncate_pagecache(struct inode *inode, loff_t newsize)
 	 * unmap_mapping_range call must be made for correctness.
 	 */
 	unmap_mapping_range(mapping, holebegin, 0, 1);
+	p3s_unmap_truncated_tail(mapping, newsize);
 	truncate_inode_pages(mapping, newsize);
 	unmap_mapping_range(mapping, holebegin, 0, 1);
+	p3s_unmap_truncated_tail(mapping, newsize);
 }
 EXPORT_SYMBOL(truncate_pagecache);
 
