@@ -3457,6 +3457,9 @@
   vcalloc_noprof
   vendor_data_pad
   verify_pkcs7_signature
+  vfio_platform_region_ioaddr
+  __vfio_platform_register_reset
+  vfio_platform_unregister_reset
   vfree
   video_devdata
   video_device_alloc

@@ -41254,6 +41254,11 @@ typedef {
   referred_type_id: 0xbf891a41
 }
 typedef {
+  id: 0x8df88eff
+  name: "vfio_platform_reset_fn_t"
+  referred_type_id: 0x2dd58efa
+}
+typedef {
   id: 0x9ea3b209
   name: "vfsgid_t"
   referred_type_id: 0x0b8c72ea
@@ -402032,6 +402037,12 @@ function {
   parameter_id: 0xf435685e
 }
 function {
+  id: 0x1d2b9eee
+  return_type_id: 0x48b5725f
+  parameter_id: 0x3e10b518
+  parameter_id: 0x8df88eff
+}
+function {
   id: 0x1d2c0513
   return_type_id: 0x48b5725f
   parameter_id: 0x36d15200
@@ -408704,6 +408715,13 @@ function {
   parameter_id: 0x0379c823
 }
 function {
+  id: 0x571d686b
+  return_type_id: 0x18bd6530
+  parameter_id: 0x0258f96e
+  parameter_id: 0x4585663f
+  parameter_id: 0x2fc964c0
+}
+function {
   id: 0x57300370
   return_type_id: 0x295c7202
   parameter_id: 0x11e6864c
@@ -413907,6 +413925,13 @@ function {
   parameter_id: 0x361d606f
   parameter_id: 0x09f704a2
   parameter_id: 0x4585663f
+}
+function {
+  id: 0x9031e5a5
+  return_type_id: 0x6720d32f
+  parameter_id: 0x3e10b518
+  parameter_id: 0x8df88eff
+  parameter_id: 0x0b27dc43
 }
 function {
   id: 0x903246db
@@ -472336,6 +472361,15 @@ elf_symbol {
   crc: 0x54284fbe
   type_id: 0xb406b28d
   full_name: "__var_waitqueue"
+}
+elf_symbol {
+  id: 0xa914cf46
+  name: "__vfio_platform_register_reset"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x0aca02df
+  type_id: 0x9031e5a5
+  full_name: "__vfio_platform_register_reset"
 }
 elf_symbol {
   id: 0x391e94ef
@@ -541793,6 +541827,24 @@ elf_symbol {
   full_name: "verify_pkcs7_signature"
 }
 elf_symbol {
+  id: 0x36a17c31
+  name: "vfio_platform_region_ioaddr"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x5826728d
+  type_id: 0x571d686b
+  full_name: "vfio_platform_region_ioaddr"
+}
+elf_symbol {
+  id: 0x58970ae7
+  name: "vfio_platform_unregister_reset"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x7b092170
+  type_id: 0x1d2b9eee
+  full_name: "vfio_platform_unregister_reset"
+}
+elf_symbol {
   id: 0xa7ab6134
   name: "vfree"
   is_defined: true
@@ -548015,6 +548067,7 @@ interface {
   symbol_id: 0xa0dc087f
   symbol_id: 0xe599a43b
   symbol_id: 0xab99b62a
+  symbol_id: 0xa914cf46
   symbol_id: 0x391e94ef
   symbol_id: 0xea1eb8a9
   symbol_id: 0x4648ac0b
@@ -555725,6 +555778,8 @@ interface {
   symbol_id: 0x2e0cfc9a
   symbol_id: 0xe79bed4b
   symbol_id: 0x9181a5f3
+  symbol_id: 0x36a17c31
+  symbol_id: 0x58970ae7
   symbol_id: 0xa7ab6134
   symbol_id: 0x1917ac22
   symbol_id: 0x8c447eb5
