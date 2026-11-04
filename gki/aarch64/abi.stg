@@ -532339,6 +532339,15 @@ elf_symbol {
   full_name: "task_cputime_adjusted"
 }
 elf_symbol {
+  id: 0xef5bc9c9
+  name: "task_is_blocked"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x722ecc0a
+  type_id: 0xf9e23171
+  full_name: "task_is_blocked"
+}
+elf_symbol {
   id: 0xb571d7d9
   name: "task_lookup_next_fdget_rcu"
   is_defined: true
@@ -554624,6 +554633,7 @@ interface {
   symbol_id: 0x63120b65
   symbol_id: 0x2eda3aae
   symbol_id: 0x9891b743
+  symbol_id: 0xef5bc9c9
   symbol_id: 0xb571d7d9
   symbol_id: 0x51f65372
   symbol_id: 0x74ea9d74
