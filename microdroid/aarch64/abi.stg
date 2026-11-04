@@ -104603,7 +104603,7 @@ elf_symbol {
   name: "__put_task_struct"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xccb17a7d
+  crc: 0x35e29429
   type_id: 0x17de3be6
   full_name: "__put_task_struct"
 }
@@ -104612,7 +104612,7 @@ elf_symbol {
   name: "module_layout"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe4227210
+  crc: 0x32ab2e25
   type_id: 0x12d88613
   full_name: "module_layout"
 }
@@ -104621,7 +104621,7 @@ elf_symbol {
   name: "utf8_data_table"
   is_defined: true
   symbol_type: OBJECT
-  crc: 0x3565a929
+  crc: 0xc9c0f04c
   type_id: 0x45396185
   full_name: "utf8_data_table"
 }
