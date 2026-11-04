@@ -3,6 +3,7 @@
 #define _ASM_ARM64_P3S_PGTABLE_H
 
 #include <linux/p3s/mm.h>
+#include <linux/mmdebug.h>
 #include <asm/pgtable-hwdef.h>
 #include <asm/memory.h>
 
@@ -69,11 +70,18 @@ static inline pgd_t *mm_pgd_offset(const struct mm_struct *mm,
 {
 	return mm->pgd + mm_pgd_index(mm, addr);
 }
+
 /*
- * In opt-in translation units, override standard pgd_offset() to use the
- * per-MM PGD indexing helper.
+ * Translation units that don't include <linux/p3s_user_pages.h> walk the
+ * lower levels with the native PMD_SHIFT and PAGE_SHIFT, so they can't walk
+ * a 4KB address space: warn if they try. Walkers that handle 4KB address
+ * spaces call mm_pgd_offset() directly, and opt-in translation units
+ * redefine pgd_offset() to check the P3S context instead.
  */
-#define pgd_offset(mm, addr) mm_pgd_offset((mm), (addr))
+#define pgd_offset(mm, addr) ({						\
+	VM_WARN_ON_ONCE(mm_is_p3s_4k(mm));				\
+	mm_pgd_offset((mm), (addr));					\
+})
 
 static inline pmd_t *mm_pmd_offset(const struct mm_struct *mm,
 				   const pud_t *pud, unsigned long addr)

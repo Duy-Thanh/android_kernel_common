@@ -2138,6 +2138,7 @@ void userfaultfd_release_new(struct userfaultfd_ctx *ctx)
 void userfaultfd_release_all(struct mm_struct *mm,
 			     struct userfaultfd_ctx *ctx)
 {
+	P3S_CONTEXT_REMOTE_MM(mm);
 	struct vm_area_struct *vma, *prev;
 	VMA_ITERATOR(vmi, mm, 0);
 
