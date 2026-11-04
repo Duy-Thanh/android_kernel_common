@@ -331,7 +331,14 @@ def get_kunit_modules_superset(arch = None, map_each = None):
     """
     return _get_kunit_modules_list_minus_select(arch, map_each)
 
-_COMMON_UNPROTECTED_MODULES_LIST = []
+_COMMON_UNPROTECTED_MODULES_LIST = [
+    # keep sorted
+    "drivers/hwtracing/coresight/coresight.ko",
+    "drivers/hwtracing/coresight/coresight-etm4x.ko",
+    "drivers/hwtracing/coresight/coresight-funnel.ko",
+    "drivers/hwtracing/coresight/coresight-replicator.ko",
+    "drivers/hwtracing/coresight/coresight-trbe.ko",
+]
 
 # buildifier: disable=unused-variable
 def get_gki_unprotected_modules_list(arch = None):
