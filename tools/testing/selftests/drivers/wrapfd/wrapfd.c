@@ -103,6 +103,16 @@ static inline int wrapfd_rewrap(int wrapfd, int prot)
 	return ioctl(wrapfd, WRAPFD_DEV_IOC_REWRAP, &rewrap);
 }
 
+static inline int wrapfd_repopulate(int dev_fd, int wrapfd, int dmabuf_fd)
+{
+	struct wrapfd_repopulate repopulate = {
+		.wrapfd = wrapfd,
+		.fd = dmabuf_fd,
+	};
+
+	return ioctl(dev_fd, WRAPFD_DEV_IOC_REPOPULATE, &repopulate);
+}
+
 static inline int wrapfd_empty(int wrapfd)
 {
 	return ioctl(wrapfd, WRAPFD_DEV_IOC_EMPTY, NULL);
@@ -1267,6 +1277,198 @@ static void test_rewrap_rdonly_file(struct __test_metadata *_metadata,
 	close(wrapfd);
 }
 
+static void test_repopulate(struct __test_metadata *_metadata,
+			    FIXTURE_DATA(wrapfd_tests) *self, int heap_fd,
+			    int fd, int rdonly_fd)
+{
+	size_t large_size = ALIGN(self->size, self->page_size) + self->page_size;
+	struct wrapfd_repopulate repopulate;
+	int small_fd, large_fd;
+	int wrapfd, wrapfd2;
+	unsigned int state;
+	struct stat sb;
+	int status;
+	char *ptr;
+	pid_t pid;
+
+	small_fd = dmabuf_heap_alloc(heap_fd, self->page_size, O_RDWR);
+	ASSERT_TRUE(small_fd >= 0);
+	large_fd = dmabuf_heap_alloc(heap_fd, large_size, O_RDWR);
+	ASSERT_TRUE(large_fd >= 0);
+
+	wrapfd = wrapfd_wrap(self->dev_fd, fd, PROT_READ | PROT_WRITE);
+	ASSERT_TRUE(wrapfd >= 0);
+
+	/* Repopulate ioctl on non-device file descriptors should fail */
+	ASSERT_TRUE(wrapfd_repopulate(-1, wrapfd, fd) < 0 && errno == EBADF);
+	ASSERT_TRUE(wrapfd_repopulate(fd, wrapfd, fd) < 0 && errno == ENOTTY);
+	ASSERT_TRUE(wrapfd_repopulate(wrapfd, wrapfd, fd) < 0 && errno == ENOTTY);
+	ASSERT_TRUE(wrapfd_repopulate(self->fd, wrapfd, fd) < 0 && errno == ENOTTY);
+
+	/* Repopulate with non-wrapfd target file descriptors should fail */
+	ASSERT_TRUE(wrapfd_repopulate(self->dev_fd, -1, fd) < 0 && errno == EBADF);
+	ASSERT_TRUE(wrapfd_repopulate(self->dev_fd, fd, fd) < 0 && errno == EBADF);
+	ASSERT_TRUE(wrapfd_repopulate(self->dev_fd, self->dev_fd, fd) < 0 &&
+		    errno == EBADF);
+	ASSERT_TRUE(wrapfd_repopulate(self->dev_fd, self->fd, fd) < 0 &&
+		    errno == EBADF);
+
+	/* Invalid ioctl parameters */
+	ASSERT_TRUE(ioctl(self->dev_fd, WRAPFD_DEV_IOC_REPOPULATE, NULL) < 0 &&
+		    errno == EFAULT);
+	repopulate = (struct wrapfd_repopulate){
+		.wrapfd = wrapfd,
+		.fd = fd,
+		.reserved = 1,
+	};
+	ASSERT_TRUE(ioctl(self->dev_fd, WRAPFD_DEV_IOC_REPOPULATE, &repopulate) < 0 &&
+		    errno == EINVAL);
+
+	/* Try repopulating unowned non-empty buffer */
+	ASSERT_TRUE(wrapfd_repopulate(self->dev_fd, wrapfd, fd) < 0 &&
+		    errno == EINVAL);
+
+	/* Take buffer ownership */
+	ASSERT_EQ(wrapfd_acquire_ownership(wrapfd), 0);
+
+	/* Try repopulating a mapped buffer */
+	ptr = mmap(NULL, self->size, PROT_READ | PROT_WRITE, MAP_SHARED,
+		   wrapfd, 0);
+	ASSERT_NE(ptr, MAP_FAILED);
+	ASSERT_TRUE(wrapfd_repopulate(self->dev_fd, wrapfd, fd) < 0 &&
+		    errno == EINVAL);
+	ASSERT_EQ(munmap(ptr, self->size), 0);
+
+	/* Try repopulating a non-empty buffer */
+	ASSERT_TRUE(wrapfd_repopulate(self->dev_fd, wrapfd, fd) < 0 &&
+		    errno == EINVAL);
+
+	/* Empty the buffer */
+	ASSERT_EQ(wrapfd_empty(wrapfd), 0);
+	ASSERT_TRUE(wrapfd_get_state(wrapfd, &state) == 0 &&
+		    state == WRAPFD_CONTENT_EMPTY);
+
+	/* Non-owner process cannot repopulate an owned empty buffer */
+	pid = fork();
+	ASSERT_FALSE(pid < 0);
+	if (pid == 0) {
+		if (wrapfd_repopulate(self->dev_fd, wrapfd, fd) < 0 && errno == EBUSY)
+			exit(EXIT_SUCCESS);
+		exit(EXIT_FAILURE);
+	} else {
+		ASSERT_NE(wait(&status), -1);
+		ASSERT_TRUE(WIFEXITED(status));
+		ASSERT_EQ(WEXITSTATUS(status), 0);
+	}
+
+	/* Try repopulating with invalid or incompatible file descriptors */
+	ASSERT_TRUE(wrapfd_repopulate(self->dev_fd, wrapfd, -1) < 0 &&
+		    errno == EBADF);
+	ASSERT_TRUE(wrapfd_repopulate(self->dev_fd, wrapfd, self->fd) < 0 &&
+		    errno == EINVAL);
+	ASSERT_TRUE(wrapfd_repopulate(self->dev_fd, wrapfd, self->dev_fd) < 0 &&
+		    errno == EINVAL);
+	ASSERT_TRUE(wrapfd_repopulate(self->dev_fd, wrapfd, wrapfd) < 0 &&
+		    errno == EINVAL);
+	ASSERT_TRUE(wrapfd_repopulate(self->dev_fd, wrapfd, rdonly_fd) < 0 &&
+		    errno == EACCES);
+	ASSERT_TRUE(wrapfd_get_state(wrapfd, &state) == 0 &&
+		    state == WRAPFD_CONTENT_EMPTY);
+
+	/* Repopulate with a smaller buffer and verify size and bounds */
+	ASSERT_EQ(wrapfd_repopulate(self->dev_fd, wrapfd, small_fd), 0);
+	ASSERT_TRUE(wrapfd_get_state(wrapfd, &state) == 0 &&
+		    state == WRAPFD_CONTENT_RDWR);
+	ASSERT_TRUE(wrapfd_repopulate(self->dev_fd, wrapfd, fd) < 0 &&
+		    errno == EINVAL);
+	ASSERT_EQ(fstat(wrapfd, &sb), 0);
+	ASSERT_EQ(sb.st_size, self->page_size);
+	ASSERT_EQ(lseek(wrapfd, 0, SEEK_END), self->page_size);
+	ASSERT_TRUE(wrapfd_load(wrapfd, self->fd, 0, 0, self->page_size + 1) < 0 &&
+		    errno == EINVAL);
+	ASSERT_EQ(wrapfd_load(wrapfd, self->fd, 0, 0, self->page_size), 0);
+	ASSERT_EQ(cmp_content(_metadata, self, wrapfd, 0, 0, self->page_size), 0);
+
+	/* Empty again and repopulate with a larger buffer */
+	ASSERT_EQ(wrapfd_empty(wrapfd), 0);
+	ASSERT_EQ(wrapfd_repopulate(self->dev_fd, wrapfd, large_fd), 0);
+	ASSERT_TRUE(wrapfd_get_state(wrapfd, &state) == 0 &&
+		    state == WRAPFD_CONTENT_RDWR);
+	ASSERT_EQ(fstat(wrapfd, &sb), 0);
+	ASSERT_EQ(sb.st_size, large_size);
+	ASSERT_EQ(lseek(wrapfd, 0, SEEK_END), large_size);
+	ptr = mmap(NULL, large_size, PROT_READ | PROT_WRITE, MAP_SHARED,
+		   wrapfd, 0);
+	ASSERT_NE(ptr, MAP_FAILED);
+	ASSERT_EQ(poison_region(wrapfd, ptr + large_size - self->page_size,
+				0x5a, self->page_size), 0);
+	ASSERT_EQ(verify_region_poison(wrapfd, ptr + large_size - self->page_size,
+				       0x5a, self->page_size), 0);
+	ASSERT_EQ(munmap(ptr, large_size), 0);
+
+	/* Empty again and repopulate with the original buffer */
+	ASSERT_EQ(wrapfd_empty(wrapfd), 0);
+	ASSERT_EQ(wrapfd_repopulate(self->dev_fd, wrapfd, fd), 0);
+	ASSERT_TRUE(wrapfd_get_state(wrapfd, &state) == 0 &&
+		    state == WRAPFD_CONTENT_RDWR);
+	ASSERT_EQ(fstat(wrapfd, &sb), 0);
+	ASSERT_EQ(sb.st_size, ALIGN(self->size, self->page_size));
+	ASSERT_EQ(load_and_cmp(_metadata, self, wrapfd, 0, 0, self->size), 0);
+
+	/*
+	 * Empty and release buffer ownership: acquiring ownership of an empty
+	 * buffer fails with ENOENT, while repopulating an unowned empty buffer
+	 * succeeds.
+	 */
+	ASSERT_EQ(wrapfd_empty(wrapfd), 0);
+	ASSERT_EQ(wrapfd_release_ownership(wrapfd), 0);
+	ASSERT_TRUE(wrapfd_acquire_ownership(wrapfd) < 0 && errno == ENOENT);
+	ASSERT_EQ(wrapfd_repopulate(self->dev_fd, wrapfd, fd), 0);
+	ASSERT_TRUE(wrapfd_get_state(wrapfd, &state) == 0 &&
+		    state == WRAPFD_CONTENT_RDWR);
+	close(wrapfd);
+
+	/* Test repopulating a read-only wrapfd */
+	wrapfd = wrapfd_wrap(self->dev_fd, rdonly_fd, PROT_READ);
+	ASSERT_TRUE(wrapfd >= 0);
+	ASSERT_EQ(wrapfd_acquire_ownership(wrapfd), 0);
+	ASSERT_EQ(wrapfd_empty(wrapfd), 0);
+
+	/* Repopulate read-only wrapfd with read-only buffer */
+	ASSERT_EQ(wrapfd_repopulate(self->dev_fd, wrapfd, rdonly_fd), 0);
+	ASSERT_TRUE(wrapfd_get_state(wrapfd, &state) == 0 &&
+		    state == WRAPFD_CONTENT_RDONLY);
+	ptr = mmap(NULL, self->size, PROT_READ | PROT_WRITE, MAP_SHARED,
+		   wrapfd, 0);
+	ASSERT_TRUE(ptr == MAP_FAILED && errno == EACCES);
+	ASSERT_TRUE(wrapfd_rewrap(wrapfd, PROT_WRITE) < 0 && errno == EACCES);
+
+	/*
+	 * Repopulate read-only wrapfd with writable buffer: wrapfd remains
+	 * read-only, but can be rewrapped as writable.
+	 */
+	ASSERT_EQ(wrapfd_empty(wrapfd), 0);
+	ASSERT_EQ(wrapfd_repopulate(self->dev_fd, wrapfd, fd), 0);
+	ASSERT_TRUE(wrapfd_get_state(wrapfd, &state) == 0 &&
+		    state == WRAPFD_CONTENT_RDONLY);
+	ptr = mmap(NULL, self->size, PROT_READ | PROT_WRITE, MAP_SHARED,
+		   wrapfd, 0);
+	ASSERT_TRUE(ptr == MAP_FAILED && errno == EACCES);
+	wrapfd2 = wrapfd_rewrap(wrapfd, PROT_WRITE);
+	ASSERT_TRUE(wrapfd2 >= 0);
+	ASSERT_TRUE(wrapfd_get_state(wrapfd2, &state) == 0 &&
+		    state == WRAPFD_CONTENT_RDWR);
+	ASSERT_TRUE(wrapfd_get_state(wrapfd, &state) == 0 &&
+		    state == WRAPFD_CONTENT_EMPTY);
+	close(wrapfd2);
+
+	ASSERT_EQ(wrapfd_release_ownership(wrapfd), 0);
+	close(wrapfd);
+
+	close(large_fd);
+	close(small_fd);
+}
+
 static void test_empty(struct __test_metadata *_metadata,
 		       FIXTURE_DATA(wrapfd_tests) *self, int fd)
 {
@@ -1364,6 +1566,12 @@ static void __test_close_on_exec(struct __test_metadata *_metadata,
 	wrapfd2 = wrapfd_rewrap(wrapfd, PROT_WRITE);
 	ASSERT_TRUE(wrapfd2 >= 0);
 	ASSERT_EQ(close_on_exec, is_close_on_exec(wrapfd2));
+
+	/* Repopulating should update the attribute to match the new content */
+	ASSERT_EQ(set_close_on_exec(fd, !close_on_exec), 0);
+	ASSERT_EQ(wrapfd_repopulate(self->dev_fd, wrapfd, fd), 0);
+	ASSERT_EQ(!close_on_exec, is_close_on_exec(wrapfd));
+	ASSERT_EQ(set_close_on_exec(fd, close_on_exec), 0);
 
 	close(wrapfd2);
 	close(wrapfd);
@@ -2094,7 +2302,8 @@ static void test_poll(struct __test_metadata *_metadata,
 }
 
 static void run_tests(struct __test_metadata *_metadata,
-		      FIXTURE_DATA(wrapfd_tests) *self, int fd, int rdonly_fd)
+		      FIXTURE_DATA(wrapfd_tests) *self, int heap_fd,
+		      int fd, int rdonly_fd)
 {
 	test_wrap(_metadata, self, fd);
 	test_wrap_rdonly_file(_metadata, self, rdonly_fd);
@@ -2111,6 +2320,7 @@ static void run_tests(struct __test_metadata *_metadata,
 	test_rewrap(_metadata, self, fd);
 	test_rewrap_rdonly_file(_metadata, self, rdonly_fd);
 	test_empty(_metadata, self, fd);
+	test_repopulate(_metadata, self, heap_fd, fd, rdonly_fd);
 	test_close_on_exec(_metadata, self, fd);
 	test_guests(_metadata, self, fd);
 	test_ioctl(_metadata, self, fd);
@@ -2134,10 +2344,10 @@ TEST_F(wrapfd_tests, wrapfd_test_dmabuf_system_heap)
 	ASSERT_TRUE(dmabuf_fd >= 0);
 	rdonly_dmabuf_fd = dmabuf_heap_alloc(heap_fd, self->size, O_RDONLY);
 	ASSERT_TRUE(rdonly_dmabuf_fd >= 0);
-	close(heap_fd);
-	run_tests(_metadata, self, dmabuf_fd, rdonly_dmabuf_fd);
+	run_tests(_metadata, self, heap_fd, dmabuf_fd, rdonly_dmabuf_fd);
 	close(rdonly_dmabuf_fd);
 	close(dmabuf_fd);
+	close(heap_fd);
 }
 
 TEST_F(wrapfd_tests, wrapfd_test_dmabuf_cma_heap)
@@ -2154,10 +2364,10 @@ TEST_F(wrapfd_tests, wrapfd_test_dmabuf_cma_heap)
 	ASSERT_TRUE(dmabuf_fd >= 0);
 	rdonly_dmabuf_fd = dmabuf_heap_alloc(heap_fd, self->size, O_RDONLY);
 	ASSERT_TRUE(rdonly_dmabuf_fd >= 0);
-	close(heap_fd);
-	run_tests(_metadata, self, dmabuf_fd, rdonly_dmabuf_fd);
+	run_tests(_metadata, self, heap_fd, dmabuf_fd, rdonly_dmabuf_fd);
 	close(rdonly_dmabuf_fd);
 	close(dmabuf_fd);
+	close(heap_fd);
 }
 
 /*
