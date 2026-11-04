@@ -234,6 +234,15 @@ static int __init setup_proxy_exec(char *str)
 #endif
 __setup("sched_proxy_exec=", setup_proxy_exec);
 
+bool task_is_blocked(struct task_struct *p)
+{
+	if (!sched_proxy_exec())
+		return false;
+
+	return !!p->blocked_on_l.lock;
+}
+EXPORT_SYMBOL_GPL(task_is_blocked);
+
 
 #ifdef CONFIG_SCHED_DEBUG
 /*
