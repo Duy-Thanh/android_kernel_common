@@ -1454,6 +1454,15 @@
   groups_alloc
   groups_free
   groups_sort
+  gspca_coarse_grained_expo_autogain
+  gspca_debug
+  gspca_dev_probe
+  gspca_dev_probe2
+  gspca_disconnect
+  gspca_expo_autogain
+  gspca_frame_add
+  gspca_resume
+  gspca_suspend
   guid_gen
   guid_null
   handle_bad_irq
