@@ -403749,6 +403749,15 @@ function {
   parameter_id: 0x3e10b518
 }
 function {
+  id: 0x1f1d081a
+  return_type_id: 0x48b5725f
+  parameter_id: 0x3eee6a0e
+  parameter_id: 0x054f691a
+  parameter_id: 0xa9403390
+  parameter_id: 0x6d7f5ff6
+  parameter_id: 0x6d7f5ff6
+}
+function {
   id: 0x1f1f7d50
   return_type_id: 0x48b5725f
   parameter_id: 0x3e6396e0
@@ -500871,6 +500880,15 @@ elf_symbol {
   full_name: "inet_proto_csum_replace4"
 }
 elf_symbol {
+  id: 0x0bf12c6a
+  name: "inet_proto_csum_replace_by_diff"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xfe913cfa
+  type_id: 0x1f1d081a
+  full_name: "inet_proto_csum_replace_by_diff"
+}
+elf_symbol {
   id: 0xd9e51d0d
   name: "inet_recvmsg"
   is_defined: true
@@ -551231,6 +551249,7 @@ interface {
   symbol_id: 0xb7df9530
   symbol_id: 0xca2771be
   symbol_id: 0x601b2cac
+  symbol_id: 0x0bf12c6a
   symbol_id: 0xd9e51d0d
   symbol_id: 0xf67ebde0
   symbol_id: 0x6debc2a4
