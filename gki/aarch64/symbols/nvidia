@@ -1494,7 +1494,10 @@
   hid_open_report
   hid_parse_report
   __hid_register_driver
+  hid_register_report
   hid_report_raw_event
+  __hid_report_raw_event
+  hid_set_field
   hid_unregister_driver
   housekeeping_cpumask
   hrtimer_active
@@ -1649,6 +1652,7 @@
   input_allocate_device
   input_close_device
   input_device_enabled
+  input_enable_softrepeat
   input_event
   input_ff_create_memless
   input_free_device
@@ -3918,6 +3922,7 @@
   usb_ep_set_maxpacket_limit
   usb_ep_type_string
   usb_find_common_endpoints
+  usb_find_common_endpoints_reverse
   usb_find_interface
   usb_free_all_descriptors
   usb_free_coherent
@@ -4000,12 +4005,15 @@
   usb_show_dynids
   usb_speed_string
   usb_stor_access_xfer_buf
+  usb_stor_Bulk_reset
   usb_stor_bulk_srb
   usb_stor_bulk_transfer_buf
   usb_stor_bulk_transfer_sg
+  usb_stor_Bulk_transport
   usb_stor_CB_reset
   usb_stor_CB_transport
   usb_stor_clear_halt
+  usb_stor_control_msg
   usb_stor_ctrl_transfer
   usb_stor_disconnect
   usb_store_new_id
@@ -4026,6 +4034,7 @@
   usb_unlink_urb
   usb_unpoison_urb
   usb_unregister_notify
+  usb_wait_anchor_empty_timeout
   __usecs_to_jiffies
   user_describe
   user_destroy
@@ -4060,6 +4069,7 @@
   v4l2_ctrl_new_std_menu
   __v4l2_ctrl_s_ctrl
   v4l2_ctrl_subscribe_event
+  v4l2_device_disconnect
   v4l2_device_put
   v4l2_device_register
   __v4l2_device_register_subdev
