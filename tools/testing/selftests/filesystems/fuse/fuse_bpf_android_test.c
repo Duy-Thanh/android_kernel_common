@@ -44,10 +44,10 @@
 #include "../../kselftest_harness.h"
 
 #ifndef RENAME_NOREPLACE
-#define RENAME_NOREPLACE	(1U << 0)
+#define RENAME_NOREPLACE	0x01
 #endif
 #ifndef RENAME_EXCHANGE
-#define RENAME_EXCHANGE		(1U << 1)
+#define RENAME_EXCHANGE		0x02
 #endif
 #ifndef FUSE_SUPER_MAGIC
 #define FUSE_SUPER_MAGIC	0x65735546
@@ -133,6 +133,18 @@ static ssize_t fd_link(int fd, char *buf, size_t len)
 	return n;
 }
 
+/*
+ * Kernels whose "no_daemon" mount option still sets fd_present fget() fd 0
+ * in fuse_get_tree() and fail the mount with -EINVAL when it is closed.
+ * Keep fd 0 open. Returns the fd to close afterwards, or -1 if it was open.
+ */
+static int ensure_fd0_open(void)
+{
+	if (fcntl(STDIN_FILENO, F_GETFD) >= 0)
+		return -1;
+	return open("/dev/null", O_RDONLY);	/* lowest free fd: 0 */
+}
+
 static int read_sysfs_str(const char *path, char *buf, size_t len)
 {
 	int err = 0, fd = open(path, O_RDONLY | O_CLOEXEC);
@@ -207,7 +219,7 @@ static int load_fuse_bpf_prog(const struct bpf_insn *insns, size_t insn_cnt)
 }
 
 static int load_fuse_bpf_prog_quiet(const struct bpf_insn *insns,
-				     size_t insn_cnt)
+				    size_t insn_cnt)
 {
 	return load_fuse_bpf_prog_impl(insns, insn_cnt, false);
 }
@@ -446,6 +458,13 @@ FIXTURE(fuse_bpf)
 	uint32_t lookup_cnt, rw_cnt, unlink_cnt, canonical_cnt, prefilter_cnt;
 };
 
+static void daemon_reply_err(struct _test_data_fuse_bpf *self,
+			     uint64_t unique, int err)
+{
+	__atomic_store_n(&self->daemon_err, err, __ATOMIC_SEQ_CST);
+	fuse_reply(self->fuse_dev_fd, unique, err, NULL, 0, NULL, 0);
+}
+
 static void daemon_lookup(struct _test_data_fuse_bpf *self,
 			  const struct fuse_in_header *ih, const char *name)
 {
@@ -465,8 +484,7 @@ static void daemon_lookup(struct _test_data_fuse_bpf *self,
 		int ret;
 
 		if (dir_fd < 0) {
-			fuse_reply(self->fuse_dev_fd, ih->unique, -errno,
-				   NULL, 0, NULL, 0);
+			daemon_reply_err(self, ih->unique, -errno);
 			return;
 		}
 		bo.backing_fd = (uint64_t)(uint32_t)dir_fd;
@@ -479,12 +497,8 @@ static void daemon_lookup(struct _test_data_fuse_bpf *self,
 		ret = fuse_reply(self->fuse_dev_fd, ih->unique, 0,
 				 &eo, sizeof(eo), &bo, sizeof(bo));
 		close(dir_fd);
-		if (ret < 0) {
-			__atomic_store_n(&self->daemon_err, ret,
-					 __ATOMIC_SEQ_CST);
-			fuse_reply(self->fuse_dev_fd, ih->unique, ret,
-				   NULL, 0, NULL, 0);
-		}
+		if (ret < 0)
+			daemon_reply_err(self, ih->unique, ret);
 	} else if (ih->nodeid == FUSE_ROOT_ID && !strcmp(name, "secret")) {
 		char spath[PATH_MAX];
 		int ret, sfd;
@@ -504,12 +518,8 @@ static void daemon_lookup(struct _test_data_fuse_bpf *self,
 		      fuse_reply(self->fuse_dev_fd, ih->unique, 0,
 				 &eo, sizeof(eo), &bo, sizeof(bo));
 		close_fd(&sfd);
-		if (ret < 0) {
-			__atomic_store_n(&self->daemon_err, ret,
-					 __ATOMIC_SEQ_CST);
-			fuse_reply(self->fuse_dev_fd, ih->unique, ret,
-				   NULL, 0, NULL, 0);
-		}
+		if (ret < 0)
+			daemon_reply_err(self, ih->unique, ret);
 	} else if (ih->nodeid == FUSE_ROOT_ID && !strcmp(name, "redacted")) {
 		char rpath[PATH_MAX];
 		struct stat st;
@@ -522,8 +532,7 @@ static void daemon_lookup(struct _test_data_fuse_bpf *self,
 			int err = -errno;
 
 			close_fd(&ffd);
-			fuse_reply(self->fuse_dev_fd, ih->unique, err,
-				   NULL, 0, NULL, 0);
+			daemon_reply_err(self, ih->unique, err);
 			return;
 		}
 		bo.backing_fd = (uint64_t)(uint32_t)ffd;
@@ -539,8 +548,7 @@ static void daemon_lookup(struct _test_data_fuse_bpf *self,
 		int pfd = open("/proc/self/mounts", O_RDONLY | O_CLOEXEC);
 
 		if (pfd < 0) {
-			fuse_reply(self->fuse_dev_fd, ih->unique, -errno,
-				   NULL, 0, NULL, 0);
+			daemon_reply_err(self, ih->unique, -errno);
 			return;
 		}
 		bo.backing_fd = (uint64_t)(uint32_t)pfd;
@@ -883,7 +891,7 @@ TEST_F(fuse_bpf, backed_file_rw_mmap)
 	ASSERT_EQ(0, ftruncate(fd, 4096));
 
 	map = mmap(NULL, 4096, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
-	ASSERT_TRUE(map != MAP_FAILED);
+	ASSERT_NE(MAP_FAILED, map);
 	memcpy(map, "MMAP-BPF", 8);
 	EXPECT_EQ(0, msync(map, 4096, MS_SYNC));
 	EXPECT_EQ(0, munmap(map, 4096));
@@ -974,8 +982,7 @@ TEST_F(fuse_bpf, no_daemon_mount)
 	ASSERT_GE(dir_fd, 0);
 	prog_fd = load_default_backing_prog();
 	ASSERT_GE(prog_fd, 0);
-	if (fcntl(STDIN_FILENO, F_GETFD) < 0)
-		null_fd = open("/dev/null", O_RDONLY);
+	null_fd = ensure_fd0_open();
 
 	snprintf(opts, sizeof(opts), "no_daemon,root_dir=%d,root_bpf=-1,%s",
 		 dir_fd, tail);
@@ -1317,7 +1324,7 @@ TEST_F(fuse_bpf, readdir_and_excl_race)
 	close_fd(&fd);
 
 	dir = opendir(backed_dir);
-	ASSERT_TRUE(dir != NULL);
+	ASSERT_NE(NULL, dir);
 	while ((de = readdir(dir)) != NULL) {
 		if (!strcmp(de->d_name, "d_one"))
 			saw_one = true;
@@ -1490,8 +1497,7 @@ TEST_F(fuse_bpf, stacking_depth_eloop)
 
 	prog_fd = load_default_backing_prog();
 	ASSERT_GE(prog_fd, 0);
-	if (fcntl(STDIN_FILENO, F_GETFD) < 0)
-		null_fd = open("/dev/null", O_RDONLY);
+	null_fd = ensure_fd0_open();
 
 	/* Positive control: the same options with a plain root_dir mount. */
 	dir_fd = open(st_back, O_RDONLY | O_DIRECTORY | O_CLOEXEC);
@@ -1708,6 +1714,7 @@ struct fuse_ksft_cap_hdr {
 	uint32_t version;
 	int pid;
 };
+
 struct fuse_ksft_cap_data {
 	uint32_t effective, permitted, inheritable;
 };
@@ -1825,11 +1832,15 @@ TEST_F(fuse_bpf, vold_mediaprovider_unpriv_model)
 
 	mp = mmap(NULL, sizeof(*mp), PROT_READ | PROT_WRITE,
 		  MAP_SHARED | MAP_ANONYMOUS, -1, 0);
-	ASSERT_TRUE(mp != MAP_FAILED);
+	ASSERT_NE(MAP_FAILED, mp);
 	prog_fd = load_fuse_bpf_prog(deny_unlink_prog,
 				     ARRAY_SIZE(deny_unlink_prog));
+	if (prog_fd < 0) {
+		setup_err = errno ? -errno : -EIO;
+		goto cleanup;
+	}
 	dev_fd = open("/dev/fuse", O_RDWR | O_CLOEXEC);
-	if (prog_fd < 0 || dev_fd < 0 || pipe2(stop_p, O_CLOEXEC)) {
+	if (dev_fd < 0 || pipe2(stop_p, O_CLOEXEC)) {
 		setup_err = errno ? -errno : -EIO;
 		goto cleanup;
 	}
