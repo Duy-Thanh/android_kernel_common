@@ -1446,6 +1446,8 @@
   gpio_request
   gpio_to_desc
   graph_util_card_probe
+  graph_util_parse_link_direction
+  graph_util_parse_trigger_order
   gre_add_protocol
   gre_del_protocol
   gro_cells_destroy
@@ -3164,9 +3166,22 @@
   simple_strtol
   simple_strtoul
   simple_strtoull
+  simple_util_be_hw_params_fixup
+  simple_util_canonicalize_cpu
+  simple_util_canonicalize_platform
+  simple_util_clean_reference
   simple_util_dai_init
   simple_util_hw_params
+  simple_util_init_priv
+  simple_util_is_convert_required
+  simple_util_parse_card_name
+  simple_util_parse_clk
+  simple_util_parse_convert
+  simple_util_parse_daifmt
+  simple_util_parse_routing
+  simple_util_parse_widgets
   simple_util_remove
+  simple_util_set_dailink_name
   simple_util_shutdown
   simple_util_startup
   simple_write_to_buffer
