@@ -42,6 +42,7 @@
 #include <linux/align.h>
 #include <linux/dma-buf.h>
 #include <linux/dma-heap.h>
+#include <linux/limits.h>
 #include <linux/wrapfd.h>
 #include "../../kselftest_harness.h"
 #include "load_gate.h"
@@ -1952,6 +1953,74 @@ static void verify_single_event(struct __test_metadata *_metadata,
 	ASSERT_EQ(count, 0);
 }
 
+static void verify_dual_unmap_events(struct __test_metadata *_metadata,
+				     FIXTURE_DATA(wrapfd_tests) *self,
+				     struct poll_thread_ctl *poll_ctl,
+				     __u32 expected_fd1, __u32 expected_fd2,
+				     __u64 *last_ts)
+{
+	struct wrapfd_event events[2] = {};
+	__u64 count = 0;
+
+	poll_thread_finish_poll(_metadata, poll_ctl);
+
+	ASSERT_EQ(wrapfd_query_events(self->dev_fd, events, 2, &count), 0);
+	ASSERT_EQ(count, 2);
+
+	ASSERT_EQ(events[0].events, WRAPFD_EVENT_UNMAP);
+	ASSERT_EQ(events[1].events, WRAPFD_EVENT_UNMAP);
+
+	if (events[0].fd == expected_fd1) {
+		ASSERT_EQ(events[1].fd, expected_fd2);
+	} else if (events[0].fd == expected_fd2) {
+		ASSERT_EQ(events[1].fd, expected_fd1);
+	} else {
+		ASSERT_TRUE(!"Should not be here");
+	}
+
+	ASSERT_TRUE(events[0].timestamp >= *last_ts);
+	ASSERT_TRUE(events[1].timestamp >= *last_ts);
+
+	if (events[0].timestamp > events[1].timestamp)
+		*last_ts = events[0].timestamp;
+	else
+		*last_ts = events[1].timestamp;
+
+	/* Subsequent query without new events should return 0 events */
+	ASSERT_EQ(wrapfd_query_events(self->dev_fd, events, 2, &count), 0);
+	ASSERT_EQ(count, 0);
+}
+
+/* The rust wrapfd driver sends "unmap" events lazily, the following code forces this by
+ * indirectly invoking the driver's "show_fdinfo" method, which queries the wrap's map-count and
+ * sends any pending "unmap" events as a side effect.
+ */
+static int wrapfd_flush_munmap(int fd)
+{
+	FILE *fdinfo_fp;
+	char path[PATH_MAX];
+	char *line = NULL;
+	size_t len = 0;
+	ssize_t nread;
+
+	sprintf(path, "/proc/self/fdinfo/%d", fd);
+
+	fdinfo_fp = fopen(path, "r");
+	if (!fdinfo_fp)
+		return -ENOENT;
+
+	do {
+		nread = getline(&line, &len, fdinfo_fp);
+	} while (nread != -1);
+
+	free(line);
+	line = NULL;
+	fclose(fdinfo_fp);
+	fdinfo_fp = NULL;
+
+	return 0;
+}
+
 static void test_poll_ioctls(struct __test_metadata *_metadata,
 			     FIXTURE_DATA(wrapfd_tests) *self, int fd)
 {
@@ -2097,6 +2166,9 @@ static void test_poll_ioctls(struct __test_metadata *_metadata,
 	ASSERT_NE(ptr, MAP_FAILED);
 	ASSERT_EQ(munmap(ptr, self->size), 0);
 
+	// Force deferred munmap notification.
+	ASSERT_EQ(wrapfd_flush_munmap(wrapfd2), 0);
+
 	/* Consume the pending poll wakeup */
 	pollfd.fd = self->dev_fd;
 	pollfd.events = POLLIN;
@@ -2203,12 +2275,12 @@ static void test_poll(struct __test_metadata *_metadata,
 	/* Test WRAPFD_EVENT_UNMAP on wrapfd1 */
 	poll_thread_start_poll(&poll_ctl);
 	ASSERT_EQ(munmap(ptr1, self->size), 0);
-	verify_single_event(_metadata, self, &poll_ctl, wrapfd1, WRAPFD_EVENT_UNMAP, &last_ts);
-
-	/* Test WRAPFD_EVENT_UNMAP on wrapfd2 */
-	poll_thread_start_poll(&poll_ctl);
 	ASSERT_EQ(munmap(ptr2, self->size), 0);
-	verify_single_event(_metadata, self, &poll_ctl, wrapfd2, WRAPFD_EVENT_UNMAP, &last_ts);
+	// Force deferred munmap notification.
+	ASSERT_EQ(wrapfd_flush_munmap(wrapfd1), 0);
+	// Force deferred munmap notification.
+	ASSERT_EQ(wrapfd_flush_munmap(wrapfd2), 0);
+	verify_dual_unmap_events(_metadata, self, &poll_ctl, wrapfd1, wrapfd2, &last_ts);
 
 	/* Test WRAPFD_EVENT_OWN on wrapfd1 */
 	poll_thread_start_poll(&poll_ctl);
@@ -2239,11 +2311,15 @@ static void test_poll(struct __test_metadata *_metadata,
 	ptr1 = mmap(NULL, self->size, PROT_READ | PROT_WRITE, MAP_SHARED, wrapfd1, 0);
 	ASSERT_NE(ptr1, MAP_FAILED);
 	ASSERT_EQ(munmap(ptr1, self->size), 0);
+	// Force deferred munmap notification.
+	ASSERT_EQ(wrapfd_flush_munmap(wrapfd1), 0);
 	ASSERT_EQ(wrapfd_release_ownership(wrapfd1), 0);
 
 	ptr2 = mmap(NULL, self->size, PROT_READ | PROT_WRITE, MAP_SHARED, wrapfd2, 0);
 	ASSERT_NE(ptr2, MAP_FAILED);
 	ASSERT_EQ(munmap(ptr2, self->size), 0);
+	// Force deferred munmap notification.
+	ASSERT_EQ(wrapfd_flush_munmap(wrapfd2), 0);
 	ASSERT_EQ(wrapfd_acquire_ownership(wrapfd2), 0);
 	ASSERT_EQ(wrapfd_release_ownership(wrapfd2), 0);
 
@@ -2276,6 +2352,8 @@ static void test_poll(struct __test_metadata *_metadata,
 	ptr1 = mmap(NULL, self->size, PROT_READ | PROT_WRITE, MAP_SHARED, wrapfd1, 0);
 	ASSERT_NE(ptr1, MAP_FAILED);
 	ASSERT_EQ(munmap(ptr1, self->size), 0);
+	// Force deferred munmap notification.
+	ASSERT_EQ(wrapfd_flush_munmap(wrapfd1), 0);
 	ASSERT_EQ(wrapfd_release_ownership(wrapfd1), 0);
 	verify_single_event(_metadata, self, &poll_ctl, wrapfd1,
 			    WRAPFD_EVENT_MAP | WRAPFD_EVENT_UNMAP, &last_ts);
