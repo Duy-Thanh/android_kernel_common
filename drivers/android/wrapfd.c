@@ -1198,6 +1198,7 @@ unlock:
 		}
 		vm_flags_clear(vma, VM_MAYWRITE);
 	}
+	vm_flags_set(vma, VM_DONTCOPY);
 
 	spin_lock(&ctx->lock);
 	mapping->content_vm_ops = vma->vm_ops;
