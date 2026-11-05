@@ -1245,15 +1245,6 @@ static loff_t wrap_llseek(struct file *file, loff_t offs, int whence)
 		goto unlock;
 	}
 
-	/*
-	 * If usage is blocked, the content is being rewrapped or emptied.
-	 * Treat this as if the wrap is already empty.
-	 */
-	if (!context_use(ctx)) {
-		ret = -ENOENT;
-		goto unlock;
-	}
-
 	content = ctx->content;
 	if (!content) {
 		ret = -ENOENT;
@@ -1264,6 +1255,13 @@ static loff_t wrap_llseek(struct file *file, loff_t offs, int whence)
 		ret = -ESPIPE;
 		goto unlock;
 	}
+
+	/*
+	 * If usage is blocked, the content is being rewrapped or emptied.
+	 * Treat this as if the wrap is already empty.
+	 */
+	if (!context_use(ctx))
+		ret = -ENOENT;
 unlock:
 	spin_unlock(&ctx->lock);
 
