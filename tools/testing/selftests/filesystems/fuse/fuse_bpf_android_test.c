@@ -119,6 +119,20 @@ static void close_fd(int *fd)
 	}
 }
 
+/* readlink("/proc/self/fd/<fd>") into buf; returns its length or -errno. */
+static ssize_t fd_link(int fd, char *buf, size_t len)
+{
+	char proc_fd_path[64];
+	ssize_t n;
+
+	snprintf(proc_fd_path, sizeof(proc_fd_path), "/proc/self/fd/%d", fd);
+	n = readlink(proc_fd_path, buf, len - 1);
+	if (n < 0)
+		return -errno;
+	buf[n] = '\0';
+	return n;
+}
+
 static int read_sysfs_str(const char *path, char *buf, size_t len)
 {
 	int err = 0, fd = open(path, O_RDONLY | O_CLOEXEC);
@@ -429,7 +443,7 @@ FIXTURE(fuse_bpf)
 	int fuse_dev_fd, stop_pipe[2], bpf_fd, lock_fd, daemon_err;
 	bool mounted, thread_started, unpriv_mp;
 	pthread_t daemon_tid;
-	uint32_t lookup_cnt, rw_cnt, unlink_cnt, canonical_cnt;
+	uint32_t lookup_cnt, rw_cnt, unlink_cnt, canonical_cnt, prefilter_cnt;
 };
 
 static void daemon_lookup(struct _test_data_fuse_bpf *self,
@@ -631,6 +645,8 @@ static void *fuse_mini_daemon(void *arg)
 			fuse_reply(self->fuse_dev_fd, ih->unique, 0,
 				   &oo, sizeof(oo), NULL, 0);
 		} else if (op == FUSE_READ && (ih->opcode & FUSE_PREFILTER)) {
+			__atomic_add_fetch(&self->prefilter_cnt, 1,
+					   __ATOMIC_SEQ_CST);
 			fuse_reply(self->fuse_dev_fd, ih->unique, 0,
 				   body, sizeof(struct fuse_read_in), NULL, 0);
 		} else if (op == FUSE_READ || op == FUSE_WRITE) {
@@ -841,7 +857,7 @@ TEST_F(fuse_bpf, sysfs_and_verifier_gate)
 TEST_F(fuse_bpf, backed_file_rw_mmap)
 {
 	char fuse_file[PATH_MAX], back_file[PATH_MAX], unbacked_file[PATH_MAX];
-	char buf[32] = { 0 };
+	char buf[32] = { 0 }, link_buf[PATH_MAX];
 	int bfd = -1, fd = -1, prog_fd;
 	struct stat st;
 	void *map;
@@ -858,6 +874,9 @@ TEST_F(fuse_bpf, backed_file_rw_mmap)
 
 	fd = open(fuse_file, O_CREAT | O_RDWR | O_TRUNC | O_CLOEXEC, 0644);
 	ASSERT_GE(fd, 0);
+	/* b/498773402: fuse-bpf O_CREAT must leave a hashed dentry. */
+	ASSERT_GT(fd_link(fd, link_buf, sizeof(link_buf)), (ssize_t)0);
+	EXPECT_EQ(NULL, strstr(link_buf, " (deleted)"));
 	ASSERT_EQ((ssize_t)14, write(fd, "hello-fuse-bpf", 14));
 	ASSERT_EQ((ssize_t)14, pread(fd, buf, sizeof(buf) - 1, 0));
 	EXPECT_STREQ("hello-fuse-bpf", buf);
@@ -1440,12 +1459,14 @@ TEST_F(fuse_bpf, bpf_user_filter_daemon_fallback)
 	ASSERT_GE(fd, 0);
 	ASSERT_EQ((ssize_t)9, write(fd, "secret-9\n", 9));
 	EXPECT_EQ(0U, __atomic_load_n(&self->rw_cnt, __ATOMIC_SEQ_CST));
+	EXPECT_EQ(0U, __atomic_load_n(&self->prefilter_cnt, __ATOMIC_SEQ_CST));
 	ASSERT_EQ(0, stat(fuse_file, &st));
 	EXPECT_EQ((off_t)9, st.st_size);
 
 	ASSERT_EQ((ssize_t)9, pread(fd, buf, sizeof(buf) - 1, 0));
 	EXPECT_STREQ("redacted\n", buf);
 	EXPECT_GE(__atomic_load_n(&self->rw_cnt, __ATOMIC_SEQ_CST), 1U);
+	EXPECT_GE(__atomic_load_n(&self->prefilter_cnt, __ATOMIC_SEQ_CST), 1U);
 	close_fd(&fd);
 
 	memset(buf, 0, sizeof(buf));
@@ -1459,16 +1480,27 @@ TEST_F(fuse_bpf, bpf_user_filter_daemon_fallback)
 TEST_F(fuse_bpf, stacking_depth_eloop)
 {
 	const char *tail = "rootmode=040755,user_id=0,group_id=0";
-	int fuse_dir_fd = -1, null_fd = -1, proc_fd = -1, prog_fd;
-	char st_mnt[256], opts[160];
+	int dir_fd = -1, fuse_dir_fd = -1, null_fd = -1, proc_fd = -1, prog_fd;
+	char st_back[256], st_mnt[256], opts[160];
 
+	snprintf(st_back, sizeof(st_back), "%s/st_back", self->tmp_dir);
 	snprintf(st_mnt, sizeof(st_mnt), "%s/st_mnt", self->tmp_dir);
+	ASSERT_EQ(0, mkdir(st_back, 0755));
 	ASSERT_EQ(0, mkdir(st_mnt, 0755));
 
 	prog_fd = load_default_backing_prog();
 	ASSERT_GE(prog_fd, 0);
 	if (fcntl(STDIN_FILENO, F_GETFD) < 0)
 		null_fd = open("/dev/null", O_RDONLY);
+
+	/* Positive control: the same options with a plain root_dir mount. */
+	dir_fd = open(st_back, O_RDONLY | O_DIRECTORY | O_CLOEXEC);
+	ASSERT_GE(dir_fd, 0);
+	snprintf(opts, sizeof(opts), "no_daemon,root_dir=%d,root_bpf=%d,%s",
+		 dir_fd, prog_fd, tail);
+	ASSERT_EQ(0, mount("fuse", st_mnt, "fuse", MS_NOSUID | MS_NODEV, opts));
+	EXPECT_EQ(0, umount2(st_mnt, MNT_DETACH));
+	close_fd(&dir_fd);
 
 	proc_fd = open("/proc", O_RDONLY | O_DIRECTORY | O_CLOEXEC);
 	ASSERT_GE(proc_fd, 0);
@@ -1570,7 +1602,7 @@ TEST_F(fuse_bpf, epoch_invalidation)
 		.unique = 0,
 	};
 	char after_file[PATH_MAX], link_buf[PATH_MAX] = { 0 };
-	char backed_dir[384], proc_fd_path[64];
+	char backed_dir[384];
 	uint32_t cnt_before, cnt_cached;
 	int fd = -1, prog_fd;
 	struct stat st;
@@ -1587,7 +1619,8 @@ TEST_F(fuse_bpf, epoch_invalidation)
 
 	ASSERT_EQ(0, stat(backed_dir, &st));
 	cnt_cached = __atomic_load_n(&self->lookup_cnt, __ATOMIC_SEQ_CST);
-	EXPECT_EQ(cnt_before, cnt_cached);
+	/* ASSERT, not EXPECT: the SKIP below would hide an EXPECT failure. */
+	ASSERT_EQ(cnt_before, cnt_cached);
 
 	n = write(self->fuse_dev_fd, &oh, sizeof(oh));
 	if (n < 0 && errno == EINVAL)
@@ -1605,11 +1638,8 @@ TEST_F(fuse_bpf, epoch_invalidation)
 	ASSERT_EQ((ssize_t)6, write(fd, "epoch\n", 6));
 	ASSERT_EQ(0, stat(after_file, &st));
 
-	snprintf(proc_fd_path, sizeof(proc_fd_path), "/proc/self/fd/%d", fd);
-	n = readlink(proc_fd_path, link_buf, sizeof(link_buf) - 1);
-	ASSERT_GT(n, (ssize_t)0);
-	link_buf[n] = '\0';
-	EXPECT_TRUE(strstr(link_buf, " (deleted)") == NULL);
+	ASSERT_GT(fd_link(fd, link_buf, sizeof(link_buf)), (ssize_t)0);
+	EXPECT_EQ(NULL, strstr(link_buf, " (deleted)"));
 	close_fd(&fd);
 }
 
