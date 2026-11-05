@@ -906,6 +906,7 @@ static inline void reset_owner(struct wrap_ctx *ctx)
 	assert_spin_locked(&ctx->lock);
 	put_task_struct(ctx->owner.task);
 	ctx->owner.task = NULL;
+	ctx->allow_guests = false;
 	generate_event(ctx, WRAPFD_EVENT_UNOWN);
 }
 
@@ -1381,7 +1382,6 @@ static int wrap_file_release_ownership(struct wrap_ctx *ctx)
 		goto unlock;
 	}
 	reset_owner(ctx);
-	ctx->allow_guests = false;
 unlock:
 	spin_unlock(&ctx->lock);
 
