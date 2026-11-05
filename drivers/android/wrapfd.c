@@ -1448,7 +1448,11 @@ static int wrap_file_load(struct wrap_ctx *ctx,
 	}
 
 	spin_lock(&ctx->lock);
-	ret = context_use(ctx) ? 0 : -ENOENT;
+	if (!ctx->allow_guests && has_owner(ctx) &&
+	    !is_owner_task(ctx, current))
+		ret = -EBUSY;
+	else
+		ret = context_use(ctx) ? 0 : -ENOENT;
 	if (!ret)
 		generate_event(ctx, WRAPFD_EVENT_LOAD);
 	spin_unlock(&ctx->lock);
