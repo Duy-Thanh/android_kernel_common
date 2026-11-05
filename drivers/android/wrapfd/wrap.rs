@@ -499,21 +499,25 @@ impl Wrap {
             return Err(EINVAL);
         }
 
-        let mut guard = self.inner.lock();
-        guard.check_modifiable()?;
+        let (_use_guard, content, was_writable) = {
+            let mut guard = self.inner.lock();
+            guard.check_modifiable()?;
 
-        let Some(mut content) = guard.content.take() else {
-            return Err(ENOENT);
-        };
+            let Some(mut content) = guard.content.take() else {
+                return Err(ENOENT);
+            };
 
-        let was_writable = content.is_writable();
-        match content.make_writable((rewrap_args.prot & bindings::PROT_WRITE) != 0) {
-            Ok(()) => {}
-            Err(err) => {
-                guard.content = Some(content);
-                return Err(err);
+            let was_writable = content.is_writable();
+            match content.make_writable((rewrap_args.prot & bindings::PROT_WRITE) != 0) {
+                Ok(()) => {}
+                Err(err) => {
+                    guard.content = Some(content);
+                    return Err(err);
+                }
             }
-        }
+
+            (self.begin_use(&mut guard), content, was_writable)
+        };
 
         let close_on_exec = self.close_on_exec;
 
@@ -526,7 +530,7 @@ impl Wrap {
             Err((err, mut content)) => {
                 // Restore original wrap.
                 _ = content.make_writable(was_writable);
-                guard.content = Some(content);
+                self.inner.lock().content = Some(content);
 
                 Err(err)
             }
