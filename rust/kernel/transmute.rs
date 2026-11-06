@@ -125,6 +125,7 @@ impl_frombytes! {
     uapi::wrapfd_event,
     uapi::wrapfd_events,
     uapi::wrapfd_monitor,
+    uapi::wrapfd_repopulate,
 }
 
 /// Types that can be viewed as an immutable slice of initialized bytes.

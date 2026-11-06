@@ -5,12 +5,13 @@
 use crate::{
     content::DmaBufContent,
     poll::{FileMonitor, ProcessMode},
-    wrap::Wrap,
+    wrap::{Wrap, WRAP_FOPS},
 };
 
 use kernel::{
     alloc::Allocator,
     bindings, device,
+    fs::LocalFile,
     prelude::*,
     sync::{poll::PollTable, Arc},
     transmute::AsBytes,
@@ -71,6 +72,16 @@ impl kernel::miscdevice::MiscDevice for WrapFdDevice {
             uapi::WRAPFD_DEV_IOC_QUERY_EVENTS => {
                 let user_slice = UserSlice::new(UserPtr::from_addr(arg), _IOC_SIZE(cmd));
                 me.query_events(user_slice)
+            }
+            uapi::WRAPFD_DEV_IOC_REPOPULATE => {
+                let user_slice = UserSlice::new(UserPtr::from_addr(arg), _IOC_SIZE(cmd));
+                let repop_args = user_slice.reader().read::<uapi::wrapfd_repopulate>()?;
+
+                if repop_args.reserved != 0 {
+                    return Err(EINVAL);
+                }
+
+                Ok(WrapfdDevFile::repopulate(&repop_args)? as isize)
             }
             _ => Err(ENOTTY),
         }
@@ -204,6 +215,29 @@ impl WrapfdDevFile {
         );
         let mut results_writer = results_slice.writer();
         Self::write_vector(&mut results_writer, &results)?;
+
+        Ok(0)
+    }
+
+    fn repopulate(args: &uapi::wrapfd_repopulate) -> Result<u32> {
+        let local_file = LocalFile::fget(args.wrapfd)?;
+
+        // SAFETY: There are no `fdget_pos` calls on the current thread.
+        let file = unsafe { LocalFile::assume_no_fdget_pos(local_file) };
+
+        let Some(wrap) = WRAP_FOPS.borrow_private(&*file) else {
+            return Err(EBADF);
+        };
+
+        let close_on_exec = wrap.repopulate(&file, args.fd)?;
+
+        // SAFETY: args.wrapfd was a valid file descriptor at least at the time we acquired the
+        // `LocalFile` reference above. If the file descriptor has been invalidated since, the
+        // call to `set_close_on_exec` will fail, but no corruption will occur because `wrapfd`
+        // was in range of the ftable before and still is. The worst that can happen is that the
+        // file descriptor has been reused and we set close_on_exec on a different file than we
+        // intended.
+        unsafe { bindings::set_close_on_exec(args.wrapfd, if close_on_exec { 1 } else { 0 }) };
 
         Ok(0)
     }

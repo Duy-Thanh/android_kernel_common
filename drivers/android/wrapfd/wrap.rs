@@ -77,6 +77,7 @@ pub(crate) struct WrapInfo {
     num_pending_mmaps: usize,
     state: WrapState,
     monitors: KVec<(Arc<FileMonitor>, usize)>,
+    pub(crate) close_on_exec: bool,
 }
 
 impl Drop for WrapInfo {
@@ -88,7 +89,7 @@ impl Drop for WrapInfo {
 }
 
 impl WrapInfo {
-    fn new() -> Self {
+    fn new(close_on_exec: bool) -> Self {
         Self {
             content: None,
             owner: WrapOwner::None,
@@ -97,6 +98,7 @@ impl WrapInfo {
             num_pending_mmaps: 0,
             state: WrapState::Available,
             monitors: KVec::default(),
+            close_on_exec,
         }
     }
 
@@ -302,10 +304,6 @@ enum AllowState {
 #[pin_data]
 pub(crate) struct Wrap {
     pub(crate) inner: Arc<Mutex<WrapInfo>>,
-
-    // Set once on construction, never modified afterwards, does not need to be guarded by
-    // the lock.
-    pub(crate) close_on_exec: bool,
 }
 
 struct UseGuard<'a>(&'a Wrap);
@@ -324,8 +322,7 @@ impl<'a> Drop for UseGuard<'a> {
 impl Wrap {
     pub(crate) fn new(close_on_exec: bool) -> impl PinInit<Self, Error> {
         try_pin_init!(Self {
-            inner: Arc::pin_init(new_mutex!(WrapInfo::new()), GFP_KERNEL)?,
-            close_on_exec,
+            inner: Arc::pin_init(new_mutex!(WrapInfo::new(close_on_exec)), GFP_KERNEL)?,
         })
     }
 
@@ -499,7 +496,7 @@ impl Wrap {
             return Err(EINVAL);
         }
 
-        let (_use_guard, content, was_writable) = {
+        let (_use_guard, content, close_on_exec, was_writable) = {
             let mut guard = self.inner.lock();
             guard.check_modifiable()?;
 
@@ -516,10 +513,13 @@ impl Wrap {
                 }
             }
 
-            (self.begin_use(&mut guard), content, was_writable)
+            (
+                self.begin_use(&mut guard),
+                content,
+                guard.close_on_exec,
+                was_writable,
+            )
         };
-
-        let close_on_exec = self.close_on_exec;
 
         let result = match KBox::pin_init(Wrap::new(close_on_exec), GFP_KERNEL) {
             Ok(new_wrap) => DmaBufContent::publish_wrap(new_wrap, content, close_on_exec, true),
@@ -554,6 +554,61 @@ impl Wrap {
         guard.allow_guests = matches!(allow, AllowState::AllowGuests);
 
         Ok(0)
+    }
+
+    pub(crate) fn repopulate(&self, wrap_file: &File, fd: u32) -> Result<bool> {
+        let f_mode = wrap_file.mode();
+
+        let mut prot = 0;
+        if (f_mode & mode::FMODE_READ) != 0 {
+            prot |= bindings::PROT_READ;
+        }
+        if (f_mode & mode::FMODE_WRITE) != 0 {
+            prot |= bindings::PROT_WRITE;
+        }
+        if prot == 0 {
+            return Err(EINVAL);
+        }
+
+        let _use_guard = {
+            let mut guard = self.inner.lock();
+
+            if guard.has_owner() && !guard.owned_by_current_task() {
+                return Err(EBUSY);
+            }
+
+            if matches!(guard.state, WrapState::InUse(_))
+                || guard.is_mapped()
+                || guard.content.is_some()
+            {
+                return Err(EINVAL);
+            }
+
+            self.begin_use(&mut guard)
+        };
+
+        let content = DmaBufContent::new(fd, prot)?;
+
+        let size = content.dmabuf.size();
+        let size = Offset::try_from(size)?;
+
+        // SAFETY: `args.fd` is a valid file descriptor, otherwise `DmaBufContent::new` would have
+        // failed.
+        let close_on_exec = unsafe { bindings::get_close_on_exec(fd) };
+
+        // SAFETY: `file` is a valid `kernel::fs::File` reference, ensuring `file.as_ptr()` is
+        // non-null and points to an active `struct file`.
+        let inode = unsafe { bindings::file_inode(wrap_file.as_ptr()) };
+
+        // SAFETY: `file_inode` on a valid `struct file` returns a non-null, valid pointer to its
+        // `struct inode`.
+        unsafe { bindings::i_size_write(inode, size) };
+
+        let mut guard = self.inner.lock();
+        guard.content = Some(content);
+        guard.close_on_exec = close_on_exec;
+
+        Ok(close_on_exec)
     }
 }
 
