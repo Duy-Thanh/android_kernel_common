@@ -217,6 +217,7 @@
   errseq_set
   filemap_invalidate_inode
   iov_iter_folio_queue
+  ufshcd_mcq_poll_n_cqe_lock
   mempool_init_noprof
   netfs_write_subrequest_terminated
   __filemap_set_wb_err
