@@ -1237,6 +1237,12 @@ static loff_t wrap_llseek(struct file *file, loff_t offs, int whence)
 	loff_t ret = 0;
 
 	spin_lock(&ctx->lock);
+	if (!ctx->allow_guests && has_owner(ctx) &&
+	    !is_owner_task(ctx, current)) {
+		ret = -EBUSY;
+		goto unlock;
+	}
+
 	/*
 	 * If usage is blocked, the content is being rewrapped or emptied.
 	 * Treat this as if the wrap is already empty.
