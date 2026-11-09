@@ -796,7 +796,6 @@ struct wrap_ctx {
 	unsigned long map_count;
 	unsigned long use_count;
 	bool unusable;
-	struct mutex listeners_lock;
 	struct list_head event_list;
 };
 
@@ -895,7 +894,6 @@ static struct wrap_ctx *create_wrap_ctx(void)
 		return NULL;
 
 	spin_lock_init(&ctx->lock);
-	mutex_init(&ctx->listeners_lock);
 	INIT_LIST_HEAD(&ctx->event_list);
 
 	return ctx;
@@ -944,33 +942,30 @@ static inline bool is_owner_dev(struct wrap_ctx *ctx,
 	return ctx->owner.dev == dev;
 }
 
-static void notify_content_release(struct wrap_ctx *ctx,
-				   struct wrap_content *content)
+static void notify_content_release(struct wrap_content *content)
 {
 	struct wrapfd_content_listener *listener;
 	struct wrapfd_content_listener *tmp;
 
-	mutex_lock(&ctx->listeners_lock);
 	list_for_each_entry_safe(listener, tmp, &content->listeners, list) {
 		listener->ops->on_content_release(listener->param);
 		list_del(&listener->list);
 		kfree(listener);
 	}
-	INIT_LIST_HEAD(&content->listeners);
-	mutex_unlock(&ctx->listeners_lock);
 }
 
 static void destroy_wrap_ctx(struct wrap_ctx *ctx)
 {
 	struct wrap_event_info *event_info, *tmp;
+	struct wrap_content *content = NULL;
 	struct device *dev = NULL;
 
+	spin_lock(&ctx->lock);
 	if (ctx->content) {
-		notify_content_release(ctx, ctx->content);
-		ctx->content->ops->free(ctx->content);
+		content = ctx->content;
+		ctx->content = NULL;
 	}
 
-	spin_lock(&ctx->lock);
 	list_for_each_entry_safe(event_info, tmp, &ctx->event_list, ctx_list) {
 		struct file_monitor *file_mon = event_info->file_mon;
 
@@ -985,9 +980,13 @@ static void destroy_wrap_ctx(struct wrap_ctx *ctx)
 		dev = ctx->owner.dev;
 	spin_unlock(&ctx->lock);
 
+	if (content) {
+		notify_content_release(content);
+		content->ops->free(content);
+	}
+
 	/* put_device() cannot be called in atomic context. */
 	put_device(dev);
-	mutex_destroy(&ctx->listeners_lock);
 	kfree(ctx);
 
 }
@@ -1014,7 +1013,7 @@ static inline int publish_wrap(struct wrap_ctx *ctx,
 	}
 
 	if (old_content == content) {
-		notify_content_release(ctx, old_content);
+		notify_content_release(old_content);
 		err = old_content->ops->clear(old_content);
 		if (err)
 			goto put_file;
@@ -1599,7 +1598,7 @@ unlock:
 	spin_unlock(&ctx->lock);
 
 	if (!ret) {
-		notify_content_release(ctx, content);
+		notify_content_release(content);
 		content->ops->free(content);
 	}
 
@@ -2050,7 +2049,6 @@ int wrapfd_add_listener(struct file *file, struct device *dev,
 	listener->ops = ops;
 	listener->param = param;
 
-	mutex_lock(&ctx->listeners_lock);
 	spin_lock(&ctx->lock);
 
 	if (!is_owner_dev(ctx, dev)) {
@@ -2071,7 +2069,6 @@ unlock:
 	else
 		kfree(listener);
 	spin_unlock(&ctx->lock);
-	mutex_unlock(&ctx->listeners_lock);
 
 	return ret;
 }
@@ -2091,7 +2088,6 @@ int wrapfd_del_listener(struct file *file, void *handle)
 
 	ctx = file->private_data;
 
-	mutex_lock(&ctx->listeners_lock);
 	spin_lock(&ctx->lock);
 
 	if (!ctx->content)
@@ -2111,7 +2107,6 @@ int wrapfd_del_listener(struct file *file, void *handle)
 	}
 unlock:
 	spin_unlock(&ctx->lock);
-	mutex_unlock(&ctx->listeners_lock);
 
 	return ret;
 }
