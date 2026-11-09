@@ -91,8 +91,7 @@ jobs:
           git init --bare "$RUNNER_TEMP/sync.git"
           cd "$RUNNER_TEMP/sync.git"
           git config http.postBuffer 524288000
-          git config http.lowSpeedLimit 1000
-          git config http.lowSpeedTime 120
+          git config http.version HTTP/1.1
           git config gc.auto 0
           git remote add upstream "https://${UPSTREAM_HOST}/${UPSTREAM_REPO}"
           git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${OWNER}/${REPO}.git"
@@ -130,13 +129,20 @@ jobs:
         run: |
           set -euo pipefail
           [ -s refspecs.txt ] || exit 0
-          for attempt in 1 2 3; do
-            if git fetch upstream --no-tags --no-write-fetch-head --stdin < refspecs.txt; then
-              exit 0
-            fi
-            echo "fetch failed (attempt $attempt), retrying..."; sleep 30
+          # Small batches: branches first (few refs, heavy), then tags (objects mostly already local)
+          sed 's|.*|+refs/heads/&:refs/heads/&|' branches.txt | split -l 2  - fb_
+          sed 's|.*|+refs/tags/&:refs/tags/&|'   tags.txt     | split -l 50 - ft_
+          fail=0
+          for f in fb_* ft_*; do
+            [ -e "$f" ] || continue
+            ok=0
+            for attempt in 1 2 3 4; do
+              if git fetch upstream --no-tags --no-write-fetch-head --stdin < "$f"; then ok=1; break; fi
+              echo "fetch failed ($f, attempt $attempt), retrying..."; sleep 30
+            done
+            [ "$ok" = 1 ] || { echo "::warning::Failed to fetch batch $f"; fail=1; }
           done
-          exit 1
+          [ "$fail" = 0 ] || exit 1
 
       - name: Push to fork (batched)
         working-directory: ${{ runner.temp }}/sync.git
