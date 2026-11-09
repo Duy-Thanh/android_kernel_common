@@ -960,6 +960,38 @@ static void notify_content_release(struct wrap_ctx *ctx,
 	mutex_unlock(&ctx->listeners_lock);
 }
 
+static void destroy_wrap_ctx(struct wrap_ctx *ctx)
+{
+	struct wrap_event_info *event_info, *tmp;
+	struct device *dev = NULL;
+
+	if (ctx->content) {
+		notify_content_release(ctx, ctx->content);
+		ctx->content->ops->free(ctx->content);
+	}
+
+	spin_lock(&ctx->lock);
+	list_for_each_entry_safe(event_info, tmp, &ctx->event_list, ctx_list) {
+		struct file_monitor *file_mon = event_info->file_mon;
+
+		spin_lock(&file_mon->event_lock);
+		free_wrap_event_info(event_info);
+		spin_unlock(&file_mon->event_lock);
+	}
+
+	if (ctx->owner.task)
+		put_task_struct(ctx->owner.task);
+	else if (ctx->owner.dev)
+		dev = ctx->owner.dev;
+	spin_unlock(&ctx->lock);
+
+	/* put_device() cannot be called in atomic context. */
+	put_device(dev);
+	mutex_destroy(&ctx->listeners_lock);
+	kfree(ctx);
+
+}
+
 static inline int publish_wrap(struct wrap_ctx *ctx,
 			       struct wrap_content *old_content,
 			       struct wrap_content *content)
@@ -1001,6 +1033,14 @@ static inline int publish_wrap(struct wrap_ctx *ctx,
 
 	return fd;
 put_file:
+	/*
+	 * wrap_release() is going to be invoked on this file when fput() is invoked, since there's
+	 * only one reference to it. If wrap_release() frees the content and ctx structures, it
+	 * leaves the caller with dangling pointers. So, clear the private_data field to NULL so
+	 * that resource cleanup is deferred to the caller to avoid potential
+	 * use-after/double-frees.
+	 */
+	file->private_data = NULL;
 	fput(file);
 put_fd:
 	put_unused_fd(fd);
@@ -1280,33 +1320,9 @@ unlock:
 static int wrap_release(struct inode *ignored, struct file *file)
 {
 	struct wrap_ctx *ctx = file->private_data;
-	struct wrap_event_info *event_info, *tmp;
-	struct device *dev = NULL;
 
-	if (ctx->content) {
-		notify_content_release(ctx, ctx->content);
-		ctx->content->ops->free(ctx->content);
-	}
-
-	spin_lock(&ctx->lock);
-	list_for_each_entry_safe(event_info, tmp, &ctx->event_list, ctx_list) {
-		struct file_monitor *file_mon = event_info->file_mon;
-
-		spin_lock(&file_mon->event_lock);
-		free_wrap_event_info(event_info);
-		spin_unlock(&file_mon->event_lock);
-	}
-
-	if (ctx->owner.task)
-		put_task_struct(ctx->owner.task);
-	else if (ctx->owner.dev)
-		dev = ctx->owner.dev;
-	spin_unlock(&ctx->lock);
-
-	/* put_device() cannot be called in atomic context. */
-	put_device(dev);
-	mutex_destroy(&ctx->listeners_lock);
-	kfree(ctx);
+	if (ctx)
+		destroy_wrap_ctx(ctx);
 
 	return 0;
 }
@@ -1548,7 +1564,7 @@ static int wrap_file_rewrap(struct wrap_ctx *ctx,
 	return ret;
 
 free_new_ctx:
-	kfree(new_ctx);
+	destroy_wrap_ctx(new_ctx);
 free_new_content:
 	if (new_content != content)
 		new_content->ops->free(new_content);
@@ -2147,7 +2163,7 @@ static int __create_wrapfd(int fd, int prot)
 
 	ret = wrap_file(ctx, fd, prot);
 	if (ret < 0)
-		kfree(ctx);
+		destroy_wrap_ctx(ctx);
 
 	return ret;
 }
