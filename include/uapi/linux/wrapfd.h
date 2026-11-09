@@ -93,8 +93,12 @@ struct wrapfd_repopulate {
 	__u64 reserved;
 };
 
-#define WRAPFD_MAX_NR_MONITORS	(PAGE_SIZE / sizeof(struct wrapfd_monitor))
-#define WRAPFD_MAX_NR_EVENTS	(PAGE_SIZE / sizeof(struct wrapfd_event))
+/*
+ * The maximum number of monitors to add/delete and events are defined as the maximum amount of
+ * structures that fit on the smallest supported page size (4096 bytes).
+ */
+#define WRAPFD_MAX_NR_MONITORS	512
+#define WRAPFD_MAX_NR_EVENTS	256
 
 /* ioctls for /dev/wrapfd */
 #define WRAPFD_DEV_IOC 0xBC
