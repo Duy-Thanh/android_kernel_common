@@ -131,6 +131,10 @@ DECLARE_HOOK(android_vh_f2fs_iostat_submit,
 DECLARE_HOOK(android_vh_f2fs_iostat_update,
 	TP_PROTO(struct super_block *sb, struct bio *bio, bool *skip),
 	TP_ARGS(sb, bio, skip));
+
+DECLARE_HOOK(android_vh_f2fs_fsync_need_flush,
+	TP_PROTO(struct inode *inode, int datasync, bool atomic, bool *need_flush),
+	TP_ARGS(inode, datasync, atomic, need_flush));
 #endif /* _TRACE_HOOK_FS_H */
 
 /* This part must be outside protection */
