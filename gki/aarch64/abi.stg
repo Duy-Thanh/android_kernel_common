@@ -436077,6 +436077,15 @@ function {
   parameter_id: 0x0d9f5631
 }
 function {
+  id: 0x9bd9d59b
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x1b8590a8
+  parameter_id: 0x6720d32f
+  parameter_id: 0x6d7f5ff6
+  parameter_id: 0x11cfee5a
+}
+function {
   id: 0x9bda0446
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -459143,6 +459152,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_f2fs_file_open"
 }
 elf_symbol {
+  id: 0xd27b817a
+  name: "__traceiter_android_vh_f2fs_fsync_need_flush"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xba36c519
+  type_id: 0x9bd9d59b
+  full_name: "__traceiter_android_vh_f2fs_fsync_need_flush"
+}
+elf_symbol {
   id: 0xcb0a2c01
   name: "__traceiter_android_vh_f2fs_improve_priority"
   is_defined: true
@@ -468060,6 +468078,15 @@ elf_symbol {
   crc: 0x7c5aa8a7
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_f2fs_file_open"
+}
+elf_symbol {
+  id: 0xb9715d2c
+  name: "__tracepoint_android_vh_f2fs_fsync_need_flush"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_f2fs_fsync_need_flush"
 }
 elf_symbol {
   id: 0x34b6590b
@@ -548575,6 +548602,7 @@ interface {
   symbol_id: 0xe3f6a4fd
   symbol_id: 0xd88c65b3
   symbol_id: 0x9c6911fb
+  symbol_id: 0xd27b817a
   symbol_id: 0xcb0a2c01
   symbol_id: 0x0a1da340
   symbol_id: 0xbfe7cc07
@@ -549566,6 +549594,7 @@ interface {
   symbol_id: 0x06235773
   symbol_id: 0x64da8159
   symbol_id: 0x9ad783c1
+  symbol_id: 0xb9715d2c
   symbol_id: 0x34b6590b
   symbol_id: 0xba4d8a1a
   symbol_id: 0xf230d27d

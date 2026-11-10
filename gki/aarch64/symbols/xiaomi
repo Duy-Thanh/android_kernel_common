@@ -715,6 +715,10 @@ __traceiter_android_vh_restore_may_deactivate
 __tracepoint_android_vh_snapshot_refaults
 __traceiter_android_vh_snapshot_refaults
 
+# required by filesystem
+__tracepoint_android_vh_f2fs_fsync_need_flush
+__traceiter_android_vh_f2fs_fsync_need_flush
+
 # protect file folios
 __tracepoint_android_vh_is_exec_file_folio
 __traceiter_android_vh_is_exec_file_folio
