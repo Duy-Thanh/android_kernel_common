@@ -289,6 +289,9 @@ static int f2fs_do_sync_file(struct file *file, loff_t start, loff_t end,
 		.for_reclaim = 0,
 	};
 	unsigned int seq_id = 0;
+	bool force_flush = false;
+
+	trace_android_vh_f2fs_fsync_need_flush(inode, datasync, atomic, &force_flush);
 
 	if (unlikely(f2fs_readonly(inode->i_sb)))
 		return 0;
@@ -401,7 +404,7 @@ sync_nodes:
 	f2fs_remove_ino_entry(sbi, ino, APPEND_INO);
 	clear_inode_flag(inode, FI_APPEND_WRITE);
 flush_out:
-	if (!atomic && F2FS_OPTION(sbi).fsync_mode != FSYNC_MODE_NOBARRIER)
+	if (!atomic && (F2FS_OPTION(sbi).fsync_mode != FSYNC_MODE_NOBARRIER || force_flush))
 		ret = f2fs_issue_flush(sbi, inode->i_ino);
 	if (!ret) {
 		f2fs_remove_ino_entry(sbi, ino, UPDATE_INO);
