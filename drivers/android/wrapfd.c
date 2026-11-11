@@ -1281,6 +1281,7 @@ static int wrap_release(struct inode *ignored, struct file *file)
 {
 	struct wrap_ctx *ctx = file->private_data;
 	struct wrap_event_info *event_info, *tmp;
+	struct device *dev = NULL;
 
 	if (ctx->content) {
 		notify_content_release(ctx, ctx->content);
@@ -1295,8 +1296,15 @@ static int wrap_release(struct inode *ignored, struct file *file)
 		free_wrap_event_info(event_info);
 		spin_unlock(&file_mon->event_lock);
 	}
+
+	if (ctx->owner.task)
+		put_task_struct(ctx->owner.task);
+	else if (ctx->owner.dev)
+		dev = ctx->owner.dev;
 	spin_unlock(&ctx->lock);
 
+	/* put_device() cannot be called in atomic context. */
+	put_device(dev);
 	mutex_destroy(&ctx->listeners_lock);
 	kfree(ctx);
 
@@ -1950,7 +1958,7 @@ int wrapfd_acquire_ownership(struct file *file, struct device *dev)
 		goto unlock;
 	}
 
-	ctx->owner.dev = dev;
+	ctx->owner.dev = get_device(dev);
 	generate_event(ctx, WRAPFD_EVENT_OWN);
 already_owned:
 	ret = 0;
@@ -1991,6 +1999,10 @@ int wrapfd_release_ownership(struct file *file, struct device *dev)
 	ret = 0;
 unlock:
 	spin_unlock(&ctx->lock);
+
+	/* put_device() cannot be called in atomic context. */
+	if (!ret)
+		put_device(dev);
 
 	return ret;
 }
