@@ -16,8 +16,6 @@
 #include <linux/vmalloc.h>
 #include <linux/wrapfd.h>
 
-#include "../wrapfd_internal.h"
-
 struct test_buffer {
 	struct page *page;
 	size_t size;
@@ -331,4 +329,5 @@ kunit_test_suites(&wrapfd_test_module);
 
 MODULE_DESCRIPTION("KUnit test for the wrapfd driver");
 MODULE_IMPORT_NS(DMA_BUF);
+MODULE_IMPORT_NS(EXPORTED_FOR_KUNIT_TESTING);
 MODULE_LICENSE("GPL");

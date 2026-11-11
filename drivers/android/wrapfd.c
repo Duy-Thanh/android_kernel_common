@@ -28,7 +28,6 @@
 #include <linux/wait.h>
 #include <linux/wrapfd.h>
 #include <uapi/linux/wrapfd.h>
-#include "wrapfd_internal.h"
 
 /* 1 buffer for the start, and at most 2 at the end. */
 #define MAX_NR_BOUNCE_BUFS 3
@@ -2517,13 +2516,13 @@ int create_wrapfd(int fd, int prot)
 {
 	return __create_wrapfd(fd, prot);
 }
-EXPORT_SYMBOL_GPL(create_wrapfd);
+EXPORT_SYMBOL_NS_GPL(create_wrapfd, EXPORTED_FOR_KUNIT_TESTING);
 
 int empty_wrapfd(struct file *file, struct device *dev)
 {
 	return wrap_file_empty(file->private_data, dev);
 }
-EXPORT_SYMBOL_GPL(empty_wrapfd);
+EXPORT_SYMBOL_NS_GPL(empty_wrapfd, EXPORTED_FOR_KUNIT_TESTING);
 #endif
 
 static const struct file_operations wrapfd_dev_fops = {

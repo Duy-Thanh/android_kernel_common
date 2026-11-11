@@ -24,3 +24,8 @@ EXPORT_SYMBOL_GPL(wrapfd_add_listener);
 EXPORT_SYMBOL_GPL(wrapfd_del_listener);
 EXPORT_SYMBOL_GPL(wrapfd_acquire_ownership);
 EXPORT_SYMBOL_GPL(wrapfd_release_ownership);
+
+#if IS_ENABLED(CONFIG_ANDROID_WRAPFD_KUNIT_TEST)
+EXPORT_SYMBOL_NS_GPL(create_wrapfd, EXPORTED_FOR_KUNIT_TESTING);
+EXPORT_SYMBOL_NS_GPL(empty_wrapfd, EXPORTED_FOR_KUNIT_TESTING);
+#endif
