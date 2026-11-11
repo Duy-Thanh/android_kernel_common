@@ -3957,6 +3957,10 @@ static void do_activate_blocked_waiter(struct rq *target_rq, struct task_struct 
 		if (state == TASK_WAKING)
 			return;
 
+		/* Dead tasks don't activate */
+		if (state == TASK_DEAD || READ_ONCE(p->exit_state))
+			return;
+
 		if (READ_ONCE(p->on_rq)) {
 			/*
 			 * We raced with a non mutex handoff activation of p.
