@@ -338,6 +338,12 @@
   sysfs_emit
   sysfs_remove_group
   system_percpu_wq
+  tegra_bpmp_transfer
+  tegra_ivc_read_advance
+  tegra_ivc_read_get_next_frame
+  tegra_ivc_write_advance
+  tegra_ivc_write_get_next_frame
+  tegra_sku_info
   timer_init_key
   trace_event_buffer_commit
   trace_event_buffer_reserve
@@ -408,6 +414,9 @@
   of_add_property
   of_chosen
   of_irq_find_parent
+  tegra_ivc_init
+  tegra_ivc_notified
+  tegra_ivc_reset
   work_on_cpu_key
 
 # required by tegra_hv_vblk_oops.ko
@@ -415,6 +424,7 @@
 
 # required by tegra_vblk.ko
   blk_execute_rq
+  blk_mq_alloc_disk_for_queue
   blk_mq_alloc_queue
   blk_mq_alloc_request
   blk_mq_alloc_tag_set
@@ -431,6 +441,7 @@
   disk_check_media_change
   kthread_create_on_cpu
   put_disk
+  queue_limits_set
   __register_blkdev
   sched_setattr_nocheck
   set_capacity
@@ -459,14 +470,21 @@
   devm_reset_controller_register
   of_clk_add_hw_provider
   of_genpd_add_provider_onecell
+  of_platform_default_populate
   pm_genpd_init
   pm_genpd_remove
   single_open_size
+  tegra_bpmp_free_mrq
+  tegra_bpmp_mrq_is_supported
+  tegra_bpmp_mrq_return
+  tegra_bpmp_request_mrq
+  tegra_bpmp_transfer_atomic
 
 # required by gpio-tegra186.ko
   __dev_fwnode
   devm_gpiochip_add_data_with_key
   generic_handle_domain_irq
+  gpiochip_add_pingroup_range
   gpiochip_disable_irq
   gpiochip_enable_irq
   gpiochip_generic_free
@@ -480,10 +498,12 @@
   irq_chip_set_type_parent
   irq_chip_set_wake_parent
   irq_find_matching_fwspec
+  of_pinctrl_get
   __seq_puts
 
 # required by host1x.ko
   add_uevent_var
+  alloc_iova
   bitmap_free
   bitmap_zalloc
   bus_register
@@ -497,8 +517,12 @@
   driver_register
   driver_unregister
   _find_next_zero_bit
+  __free_iova
+  free_iova
+  host1x_context_device_bus_type
   init_iova_domain
   iommu_attach_group
+  iommu_detach_group
   iommu_domain_free
   iommu_group_get
   iommu_group_put
@@ -506,16 +530,24 @@
   iommu_map_sg
   iommu_paging_domain_alloc_flags
   iommu_unmap
+  iova_cache_get
+  iova_cache_put
   mutex_lock_interruptible
   of_match_node
   of_property_read_reg
   of_prop_next_string
   platform_get_irq_byname_optional
+  pm_generic_freeze
+  pm_generic_poweroff
+  pm_generic_restore
   pm_generic_resume
   pm_generic_suspend
+  pm_generic_thaw
   put_iova_domain
+  reset_control_bulk_acquire
   reset_control_bulk_assert
   reset_control_bulk_deassert
+  reset_control_bulk_release
   strstr
   __sw_hweight16
   __sw_hweight8
@@ -531,9 +563,11 @@
 # required by host1x-emu.ko
   hrtimer_cb_get_time
   hrtimer_forward
+  nsecs_to_jiffies64
 
 # required by nvmap.ko
   alloc_pages_bulk_noprof
+  arch_invalidate_pmem
   arch_wb_cache_pmem
   bpf_trace_run10
   bpf_trace_run7
@@ -599,6 +633,7 @@
   async_schedule_node
   async_synchronize_cookie
   bsearch
+  clk_get_sys
   clk_put
   clk_round_rate
   complete_all
@@ -621,8 +656,11 @@
   devm_of_icc_get
   dev_pm_domain_attach
   dev_pm_domain_detach
+  dev_pm_domain_set
   dev_pm_genpd_add_notifier
   dev_pm_genpd_remove_notifier
+  dev_pm_genpd_resume
+  dev_pm_genpd_suspend
   dev_pm_opp_add_dynamic
   dev_pm_opp_find_freq_ceil
   dev_pm_opp_get_opp_count
@@ -644,10 +682,12 @@
   find_vma_intersection
   find_vpid
   fwnode_gpiod_get_index
+  gpiod_get_direction
   gpiod_get_raw_value
   icc_set_bw
   int_sqrt
   jiffies_to_msecs
+  jiffies_to_timespec64
   kernel_restart
   kstrtou8
   kstrtoull
@@ -665,8 +705,10 @@
   pci_alloc_irq_vectors
   pci_bus_type
   pci_enable_device
+  pcie_reset_flr
   pci_find_host_bridge
   pci_free_irq_vectors
+  pci_ignore_hotplug
   pci_irq_vector
   __pci_register_driver
   pci_restore_state
@@ -698,6 +740,8 @@
   sysfs_create_link
   sysfs_remove_link
   system_unbound_wq
+  tegra_bpmp_get
+  tegra_fuse_readl
   _totalram_pages
   __traceiter_mmap_lock_acquire_returned
   __traceiter_mmap_lock_released
@@ -735,6 +779,7 @@
   down_trylock
   __flush_workqueue
   krealloc_node_align_noprof
+  ktime_get_resolution_ns
   __ndelay
   of_find_node_by_phandle
   __of_get_address
@@ -800,8 +845,10 @@
   drm_dev_put
   drm_dev_register
   drm_dev_unregister
+  drm_edid_override_connector_update
   drm_encoder_cleanup
   drm_encoder_init
+  drm_file_get_master
   drm_format_info
   drm_framebuffer_cleanup
   drm_framebuffer_init
@@ -819,10 +866,12 @@
   drm_helper_probe_single_connector_modes
   drm_ioctl
   drm_kms_helper_hotplug_event
+  drm_master_put
   drmm_mode_config_init
   drm_mode_config_cleanup
   drm_mode_config_reset
   drm_mode_create
+  drm_mode_create_dvi_i_properties
   drm_mode_object_find
   drm_mode_object_put
   drm_mode_probed_add
@@ -892,6 +941,7 @@
 # required by nvethernet.ko
   alloc_etherdev_mqs
   __alloc_skb
+  arp_send
   clk_set_parent
   consume_skb
   desc_to_gpio
@@ -946,6 +996,8 @@
   of_phy_is_fixed_link
   of_phy_register_fixed_link
   of_property_read_u64
+  page_pool_alloc_frag_netmem
+  page_pool_alloc_netmems
   page_pool_create
   page_pool_destroy
   page_pool_put_unrefed_netmem
@@ -1001,6 +1053,7 @@
   _copy_to_iter
   debugfs_create_u8
   iov_iter_advance
+  iov_iter_get_pages_alloc2
   lock_sock_nested
   _raw_spin_lock_bh
   _raw_spin_unlock_bh
@@ -1008,3 +1061,17 @@
   sk_error_report
   sk_free
   system_wq
+  vsock_addr_init
+  vsock_assign_transport
+  vsock_connected_table
+  vsock_core_register
+  vsock_core_unregister
+  vsock_create_connected
+  vsock_data_ready
+  vsock_enqueue_accept
+  vsock_find_bound_socket
+  vsock_find_connected_socket
+  vsock_insert_connected
+  vsock_remove_sock
+  vsock_stream_has_data
+  vsock_table_lock
