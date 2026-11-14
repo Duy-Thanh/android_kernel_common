@@ -842,7 +842,8 @@ struct file_monitor {
 	struct wait_queue_head wait_queue;
 	atomic_t events_pending;
 	struct list_head event_list;
-	spinlock_t event_lock; /* protects event_list */
+	spinlock_t event_lock; /* protects event_list and ID counter */
+	__u64 next_id;
 };
 
 struct wrap_event_info {
@@ -856,11 +857,11 @@ struct wrap_event_info {
 	unsigned int monitored;
 	unsigned int triggered;
 	__u64 timestamp;
-	__u32 fd;
+	__u64 id;
 };
 
 static struct wrap_event_info *
-find_wrap_event_info(struct file_monitor *file_mon, struct wrap_ctx *ctx)
+find_wrap_event_info_by_ctx(struct file_monitor *file_mon, struct wrap_ctx *ctx)
 {
 	struct wrap_event_info *event_info;
 
@@ -875,14 +876,14 @@ find_wrap_event_info(struct file_monitor *file_mon, struct wrap_ctx *ctx)
 }
 
 static void
-init_wrap_event_info(struct wrap_event_info *event_info,
-		     struct file_monitor *file_mon, struct wrap_ctx *ctx, __u32 fd)
+init_wrap_event_info(struct wrap_event_info *event_info, struct file_monitor *file_mon,
+		     struct wrap_ctx *ctx)
 {
 	assert_spin_locked(&ctx->lock);
 	assert_spin_locked(&file_mon->event_lock);
 	event_info->file_mon = file_mon;
 	event_info->ctx = ctx;
-	event_info->fd = fd;
+	event_info->id = file_mon->next_id++;
 	list_add(&event_info->file_list, &file_mon->event_list);
 	list_add(&event_info->ctx_list, &ctx->event_list);
 }
@@ -2206,118 +2207,52 @@ static int __create_wrapfd(int fd, int prot)
 	return ret;
 }
 
-static long process_monitors(struct file_monitor *file_mon,
-			     struct wrapfd_monitors *monitors, bool add)
+static bool events_valid(unsigned int events)
 {
-	struct wrap_event_info *tmp = NULL;
-	struct wrapfd_monitor *arr;
-	__s64 *results;
-	long ret = 0;
+	return ((events & ~WRAPFD_EVENTS_MASK) == 0) && ((events & WRAPFD_EVENTS_MASK) != 0);
+}
 
-	if (!monitors->len || monitors->len > WRAPFD_MAX_NR_MONITORS)
+static __s64 add_monitor(struct file_monitor *file_mon, struct wrapfd_add_monitor *monitor)
+{
+	struct wrap_event_info *tmp;
+	__s64 ret;
+	struct wrap_event_info *event_info;
+	struct wrap_ctx *ctx;
+	struct file *file;
+	struct fd f;
+
+	if (!events_valid(monitor->events) || monitor->pad)
 		return -EINVAL;
 
-	arr = kzalloc_objs(*arr, monitors->len);
-	if (!arr)
-		return -ENOMEM;
-
-	results = kzalloc_objs(*results, monitors->len);
-	if (!results) {
-		ret = -ENOMEM;
-		goto free_arr;
-	}
-
-	if (copy_from_user(arr, u64_to_user_ptr(monitors->arr),
-			   monitors->len * sizeof(struct wrapfd_monitor))) {
-		ret = -EFAULT;
-		goto free_res;
-	}
-
-	/* Verify all inputs */
-	for (__u64 i = 0; i < monitors->len; i++) {
-		struct wrapfd_monitor *monitor = &arr[i];
-		struct wrap_event_info *event_info;
-		struct wrap_ctx *ctx;
-		struct file *file;
-		struct fd f;
-
-		if (monitor->events & ~WRAPFD_EVENTS_MASK ||
-		    (monitor->events & WRAPFD_EVENTS_MASK) == 0) {
-			results[i] = -EINVAL;
-			continue;
-		}
-
-		if (monitor->fd > INT_MAX) {
-			results[i] = -EBADF;
-			continue;
-		}
-
-		f = fdget(monitor->fd);
-		file = fd_file(f);
-		if (!file || file->f_op != &wrap_fops) {
-			fdput(f);
-			results[i] = -EBADF;
-			continue;
-		}
-
-		ctx = file->private_data;
-		if (add && !tmp) {
-			/*
-			 * Preallocate wrap_event_info before locking in case
-			 * we need it later.
-			 */
-			tmp = kzalloc_obj(*tmp);
-		}
-
-		spin_lock(&ctx->lock);
-		spin_lock(&file_mon->event_lock);
-		event_info = find_wrap_event_info(file_mon, ctx);
-		if (event_info) {
-			/*
-			 * Do not allow monitoring the same wrapfd file
-			 * under different (dup'ed) FDs since that
-			 * would cause one wrapfd operation to generate
-			 * multiple events.
-			 */
-			if (monitor->fd != event_info->fd) {
-				results[i] = -EBUSY;
-				goto unlock;
-			}
-		}
-		if (add) {
-			if (!event_info) {
-				if (!tmp) {
-					results[i] = -ENOMEM;
-					goto unlock;
-				}
-				event_info = tmp;
-				tmp = NULL;
-				init_wrap_event_info(event_info, file_mon,
-						     ctx, monitor->fd);
-			}
-			event_info->monitored |= monitor->events;
-		} else {
-			if (event_info) {
-				event_info->monitored &= ~monitor->events;
-				if (!event_info->monitored)
-					free_wrap_event_info(event_info);
-			} else {
-				results[i] = -EINVAL;
-			}
-		}
-unlock:
-		spin_unlock(&file_mon->event_lock);
-		spin_unlock(&ctx->lock);
+	f = fdget(monitor->fd);
+	file = fd_file(f);
+	if (!file || file->f_op != &wrap_fops) {
 		fdput(f);
+		return -EBADF;
 	}
+
+	ctx = file->private_data;
+	tmp = kzalloc_obj(*tmp);
+
+	spin_lock(&ctx->lock);
+	spin_lock(&file_mon->event_lock);
+	event_info = find_wrap_event_info_by_ctx(file_mon, ctx);
+	if (!event_info && tmp) {
+		event_info = tmp;
+		tmp = NULL;
+		init_wrap_event_info(event_info, file_mon, ctx);
+	}
+
+	if (event_info) {
+		event_info->monitored |= monitor->events;
+		ret = event_info->id;
+	} else {
+		ret = -ENOMEM;
+	}
+	spin_unlock(&file_mon->event_lock);
+	spin_unlock(&ctx->lock);
+	fdput(f);
 	kfree(tmp);
-	if (copy_to_user(u64_to_user_ptr(monitors->results), results,
-			 monitors->len * sizeof(*results)))
-		ret = -EFAULT;
-free_res:
-	kfree(results);
-free_arr:
-	kfree(arr);
 
 	return ret;
 }
@@ -2325,6 +2260,11 @@ free_arr:
 static long wrapfd_dev_add_monitor(struct file *file, unsigned long arg)
 {
 	struct wrapfd_add_monitors params;
+	struct wrapfd_monitors *monitors;
+	struct wrapfd_add_monitor *arr;
+	long ret = 0;
+	__s64 *results;
+	__u64 i;
 
 	if (copy_from_user(&params, (struct wrapfd_add_monitors __user *)arg,
 			   sizeof(params)))
@@ -2333,12 +2273,111 @@ static long wrapfd_dev_add_monitor(struct file *file, unsigned long arg)
 	if (params.reserved)
 		return -EINVAL;
 
-	return process_monitors(file->private_data, &params.monitors, true);
+	monitors = &params.monitors;
+	if (!monitors->len || monitors->len > WRAPFD_MAX_NR_MONITORS || !monitors->results)
+		return -EINVAL;
+
+	arr = memdup_array_user(u64_to_user_ptr(monitors->arr), monitors->len, sizeof(*arr));
+	if (IS_ERR(arr))
+		return PTR_ERR(arr);
+
+	results = kzalloc_objs(*results, monitors->len);
+	if (!results) {
+		ret = -ENOMEM;
+		goto free_arr;
+	}
+
+	for (i = 0; i < monitors->len; i++)
+		results[i] = add_monitor(file->private_data, &arr[i]);
+
+	if (copy_to_user(u64_to_user_ptr(monitors->results), results,
+			 monitors->len * sizeof(*results)))
+		ret = -EFAULT;
+
+	kfree(results);
+free_arr:
+	kfree(arr);
+	return ret;
+
+}
+
+static struct wrap_event_info *find_wrap_event_info_by_id(struct file_monitor *file_mon, __u64 id)
+{
+	struct wrap_event_info *event_info;
+
+	assert_spin_locked(&file_mon->event_lock);
+	list_for_each_entry(event_info, &file_mon->event_list, file_list) {
+		if (event_info->id == id)
+			return event_info;
+	}
+	return NULL;
+}
+
+static long del_monitor(struct file_monitor *file_mon, struct wrapfd_del_monitor *monitor)
+{
+	const unsigned int max_retries = 5;
+	struct wrap_event_info *event_info;
+	unsigned int retries;
+	struct wrap_ctx *ctx;
+	long ret = 0;
+
+	if (!events_valid(monitor->events) || monitor->pad)
+		return -EINVAL;
+
+	/*
+	 * Monitors are deleted by ID so we don't have a reference to the wrap file to safely
+	 * acquire ctx->lock. Instead, file_mon->event_lock must be acquired first to look up
+	 * event_info and ensure that it and ctx aren't freed.
+	 *
+	 * Blocking on ctx->lock while holding file_mon->event_lock would violate the general
+	 * lock ordering we have in the rest of the driver, and risk a deadlock. Dropping
+	 * file_mon->event_lock to acquire ctx->lock could result in a use-after-free if ctx is
+	 * destroyed in the meantime. Therefore, try to acquire ctx->lock, and if that fails,
+	 * drop file_mon->event_lock so that the holder of ctx->lock can make progress. After
+	 * reacquiring the file_mon->event_lock look up event_info again in case it was freed after
+	 * we dropped the lock.
+	 */
+	spin_lock(&file_mon->event_lock);
+	for (retries = 0; ; retries++) {
+		event_info = find_wrap_event_info_by_id(file_mon, monitor->id);
+		if (!event_info) {
+			ret = -EINVAL;
+			break;
+		}
+
+		ctx = event_info->ctx;
+		if (spin_trylock(&ctx->lock)) {
+			event_info->monitored &= ~monitor->events;
+			if (!event_info->monitored)
+				free_wrap_event_info(event_info);
+			else
+				event_info->triggered &= ~monitor->events;
+			spin_unlock(&ctx->lock);
+			break;
+		}
+
+		if (retries >= max_retries) {
+			ret = -EAGAIN;
+			break;
+		}
+
+		spin_unlock(&file_mon->event_lock);
+		cpu_relax();
+		spin_lock(&file_mon->event_lock);
+	}
+	spin_unlock(&file_mon->event_lock);
+
+	return ret;
 }
 
 static long wrapfd_dev_del_monitor(struct file *file, unsigned long arg)
 {
 	struct wrapfd_del_monitors params;
+	struct wrapfd_monitors *monitors;
+	struct wrapfd_del_monitor *arr;
+	long ret = 0;
+	__s64 *results;
+	__u64 i;
 
 	if (copy_from_user(&params, (struct wrapfd_del_monitors __user *)arg,
 			   sizeof(params)))
@@ -2347,7 +2386,31 @@ static long wrapfd_dev_del_monitor(struct file *file, unsigned long arg)
 	if (params.reserved)
 		return -EINVAL;
 
-	return process_monitors(file->private_data, &params.monitors, false);
+	monitors = &params.monitors;
+	if (!monitors->len || monitors->len > WRAPFD_MAX_NR_MONITORS || !monitors->results)
+		return -EINVAL;
+
+	arr = memdup_array_user(u64_to_user_ptr(monitors->arr), monitors->len, sizeof(*arr));
+	if (IS_ERR(arr))
+		return PTR_ERR(arr);
+
+	results = kzalloc_objs(*results, monitors->len);
+	if (!results) {
+		ret = -ENOMEM;
+		goto free_arr;
+	}
+
+	for (i = 0; i < monitors->len; i++)
+		results[i] = del_monitor(file->private_data, &arr[i]);
+
+	if (copy_to_user(u64_to_user_ptr(monitors->results), results,
+			 monitors->len * sizeof(*results)))
+		ret = -EFAULT;
+
+	kfree(results);
+free_arr:
+	kfree(arr);
+	return ret;
 }
 
 static long wrapfd_dev_query_events(struct file *file, unsigned long arg)
@@ -2381,7 +2444,7 @@ static long wrapfd_dev_query_events(struct file *file, unsigned long arg)
 			break;
 		}
 
-		arr[i].fd = event_info->fd;
+		arr[i].id = event_info->id;
 		arr[i].events = event_info->triggered;
 		arr[i].timestamp = event_info->timestamp;
 		event_info->triggered = 0;
@@ -2419,6 +2482,7 @@ static int wrapfd_dev_open(struct inode *ignored, struct file *file)
 	atomic_set(&file_mon->events_pending, 0);
 	INIT_LIST_HEAD(&file_mon->event_list);
 	spin_lock_init(&file_mon->event_lock);
+	file_mon->next_id = 0;
 	file->private_data = file_mon;
 
 	return 0;
