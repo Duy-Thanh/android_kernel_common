@@ -2413,6 +2413,35 @@ free_arr:
 	return ret;
 }
 
+static void restore_events(struct file_monitor *file_mon, struct wrapfd_event *arr, __u64 count)
+{
+	struct wrap_event_info *event_info;
+	bool restored = false;
+	unsigned int events;
+	__u64 i;
+
+	spin_lock(&file_mon->event_lock);
+	for (i = 0; i < count; i++) {
+		event_info = find_wrap_event_info_by_id(file_mon, arr[i].id);
+		if (!event_info)
+			continue;
+
+		/*
+		 * Only events that are still monitored are restored, so that monitors and events
+		 * that were deleted in the meantime stay deleted.
+		 */
+		events = arr[i].events & event_info->monitored;
+		if (events) {
+			event_info->triggered |= events;
+			restored = true;
+		}
+	}
+
+	if (restored && atomic_cmpxchg(&file_mon->events_pending, 0, 1) == 0)
+		wake_up_interruptible(&file_mon->wait_queue);
+	spin_unlock(&file_mon->event_lock);
+}
+
 static long wrapfd_dev_query_events(struct file *file, unsigned long arg)
 {
 	struct file_monitor *file_mon = file->private_data;
@@ -2421,7 +2450,7 @@ static long wrapfd_dev_query_events(struct file *file, unsigned long arg)
 	struct wrapfd_event *arr;
 	bool has_more = false;
 	__u64 i = 0;
-	int ret;
+	int ret = 0;
 
 	if (copy_from_user(&events, (struct wrapfd_events __user *)arg,
 			   sizeof(events)))
@@ -2454,16 +2483,13 @@ static long wrapfd_dev_query_events(struct file *file, unsigned long arg)
 		atomic_set(&file_mon->events_pending, 0);
 	spin_unlock(&file_mon->event_lock);
 
-	if (copy_to_user(u64_to_user_ptr(events.arr), arr,
-			 i * sizeof(struct wrapfd_event))) {
+	if (copy_to_user(u64_to_user_ptr(events.arr), arr, i * sizeof(struct wrapfd_event)) ||
+	    put_user(i, &((struct wrapfd_events __user *)arg)->count)) {
+		/* Re-trigger events that a query drained, but could not report to userspace. */
+		restore_events(file_mon, arr, i);
 		ret = -EFAULT;
 		goto free_arr;
 	}
-	if (put_user(i, &((struct wrapfd_events __user *)arg)->count)) {
-		ret = -EFAULT;
-		goto free_arr;
-	}
-	ret = 0;
 free_arr:
 	kfree(arr);
 
