@@ -3174,13 +3174,17 @@
   simple_util_canonicalize_platform
   simple_util_clean_reference
   simple_util_dai_init
+  simple_util_get_sample_fmt
   simple_util_hw_params
+  simple_util_init_aux_jacks
+  simple_util_init_jack
   simple_util_init_priv
   simple_util_is_convert_required
   simple_util_parse_card_name
   simple_util_parse_clk
   simple_util_parse_convert
   simple_util_parse_daifmt
+  simple_util_parse_pin_switches
   simple_util_parse_routing
   simple_util_parse_widgets
   simple_util_remove
