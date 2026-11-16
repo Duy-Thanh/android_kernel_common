@@ -15,6 +15,7 @@
 #include <linux/mmu_notifier.h>
 #include <linux/page_idle.h>
 #include <linux/page_size_compat.h>
+#include <linux/p3s/proc.h>
 #include <linux/kernel-page-flags.h>
 #include <linux/uaccess.h>
 #include "internal.h"
@@ -46,7 +47,7 @@ static inline unsigned long get_max_dump_pfn(void)
 static ssize_t kpagecount_read(struct file *file, char __user *buf,
 			     size_t count, loff_t *ppos)
 {
-	const unsigned long max_dump_pfn = get_max_dump_pfn();
+	const unsigned long max_dump_pfn = kpage_reader_pfns(get_max_dump_pfn());
 	u64 __user *out = (u64 __user *)buf;
 	unsigned long src = *ppos;
 	unsigned long pfn;
@@ -67,10 +68,11 @@ static ssize_t kpagecount_read(struct file *file, char __user *buf,
 		 * TODO: ZONE_DEVICE support requires to identify
 		 * memmaps that were actually initialized.
 		 */
-		page = pfn_to_online_page(pfn);
+		page = pfn_to_online_page(kpage_kernel_pfn(pfn));
 		if (page)
 			mapcount = folio_precise_page_mapcount(page_folio(page),
 							       page);
+		mapcount = kpage_reader_mapcount(mapcount);
 
 		if (put_user(mapcount, out)) {
 			ret = -EFAULT;
@@ -227,7 +229,7 @@ u64 stable_page_flags(const struct page *page)
 static ssize_t kpageflags_read(struct file *file, char __user *buf,
 			     size_t count, loff_t *ppos)
 {
-	const unsigned long max_dump_pfn = get_max_dump_pfn();
+	const unsigned long max_dump_pfn = kpage_reader_pfns(get_max_dump_pfn());
 	u64 __user *out = (u64 __user *)buf;
 	unsigned long src = *ppos;
 	unsigned long pfn;
@@ -245,9 +247,9 @@ static ssize_t kpageflags_read(struct file *file, char __user *buf,
 		 * TODO: ZONE_DEVICE support requires to identify
 		 * memmaps that were actually initialized.
 		 */
-		struct page *page = pfn_to_online_page(pfn);
+		struct page *page = pfn_to_online_page(kpage_kernel_pfn(pfn));
 
-		if (put_user(stable_page_flags(page), out)) {
+		if (put_user(kpage_reader_flags(pfn, stable_page_flags(page)), out)) {
 			ret = -EFAULT;
 			break;
 		}
@@ -275,7 +277,7 @@ static const struct proc_ops kpageflags_proc_ops = {
 static ssize_t kpagecgroup_read(struct file *file, char __user *buf,
 				size_t count, loff_t *ppos)
 {
-	const unsigned long max_dump_pfn = get_max_dump_pfn();
+	const unsigned long max_dump_pfn = kpage_reader_pfns(get_max_dump_pfn());
 	u64 __user *out = (u64 __user *)buf;
 	struct page *ppage;
 	unsigned long src = *ppos;
@@ -295,7 +297,7 @@ static ssize_t kpagecgroup_read(struct file *file, char __user *buf,
 		 * TODO: ZONE_DEVICE support requires to identify
 		 * memmaps that were actually initialized.
 		 */
-		ppage = pfn_to_online_page(pfn);
+		ppage = pfn_to_online_page(kpage_kernel_pfn(pfn));
 
 		if (ppage)
 			ino = page_cgroup_ino(ppage);
