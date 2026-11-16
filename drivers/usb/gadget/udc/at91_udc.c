@@ -1942,7 +1942,7 @@ err_unprepare_fclk:
 	return retval;
 }
 
-static void at91udc_remove(struct platform_device *pdev)
+static int at91udc_remove(struct platform_device *pdev)
 {
 	struct at91_udc *udc = platform_get_drvdata(pdev);
 	unsigned long	flags;
@@ -1950,11 +1950,8 @@ static void at91udc_remove(struct platform_device *pdev)
 	DBG("remove\n");
 
 	usb_del_gadget_udc(&udc->gadget);
-	if (udc->driver) {
-		dev_err(&pdev->dev,
-			"Driver still in use but removing anyhow\n");
-		return;
-	}
+	if (udc->driver)
+		return -EBUSY;
 
 	spin_lock_irqsave(&udc->lock, flags);
 	pullup(udc, 0);
@@ -1964,6 +1961,8 @@ static void at91udc_remove(struct platform_device *pdev)
 	remove_debug_file(udc);
 	clk_unprepare(udc->fclk);
 	clk_unprepare(udc->iclk);
+
+	return 0;
 }
 
 #ifdef CONFIG_PM
@@ -2019,7 +2018,7 @@ static int at91udc_resume(struct platform_device *pdev)
 #endif
 
 static struct platform_driver at91_udc_driver = {
-	.remove_new	= at91udc_remove,
+	.remove		= at91udc_remove,
 	.shutdown	= at91udc_shutdown,
 	.suspend	= at91udc_suspend,
 	.resume		= at91udc_resume,
