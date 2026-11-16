@@ -7,7 +7,8 @@
 #include <linux/tracepoint.h>
 #include <trace/events/mmflags.h>
 
-#define PG_COUNT_TO_KB(x) ((x) << (PAGE_SHIFT - 10))
+/* The counters of task->mm count pages of mm_pte_size(task->mm) bytes */
+#define PG_COUNT_TO_KB(x) mm_pages_to_kb(task->mm, (x))
 
 TRACE_EVENT(oom_score_adj_update,
 
