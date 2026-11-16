@@ -2551,9 +2551,9 @@ int vb2_mmap(struct vb2_queue *q, struct vm_area_struct *vma)
 	/*
 	 * MMAP requires page_aligned buffers.
 	 * The buffer length was page_aligned at __vb2_buf_mem_alloc(),
-	 * so, we need to do the same here.
+	 * so, we need to do the same here, in pages of the mapping process.
 	 */
-	length = PAGE_ALIGN(vb->planes[plane].length);
+	length = ALIGN(vb->planes[plane].length, vma_page_size(vma));
 	if (length < (vma->vm_end - vma->vm_start)) {
 		dprintk(q, 1,
 			"MMAP invalid, as it would overflow buffer length\n");
