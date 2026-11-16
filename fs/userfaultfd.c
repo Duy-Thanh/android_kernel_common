@@ -1987,6 +1987,7 @@ static int userfaultfd_api(struct userfaultfd_ctx *ctx,
 	uffdio_api.features &= ~UFFD_FEATURE_WP_UNPOPULATED;
 	uffdio_api.features &= ~UFFD_FEATURE_WP_ASYNC;
 #endif
+	uffdio_api.features &= ~p3s_uffd_unsupported_features(ctx->mm);
 
 	ret = -EINVAL;
 	if (features & ~uffdio_api.features)

@@ -252,6 +252,20 @@ static inline bool vma_can_userfault(struct vm_area_struct *vma,
 	    vma_is_shmem(vma);
 }
 
+/*
+ * Features of the memory types that vma_can_userfault() refuses to a 4KB
+ * compat task, so that UFFDIO_API does not offer them to one.
+ */
+static inline __u64 p3s_uffd_unsupported_features(struct mm_struct *mm)
+{
+	if (!mm_is_p3s_4k(mm))
+		return 0;
+
+	return UFFD_FEATURE_MISSING_HUGETLBFS | UFFD_FEATURE_MISSING_SHMEM |
+	       UFFD_FEATURE_MINOR_HUGETLBFS | UFFD_FEATURE_MINOR_SHMEM |
+	       UFFD_FEATURE_WP_HUGETLBFS_SHMEM;
+}
+
 static inline bool vma_has_uffd_without_event_remap(struct vm_area_struct *vma)
 {
 	struct userfaultfd_ctx *uffd_ctx = vma->vm_userfaultfd_ctx.ctx;
