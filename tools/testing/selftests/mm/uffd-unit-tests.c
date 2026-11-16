@@ -7,6 +7,8 @@
 
 #include "uffd-common.h"
 
+#include <linux/fs.h>
+
 #include "../../../../mm/gup_test.h"
 
 #ifdef __NR_userfaultfd
@@ -1128,10 +1130,13 @@ uffd_move_handle_fault_common(struct uffd_msg *msg, struct uffd_args *args,
 		args->missing_faults++;
 }
 
+/* Length that uffd_move_handle_fault() moves */
+static unsigned long uffd_move_len;
+
 static void uffd_move_handle_fault(struct uffd_msg *msg,
 				   struct uffd_args *args)
 {
-	uffd_move_handle_fault_common(msg, args, page_size);
+	uffd_move_handle_fault_common(msg, args, uffd_move_len);
 }
 
 static void uffd_move_pmd_handle_fault(struct uffd_msg *msg,
@@ -1233,9 +1238,34 @@ uffd_move_test_common(uffd_test_args_t *targs, unsigned long chunk_size,
 		uffd_test_pass();
 }
 
+/*
+ * UFFDIO_MOVE moves whole kernel pages. A 4KB process on a 16KB kernel
+ * maps a kernel page with up to four 4KB PTEs, and moving one of them
+ * fails with -EBUSY while the others map the same page. Move the page
+ * size that backs the source, which PROCMAP_QUERY reports, when it is
+ * larger than the page size.
+ */
+static unsigned long uffd_move_unit(void)
+{
+	struct procmap_query query = {
+		.size = sizeof(query),
+		.query_addr = (unsigned long)area_src,
+	};
+	unsigned long unit = page_size;
+	int fd = open("/proc/self/maps", O_RDONLY);
+
+	if (fd < 0)
+		return unit;
+	if (!ioctl(fd, PROCMAP_QUERY, &query) && query.vma_page_size > unit)
+		unit = query.vma_page_size;
+	close(fd);
+	return unit;
+}
+
 static void uffd_move_test(uffd_test_args_t *targs)
 {
-	uffd_move_test_common(targs, page_size, uffd_move_handle_fault);
+	uffd_move_len = uffd_move_unit();
+	uffd_move_test_common(targs, uffd_move_len, uffd_move_handle_fault);
 }
 
 static void uffd_move_pmd_test(uffd_test_args_t *targs)
