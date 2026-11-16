@@ -716,7 +716,7 @@ static vm_fault_t exfat_page_mkwrite(struct vm_fault *vmf)
 	if (!inode_trylock(inode))
 		return VM_FAULT_RETRY;
 
-	start = ((loff_t)vma->vm_pgoff << PAGE_SHIFT);
+	start = vma_file_offset(vma);
 	end = min_t(loff_t, i_size_read(inode),
 			start + vma->vm_end - vma->vm_start);
 
