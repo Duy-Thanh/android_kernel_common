@@ -2484,11 +2484,11 @@ err_clk:
 	return ret;
 }
 
-static void imx_uart_remove(struct platform_device *pdev)
+static int imx_uart_remove(struct platform_device *pdev)
 {
 	struct imx_port *sport = platform_get_drvdata(pdev);
 
-	uart_remove_one_port(&imx_uart_uart_driver, &sport->port);
+	return uart_remove_one_port(&imx_uart_uart_driver, &sport->port);
 }
 
 static void imx_uart_restore_context(struct imx_port *sport)
@@ -2655,7 +2655,7 @@ static const struct dev_pm_ops imx_uart_pm_ops = {
 
 static struct platform_driver imx_uart_platform_driver = {
 	.probe = imx_uart_probe,
-	.remove_new = imx_uart_remove,
+	.remove = imx_uart_remove,
 
 	.driver = {
 		.name = "imx-uart",
