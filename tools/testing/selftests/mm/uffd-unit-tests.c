@@ -1129,10 +1129,13 @@ uffd_move_handle_fault_common(uffd_global_test_opts_t *gopts,
 		args->missing_faults++;
 }
 
+/* Length that uffd_move_handle_fault() moves */
+static unsigned long uffd_move_len;
+
 static void uffd_move_handle_fault(uffd_global_test_opts_t *gopts, struct uffd_msg *msg,
 				   struct uffd_args *args)
 {
-	uffd_move_handle_fault_common(gopts, msg, args, gopts->page_size);
+	uffd_move_handle_fault_common(gopts, msg, args, uffd_move_len);
 }
 
 static void uffd_move_pmd_handle_fault(uffd_global_test_opts_t *gopts, struct uffd_msg *msg,
@@ -1240,9 +1243,31 @@ uffd_move_test_common(uffd_global_test_opts_t *gopts,
 		uffd_test_pass();
 }
 
+/*
+ * UFFDIO_MOVE moves whole kernel pages. A 4KB process on a 16KB kernel
+ * maps a kernel page with up to four 4KB PTEs, and moving one of them
+ * fails with -EBUSY while the others map the same page. Move the page
+ * size that backs the source, which PROCMAP_QUERY reports, when it is
+ * larger than the page size.
+ */
+static unsigned long uffd_move_unit(uffd_global_test_opts_t *gopts)
+{
+	unsigned long unit = gopts->page_size;
+	struct procmap_fd procmap;
+
+	if (open_procmap(getpid(), &procmap))
+		return unit;
+	procmap.query.query_addr = (unsigned long)gopts->area_src;
+	if (!query_procmap(&procmap))
+		unit = MAX(unit, procmap.query.vma_page_size);
+	close_procmap(&procmap);
+	return unit;
+}
+
 static void uffd_move_test(uffd_global_test_opts_t *gopts, uffd_test_args_t *targs)
 {
-	uffd_move_test_common(gopts, targs, gopts->page_size, uffd_move_handle_fault);
+	uffd_move_len = uffd_move_unit(gopts);
+	uffd_move_test_common(gopts, targs, uffd_move_len, uffd_move_handle_fault);
 }
 
 static void uffd_move_pmd_test(uffd_global_test_opts_t *gopts, uffd_test_args_t *targs)
