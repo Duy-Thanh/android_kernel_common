@@ -18,6 +18,7 @@ static int nr_thpsizes;
 static size_t thpsizes[20];
 static int nr_hugetlbsizes;
 static size_t hugetlbsizes[10];
+static uint64_t uffd_features;
 
 static int detect_thp_sizes(size_t sizes[], int max)
 {
@@ -168,6 +169,13 @@ static void test_one_folio(uffd_global_test_opts_t *gopts, size_t size, bool pri
 				private ? "true" : "false",
 				swapout ? "true" : "false",
 				hugetlb ? "true" : "false");
+
+	/* The kernel may not support uffd-wp on shmem and hugetlbfs */
+	if ((!private || hugetlb) &&
+	    !(uffd_features & UFFD_FEATURE_WP_HUGETLBFS_SHMEM)) {
+		ksft_test_result_skip("uffd-wp on shmem and hugetlbfs is not supported\n");
+		return;
+	}
 
 	/* Allocate a folio of required size and type. */
 	mem = alloc_one_folio(size, private, hugetlb);
@@ -337,6 +345,8 @@ int main(int argc, char **argv)
 	int i, j, plan = 0;
 
 	pagesize = getpagesize();
+	if (uffd_get_features(&uffd_features))
+		uffd_features = 0;
 	nr_thpsizes = detect_thp_sizes(thpsizes, ARRAY_SIZE(thpsizes));
 	nr_hugetlbsizes = detect_hugetlb_page_sizes(hugetlbsizes,
 						    ARRAY_SIZE(hugetlbsizes));

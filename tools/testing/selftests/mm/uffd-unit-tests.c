@@ -182,15 +182,41 @@ out:
 }
 
 
-static bool uffd_feature_supported(uffd_test_case_t *test)
+/*
+ * Features of @test that apply to @mem_type. The shmem and hugetlbfs
+ * features only matter on that memory type, and registering memory of a
+ * type other than anonymous needs the MISSING feature of the type, which
+ * the kernel does not offer if it doesn't support userfaultfd there.
+ */
+static uint64_t uffd_test_features(uffd_test_case_t *test,
+				   mem_type_t *mem_type)
+{
+	const uint64_t shmem = UFFD_FEATURE_MISSING_SHMEM |
+			       UFFD_FEATURE_MINOR_SHMEM;
+	const uint64_t hugetlb = UFFD_FEATURE_MISSING_HUGETLBFS |
+				 UFFD_FEATURE_MINOR_HUGETLBFS;
+	uint64_t features = test->uffd_feature_required;
+
+	switch (mem_type->mem_flag) {
+	case MEM_ANON:
+		return features & ~(shmem | hugetlb |
+				    UFFD_FEATURE_WP_HUGETLBFS_SHMEM);
+	case MEM_SHMEM:
+	case MEM_SHMEM_PRIVATE:
+		return (features & ~hugetlb) | UFFD_FEATURE_MISSING_SHMEM;
+	default:
+		return (features & ~shmem) | UFFD_FEATURE_MISSING_HUGETLBFS;
+	}
+}
+
+static bool uffd_feature_supported(uint64_t required)
 {
 	uint64_t features;
 
 	if (uffd_get_features(&features))
 		return false;
 
-	return (features & test->uffd_feature_required) ==
-	    test->uffd_feature_required;
+	return (features & required) == required;
 }
 
 static int pagemap_open(void)
@@ -1711,6 +1737,7 @@ int main(int argc, char *argv[])
 	mem_type_t *mem_type;
 	uffd_test_args_t args;
 	const char *errmsg;
+	uint64_t features;
 	int has_uffd, opt;
 	int i, j;
 
@@ -1781,11 +1808,12 @@ int main(int argc, char *argv[])
 				continue;
 
 			uffd_test_start("%s on %s", test->name, mem_type->name);
-			if (!uffd_feature_supported(test)) {
+			features = uffd_test_features(test, mem_type);
+			if (!uffd_feature_supported(features)) {
 				uffd_test_skip("feature missing");
 				continue;
 			}
-			if (uffd_test_ctx_init(&gopts, test->uffd_feature_required, &errmsg)) {
+			if (uffd_test_ctx_init(&gopts, features, &errmsg)) {
 				uffd_test_skip(errmsg);
 				continue;
 			}

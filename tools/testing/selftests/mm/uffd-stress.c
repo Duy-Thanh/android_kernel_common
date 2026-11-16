@@ -433,6 +433,12 @@ static void parse_test_type_arg(uffd_global_test_opts_t *gopts, const char *raw_
 	if (uffd_get_features(&features) && errno == ENOENT)
 		ksft_exit_skip("failed to get available features (%d)\n", errno);
 
+	/* The kernel may not support userfaultfd on shmem or hugetlbfs */
+	if (gopts->test_type == TEST_SHMEM && !(features & UFFD_FEATURE_MISSING_SHMEM))
+		ksft_exit_skip("userfaultfd on shmem is not supported\n");
+	if (gopts->test_type == TEST_HUGETLB && !(features & UFFD_FEATURE_MISSING_HUGETLBFS))
+		ksft_exit_skip("userfaultfd on hugetlbfs is not supported\n");
+
 	gopts->test_uffdio_wp = gopts->test_uffdio_wp &&
 		(features & UFFD_FEATURE_PAGEFAULT_FLAG_WP);
 
