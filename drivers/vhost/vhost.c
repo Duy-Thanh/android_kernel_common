@@ -1099,6 +1099,13 @@ long vhost_dev_set_owner(struct vhost_dev *dev)
 	struct vhost_worker *worker;
 	int err, i;
 
+	/*
+	 * set_bit_to_user() locates the dirty log in kernel pages, and 4KB
+	 * processes cannot create VMs.
+	 */
+	if (p3s_4k_unsupported(current->mm))
+		return -EPERM;
+
 	/* Is there an owner already? */
 	if (vhost_dev_has_owner(dev)) {
 		err = -EBUSY;
