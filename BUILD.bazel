@@ -1475,10 +1475,10 @@ cc_library(
     hdrs = glob([
         "tools/lib/bpf/*.h",
     ]),
-    implementation_deps = [":tools_includes"],
     strip_include_prefix = "tools/lib",
     visibility = ["//visibility:public"],
     deps = ["//prebuilts/kernel-build-tools:imported_libs"],
+    implementation_deps = [":tools_includes"],
 )
 
 pahole(
