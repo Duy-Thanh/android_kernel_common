@@ -1382,8 +1382,11 @@ nfsd4_setup_inter_ssc(struct svc_rqst *rqstp,
 		goto out;
 
 	status = nfsd4_interssc_connect(&copy->cp_src, rqstp, mount);
-	if (status)
+	if (status) {
+		nfsd_file_put(copy->nf_dst);
+		copy->nf_dst = NULL;
 		goto out;
+	}
 
 	s_fh = &cstate->save_fh;
 
@@ -1665,12 +1668,14 @@ nfsd4_copy(struct svc_rqst *rqstp, struct nfsd4_compound_state *cstate,
 		}
 		status = nfsd4_setup_inter_ssc(rqstp, cstate, copy,
 				&copy->ss_mnt);
-		if (status)
-			return nfserr_offload_denied;
+		if (status) {
+			status = nfserr_offload_denied;
+			goto out;
+		}
 	} else {
 		status = nfsd4_setup_intra_ssc(rqstp, cstate, copy);
 		if (status)
-			return status;
+			goto out;
 	}
 
 	copy->cp_clp = cstate->clp;
