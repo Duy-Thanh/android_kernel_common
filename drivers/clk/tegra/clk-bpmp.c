@@ -5,8 +5,11 @@
 
 #include <linux/clk-provider.h>
 #include <linux/device.h>
+#include <linux/of.h>
 #include <linux/seq_buf.h>
 #include <linux/slab.h>
+
+#include <dt-bindings/clock/nvidia,tegra238.h>
 
 #include <soc/tegra/bpmp.h>
 #include <soc/tegra/bpmp-abi.h>
@@ -579,6 +582,12 @@ tegra_bpmp_clk_register(struct tegra_bpmp *bpmp,
 	}
 
 	init.parent_names = parents;
+
+	/* EMC rates can change autonomously in BPMP firmware. */
+	if (of_device_is_compatible(bpmp->dev->of_node,
+				    "nvidia,tegra238-bpmp") &&
+	    info->id == TEGRA238_CLK_EMC)
+		init.flags |= CLK_GET_RATE_NOCACHE;
 
 	err = devm_clk_hw_register(bpmp->dev, &clk->hw);
 
